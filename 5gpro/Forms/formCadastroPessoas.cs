@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5gpro.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,8 @@ namespace _5gpro.Forms
 {
     public partial class formCadastroPessoas : Form
     {
+        Pessoa pessoa = new Pessoa();
+
         public formCadastroPessoas()
         {
             InitializeComponent();
@@ -19,12 +22,19 @@ namespace _5gpro.Forms
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pessoa.Codigo = tbCodigo.Text;
+            pessoa.Nome = tbNome.Text;
+            pessoa.Fantasia = tbFantasia.Text;
+            Console.WriteLine(clbAtuacao.Text);
         }
     }
 }

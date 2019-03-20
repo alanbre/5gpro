@@ -93,6 +93,26 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosDelete_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosDelete_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosDelete_48px_Red {
+            get {
+                object obj = ResourceManager.GetObject("iosDelete_48px_Red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosDelete_64px_black {
             get {
                 object obj = ResourceManager.GetObject("iosDelete_64px_black", resourceCulture);
@@ -106,6 +126,26 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap iosDelete_64px_red {
             get {
                 object obj = ResourceManager.GetObject("iosDelete_64px_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosLeft_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosLeft_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosLeft_48px_Blue {
+            get {
+                object obj = ResourceManager.GetObject("iosLeft_48px_Blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,6 +173,26 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosOk_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosOk_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosOk_48px_Green {
+            get {
+                object obj = ResourceManager.GetObject("iosOk_48px_Green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosOk_64px_black {
             get {
                 object obj = ResourceManager.GetObject("iosOk_64px_black", resourceCulture);
@@ -146,6 +206,26 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap iosOk_64px_green {
             get {
                 object obj = ResourceManager.GetObject("iosOk_64px_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosPlus_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosPlus_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosPlus_48px_blue {
+            get {
+                object obj = ResourceManager.GetObject("iosPlus_48px_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,6 +253,26 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosReload_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosReload_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosReload_48px_blue {
+            get {
+                object obj = ResourceManager.GetObject("iosReload_48px_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosReload_64px_black {
             get {
                 object obj = ResourceManager.GetObject("iosReload_64px_black", resourceCulture);
@@ -193,6 +293,26 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosRight_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosRight_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosRight_48px_Blue {
+            get {
+                object obj = ResourceManager.GetObject("iosRight_48px_Blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosRight_64px_black {
             get {
                 object obj = ResourceManager.GetObject("iosRight_64px_black", resourceCulture);
@@ -206,6 +326,26 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap iosRight_64px_blue {
             get {
                 object obj = ResourceManager.GetObject("iosRight_64px_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosSearch_48px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosSearch_48px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosSearch_48px_Blue {
+            get {
+                object obj = ResourceManager.GetObject("iosSearch_48px_Blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
