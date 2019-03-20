@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\_Item.cs" />
     <Compile Include="Entities\Pessoa.cs" />
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
@@ -63,17 +64,29 @@
     <Compile Include="Forms\fmBuscaEstado.Designer.cs">
       <DependentUpon>fmBuscaEstado.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\formCadastroPessoas.cs">
+    <Compile Include="Forms\fmCadastroFuncionario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\formCadastroPessoas.Designer.cs">
-      <DependentUpon>formCadastroPessoas.cs</DependentUpon>
+    <Compile Include="Forms\fmCadastroFuncionario.Designer.cs">
+      <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\formMain.cs">
+    <Compile Include="Forms\fmCadastroItens.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\formMain.Designer.cs">
-      <DependentUpon>formMain.cs</DependentUpon>
+    <Compile Include="Forms\fmCadastroItens.Designer.cs">
+      <DependentUpon>fmCadastroItens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPessoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPessoa.Designer.cs">
+      <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmMain.Designer.cs">
+      <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -83,11 +96,17 @@
     <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
       <DependentUpon>fmBuscaEstado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\formCadastroPessoas.resx">
-      <DependentUpon>formCadastroPessoas.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCadastroFuncionario.resx">
+      <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\formMain.resx">
-      <DependentUpon>formMain.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCadastroItens.resx">
+      <DependentUpon>fmCadastroItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
+      <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmMain.resx">
+      <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -246,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Google_Web_Search_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Book_18px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

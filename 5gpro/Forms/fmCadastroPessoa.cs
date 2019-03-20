@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class formCadastroPessoas : Form, IMessageFilter
+    public partial class fmCadastroPessoa : Form, IMessageFilter
     {
         Pessoa pessoa = new Pessoa();
         bool editando = false;
 
-        public formCadastroPessoas()
+        public fmCadastroPessoa()
         {
             InitializeComponent();
             Application.AddMessageFilter(this); // código para trocar o enter por tab
@@ -106,8 +106,8 @@ namespace _5gpro.Forms
                 btNovo.Enabled = false;
                 btSalvar.Image = Properties.Resources.iosOk_48px_Green;
                 btSalvar.Enabled = true;
-                btSearch.Image = Properties.Resources.iosSearch_48px_black;
-                btSearch.Enabled = false;
+                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
+                btBuscar.Enabled = false;
                 btDeletar.Image = Properties.Resources.iosDelete_48px_black;
                 btDeletar.Enabled = false;
             }
@@ -117,8 +117,8 @@ namespace _5gpro.Forms
                 btNovo.Enabled = true;
                 btSalvar.Image = Properties.Resources.iosOk_48px_black;
                 btSalvar.Enabled = false;
-                btSearch.Image = Properties.Resources.iosSearch_48px_Blue;
-                btSearch.Enabled = true;
+                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
+                btBuscar.Enabled = true;
                 btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
                 btDeletar.Enabled = false;
             } 
@@ -196,6 +196,24 @@ namespace _5gpro.Forms
                 var buscaCidade = new fmBuscaCidade();
                 buscaCidade.ShowDialog();
             }
+        }
+
+        private void btDeletar_Click(object sender, EventArgs e)
+        {
+            if (!editando)
+            {
+
+            }
+        }
+
+        private void btRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btLeft_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
