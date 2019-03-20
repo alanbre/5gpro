@@ -215,5 +215,21 @@ namespace _5gpro.Forms
         {
 
         }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
+        }
+
+        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3 && !editando)
+            {
+                e.Handled = true;
+                var buscaPessoa = new fmBuscaPessoa();
+                buscaPessoa.ShowDialog();
+            }
+        }
     }
 }

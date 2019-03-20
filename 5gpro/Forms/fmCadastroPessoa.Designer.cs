@@ -60,13 +60,13 @@
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
             this.pnBotoes = new System.Windows.Forms.Panel();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btDeletar = new System.Windows.Forms.Button();
             this.btAnterior = new System.Windows.Forms.Button();
             this.btProximo = new System.Windows.Forms.Button();
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -157,6 +157,7 @@
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
             this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
+            this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
             this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
             // 
             // lbCodigo
@@ -402,17 +403,6 @@
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
             // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAjuda.Enabled = false;
-            this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
-            this.tbAjuda.TabIndex = 4;
-            // 
             // btSalvar
             // 
             this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -476,6 +466,7 @@
             this.btBuscar.Size = new System.Drawing.Size(48, 48);
             this.btBuscar.TabIndex = 2;
             this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btNovo
             // 
@@ -489,6 +480,17 @@
             this.btNovo.TabIndex = 1;
             this.btNovo.UseVisualStyleBackColor = true;
             this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
+            // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.TabIndex = 4;
             // 
             // fmCadastroPessoa
             // 
