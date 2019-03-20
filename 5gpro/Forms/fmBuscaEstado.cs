@@ -10,13 +10,13 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaCidade : Form, IMessageFilter
+    public partial class fmBuscaEstado : Form, IMessageFilter
     {
-        public fmBuscaCidade()
+        public fmBuscaEstado()
         {
             InitializeComponent();
             Application.AddMessageFilter(this); // código para trocar o enter por tab
-            tbFiltroCodEstado.Focus();
+            tbFiltroNomeCidade.Focus();
         }
 
         //Continuação do código para trocar o enter por tab
@@ -38,24 +38,7 @@ namespace _5gpro.Forms
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            // Faz consulta no banco de dados baseado nos filtros
-        }
-
-        private void btProcuraEstado_Click(object sender, EventArgs e)
-        {
-            var buscaEstado = new fmBuscaEstado();
-            buscaEstado.ShowDialog();
-        }
-
-        private void tbFiltroCodEstado_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                var buscaEstado = new fmBuscaEstado();
-                buscaEstado.ShowDialog();
-            }
-            
+            //busca e preenche os estados no grid
         }
     }
 }

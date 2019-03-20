@@ -56,22 +56,26 @@
             this.tbFiltroCodEstado.Location = new System.Drawing.Point(12, 25);
             this.tbFiltroCodEstado.Name = "tbFiltroCodEstado";
             this.tbFiltroCodEstado.Size = new System.Drawing.Size(54, 20);
-            this.tbFiltroCodEstado.TabIndex = 1;
+            this.tbFiltroCodEstado.TabIndex = 0;
+            this.tbFiltroCodEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodEstado_KeyUp);
             // 
             // btProcuraEstado
             // 
             this.btProcuraEstado.Location = new System.Drawing.Point(68, 25);
             this.btProcuraEstado.Name = "btProcuraEstado";
             this.btProcuraEstado.Size = new System.Drawing.Size(20, 20);
-            this.btProcuraEstado.TabIndex = 2;
+            this.btProcuraEstado.TabIndex = 0;
+            this.btProcuraEstado.TabStop = false;
             this.btProcuraEstado.UseVisualStyleBackColor = true;
+            this.btProcuraEstado.Click += new System.EventHandler(this.btProcuraEstado_Click);
             // 
             // tbNomeEstado
             // 
+            this.tbNomeEstado.Enabled = false;
             this.tbNomeEstado.Location = new System.Drawing.Point(90, 25);
             this.tbNomeEstado.Name = "tbNomeEstado";
             this.tbNomeEstado.Size = new System.Drawing.Size(414, 20);
-            this.tbNomeEstado.TabIndex = 3;
+            this.tbNomeEstado.TabIndex = 1;
             // 
             // lbFiltroNomeCidade
             // 
@@ -87,14 +91,14 @@
             this.tbFiltroNomeCidade.Location = new System.Drawing.Point(12, 64);
             this.tbFiltroNomeCidade.Name = "tbFiltroNomeCidade";
             this.tbFiltroNomeCidade.Size = new System.Drawing.Size(492, 20);
-            this.tbFiltroNomeCidade.TabIndex = 5;
+            this.tbFiltroNomeCidade.TabIndex = 1;
             // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(510, 64);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 6;
+            this.btPesquisar.TabIndex = 2;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
@@ -116,7 +120,7 @@
             this.dgvCidades.ReadOnly = true;
             this.dgvCidades.RowHeadersVisible = false;
             this.dgvCidades.Size = new System.Drawing.Size(560, 360);
-            this.dgvCidades.TabIndex = 7;
+            this.dgvCidades.TabIndex = 3;
             // 
             // colunaCodigo
             // 

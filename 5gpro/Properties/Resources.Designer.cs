@@ -133,6 +133,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosHistory_18px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosHistory_18px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosLeft_48px_black {
             get {
                 object obj = ResourceManager.GetObject("iosLeft_48px_black", resourceCulture);

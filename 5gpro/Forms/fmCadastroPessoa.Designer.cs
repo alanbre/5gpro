@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class formCadastroPessoas
+    partial class fmCadastroPessoa
     {
         /// <summary>
         /// Required designer variable.
@@ -41,7 +41,7 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btBuscaCidade = new System.Windows.Forms.Button();
             this.tbNomeCidade = new System.Windows.Forms.TextBox();
             this.tbCodCidade = new System.Windows.Forms.TextBox();
             this.lbCidade = new System.Windows.Forms.Label();
@@ -60,13 +60,13 @@
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
             this.pnBotoes = new System.Windows.Forms.Panel();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btDeletar = new System.Windows.Forms.Button();
-            this.btLeft = new System.Windows.Forms.Button();
-            this.btRight = new System.Windows.Forms.Button();
-            this.btSearch = new System.Windows.Forms.Button();
+            this.btAnterior = new System.Windows.Forms.Button();
+            this.btProximo = new System.Windows.Forms.Button();
+            this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -157,6 +157,7 @@
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
             this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
+            this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
             this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
             // 
             // lbCodigo
@@ -209,7 +210,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnDados.Controls.Add(this.button3);
+            this.pnDados.Controls.Add(this.btBuscaCidade);
             this.pnDados.Controls.Add(this.tbNomeCidade);
             this.pnDados.Controls.Add(this.tbCodCidade);
             this.pnDados.Controls.Add(this.lbCidade);
@@ -232,16 +233,16 @@
             this.pnDados.Size = new System.Drawing.Size(1110, 305);
             this.pnDados.TabIndex = 2;
             // 
-            // button3
+            // btBuscaCidade
             // 
-            this.button3.Location = new System.Drawing.Point(85, 142);
-            this.button3.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 1;
-            this.button3.TabStop = false;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btBuscaCidade.Location = new System.Drawing.Point(85, 142);
+            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btBuscaCidade.Name = "btBuscaCidade";
+            this.btBuscaCidade.Size = new System.Drawing.Size(20, 20);
+            this.btBuscaCidade.TabIndex = 1;
+            this.btBuscaCidade.TabStop = false;
+            this.btBuscaCidade.UseVisualStyleBackColor = true;
+            this.btBuscaCidade.Click += new System.EventHandler(this.btBuscaCidade_Click);
             // 
             // tbNomeCidade
             // 
@@ -258,6 +259,7 @@
             this.tbCodCidade.Name = "tbCodCidade";
             this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
             this.tbCodCidade.TabIndex = 8;
+            this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
             // 
             // lbCidade
             // 
@@ -392,25 +394,14 @@
             // 
             this.pnBotoes.Controls.Add(this.btSalvar);
             this.pnBotoes.Controls.Add(this.btDeletar);
-            this.pnBotoes.Controls.Add(this.btLeft);
-            this.pnBotoes.Controls.Add(this.btRight);
-            this.pnBotoes.Controls.Add(this.btSearch);
+            this.pnBotoes.Controls.Add(this.btAnterior);
+            this.pnBotoes.Controls.Add(this.btProximo);
+            this.pnBotoes.Controls.Add(this.btBuscar);
             this.pnBotoes.Controls.Add(this.btNovo);
             this.pnBotoes.Location = new System.Drawing.Point(10, 11);
             this.pnBotoes.Name = "pnBotoes";
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
-            // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAjuda.Enabled = false;
-            this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
-            this.tbAjuda.TabIndex = 4;
             // 
             // btSalvar
             // 
@@ -436,42 +427,46 @@
             this.btDeletar.Size = new System.Drawing.Size(48, 48);
             this.btDeletar.TabIndex = 5;
             this.btDeletar.UseVisualStyleBackColor = true;
+            this.btDeletar.Click += new System.EventHandler(this.btDeletar_Click);
             // 
-            // btLeft
+            // btAnterior
             // 
-            this.btLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btLeft.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
-            this.btLeft.Location = new System.Drawing.Point(3, 208);
-            this.btLeft.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btLeft.Name = "btLeft";
-            this.btLeft.Size = new System.Drawing.Size(48, 48);
-            this.btLeft.TabIndex = 4;
-            this.btLeft.UseVisualStyleBackColor = true;
+            this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
+            this.btAnterior.Location = new System.Drawing.Point(3, 208);
+            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btAnterior.Name = "btAnterior";
+            this.btAnterior.Size = new System.Drawing.Size(48, 48);
+            this.btAnterior.TabIndex = 4;
+            this.btAnterior.UseVisualStyleBackColor = true;
+            this.btAnterior.Click += new System.EventHandler(this.btLeft_Click);
             // 
-            // btRight
+            // btProximo
             // 
-            this.btRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRight.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
-            this.btRight.Location = new System.Drawing.Point(3, 157);
-            this.btRight.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btRight.Name = "btRight";
-            this.btRight.Size = new System.Drawing.Size(48, 48);
-            this.btRight.TabIndex = 3;
-            this.btRight.UseVisualStyleBackColor = true;
+            this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
+            this.btProximo.Location = new System.Drawing.Point(3, 157);
+            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btProximo.Name = "btProximo";
+            this.btProximo.Size = new System.Drawing.Size(48, 48);
+            this.btProximo.TabIndex = 3;
+            this.btProximo.UseVisualStyleBackColor = true;
+            this.btProximo.Click += new System.EventHandler(this.btRight_Click);
             // 
-            // btSearch
+            // btBuscar
             // 
-            this.btSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSearch.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
-            this.btSearch.Location = new System.Drawing.Point(3, 55);
-            this.btSearch.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btSearch.Name = "btSearch";
-            this.btSearch.Size = new System.Drawing.Size(48, 48);
-            this.btSearch.TabIndex = 2;
-            this.btSearch.UseVisualStyleBackColor = true;
+            this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
+            this.btBuscar.Location = new System.Drawing.Point(3, 55);
+            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(48, 48);
+            this.btBuscar.TabIndex = 2;
+            this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btNovo
             // 
@@ -486,7 +481,18 @@
             this.btNovo.UseVisualStyleBackColor = true;
             this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
-            // formCadastroPessoas
+            // tbAjuda
+            // 
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.TabIndex = 4;
+            // 
+            // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -499,11 +505,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(850, 600);
-            this.Name = "formCadastroPessoas";
+            this.Name = "fmCadastroPessoa";
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de pessoas";
-            this.TopMost = true;
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.formCadastroPessoas_KeyUp);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.gbAtuacao.ResumeLayout(false);
@@ -549,11 +554,11 @@
         private System.Windows.Forms.Button btNovo;
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btDeletar;
-        private System.Windows.Forms.Button btLeft;
-        private System.Windows.Forms.Button btRight;
-        private System.Windows.Forms.Button btSearch;
+        private System.Windows.Forms.Button btAnterior;
+        private System.Windows.Forms.Button btProximo;
+        private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.TextBox tbAjuda;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btBuscaCidade;
         private System.Windows.Forms.TextBox tbNomeCidade;
         private System.Windows.Forms.TextBox tbCodCidade;
         private System.Windows.Forms.Label lbCidade;

@@ -11,15 +11,33 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class formCadastroPessoas : Form
+    public partial class fmCadastroPessoa : Form, IMessageFilter
     {
         Pessoa pessoa = new Pessoa();
         bool editando = false;
 
-        public formCadastroPessoas()
+        public fmCadastroPessoa()
         {
             InitializeComponent();
+            Application.AddMessageFilter(this); // código para trocar o enter por tab
             AlteraBotoes();
+        }
+
+        //Continuação do código para trocar o enter por tab
+        public bool PreFilterMessage(ref Message m)
+        {
+            if (m.Msg == 0x100)//WM_KEYDOWN
+            {
+                if (m.WParam.ToInt32() == 0xd)//VK_RETURN = 0xd
+                {
+                    if (this.ActiveControl is TextBox || this.ActiveControl is RadioButton || this.ActiveControl is MaskedTextBox)
+                    {
+                        SendKeys.Send("{TAB}");
+                        return true; //Discard the Enter key
+                    }
+                }
+            }
+            return false;
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -88,8 +106,8 @@ namespace _5gpro.Forms
                 btNovo.Enabled = false;
                 btSalvar.Image = Properties.Resources.iosOk_48px_Green;
                 btSalvar.Enabled = true;
-                btSearch.Image = Properties.Resources.iosSearch_48px_black;
-                btSearch.Enabled = false;
+                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
+                btBuscar.Enabled = false;
                 btDeletar.Image = Properties.Resources.iosDelete_48px_black;
                 btDeletar.Enabled = false;
             }
@@ -99,8 +117,8 @@ namespace _5gpro.Forms
                 btNovo.Enabled = true;
                 btSalvar.Image = Properties.Resources.iosOk_48px_black;
                 btSalvar.Enabled = false;
-                btSearch.Image = Properties.Resources.iosSearch_48px_Blue;
-                btSearch.Enabled = true;
+                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
+                btBuscar.Enabled = true;
                 btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
                 btDeletar.Enabled = false;
             } 
@@ -154,7 +172,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btBuscaCidade_Click(object sender, EventArgs e)
         {
             var buscaCidade = new fmBuscaCidade();
             buscaCidade.ShowDialog();
@@ -170,11 +188,47 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
-        private void formCadastroPessoas_KeyUp(object sender, KeyEventArgs e)
+        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.F3)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = true;
+                var buscaCidade = new fmBuscaCidade();
+                buscaCidade.ShowDialog();
+            }
+        }
+
+        private void btDeletar_Click(object sender, EventArgs e)
+        {
+            if (!editando)
+            {
+
+            }
+        }
+
+        private void btRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btLeft_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
+        }
+
+        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3 && !editando)
+            {
+                e.Handled = true;
+                var buscaPessoa = new fmBuscaPessoa();
+                buscaPessoa.ShowDialog();
             }
         }
     }

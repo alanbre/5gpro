@@ -10,13 +10,12 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaCidade : Form, IMessageFilter
+    public partial class fmBuscaPessoa : Form, IMessageFilter
     {
-        public fmBuscaCidade()
+        public fmBuscaPessoa()
         {
             InitializeComponent();
             Application.AddMessageFilter(this); // código para trocar o enter por tab
-            tbFiltroCodEstado.Focus();
         }
 
         //Continuação do código para trocar o enter por tab
@@ -36,26 +35,20 @@ namespace _5gpro.Forms
             return false;
         }
 
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void btBuscaCidade_Click(object sender, EventArgs e)
         {
-            // Faz consulta no banco de dados baseado nos filtros
+            var buscaCidade = new fmBuscaCidade();
+            buscaCidade.ShowDialog();
         }
 
-        private void btProcuraEstado_Click(object sender, EventArgs e)
-        {
-            var buscaEstado = new fmBuscaEstado();
-            buscaEstado.ShowDialog();
-        }
-
-        private void tbFiltroCodEstado_KeyUp(object sender, KeyEventArgs e)
+        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
-                var buscaEstado = new fmBuscaEstado();
-                buscaEstado.ShowDialog();
+                var buscaCidade = new fmBuscaCidade();
+                buscaCidade.ShowDialog();
             }
-            
         }
     }
 }
