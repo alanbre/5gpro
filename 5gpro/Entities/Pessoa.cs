@@ -83,5 +83,11 @@ namespace _5gpro.Entities
         {
             //SALVAR NO BANCO.
         }
+
+        public int BuscarPessoaByCod()
+        {
+            // Busca no banco baseado no cod... para isso, antes de chamar essa função o código deve ser estipulado no objeto.
+            return 1;
+        }
     }
 }

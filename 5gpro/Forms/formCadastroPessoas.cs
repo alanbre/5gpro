@@ -42,10 +42,16 @@ namespace _5gpro.Forms
                 {
                     editando = true;
                     NovoRegistro();
+                    tbCodigo.Focus();
+                }
+                else
+                {
+
                 }
             }
             else
             {
+                tbCodigo.Focus();
                 editando = true;
             }
             AlteraBotoes();
@@ -76,44 +82,73 @@ namespace _5gpro.Forms
             if (editando)
             {
                 btNovo.Image = Properties.Resources.iosPlus_48px_black;
+                btNovo.Enabled = false;
+                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
+                btSalvar.Enabled = true;
+                btSearch.Image = Properties.Resources.iosSearch_48px_black;
+                btSearch.Enabled = false;
+                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
+                btDeletar.Enabled = false;
             }
             else
             {
                 btNovo.Image = Properties.Resources.iosPlus_48px_blue;
+                btNovo.Enabled = true;
+                btSalvar.Image = Properties.Resources.iosOk_48px_black;
+                btSalvar.Enabled = false;
+                btSearch.Image = Properties.Resources.iosSearch_48px_Blue;
+                btSearch.Enabled = true;
+                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
+                btDeletar.Enabled = false;
             } 
         }
 
         private void NovoRegistro()
         {
-            LimpaCampos();
+            LimpaCampos(true);
         }
 
-        private void LimpaCampos()
+        private void LimpaCampos(bool cod)
         {
-            Action<Control.ControlCollection> func = null;
-
-            func = (controls) =>
-            {
-                foreach (Control control in controls)
-                    if (control is TextBox)
-                        (control as TextBox).Clear();
-                    else if (control is MaskedTextBox)
-                    {
-                        (control as MaskedTextBox).Clear();
-                    }
-                    else
-                    {
-                        func(control.Controls);
-                    }
-            };
+            if (cod) { tbCodigo.Clear(); }
+            tbNome.Clear();
+            tbFantasia.Clear();
+            tbRua.Clear();
+            tbNumero.Clear();
+            tbBairro.Clear();
+            tbComplemento.Clear();
+            tbCodCidade.Clear();
+            tbNomeCidade.Clear();
+            mtbCpfCnpj.Clear();
+            mtbTelefone.Clear();
+            tbEmail.Clear();
             foreach (int i in cblAtuacao.CheckedIndices)
             {
                 cblAtuacao.SetItemCheckState(i, CheckState.Unchecked);
             }
             rbPessoaFisica.Checked = true;
             rbPessoaJuridica.Checked = false;
+        }
 
-            func(Controls);
+        private void tbCodigo_Leave(object sender, EventArgs e)
+        {
+            if (pessoa.Codigo == null)
+            {
+                editando = tbCodigo.Text.Length > 0 ? true : false;
+                LimpaCampos(false);
+                AlteraBotoes();
+            }
+            else
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    editando = true;
+                    NovoRegistro();
+                }
+            }
         }
     }
 }

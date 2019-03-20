@@ -152,6 +152,7 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
+            this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
             // 
             // lbCodigo
             // 
@@ -416,7 +417,7 @@
             // 
             this.btLeft.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btLeft.Image = global::_5gpro.Properties.Resources.iosLeft_48px_black;
+            this.btLeft.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
             this.btLeft.Location = new System.Drawing.Point(3, 208);
             this.btLeft.MinimumSize = new System.Drawing.Size(48, 48);
             this.btLeft.Name = "btLeft";
@@ -428,7 +429,7 @@
             // 
             this.btRight.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRight.Image = global::_5gpro.Properties.Resources.iosRight_48px_black;
+            this.btRight.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
             this.btRight.Location = new System.Drawing.Point(3, 157);
             this.btRight.MinimumSize = new System.Drawing.Size(48, 48);
             this.btRight.Name = "btRight";
