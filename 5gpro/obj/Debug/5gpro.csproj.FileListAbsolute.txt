@@ -1,0 +1,11 @@
+D:\workspace\5gpro\5gpro\bin\Debug\5gpro.exe.config
+D:\workspace\5gpro\5gpro\bin\Debug\5gpro.exe
+D:\workspace\5gpro\5gpro\bin\Debug\5gpro.pdb
+D:\workspace\5gpro\5gpro\obj\Debug\5gpro.csprojAssemblyReference.cache
+D:\workspace\5gpro\5gpro\obj\Debug\_5gpro.fmMain.resources
+D:\workspace\5gpro\5gpro\obj\Debug\_5gpro.Properties.Resources.resources
+D:\workspace\5gpro\5gpro\obj\Debug\5gpro.csproj.GenerateResource.cache
+D:\workspace\5gpro\5gpro\obj\Debug\5gpro.csproj.CoreCompileInputs.cache
+D:\workspace\5gpro\5gpro\obj\Debug\5gpro.exe
+D:\workspace\5gpro\5gpro\obj\Debug\5gpro.pdb
+D:\workspace\5gpro\5gpro\obj\Debug\_5gpro.Forms.formCadastroPessoas.resources
