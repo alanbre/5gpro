@@ -50,12 +50,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bll\paisBLL.cs" />
+    <Compile Include="Daos\PaisDAO.cs" />
+    <Compile Include="Daos\ConexaoDAO.cs" />
+    <Compile Include="Entities\Pais.cs" />
     <Compile Include="Entities\Pessoa.cs" />
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\formCadastroPais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\formCadastroPais.Designer.cs">
+      <DependentUpon>formCadastroPais.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\formCadastroPessoas.cs">
       <SubType>Form</SubType>
@@ -73,6 +83,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\formCadastroPais.resx">
+      <DependentUpon>formCadastroPais.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\formCadastroPessoas.resx">
       <DependentUpon>formCadastroPessoas.cs</DependentUpon>
@@ -238,5 +251,6 @@
   <ItemGroup>
     <None Include="Resources\icons8_Google_Web_Search_48px.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
