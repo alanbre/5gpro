@@ -83,10 +83,12 @@ namespace _5gpro.Forms
             pessoa.Codigo = tbCodigo.Text;
             pessoa.Nome = tbNome.Text;
             pessoa.Fantasia = tbFantasia.Text;
+            List<string> atuacoes = new List<string>();
             foreach (string s in cblAtuacao.CheckedItems)
             {
-                pessoa.Atuacao.Add(s);
+                atuacoes.Add(s);
             }
+            pessoa.Atuacao = atuacoes;
             pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
             pessoa.Rua = tbRua.Text;
             pessoa.Numero = tbNumero.Text;
