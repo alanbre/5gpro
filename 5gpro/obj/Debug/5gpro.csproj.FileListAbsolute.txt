@@ -9,3 +9,14 @@ D:\workspace\5gpro\5gpro\obj\Debug\5gpro.csproj.CoreCompileInputs.cache
 D:\workspace\5gpro\5gpro\obj\Debug\5gpro.exe
 D:\workspace\5gpro\5gpro\obj\Debug\5gpro.pdb
 D:\workspace\5gpro\5gpro\obj\Debug\_5gpro.Forms.formCadastroPessoas.resources
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\5gpro.csprojAssemblyReference.cache
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\_5gpro.Forms.formCadastroPessoas.resources
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\_5gpro.fmMain.resources
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\_5gpro.Properties.Resources.resources
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\5gpro.csproj.GenerateResource.cache
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\5gpro.csproj.CoreCompileInputs.cache
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\5gpro.exe
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\obj\Debug\5gpro.pdb
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\bin\Debug\5gpro.exe.config
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\bin\Debug\5gpro.exe
+C:\Users\Eduardo\Documents\Projects Visual Studio 2017\5gpro\5gpro\bin\Debug\5gpro.pdb

@@ -34,7 +34,7 @@ namespace _5gpro.Forms
             pessoa.Codigo = tbCodigo.Text;
             pessoa.Nome = tbNome.Text;
             pessoa.Fantasia = tbFantasia.Text;
-            pessoa.Atuacao = cblAtuacao.SelectedItems.ToString;
+           // pessoa.Atuacao = cblAtuacao.SelectedItems.ToString;
         }
     }
 }
