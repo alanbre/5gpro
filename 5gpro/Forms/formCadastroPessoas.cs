@@ -34,15 +34,11 @@ namespace _5gpro.Forms
             pessoa.Codigo = tbCodigo.Text;
             pessoa.Nome = tbNome.Text;
             pessoa.Fantasia = tbFantasia.Text;
-<<<<<<< HEAD
-
             foreach(string s in cblAtuacao.CheckedItems)
             {
                 Console.WriteLine(s[0]);
             }
-=======
            // pessoa.Atuacao = cblAtuacao.SelectedItems.ToString;
->>>>>>> master
         }
     }
 }
