@@ -24,11 +24,13 @@ namespace _5gpro.Forms
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "###.###.###-##";
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
+            mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "##.###.###/####-##";
         }
 
@@ -149,6 +151,30 @@ namespace _5gpro.Forms
                     editando = true;
                     NovoRegistro();
                 }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var buscaCidade = new fmBuscaCidade();
+            buscaCidade.ShowDialog();
+        }
+
+        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void formCadastroPessoas_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
             }
         }
     }

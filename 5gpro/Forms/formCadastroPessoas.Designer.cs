@@ -60,13 +60,13 @@
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
             this.pnBotoes = new System.Windows.Forms.Panel();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btDeletar = new System.Windows.Forms.Button();
             this.btLeft = new System.Windows.Forms.Button();
             this.btRight = new System.Windows.Forms.Button();
             this.btSearch = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -113,10 +113,12 @@
             this.cblAtuacao.Name = "cblAtuacao";
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
             this.cblAtuacao.TabIndex = 7;
+            this.cblAtuacao.TabStop = false;
             // 
             // tbFantasia
             // 
             this.tbFantasia.Location = new System.Drawing.Point(15, 108);
+            this.tbFantasia.MaxLength = 255;
             this.tbFantasia.Name = "tbFantasia";
             this.tbFantasia.Size = new System.Drawing.Size(528, 20);
             this.tbFantasia.TabIndex = 5;
@@ -133,6 +135,7 @@
             // tbNome
             // 
             this.tbNome.Location = new System.Drawing.Point(16, 65);
+            this.tbNome.MaxLength = 255;
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(527, 20);
             this.tbNome.TabIndex = 3;
@@ -149,9 +152,11 @@
             // tbCodigo
             // 
             this.tbCodigo.Location = new System.Drawing.Point(16, 26);
+            this.tbCodigo.MaxLength = 5;
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
+            this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
             this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
             // 
             // lbCodigo
@@ -224,7 +229,7 @@
             this.pnDados.Controls.Add(this.lbRua);
             this.pnDados.Location = new System.Drawing.Point(72, 207);
             this.pnDados.Name = "pnDados";
-            this.pnDados.Size = new System.Drawing.Size(1110, 292);
+            this.pnDados.Size = new System.Drawing.Size(1110, 305);
             this.pnDados.TabIndex = 2;
             // 
             // button3
@@ -233,8 +238,10 @@
             this.button3.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 17;
+            this.button3.TabIndex = 1;
+            this.button3.TabStop = false;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // tbNomeCidade
             // 
@@ -247,9 +254,10 @@
             // tbCodCidade
             // 
             this.tbCodCidade.Location = new System.Drawing.Point(15, 143);
+            this.tbCodCidade.MaxLength = 5;
             this.tbCodCidade.Name = "tbCodCidade";
             this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
-            this.tbCodCidade.TabIndex = 15;
+            this.tbCodCidade.TabIndex = 8;
             // 
             // lbCidade
             // 
@@ -257,15 +265,16 @@
             this.lbCidade.Location = new System.Drawing.Point(13, 127);
             this.lbCidade.Name = "lbCidade";
             this.lbCidade.Size = new System.Drawing.Size(40, 13);
-            this.lbCidade.TabIndex = 14;
+            this.lbCidade.TabIndex = 8;
             this.lbCidade.Text = "Cidade";
             // 
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(15, 267);
+            this.tbEmail.MaxLength = 45;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
-            this.tbEmail.TabIndex = 13;
+            this.tbEmail.TabIndex = 15;
             // 
             // lbEmail
             // 
@@ -273,7 +282,7 @@
             this.lbEmail.Location = new System.Drawing.Point(13, 251);
             this.lbEmail.Name = "lbEmail";
             this.lbEmail.Size = new System.Drawing.Size(35, 13);
-            this.lbEmail.TabIndex = 12;
+            this.lbEmail.TabIndex = 14;
             this.lbEmail.Text = "E-mail";
             // 
             // mtbTelefone
@@ -282,7 +291,7 @@
             this.mtbTelefone.Mask = "(##) ####-####";
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
-            this.mtbTelefone.TabIndex = 11;
+            this.mtbTelefone.TabIndex = 13;
             // 
             // lbTelefone
             // 
@@ -290,7 +299,7 @@
             this.lbTelefone.Location = new System.Drawing.Point(13, 212);
             this.lbTelefone.Name = "lbTelefone";
             this.lbTelefone.Size = new System.Drawing.Size(49, 13);
-            this.lbTelefone.TabIndex = 10;
+            this.lbTelefone.TabIndex = 12;
             this.lbTelefone.Text = "Telefone";
             // 
             // mtbCpfCnpj
@@ -300,7 +309,7 @@
             this.mtbCpfCnpj.Mask = "###.###.###-##";
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
-            this.mtbCpfCnpj.TabIndex = 9;
+            this.mtbCpfCnpj.TabIndex = 11;
             // 
             // lbCpf
             // 
@@ -308,12 +317,13 @@
             this.lbCpf.Location = new System.Drawing.Point(13, 173);
             this.lbCpf.Name = "lbCpf";
             this.lbCpf.Size = new System.Drawing.Size(59, 13);
-            this.lbCpf.TabIndex = 8;
+            this.lbCpf.TabIndex = 10;
             this.lbCpf.Text = "CPF/CNPJ";
             // 
             // tbComplemento
             // 
             this.tbComplemento.Location = new System.Drawing.Point(16, 104);
+            this.tbComplemento.MaxLength = 45;
             this.tbComplemento.Name = "tbComplemento";
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
             this.tbComplemento.TabIndex = 7;
@@ -330,6 +340,7 @@
             // tbBairro
             // 
             this.tbBairro.Location = new System.Drawing.Point(15, 65);
+            this.tbBairro.MaxLength = 45;
             this.tbBairro.Name = "tbBairro";
             this.tbBairro.Size = new System.Drawing.Size(528, 20);
             this.tbBairro.TabIndex = 5;
@@ -346,6 +357,7 @@
             // tbNumero
             // 
             this.tbNumero.Location = new System.Drawing.Point(553, 26);
+            this.tbNumero.MaxLength = 10;
             this.tbNumero.Name = "tbNumero";
             this.tbNumero.Size = new System.Drawing.Size(64, 20);
             this.tbNumero.TabIndex = 3;
@@ -362,6 +374,7 @@
             // tbRua
             // 
             this.tbRua.Location = new System.Drawing.Point(15, 26);
+            this.tbRua.MaxLength = 150;
             this.tbRua.Name = "tbRua";
             this.tbRua.Size = new System.Drawing.Size(528, 20);
             this.tbRua.TabIndex = 1;
@@ -388,6 +401,17 @@
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
             // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.TabIndex = 4;
+            // 
             // btSalvar
             // 
             this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -397,7 +421,7 @@
             this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(48, 48);
-            this.btSalvar.TabIndex = 5;
+            this.btSalvar.TabIndex = 0;
             this.btSalvar.UseVisualStyleBackColor = true;
             this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
             // 
@@ -410,7 +434,7 @@
             this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
             this.btDeletar.Name = "btDeletar";
             this.btDeletar.Size = new System.Drawing.Size(48, 48);
-            this.btDeletar.TabIndex = 4;
+            this.btDeletar.TabIndex = 5;
             this.btDeletar.UseVisualStyleBackColor = true;
             // 
             // btLeft
@@ -422,7 +446,7 @@
             this.btLeft.MinimumSize = new System.Drawing.Size(48, 48);
             this.btLeft.Name = "btLeft";
             this.btLeft.Size = new System.Drawing.Size(48, 48);
-            this.btLeft.TabIndex = 3;
+            this.btLeft.TabIndex = 4;
             this.btLeft.UseVisualStyleBackColor = true;
             // 
             // btRight
@@ -434,7 +458,7 @@
             this.btRight.MinimumSize = new System.Drawing.Size(48, 48);
             this.btRight.Name = "btRight";
             this.btRight.Size = new System.Drawing.Size(48, 48);
-            this.btRight.TabIndex = 2;
+            this.btRight.TabIndex = 3;
             this.btRight.UseVisualStyleBackColor = true;
             // 
             // btSearch
@@ -446,7 +470,7 @@
             this.btSearch.MinimumSize = new System.Drawing.Size(48, 48);
             this.btSearch.Name = "btSearch";
             this.btSearch.Size = new System.Drawing.Size(48, 48);
-            this.btSearch.TabIndex = 1;
+            this.btSearch.TabIndex = 2;
             this.btSearch.UseVisualStyleBackColor = true;
             // 
             // btNovo
@@ -458,26 +482,15 @@
             this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
             this.btNovo.Name = "btNovo";
             this.btNovo.Size = new System.Drawing.Size(48, 48);
-            this.btNovo.TabIndex = 0;
+            this.btNovo.TabIndex = 1;
             this.btNovo.UseVisualStyleBackColor = true;
             this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
-            // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAjuda.Enabled = false;
-            this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 517);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
-            this.tbAjuda.TabIndex = 4;
             // 
             // formCadastroPessoas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 549);
+            this.ClientSize = new System.Drawing.Size(1194, 562);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.pnBotoes);
             this.Controls.Add(this.pnDados);
@@ -485,11 +498,12 @@
             this.Controls.Add(this.pnDadosGerais);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(750, 550);
+            this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "formCadastroPessoas";
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de pessoas";
             this.TopMost = true;
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.formCadastroPessoas_KeyUp);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.gbAtuacao.ResumeLayout(false);
