@@ -30,7 +30,7 @@
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.clbAtuacao = new System.Windows.Forms.CheckedListBox();
+            this.cblAtuacao = new System.Windows.Forms.CheckedListBox();
             this.tbFantasia = new System.Windows.Forms.TextBox();
             this.lbFantasia = new System.Windows.Forms.Label();
             this.tbNome = new System.Windows.Forms.TextBox();
@@ -93,7 +93,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.clbAtuacao);
+            this.groupBox1.Controls.Add(this.cblAtuacao);
             this.groupBox1.Location = new System.Drawing.Point(553, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(135, 121);
@@ -101,18 +101,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Atuação";
             // 
-            // clbAtuacao
+            // cblAtuacao
             // 
-            this.clbAtuacao.BackColor = System.Drawing.SystemColors.Control;
-            this.clbAtuacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.clbAtuacao.FormattingEnabled = true;
-            this.clbAtuacao.Items.AddRange(new object[] {
+            this.cblAtuacao.BackColor = System.Drawing.SystemColors.Control;
+            this.cblAtuacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cblAtuacao.FormattingEnabled = true;
+            this.cblAtuacao.Items.AddRange(new object[] {
             "Cliente",
             "Fornecedor"});
-            this.clbAtuacao.Location = new System.Drawing.Point(6, 19);
-            this.clbAtuacao.Name = "clbAtuacao";
-            this.clbAtuacao.Size = new System.Drawing.Size(120, 90);
-            this.clbAtuacao.TabIndex = 7;
+            this.cblAtuacao.Location = new System.Drawing.Point(6, 19);
+            this.cblAtuacao.Name = "cblAtuacao";
+            this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
+            this.cblAtuacao.TabIndex = 7;
             // 
             // tbFantasia
             // 
@@ -541,6 +541,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label lbCidade;
-        private System.Windows.Forms.CheckedListBox clbAtuacao;
+        private System.Windows.Forms.CheckedListBox cblAtuacao;
     }
 }
