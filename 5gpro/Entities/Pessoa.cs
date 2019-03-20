@@ -36,58 +36,5 @@ namespace _5gpro.Entities
             this.Atuacao = atuacao;
             this.TipoPessoa = tipopessoa;
         }
-
-        //TODO:
-        //VERIFICAR A NECESSIDADE DE TER GET E SET PARA TUDO, POR ENQUANTO DEIXAR OS CAMPOS COMO PUBLICOS (ACHO QUE PRECISA PRO CÓDIGO SÓ)
-        public void SetCodigo(string codigo)
-        {
-            this.Codigo = codigo;
-        }
-
-        public string GetCodigo()
-        {
-            return this.Codigo;
-        }
-
-        public void SetNome(string nome)
-        {
-            this.Nome = nome;
-        }
-
-        public string GetNome()
-        {
-            return this.Nome;
-        }
-
-        public void SetFantasia(string fantasia)
-        {
-            this.Fantasia = fantasia;
-        }
-
-        public string GetFantasia()
-        {
-            return this.Fantasia;
-        }
-
-        public void SetAtuacao(List<string> atuacao)
-        {
-            this.Atuacao = atuacao;
-        }
-
-        public string GetAtuacao()
-        {
-            return this.Nome;
-        }
-
-        public void SalvarPessoa()
-        {
-            //SALVAR NO BANCO.
-        }
-
-        public int BuscarPessoaByCod()
-        {
-            // Busca no banco baseado no cod... para isso, antes de chamar essa função o código deve ser estipulado no objeto.
-            return 1;
-        }
     }
 }
