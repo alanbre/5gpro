@@ -1,10 +1,6 @@
-SELECT * FROM hiring_pais;
+INSERT INTO pais (`idpais`, `nome`, `sigla`) VALUES (1, 'Brasil', 'BR');
 
-INSERT INTO hiring_pais (`id`, `nome`, `sigla`) VALUES (1, 'Brasil', 'BR');
-
-SELECT * FROM hiring_estados;
-
-INSERT INTO hiring_estados (`id`, `nome`, `uf`, `pais_id`) VALUES
+INSERT INTO estado (`idestado`, `nome`, `uf`, `idpais`) VALUES
 (1, 'Acre', 'AC', 1),
 (2, 'Alagoas', 'AL', 1),
 (3, 'Amazonas', 'AM', 1),
@@ -33,10 +29,7 @@ INSERT INTO hiring_estados (`id`, `nome`, `uf`, `pais_id`) VALUES
 (26, 'São Paulo', 'SP', 1),
 (27, 'Tocantins', 'TO', 1);
 
-
-SELECT * FROM `hiring_cidades`;
-
-INSERT INTO `hiring_cidades` (`id`, `nome`, `estado_id`) VALUES
+INSERT INTO cidade (`idcidade`, `nome`, `idestado`) VALUES
 (1, 'Afonso Cláudio', 8),
 (2, 'Água Doce do Norte', 8),
 (3, 'Águia Branca', 8),
@@ -2063,7 +2056,7 @@ INSERT INTO `hiring_cidades` (`id`, `nome`, `estado_id`) VALUES
 (2024, 'Mariana', 11),
 (2025, 'Marilac', 11),
 (2026, 'Mário Campos', 11);
-INSERT INTO `cidade` (`id`, `nome`, `estado`) VALUES
+INSERT INTO `cidade` (`idcidade`, `nome`, `idestado`) VALUES
 (2027, 'Maripá de Minas', 11),
 (2028, 'Marliéria', 11),
 (2029, 'Marmelópolis', 11),
@@ -3931,7 +3924,7 @@ INSERT INTO `cidade` (`id`, `nome`, `estado`) VALUES
 (3891, 'Benjamin Constant do Sul', 23),
 (3892, 'Bento Gonçalves', 23),
 (3893, 'Boa Vista das Missões', 23);
-INSERT INTO `cidade` (`id`, `nome`, `estado`) VALUES
+INSERT INTO `cidade` (`idcidade`, `nome`, `idestado`) VALUES
 (3894, 'Boa Vista do Buricá', 23),
 (3895, 'Boa Vista do Cadeado', 23),
 (3896, 'Boa Vista do Incra', 23),
@@ -5603,3 +5596,5 @@ INSERT INTO `cidade` (`id`, `nome`, `estado`) VALUES
 (5562, 'Tupiratins', 27),
 (5563, 'Wanderlândia', 27),
 (5564, 'Xambioá', 27);
+
+INSERT INTO atuacao (`idatuacao`, `descricao`) VALUES (1, 'Cliente'), (2, 'Fornecedor');
