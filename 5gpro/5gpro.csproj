@@ -222,5 +222,8 @@
   <ItemGroup>
     <None Include="Resources\icons8_Search_48px_1.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Google_Web_Search_48px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

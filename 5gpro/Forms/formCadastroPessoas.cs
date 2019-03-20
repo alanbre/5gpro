@@ -36,9 +36,17 @@ namespace _5gpro.Forms
             pessoa.Fantasia = tbFantasia.Text;
             foreach(string s in cblAtuacao.CheckedItems)
             {
-                Console.WriteLine(s[0]);
+                pessoa.Atuacao.Add(s);
             }
-           // pessoa.Atuacao = cblAtuacao.SelectedItems.ToString;
-        }
+            pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+            pessoa.Rua = tbRua.Text;
+            pessoa.Numero = tbNumero.Text;
+            pessoa.Bairro = tbBairro.Text;
+            pessoa.Complemento = tbComplemento.Text;
+            pessoa.Cidade = tbCodCidade.Text;
+            pessoa.CpfCnpj = mtbCpfCnpj.Text;
+            pessoa.Telefone = mtbTelefone.Text;
+            pessoa.Email = tbEmail.Text;
+         }
     }
 }

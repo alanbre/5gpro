@@ -43,7 +43,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbCodCidade = new System.Windows.Forms.TextBox();
             this.lbCidade = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
@@ -205,7 +205,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.tbCodCidade);
             this.panel1.Controls.Add(this.lbCidade);
             this.panel1.Controls.Add(this.tbEmail);
             this.panel1.Controls.Add(this.lbEmail);
@@ -243,12 +243,12 @@
             this.textBox3.Size = new System.Drawing.Size(436, 20);
             this.textBox3.TabIndex = 16;
             // 
-            // textBox2
+            // tbCodCidade
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 143);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(68, 20);
-            this.textBox2.TabIndex = 15;
+            this.tbCodCidade.Location = new System.Drawing.Point(15, 143);
+            this.tbCodCidade.Name = "tbCodCidade";
+            this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
+            this.tbCodCidade.TabIndex = 15;
             // 
             // lbCidade
             // 
@@ -539,7 +539,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbCodCidade;
         private System.Windows.Forms.Label lbCidade;
         private System.Windows.Forms.CheckedListBox cblAtuacao;
     }

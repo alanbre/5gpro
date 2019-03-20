@@ -76,5 +76,10 @@ namespace _5gpro.Entities
         {
             return this.Nome;
         }
+
+        public void SalvarPessoa()
+        {
+            //SALVAR NO BANCO.
+        }
     }
 }
