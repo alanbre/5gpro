@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbAtuacao = new System.Windows.Forms.GroupBox();
             this.cblAtuacao = new System.Windows.Forms.CheckedListBox();
             this.tbFantasia = new System.Windows.Forms.TextBox();
             this.lbFantasia = new System.Windows.Forms.Label();
@@ -40,9 +40,9 @@
             this.gbTipoDePessoa = new System.Windows.Forms.GroupBox();
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnDados = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbNomeCidade = new System.Windows.Forms.TextBox();
             this.tbCodCidade = new System.Windows.Forms.TextBox();
             this.lbCidade = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
@@ -59,19 +59,19 @@
             this.lbNumero = new System.Windows.Forms.Label();
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pnBotoes = new System.Windows.Forms.Panel();
+            this.btSalvar = new System.Windows.Forms.Button();
+            this.btDeletar = new System.Windows.Forms.Button();
             this.btLeft = new System.Windows.Forms.Button();
             this.btRight = new System.Windows.Forms.Button();
             this.btSearch = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnDadosGerais.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnDados.SuspendLayout();
+            this.pnBotoes.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnDadosGerais
@@ -79,7 +79,7 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnDadosGerais.Controls.Add(this.groupBox1);
+            this.pnDadosGerais.Controls.Add(this.gbAtuacao);
             this.pnDadosGerais.Controls.Add(this.tbFantasia);
             this.pnDadosGerais.Controls.Add(this.lbFantasia);
             this.pnDadosGerais.Controls.Add(this.tbNome);
@@ -91,15 +91,15 @@
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 138);
             this.pnDadosGerais.TabIndex = 0;
             // 
-            // groupBox1
+            // gbAtuacao
             // 
-            this.groupBox1.Controls.Add(this.cblAtuacao);
-            this.groupBox1.Location = new System.Drawing.Point(553, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(135, 121);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Atuação";
+            this.gbAtuacao.Controls.Add(this.cblAtuacao);
+            this.gbAtuacao.Location = new System.Drawing.Point(553, 6);
+            this.gbAtuacao.Name = "gbAtuacao";
+            this.gbAtuacao.Size = new System.Drawing.Size(135, 121);
+            this.gbAtuacao.TabIndex = 6;
+            this.gbAtuacao.TabStop = false;
+            this.gbAtuacao.Text = "Atuação";
             // 
             // cblAtuacao
             // 
@@ -197,34 +197,34 @@
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
             this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
-            // panel1
+            // pnDados
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnDados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.textBox3);
-            this.panel1.Controls.Add(this.tbCodCidade);
-            this.panel1.Controls.Add(this.lbCidade);
-            this.panel1.Controls.Add(this.tbEmail);
-            this.panel1.Controls.Add(this.lbEmail);
-            this.panel1.Controls.Add(this.mtbTelefone);
-            this.panel1.Controls.Add(this.lbTelefone);
-            this.panel1.Controls.Add(this.mtbCpfCnpj);
-            this.panel1.Controls.Add(this.lbCpf);
-            this.panel1.Controls.Add(this.tbComplemento);
-            this.panel1.Controls.Add(this.lbComplemento);
-            this.panel1.Controls.Add(this.tbBairro);
-            this.panel1.Controls.Add(this.lbBairro);
-            this.panel1.Controls.Add(this.tbNumero);
-            this.panel1.Controls.Add(this.lbNumero);
-            this.panel1.Controls.Add(this.tbRua);
-            this.panel1.Controls.Add(this.lbRua);
-            this.panel1.Location = new System.Drawing.Point(72, 207);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1110, 292);
-            this.panel1.TabIndex = 2;
+            this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDados.Controls.Add(this.button3);
+            this.pnDados.Controls.Add(this.tbNomeCidade);
+            this.pnDados.Controls.Add(this.tbCodCidade);
+            this.pnDados.Controls.Add(this.lbCidade);
+            this.pnDados.Controls.Add(this.tbEmail);
+            this.pnDados.Controls.Add(this.lbEmail);
+            this.pnDados.Controls.Add(this.mtbTelefone);
+            this.pnDados.Controls.Add(this.lbTelefone);
+            this.pnDados.Controls.Add(this.mtbCpfCnpj);
+            this.pnDados.Controls.Add(this.lbCpf);
+            this.pnDados.Controls.Add(this.tbComplemento);
+            this.pnDados.Controls.Add(this.lbComplemento);
+            this.pnDados.Controls.Add(this.tbBairro);
+            this.pnDados.Controls.Add(this.lbBairro);
+            this.pnDados.Controls.Add(this.tbNumero);
+            this.pnDados.Controls.Add(this.lbNumero);
+            this.pnDados.Controls.Add(this.tbRua);
+            this.pnDados.Controls.Add(this.lbRua);
+            this.pnDados.Location = new System.Drawing.Point(72, 207);
+            this.pnDados.Name = "pnDados";
+            this.pnDados.Size = new System.Drawing.Size(1110, 292);
+            this.pnDados.TabIndex = 2;
             // 
             // button3
             // 
@@ -235,13 +235,13 @@
             this.button3.TabIndex = 17;
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // tbNomeCidade
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(107, 143);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(436, 20);
-            this.textBox3.TabIndex = 16;
+            this.tbNomeCidade.Enabled = false;
+            this.tbNomeCidade.Location = new System.Drawing.Point(107, 143);
+            this.tbNomeCidade.Name = "tbNomeCidade";
+            this.tbNomeCidade.Size = new System.Drawing.Size(436, 20);
+            this.tbNomeCidade.TabIndex = 16;
             // 
             // tbCodCidade
             // 
@@ -374,43 +374,43 @@
             this.lbRua.TabIndex = 0;
             this.lbRua.Text = "Rua";
             // 
-            // panel2
+            // pnBotoes
             // 
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
-            this.panel2.Controls.Add(this.btLeft);
-            this.panel2.Controls.Add(this.btRight);
-            this.panel2.Controls.Add(this.btSearch);
-            this.panel2.Controls.Add(this.btNovo);
-            this.panel2.Location = new System.Drawing.Point(10, 11);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(56, 488);
-            this.panel2.TabIndex = 3;
+            this.pnBotoes.Controls.Add(this.btSalvar);
+            this.pnBotoes.Controls.Add(this.btDeletar);
+            this.pnBotoes.Controls.Add(this.btLeft);
+            this.pnBotoes.Controls.Add(this.btRight);
+            this.pnBotoes.Controls.Add(this.btSearch);
+            this.pnBotoes.Controls.Add(this.btNovo);
+            this.pnBotoes.Location = new System.Drawing.Point(10, 11);
+            this.pnBotoes.Name = "pnBotoes";
+            this.pnBotoes.Size = new System.Drawing.Size(56, 488);
+            this.pnBotoes.TabIndex = 3;
             // 
-            // button2
+            // btSalvar
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
-            this.button2.Location = new System.Drawing.Point(3, 107);
-            this.button2.MinimumSize = new System.Drawing.Size(48, 48);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(48, 48);
-            this.button2.TabIndex = 5;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
+            this.btSalvar.Location = new System.Drawing.Point(3, 107);
+            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(48, 48);
+            this.btSalvar.TabIndex = 5;
+            this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
             // 
-            // button1
+            // btDeletar
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
-            this.button1.Location = new System.Drawing.Point(4, 260);
-            this.button1.MinimumSize = new System.Drawing.Size(48, 48);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(48, 48);
-            this.button1.TabIndex = 4;
-            this.button1.UseVisualStyleBackColor = true;
+            this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
+            this.btDeletar.Location = new System.Drawing.Point(4, 260);
+            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btDeletar.Name = "btDeletar";
+            this.btDeletar.Size = new System.Drawing.Size(48, 48);
+            this.btDeletar.TabIndex = 4;
+            this.btDeletar.UseVisualStyleBackColor = true;
             // 
             // btLeft
             // 
@@ -459,26 +459,27 @@
             this.btNovo.Size = new System.Drawing.Size(48, 48);
             this.btNovo.TabIndex = 0;
             this.btNovo.UseVisualStyleBackColor = true;
+            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
-            // textBox1
+            // tbAjuda
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Enabled = false;
-            this.textBox1.HideSelection = false;
-            this.textBox1.Location = new System.Drawing.Point(72, 517);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(1110, 20);
-            this.textBox1.TabIndex = 4;
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(72, 517);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.TabIndex = 4;
             // 
             // formCadastroPessoas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1194, 549);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tbAjuda);
+            this.Controls.Add(this.pnBotoes);
+            this.Controls.Add(this.pnDados);
             this.Controls.Add(this.gbTipoDePessoa);
             this.Controls.Add(this.pnDadosGerais);
             this.MaximizeBox = false;
@@ -490,12 +491,12 @@
             this.TopMost = true;
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
+            this.gbAtuacao.ResumeLayout(false);
             this.gbTipoDePessoa.ResumeLayout(false);
             this.gbTipoDePessoa.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            this.pnDados.ResumeLayout(false);
+            this.pnDados.PerformLayout();
+            this.pnBotoes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -513,8 +514,8 @@
         private System.Windows.Forms.GroupBox gbTipoDePessoa;
         private System.Windows.Forms.RadioButton rbPessoaJuridica;
         private System.Windows.Forms.RadioButton rbPessoaFisica;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox gbAtuacao;
+        private System.Windows.Forms.Panel pnDados;
         private System.Windows.Forms.MaskedTextBox mtbCpfCnpj;
         private System.Windows.Forms.Label lbCpf;
         private System.Windows.Forms.TextBox tbComplemento;
@@ -529,16 +530,16 @@
         private System.Windows.Forms.Label lbTelefone;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.Label lbEmail;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnBotoes;
         private System.Windows.Forms.Button btNovo;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btSalvar;
+        private System.Windows.Forms.Button btDeletar;
         private System.Windows.Forms.Button btLeft;
         private System.Windows.Forms.Button btRight;
         private System.Windows.Forms.Button btSearch;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbNomeCidade;
         private System.Windows.Forms.TextBox tbCodCidade;
         private System.Windows.Forms.Label lbCidade;
         private System.Windows.Forms.CheckedListBox cblAtuacao;

@@ -14,10 +14,12 @@ namespace _5gpro.Forms
     public partial class formCadastroPessoas : Form
     {
         Pessoa pessoa = new Pessoa();
+        bool editando = false;
 
         public formCadastroPessoas()
         {
             InitializeComponent();
+            AlteraBotoes();
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -29,12 +31,32 @@ namespace _5gpro.Forms
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btNovo_Click(object sender, EventArgs e)
+        {
+            if (editando)
+            {
+                if(MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    editando = true;
+                    NovoRegistro();
+                }
+            }
+            else
+            {
+                editando = true;
+            }
+            AlteraBotoes();
+        }
+
+        private void btSalvar_Click(object sender, EventArgs e)
         {
             pessoa.Codigo = tbCodigo.Text;
             pessoa.Nome = tbNome.Text;
             pessoa.Fantasia = tbFantasia.Text;
-            foreach(string s in cblAtuacao.CheckedItems)
+            foreach (string s in cblAtuacao.CheckedItems)
             {
                 pessoa.Atuacao.Add(s);
             }
@@ -47,6 +69,51 @@ namespace _5gpro.Forms
             pessoa.CpfCnpj = mtbCpfCnpj.Text;
             pessoa.Telefone = mtbTelefone.Text;
             pessoa.Email = tbEmail.Text;
-         }
+        }
+
+        private void AlteraBotoes()
+        {
+            if (editando)
+            {
+                btNovo.Image = Properties.Resources.iosPlus_48px_black;
+            }
+            else
+            {
+                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
+            } 
+        }
+
+        private void NovoRegistro()
+        {
+            LimpaCampos();
+        }
+
+        private void LimpaCampos()
+        {
+            Action<Control.ControlCollection> func = null;
+
+            func = (controls) =>
+            {
+                foreach (Control control in controls)
+                    if (control is TextBox)
+                        (control as TextBox).Clear();
+                    else if (control is MaskedTextBox)
+                    {
+                        (control as MaskedTextBox).Clear();
+                    }
+                    else
+                    {
+                        func(control.Controls);
+                    }
+            };
+            foreach (int i in cblAtuacao.CheckedIndices)
+            {
+                cblAtuacao.SetItemCheckState(i, CheckState.Unchecked);
+            }
+            rbPessoaFisica.Checked = true;
+            rbPessoaJuridica.Checked = false;
+
+            func(Controls);
+        }
     }
 }
