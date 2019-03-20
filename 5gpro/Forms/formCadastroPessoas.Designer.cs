@@ -41,7 +41,7 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btBuscaCidade = new System.Windows.Forms.Button();
             this.tbNomeCidade = new System.Windows.Forms.TextBox();
             this.tbCodCidade = new System.Windows.Forms.TextBox();
             this.lbCidade = new System.Windows.Forms.Label();
@@ -60,13 +60,13 @@
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
             this.pnBotoes = new System.Windows.Forms.Panel();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btDeletar = new System.Windows.Forms.Button();
             this.btLeft = new System.Windows.Forms.Button();
             this.btRight = new System.Windows.Forms.Button();
             this.btSearch = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -209,7 +209,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnDados.Controls.Add(this.button3);
+            this.pnDados.Controls.Add(this.btBuscaCidade);
             this.pnDados.Controls.Add(this.tbNomeCidade);
             this.pnDados.Controls.Add(this.tbCodCidade);
             this.pnDados.Controls.Add(this.lbCidade);
@@ -232,16 +232,16 @@
             this.pnDados.Size = new System.Drawing.Size(1110, 305);
             this.pnDados.TabIndex = 2;
             // 
-            // button3
+            // btBuscaCidade
             // 
-            this.button3.Location = new System.Drawing.Point(85, 142);
-            this.button3.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(20, 20);
-            this.button3.TabIndex = 1;
-            this.button3.TabStop = false;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btBuscaCidade.Location = new System.Drawing.Point(85, 142);
+            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btBuscaCidade.Name = "btBuscaCidade";
+            this.btBuscaCidade.Size = new System.Drawing.Size(20, 20);
+            this.btBuscaCidade.TabIndex = 1;
+            this.btBuscaCidade.TabStop = false;
+            this.btBuscaCidade.UseVisualStyleBackColor = true;
+            this.btBuscaCidade.Click += new System.EventHandler(this.btBuscaCidade_Click);
             // 
             // tbNomeCidade
             // 
@@ -258,6 +258,7 @@
             this.tbCodCidade.Name = "tbCodCidade";
             this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
             this.tbCodCidade.TabIndex = 8;
+            this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
             // 
             // lbCidade
             // 
@@ -401,17 +402,6 @@
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
             // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAjuda.Enabled = false;
-            this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
-            this.tbAjuda.TabIndex = 4;
-            // 
             // btSalvar
             // 
             this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -486,6 +476,17 @@
             this.btNovo.UseVisualStyleBackColor = true;
             this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.TabIndex = 4;
+            // 
             // formCadastroPessoas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -503,7 +504,6 @@
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de pessoas";
             this.TopMost = true;
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.formCadastroPessoas_KeyUp);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.gbAtuacao.ResumeLayout(false);
@@ -553,7 +553,7 @@
         private System.Windows.Forms.Button btRight;
         private System.Windows.Forms.Button btSearch;
         private System.Windows.Forms.TextBox tbAjuda;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btBuscaCidade;
         private System.Windows.Forms.TextBox tbNomeCidade;
         private System.Windows.Forms.TextBox tbCodCidade;
         private System.Windows.Forms.Label lbCidade;

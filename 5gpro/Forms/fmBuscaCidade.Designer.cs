@@ -57,6 +57,7 @@
             this.tbFiltroCodEstado.Name = "tbFiltroCodEstado";
             this.tbFiltroCodEstado.Size = new System.Drawing.Size(54, 20);
             this.tbFiltroCodEstado.TabIndex = 1;
+            this.tbFiltroCodEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodEstado_KeyUp);
             // 
             // btProcuraEstado
             // 
@@ -64,10 +65,13 @@
             this.btProcuraEstado.Name = "btProcuraEstado";
             this.btProcuraEstado.Size = new System.Drawing.Size(20, 20);
             this.btProcuraEstado.TabIndex = 2;
+            this.btProcuraEstado.TabStop = false;
             this.btProcuraEstado.UseVisualStyleBackColor = true;
+            this.btProcuraEstado.Click += new System.EventHandler(this.btProcuraEstado_Click);
             // 
             // tbNomeEstado
             // 
+            this.tbNomeEstado.Enabled = false;
             this.tbNomeEstado.Location = new System.Drawing.Point(90, 25);
             this.tbNomeEstado.Name = "tbNomeEstado";
             this.tbNomeEstado.Size = new System.Drawing.Size(414, 20);

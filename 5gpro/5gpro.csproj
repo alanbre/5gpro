@@ -57,6 +57,12 @@
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaEstado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaEstado.Designer.cs">
+      <DependentUpon>fmBuscaEstado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\formCadastroPessoas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
+      <DependentUpon>fmBuscaEstado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\formCadastroPessoas.resx">
       <DependentUpon>formCadastroPessoas.cs</DependentUpon>
