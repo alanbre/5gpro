@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -51,12 +51,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\_Item.cs" />
+    <Compile Include="Bll\paisBLL.cs" />
+    <Compile Include="Daos\PaisDAO.cs" />
+    <Compile Include="Daos\ConexaoDAO.cs" />
+    <Compile Include="Entities\Pais.cs" />
     <Compile Include="Entities\Pessoa.cs" />
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPais.Designer.cs">
+      <DependentUpon>fmCadastroPais.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaEstado.cs">
       <SubType>Form</SubType>
@@ -110,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroItens.resx">
       <DependentUpon>fmCadastroItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroPais.resx">
+      <DependentUpon>fmCadastroPais.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>

@@ -22,31 +22,14 @@ namespace _5gpro
 
         private void cadastrosDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD:5gpro/Forms/formMain.cs
-            formCadastroPessoas formCadPessoas = new formCadastroPessoas();
+            var formCadPessoas = new fmCadastroPessoa();
             formCadPessoas.Show();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var cn = new ConexaoDAO();
-            cn.AbrirConexao();
         }
 
         private void cadastroDePaisesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formCadastroPais formCadPais = new formCadastroPais();
-            formCadPais.Show();
-        }
-=======
-            var formCadPessoa = new fmCadastroPessoa();
-            formCadPessoa.Show(this);
-        }
-
-        private void cadastroDeFuncionáriosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formCadFuncionario = new fmCadastroFuncionario();
-            formCadFuncionario.Show(this);
+            var formCadPais = new fmCadastroPais();
+            formCadPais.Show(this);
         }
 
         private void cadastroDeItensToolStripMenuItem_Click(object sender, EventArgs e)
@@ -54,6 +37,11 @@ namespace _5gpro
             var formCadItens = new fmCadastroItens();
             formCadItens.Show(this);
         }
->>>>>>> master:5gpro/Forms/fmMain.cs
+
+        private void cadastroDeFuncionariosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadFuncionario = new fmCadastroFuncionario();
+            formCadFuncionario.Show(this);
+        }
     }
 }
