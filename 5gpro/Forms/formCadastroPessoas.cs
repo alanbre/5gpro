@@ -24,11 +24,12 @@ namespace _5gpro.Forms
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
+            mtbCpfCnpj.Mask = "###.###.###-##";
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-
+            mtbCpfCnpj.Mask = "##.###.###/####-##";
         }
 
         private void btNovo_Click(object sender, EventArgs e)
