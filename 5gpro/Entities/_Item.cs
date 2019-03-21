@@ -8,14 +8,14 @@ namespace _5gpro.Entities
 {
     class _Item
     {
-        public string Codigo { get; set; }
+        public string Iditem { get; set; }
         public string Descricao { get; set; }
-        public string DescricaoCompra { get; set; }
-        public string CodUniMedida { get; set; }
-        public string Referencia { get; set; }
+        public string DenomCompra { get; set; }
         public string TipoItem { get; set; }
-        public string PrecoUltimaEntrada { get; set; }
-        public string EstoqueNecessario { get; set; }
-        public string PrecoVenda { get; set; }
+        public string Referencia { get; set; }
+        public decimal ValorEntrada { get; set; }
+        public decimal ValorSaida { get; set; }
+        public decimal Estoquenecessario { get; set; }
+        public int Unimedida { get; set; }
     }
 }

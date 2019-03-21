@@ -21,7 +21,7 @@ namespace _5gpro.Forms
 
         private void salvar(Pais pais)
         {
-            paisBLL pbl = new paisBLL();
+            PaisBLL pbl = new PaisBLL();
 
             pais.idpais = int.Parse(tbIdpais.Text);
             pais.nome = tbNomepais.Text;
@@ -38,6 +38,11 @@ namespace _5gpro.Forms
         {
             Pais pais = new Pais();
             salvar(pais);
+        }
+
+        private void fmCadastroPais_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

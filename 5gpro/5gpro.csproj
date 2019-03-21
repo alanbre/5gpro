@@ -50,9 +50,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bll\_ItemBLL.cs" />
+    <Compile Include="Daos\_ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
+    <Compile Include="Daos\UnimedidaDAO.cs" />
+    <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\_Item.cs" />
-    <Compile Include="Bll\paisBLL.cs" />
+    <Compile Include="Bll\PaisBLL.cs" />
     <Compile Include="Daos\PaisDAO.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pais.cs" />

@@ -115,7 +115,7 @@
             this.btSavepais.UseVisualStyleBackColor = true;
             this.btSavepais.Click += new System.EventHandler(this.btSavepais_Click);
             // 
-            // formCadastroPais
+            // fmCadastroPais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -129,8 +129,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "formCadastroPais";
+            this.Name = "fmCadastroPais";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.fmCadastroPais_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -8,15 +8,16 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Bll
 {
-    class PaisBLL
+    class _ItemBLL
     {
-        PaisDAO paisdao = new PaisDAO();
 
-        public void salvar(Pais pais)
+        _ItemDAO itemdao = new _ItemDAO();
+
+        public void salvar(_Item _item)
         {
             try
             {
-                paisdao.Salvar(pais);
+                itemdao.Salvar(_item);
             }
             catch (Exception erro)
             {
@@ -24,5 +25,6 @@ namespace _5gpro.Bll
                 throw erro;
             }
         }
+
     }
 }
