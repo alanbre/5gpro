@@ -11,7 +11,7 @@ namespace _5gpro.Daos
     class PaisDAO: ConexaoDAO
     {
 
-        public void Salvar(Pais pais)
+        public int Salvar(Pais pais)
         {
             MySqlCommand comando = null;
             try
@@ -22,7 +22,7 @@ namespace _5gpro.Daos
                 comando.Parameters.AddWithValue("@nome", pais.nome);
                 comando.Parameters.AddWithValue("@sigla", pais.sigla);
 
-                comando.ExecuteNonQuery();
+                return comando.ExecuteNonQuery();
             }
             catch (Exception erro)
             {
@@ -34,6 +34,5 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
         }
-
     }
 }

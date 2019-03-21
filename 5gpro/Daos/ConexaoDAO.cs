@@ -9,7 +9,7 @@ namespace _5gpro.Daos
 {
     public class ConexaoDAO
     {
-        string conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=root; PWD=5gproedualan";
+        string conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
         protected MySqlConnection conexao = null;
 
 

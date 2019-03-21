@@ -98,6 +98,8 @@ namespace _5gpro.Forms
             pessoa.CpfCnpj = mtbCpfCnpj.Text;
             pessoa.Telefone = mtbTelefone.Text;
             pessoa.Email = tbEmail.Text;
+
+            //SalvarPessoa(pessoa);
         }
 
         private void AlteraBotoes()
