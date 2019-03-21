@@ -166,5 +166,11 @@ namespace _5gpro.Forms
         {
 
         }
+
+        private void btBuscaUndMedida_Click(object sender, EventArgs e)
+        {
+            var buscaUnimedida = new fmBuscaUnimedida();
+            buscaUnimedida.ShowDialog();
+        }
     }
 }

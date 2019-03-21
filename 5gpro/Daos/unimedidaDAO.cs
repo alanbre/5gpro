@@ -17,7 +17,7 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", conexao);
+                comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Conexao);
                 comando.Parameters.AddWithValue("@idunimedida", unimedida.idunimedida);
                 comando.Parameters.AddWithValue("@sigla", unimedida.sigla);
                 comando.Parameters.AddWithValue("@descricao", unimedida.descricao);

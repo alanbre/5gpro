@@ -67,6 +67,12 @@
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaUnimedida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaUnimedida.Designer.cs">
+      <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCadastroPais.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +129,9 @@
     <EmbeddedResource Include="Forms\fmBuscaPessoa.resx">
       <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaUnimedida.resx">
+      <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroFuncionario.resx">
       <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +157,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\_5gpro.Entities.Unimedida.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

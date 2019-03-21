@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.pnBotoes = new System.Windows.Forms.Panel();
-            this.btSalvar = new System.Windows.Forms.Button();
-            this.btDeletar = new System.Windows.Forms.Button();
-            this.btAnterior = new System.Windows.Forms.Button();
-            this.btProximo = new System.Windows.Forms.Button();
-            this.btBuscar = new System.Windows.Forms.Button();
-            this.btNovo = new System.Windows.Forms.Button();
             this.pnDadosGerais = new System.Windows.Forms.Panel();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
@@ -56,12 +50,18 @@
             this.tpEstoque = new System.Windows.Forms.TabPage();
             this.tbEstoqueNecessario = new System.Windows.Forms.TextBox();
             this.lbEstoqueNecessario = new System.Windows.Forms.Label();
-            this.btHistEntradas = new System.Windows.Forms.Button();
             this.tbPrecoUltimaEntrada = new System.Windows.Forms.TextBox();
             this.lbPrecoUltimaEntrada = new System.Windows.Forms.Label();
             this.tpVendas = new System.Windows.Forms.TabPage();
             this.tbPrecoVenda = new System.Windows.Forms.TextBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
+            this.btHistEntradas = new System.Windows.Forms.Button();
+            this.btSalvar = new System.Windows.Forms.Button();
+            this.btDeletar = new System.Windows.Forms.Button();
+            this.btAnterior = new System.Windows.Forms.Button();
+            this.btProximo = new System.Windows.Forms.Button();
+            this.btBuscar = new System.Windows.Forms.Button();
+            this.btNovo = new System.Windows.Forms.Button();
             this.pnBotoes.SuspendLayout();
             this.pnDadosGerais.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
@@ -82,80 +82,6 @@
             this.pnBotoes.Name = "pnBotoes";
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 4;
-            // 
-            // btSalvar
-            // 
-            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
-            this.btSalvar.Location = new System.Drawing.Point(3, 107);
-            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btSalvar.Name = "btSalvar";
-            this.btSalvar.Size = new System.Drawing.Size(48, 48);
-            this.btSalvar.TabIndex = 0;
-            this.btSalvar.UseVisualStyleBackColor = true;
-            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
-            // 
-            // btDeletar
-            // 
-            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
-            this.btDeletar.Location = new System.Drawing.Point(4, 260);
-            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btDeletar.Name = "btDeletar";
-            this.btDeletar.Size = new System.Drawing.Size(48, 48);
-            this.btDeletar.TabIndex = 5;
-            this.btDeletar.UseVisualStyleBackColor = true;
-            // 
-            // btAnterior
-            // 
-            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
-            this.btAnterior.Location = new System.Drawing.Point(3, 208);
-            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btAnterior.Name = "btAnterior";
-            this.btAnterior.Size = new System.Drawing.Size(48, 48);
-            this.btAnterior.TabIndex = 4;
-            this.btAnterior.UseVisualStyleBackColor = true;
-            // 
-            // btProximo
-            // 
-            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
-            this.btProximo.Location = new System.Drawing.Point(3, 157);
-            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btProximo.Name = "btProximo";
-            this.btProximo.Size = new System.Drawing.Size(48, 48);
-            this.btProximo.TabIndex = 3;
-            this.btProximo.UseVisualStyleBackColor = true;
-            // 
-            // btBuscar
-            // 
-            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
-            this.btBuscar.Location = new System.Drawing.Point(3, 55);
-            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btBuscar.Name = "btBuscar";
-            this.btBuscar.Size = new System.Drawing.Size(48, 48);
-            this.btBuscar.TabIndex = 2;
-            this.btBuscar.UseVisualStyleBackColor = true;
-            // 
-            // btNovo
-            // 
-            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_black;
-            this.btNovo.Location = new System.Drawing.Point(3, 3);
-            this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btNovo.Name = "btNovo";
-            this.btNovo.Size = new System.Drawing.Size(48, 48);
-            this.btNovo.TabIndex = 1;
-            this.btNovo.UseVisualStyleBackColor = true;
-            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // pnDadosGerais
             // 
@@ -244,6 +170,7 @@
             this.btBuscaUndMedida.Size = new System.Drawing.Size(20, 20);
             this.btBuscaUndMedida.TabIndex = 9;
             this.btBuscaUndMedida.UseVisualStyleBackColor = true;
+            this.btBuscaUndMedida.Click += new System.EventHandler(this.btBuscaUndMedida_Click);
             // 
             // tbCodUniMedida
             // 
@@ -367,16 +294,6 @@
             this.lbEstoqueNecessario.TabIndex = 3;
             this.lbEstoqueNecessario.Text = "Estoque necessário";
             // 
-            // btHistEntradas
-            // 
-            this.btHistEntradas.BackgroundImage = global::_5gpro.Properties.Resources.iosHistory_18px_black;
-            this.btHistEntradas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btHistEntradas.Location = new System.Drawing.Point(94, 19);
-            this.btHistEntradas.Name = "btHistEntradas";
-            this.btHistEntradas.Size = new System.Drawing.Size(20, 20);
-            this.btHistEntradas.TabIndex = 2;
-            this.btHistEntradas.UseVisualStyleBackColor = true;
-            // 
             // tbPrecoUltimaEntrada
             // 
             this.tbPrecoUltimaEntrada.Location = new System.Drawing.Point(6, 19);
@@ -420,6 +337,90 @@
             this.lbPrecoVenda.Size = new System.Drawing.Size(83, 13);
             this.lbPrecoVenda.TabIndex = 0;
             this.lbPrecoVenda.Text = "Preço de venda";
+            // 
+            // btHistEntradas
+            // 
+            this.btHistEntradas.BackgroundImage = global::_5gpro.Properties.Resources.iosHistory_18px_black;
+            this.btHistEntradas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btHistEntradas.Location = new System.Drawing.Point(94, 19);
+            this.btHistEntradas.Name = "btHistEntradas";
+            this.btHistEntradas.Size = new System.Drawing.Size(20, 20);
+            this.btHistEntradas.TabIndex = 2;
+            this.btHistEntradas.UseVisualStyleBackColor = true;
+            // 
+            // btSalvar
+            // 
+            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
+            this.btSalvar.Location = new System.Drawing.Point(3, 107);
+            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(48, 48);
+            this.btSalvar.TabIndex = 0;
+            this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
+            // 
+            // btDeletar
+            // 
+            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
+            this.btDeletar.Location = new System.Drawing.Point(4, 260);
+            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btDeletar.Name = "btDeletar";
+            this.btDeletar.Size = new System.Drawing.Size(48, 48);
+            this.btDeletar.TabIndex = 5;
+            this.btDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btAnterior
+            // 
+            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
+            this.btAnterior.Location = new System.Drawing.Point(3, 208);
+            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btAnterior.Name = "btAnterior";
+            this.btAnterior.Size = new System.Drawing.Size(48, 48);
+            this.btAnterior.TabIndex = 4;
+            this.btAnterior.UseVisualStyleBackColor = true;
+            // 
+            // btProximo
+            // 
+            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
+            this.btProximo.Location = new System.Drawing.Point(3, 157);
+            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btProximo.Name = "btProximo";
+            this.btProximo.Size = new System.Drawing.Size(48, 48);
+            this.btProximo.TabIndex = 3;
+            this.btProximo.UseVisualStyleBackColor = true;
+            // 
+            // btBuscar
+            // 
+            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
+            this.btBuscar.Location = new System.Drawing.Point(3, 55);
+            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(48, 48);
+            this.btBuscar.TabIndex = 2;
+            this.btBuscar.UseVisualStyleBackColor = true;
+            // 
+            // btNovo
+            // 
+            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_black;
+            this.btNovo.Location = new System.Drawing.Point(3, 3);
+            this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btNovo.Name = "btNovo";
+            this.btNovo.Size = new System.Drawing.Size(48, 48);
+            this.btNovo.TabIndex = 1;
+            this.btNovo.UseVisualStyleBackColor = true;
+            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // fmCadastroItens
             // 
