@@ -14,7 +14,7 @@ namespace _5gpro.Daos
                 AbrirConexao();
                 comando = new MySqlCommand(@"INSERT INTO pessoa (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade)
                                                          VALUES (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade)",
-                                           conexao);
+                                           Conexao);
                 comando.Parameters.AddWithValue("@idpessoa", pessoa.Codigo);
                 comando.Parameters.AddWithValue("@nome", pessoa.Nome);
                 comando.Parameters.AddWithValue("@fantasia", pessoa.Fantasia);

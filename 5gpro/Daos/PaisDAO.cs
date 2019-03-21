@@ -13,16 +13,16 @@ namespace _5gpro.Daos
 
         public int Salvar(Pais pais)
         {
-            MySqlCommand comando = null;
+            MySqlCommand Comando = null;
             try
             {
                 AbrirConexao();
-                comando = new MySqlCommand("INSERT INTO pais (idpais, nome, sigla) VALUES(@idpais, @nome, @sigla)", conexao);
-                comando.Parameters.AddWithValue("@idpais", pais.idpais);
-                comando.Parameters.AddWithValue("@nome", pais.nome);
-                comando.Parameters.AddWithValue("@sigla", pais.sigla);
+                Comando = new MySqlCommand("INSERT INTO pais (idpais, nome, sigla) VALUES(@idpais, @nome, @sigla)", Conexao);
+                Comando.Parameters.AddWithValue("@idpais", pais.idpais);
+                Comando.Parameters.AddWithValue("@nome", pais.nome);
+                Comando.Parameters.AddWithValue("@sigla", pais.sigla);
 
-                return comando.ExecuteNonQuery();
+                return Comando.ExecuteNonQuery();
             }
             catch (Exception erro)
             {
