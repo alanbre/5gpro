@@ -1,4 +1,5 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Bll;
+using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,6 +9,7 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form, IMessageFilter
     {
         Pessoa pessoa = new Pessoa();
+        PessoaBLL pessoaBLL = new PessoaBLL();
         bool editando = false;
 
         public fmCadastroPessoa()
@@ -89,11 +91,128 @@ namespace _5gpro.Forms
             pessoa.Bairro = tbBairro.Text;
             pessoa.Complemento = tbComplemento.Text;
             pessoa.Cidade = tbCodCidade.Text;
-            pessoa.CpfCnpj = mtbCpfCnpj.Text;
-            pessoa.Telefone = mtbTelefone.Text;
+            pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+            pessoa.Telefone = mtbTelefone.TextNoMask();
             pessoa.Email = tbEmail.Text;
 
-            //SalvarPessoa(pessoa);
+
+            if (pessoaBLL.Salvar(pessoa) == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+            else
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                editando = false;
+                AlteraBotoes();
+            }
+        }
+
+        private void btBuscaCidade_Click(object sender, EventArgs e)
+        {
+            var buscaCidade = new fmBuscaCidade();
+            buscaCidade.ShowDialog();
+        }
+
+        private void btDeletar_Click(object sender, EventArgs e)
+        {
+            if (!editando)
+            {
+
+            }
+        }
+
+        private void btRight_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btLeft_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
+        }
+
+        private void tbCodigo_Leave(object sender, EventArgs e)
+        {
+            if (!editando)
+            {
+                if (tbCodigo.Text.Length > 0)
+                {
+                    pessoa = pessoaBLL.BuscaPessoaById(tbCodigo.Text);
+                    if (pessoa.Codigo != null)
+                    {
+                        PreencheCampo(pessoa, false);
+                        editando = false;
+                    }
+                    else
+                    {
+                        editando = true;
+                        LimpaCampos(false);
+                    }
+                }
+                AlteraBotoes();
+            }
+            else
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    NovoRegistro();
+                }
+            }
+        }
+        
+        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            {
+                e.Handled = true;
+                var buscaCidade = new fmBuscaCidade();
+                buscaCidade.ShowDialog();
+            }
+        }
+
+        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3 && !editando)
+            {
+                e.Handled = true;
+                var buscaPessoa = new fmBuscaPessoa();
+                buscaPessoa.ShowDialog();
+            }
+        }
+
+        private void tbCodCidade_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+        private void NovoRegistro()
+        {
+            LimpaCampos(false);
         }
 
         private void AlteraBotoes()
@@ -122,11 +241,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void NovoRegistro()
-        {
-            LimpaCampos(true);
-        }
-
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodigo.Clear(); }
@@ -149,85 +263,30 @@ namespace _5gpro.Forms
             rbPessoaJuridica.Checked = false;
         }
 
-        private void tbCodigo_Leave(object sender, EventArgs e)
+        private void PreencheCampo(Pessoa pessoa, bool cod)
         {
-            if (pessoa.Codigo == null)
+            tbCodigo.Text = cod ? pessoa.Codigo : tbCodigo.Text;
+            tbNome.Text = pessoa.Nome;
+            tbFantasia.Text = pessoa.Fantasia;
+            if (pessoa.TipoPessoa == "F")
             {
-                editando = tbCodigo.Text.Length > 0 ? true : false;
-                LimpaCampos(false);
-                AlteraBotoes();
+                rbPessoaFisica.Checked = true;
+                rbPessoaJuridica.Checked = false;
             }
             else
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    editando = true;
-                    NovoRegistro();
-                }
+                rbPessoaFisica.Checked = false;
+                rbPessoaJuridica.Checked = true;
             }
+            tbRua.Text = pessoa.Rua;
+            tbNumero.Text = pessoa.Numero;
+            tbBairro.Text = pessoa.Bairro;
+            tbComplemento.Text = pessoa.Complemento;
+            tbCodCidade.Text = pessoa.Cidade;
+            mtbCpfCnpj.Text = pessoa.CpfCnpj;
+            mtbTelefone.Text = pessoa.Telefone;
+            tbEmail.Text = pessoa.Email;
         }
 
-        private void btBuscaCidade_Click(object sender, EventArgs e)
-        {
-            var buscaCidade = new fmBuscaCidade();
-            buscaCidade.ShowDialog();
-        }
-
-        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-            editando = true;
-            AlteraBotoes();
-        }
-
-        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                var buscaCidade = new fmBuscaCidade();
-                buscaCidade.ShowDialog();
-            }
-        }
-
-        private void btDeletar_Click(object sender, EventArgs e)
-        {
-            if (!editando)
-            {
-
-            }
-        }
-
-        private void btRight_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btLeft_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btBuscar_Click(object sender, EventArgs e)
-        {
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
-        }
-
-        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3 && !editando)
-            {
-                e.Handled = true;
-                var buscaPessoa = new fmBuscaPessoa();
-                buscaPessoa.ShowDialog();
-            }
-        }
     }
 }

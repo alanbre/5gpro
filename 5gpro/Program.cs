@@ -14,12 +14,7 @@ namespace _5gpro
         static void Main()
         {
             CarregaSistema carregaSistema = new CarregaSistema();
-            FuncoesBanco funcoesBanco = new FuncoesBanco();
-            IDictionary<string, string> dados = new Dictionary<string, string>();
-            dados.Add("valor", "3");
-
-            IDictionary<string, List<string>> where = new Dictionary<string, List<string>>();
-            //where.Add("variavel", new List<string> { "=", "versaodb" });
+            
 
             if (carregaSistema.Carrega())
             {

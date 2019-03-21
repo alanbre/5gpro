@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 
 namespace _5gpro.Funcoes
@@ -7,12 +8,18 @@ namespace _5gpro.Funcoes
     {
         MySqlCommand Comando = null;
 
-        public int ExecutaUpdate(string table, IDictionary<string, string> dados, IDictionary<string, List<string>> where)
+        public int ExecutaUpdate(string tabela, IDictionary<string, string> dados, IDictionary<string, List<string>> where)
         {
-            AbrirConexao();
+            //Exemplo de uso
+            //FuncoesBanco funcoesBanco = new FuncoesBanco();
+            //IDictionary<string, string> dados = new Dictionary<string, string>();
+            //dados.Add("valor", "3");
 
-            string sql = "UPDATE " + table + " SET";
-            //UPDATE configuracao SET valor = @valor WHERE variavel = @versaodb
+            //IDictionary<string, List<string>> where = new Dictionary<string, List<string>>();
+            //where.Add("variavel", new List<string> { "=", "versaodb" });
+            //funcoesBanco.ExecutaUpdate("configuracoes", dados, where);
+            int retorno = 0;
+            string sql = "UPDATE " + tabela + " SET";
             int lengthDados = dados.Count;
             foreach (string key in dados.Keys)
             {
@@ -38,19 +45,40 @@ namespace _5gpro.Funcoes
                     }
                 }
             }
-            Comando = new MySqlCommand(sql, Conexao);
 
-            foreach (string key in dados.Keys)
+            try
             {
-                Comando.Parameters.AddWithValue("@" + key + "s", dados[key]);
-            }
-            foreach (string key in where.Keys)
-            {
-                Comando.Parameters.AddWithValue("@" + key + "w", where[key][1]);
-            }
+                AbrirConexao();
 
-            int retorno = Comando.ExecuteNonQuery();
+
+                Comando = new MySqlCommand(sql, Conexao);
+
+                foreach (string key in dados.Keys)
+                {
+                    Comando.Parameters.AddWithValue("@" + key + "s", dados[key]);
+                }
+                foreach (string key in where.Keys)
+                {
+                    Comando.Parameters.AddWithValue("@" + key + "w", where[key][1]);
+                }
+
+                retorno = Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
             return retorno;
+        }
+
+        public int ExecutaInsert(string tabela)
+        {
+            return 1;
         }
     }
 }

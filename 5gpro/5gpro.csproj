@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bll\PessoaBLL.cs" />
     <Compile Include="Bll\_ItemBLL.cs" />
     <Compile Include="Daos\_ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesBanco.cs" />
+    <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
