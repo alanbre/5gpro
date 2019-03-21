@@ -74,7 +74,7 @@ namespace _5gpro.Funcoes
                 AbrirConexao();
                 Comando = new MySqlCommand("UPDATE configuracao SET valor = @valor WHERE variavel = @versaodb", Conexao);
                 Comando.Parameters.AddWithValue("@versaodb", "versaodb");
-                Comando.Parameters.AddWithValue("@valor", versao);
+                Comando.Parameters.AddWithValue("@val", versao);
                 return Comando.ExecuteNonQuery();
             }
             catch (MySqlException ex)

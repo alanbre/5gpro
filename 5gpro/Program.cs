@@ -1,6 +1,7 @@
-﻿using System;
+﻿using _5gpro.Funcoes;
+using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
-using _5gpro.Funcoes;
 
 namespace _5gpro
 {
@@ -12,8 +13,18 @@ namespace _5gpro
         [STAThread]
         static void Main()
         {
-            CarregaSistema carregaSistema = new CarregaSistema();
-            if (carregaSistema.Carrega())
+            //CarregaSistema carregaSistema = new CarregaSistema();
+            FuncoesBanco funcoesBanco = new FuncoesBanco();
+            IDictionary<string, string> dados = new Dictionary<string, string>();
+            dados.Add("variavel", "testefuncao");
+            dados.Add("valor", "testefuncaovalor");
+
+            IDictionary<string, string> where = new Dictionary<string, string>();
+            where.Add("variavel", "testefuncao");
+            where.Add("valor", "testefuncaovalor");
+
+            //if (carregaSistema.Carrega())
+            if (funcoesBanco.ExecutaUpdate("configuracao", dados, where) > 0)
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
@@ -26,10 +37,10 @@ namespace _5gpro
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error) == DialogResult.OK)
                 {
-                    
+
                 }
             }
-            
+
         }
     }
 }

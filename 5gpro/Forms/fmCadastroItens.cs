@@ -1,4 +1,5 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Bll;
+using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -98,20 +99,25 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            item.Codigo = tbCodigo.Text;
+            item.Iditem = tbCodigo.Text;
             item.Descricao = tbDescricao.Text;
-            item.DescricaoCompra = tbDescricaoDeCompra.Text;
-            item.CodUniMedida = tbCodUniMedida.Text;
+            item.DenomCompra = tbDescricaoDeCompra.Text;
             item.Referencia = tbReferncia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
-            item.PrecoUltimaEntrada = tbPrecoUltimaEntrada.Text;
-            item.EstoqueNecessario = tbEstoqueNecessario.Text;
-            item.PrecoVenda = tbPrecoVenda.Text;
+            item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
+            item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
+            item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+            item.Unimedida = int.Parse(tbCodUniMedida.Text);
+
+            _ItemBLL itemBLL = new _ItemBLL();
+            itemBLL.salvar(item);
+
+            MessageBox.Show("Item adicionado com sucesso!");
         }
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            if (item.Codigo == null)
+            if (item.Iditem == null)
             {
                 editando = tbCodigo.Text.Length > 0 ? true : false;
                 LimpaCampos(false);
@@ -154,6 +160,11 @@ namespace _5gpro.Forms
                 editando = true;
             }
             AlteraBotoes();
+        }
+
+        private void fmCadastroItens_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
