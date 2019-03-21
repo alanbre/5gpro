@@ -16,7 +16,8 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                comando = new MySqlCommand("INSERT INTO item (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, unimedida_idunimedida) VALUES(@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @unimedida_idunimedida)", conexao);
+                comando = new MySqlCommand(@"INSERT INTO item (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, unimedida_idunimedida) 
+                                                        VALUES(@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @unimedida_idunimedida)", Conexao);
                 comando.Parameters.AddWithValue("@iditem", _Item.Iditem);
                 comando.Parameters.AddWithValue("@descitem", _Item.Descricao);
                 comando.Parameters.AddWithValue("@denominacaocompra", _Item.DenomCompra);

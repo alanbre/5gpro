@@ -16,15 +16,12 @@ namespace _5gpro
             //CarregaSistema carregaSistema = new CarregaSistema();
             FuncoesBanco funcoesBanco = new FuncoesBanco();
             IDictionary<string, string> dados = new Dictionary<string, string>();
-            dados.Add("variavel", "testefuncao");
-            dados.Add("valor", "testefuncaovalor");
+            dados.Add("valor", "3");
 
-            IDictionary<string, string> where = new Dictionary<string, string>();
-            where.Add("variavel", "testefuncao");
-            where.Add("valor", "testefuncaovalor");
+            IDictionary<string, List<string>> where = new Dictionary<string, List<string>>();
+            //where.Add("variavel", new List<string> { "=", "versaodb" });
 
-            //if (carregaSistema.Carrega())
-            if (funcoesBanco.ExecutaUpdate("configuracao", dados, where) > 0)
+            if (carregaSistema.Carrega())
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
