@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using _5gpro.Entities;
+using _5gpro.Bll;
+using System;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
     public partial class fmBuscaCidade : Form, IMessageFilter
     {
+        public Cidade Cidade;
+        private CidadeBLL cidadeBLL = new CidadeBLL();
+        
         public fmBuscaCidade()
         {
             InitializeComponent();
@@ -38,7 +36,7 @@ namespace _5gpro.Forms
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            // Faz consulta no banco de dados baseado nos filtros
+            Cidade = cidadeBLL.BuscaCidadeByCod("4328");
         }
 
         private void btProcuraEstado_Click(object sender, EventArgs e)
@@ -55,7 +53,9 @@ namespace _5gpro.Forms
                 var buscaEstado = new fmBuscaEstado();
                 buscaEstado.ShowDialog();
             }
-            
+
         }
+
+
     }
 }

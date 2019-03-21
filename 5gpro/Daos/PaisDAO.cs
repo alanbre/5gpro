@@ -13,7 +13,6 @@ namespace _5gpro.Daos
 
         public int Salvar(Pais pais)
         {
-            MySqlCommand Comando = null;
             try
             {
                 AbrirConexao();

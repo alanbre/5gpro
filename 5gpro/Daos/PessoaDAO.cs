@@ -7,7 +7,6 @@ namespace _5gpro.Daos
 {
     class PessoaDAO : ConexaoDAO
     {
-        MySqlCommand Comando = null;
         public int SalvarPessoa(Pessoa pessoa)
         {
 
