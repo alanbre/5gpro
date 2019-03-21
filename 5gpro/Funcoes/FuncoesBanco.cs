@@ -6,8 +6,6 @@ namespace _5gpro.Funcoes
 {
     class FuncoesBanco : Daos.ConexaoDAO
     {
-        MySqlCommand Comando = null;
-
         public int ExecutaUpdate(string tabela, IDictionary<string, string> dados, IDictionary<string, List<string>> where)
         {
             //Exemplo de uso

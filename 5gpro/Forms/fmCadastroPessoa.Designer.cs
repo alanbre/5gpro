@@ -67,6 +67,7 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.btRecarregar = new System.Windows.Forms.Button();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -247,9 +248,10 @@
             // tbNomeCidade
             // 
             this.tbNomeCidade.Enabled = false;
+            this.tbNomeCidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeCidade.Location = new System.Drawing.Point(107, 143);
             this.tbNomeCidade.Name = "tbNomeCidade";
-            this.tbNomeCidade.Size = new System.Drawing.Size(436, 20);
+            this.tbNomeCidade.Size = new System.Drawing.Size(436, 21);
             this.tbNomeCidade.TabIndex = 16;
             // 
             // tbCodCidade
@@ -393,6 +395,7 @@
             // 
             // pnBotoes
             // 
+            this.pnBotoes.Controls.Add(this.btRecarregar);
             this.pnBotoes.Controls.Add(this.btSalvar);
             this.pnBotoes.Controls.Add(this.btDeletar);
             this.pnBotoes.Controls.Add(this.btAnterior);
@@ -409,7 +412,7 @@
             this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
-            this.btSalvar.Location = new System.Drawing.Point(3, 107);
+            this.btSalvar.Location = new System.Drawing.Point(3, 106);
             this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(48, 48);
@@ -422,7 +425,7 @@
             this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
-            this.btDeletar.Location = new System.Drawing.Point(4, 260);
+            this.btDeletar.Location = new System.Drawing.Point(3, 310);
             this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
             this.btDeletar.Name = "btDeletar";
             this.btDeletar.Size = new System.Drawing.Size(48, 48);
@@ -435,7 +438,7 @@
             this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
-            this.btAnterior.Location = new System.Drawing.Point(3, 208);
+            this.btAnterior.Location = new System.Drawing.Point(3, 259);
             this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
             this.btAnterior.Name = "btAnterior";
             this.btAnterior.Size = new System.Drawing.Size(48, 48);
@@ -448,7 +451,7 @@
             this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
-            this.btProximo.Location = new System.Drawing.Point(3, 157);
+            this.btProximo.Location = new System.Drawing.Point(3, 208);
             this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
             this.btProximo.Name = "btProximo";
             this.btProximo.Size = new System.Drawing.Size(48, 48);
@@ -492,6 +495,19 @@
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 4;
+            // 
+            // btRecarregar
+            // 
+            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
+            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
+            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btRecarregar.Name = "btRecarregar";
+            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
+            this.btRecarregar.TabIndex = 6;
+            this.btRecarregar.UseVisualStyleBackColor = true;
             // 
             // fmCadastroPessoa
             // 
@@ -564,5 +580,6 @@
         private System.Windows.Forms.TextBox tbCodCidade;
         private System.Windows.Forms.Label lbCidade;
         private System.Windows.Forms.CheckedListBox cblAtuacao;
+        private System.Windows.Forms.Button btRecarregar;
     }
 }

@@ -13,16 +13,15 @@ namespace _5gpro.Daos
 
         public int Salvar(Unimedida unimedida)
         {
-            MySqlCommand comando = null;
             try
             {
                 AbrirConexao();
-                comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Conexao);
-                comando.Parameters.AddWithValue("@idunimedida", unimedida.idunimedida);
-                comando.Parameters.AddWithValue("@sigla", unimedida.sigla);
-                comando.Parameters.AddWithValue("@descricao", unimedida.descricao);
+                Comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Conexao);
+                Comando.Parameters.AddWithValue("@idunimedida", unimedida.idunimedida);
+                Comando.Parameters.AddWithValue("@sigla", unimedida.sigla);
+                Comando.Parameters.AddWithValue("@descricao", unimedida.descricao);
 
-                return comando.ExecuteNonQuery();
+                return Comando.ExecuteNonQuery();
             }
             catch (Exception erro)
             {

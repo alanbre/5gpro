@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    class Cidade
+    public class Cidade
     {
         public string CodCidade { get; set; }
         public string Nome { get; set; }

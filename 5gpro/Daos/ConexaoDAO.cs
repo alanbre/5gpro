@@ -8,6 +8,7 @@ namespace _5gpro.Daos
         private static string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
         protected MySqlConnection Conexao;
         protected MySqlTransaction tr = null;
+        protected MySqlCommand Comando = null;
 
         //MÉTODO PARA CONECTAR NO BANCO
         public void AbrirConexao()

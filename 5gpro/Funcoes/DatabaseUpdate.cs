@@ -6,7 +6,6 @@ namespace _5gpro.Funcoes
 {
     class DatabaseUpdate : Daos.ConexaoDAO
     {
-        MySqlCommand Comando = null;
         int VersaoDB = 0;
 
         public bool CriarTabelasSeNaoExistirem()

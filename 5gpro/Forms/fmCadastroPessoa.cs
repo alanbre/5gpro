@@ -9,7 +9,10 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form, IMessageFilter
     {
         Pessoa pessoa = new Pessoa();
+        Cidade cidade = new Cidade();
         PessoaBLL pessoaBLL = new PessoaBLL();
+        CidadeBLL cidadeBLL = new CidadeBLL();
+
         bool editando = false;
 
         public fmCadastroPessoa()
@@ -113,8 +116,7 @@ namespace _5gpro.Forms
 
         private void btBuscaCidade_Click(object sender, EventArgs e)
         {
-            var buscaCidade = new fmBuscaCidade();
-            buscaCidade.ShowDialog();
+            AbreTelaBuscaCidade();
         }
 
         private void btDeletar_Click(object sender, EventArgs e)
@@ -150,7 +152,7 @@ namespace _5gpro.Forms
                     pessoa = pessoaBLL.BuscaPessoaById(tbCodigo.Text);
                     if (pessoa.Codigo != null)
                     {
-                        PreencheCampo(pessoa, false);
+                        PreencheCampos(pessoa, false);
                         editando = false;
                     }
                     else
@@ -186,8 +188,7 @@ namespace _5gpro.Forms
             if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
-                var buscaCidade = new fmBuscaCidade();
-                buscaCidade.ShowDialog();
+                AbreTelaBuscaCidade();
             }
         }
 
@@ -203,7 +204,15 @@ namespace _5gpro.Forms
 
         private void tbCodCidade_Leave(object sender, EventArgs e)
         {
-
+            if(tbCodCidade.Text.Length > 0)
+            {
+                cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
+                PreencheCamposCidade(cidade);
+            }
+            else
+            {
+                tbNomeCidade.Text = "";
+            }
         }
 
 
@@ -263,7 +272,7 @@ namespace _5gpro.Forms
             rbPessoaJuridica.Checked = false;
         }
 
-        private void PreencheCampo(Pessoa pessoa, bool cod)
+        private void PreencheCampos(Pessoa pessoa, bool cod)
         {
             tbCodigo.Text = cod ? pessoa.Codigo : tbCodigo.Text;
             tbNome.Text = pessoa.Nome;
@@ -286,7 +295,26 @@ namespace _5gpro.Forms
             mtbCpfCnpj.Text = pessoa.CpfCnpj;
             mtbTelefone.Text = pessoa.Telefone;
             tbEmail.Text = pessoa.Email;
+
+            if (pessoa.Cidade != null)
+            {
+                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade);
+                PreencheCamposCidade(cidade);
+            }
         }
 
+        private void PreencheCamposCidade(Cidade cidade)
+        {
+            tbCodCidade.Text = cidade.CodCidade;
+            tbNomeCidade.Text = cidade.Nome;
+        }
+
+        private void AbreTelaBuscaCidade()
+        {
+            var buscaCidade = new fmBuscaCidade();
+            buscaCidade.ShowDialog();
+            cidade = buscaCidade.Cidade;
+            PreencheCamposCidade(cidade);
+        }
     }
 }
