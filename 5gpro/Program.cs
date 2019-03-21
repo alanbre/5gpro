@@ -13,7 +13,7 @@ namespace _5gpro
         [STAThread]
         static void Main()
         {
-            //CarregaSistema carregaSistema = new CarregaSistema();
+            CarregaSistema carregaSistema = new CarregaSistema();
             FuncoesBanco funcoesBanco = new FuncoesBanco();
             IDictionary<string, string> dados = new Dictionary<string, string>();
             dados.Add("valor", "3");
