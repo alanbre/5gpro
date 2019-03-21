@@ -1,19 +1,3 @@
--- MySQL Workbench Forward Engineering
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
--- -----------------------------------------------------
--- Schema 5gprodatabase
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema 5gprodatabase
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8 ;
-USE `5gprodatabase` ;
-
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`pais`
 -- -----------------------------------------------------
@@ -76,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
   `endereco` VARCHAR(45) NULL,
   `telefone` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
+  `tipo_pessoa` CHAR(1) NULL,
   `idcidade` INT NOT NULL,
   PRIMARY KEY (`idpessoa`),
   INDEX `fk_pessoa_cidade1_idx` (`idcidade` ASC) VISIBLE,
@@ -119,6 +104,12 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`atuacao_has_pessoa` (
 ENGINE = InnoDB;
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`configuracao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`configuracao` (
+  `idconfiguracao` INT NOT NULL,
+  `variavel` VARCHAR(200) NULL,
+  `valor` VARCHAR(200) NULL,
+  PRIMARY KEY (`idconfiguracao`))
+ENGINE = InnoDB;

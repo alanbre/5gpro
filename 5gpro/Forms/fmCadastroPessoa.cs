@@ -1,12 +1,6 @@
 ﻿using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -56,7 +50,7 @@ namespace _5gpro.Forms
         {
             if (editando)
             {
-                if(MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -125,7 +119,7 @@ namespace _5gpro.Forms
                 btBuscar.Enabled = true;
                 btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
                 btDeletar.Enabled = false;
-            } 
+            }
         }
 
         private void NovoRegistro()

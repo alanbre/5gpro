@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Entities\_Item.cs" />
     <Compile Include="Bll\paisBLL.cs" />
     <Compile Include="Daos\PaisDAO.cs" />
@@ -104,6 +105,8 @@
     <Compile Include="Forms\fmMain.Designer.cs">
       <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Funcoes\CarregaSistema.cs" />
+    <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">

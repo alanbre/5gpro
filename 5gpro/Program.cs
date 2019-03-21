@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using _5gpro.Funcoes;
 
 namespace _5gpro
 {
@@ -14,9 +12,24 @@ namespace _5gpro
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new fmMain());
+            CarregaSistema carregaSistema = new CarregaSistema();
+            if (carregaSistema.Carrega())
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new fmMain());
+            }
+            else
+            {
+                if (MessageBox.Show("Problema ao abrir o sistema",
+                "Erro ao abrir sistema",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error) == DialogResult.OK)
+                {
+                    
+                }
+            }
+            
         }
     }
 }
