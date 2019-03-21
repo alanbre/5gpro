@@ -1,23 +1,18 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Funcoes
 {
     class DatabaseUpdate : Daos.ConexaoDAO
     {
         MySqlCommand Comando = null;
+        int VersaoDB = 0;
 
         public bool CriarTabelasSeNaoExistirem()
         {
             try
             {
-                AbrirConexao();
-
                 // Esse comando trás o diretório atual (Ex \bin\Debug)
                 string workingDirectory = Environment.CurrentDirectory;
                 // Ou: Directory.GetCurrentDirectory() devolve o mesmo resultado
@@ -25,51 +20,131 @@ namespace _5gpro.Funcoes
                 // Esse comando trás o diretório do projeto
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
 
+                AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
-                MySqlScript mySqlScript = new MySqlScript(conexao, File.ReadAllText(projectDirectory + "/create_tables.sql"));
+                MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(projectDirectory + "/create_tables.sql"));
+
+
                 mySqlScript.Execute();
-                
                 return true;
             }
             catch (MySqlException ex)
             {
-                try
-                {
-                    Console.WriteLine("Error: {0}", ex.ToString());
-                    return false;
-                }
-                catch (MySqlException ex1)
-                {
-                    Console.WriteLine("Error: {0}", ex1.ToString());
-                    return false;
-                }
+
+                Console.WriteLine("Error: {0}", ex.ToString());
+                return false;
             }
             finally
             {
-                if (conexao != null)
-                {
-                    conexao.Close();
-                }
+                FecharConexao();
             }
         }
 
-        //public bool AtualizaBanco()
-        //{
-        //    try
-        //    {
+        public int BuscaVersaoDB()
+        {
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT valor FROM configuracao WHERE variavel = @versaodb", Conexao);
+                Comando.Parameters.AddWithValue("@versaodb", "versaodb");
 
-        //        Comando = new MySqlCommand("SELECT ");
-        //    }
-        //    catch (Exception)
-        //    {
+                MySqlDataReader reader = Comando.ExecuteReader();
 
-        //        throw;
-        //    }
-        //    finally
-        //    {
+                while (reader.Read())
+                {
+                    VersaoDB = reader.GetInt32(0);
+                }
+                return VersaoDB;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                return 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+        }
 
-        //    }
-        //    return true;
-        //}
+        public int AtualizaVersaoBD(int versao)
+        {
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("UPDATE configuracao SET valor = @valor WHERE variavel = @versaodb", Conexao);
+                Comando.Parameters.AddWithValue("@versaodb", "versaodb");
+                Comando.Parameters.AddWithValue("@valor", versao);
+                return Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                return 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+        }
+
+        public bool AtualizaBD()
+        {
+            try
+            {
+                int versaoAtual = BuscaVersaoDB();
+                if (versaoAtual < 2 )
+                {
+                    AbrirConexao();
+                    Comando = Conexao.CreateCommand();
+
+                    tr = Conexao.BeginTransaction();
+
+                    Comando.Connection = Conexao;
+                    Comando.Transaction = tr;
+                    try
+                    {
+                        Comando.CommandText = "ALTER TABLE pessoa ADD COLUMN tipo_pessoa CHAR(1)";
+                        Comando.ExecuteNonQuery();
+                        Comando.CommandText = "ALTER TABLE configuracao MODIFY COLUMN idconfiguracao INT NOT NULL AUTO_INCREMENT";
+                        Comando.ExecuteNonQuery();
+                        tr.Commit();
+                        AtualizaVersaoBD(2);
+                        return true;
+                    }
+                    catch (MySqlException ex)
+                    {
+                        Console.WriteLine("Error: {0}", ex.ToString());
+                        try
+                        {
+                            tr.Rollback();
+                        }
+                        catch (MySqlException ex2)
+                        {
+                            if (tr.Connection != null)
+                            {
+                                Console.WriteLine(@"Uma exceção do tipo " + ex2.GetType() +
+                                " ocorreu enquanto acontecia o rollback da transação.");
+                            }
+                        }
+                        Console.WriteLine(@"Uma exceção do tipo  " + ex.GetType() +
+                                           " ocorreu enquanto os dados eram atualizados");
+                        Console.WriteLine("Nenhum dado foi atualizado no banco");
+                        return false;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                return false;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return true;
+        }
     }
 }
+
