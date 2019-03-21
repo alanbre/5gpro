@@ -5,7 +5,6 @@
         public bool Carrega()
         {
             DatabaseUpdate databaseUpdate = new DatabaseUpdate();
-
             return databaseUpdate.CriarTabelasSeNaoExistirem() && databaseUpdate.AtualizaBD();
         }
 

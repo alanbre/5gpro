@@ -260,6 +260,7 @@
             this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
             this.tbCodCidade.TabIndex = 8;
             this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
+            this.tbCodCidade.Leave += new System.EventHandler(this.tbCodCidade_Leave);
             // 
             // lbCidade
             // 
