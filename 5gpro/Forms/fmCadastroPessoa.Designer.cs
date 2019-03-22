@@ -123,6 +123,7 @@
             this.tbFantasia.Name = "tbFantasia";
             this.tbFantasia.Size = new System.Drawing.Size(528, 20);
             this.tbFantasia.TabIndex = 5;
+            this.tbFantasia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFantasia_KeyUp);
             // 
             // lbFantasia
             // 
@@ -140,6 +141,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(527, 20);
             this.tbNome.TabIndex = 3;
+            this.tbNome.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbNome_KeyUp);
             // 
             // lbNome
             // 
@@ -332,6 +334,7 @@
             this.tbComplemento.Name = "tbComplemento";
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
             this.tbComplemento.TabIndex = 7;
+            this.tbComplemento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbComplemento_KeyUp);
             // 
             // lbComplemento
             // 
@@ -349,6 +352,7 @@
             this.tbBairro.Name = "tbBairro";
             this.tbBairro.Size = new System.Drawing.Size(528, 20);
             this.tbBairro.TabIndex = 5;
+            this.tbBairro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbBairro_KeyUp);
             // 
             // lbBairro
             // 
@@ -366,6 +370,7 @@
             this.tbNumero.Name = "tbNumero";
             this.tbNumero.Size = new System.Drawing.Size(64, 20);
             this.tbNumero.TabIndex = 3;
+            this.tbNumero.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbNumero_KeyUp);
             // 
             // lbNumero
             // 
@@ -383,6 +388,7 @@
             this.tbRua.Name = "tbRua";
             this.tbRua.Size = new System.Drawing.Size(528, 20);
             this.tbRua.TabIndex = 1;
+            this.tbRua.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbRua_KeyUp);
             // 
             // lbRua
             // 

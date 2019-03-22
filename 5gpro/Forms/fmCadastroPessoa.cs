@@ -43,12 +43,16 @@ namespace _5gpro.Forms
         {
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "###.###.###-##";
+            editando = true;
+            AlteraBotoes();
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "##.###.###/####-##";
+            editando = true;
+            AlteraBotoes();
         }
 
         private void btNovo_Click(object sender, EventArgs e)
@@ -196,6 +200,13 @@ namespace _5gpro.Forms
                 e.Handled = true;
                 AbreTelaBuscaCidade();
             }
+
+            if (e.KeyCode < Keys.F1 || e.KeyCode > Keys.F12)
+            {
+                editando = true;
+                AlteraBotoes();
+            }
+
         }
 
         private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
@@ -326,7 +337,43 @@ namespace _5gpro.Forms
             {
                 cidade = buscaCidade.cidadeSelecionada;
                 PreencheCamposCidade(cidade);
-            }            
+            }
+        }
+
+        private void tbNome_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbFantasia_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbRua_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbNumero_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbBairro_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbComplemento_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
         }
     }
 }

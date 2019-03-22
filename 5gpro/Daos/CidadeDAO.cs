@@ -48,7 +48,7 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado 
+                Comando = new MySqlCommand(@"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado, e.uf
                                              FROM cidade c INNER JOIN estado e 
                                              ON c.idestado = e.idestado
                                              WHERE 1=1
