@@ -11,13 +11,13 @@ namespace _5gpro.Bll
     class _ItemBLL
     {
 
-        _ItemDAO itemdao = new _ItemDAO();
+        _ItemDAO _itemdao = new _ItemDAO();
 
-        public void salvar(_Item _item)
+        public void SalvarOuAtualizarItem(_Item _item)
         {
             try
             {
-                itemdao.Salvar(_item);
+                _itemdao.SalvarOuAtualizarItem(_item);
             }
             catch (Exception erro)
             {

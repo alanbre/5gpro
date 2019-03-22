@@ -105,7 +105,7 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            item.Iditem = tbCodigo.Text;
+            item.Codigo = tbCodigo.Text;
             item.Descricao = tbDescricao.Text;
             item.DenomCompra = tbDescricaoDeCompra.Text;
             item.Referencia = tbReferncia.Text;
@@ -116,14 +116,14 @@ namespace _5gpro.Forms
             item.Unimedida = int.Parse(tbCodUnimedida.Text);
 
             _ItemBLL itemBLL = new _ItemBLL();
-            itemBLL.salvar(item);
+            itemBLL.SalvarOuAtualizarItem(item);
 
             MessageBox.Show("Item adicionado com sucesso!");
         }
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            if (item.Iditem == null)
+            if (item.Codigo == null)
             {
                 editando = tbCodigo.Text.Length > 0 ? true : false;
                 LimpaCampos(false);
