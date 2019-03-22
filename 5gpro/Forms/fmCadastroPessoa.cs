@@ -174,7 +174,7 @@ namespace _5gpro.Forms
                 }
             }
         }
-        
+
         private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -204,7 +204,7 @@ namespace _5gpro.Forms
 
         private void tbCodCidade_Leave(object sender, EventArgs e)
         {
-            if(tbCodCidade.Text.Length > 0)
+            if (tbCodCidade.Text.Length > 0)
             {
                 cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
                 PreencheCamposCidade(cidade);
@@ -305,8 +305,11 @@ namespace _5gpro.Forms
 
         private void PreencheCamposCidade(Cidade cidade)
         {
-            tbCodCidade.Text = cidade.CodCidade;
-            tbNomeCidade.Text = cidade.Nome;
+            if (cidade != null)
+            {
+                tbCodCidade.Text = cidade.CodCidade;
+                tbNomeCidade.Text = cidade.Nome;
+            }
         }
 
         private void AbreTelaBuscaCidade()

@@ -36,9 +36,6 @@
             this.tbFiltroNomeCidade = new System.Windows.Forms.TextBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.dgvCidades = new System.Windows.Forms.DataGridView();
-            this.colunaCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaNomeCidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaNomeEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +54,10 @@
             this.tbFiltroCodEstado.Name = "tbFiltroCodEstado";
             this.tbFiltroCodEstado.Size = new System.Drawing.Size(54, 20);
             this.tbFiltroCodEstado.TabIndex = 0;
+            this.tbFiltroCodEstado.Text = "23";
+            this.tbFiltroCodEstado.Enter += new System.EventHandler(this.tbFiltroCodEstado_Enter);
             this.tbFiltroCodEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodEstado_KeyUp);
+            this.tbFiltroCodEstado.Leave += new System.EventHandler(this.tbFiltroCodEstado_Leave);
             // 
             // btProcuraEstado
             // 
@@ -71,11 +71,12 @@
             // 
             // tbNomeEstado
             // 
-            this.tbNomeEstado.Enabled = false;
             this.tbNomeEstado.Location = new System.Drawing.Point(90, 25);
             this.tbNomeEstado.Name = "tbNomeEstado";
+            this.tbNomeEstado.ReadOnly = true;
             this.tbNomeEstado.Size = new System.Drawing.Size(414, 20);
             this.tbNomeEstado.TabIndex = 1;
+            this.tbNomeEstado.TabStop = false;
             // 
             // lbFiltroNomeCidade
             // 
@@ -108,44 +109,21 @@
             this.dgvCidades.AllowUserToAddRows = false;
             this.dgvCidades.AllowUserToDeleteRows = false;
             this.dgvCidades.AllowUserToOrderColumns = true;
+            this.dgvCidades.AllowUserToResizeRows = false;
+            this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCidades.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvCidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colunaCodigo,
-            this.colunaNomeCidade,
-            this.colunaNomeEstado});
             this.dgvCidades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvCidades.Location = new System.Drawing.Point(12, 90);
+            this.dgvCidades.MinimumSize = new System.Drawing.Size(560, 360);
             this.dgvCidades.MultiSelect = false;
             this.dgvCidades.Name = "dgvCidades";
             this.dgvCidades.ReadOnly = true;
             this.dgvCidades.RowHeadersVisible = false;
+            this.dgvCidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCidades.Size = new System.Drawing.Size(560, 360);
             this.dgvCidades.TabIndex = 3;
-            // 
-            // colunaCodigo
-            // 
-            this.colunaCodigo.HeaderText = "Código";
-            this.colunaCodigo.MinimumWidth = 50;
-            this.colunaCodigo.Name = "colunaCodigo";
-            this.colunaCodigo.ReadOnly = true;
-            this.colunaCodigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colunaCodigo.Width = 186;
-            // 
-            // colunaNomeCidade
-            // 
-            this.colunaNomeCidade.HeaderText = "Nome da cidade";
-            this.colunaNomeCidade.MinimumWidth = 100;
-            this.colunaNomeCidade.Name = "colunaNomeCidade";
-            this.colunaNomeCidade.ReadOnly = true;
-            this.colunaNomeCidade.Width = 185;
-            // 
-            // colunaNomeEstado
-            // 
-            this.colunaNomeEstado.HeaderText = "Estado";
-            this.colunaNomeEstado.MinimumWidth = 100;
-            this.colunaNomeEstado.Name = "colunaNomeEstado";
-            this.colunaNomeEstado.ReadOnly = true;
-            this.colunaNomeEstado.Width = 186;
+            this.dgvCidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCidades_CellDoubleClick);
             // 
             // fmBuscaCidade
             // 
@@ -184,8 +162,5 @@
         private System.Windows.Forms.TextBox tbFiltroNomeCidade;
         private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.DataGridView dgvCidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaNomeCidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaNomeEstado;
     }
 }

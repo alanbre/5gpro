@@ -1,5 +1,6 @@
-﻿using _5gpro.Entities;
-using _5gpro.Daos;
+﻿using _5gpro.Daos;
+using _5gpro.Entities;
+using System.Collections.Generic;
 
 namespace _5gpro.Bll
 {
@@ -9,6 +10,11 @@ namespace _5gpro.Bll
         public Cidade BuscaCidadeByCod(string cod)
         {
             return CidadeDAO.BuscaCidadeByCod(cod);
+        }
+
+        public List<Cidade> BuscaCidadesByCodEstado(string codEstado)
+        {
+            return CidadeDAO.BuscaCidadesByCodEstado(codEstado);
         }
     }
 }
