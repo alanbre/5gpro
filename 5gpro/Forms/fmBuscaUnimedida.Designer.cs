@@ -52,6 +52,7 @@
             this.dgvUnimedida.Size = new System.Drawing.Size(560, 360);
             this.dgvUnimedida.TabIndex = 3;
             this.dgvUnimedida.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellContentClick);
+            this.dgvUnimedida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellDoubleClick);
             // 
             // tbFiltroUnimedida
             // 

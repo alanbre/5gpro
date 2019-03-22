@@ -65,6 +65,35 @@ namespace _5gpro.Daos
             }
             return listaunimedida;
         }
-        
+
+        public Unimedida BuscaUnimedidaByCod(string cod)
+        {
+            Unimedida unimedida = new Unimedida();
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM unimedida WHERE idunimedida = @idunimedida", Conexao);
+                Comando.Parameters.AddWithValue("@idunimedida", cod);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    unimedida.Codigo = int.Parse(reader.GetString(reader.GetOrdinal("idcidade")));
+                    unimedida.Sigla = reader.GetString(reader.GetOrdinal("nome"));
+                    unimedida.Descricao = reader.GetString(reader.GetOrdinal("idestado"));
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return unimedida;
+        }
+
     }
 }
