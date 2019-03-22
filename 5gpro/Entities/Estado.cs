@@ -10,5 +10,6 @@ namespace _5gpro.Entities
     {
         public string CodEstado { get; set; }
         public string Nome { get; set; }
+        public string Uf { get; set; }
     }
 }

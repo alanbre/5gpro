@@ -69,6 +69,7 @@ namespace _5gpro.Daos
                     Estado estado = new Estado();
                     estado.CodEstado = reader.GetString(reader.GetOrdinal("idestado"));
                     estado.Nome = reader.GetString(reader.GetOrdinal("nomeestado"));
+                    estado.Uf = reader.GetString(reader.GetOrdinal("uf"));
                     cidade.Estado = estado;
                     cidades.Add(cidade);
                 }
