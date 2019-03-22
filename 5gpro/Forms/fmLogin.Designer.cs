@@ -51,6 +51,7 @@
             this.tbLogin.Name = "tbLogin";
             this.tbLogin.Size = new System.Drawing.Size(156, 20);
             this.tbLogin.TabIndex = 1;
+            this.tbLogin.Enter += new System.EventHandler(this.tbLogin_Enter);
             // 
             // lbSenha
             // 
@@ -68,6 +69,7 @@
             this.tbSenha.PasswordChar = '*';
             this.tbSenha.Size = new System.Drawing.Size(156, 20);
             this.tbSenha.TabIndex = 3;
+            this.tbSenha.Enter += new System.EventHandler(this.tbSenha_Enter);
             // 
             // btEntrar
             // 
@@ -87,6 +89,7 @@
             this.btSair.TabIndex = 5;
             this.btSair.Text = "Sair";
             this.btSair.UseVisualStyleBackColor = true;
+            this.btSair.Click += new System.EventHandler(this.btSair_Click);
             // 
             // fmLogin
             // 
