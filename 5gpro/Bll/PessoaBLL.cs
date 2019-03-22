@@ -7,9 +7,9 @@ namespace _5gpro.Bll
     {
         PessoaDAO PessoaDAO = new PessoaDAO();
 
-        public int Salvar(Pessoa pessoa)
+        public int SalvarOuAtualizarPessoa(Pessoa pessoa)
         {
-            return PessoaDAO.SalvarPessoa(pessoa);
+            return PessoaDAO.SalvarOuAtualizarPessoa(pessoa);
         }
 
         public Pessoa BuscaPessoaById(string cod)

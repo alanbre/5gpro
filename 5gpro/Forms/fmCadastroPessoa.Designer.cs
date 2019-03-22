@@ -60,6 +60,7 @@
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
             this.pnBotoes = new System.Windows.Forms.Panel();
+            this.btRecarregar = new System.Windows.Forms.Button();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btDeletar = new System.Windows.Forms.Button();
             this.btAnterior = new System.Windows.Forms.Button();
@@ -67,7 +68,6 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.btRecarregar = new System.Windows.Forms.Button();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -407,6 +407,19 @@
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
             // 
+            // btRecarregar
+            // 
+            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
+            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
+            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btRecarregar.Name = "btRecarregar";
+            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
+            this.btRecarregar.TabIndex = 6;
+            this.btRecarregar.UseVisualStyleBackColor = true;
+            // 
             // btSalvar
             // 
             this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -489,25 +502,12 @@
             // 
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbAjuda.Enabled = false;
             this.tbAjuda.HideSelection = false;
             this.tbAjuda.Location = new System.Drawing.Point(72, 530);
             this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 4;
-            // 
-            // btRecarregar
-            // 
-            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
-            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
-            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btRecarregar.Name = "btRecarregar";
-            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
-            this.btRecarregar.TabIndex = 6;
-            this.btRecarregar.UseVisualStyleBackColor = true;
             // 
             // fmCadastroPessoa
             // 

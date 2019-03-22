@@ -98,17 +98,23 @@ namespace _5gpro.Forms
             pessoa.Telefone = mtbTelefone.TextNoMask();
             pessoa.Email = tbEmail.Text;
 
-
-            if (pessoaBLL.Salvar(pessoa) == 0)
+            int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+            if (resultado == 0)
             {
                 MessageBox.Show("Problema ao salvar o registro",
                 "Problema ao salvar",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
             }
-            else
+            else if (resultado == 1)
             {
                 tbAjuda.Text = "Dados salvos com sucesso";
+                editando = false;
+                AlteraBotoes();
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
                 editando = false;
                 AlteraBotoes();
             }

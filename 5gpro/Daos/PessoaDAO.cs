@@ -7,15 +7,21 @@ namespace _5gpro.Daos
 {
     class PessoaDAO : ConexaoDAO
     {
-        public int SalvarPessoa(Pessoa pessoa)
+        public int SalvarOuAtualizarPessoa(Pessoa pessoa)
         {
 
             int retorno = 0;
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand(@"INSERT INTO pessoa (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa)
-                                                         VALUES (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa)",
+                Comando = new MySqlCommand(@"INSERT INTO pessoa
+                         (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa)
+                          VALUES
+                         (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa
+                          ON DUPLICATE KEY UPDATE
+                          nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, complemento = @complemento,
+                          cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipo_pessoa
+                         )",
                                            Conexao);
                 Comando.Parameters.AddWithValue("@idpessoa", pessoa.Codigo);
                 Comando.Parameters.AddWithValue("@nome", pessoa.Nome);

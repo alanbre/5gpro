@@ -113,3 +113,17 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`configuracao` (
   `valor` VARCHAR(200) NULL,
   PRIMARY KEY (`idconfiguracao`))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`usuario` (
+  `idusuario` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(40) NOT NULL,
+  `sobrenome` VARCHAR(50) NULL,
+  `login` VARCHAR(20) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`idusuario`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE)
+ENGINE = InnoDB;

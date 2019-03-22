@@ -1,4 +1,5 @@
-﻿using _5gpro.Funcoes;
+﻿using _5gpro.Forms;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -15,11 +16,14 @@ namespace _5gpro
         {
             CarregaSistema carregaSistema = new CarregaSistema();
             
+    
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
 
             if (carregaSistema.Carrega())
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
+                fmLogin formLogin = new fmLogin();
+                formLogin.ShowDialog();
                 Application.Run(new fmMain());
             }
             else
