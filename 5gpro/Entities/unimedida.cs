@@ -6,10 +6,23 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    class Unimedida
+    public class Unimedida
     {
-        public string idunimedida { get; set; }
-        public string sigla { get; set; }
-        public string descricao { get; set; }
+        public int Codigo { get; set; }
+        public string Sigla { get; set; }
+        public string Descricao { get; set; }
+
+        public Unimedida()
+        {
+
+        }
+
+        public Unimedida(int codigo, string sigla, string descricao)
+        {
+            this.Codigo = codigo;
+            this.Sigla = sigla;
+            this.Descricao = descricao;
+        }
+
     }
 }
