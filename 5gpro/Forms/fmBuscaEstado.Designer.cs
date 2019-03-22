@@ -28,35 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvCidades = new System.Windows.Forms.DataGridView();
+            this.dgvEstados = new System.Windows.Forms.DataGridView();
             this.btPesquisar = new System.Windows.Forms.Button();
-            this.tbFiltroNomeCidade = new System.Windows.Forms.TextBox();
+            this.tbFiltroNomeEstado = new System.Windows.Forms.TextBox();
             this.lbFiltroNomeEstado = new System.Windows.Forms.Label();
-            this.colunaCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaNomeEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstados)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvCidades
+            // dgvEstados
             // 
-            this.dgvCidades.AllowUserToAddRows = false;
-            this.dgvCidades.AllowUserToDeleteRows = false;
-            this.dgvCidades.AllowUserToOrderColumns = true;
-            this.dgvCidades.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvCidades.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvCidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colunaCodigo,
-            this.colunaNomeEstado});
-            this.dgvCidades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvCidades.Location = new System.Drawing.Point(12, 52);
-            this.dgvCidades.MaximumSize = new System.Drawing.Size(560, 360);
-            this.dgvCidades.MinimumSize = new System.Drawing.Size(560, 360);
-            this.dgvCidades.MultiSelect = false;
-            this.dgvCidades.Name = "dgvCidades";
-            this.dgvCidades.ReadOnly = true;
-            this.dgvCidades.RowHeadersVisible = false;
-            this.dgvCidades.Size = new System.Drawing.Size(560, 360);
-            this.dgvCidades.TabIndex = 11;
+            this.dgvEstados.AllowUserToAddRows = false;
+            this.dgvEstados.AllowUserToDeleteRows = false;
+            this.dgvEstados.AllowUserToOrderColumns = true;
+            this.dgvEstados.AllowUserToResizeRows = false;
+            this.dgvEstados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvEstados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvEstados.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvEstados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvEstados.Location = new System.Drawing.Point(12, 52);
+            this.dgvEstados.MinimumSize = new System.Drawing.Size(560, 360);
+            this.dgvEstados.MultiSelect = false;
+            this.dgvEstados.Name = "dgvEstados";
+            this.dgvEstados.ReadOnly = true;
+            this.dgvEstados.RowHeadersVisible = false;
+            this.dgvEstados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvEstados.Size = new System.Drawing.Size(560, 360);
+            this.dgvEstados.TabIndex = 11;
+            this.dgvEstados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstados_CellDoubleClick);
             // 
             // btPesquisar
             // 
@@ -68,12 +68,12 @@
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
             // 
-            // tbFiltroNomeCidade
+            // tbFiltroNomeEstado
             // 
-            this.tbFiltroNomeCidade.Location = new System.Drawing.Point(12, 26);
-            this.tbFiltroNomeCidade.Name = "tbFiltroNomeCidade";
-            this.tbFiltroNomeCidade.Size = new System.Drawing.Size(492, 20);
-            this.tbFiltroNomeCidade.TabIndex = 9;
+            this.tbFiltroNomeEstado.Location = new System.Drawing.Point(12, 26);
+            this.tbFiltroNomeEstado.Name = "tbFiltroNomeEstado";
+            this.tbFiltroNomeEstado.Size = new System.Drawing.Size(492, 20);
+            this.tbFiltroNomeEstado.TabIndex = 9;
             // 
             // lbFiltroNomeEstado
             // 
@@ -84,29 +84,14 @@
             this.lbFiltroNomeEstado.TabIndex = 8;
             this.lbFiltroNomeEstado.Text = "Nome da estado";
             // 
-            // colunaCodigo
-            // 
-            this.colunaCodigo.HeaderText = "Código";
-            this.colunaCodigo.MinimumWidth = 50;
-            this.colunaCodigo.Name = "colunaCodigo";
-            this.colunaCodigo.ReadOnly = true;
-            this.colunaCodigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // colunaNomeEstado
-            // 
-            this.colunaNomeEstado.HeaderText = "Nome do estado";
-            this.colunaNomeEstado.MinimumWidth = 100;
-            this.colunaNomeEstado.Name = "colunaNomeEstado";
-            this.colunaNomeEstado.ReadOnly = true;
-            // 
             // fmBuscaEstado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 427);
-            this.Controls.Add(this.dgvCidades);
+            this.Controls.Add(this.dgvEstados);
             this.Controls.Add(this.btPesquisar);
-            this.Controls.Add(this.tbFiltroNomeCidade);
+            this.Controls.Add(this.tbFiltroNomeEstado);
             this.Controls.Add(this.lbFiltroNomeEstado);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(600, 465);
@@ -116,8 +101,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca Estado";
-            this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -125,11 +109,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvCidades;
+        private System.Windows.Forms.DataGridView dgvEstados;
         private System.Windows.Forms.Button btPesquisar;
-        private System.Windows.Forms.TextBox tbFiltroNomeCidade;
+        private System.Windows.Forms.TextBox tbFiltroNomeEstado;
         private System.Windows.Forms.Label lbFiltroNomeEstado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaNomeEstado;
     }
 }

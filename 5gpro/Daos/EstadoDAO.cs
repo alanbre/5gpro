@@ -42,8 +42,8 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM estado WHERE nome = @nome", Conexao);
-                Comando.Parameters.AddWithValue("@nome", nome);
+                Comando = new MySqlCommand("SELECT * FROM estado WHERE nome LIKE @nome", Conexao);
+                Comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
 
                 IDataReader reader = Comando.ExecuteReader();
 

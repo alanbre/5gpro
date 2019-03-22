@@ -39,7 +39,6 @@ namespace _5gpro.Forms
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            //Cidade = cidadeBLL.BuscaCidadeByCod("4328");
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
@@ -53,8 +52,7 @@ namespace _5gpro.Forms
 
         private void btProcuraEstado_Click(object sender, EventArgs e)
         {
-            var buscaEstado = new fmBuscaEstado();
-            buscaEstado.ShowDialog();
+            AbreTelaBuscaEstado();
         }
 
         private void tbFiltroCodEstado_KeyUp(object sender, KeyEventArgs e)
@@ -62,8 +60,7 @@ namespace _5gpro.Forms
             if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
-                var buscaEstado = new fmBuscaEstado();
-                buscaEstado.ShowDialog();
+                AbreTelaBuscaEstado();
             }
 
         }
@@ -77,7 +74,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbFiltroCodEstado.Text = "";
+                tbNomeEstado.Text = "";
             }
         }
 
@@ -95,6 +92,22 @@ namespace _5gpro.Forms
             Cidade.Nome = Convert.ToString(selectedRow.Cells[1].Value);
             Cidade.CodEstado = Convert.ToString(selectedRow.Cells[2].Value);
             this.Close();
+        }
+
+
+
+
+        private void AbreTelaBuscaEstado()
+        {
+            var buscaEstado = new fmBuscaEstado();
+            buscaEstado.ShowDialog();
+            Estado = buscaEstado.Estado;
+            if (Estado != null)
+            {
+                tbFiltroCodEstado.Text = Estado.CodEstado;
+                tbNomeEstado.Text = Estado.Nome;
+            }
+            tbFiltroCodEstado.Focus();
         }
     }
 }

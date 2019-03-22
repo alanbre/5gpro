@@ -54,7 +54,6 @@
             this.tbFiltroCodEstado.Name = "tbFiltroCodEstado";
             this.tbFiltroCodEstado.Size = new System.Drawing.Size(54, 20);
             this.tbFiltroCodEstado.TabIndex = 0;
-            this.tbFiltroCodEstado.Text = "23";
             this.tbFiltroCodEstado.Enter += new System.EventHandler(this.tbFiltroCodEstado_Enter);
             this.tbFiltroCodEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodEstado_KeyUp);
             this.tbFiltroCodEstado.Leave += new System.EventHandler(this.tbFiltroCodEstado_Leave);
@@ -110,7 +109,8 @@
             this.dgvCidades.AllowUserToDeleteRows = false;
             this.dgvCidades.AllowUserToOrderColumns = true;
             this.dgvCidades.AllowUserToResizeRows = false;
-            this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCidades.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvCidades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -139,7 +139,6 @@
             this.Controls.Add(this.tbFiltroCodEstado);
             this.Controls.Add(this.lbEstado);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(600, 500);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "fmBuscaCidade";

@@ -16,5 +16,10 @@ namespace _5gpro.Bll
         {
             return EstadoDAO.BuscaEstadoByCod(cod);
         }
+
+        public List<Estado> BuscaEstadoByNome(string nome)
+        {
+            return EstadoDAO.BuscaEstadoByNome(nome);
+        }
     }
 }
