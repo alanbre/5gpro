@@ -223,7 +223,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca pessoa";
-            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -1,5 +1,6 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,9 +28,10 @@ namespace _5gpro.Forms
             pais.nome = tbNomepais.Text;
             pais.sigla = tbSigla.Text;
 
-            pbl.salvar(pais);
+            ValidarPais(pais);
+            //pbl.salvar(pais);
 
-            MessageBox.Show("País adicionado com sucesso!");
+            // MessageBox.Show("País adicionado com sucesso!");
 
 
         }
@@ -44,5 +46,16 @@ namespace _5gpro.Forms
         {
 
         }
+
+
+        private void ValidarPais(object obj)
+        {
+            var erros = Validacao.getValidationErros(obj);
+            foreach (var error in erros)
+            {
+                MessageBox.Show((error.ErrorMessage));
+            }
+        }
+
     }
 }
