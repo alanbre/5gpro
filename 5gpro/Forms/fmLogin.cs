@@ -47,5 +47,10 @@ namespace _5gpro.Forms
         {
             tbSenha.SelectAll();
         }
+
+        private void fmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
