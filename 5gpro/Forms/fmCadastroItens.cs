@@ -14,7 +14,13 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroItens : Form, IMessageFilter
     {
+
         _Item item = new _Item();
+        Unimedida unimedida = new Unimedida();
+        _ItemBLL _itemBLL = new _ItemBLL();
+        UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
+
+
         bool editando = false;
 
         public fmCadastroItens()
@@ -87,7 +93,7 @@ namespace _5gpro.Forms
             if (cod) { tbCodigo.Clear(); }
             tbDescricao.Clear();
             tbDescricaoDeCompra.Clear();
-            tbCodUniMedida.Clear();
+            tbCodUnimedida.Clear();
             tbDescricaoUndMedida.Clear();
             tbReferncia.Clear();
             tbPrecoUltimaEntrada.Clear();
@@ -107,7 +113,7 @@ namespace _5gpro.Forms
             item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
             item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
             item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
-            item.Unimedida = int.Parse(tbCodUniMedida.Text);
+            item.Unimedida = int.Parse(tbCodUnimedida.Text);
 
             _ItemBLL itemBLL = new _ItemBLL();
             itemBLL.salvar(item);
@@ -167,12 +173,55 @@ namespace _5gpro.Forms
 
         }
 
+        private void PreencheCamposUnimedida(Unimedida unimedida)
+        {
+            if (unimedida != null)
+            {
+                Console.WriteLine("Entrou no IF");
+                tbCodUnimedida.Text = unimedida.Codigo.ToString();
+                tbDescricaoUndMedida.Text = unimedida.Descricao;
+            }
+            else
+            {
+                Console.WriteLine("Entrou no ELSE");
+            }
+        }
+
+        private void tbCodUnimedida_Leave(object sender, EventArgs e)
+        {
+            if (tbCodUnimedida.Text.Length > 0)
+            {
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
+                PreencheCamposUnimedida(unimedida);
+            }
+            else
+            {
+                tbDescricaoUndMedida.Text = "";
+            }
+        }
 
         private void btBuscaUndMedida_Click(object sender, EventArgs e)
         {
-            var buscaUnimedida = new fmBuscaUnimedida();
-            buscaUnimedida.ShowDialog();
+            AbreTelaBuscaUnimedida();
         }
 
+
+        private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            {
+                e.Handled = true;
+                AbreTelaBuscaUnimedida();
+            }
+        }
+
+        private void AbreTelaBuscaUnimedida()
+        {
+            Console.WriteLine("Entrou no ABRETELABUSCAUNIMEDIDA");
+            var buscaUnimedida = new fmBuscaUnimedida();
+            buscaUnimedida.ShowDialog();
+            unimedida = buscaUnimedida.Unimedida;
+            PreencheCamposUnimedida(unimedida);
+        }
     }
 }
