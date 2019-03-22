@@ -1,6 +1,7 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
@@ -8,10 +9,12 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaCidade : Form, IMessageFilter
     {
-        public Cidade Cidade;
-        public Estado Estado;
+        public List<Cidade> Cidades;
+        public List<Estado> Estados;
+        public Cidade cidadeSelecionada;
         private CidadeBLL cidadeBLL = new CidadeBLL();
         private EstadoBLL estadoBLL = new EstadoBLL();
+
 
         public fmBuscaCidade()
         {
@@ -41,11 +44,15 @@ namespace _5gpro.Forms
         {
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Nome", typeof(string));
+            table.Columns.Add("Cidade", typeof(string));
             table.Columns.Add("Código do estado", typeof(string));
-            foreach (Cidade c in cidadeBLL.BuscaCidadesByCodEstado(tbFiltroCodEstado.Text))
+            table.Columns.Add("Estado", typeof(string));
+
+            Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
+
+            foreach (Cidade c in Cidades)
             {
-                table.Rows.Add(c.CodCidade, c.Nome, c.CodEstado);
+                table.Rows.Add(c.CodCidade, c.Nome, c.Estado.CodEstado, c.Estado.Nome);
             }
             dgvCidades.DataSource = table;
         }
@@ -69,8 +76,8 @@ namespace _5gpro.Forms
         {
             if (tbFiltroCodEstado.Text.Length > 0)
             {
-                Estado = estadoBLL.BuscaEstadoByCod(tbFiltroCodEstado.Text);
-                tbNomeEstado.Text = Estado.Nome;
+                Estados = estadoBLL.BuscaEstadoByCod(tbFiltroCodEstado.Text);
+                tbNomeEstado.Text = Estados[0].Nome;
             }
             else
             {
@@ -87,10 +94,9 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvCidades.Rows[selectedRowIndex];
-            Cidade = new Cidade();
-            Cidade.CodCidade = Convert.ToString(selectedRow.Cells[0].Value);
-            Cidade.Nome = Convert.ToString(selectedRow.Cells[1].Value);
-            Cidade.CodEstado = Convert.ToString(selectedRow.Cells[2].Value);
+            cidadeSelecionada = new Cidade();
+            cidadeSelecionada.CodCidade = Convert.ToString(selectedRow.Cells[0].Value);
+            cidadeSelecionada.Nome = Convert.ToString(selectedRow.Cells[1].Value);
             this.Close();
         }
 
@@ -101,11 +107,12 @@ namespace _5gpro.Forms
         {
             var buscaEstado = new fmBuscaEstado();
             buscaEstado.ShowDialog();
-            Estado = buscaEstado.Estado;
-            if (Estado != null)
+            Estados = new List<Estado>();
+            Estados.Add(buscaEstado.EstadoSelecionado);
+            if (Estados != null)
             {
-                tbFiltroCodEstado.Text = Estado.CodEstado;
-                tbNomeEstado.Text = Estado.Nome;
+                tbFiltroCodEstado.Text = Estados[0].CodEstado;
+                tbNomeEstado.Text = Estados[0].Nome;
             }
             tbFiltroCodEstado.Focus();
         }

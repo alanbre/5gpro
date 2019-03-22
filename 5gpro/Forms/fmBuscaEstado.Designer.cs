@@ -55,7 +55,7 @@
             this.dgvEstados.RowHeadersVisible = false;
             this.dgvEstados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEstados.Size = new System.Drawing.Size(560, 360);
-            this.dgvEstados.TabIndex = 11;
+            this.dgvEstados.TabIndex = 2;
             this.dgvEstados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstados_CellDoubleClick);
             // 
             // btPesquisar
@@ -63,7 +63,7 @@
             this.btPesquisar.Location = new System.Drawing.Point(510, 26);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 10;
+            this.btPesquisar.TabIndex = 1;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
@@ -73,7 +73,7 @@
             this.tbFiltroNomeEstado.Location = new System.Drawing.Point(12, 26);
             this.tbFiltroNomeEstado.Name = "tbFiltroNomeEstado";
             this.tbFiltroNomeEstado.Size = new System.Drawing.Size(492, 20);
-            this.tbFiltroNomeEstado.TabIndex = 9;
+            this.tbFiltroNomeEstado.TabIndex = 0;
             // 
             // lbFiltroNomeEstado
             // 
@@ -81,7 +81,7 @@
             this.lbFiltroNomeEstado.Location = new System.Drawing.Point(12, 10);
             this.lbFiltroNomeEstado.Name = "lbFiltroNomeEstado";
             this.lbFiltroNomeEstado.Size = new System.Drawing.Size(85, 13);
-            this.lbFiltroNomeEstado.TabIndex = 8;
+            this.lbFiltroNomeEstado.TabIndex = 3;
             this.lbFiltroNomeEstado.Text = "Nome da estado";
             // 
             // fmBuscaEstado

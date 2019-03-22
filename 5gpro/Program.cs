@@ -16,7 +16,6 @@ namespace _5gpro
         {
             CarregaSistema carregaSistema = new CarregaSistema();
             
-    
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

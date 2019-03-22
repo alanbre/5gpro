@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _5gpro.Entities
+﻿namespace _5gpro.Entities
 {
     public class Cidade
     {
         public string CodCidade { get; set; }
         public string Nome { get; set; }
-        public string CodEstado { get; set; }
+        public Estado Estado { get; set; }
     }
 }

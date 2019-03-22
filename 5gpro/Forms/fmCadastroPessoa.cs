@@ -322,8 +322,11 @@ namespace _5gpro.Forms
         {
             var buscaCidade = new fmBuscaCidade();
             buscaCidade.ShowDialog();
-            cidade = buscaCidade.Cidade;
-            PreencheCamposCidade(cidade);
+            if (buscaCidade.Cidades != null)
+            {
+                cidade = buscaCidade.cidadeSelecionada;
+                PreencheCamposCidade(cidade);
+            }            
         }
     }
 }
