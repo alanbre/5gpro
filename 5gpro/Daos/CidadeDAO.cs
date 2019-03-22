@@ -39,9 +39,11 @@ namespace _5gpro.Daos
             return cidade;
         }
 
-        public List<Cidade> BuscaCidades(string codEstado, string nome)
+        public List<Cidade> BuscaCidades(string codEstado, string nomeCidade)
         {
             List<Cidade> cidades = new List<Cidade>();
+            string conCodEstado = codEstado.Length > 0 ? "AND e.idestado = @idestado" : "";
+            string conNomeCidade = nomeCidade.Length > 0 ? "AND c.nome LIKE @nomecidade" : "";
 
             try
             {
@@ -49,12 +51,13 @@ namespace _5gpro.Daos
                 Comando = new MySqlCommand(@"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado 
                                              FROM cidade c INNER JOIN estado e 
                                              ON c.idestado = e.idestado
-                                             WHERE e.idestado = @idestado
-                                             AND c.nome LIKE @nomecidade
+                                             WHERE 1=1
+                                             " + conCodEstado + @"
+                                             " + conNomeCidade + @"
                                              ORDER BY c.idcidade;", Conexao);
 
-                Comando.Parameters.AddWithValue("@idestado", codEstado);
-                Comando.Parameters.AddWithValue("@nomecidade", "%" + nome + "%");
+                if (codEstado.Length > 0) { Comando.Parameters.AddWithValue("@idestado", codEstado); }
+                if (nomeCidade.Length > 0) { Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
 
                 IDataReader reader = Comando.ExecuteReader();
 
