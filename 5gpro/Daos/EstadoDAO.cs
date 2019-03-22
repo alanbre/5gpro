@@ -8,9 +8,9 @@ namespace _5gpro.Daos
 {
     class EstadoDAO : ConexaoDAO
     {
-        public Estado BuscaEstadoByCod(string cod)
+        public List<Estado> BuscaEstadoByCod(string cod)
         {
-            Estado estado = new Estado();
+            List<Estado> estados = new List<Estado>();
             try
             {
                 AbrirConexao();
@@ -19,10 +19,12 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Comando.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
+                    Estado estado = new Estado();
                     estado.CodEstado = reader.GetString(reader.GetOrdinal("idestado"));
                     estado.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    estados.Add(estado);
                 }
             }
             catch (MySqlException ex)
@@ -33,7 +35,7 @@ namespace _5gpro.Daos
             {
                 FecharConexao();
             }
-            return estado;
+            return estados;
         }
 
         public List<Estado> BuscaEstadoByNome(string nome)

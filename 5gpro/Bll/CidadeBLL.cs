@@ -12,9 +12,9 @@ namespace _5gpro.Bll
             return CidadeDAO.BuscaCidadeByCod(cod);
         }
 
-        public List<Cidade> BuscaCidadesByCodEstado(string codEstado)
+        public List<Cidade> BuscaCidades(string codEstado, string nomeCidade)
         {
-            return CidadeDAO.BuscaCidadesByCodEstado(codEstado);
+            return CidadeDAO.BuscaCidades(codEstado, nomeCidade);
         }
     }
 }

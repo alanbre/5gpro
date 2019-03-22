@@ -12,7 +12,7 @@ namespace _5gpro.Bll
     {
         EstadoDAO EstadoDAO = new EstadoDAO();
 
-        public Estado BuscaEstadoByCod(string cod)
+        public List<Estado> BuscaEstadoByCod(string cod)
         {
             return EstadoDAO.BuscaEstadoByCod(cod);
         }
