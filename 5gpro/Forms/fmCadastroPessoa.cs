@@ -39,6 +39,9 @@ namespace _5gpro.Forms
             return false;
         }
 
+
+
+
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             mtbCpfCnpj.Clear();
@@ -55,6 +58,10 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
+
+
+
+        //EVENTOS DE CLICK
         private void btNovo_Click(object sender, EventArgs e)
         {
             if (editando)
@@ -79,6 +86,12 @@ namespace _5gpro.Forms
                 editando = true;
             }
             AlteraBotoes();
+        }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
         }
 
         private void btSalvar_Click(object sender, EventArgs e)
@@ -129,12 +142,9 @@ namespace _5gpro.Forms
             AbreTelaBuscaCidade();
         }
 
-        private void btDeletar_Click(object sender, EventArgs e)
+        private void btRecarregar_Click(object sender, EventArgs e)
         {
-            if (!editando)
-            {
-
-            }
+            RecarregarDados(pessoa);
         }
 
         private void btRight_Click(object sender, EventArgs e)
@@ -147,10 +157,41 @@ namespace _5gpro.Forms
 
         }
 
-        private void btBuscar_Click(object sender, EventArgs e)
+        private void btDeletar_Click(object sender, EventArgs e)
         {
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
+            if (!editando)
+            {
+
+            }
+        }
+
+
+
+
+        //EVENTOS DE KEY PRESS
+        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+
+
+
+        //EVENTOS DE LEAVE
+        private void tbCodCidade_Leave(object sender, EventArgs e)
+        {
+            if (tbCodCidade.Text.Length > 0)
+            {
+                cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
+                PreencheCamposCidade(cidade);
+            }
+            else
+            {
+                tbNomeCidade.Text = "";
+            }
         }
 
         private void tbCodigo_Leave(object sender, EventArgs e)
@@ -185,11 +226,59 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+
+
+
+        //EVENTOS DE KEY UP
+        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            if (e.KeyCode == Keys.F3 && !editando)
             {
                 e.Handled = true;
+                var buscaPessoa = new fmBuscaPessoa();
+                buscaPessoa.ShowDialog();
+            }
+        }
+
+        private void tbNome_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbFantasia_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbRua_KeyUp(object sender, KeyEventArgs e)
+        {
+            editando = true;
+            AlteraBotoes();
+        }
+
+        private void tbNumero_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char) e.KeyCode))
+            {
+                Editando();
+            }
+        }
+
+        private void tbBairro_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando();
+            }
+        }
+
+        private void tbComplemento_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando();
             }
         }
 
@@ -209,32 +298,25 @@ namespace _5gpro.Forms
 
         }
 
-        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+
+
+
+
+
+
+
+
+
+
+        //PADRÕES CRIADAS
+        private void RecarregarDados(Pessoa pessoa)
         {
-            if (e.KeyCode == Keys.F3 && !editando)
-            {
-                e.Handled = true;
-                var buscaPessoa = new fmBuscaPessoa();
-                buscaPessoa.ShowDialog();
-            }
+            //TODO
+            //BUSCAR NOVAMENTO OS DADOS DO BANCO (POIS OS DADOS PODEM TER SIDO ALTERADOS ENQUANTO O REGISTRO ESTAVA CARREGADO)
+            PreencheCampos(pessoa, true);
+            editando = false;
+            AlteraBotoes();
         }
-
-        private void tbCodCidade_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
-            }
-        }
-
-
-
-
 
         private void NovoRegistro()
         {
@@ -267,9 +349,9 @@ namespace _5gpro.Forms
             }
         }
 
-        private void LimpaCampos(bool cod)
+        private void LimpaCampos(bool limpaCodigo)
         {
-            if (cod) { tbCodigo.Clear(); }
+            if (limpaCodigo) { tbCodigo.Clear(); }
             tbNome.Clear();
             tbFantasia.Clear();
             tbRua.Clear();
@@ -289,9 +371,9 @@ namespace _5gpro.Forms
             rbPessoaJuridica.Checked = false;
         }
 
-        private void PreencheCampos(Pessoa pessoa, bool cod)
+        private void PreencheCampos(Pessoa pessoa, bool alteraCodigo)
         {
-            tbCodigo.Text = cod ? pessoa.Codigo : tbCodigo.Text;
+            tbCodigo.Text = alteraCodigo ? pessoa.Codigo : tbCodigo.Text;
             tbNome.Text = pessoa.Nome;
             tbFantasia.Text = pessoa.Fantasia;
             if (pessoa.TipoPessoa == "F")
@@ -340,37 +422,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbNome_KeyUp(object sender, KeyEventArgs e)
-        {
-            editando = true;
-            AlteraBotoes();
-        }
-
-        private void tbFantasia_KeyUp(object sender, KeyEventArgs e)
-        {
-            editando = true;
-            AlteraBotoes();
-        }
-
-        private void tbRua_KeyUp(object sender, KeyEventArgs e)
-        {
-            editando = true;
-            AlteraBotoes();
-        }
-
-        private void tbNumero_KeyUp(object sender, KeyEventArgs e)
-        {
-            editando = true;
-            AlteraBotoes();
-        }
-
-        private void tbBairro_KeyUp(object sender, KeyEventArgs e)
-        {
-            editando = true;
-            AlteraBotoes();
-        }
-
-        private void tbComplemento_KeyUp(object sender, KeyEventArgs e)
+        private void Editando()
         {
             editando = true;
             AlteraBotoes();

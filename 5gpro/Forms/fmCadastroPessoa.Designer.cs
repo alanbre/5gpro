@@ -425,6 +425,7 @@
             this.btRecarregar.Size = new System.Drawing.Size(48, 48);
             this.btRecarregar.TabIndex = 6;
             this.btRecarregar.UseVisualStyleBackColor = true;
+            this.btRecarregar.Click += new System.EventHandler(this.btRecarregar_Click);
             // 
             // btSalvar
             // 
