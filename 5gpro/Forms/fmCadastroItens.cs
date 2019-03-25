@@ -52,7 +52,7 @@ namespace _5gpro.Forms
             {
                 e.Handled = true;
             }
-            editando = true;
+           // editando = true;
             AlteraBotoes();
         }
 
@@ -124,6 +124,8 @@ namespace _5gpro.Forms
         {
             if (!editando)
             {
+
+                
                 if (tbCodigo.Text.Length > 0)
                 {
                     _item = _itemBLL.BuscaItemById(tbCodigo.Text);
@@ -142,6 +144,7 @@ namespace _5gpro.Forms
             }
             else
             {
+      
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
