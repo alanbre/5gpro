@@ -75,6 +75,7 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
+            pessoa = new Pessoa();
             pessoa.Codigo = tbCodigo.Text;
             pessoa.Nome = tbNome.Text;
             pessoa.Fantasia = tbFantasia.Text;
