@@ -115,6 +115,7 @@
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
             this.cblAtuacao.TabIndex = 7;
             this.cblAtuacao.TabStop = false;
+            this.cblAtuacao.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cblAtuacao_ItemCheck);
             // 
             // tbFantasia
             // 
@@ -159,7 +160,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.TextChanged += new System.EventHandler(this.tbCodigo_TextChanged);
             this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
             this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
             this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);

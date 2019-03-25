@@ -1,6 +1,7 @@
 ﻿using _5gpro.Entities;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace _5gpro.Daos
@@ -14,15 +15,21 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand(@"INSERT INTO pessoa
+                Comando = Conexao.CreateCommand();
+                tr = Conexao.BeginTransaction();
+                Comando.Connection = Conexao;
+                Comando.Transaction = tr;
+
+
+                Comando.CommandText = @"INSERT INTO pessoa
                          (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa)
                           VALUES
                          (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa)
                           ON DUPLICATE KEY UPDATE
                           nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, complemento = @complemento,
                           cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa
-                         ;",
-                                           Conexao);
+                          ";
+
                 Comando.Parameters.AddWithValue("@idpessoa", pessoa.Codigo);
                 Comando.Parameters.AddWithValue("@nome", pessoa.Nome);
                 Comando.Parameters.AddWithValue("@fantasia", pessoa.Fantasia);
@@ -47,6 +54,34 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@tipoPessoa", pessoa.TipoPessoa);
 
                 retorno = Comando.ExecuteNonQuery();
+
+
+                if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
+                {
+                    Comando.CommandText = @"UPDATE atuacao_has_pessoa SET ativo = FALSE where pessoa_idpessoa = @idpessoa";
+                    Comando.ExecuteNonQuery();
+
+                    foreach (string atuacao in pessoa.Atuacao)
+                    {
+                        switch (atuacao)
+                        {
+                            case "Cliente":
+                                Comando.CommandText = @"INSERT INTO atuacao_has_pessoa (pessoa_idpessoa, atuacao_idatuacao, ativo)
+                                                        VALUES (@idpessoa, 1, TRUE)
+                                                        ON DUPLICATE KEY UPDATE
+                                                        ativo = TRUE";
+                                break;
+                            case "Fornecedor":
+                                Comando.CommandText = @"INSERT INTO atuacao_has_pessoa (pessoa_idpessoa, atuacao_idatuacao, ativo)
+                                                        VALUES (@idpessoa, 2, TRUE)
+                                                        ON DUPLICATE KEY UPDATE
+                                                        ativo = TRUE";
+                                break;
+                        }
+                        Comando.ExecuteNonQuery();
+                    }
+                }
+                tr.Commit();
             }
             catch (MySqlException ex)
             {
@@ -62,7 +97,7 @@ namespace _5gpro.Daos
 
         public Pessoa BuscarPessoaById(string cod)
         {
-            Pessoa pessoa = new Pessoa();
+            Pessoa pessoa = null;
             try
             {
                 AbrirConexao();
@@ -71,8 +106,9 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Comando.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
+                    pessoa = new Pessoa();
                     pessoa.Codigo = reader.GetString(reader.GetOrdinal("idpessoa"));
                     pessoa.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     pessoa.Fantasia = reader.GetString(reader.GetOrdinal("fantasia"));
@@ -85,6 +121,7 @@ namespace _5gpro.Daos
                     pessoa.CpfCnpj = pessoa.TipoPessoa == "F"? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
                     pessoa.Email = reader.GetString(reader.GetOrdinal("email"));
+                    reader.Close();
                 }
             }
             catch (MySqlException ex)
@@ -95,7 +132,46 @@ namespace _5gpro.Daos
             {
                 FecharConexao();
             }
+
+            pessoa.Atuacao = pessoa != null? buscaAtuacoes(pessoa): pessoa.Atuacao;
             return pessoa;
+        }
+
+
+        public List<string> buscaAtuacoes(Pessoa pessoa)
+        {
+            List<string> atuacoes = new List<string>();
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM atuacao_has_pessoa WHERE pessoa_idpessoa = @idpessoa AND ativo = TRUE", Conexao);
+                Comando.Parameters.AddWithValue("@idpessoa", pessoa.Codigo);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    switch (reader.GetInt32(reader.GetOrdinal("atuacao_idatuacao")))
+                    {
+                        case 1:
+                            atuacoes.Add("Cliente");
+                            break;
+                        case 2:
+                            atuacoes.Add("Fornecedor");
+                            break;
+                    }
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return atuacoes;
         }
     }
 }
