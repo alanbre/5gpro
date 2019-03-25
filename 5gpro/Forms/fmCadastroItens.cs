@@ -21,7 +21,7 @@ namespace _5gpro.Forms
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
 
         bool editando = false;
-        bool ignoraCheckEvent;
+        //bool ignoraCheckEvent;
 
         public fmCadastroItens()
         {
@@ -246,7 +246,7 @@ namespace _5gpro.Forms
 
         private void PreencheCampos(_Item _item)
         {
-            ignoraCheckEvent = true;
+            //ignoraCheckEvent = true;
             LimpaCampos(false);
             tbCodigo.Text = _item.Codigo;
             tbDescricao.Text = _item.Descricao;
@@ -274,7 +274,7 @@ namespace _5gpro.Forms
             tbEstoqueNecessario.Text = _item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = _item.ValorSaida.ToString();
 
-            ignoraCheckEvent = false;
+            //ignoraCheckEvent = false;
         }
 
         private void Editando(bool edit)
