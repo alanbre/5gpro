@@ -15,7 +15,7 @@ namespace _5gpro.Forms
     public partial class fmCadastroItens : Form
     {
 
-        _Item _item = new _Item();
+        _Item _item;
         Unimedida unimedida = new Unimedida();
         _ItemBLL _itemBLL = new _ItemBLL();
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
@@ -37,8 +37,6 @@ namespace _5gpro.Forms
             {
                 e.Handled = true;
             }
-            editando = true;
-            AlteraBotoes();
         }
 
 
@@ -58,8 +56,7 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-
-            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+        tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
@@ -125,6 +122,7 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
+            _item = new _Item();
             _item.Codigo = tbCodigo.Text;
             _item.Descricao = tbDescricao.Text;
             _item.DescCompra = tbDescricaoDeCompra.Text;
@@ -135,10 +133,29 @@ namespace _5gpro.Forms
             _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
             _item.Unimedida = tbCodUnimedida.Text;
 
-            _ItemBLL itemBLL = new _ItemBLL();
-            itemBLL.SalvarOuAtualizarItem(_item);
+            int resultado = _itemBLL.SalvarOuAtualizarItem(_item);
 
-            MessageBox.Show("Item adicionado com sucesso!");
+
+            // resultado 0 = nada foi inserido (houve algum erro)
+            // resultado 1 = foi inserido com sucesso
+            // resultado 2 = foi atualizado com sucesso
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                Editando(false);
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+            }
         }
 
         private void btNovo_Click(object sender, EventArgs e)
@@ -170,7 +187,7 @@ namespace _5gpro.Forms
 
         //FUNÇÕES DE KEY UP
         private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
-        {
+            {
             if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
@@ -233,13 +250,8 @@ namespace _5gpro.Forms
         {
             if (unimedida != null)
             {
-               
                 tbCodUnimedida.Text = unimedida.Codigo.ToString();
                 tbDescricaoUndMedida.Text = unimedida.Descricao;
-            }
-            else
-            {
-                
             }
         }
 

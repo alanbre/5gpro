@@ -57,7 +57,7 @@ namespace _5gpro.Daos
 
         public _Item BuscarItemById(string cod)
         {
-            _Item _item = new _Item();
+            _Item _item = null;
             try
             {
                 AbrirConexao();
@@ -66,8 +66,9 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Comando.ExecuteReader();
 
-                while (reader.Read())
+                if(reader.Read())
                 {
+                    _item = new _Item();
                     _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
                     _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
                     _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
@@ -77,10 +78,7 @@ namespace _5gpro.Daos
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
                     _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
-
-
-
-
+                    reader.Close();
                 }
             }
             catch (MySqlException ex)

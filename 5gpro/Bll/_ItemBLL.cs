@@ -1,10 +1,5 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Bll
 {
@@ -13,17 +8,9 @@ namespace _5gpro.Bll
 
         _ItemDAO _itemdao = new _ItemDAO();
 
-        public void SalvarOuAtualizarItem(_Item _item)
+        public int SalvarOuAtualizarItem(_Item _item)
         {
-            try
-            {
-                _itemdao.SalvarOuAtualizarItem(_item);
-            }
-            catch (Exception erro)
-            {
-
-                throw erro;
-            }
+            return _itemdao.SalvarOuAtualizarItem(_item);
         }
 
 

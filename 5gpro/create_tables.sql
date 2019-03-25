@@ -127,3 +127,33 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`usuario` (
   PRIMARY KEY (`idusuario`),
   UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE)
 ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`unimedida`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`unimedida` (
+  `idunimedida` INT(11) NOT NULL,
+  `sigla` VARCHAR(45) NULL DEFAULT NULL,
+  `descricao` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idunimedida`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`item`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
+  `iditem` INT(11) NOT NULL,
+  `descitem` VARCHAR(45) NULL DEFAULT NULL,
+  `denominacaocompra` VARCHAR(45) NULL DEFAULT NULL,
+  `tipo` VARCHAR(45) NULL DEFAULT NULL,
+  `referencia` VARCHAR(45) NULL DEFAULT NULL,
+  `valorentrada` DECIMAL(15,2) NULL DEFAULT NULL,
+  `valorsaida` DECIMAL(15,2) NULL DEFAULT NULL,
+  `estoquenecessario` DECIMAL(10,0) NULL DEFAULT NULL,
+  `unimedida_idunimedida` INT(11) NOT NULL,
+  PRIMARY KEY (`iditem`),
+  INDEX `fk_item_unimedida1_idx` (`unimedida_idunimedida` ASC) VISIBLE,
+  CONSTRAINT `fk_item_unimedida1`
+    FOREIGN KEY (`unimedida_idunimedida`)
+    REFERENCES `5gprodatabase`.`unimedida` (`idunimedida`))
+ENGINE = InnoDB;
