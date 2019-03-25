@@ -21,10 +21,37 @@ namespace _5gpro.Forms
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
 
         bool editando = false;
+        bool ignoraCheckEvent;
 
         public fmCadastroItens()
         {
             InitializeComponent();
+            AlteraBotoes();
+        }
+
+        private void btNovo_Click(object sender, EventArgs e)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    editando = true;
+                    NovoRegistro();
+                    tbCodigo.Focus();
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                tbCodigo.Focus();
+                editando = true;
+            }
             AlteraBotoes();
         }
 
@@ -34,7 +61,7 @@ namespace _5gpro.Forms
             {
                 e.Handled = true;
             }
-           // editando = true;
+            editando = true;
             AlteraBotoes();
         }
 
@@ -104,64 +131,63 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
+
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
-
-                
                 if (tbCodigo.Text.Length > 0)
                 {
-                    _item = _itemBLL.BuscaItemById(tbCodigo.Text);
-                    if (_item.Codigo != null)
+                    _Item newitem = _itemBLL.BuscaItemById(tbCodigo.Text);
+                    if (newitem != null)
                     {
-                        PreencheCampos(_item, false);
-                        editando = false;
+                        _item = newitem;
+                        PreencheCampos(_item);
+                        Editando(false);
                     }
                     else
                     {
-                        editando = true;
+                        Editando(true);
                         LimpaCampos(false);
                     }
                 }
-                AlteraBotoes();
-            }
-            else
-            {
-      
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                else if (tbCodigo.Text.Length == 0)
                 {
-                    NovoRegistro();
+                    LimpaCampos(true);
+                    Editando(false);
                 }
             }
-        }
-
-        private void btNovo_Click(object sender, EventArgs e)
-        {
-            if (editando)
+            else
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    editando = true;
-                    NovoRegistro();
-                    tbCodigo.Focus();
+                    if (tbCodigo.Text.Length > 0)
+                    {
+                        _Item newitem = _itemBLL.BuscaItemById(tbCodigo.Text);
+                        if (newitem != null)
+                        {
+                            _item = newitem;
+                            PreencheCampos(_item);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodigo.Text.Length == 0)
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
                 }
-                else
-                {
+            }
 
-                }
-            }
-            else
-            {
-                tbCodigo.Focus();
-                editando = true;
-            }
-            AlteraBotoes();
         }
+
 
         private void fmCadastroItens_Load(object sender, EventArgs e)
         {
@@ -172,13 +198,13 @@ namespace _5gpro.Forms
         {
             if (unimedida != null)
             {
-                Console.WriteLine("Entrou no IF");
+               
                 tbCodUnimedida.Text = unimedida.Codigo.ToString();
                 tbDescricaoUndMedida.Text = unimedida.Descricao;
             }
             else
             {
-                Console.WriteLine("Entrou no ELSE");
+                
             }
         }
 
@@ -212,16 +238,17 @@ namespace _5gpro.Forms
 
         private void AbreTelaBuscaUnimedida()
         {
-            Console.WriteLine("Entrou no ABRETELABUSCAUNIMEDIDA");
             var buscaUnimedida = new fmBuscaUnimedida();
             buscaUnimedida.ShowDialog();
             unimedida = buscaUnimedida.Unimedida;
             PreencheCamposUnimedida(unimedida);
         }
 
-        private void PreencheCampos(_Item _item, bool alteraCodigo)
+        private void PreencheCampos(_Item _item)
         {
-            tbCodigo.Text = alteraCodigo ? _item.Codigo : tbCodigo.Text;
+            ignoraCheckEvent = true;
+            LimpaCampos(false);
+            tbCodigo.Text = _item.Codigo;
             tbDescricao.Text = _item.Descricao;
             tbDescricaoDeCompra.Text = _item.DescCompra;
 
@@ -246,6 +273,28 @@ namespace _5gpro.Forms
             tbPrecoUltimaEntrada.Text = _item.ValorEntrada.ToString();
             tbEstoqueNecessario.Text = _item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = _item.ValorSaida.ToString();
+
+            ignoraCheckEvent = false;
+        }
+
+        private void Editando(bool edit)
+        {
+            editando = edit;
+            AlteraBotoes();
+        }
+
+        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

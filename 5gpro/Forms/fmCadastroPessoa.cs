@@ -646,6 +646,9 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
 
+        }
     }
 }
