@@ -196,7 +196,7 @@
             this.rbPessoaJuridica.TabIndex = 1;
             this.rbPessoaJuridica.Text = "Pessoa Jurídica";
             this.rbPessoaJuridica.UseVisualStyleBackColor = true;
-            this.rbPessoaJuridica.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.rbPessoaJuridica.CheckedChanged += new System.EventHandler(this.rbJuridica_CheckedChanged);
             this.rbPessoaJuridica.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbPessoaJuridica_KeyDown);
             // 
             // rbPessoaFisica
@@ -210,7 +210,7 @@
             this.rbPessoaFisica.TabStop = true;
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
-            this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.rbFisica_CheckedChanged);
             this.rbPessoaFisica.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbPessoaFisica_KeyDown);
             // 
             // pnDados
