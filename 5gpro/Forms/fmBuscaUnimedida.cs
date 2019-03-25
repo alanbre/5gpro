@@ -16,6 +16,7 @@ namespace _5gpro.Forms
     public partial class fmBuscaUnimedida : Form, IMessageFilter
     {
 
+        public List<Unimedida> Listaunimedida;
         public Unimedida Unimedida;
         private UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
 
@@ -62,28 +63,19 @@ namespace _5gpro.Forms
         private void fmBuscaUnimedida_Load(object sender, EventArgs e)
         {
 
-            List<Unimedida> l = new List<Unimedida>();
+            DataTable table = new DataTable();
+            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Sigla", typeof(string));
+            table.Columns.Add("Descrição", typeof(string));
 
-            dgvUnimedida.ColumnCount = 3;
-            dgvUnimedida.Columns[0].Name = "Código";
-            dgvUnimedida.Columns[1].Name = "Sigla";
-            dgvUnimedida.Columns[2].Name = "Descrição";
 
-            var rows = new List<string[]>();
-            List<Unimedida> lum = new List<Unimedida>();
-            lum = new UnimedidaDAO().BuscarTodasUnimedidas();
+            Listaunimedida = unimedidaBLL.BuscarTodasUnimedidas();
 
-            foreach (Unimedida unimedida in lum)
+            foreach (Unimedida u in Listaunimedida)
             {
-                string[] row1 = new string[] { unimedida.Codigo.ToString(), unimedida.Sigla, unimedida.Descricao };
-                rows.Add(row1);
+                table.Rows.Add(u.Codigo, u.Sigla, u.Descricao);
             }
-
-            foreach (string[] rowArray in rows)
-            {
-                dgvUnimedida.Rows.Add(rowArray);
-            }
-
+            dgvUnimedida.DataSource = table;
 
         }
 

@@ -37,7 +37,7 @@ namespace _5gpro.Daos
 
         public List<Unimedida> BuscarTodasUnimedidas()
         {
-            Unimedida unimedida = new Unimedida();
+            
             List<Unimedida> listaunimedida = new List<Unimedida>();
             try
             {
@@ -48,6 +48,7 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    Unimedida unimedida = new Unimedida();
                     unimedida.Codigo = reader.GetInt32(reader.GetOrdinal("idunimedida"));
                     unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
                     unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));

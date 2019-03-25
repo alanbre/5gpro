@@ -18,5 +18,10 @@ namespace _5gpro.Bll
             return UnimedidaDAO.BuscaUnimedidaByCod(cod);
         }
 
+        public List<Unimedida> BuscarTodasUnimedidas()
+        {
+            return UnimedidaDAO.BuscarTodasUnimedidas();
+        }
+
     }
 }
