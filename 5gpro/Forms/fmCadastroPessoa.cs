@@ -23,7 +23,7 @@ namespace _5gpro.Forms
         }
 
 
-        private void rbFisica_CheckedChanged(object sender, EventArgs e)
+        private void rbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CPF
             mtbCpfCnpj.Clear();
@@ -31,14 +31,13 @@ namespace _5gpro.Forms
             Editando(true);
         }
 
-        private void rbJuridica_CheckedChanged(object sender, EventArgs e)
+        private void rbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CNPJ
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "##.###.###/####-##";
             Editando(true);
         }
-
 
 
 
