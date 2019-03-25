@@ -203,12 +203,12 @@ namespace _5gpro.Forms
                     pessoa = pessoaBLL.BuscaPessoaById(tbCodigo.Text);
                     if (pessoa.Codigo != null)
                     {
-                        PreencheCampos(pessoa, false);
-                        editando = false;
+                        PreencheCampos(pessoa);
+                        Editando(false);
                     }
                     else
                     {
-                        editando = true;
+                        Editando(true);
                         LimpaCampos(false);
                     }
                 }
@@ -262,7 +262,7 @@ namespace _5gpro.Forms
         {
             if (char.IsLetterOrDigit((char) e.KeyCode))
             {
-                Editando();
+                Editando(true);
             }
         }
 
@@ -270,7 +270,7 @@ namespace _5gpro.Forms
         {
             if (char.IsLetterOrDigit((char)e.KeyCode))
             {
-                Editando();
+                Editando(true);
             }
         }
 
@@ -278,7 +278,7 @@ namespace _5gpro.Forms
         {
             if (char.IsLetterOrDigit((char)e.KeyCode))
             {
-                Editando();
+                Editando(true);
             }
         }
 
@@ -300,6 +300,10 @@ namespace _5gpro.Forms
 
 
 
+        private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            Editando(true);
+        }
 
 
 
@@ -313,7 +317,7 @@ namespace _5gpro.Forms
         {
             //TODO
             //BUSCAR NOVAMENTO OS DADOS DO BANCO (POIS OS DADOS PODEM TER SIDO ALTERADOS ENQUANTO O REGISTRO ESTAVA CARREGADO)
-            PreencheCampos(pessoa, true);
+            PreencheCampos(pessoa);
             editando = false;
             AlteraBotoes();
         }
@@ -371,9 +375,10 @@ namespace _5gpro.Forms
             rbPessoaJuridica.Checked = false;
         }
 
-        private void PreencheCampos(Pessoa pessoa, bool alteraCodigo)
+        private void PreencheCampos(Pessoa pessoa)
         {
-            tbCodigo.Text = alteraCodigo ? pessoa.Codigo : tbCodigo.Text;
+            LimpaCampos(false);
+            tbCodigo.Text = pessoa.Codigo;
             tbNome.Text = pessoa.Nome;
             tbFantasia.Text = pessoa.Fantasia;
             if (pessoa.TipoPessoa == "F")
@@ -400,6 +405,19 @@ namespace _5gpro.Forms
                 cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade);
                 PreencheCamposCidade(cidade);
             }
+
+            foreach (string atuacao in pessoa.Atuacao)
+            {
+                switch (atuacao)
+                {
+                    case "Cliente":
+                        cblAtuacao.SetItemChecked(0, true);
+                        break;
+                    case "Fornecedor":
+                        cblAtuacao.SetItemChecked(1, true);
+                        break;
+                }
+            }
         }
 
         private void PreencheCamposCidade(Cidade cidade)
@@ -422,10 +440,11 @@ namespace _5gpro.Forms
             }
         }
 
-        private void Editando()
+        private void Editando(bool edit)
         {
-            editando = true;
+            editando = edit;
             AlteraBotoes();
         }
+
     }
 }

@@ -115,6 +115,7 @@
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
             this.cblAtuacao.TabIndex = 7;
             this.cblAtuacao.TabStop = false;
+            this.cblAtuacao.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cblAtuacao_ItemCheck);
             // 
             // tbFantasia
             // 

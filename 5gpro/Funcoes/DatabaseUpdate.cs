@@ -73,7 +73,7 @@ namespace _5gpro.Funcoes
                 AbrirConexao();
                 Comando = new MySqlCommand("UPDATE configuracao SET valor = @valor WHERE variavel = @versaodb", Conexao);
                 Comando.Parameters.AddWithValue("@versaodb", "versaodb");
-                Comando.Parameters.AddWithValue("@val", versao);
+                Comando.Parameters.AddWithValue("@valor", versao);
                 return Comando.ExecuteNonQuery();
             }
             catch (MySqlException ex)
@@ -92,22 +92,25 @@ namespace _5gpro.Funcoes
             try
             {
                 int versaoAtual = BuscaVersaoDB();
+
+                AbrirConexao();
+                Comando = Conexao.CreateCommand();
+
+                tr = Conexao.BeginTransaction();
+
+                Comando.Connection = Conexao;
+                Comando.Transaction = tr;
+
                 if (versaoAtual < 2 )
                 {
-                    AbrirConexao();
-                    Comando = Conexao.CreateCommand();
-
-                    tr = Conexao.BeginTransaction();
-
-                    Comando.Connection = Conexao;
-                    Comando.Transaction = tr;
+                    
                     try
                     {
                         Comando.CommandText = "ALTER TABLE pessoa ADD COLUMN tipo_pessoa CHAR(1)";
                         Comando.ExecuteNonQuery();
                         Comando.CommandText = "ALTER TABLE configuracao MODIFY COLUMN idconfiguracao INT NOT NULL AUTO_INCREMENT";
                         Comando.ExecuteNonQuery();
-                        tr.Commit();
+                        
                         AtualizaVersaoBD(2);
                         return true;
                     }
@@ -132,6 +135,38 @@ namespace _5gpro.Funcoes
                         return false;
                     }
                 }
+                if (versaoAtual < 3)
+                {
+                    try
+                    {
+                        Comando.CommandText = "ALTER TABLE atuacao_has_pessoa ADD COLUMN ativo BOOLEAN";
+                        Comando.ExecuteNonQuery();
+                        AtualizaVersaoBD(3);
+                        return true;
+                    }
+                    catch (MySqlException ex)
+                    {
+                        Console.WriteLine("Error: {0}", ex.ToString());
+                        try
+                        {
+                            tr.Rollback();
+                        }
+                        catch (MySqlException ex2)
+                        {
+                            if (tr.Connection != null)
+                            {
+                                Console.WriteLine(@"Uma exceção do tipo " + ex2.GetType() +
+                                " ocorreu enquanto acontecia o rollback da transação.");
+                            }
+                        }
+                        Console.WriteLine(@"Uma exceção do tipo  " + ex.GetType() +
+                                           " ocorreu enquanto os dados eram atualizados");
+                        Console.WriteLine("Nenhum dado foi atualizado no banco");
+                        return false;
+                    }
+                }
+
+                tr.Commit();
             }
             catch (MySqlException ex)
             {
