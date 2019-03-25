@@ -12,13 +12,13 @@ namespace _5gpro.Entities
     {
         public string Codigo { get; set; }
         public string Descricao { get; set; }
-        public string DenomCompra { get; set; }
+        public string DescCompra { get; set; }
         public string TipoItem { get; set; }
         public string Referencia { get; set; }
         public decimal ValorEntrada { get; set; }
         public decimal ValorSaida { get; set; }
         public decimal Estoquenecessario { get; set; }
-        public int Unimedida { get; set; }
+        public string Unimedida { get; set; }
 
 
         public _Item()
@@ -26,11 +26,11 @@ namespace _5gpro.Entities
 
         }
 
-        public _Item(string codigo, string descricao, string denomcompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, int unimedida)
+        public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, string unimedida)
         {
             this.Codigo = codigo;
             this.Descricao = descricao;
-            this.DenomCompra = denomcompra;
+            this.DescCompra = desccompra;
             this.TipoItem = tipoitem;
             this.Referencia = referencia;
             this.ValorEntrada = valorentrada;

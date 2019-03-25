@@ -427,5 +427,10 @@ namespace _5gpro.Forms
             editando = true;
             AlteraBotoes();
         }
+
+        private void tbCodigo_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

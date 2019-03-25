@@ -8,7 +8,7 @@ namespace _5gpro.Entities
 {
     public class Unimedida
     {
-        public int Codigo { get; set; }
+        public string Codigo { get; set; }
         public string Sigla { get; set; }
         public string Descricao { get; set; }
 
@@ -17,7 +17,7 @@ namespace _5gpro.Entities
 
         }
 
-        public Unimedida(int codigo, string sigla, string descricao)
+        public Unimedida(string codigo, string sigla, string descricao)
         {
             this.Codigo = codigo;
             this.Sigla = sigla;

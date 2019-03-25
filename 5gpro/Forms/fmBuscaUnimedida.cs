@@ -84,7 +84,7 @@ namespace _5gpro.Forms
             int selectedRowIndex = dgvUnimedida.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvUnimedida.Rows[selectedRowIndex];
             Unimedida = new Unimedida();
-            Unimedida.Codigo = int.Parse(selectedRow.Cells[0].Value.ToString());
+            Unimedida.Codigo = selectedRow.Cells[0].Value.ToString();
             Unimedida.Sigla = Convert.ToString(selectedRow.Cells[1].Value);
             Unimedida.Descricao = Convert.ToString(selectedRow.Cells[2].Value);
             this.Close();
