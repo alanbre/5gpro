@@ -230,9 +230,10 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    pessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
-                    if (pessoa != null)
+                    Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+                    if (newpessoa != null)
                     {
+                        pessoa = newpessoa;
                         PreencheCampos(pessoa);
                         Editando(false);
                     }
