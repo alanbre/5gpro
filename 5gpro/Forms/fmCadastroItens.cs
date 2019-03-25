@@ -1,13 +1,6 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -27,7 +20,7 @@ namespace _5gpro.Forms
             InitializeComponent();
             AlteraBotoes();
         }
-        
+
 
 
         //FUNÇÕES DE KEY PRESS
@@ -56,7 +49,7 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-        tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
@@ -187,17 +180,148 @@ namespace _5gpro.Forms
 
         //FUNÇÕES DE KEY UP
         private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
-            {
+        {
             if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
                 AbreTelaBuscaUnimedida();
+            }
+
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbDescricao_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbDescricaoDeCompra_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbReferncia_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbPrecoUltimaEntrada_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbEstoqueNecessario_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbPrecoVenda_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
             }
         }
 
 
 
 
+        //EVENTOS DE KEY DOWN
+        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbDescricao_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbDescricaoDeCompra_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbCodUnimedida_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbReferncia_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbPrecoUltimaEntrada_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbEstoqueNecessario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbPrecoVenda_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+
+        private void fmCadastroItens_Load(object sender, EventArgs e)
+        {
+            tbCodigo.Focus();
+        }
 
 
         private void AlteraBotoes()
@@ -262,7 +386,7 @@ namespace _5gpro.Forms
             unimedida = buscaUnimedida.Unimedida;
             PreencheCamposUnimedida(unimedida);
         }
-               
+
         private void PreencheCampos(_Item _item)
         {
             LimpaCampos(false);
@@ -293,11 +417,12 @@ namespace _5gpro.Forms
             tbPrecoVenda.Text = _item.ValorSaida.ToString();
 
         }
-                              
+
         private void Editando(bool edit)
         {
             editando = edit;
             AlteraBotoes();
         }
+
     }
 }

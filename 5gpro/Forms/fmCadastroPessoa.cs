@@ -28,7 +28,7 @@ namespace _5gpro.Forms
             //ALTERA A MASCARA DO CAMPO PARA CPF
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "###.###.###-##";
-            Editando(true);
+            if (!ignoraCheckEvent) { Editando(true); }
         }
 
         private void rbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace _5gpro.Forms
             //ALTERA A MASCARA DO CAMPO PARA CNPJ
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "##.###.###/####-##";
-            Editando(true);
+            if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
