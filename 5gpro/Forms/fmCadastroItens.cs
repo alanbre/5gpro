@@ -15,11 +15,10 @@ namespace _5gpro.Forms
     public partial class fmCadastroItens : Form
     {
 
-        _Item item = new _Item();
+        _Item _item = new _Item();
         Unimedida unimedida = new Unimedida();
         _ItemBLL _itemBLL = new _ItemBLL();
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
-
 
         bool editando = false;
 
@@ -35,7 +34,7 @@ namespace _5gpro.Forms
             {
                 e.Handled = true;
             }
-            editando = true;
+           // editando = true;
             AlteraBotoes();
         }
 
@@ -87,38 +86,52 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            item.Codigo = tbCodigo.Text;
-            item.Descricao = tbDescricao.Text;
-            item.DenomCompra = tbDescricaoDeCompra.Text;
-            item.Referencia = tbReferncia.Text;
-            item.TipoItem = rbProduto.Checked ? "P" : "S";
-            item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
-            item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
-            item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
-            item.Unimedida = int.Parse(tbCodUnimedida.Text);
+            _item.Codigo = tbCodigo.Text;
+            _item.Descricao = tbDescricao.Text;
+            _item.DescCompra = tbDescricaoDeCompra.Text;
+            _item.Referencia = tbReferncia.Text;
+            _item.TipoItem = rbProduto.Checked ? "P" : "S";
+            _item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
+            _item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
+            _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+            _item.Unimedida = tbCodUnimedida.Text;
 
             _ItemBLL itemBLL = new _ItemBLL();
-            itemBLL.SalvarOuAtualizarItem(item);
+            itemBLL.SalvarOuAtualizarItem(_item);
 
             MessageBox.Show("Item adicionado com sucesso!");
         }
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            if (item.Codigo == null)
+            if (!editando)
             {
-                editando = tbCodigo.Text.Length > 0 ? true : false;
-                LimpaCampos(false);
+
+                
+                if (tbCodigo.Text.Length > 0)
+                {
+                    _item = _itemBLL.BuscaItemById(tbCodigo.Text);
+                    if (_item.Codigo != null)
+                    {
+                        PreencheCampos(_item, false);
+                        editando = false;
+                    }
+                    else
+                    {
+                        editando = true;
+                        LimpaCampos(false);
+                    }
+                }
                 AlteraBotoes();
             }
             else
             {
+      
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    editando = true;
                     NovoRegistro();
                 }
             }
@@ -204,6 +217,36 @@ namespace _5gpro.Forms
             buscaUnimedida.ShowDialog();
             unimedida = buscaUnimedida.Unimedida;
             PreencheCamposUnimedida(unimedida);
+        }
+
+        private void PreencheCampos(_Item _item, bool alteraCodigo)
+        {
+            tbCodigo.Text = alteraCodigo ? _item.Codigo : tbCodigo.Text;
+            tbDescricao.Text = _item.Descricao;
+            tbDescricaoDeCompra.Text = _item.DescCompra;
+
+            if (_item.Unimedida != null)
+            {
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(_item.Unimedida);
+                PreencheCamposUnimedida(unimedida);
+            }
+
+            if (_item.TipoItem == "P")
+            {
+                rbProduto.Checked = true;
+                rbServico.Checked = false;
+            }
+            else
+            {
+                rbProduto.Checked = false;
+                rbServico.Checked = true;
+            }
+
+            tbReferncia.Text = _item.Referencia;
+            tbPrecoUltimaEntrada.Text = _item.ValorEntrada.ToString();
+            tbEstoqueNecessario.Text = _item.Estoquenecessario.ToString();
+            tbPrecoVenda.Text = _item.ValorSaida.ToString();
+
         }
     }
 }

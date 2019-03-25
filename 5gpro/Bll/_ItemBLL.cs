@@ -27,5 +27,11 @@ namespace _5gpro.Bll
         }
 
 
+        public _Item BuscaItemById(string cod)
+        {
+            return _itemdao.BuscarItemById(cod);
+        }
+
+
     }
 }

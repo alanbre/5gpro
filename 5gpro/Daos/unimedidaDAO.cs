@@ -49,7 +49,7 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     Unimedida unimedida = new Unimedida();
-                    unimedida.Codigo = reader.GetInt32(reader.GetOrdinal("idunimedida"));
+                    unimedida.Codigo = reader.GetString(reader.GetOrdinal("idunimedida"));
                     unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
                     unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));
                     listaunimedida.Add(unimedida);
@@ -80,9 +80,9 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    unimedida.Codigo = int.Parse(reader.GetString(reader.GetOrdinal("idcidade")));
-                    unimedida.Sigla = reader.GetString(reader.GetOrdinal("nome"));
-                    unimedida.Descricao = reader.GetString(reader.GetOrdinal("idestado"));
+                    unimedida.Codigo = reader.GetString(reader.GetOrdinal("idunimedida"));
+                    unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
+                    unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));
                 }
             }
             catch (MySqlException ex)

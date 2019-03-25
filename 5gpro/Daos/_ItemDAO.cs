@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace _5gpro.Daos
 
                 Comando.Parameters.AddWithValue("@iditem", _item.Codigo);
                 Comando.Parameters.AddWithValue("@descitem", _item.Descricao);
-                Comando.Parameters.AddWithValue("@denominacaocompra", _item.DenomCompra);
+                Comando.Parameters.AddWithValue("@denominacaocompra", _item.DescCompra);
                 Comando.Parameters.AddWithValue("@tipo", _item.TipoItem);
                 Comando.Parameters.AddWithValue("@referencia", _item.Referencia);
                 Comando.Parameters.AddWithValue("@valorentrada", _item.ValorEntrada);
@@ -54,6 +55,44 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+        public _Item BuscarItemById(string cod)
+        {
+            _Item _item = new _Item();
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM item WHERE iditem = @iditem", Conexao);
+                Comando.Parameters.AddWithValue("@iditem", cod);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
+                    _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
+                    _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
+                    _item.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
+                    _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
+                    _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
+                    _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
+                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+
+
+
+
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return _item;
+        }
     }
 
 }
