@@ -52,6 +52,7 @@
             this.tbLogin.Size = new System.Drawing.Size(156, 20);
             this.tbLogin.TabIndex = 1;
             this.tbLogin.Enter += new System.EventHandler(this.tbLogin_Enter);
+            this.tbLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
             // 
             // lbSenha
             // 
@@ -70,6 +71,7 @@
             this.tbSenha.Size = new System.Drawing.Size(156, 20);
             this.tbSenha.TabIndex = 3;
             this.tbSenha.Enter += new System.EventHandler(this.tbSenha_Enter);
+            this.tbSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSenha_KeyDown);
             // 
             // btEntrar
             // 

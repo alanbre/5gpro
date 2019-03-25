@@ -133,7 +133,91 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            pessoa.Atuacao = pessoa != null? buscaAtuacoes(pessoa): pessoa.Atuacao;
+            if (pessoa != null) { pessoa.Atuacao = buscaAtuacoes(pessoa); }
+            return pessoa;
+        }
+
+        public Pessoa BuscarProximaPessoa(string codAtual)
+        {
+            Pessoa pessoa = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)", Conexao);
+                Comando.Parameters.AddWithValue("@idpessoa", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    pessoa = new Pessoa();
+                    pessoa.Codigo = reader.GetString(reader.GetOrdinal("idpessoa"));
+                    pessoa.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    pessoa.Fantasia = reader.GetString(reader.GetOrdinal("fantasia"));
+                    pessoa.TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa"));
+                    pessoa.Rua = reader.GetString(reader.GetOrdinal("rua"));
+                    pessoa.Numero = reader.GetString(reader.GetOrdinal("numero"));
+                    pessoa.Bairro = reader.GetString(reader.GetOrdinal("bairro"));
+                    pessoa.Complemento = reader.GetString(reader.GetOrdinal("complemento"));
+                    pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                    pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+                    pessoa.Email = reader.GetString(reader.GetOrdinal("email"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            if (pessoa != null) { pessoa.Atuacao = buscaAtuacoes(pessoa); }
+            return pessoa;
+        }
+
+        public Pessoa BuscarPessoaAnterior(string codAtual)
+        {
+            Pessoa pessoa = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)", Conexao);
+                Comando.Parameters.AddWithValue("@idpessoa", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    pessoa = new Pessoa();
+                    pessoa.Codigo = reader.GetString(reader.GetOrdinal("idpessoa"));
+                    pessoa.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    pessoa.Fantasia = reader.GetString(reader.GetOrdinal("fantasia"));
+                    pessoa.TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa"));
+                    pessoa.Rua = reader.GetString(reader.GetOrdinal("rua"));
+                    pessoa.Numero = reader.GetString(reader.GetOrdinal("numero"));
+                    pessoa.Bairro = reader.GetString(reader.GetOrdinal("bairro"));
+                    pessoa.Complemento = reader.GetString(reader.GetOrdinal("complemento"));
+                    pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                    pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+                    pessoa.Email = reader.GetString(reader.GetOrdinal("email"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            if (pessoa != null) { pessoa.Atuacao = buscaAtuacoes(pessoa); }
             return pessoa;
         }
 

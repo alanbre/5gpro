@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaCidade : Form, IMessageFilter
+    public partial class fmBuscaCidade : Form
     {
         public List<Cidade> Cidades;
         public List<Estado> Estados;
@@ -19,25 +19,7 @@ namespace _5gpro.Forms
         public fmBuscaCidade()
         {
             InitializeComponent();
-            Application.AddMessageFilter(this); // código para trocar o enter por tab
             tbFiltroCodEstado.Focus();
-        }
-
-        //Continuação do código para trocar o enter por tab
-        public bool PreFilterMessage(ref Message m)
-        {
-            if (m.Msg == 0x100)//WM_KEYDOWN
-            {
-                if (m.WParam.ToInt32() == 0xd)//VK_RETURN = 0xd
-                {
-                    if (this.ActiveControl is TextBox || this.ActiveControl is RadioButton || this.ActiveControl is MaskedTextBox)
-                    {
-                        SendKeys.Send("{TAB}");
-                        return true; //Discard the Enter key
-                    }
-                }
-            }
-            return false;
         }
 
         private void btPesquisar_Click(object sender, EventArgs e)

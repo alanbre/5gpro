@@ -6,56 +6,35 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmCadastroPessoa : Form, IMessageFilter
+    public partial class fmCadastroPessoa : Form
     {
-        Pessoa pessoa = new Pessoa();
+        Pessoa pessoa;
         Cidade cidade = new Cidade();
         PessoaBLL pessoaBLL = new PessoaBLL();
         CidadeBLL cidadeBLL = new CidadeBLL();
 
         bool editando = false;
+        bool ignoraCheckEvent;
 
         public fmCadastroPessoa()
         {
             InitializeComponent();
-            Application.AddMessageFilter(this); // código para trocar o enter por tab
             AlteraBotoes();
         }
-
-        //Continuação do código para trocar o enter por tab
-        public bool PreFilterMessage(ref Message m)
-        {
-            if (m.Msg == 0x100)//WM_KEYDOWN
-            {
-                if (m.WParam.ToInt32() == 0xd)//VK_RETURN = 0xd
-                {
-                    if (this.ActiveControl is TextBox || this.ActiveControl is RadioButton || this.ActiveControl is MaskedTextBox)
-                    {
-                        SendKeys.Send("{TAB}");
-                        return true; //Discard the Enter key
-                    }
-                }
-            }
-            return false;
-        }
-
-
 
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "###.###.###-##";
-            editando = true;
-            AlteraBotoes();
+            Editando(true);
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             mtbCpfCnpj.Clear();
             mtbCpfCnpj.Mask = "##.###.###/####-##";
-            editando = true;
-            AlteraBotoes();
+            Editando(true);
         }
 
 
@@ -149,12 +128,62 @@ namespace _5gpro.Forms
 
         private void btRight_Click(object sender, EventArgs e)
         {
-
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                pessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                if (pessoa != null) { PreencheCampos(pessoa); }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    pessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                    if (pessoa != null)
+                    {
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        pessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                }
+            }
         }
 
         private void btLeft_Click(object sender, EventArgs e)
         {
-
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                pessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                if (pessoa != null) { PreencheCampos(pessoa); }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    pessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                    if (pessoa != null)
+                    {
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        pessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                }
+            }
         }
 
         private void btDeletar_Click(object sender, EventArgs e)
@@ -196,12 +225,13 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    pessoa = pessoaBLL.BuscaPessoaById(tbCodigo.Text);
-                    if (pessoa.Codigo != null)
+                    pessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+                    if (pessoa != null)
                     {
                         PreencheCampos(pessoa);
                         Editando(false);
@@ -212,6 +242,11 @@ namespace _5gpro.Forms
                         LimpaCampos(false);
                     }
                 }
+                else if (tbCodigo.Text.Length == 0)
+                {
+                    LimpaCampos(true);
+                    Editando(false);
+                }
             }
             else
             {
@@ -220,7 +255,25 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    NovoRegistro();
+                    if (tbCodigo.Text.Length > 0)
+                    {
+                        pessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+                        if (pessoa != null)
+                        {
+                            PreencheCampos(pessoa);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodigo.Text.Length == 0)
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
                 }
             }
         }
@@ -265,7 +318,7 @@ namespace _5gpro.Forms
 
         private void tbNumero_KeyUp(object sender, KeyEventArgs e)
         {
-            if (char.IsLetterOrDigit((char) e.KeyCode))
+            if (char.IsLetterOrDigit((char)e.KeyCode))
             {
                 Editando(true);
             }
@@ -328,26 +381,139 @@ namespace _5gpro.Forms
 
 
 
-        private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
+
+        //EVENTOS DE KEY DOWN
+        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
         {
-            Editando(true);
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbNome_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbFantasia_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void rbPessoaFisica_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void rbPessoaJuridica_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbRua_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbNumero_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbBairro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbComplemento_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbCodCidade_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void mtbCpfCnpj_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void mtbTelefone_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbEmail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
 
 
 
-
-
-
+        private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
 
 
         //PADRÕES CRIADAS
         private void RecarregarDados(Pessoa pessoa)
         {
-            //TODO
-            //BUSCAR NOVAMENTO OS DADOS DO BANCO (POIS OS DADOS PODEM TER SIDO ALTERADOS ENQUANTO O REGISTRO ESTAVA CARREGADO)
+            pessoa = tbCodigo.Text.Length > 0 ? pessoaBLL.BuscarPessoaById(tbCodigo.Text) : pessoa = null;
             PreencheCampos(pessoa);
-            editando = false;
-            AlteraBotoes();
+            Editando(false);
         }
 
         private void NovoRegistro()
@@ -405,6 +571,7 @@ namespace _5gpro.Forms
 
         private void PreencheCampos(Pessoa pessoa)
         {
+            ignoraCheckEvent = true;
             LimpaCampos(false);
             tbCodigo.Text = pessoa.Codigo;
             tbNome.Text = pessoa.Nome;
@@ -446,6 +613,7 @@ namespace _5gpro.Forms
                         break;
                 }
             }
+            ignoraCheckEvent = false;
         }
 
         private void PreencheCamposCidade(Cidade cidade)
@@ -473,6 +641,7 @@ namespace _5gpro.Forms
             editando = edit;
             AlteraBotoes();
         }
+
 
     }
 }
