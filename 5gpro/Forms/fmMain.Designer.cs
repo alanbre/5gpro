@@ -32,7 +32,6 @@
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrosDePessoasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDePaisesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeFuncionariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +51,6 @@
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cadastrosDePessoasToolStripMenuItem,
             this.cadastroDePaisesToolStripMenuItem,
-            this.cadastroDeFuncionariosToolStripMenuItem,
             this.cadastroDeItensToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
             this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
@@ -61,28 +59,21 @@
             // cadastrosDePessoasToolStripMenuItem
             // 
             this.cadastrosDePessoasToolStripMenuItem.Name = "cadastrosDePessoasToolStripMenuItem";
-            this.cadastrosDePessoasToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cadastrosDePessoasToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.cadastrosDePessoasToolStripMenuItem.Text = "Cadastros de pessoas";
             this.cadastrosDePessoasToolStripMenuItem.Click += new System.EventHandler(this.cadastrosDePessoasToolStripMenuItem_Click);
             // 
             // cadastroDePaisesToolStripMenuItem
             // 
             this.cadastroDePaisesToolStripMenuItem.Name = "cadastroDePaisesToolStripMenuItem";
-            this.cadastroDePaisesToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cadastroDePaisesToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.cadastroDePaisesToolStripMenuItem.Text = "Cadastro de Paises";
             this.cadastroDePaisesToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePaisesToolStripMenuItem_Click);
-            // 
-            // cadastroDeFuncionariosToolStripMenuItem
-            // 
-            this.cadastroDeFuncionariosToolStripMenuItem.Name = "cadastroDeFuncionariosToolStripMenuItem";
-            this.cadastroDeFuncionariosToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
-            this.cadastroDeFuncionariosToolStripMenuItem.Text = "Cadastro de Funcionários";
-            this.cadastroDeFuncionariosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeFuncionariosToolStripMenuItem_Click);
             // 
             // cadastroDeItensToolStripMenuItem
             // 
             this.cadastroDeItensToolStripMenuItem.Name = "cadastroDeItensToolStripMenuItem";
-            this.cadastroDeItensToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
+            this.cadastroDeItensToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.cadastroDeItensToolStripMenuItem.Text = "Cadastro de Itens";
             this.cadastroDeItensToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeItensToolStripMenuItem_Click);
             // 
@@ -108,7 +99,6 @@
         private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastrosDePessoasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDePaisesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeFuncionariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeItensToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeFuncionáriosToolStripMenuItem;
     }

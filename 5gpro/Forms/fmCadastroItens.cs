@@ -21,40 +21,16 @@ namespace _5gpro.Forms
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
 
         bool editando = false;
-        //bool ignoraCheckEvent;
 
         public fmCadastroItens()
         {
             InitializeComponent();
             AlteraBotoes();
         }
+        
 
-        private void btNovo_Click(object sender, EventArgs e)
-        {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    editando = true;
-                    NovoRegistro();
-                    tbCodigo.Focus();
-                }
-                else
-                {
 
-                }
-            }
-            else
-            {
-                tbCodigo.Focus();
-                editando = true;
-            }
-            AlteraBotoes();
-        }
-
+        //FUNÇÕES DE KEY PRESS
         private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -65,68 +41,19 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
-        private void AlteraBotoes()
+
+        //FUNÇÕES DE LEAVE
+        private void tbCodUnimedida_Leave(object sender, EventArgs e)
         {
-            if (editando)
+            if (tbCodUnimedida.Text.Length > 0)
             {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
+                PreencheCamposUnimedida(unimedida);
             }
             else
             {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
+                tbDescricaoUndMedida.Text = "";
             }
-        }
-
-        private void NovoRegistro()
-        {
-            LimpaCampos(true);
-        }
-
-        private void LimpaCampos(bool cod)
-        {
-            if (cod) { tbCodigo.Clear(); }
-            tbDescricao.Clear();
-            tbDescricaoDeCompra.Clear();
-            tbCodUnimedida.Clear();
-            tbDescricaoUndMedida.Clear();
-            tbReferncia.Clear();
-            tbPrecoUltimaEntrada.Clear();
-            tbEstoqueNecessario.Clear();
-            tbPrecoVenda.Clear();
-            rbProduto.Checked = true;
-            rbServico.Checked = false;
-        }
-
-        private void btSalvar_Click(object sender, EventArgs e)
-        {
-            _item.Codigo = tbCodigo.Text;
-            _item.Descricao = tbDescricao.Text;
-            _item.DescCompra = tbDescricaoDeCompra.Text;
-            _item.Referencia = tbReferncia.Text;
-            _item.TipoItem = rbProduto.Checked ? "P" : "S";
-            _item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
-            _item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
-            _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
-            _item.Unimedida = tbCodUnimedida.Text;
-
-            _ItemBLL itemBLL = new _ItemBLL();
-            itemBLL.SalvarOuAtualizarItem(_item);
-
-            MessageBox.Show("Item adicionado com sucesso!");
         }
 
         private void tbCodigo_Leave(object sender, EventArgs e)
@@ -189,9 +116,117 @@ namespace _5gpro.Forms
         }
 
 
-        private void fmCadastroItens_Load(object sender, EventArgs e)
-        {
 
+        //FUNÇÕES DE CLICK
+        private void btBuscaUndMedida_Click(object sender, EventArgs e)
+        {
+            AbreTelaBuscaUnimedida();
+        }
+
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            _item.Codigo = tbCodigo.Text;
+            _item.Descricao = tbDescricao.Text;
+            _item.DescCompra = tbDescricaoDeCompra.Text;
+            _item.Referencia = tbReferncia.Text;
+            _item.TipoItem = rbProduto.Checked ? "P" : "S";
+            _item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
+            _item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
+            _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+            _item.Unimedida = tbCodUnimedida.Text;
+
+            _ItemBLL itemBLL = new _ItemBLL();
+            itemBLL.SalvarOuAtualizarItem(_item);
+
+            MessageBox.Show("Item adicionado com sucesso!");
+        }
+
+        private void btNovo_Click(object sender, EventArgs e)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    editando = true;
+                    NovoRegistro();
+                    tbCodigo.Focus();
+                }
+                else
+                {
+
+                }
+            }
+            else
+            {
+                tbCodigo.Focus();
+                editando = true;
+            }
+            AlteraBotoes();
+        }
+
+
+        //FUNÇÕES DE KEY UP
+        private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            {
+                e.Handled = true;
+                AbreTelaBuscaUnimedida();
+            }
+        }
+
+
+
+
+
+
+        private void AlteraBotoes()
+        {
+            if (editando)
+            {
+                btNovo.Image = Properties.Resources.iosPlus_48px_black;
+                btNovo.Enabled = false;
+                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
+                btSalvar.Enabled = true;
+                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
+                btBuscar.Enabled = false;
+                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
+                btDeletar.Enabled = false;
+            }
+            else
+            {
+                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
+                btNovo.Enabled = true;
+                btSalvar.Image = Properties.Resources.iosOk_48px_black;
+                btSalvar.Enabled = false;
+                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
+                btBuscar.Enabled = true;
+                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
+                btDeletar.Enabled = false;
+            }
+        }
+
+        private void NovoRegistro()
+        {
+            LimpaCampos(true);
+        }
+
+        private void LimpaCampos(bool cod)
+        {
+            if (cod) { tbCodigo.Clear(); }
+            tbDescricao.Clear();
+            tbDescricaoDeCompra.Clear();
+            tbCodUnimedida.Clear();
+            tbDescricaoUndMedida.Clear();
+            tbReferncia.Clear();
+            tbPrecoUltimaEntrada.Clear();
+            tbEstoqueNecessario.Clear();
+            tbPrecoVenda.Clear();
+            rbProduto.Checked = true;
+            rbServico.Checked = false;
         }
 
         private void PreencheCamposUnimedida(Unimedida unimedida)
@@ -208,34 +243,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodUnimedida_Leave(object sender, EventArgs e)
-        {
-            if (tbCodUnimedida.Text.Length > 0)
-            {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
-                PreencheCamposUnimedida(unimedida);
-            }
-            else
-            {
-                tbDescricaoUndMedida.Text = "";
-            }
-        }
-
-        private void btBuscaUndMedida_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaUnimedida();
-        }
-
-
-        private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaUnimedida();
-            }
-        }
-
         private void AbreTelaBuscaUnimedida()
         {
             var buscaUnimedida = new fmBuscaUnimedida();
@@ -243,10 +250,9 @@ namespace _5gpro.Forms
             unimedida = buscaUnimedida.Unimedida;
             PreencheCamposUnimedida(unimedida);
         }
-
+               
         private void PreencheCampos(_Item _item)
         {
-            //ignoraCheckEvent = true;
             LimpaCampos(false);
             tbCodigo.Text = _item.Codigo;
             tbDescricao.Text = _item.Descricao;
@@ -274,28 +280,12 @@ namespace _5gpro.Forms
             tbEstoqueNecessario.Text = _item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = _item.ValorSaida.ToString();
 
-            //ignoraCheckEvent = false;
         }
-
+                              
         private void Editando(bool edit)
         {
             editando = edit;
             AlteraBotoes();
-        }
-
-        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
-        {
-
-        }
-
-        private void tbCodigo_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

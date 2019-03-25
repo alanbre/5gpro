@@ -77,7 +77,8 @@
             // 
             // pnDadosGerais
             // 
-            this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnDadosGerais.Controls.Add(this.gbAtuacao);
@@ -195,8 +196,7 @@
             this.rbPessoaJuridica.Size = new System.Drawing.Size(101, 17);
             this.rbPessoaJuridica.TabIndex = 1;
             this.rbPessoaJuridica.Text = "Pessoa Jurídica";
-            this.rbPessoaJuridica.UseVisualStyleBackColor = true;
-            this.rbPessoaJuridica.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.rbPessoaJuridica.UseVisualStyleBackColor = true;
             this.rbPessoaJuridica.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbPessoaJuridica_KeyDown);
             // 
             // rbPessoaFisica
@@ -210,13 +210,14 @@
             this.rbPessoaFisica.TabStop = true;
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
-            this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             this.rbPessoaFisica.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbPessoaFisica_KeyDown);
             // 
             // pnDados
             // 
-            this.pnDados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.pnDados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+
+            | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnDados.Controls.Add(this.btBuscaCidade);
@@ -432,7 +433,8 @@
             // 
             // btRecarregar
             // 
-            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
@@ -446,7 +448,8 @@
             // 
             // btSalvar
             // 
-            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
             this.btSalvar.Location = new System.Drawing.Point(3, 106);
@@ -459,7 +462,8 @@
             // 
             // btDeletar
             // 
-            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
             this.btDeletar.Location = new System.Drawing.Point(3, 310);
@@ -472,7 +476,8 @@
             // 
             // btAnterior
             // 
-            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
             this.btAnterior.Location = new System.Drawing.Point(3, 259);
@@ -485,7 +490,8 @@
             // 
             // btProximo
             // 
-            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
             this.btProximo.Location = new System.Drawing.Point(3, 208);
@@ -498,7 +504,8 @@
             // 
             // btBuscar
             // 
-            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
             this.btBuscar.Location = new System.Drawing.Point(3, 55);
@@ -511,7 +518,8 @@
             // 
             // btNovo
             // 
-            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_black;
             this.btNovo.Location = new System.Drawing.Point(3, 3);
@@ -524,7 +532,8 @@
             // 
             // tbAjuda
             // 
-            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
             this.tbAjuda.Location = new System.Drawing.Point(72, 530);
