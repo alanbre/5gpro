@@ -124,7 +124,7 @@ namespace _5gpro.Forms
 
         private void btRecarregar_Click(object sender, EventArgs e)
         {
-            RecarregarDados(pessoa);
+            if (pessoa != null) { RecarregarDados(pessoa); }
         }
 
         private void btRight_Click(object sender, EventArgs e)
@@ -259,9 +259,10 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        pessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
-                        if (pessoa != null)
+                        Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+                        if (newpessoa != null)
                         {
+                            pessoa = newpessoa;
                             PreencheCampos(pessoa);
                             Editando(false);
                         }
@@ -513,7 +514,8 @@ namespace _5gpro.Forms
         //PADRÕES CRIADAS
         private void RecarregarDados(Pessoa pessoa)
         {
-            pessoa = tbCodigo.Text.Length > 0 ? pessoaBLL.BuscarPessoaById(tbCodigo.Text) : pessoa = null;
+
+            pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
             PreencheCampos(pessoa);
             Editando(false);
         }
