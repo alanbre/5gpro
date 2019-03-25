@@ -283,6 +283,7 @@
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
             this.tbEmail.TabIndex = 15;
+            this.tbEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbEmail_KeyUp);
             // 
             // lbEmail
             // 
@@ -300,6 +301,7 @@
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 13;
+            this.mtbTelefone.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mtbTelefone_KeyUp);
             // 
             // lbTelefone
             // 
@@ -318,6 +320,7 @@
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
             this.mtbCpfCnpj.TabIndex = 11;
+            this.mtbCpfCnpj.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mtbCpfCnpj_KeyUp);
             // 
             // lbCpf
             // 

@@ -212,7 +212,6 @@ namespace _5gpro.Forms
                         LimpaCampos(false);
                     }
                 }
-                AlteraBotoes();
             }
             else
             {
@@ -242,20 +241,26 @@ namespace _5gpro.Forms
 
         private void tbNome_KeyUp(object sender, KeyEventArgs e)
         {
-            editando = true;
-            AlteraBotoes();
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
         }
 
         private void tbFantasia_KeyUp(object sender, KeyEventArgs e)
         {
-            editando = true;
-            AlteraBotoes();
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
         }
 
         private void tbRua_KeyUp(object sender, KeyEventArgs e)
         {
-            editando = true;
-            AlteraBotoes();
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
         }
 
         private void tbNumero_KeyUp(object sender, KeyEventArgs e)
@@ -290,12 +295,35 @@ namespace _5gpro.Forms
                 AbreTelaBuscaCidade();
             }
 
-            if (e.KeyCode < Keys.F1 || e.KeyCode > Keys.F12)
+            if (char.IsLetterOrDigit((char)e.KeyCode))
             {
-                editando = true;
-                AlteraBotoes();
+                Editando(true);
             }
 
+        }
+
+        private void mtbCpfCnpj_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void mtbTelefone_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbEmail_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsLetterOrDigit((char)e.KeyCode))
+            {
+                Editando(true);
+            }
         }
 
 
