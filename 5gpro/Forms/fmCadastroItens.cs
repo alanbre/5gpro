@@ -424,5 +424,87 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
+        private void btProximo_Click(object sender, EventArgs e)
+        {
+            //Busca o item com ID maior que o atual preenchido. Só preenche se houver algum registro maior
+            //Caso não houver registro com ID maior, verifica se item existe. Se não existir busca o maior anterior ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+ 
+                _Item newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                if (newitem != null)
+                {
+                    _item = newitem;
+                    PreencheCampos(_item);
+                }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    _Item newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                    if (newitem != null)
+                    {
+                        _item = newitem;
+                        PreencheCampos(_item);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                        if (newitem != null)
+                        {
+                            _item = newitem;
+                            PreencheCampos(_item);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void btAnterior_Click(object sender, EventArgs e)
+        {
+            //Busca o item com ID menor que o atual preenchido. Só preenche se houver algum registro menor
+            //Caso não houver registro com ID menor, verifica se item existe. Se não existir busca o proximo ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                _Item newitem = _itemBLL.BuscarItemAnterior(tbCodigo.Text);
+                if (newitem != null)
+                {
+                    _item = newitem;
+                    PreencheCampos(_item);
+                }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    _Item newitem = _itemBLL.BuscarItemAnterior(tbCodigo.Text);
+                    if (newitem != null)
+                    {
+                        _item = newitem;
+                        PreencheCampos(_item);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                        if (newitem != null)
+                        {
+                            _item = newitem;
+                            PreencheCampos(_item);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

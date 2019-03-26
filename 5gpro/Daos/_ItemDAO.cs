@@ -91,6 +91,82 @@ namespace _5gpro.Daos
             }
             return _item;
         }
+
+        public _Item BuscarProximoItem(string codAtual)
+        {
+            _Item _item = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM item WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)", Conexao);
+                Comando.Parameters.AddWithValue("@iditem", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    _item = new _Item();
+                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
+                    _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
+                    _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
+                    _item.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
+                    _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
+                    _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
+                    _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
+                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return _item;
+        }
+
+        public _Item BuscarItemAnterior(string codAtual)
+        {
+            _Item _item = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM item WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)", Conexao);
+                Comando.Parameters.AddWithValue("@iditem", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    _item = new _Item();
+                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
+                    _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
+                    _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
+                    _item.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
+                    _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
+                    _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
+                    _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
+                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return _item;
+        }
     }
 
 }
