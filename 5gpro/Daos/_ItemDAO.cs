@@ -188,13 +188,6 @@ namespace _5gpro.Daos
                                              " + conTipoItem + @"
                                              ORDER BY i.iditem;", Conexao);
 
-                //Comando = new MySqlCommand(@"SELECT i.iditem, i.descitem AS nomeitem, u.idunimedida, u.sigla AS nomeunimedida
-                //                             FROM item i INNER JOIN unimedida u 
-                //                             ON i.unimedida_idunimedida = u.idunimedida
-                //                             WHERE 1=1
-                //                             " + conDescItem + @"
-                //                             " + conDenomItem + @"
-                //                             ORDER BY i.iditem;", Conexao);
 
                 if (denomItem.Length > 0) { Comando.Parameters.AddWithValue("@denominacaocompra", "%" + denomItem + "%"); }
                 if (descItem.Length > 0) { Comando.Parameters.AddWithValue("@descitem", "%" + descItem + "%"); }
@@ -214,7 +207,8 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+                    //_item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+                    _item.Unimedida = reader.GetString(reader.GetOrdinal("sigla"));
                     _itens.Add(_item);
                 }
             }
