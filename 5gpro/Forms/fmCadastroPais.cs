@@ -29,11 +29,11 @@ namespace _5gpro.Forms
             pais.sigla = tbSigla.Text;
 
             Validacao vl = new Validacao();
-            int ok = vl.ValidarEntidade(pais);
+            bool ok = vl.ValidarEntidade(pais);
 
             //QUANDO A VARIÁVEL OK FOR RETORNADO COM O VALOR 0
             //SALVA O REGISTRO
-            if (ok == 0)
+            if (ok)
             {
                 pbl.salvar(pais);
                 MessageBox.Show("País adicionado com sucesso!");

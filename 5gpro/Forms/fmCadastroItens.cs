@@ -1,5 +1,6 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;
 
@@ -121,33 +122,66 @@ namespace _5gpro.Forms
             _item.DescCompra = tbDescricaoDeCompra.Text;
             _item.Referencia = tbReferncia.Text;
             _item.TipoItem = rbProduto.Checked ? "P" : "S";
-            _item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
-            _item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
-            _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+
+            if (tbPrecoUltimaEntrada.TextLength > 0)
+            {
+                _item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
+            }
+            else
+            {
+                _item.ValorEntrada = 0;
+            }
+
+            if (tbPrecoVenda.TextLength > 0)
+            {
+                _item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
+            }
+            else
+            {
+                _item.ValorSaida = 0;
+            }
+
+            if (tbEstoqueNecessario.TextLength > 0)
+            {
+                _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+            }
+            else
+            {
+                _item.Estoquenecessario = 0;
+            }
+
+
             _item.Unimedida = tbCodUnimedida.Text;
 
-            int resultado = _itemBLL.SalvarOuAtualizarItem(_item);
+            Validacao vld = new Validacao();
+            bool ok = vld.ValidarEntidade(_item);
+
+            if (ok)
+            {
+
+                int resultado = _itemBLL.SalvarOuAtualizarItem(_item);
 
 
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            }
-            else if (resultado == 1)
-            {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                Editando(false);
-            }
-            else if (resultado == 2)
-            {
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                Editando(false);
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                }
             }
         }
 
@@ -430,7 +464,7 @@ namespace _5gpro.Forms
             //Caso não houver registro com ID maior, verifica se item existe. Se não existir busca o maior anterior ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
             {
- 
+
                 _Item newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
                 if (newitem != null)
                 {
