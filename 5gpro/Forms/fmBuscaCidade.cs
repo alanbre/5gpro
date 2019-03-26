@@ -64,9 +64,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvCidades.Rows[selectedRowIndex];
-            cidadeSelecionada = new Cidade();
-            cidadeSelecionada.CodCidade = Convert.ToString(selectedRow.Cells[0].Value);
-            cidadeSelecionada.Nome = Convert.ToString(selectedRow.Cells[1].Value);
+            cidadeSelecionada = Cidades.Find(c => c.CodCidade == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
 
@@ -110,3 +108,4 @@ namespace _5gpro.Forms
         }
     }
 }
+

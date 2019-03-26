@@ -132,28 +132,31 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`unimedida`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`unimedida` (
-  `idunimedida` INT(11) NOT NULL,
-  `sigla` VARCHAR(45) NULL DEFAULT NULL,
-  `descricao` VARCHAR(45) NULL DEFAULT NULL,
+  `idunimedida` INT NOT NULL,
+  `sigla` VARCHAR(45) NULL,
+  `descricao` VARCHAR(45) NULL,
   PRIMARY KEY (`idunimedida`))
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
-  `iditem` INT(11) NOT NULL,
-  `descitem` VARCHAR(45) NULL DEFAULT NULL,
-  `denominacaocompra` VARCHAR(45) NULL DEFAULT NULL,
-  `tipo` VARCHAR(45) NULL DEFAULT NULL,
-  `referencia` VARCHAR(45) NULL DEFAULT NULL,
-  `valorentrada` DECIMAL(15,2) NULL DEFAULT NULL,
-  `valorsaida` DECIMAL(15,2) NULL DEFAULT NULL,
-  `estoquenecessario` DECIMAL(10,0) NULL DEFAULT NULL,
-  `unimedida_idunimedida` INT(11) NOT NULL,
+  `iditem` INT NOT NULL,
+  `descitem` VARCHAR(45) NOT NULL,
+  `denominacaocompra` VARCHAR(45) NULL,
+  `tipo` VARCHAR(45) NOT NULL,
+  `referencia` VARCHAR(45) NULL,
+  `valorentrada` DECIMAL(15,2) NULL,
+  `valorsaida` DECIMAL(15,2) NULL,
+  `estoquenecessario` DECIMAL(10,2) NULL,
+  `idunimedida` INT NOT NULL,
   PRIMARY KEY (`iditem`),
-  INDEX `fk_item_unimedida1_idx` (`unimedida_idunimedida` ASC) VISIBLE,
+  INDEX `fk_item_unimedida1_idx` (`idunimedida` ASC) VISIBLE,
   CONSTRAINT `fk_item_unimedida1`
-    FOREIGN KEY (`unimedida_idunimedida`)
-    REFERENCES `5gprodatabase`.`unimedida` (`idunimedida`))
+    FOREIGN KEY (`idunimedida`)
+    REFERENCES `5gprodatabase`.`unimedida` (`idunimedida`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;

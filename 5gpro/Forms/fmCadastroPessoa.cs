@@ -70,11 +70,10 @@ namespace _5gpro.Forms
 
         private void btBuscar_Click(object sender, EventArgs e)
         {
-            //ABRE O FORM DE BUSCA PESSOA
-            //TODO:
-            //TERMINAR DE DESENVOLVER A TELA DE BUSCA E QUANDO CARREGAR VERIFICAR SE ESTA EDITANDO. SE ESTIVER USUARIO DEVE ACEITAR.
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
+            if (!editando)
+            {
+                AbreTelaBuscaPessoa();
+            }
         }
 
         private void btSalvar_Click(object sender, EventArgs e)
@@ -325,8 +324,7 @@ namespace _5gpro.Forms
             if (e.KeyCode == Keys.F3 && !editando)
             {
                 e.Handled = true;
-                var buscaPessoa = new fmBuscaPessoa();
-                buscaPessoa.ShowDialog();
+                AbreTelaBuscaPessoa();
             }
         }
 
@@ -672,6 +670,17 @@ namespace _5gpro.Forms
             {
                 cidade = buscaCidade.cidadeSelecionada;
                 PreencheCamposCidade(cidade);
+            }
+        }
+
+        private void AbreTelaBuscaPessoa()
+        {
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
+            if (buscaPessoa.pessoaSelecionada != null)
+            {
+                pessoa = buscaPessoa.pessoaSelecionada;
+                PreencheCampos(pessoa);
             }
         }
 

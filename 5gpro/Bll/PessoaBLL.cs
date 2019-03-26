@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using System.Collections.Generic;
 
 namespace _5gpro.Bll
 {
@@ -25,6 +26,11 @@ namespace _5gpro.Bll
         public Pessoa BuscarPessoaAnterior(string codAtual)
         {
             return PessoaDAO.BuscarPessoaAnterior(codAtual);
+        }
+
+        public List<Pessoa> BuscarPessoas(string nome, string cpfcnpj, string cidade)
+        {
+            return PessoaDAO.BuscarPessoas(nome, cpfcnpj, cidade);
         }
     }
 }

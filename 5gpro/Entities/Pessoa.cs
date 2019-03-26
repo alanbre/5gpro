@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using MySql.Data.MySqlClient;
 
 namespace _5gpro.Entities
 {
-    class Pessoa
+    public class Pessoa
     {
         public string Codigo { get; set; }
         public string Nome { get; set; }
@@ -23,6 +24,24 @@ namespace _5gpro.Entities
         public string CpfCnpj { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
+
+        public string Endereco
+        {
+            get
+            {
+                return (this.Rua + ", " + this.Numero + " - " + this.Bairro);
+            }
+            set
+            {
+                //PEGA O VALOR PASSADO PELA VARIÁVEL DO C# CHAMADA value 
+                //(EXEMPLO pessoa.Endereco = "abc, 123 - Centro") e separa pra passar certinho pros campos
+                //É ÚTIL PROS GRIDS (OU LUGAR COM MESMA CONDIÇÃO) ONDE NÃO PRECISA SEPARA RUA, NUMERO, BAIRRO
+                string[] dados = Regex.Split(value, ",|-");
+                this.Rua = dados[0];
+                this.Numero = dados[1];
+                this.Bairro = dados[2];
+            }
+        }
 
         public Pessoa()
         {
