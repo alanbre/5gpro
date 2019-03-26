@@ -24,20 +24,7 @@ namespace _5gpro.Forms
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
-            DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Cidade", typeof(string));
-            table.Columns.Add("Código do estado", typeof(string));
-            table.Columns.Add("Estado", typeof(string));
-            table.Columns.Add("UF", typeof(string));
-
-            Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
-
-            foreach (Cidade c in Cidades)
-            {
-                table.Rows.Add(c.CodCidade, c.Nome, c.Estado.CodEstado, c.Estado.Nome, c.Estado.Uf);
-            }
-            dgvCidades.DataSource = table;
+            BuscaCidades();
         }
 
         private void btProcuraEstado_Click(object sender, EventArgs e)
@@ -122,4 +109,3 @@ namespace _5gpro.Forms
     }
 }
 
-            BuscaCidades();
