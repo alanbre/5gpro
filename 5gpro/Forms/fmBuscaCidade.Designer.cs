@@ -92,6 +92,7 @@
             this.tbFiltroNomeCidade.Name = "tbFiltroNomeCidade";
             this.tbFiltroNomeCidade.Size = new System.Drawing.Size(492, 20);
             this.tbFiltroNomeCidade.TabIndex = 1;
+            this.tbFiltroNomeCidade.TextChanged += new System.EventHandler(this.tbFiltroNomeCidade_TextChanged);
             // 
             // btPesquisar
             // 
