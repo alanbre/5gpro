@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using System.Collections.Generic;
 
 namespace _5gpro.Bll
 {
@@ -28,6 +29,9 @@ namespace _5gpro.Bll
             return _itemdao.BuscarItemAnterior(codAtual);
         }
 
-
+        public List<_Item> BuscaItens(string descItem, string denomItem, string tipoItem)
+        {
+            return _itemdao.BuscaItem(descItem, denomItem, tipoItem);
+        }
     }
 }

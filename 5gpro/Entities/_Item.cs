@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace _5gpro.Entities
 {
-    class _Item
+    public class _Item
     {
         public string Codigo { get; set; }
         public string Descricao { get; set; }

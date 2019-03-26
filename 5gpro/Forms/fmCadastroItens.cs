@@ -506,5 +506,12 @@ namespace _5gpro.Forms
                 }
             }
         }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            //ABRE O FORM DE BUSCA ITEM
+            var buscaItem = new fmBuscaItem();
+            buscaItem.ShowDialog();
+        }
     }
 }

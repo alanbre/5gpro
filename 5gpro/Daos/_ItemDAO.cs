@@ -27,7 +27,7 @@ namespace _5gpro.Daos
                           ON DUPLICATE KEY UPDATE
                            descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, unimedida_idunimedida = @unimedida_idunimedida
-                         ;", 
+                         ;",
                          Conexao);
 
                 Comando.Parameters.AddWithValue("@iditem", _item.Codigo);
@@ -66,7 +66,7 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Comando.ExecuteReader();
 
-                if(reader.Read())
+                if (reader.Read())
                 {
                     _item = new _Item();
                     _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
@@ -166,6 +166,67 @@ namespace _5gpro.Daos
             }
 
             return _item;
+        }
+
+        public List<_Item> BuscaItem(string descItem, string denomItem, string tipoItem)
+        {
+            List<_Item> _itens = new List<_Item>();
+            string conDescItem = descItem.Length > 0 ? "AND i.descitem LIKE @descitem" : "";
+            string conDenomItem = denomItem.Length > 0 ? "AND i.denominacaocompra LIKE @denominacaocompra" : "";
+            string conTipoItem = tipoItem.Length > 0 ? "AND i.tipo LIKE @tipo" : "";
+
+            try
+            {
+                AbrirConexao();
+
+                Comando = new MySqlCommand(@"SELECT * 
+                                             FROM item i INNER JOIN unimedida u 
+                                             ON i.unimedida_idunimedida = u.idunimedida
+                                             WHERE 1=1
+                                             " + conDescItem + @"                                         
+                                             " + conDenomItem + @"
+                                             " + conTipoItem + @"
+                                             ORDER BY i.iditem;", Conexao);
+
+                //Comando = new MySqlCommand(@"SELECT i.iditem, i.descitem AS nomeitem, u.idunimedida, u.sigla AS nomeunimedida
+                //                             FROM item i INNER JOIN unimedida u 
+                //                             ON i.unimedida_idunimedida = u.idunimedida
+                //                             WHERE 1=1
+                //                             " + conDescItem + @"
+                //                             " + conDenomItem + @"
+                //                             ORDER BY i.iditem;", Conexao);
+
+                if (denomItem.Length > 0) { Comando.Parameters.AddWithValue("@denominacaocompra", "%" + denomItem + "%"); }
+                if (descItem.Length > 0) { Comando.Parameters.AddWithValue("@descitem", "%" + descItem + "%"); }
+                if (tipoItem.Length > 0) { Comando.Parameters.AddWithValue("@tipo", "%" + tipoItem + "%"); }
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    _Item _item = new _Item();
+                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
+                    _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
+                    _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
+                    _item.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
+                    _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
+                    _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
+                    _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
+                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+                    _itens.Add(_item);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return _itens;
         }
     }
 

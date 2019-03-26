@@ -145,6 +145,7 @@
             this.btBuscar.Size = new System.Drawing.Size(48, 48);
             this.btBuscar.TabIndex = 16;
             this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btNovo
             // 

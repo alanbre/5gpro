@@ -79,6 +79,12 @@
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaItem.Designer.cs">
+      <DependentUpon>fmBuscaItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaUnimedida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
       <DependentUpon>fmBuscaEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaItem.resx">
+      <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaPessoa.resx">
       <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
