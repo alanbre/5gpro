@@ -34,8 +34,8 @@
             this.lbDescricao = new System.Windows.Forms.Label();
             this.lbDenomCompra = new System.Windows.Forms.Label();
             this.gbTipoItem = new System.Windows.Forms.GroupBox();
-            this.cbProduto = new System.Windows.Forms.CheckBox();
             this.cbServico = new System.Windows.Forms.CheckBox();
+            this.cbProduto = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.gbTipoItem.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +48,7 @@
             this.dgvItens.Location = new System.Drawing.Point(12, 67);
             this.dgvItens.Name = "dgvItens";
             this.dgvItens.RowHeadersVisible = false;
-            this.dgvItens.Size = new System.Drawing.Size(776, 371);
+            this.dgvItens.Size = new System.Drawing.Size(892, 371);
             this.dgvItens.TabIndex = 0;
             // 
             // tbDenomCompra
@@ -96,6 +96,17 @@
             this.gbTipoItem.TabStop = false;
             this.gbTipoItem.Text = "Tipo";
             // 
+            // cbServico
+            // 
+            this.cbServico.AutoSize = true;
+            this.cbServico.Location = new System.Drawing.Point(76, 23);
+            this.cbServico.Name = "cbServico";
+            this.cbServico.Size = new System.Drawing.Size(62, 17);
+            this.cbServico.TabIndex = 1;
+            this.cbServico.Text = "Serviço";
+            this.cbServico.UseVisualStyleBackColor = true;
+            this.cbServico.Click += new System.EventHandler(this.cbServico_Click);
+            // 
             // cbProduto
             // 
             this.cbProduto.AutoSize = true;
@@ -108,22 +119,11 @@
             this.cbProduto.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             this.cbProduto.Click += new System.EventHandler(this.cbProduto_Click);
             // 
-            // cbServico
-            // 
-            this.cbServico.AutoSize = true;
-            this.cbServico.Location = new System.Drawing.Point(76, 23);
-            this.cbServico.Name = "cbServico";
-            this.cbServico.Size = new System.Drawing.Size(62, 17);
-            this.cbServico.TabIndex = 1;
-            this.cbServico.Text = "Serviço";
-            this.cbServico.UseVisualStyleBackColor = true;
-            this.cbServico.Click += new System.EventHandler(this.cbServico_Click);
-            // 
             // fmBuscaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(916, 450);
             this.Controls.Add(this.gbTipoItem);
             this.Controls.Add(this.lbDenomCompra);
             this.Controls.Add(this.lbDescricao);
@@ -132,11 +132,12 @@
             this.Controls.Add(this.dgvItens);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(816, 489);
+            this.MinimumSize = new System.Drawing.Size(932, 489);
             this.Name = "fmBuscaItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca de Itens";
+            this.Load += new System.EventHandler(this.fmBuscaItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();
             this.gbTipoItem.ResumeLayout(false);
             this.gbTipoItem.PerformLayout();

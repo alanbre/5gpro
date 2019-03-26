@@ -105,5 +105,10 @@ namespace _5gpro.Forms
         {
             BuscaItens();
         }
+
+        private void fmBuscaItem_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
