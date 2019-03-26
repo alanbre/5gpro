@@ -29,53 +29,71 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastrosDePessoasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDePaisesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastros = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroPessoas = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroPaises = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroItens = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastrosToolStripMenuItem});
+            this.tsmiCadastros,
+            this.tsmiOrcamentos});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1162, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "msMenu";
             // 
-            // cadastrosToolStripMenuItem
+            // tsmiCadastros
             // 
-            this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastrosDePessoasToolStripMenuItem,
-            this.cadastroDePaisesToolStripMenuItem,
-            this.cadastroDeItensToolStripMenuItem});
-            this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
-            this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.cadastrosToolStripMenuItem.Text = "Cadastros";
+            this.tsmiCadastros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCadastroPessoas,
+            this.tsmiCadastroPaises,
+            this.tsmiCadastroItens});
+            this.tsmiCadastros.Name = "tsmiCadastros";
+            this.tsmiCadastros.Size = new System.Drawing.Size(71, 20);
+            this.tsmiCadastros.Text = "Cadastros";
             // 
-            // cadastrosDePessoasToolStripMenuItem
+            // tsmiCadastroPessoas
             // 
-            this.cadastrosDePessoasToolStripMenuItem.Name = "cadastrosDePessoasToolStripMenuItem";
-            this.cadastrosDePessoasToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.cadastrosDePessoasToolStripMenuItem.Text = "Cadastros de pessoas";
-            this.cadastrosDePessoasToolStripMenuItem.Click += new System.EventHandler(this.cadastrosDePessoasToolStripMenuItem_Click);
+            this.tsmiCadastroPessoas.Name = "tsmiCadastroPessoas";
+            this.tsmiCadastroPessoas.Size = new System.Drawing.Size(186, 22);
+            this.tsmiCadastroPessoas.Text = "Cadastros de pessoas";
+            this.tsmiCadastroPessoas.Click += new System.EventHandler(this.tsmiCadastroPessoas_Click);
             // 
-            // cadastroDePaisesToolStripMenuItem
+            // tsmiCadastroPaises
             // 
-            this.cadastroDePaisesToolStripMenuItem.Name = "cadastroDePaisesToolStripMenuItem";
-            this.cadastroDePaisesToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.cadastroDePaisesToolStripMenuItem.Text = "Cadastro de Paises";
-            this.cadastroDePaisesToolStripMenuItem.Click += new System.EventHandler(this.cadastroDePaisesToolStripMenuItem_Click);
+            this.tsmiCadastroPaises.Name = "tsmiCadastroPaises";
+            this.tsmiCadastroPaises.Size = new System.Drawing.Size(186, 22);
+            this.tsmiCadastroPaises.Text = "Cadastro de Paises";
+            this.tsmiCadastroPaises.Click += new System.EventHandler(this.tsmiCadastroPaises_Click);
             // 
-            // cadastroDeItensToolStripMenuItem
+            // tsmiCadastroItens
             // 
-            this.cadastroDeItensToolStripMenuItem.Name = "cadastroDeItensToolStripMenuItem";
-            this.cadastroDeItensToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-            this.cadastroDeItensToolStripMenuItem.Text = "Cadastro de Itens";
-            this.cadastroDeItensToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeItensToolStripMenuItem_Click);
+            this.tsmiCadastroItens.Name = "tsmiCadastroItens";
+            this.tsmiCadastroItens.Size = new System.Drawing.Size(186, 22);
+            this.tsmiCadastroItens.Text = "Cadastro de Itens";
+            this.tsmiCadastroItens.Click += new System.EventHandler(this.tsmiCadastroItens_Click);
+            // 
+            // tsmiOrcamentos
+            // 
+            this.tsmiOrcamentos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCadastroOrcamentos});
+            this.tsmiOrcamentos.Name = "tsmiOrcamentos";
+            this.tsmiOrcamentos.Size = new System.Drawing.Size(84, 20);
+            this.tsmiOrcamentos.Text = "Orçamentos";
+            // 
+            // tsmiCadastroOrcamentos
+            // 
+            this.tsmiCadastroOrcamentos.Name = "tsmiCadastroOrcamentos";
+            this.tsmiCadastroOrcamentos.Size = new System.Drawing.Size(208, 22);
+            this.tsmiCadastroOrcamentos.Text = "Cadastros de orçamentos";
+            this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.tsmiCadastroOrcamentos_Click);
             // 
             // fmMain
             // 
@@ -96,11 +114,12 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem cadastrosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastrosDePessoasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDePaisesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeItensToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeFuncionáriosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastros;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroPessoas;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroPaises;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroItens;
+        private System.Windows.Forms.ToolStripMenuItem tsmiOrcamentos;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroOrcamentos;
     }
 }
 

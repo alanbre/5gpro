@@ -26,6 +26,7 @@ namespace _5gpro.Forms
         {
             AbreTelaBuscaCidade();
         }
+
         private void btPesquisar_Click(object sender, EventArgs e)
         {
             BuscaPessoas();
@@ -50,6 +51,7 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
         private void tbFiltroNome_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -58,6 +60,7 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
         private void tbCpfCnpj_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -86,11 +89,13 @@ namespace _5gpro.Forms
         {
             if (tbFiltroNome.Text.Length > 0) { BuscaPessoas(); }
         }
+
         private void tbCpfCnpj_TextChanged(object sender, EventArgs e)
         {
             if (tbCpfCnpj.Text.Length > 0) { BuscaPessoas(); }
         }
 
+        //EVENTOS DE CELL DOUBLE CLICK
         private void dgvCidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
@@ -98,11 +103,6 @@ namespace _5gpro.Forms
             pessoaSelecionada = Pessoas.Find(p => p.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
             this.Close();
         }
-
-
-
-
-
 
 
         private void AbreTelaBuscaCidade()
@@ -115,6 +115,7 @@ namespace _5gpro.Forms
                 PreencheCamposCidade(cidade);
             }
         }
+
         private void PreencheCamposCidade(Cidade cidade)
         {
             if (cidade != null)

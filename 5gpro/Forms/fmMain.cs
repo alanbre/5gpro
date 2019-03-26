@@ -1,13 +1,5 @@
-﻿using _5gpro.Daos;
-using _5gpro.Forms;
+﻿using _5gpro.Forms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro
@@ -20,28 +12,28 @@ namespace _5gpro
 
         }
 
-        private void cadastrosDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
             formCadPessoas.Show();
         }
 
-        private void cadastroDePaisesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroPaises_Click(object sender, EventArgs e)
         {
             var formCadPais = new fmCadastroPais();
             formCadPais.Show(this);
         }
 
-        private void cadastroDeItensToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroItens_Click(object sender, EventArgs e)
         {
             var formCadItens = new fmCadastroItens();
             formCadItens.Show(this);
         }
 
-        private void cadastroDeFuncionariosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroOrcamentos_Click(object sender, EventArgs e)
         {
-            var formCadFuncionario = new fmCadastroFuncionario();
-            formCadFuncionario.Show(this);
+            var formCadOrcamentos = new fmOrcamento();
+            formCadOrcamentos.Show(this);
         }
     }
 }
