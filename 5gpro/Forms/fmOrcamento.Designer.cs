@@ -52,15 +52,19 @@
             this.tbQuantidade = new System.Windows.Forms.TextBox();
             this.lbValorUnit = new System.Windows.Forms.Label();
             this.lbQuantidade = new System.Windows.Forms.Label();
-            this.tbValorUnit = new System.Windows.Forms.TextBox();
+            this.tbValorUnitItem = new System.Windows.Forms.TextBox();
             this.tbDescItem = new System.Windows.Forms.TextBox();
             this.btProcuraItem = new System.Windows.Forms.Button();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.tbCodItem = new System.Windows.Forms.TextBox();
-            this.tbValorTot = new System.Windows.Forms.TextBox();
+            this.tbValorTotItem = new System.Windows.Forms.TextBox();
             this.lbCodItem = new System.Windows.Forms.Label();
             this.btInserirItem = new System.Windows.Forms.Button();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.tbDescontoItem = new System.Windows.Forms.TextBox();
+            this.lbDescItem = new System.Windows.Forms.Label();
+            this.tbDescontoItemPorc = new System.Windows.Forms.TextBox();
+            this.lbDescontoPorc = new System.Windows.Forms.Label();
             this.btAutoriza = new System.Windows.Forms.Button();
             this.btNovoItem = new System.Windows.Forms.Button();
             this.lbTotalItens = new System.Windows.Forms.Label();
@@ -72,10 +76,6 @@
             this.lbDescontoTotalItens = new System.Windows.Forms.Label();
             this.tbTotalOrcamento = new System.Windows.Forms.TextBox();
             this.lbTotalOrcamento = new System.Windows.Forms.Label();
-            this.lbDescontoPorc = new System.Windows.Forms.Label();
-            this.tbDescontoItemPorc = new System.Windows.Forms.TextBox();
-            this.lbDescItem = new System.Windows.Forms.Label();
-            this.tbDescontoItem = new System.Windows.Forms.TextBox();
             this.gbDadosOrcamento.SuspendLayout();
             this.pnBotoes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
@@ -338,11 +338,13 @@
             // 
             this.tbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbQuantidade.Location = new System.Drawing.Point(6, 256);
+            this.tbQuantidade.MaxLength = 8;
             this.tbQuantidade.Name = "tbQuantidade";
             this.tbQuantidade.Size = new System.Drawing.Size(63, 20);
             this.tbQuantidade.TabIndex = 4;
             this.tbQuantidade.Text = "0,00";
             this.tbQuantidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbQuantidade_KeyDown);
+            this.tbQuantidade.Leave += new System.EventHandler(this.tbQuantidade_Leave);
             // 
             // lbValorUnit
             // 
@@ -364,15 +366,17 @@
             this.lbQuantidade.TabIndex = 3;
             this.lbQuantidade.Text = "Quantidade";
             // 
-            // tbValorUnit
+            // tbValorUnitItem
             // 
-            this.tbValorUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbValorUnit.Location = new System.Drawing.Point(75, 256);
-            this.tbValorUnit.Name = "tbValorUnit";
-            this.tbValorUnit.Size = new System.Drawing.Size(63, 20);
-            this.tbValorUnit.TabIndex = 6;
-            this.tbValorUnit.Text = "0,00";
-            this.tbValorUnit.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorUnit_KeyDown);
+            this.tbValorUnitItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbValorUnitItem.Location = new System.Drawing.Point(75, 256);
+            this.tbValorUnitItem.MaxLength = 13;
+            this.tbValorUnitItem.Name = "tbValorUnitItem";
+            this.tbValorUnitItem.Size = new System.Drawing.Size(63, 20);
+            this.tbValorUnitItem.TabIndex = 6;
+            this.tbValorUnitItem.Text = "0,00";
+            this.tbValorUnitItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorUnit_KeyDown);
+            this.tbValorUnitItem.Leave += new System.EventHandler(this.tbValorUnitItem_Leave);
             // 
             // tbDescItem
             // 
@@ -414,15 +418,17 @@
             this.tbCodItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCodItem_KeyDown);
             this.tbCodItem.Leave += new System.EventHandler(this.tbCodItem_Leave);
             // 
-            // tbValorTot
+            // tbValorTotItem
             // 
-            this.tbValorTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbValorTot.Location = new System.Drawing.Point(144, 256);
-            this.tbValorTot.Name = "tbValorTot";
-            this.tbValorTot.Size = new System.Drawing.Size(87, 20);
-            this.tbValorTot.TabIndex = 8;
-            this.tbValorTot.Text = "0,00";
-            this.tbValorTot.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorTot_KeyDown);
+            this.tbValorTotItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbValorTotItem.Location = new System.Drawing.Point(144, 256);
+            this.tbValorTotItem.MaxLength = 13;
+            this.tbValorTotItem.Name = "tbValorTotItem";
+            this.tbValorTotItem.Size = new System.Drawing.Size(87, 20);
+            this.tbValorTotItem.TabIndex = 8;
+            this.tbValorTotItem.Text = "0,00";
+            this.tbValorTotItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorTot_KeyDown);
+            this.tbValorTotItem.Leave += new System.EventHandler(this.tbValorTotItem_Leave);
             // 
             // lbCodItem
             // 
@@ -440,7 +446,7 @@
             this.btInserirItem.Location = new System.Drawing.Point(144, 289);
             this.btInserirItem.Name = "btInserirItem";
             this.btInserirItem.Size = new System.Drawing.Size(59, 24);
-            this.btInserirItem.TabIndex = 9;
+            this.btInserirItem.TabIndex = 13;
             this.btInserirItem.Text = "Inserir";
             this.btInserirItem.UseVisualStyleBackColor = true;
             this.btInserirItem.Click += new System.EventHandler(this.btInserirItem_Click);
@@ -460,12 +466,12 @@
             this.gbItens.Controls.Add(this.btInserirItem);
             this.gbItens.Controls.Add(this.lbCodItem);
             this.gbItens.Controls.Add(this.tbQuantidade);
-            this.gbItens.Controls.Add(this.tbValorTot);
+            this.gbItens.Controls.Add(this.tbValorTotItem);
             this.gbItens.Controls.Add(this.lbValorUnit);
             this.gbItens.Controls.Add(this.tbCodItem);
             this.gbItens.Controls.Add(this.lbQuantidade);
             this.gbItens.Controls.Add(this.lbValorTot);
-            this.gbItens.Controls.Add(this.tbValorUnit);
+            this.gbItens.Controls.Add(this.tbValorUnitItem);
             this.gbItens.Controls.Add(this.btProcuraItem);
             this.gbItens.Controls.Add(this.tbDescItem);
             this.gbItens.Location = new System.Drawing.Point(65, 200);
@@ -475,6 +481,50 @@
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
             // 
+            // tbDescontoItem
+            // 
+            this.tbDescontoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbDescontoItem.Location = new System.Drawing.Point(75, 293);
+            this.tbDescontoItem.MaxLength = 13;
+            this.tbDescontoItem.Name = "tbDescontoItem";
+            this.tbDescontoItem.Size = new System.Drawing.Size(63, 20);
+            this.tbDescontoItem.TabIndex = 12;
+            this.tbDescontoItem.Text = "0,00";
+            this.tbDescontoItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescontoItem_KeyDown);
+            this.tbDescontoItem.Leave += new System.EventHandler(this.tbDescontoItem_Leave);
+            // 
+            // lbDescItem
+            // 
+            this.lbDescItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbDescItem.AutoSize = true;
+            this.lbDescItem.Location = new System.Drawing.Point(73, 277);
+            this.lbDescItem.Name = "lbDescItem";
+            this.lbDescItem.Size = new System.Drawing.Size(58, 13);
+            this.lbDescItem.TabIndex = 11;
+            this.lbDescItem.Text = "Desc. Item";
+            // 
+            // tbDescontoItemPorc
+            // 
+            this.tbDescontoItemPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbDescontoItemPorc.Location = new System.Drawing.Point(6, 293);
+            this.tbDescontoItemPorc.MaxLength = 6;
+            this.tbDescontoItemPorc.Name = "tbDescontoItemPorc";
+            this.tbDescontoItemPorc.Size = new System.Drawing.Size(62, 20);
+            this.tbDescontoItemPorc.TabIndex = 10;
+            this.tbDescontoItemPorc.Text = "0,00";
+            this.tbDescontoItemPorc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescontoItemPorc_KeyDown);
+            this.tbDescontoItemPorc.Leave += new System.EventHandler(this.tbDescontoItemPorc_Leave);
+            // 
+            // lbDescontoPorc
+            // 
+            this.lbDescontoPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbDescontoPorc.AutoSize = true;
+            this.lbDescontoPorc.Location = new System.Drawing.Point(3, 277);
+            this.lbDescontoPorc.Name = "lbDescontoPorc";
+            this.lbDescontoPorc.Size = new System.Drawing.Size(46, 13);
+            this.lbDescontoPorc.TabIndex = 9;
+            this.lbDescontoPorc.Text = "% Desc.";
+            // 
             // btAutoriza
             // 
             this.btAutoriza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -483,7 +533,7 @@
             this.btAutoriza.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
             this.btAutoriza.Name = "btAutoriza";
             this.btAutoriza.Size = new System.Drawing.Size(24, 24);
-            this.btAutoriza.TabIndex = 11;
+            this.btAutoriza.TabIndex = 15;
             this.btAutoriza.UseVisualStyleBackColor = true;
             // 
             // btNovoItem
@@ -494,7 +544,7 @@
             this.btNovoItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
             this.btNovoItem.Name = "btNovoItem";
             this.btNovoItem.Size = new System.Drawing.Size(24, 24);
-            this.btNovoItem.TabIndex = 10;
+            this.btNovoItem.TabIndex = 14;
             this.btNovoItem.UseVisualStyleBackColor = true;
             // 
             // lbTotalItens
@@ -598,42 +648,6 @@
             this.lbTotalOrcamento.TabIndex = 6;
             this.lbTotalOrcamento.Text = "Valor total do orçamento";
             // 
-            // lbDescontoPorc
-            // 
-            this.lbDescontoPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbDescontoPorc.AutoSize = true;
-            this.lbDescontoPorc.Location = new System.Drawing.Point(3, 277);
-            this.lbDescontoPorc.Name = "lbDescontoPorc";
-            this.lbDescontoPorc.Size = new System.Drawing.Size(46, 13);
-            this.lbDescontoPorc.TabIndex = 14;
-            this.lbDescontoPorc.Text = "% Desc.";
-            // 
-            // tbDescontoItemPorc
-            // 
-            this.tbDescontoItemPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbDescontoItemPorc.Location = new System.Drawing.Point(6, 293);
-            this.tbDescontoItemPorc.Name = "tbDescontoItemPorc";
-            this.tbDescontoItemPorc.Size = new System.Drawing.Size(62, 20);
-            this.tbDescontoItemPorc.TabIndex = 15;
-            // 
-            // lbDescItem
-            // 
-            this.lbDescItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbDescItem.AutoSize = true;
-            this.lbDescItem.Location = new System.Drawing.Point(73, 277);
-            this.lbDescItem.Name = "lbDescItem";
-            this.lbDescItem.Size = new System.Drawing.Size(58, 13);
-            this.lbDescItem.TabIndex = 16;
-            this.lbDescItem.Text = "Desc. Item";
-            // 
-            // tbDescontoItem
-            // 
-            this.tbDescontoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbDescontoItem.Location = new System.Drawing.Point(75, 293);
-            this.tbDescontoItem.Name = "tbDescontoItem";
-            this.tbDescontoItem.Size = new System.Drawing.Size(63, 20);
-            this.tbDescontoItem.TabIndex = 17;
-            // 
             // fmOrcamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -687,12 +701,12 @@
         private System.Windows.Forms.TextBox tbQuantidade;
         private System.Windows.Forms.Label lbValorUnit;
         private System.Windows.Forms.Label lbQuantidade;
-        private System.Windows.Forms.TextBox tbValorUnit;
+        private System.Windows.Forms.TextBox tbValorUnitItem;
         private System.Windows.Forms.TextBox tbDescItem;
         private System.Windows.Forms.Button btProcuraItem;
         private System.Windows.Forms.Label lbValorTot;
         private System.Windows.Forms.TextBox tbCodItem;
-        private System.Windows.Forms.TextBox tbValorTot;
+        private System.Windows.Forms.TextBox tbValorTotItem;
         private System.Windows.Forms.Label lbCodItem;
         private System.Windows.Forms.Button btInserirItem;
         private System.Windows.Forms.GroupBox gbItens;
