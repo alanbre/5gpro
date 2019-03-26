@@ -30,7 +30,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código do estado", typeof(string));
             table.Columns.Add("Estado", typeof(string));
             table.Columns.Add("UF", typeof(string));
-
+                
             Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
 
             foreach (Cidade c in Cidades)
@@ -77,9 +77,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvCidades.Rows[selectedRowIndex];
-            cidadeSelecionada = new Cidade();
-            cidadeSelecionada.CodCidade = Convert.ToString(selectedRow.Cells[0].Value);
-            cidadeSelecionada.Nome = Convert.ToString(selectedRow.Cells[1].Value);
+            cidadeSelecionada = Cidades.Find(c => c.CodCidade == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
 

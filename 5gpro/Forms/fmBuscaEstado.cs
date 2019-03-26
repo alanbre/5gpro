@@ -37,9 +37,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvEstados.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvEstados.Rows[selectedRowIndex];
-            EstadoSelecionado = new Estado();
-            EstadoSelecionado.CodEstado = Convert.ToString(selectedRow.Cells[0].Value);
-            EstadoSelecionado.Nome = Convert.ToString(selectedRow.Cells[1].Value);
+            EstadoSelecionado = Estados.Find(est => est.CodEstado == Convert.ToString(selectedRow.Cells[0].Value));
             this.Close();
         }
     }

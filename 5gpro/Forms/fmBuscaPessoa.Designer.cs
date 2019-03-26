@@ -35,16 +35,9 @@
             this.lbFiltroNome = new System.Windows.Forms.Label();
             this.tbFiltroNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.dgvCidades = new System.Windows.Forms.DataGridView();
-            this.colunaCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaNomeCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaFantasia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaCpfCnpj = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaEndereco = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaTelefone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colunaEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btPesquisar = new System.Windows.Forms.Button();
+            this.tbCpfCnpj = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,11 +54,12 @@
             // 
             // tbNomeCidade
             // 
-            this.tbNomeCidade.Enabled = false;
             this.tbNomeCidade.Location = new System.Drawing.Point(101, 25);
             this.tbNomeCidade.Name = "tbNomeCidade";
+            this.tbNomeCidade.ReadOnly = true;
             this.tbNomeCidade.Size = new System.Drawing.Size(436, 20);
             this.tbNomeCidade.TabIndex = 20;
+            this.tbNomeCidade.TabStop = false;
             // 
             // tbFiltroCodCidade
             // 
@@ -73,8 +67,10 @@
             this.tbFiltroCodCidade.MaxLength = 5;
             this.tbFiltroCodCidade.Name = "tbFiltroCodCidade";
             this.tbFiltroCodCidade.Size = new System.Drawing.Size(68, 20);
-            this.tbFiltroCodCidade.TabIndex = 18;
+            this.tbFiltroCodCidade.TabIndex = 1;
+            this.tbFiltroCodCidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodCidade_KeyDown);
             this.tbFiltroCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
+            this.tbFiltroCodCidade.Leave += new System.EventHandler(this.tbFiltroCodCidade_Leave);
             // 
             // lbFiltroCidade
             // 
@@ -82,7 +78,7 @@
             this.lbFiltroCidade.Location = new System.Drawing.Point(4, 8);
             this.lbFiltroCidade.Name = "lbFiltroCidade";
             this.lbFiltroCidade.Size = new System.Drawing.Size(40, 13);
-            this.lbFiltroCidade.TabIndex = 19;
+            this.lbFiltroCidade.TabIndex = 0;
             this.lbFiltroCidade.Text = "Cidade";
             // 
             // lbFiltroNome
@@ -91,15 +87,17 @@
             this.lbFiltroNome.Location = new System.Drawing.Point(9, 47);
             this.lbFiltroNome.Name = "lbFiltroNome";
             this.lbFiltroNome.Size = new System.Drawing.Size(35, 13);
-            this.lbFiltroNome.TabIndex = 21;
+            this.lbFiltroNome.TabIndex = 2;
             this.lbFiltroNome.Text = "Nome";
             // 
             // tbFiltroNome
             // 
             this.tbFiltroNome.Location = new System.Drawing.Point(7, 63);
             this.tbFiltroNome.Name = "tbFiltroNome";
-            this.tbFiltroNome.Size = new System.Drawing.Size(781, 20);
-            this.tbFiltroNome.TabIndex = 22;
+            this.tbFiltroNome.Size = new System.Drawing.Size(530, 20);
+            this.tbFiltroNome.TabIndex = 3;
+            this.tbFiltroNome.TextChanged += new System.EventHandler(this.tbFiltroNome_TextChanged);
+            this.tbFiltroNome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFiltroNome_KeyDown);
             // 
             // label1
             // 
@@ -107,109 +105,58 @@
             this.label1.Location = new System.Drawing.Point(9, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 23;
+            this.label1.TabIndex = 4;
             this.label1.Text = "CPF/CNPJ";
-            // 
-            // maskedTextBox1
-            // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(7, 102);
-            this.maskedTextBox1.Mask = "###.###.###-##";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(141, 20);
-            this.maskedTextBox1.TabIndex = 24;
             // 
             // dgvCidades
             // 
             this.dgvCidades.AllowUserToAddRows = false;
             this.dgvCidades.AllowUserToDeleteRows = false;
             this.dgvCidades.AllowUserToOrderColumns = true;
-            this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dgvCidades.AllowUserToResizeRows = false;
+            this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvCidades.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvCidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colunaCodigo,
-            this.colunaNomeCliente,
-            this.colunaFantasia,
-            this.colunaCpfCnpj,
-            this.colunaEndereco,
-            this.colunaTelefone,
-            this.colunaEmail});
             this.dgvCidades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvCidades.Location = new System.Drawing.Point(7, 128);
             this.dgvCidades.MultiSelect = false;
             this.dgvCidades.Name = "dgvCidades";
             this.dgvCidades.ReadOnly = true;
             this.dgvCidades.RowHeadersVisible = false;
-            this.dgvCidades.Size = new System.Drawing.Size(875, 365);
-            this.dgvCidades.TabIndex = 25;
-            // 
-            // colunaCodigo
-            // 
-            this.colunaCodigo.HeaderText = "Código";
-            this.colunaCodigo.MinimumWidth = 50;
-            this.colunaCodigo.Name = "colunaCodigo";
-            this.colunaCodigo.ReadOnly = true;
-            this.colunaCodigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colunaCodigo.Width = 186;
-            // 
-            // colunaNomeCliente
-            // 
-            this.colunaNomeCliente.HeaderText = "Nome do cliente";
-            this.colunaNomeCliente.MinimumWidth = 100;
-            this.colunaNomeCliente.Name = "colunaNomeCliente";
-            this.colunaNomeCliente.ReadOnly = true;
-            this.colunaNomeCliente.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colunaNomeCliente.Width = 250;
-            // 
-            // colunaFantasia
-            // 
-            this.colunaFantasia.HeaderText = "Apelido / Fantasia";
-            this.colunaFantasia.MinimumWidth = 100;
-            this.colunaFantasia.Name = "colunaFantasia";
-            this.colunaFantasia.ReadOnly = true;
-            this.colunaFantasia.Width = 250;
-            // 
-            // colunaCpfCnpj
-            // 
-            this.colunaCpfCnpj.HeaderText = "CPF/CNPJ";
-            this.colunaCpfCnpj.Name = "colunaCpfCnpj";
-            this.colunaCpfCnpj.ReadOnly = true;
-            // 
-            // colunaEndereco
-            // 
-            this.colunaEndereco.HeaderText = "Endereço";
-            this.colunaEndereco.Name = "colunaEndereco";
-            this.colunaEndereco.ReadOnly = true;
-            // 
-            // colunaTelefone
-            // 
-            this.colunaTelefone.HeaderText = "Telefone";
-            this.colunaTelefone.Name = "colunaTelefone";
-            this.colunaTelefone.ReadOnly = true;
-            // 
-            // colunaEmail
-            // 
-            this.colunaEmail.HeaderText = "E-Mail";
-            this.colunaEmail.Name = "colunaEmail";
-            this.colunaEmail.ReadOnly = true;
+            this.dgvCidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCidades.Size = new System.Drawing.Size(1046, 377);
+            this.dgvCidades.TabIndex = 7;
+            this.dgvCidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCidades_CellDoubleClick);
             // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(154, 100);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 26;
+            this.btPesquisar.TabIndex = 6;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
+            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            // 
+            // tbCpfCnpj
+            // 
+            this.tbCpfCnpj.Location = new System.Drawing.Point(7, 102);
+            this.tbCpfCnpj.MaxLength = 14;
+            this.tbCpfCnpj.Name = "tbCpfCnpj";
+            this.tbCpfCnpj.Size = new System.Drawing.Size(141, 20);
+            this.tbCpfCnpj.TabIndex = 5;
+            this.tbCpfCnpj.TextChanged += new System.EventHandler(this.tbCpfCnpj_TextChanged);
+            this.tbCpfCnpj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCpfCnpj_KeyDown);
             // 
             // fmBuscaPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 505);
+            this.ClientSize = new System.Drawing.Size(1065, 517);
+            this.Controls.Add(this.tbCpfCnpj);
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.dgvCidades);
-            this.Controls.Add(this.maskedTextBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbFiltroNome);
             this.Controls.Add(this.lbFiltroNome);
@@ -238,15 +185,8 @@
         private System.Windows.Forms.Label lbFiltroNome;
         private System.Windows.Forms.TextBox tbFiltroNome;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.DataGridView dgvCidades;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaNomeCliente;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaFantasia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaCpfCnpj;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaEndereco;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaTelefone;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colunaEmail;
         private System.Windows.Forms.Button btPesquisar;
+        private System.Windows.Forms.TextBox tbCpfCnpj;
     }
 }
