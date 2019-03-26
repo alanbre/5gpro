@@ -24,14 +24,21 @@ namespace _5gpro.Forms
         {
             PaisBLL pbl = new PaisBLL();
 
-            pais.idpais = int.Parse(tbIdpais.Text);
+            pais.idpais = tbIdpais.Text;
             pais.nome = tbNomepais.Text;
             pais.sigla = tbSigla.Text;
 
-            ValidarPais(pais);
-            //pbl.salvar(pais);
+            Validacao vl = new Validacao();
+            int ok = vl.ValidarEntidade(pais);
 
-            // MessageBox.Show("País adicionado com sucesso!");
+            //QUANDO A VARIÁVEL OK FOR RETORNADO COM O VALOR 0
+            //SALVA O REGISTRO
+            if (ok == 0)
+            {
+                pbl.salvar(pais);
+                MessageBox.Show("País adicionado com sucesso!");
+            }
+
 
 
         }
@@ -48,14 +55,23 @@ namespace _5gpro.Forms
         }
 
 
-        private void ValidarPais(object obj)
-        {
-            var erros = Validacao.getValidationErros(obj);
-            foreach (var error in erros)
-            {
-                MessageBox.Show((error.ErrorMessage));
-            }
-        }
+        //private void ValidarPais(object obj)
+        //{
+        //    var erros = Validacao.getValidationErros(obj);
+        //    List<string> listaerros = new List<string>();
+
+        //    foreach (var error in erros)
+        //    {
+
+        //        listaerros.Add(error.ErrorMessage);
+
+        //    }
+        //    if (listaerros.Count > 0)
+        //    {
+        //        MessageBox.Show(listaerros[0]);
+        //    }
+
+        //}
 
     }
 }
