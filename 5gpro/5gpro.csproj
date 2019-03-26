@@ -65,6 +65,7 @@
     <Compile Include="Daos\UnimedidaDAO.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Estado.cs" />
+    <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\_Item.cs" />
@@ -349,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_Book_18px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_22px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkmark_22px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -183,6 +183,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosOk_22px_Green {
+            get {
+                object obj = ResourceManager.GetObject("iosOk_22px_Green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosOk_48px_black {
             get {
                 object obj = ResourceManager.GetObject("iosOk_48px_black", resourceCulture);
@@ -216,6 +226,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap iosOk_64px_green {
             get {
                 object obj = ResourceManager.GetObject("iosOk_64px_green", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosPlus_22px_blue {
+            get {
+                object obj = ResourceManager.GetObject("iosPlus_22px_blue", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
