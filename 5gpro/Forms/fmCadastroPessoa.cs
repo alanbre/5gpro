@@ -659,6 +659,7 @@ namespace _5gpro.Forms
             {
                 tbCodCidade.Text = cidade.CodCidade;
                 tbNomeCidade.Text = cidade.Nome;
+                Editando(true);
             }
         }
 

@@ -20,6 +20,13 @@ namespace _5gpro.Entities
         public decimal Estoquenecessario { get; set; }
         public string Unimedida { get; set; }
 
+        //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.
+        public decimal ValorUnitario { get; set; }
+        public decimal ValorTotal { get; set; }
+        public decimal DescontoPorc { get; set; }
+        public decimal Desconto { get; set; }
+        public decimal Quantidade { get; set; }
+
 
         public _Item()
         {
