@@ -13,7 +13,7 @@ namespace _5gpro.Daos
 
         public Cidade BuscaCidadeByCod(string cod)
         {
-            Cidade cidade = new Cidade();
+            Cidade cidade = null;
             try
             {
                 AbrirConexao();
@@ -22,8 +22,9 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Comando.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
+                    cidade = new Cidade();
                     cidade.CodCidade = reader.GetString(reader.GetOrdinal("idcidade"));
                     cidade.Nome = reader.GetString(reader.GetOrdinal("nome"));
                 }

@@ -1,6 +1,8 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -8,9 +10,11 @@ namespace _5gpro.Forms
     public partial class fmOrcamento : Form
     {
         Pessoa pessoa = null;
+        List<_Item> itens = null;
         PessoaBLL pessoaBLL = new PessoaBLL();
+        _ItemBLL itemBLL = new _ItemBLL();
 
-
+        DataTable table = new DataTable();
         bool editando = false;
 
 
@@ -18,29 +22,25 @@ namespace _5gpro.Forms
         public fmOrcamento()
         {
             InitializeComponent();
+            
+            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Descrição", typeof(string));
+            table.Columns.Add("Quantidade", typeof(decimal));
+            table.Columns.Add("Valor unitário", typeof(decimal));
+            table.Columns.Add("Valor total", typeof(decimal));
+            table.Columns.Add("% Desc.", typeof(decimal));
+            table.Columns.Add("Desc. Item", typeof(decimal));
+            dgvItens.DataSource = table;
         }
 
-        private void dtpCadastro_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsNumber((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
 
         private void cbVencimento_CheckedChanged(object sender, EventArgs e)
         {
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
         }
 
-        private void tbCliente_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3 && !editando)
-            {
-                e.Handled = true;
-                AbreTelaBuscaPessoa();
-            }
-        }
+
+
 
         private void tbCodCliente_Leave(object sender, EventArgs e)
         {
@@ -54,6 +54,133 @@ namespace _5gpro.Forms
                 tbNomeCliente.Text = "";
             }
         }
+
+        private void tbCodItem_Leave(object sender, EventArgs e)
+        {
+            if (tbCodItem.Text.Length > 0)
+            {
+                _Item item = itemBLL.BuscaItemById(tbCodCliente.Text);
+                PreencheCamposItem(item);
+            }
+            else
+            {
+                tbNomeCliente.Text = "";
+            }
+        }
+
+
+
+
+
+        private void dtpCadastro_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (char.IsNumber((char)e.KeyCode))
+            {
+                Editando(true);
+            }
+        }
+
+        private void tbCliente_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3 && !editando)
+            {
+                e.Handled = true;
+                AbreTelaBuscaPessoa();
+            }
+        }
+
+
+
+        //EVENTOS DE KEY DOWN
+        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbCodCliente_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void dtpCadastro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void dtpVencimento_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbCodItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbQuantidade_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbValorUnit_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbValorTot_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void tbDescontoTotal_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+
+
+
+        private void btInserirItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
 
@@ -76,6 +203,25 @@ namespace _5gpro.Forms
                 tbCodCliente.Text = pessoa.Codigo;
                 tbNomeCliente.Text = pessoa.Nome;
                 Editando(true);
+            }
+        }
+
+        private void PreencheCamposItem(_Item item)
+        {
+            if (item != null)
+            {
+                tbCodItem.Text = item.Codigo;
+                tbDescItem.Text = item.Descricao;
+            }
+            else
+            {
+                MessageBox.Show("Item não encontrado no banco de dados",
+                "Item não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodItem.Focus();
+                tbCodItem.SelectAll();
+                
             }
         }
 
@@ -167,5 +313,6 @@ namespace _5gpro.Forms
             //    }
             //}
         }
+
     }
 }

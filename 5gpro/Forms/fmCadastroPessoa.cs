@@ -9,7 +9,7 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form
     {
         Pessoa pessoa;
-        Cidade cidade = new Cidade();
+        Cidade cidade;
         PessoaBLL pessoaBLL = new PessoaBLL();
         CidadeBLL cidadeBLL = new CidadeBLL();
 
@@ -660,6 +660,15 @@ namespace _5gpro.Forms
                 tbCodCidade.Text = cidade.CodCidade;
                 tbNomeCidade.Text = cidade.Nome;
                 Editando(true);
+            }
+            else
+            {
+                MessageBox.Show("Cidade não encontrada no banco de dados",
+                "Cidade não encontrada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodCidade.Focus();
+                tbCodCidade.SelectAll();
             }
         }
 

@@ -11,5 +11,6 @@ namespace _5gpro.Entities
         public List<_Item> Itens { get; set; }
         public decimal ValorTotalItens { get; set; }
         public decimal ValorTotalOrcamento { get; set; }
+
     }
 }
