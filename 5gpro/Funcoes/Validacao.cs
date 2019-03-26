@@ -24,13 +24,13 @@ namespace _5gpro.Funcoes
             return resultadoValidacao;
         }
 
-        public int ValidarEntidade(object obj)
+        public bool ValidarEntidade(object obj)
         {
 
             //RECEBE A ENTIDADE A SER TESTADA
 
             //CRIA UMA VARIÁVEL "OK" COM O VALOR 1
-            int ok = 1;
+            bool ok = false;
 
             //CHAMA A FUNÇÃO getValidationErros PARA OBTER A LISTA DE ERROS
             //CASO EXISTA ALGUM
@@ -56,7 +56,7 @@ namespace _5gpro.Funcoes
             // "OK" PARA 0
             else
             {
-                ok = 0;
+                ok = true;
             }
 
             return ok;
