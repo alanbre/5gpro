@@ -47,43 +47,6 @@ namespace _5gpro.Forms
 
 
 
-        private void tbCodCliente_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCliente.Text.Length > 0)
-            {
-                pessoa = pessoaBLL.BuscarPessoaById(tbCodCliente.Text);
-                PreencheCamposPessoa(pessoa);
-            }
-            else
-            {
-                tbNomeCliente.Text = "";
-            }
-        }
-
-        private void tbCodItem_Leave(object sender, EventArgs e)
-        {
-            if (tbCodItem.Text.Length > 0)
-            {
-                DataRow dr = table.Select("Código=" + tbCodItem.Text).FirstOrDefault();
-                _Item item;
-                if (dr == null)
-                {
-                    item = itemBLL.BuscaItemById(tbCodItem.Text);
-                    PreencheCamposItem(item);
-                }
-                else
-                {
-                    item = itens.Where(i => i.Codigo == tbCodItem.Text).First();
-                    PreencheCamposItem(item);
-                }
-                
-            }
-            else
-            {
-                tbNomeCliente.Text = "";
-            }
-        }
-
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
             //tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
@@ -91,7 +54,7 @@ namespace _5gpro.Forms
             //{
             //    if (tbCodigo.Text.Length > 0)
             //    {
-            //        Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+            //        Orcamento neworcamento = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
             //        if (newpessoa != null)
             //        {
             //            pessoa = newpessoa;
@@ -139,6 +102,43 @@ namespace _5gpro.Forms
             //        }
             //    }
             //}
+        }
+
+        private void tbCodCliente_Leave(object sender, EventArgs e)
+        {
+            if (tbCodCliente.Text.Length > 0)
+            {
+                pessoa = pessoaBLL.BuscarPessoaById(tbCodCliente.Text);
+                PreencheCamposPessoa(pessoa);
+            }
+            else
+            {
+                tbNomeCliente.Text = "";
+            }
+        }
+
+        private void tbCodItem_Leave(object sender, EventArgs e)
+        {
+            if (tbCodItem.Text.Length > 0)
+            {
+                DataRow dr = table.Select("Código=" + tbCodItem.Text).FirstOrDefault();
+                _Item item;
+                if (dr == null)
+                {
+                    item = itemBLL.BuscaItemById(tbCodItem.Text);
+                    PreencheCamposItem(item);
+                }
+                else
+                {
+                    item = itens.Where(i => i.Codigo == tbCodItem.Text).First();
+                    PreencheCamposItem(item);
+                }
+                
+            }
+            else
+            {
+                tbNomeCliente.Text = "";
+            }
         }
 
         private void tbQuantidade_Leave(object sender, EventArgs e)

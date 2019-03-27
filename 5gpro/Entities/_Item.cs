@@ -34,20 +34,20 @@ namespace _5gpro.Entities
         public string Unimedida { get; set; }
 
         //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.
+        public decimal Quantidade { get; set; }
         public decimal ValorUnitario { get; set; }
         public decimal ValorTotal { get; set; }
         public decimal DescontoPorc { get; set; }
         public decimal Desconto { get; set; }
-        public decimal Quantidade { get; set; }
 
 
         public _Item()
         {
+            Quantidade = 0;
             ValorUnitario = 0;
             ValorTotal = 0;
             DescontoPorc = 0;
             Desconto = 0;
-            Quantidade = 0;
         }
 
         public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, string unimedida)
