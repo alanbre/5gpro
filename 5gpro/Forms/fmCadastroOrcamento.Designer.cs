@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmOrcamento
+    partial class fmCadastroOrcamento
     {
         /// <summary>
         /// Required designer variable.
@@ -134,7 +134,7 @@
             this.dtpCadastro.Name = "dtpCadastro";
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 5;
-            this.dtpCadastro.Value = new System.DateTime(2019, 3, 26, 0, 0, 0, 0);
+            this.dtpCadastro.Value = new System.DateTime(2019, 3, 27, 0, 0, 0, 0);
             this.dtpCadastro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyDown);
             this.dtpCadastro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyUp);
             // 
@@ -333,6 +333,7 @@
             this.dgvItens.Size = new System.Drawing.Size(955, 171);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
+            this.dgvItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItens_CellClick);
             // 
             // tbQuantidade
             // 
@@ -344,6 +345,7 @@
             this.tbQuantidade.TabIndex = 4;
             this.tbQuantidade.Text = "0,00";
             this.tbQuantidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbQuantidade_KeyDown);
+            this.tbQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantidade_KeyPress);
             this.tbQuantidade.Leave += new System.EventHandler(this.tbQuantidade_Leave);
             // 
             // lbValorUnit
@@ -375,7 +377,8 @@
             this.tbValorUnitItem.Size = new System.Drawing.Size(63, 20);
             this.tbValorUnitItem.TabIndex = 6;
             this.tbValorUnitItem.Text = "0,00";
-            this.tbValorUnitItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorUnit_KeyDown);
+            this.tbValorUnitItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorUnitItem_KeyDown);
+            this.tbValorUnitItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorUnitItem_KeyPress);
             this.tbValorUnitItem.Leave += new System.EventHandler(this.tbValorUnitItem_Leave);
             // 
             // tbDescItem
@@ -427,7 +430,8 @@
             this.tbValorTotItem.Size = new System.Drawing.Size(87, 20);
             this.tbValorTotItem.TabIndex = 8;
             this.tbValorTotItem.Text = "0,00";
-            this.tbValorTotItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorTot_KeyDown);
+            this.tbValorTotItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbValorTotItem_KeyDown);
+            this.tbValorTotItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorTotItem_KeyPress);
             this.tbValorTotItem.Leave += new System.EventHandler(this.tbValorTotItem_Leave);
             // 
             // lbCodItem
@@ -491,6 +495,7 @@
             this.tbDescontoItem.TabIndex = 12;
             this.tbDescontoItem.Text = "0,00";
             this.tbDescontoItem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescontoItem_KeyDown);
+            this.tbDescontoItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoItem_KeyPress);
             this.tbDescontoItem.Leave += new System.EventHandler(this.tbDescontoItem_Leave);
             // 
             // lbDescItem
@@ -513,6 +518,7 @@
             this.tbDescontoItemPorc.TabIndex = 10;
             this.tbDescontoItemPorc.Text = "0,00";
             this.tbDescontoItemPorc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescontoItemPorc_KeyDown);
+            this.tbDescontoItemPorc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoItemPorc_KeyPress);
             this.tbDescontoItemPorc.Leave += new System.EventHandler(this.tbDescontoItemPorc_Leave);
             // 
             // lbDescontoPorc
@@ -535,6 +541,7 @@
             this.btAutoriza.Size = new System.Drawing.Size(24, 24);
             this.btAutoriza.TabIndex = 15;
             this.btAutoriza.UseVisualStyleBackColor = true;
+            this.btAutoriza.Visible = false;
             // 
             // btNovoItem
             // 
@@ -546,6 +553,7 @@
             this.btNovoItem.Size = new System.Drawing.Size(24, 24);
             this.btNovoItem.TabIndex = 14;
             this.btNovoItem.UseVisualStyleBackColor = true;
+            this.btNovoItem.Click += new System.EventHandler(this.btNovoItem_Click);
             // 
             // lbTotalItens
             // 
@@ -648,7 +656,7 @@
             this.lbTotalOrcamento.TabIndex = 6;
             this.lbTotalOrcamento.Text = "Valor total do orçamento";
             // 
-            // fmOrcamento
+            // fmCadastroOrcamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -659,7 +667,7 @@
             this.Controls.Add(this.gbDadosOrcamento);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1255, 570);
-            this.Name = "fmOrcamento";
+            this.Name = "fmCadastroOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Orçamentos";

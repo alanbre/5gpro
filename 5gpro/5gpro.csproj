@@ -140,16 +140,19 @@
     <Compile Include="Forms\fmMain.Designer.cs">
       <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmOrcamento.cs">
+    <Compile Include="Forms\fmCadastroOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmOrcamento.Designer.cs">
-      <DependentUpon>fmOrcamento.cs</DependentUpon>
+    <Compile Include="Forms\fmCadastroOrcamento.Designer.cs">
+      <DependentUpon>fmCadastroOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
+    <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
     <Compile Include="Funcoes\FuncoesBanco.cs" />
-    <Compile Include="Funcoes\Validacao.cs" />
+    <Compile Include="Funcoes\Validacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,8 +189,8 @@
     <EmbeddedResource Include="Forms\fmMain.resx">
       <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmOrcamento.resx">
-      <DependentUpon>fmOrcamento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCadastroOrcamento.resx">
+      <DependentUpon>fmCadastroOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

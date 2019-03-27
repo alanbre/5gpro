@@ -42,7 +42,11 @@ namespace _5gpro.Entities
 
         public _Item()
         {
-
+            ValorUnitario = 0;
+            ValorTotal = 0;
+            DescontoPorc = 0;
+            Desconto = 0;
+            Quantidade = 0;
         }
 
         public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, string unimedida)
