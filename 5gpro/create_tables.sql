@@ -172,25 +172,10 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`orcamento` (
   `valor_orcamento` DECIMAL(10,2) NULL,
   `desconto_total_itens` DECIMAL(10,2) NULL,
   `desconto_orcamento` DECIMAL(10,2) NULL,
-  PRIMARY KEY (`idorcamento`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`orcamento_has_pessoa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`orcamento_has_pessoa` (
-  `idorcamento` INT NOT NULL,
-  `idpessoa` INT NOT NULL,
-  PRIMARY KEY (`idorcamento`, `idpessoa`),
-  INDEX `fk_orcamento_has_pessoa_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
-  INDEX `fk_orcamento_has_pessoa_orcamento1_idx` (`idorcamento` ASC) VISIBLE,
-  CONSTRAINT `fk_orcamento_has_pessoa_orcamento1`
-    FOREIGN KEY (`idorcamento`)
-    REFERENCES `5gprodatabase`.`orcamento` (`idorcamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_orcamento_has_pessoa_pessoa1`
+  `idpessoa` INT NULL,
+  PRIMARY KEY (`idorcamento`),
+  INDEX `fk_orcamento_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_orcamento_pessoa1`
     FOREIGN KEY (`idpessoa`)
     REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
     ON DELETE NO ACTION
@@ -208,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`orcamento_has_item` (
   `valor_unitario` DECIMAL(10,2) NULL,
   `valor_total` DECIMAL(10,2) NULL,
   `desconto_porc` DECIMAL(10,2) NULL,
-  `decontro` DECIMAL(10,2) NULL,
+  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idorcamento`, `iditem`),
   INDEX `fk_orcamento_has_item_item1_idx` (`iditem` ASC) VISIBLE,
   INDEX `fk_orcamento_has_item_orcamento1_idx` (`idorcamento` ASC) VISIBLE,
