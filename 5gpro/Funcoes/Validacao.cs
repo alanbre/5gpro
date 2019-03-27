@@ -19,7 +19,7 @@ namespace _5gpro.Funcoes
             var resultadoValidacao = new List<ValidationResult>();
             var contexto = new ValidationContext(obj, null, null);
             Validator.TryValidateObject(obj, contexto, resultadoValidacao, true);
-            
+
 
             //RETORNA A LISTA DE ERROS GERADA
             return resultadoValidacao;
@@ -36,7 +36,7 @@ namespace _5gpro.Funcoes
             //CHAMA A FUNÇÃO getValidationErros PARA OBTER A LISTA DE ERROS
             //CASO EXISTA ALGUM
             var erros = Validacao.getValidationErros(obj);
-            
+
 
             //CRIA UMA LISTA DE STRING PARA ARMAZENAR OS ERROS PARA QUE
             //SEJA POSSÍVEL APRESENTAR APENAS O ERRO DA POSIÇÃO [0]
@@ -45,8 +45,7 @@ namespace _5gpro.Funcoes
             // E ARMAZENANDO ELES NA LISTA DE STRING
             List<string> listaerros = new List<string>();
             List<string> listabotoes = new List<string>();
-            List<string> listabotoesok = new List<string>();
-            
+
 
             foreach (var error in erros)
             {
@@ -62,9 +61,9 @@ namespace _5gpro.Funcoes
             string todoserros = "CAMPOS OBRIGATÓRIOS";
             if (listaerros.Count > 0)
             {
-                foreach(var erro in listaerros)
-                {                 
-                    todoserros = todoserros +"\n \n "+ erro;
+                foreach (var erro in listaerros)
+                {
+                    todoserros = todoserros + "\n \n " + erro;
                 }
                 pintarBotoes(listabotoes, controls);
                 MessageBox.Show(todoserros);
@@ -81,15 +80,61 @@ namespace _5gpro.Funcoes
             //RECEBE A LISTA DE BOTOES QUE DEVEM SER PINTADOS E EM QUAL CONTROLCOLLECTION
 
             Control[] c;
-            
+
+
+            //PEGA TODOSS OS COMPONENTESS DENTRO DO controls
+            //E VERFICIA O TIPO DELE, CASO SEJA PANEL FAZ UM FOREACH
+            //PARA PINTAR OS COMPONENTES DENTRO DO PANEL
+            foreach (Control ctrl in controls)
+            {
+                //PAINEL
+                if (ctrl is Panel)
+                {
+                    foreach (Control ctrlp in ctrl.Controls)
+                    {
+                        if (ctrlp is TextBox)
+                        {
+                            ctrlp.BackColor = System.Drawing.Color.White;
+
+                        }
+                    }
+
+                }
+
+                //TABPAGE
+                if (ctrl is TabControl)
+                {
+                    foreach (TabPage page in ctrl.Controls)
+                    {
+                        foreach (Control ctrltabpage in page.Controls)
+                        {
+                            if (ctrltabpage is TextBox)
+                            {
+                                ctrltabpage.BackColor = System.Drawing.Color.White;
+                            }
+                        }
+                    }
+                }
+
+                //TEXTBOX
+                if (ctrl is TextBox)
+                {
+                    ctrl.BackColor = System.Drawing.Color.White;
+                }
+            }
+
+
+
+            //DEPOIS DE PINTAR TODOS OS CAMPOS DE BRANCO, ELE PINTA
+            //OS CAMPOS COM ERRO, DE VERMELHO
             foreach (var botao in botoes)
             {
                 c = controls.Find(botao, true);
 
                 foreach (Control ct in c)
                 {
-                    ct.BackColor = System.Drawing.Color.Yellow;
-                }
+                    ct.BackColor = System.Drawing.Color.Salmon;                 
+               }
 
             }
 
