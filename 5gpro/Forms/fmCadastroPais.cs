@@ -43,7 +43,9 @@ namespace _5gpro.Forms
             if (ok)
             {
                 pbl.salvar(pais);
-                new Limpar().limparTextBoxes(this.Controls);
+                
+                
+                new Limpar().limparTudo(this.Controls);
                 MessageBox.Show("País adicionado com sucesso!");
             }
 

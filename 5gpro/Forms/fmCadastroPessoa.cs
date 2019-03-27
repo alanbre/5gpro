@@ -106,6 +106,7 @@ namespace _5gpro.Forms
 
             if (ok)
             {
+                
                 int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
@@ -124,7 +125,7 @@ namespace _5gpro.Forms
                     Editando(false);
                 }
                 else if (resultado == 2)
-                {
+                {         
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
                 }
@@ -708,6 +709,9 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new Limpar().limparTudo(this.Controls);
+        }
     }
 }
