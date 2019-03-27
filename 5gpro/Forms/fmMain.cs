@@ -32,7 +32,7 @@ namespace _5gpro
 
         private void tsmiCadastroOrcamentos_Click(object sender, EventArgs e)
         {
-            var formCadOrcamentos = new fmOrcamento();
+            var formCadOrcamentos = new fmCadastroOrcamento();
             formCadOrcamentos.Show(this);
         }
     }
