@@ -24,12 +24,14 @@ namespace _5gpro.Forms
         {
             PaisBLL pbl = new PaisBLL();
 
-            pais.idpais = tbIdpais.Text;
+            pais.idpais = tbCodpais.Text;
             pais.nome = tbNomepais.Text;
-            pais.sigla = tbSigla.Text;
+            pais.sigla = tbSiglapais.Text;
+
+            ControlCollection controls = (ControlCollection)this.Controls;
 
             Validacao vl = new Validacao();
-            bool ok = vl.ValidarEntidade(pais);
+            bool ok = vl.ValidarEntidade(pais, controls);
 
             //QUANDO A VARIÁVEL OK FOR RETORNADO COM O VALOR 0
             //SALVA O REGISTRO
@@ -56,12 +58,7 @@ namespace _5gpro.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string tb = "tbSigla";
-            string cmnd = ".BackColor = System.Drawing.Color.Red;";
-
             
-            
-            //tbSigla.BackColor = System.Drawing.Color.Red;
         }
 
 

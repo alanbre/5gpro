@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -13,6 +14,8 @@ namespace _5gpro.Forms
         Unimedida unimedida = new Unimedida();
         _ItemBLL _itemBLL = new _ItemBLL();
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
+        Validacao validacao = new Validacao();
+        
 
         bool editando = false;
 
@@ -116,13 +119,11 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            //tbCodigo.BackColor = System.Drawing.Color.Red;
-            string tb = "tbCodigo";
-            string tc = ".BackColor = System.Drawing.Color.Red;";
 
-
-
+            List<string> botoes = new List<string>();
+            
             _item = new _Item();
+
             _item.Codigo = tbCodigo.Text;
             _item.Descricao = tbDescricao.Text;
             _item.DescCompra = tbDescricaoDeCompra.Text;
@@ -159,14 +160,13 @@ namespace _5gpro.Forms
 
             _item.Unimedida = tbCodUnimedida.Text;
 
-            Validacao vld = new Validacao();
-            bool ok = vld.ValidarEntidade(_item);
+            ControlCollection controls = (ControlCollection)this.Controls;
+
+            bool ok = validacao.ValidarEntidade(_item, controls);
 
             if (ok)
             {
-
                 int resultado = _itemBLL.SalvarOuAtualizarItem(_item);
-
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -552,6 +552,17 @@ namespace _5gpro.Forms
             //ABRE O FORM DE BUSCA ITEM
             var buscaItem = new fmBuscaItem();
             buscaItem.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ControlCollection controls = (ControlCollection)this.Controls;       
+            List<string> botoes = new List<string>();
+            botoes.Add("tbCodigo");
+            botoes.Add("tbDescricao");
+
+            validacao.pintarBotoes(botoes, controls);
+
         }
     }
 }
