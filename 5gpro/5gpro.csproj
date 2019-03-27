@@ -150,9 +150,8 @@
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
     <Compile Include="Funcoes\FuncoesBanco.cs" />
-    <Compile Include="Funcoes\Validacao.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Funcoes\Limpar.cs" />
+    <Compile Include="Funcoes\Validacao.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

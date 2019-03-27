@@ -15,6 +15,12 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroPais : Form
     {
+
+        Validacao validacao = new Validacao();
+    
+        
+
+
         public fmCadastroPais()
         {
             InitializeComponent();
@@ -30,18 +36,16 @@ namespace _5gpro.Forms
 
             ControlCollection controls = (ControlCollection)this.Controls;
 
-            Validacao vl = new Validacao();
-            bool ok = vl.ValidarEntidade(pais, controls);
+            bool ok = validacao.ValidarEntidade(pais, controls);
 
             //QUANDO A VARIÁVEL OK FOR RETORNADO COM O VALOR 0
             //SALVA O REGISTRO
             if (ok)
             {
                 pbl.salvar(pais);
+                new Limpar().limparTextBoxes(this.Controls);
                 MessageBox.Show("País adicionado com sucesso!");
             }
-
-
 
         }
 
@@ -60,25 +64,6 @@ namespace _5gpro.Forms
         {
             
         }
-
-
-        //private void ValidarPais(object obj)
-        //{
-        //    var erros = Validacao.getValidationErros(obj);
-        //    List<string> listaerros = new List<string>();
-
-        //    foreach (var error in erros)
-        //    {
-
-        //        listaerros.Add(error.ErrorMessage);
-
-        //    }
-        //    if (listaerros.Count > 0)
-        //    {
-        //        MessageBox.Show(listaerros[0]);
-        //    }
-
-        //}
 
     }
 }

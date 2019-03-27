@@ -14,7 +14,6 @@ namespace _5gpro.Entities
         public string Codigo { get; set; }
 
         [Required(ErrorMessage = "A Descrição é obrigatória.|tbDescricao", AllowEmptyStrings = false)]
-        [Display(Name = "tbDescricaoTESTEEE")]
         public string Descricao { get; set; }
 
         public string DescCompra { get; set; }

@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
+using static System.Windows.Forms.Control;
 
 namespace _5gpro.Funcoes
 {
 
-    public class Validacao : Form
+    public class Validacao
     {
 
         public static IEnumerable<ValidationResult> getValidationErros(object obj)
@@ -66,7 +67,7 @@ namespace _5gpro.Funcoes
                     todoserros = todoserros + "\n \n " + erro;
                 }
                 pintarBotoes(listabotoes, controls);
-                MessageBox.Show(todoserros);
+                //MessageBox.Show(todoserros);
             }
             else
             {
@@ -133,8 +134,10 @@ namespace _5gpro.Funcoes
 
                 foreach (Control ct in c)
                 {
-                    ct.BackColor = System.Drawing.Color.Salmon;                 
-               }
+                    //ct.BackColor = System.Drawing.Color.Salmon;
+                    ct.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFD2CA");
+
+                }
 
             }
 
