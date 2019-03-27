@@ -38,22 +38,30 @@ namespace _5gpro.Funcoes
 
             //CRIA UMA LISTA DE STRING PARA ARMAZENAR OS ERROS PARA QUE
             //SEJA POSSÍVEL APRESENTAR APENAS O ERRO DA POSIÇÃO [0]
+
+            //PERCORRENDO A LISTA DE ERROS GERADOS PELA FUNÇÃO getValidationErros
+            // E ARMAZENANDO ELES NA LISTA DE STRING
             List<string> listaerros = new List<string>();
             foreach (var error in erros)
             {
-                //PERCORRENDO A LISTA DE ERROS GERADOS PELA FUNÇÃO getValidationErros
-                // E ARMAZENANDO ELES NA LISTA DE STRING
                 listaerros.Add(error.ErrorMessage);
             }
 
             //VERIFICA SE A LISTA TEM MAIS DE 0 REGISTROS E MOSTRA APENAS
             //O PRIMEIRO QUE ESTÁ NA POSIÇÃO [0]
-            if (listaerros.Count > 0)
-            {
-                MessageBox.Show(listaerros[0]);
-            }
             //QUANDO NÃO HOUVER MAIS ERROS, CAI NO ELSE E MUDA A VARIAVEL
             // "OK" PARA 0
+            string todoserros = "CAMPOS OBRIGATÓRIOS";
+            if (listaerros.Count > 0)
+            {
+                foreach(var erro in listaerros)
+                {
+                    
+                    todoserros = todoserros +"\n \n "+ erro;
+                }
+                MessageBox.Show(todoserros);
+                
+            }
             else
             {
                 ok = true;

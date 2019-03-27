@@ -116,6 +116,12 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
+            //tbCodigo.BackColor = System.Drawing.Color.Red;
+            string tb = "tbCodigo";
+            string tc = ".BackColor = System.Drawing.Color.Red;";
+
+
+
             _item = new _Item();
             _item.Codigo = tbCodigo.Text;
             _item.Descricao = tbDescricao.Text;

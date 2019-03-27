@@ -54,6 +54,16 @@ namespace _5gpro.Forms
 
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string tb = "tbSigla";
+            string cmnd = ".BackColor = System.Drawing.Color.Red;";
+
+            
+            
+            //tbSigla.BackColor = System.Drawing.Color.Red;
+        }
+
 
         //private void ValidarPais(object obj)
         //{
