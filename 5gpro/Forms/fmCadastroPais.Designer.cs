@@ -31,13 +31,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.tbIdpais = new System.Windows.Forms.TextBox();
+            this.tbCodpais = new System.Windows.Forms.TextBox();
             this.tbNomepais = new System.Windows.Forms.TextBox();
-            this.tbSigla = new System.Windows.Forms.TextBox();
+            this.tbSiglapais = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btCancelpais = new System.Windows.Forms.Button();
             this.btSavepais = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -67,12 +66,12 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Sigla";
             // 
-            // tbIdpais
+            // tbCodpais
             // 
-            this.tbIdpais.Location = new System.Drawing.Point(68, 66);
-            this.tbIdpais.Name = "tbIdpais";
-            this.tbIdpais.Size = new System.Drawing.Size(100, 20);
-            this.tbIdpais.TabIndex = 3;
+            this.tbCodpais.Location = new System.Drawing.Point(68, 66);
+            this.tbCodpais.Name = "tbCodpais";
+            this.tbCodpais.Size = new System.Drawing.Size(100, 20);
+            this.tbCodpais.TabIndex = 3;
             // 
             // tbNomepais
             // 
@@ -81,12 +80,12 @@
             this.tbNomepais.Size = new System.Drawing.Size(100, 20);
             this.tbNomepais.TabIndex = 4;
             // 
-            // tbSigla
+            // tbSiglapais
             // 
-            this.tbSigla.Location = new System.Drawing.Point(68, 146);
-            this.tbSigla.Name = "tbSigla";
-            this.tbSigla.Size = new System.Drawing.Size(100, 20);
-            this.tbSigla.TabIndex = 5;
+            this.tbSiglapais.Location = new System.Drawing.Point(68, 146);
+            this.tbSiglapais.Name = "tbSiglapais";
+            this.tbSiglapais.Size = new System.Drawing.Size(100, 20);
+            this.tbSiglapais.TabIndex = 5;
             // 
             // label4
             // 
@@ -116,28 +115,17 @@
             this.btSavepais.UseVisualStyleBackColor = true;
             this.btSavepais.Click += new System.EventHandler(this.btSavepais_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(215, 120);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // fmCadastroPais
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 236);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(216, 236);
             this.Controls.Add(this.btCancelpais);
             this.Controls.Add(this.btSavepais);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbSigla);
+            this.Controls.Add(this.tbSiglapais);
             this.Controls.Add(this.tbNomepais);
-            this.Controls.Add(this.tbIdpais);
+            this.Controls.Add(this.tbCodpais);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -154,12 +142,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbIdpais;
+        private System.Windows.Forms.TextBox tbCodpais;
         private System.Windows.Forms.TextBox tbNomepais;
-        private System.Windows.Forms.TextBox tbSigla;
+        private System.Windows.Forms.TextBox tbSiglapais;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btSavepais;
         private System.Windows.Forms.Button btCancelpais;
-        private System.Windows.Forms.Button button1;
     }
 }
