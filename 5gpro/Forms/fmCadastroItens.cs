@@ -154,14 +154,6 @@ namespace _5gpro.Forms
                 AbreTelaBuscaUnimedida();
             }
         }
-        //    if (char.IsLetterOrDigit((char)e.KeyCode))
-        //    {
-        //        Editando(true);
-        //    }
-        //}
-
-
-
 
 
         //EVENTOS DE TEXTCHANGED
@@ -415,7 +407,7 @@ namespace _5gpro.Forms
                     _item.Estoquenecessario = 0;
                 }
 
-                _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(tbCodUnimedida.Text);
+                _item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
 
 
                 ControlCollection controls = (ControlCollection)this.Controls;
@@ -603,6 +595,19 @@ namespace _5gpro.Forms
 
             validacao.pintarBotoes(botoes, controls);
 
+        }
+
+        private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
+        {
+            if (tbCodUnimedida.Text.Length > 0)
+            {
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
+                PreencheCamposUnimedida(unimedida);
+            }
+            else
+            {
+                tbDescricaoUndMedida.Text = "";
+            }
         }
     }
 }

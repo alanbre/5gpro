@@ -69,7 +69,7 @@ namespace _5gpro.Daos
 
         public Unimedida BuscaUnimedidaByCod(string cod)
         {
-            Unimedida unimedida = new Unimedida();
+            Unimedida unimedida = null;
             try
             {
                 AbrirConexao();
@@ -80,6 +80,7 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    unimedida = new Unimedida();
                     unimedida.Codigo = reader.GetString(reader.GetOrdinal("idunimedida"));
                     unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
                     unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));

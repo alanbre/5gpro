@@ -361,7 +361,7 @@ namespace _5gpro.Forms
                 pessoa.Numero = tbNumero.Text;
                 pessoa.Bairro = tbBairro.Text;
                 pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(tbCodCidade.Text);
+                pessoa.Cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
                 pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
                 pessoa.Telefone = mtbTelefone.TextNoMask();
                 pessoa.Email = tbEmail.Text;
