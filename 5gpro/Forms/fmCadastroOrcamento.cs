@@ -63,6 +63,10 @@ namespace _5gpro.Forms
         }
 
 
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
 
 
 
@@ -299,6 +303,8 @@ namespace _5gpro.Forms
                     dgvItens.Update();
                     dgvItens.Refresh();
                 }
+                tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
+                tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
             }
             else
             {
@@ -379,19 +385,18 @@ namespace _5gpro.Forms
             //TODO: IMPLEMENTAR SALVACADASTRO
             if (editando)
             {
+                orcamento = new Orcamento();
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(orcamento, controls);
 
                 if (ok)
                 {
-                    orcamento = new Orcamento();
                     orcamento.Codigo = tbCodigo.Text;
                     orcamento.Pessoa = pessoa;
                     orcamento.DataCadastro = dtpCadastro.Value;
                     orcamento.DataVencimento = cbVencimento.Checked ? dtpVencimento.Value : dtpCadastro.Value;
                     orcamento.UsaVencimento = cbVencimento.Checked;
                     orcamento.Itens = itens;
-                    List<string> atuacoes = new List<string>();
                     orcamento.ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text);
                     orcamento.DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text);
                     orcamento.DescontoOrcamento = Convert.ToDecimal(tbDescontoOrcamento.Text);
