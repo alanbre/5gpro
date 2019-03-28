@@ -388,14 +388,16 @@ namespace _5gpro.Forms
                     orcamento.Codigo = tbCodigo.Text;
                     orcamento.Pessoa = pessoa;
                     orcamento.DataCadastro = dtpCadastro.Value;
-                    if (cbVencimento.Checked) { orcamento.DataCadastro = dtpVencimento.Value; }
+                    orcamento.DataVencimento = cbVencimento.Checked ? dtpVencimento.Value : dtpCadastro.Value;
+                    orcamento.UsaVencimento = cbVencimento.Checked;
                     orcamento.Itens = itens;
                     List<string> atuacoes = new List<string>();
-                    orcamento.ValorTotalItens = Convert.ToDecimal(tbTotalItens.Text);
+                    orcamento.ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text);
                     orcamento.DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text);
                     orcamento.DescontoOrcamento = Convert.ToDecimal(tbDescontoOrcamento.Text);
+                    orcamento.ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalOrcamento.Text);
 
-                    int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+                    int resultado = orcamentoBLL.SalvarOuAtualizarOrcamento(orcamento);
 
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -632,7 +634,7 @@ namespace _5gpro.Forms
             tbValorTotItem.Text = orcamento.ValorTotalItens.ToString("############0.00");
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
             tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
-            tbTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
+            tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
         }
 
         private void LimpaCampos(bool limpaCod)
@@ -647,7 +649,7 @@ namespace _5gpro.Forms
             tbValorTotItem.Text = "0,00";
             tbDescontoTotalItens.Text = "0,00";
             tbDescontoOrcamento.Text = "0,00";
-            tbTotalOrcamento.Text = "0,00";
+            tbValorTotalOrcamento.Text = "0,00";
             table.Clear();
             dgvItens.Refresh();
         }

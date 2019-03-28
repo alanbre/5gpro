@@ -68,13 +68,13 @@
             this.btAutoriza = new System.Windows.Forms.Button();
             this.btNovoItem = new System.Windows.Forms.Button();
             this.lbTotalItens = new System.Windows.Forms.Label();
-            this.tbTotalItens = new System.Windows.Forms.TextBox();
+            this.tbValorTotalItens = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.tbDescontoOrcamento = new System.Windows.Forms.TextBox();
             this.lbDesconto = new System.Windows.Forms.Label();
             this.tbDescontoTotalItens = new System.Windows.Forms.TextBox();
             this.lbDescontoTotalItens = new System.Windows.Forms.Label();
-            this.tbTotalOrcamento = new System.Windows.Forms.TextBox();
+            this.tbValorTotalOrcamento = new System.Windows.Forms.TextBox();
             this.lbTotalOrcamento = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbDadosOrcamento.SuspendLayout();
@@ -556,16 +556,16 @@
             this.lbTotalItens.TabIndex = 0;
             this.lbTotalItens.Text = "Valor total dos itens";
             // 
-            // tbTotalItens
+            // tbValorTotalItens
             // 
-            this.tbTotalItens.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbTotalItens.Location = new System.Drawing.Point(9, 35);
-            this.tbTotalItens.Name = "tbTotalItens";
-            this.tbTotalItens.ReadOnly = true;
-            this.tbTotalItens.Size = new System.Drawing.Size(85, 20);
-            this.tbTotalItens.TabIndex = 1;
-            this.tbTotalItens.TabStop = false;
-            this.tbTotalItens.Text = "0,00";
+            this.tbValorTotalItens.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbValorTotalItens.Location = new System.Drawing.Point(9, 35);
+            this.tbValorTotalItens.Name = "tbValorTotalItens";
+            this.tbValorTotalItens.ReadOnly = true;
+            this.tbValorTotalItens.Size = new System.Drawing.Size(85, 20);
+            this.tbValorTotalItens.TabIndex = 1;
+            this.tbValorTotalItens.TabStop = false;
+            this.tbValorTotalItens.Text = "0,00";
             // 
             // gbTotais
             // 
@@ -575,10 +575,10 @@
             this.gbTotais.Controls.Add(this.lbDesconto);
             this.gbTotais.Controls.Add(this.tbDescontoTotalItens);
             this.gbTotais.Controls.Add(this.lbDescontoTotalItens);
-            this.gbTotais.Controls.Add(this.tbTotalOrcamento);
+            this.gbTotais.Controls.Add(this.tbValorTotalOrcamento);
             this.gbTotais.Controls.Add(this.lbTotalOrcamento);
             this.gbTotais.Controls.Add(this.lbTotalItens);
-            this.gbTotais.Controls.Add(this.tbTotalItens);
+            this.gbTotais.Controls.Add(this.tbValorTotalItens);
             this.gbTotais.Location = new System.Drawing.Point(1064, 200);
             this.gbTotais.MinimumSize = new System.Drawing.Size(163, 326);
             this.gbTotais.Name = "gbTotais";
@@ -627,14 +627,14 @@
             this.lbDescontoTotalItens.TabIndex = 2;
             this.lbDescontoTotalItens.Text = "Desconto total dos itens";
             // 
-            // tbTotalOrcamento
+            // tbValorTotalOrcamento
             // 
-            this.tbTotalOrcamento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbTotalOrcamento.Location = new System.Drawing.Point(8, 152);
-            this.tbTotalOrcamento.Name = "tbTotalOrcamento";
-            this.tbTotalOrcamento.Size = new System.Drawing.Size(85, 20);
-            this.tbTotalOrcamento.TabIndex = 7;
-            this.tbTotalOrcamento.Text = "0,00";
+            this.tbValorTotalOrcamento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbValorTotalOrcamento.Location = new System.Drawing.Point(8, 152);
+            this.tbValorTotalOrcamento.Name = "tbValorTotalOrcamento";
+            this.tbValorTotalOrcamento.Size = new System.Drawing.Size(85, 20);
+            this.tbValorTotalOrcamento.TabIndex = 7;
+            this.tbValorTotalOrcamento.Text = "0,00";
             // 
             // lbTotalOrcamento
             // 
@@ -725,9 +725,9 @@
         private System.Windows.Forms.GroupBox gbItens;
         private System.Windows.Forms.Button btNovoItem;
         private System.Windows.Forms.Label lbTotalItens;
-        private System.Windows.Forms.TextBox tbTotalItens;
+        private System.Windows.Forms.TextBox tbValorTotalItens;
         private System.Windows.Forms.GroupBox gbTotais;
-        private System.Windows.Forms.TextBox tbTotalOrcamento;
+        private System.Windows.Forms.TextBox tbValorTotalOrcamento;
         private System.Windows.Forms.Label lbTotalOrcamento;
         private System.Windows.Forms.Button btAutoriza;
         private System.Windows.Forms.TextBox tbDescontoOrcamento;
