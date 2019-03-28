@@ -345,35 +345,34 @@ namespace _5gpro.Forms
             //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
             if (editando)
             {
+
+                pessoa = new Pessoa();
+                pessoa.Codigo = tbCodigo.Text;
+                pessoa.Nome = tbNome.Text;
+                pessoa.Fantasia = tbFantasia.Text;
+                List<string> atuacoes = new List<string>();
+                foreach (string s in cblAtuacao.CheckedItems)
+                {
+                    atuacoes.Add(s);
+                }
+                pessoa.Atuacao = atuacoes;
+                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+                pessoa.Rua = tbRua.Text;
+                pessoa.Numero = tbNumero.Text;
+                pessoa.Bairro = tbBairro.Text;
+                pessoa.Complemento = tbComplemento.Text;
+                pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(tbCodCidade.Text);
+                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+                pessoa.Telefone = mtbTelefone.TextNoMask();
+                pessoa.Email = tbEmail.Text;
+
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(pessoa, controls);
 
                 if (ok)
                 {
-                    pessoa = new Pessoa();
-                    pessoa.Codigo = tbCodigo.Text;
-                    pessoa.Nome = tbNome.Text;
-                    pessoa.Fantasia = tbFantasia.Text;
-                    List<string> atuacoes = new List<string>();
-                    foreach (string s in cblAtuacao.CheckedItems)
-                    {
-                        atuacoes.Add(s);
-                    }
-                    pessoa.Atuacao = atuacoes;
-                    pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-                    pessoa.Rua = tbRua.Text;
-                    pessoa.Numero = tbNumero.Text;
-                    pessoa.Bairro = tbBairro.Text;
-                    pessoa.Complemento = tbComplemento.Text;
-                    pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(tbCodCidade.Text);
-                    pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-                    pessoa.Telefone = mtbTelefone.TextNoMask();
-                    pessoa.Email = tbEmail.Text;
-
-
-
                     int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
-
+                    validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
                     // resultado 2 = foi atualizado com sucesso
@@ -433,10 +432,16 @@ namespace _5gpro.Forms
         {
             //Busca a pessoa com ID maior que o atual preenchido. Só preenche se houver algum registro maior
             //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
+
+            ControlCollection controls = (ControlCollection)this.Controls;
+
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
                 //la do inicio do arquivo.
+
+                validacao.despintarCampos(controls);
+
                 Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
                 if (newpessoa != null)
                 {
@@ -451,6 +456,7 @@ namespace _5gpro.Forms
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    validacao.despintarCampos(controls);
                     Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
                     if (newpessoa != null)
                     {
@@ -476,10 +482,15 @@ namespace _5gpro.Forms
         {
             //Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
             //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+
+            ControlCollection controls = (ControlCollection)this.Controls;
+
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
                 //la do inicio do arquivo.
+
+                validacao.despintarCampos(controls);
                 Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
                 if (newpessoa != null)
                 {
@@ -494,6 +505,7 @@ namespace _5gpro.Forms
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    validacao.despintarCampos(controls);
                     Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
                     if (newpessoa != null)
                     {
