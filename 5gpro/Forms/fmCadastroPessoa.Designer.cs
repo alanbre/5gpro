@@ -544,6 +544,7 @@
             this.Controls.Add(this.pnDados);
             this.Controls.Add(this.gbTipoDePessoa);
             this.Controls.Add(this.pnDadosGerais);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(850, 600);
@@ -551,6 +552,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de pessoas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroPessoa_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmCadastroPessoa_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.gbAtuacao.ResumeLayout(false);

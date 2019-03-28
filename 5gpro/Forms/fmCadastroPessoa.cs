@@ -48,27 +48,7 @@ namespace _5gpro.Forms
         //EVENTOS DE CLICK
         private void btNovo_Click(object sender, EventArgs e)
         {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    Editando(true);
-                    NovoRegistro();
-                    tbNome.Focus();
-                }
-                else
-                {
-
-                }
-            }
-            else
-            {
-                NovoRegistro();
-                tbNome.Focus();
-            }
+            NovoRegistro();
         }
 
         private void btBuscar_Click(object sender, EventArgs e)
@@ -81,56 +61,7 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
-            pessoa = new Pessoa();
-            pessoa.Codigo = tbCodigo.Text;
-            pessoa.Nome = tbNome.Text;
-            pessoa.Fantasia = tbFantasia.Text;
-            List<string> atuacoes = new List<string>();
-            foreach (string s in cblAtuacao.CheckedItems)
-            {
-                atuacoes.Add(s);
-            }
-            pessoa.Atuacao = atuacoes;
-            pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-            pessoa.Rua = tbRua.Text;
-            pessoa.Numero = tbNumero.Text;
-            pessoa.Bairro = tbBairro.Text;
-            pessoa.Complemento = tbComplemento.Text;
-            pessoa.Cidade = tbCodCidade.Text;
-            pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-            pessoa.Telefone = mtbTelefone.TextNoMask();
-            pessoa.Email = tbEmail.Text;
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-            bool ok = validacao.ValidarEntidade(pessoa, controls);
-
-            if (ok)
-            {
-                
-                int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
-
-                // resultado 0 = nada foi inserido (houve algum erro)
-                // resultado 1 = foi inserido com sucesso
-                // resultado 2 = foi atualizado com sucesso
-                if (resultado == 0)
-                {
-                    MessageBox.Show("Problema ao salvar o registro",
-                    "Problema ao salvar",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                }
-                else if (resultado == 1)
-                {
-                    tbAjuda.Text = "Dados salvos com sucesso";
-                    Editando(false);
-                }
-                else if (resultado == 2)
-                {         
-                    tbAjuda.Text = "Dados atualizados com sucesso";
-                    Editando(false);
-                }
-            }
+            SalvaCadastro();
         }
 
         private void btBuscaCidade_Click(object sender, EventArgs e)
@@ -142,7 +73,7 @@ namespace _5gpro.Forms
         {
             //Se não houver uma pessoa setada (por qualquer motivo) ele limpa os campos. Se tiver pessoa recarrega com as informações do banco.
             //Desta forma é necessário ter carregado um registro pra poder recarregar.
-            if (pessoa != null) { RecarregarDados(pessoa); } else { LimpaCampos(true); Editando(false); }
+            RecarregarDados(pessoa);
         }
 
         private void btRight_Click(object sender, EventArgs e)
@@ -517,29 +448,88 @@ namespace _5gpro.Forms
 
 
 
-
-
-
         private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
+
+        private void fmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+
         //PADRÕES CRIADAS
         private void RecarregarDados(Pessoa pessoa)
         {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (pessoa != null)
+                    {
+                        pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
+                }
+            }
+            else
+            {
+                pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
+                PreencheCampos(pessoa);
+                Editando(false);
+            }
 
-            pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
-            PreencheCampos(pessoa);
-            Editando(false);
         }
 
         private void NovoRegistro()
         {
-            LimpaCampos(false);
-            tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
-            pessoa = null;
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    LimpaCampos(false);
+                    tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+                    pessoa = null;
+                    tbNome.Focus();
+                    Editando(true);
+                }
+            }
+            else
+            {
+                LimpaCampos(false);
+                tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+                pessoa = null;
+                tbNome.Focus();
+                Editando(true);
+            }
         }
 
         private void AlteraBotoes()
@@ -685,5 +675,79 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
+        private void SalvaCadastro()
+        {
+            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
+            if (editando)
+            {
+                pessoa = new Pessoa();
+                pessoa.Codigo = tbCodigo.Text;
+                pessoa.Nome = tbNome.Text;
+                pessoa.Fantasia = tbFantasia.Text;
+                List<string> atuacoes = new List<string>();
+                foreach (string s in cblAtuacao.CheckedItems)
+                {
+                    atuacoes.Add(s);
+                }
+                pessoa.Atuacao = atuacoes;
+                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+                pessoa.Rua = tbRua.Text;
+                pessoa.Numero = tbNumero.Text;
+                pessoa.Bairro = tbBairro.Text;
+                pessoa.Complemento = tbComplemento.Text;
+                pessoa.Cidade = tbCodCidade.Text;
+                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+                pessoa.Telefone = mtbTelefone.TextNoMask();
+                pessoa.Email = tbEmail.Text;
+
+                ControlCollection controls = (ControlCollection)this.Controls;
+                bool ok = validacao.ValidarEntidade(pessoa, controls);
+
+                if (ok)
+                {
+
+                    int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+
+                    // resultado 0 = nada foi inserido (houve algum erro)
+                    // resultado 1 = foi inserido com sucesso
+                    // resultado 2 = foi atualizado com sucesso
+                    if (resultado == 0)
+                    {
+                        MessageBox.Show("Problema ao salvar o registro",
+                        "Problema ao salvar",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    }
+                    else if (resultado == 1)
+                    {
+                        tbAjuda.Text = "Dados salvos com sucesso";
+                        Editando(false);
+                    }
+                    else if (resultado == 2)
+                    {
+                        tbAjuda.Text = "Dados atualizados com sucesso";
+                        Editando(false);
+                    }
+                }
+            }
+        }
+
+        private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                RecarregarDados(pessoa);
+            }
+
+            if (e.KeyCode == Keys.F1)
+            {
+                NovoRegistro();
+            }
+
+            if (e.KeyCode == Keys.F2)
+            {
+                SalvaCadastro();
+            }
+        }
     }
 }
