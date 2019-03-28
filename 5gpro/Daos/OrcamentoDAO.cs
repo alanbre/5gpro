@@ -52,6 +52,44 @@ namespace _5gpro.Daos
             return orcamento;
         }
 
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT o1.idorcamento + 1 AS proximoid
+                                             FROM orcamento AS o1
+                                             LEFT OUTER JOIN orcamento AS o2 ON o1.idorcamento + 1 = o2.idorcamento
+                                             WHERE o2.idorcamento IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+                else
+                {
+                    //FIZ ESSE ELSE PARA CASO N TIVER NENHUM REGISTRO NA BASE... PODE DAR PROBLEMA EM ALGUM MOMENTO xD
+                    proximoid = "1";
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return proximoid;
+        }
+
         public List<_Item> BuscaItensDoOrcamento(Orcamento orcamento)
         {
             List<_Item> itensOrcamento = new List<_Item>();
@@ -97,5 +135,7 @@ namespace _5gpro.Daos
             }
             return itensOrcamento;
         }
+
+
     }
 }

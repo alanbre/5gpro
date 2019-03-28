@@ -19,7 +19,7 @@ namespace _5gpro.Forms
         List<_Item> itens = new List<_Item>();
         _Item itemSelecionado;
         Pessoa pessoa;
-
+        Validacao validacao = new Validacao();
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         DataTable table = new DataTable();
@@ -42,13 +42,34 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
+        private void fmCadastroOrcamento_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                RecarregaDados(pessoa);
+            }
+
+            if (e.KeyCode == Keys.F1)
+            {
+                NovoCadastro();
+            }
+
+            if (e.KeyCode == Keys.F2)
+            {
+                SalvaCadastro();
+            }
+
+            EnterTab(this.ActiveControl, e);
+        }
+
+
+
+
 
         private void cbVencimento_CheckedChanged(object sender, EventArgs e)
         {
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
         }
-
-
 
 
         private void tbCodigo_Leave(object sender, EventArgs e)
@@ -198,110 +219,6 @@ namespace _5gpro.Forms
         }
 
 
-
-        //EVENTOS DE KEY DOWN
-        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbCodCliente_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void dtpCadastro_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void dtpVencimento_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbCodItem_KeyDown(object sender, KeyEventArgs e)
-
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbQuantidade_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-
-        }
-
-        private void tbValorUnitItem_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbValorTotItem_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbDescontoTotal_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbDescontoItemPorc_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbDescontoItem_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-
         //EVENTOS DE KEY PRESS
         private void tbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -414,6 +331,189 @@ namespace _5gpro.Forms
 
 
 
+
+
+
+
+        //PADRÕES CRIADAS
+        private void NovoCadastro()
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    LimpaCampos(false);
+                    tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
+                    orcamento = null;
+                    tbCodCliente.Focus();
+                    Editando(true);
+                }
+            }
+            else
+            {
+                LimpaCampos(false);
+                tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
+                orcamento = null;
+                tbCodCliente.Focus();
+                Editando(true);
+            }
+        }
+
+        private void AbreTelaBuscaOrcamento()
+        {
+            //TODO: CRIAR TELA DE BUSCA DE ORÇAMENTO
+            //var buscaPessoa = new fmBuscaPessoa();
+            //buscaPessoa.ShowDialog();
+            //if (buscaPessoa.pessoaSelecionada != null)
+            //{
+            //    pessoa = buscaPessoa.pessoaSelecionada;
+            //    PreencheCampos(pessoa);
+            //}
+        }
+
+        private void SalvaCadastro()
+        {
+            //TODO: IMPLEMENTAR SALVACADASTRO
+            if (editando)
+            {
+                ControlCollection controls = (ControlCollection)this.Controls;
+                bool ok = validacao.ValidarEntidade(orcamento, controls);
+
+                if (ok)
+                {
+                    orcamento = new Orcamento();
+                    orcamento.Codigo = tbCodigo.Text;
+                    orcamento.Pessoa = pessoa;
+                    orcamento.DataCadastro = dtpCadastro.Value;
+                    if (cbVencimento.Checked) { orcamento.DataCadastro = dtpVencimento.Value; }
+                    orcamento.Itens = itens;
+                    List<string> atuacoes = new List<string>();
+                    orcamento.ValorTotalItens = Convert.ToDecimal(tbTotalItens.Text);
+                    orcamento.DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text);
+                    orcamento.DescontoOrcamento = Convert.ToDecimal(tbDescontoOrcamento.Text);
+
+                    int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+
+                    // resultado 0 = nada foi inserido (houve algum erro)
+                    // resultado 1 = foi inserido com sucesso
+                    // resultado 2 = foi atualizado com sucesso
+                    if (resultado == 0)
+                    {
+                        MessageBox.Show("Problema ao salvar o registro",
+                        "Problema ao salvar",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    }
+                    else if (resultado == 1)
+                    {
+                        tbAjuda.Text = "Dados salvos com sucesso";
+                        Editando(false);
+                    }
+                    else if (resultado == 2)
+                    {
+                        tbAjuda.Text = "Dados atualizados com sucesso";
+                        Editando(false);
+                    }
+                }
+            }
+        }
+
+        private void RecarregaDados(Pessoa pessoa)
+        {
+            //TODO: IMPLEMENTAR O RECARREGADADOS
+        }
+
+        private void ProximoCadastro()
+        {
+            //TODO: IMPLEMENTAR O PROXIMOCADASTRO
+            ////Busca a pessoa com ID maior que o atual preenchido. Só preenche se houver algum registro maior
+            ////Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
+            //if (!editando && tbCodigo.Text.Length > 0)
+            //{
+            //    //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
+            //    //la do inicio do arquivo.
+            //    Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+            //    if (newpessoa != null)
+            //    {
+            //        pessoa = newpessoa;
+            //        PreencheCampos(pessoa);
+            //    }
+            //}
+            //else if (editando && tbCodigo.Text.Length > 0)
+            //{
+            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            //   "Aviso de alteração",
+            //   MessageBoxButtons.YesNo,
+            //   MessageBoxIcon.Warning) == DialogResult.Yes)
+            //    {
+            //        Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+            //        if (newpessoa != null)
+            //        {
+            //            pessoa = newpessoa;
+            //            PreencheCampos(pessoa);
+            //            Editando(false);
+            //        }
+            //        else
+            //        {
+            //            newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+            //            if (newpessoa != null)
+            //            {
+            //                pessoa = newpessoa;
+            //                PreencheCampos(pessoa);
+            //                Editando(false);
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
+        private void CadastroAnterior()
+        {
+            //TODO: IMPLEMENTAR O CADASTROANTERIOR
+            ////Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
+            ////Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+            //if (!editando && tbCodigo.Text.Length > 0)
+            //{
+            //    //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
+            //    //la do inicio do arquivo.
+            //    Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+            //    if (newpessoa != null)
+            //    {
+            //        pessoa = newpessoa;
+            //        PreencheCampos(pessoa);
+            //    }
+            //}
+            //else if (editando && tbCodigo.Text.Length > 0)
+            //{
+            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            //   "Aviso de alteração",
+            //   MessageBoxButtons.YesNo,
+            //   MessageBoxIcon.Warning) == DialogResult.Yes)
+            //    {
+            //        Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+            //        if (newpessoa != null)
+            //        {
+            //            pessoa = newpessoa;
+            //            PreencheCampos(pessoa);
+            //            Editando(false);
+            //        }
+            //        else
+            //        {
+            //            newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+            //            if (newpessoa != null)
+            //            {
+            //                pessoa = newpessoa;
+            //                PreencheCampos(pessoa);
+            //                Editando(false);
+            //            }
+            //        }
+            //    }
+            //}
+        }
+
         private void AbreTelaBuscaPessoa()
         {
             var buscaPessoa = new fmBuscaPessoa();
@@ -432,6 +532,15 @@ namespace _5gpro.Forms
                 tbCodCliente.Text = pessoa.Codigo;
                 tbNomeCliente.Text = pessoa.Nome;
                 Editando(true);
+            }
+            else
+            {
+                MessageBox.Show("Cliente não encontrado no banco de dados",
+                "Cliente não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodCliente.Focus();
+                tbCodCliente.SelectAll();
             }
         }
 
@@ -491,6 +600,15 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
         private void LimpaCampoItem()
         {
             tbCodItem.Clear();
@@ -513,7 +631,7 @@ namespace _5gpro.Forms
             cbVencimento.Checked = orcamento.DataVencimento != null ? true : false;
             tbValorTotItem.Text = orcamento.ValorTotalItens.ToString("############0.00");
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
-            tbDesconto.Text = orcamento.DescontoOrcamento.ToString("############0.00");
+            tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
             tbTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
         }
 
@@ -528,10 +646,11 @@ namespace _5gpro.Forms
             cbVencimento.Checked = false;
             tbValorTotItem.Text = "0,00";
             tbDescontoTotalItens.Text = "0,00";
-            tbDesconto.Text = "0,00";
+            tbDescontoOrcamento.Text = "0,00";
             tbTotalOrcamento.Text = "0,00";
             table.Clear();
             dgvItens.Refresh();
         }
+
     }
 }

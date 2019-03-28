@@ -125,7 +125,6 @@
             this.tbFantasia.Size = new System.Drawing.Size(528, 20);
             this.tbFantasia.TabIndex = 5;
             this.tbFantasia.TextChanged += new System.EventHandler(this.tbFantasia_TextChanged);
-            this.tbFantasia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFantasia_KeyDown);
             // 
             // lbFantasia
             // 
@@ -144,7 +143,6 @@
             this.tbNome.Size = new System.Drawing.Size(527, 20);
             this.tbNome.TabIndex = 3;
             this.tbNome.TextChanged += new System.EventHandler(this.tbNome_TextChanged);
-            this.tbNome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNome_KeyDown);
             // 
             // lbNome
             // 
@@ -162,7 +160,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyDown);
             this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
             this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
             this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
@@ -197,7 +194,6 @@
             this.rbPessoaJuridica.Text = "Pessoa Jurídica";
             this.rbPessoaJuridica.UseVisualStyleBackColor = true;
             this.rbPessoaJuridica.CheckedChanged += new System.EventHandler(this.rbPessoaJuridica_CheckedChanged);
-            this.rbPessoaJuridica.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbPessoaJuridica_KeyDown);
             // 
             // rbPessoaFisica
             // 
@@ -211,7 +207,6 @@
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
             this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.rbPessoaFisica_CheckedChanged);
-            this.rbPessoaFisica.KeyDown += new System.Windows.Forms.KeyEventHandler(this.rbPessoaFisica_KeyDown);
             // 
             // pnDados
             // 
@@ -270,7 +265,6 @@
             this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
             this.tbCodCidade.TabIndex = 8;
             this.tbCodCidade.TextChanged += new System.EventHandler(this.tbCodCidade_TextChanged);
-            this.tbCodCidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyDown);
             this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
             this.tbCodCidade.Leave += new System.EventHandler(this.tbCodCidade_Leave);
             // 
@@ -291,7 +285,6 @@
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
             this.tbEmail.TabIndex = 15;
             this.tbEmail.TextChanged += new System.EventHandler(this.tbEmail_TextChanged);
-            this.tbEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbEmail_KeyDown);
             // 
             // lbEmail
             // 
@@ -310,7 +303,6 @@
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 13;
             this.mtbTelefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbTelefone_MaskInputRejected);
-            this.mtbTelefone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbTelefone_KeyDown);
             // 
             // lbTelefone
             // 
@@ -330,7 +322,6 @@
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
             this.mtbCpfCnpj.TabIndex = 11;
             this.mtbCpfCnpj.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbCpfCnpj_MaskInputRejected);
-            this.mtbCpfCnpj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCpfCnpj_KeyDown);
             // 
             // lbCpf
             // 
@@ -349,7 +340,6 @@
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
             this.tbComplemento.TabIndex = 7;
             this.tbComplemento.TextChanged += new System.EventHandler(this.tbComplemento_TextChanged);
-            this.tbComplemento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbComplemento_KeyDown);
             // 
             // lbComplemento
             // 
@@ -368,7 +358,6 @@
             this.tbBairro.Size = new System.Drawing.Size(528, 20);
             this.tbBairro.TabIndex = 5;
             this.tbBairro.TextChanged += new System.EventHandler(this.tbBairro_TextChanged);
-            this.tbBairro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbBairro_KeyDown);
             // 
             // lbBairro
             // 
@@ -387,7 +376,6 @@
             this.tbNumero.Size = new System.Drawing.Size(64, 20);
             this.tbNumero.TabIndex = 3;
             this.tbNumero.TextChanged += new System.EventHandler(this.tbNumero_TextChanged);
-            this.tbNumero.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNumero_KeyDown);
             // 
             // lbNumero
             // 
@@ -406,7 +394,6 @@
             this.tbRua.Size = new System.Drawing.Size(528, 20);
             this.tbRua.TabIndex = 1;
             this.tbRua.TextChanged += new System.EventHandler(this.tbRua_TextChanged);
-            this.tbRua.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbRua_KeyDown);
             // 
             // lbRua
             // 

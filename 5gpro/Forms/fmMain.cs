@@ -15,7 +15,7 @@ namespace _5gpro
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
-            formCadPessoas.Show();
+            formCadPessoas.Show(this);
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)

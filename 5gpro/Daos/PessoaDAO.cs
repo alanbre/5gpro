@@ -331,6 +331,11 @@ namespace _5gpro.Daos
                     proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
                     reader.Close();
                 }
+                else
+                {
+                    //FIZ ESSE ELSE PARA CASO N TIVER NENHUM REGISTRO NA BASE... PODE DAR PROBLEMA EM ALGUM MOMENTO xD
+                    proximoid = "1";
+                }
             }
             catch (MySqlException ex)
             {

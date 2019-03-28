@@ -26,6 +26,28 @@ namespace _5gpro.Forms
             AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
         }
 
+        private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                RecarregaDados(pessoa);
+            }
+
+            if (e.KeyCode == Keys.F1)
+            {
+                NovoCadastro();
+            }
+
+            if (e.KeyCode == Keys.F2)
+            {
+                SalvaCadastro();
+            }
+
+            EnterTab(this.ActiveControl, e);
+        }
+
+
+
 
         private void rbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
@@ -48,7 +70,7 @@ namespace _5gpro.Forms
         //EVENTOS DE CLICK
         private void btNovo_Click(object sender, EventArgs e)
         {
-            NovoRegistro();
+            NovoCadastro();
         }
 
         private void btBuscar_Click(object sender, EventArgs e)
@@ -73,7 +95,7 @@ namespace _5gpro.Forms
         {
             //Se não houver uma pessoa setada (por qualquer motivo) ele limpa os campos. Se tiver pessoa recarrega com as informações do banco.
             //Desta forma é necessário ter carregado um registro pra poder recarregar.
-            RecarregarDados(pessoa);
+            RecarregaDados(pessoa);
         }
 
         private void btRight_Click(object sender, EventArgs e)
@@ -157,6 +179,7 @@ namespace _5gpro.Forms
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
+
 
         //EVENTOS DE LEAVE
         private void tbCodCidade_Leave(object sender, EventArgs e)
@@ -252,126 +275,6 @@ namespace _5gpro.Forms
         }
 
 
-        //EVENTOS DE KEY DOWN
-        private void tbCodigo_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbNome_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbFantasia_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void rbPessoaFisica_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void rbPessoaJuridica_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbRua_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbNumero_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbBairro_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbComplemento_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbCodCidade_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void mtbCpfCnpj_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void mtbTelefone_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbEmail_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-
-
         private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
@@ -399,7 +302,7 @@ namespace _5gpro.Forms
 
 
         //PADRÕES CRIADAS
-        private void NovoRegistro()
+        private void NovoCadastro()
         {
             if (editando)
             {
@@ -494,7 +397,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void RecarregarDados(Pessoa pessoa)
+        private void RecarregaDados(Pessoa pessoa)
         {
             if (editando)
             {
@@ -637,6 +540,21 @@ namespace _5gpro.Forms
             }
         }
 
+        private void Editando(bool edit)
+        {
+            editando = edit;
+            AlteraBotoes();
+        }
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
         private void LimpaCampos(bool limpaCodigo)
         {
             if (limpaCodigo) { tbCodigo.Clear(); }
@@ -738,29 +656,6 @@ namespace _5gpro.Forms
         }
 
 
-        private void Editando(bool edit)
-        {
-            editando = edit;
-            AlteraBotoes();
-        }
 
-
-        private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
-                RecarregarDados(pessoa);
-            }
-
-            if (e.KeyCode == Keys.F1)
-            {
-                NovoRegistro();
-            }
-
-            if (e.KeyCode == Keys.F2)
-            {
-                SalvaCadastro();
-            }
-        }
     }
 }
