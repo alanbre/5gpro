@@ -67,7 +67,7 @@ namespace _5gpro.Funcoes
                     todoserros = todoserros + "\n \n " + erro;
                 }
                 pintarBotoes(listabotoes, controls);
-                //MessageBox.Show(todoserros);
+                MessageBox.Show(todoserros);
             }
             else
             {
@@ -76,16 +76,8 @@ namespace _5gpro.Funcoes
             return ok;
         }
 
-        public void pintarBotoes(List<string> botoes, ControlCollection controls)
+        public void despintarCampos(ControlCollection controls)
         {
-            //RECEBE A LISTA DE BOTOES QUE DEVEM SER PINTADOS E EM QUAL CONTROLCOLLECTION
-
-            Control[] c;
-
-
-            //PEGA TODOSS OS COMPONENTESS DENTRO DO controls
-            //E VERFICIA O TIPO DELE, CASO SEJA PANEL FAZ UM FOREACH
-            //PARA PINTAR OS COMPONENTES DENTRO DO PANEL
             foreach (Control ctrl in controls)
             {
                 //PAINEL
@@ -93,15 +85,12 @@ namespace _5gpro.Funcoes
                 {
                     foreach (Control ctrlp in ctrl.Controls)
                     {
-                        if (ctrlp is TextBox)
+                        if (ctrlp is TextBox && !ctrlp.Name.Equals("tbAjuda"))
                         {
                             ctrlp.BackColor = System.Drawing.Color.White;
-
                         }
                     }
-
                 }
-
                 //TABPAGE
                 if (ctrl is TabControl)
                 {
@@ -109,23 +98,32 @@ namespace _5gpro.Funcoes
                     {
                         foreach (Control ctrltabpage in page.Controls)
                         {
-                            if (ctrltabpage is TextBox)
+                            if (ctrltabpage is TextBox && !ctrltabpage.Name.Equals("tbAjuda"))
                             {
                                 ctrltabpage.BackColor = System.Drawing.Color.White;
                             }
                         }
                     }
                 }
-
                 //TEXTBOX
-                if (ctrl is TextBox)
+                if (ctrl is TextBox && !ctrl.Name.Equals("tbAjuda"))
                 {
                     ctrl.BackColor = System.Drawing.Color.White;
                 }
             }
+        }
 
+        public void pintarBotoes(List<string> botoes, ControlCollection controls)
+        {
+            //RECEBE A LISTA DE BOTOES QUE DEVEM SER PINTADOS E EM QUAL CONTROLCOLLECTION
 
+            Control[] c;
 
+            //PEGA TODOSS OS COMPONENTESS DENTRO DO controls
+            //E VERFICIA O TIPO DELE, CASO SEJA PANEL FAZ UM FOREACH
+            //PARA PINTAR OS COMPONENTES DENTRO DO PANEL
+
+            despintarCampos(controls);
             //DEPOIS DE PINTAR TODOS OS CAMPOS DE BRANCO, ELE PINTA
             //OS CAMPOS COM ERRO, DE VERMELHO
             foreach (var botao in botoes)
@@ -143,8 +141,6 @@ namespace _5gpro.Funcoes
 
         }
     }
-
-
 }
 
 

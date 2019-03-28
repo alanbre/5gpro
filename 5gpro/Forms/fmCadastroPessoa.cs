@@ -107,7 +107,7 @@ namespace _5gpro.Forms
 
             if (ok)
             {
-                
+                validacao.despintarCampos(controls);
                 int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
