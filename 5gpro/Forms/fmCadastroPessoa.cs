@@ -421,8 +421,15 @@ namespace _5gpro.Forms
             }
             else
             {
-                pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
-                PreencheCampos(pessoa);
+                if (pessoa != null)
+                {
+                    pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
+                    PreencheCampos(pessoa);
+                }
+                else
+                {
+                    LimpaCampos(true);
+                }
                 Editando(false);
             }
 

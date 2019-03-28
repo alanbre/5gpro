@@ -21,12 +21,12 @@ namespace _5gpro.Daos
                 AbrirConexao();
 
                 Comando = new MySqlCommand(@"INSERT INTO item 
-                          (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, unimedida_idunimedida) 
+                          (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida) 
                           VALUES
-                          (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @unimedida_idunimedida)
+                          (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida)
                           ON DUPLICATE KEY UPDATE
                            descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
-                           valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, unimedida_idunimedida = @unimedida_idunimedida
+                           valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida
                          ;",
                          Conexao);
 
@@ -38,7 +38,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@valorentrada", _item.ValorEntrada);
                 Comando.Parameters.AddWithValue("@valorsaida", _item.ValorSaida);
                 Comando.Parameters.AddWithValue("@estoquenecessario", _item.Estoquenecessario);
-                Comando.Parameters.AddWithValue("@unimedida_idunimedida", _item.Unimedida.Codigo);
+                Comando.Parameters.AddWithValue("@idunimedida", _item.Unimedida.Codigo);
 
 
                 retorno = Comando.ExecuteNonQuery();
@@ -78,7 +78,7 @@ namespace _5gpro.Daos
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
 
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("idunimedida")));
                     //_item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
                     reader.Close();
                 }
@@ -157,7 +157,7 @@ namespace _5gpro.Daos
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
 
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("idunimedida")));
                     //_item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
                     reader.Close();
                 }

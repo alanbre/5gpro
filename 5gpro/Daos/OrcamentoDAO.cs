@@ -4,6 +4,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Text;
 
 namespace _5gpro.Daos
 {
@@ -139,6 +140,78 @@ namespace _5gpro.Daos
             return itensOrcamento;
         }
 
+        public int SalvarOuAtualizarOrcamento(Orcamento orcamento)
+        {
+            int retorno = 0;
+            string vencimento = orcamento.DataVencimento != null ? orcamento.DataVencimento.Date.ToString() : "";
+            string vencimento_campo = vencimento.Length > 0 ? "data_vencimento," : "";
+            string vencimento_ref = vencimento.Length > 0 ? "@data_vencimento," : "";
+            string idpessoa_campo = orcamento.Pessoa != null ? ", idpessoa" : "";
+            string idpessoa_ref = orcamento.Pessoa != null ? ", @idpessoa" : "";
+            try
+            {
+                AbrirConexao();
+                Comando = Conexao.CreateCommand();
+                tr = Conexao.BeginTransaction();
+                Comando.Connection = Conexao;
+                Comando.Transaction = tr;
 
+
+                Comando.CommandText = @"INSERT INTO orcamento
+                         (idorcamento, data_cadastro, " + vencimento_campo + @" valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento" + idpessoa_campo + @")
+                          VALUES
+                         (@idorcamento, @data_cadastro, " + vencimento_ref + @", @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento" + idpessoa_ref + @")
+                          ON DUPLICATE KEY UPDATE
+                          data_cadastro = @data_cadastro, " + vencimento_campo + @" = " + vencimento_ref + @", valor_total_itens = @valor_total_itens,
+                          valor_orcamento = @valor_orcamento, desconto_total_itens = @desconto_total_itens, desconto_orcamento = @desconto_orcamento,
+                          " + idpessoa_campo + @" = " + idpessoa_ref + @"
+                          ";
+
+                Comando.Parameters.AddWithValue("@idorcamento", orcamento.Codigo);
+                Comando.Parameters.AddWithValue("@data_cadastro", orcamento.DataCadastro);
+                if (vencimento.Length > 0) { Comando.Parameters.AddWithValue(vencimento_ref, orcamento.DataVencimento); }
+                Comando.Parameters.AddWithValue("@valor_total_itens", orcamento.ValorTotalItens);
+                Comando.Parameters.AddWithValue("@valor_orcamento", orcamento.ValorTotalOrcamento);
+                Comando.Parameters.AddWithValue("@desconto_total_itens", orcamento.ValorTotalItens);
+                Comando.Parameters.AddWithValue("@desconto_orcamento", orcamento.DescontoOrcamento);
+                if (orcamento.Pessoa != null) { Comando.Parameters.AddWithValue("@idpessoa", orcamento.Pessoa.Codigo); }
+
+                retorno = Comando.ExecuteNonQuery();
+
+
+                if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
+                {
+                    Comando.CommandText = @"DELETE FROM orcamento_has_item WHERE idorcamento = @idorcamento";
+                    Comando.ExecuteNonQuery();
+
+                    Comando.CommandText = @"INSERT INTO orcamento_has_item (idorcamento, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
+                                            VALUES
+                                            (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto";
+                    foreach (_Item i in orcamento.Itens)
+                    {
+                        Comando.Parameters.Clear();
+                        Comando.Parameters.AddWithValue("@idorcamento", orcamento.Codigo);
+                        Comando.Parameters.AddWithValue("@iditem", i.Codigo);
+                        Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
+                        Comando.Parameters.AddWithValue("@idorcamento", i.ValorUnitario);
+                        Comando.Parameters.AddWithValue("@idorcamento", i.ValorTotal);
+                        Comando.Parameters.AddWithValue("@idorcamento", i.DescontoPorc);
+                        Comando.Parameters.AddWithValue("@idorcamento", i.Desconto);
+                        Comando.ExecuteNonQuery();
+                    }
+                }
+                tr.Commit();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return retorno;
+        }
     }
 }

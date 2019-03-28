@@ -12,6 +12,11 @@ namespace _5gpro.Bll
             return orcamentoDAO.BuscaOrcamentoById(cod);
         }
 
+        public int SalvarOuAtualizarOrcamento(Orcamento orcamento)
+        {
+            return orcamentoDAO.SalvarOuAtualizarOrcamento(orcamento);
+        }
+
         public string BuscaProxCodigoDisponivel()
         {
             return orcamentoDAO.BuscaProxCodigoDisponivel();
