@@ -35,5 +35,11 @@ namespace _5gpro
             var formCadOrcamentos = new fmCadastroOrcamento();
             formCadOrcamentos.Show(this);
         }
+
+        private void cadastroDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadUsuarios = new fmCadastroUsuario();
+            formCadUsuarios.Show(this);
+        }
     }
 }

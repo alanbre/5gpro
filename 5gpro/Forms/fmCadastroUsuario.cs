@@ -15,6 +15,14 @@ namespace _5gpro.Forms
         public fmCadastroUsuario()
         {
             InitializeComponent();
+            tbSenhaUsuario.PasswordChar = '*';
+            tbConfirmaSenhaUsuario.PasswordChar = '*';
+
+        }
+
+        private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
