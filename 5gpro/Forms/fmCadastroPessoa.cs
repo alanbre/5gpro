@@ -78,88 +78,12 @@ namespace _5gpro.Forms
 
         private void btRight_Click(object sender, EventArgs e)
         {
-            //Busca a pessoa com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
-            {
-                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-                //la do inicio do arquivo.
-                Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
-                if (newpessoa != null)
-                {
-                    pessoa = newpessoa;
-                    PreencheCampos(pessoa);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
-                    if (newpessoa != null)
-                    {
-                        pessoa = newpessoa;
-                        PreencheCampos(pessoa);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
-                        if (newpessoa != null)
-                        {
-                            pessoa = newpessoa;
-                            PreencheCampos(pessoa);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
+            ProximoCadastro();
         }
 
         private void btLeft_Click(object sender, EventArgs e)
         {
-            //Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
-            {
-                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-                //la do inicio do arquivo.
-                Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
-                if (newpessoa != null)
-                {
-                    pessoa = newpessoa;
-                    PreencheCampos(pessoa);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
-                    if (newpessoa != null)
-                    {
-                        pessoa = newpessoa;
-                        PreencheCampos(pessoa);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
-                        if (newpessoa != null)
-                        {
-                            pessoa = newpessoa;
-                            PreencheCampos(pessoa);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
+            CadastroAnterior();
         }
 
         private void btDeletar_Click(object sender, EventArgs e)
@@ -475,6 +399,101 @@ namespace _5gpro.Forms
 
 
         //PADRÕES CRIADAS
+        private void NovoRegistro()
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    LimpaCampos(false);
+                    tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+                    pessoa = null;
+                    tbNome.Focus();
+                    Editando(true);
+                }
+            }
+            else
+            {
+                LimpaCampos(false);
+                tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+                pessoa = null;
+                tbNome.Focus();
+                Editando(true);
+            }
+        }
+
+        private void AbreTelaBuscaPessoa()
+        {
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
+            if (buscaPessoa.pessoaSelecionada != null)
+            {
+                pessoa = buscaPessoa.pessoaSelecionada;
+                PreencheCampos(pessoa);
+            }
+        }
+
+        private void SalvaCadastro()
+        {
+            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
+            if (editando)
+            {
+                ControlCollection controls = (ControlCollection)this.Controls;
+                bool ok = validacao.ValidarEntidade(pessoa, controls);
+
+                if (ok)
+                {
+                    pessoa = new Pessoa();
+                    pessoa.Codigo = tbCodigo.Text;
+                    pessoa.Nome = tbNome.Text;
+                    pessoa.Fantasia = tbFantasia.Text;
+                    List<string> atuacoes = new List<string>();
+                    foreach (string s in cblAtuacao.CheckedItems)
+                    {
+                        atuacoes.Add(s);
+                    }
+                    pessoa.Atuacao = atuacoes;
+                    pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+                    pessoa.Rua = tbRua.Text;
+                    pessoa.Numero = tbNumero.Text;
+                    pessoa.Bairro = tbBairro.Text;
+                    pessoa.Complemento = tbComplemento.Text;
+                    pessoa.Cidade = tbCodCidade.Text;
+                    pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+                    pessoa.Telefone = mtbTelefone.TextNoMask();
+                    pessoa.Email = tbEmail.Text;
+
+
+
+                    int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+
+                    // resultado 0 = nada foi inserido (houve algum erro)
+                    // resultado 1 = foi inserido com sucesso
+                    // resultado 2 = foi atualizado com sucesso
+                    if (resultado == 0)
+                    {
+                        MessageBox.Show("Problema ao salvar o registro",
+                        "Problema ao salvar",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    }
+                    else if (resultado == 1)
+                    {
+                        tbAjuda.Text = "Dados salvos com sucesso";
+                        Editando(false);
+                    }
+                    else if (resultado == 2)
+                    {
+                        tbAjuda.Text = "Dados atualizados com sucesso";
+                        Editando(false);
+                    }
+                }
+            }
+        }
+
         private void RecarregarDados(Pessoa pessoa)
         {
             if (editando)
@@ -506,29 +525,89 @@ namespace _5gpro.Forms
 
         }
 
-        private void NovoRegistro()
+        private void ProximoCadastro()
         {
-            if (editando)
+            //Busca a pessoa com ID maior que o atual preenchido. Só preenche se houver algum registro maior
+            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
+                //la do inicio do arquivo.
+                Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                if (newpessoa != null)
                 {
-                    LimpaCampos(false);
-                    tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
-                    pessoa = null;
-                    tbNome.Focus();
-                    Editando(true);
+                    pessoa = newpessoa;
+                    PreencheCampos(pessoa);
                 }
             }
-            else
+            else if (editando && tbCodigo.Text.Length > 0)
             {
-                LimpaCampos(false);
-                tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
-                pessoa = null;
-                tbNome.Focus();
-                Editando(true);
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                    if (newpessoa != null)
+                    {
+                        pessoa = newpessoa;
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                        if (newpessoa != null)
+                        {
+                            pessoa = newpessoa;
+                            PreencheCampos(pessoa);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CadastroAnterior()
+        {
+            //Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
+            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
+                //la do inicio do arquivo.
+                Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                if (newpessoa != null)
+                {
+                    pessoa = newpessoa;
+                    PreencheCampos(pessoa);
+                }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                    if (newpessoa != null)
+                    {
+                        pessoa = newpessoa;
+                        PreencheCampos(pessoa);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                        if (newpessoa != null)
+                        {
+                            pessoa = newpessoa;
+                            PreencheCampos(pessoa);
+                            Editando(false);
+                        }
+                    }
+                }
             }
         }
 
@@ -658,16 +737,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaPessoa()
-        {
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
-            if (buscaPessoa.pessoaSelecionada != null)
-            {
-                pessoa = buscaPessoa.pessoaSelecionada;
-                PreencheCampos(pessoa);
-            }
-        }
 
         private void Editando(bool edit)
         {
@@ -675,62 +744,6 @@ namespace _5gpro.Forms
             AlteraBotoes();
         }
 
-        private void SalvaCadastro()
-        {
-            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
-            if (editando)
-            {
-                pessoa = new Pessoa();
-                pessoa.Codigo = tbCodigo.Text;
-                pessoa.Nome = tbNome.Text;
-                pessoa.Fantasia = tbFantasia.Text;
-                List<string> atuacoes = new List<string>();
-                foreach (string s in cblAtuacao.CheckedItems)
-                {
-                    atuacoes.Add(s);
-                }
-                pessoa.Atuacao = atuacoes;
-                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-                pessoa.Rua = tbRua.Text;
-                pessoa.Numero = tbNumero.Text;
-                pessoa.Bairro = tbBairro.Text;
-                pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = tbCodCidade.Text;
-                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-                pessoa.Telefone = mtbTelefone.TextNoMask();
-                pessoa.Email = tbEmail.Text;
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(pessoa, controls);
-
-                if (ok)
-                {
-
-                    int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
-
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                    }
-                    else if (resultado == 1)
-                    {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
-                    }
-                }
-            }
-        }
 
         private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
         {
