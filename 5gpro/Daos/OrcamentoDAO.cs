@@ -144,10 +144,10 @@ namespace _5gpro.Daos
         {
             int retorno = 0;
             string vencimento = orcamento.DataVencimento != null ? orcamento.DataVencimento.Date.ToString() : "";
-            string vencimento_campo = vencimento.Length > 0 ? "data_vencimento," : "";
-            string vencimento_ref = vencimento.Length > 0 ? "@data_vencimento," : "";
-            string idpessoa_campo = orcamento.Pessoa != null ? ", idpessoa" : "";
-            string idpessoa_ref = orcamento.Pessoa != null ? ", @idpessoa" : "";
+            string vencimento_campo = vencimento.Length > 0 ? "data_vencimento" : "";
+            string vencimento_ref = vencimento.Length > 0 ? "@data_vencimento" : "";
+            string idpessoa_campo = orcamento.Pessoa != null ? "idpessoa" : "";
+            string idpessoa_ref = orcamento.Pessoa != null ? "@idpessoa" : "";
             try
             {
                 AbrirConexao();
@@ -158,9 +158,9 @@ namespace _5gpro.Daos
 
 
                 Comando.CommandText = @"INSERT INTO orcamento
-                         (idorcamento, data_cadastro, " + vencimento_campo + @" valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento" + idpessoa_campo + @")
+                         (idorcamento, data_cadastro, " + vencimento_campo + @", valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento, " + idpessoa_campo + @")
                           VALUES
-                         (@idorcamento, @data_cadastro, " + vencimento_ref + @", @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento" + idpessoa_ref + @")
+                         (@idorcamento, @data_cadastro, " + vencimento_ref + @", @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento, " + idpessoa_ref + @")
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, " + vencimento_campo + @" = " + vencimento_ref + @", valor_total_itens = @valor_total_itens,
                           valor_orcamento = @valor_orcamento, desconto_total_itens = @desconto_total_itens, desconto_orcamento = @desconto_orcamento,
@@ -169,7 +169,7 @@ namespace _5gpro.Daos
 
                 Comando.Parameters.AddWithValue("@idorcamento", orcamento.Codigo);
                 Comando.Parameters.AddWithValue("@data_cadastro", orcamento.DataCadastro);
-                if (vencimento.Length > 0) { Comando.Parameters.AddWithValue(vencimento_ref, orcamento.DataVencimento); }
+                if (vencimento.Length > 0) { Comando.Parameters.AddWithValue("@data_vencimento", orcamento.DataVencimento); }
                 Comando.Parameters.AddWithValue("@valor_total_itens", orcamento.ValorTotalItens);
                 Comando.Parameters.AddWithValue("@valor_orcamento", orcamento.ValorTotalOrcamento);
                 Comando.Parameters.AddWithValue("@desconto_total_itens", orcamento.ValorTotalItens);
@@ -186,17 +186,17 @@ namespace _5gpro.Daos
 
                     Comando.CommandText = @"INSERT INTO orcamento_has_item (idorcamento, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
                                             VALUES
-                                            (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto";
+                                            (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
                     foreach (_Item i in orcamento.Itens)
                     {
                         Comando.Parameters.Clear();
                         Comando.Parameters.AddWithValue("@idorcamento", orcamento.Codigo);
                         Comando.Parameters.AddWithValue("@iditem", i.Codigo);
                         Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
-                        Comando.Parameters.AddWithValue("@idorcamento", i.ValorUnitario);
-                        Comando.Parameters.AddWithValue("@idorcamento", i.ValorTotal);
-                        Comando.Parameters.AddWithValue("@idorcamento", i.DescontoPorc);
-                        Comando.Parameters.AddWithValue("@idorcamento", i.Desconto);
+                        Comando.Parameters.AddWithValue("@valor_unitario", i.ValorUnitario);
+                        Comando.Parameters.AddWithValue("@valor_total", i.ValorTotal);
+                        Comando.Parameters.AddWithValue("@desconto_porc", i.DescontoPorc);
+                        Comando.Parameters.AddWithValue("@desconto", i.Desconto);
                         Comando.ExecuteNonQuery();
                     }
                 }

@@ -247,6 +247,7 @@
             this.btSalvar.Size = new System.Drawing.Size(48, 48);
             this.btSalvar.TabIndex = 0;
             this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
             // 
             // btDeletar
             // 
