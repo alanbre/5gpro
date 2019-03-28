@@ -98,12 +98,12 @@ namespace _5gpro.Forms
 
         private void cbProduto_Click(object sender, EventArgs e)
         {
-           // BuscaItens();
+            BuscaItens();
         }
 
         private void cbServico_Click(object sender, EventArgs e)
         {
-            //BuscaItens();
+            BuscaItens();
         }
 
         private void fmBuscaItem_Load(object sender, EventArgs e)

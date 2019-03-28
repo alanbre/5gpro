@@ -33,5 +33,10 @@ namespace _5gpro.Bll
         {
             return _itemdao.BuscaItem(descItem, denomItem, tipoItem);
         }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            return _itemdao.BuscaProxCodigoDisponivel();
+        }
     }
 }
