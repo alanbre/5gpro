@@ -115,6 +115,14 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`configuracao` (
   PRIMARY KEY (`idconfiguracao`))
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`grupo_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupo_usuario` (
+  `idgrupousuario` INT NOT NULL,
+  `nome` VARCHAR(60) NULL,
+  PRIMARY KEY (`idgrupousuario`))
+ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`usuario`
@@ -125,8 +133,17 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`usuario` (
   `sobrenome` VARCHAR(50) NULL,
   `login` VARCHAR(20) NOT NULL,
   `senha` VARCHAR(255) NOT NULL,
+  `email` VARCHAR(60) NULL,
+  `fone` VARCHAR(45) NULL,
+  `idgrupousuario` INT NOT NULL,
   PRIMARY KEY (`idusuario`),
-  UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE)
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE,
+  INDEX `fk_usuario_grupo_usuario1_idx` (`idgrupousuario` ASC) VISIBLE,
+  CONSTRAINT `fk_usuario_grupo_usuario1`
+    FOREIGN KEY (`idgrupousuario`)
+    REFERENCES `5gprodatabase`.`grupo_usuario` (`idgrupousuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -206,6 +223,38 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`orcamento_has_item` (
   CONSTRAINT `fk_orcamento_has_item_item1`
     FOREIGN KEY (`iditem`)
     REFERENCES `5gprodatabase`.`item` (`iditem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`permissao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
+  `idpermissao` INT NOT NULL,
+  `nome` VARCHAR(45) NULL,
+  `nivel` INT NULL,
+  `permissaocol` VARCHAR(45) NULL,
+  PRIMARY KEY (`idpermissao`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`permissao_has_grupo_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
+  `permissao_idpermissao` INT NOT NULL,
+  `grupo_usuario_idgrupousuario` INT NOT NULL,
+  PRIMARY KEY (`permissao_idpermissao`, `grupo_usuario_idgrupousuario`),
+  INDEX `fk_permissao_has_grupo_usuario_grupo_usuario1_idx` (`grupo_usuario_idgrupousuario` ASC) VISIBLE,
+  INDEX `fk_permissao_has_grupo_usuario_permissao1_idx` (`permissao_idpermissao` ASC) VISIBLE,
+  CONSTRAINT `fk_permissao_has_grupo_usuario_permissao1`
+    FOREIGN KEY (`permissao_idpermissao`)
+    REFERENCES `5gprodatabase`.`permissao` (`idpermissao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_permissao_has_grupo_usuario_grupo_usuario1`
+    FOREIGN KEY (`grupo_usuario_idgrupousuario`)
+    REFERENCES `5gprodatabase`.`grupo_usuario` (`idgrupousuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

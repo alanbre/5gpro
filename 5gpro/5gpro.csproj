@@ -130,6 +130,12 @@
     <Compile Include="Forms\fmCadastroPessoa.Designer.cs">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCadastroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroUsuario.Designer.cs">
+      <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroUsuario.resx">
+      <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>
