@@ -88,6 +88,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`atuacao_has_pessoa` (
   `atuacao_idatuacao` INT NOT NULL,
   `pessoa_idpessoa` INT NOT NULL,
+  `ativo` TINYINT NULL,
   PRIMARY KEY (`atuacao_idatuacao`, `pessoa_idpessoa`),
   INDEX `fk_atuacao_has_pessoa_pessoa1_idx` (`pessoa_idpessoa` ASC) VISIBLE,
   INDEX `fk_atuacao_has_pessoa_atuacao1_idx` (`atuacao_idatuacao` ASC) VISIBLE,

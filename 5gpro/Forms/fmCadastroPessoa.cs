@@ -1,5 +1,6 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -12,6 +13,8 @@ namespace _5gpro.Forms
         Cidade cidade;
         PessoaBLL pessoaBLL = new PessoaBLL();
         CidadeBLL cidadeBLL = new CidadeBLL();
+
+        FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -51,9 +54,9 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    editando = true;
+                    Editando(true);
                     NovoRegistro();
-                    tbCodigo.Focus();
+                    tbNome.Focus();
                 }
                 else
                 {
@@ -62,10 +65,9 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbCodigo.Focus();
-                editando = true;
+                NovoRegistro();
+                tbNome.Focus();
             }
-            AlteraBotoes();
         }
 
         private void btBuscar_Click(object sender, EventArgs e)
@@ -132,7 +134,7 @@ namespace _5gpro.Forms
         {
             //Se não houver uma pessoa setada (por qualquer motivo) ele limpa os campos. Se tiver pessoa recarrega com as informações do banco.
             //Desta forma é necessário ter carregado um registro pra poder recarregar.
-            if (pessoa != null) { RecarregarDados(pessoa); } else { LimpaCampos(true); }
+            if (pessoa != null) { RecarregarDados(pessoa); } else { LimpaCampos(true); Editando(false); }
         }
 
         private void btRight_Click(object sender, EventArgs e)
@@ -242,7 +244,56 @@ namespace _5gpro.Forms
         }
 
 
+        //EVENTOS DE TEXTCHANGED
+        private void tbNome_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
 
+        private void tbFantasia_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbRua_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbNumero_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbBairro_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbComplemento_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbCodCidade_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void mtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void mtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbEmail_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
 
         //EVENTOS DE LEAVE
         private void tbCodCidade_Leave(object sender, EventArgs e)
@@ -328,54 +379,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbNome_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void tbFantasia_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void tbRua_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void tbNumero_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void tbBairro_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void tbComplemento_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
         private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3)
@@ -383,39 +386,7 @@ namespace _5gpro.Forms
                 e.Handled = true;
                 AbreTelaBuscaCidade();
             }
-
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-
         }
-
-        private void mtbCpfCnpj_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void mtbTelefone_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-        private void tbEmail_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsLetterOrDigit((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
-
 
 
         //EVENTOS DE KEY DOWN
@@ -538,6 +509,9 @@ namespace _5gpro.Forms
 
 
 
+
+
+
         private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
@@ -556,6 +530,8 @@ namespace _5gpro.Forms
         private void NovoRegistro()
         {
             LimpaCampos(false);
+            tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+            pessoa = null;
         }
 
         private void AlteraBotoes()
@@ -604,6 +580,7 @@ namespace _5gpro.Forms
             }
             rbPessoaFisica.Checked = true;
             rbPessoaJuridica.Checked = false;
+            tbAjuda.Clear();
         }
 
         private void PreencheCampos(Pessoa pessoa)
@@ -659,7 +636,6 @@ namespace _5gpro.Forms
             {
                 tbCodCidade.Text = cidade.CodCidade;
                 tbNomeCidade.Text = cidade.Nome;
-                Editando(true);
             }
             else
             {
@@ -680,6 +656,7 @@ namespace _5gpro.Forms
             {
                 cidade = buscaCidade.cidadeSelecionada;
                 PreencheCamposCidade(cidade);
+                Editando(true);
             }
         }
 
@@ -699,7 +676,6 @@ namespace _5gpro.Forms
             editando = edit;
             AlteraBotoes();
         }
-
 
     }
 }

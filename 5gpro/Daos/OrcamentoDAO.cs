@@ -17,8 +17,8 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM orcamento WHERE idorcamento = @orcamento", Conexao);
-                Comando.Parameters.AddWithValue("@idpessoa", cod);
+                Comando = new MySqlCommand("SELECT * FROM orcamento WHERE idorcamento = @idorcamento", Conexao);
+                Comando.Parameters.AddWithValue("@idorcamento", cod);
 
                 IDataReader reader = Comando.ExecuteReader();
 
@@ -32,6 +32,7 @@ namespace _5gpro.Daos
                     orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
                     orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
                     orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
+                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetString(reader.GetOrdinal("idpessoa")));
                     reader.Close();
                 }
             }
@@ -46,7 +47,7 @@ namespace _5gpro.Daos
             if (orcamento != null)
             {
                 orcamento.Itens = BuscaItensDoOrcamento(orcamento);
-                //orcamento.Pessoa = pessoaBLL.BuscarPessoaById();
+                
             }
             return orcamento;
         }

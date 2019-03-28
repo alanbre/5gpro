@@ -124,8 +124,8 @@
             this.tbFantasia.Name = "tbFantasia";
             this.tbFantasia.Size = new System.Drawing.Size(528, 20);
             this.tbFantasia.TabIndex = 5;
+            this.tbFantasia.TextChanged += new System.EventHandler(this.tbFantasia_TextChanged);
             this.tbFantasia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFantasia_KeyDown);
-            this.tbFantasia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFantasia_KeyUp);
             // 
             // lbFantasia
             // 
@@ -143,8 +143,8 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(527, 20);
             this.tbNome.TabIndex = 3;
+            this.tbNome.TextChanged += new System.EventHandler(this.tbNome_TextChanged);
             this.tbNome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNome_KeyDown);
-            this.tbNome.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbNome_KeyUp);
             // 
             // lbNome
             // 
@@ -269,6 +269,7 @@
             this.tbCodCidade.Name = "tbCodCidade";
             this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
             this.tbCodCidade.TabIndex = 8;
+            this.tbCodCidade.TextChanged += new System.EventHandler(this.tbCodCidade_TextChanged);
             this.tbCodCidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyDown);
             this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
             this.tbCodCidade.Leave += new System.EventHandler(this.tbCodCidade_Leave);
@@ -289,8 +290,8 @@
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
             this.tbEmail.TabIndex = 15;
+            this.tbEmail.TextChanged += new System.EventHandler(this.tbEmail_TextChanged);
             this.tbEmail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbEmail_KeyDown);
-            this.tbEmail.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbEmail_KeyUp);
             // 
             // lbEmail
             // 
@@ -308,8 +309,8 @@
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 13;
+            this.mtbTelefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbTelefone_MaskInputRejected);
             this.mtbTelefone.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbTelefone_KeyDown);
-            this.mtbTelefone.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mtbTelefone_KeyUp);
             // 
             // lbTelefone
             // 
@@ -328,8 +329,8 @@
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
             this.mtbCpfCnpj.TabIndex = 11;
+            this.mtbCpfCnpj.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbCpfCnpj_MaskInputRejected);
             this.mtbCpfCnpj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mtbCpfCnpj_KeyDown);
-            this.mtbCpfCnpj.KeyUp += new System.Windows.Forms.KeyEventHandler(this.mtbCpfCnpj_KeyUp);
             // 
             // lbCpf
             // 
@@ -347,8 +348,8 @@
             this.tbComplemento.Name = "tbComplemento";
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
             this.tbComplemento.TabIndex = 7;
+            this.tbComplemento.TextChanged += new System.EventHandler(this.tbComplemento_TextChanged);
             this.tbComplemento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbComplemento_KeyDown);
-            this.tbComplemento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbComplemento_KeyUp);
             // 
             // lbComplemento
             // 
@@ -366,8 +367,8 @@
             this.tbBairro.Name = "tbBairro";
             this.tbBairro.Size = new System.Drawing.Size(528, 20);
             this.tbBairro.TabIndex = 5;
+            this.tbBairro.TextChanged += new System.EventHandler(this.tbBairro_TextChanged);
             this.tbBairro.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbBairro_KeyDown);
-            this.tbBairro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbBairro_KeyUp);
             // 
             // lbBairro
             // 
@@ -385,8 +386,8 @@
             this.tbNumero.Name = "tbNumero";
             this.tbNumero.Size = new System.Drawing.Size(64, 20);
             this.tbNumero.TabIndex = 3;
+            this.tbNumero.TextChanged += new System.EventHandler(this.tbNumero_TextChanged);
             this.tbNumero.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNumero_KeyDown);
-            this.tbNumero.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbNumero_KeyUp);
             // 
             // lbNumero
             // 
@@ -404,8 +405,8 @@
             this.tbRua.Name = "tbRua";
             this.tbRua.Size = new System.Drawing.Size(528, 20);
             this.tbRua.TabIndex = 1;
+            this.tbRua.TextChanged += new System.EventHandler(this.tbRua_TextChanged);
             this.tbRua.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbRua_KeyDown);
-            this.tbRua.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbRua_KeyUp);
             // 
             // lbRua
             // 

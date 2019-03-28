@@ -32,5 +32,10 @@ namespace _5gpro.Bll
         {
             return PessoaDAO.BuscarPessoas(nome, cpfcnpj, cidade);
         }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            return PessoaDAO.BuscaProxCodigoDisponivel();
+        }
     }
 }

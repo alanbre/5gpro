@@ -11,11 +11,14 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroOrcamento : Form
     {
-        Pessoa pessoa;
-        List<_Item> itens = new List<_Item>();
         PessoaBLL pessoaBLL = new PessoaBLL();
         _ItemBLL itemBLL = new _ItemBLL();
+        OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+
+        Orcamento orcamento;
+        List<_Item> itens = new List<_Item>();
         _Item itemSelecionado;
+        Pessoa pessoa;
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
@@ -36,6 +39,7 @@ namespace _5gpro.Forms
             table.Columns.Add("% Desc.", typeof(decimal));
             table.Columns.Add("Desc. Item", typeof(decimal));
             dgvItens.DataSource = table;
+            AlteraBotoes();
         }
 
 
@@ -49,59 +53,59 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            //tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
-            //if (!editando)
-            //{
-            //    if (tbCodigo.Text.Length > 0)
-            //    {
-            //        Orcamento neworcamento = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
-            //        if (newpessoa != null)
-            //        {
-            //            pessoa = newpessoa;
-            //            PreencheCampos(orcamento);
-            //            Editando(false);
-            //        }
-            //        else
-            //        {
-            //            Editando(true);
-            //            LimpaCampos(false);
-            //        }
-            //    }
-            //    else if (tbCodigo.Text.Length == 0)
-            //    {
-            //        LimpaCampos(true);
-            //        Editando(false);
-            //    }
-            //}
-            //else
-            //{
-            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-            //    "Aviso de alteração",
-            //    MessageBoxButtons.YesNo,
-            //    MessageBoxIcon.Warning) == DialogResult.Yes)
-            //    {
-            //        if (tbCodigo.Text.Length > 0)
-            //        {
-            //            Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
-            //            if (newpessoa != null)
-            //            {
-            //                pessoa = newpessoa;
-            //                PreencheCampos(pessoa);
-            //                Editando(false);
-            //            }
-            //            else
-            //            {
-            //                Editando(true);
-            //                LimpaCampos(false);
-            //            }
-            //        }
-            //        else if (tbCodigo.Text.Length == 0)
-            //        {
-            //            LimpaCampos(true);
-            //            Editando(false);
-            //        }
-            //    }
-            //}
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!editando)
+            {
+                if (tbCodigo.Text.Length > 0)
+                {
+                    Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoById(tbCodigo.Text);
+                    if (neworcamento != null)
+                    {
+                        orcamento = neworcamento;
+                        PreencheCampos(orcamento);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        Editando(true);
+                        LimpaCampos(false);
+                    }
+                }
+                else if (tbCodigo.Text.Length == 0)
+                {
+                    LimpaCampos(true);
+                    Editando(false);
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (tbCodigo.Text.Length > 0)
+                    {
+                        Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoById(tbCodigo.Text);
+                        if (neworcamento != null)
+                        {
+                            orcamento = neworcamento;
+                            PreencheCampos(neworcamento);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodigo.Text.Length == 0)
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
+                }
+            }
         }
 
         private void tbCodCliente_Leave(object sender, EventArgs e)
@@ -498,5 +502,36 @@ namespace _5gpro.Forms
             tbDescontoItem.Text = "0,00";
         }
 
+        private void PreencheCampos(Orcamento orcamento)
+        {
+            LimpaCampos(false);
+            tbCodigo.Text = orcamento.Codigo;
+            tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
+            tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
+            dtpCadastro.Value = orcamento.DataCadastro;
+            dtpVencimento.Value = orcamento.DataVencimento != null ? orcamento.DataVencimento : DateTime.Now;
+            cbVencimento.Checked = orcamento.DataVencimento != null ? true : false;
+            tbValorTotItem.Text = orcamento.ValorTotalItens.ToString("############0.00");
+            tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
+            tbDesconto.Text = orcamento.DescontoOrcamento.ToString("############0.00");
+            tbTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
+        }
+
+        private void LimpaCampos(bool limpaCod)
+        {
+            if (limpaCod) { tbCodigo.Clear(); }
+            tbCodCliente.Clear();
+            tbNomeCliente.Clear();
+            dtpCadastro.Value = DateTime.Now;
+            dtpVencimento.Value = DateTime.Now;
+            dtpVencimento.Enabled = false;
+            cbVencimento.Checked = false;
+            tbValorTotItem.Text = "0,00";
+            tbDescontoTotalItens.Text = "0,00";
+            tbDesconto.Text = "0,00";
+            tbTotalOrcamento.Text = "0,00";
+            table.Clear();
+            dgvItens.Refresh();
+        }
     }
 }

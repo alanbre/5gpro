@@ -310,5 +310,38 @@ namespace _5gpro.Daos
             }
             return atuacoes;
         }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT p1.idpessoa + 1 AS proximoid
+                                             FROM pessoa AS p1
+                                             LEFT OUTER JOIN pessoa AS p2 ON p1.idpessoa + 1 = p2.idpessoa
+                                             WHERE p2.idpessoa IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return proximoid;
+        }
     }
 }

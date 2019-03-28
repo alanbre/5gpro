@@ -70,8 +70,8 @@
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.tbTotalItens = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
-            this.tbDescontoTotal = new System.Windows.Forms.TextBox();
-            this.lbDescontoTotal = new System.Windows.Forms.Label();
+            this.tbDesconto = new System.Windows.Forms.TextBox();
+            this.lbDesconto = new System.Windows.Forms.Label();
             this.tbDescontoTotalItens = new System.Windows.Forms.TextBox();
             this.lbDescontoTotalItens = new System.Windows.Forms.Label();
             this.tbTotalOrcamento = new System.Windows.Forms.TextBox();
@@ -580,8 +580,8 @@
             // 
             this.gbTotais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbTotais.Controls.Add(this.tbDescontoTotal);
-            this.gbTotais.Controls.Add(this.lbDescontoTotal);
+            this.gbTotais.Controls.Add(this.tbDesconto);
+            this.gbTotais.Controls.Add(this.lbDesconto);
             this.gbTotais.Controls.Add(this.tbDescontoTotalItens);
             this.gbTotais.Controls.Add(this.lbDescontoTotalItens);
             this.gbTotais.Controls.Add(this.tbTotalOrcamento);
@@ -596,25 +596,25 @@
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
             // 
-            // tbDescontoTotal
+            // tbDesconto
             // 
-            this.tbDescontoTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbDescontoTotal.Location = new System.Drawing.Point(9, 113);
-            this.tbDescontoTotal.Name = "tbDescontoTotal";
-            this.tbDescontoTotal.Size = new System.Drawing.Size(85, 20);
-            this.tbDescontoTotal.TabIndex = 5;
-            this.tbDescontoTotal.Text = "0,00";
-            this.tbDescontoTotal.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescontoTotal_KeyDown);
+            this.tbDesconto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDesconto.Location = new System.Drawing.Point(9, 113);
+            this.tbDesconto.Name = "tbDesconto";
+            this.tbDesconto.Size = new System.Drawing.Size(85, 20);
+            this.tbDesconto.TabIndex = 5;
+            this.tbDesconto.Text = "0,00";
+            this.tbDesconto.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescontoTotal_KeyDown);
             // 
-            // lbDescontoTotal
+            // lbDesconto
             // 
-            this.lbDescontoTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbDescontoTotal.AutoSize = true;
-            this.lbDescontoTotal.Location = new System.Drawing.Point(6, 97);
-            this.lbDescontoTotal.Name = "lbDescontoTotal";
-            this.lbDescontoTotal.Size = new System.Drawing.Size(144, 13);
-            this.lbDescontoTotal.TabIndex = 4;
-            this.lbDescontoTotal.Text = "Desconto total do orçamento";
+            this.lbDesconto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbDesconto.AutoSize = true;
+            this.lbDesconto.Location = new System.Drawing.Point(6, 97);
+            this.lbDesconto.Name = "lbDesconto";
+            this.lbDesconto.Size = new System.Drawing.Size(121, 13);
+            this.lbDesconto.TabIndex = 4;
+            this.lbDesconto.Text = "Desconto do orçamento";
             // 
             // tbDescontoTotalItens
             // 
@@ -725,8 +725,8 @@
         private System.Windows.Forms.TextBox tbTotalOrcamento;
         private System.Windows.Forms.Label lbTotalOrcamento;
         private System.Windows.Forms.Button btAutoriza;
-        private System.Windows.Forms.TextBox tbDescontoTotal;
-        private System.Windows.Forms.Label lbDescontoTotal;
+        private System.Windows.Forms.TextBox tbDesconto;
+        private System.Windows.Forms.Label lbDesconto;
         private System.Windows.Forms.TextBox tbDescontoTotalItens;
         private System.Windows.Forms.Label lbDescontoTotalItens;
         private System.Windows.Forms.Label lbDescontoPorc;
