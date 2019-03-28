@@ -328,7 +328,7 @@
             this.dgvItens.ReadOnly = true;
             this.dgvItens.RowHeadersVisible = false;
             this.dgvItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItens.Size = new System.Drawing.Size(955, 179);
+            this.dgvItens.Size = new System.Drawing.Size(955, 189);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
             this.dgvItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItens_CellClick);
@@ -336,7 +336,7 @@
             // tbQuantidade
             // 
             this.tbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbQuantidade.Location = new System.Drawing.Point(6, 264);
+            this.tbQuantidade.Location = new System.Drawing.Point(6, 274);
             this.tbQuantidade.MaxLength = 8;
             this.tbQuantidade.Name = "tbQuantidade";
             this.tbQuantidade.Size = new System.Drawing.Size(63, 20);
@@ -349,7 +349,7 @@
             // 
             this.lbValorUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbValorUnit.AutoSize = true;
-            this.lbValorUnit.Location = new System.Drawing.Point(72, 248);
+            this.lbValorUnit.Location = new System.Drawing.Point(72, 258);
             this.lbValorUnit.Name = "lbValorUnit";
             this.lbValorUnit.Size = new System.Drawing.Size(56, 13);
             this.lbValorUnit.TabIndex = 5;
@@ -359,7 +359,7 @@
             // 
             this.lbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbQuantidade.AutoSize = true;
-            this.lbQuantidade.Location = new System.Drawing.Point(6, 248);
+            this.lbQuantidade.Location = new System.Drawing.Point(6, 258);
             this.lbQuantidade.Name = "lbQuantidade";
             this.lbQuantidade.Size = new System.Drawing.Size(62, 13);
             this.lbQuantidade.TabIndex = 3;
@@ -368,7 +368,7 @@
             // tbValorUnitItem
             // 
             this.tbValorUnitItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbValorUnitItem.Location = new System.Drawing.Point(75, 264);
+            this.tbValorUnitItem.Location = new System.Drawing.Point(75, 274);
             this.tbValorUnitItem.MaxLength = 13;
             this.tbValorUnitItem.Name = "tbValorUnitItem";
             this.tbValorUnitItem.Size = new System.Drawing.Size(63, 20);
@@ -381,7 +381,7 @@
             // 
             this.tbDescItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbDescItem.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tbDescItem.Location = new System.Drawing.Point(93, 217);
+            this.tbDescItem.Location = new System.Drawing.Point(93, 227);
             this.tbDescItem.Name = "tbDescItem";
             this.tbDescItem.ReadOnly = true;
             this.tbDescItem.Size = new System.Drawing.Size(355, 20);
@@ -390,7 +390,7 @@
             // btProcuraItem
             // 
             this.btProcuraItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btProcuraItem.Location = new System.Drawing.Point(71, 217);
+            this.btProcuraItem.Location = new System.Drawing.Point(71, 227);
             this.btProcuraItem.Name = "btProcuraItem";
             this.btProcuraItem.Size = new System.Drawing.Size(20, 20);
             this.btProcuraItem.TabIndex = 12;
@@ -401,7 +401,7 @@
             // 
             this.lbValorTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbValorTot.AutoSize = true;
-            this.lbValorTot.Location = new System.Drawing.Point(141, 248);
+            this.lbValorTot.Location = new System.Drawing.Point(141, 258);
             this.lbValorTot.Name = "lbValorTot";
             this.lbValorTot.Size = new System.Drawing.Size(53, 13);
             this.lbValorTot.TabIndex = 7;
@@ -410,7 +410,7 @@
             // tbCodItem
             // 
             this.tbCodItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbCodItem.Location = new System.Drawing.Point(6, 217);
+            this.tbCodItem.Location = new System.Drawing.Point(6, 227);
             this.tbCodItem.Name = "tbCodItem";
             this.tbCodItem.Size = new System.Drawing.Size(63, 20);
             this.tbCodItem.TabIndex = 2;
@@ -419,7 +419,7 @@
             // tbValorTotItem
             // 
             this.tbValorTotItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbValorTotItem.Location = new System.Drawing.Point(144, 264);
+            this.tbValorTotItem.Location = new System.Drawing.Point(144, 274);
             this.tbValorTotItem.MaxLength = 13;
             this.tbValorTotItem.Name = "tbValorTotItem";
             this.tbValorTotItem.Size = new System.Drawing.Size(87, 20);
@@ -432,7 +432,7 @@
             // 
             this.lbCodItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCodItem.AutoSize = true;
-            this.lbCodItem.Location = new System.Drawing.Point(6, 201);
+            this.lbCodItem.Location = new System.Drawing.Point(6, 211);
             this.lbCodItem.Name = "lbCodItem";
             this.lbCodItem.Size = new System.Drawing.Size(27, 13);
             this.lbCodItem.TabIndex = 1;
@@ -441,7 +441,7 @@
             // btInserirItem
             // 
             this.btInserirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btInserirItem.Location = new System.Drawing.Point(144, 297);
+            this.btInserirItem.Location = new System.Drawing.Point(144, 307);
             this.btInserirItem.Name = "btInserirItem";
             this.btInserirItem.Size = new System.Drawing.Size(59, 24);
             this.btInserirItem.TabIndex = 13;
@@ -474,7 +474,7 @@
             this.gbItens.Controls.Add(this.tbDescItem);
             this.gbItens.Location = new System.Drawing.Point(65, 200);
             this.gbItens.Name = "gbItens";
-            this.gbItens.Size = new System.Drawing.Size(993, 333);
+            this.gbItens.Size = new System.Drawing.Size(993, 343);
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
@@ -482,7 +482,7 @@
             // tbDescontoItem
             // 
             this.tbDescontoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbDescontoItem.Location = new System.Drawing.Point(75, 301);
+            this.tbDescontoItem.Location = new System.Drawing.Point(75, 311);
             this.tbDescontoItem.MaxLength = 13;
             this.tbDescontoItem.Name = "tbDescontoItem";
             this.tbDescontoItem.Size = new System.Drawing.Size(63, 20);
@@ -495,7 +495,7 @@
             // 
             this.lbDescItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbDescItem.AutoSize = true;
-            this.lbDescItem.Location = new System.Drawing.Point(73, 285);
+            this.lbDescItem.Location = new System.Drawing.Point(73, 295);
             this.lbDescItem.Name = "lbDescItem";
             this.lbDescItem.Size = new System.Drawing.Size(58, 13);
             this.lbDescItem.TabIndex = 11;
@@ -504,7 +504,7 @@
             // tbDescontoItemPorc
             // 
             this.tbDescontoItemPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbDescontoItemPorc.Location = new System.Drawing.Point(6, 301);
+            this.tbDescontoItemPorc.Location = new System.Drawing.Point(6, 311);
             this.tbDescontoItemPorc.MaxLength = 6;
             this.tbDescontoItemPorc.Name = "tbDescontoItemPorc";
             this.tbDescontoItemPorc.Size = new System.Drawing.Size(62, 20);
@@ -517,7 +517,7 @@
             // 
             this.lbDescontoPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbDescontoPorc.AutoSize = true;
-            this.lbDescontoPorc.Location = new System.Drawing.Point(3, 285);
+            this.lbDescontoPorc.Location = new System.Drawing.Point(3, 295);
             this.lbDescontoPorc.Name = "lbDescontoPorc";
             this.lbDescontoPorc.Size = new System.Drawing.Size(46, 13);
             this.lbDescontoPorc.TabIndex = 9;
@@ -583,7 +583,7 @@
             this.gbTotais.Location = new System.Drawing.Point(1064, 200);
             this.gbTotais.MinimumSize = new System.Drawing.Size(163, 326);
             this.gbTotais.Name = "gbTotais";
-            this.gbTotais.Size = new System.Drawing.Size(163, 375);
+            this.gbTotais.Size = new System.Drawing.Size(163, 369);
             this.gbTotais.TabIndex = 2;
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
@@ -596,6 +596,8 @@
             this.tbDescontoOrcamento.Size = new System.Drawing.Size(85, 20);
             this.tbDescontoOrcamento.TabIndex = 5;
             this.tbDescontoOrcamento.Text = "0,00";
+            this.tbDescontoOrcamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoOrcamento_KeyPress);
+            this.tbDescontoOrcamento.Leave += new System.EventHandler(this.tbDescontoOrcamento_Leave);
             // 
             // lbDesconto
             // 
@@ -636,6 +638,8 @@
             this.tbValorTotalOrcamento.Size = new System.Drawing.Size(85, 20);
             this.tbValorTotalOrcamento.TabIndex = 7;
             this.tbValorTotalOrcamento.Text = "0,00";
+            this.tbValorTotalOrcamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorTotalOrcamento_KeyPress);
+            this.tbValorTotalOrcamento.Leave += new System.EventHandler(this.tbValorTotalOrcamento_Leave);
             // 
             // lbTotalOrcamento
             // 
@@ -652,7 +656,7 @@
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(65, 539);
+            this.tbAjuda.Location = new System.Drawing.Point(65, 549);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);

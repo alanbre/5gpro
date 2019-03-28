@@ -4,8 +4,8 @@ using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
@@ -162,11 +162,11 @@ namespace _5gpro.Forms
                     item = itens.Where(i => i.Codigo == tbCodItem.Text).First();
                     PreencheCamposItem(item);
                 }
-                
+
             }
             else
             {
-                tbNomeCliente.Text = "";
+                tbCodItem.Text = "";
             }
         }
 
@@ -201,6 +201,13 @@ namespace _5gpro.Forms
             tbDescontoItem.Text = Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
+
+        private void tbDescontoOrcamento_Leave(object sender, EventArgs e)
+        {
+            tbDescontoOrcamento.Text = Convert.ToDecimal(tbDescontoOrcamento.Text).ToString("############0.00");
+            CalculaTotalOrcamento();
+        }
+
 
 
 
@@ -269,6 +276,25 @@ namespace _5gpro.Forms
             }
         }
 
+        private void tbDescontoOrcamento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (f.ValidaTeclaDigitadaDecimal(e))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void tbValorTotalOrcamento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (f.ValidaTeclaDigitadaDecimal(e))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+
 
 
         private void btInserirItem_Click(object sender, EventArgs e)
@@ -305,6 +331,7 @@ namespace _5gpro.Forms
                 }
                 tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
                 tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
+                CalculaTotalOrcamento();
             }
             else
             {
@@ -538,7 +565,6 @@ namespace _5gpro.Forms
             {
                 tbCodCliente.Text = pessoa.Codigo;
                 tbNomeCliente.Text = pessoa.Nome;
-                Editando(true);
             }
             else
             {
@@ -636,10 +662,15 @@ namespace _5gpro.Forms
             dtpCadastro.Value = orcamento.DataCadastro;
             dtpVencimento.Value = orcamento.DataVencimento != null ? orcamento.DataVencimento : DateTime.Now;
             cbVencimento.Checked = orcamento.DataVencimento != null ? true : false;
-            tbValorTotItem.Text = orcamento.ValorTotalItens.ToString("############0.00");
+            tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
             tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
             tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
+            foreach(_Item i in orcamento.Itens)
+            {
+                table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+            }
+            dgvItens.Refresh();
         }
 
         private void LimpaCampos(bool limpaCod)
@@ -659,5 +690,14 @@ namespace _5gpro.Forms
             dgvItens.Refresh();
         }
 
+        private void CalculaTotalOrcamento()
+        {
+            tbValorTotalOrcamento.Text = (Convert.ToDecimal(tbValorTotalItens.Text) - Convert.ToDecimal(tbDescontoTotalItens.Text) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
+        }
+
+        private void tbValorTotalOrcamento_Leave(object sender, EventArgs e)
+        {
+            tbValorTotalOrcamento.Text = Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00");
+        }
     }
 }
