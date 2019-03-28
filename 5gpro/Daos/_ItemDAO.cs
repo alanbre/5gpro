@@ -38,7 +38,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@valorentrada", _item.ValorEntrada);
                 Comando.Parameters.AddWithValue("@valorsaida", _item.ValorSaida);
                 Comando.Parameters.AddWithValue("@estoquenecessario", _item.Estoquenecessario);
-                Comando.Parameters.AddWithValue("@idunimedida", _item.Unimedida);
+                Comando.Parameters.AddWithValue("@unimedida_idunimedida", _item.Unimedida.Codigo);
 
 
                 retorno = Comando.ExecuteNonQuery();

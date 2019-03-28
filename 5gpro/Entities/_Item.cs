@@ -28,7 +28,7 @@ namespace _5gpro.Entities
 
         public decimal Estoquenecessario { get; set; }
 
-        [Required(ErrorMessage = "A unidade de medida é obrigatória.|tbDescricaoUndMedida", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "A unidade de medida é obrigatória.|tbCodUnimedida", AllowEmptyStrings = false)]
         public Unimedida Unimedida { get; set; }
 
         //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.

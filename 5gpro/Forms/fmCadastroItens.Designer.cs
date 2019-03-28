@@ -39,7 +39,7 @@
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
-            this.tbReferncia = new System.Windows.Forms.TextBox();
+            this.tbReferencia = new System.Windows.Forms.TextBox();
             this.lbReferencia = new System.Windows.Forms.Label();
             this.tbDescricaoUndMedida = new System.Windows.Forms.TextBox();
             this.btBuscaUndMedida = new System.Windows.Forms.Button();
@@ -166,7 +166,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnDadosGerais.Controls.Add(this.gbTipoDeItem);
-            this.pnDadosGerais.Controls.Add(this.tbReferncia);
+            this.pnDadosGerais.Controls.Add(this.tbReferencia);
             this.pnDadosGerais.Controls.Add(this.lbReferencia);
             this.pnDadosGerais.Controls.Add(this.tbDescricaoUndMedida);
             this.pnDadosGerais.Controls.Add(this.btBuscaUndMedida);
@@ -203,6 +203,7 @@
             this.rbServico.TabIndex = 9;
             this.rbServico.Text = "Serviço";
             this.rbServico.UseVisualStyleBackColor = true;
+            this.rbServico.CheckedChanged += new System.EventHandler(this.rbServico_CheckedChanged);
             // 
             // rbProduto
             // 
@@ -215,15 +216,15 @@
             this.rbProduto.TabStop = true;
             this.rbProduto.Text = "Produto";
             this.rbProduto.UseVisualStyleBackColor = true;
+            this.rbProduto.CheckedChanged += new System.EventHandler(this.rbProduto_CheckedChanged);
             // 
-            // tbReferncia
+            // tbReferencia
             // 
-            this.tbReferncia.Location = new System.Drawing.Point(15, 186);
-            this.tbReferncia.Name = "tbReferncia";
-            this.tbReferncia.Size = new System.Drawing.Size(265, 20);
-            this.tbReferncia.TabIndex = 10;
-            this.tbReferncia.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbReferncia_KeyDown);
-            this.tbReferncia.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbReferncia_KeyUp);
+            this.tbReferencia.Location = new System.Drawing.Point(15, 186);
+            this.tbReferencia.Name = "tbReferencia";
+            this.tbReferencia.Size = new System.Drawing.Size(265, 20);
+            this.tbReferencia.TabIndex = 10;
+            this.tbReferencia.TextChanged += new System.EventHandler(this.tbReferencia_TextChanged);
             // 
             // lbReferencia
             // 
@@ -259,7 +260,7 @@
             this.tbCodUnimedida.Name = "tbCodUnimedida";
             this.tbCodUnimedida.Size = new System.Drawing.Size(59, 20);
             this.tbCodUnimedida.TabIndex = 7;
-            this.tbCodUnimedida.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCodUnimedida_KeyDown);
+            this.tbCodUnimedida.TextChanged += new System.EventHandler(this.tbCodUnimedida_TextChanged);
             this.tbCodUnimedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodUnimedida_KeyUp);
             // 
             // lbUndMedida
@@ -278,8 +279,7 @@
             this.tbDescricaoDeCompra.Name = "tbDescricaoDeCompra";
             this.tbDescricaoDeCompra.Size = new System.Drawing.Size(528, 20);
             this.tbDescricaoDeCompra.TabIndex = 5;
-            this.tbDescricaoDeCompra.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescricaoDeCompra_KeyDown);
-            this.tbDescricaoDeCompra.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbDescricaoDeCompra_KeyUp);
+            this.tbDescricaoDeCompra.TextChanged += new System.EventHandler(this.tbDescricaoDeCompra_TextChanged);
             // 
             // lbDescricaoFornecedor
             // 
@@ -297,8 +297,7 @@
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(527, 20);
             this.tbDescricao.TabIndex = 3;
-            this.tbDescricao.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbDescricao_KeyDown);
-            this.tbDescricao.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbDescricao_KeyUp);
+            this.tbDescricao.TextChanged += new System.EventHandler(this.tbDescricao_TextChanged);
             // 
             // lbDescricao
             // 
@@ -316,7 +315,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyDown);
             this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
             this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
             // 
@@ -373,8 +371,7 @@
             this.tbEstoqueNecessario.Name = "tbEstoqueNecessario";
             this.tbEstoqueNecessario.Size = new System.Drawing.Size(108, 20);
             this.tbEstoqueNecessario.TabIndex = 12;
-            this.tbEstoqueNecessario.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbEstoqueNecessario_KeyDown);
-            this.tbEstoqueNecessario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbEstoqueNecessario_KeyUp);
+            this.tbEstoqueNecessario.TextChanged += new System.EventHandler(this.tbEstoqueNecessario_TextChanged);
             // 
             // lbEstoqueNecessario
             // 
@@ -402,8 +399,7 @@
             this.tbPrecoUltimaEntrada.Name = "tbPrecoUltimaEntrada";
             this.tbPrecoUltimaEntrada.Size = new System.Drawing.Size(86, 20);
             this.tbPrecoUltimaEntrada.TabIndex = 11;
-            this.tbPrecoUltimaEntrada.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPrecoUltimaEntrada_KeyDown);
-            this.tbPrecoUltimaEntrada.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPrecoUltimaEntrada_KeyUp);
+            this.tbPrecoUltimaEntrada.TextChanged += new System.EventHandler(this.tbPrecoUltimaEntrada_TextChanged);
             // 
             // lbPrecoUltimaEntrada
             // 
@@ -432,8 +428,7 @@
             this.tbPrecoVenda.Name = "tbPrecoVenda";
             this.tbPrecoVenda.Size = new System.Drawing.Size(86, 20);
             this.tbPrecoVenda.TabIndex = 13;
-            this.tbPrecoVenda.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbPrecoVenda_KeyDown);
-            this.tbPrecoVenda.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbPrecoVenda_KeyUp);
+            this.tbPrecoVenda.TextChanged += new System.EventHandler(this.tbPrecoVenda_TextChanged);
             // 
             // lbPrecoVenda
             // 
@@ -486,7 +481,7 @@
         private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.Button btNovo;
         private System.Windows.Forms.Panel pnDadosGerais;
-        private System.Windows.Forms.TextBox tbReferncia;
+        private System.Windows.Forms.TextBox tbReferencia;
         private System.Windows.Forms.Label lbReferencia;
         private System.Windows.Forms.TextBox tbDescricaoUndMedida;
         private System.Windows.Forms.Button btBuscaUndMedida;

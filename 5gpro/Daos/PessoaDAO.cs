@@ -50,7 +50,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@endereco", pessoa.Rua + ", " + pessoa.Numero + "-" + pessoa.Bairro);
                 Comando.Parameters.AddWithValue("@telefone", pessoa.Telefone);
                 Comando.Parameters.AddWithValue("@email", pessoa.Email);
-                Comando.Parameters.AddWithValue("@idcidade", pessoa.Cidade);
+                Comando.Parameters.AddWithValue("@idcidade", pessoa.Cidade.CodCidade);
                 Comando.Parameters.AddWithValue("@tipoPessoa", pessoa.TipoPessoa);
 
                 retorno = Comando.ExecuteNonQuery();

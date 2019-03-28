@@ -27,7 +27,7 @@ namespace _5gpro.Entities
         public string Bairro { get; set; }
         public string Complemento { get; set; }
 
-        [Required(ErrorMessage = "A Cidade é obrigatória.|tbNomeCidade", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "A Cidade é obrigatória.|tbCodCidade", AllowEmptyStrings = false)]
         public Cidade Cidade { get; set; }
 
         public string CpfCnpj { get; set; }
