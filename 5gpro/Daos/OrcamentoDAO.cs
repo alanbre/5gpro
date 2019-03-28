@@ -26,7 +26,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     orcamento = new Orcamento();
-                    orcamento.Codigo = reader.GetString(reader.GetOrdinal("idpessoa"));
+                    orcamento.Codigo = reader.GetString(reader.GetOrdinal("idorcamento"));
                     orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
                     orcamento.DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento"));
                     orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
@@ -117,7 +117,7 @@ namespace _5gpro.Daos
                     i.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     i.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
 
-                    i.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    i.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("idunimedida")));
                     //i.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
 
                     i.Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade"));
