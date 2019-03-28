@@ -1,4 +1,5 @@
 ﻿using _5gpro.Bll;
+using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -158,7 +159,7 @@ namespace _5gpro.Forms
             }
 
 
-            _item.Unimedida = tbCodUnimedida.Text;
+            _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(tbCodUnimedida.Text);
 
             ControlCollection controls = (ControlCollection)this.Controls;
 
@@ -434,10 +435,11 @@ namespace _5gpro.Forms
             tbCodigo.Text = _item.Codigo;
             tbDescricao.Text = _item.Descricao;
             tbDescricaoDeCompra.Text = _item.DescCompra;
+            
 
             if (_item.Unimedida != null)
             {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(_item.Unimedida);
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(_item.Unimedida.Codigo);
                 PreencheCamposUnimedida(unimedida);
             }
 
@@ -551,8 +553,21 @@ namespace _5gpro.Forms
         private void btBuscar_Click(object sender, EventArgs e)
         {
             //ABRE O FORM DE BUSCA ITEM
+            if (!editando)
+            {
+                AbreTelaBuscaItem();
+            }
+        }
+
+        private void AbreTelaBuscaItem()
+        {
             var buscaItem = new fmBuscaItem();
             buscaItem.ShowDialog();
+            if (buscaItem.itemSelecionado != null)
+            {
+                _item = buscaItem.itemSelecionado;
+                PreencheCampos(_item);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

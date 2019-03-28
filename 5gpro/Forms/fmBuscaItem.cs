@@ -61,7 +61,7 @@ namespace _5gpro.Forms
 
             foreach (_Item i in _itens)
             {
-                table.Rows.Add(i.Codigo, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida, i.ValorEntrada, i.ValorSaida);
+                table.Rows.Add(i.Codigo, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
             }
             dgvItens.DataSource = table;
         }
@@ -98,17 +98,35 @@ namespace _5gpro.Forms
 
         private void cbProduto_Click(object sender, EventArgs e)
         {
-            BuscaItens();
+           // BuscaItens();
         }
 
         private void cbServico_Click(object sender, EventArgs e)
         {
-            BuscaItens();
+            //BuscaItens();
         }
 
         private void fmBuscaItem_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbServico_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btBuscarItens_Click(object sender, EventArgs e)
+        {
+            BuscaItens();
+        }
+
+        private void dgvItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
+            itemSelecionado = _itens.Find(p => p.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            this.Close();
         }
     }
 }

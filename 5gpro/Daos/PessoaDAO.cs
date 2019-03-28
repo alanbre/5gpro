@@ -117,7 +117,10 @@ namespace _5gpro.Daos
                     pessoa.Numero = reader.GetString(reader.GetOrdinal("numero"));
                     pessoa.Bairro = reader.GetString(reader.GetOrdinal("bairro"));
                     pessoa.Complemento = reader.GetString(reader.GetOrdinal("complemento"));
-                    pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
+                    pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetString(reader.GetOrdinal("idcidade")));
+                    //pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
                     pessoa.CpfCnpj = pessoa.TipoPessoa == "F"? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
                     pessoa.Email = reader.GetString(reader.GetOrdinal("email"));
@@ -159,7 +162,10 @@ namespace _5gpro.Daos
                     pessoa.Numero = reader.GetString(reader.GetOrdinal("numero"));
                     pessoa.Bairro = reader.GetString(reader.GetOrdinal("bairro"));
                     pessoa.Complemento = reader.GetString(reader.GetOrdinal("complemento"));
-                    pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
+                    pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetString(reader.GetOrdinal("idcidade")));
+                    //pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
                     pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
                     pessoa.Email = reader.GetString(reader.GetOrdinal("email"));
@@ -201,7 +207,10 @@ namespace _5gpro.Daos
                     pessoa.Numero = reader.GetString(reader.GetOrdinal("numero"));
                     pessoa.Bairro = reader.GetString(reader.GetOrdinal("bairro"));
                     pessoa.Complemento = reader.GetString(reader.GetOrdinal("complemento"));
-                    pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
+                    pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetString(reader.GetOrdinal("idcidade")));
+                    //pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
                     pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
                     pessoa.Email = reader.GetString(reader.GetOrdinal("email"));
@@ -255,7 +264,10 @@ namespace _5gpro.Daos
                     pessoa.Numero = reader.GetString(reader.GetOrdinal("numero"));
                     pessoa.Bairro = reader.GetString(reader.GetOrdinal("bairro"));
                     pessoa.Complemento = reader.GetString(reader.GetOrdinal("complemento"));
-                    pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
+                    pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetString(reader.GetOrdinal("idcidade")));
+                    //pessoa.Cidade = reader.GetString(reader.GetOrdinal("idcidade"));
+
                     pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     pessoa.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
                     pessoa.Email = reader.GetString(reader.GetOrdinal("email"));

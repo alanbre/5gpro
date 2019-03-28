@@ -14,6 +14,8 @@ namespace _5gpro.Forms
         public Cidade cidadeSelecionada;
         private CidadeBLL cidadeBLL = new CidadeBLL();
         private EstadoBLL estadoBLL = new EstadoBLL();
+        
+        
 
 
         public fmBuscaCidade()

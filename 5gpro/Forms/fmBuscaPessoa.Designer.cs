@@ -35,10 +35,10 @@
             this.lbFiltroNome = new System.Windows.Forms.Label();
             this.tbFiltroNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvCidades = new System.Windows.Forms.DataGridView();
+            this.dgvPessoas = new System.Windows.Forms.DataGridView();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.tbCpfCnpj = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPessoas)).BeginInit();
             this.SuspendLayout();
             // 
             // btBuscaCidade
@@ -108,26 +108,27 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "CPF/CNPJ";
             // 
-            // dgvCidades
+            // dgvPessoas
             // 
-            this.dgvCidades.AllowUserToAddRows = false;
-            this.dgvCidades.AllowUserToDeleteRows = false;
-            this.dgvCidades.AllowUserToOrderColumns = true;
-            this.dgvCidades.AllowUserToResizeRows = false;
-            this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvPessoas.AllowUserToAddRows = false;
+            this.dgvPessoas.AllowUserToDeleteRows = false;
+            this.dgvPessoas.AllowUserToOrderColumns = true;
+            this.dgvPessoas.AllowUserToResizeRows = false;
+            this.dgvPessoas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvCidades.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvCidades.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvCidades.Location = new System.Drawing.Point(7, 128);
-            this.dgvCidades.MultiSelect = false;
-            this.dgvCidades.Name = "dgvCidades";
-            this.dgvCidades.ReadOnly = true;
-            this.dgvCidades.RowHeadersVisible = false;
-            this.dgvCidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCidades.Size = new System.Drawing.Size(1046, 377);
-            this.dgvCidades.TabIndex = 7;
-            this.dgvCidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCidades_CellDoubleClick);
+            this.dgvPessoas.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvPessoas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvPessoas.Location = new System.Drawing.Point(7, 128);
+            this.dgvPessoas.MultiSelect = false;
+            this.dgvPessoas.Name = "dgvPessoas";
+            this.dgvPessoas.ReadOnly = true;
+            this.dgvPessoas.RowHeadersVisible = false;
+            this.dgvPessoas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPessoas.Size = new System.Drawing.Size(1046, 377);
+            this.dgvPessoas.TabIndex = 7;
+            this.dgvPessoas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPessoas_CellContentClick);
+            this.dgvPessoas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPessoas_CellDoubleClick);
             // 
             // btPesquisar
             // 
@@ -156,7 +157,7 @@
             this.ClientSize = new System.Drawing.Size(1065, 517);
             this.Controls.Add(this.tbCpfCnpj);
             this.Controls.Add(this.btPesquisar);
-            this.Controls.Add(this.dgvCidades);
+            this.Controls.Add(this.dgvPessoas);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbFiltroNome);
             this.Controls.Add(this.lbFiltroNome);
@@ -170,7 +171,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca pessoa";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPessoas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -185,7 +186,7 @@
         private System.Windows.Forms.Label lbFiltroNome;
         private System.Windows.Forms.TextBox tbFiltroNome;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvCidades;
+        private System.Windows.Forms.DataGridView dgvPessoas;
         private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.TextBox tbCpfCnpj;
     }
