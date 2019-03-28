@@ -68,6 +68,7 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -219,6 +220,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDados.Controls.Add(this.button1);
             this.pnDados.Controls.Add(this.btBuscaCidade);
             this.pnDados.Controls.Add(this.tbNomeCidade);
             this.pnDados.Controls.Add(this.tbCodCidade);
@@ -534,6 +536,16 @@
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 4;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(350, 201);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,5 +618,6 @@
         private System.Windows.Forms.Label lbCidade;
         private System.Windows.Forms.CheckedListBox cblAtuacao;
         private System.Windows.Forms.Button btRecarregar;
+        private System.Windows.Forms.Button button1;
     }
 }

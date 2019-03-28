@@ -13,6 +13,7 @@ namespace _5gpro.Forms
         Cidade cidade;
         PessoaBLL pessoaBLL = new PessoaBLL();
         CidadeBLL cidadeBLL = new CidadeBLL();
+        Validacao validacao = new Validacao();
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
@@ -101,27 +102,34 @@ namespace _5gpro.Forms
             pessoa.Telefone = mtbTelefone.TextNoMask();
             pessoa.Email = tbEmail.Text;
 
-            int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+            ControlCollection controls = (ControlCollection)this.Controls;
+            bool ok = validacao.ValidarEntidade(pessoa, controls);
 
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
+            if (ok)
             {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-            }
-            else if (resultado == 1)
-            {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                Editando(false);
-            }
-            else if (resultado == 2)
-            {
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                Editando(false);
+                
+                int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {         
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                }
             }
         }
 
