@@ -128,7 +128,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`usuario` (
-  `idusuario` INT NOT NULL AUTO_INCREMENT,
+  `idusuario` INT NOT NULL,
   `nome` VARCHAR(40) NOT NULL,
   `sobrenome` VARCHAR(50) NULL,
   `login` VARCHAR(20) NOT NULL,
