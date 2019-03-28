@@ -262,6 +262,7 @@
             this.tbCodUnimedida.TabIndex = 7;
             this.tbCodUnimedida.TextChanged += new System.EventHandler(this.tbCodUnimedida_TextChanged);
             this.tbCodUnimedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodUnimedida_KeyUp);
+            this.tbCodUnimedida.Leave += new System.EventHandler(this.tbCodUnimedida_Leave_1);
             // 
             // lbUndMedida
             // 
