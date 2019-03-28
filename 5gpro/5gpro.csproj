@@ -33,7 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>mysql\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,14 +51,157 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Bll\CidadeBLL.cs" />
+    <Compile Include="Bll\EstadoBLL.cs" />
+    <Compile Include="Bll\OrcamentoBLL.cs" />
+    <Compile Include="Bll\PessoaBLL.cs" />
+    <Compile Include="Bll\UnimedidaBLL.cs" />
+    <Compile Include="Bll\UsuarioBLL.cs" />
+    <Compile Include="Bll\_ItemBLL.cs" />
+    <Compile Include="Daos\CidadeDAO.cs" />
+    <Compile Include="Daos\EstadoDAO.cs" />
+    <Compile Include="Daos\OrcamentoDAO.cs" />
+    <Compile Include="Daos\UsuarioDAO.cs" />
+    <Compile Include="Daos\_ItemDAO.cs" />
+    <Compile Include="Daos\PessoaDAO.cs" />
+    <Compile Include="Daos\UnimedidaDAO.cs" />
+    <Compile Include="Entities\Cidade.cs" />
+    <Compile Include="Entities\Estado.cs" />
+    <Compile Include="Entities\Orcamento.cs" />
+    <Compile Include="Entities\Unimedida.cs" />
+    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\_Item.cs" />
+    <Compile Include="Bll\PaisBLL.cs" />
+    <Compile Include="Daos\PaisDAO.cs" />
+    <Compile Include="Daos\ConexaoDAO.cs" />
+    <Compile Include="Entities\Pais.cs" />
+    <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\fmBuscaCidade.Designer.cs">
+      <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaItem.Designer.cs">
+      <DependentUpon>fmBuscaItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaUnimedida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaUnimedida.Designer.cs">
+      <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPais.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPais.Designer.cs">
+      <DependentUpon>fmCadastroPais.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaEstado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaEstado.Designer.cs">
+      <DependentUpon>fmBuscaEstado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaPessoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaPessoa.Designer.cs">
+      <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroFuncionario.Designer.cs">
+      <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroItens.Designer.cs">
+      <DependentUpon>fmCadastroItens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPessoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroPessoa.Designer.cs">
+      <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroUsuario.Designer.cs">
+      <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmLogin.Designer.cs">
+      <DependentUpon>fmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmMain.Designer.cs">
+      <DependentUpon>fmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroOrcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroOrcamento.Designer.cs">
+      <DependentUpon>fmCadastroOrcamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Funcoes\CarregaSistema.cs" />
+    <Compile Include="Funcoes\DatabaseUpdate.cs" />
+    <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
+    <Compile Include="Funcoes\FuncoesBanco.cs" />
+    <Compile Include="Funcoes\Limpar.cs" />
+    <Compile Include="Funcoes\Validacao.cs" />
+    <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
+      <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
+      <DependentUpon>fmBuscaEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaItem.resx">
+      <DependentUpon>fmBuscaItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaPessoa.resx">
+      <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaUnimedida.resx">
+      <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroFuncionario.resx">
+      <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroItens.resx">
+      <DependentUpon>fmCadastroItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroPais.resx">
+      <DependentUpon>fmCadastroPais.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
+      <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroUsuario.resx">
+      <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmLogin.resx">
+      <DependentUpon>fmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmMain.resx">
+      <DependentUpon>fmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroOrcamento.resx">
+      <DependentUpon>fmCadastroOrcamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +210,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Properties\DataSources\_5gpro.Entities.Unimedida.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +225,150 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_32_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_32_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right_32_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_32_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_32_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left_32_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ok_32_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus_32_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Add_File_32px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Right_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Right_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Left_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Left_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkmark_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkmark_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Search_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Search_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Reset_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Reset_64px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Left_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Left_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Right_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Right_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Right_48px_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Reset_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Reset_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkmark_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkmark_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Search_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Search_48px_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Google_Web_Search_48px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Book_18px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Plus_Math_22px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Checkmark_22px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
