@@ -77,7 +77,9 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    //_item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
                     reader.Close();
                 }
             }
@@ -114,7 +116,9 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    //_item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
                     reader.Close();
                 }
             }
@@ -152,7 +156,9 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
+
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    //_item.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
                     reader.Close();
                 }
             }
@@ -207,7 +213,9 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = reader.GetString(reader.GetOrdinal("sigla"));
+
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    //_item.Unimedida = reader.GetString(reader.GetOrdinal("sigla"));
                     _itens.Add(_item);
                 }
             }
@@ -220,6 +228,39 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
             return _itens;
+        }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT i1.iditem + 1 AS proximoid
+                                             FROM item AS i1
+                                             LEFT OUTER JOIN item AS i2 ON i1.iditem + 1 = i2.iditem
+                                             WHERE i2.iditem IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return proximoid;
         }
     }
 

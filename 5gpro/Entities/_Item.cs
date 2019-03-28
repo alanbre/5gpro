@@ -29,7 +29,7 @@ namespace _5gpro.Entities
         public decimal Estoquenecessario { get; set; }
 
         [Required(ErrorMessage = "A unidade de medida é obrigatória.|tbDescricaoUndMedida", AllowEmptyStrings = false)]
-        public string Unimedida { get; set; }
+        public Unimedida Unimedida { get; set; }
 
         //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.
         public decimal Quantidade { get; set; }
@@ -48,7 +48,7 @@ namespace _5gpro.Entities
             Desconto = 0;
         }
 
-        public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, string unimedida)
+        public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, Unimedida unimedida)
         {
             this.Codigo = codigo;
             this.Descricao = descricao;

@@ -28,7 +28,8 @@ namespace _5gpro.Entities
         public string Complemento { get; set; }
 
         [Required(ErrorMessage = "A Cidade é obrigatória.|tbNomeCidade", AllowEmptyStrings = false)]
-        public string Cidade { get; set; }
+        public Cidade Cidade { get; set; }
+
         public string CpfCnpj { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
@@ -56,12 +57,13 @@ namespace _5gpro.Entities
 
         }
 
-        public Pessoa(string codigo, string nome, List<string> atuacao, string tipopessoa)
+        public Pessoa(string codigo, string nome, List<string> atuacao, string tipopessoa, Cidade cidade)
         {
             this.Codigo = codigo;
             this.Nome = nome;
             this.Atuacao = atuacao;
             this.TipoPessoa = tipopessoa;
+            this.Cidade = cidade;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using _5gpro.Bll;
+using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -364,7 +365,7 @@ namespace _5gpro.Forms
                     pessoa.Numero = tbNumero.Text;
                     pessoa.Bairro = tbBairro.Text;
                     pessoa.Complemento = tbComplemento.Text;
-                    pessoa.Cidade = tbCodCidade.Text;
+                    pessoa.Cidade = new CidadeDAO().BuscaCidadeByCod(tbCodCidade.Text);
                     pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
                     pessoa.Telefone = mtbTelefone.TextNoMask();
                     pessoa.Email = tbEmail.Text;
@@ -599,14 +600,14 @@ namespace _5gpro.Forms
             tbNumero.Text = pessoa.Numero;
             tbBairro.Text = pessoa.Bairro;
             tbComplemento.Text = pessoa.Complemento;
-            tbCodCidade.Text = pessoa.Cidade;
+            tbCodCidade.Text = pessoa.Cidade.CodCidade;
             mtbCpfCnpj.Text = pessoa.CpfCnpj;
             mtbTelefone.Text = pessoa.Telefone;
             tbEmail.Text = pessoa.Email;
 
             if (pessoa.Cidade != null)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade);
+                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade.CodCidade);
                 PreencheCamposCidade(cidade);
             }
 

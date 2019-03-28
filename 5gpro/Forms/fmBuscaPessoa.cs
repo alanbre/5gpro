@@ -96,10 +96,10 @@ namespace _5gpro.Forms
         }
 
         //EVENTOS DE CELL DOUBLE CLICK
-        private void dgvCidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvCidades.Rows[selectedRowIndex];
+            int selectedRowIndex = dgvPessoas.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvPessoas.Rows[selectedRowIndex];
             pessoaSelecionada = Pessoas.Find(p => p.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
             this.Close();
         }
@@ -141,10 +141,14 @@ namespace _5gpro.Forms
 
             foreach (Pessoa p in Pessoas)
             {
-                table.Rows.Add(p.Codigo, p.Nome, p.Fantasia, p.TipoPessoa, p.Endereco, p.Cidade, p.CpfCnpj, p.Telefone, p.Email);
+                table.Rows.Add(p.Codigo, p.Nome, p.Fantasia, p.TipoPessoa, p.Endereco, p.Cidade.Nome, p.CpfCnpj, p.Telefone, p.Email);
             }
-            dgvCidades.DataSource = table;
+            dgvPessoas.DataSource = table;
         }
 
+        private void dgvPessoas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
