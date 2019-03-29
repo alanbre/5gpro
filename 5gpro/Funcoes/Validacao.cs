@@ -67,7 +67,8 @@ namespace _5gpro.Funcoes
                     todoserros = todoserros + "\n \n " + erro;
                 }
                 pintarBotoes(listabotoes, controls);
-                MessageBox.Show(todoserros);
+                //MessageBox.Show(todoserros);
+                MessageBox.Show("Verifique os campos!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {

@@ -15,14 +15,29 @@ namespace _5gpro.Forms
         public fmCadastroUsuario()
         {
             InitializeComponent();
-            tbSenhaUsuario.PasswordChar = '*';
-            tbConfirmaSenhaUsuario.PasswordChar = '*';
+            tbSenhaUsuario.UseSystemPasswordChar = true;
+            tbConfirmaSenhaUsuario.UseSystemPasswordChar = true;
 
         }
 
         private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void cbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbMostrarSenhaUsuario.Checked)
+            {
+                tbSenhaUsuario.UseSystemPasswordChar = false;
+                tbConfirmaSenhaUsuario.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                tbSenhaUsuario.UseSystemPasswordChar = true;
+                tbConfirmaSenhaUsuario.UseSystemPasswordChar = true;
+            }
+            
         }
     }
 }

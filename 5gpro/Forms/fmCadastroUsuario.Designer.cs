@@ -37,28 +37,28 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
+            this.tbConfirmaSenhaUsuario = new System.Windows.Forms.TextBox();
+            this.lbConfirmaSenhaUsuario = new System.Windows.Forms.Label();
+            this.tbSenhaUsuario = new System.Windows.Forms.TextBox();
+            this.lbSenhaUsuario = new System.Windows.Forms.Label();
+            this.tbLoginUsuario = new System.Windows.Forms.TextBox();
+            this.lbLoginUsuario = new System.Windows.Forms.Label();
+            this.lbGrupoUsuario = new System.Windows.Forms.Label();
+            this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
+            this.lbCodigoUsuario = new System.Windows.Forms.Label();
+            this.btGrupoUsuario = new System.Windows.Forms.Button();
+            this.tbCodigoUsuario = new System.Windows.Forms.TextBox();
+            this.tbCodUsuario = new System.Windows.Forms.TextBox();
             this.tbNomeUsuario = new System.Windows.Forms.TextBox();
             this.lbNomeUsuario = new System.Windows.Forms.Label();
             this.lbSobrenomeUsuario = new System.Windows.Forms.Label();
             this.tbSobrenomeUsuario = new System.Windows.Forms.TextBox();
-            this.tbCodigoUsuario = new System.Windows.Forms.TextBox();
-            this.lbCodigoUsuario = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lbEmailUsuario = new System.Windows.Forms.Label();
+            this.lbTelefoneUsuario = new System.Windows.Forms.Label();
             this.tbEmailUsuario = new System.Windows.Forms.TextBox();
-            this.lbFoneUsuario = new System.Windows.Forms.Label();
-            this.tbFoneUsuario = new System.Windows.Forms.TextBox();
-            this.tbCodUsuario = new System.Windows.Forms.TextBox();
-            this.btGrupoUsuario = new System.Windows.Forms.Button();
-            this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
-            this.lbGrupoUsuario = new System.Windows.Forms.Label();
-            this.lbLoginUsuario = new System.Windows.Forms.Label();
-            this.tbLoginUsuario = new System.Windows.Forms.TextBox();
-            this.lbSenhaUsuario = new System.Windows.Forms.Label();
-            this.tbSenhaUsuario = new System.Windows.Forms.TextBox();
-            this.lbConfirmaSenhaUsuario = new System.Windows.Forms.Label();
-            this.tbConfirmaSenhaUsuario = new System.Windows.Forms.TextBox();
-            this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
+            this.lbEmailUsuario = new System.Windows.Forms.Label();
+            this.mtbTelefoneUsuario = new System.Windows.Forms.MaskedTextBox();
             this.pnBotoes.SuspendLayout();
             this.pnDadosGerais.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -184,6 +184,113 @@
             this.pnDadosGerais.Size = new System.Drawing.Size(737, 220);
             this.pnDadosGerais.TabIndex = 4;
             // 
+            // cbMostrarSenhaUsuario
+            // 
+            this.cbMostrarSenhaUsuario.AutoSize = true;
+            this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(262, 110);
+            this.cbMostrarSenhaUsuario.Name = "cbMostrarSenhaUsuario";
+            this.cbMostrarSenhaUsuario.Size = new System.Drawing.Size(61, 17);
+            this.cbMostrarSenhaUsuario.TabIndex = 15;
+            this.cbMostrarSenhaUsuario.Text = "Mostrar";
+            this.cbMostrarSenhaUsuario.UseVisualStyleBackColor = true;
+            this.cbMostrarSenhaUsuario.CheckedChanged += new System.EventHandler(this.cbMostrarSenhaUsuario_CheckedChanged);
+            // 
+            // tbConfirmaSenhaUsuario
+            // 
+            this.tbConfirmaSenhaUsuario.Location = new System.Drawing.Point(9, 146);
+            this.tbConfirmaSenhaUsuario.Name = "tbConfirmaSenhaUsuario";
+            this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(250, 20);
+            this.tbConfirmaSenhaUsuario.TabIndex = 13;
+            // 
+            // lbConfirmaSenhaUsuario
+            // 
+            this.lbConfirmaSenhaUsuario.AutoSize = true;
+            this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 130);
+            this.lbConfirmaSenhaUsuario.Name = "lbConfirmaSenhaUsuario";
+            this.lbConfirmaSenhaUsuario.Size = new System.Drawing.Size(89, 13);
+            this.lbConfirmaSenhaUsuario.TabIndex = 12;
+            this.lbConfirmaSenhaUsuario.Text = "Confirme a senha";
+            // 
+            // tbSenhaUsuario
+            // 
+            this.tbSenhaUsuario.Location = new System.Drawing.Point(9, 107);
+            this.tbSenhaUsuario.Name = "tbSenhaUsuario";
+            this.tbSenhaUsuario.Size = new System.Drawing.Size(250, 20);
+            this.tbSenhaUsuario.TabIndex = 11;
+            // 
+            // lbSenhaUsuario
+            // 
+            this.lbSenhaUsuario.AutoSize = true;
+            this.lbSenhaUsuario.Location = new System.Drawing.Point(6, 91);
+            this.lbSenhaUsuario.Name = "lbSenhaUsuario";
+            this.lbSenhaUsuario.Size = new System.Drawing.Size(38, 13);
+            this.lbSenhaUsuario.TabIndex = 10;
+            this.lbSenhaUsuario.Text = "Senha";
+            // 
+            // tbLoginUsuario
+            // 
+            this.tbLoginUsuario.Location = new System.Drawing.Point(9, 68);
+            this.tbLoginUsuario.Name = "tbLoginUsuario";
+            this.tbLoginUsuario.Size = new System.Drawing.Size(250, 20);
+            this.tbLoginUsuario.TabIndex = 9;
+            // 
+            // lbLoginUsuario
+            // 
+            this.lbLoginUsuario.AutoSize = true;
+            this.lbLoginUsuario.Location = new System.Drawing.Point(6, 51);
+            this.lbLoginUsuario.Name = "lbLoginUsuario";
+            this.lbLoginUsuario.Size = new System.Drawing.Size(33, 13);
+            this.lbLoginUsuario.TabIndex = 8;
+            this.lbLoginUsuario.Text = "Login";
+            // 
+            // lbGrupoUsuario
+            // 
+            this.lbGrupoUsuario.AutoSize = true;
+            this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 169);
+            this.lbGrupoUsuario.Name = "lbGrupoUsuario";
+            this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
+            this.lbGrupoUsuario.TabIndex = 7;
+            this.lbGrupoUsuario.Text = "Grupo Usuário";
+            // 
+            // tbNomeGrupoUsuario
+            // 
+            this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 185);
+            this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
+            this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(433, 20);
+            this.tbNomeGrupoUsuario.TabIndex = 6;
+            this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
+            // 
+            // lbCodigoUsuario
+            // 
+            this.lbCodigoUsuario.AutoSize = true;
+            this.lbCodigoUsuario.Location = new System.Drawing.Point(6, 4);
+            this.lbCodigoUsuario.Name = "lbCodigoUsuario";
+            this.lbCodigoUsuario.Size = new System.Drawing.Size(40, 13);
+            this.lbCodigoUsuario.TabIndex = 5;
+            this.lbCodigoUsuario.Text = "Código";
+            // 
+            // btGrupoUsuario
+            // 
+            this.btGrupoUsuario.Location = new System.Drawing.Point(80, 185);
+            this.btGrupoUsuario.Name = "btGrupoUsuario";
+            this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
+            this.btGrupoUsuario.TabIndex = 5;
+            this.btGrupoUsuario.UseVisualStyleBackColor = true;
+            // 
+            // tbCodigoUsuario
+            // 
+            this.tbCodigoUsuario.Location = new System.Drawing.Point(9, 27);
+            this.tbCodigoUsuario.Name = "tbCodigoUsuario";
+            this.tbCodigoUsuario.Size = new System.Drawing.Size(100, 20);
+            this.tbCodigoUsuario.TabIndex = 4;
+            // 
+            // tbCodUsuario
+            // 
+            this.tbCodUsuario.Location = new System.Drawing.Point(9, 185);
+            this.tbCodUsuario.Name = "tbCodUsuario";
+            this.tbCodUsuario.Size = new System.Drawing.Size(68, 20);
+            this.tbCodUsuario.TabIndex = 4;
+            // 
             // tbNomeUsuario
             // 
             this.tbNomeUsuario.Location = new System.Drawing.Point(9, 29);
@@ -216,27 +323,11 @@
             this.tbSobrenomeUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbSobrenomeUsuario.TabIndex = 3;
             // 
-            // tbCodigoUsuario
-            // 
-            this.tbCodigoUsuario.Location = new System.Drawing.Point(9, 27);
-            this.tbCodigoUsuario.Name = "tbCodigoUsuario";
-            this.tbCodigoUsuario.Size = new System.Drawing.Size(100, 20);
-            this.tbCodigoUsuario.TabIndex = 4;
-            // 
-            // lbCodigoUsuario
-            // 
-            this.lbCodigoUsuario.AutoSize = true;
-            this.lbCodigoUsuario.Location = new System.Drawing.Point(6, 4);
-            this.lbCodigoUsuario.Name = "lbCodigoUsuario";
-            this.lbCodigoUsuario.Size = new System.Drawing.Size(40, 13);
-            this.lbCodigoUsuario.TabIndex = 5;
-            this.lbCodigoUsuario.Text = "Código";
-            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.tbFoneUsuario);
-            this.panel2.Controls.Add(this.lbFoneUsuario);
+            this.panel2.Controls.Add(this.mtbTelefoneUsuario);
+            this.panel2.Controls.Add(this.lbTelefoneUsuario);
             this.panel2.Controls.Add(this.tbEmailUsuario);
             this.panel2.Controls.Add(this.lbEmailUsuario);
             this.panel2.Controls.Add(this.lbNomeUsuario);
@@ -248,6 +339,22 @@
             this.panel2.Size = new System.Drawing.Size(737, 206);
             this.panel2.TabIndex = 5;
             // 
+            // lbTelefoneUsuario
+            // 
+            this.lbTelefoneUsuario.AutoSize = true;
+            this.lbTelefoneUsuario.Location = new System.Drawing.Point(7, 130);
+            this.lbTelefoneUsuario.Name = "lbTelefoneUsuario";
+            this.lbTelefoneUsuario.Size = new System.Drawing.Size(49, 13);
+            this.lbTelefoneUsuario.TabIndex = 2;
+            this.lbTelefoneUsuario.Text = "Telefone";
+            // 
+            // tbEmailUsuario
+            // 
+            this.tbEmailUsuario.Location = new System.Drawing.Point(9, 107);
+            this.tbEmailUsuario.Name = "tbEmailUsuario";
+            this.tbEmailUsuario.Size = new System.Drawing.Size(527, 20);
+            this.tbEmailUsuario.TabIndex = 1;
+            // 
             // lbEmailUsuario
             // 
             this.lbEmailUsuario.AutoSize = true;
@@ -257,118 +364,13 @@
             this.lbEmailUsuario.TabIndex = 0;
             this.lbEmailUsuario.Text = "Email";
             // 
-            // tbEmailUsuario
+            // mtbTelefoneUsuario
             // 
-            this.tbEmailUsuario.Location = new System.Drawing.Point(9, 107);
-            this.tbEmailUsuario.Name = "tbEmailUsuario";
-            this.tbEmailUsuario.Size = new System.Drawing.Size(527, 20);
-            this.tbEmailUsuario.TabIndex = 1;
-            // 
-            // lbFoneUsuario
-            // 
-            this.lbFoneUsuario.AutoSize = true;
-            this.lbFoneUsuario.Location = new System.Drawing.Point(7, 130);
-            this.lbFoneUsuario.Name = "lbFoneUsuario";
-            this.lbFoneUsuario.Size = new System.Drawing.Size(31, 13);
-            this.lbFoneUsuario.TabIndex = 2;
-            this.lbFoneUsuario.Text = "Fone";
-            // 
-            // tbFoneUsuario
-            // 
-            this.tbFoneUsuario.Location = new System.Drawing.Point(9, 146);
-            this.tbFoneUsuario.Name = "tbFoneUsuario";
-            this.tbFoneUsuario.Size = new System.Drawing.Size(527, 20);
-            this.tbFoneUsuario.TabIndex = 3;
-            // 
-            // tbCodUsuario
-            // 
-            this.tbCodUsuario.Location = new System.Drawing.Point(9, 185);
-            this.tbCodUsuario.Name = "tbCodUsuario";
-            this.tbCodUsuario.Size = new System.Drawing.Size(68, 20);
-            this.tbCodUsuario.TabIndex = 4;
-            // 
-            // btGrupoUsuario
-            // 
-            this.btGrupoUsuario.Location = new System.Drawing.Point(80, 185);
-            this.btGrupoUsuario.Name = "btGrupoUsuario";
-            this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
-            this.btGrupoUsuario.TabIndex = 5;
-            this.btGrupoUsuario.UseVisualStyleBackColor = true;
-            // 
-            // tbNomeGrupoUsuario
-            // 
-            this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 185);
-            this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
-            this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(433, 20);
-            this.tbNomeGrupoUsuario.TabIndex = 6;
-            this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
-            // 
-            // lbGrupoUsuario
-            // 
-            this.lbGrupoUsuario.AutoSize = true;
-            this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 169);
-            this.lbGrupoUsuario.Name = "lbGrupoUsuario";
-            this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
-            this.lbGrupoUsuario.TabIndex = 7;
-            this.lbGrupoUsuario.Text = "Grupo Usuário";
-            // 
-            // lbLoginUsuario
-            // 
-            this.lbLoginUsuario.AutoSize = true;
-            this.lbLoginUsuario.Location = new System.Drawing.Point(6, 51);
-            this.lbLoginUsuario.Name = "lbLoginUsuario";
-            this.lbLoginUsuario.Size = new System.Drawing.Size(33, 13);
-            this.lbLoginUsuario.TabIndex = 8;
-            this.lbLoginUsuario.Text = "Login";
-            // 
-            // tbLoginUsuario
-            // 
-            this.tbLoginUsuario.Location = new System.Drawing.Point(9, 68);
-            this.tbLoginUsuario.Name = "tbLoginUsuario";
-            this.tbLoginUsuario.Size = new System.Drawing.Size(527, 20);
-            this.tbLoginUsuario.TabIndex = 9;
-            // 
-            // lbSenhaUsuario
-            // 
-            this.lbSenhaUsuario.AutoSize = true;
-            this.lbSenhaUsuario.Location = new System.Drawing.Point(6, 91);
-            this.lbSenhaUsuario.Name = "lbSenhaUsuario";
-            this.lbSenhaUsuario.Size = new System.Drawing.Size(38, 13);
-            this.lbSenhaUsuario.TabIndex = 10;
-            this.lbSenhaUsuario.Text = "Senha";
-            // 
-            // tbSenhaUsuario
-            // 
-            this.tbSenhaUsuario.Location = new System.Drawing.Point(9, 107);
-            this.tbSenhaUsuario.Name = "tbSenhaUsuario";
-            this.tbSenhaUsuario.Size = new System.Drawing.Size(527, 20);
-            this.tbSenhaUsuario.TabIndex = 11;
-            // 
-            // lbConfirmaSenhaUsuario
-            // 
-            this.lbConfirmaSenhaUsuario.AutoSize = true;
-            this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 130);
-            this.lbConfirmaSenhaUsuario.Name = "lbConfirmaSenhaUsuario";
-            this.lbConfirmaSenhaUsuario.Size = new System.Drawing.Size(89, 13);
-            this.lbConfirmaSenhaUsuario.TabIndex = 12;
-            this.lbConfirmaSenhaUsuario.Text = "Confirme a senha";
-            // 
-            // tbConfirmaSenhaUsuario
-            // 
-            this.tbConfirmaSenhaUsuario.Location = new System.Drawing.Point(9, 146);
-            this.tbConfirmaSenhaUsuario.Name = "tbConfirmaSenhaUsuario";
-            this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(527, 20);
-            this.tbConfirmaSenhaUsuario.TabIndex = 13;
-            // 
-            // cbMostrarSenhaUsuario
-            // 
-            this.cbMostrarSenhaUsuario.AutoSize = true;
-            this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(542, 110);
-            this.cbMostrarSenhaUsuario.Name = "cbMostrarSenhaUsuario";
-            this.cbMostrarSenhaUsuario.Size = new System.Drawing.Size(61, 17);
-            this.cbMostrarSenhaUsuario.TabIndex = 15;
-            this.cbMostrarSenhaUsuario.Text = "Mostrar";
-            this.cbMostrarSenhaUsuario.UseVisualStyleBackColor = true;
+            this.mtbTelefoneUsuario.Location = new System.Drawing.Point(9, 147);
+            this.mtbTelefoneUsuario.Mask = "(##) ####-####";
+            this.mtbTelefoneUsuario.Name = "mtbTelefoneUsuario";
+            this.mtbTelefoneUsuario.Size = new System.Drawing.Size(153, 20);
+            this.mtbTelefoneUsuario.TabIndex = 4;
             // 
             // fmCadastroUsuario
             // 
@@ -414,8 +416,7 @@
         private System.Windows.Forms.TextBox tbNomeUsuario;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbCodUsuario;
-        private System.Windows.Forms.TextBox tbFoneUsuario;
-        private System.Windows.Forms.Label lbFoneUsuario;
+        private System.Windows.Forms.Label lbTelefoneUsuario;
         private System.Windows.Forms.TextBox tbEmailUsuario;
         private System.Windows.Forms.Label lbEmailUsuario;
         private System.Windows.Forms.TextBox tbNomeGrupoUsuario;
@@ -428,5 +429,6 @@
         private System.Windows.Forms.TextBox tbConfirmaSenhaUsuario;
         private System.Windows.Forms.Label lbConfirmaSenhaUsuario;
         private System.Windows.Forms.CheckBox cbMostrarSenhaUsuario;
+        private System.Windows.Forms.MaskedTextBox mtbTelefoneUsuario;
     }
 }
