@@ -43,12 +43,14 @@
             // 
             // dgvUsuarios
             // 
+            this.dgvUsuarios.AllowUserToAddRows = false;
             this.dgvUsuarios.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Location = new System.Drawing.Point(13, 108);
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.Size = new System.Drawing.Size(775, 330);
             this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.AllowUserToAddRowsChanged += new System.EventHandler(this.dgvUsuarios_AllowUserToAddRowsChanged);
             this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellDoubleClick);
             // 
             // lbNomeUsuario
@@ -66,6 +68,7 @@
             this.tbFiltroNomeUsuario.Name = "tbFiltroNomeUsuario";
             this.tbFiltroNomeUsuario.Size = new System.Drawing.Size(200, 20);
             this.tbFiltroNomeUsuario.TabIndex = 2;
+            this.tbFiltroNomeUsuario.TextChanged += new System.EventHandler(this.tbFiltroNomeUsuario_TextChanged);
             // 
             // tbFiltroCodUsuario
             // 
@@ -114,6 +117,7 @@
             this.tbFiltroSobrenomeUsuario.Name = "tbFiltroSobrenomeUsuario";
             this.tbFiltroSobrenomeUsuario.Size = new System.Drawing.Size(200, 20);
             this.tbFiltroSobrenomeUsuario.TabIndex = 8;
+            this.tbFiltroSobrenomeUsuario.TextChanged += new System.EventHandler(this.tbFiltroSobrenomeUsuario_TextChanged);
             // 
             // btPesquisar
             // 

@@ -68,6 +68,7 @@ namespace _5gpro.Forms
             ignoraCheckEvent = true;
             LimpaCampos(false);
 
+            tbCodigoUsuario.Text = usuario.Codigo;
             tbLoginUsuario.Text = usuario.Login;
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
@@ -375,6 +376,17 @@ namespace _5gpro.Forms
             }
         }
 
+        private void AbreTelaBuscaUsuario()
+        {
+            var buscaUsuario = new fmBuscaUsuario();
+            buscaUsuario.ShowDialog();
+            if (buscaUsuario.usuarioSelecionado != null)
+            {
+                usuario = buscaUsuario.usuarioSelecionado;
+                PreencheCampos(usuario);
+            }
+        }
+
 
 
         //EVENTOS DE TEXTCHANGED
@@ -517,8 +529,23 @@ namespace _5gpro.Forms
         {
             if (!editando)
             {
-                //AbreTelaBuscaUsuario();
+                AbreTelaBuscaUsuario();
             }
+        }
+
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
+
+        private void btProximo_Click(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void btAnterior_Click(object sender, EventArgs e)
+        {
+            CadastroAnterior();
         }
     }
 }

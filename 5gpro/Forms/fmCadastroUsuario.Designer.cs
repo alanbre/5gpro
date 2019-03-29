@@ -103,6 +103,7 @@
             this.btSalvar.Size = new System.Drawing.Size(48, 48);
             this.btSalvar.TabIndex = 0;
             this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
             // 
             // btDeletar
             // 
@@ -127,6 +128,7 @@
             this.btAnterior.Size = new System.Drawing.Size(48, 48);
             this.btAnterior.TabIndex = 4;
             this.btAnterior.UseVisualStyleBackColor = true;
+            this.btAnterior.Click += new System.EventHandler(this.btAnterior_Click);
             // 
             // btProximo
             // 
@@ -139,6 +141,7 @@
             this.btProximo.Size = new System.Drawing.Size(48, 48);
             this.btProximo.TabIndex = 3;
             this.btProximo.UseVisualStyleBackColor = true;
+            this.btProximo.Click += new System.EventHandler(this.btProximo_Click);
             // 
             // btBuscar
             // 

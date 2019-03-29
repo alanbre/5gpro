@@ -53,5 +53,20 @@ namespace _5gpro.Forms
         {
             BuscaUsuario();
         }
+
+        private void tbFiltroNomeUsuario_TextChanged(object sender, EventArgs e)
+        {
+            BuscaUsuario();
+        }
+
+        private void tbFiltroSobrenomeUsuario_TextChanged(object sender, EventArgs e)
+        {
+            BuscaUsuario();
+        }
+
+        private void dgvUsuarios_AllowUserToAddRowsChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

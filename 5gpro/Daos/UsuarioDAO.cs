@@ -255,7 +255,7 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT u.idusuario, u.nome AS nomeusuario, g.idgrupousuario, g.nome AS nomegrupousuario
+                Comando = new MySqlCommand(@"SELECT *
                                              FROM usuario u INNER JOIN grupo_usuario g 
                                              ON u.idgrupousuario = g.idgrupousuario
                                              WHERE 1=1
