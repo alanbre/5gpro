@@ -1,4 +1,5 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Bll;
+using _5gpro.Entities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
@@ -7,6 +8,9 @@ namespace _5gpro.Daos
 {
     class UsuarioDAO : ConexaoDAO
     {
+
+        GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
+
         public Usuario Logar(string login, string senha)
         {
             Usuario usuario = new Usuario();
@@ -37,6 +41,203 @@ namespace _5gpro.Daos
             {
                 FecharConexao();
             }
+            return usuario;
+        }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT u1.idusuario + 1 AS proximoid
+                                             FROM usuario AS u1
+                                             LEFT OUTER JOIN usuario AS u2 ON u1.idusuario + 1 = u2.idusuario
+                                             WHERE u2.idusuario IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+                else
+                {
+                    //FIZ ESSE ELSE PARA CASO N TIVER NENHUM REGISTRO NA BASE... PODE DAR PROBLEMA EM ALGUM MOMENTO xD
+                    proximoid = "1";
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return proximoid;
+        }
+
+        public int SalvarOuAtualizarUsuario(Usuario usuario)
+        {
+
+            int retorno = 0;
+            try
+            {
+                AbrirConexao();
+
+                Comando = new MySqlCommand(@"INSERT INTO usuario 
+                          (idusuario, nome, sobrenome, login, senha, email, telefone, idgrupousuario) 
+                          VALUES
+                          (@idusuario, @nome, @sobrenome, @login, @senha, @email, @telefone, @idgrupousuario)
+                          ON DUPLICATE KEY UPDATE
+                           nome = @nome, sobrenome = @sobrenome, login = @login, senha = @senha, email = @email,
+                           telefone = @telefone, idgrupousuario = @idgrupousuario
+                         ;",
+                         Conexao);
+
+                Comando.Parameters.AddWithValue("@idusuario", usuario.Codigo);
+                Comando.Parameters.AddWithValue("@nome", usuario.Nome);
+                Comando.Parameters.AddWithValue("@sobrenome", usuario.Sobrenome);
+                Comando.Parameters.AddWithValue("@login", usuario.Login);
+                Comando.Parameters.AddWithValue("@senha", usuario.Senha);
+                Comando.Parameters.AddWithValue("@email", usuario.Email);
+                Comando.Parameters.AddWithValue("@telefone", usuario.Telefone);
+                Comando.Parameters.AddWithValue("@idgrupousuario", usuario.Grupousuario.Codigo);
+
+
+                retorno = Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return retorno;
+        }
+
+        public Usuario BuscarUsuarioById(string cod)
+        {
+            Usuario usuario = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario", Conexao);
+                Comando.Parameters.AddWithValue("@idusuario", cod);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usuario = new Usuario();
+
+                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
+                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
+                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
+                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
+                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
+                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return usuario;
+        }
+
+
+        public Usuario BuscarProximoUsuario(string codAtual)
+        {
+            Usuario usuario = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = (SELECT min(idusuario) FROM usuario WHERE idusuario > @idusuario)", Conexao);
+                Comando.Parameters.AddWithValue("@idusuario", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usuario = new Usuario();
+
+                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
+                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
+                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
+                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
+                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
+                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return usuario;
+        }
+
+        public Usuario BuscarUsuarioAnterior(string codAtual)
+        {
+            Usuario usuario = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = (SELECT max(idusuario) FROM usuario WHERE idusuario < @idusuario)", Conexao);
+                Comando.Parameters.AddWithValue("@idusuario", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usuario = new Usuario();
+                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
+                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
+                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
+                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
+                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
+                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
             return usuario;
         }
     }

@@ -62,6 +62,7 @@
             this.tpVendas = new System.Windows.Forms.TabPage();
             this.tbPrecoVenda = new System.Windows.Forms.TextBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.pnBotoes.SuspendLayout();
             this.pnDadosGerais.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
@@ -354,6 +355,7 @@
             // 
             this.tpEstoque.AutoScroll = true;
             this.tpEstoque.BackColor = System.Drawing.SystemColors.Control;
+            this.tpEstoque.Controls.Add(this.button1);
             this.tpEstoque.Controls.Add(this.tbEstoqueNecessario);
             this.tpEstoque.Controls.Add(this.lbEstoqueNecessario);
             this.tpEstoque.Controls.Add(this.btHistEntradas);
@@ -440,6 +442,16 @@
             this.lbPrecoVenda.TabIndex = 0;
             this.lbPrecoVenda.Text = "Preço de venda";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(364, 54);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // fmCadastroItens
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -508,5 +520,6 @@
         private System.Windows.Forms.Button btHistEntradas;
         private System.Windows.Forms.Label lbPrecoVenda;
         private System.Windows.Forms.TextBox tbPrecoVenda;
+        private System.Windows.Forms.Button button1;
     }
 }

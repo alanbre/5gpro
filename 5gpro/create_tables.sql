@@ -234,7 +234,6 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
   `idpermissao` INT NOT NULL,
   `nome` VARCHAR(45) NULL,
   `nivel` INT NULL,
-  `permissaocol` VARCHAR(45) NULL,
   PRIMARY KEY (`idpermissao`))
 ENGINE = InnoDB;
 
@@ -242,18 +241,18 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`permissao_has_grupo_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
-  `permissao_idpermissao` INT NOT NULL,
-  `grupo_usuario_idgrupousuario` INT NOT NULL,
-  PRIMARY KEY (`permissao_idpermissao`, `grupo_usuario_idgrupousuario`),
-  INDEX `fk_permissao_has_grupo_usuario_grupo_usuario1_idx` (`grupo_usuario_idgrupousuario` ASC) VISIBLE,
-  INDEX `fk_permissao_has_grupo_usuario_permissao1_idx` (`permissao_idpermissao` ASC) VISIBLE,
+  `idpermissao` INT NOT NULL,
+  `idgrupousuario` INT NOT NULL,
+  PRIMARY KEY (`idpermissao`, `idgrupousuario`),
+  INDEX `fk_permissao_has_grupo_usuario_grupo_usuario1_idx` (`idgrupousuario` ASC) VISIBLE,
+  INDEX `fk_permissao_has_grupo_usuario_permissao1_idx` (`idpermissao` ASC) VISIBLE,
   CONSTRAINT `fk_permissao_has_grupo_usuario_permissao1`
-    FOREIGN KEY (`permissao_idpermissao`)
+    FOREIGN KEY (`idpermissao`)
     REFERENCES `5gprodatabase`.`permissao` (`idpermissao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_permissao_has_grupo_usuario_grupo_usuario1`
-    FOREIGN KEY (`grupo_usuario_idgrupousuario`)
+    FOREIGN KEY (`idgrupousuario`)
     REFERENCES `5gprodatabase`.`grupo_usuario` (`idgrupousuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)

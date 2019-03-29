@@ -609,5 +609,16 @@ namespace _5gpro.Forms
                 tbDescricaoUndMedida.Text = "";
             }
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            ControlCollection controls = (ControlCollection)this.Controls;
+            List<string> excecoes = new List<string>();
+            excecoes.Add("tbCodigo");
+            excecoes.Add("tbDescricao");
+
+            Limpar limpar = new Limpar();
+            limpar.limparComExcessao(controls, excecoes);
+        }
     }
 }

@@ -53,21 +53,27 @@
   <ItemGroup>
     <Compile Include="Bll\CidadeBLL.cs" />
     <Compile Include="Bll\EstadoBLL.cs" />
+    <Compile Include="Bll\GrupoUsuarioBLL.cs" />
     <Compile Include="Bll\OrcamentoBLL.cs" />
+    <Compile Include="Bll\PermissaoBLL.cs" />
     <Compile Include="Bll\PessoaBLL.cs" />
     <Compile Include="Bll\UnimedidaBLL.cs" />
     <Compile Include="Bll\UsuarioBLL.cs" />
     <Compile Include="Bll\_ItemBLL.cs" />
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
+    <Compile Include="Daos\GrupoUsuarioDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
+    <Compile Include="Daos\PermissaoDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
     <Compile Include="Daos\_ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Estado.cs" />
+    <Compile Include="Entities\GrupoUsuario.cs" />
     <Compile Include="Entities\Orcamento.cs" />
+    <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\_Item.cs" />
@@ -93,6 +99,12 @@
     </Compile>
     <Compile Include="Forms\fmBuscaUnimedida.Designer.cs">
       <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaUsuario.Designer.cs">
+      <DependentUpon>fmBuscaUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmCadastroPais.cs">
       <SubType>Form</SubType>
@@ -136,6 +148,12 @@
     <Compile Include="Forms\fmCadastroUsuario.Designer.cs">
       <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaGrupoUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaGrupoUsuario.Designer.cs">
+      <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,6 +196,9 @@
     <EmbeddedResource Include="Forms\fmBuscaUnimedida.resx">
       <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaUsuario.resx">
+      <DependentUpon>fmBuscaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroFuncionario.resx">
       <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
     </EmbeddedResource>
@@ -192,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUsuario.resx">
       <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaGrupoUsuario.resx">
+      <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>

@@ -49,16 +49,17 @@
             this.lbCodigoUsuario = new System.Windows.Forms.Label();
             this.btGrupoUsuario = new System.Windows.Forms.Button();
             this.tbCodigoUsuario = new System.Windows.Forms.TextBox();
-            this.tbCodUsuario = new System.Windows.Forms.TextBox();
+            this.tbCodGrupoUsuario = new System.Windows.Forms.TextBox();
             this.tbNomeUsuario = new System.Windows.Forms.TextBox();
             this.lbNomeUsuario = new System.Windows.Forms.Label();
             this.lbSobrenomeUsuario = new System.Windows.Forms.Label();
             this.tbSobrenomeUsuario = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.mtbTelefoneUsuario = new System.Windows.Forms.MaskedTextBox();
             this.lbTelefoneUsuario = new System.Windows.Forms.Label();
             this.tbEmailUsuario = new System.Windows.Forms.TextBox();
             this.lbEmailUsuario = new System.Windows.Forms.Label();
-            this.mtbTelefoneUsuario = new System.Windows.Forms.MaskedTextBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnBotoes.SuspendLayout();
             this.pnDadosGerais.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -150,6 +151,7 @@
             this.btBuscar.Size = new System.Drawing.Size(48, 48);
             this.btBuscar.TabIndex = 2;
             this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btNovo
             // 
@@ -162,6 +164,7 @@
             this.btNovo.Size = new System.Drawing.Size(48, 48);
             this.btNovo.TabIndex = 1;
             this.btNovo.UseVisualStyleBackColor = true;
+            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // pnDadosGerais
             // 
@@ -178,10 +181,10 @@
             this.pnDadosGerais.Controls.Add(this.lbCodigoUsuario);
             this.pnDadosGerais.Controls.Add(this.btGrupoUsuario);
             this.pnDadosGerais.Controls.Add(this.tbCodigoUsuario);
-            this.pnDadosGerais.Controls.Add(this.tbCodUsuario);
-            this.pnDadosGerais.Location = new System.Drawing.Point(85, 14);
+            this.pnDadosGerais.Controls.Add(this.tbCodGrupoUsuario);
+            this.pnDadosGerais.Location = new System.Drawing.Point(72, 14);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(737, 220);
+            this.pnDadosGerais.Size = new System.Drawing.Size(750, 220);
             this.pnDadosGerais.TabIndex = 4;
             // 
             // cbMostrarSenhaUsuario
@@ -283,13 +286,15 @@
             this.tbCodigoUsuario.Name = "tbCodigoUsuario";
             this.tbCodigoUsuario.Size = new System.Drawing.Size(100, 20);
             this.tbCodigoUsuario.TabIndex = 4;
+            this.tbCodigoUsuario.Leave += new System.EventHandler(this.tbCodigoUsuario_Leave);
             // 
-            // tbCodUsuario
+            // tbCodGrupoUsuario
             // 
-            this.tbCodUsuario.Location = new System.Drawing.Point(9, 185);
-            this.tbCodUsuario.Name = "tbCodUsuario";
-            this.tbCodUsuario.Size = new System.Drawing.Size(68, 20);
-            this.tbCodUsuario.TabIndex = 4;
+            this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 185);
+            this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
+            this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
+            this.tbCodGrupoUsuario.TabIndex = 4;
+            this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
             // tbNomeUsuario
             // 
@@ -334,10 +339,18 @@
             this.panel2.Controls.Add(this.tbNomeUsuario);
             this.panel2.Controls.Add(this.tbSobrenomeUsuario);
             this.panel2.Controls.Add(this.lbSobrenomeUsuario);
-            this.panel2.Location = new System.Drawing.Point(85, 240);
+            this.panel2.Location = new System.Drawing.Point(72, 240);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(737, 206);
+            this.panel2.Size = new System.Drawing.Size(750, 270);
             this.panel2.TabIndex = 5;
+            // 
+            // mtbTelefoneUsuario
+            // 
+            this.mtbTelefoneUsuario.Location = new System.Drawing.Point(9, 147);
+            this.mtbTelefoneUsuario.Mask = "(##) ####-####";
+            this.mtbTelefoneUsuario.Name = "mtbTelefoneUsuario";
+            this.mtbTelefoneUsuario.Size = new System.Drawing.Size(153, 20);
+            this.mtbTelefoneUsuario.TabIndex = 4;
             // 
             // lbTelefoneUsuario
             // 
@@ -364,19 +377,23 @@
             this.lbEmailUsuario.TabIndex = 0;
             this.lbEmailUsuario.Text = "Email";
             // 
-            // mtbTelefoneUsuario
+            // tbAjuda
             // 
-            this.mtbTelefoneUsuario.Location = new System.Drawing.Point(9, 147);
-            this.mtbTelefoneUsuario.Mask = "(##) ####-####";
-            this.mtbTelefoneUsuario.Name = "mtbTelefoneUsuario";
-            this.mtbTelefoneUsuario.Size = new System.Drawing.Size(153, 20);
-            this.mtbTelefoneUsuario.TabIndex = 4;
+            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.ReadOnly = true;
+            this.tbAjuda.Size = new System.Drawing.Size(750, 20);
+            this.tbAjuda.TabIndex = 6;
             // 
             // fmCadastroUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 561);
+            this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnDadosGerais);
             this.Controls.Add(this.pnBotoes);
@@ -388,12 +405,14 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de Usuário";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
             this.pnBotoes.ResumeLayout(false);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -415,7 +434,7 @@
         private System.Windows.Forms.Label lbNomeUsuario;
         private System.Windows.Forms.TextBox tbNomeUsuario;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox tbCodUsuario;
+        private System.Windows.Forms.TextBox tbCodGrupoUsuario;
         private System.Windows.Forms.Label lbTelefoneUsuario;
         private System.Windows.Forms.TextBox tbEmailUsuario;
         private System.Windows.Forms.Label lbEmailUsuario;
@@ -430,5 +449,6 @@
         private System.Windows.Forms.Label lbConfirmaSenhaUsuario;
         private System.Windows.Forms.CheckBox cbMostrarSenhaUsuario;
         private System.Windows.Forms.MaskedTextBox mtbTelefoneUsuario;
+        private System.Windows.Forms.TextBox tbAjuda;
     }
 }
