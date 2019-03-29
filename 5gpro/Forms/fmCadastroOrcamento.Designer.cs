@@ -125,6 +125,7 @@
             this.dtpVencimento.Name = "dtpVencimento";
             this.dtpVencimento.Size = new System.Drawing.Size(99, 20);
             this.dtpVencimento.TabIndex = 7;
+            this.dtpVencimento.ValueChanged += new System.EventHandler(this.dtpVencimento_ValueChanged);
             // 
             // dtpCadastro
             // 
@@ -135,6 +136,7 @@
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 5;
             this.dtpCadastro.Value = new System.DateTime(2019, 3, 27, 0, 0, 0, 0);
+            this.dtpCadastro.ValueChanged += new System.EventHandler(this.dtpCadastro_ValueChanged);
             this.dtpCadastro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyUp);
             // 
             // lbVencimento
@@ -180,6 +182,7 @@
             this.tbCodCliente.Name = "tbCodCliente";
             this.tbCodCliente.Size = new System.Drawing.Size(65, 20);
             this.tbCodCliente.TabIndex = 3;
+            this.tbCodCliente.TextChanged += new System.EventHandler(this.tbCodCliente_TextChanged);
             this.tbCodCliente.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCliente_KeyUp);
             this.tbCodCliente.Leave += new System.EventHandler(this.tbCodCliente_Leave);
             // 
@@ -342,6 +345,7 @@
             this.tbQuantidade.Size = new System.Drawing.Size(63, 20);
             this.tbQuantidade.TabIndex = 4;
             this.tbQuantidade.Text = "0,00";
+            this.tbQuantidade.TextChanged += new System.EventHandler(this.tbQuantidade_TextChanged);
             this.tbQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantidade_KeyPress);
             this.tbQuantidade.Leave += new System.EventHandler(this.tbQuantidade_Leave);
             // 
@@ -374,6 +378,7 @@
             this.tbValorUnitItem.Size = new System.Drawing.Size(63, 20);
             this.tbValorUnitItem.TabIndex = 6;
             this.tbValorUnitItem.Text = "0,00";
+            this.tbValorUnitItem.TextChanged += new System.EventHandler(this.tbValorUnitItem_TextChanged);
             this.tbValorUnitItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorUnitItem_KeyPress);
             this.tbValorUnitItem.Leave += new System.EventHandler(this.tbValorUnitItem_Leave);
             // 
@@ -414,6 +419,7 @@
             this.tbCodItem.Name = "tbCodItem";
             this.tbCodItem.Size = new System.Drawing.Size(63, 20);
             this.tbCodItem.TabIndex = 2;
+            this.tbCodItem.TextChanged += new System.EventHandler(this.tbCodItem_TextChanged);
             this.tbCodItem.Leave += new System.EventHandler(this.tbCodItem_Leave);
             // 
             // tbValorTotItem
@@ -425,6 +431,7 @@
             this.tbValorTotItem.Size = new System.Drawing.Size(87, 20);
             this.tbValorTotItem.TabIndex = 8;
             this.tbValorTotItem.Text = "0,00";
+            this.tbValorTotItem.TextChanged += new System.EventHandler(this.tbValorTotItem_TextChanged);
             this.tbValorTotItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorTotItem_KeyPress);
             this.tbValorTotItem.Leave += new System.EventHandler(this.tbValorTotItem_Leave);
             // 
@@ -488,6 +495,7 @@
             this.tbDescontoItem.Size = new System.Drawing.Size(63, 20);
             this.tbDescontoItem.TabIndex = 12;
             this.tbDescontoItem.Text = "0,00";
+            this.tbDescontoItem.TextChanged += new System.EventHandler(this.tbDescontoItem_TextChanged);
             this.tbDescontoItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoItem_KeyPress);
             this.tbDescontoItem.Leave += new System.EventHandler(this.tbDescontoItem_Leave);
             // 
@@ -510,6 +518,7 @@
             this.tbDescontoItemPorc.Size = new System.Drawing.Size(62, 20);
             this.tbDescontoItemPorc.TabIndex = 10;
             this.tbDescontoItemPorc.Text = "0,00";
+            this.tbDescontoItemPorc.TextChanged += new System.EventHandler(this.tbDescontoItemPorc_TextChanged);
             this.tbDescontoItemPorc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoItemPorc_KeyPress);
             this.tbDescontoItemPorc.Leave += new System.EventHandler(this.tbDescontoItemPorc_Leave);
             // 

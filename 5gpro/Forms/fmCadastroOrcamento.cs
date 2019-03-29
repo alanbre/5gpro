@@ -73,6 +73,7 @@ namespace _5gpro.Forms
         private void cbVencimento_CheckedChanged(object sender, EventArgs e)
         {
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
+            Editando(true);
         }
 
 
@@ -208,6 +209,10 @@ namespace _5gpro.Forms
             CalculaTotalOrcamento();
         }
 
+        private void tbValorTotalOrcamento_Leave(object sender, EventArgs e)
+        {
+            tbValorTotalOrcamento.Text = Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00");
+        }
 
 
 
@@ -364,6 +369,50 @@ namespace _5gpro.Forms
 
 
 
+        private void tbCodCliente_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void dtpCadastro_ValueChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void dtpVencimento_ValueChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void tbCodItem_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void tbQuantidade_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void tbValorUnitItem_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void tbValorTotItem_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void tbDescontoItemPorc_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void tbDescontoItem_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
 
 
 
@@ -666,7 +715,8 @@ namespace _5gpro.Forms
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
             tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
             tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
-            foreach(_Item i in orcamento.Itens)
+            itens = orcamento.Itens;
+            foreach(_Item i in itens)
             {
                 table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
             }
@@ -695,9 +745,6 @@ namespace _5gpro.Forms
             tbValorTotalOrcamento.Text = (Convert.ToDecimal(tbValorTotalItens.Text) - Convert.ToDecimal(tbDescontoTotalItens.Text) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
         }
 
-        private void tbValorTotalOrcamento_Leave(object sender, EventArgs e)
-        {
-            tbValorTotalOrcamento.Text = Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00");
-        }
+
     }
 }
