@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
+
     class GrupoUsuarioDAO : ConexaoDAO
     {
-        PermissaoBLL permissaoBLL = new PermissaoBLL();
-        GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
+        public PermissaoBLL permissaoBLL = new PermissaoBLL();
 
         public GrupoUsuario BuscarGrupoUsuarioById(string cod)
         {
@@ -32,7 +32,7 @@ namespace _5gpro.Daos
                     grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     grupousuario.Permissoes = permissaoBLL.BuscaPermissoesGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                   
+                  
                     reader.Close();
                 }
             }

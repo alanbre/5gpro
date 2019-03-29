@@ -12,6 +12,5 @@ namespace _5gpro.Entities
         public string Nome { get; set; }
         public string Nivel { get; set; }
        
-
     }
 }

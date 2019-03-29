@@ -517,7 +517,7 @@ namespace _5gpro.Forms
         {
             if (!editando)
             {
-                AbreTelaBuscaUsuario();
+                //AbreTelaBuscaUsuario();
             }
         }
     }

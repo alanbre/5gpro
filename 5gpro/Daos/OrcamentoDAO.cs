@@ -118,10 +118,7 @@ namespace _5gpro.Daos
                     i.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     i.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     i.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-
                     i.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("idunimedida")));
-                    //i.Unimedida = reader.GetString(reader.GetOrdinal("unimedida_idunimedida"));
-
                     i.Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade"));
                     i.ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario"));
                     i.ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total"));

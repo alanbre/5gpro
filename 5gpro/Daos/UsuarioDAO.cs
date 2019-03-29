@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace _5gpro.Daos
@@ -9,7 +10,7 @@ namespace _5gpro.Daos
     class UsuarioDAO : ConexaoDAO
     {
 
-        GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
+        public GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
 
         public Usuario Logar(string login, string senha)
         {
@@ -239,6 +240,60 @@ namespace _5gpro.Daos
             }
 
             return usuario;
+        }
+
+        public List<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
+        {
+
+            List<Usuario> usuarios = new List<Usuario>();
+
+            string conCodGrupoUsuario = codGrupoUsuario.Length > 0 ? "AND g.idgrupousuario = @idgrupousuario" : "";
+            string conNomeUsuario = nomeUsuario.Length > 0 ? "AND u.nome LIKE @nomeusuario" : "";
+            string conSobrenomeUsuario = sobrenomeUsuario.Length > 0 ? "AND u.sobrenome LIKE @sobrenomeusuario" : "";
+
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT u.idusuario, u.nome AS nomeusuario, g.idgrupousuario, g.nome AS nomegrupousuario
+                                             FROM usuario u INNER JOIN grupo_usuario g 
+                                             ON u.idgrupousuario = g.idgrupousuario
+                                             WHERE 1=1
+                                             " + conCodGrupoUsuario + @"
+                                             " + conNomeUsuario + @"
+                                             " + conSobrenomeUsuario + @"
+                                             ORDER BY u.idusuario;", Conexao);
+
+                //if (codEstado.Length > 0) { Comando.Parameters.AddWithValue("@idestado", codEstado); }
+                //if (nomeCidade.Length > 0) { Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    Usuario usuario = new Usuario();
+                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
+                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
+                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
+                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
+                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
+                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+
+                    usuarios.Add(usuario);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return usuarios;
         }
     }
 }

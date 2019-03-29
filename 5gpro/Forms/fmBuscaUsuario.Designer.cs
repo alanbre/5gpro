@@ -28,27 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvUsuarios = new System.Windows.Forms.DataGridView();
             this.lbNomeUsuario = new System.Windows.Forms.Label();
-            this.tbNomeUsuario = new System.Windows.Forms.TextBox();
+            this.tbFiltroNomeUsuario = new System.Windows.Forms.TextBox();
             this.tbFiltroCodUsuario = new System.Windows.Forms.TextBox();
             this.btBuscaGrupoUsuario = new System.Windows.Forms.Button();
             this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbSobrenomeUsuario = new System.Windows.Forms.Label();
-            this.tbSobrenomeUsuario = new System.Windows.Forms.TextBox();
+            this.tbFiltroSobrenomeUsuario = new System.Windows.Forms.TextBox();
             this.btPesquisar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvUsuarios
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 108);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(775, 330);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvUsuarios.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsuarios.Location = new System.Drawing.Point(13, 108);
+            this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.Size = new System.Drawing.Size(775, 330);
+            this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellDoubleClick);
             // 
             // lbNomeUsuario
             // 
@@ -59,12 +60,12 @@
             this.lbNomeUsuario.TabIndex = 1;
             this.lbNomeUsuario.Text = "Nome";
             // 
-            // tbNomeUsuario
+            // tbFiltroNomeUsuario
             // 
-            this.tbNomeUsuario.Location = new System.Drawing.Point(10, 64);
-            this.tbNomeUsuario.Name = "tbNomeUsuario";
-            this.tbNomeUsuario.Size = new System.Drawing.Size(200, 20);
-            this.tbNomeUsuario.TabIndex = 2;
+            this.tbFiltroNomeUsuario.Location = new System.Drawing.Point(10, 64);
+            this.tbFiltroNomeUsuario.Name = "tbFiltroNomeUsuario";
+            this.tbFiltroNomeUsuario.Size = new System.Drawing.Size(200, 20);
+            this.tbFiltroNomeUsuario.TabIndex = 2;
             // 
             // tbFiltroCodUsuario
             // 
@@ -107,12 +108,12 @@
             this.lbSobrenomeUsuario.TabIndex = 7;
             this.lbSobrenomeUsuario.Text = "Sobrenome";
             // 
-            // tbSobrenomeUsuario
+            // tbFiltroSobrenomeUsuario
             // 
-            this.tbSobrenomeUsuario.Location = new System.Drawing.Point(250, 64);
-            this.tbSobrenomeUsuario.Name = "tbSobrenomeUsuario";
-            this.tbSobrenomeUsuario.Size = new System.Drawing.Size(200, 20);
-            this.tbSobrenomeUsuario.TabIndex = 8;
+            this.tbFiltroSobrenomeUsuario.Location = new System.Drawing.Point(250, 64);
+            this.tbFiltroSobrenomeUsuario.Name = "tbFiltroSobrenomeUsuario";
+            this.tbFiltroSobrenomeUsuario.Size = new System.Drawing.Size(200, 20);
+            this.tbFiltroSobrenomeUsuario.TabIndex = 8;
             // 
             // btPesquisar
             // 
@@ -122,6 +123,7 @@
             this.btPesquisar.TabIndex = 9;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
+            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
             // 
             // fmBuscaUsuario
             // 
@@ -129,18 +131,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btPesquisar);
-            this.Controls.Add(this.tbSobrenomeUsuario);
+            this.Controls.Add(this.tbFiltroSobrenomeUsuario);
             this.Controls.Add(this.lbSobrenomeUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbNomeGrupoUsuario);
             this.Controls.Add(this.btBuscaGrupoUsuario);
             this.Controls.Add(this.tbFiltroCodUsuario);
-            this.Controls.Add(this.tbNomeUsuario);
+            this.Controls.Add(this.tbFiltroNomeUsuario);
             this.Controls.Add(this.lbNomeUsuario);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvUsuarios);
             this.Name = "fmBuscaUsuario";
             this.Text = "fmBuscaUsuario";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -148,15 +150,15 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvUsuarios;
         private System.Windows.Forms.Label lbNomeUsuario;
-        private System.Windows.Forms.TextBox tbNomeUsuario;
+        private System.Windows.Forms.TextBox tbFiltroNomeUsuario;
         private System.Windows.Forms.TextBox tbFiltroCodUsuario;
         private System.Windows.Forms.Button btBuscaGrupoUsuario;
         private System.Windows.Forms.TextBox tbNomeGrupoUsuario;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lbSobrenomeUsuario;
-        private System.Windows.Forms.TextBox tbSobrenomeUsuario;
+        private System.Windows.Forms.TextBox tbFiltroSobrenomeUsuario;
         private System.Windows.Forms.Button btPesquisar;
     }
 }

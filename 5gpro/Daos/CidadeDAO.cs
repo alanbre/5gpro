@@ -11,6 +11,7 @@ namespace _5gpro.Daos
     {
         public EstadoBLL estadoBLL = new EstadoBLL();
 
+
         public Cidade BuscaCidadeByCod(string cod)
         {
             Cidade cidade = null;

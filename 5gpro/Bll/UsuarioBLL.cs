@@ -41,5 +41,10 @@ namespace _5gpro.Bll
         {
             return usuarioDAO.BuscarUsuarioAnterior(codAtual);
         }
+
+        public List<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
+        {
+            return usuarioDAO.BuscaUsuarios(codGrupoUsuario, nomeUsuario, sobrenomeUsuario);
+        }
     }
 }

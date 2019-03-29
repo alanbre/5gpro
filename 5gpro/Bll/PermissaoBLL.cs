@@ -11,6 +11,7 @@ namespace _5gpro.Bll
     class PermissaoBLL
     {
         PermissaoDAO permissaoDAO = new PermissaoDAO();
+      
 
         public List<Permissao> BuscaPermissoesGrupo(string cod)
         {
@@ -19,3 +20,5 @@ namespace _5gpro.Bll
 
     }
 }
+
+
