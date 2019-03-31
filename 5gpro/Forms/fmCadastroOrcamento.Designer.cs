@@ -135,7 +135,7 @@
             this.dtpCadastro.Name = "dtpCadastro";
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 5;
-            this.dtpCadastro.Value = new System.DateTime(2019, 3, 27, 0, 0, 0, 0);
+            this.dtpCadastro.Value = new System.DateTime(2019, 3, 30, 0, 0, 0, 0);
             this.dtpCadastro.ValueChanged += new System.EventHandler(this.dtpCadastro_ValueChanged);
             this.dtpCadastro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyUp);
             // 

@@ -26,7 +26,6 @@ namespace _5gpro.Forms
         bool editando = false;
 
 
-
         public fmCadastroOrcamento()
         {
             InitializeComponent();
@@ -430,6 +429,7 @@ namespace _5gpro.Forms
                     LimpaCampos(false);
                     tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
                     orcamento = null;
+                    Editando(false);
                     tbCodCliente.Focus();
                     Editando(true);
                 }
@@ -439,6 +439,7 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
                 tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
                 orcamento = null;
+                Editando(false);
                 tbCodCliente.Focus();
                 Editando(true);
             }

@@ -4,7 +4,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
 
 namespace _5gpro.Daos
 {
@@ -50,7 +49,7 @@ namespace _5gpro.Daos
             if (orcamento != null)
             {
                 orcamento.Itens = BuscaItensDoOrcamento(orcamento);
-                
+
             }
             return orcamento;
         }
@@ -171,7 +170,7 @@ namespace _5gpro.Daos
                 if (vencimento.Length > 0) { Comando.Parameters.AddWithValue("@data_vencimento", orcamento.DataVencimento); }
                 Comando.Parameters.AddWithValue("@valor_total_itens", orcamento.ValorTotalItens);
                 Comando.Parameters.AddWithValue("@valor_orcamento", orcamento.ValorTotalOrcamento);
-                Comando.Parameters.AddWithValue("@desconto_total_itens", orcamento.ValorTotalItens);
+                Comando.Parameters.AddWithValue("@desconto_total_itens", orcamento.DescontoTotalItens);
                 Comando.Parameters.AddWithValue("@desconto_orcamento", orcamento.DescontoOrcamento);
                 if (orcamento.Pessoa != null) { Comando.Parameters.AddWithValue("@idpessoa", orcamento.Pessoa.Codigo); }
 

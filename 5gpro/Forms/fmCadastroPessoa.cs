@@ -183,19 +183,6 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE LEAVE
-        private void tbCodCidade_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
-            }
-        }
-
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
             tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
@@ -250,6 +237,19 @@ namespace _5gpro.Forms
                         Editando(false);
                     }
                 }
+            }
+        }
+
+        private void tbCodCidade_Leave(object sender, EventArgs e)
+        {
+            if (tbCodCidade.Text.Length > 0)
+            {
+                cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
+                PreencheCamposCidade(cidade);
+            }
+            else
+            {
+                tbNomeCidade.Text = "";
             }
         }
 
@@ -315,6 +315,7 @@ namespace _5gpro.Forms
                     LimpaCampos(false);
                     tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
                     pessoa = null;
+                    Editando(false);
                     tbNome.Focus();
                     Editando(true);
                 }
@@ -324,6 +325,7 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
                 tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
                 pessoa = null;
+                Editando(false);
                 tbNome.Focus();
                 Editando(true);
             }
