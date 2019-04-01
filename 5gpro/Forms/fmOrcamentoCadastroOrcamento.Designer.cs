@@ -221,7 +221,8 @@
             this.pnBotoes.Controls.Add(this.btProximo);
             this.pnBotoes.Controls.Add(this.btBuscar);
             this.pnBotoes.Controls.Add(this.btNovo);
-            this.pnBotoes.Location = new System.Drawing.Point(4, 11);
+            this.pnBotoes.Location = new System.Drawing.Point(3, 6);
+            this.pnBotoes.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
             this.pnBotoes.Name = "pnBotoes";
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
@@ -688,7 +689,7 @@
             this.Controls.Add(this.gbDadosOrcamento);
             this.KeyPreview = true;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1255, 570);
+            this.MinimumSize = new System.Drawing.Size(1255, 620);
             this.Name = "fmOrcamentoCadastroOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
