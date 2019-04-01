@@ -12,15 +12,15 @@ namespace _5gpro.Daos
 
         public GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
 
-        public Usuario Logar(string login, string senha)
+        public Usuario Logar(string idusuario, string senha)
         {
             Usuario usuario = new Usuario();
 
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM usuario WHERE login = @login AND senha = @senha", Conexao);
-                Comando.Parameters.AddWithValue("@login", login);
+                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario AND senha = @senha", Conexao);
+                Comando.Parameters.AddWithValue("@idusuario", idusuario);
                 Comando.Parameters.AddWithValue("@senha", senha);
 
                 IDataReader reader = Comando.ExecuteReader();
@@ -30,7 +30,6 @@ namespace _5gpro.Daos
                     usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
-                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                 }
             }
@@ -92,11 +91,11 @@ namespace _5gpro.Daos
                 AbrirConexao();
 
                 Comando = new MySqlCommand(@"INSERT INTO usuario 
-                          (idusuario, nome, sobrenome, login, senha, email, telefone, idgrupousuario) 
+                          (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
                           VALUES
-                          (@idusuario, @nome, @sobrenome, @login, @senha, @email, @telefone, @idgrupousuario)
+                          (@idusuario, @nome, @sobrenome, @senha, @email, @telefone, @idgrupousuario)
                           ON DUPLICATE KEY UPDATE
-                           nome = @nome, sobrenome = @sobrenome, login = @login, senha = @senha, email = @email,
+                           nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email,
                            telefone = @telefone, idgrupousuario = @idgrupousuario
                          ;",
                          Conexao);
@@ -104,7 +103,6 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@idusuario", usuario.Codigo);
                 Comando.Parameters.AddWithValue("@nome", usuario.Nome);
                 Comando.Parameters.AddWithValue("@sobrenome", usuario.Sobrenome);
-                Comando.Parameters.AddWithValue("@login", usuario.Login);
                 Comando.Parameters.AddWithValue("@senha", usuario.Senha);
                 Comando.Parameters.AddWithValue("@email", usuario.Email);
                 Comando.Parameters.AddWithValue("@telefone", usuario.Telefone);
@@ -141,7 +139,6 @@ namespace _5gpro.Daos
                     usuario = new Usuario();
 
                     usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
-                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
@@ -181,7 +178,6 @@ namespace _5gpro.Daos
                     usuario = new Usuario();
 
                     usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
-                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
@@ -219,7 +215,6 @@ namespace _5gpro.Daos
                 {
                     usuario = new Usuario();
                     usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
-                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
@@ -274,7 +269,6 @@ namespace _5gpro.Daos
 
                     Usuario usuario = new Usuario();
                     usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
-                    usuario.Login = reader.GetString(reader.GetOrdinal("login"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
