@@ -32,14 +32,20 @@ namespace _5gpro
 
         private void tsmiCadastroOrcamentos_Click(object sender, EventArgs e)
         {
-            var formCadOrcamentos = new fmCadastroOrcamento();
-            formCadOrcamentos.Show(this);
+            var formOrcamentoCadOrcamentos = new fmOrcamentoCadastroOrcamento();
+            formOrcamentoCadOrcamentos.Show(this);
         }
 
-        private void cadastroDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroUsuariosMenuItem_Click(object sender, EventArgs e)
         {
             var formCadUsuarios = new fmCadastroUsuario();
             formCadUsuarios.Show(this);
+        }
+
+        private void tsmiEntradaDoc_Click(object sender, EventArgs e)
+        {
+            var formEstoqueEntradaDocumentos = new fmEstoqueEntradaDocumentos();
+            formEstoqueEntradaDocumentos.Show(this);
         }
     }
 }

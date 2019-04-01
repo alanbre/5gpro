@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmCadastroOrcamento
+    partial class fmOrcamentoCadastroOrcamento
     {
         /// <summary>
         /// Required designer variable.
@@ -302,6 +302,7 @@
             this.btBuscar.Size = new System.Drawing.Size(48, 48);
             this.btBuscar.TabIndex = 2;
             this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btNovo
             // 
@@ -675,7 +676,7 @@
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 16;
             // 
-            // fmCadastroOrcamento
+            // fmOrcamentoCadastroOrcamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -688,7 +689,7 @@
             this.KeyPreview = true;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1255, 570);
-            this.Name = "fmCadastroOrcamento";
+            this.Name = "fmOrcamentoCadastroOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Orçamentos";

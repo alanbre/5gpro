@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmCadastroOrcamento : Form
+    public partial class fmOrcamentoCadastroOrcamento : Form
     {
         PessoaBLL pessoaBLL = new PessoaBLL();
         _ItemBLL itemBLL = new _ItemBLL();
@@ -27,7 +27,7 @@ namespace _5gpro.Forms
         
 
 
-        public fmCadastroOrcamento()
+        public fmOrcamentoCadastroOrcamento()
         {
             InitializeComponent();
 
@@ -63,10 +63,6 @@ namespace _5gpro.Forms
         }
 
 
-        private void btSalvar_Click(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
 
 
 
@@ -304,6 +300,49 @@ namespace _5gpro.Forms
 
 
 
+        private void btNovoItem_Click(object sender, EventArgs e)
+        {
+            LimpaCampoItem();
+            tbCodItem.Focus();
+            itemSelecionado = null;
+            btInserirItem.Text = "Inserir";
+        }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
+
+        private void btRecarregar_Click(object sender, EventArgs e)
+        {
+            RecarregaDados(orcamento);
+        }
+
+        private void btProximo_Click(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void btAnterior_Click(object sender, EventArgs e)
+        {
+            CadastroAnterior();
+        }
+
+
+        private void dgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
+            itemSelecionado = itens.Find(i => i.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            btInserirItem.Text = "Alterar";
+            PreencheCamposItem(itemSelecionado);
+        }
+
         private void btInserirItem_Click(object sender, EventArgs e)
         {
             _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(tbCodItem.Text) : itemSelecionado;
@@ -350,38 +389,6 @@ namespace _5gpro.Forms
                 tbCodItem.SelectAll();
             }
 
-        }
-
-        private void btNovoItem_Click(object sender, EventArgs e)
-        {
-            LimpaCampoItem();
-            tbCodItem.Focus();
-            itemSelecionado = null;
-            btInserirItem.Text = "Inserir";
-        }
-
-        private void btRecarregar_Click(object sender, EventArgs e)
-        {
-            RecarregaDados(orcamento);
-        }
-
-        private void btProximo_Click(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
-        private void btAnterior_Click(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
-
-        private void dgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = itens.Find(i => i.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
-            btInserirItem.Text = "Alterar";
-            PreencheCamposItem(itemSelecionado);
         }
 
 
@@ -800,6 +807,7 @@ namespace _5gpro.Forms
         {
             NovoCadastro();
         }
+
 
         private void CalculaTotalOrcamento()
         {
