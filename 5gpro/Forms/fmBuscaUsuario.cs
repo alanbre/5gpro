@@ -16,7 +16,7 @@ namespace _5gpro.Forms
     {
         List<Usuario> usuarios;
         private UsuarioBLL usuarioBLL = new UsuarioBLL();
-        public Usuario usuarioSelecionado;
+        public Usuario usuarioSelecionado = null;
 
         public fmBuscaUsuario()
         {
@@ -43,7 +43,7 @@ namespace _5gpro.Forms
 
         private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = dgvUsuarios.SelectedCells[0].RowIndex;
+            int selectedRowIndex = dgvUsuarios.SelectedCells[0].RowIndex;           
             DataGridViewRow selectedRow = dgvUsuarios.Rows[selectedRowIndex];
             usuarioSelecionado = usuarios.Find(u => u.Codigo == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();

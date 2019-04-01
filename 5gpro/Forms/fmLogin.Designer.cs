@@ -55,6 +55,7 @@
             this.tbCodigo.TabIndex = 1;
             this.tbCodigo.Enter += new System.EventHandler(this.tbLogin_Enter);
             this.tbCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
+            this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
             // 
             // lbSenha
             // 
@@ -103,6 +104,7 @@
             this.btProcuraUsuario.TabIndex = 10;
             this.btProcuraUsuario.TabStop = false;
             this.btProcuraUsuario.UseVisualStyleBackColor = true;
+            this.btProcuraUsuario.Click += new System.EventHandler(this.btProcuraUsuario_Click);
             // 
             // tbNomeUsuario
             // 

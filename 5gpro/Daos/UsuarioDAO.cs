@@ -259,8 +259,9 @@ namespace _5gpro.Daos
                                              " + conSobrenomeUsuario + @"
                                              ORDER BY u.idusuario;", Conexao);
 
-                //if (codEstado.Length > 0) { Comando.Parameters.AddWithValue("@idestado", codEstado); }
-                //if (nomeCidade.Length > 0) { Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
+                if (codGrupoUsuario.Length > 0) { Comando.Parameters.AddWithValue("@idgrupousuario", codGrupoUsuario); }
+                if (nomeUsuario.Length > 0) { Comando.Parameters.AddWithValue("@nomeusuario", "%" + nomeUsuario + "%"); }
+                if (sobrenomeUsuario.Length > 0) { Comando.Parameters.AddWithValue("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
 
                 IDataReader reader = Comando.ExecuteReader();
 
