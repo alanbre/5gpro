@@ -33,9 +33,9 @@
             this.tsmiCadastroPessoas = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroPaises = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroItens = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +65,7 @@
             // 
             this.tsmiCadastroPessoas.Name = "tsmiCadastroPessoas";
             this.tsmiCadastroPessoas.Size = new System.Drawing.Size(186, 22);
-            this.tsmiCadastroPessoas.Text = "Cadastros de pessoas";
+            this.tsmiCadastroPessoas.Text = "Cadastros de Pessoas";
             this.tsmiCadastroPessoas.Click += new System.EventHandler(this.tsmiCadastroPessoas_Click);
             // 
             // tsmiCadastroPaises
@@ -82,6 +82,13 @@
             this.tsmiCadastroItens.Text = "Cadastro de Itens";
             this.tsmiCadastroItens.Click += new System.EventHandler(this.tsmiCadastroItens_Click);
             // 
+            // tsmiCadastroUsuarios
+            // 
+            this.tsmiCadastroUsuarios.Name = "tsmiCadastroUsuarios";
+            this.tsmiCadastroUsuarios.Size = new System.Drawing.Size(186, 22);
+            this.tsmiCadastroUsuarios.Text = "Cadastro de Usuários";
+            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.cadastroDeUsuáriosToolStripMenuItem_Click);
+            // 
             // tsmiOrcamentos
             // 
             this.tsmiOrcamentos.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -96,13 +103,6 @@
             this.tsmiCadastroOrcamentos.Size = new System.Drawing.Size(208, 22);
             this.tsmiCadastroOrcamentos.Text = "Cadastros de orçamentos";
             this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.tsmiCadastroOrcamentos_Click);
-            // 
-            // tsmiCadastroUsuarios
-            // 
-            this.tsmiCadastroUsuarios.Name = "tsmiCadastroUsuarios";
-            this.tsmiCadastroUsuarios.Size = new System.Drawing.Size(186, 22);
-            this.tsmiCadastroUsuarios.Text = "Cadastro de Usuários";
-            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.cadastroDeUsuáriosToolStripMenuItem_Click);
             // 
             // fmMain
             // 

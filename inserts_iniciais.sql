@@ -5598,3 +5598,8 @@ INSERT INTO `cidade` (`idcidade`, `nome`, `idestado`) VALUES
 (5564, 'Xambioá', 27);
 
 INSERT INTO atuacao (`idatuacao`, `descricao`) VALUES (1, 'Cliente'), (2, 'Fornecedor');
+
+INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
+
+INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
+             VALUES (9999, 'ADMIN', 'ADMIN', 'admin', '', '', 999);

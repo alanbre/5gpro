@@ -17,7 +17,7 @@ namespace _5gpro.Forms
 
         private void btEntrar_Click(object sender, EventArgs e)
         {
-            usuario = usuarioBLL.Logar(tbLogin.Text, tbSenha.Text);
+            usuario = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
             if (usuario.Codigo != null)
             {
                 this.Close();
@@ -28,7 +28,7 @@ namespace _5gpro.Forms
                 "Login mal sucessido",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbLogin.Focus();
+                tbCodigo.Focus();
             }
 
         }
@@ -40,7 +40,7 @@ namespace _5gpro.Forms
 
         private void tbLogin_Enter(object sender, EventArgs e)
         {
-            tbLogin.SelectAll();
+            tbCodigo.SelectAll();
         }
 
         private void tbSenha_Enter(object sender, EventArgs e)
