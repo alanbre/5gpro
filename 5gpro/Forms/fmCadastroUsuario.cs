@@ -201,11 +201,11 @@ namespace _5gpro.Forms
         {
             var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
             buscaGrupoUsuario.ShowDialog();
-            //if (buscaPessoa.pessoaSelecionada != null)
-            //{
-            //    pessoa = buscaPessoa.pessoaSelecionada;
-            //    PreencheCampos(pessoa);
-            //}
+            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
+            {
+                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
+                PreencheCamposGrupoUsuario(grupousuario);
+            }
         }
 
         //Botões principais
@@ -546,6 +546,11 @@ namespace _5gpro.Forms
         private void btAnterior_Click(object sender, EventArgs e)
         {
             CadastroAnterior();
+        }
+
+        private void btGrupoUsuario_Click(object sender, EventArgs e)
+        {
+            AbreTelaBuscaGrupoUsuario();
         }
     }
 }

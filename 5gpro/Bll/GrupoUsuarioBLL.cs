@@ -18,6 +18,16 @@ namespace _5gpro.Bll
             return grupousuarioDAO.BuscarGrupoUsuarioById(cod);
         }
 
+        public List<GrupoUsuario> BuscarTodosGrupoUsuarios()
+        {
+            return grupousuarioDAO.BuscarTodosGrupoUsuarios();
+        }
+
+        public List<GrupoUsuario> BuscarGrupoUsuario(string nome)
+        {
+            return grupousuarioDAO.BuscarGrupoUsuario(nome);
+        }
+
 
     }
 }

@@ -282,6 +282,7 @@
             this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
             this.btGrupoUsuario.TabIndex = 5;
             this.btGrupoUsuario.UseVisualStyleBackColor = true;
+            this.btGrupoUsuario.Click += new System.EventHandler(this.btGrupoUsuario_Click);
             // 
             // tbCodigoUsuario
             // 
