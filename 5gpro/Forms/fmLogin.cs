@@ -1,5 +1,6 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;
 
@@ -9,6 +10,7 @@ namespace _5gpro.Forms
     {
         public Usuario usuario;
         UsuarioBLL usuarioBLL = new UsuarioBLL();
+
 
         public fmLogin()
         {
@@ -63,6 +65,45 @@ namespace _5gpro.Forms
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void PreencheCamposCodUsuario(Usuario usuario)
+        {
+            if (usuario != null)
+            {
+                tbCodigo.Text = usuario.Codigo;
+                tbNomeUsuario.Text = usuario.Nome;
+            }
+            else
+            {
+                new Limpar().limparTudo(this.Controls);
+            }
+
+
+        }
+
+        private void btProcuraUsuario_Click(object sender, EventArgs e)
+        {
+            var buscaUsuario = new fmBuscaUsuario();
+            buscaUsuario.ShowDialog();
+            if (buscaUsuario.usuarioSelecionado != null)
+            {
+                usuario = buscaUsuario.usuarioSelecionado;
+                PreencheCamposCodUsuario(usuario);
+            }
+        }
+
+        private void tbCodigo_Leave(object sender, EventArgs e)
+        {
+            if (tbCodigo.Text.Length > 0)
+            {
+                usuario = usuarioBLL.BuscarUsuarioById(tbCodigo.Text);
+                PreencheCamposCodUsuario(usuario);
+            }
+            else
+            {
+                tbNomeUsuario.Text = "";
             }
         }
     }

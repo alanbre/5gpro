@@ -16,9 +16,6 @@ namespace _5gpro.Entities
 
         public string Sobrenome { get; set; }
 
-        [Required(ErrorMessage = "O Login é obrigatório.|tbLoginUsuario", AllowEmptyStrings = false)]
-        public string Login { get; set; }
-
         [Required(ErrorMessage = "A Senha é obrigatória.|tbSenhaUsuario", AllowEmptyStrings = false)]
         public string Senha { get; set; }
 
@@ -35,12 +32,11 @@ namespace _5gpro.Entities
 
         }
 
-        public Usuario(string codigo, string nome, string sobrenome, string login, string senha, string email, string telefone, GrupoUsuario grupousuario)
+        public Usuario(string codigo, string nome, string sobrenome, string senha, string email, string telefone, GrupoUsuario grupousuario)
         {
             this.Codigo = codigo;
             this.Nome = nome;
             this.Sobrenome = sobrenome;
-            this.Login = login;
             this.Senha = senha;
             this.Email = email;
             this.Telefone = telefone;

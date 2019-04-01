@@ -70,7 +70,6 @@ namespace _5gpro.Forms
             LimpaCampos(false);
 
             tbCodigoUsuario.Text = usuario.Codigo;
-            tbLoginUsuario.Text = usuario.Login;
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
             tbCodGrupoUsuario.Text = usuario.Grupousuario.Codigo;
@@ -149,7 +148,6 @@ namespace _5gpro.Forms
 
                 usuario = new Usuario();
                 usuario.Codigo = tbCodigoUsuario.Text;
-                usuario.Login = tbLoginUsuario.Text;
 
                 if (confirmaSenhas() == true)
                 {
