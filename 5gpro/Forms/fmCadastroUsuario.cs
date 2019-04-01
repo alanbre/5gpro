@@ -27,6 +27,7 @@ namespace _5gpro.Forms
         public fmCadastroUsuario()
         {
             InitializeComponent();
+            lbConfirmaSenha.Text = "";
             AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
 
             tbSenhaUsuario.UseSystemPasswordChar = true;  //Iniciar com senha oculta
@@ -122,6 +123,24 @@ namespace _5gpro.Forms
 
         }
 
+        public bool confirmaSenhas()
+        {
+            bool iguais = false;
+            if (tbSenhaUsuario.Text.Equals( tbConfirmaSenhaUsuario.Text))
+            {
+                lbConfirmaSenha.Text = "";
+                iguais  = true;
+            }
+            else
+            {
+                lbConfirmaSenha.ForeColor = Color.Red;
+                lbConfirmaSenha.Text = "Senhas não são iguais";
+                iguais = false;
+            }
+            return iguais;
+        }
+
+
         private void SalvaCadastro()
         {
             //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
@@ -131,7 +150,14 @@ namespace _5gpro.Forms
                 usuario = new Usuario();
                 usuario.Codigo = tbCodigoUsuario.Text;
                 usuario.Login = tbLoginUsuario.Text;
-                usuario.Senha = tbConfirmaSenhaUsuario.Text;
+
+                if (confirmaSenhas() == true)
+                {
+                    usuario.Senha = tbSenhaUsuario.Text;
+                }
+                
+
+                //usuario.Senha = tbSenhaUsuario.Text;
                 usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(tbCodGrupoUsuario.Text);
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
@@ -201,11 +227,11 @@ namespace _5gpro.Forms
         {
             var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
             buscaGrupoUsuario.ShowDialog();
-            //if (buscaPessoa.pessoaSelecionada != null)
-            //{
-            //    pessoa = buscaPessoa.pessoaSelecionada;
-            //    PreencheCampos(pessoa);
-            //}
+            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
+            {
+                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
+                PreencheCamposGrupoUsuario(grupousuario);
+            }
         }
 
         //Botões principais
@@ -546,6 +572,24 @@ namespace _5gpro.Forms
         private void btAnterior_Click(object sender, EventArgs e)
         {
             CadastroAnterior();
+        }
+
+        private void btGrupoUsuario_Click(object sender, EventArgs e)
+        {
+            AbreTelaBuscaGrupoUsuario();
+        }
+
+        private void tbConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
+        {
+            confirmaSenhas();
+        }
+
+        private void tbSenhaUsuario_Leave(object sender, EventArgs e)
+        {
+            if(tbConfirmaSenhaUsuario.TextLength > 0)
+            {
+                confirmaSenhas();
+            }
         }
     }
 }
