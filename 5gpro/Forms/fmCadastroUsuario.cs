@@ -474,6 +474,11 @@ namespace _5gpro.Forms
             }
         }
 
+        public void existeLogin(string login)
+        {
+            
+        }
+
 
         //EVENTOS DE LEAVE
         private void tbCodigoUsuario_Leave(object sender, EventArgs e)
@@ -590,6 +595,11 @@ namespace _5gpro.Forms
             {
                 confirmaSenhas();
             }
+        }
+
+        private void fmCadastroUsuario_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
