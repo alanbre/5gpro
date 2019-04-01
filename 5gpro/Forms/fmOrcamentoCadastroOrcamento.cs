@@ -214,6 +214,14 @@ namespace _5gpro.Forms
 
 
 
+        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3 && !editando)
+            {
+                e.Handled = true;
+                AbreTelaBuscaOrcamento();
+            }
+        }
 
         private void dtpCadastro_KeyUp(object sender, KeyEventArgs e)
         {
@@ -307,7 +315,10 @@ namespace _5gpro.Forms
 
         private void btBuscar_Click(object sender, EventArgs e)
         {
-
+            if (!editando)
+            {
+                AbreTelaBuscaOrcamento();
+            }
         }
 
         private void btSalvar_Click(object sender, EventArgs e)
@@ -488,8 +499,8 @@ namespace _5gpro.Forms
         private void AbreTelaBuscaOrcamento()
         {
             //TODO: CRIAR TELA DE BUSCA DE ORÇAMENTO
-            //var buscaPessoa = new fmBuscaPessoa();
-            //buscaPessoa.ShowDialog();
+            var buscaOrcamento = new fmBuscaOrcamento();
+            buscaOrcamento.ShowDialog();
             //if (buscaPessoa.pessoaSelecionada != null)
             //{
             //    pessoa = buscaPessoa.pessoaSelecionada;
@@ -839,6 +850,7 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = false;
             }
         }
+
 
         private void PreencheGridItens(List<_Item> itens)
         {

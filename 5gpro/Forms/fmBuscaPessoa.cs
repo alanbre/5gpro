@@ -20,6 +20,11 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+        private void fmBuscaPessoa_KeyDown(object sender, KeyEventArgs e)
+        {
+            EnterTab(this.ActiveControl, e);
+        }
+
 
         //EVENTOS DE CLICK
         private void btBuscaCidade_Click(object sender, EventArgs e)
@@ -42,33 +47,6 @@ namespace _5gpro.Forms
             }
         }
 
-        //EVENTOS DE KEY DOWN
-        private void tbFiltroCodCidade_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbFiltroNome_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void tbCpfCnpj_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
 
         //EVENTOS DE LEAVE
         private void tbFiltroCodCidade_Leave(object sender, EventArgs e)
@@ -124,6 +102,7 @@ namespace _5gpro.Forms
                 tbNomeCidade.Text = cidade.Nome;
             }
         }
+
         private void BuscaPessoas()
         {
             DataTable table = new DataTable();
@@ -149,6 +128,17 @@ namespace _5gpro.Forms
         private void dgvPessoas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

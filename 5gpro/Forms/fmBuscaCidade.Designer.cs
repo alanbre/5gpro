@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbEstado = new System.Windows.Forms.Label();
             this.tbFiltroCodEstado = new System.Windows.Forms.TextBox();
             this.btProcuraEstado = new System.Windows.Forms.Button();
@@ -110,6 +111,8 @@
             this.dgvCidades.AllowUserToDeleteRows = false;
             this.dgvCidades.AllowUserToOrderColumns = true;
             this.dgvCidades.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvCidades.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

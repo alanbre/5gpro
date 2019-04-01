@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvEstados = new System.Windows.Forms.DataGridView();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.tbFiltroNomeEstado = new System.Windows.Forms.TextBox();
@@ -41,6 +42,8 @@
             this.dgvEstados.AllowUserToDeleteRows = false;
             this.dgvEstados.AllowUserToOrderColumns = true;
             this.dgvEstados.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvEstados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvEstados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -88,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 427);
+            this.ClientSize = new System.Drawing.Size(584, 426);
             this.Controls.Add(this.dgvEstados);
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbFiltroNomeEstado);

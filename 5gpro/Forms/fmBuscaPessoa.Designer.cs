@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btBuscaCidade = new System.Windows.Forms.Button();
             this.tbNomeCidade = new System.Windows.Forms.TextBox();
             this.tbFiltroCodCidade = new System.Windows.Forms.TextBox();
@@ -47,7 +48,7 @@
             this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
             this.btBuscaCidade.Name = "btBuscaCidade";
             this.btBuscaCidade.Size = new System.Drawing.Size(20, 20);
-            this.btBuscaCidade.TabIndex = 17;
+            this.btBuscaCidade.TabIndex = 2;
             this.btBuscaCidade.TabStop = false;
             this.btBuscaCidade.UseVisualStyleBackColor = true;
             this.btBuscaCidade.Click += new System.EventHandler(this.btBuscaCidade_Click);
@@ -58,7 +59,7 @@
             this.tbNomeCidade.Name = "tbNomeCidade";
             this.tbNomeCidade.ReadOnly = true;
             this.tbNomeCidade.Size = new System.Drawing.Size(436, 20);
-            this.tbNomeCidade.TabIndex = 20;
+            this.tbNomeCidade.TabIndex = 3;
             this.tbNomeCidade.TabStop = false;
             // 
             // tbFiltroCodCidade
@@ -68,7 +69,6 @@
             this.tbFiltroCodCidade.Name = "tbFiltroCodCidade";
             this.tbFiltroCodCidade.Size = new System.Drawing.Size(68, 20);
             this.tbFiltroCodCidade.TabIndex = 1;
-            this.tbFiltroCodCidade.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodCidade_KeyDown);
             this.tbFiltroCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
             this.tbFiltroCodCidade.Leave += new System.EventHandler(this.tbFiltroCodCidade_Leave);
             // 
@@ -87,7 +87,7 @@
             this.lbFiltroNome.Location = new System.Drawing.Point(9, 47);
             this.lbFiltroNome.Name = "lbFiltroNome";
             this.lbFiltroNome.Size = new System.Drawing.Size(35, 13);
-            this.lbFiltroNome.TabIndex = 2;
+            this.lbFiltroNome.TabIndex = 4;
             this.lbFiltroNome.Text = "Nome";
             // 
             // tbFiltroNome
@@ -95,9 +95,8 @@
             this.tbFiltroNome.Location = new System.Drawing.Point(7, 63);
             this.tbFiltroNome.Name = "tbFiltroNome";
             this.tbFiltroNome.Size = new System.Drawing.Size(530, 20);
-            this.tbFiltroNome.TabIndex = 3;
+            this.tbFiltroNome.TabIndex = 5;
             this.tbFiltroNome.TextChanged += new System.EventHandler(this.tbFiltroNome_TextChanged);
-            this.tbFiltroNome.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbFiltroNome_KeyDown);
             // 
             // label1
             // 
@@ -105,7 +104,7 @@
             this.label1.Location = new System.Drawing.Point(9, 86);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 13);
-            this.label1.TabIndex = 4;
+            this.label1.TabIndex = 6;
             this.label1.Text = "CPF/CNPJ";
             // 
             // dgvPessoas
@@ -114,6 +113,8 @@
             this.dgvPessoas.AllowUserToDeleteRows = false;
             this.dgvPessoas.AllowUserToOrderColumns = true;
             this.dgvPessoas.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPessoas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPessoas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -126,7 +127,7 @@
             this.dgvPessoas.RowHeadersVisible = false;
             this.dgvPessoas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPessoas.Size = new System.Drawing.Size(1046, 377);
-            this.dgvPessoas.TabIndex = 7;
+            this.dgvPessoas.TabIndex = 9;
             this.dgvPessoas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPessoas_CellContentClick);
             this.dgvPessoas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPessoas_CellDoubleClick);
             // 
@@ -135,7 +136,7 @@
             this.btPesquisar.Location = new System.Drawing.Point(154, 100);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 6;
+            this.btPesquisar.TabIndex = 8;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
@@ -146,9 +147,8 @@
             this.tbCpfCnpj.MaxLength = 14;
             this.tbCpfCnpj.Name = "tbCpfCnpj";
             this.tbCpfCnpj.Size = new System.Drawing.Size(141, 20);
-            this.tbCpfCnpj.TabIndex = 5;
+            this.tbCpfCnpj.TabIndex = 7;
             this.tbCpfCnpj.TextChanged += new System.EventHandler(this.tbCpfCnpj_TextChanged);
-            this.tbCpfCnpj.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbCpfCnpj_KeyDown);
             // 
             // fmBuscaPessoa
             // 
@@ -165,12 +165,14 @@
             this.Controls.Add(this.tbNomeCidade);
             this.Controls.Add(this.tbFiltroCodCidade);
             this.Controls.Add(this.lbFiltroCidade);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "fmBuscaPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca pessoa";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmBuscaPessoa_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPessoas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
