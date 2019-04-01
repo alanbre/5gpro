@@ -231,9 +231,9 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
   `idpermissao` INT NOT NULL,
   `nome` VARCHAR(45) NULL,
-  `nivel` INT NULL,
   PRIMARY KEY (`idpermissao`))
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`permissao_has_grupo_usuario`
@@ -241,6 +241,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
   `idpermissao` INT NOT NULL,
   `idgrupousuario` INT NOT NULL,
+  `nivel` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idpermissao`, `idgrupousuario`),
   INDEX `fk_permissao_has_grupo_usuario_grupo_usuario1_idx` (`idgrupousuario` ASC) VISIBLE,
   INDEX `fk_permissao_has_grupo_usuario_permissao1_idx` (`idpermissao` ASC) VISIBLE,

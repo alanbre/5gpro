@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItens = new System.Windows.Forms.DataGridView();
             this.tbDenomCompra = new System.Windows.Forms.TextBox();
             this.tbDescricao = new System.Windows.Forms.TextBox();
@@ -44,6 +45,8 @@
             // dgvItens
             // 
             this.dgvItens.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItens.Location = new System.Drawing.Point(15, 112);

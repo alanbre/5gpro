@@ -36,15 +36,15 @@
             this.btProximo = new System.Windows.Forms.Button();
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.gbGrupoDeUsuario = new System.Windows.Forms.GroupBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lbNomeGrupoUsuario = new System.Windows.Forms.Label();
+            this.lbCodGrupoUsuario = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pnBotoes.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -148,55 +148,55 @@
             this.btNovo.TabIndex = 1;
             this.btNovo.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // gbGrupoDeUsuario
             // 
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(74, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(748, 127);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 52);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(48, 17);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(103, 20);
-            this.textBox1.TabIndex = 2;
+            this.gbGrupoDeUsuario.Controls.Add(this.textBox2);
+            this.gbGrupoDeUsuario.Controls.Add(this.textBox1);
+            this.gbGrupoDeUsuario.Controls.Add(this.lbNomeGrupoUsuario);
+            this.gbGrupoDeUsuario.Controls.Add(this.lbCodGrupoUsuario);
+            this.gbGrupoDeUsuario.Location = new System.Drawing.Point(74, 12);
+            this.gbGrupoDeUsuario.Name = "gbGrupoDeUsuario";
+            this.gbGrupoDeUsuario.Size = new System.Drawing.Size(310, 93);
+            this.gbGrupoDeUsuario.TabIndex = 4;
+            this.gbGrupoDeUsuario.TabStop = false;
+            this.gbGrupoDeUsuario.Text = "Grupo de Usuários";
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(48, 45);
+            this.textBox2.Location = new System.Drawing.Point(55, 58);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(213, 20);
             this.textBox2.TabIndex = 3;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(55, 30);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(103, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // lbNomeGrupoUsuario
+            // 
+            this.lbNomeGrupoUsuario.AutoSize = true;
+            this.lbNomeGrupoUsuario.Location = new System.Drawing.Point(19, 61);
+            this.lbNomeGrupoUsuario.Name = "lbNomeGrupoUsuario";
+            this.lbNomeGrupoUsuario.Size = new System.Drawing.Size(35, 13);
+            this.lbNomeGrupoUsuario.TabIndex = 1;
+            this.lbNomeGrupoUsuario.Text = "Nome";
+            // 
+            // lbCodGrupoUsuario
+            // 
+            this.lbCodGrupoUsuario.AutoSize = true;
+            this.lbCodGrupoUsuario.Location = new System.Drawing.Point(14, 33);
+            this.lbCodGrupoUsuario.Name = "lbCodGrupoUsuario";
+            this.lbCodGrupoUsuario.Size = new System.Drawing.Size(40, 13);
+            this.lbCodGrupoUsuario.TabIndex = 0;
+            this.lbCodGrupoUsuario.Text = "Código";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(75, 146);
+            this.groupBox2.Location = new System.Drawing.Point(74, 111);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(747, 403);
             this.groupBox2.TabIndex = 5;
@@ -218,15 +218,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 561);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbGrupoDeUsuario);
             this.Controls.Add(this.pnBotoes);
             this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "fmCadastroGrupoUsuario";
             this.Text = "fmCadastroGrupoUsuario";
             this.Load += new System.EventHandler(this.fmCadastroGrupoUsuario_Load);
             this.pnBotoes.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbGrupoDeUsuario.ResumeLayout(false);
+            this.gbGrupoDeUsuario.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
@@ -243,11 +243,11 @@
         private System.Windows.Forms.Button btProximo;
         private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.Button btNovo;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbGrupoDeUsuario;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbNomeGrupoUsuario;
+        private System.Windows.Forms.Label lbCodGrupoUsuario;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
     }
