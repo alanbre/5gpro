@@ -23,7 +23,8 @@ namespace _5gpro.Forms
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         DataTable table = new DataTable();
-        bool editando = false;
+        bool editando , ignoracheckevent = false;
+        
 
 
         public fmCadastroOrcamento()
@@ -45,7 +46,7 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(pessoa);
+                RecarregaDados(orcamento);
             }
 
             if (e.KeyCode == Keys.F1)
@@ -72,7 +73,7 @@ namespace _5gpro.Forms
         private void cbVencimento_CheckedChanged(object sender, EventArgs e)
         {
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
 
@@ -98,8 +99,9 @@ namespace _5gpro.Forms
                 }
                 else if (tbCodigo.Text.Length == 0)
                 {
+                    ignoracheckevent = true;
                     LimpaCampos(true);
-                    Editando(false);
+                    ignoracheckevent = false;
                 }
             }
             else
@@ -126,8 +128,9 @@ namespace _5gpro.Forms
                     }
                     else if (tbCodigo.Text.Length == 0)
                     {
+                        ignoracheckevent = true;
                         LimpaCampos(true);
-                        Editando(false);
+                        ignoracheckevent = false;
                     }
                 }
             }
@@ -172,45 +175,45 @@ namespace _5gpro.Forms
 
         private void tbQuantidade_Leave(object sender, EventArgs e)
         {
-            tbQuantidade.Text = Convert.ToDecimal(tbQuantidade.Text).ToString("############0.00");
+            tbQuantidade.Text = tbQuantidade.Text.Length > 0 ? Convert.ToDecimal(tbQuantidade.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
         private void tbValorUnitItem_Leave(object sender, EventArgs e)
         {
-            tbValorUnitItem.Text = Convert.ToDecimal(tbValorUnitItem.Text).ToString("############0.00");
+            tbValorUnitItem.Text = tbValorUnitItem.Text.Length > 0 ? Convert.ToDecimal(tbValorUnitItem.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
         private void tbValorTotItem_Leave(object sender, EventArgs e)
         {
-            tbValorTotItem.Text = Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00");
+            tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ?  Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
         private void tbDescontoItemPorc_Leave(object sender, EventArgs e)
         {
-            tbDescontoItemPorc.Text = Convert.ToDecimal(tbDescontoItemPorc.Text).ToString("##0.00");
+            tbDescontoItemPorc.Text = tbDescontoItemPorc.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItemPorc.Text).ToString("##0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
         private void tbDescontoItem_Leave(object sender, EventArgs e)
         {
-            tbDescontoItem.Text = Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00");
+            tbDescontoItem.Text = tbDescontoItem.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
         private void tbDescontoOrcamento_Leave(object sender, EventArgs e)
         {
-            tbDescontoOrcamento.Text = Convert.ToDecimal(tbDescontoOrcamento.Text).ToString("############0.00");
+            tbDescontoOrcamento.Text = tbDescontoOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbDescontoOrcamento.Text).ToString("############0.00") : "0,00";
             CalculaTotalOrcamento();
         }
 
         private void tbValorTotalOrcamento_Leave(object sender, EventArgs e)
         {
-            tbValorTotalOrcamento.Text = Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00");
+            tbValorTotalOrcamento.Text = tbValorTotalOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00") : "0,00" ;
         }
 
 
@@ -357,6 +360,21 @@ namespace _5gpro.Forms
             btInserirItem.Text = "Inserir";
         }
 
+        private void btRecarregar_Click(object sender, EventArgs e)
+        {
+            RecarregaDados(orcamento);
+        }
+
+        private void btProximo_Click(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void btAnterior_Click(object sender, EventArgs e)
+        {
+            CadastroAnterior();
+        }
+
         private void dgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
@@ -368,49 +386,50 @@ namespace _5gpro.Forms
 
 
 
+
         private void tbCodCliente_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void dtpCadastro_ValueChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void dtpVencimento_ValueChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void tbCodItem_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void tbQuantidade_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void tbValorUnitItem_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void tbValorTotItem_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void tbDescontoItemPorc_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
         private void tbDescontoItem_TextChanged(object sender, EventArgs e)
         {
-            Editando(true);
+            if (!ignoracheckevent) { Editando(true); }
         }
 
 
@@ -426,21 +445,24 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    ignoracheckevent = true;
                     LimpaCampos(false);
                     tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
                     orcamento = null;
-                    Editando(false);
                     tbCodCliente.Focus();
+                    ignoracheckevent = false;
                     Editando(true);
                 }
             }
             else
             {
+                ignoracheckevent = true;
                 LimpaCampos(false);
                 tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
                 orcamento = null;
                 Editando(false);
                 tbCodCliente.Focus();
+                ignoracheckevent = false;
                 Editando(true);
             }
         }
@@ -471,8 +493,7 @@ namespace _5gpro.Forms
                     orcamento.Codigo = tbCodigo.Text;
                     orcamento.Pessoa = pessoa;
                     orcamento.DataCadastro = dtpCadastro.Value;
-                    orcamento.DataVencimento = cbVencimento.Checked ? dtpVencimento.Value : dtpCadastro.Value;
-                    orcamento.UsaVencimento = cbVencimento.Checked;
+                    orcamento.DataVencimento = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null;
                     orcamento.Itens = itens;
                     orcamento.ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text);
                     orcamento.DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text);
@@ -505,97 +526,127 @@ namespace _5gpro.Forms
             }
         }
 
-        private void RecarregaDados(Pessoa pessoa)
+        private void RecarregaDados(Orcamento orcamento)
         {
-            //TODO: IMPLEMENTAR O RECARREGADADOS
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (orcamento != null)
+                    {
+                        orcamento = orcamentoBLL.BuscaOrcamentoById(orcamento.Codigo);
+                        PreencheCampos(orcamento);
+                    }
+                    else
+                    {
+                        ignoracheckevent = true;
+                        LimpaCampos(true);
+                        ignoracheckevent = false;
+                    }
+                }
+            }
+            else
+            {
+                if (orcamento != null)
+                {
+                    orcamento = orcamentoBLL.BuscaOrcamentoById(orcamento.Codigo);
+                    PreencheCampos(orcamento);
+                }
+                else
+                {
+                    ignoracheckevent = true;
+                    LimpaCampos(true);
+                    ignoracheckevent = false;
+                }
+            }
+
         }
 
         private void ProximoCadastro()
         {
             //TODO: IMPLEMENTAR O PROXIMOCADASTRO
-            ////Busca a pessoa com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            ////Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-            //if (!editando && tbCodigo.Text.Length > 0)
-            //{
-            //    //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-            //    //la do inicio do arquivo.
-            //    Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
-            //    if (newpessoa != null)
-            //    {
-            //        pessoa = newpessoa;
-            //        PreencheCampos(pessoa);
-            //    }
-            //}
-            //else if (editando && tbCodigo.Text.Length > 0)
-            //{
-            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-            //   "Aviso de alteração",
-            //   MessageBoxButtons.YesNo,
-            //   MessageBoxIcon.Warning) == DialogResult.Yes)
-            //    {
-            //        Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
-            //        if (newpessoa != null)
-            //        {
-            //            pessoa = newpessoa;
-            //            PreencheCampos(pessoa);
-            //            Editando(false);
-            //        }
-            //        else
-            //        {
-            //            newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
-            //            if (newpessoa != null)
-            //            {
-            //                pessoa = newpessoa;
-            //                PreencheCampos(pessoa);
-            //                Editando(false);
-            //            }
-            //        }
-            //    }
-            //}
+            //Busca o orcamento com ID maior que o atual preenchido. Só preenche se houver algum registro maior
+            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                Orcamento neworcamento = orcamentoBLL.BuscaProximoOrcamento(tbCodigo.Text);
+                if (neworcamento != null)
+                {
+                    orcamento = neworcamento;
+                    PreencheCampos(orcamento);
+               }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Orcamento neworcamento = orcamentoBLL.BuscaProximoOrcamento(tbCodigo.Text);
+                    if (neworcamento != null)
+                    {
+                        orcamento = neworcamento;
+                        PreencheCampos(orcamento);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        neworcamento = orcamentoBLL.BuscaOrcamentoAnterior(tbCodigo.Text);
+                        if (neworcamento != null)
+                        {
+                            orcamento = neworcamento;
+                            PreencheCampos(neworcamento);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
         }
 
         private void CadastroAnterior()
         {
             //TODO: IMPLEMENTAR O CADASTROANTERIOR
-            ////Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            ////Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-            //if (!editando && tbCodigo.Text.Length > 0)
-            //{
-            //    //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-            //    //la do inicio do arquivo.
-            //    Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
-            //    if (newpessoa != null)
-            //    {
-            //        pessoa = newpessoa;
-            //        PreencheCampos(pessoa);
-            //    }
-            //}
-            //else if (editando && tbCodigo.Text.Length > 0)
-            //{
-            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-            //   "Aviso de alteração",
-            //   MessageBoxButtons.YesNo,
-            //   MessageBoxIcon.Warning) == DialogResult.Yes)
-            //    {
-            //        Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
-            //        if (newpessoa != null)
-            //        {
-            //            pessoa = newpessoa;
-            //            PreencheCampos(pessoa);
-            //            Editando(false);
-            //        }
-            //        else
-            //        {
-            //            newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
-            //            if (newpessoa != null)
-            //            {
-            //                pessoa = newpessoa;
-            //                PreencheCampos(pessoa);
-            //                Editando(false);
-            //            }
-            //        }
-            //    }
-            //}
+            //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
+            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoAnterior(tbCodigo.Text);
+                if (neworcamento != null)
+                {
+                    orcamento = neworcamento;
+                    PreencheCampos(orcamento);
+                }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoAnterior(tbCodigo.Text);
+                    if (neworcamento != null)
+                    {
+                        orcamento = neworcamento;
+                        PreencheCampos(orcamento);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        neworcamento = orcamentoBLL.BuscaProximoOrcamento(tbCodigo.Text);
+                        if (neworcamento != null)
+                        {
+                            orcamento = neworcamento;
+                            PreencheCampos(neworcamento);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
         }
 
         private void AbreTelaBuscaPessoa()
@@ -705,13 +756,14 @@ namespace _5gpro.Forms
 
         private void PreencheCampos(Orcamento orcamento)
         {
+            ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigo.Text = orcamento.Codigo;
             tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
             tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
             dtpCadastro.Value = orcamento.DataCadastro;
-            dtpVencimento.Value = orcamento.DataVencimento != null ? orcamento.DataVencimento : DateTime.Now;
-            cbVencimento.Checked = orcamento.DataVencimento != null ? true : false;
+            dtpVencimento.Value = orcamento.DataVencimento.HasValue ? (DateTime) orcamento.DataVencimento : DateTime.Now;
+            cbVencimento.Checked = orcamento.DataVencimento.HasValue ? true : false;
             tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
             tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
@@ -722,6 +774,7 @@ namespace _5gpro.Forms
                 table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
             }
             dgvItens.Refresh();
+            ignoracheckevent = false;
         }
 
         private void LimpaCampos(bool limpaCod)
@@ -737,15 +790,21 @@ namespace _5gpro.Forms
             tbDescontoTotalItens.Text = "0,00";
             tbDescontoOrcamento.Text = "0,00";
             tbValorTotalOrcamento.Text = "0,00";
+            tbAjuda.Text = "";
             table.Clear();
             dgvItens.Refresh();
+            LimpaCampoItem();
+        }
+
+        private void btNovo_Click(object sender, EventArgs e)
+        {
+            NovoCadastro();
         }
 
         private void CalculaTotalOrcamento()
         {
             tbValorTotalOrcamento.Text = (Convert.ToDecimal(tbValorTotalItens.Text) - Convert.ToDecimal(tbDescontoTotalItens.Text) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
         }
-
 
     }
 }

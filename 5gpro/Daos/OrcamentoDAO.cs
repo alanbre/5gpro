@@ -29,7 +29,7 @@ namespace _5gpro.Daos
                     orcamento = new Orcamento();
                     orcamento.Codigo = reader.GetString(reader.GetOrdinal("idorcamento"));
                     orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
-                    orcamento.DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento"));
+                    orcamento.DataVencimento = reader.IsDBNull(reader.GetOrdinal("data_vencimento")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_vencimento"));
                     orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
                     orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
                     orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
@@ -53,6 +53,87 @@ namespace _5gpro.Daos
             }
             return orcamento;
         }
+
+        public Orcamento BuscaProximoOrcamento(string codAtual)
+        {
+            Orcamento orcamento = null;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM orcamento WHERE idorcamento = (SELECT min(idorcamento) FROM orcamento WHERE idorcamento > @idorcamento)", Conexao);
+                Comando.Parameters.AddWithValue("@idorcamento", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    orcamento = new Orcamento();
+                    orcamento.Codigo = reader.GetString(reader.GetOrdinal("idorcamento"));
+                    orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
+                    orcamento.DataVencimento = reader.IsDBNull(reader.GetOrdinal("data_vencimento")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_vencimento"));
+                    orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
+                    orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
+                    orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
+                    orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
+                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetString(reader.GetOrdinal("idpessoa")));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            if (orcamento != null) { orcamento.Itens = BuscaItensDoOrcamento(orcamento); }
+
+            return orcamento;
+        }
+
+        public Orcamento BuscaOrcamentoAnterior(string codAtual)
+        {
+            Orcamento orcamento = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM orcamento WHERE idorcamento = (SELECT max(idorcamento) FROM orcamento WHERE idorcamento < @idorcamento)", Conexao);
+                Comando.Parameters.AddWithValue("@idorcamento", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    orcamento = new Orcamento();
+                    orcamento.Codigo = reader.GetString(reader.GetOrdinal("idorcamento"));
+                    orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
+                    orcamento.DataVencimento = reader.IsDBNull(reader.GetOrdinal("data_vencimento")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_vencimento"));
+                    orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
+                    orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
+                    orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
+                    orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
+                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetString(reader.GetOrdinal("idpessoa")));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            if (orcamento != null) { orcamento.Itens = BuscaItensDoOrcamento(orcamento); }
+
+            return orcamento;
+        }
+
+
 
         public string BuscaProxCodigoDisponivel()
         {
@@ -141,7 +222,7 @@ namespace _5gpro.Daos
         public int SalvarOuAtualizarOrcamento(Orcamento orcamento)
         {
             int retorno = 0;
-            string vencimento = orcamento.DataVencimento != null ? orcamento.DataVencimento.Date.ToString() : "";
+            string vencimento = orcamento.DataVencimento.HasValue ? orcamento.DataVencimento.Value.Date.ToString() : "";
             string vencimento_campo = vencimento.Length > 0 ? "data_vencimento" : "";
             string vencimento_ref = vencimento.Length > 0 ? "@data_vencimento" : "";
             string idpessoa_campo = orcamento.Pessoa != null ? "idpessoa" : "";
@@ -156,18 +237,18 @@ namespace _5gpro.Daos
 
 
                 Comando.CommandText = @"INSERT INTO orcamento
-                         (idorcamento, data_cadastro, " + vencimento_campo + @", valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento, " + idpessoa_campo + @")
+                         (idorcamento, data_cadastro, data_vencimento, valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento, idpessoa)
                           VALUES
-                         (@idorcamento, @data_cadastro, " + vencimento_ref + @", @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento, " + idpessoa_ref + @")
+                         (@idorcamento, @data_cadastro, @data_vencimento, @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento, @idpessoa)
                           ON DUPLICATE KEY UPDATE
-                          data_cadastro = @data_cadastro, " + vencimento_campo + @" = " + vencimento_ref + @", valor_total_itens = @valor_total_itens,
+                          data_cadastro = @data_cadastro, data_vencimento = @data_vencimento, valor_total_itens = @valor_total_itens,
                           valor_orcamento = @valor_orcamento, desconto_total_itens = @desconto_total_itens, desconto_orcamento = @desconto_orcamento,
-                          " + idpessoa_campo + @" = " + idpessoa_ref + @"
+                          idpessoa = @idpessoa
                           ";
 
                 Comando.Parameters.AddWithValue("@idorcamento", orcamento.Codigo);
                 Comando.Parameters.AddWithValue("@data_cadastro", orcamento.DataCadastro);
-                if (vencimento.Length > 0) { Comando.Parameters.AddWithValue("@data_vencimento", orcamento.DataVencimento); }
+                Comando.Parameters.AddWithValue("@data_vencimento", orcamento.DataVencimento);
                 Comando.Parameters.AddWithValue("@valor_total_itens", orcamento.ValorTotalItens);
                 Comando.Parameters.AddWithValue("@valor_orcamento", orcamento.ValorTotalOrcamento);
                 Comando.Parameters.AddWithValue("@desconto_total_itens", orcamento.DescontoTotalItens);

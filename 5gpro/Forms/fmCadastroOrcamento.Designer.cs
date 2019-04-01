@@ -129,13 +129,13 @@
             // 
             // dtpCadastro
             // 
-            this.dtpCadastro.CustomFormat = "dd/MM/yyyy";
+            this.dtpCadastro.CustomFormat = "";
             this.dtpCadastro.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpCadastro.Location = new System.Drawing.Point(9, 117);
             this.dtpCadastro.Name = "dtpCadastro";
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 5;
-            this.dtpCadastro.Value = new System.DateTime(2019, 3, 30, 0, 0, 0, 0);
+            this.dtpCadastro.Value = new System.DateTime(2019, 4, 1, 0, 0, 0, 0);
             this.dtpCadastro.ValueChanged += new System.EventHandler(this.dtpCadastro_ValueChanged);
             this.dtpCadastro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyUp);
             // 
@@ -238,6 +238,7 @@
             this.btRecarregar.Size = new System.Drawing.Size(48, 48);
             this.btRecarregar.TabIndex = 3;
             this.btRecarregar.UseVisualStyleBackColor = true;
+            this.btRecarregar.Click += new System.EventHandler(this.btRecarregar_Click);
             // 
             // btSalvar
             // 
@@ -275,6 +276,7 @@
             this.btAnterior.Size = new System.Drawing.Size(48, 48);
             this.btAnterior.TabIndex = 5;
             this.btAnterior.UseVisualStyleBackColor = true;
+            this.btAnterior.Click += new System.EventHandler(this.btAnterior_Click);
             // 
             // btProximo
             // 
@@ -287,6 +289,7 @@
             this.btProximo.Size = new System.Drawing.Size(48, 48);
             this.btProximo.TabIndex = 4;
             this.btProximo.UseVisualStyleBackColor = true;
+            this.btProximo.Click += new System.EventHandler(this.btProximo_Click);
             // 
             // btBuscar
             // 
@@ -311,6 +314,7 @@
             this.btNovo.Size = new System.Drawing.Size(48, 48);
             this.btNovo.TabIndex = 1;
             this.btNovo.UseVisualStyleBackColor = true;
+            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // dgvItens
             // 
