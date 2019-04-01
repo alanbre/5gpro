@@ -47,5 +47,11 @@ namespace _5gpro
             var formEstoqueEntradaDocumentos = new fmEstoqueEntradaDocumentos();
             formEstoqueEntradaDocumentos.Show(this);
         }
+
+        private void cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
+            formCadGrupoUsuarios.Show(this);
+        }
     }
 }

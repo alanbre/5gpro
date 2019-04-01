@@ -234,12 +234,14 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
   PRIMARY KEY (`idpermissao`))
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`permissao_has_grupo_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
   `idpermissao` INT NOT NULL,
   `idgrupousuario` INT NOT NULL,
+  `nivel` INT NOT NULL DEFAULT 0,
   PRIMARY KEY (`idpermissao`, `idgrupousuario`),
   INDEX `fk_permissao_has_grupo_usuario_grupo_usuario1_idx` (`idgrupousuario` ASC) VISIBLE,
   INDEX `fk_permissao_has_grupo_usuario_permissao1_idx` (`idpermissao` ASC) VISIBLE,
@@ -251,37 +253,6 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
   CONSTRAINT `fk_permissao_has_grupo_usuario_grupo_usuario1`
     FOREIGN KEY (`idgrupousuario`)
     REFERENCES `5gprodatabase`.`grupo_usuario` (`idgrupousuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`nivel`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nivel` (
-  `idnivel` INT NOT NULL,
-  `descricao` VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`idnivel`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`permissao_has_nivel`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_nivel` (
-  `idpermissao` INT NOT NULL,
-  `idnivel` INT NOT NULL,
-  PRIMARY KEY (`idpermissao`, `idnivel`),
-  INDEX `fk_permissao_has_nivel_nivel1_idx` (`idnivel` ASC) VISIBLE,
-  INDEX `fk_permissao_has_nivel_permissao1_idx` (`idpermissao` ASC) VISIBLE,
-  CONSTRAINT `fk_permissao_has_nivel_permissao1`
-    FOREIGN KEY (`idpermissao`)
-    REFERENCES `5gprodatabase`.`permissao` (`idpermissao`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_permissao_has_nivel_nivel1`
-    FOREIGN KEY (`idnivel`)
-    REFERENCES `5gprodatabase`.`nivel` (`idnivel`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
