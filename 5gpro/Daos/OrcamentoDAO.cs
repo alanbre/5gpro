@@ -49,7 +49,6 @@ namespace _5gpro.Daos
             if (orcamento != null)
             {
                 orcamento.Itens = BuscaItensDoOrcamento(orcamento);
-
             }
             return orcamento;
         }

@@ -28,31 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lbLogin = new System.Windows.Forms.Label();
-            this.tbLogin = new System.Windows.Forms.TextBox();
+            this.lbCodigo = new System.Windows.Forms.Label();
+            this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbSenha = new System.Windows.Forms.Label();
             this.tbSenha = new System.Windows.Forms.TextBox();
             this.btEntrar = new System.Windows.Forms.Button();
             this.btSair = new System.Windows.Forms.Button();
+            this.btProcuraUsuario = new System.Windows.Forms.Button();
+            this.tbNomeUsuario = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // lbLogin
+            // lbCodigo
             // 
-            this.lbLogin.AutoSize = true;
-            this.lbLogin.Location = new System.Drawing.Point(12, 9);
-            this.lbLogin.Name = "lbLogin";
-            this.lbLogin.Size = new System.Drawing.Size(33, 13);
-            this.lbLogin.TabIndex = 0;
-            this.lbLogin.Text = "Login";
+            this.lbCodigo.AutoSize = true;
+            this.lbCodigo.Location = new System.Drawing.Point(12, 9);
+            this.lbCodigo.Name = "lbCodigo";
+            this.lbCodigo.Size = new System.Drawing.Size(40, 13);
+            this.lbCodigo.TabIndex = 0;
+            this.lbCodigo.Text = "Código";
             // 
-            // tbLogin
+            // tbCodigo
             // 
-            this.tbLogin.Location = new System.Drawing.Point(12, 25);
-            this.tbLogin.Name = "tbLogin";
-            this.tbLogin.Size = new System.Drawing.Size(156, 20);
-            this.tbLogin.TabIndex = 1;
-            this.tbLogin.Enter += new System.EventHandler(this.tbLogin_Enter);
-            this.tbLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
+            this.tbCodigo.Location = new System.Drawing.Point(12, 25);
+            this.tbCodigo.Name = "tbCodigo";
+            this.tbCodigo.Size = new System.Drawing.Size(40, 20);
+            this.tbCodigo.TabIndex = 1;
+            this.tbCodigo.Enter += new System.EventHandler(this.tbLogin_Enter);
+            this.tbCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
             // 
             // lbSenha
             // 
@@ -68,14 +70,14 @@
             this.tbSenha.Location = new System.Drawing.Point(12, 64);
             this.tbSenha.Name = "tbSenha";
             this.tbSenha.PasswordChar = '*';
-            this.tbSenha.Size = new System.Drawing.Size(156, 20);
+            this.tbSenha.Size = new System.Drawing.Size(204, 20);
             this.tbSenha.TabIndex = 3;
             this.tbSenha.Enter += new System.EventHandler(this.tbSenha_Enter);
             this.tbSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSenha_KeyDown);
             // 
             // btEntrar
             // 
-            this.btEntrar.Location = new System.Drawing.Point(12, 90);
+            this.btEntrar.Location = new System.Drawing.Point(54, 90);
             this.btEntrar.Name = "btEntrar";
             this.btEntrar.Size = new System.Drawing.Size(75, 23);
             this.btEntrar.TabIndex = 4;
@@ -85,7 +87,7 @@
             // 
             // btSair
             // 
-            this.btSair.Location = new System.Drawing.Point(93, 90);
+            this.btSair.Location = new System.Drawing.Point(141, 90);
             this.btSair.Name = "btSair";
             this.btSair.Size = new System.Drawing.Size(75, 23);
             this.btSair.TabIndex = 5;
@@ -93,21 +95,40 @@
             this.btSair.UseVisualStyleBackColor = true;
             this.btSair.Click += new System.EventHandler(this.btSair_Click);
             // 
+            // btProcuraUsuario
+            // 
+            this.btProcuraUsuario.Location = new System.Drawing.Point(54, 25);
+            this.btProcuraUsuario.Name = "btProcuraUsuario";
+            this.btProcuraUsuario.Size = new System.Drawing.Size(20, 20);
+            this.btProcuraUsuario.TabIndex = 10;
+            this.btProcuraUsuario.TabStop = false;
+            this.btProcuraUsuario.UseVisualStyleBackColor = true;
+            // 
+            // tbNomeUsuario
+            // 
+            this.tbNomeUsuario.Location = new System.Drawing.Point(76, 26);
+            this.tbNomeUsuario.Name = "tbNomeUsuario";
+            this.tbNomeUsuario.ReadOnly = true;
+            this.tbNomeUsuario.Size = new System.Drawing.Size(140, 20);
+            this.tbNomeUsuario.TabIndex = 11;
+            // 
             // fmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(184, 131);
+            this.ClientSize = new System.Drawing.Size(229, 131);
+            this.Controls.Add(this.tbNomeUsuario);
+            this.Controls.Add(this.btProcuraUsuario);
             this.Controls.Add(this.btSair);
             this.Controls.Add(this.btEntrar);
             this.Controls.Add(this.tbSenha);
             this.Controls.Add(this.lbSenha);
-            this.Controls.Add(this.tbLogin);
-            this.Controls.Add(this.lbLogin);
+            this.Controls.Add(this.tbCodigo);
+            this.Controls.Add(this.lbCodigo);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(200, 170);
+            this.MaximumSize = new System.Drawing.Size(245, 170);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(200, 170);
+            this.MinimumSize = new System.Drawing.Size(245, 170);
             this.Name = "fmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -118,11 +139,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lbLogin;
-        private System.Windows.Forms.TextBox tbLogin;
+        private System.Windows.Forms.Label lbCodigo;
+        private System.Windows.Forms.TextBox tbCodigo;
         private System.Windows.Forms.Label lbSenha;
         private System.Windows.Forms.TextBox tbSenha;
         private System.Windows.Forms.Button btEntrar;
         private System.Windows.Forms.Button btSair;
+        private System.Windows.Forms.Button btProcuraUsuario;
+        private System.Windows.Forms.TextBox tbNomeUsuario;
     }
 }
