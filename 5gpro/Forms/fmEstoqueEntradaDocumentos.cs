@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class EstoqueEntradaDocumentos : Form
+    public partial class fmEstoqueEntradaDocumentos : Form
     {
-        public EstoqueEntradaDocumentos()
+        public fmEstoqueEntradaDocumentos()
         {
             InitializeComponent();
         }

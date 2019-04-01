@@ -160,6 +160,12 @@
     <Compile Include="Forms\fmBuscaGrupoUsuario.Designer.cs">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmEstoqueEntradaDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmEstoqueEntradaDocumentos.Designer.cs">
+      <DependentUpon>fmEstoqueEntradaDocumentos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,11 +178,11 @@
     <Compile Include="Forms\fmMain.Designer.cs">
       <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmCadastroOrcamento.cs">
+    <Compile Include="Forms\fmOrcamentoCadastroOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmCadastroOrcamento.Designer.cs">
-      <DependentUpon>fmCadastroOrcamento.cs</DependentUpon>
+    <Compile Include="Forms\fmOrcamentoCadastroOrcamento.Designer.cs">
+      <DependentUpon>fmOrcamentoCadastroOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
@@ -226,14 +232,17 @@
     <EmbeddedResource Include="Forms\fmBuscaGrupoUsuario.resx">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmEstoqueEntradaDocumentos.resx">
+      <DependentUpon>fmEstoqueEntradaDocumentos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmMain.resx">
       <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroOrcamento.resx">
-      <DependentUpon>fmCadastroOrcamento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmOrcamentoCadastroOrcamento.resx">
+      <DependentUpon>fmOrcamentoCadastroOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
