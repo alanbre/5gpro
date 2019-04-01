@@ -17,9 +17,9 @@ namespace _5gpro.Bll
             return usuarioDAO.SalvarOuAtualizarUsuario(usuario);
         }
 
-        public Usuario Logar(string login, string senha)
+        public Usuario Logar(string idusuario, string senha)
         {
-            return usuarioDAO.Logar(login, senha);
+            return usuarioDAO.Logar(idusuario, senha);
         }
 
         public string BuscaProxCodigoDisponivel()
