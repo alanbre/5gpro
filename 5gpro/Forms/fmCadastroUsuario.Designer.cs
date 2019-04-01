@@ -37,13 +37,12 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.lbConfirmaSenha = new System.Windows.Forms.Label();
             this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
             this.tbConfirmaSenhaUsuario = new System.Windows.Forms.TextBox();
             this.lbConfirmaSenhaUsuario = new System.Windows.Forms.Label();
             this.tbSenhaUsuario = new System.Windows.Forms.TextBox();
             this.lbSenhaUsuario = new System.Windows.Forms.Label();
-            this.tbLoginUsuario = new System.Windows.Forms.TextBox();
-            this.lbLoginUsuario = new System.Windows.Forms.Label();
             this.lbGrupoUsuario = new System.Windows.Forms.Label();
             this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
             this.lbCodigoUsuario = new System.Windows.Forms.Label();
@@ -60,7 +59,6 @@
             this.tbEmailUsuario = new System.Windows.Forms.TextBox();
             this.lbEmailUsuario = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.lbConfirmaSenha = new System.Windows.Forms.Label();
             this.pnBotoes.SuspendLayout();
             this.pnDadosGerais.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -77,7 +75,7 @@
             this.pnBotoes.Controls.Add(this.btNovo);
             this.pnBotoes.Location = new System.Drawing.Point(10, 11);
             this.pnBotoes.Name = "pnBotoes";
-            this.pnBotoes.Size = new System.Drawing.Size(56, 488);
+            this.pnBotoes.Size = new System.Drawing.Size(56, 376);
             this.pnBotoes.TabIndex = 2;
             // 
             // btRecarregar
@@ -179,8 +177,6 @@
             this.pnDadosGerais.Controls.Add(this.lbConfirmaSenhaUsuario);
             this.pnDadosGerais.Controls.Add(this.tbSenhaUsuario);
             this.pnDadosGerais.Controls.Add(this.lbSenhaUsuario);
-            this.pnDadosGerais.Controls.Add(this.tbLoginUsuario);
-            this.pnDadosGerais.Controls.Add(this.lbLoginUsuario);
             this.pnDadosGerais.Controls.Add(this.lbGrupoUsuario);
             this.pnDadosGerais.Controls.Add(this.tbNomeGrupoUsuario);
             this.pnDadosGerais.Controls.Add(this.lbCodigoUsuario);
@@ -189,13 +185,22 @@
             this.pnDadosGerais.Controls.Add(this.tbCodGrupoUsuario);
             this.pnDadosGerais.Location = new System.Drawing.Point(72, 14);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(750, 220);
+            this.pnDadosGerais.Size = new System.Drawing.Size(750, 184);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // lbConfirmaSenha
+            // 
+            this.lbConfirmaSenha.AutoSize = true;
+            this.lbConfirmaSenha.Location = new System.Drawing.Point(266, 111);
+            this.lbConfirmaSenha.Name = "lbConfirmaSenha";
+            this.lbConfirmaSenha.Size = new System.Drawing.Size(114, 13);
+            this.lbConfirmaSenha.TabIndex = 9;
+            this.lbConfirmaSenha.Text = "Senhas não são iguais";
             // 
             // cbMostrarSenhaUsuario
             // 
             this.cbMostrarSenhaUsuario.AutoSize = true;
-            this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(262, 110);
+            this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(262, 69);
             this.cbMostrarSenhaUsuario.Name = "cbMostrarSenhaUsuario";
             this.cbMostrarSenhaUsuario.Size = new System.Drawing.Size(61, 17);
             this.cbMostrarSenhaUsuario.TabIndex = 6;
@@ -206,7 +211,7 @@
             // 
             // tbConfirmaSenhaUsuario
             // 
-            this.tbConfirmaSenhaUsuario.Location = new System.Drawing.Point(9, 146);
+            this.tbConfirmaSenhaUsuario.Location = new System.Drawing.Point(9, 105);
             this.tbConfirmaSenhaUsuario.Name = "tbConfirmaSenhaUsuario";
             this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(250, 20);
             this.tbConfirmaSenhaUsuario.TabIndex = 8;
@@ -215,7 +220,7 @@
             // lbConfirmaSenhaUsuario
             // 
             this.lbConfirmaSenhaUsuario.AutoSize = true;
-            this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 130);
+            this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 89);
             this.lbConfirmaSenhaUsuario.Name = "lbConfirmaSenhaUsuario";
             this.lbConfirmaSenhaUsuario.Size = new System.Drawing.Size(89, 13);
             this.lbConfirmaSenhaUsuario.TabIndex = 7;
@@ -223,7 +228,7 @@
             // 
             // tbSenhaUsuario
             // 
-            this.tbSenhaUsuario.Location = new System.Drawing.Point(9, 107);
+            this.tbSenhaUsuario.Location = new System.Drawing.Point(9, 66);
             this.tbSenhaUsuario.Name = "tbSenhaUsuario";
             this.tbSenhaUsuario.Size = new System.Drawing.Size(250, 20);
             this.tbSenhaUsuario.TabIndex = 5;
@@ -232,32 +237,16 @@
             // lbSenhaUsuario
             // 
             this.lbSenhaUsuario.AutoSize = true;
-            this.lbSenhaUsuario.Location = new System.Drawing.Point(6, 91);
+            this.lbSenhaUsuario.Location = new System.Drawing.Point(6, 50);
             this.lbSenhaUsuario.Name = "lbSenhaUsuario";
             this.lbSenhaUsuario.Size = new System.Drawing.Size(38, 13);
             this.lbSenhaUsuario.TabIndex = 4;
             this.lbSenhaUsuario.Text = "Senha";
             // 
-            // tbLoginUsuario
-            // 
-            this.tbLoginUsuario.Location = new System.Drawing.Point(9, 68);
-            this.tbLoginUsuario.Name = "tbLoginUsuario";
-            this.tbLoginUsuario.Size = new System.Drawing.Size(250, 20);
-            this.tbLoginUsuario.TabIndex = 3;
-            // 
-            // lbLoginUsuario
-            // 
-            this.lbLoginUsuario.AutoSize = true;
-            this.lbLoginUsuario.Location = new System.Drawing.Point(6, 51);
-            this.lbLoginUsuario.Name = "lbLoginUsuario";
-            this.lbLoginUsuario.Size = new System.Drawing.Size(33, 13);
-            this.lbLoginUsuario.TabIndex = 2;
-            this.lbLoginUsuario.Text = "Login";
-            // 
             // lbGrupoUsuario
             // 
             this.lbGrupoUsuario.AutoSize = true;
-            this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 169);
+            this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 128);
             this.lbGrupoUsuario.Name = "lbGrupoUsuario";
             this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
             this.lbGrupoUsuario.TabIndex = 10;
@@ -266,7 +255,7 @@
             // tbNomeGrupoUsuario
             // 
             this.tbNomeGrupoUsuario.Enabled = false;
-            this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 185);
+            this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 144);
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
             this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(433, 20);
             this.tbNomeGrupoUsuario.TabIndex = 13;
@@ -284,7 +273,7 @@
             // 
             // btGrupoUsuario
             // 
-            this.btGrupoUsuario.Location = new System.Drawing.Point(80, 185);
+            this.btGrupoUsuario.Location = new System.Drawing.Point(80, 144);
             this.btGrupoUsuario.Name = "btGrupoUsuario";
             this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
             this.btGrupoUsuario.TabIndex = 12;
@@ -302,7 +291,7 @@
             // 
             // tbCodGrupoUsuario
             // 
-            this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 185);
+            this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 144);
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
             this.tbCodGrupoUsuario.TabIndex = 11;
@@ -351,9 +340,9 @@
             this.panel2.Controls.Add(this.tbNomeUsuario);
             this.panel2.Controls.Add(this.tbSobrenomeUsuario);
             this.panel2.Controls.Add(this.lbSobrenomeUsuario);
-            this.panel2.Location = new System.Drawing.Point(72, 240);
+            this.panel2.Location = new System.Drawing.Point(72, 219);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(750, 270);
+            this.panel2.Size = new System.Drawing.Size(750, 184);
             this.panel2.TabIndex = 1;
             // 
             // mtbTelefoneUsuario
@@ -394,27 +383,18 @@
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Location = new System.Drawing.Point(72, 421);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(750, 20);
             this.tbAjuda.TabIndex = 6;
             this.tbAjuda.TabStop = false;
             // 
-            // lbConfirmaSenha
-            // 
-            this.lbConfirmaSenha.AutoSize = true;
-            this.lbConfirmaSenha.Location = new System.Drawing.Point(266, 152);
-            this.lbConfirmaSenha.Name = "lbConfirmaSenha";
-            this.lbConfirmaSenha.Size = new System.Drawing.Size(114, 13);
-            this.lbConfirmaSenha.TabIndex = 9;
-            this.lbConfirmaSenha.Text = "Senhas não são iguais";
-            // 
             // fmCadastroUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 561);
+            this.ClientSize = new System.Drawing.Size(834, 453);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnDadosGerais);
@@ -422,7 +402,7 @@
             this.Location = new System.Drawing.Point(10, 11);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 600);
+            this.MinimumSize = new System.Drawing.Size(850, 492);
             this.Name = "fmCadastroUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -466,8 +446,6 @@
         private System.Windows.Forms.Label lbGrupoUsuario;
         private System.Windows.Forms.TextBox tbSenhaUsuario;
         private System.Windows.Forms.Label lbSenhaUsuario;
-        private System.Windows.Forms.TextBox tbLoginUsuario;
-        private System.Windows.Forms.Label lbLoginUsuario;
         private System.Windows.Forms.TextBox tbConfirmaSenhaUsuario;
         private System.Windows.Forms.Label lbConfirmaSenhaUsuario;
         private System.Windows.Forms.CheckBox cbMostrarSenhaUsuario;

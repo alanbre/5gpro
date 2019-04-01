@@ -52,7 +52,6 @@ namespace _5gpro.Forms
         private void LimpaCampos(bool limpaCodigo)
         {
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
-            tbLoginUsuario.Clear();
             tbSenhaUsuario.Clear();
             tbConfirmaSenhaUsuario.Clear();
             tbCodGrupoUsuario.Clear();
@@ -207,7 +206,6 @@ namespace _5gpro.Forms
                     LimpaCampos(false);
                     tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
                     usuario = null;
-                    tbLoginUsuario.Focus();
                     Editando(true);
                 }
             }
@@ -216,7 +214,6 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
                 tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
                 usuario = null;
-                tbLoginUsuario.Focus();
                 Editando(true);
             }
         }

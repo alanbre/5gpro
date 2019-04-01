@@ -21,6 +21,10 @@ namespace _5gpro.Forms
         bool editando = false;
         bool ignoraCheckEvent;
 
+
+       
+       
+
         public fmCadastroPessoa()
         {
             InitializeComponent();
@@ -118,11 +122,10 @@ namespace _5gpro.Forms
         }
 
 
-
-
         //EVENTOS DE KEY PRESS
         private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
+            
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -185,6 +188,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
+            
             tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
@@ -211,6 +215,7 @@ namespace _5gpro.Forms
             }
             else
             {
+
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
@@ -218,6 +223,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
+                        
                         Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
                         if (newpessoa != null)
                         {
@@ -237,6 +243,11 @@ namespace _5gpro.Forms
                         Editando(false);
                     }
                 }
+                else
+                {
+                    
+                }
+                
             }
         }
 

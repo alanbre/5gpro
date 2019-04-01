@@ -101,7 +101,7 @@
             this.btProcuraUsuario.Location = new System.Drawing.Point(54, 25);
             this.btProcuraUsuario.Name = "btProcuraUsuario";
             this.btProcuraUsuario.Size = new System.Drawing.Size(20, 20);
-            this.btProcuraUsuario.TabIndex = 10;
+            this.btProcuraUsuario.TabIndex = 6;
             this.btProcuraUsuario.TabStop = false;
             this.btProcuraUsuario.UseVisualStyleBackColor = true;
             this.btProcuraUsuario.Click += new System.EventHandler(this.btProcuraUsuario_Click);
@@ -112,7 +112,8 @@
             this.tbNomeUsuario.Name = "tbNomeUsuario";
             this.tbNomeUsuario.ReadOnly = true;
             this.tbNomeUsuario.Size = new System.Drawing.Size(140, 20);
-            this.tbNomeUsuario.TabIndex = 11;
+            this.tbNomeUsuario.TabIndex = 7;
+            this.tbNomeUsuario.TabStop = false;
             // 
             // fmLogin
             // 
