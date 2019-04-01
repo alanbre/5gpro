@@ -93,6 +93,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iosDelete_22px_Red {
+            get {
+                object obj = ResourceManager.GetObject("iosDelete_22px_Red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosDelete_48px_black {
             get {
                 object obj = ResourceManager.GetObject("iosDelete_48px_black", resourceCulture);

@@ -61,11 +61,11 @@
             this.lbCodItem = new System.Windows.Forms.Label();
             this.btInserirItem = new System.Windows.Forms.Button();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.btExcluirItem = new System.Windows.Forms.Button();
             this.tbDescontoItem = new System.Windows.Forms.TextBox();
             this.lbDescItem = new System.Windows.Forms.Label();
             this.tbDescontoItemPorc = new System.Windows.Forms.TextBox();
             this.lbDescontoPorc = new System.Windows.Forms.Label();
-            this.btAutoriza = new System.Windows.Forms.Button();
             this.btNovoItem = new System.Windows.Forms.Button();
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.tbValorTotalItens = new System.Windows.Forms.TextBox();
@@ -467,11 +467,11 @@
             this.gbItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbItens.Controls.Add(this.btExcluirItem);
             this.gbItens.Controls.Add(this.tbDescontoItem);
             this.gbItens.Controls.Add(this.lbDescItem);
             this.gbItens.Controls.Add(this.tbDescontoItemPorc);
             this.gbItens.Controls.Add(this.lbDescontoPorc);
-            this.gbItens.Controls.Add(this.btAutoriza);
             this.gbItens.Controls.Add(this.btNovoItem);
             this.gbItens.Controls.Add(this.dgvItens);
             this.gbItens.Controls.Add(this.btInserirItem);
@@ -491,6 +491,19 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
+            // 
+            // btExcluirItem
+            // 
+            this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExcluirItem.Enabled = false;
+            this.btExcluirItem.Image = global::_5gpro.Properties.Resources.iosDelete_22px_Red;
+            this.btExcluirItem.Location = new System.Drawing.Point(963, 49);
+            this.btExcluirItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btExcluirItem.Name = "btExcluirItem";
+            this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
+            this.btExcluirItem.TabIndex = 15;
+            this.btExcluirItem.UseVisualStyleBackColor = true;
+            this.btExcluirItem.Click += new System.EventHandler(this.btDeletarItem_Click);
             // 
             // tbDescontoItem
             // 
@@ -537,18 +550,6 @@
             this.lbDescontoPorc.Size = new System.Drawing.Size(46, 13);
             this.lbDescontoPorc.TabIndex = 9;
             this.lbDescontoPorc.Text = "% Desc.";
-            // 
-            // btAutoriza
-            // 
-            this.btAutoriza.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAutoriza.Image = global::_5gpro.Properties.Resources.iosOk_22px_Green;
-            this.btAutoriza.Location = new System.Drawing.Point(963, 49);
-            this.btAutoriza.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btAutoriza.Name = "btAutoriza";
-            this.btAutoriza.Size = new System.Drawing.Size(24, 24);
-            this.btAutoriza.TabIndex = 15;
-            this.btAutoriza.UseVisualStyleBackColor = true;
-            this.btAutoriza.Visible = false;
             // 
             // btNovoItem
             // 
@@ -749,7 +750,6 @@
         private System.Windows.Forms.GroupBox gbTotais;
         private System.Windows.Forms.TextBox tbValorTotalOrcamento;
         private System.Windows.Forms.Label lbTotalOrcamento;
-        private System.Windows.Forms.Button btAutoriza;
         private System.Windows.Forms.TextBox tbDescontoOrcamento;
         private System.Windows.Forms.Label lbDesconto;
         private System.Windows.Forms.TextBox tbDescontoTotalItens;
@@ -759,5 +759,6 @@
         private System.Windows.Forms.Label lbDescItem;
         private System.Windows.Forms.TextBox tbDescontoItemPorc;
         private System.Windows.Forms.TextBox tbAjuda;
+        private System.Windows.Forms.Button btExcluirItem;
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using MySql.Data.MySqlClient;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
@@ -35,18 +28,13 @@ namespace _5gpro.Entities
         //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.
         public decimal Quantidade { get; set; }
         public decimal ValorUnitario { get; set; }
-        public decimal ValorTotal { get; set; }
+        public decimal ValorTotal { get; set; } //=> Quantidade * ValorUnitario;
         public decimal DescontoPorc { get; set; }
-        public decimal Desconto { get; set; }
+        public decimal Desconto { get; set; } //=> ValorTotal * DescontoPorc / 100;
 
 
         public _Item()
         {
-            Quantidade = 0;
-            ValorUnitario = 0;
-            ValorTotal = 0;
-            DescontoPorc = 0;
-            Desconto = 0;
         }
 
         public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, Unimedida unimedida)

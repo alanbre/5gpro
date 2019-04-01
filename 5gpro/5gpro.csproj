@@ -412,5 +412,8 @@
   <ItemGroup>
     <None Include="Resources\icons8_Checkmark_22px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_delete_sign_filled_22px.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

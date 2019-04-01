@@ -23,8 +23,8 @@ namespace _5gpro.Forms
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         DataTable table = new DataTable();
-        bool editando , ignoracheckevent = false;
-        
+        bool editando, ignoracheckevent = false;
+
 
 
         public fmOrcamentoCadastroOrcamento()
@@ -185,7 +185,7 @@ namespace _5gpro.Forms
 
         private void tbValorTotItem_Leave(object sender, EventArgs e)
         {
-            tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ?  Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
+            tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ? Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
@@ -209,7 +209,7 @@ namespace _5gpro.Forms
 
         private void tbValorTotalOrcamento_Leave(object sender, EventArgs e)
         {
-            tbValorTotalOrcamento.Text = tbValorTotalOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00") : "0,00" ;
+            tbValorTotalOrcamento.Text = tbValorTotalOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00") : "0,00";
         }
 
 
@@ -300,12 +300,9 @@ namespace _5gpro.Forms
 
 
 
-        private void btNovoItem_Click(object sender, EventArgs e)
+        private void btNovo_Click(object sender, EventArgs e)
         {
-            LimpaCampoItem();
-            tbCodItem.Focus();
-            itemSelecionado = null;
-            btInserirItem.Text = "Inserir";
+            NovoCadastro();
         }
 
         private void btBuscar_Click(object sender, EventArgs e)
@@ -341,6 +338,15 @@ namespace _5gpro.Forms
             itemSelecionado = itens.Find(i => i.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
             btInserirItem.Text = "Alterar";
             PreencheCamposItem(itemSelecionado);
+            btExcluirItem.Enabled = true;
+        }
+
+        private void btNovoItem_Click(object sender, EventArgs e)
+        {
+            LimpaCampoItem();
+            tbCodItem.Focus();
+            itemSelecionado = null;
+            btInserirItem.Text = "Inserir";
         }
 
         private void btInserirItem_Click(object sender, EventArgs e)
@@ -375,9 +381,8 @@ namespace _5gpro.Forms
                     dgvItens.Update();
                     dgvItens.Refresh();
                 }
-                tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
-                tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
                 CalculaTotalOrcamento();
+                btExcluirItem.Enabled = false;
             }
             else
             {
@@ -390,6 +395,12 @@ namespace _5gpro.Forms
             }
 
         }
+
+        private void btDeletarItem_Click(object sender, EventArgs e)
+        {
+            ExcluirItem(itemSelecionado);
+        }
+
 
 
 
@@ -574,7 +585,6 @@ namespace _5gpro.Forms
 
         private void ProximoCadastro()
         {
-            //TODO: IMPLEMENTAR O PROXIMOCADASTRO
             //Busca o orcamento com ID maior que o atual preenchido. Só preenche se houver algum registro maior
             //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
@@ -583,8 +593,9 @@ namespace _5gpro.Forms
                 if (neworcamento != null)
                 {
                     orcamento = neworcamento;
+                    itens = orcamento.Itens;
                     PreencheCampos(orcamento);
-               }
+                }
             }
             else if (editando && tbCodigo.Text.Length > 0)
             {
@@ -597,6 +608,7 @@ namespace _5gpro.Forms
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
+                        itens = orcamento.Itens;
                         PreencheCampos(orcamento);
                         Editando(false);
                     }
@@ -606,7 +618,8 @@ namespace _5gpro.Forms
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;
-                            PreencheCampos(neworcamento);
+                            itens = orcamento.Itens;
+                            PreencheCampos(orcamento);
                             Editando(false);
                         }
                     }
@@ -625,6 +638,7 @@ namespace _5gpro.Forms
                 if (neworcamento != null)
                 {
                     orcamento = neworcamento;
+                    itens = orcamento.Itens;
                     PreencheCampos(orcamento);
                 }
             }
@@ -639,6 +653,7 @@ namespace _5gpro.Forms
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
+                        itens = orcamento.Itens;
                         PreencheCampos(orcamento);
                         Editando(false);
                     }
@@ -648,6 +663,7 @@ namespace _5gpro.Forms
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;
+                            itens = orcamento.Itens;
                             PreencheCampos(neworcamento);
                             Editando(false);
                         }
@@ -769,18 +785,15 @@ namespace _5gpro.Forms
             tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
             tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
             dtpCadastro.Value = orcamento.DataCadastro;
-            dtpVencimento.Value = orcamento.DataVencimento.HasValue ? (DateTime) orcamento.DataVencimento : DateTime.Now;
+            dtpVencimento.Value = orcamento.DataVencimento.HasValue ? (DateTime)orcamento.DataVencimento : DateTime.Now;
             cbVencimento.Checked = orcamento.DataVencimento.HasValue ? true : false;
             tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
             tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
             tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
             itens = orcamento.Itens;
-            foreach(_Item i in itens)
-            {
-                table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
-            }
-            dgvItens.Refresh();
+            PreencheGridItens(orcamento.Itens);
+            btInserirItem.Text = "Inserir";
             ignoracheckevent = false;
         }
 
@@ -803,16 +816,37 @@ namespace _5gpro.Forms
             LimpaCampoItem();
         }
 
-        private void btNovo_Click(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
-
-
         private void CalculaTotalOrcamento()
         {
-            tbValorTotalOrcamento.Text = (Convert.ToDecimal(tbValorTotalItens.Text) - Convert.ToDecimal(tbDescontoTotalItens.Text) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
+            if (itens.Count > 0)
+            {
+                tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
+                tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
+                tbValorTotalOrcamento.Text = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
+            }
         }
 
+        private void ExcluirItem(_Item item)
+        {
+            if (itemSelecionado != null)
+            {
+                itens.RemoveAll(i => i.Codigo == itemSelecionado.Codigo);
+                table.Clear();
+                dgvItens.Refresh();
+                LimpaCampoItem();
+                PreencheGridItens(itens);
+                CalculaTotalOrcamento();
+                btExcluirItem.Enabled = false;
+            }
+        }
+
+        private void PreencheGridItens(List<_Item> itens)
+        {
+            foreach (_Item i in itens)
+            {
+                table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+            }
+            dgvItens.Refresh();
+        }
     }
 }
