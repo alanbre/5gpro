@@ -138,6 +138,9 @@ namespace _5gpro.Daos
             List<Orcamento> orcamentos = new List<Orcamento>();
             string wherePessoa = f.filtroPessoa != null ? "AND idpessoa = @idpessoa" : "";
             string whereCidade = f.filtroCidade != null ? "AND idcidade = @idcidade" : "";
+            string contemValidade = f.contemValidade ? "NOT" : "";
+            string contemEfeteviacao = f.contemEfetivacao ? "NOT" : "";
+
             try
             {
                 AbrirConexao();
@@ -149,7 +152,7 @@ namespace _5gpro.Daos
                                              + wherePessoa + "" +
                                           @" AND valor_orcamento BETWEEN @valor_total_inicial AND @valor_total_final
                                              AND data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                             AND data_validade BETWEEN @data_validade_inicial ANd @data_validade_final
+                                             AND (data_validade BETWEEN @data_validade_inicial AND @data_validade_final OR data_validade IS " + contemValidade + @" NULL)
                                              ORDER BY idorcamento", Conexao);
                 if (f.filtroCidade != null) { Comando.Parameters.AddWithValue("@idcidade", f.filtroCidade.CodCidade); }
                 if (f.filtroPessoa != null) { Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.Codigo); }
@@ -159,6 +162,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@data_cadastro_final", f.filtroDataCadastroFinal);
                 Comando.Parameters.AddWithValue("@data_validade_inicial", f.filtroDataValidadeInicial);
                 Comando.Parameters.AddWithValue("@data_validade_final", f.filtroDataValidadeFinal);
+
                 IDataReader reader = Comando.ExecuteReader();
 
                 while (reader.Read())

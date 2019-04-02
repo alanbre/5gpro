@@ -3,6 +3,7 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -20,6 +21,8 @@ namespace _5gpro.Forms
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
+        DataTable table = new DataTable();
+
         public struct Filtros
         {
             public Pessoa filtroPessoa;
@@ -32,11 +35,24 @@ namespace _5gpro.Forms
             public DateTime? filtroDataEfetivacaoFinal;
             public decimal filtroValorTotalInical;
             public decimal filtroValorTotalFinal;
+            public bool contemValidade;
+            public bool contemEfetivacao;
         }
 
         public fmBuscaOrcamento()
         {
             InitializeComponent();
+
+            //table.Columns.Add("Orcamento", typeof(string));
+            //table.Columns.Add("Código cliente", typeof(string));
+            //table.Columns.Add("Nome cliente", typeof(string));
+            //table.Columns.Add("Data do cadastro", typeof(DateTime));
+            //table.Columns.Add("Data da validade", typeof(DateTime));
+            //table.Columns.Add("Valor dos itens", typeof(decimal));
+            //table.Columns.Add("Desconto dos itens", typeof(decimal));
+            //table.Columns.Add("Desconto do orçamento", typeof(decimal));
+            //table.Columns.Add("Valor do orçamento", typeof(decimal));
+            //dgvOrcamentos.DataSource = table;
         }
 
         private void fmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e)
@@ -46,7 +62,7 @@ namespace _5gpro.Forms
 
 
 
-        private void tbFiltroCodCidade_Leave(object sender, System.EventArgs e)
+        private void tbFiltroCodCidade_Leave(object sender, EventArgs e)
         {
             if (tbFiltroCodCidade.Text.Length > 0)
             {
@@ -72,7 +88,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbFiltroValorTotalOrcamentoInicial_Leave(object sender, System.EventArgs e)
+        private void tbFiltroValorTotalOrcamentoInicial_Leave(object sender, EventArgs e)
         {
             tbFiltroValorTotalOrcamentoInicial.Text = tbFiltroValorTotalOrcamentoInicial.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text).ToString("############0.00") : "0,00";
         }
@@ -105,12 +121,12 @@ namespace _5gpro.Forms
 
 
 
-        private void btBuscaCidade_Click(object sender, System.EventArgs e)
+        private void btBuscaCidade_Click(object sender, EventArgs e)
         {
             AbreTelaBuscaCidade();
         }
 
-        private void btProcuraCliente_Click(object sender, System.EventArgs e)
+        private void btProcuraCliente_Click(object sender, EventArgs e)
         {
             AbreTelaBuscaPessoa();
         }
@@ -199,6 +215,7 @@ namespace _5gpro.Forms
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
+            dgvOrcamentos.Rows.Clear();
             Filtros f = new Filtros();
             f.filtroCidade = cidade;
             f.filtroPessoa = pessoa;
@@ -208,8 +225,36 @@ namespace _5gpro.Forms
             f.filtroDataValidadeFinal = dtpFiltroDataValidadeFinal.Value;
             f.filtroDataEfetivacaoInicial = dtpFiltroDataEfetivacaoInicial.Value;
             f.filtroDataEfetivacaoFinal = dtpFiltroDataEfetivacaoFinal.Value;
+            f.contemValidade = cblFiltros.GetItemChecked(0);
+            f.contemEfetivacao = cblFiltros.GetItemChecked(1);
+            f.filtroValorTotalInical = Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text);
+            f.filtroValorTotalFinal = Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text);
 
             orcamentos = orcamentoBLL.BuscaOrcamentos(f);
+
+            foreach (var o in orcamentos)
+            {
+                if (o.DataValidade.HasValue)
+                {
+                    dgvOrcamentos.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade.Value.ToShortDateString(), o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+                }
+                else
+                {
+                    dgvOrcamentos.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+                }
+                
+                //table.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro, o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+            }
+            dgvOrcamentos.Refresh();
+        }
+
+
+        private void dgvOrcamentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvOrcamentos.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvOrcamentos.Rows[selectedRowIndex];
+            orcamentoSelecionado = orcamentos.Find(o => o.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            this.Close();
         }
     }
 }
