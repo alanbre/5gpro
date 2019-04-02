@@ -1,16 +1,13 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Forms;
+using System.Collections.Generic;
 
 namespace _5gpro.Bll
 {
     class OrcamentoBLL
     {
         OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
-
-        public Orcamento BuscaOrcamentoById(string cod)
-        {
-            return orcamentoDAO.BuscaOrcamentoById(cod);
-        }
 
         public int SalvarOuAtualizarOrcamento(Orcamento orcamento)
         {
@@ -22,6 +19,11 @@ namespace _5gpro.Bll
             return orcamentoDAO.BuscaProxCodigoDisponivel();
         }
 
+        public Orcamento BuscaOrcamentoById(string cod)
+        {
+            return orcamentoDAO.BuscaOrcamentoById(cod);
+        }
+
         public Orcamento BuscaProximoOrcamento(string codAtual)
         {
             return orcamentoDAO.BuscaProximoOrcamento(codAtual);
@@ -30,6 +32,11 @@ namespace _5gpro.Bll
         public Orcamento BuscaOrcamentoAnterior(string codAtual)
         {
             return orcamentoDAO.BuscaOrcamentoAnterior(codAtual);
+        }
+
+        public List<Orcamento> BuscaOrcamentos(fmBuscaOrcamento.Filtros f)
+        {
+            return orcamentoDAO.BuscaOrcamentos(f);
         }
     }
 }
