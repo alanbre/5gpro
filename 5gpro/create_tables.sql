@@ -231,8 +231,11 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
   `idpermissao` INT NOT NULL,
   `nome` VARCHAR(45) NULL,
-  PRIMARY KEY (`idpermissao`))
+  `codigo` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`idpermissao`),
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE)
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------
