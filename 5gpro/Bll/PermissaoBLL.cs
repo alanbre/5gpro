@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,17 @@ namespace _5gpro.Bll
         PermissaoDAO permissaoDAO = new PermissaoDAO();
       
 
-        public List<Permissao> BuscaPermissoesGrupo(string cod)
+        public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesGrupo(string cod)
         {
             return permissaoDAO.BuscaPermissoesGrupo(cod);
         }
 
+        public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
+        {
+            return permissaoDAO.BuscaTodasPermissoes();
+        }
+
+        
     }
 }
 

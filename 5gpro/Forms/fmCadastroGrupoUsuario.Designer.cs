@@ -43,10 +43,14 @@
             this.lbCodGrupoUsuario = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvModulos = new System.Windows.Forms.DataGridView();
+            this.gbModulos = new System.Windows.Forms.GroupBox();
             this.pnBotoes.SuspendLayout();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModulos)).BeginInit();
+            this.gbModulos.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnBotoes
@@ -196,27 +200,49 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView1);
-            this.groupBox2.Location = new System.Drawing.Point(74, 111);
+            this.groupBox2.Location = new System.Drawing.Point(74, 309);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(747, 403);
+            this.groupBox2.Size = new System.Drawing.Size(747, 235);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Permissões";
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 20);
+            this.dataGridView1.Location = new System.Drawing.Point(7, 18);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(734, 377);
+            this.dataGridView1.Size = new System.Drawing.Size(734, 211);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // dgvModulos
+            // 
+            this.dgvModulos.AllowUserToAddRows = false;
+            this.dgvModulos.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvModulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModulos.Location = new System.Drawing.Point(6, 19);
+            this.dgvModulos.Name = "dgvModulos";
+            this.dgvModulos.Size = new System.Drawing.Size(736, 173);
+            this.dgvModulos.TabIndex = 0;
+            // 
+            // gbModulos
+            // 
+            this.gbModulos.Controls.Add(this.dgvModulos);
+            this.gbModulos.Location = new System.Drawing.Point(74, 111);
+            this.gbModulos.Name = "gbModulos";
+            this.gbModulos.Size = new System.Drawing.Size(747, 198);
+            this.gbModulos.TabIndex = 6;
+            this.gbModulos.TabStop = false;
+            this.gbModulos.Text = "Módulos";
             // 
             // fmCadastroGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 561);
+            this.Controls.Add(this.gbModulos);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbGrupoDeUsuario);
             this.Controls.Add(this.pnBotoes);
@@ -229,6 +255,8 @@
             this.gbGrupoDeUsuario.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvModulos)).EndInit();
+            this.gbModulos.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -250,5 +278,7 @@
         private System.Windows.Forms.Label lbCodGrupoUsuario;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvModulos;
+        private System.Windows.Forms.GroupBox gbModulos;
     }
 }
