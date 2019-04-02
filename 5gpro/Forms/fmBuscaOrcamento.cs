@@ -9,8 +9,8 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaOrcamento : Form
     {
-        Cidade cidade;
-        Pessoa pessoa;
+        Cidade cidade = null;
+        Pessoa pessoa = null;
         public Orcamento orcamentoSelecionado = null;
         List<Orcamento> orcamentos;
 
@@ -19,6 +19,20 @@ namespace _5gpro.Forms
         OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
+
+        public struct Filtros
+        {
+            public Pessoa filtroPessoa;
+            public Cidade filtroCidade;
+            public DateTime? filtroDataCadastroInicial;
+            public DateTime? filtroDataCadastroFinal;
+            public DateTime? filtroDataValidadeInicial;
+            public DateTime? filtroDataValidadeFinal;
+            public DateTime? filtroDataEfetivacaoInicial;
+            public DateTime? filtroDataEfetivacaoFinal;
+            public decimal filtroValorTotalInical;
+            public decimal filtroValorTotalFinal;
+        }
 
         public fmBuscaOrcamento()
         {
@@ -183,5 +197,19 @@ namespace _5gpro.Forms
             }
         }
 
+        private void btPesquisar_Click(object sender, EventArgs e)
+        {
+            Filtros f = new Filtros();
+            f.filtroCidade = cidade;
+            f.filtroPessoa = pessoa;
+            f.filtroDataCadastroInicial = dtpFiltroDataCadastroInicial.Value;
+            f.filtroDataCadastroFinal = dtpFiltroDataCadastroFinal.Value;
+            f.filtroDataValidadeInicial = dtpFiltroDataValidadeInicial.Value;
+            f.filtroDataValidadeFinal = dtpFiltroDataValidadeFinal.Value;
+            f.filtroDataEfetivacaoInicial = dtpFiltroDataEfetivacaoInicial.Value;
+            f.filtroDataEfetivacaoFinal = dtpFiltroDataEfetivacaoFinal.Value;
+
+            orcamentos = orcamentoBLL.BuscaOrcamentos(f);
+        }
     }
 }

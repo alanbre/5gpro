@@ -522,7 +522,7 @@ namespace _5gpro.Forms
                     orcamento.Codigo = tbCodigo.Text;
                     orcamento.Pessoa = pessoa;
                     orcamento.DataCadastro = dtpCadastro.Value;
-                    orcamento.DataVencimento = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null;
+                    orcamento.DataValidade = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null;
                     orcamento.Itens = itens;
                     orcamento.ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text);
                     orcamento.DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text);
@@ -796,8 +796,8 @@ namespace _5gpro.Forms
             tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
             tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
             dtpCadastro.Value = orcamento.DataCadastro;
-            dtpVencimento.Value = orcamento.DataVencimento.HasValue ? (DateTime)orcamento.DataVencimento : DateTime.Now;
-            cbVencimento.Checked = orcamento.DataVencimento.HasValue ? true : false;
+            dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
+            cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
             tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
             tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
             tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
