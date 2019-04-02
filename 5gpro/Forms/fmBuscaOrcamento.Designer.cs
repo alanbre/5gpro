@@ -57,15 +57,28 @@
             this.lbFiltroCidade = new System.Windows.Forms.Label();
             this.gbGridOrcamentos = new System.Windows.Forms.GroupBox();
             this.dgvOrcamentos = new System.Windows.Forms.DataGridView();
+            this.cblFiltros = new System.Windows.Forms.CheckedListBox();
+            this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcCodigoPessoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataValidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescontoTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosOrcamento.SuspendLayout();
             this.gbGridOrcamentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
+            this.gbFiltros.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbFiltrosOrcamento
             // 
             this.gbFiltrosOrcamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltrosOrcamento.Controls.Add(this.gbFiltros);
             this.gbFiltrosOrcamento.Controls.Add(this.btPesquisar);
             this.gbFiltrosOrcamento.Controls.Add(this.label1);
             this.gbFiltrosOrcamento.Controls.Add(this.tbFiltroValorTotalOrcamentoInicial);
@@ -93,7 +106,7 @@
             this.gbFiltrosOrcamento.Controls.Add(this.lbFiltroCidade);
             this.gbFiltrosOrcamento.Location = new System.Drawing.Point(12, 12);
             this.gbFiltrosOrcamento.Name = "gbFiltrosOrcamento";
-            this.gbFiltrosOrcamento.Size = new System.Drawing.Size(689, 174);
+            this.gbFiltrosOrcamento.Size = new System.Drawing.Size(1048, 174);
             this.gbFiltrosOrcamento.TabIndex = 0;
             this.gbFiltrosOrcamento.TabStop = false;
             this.gbFiltrosOrcamento.Text = "Filtros do orçamento";
@@ -347,13 +360,17 @@
             this.gbGridOrcamentos.Controls.Add(this.dgvOrcamentos);
             this.gbGridOrcamentos.Location = new System.Drawing.Point(12, 192);
             this.gbGridOrcamentos.Name = "gbGridOrcamentos";
-            this.gbGridOrcamentos.Size = new System.Drawing.Size(690, 257);
+            this.gbGridOrcamentos.Size = new System.Drawing.Size(1049, 257);
             this.gbGridOrcamentos.TabIndex = 1;
             this.gbGridOrcamentos.TabStop = false;
             this.gbGridOrcamentos.Text = "Orçamentos";
             // 
             // dgvOrcamentos
             // 
+            this.dgvOrcamentos.AllowUserToAddRows = false;
+            this.dgvOrcamentos.AllowUserToDeleteRows = false;
+            this.dgvOrcamentos.AllowUserToOrderColumns = true;
+            this.dgvOrcamentos.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrcamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -361,22 +378,133 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvOrcamentos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvOrcamentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrcamentos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcOrcamento,
+            this.dgvtbcCodigoPessoa,
+            this.dgvtbcNome,
+            this.dgvtbcDataCadastro,
+            this.dgvtbcDataValidade,
+            this.dgvtbcValorTotalItens,
+            this.dgvtbcDescontoTotalItens,
+            this.dgvtbcDescontoOrcamento,
+            this.dgvtbcValorTotalOrçamento});
+            this.dgvOrcamentos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvOrcamentos.Location = new System.Drawing.Point(10, 19);
+            this.dgvOrcamentos.MultiSelect = false;
             this.dgvOrcamentos.Name = "dgvOrcamentos";
-            this.dgvOrcamentos.Size = new System.Drawing.Size(674, 232);
+            this.dgvOrcamentos.ReadOnly = true;
+            this.dgvOrcamentos.RowHeadersVisible = false;
+            this.dgvOrcamentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrcamentos.Size = new System.Drawing.Size(1033, 232);
             this.dgvOrcamentos.TabIndex = 0;
+            this.dgvOrcamentos.TabStop = false;
+            this.dgvOrcamentos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrcamentos_CellDoubleClick);
+            // 
+            // cblFiltros
+            // 
+            this.cblFiltros.BackColor = System.Drawing.SystemColors.Window;
+            this.cblFiltros.FormattingEnabled = true;
+            this.cblFiltros.Items.AddRange(new object[] {
+            "Validade",
+            "Efetivação"});
+            this.cblFiltros.Location = new System.Drawing.Point(6, 19);
+            this.cblFiltros.Name = "cblFiltros";
+            this.cblFiltros.Size = new System.Drawing.Size(120, 34);
+            this.cblFiltros.TabIndex = 41;
+            // 
+            // gbFiltros
+            // 
+            this.gbFiltros.Controls.Add(this.cblFiltros);
+            this.gbFiltros.Location = new System.Drawing.Point(314, 98);
+            this.gbFiltros.Name = "gbFiltros";
+            this.gbFiltros.Size = new System.Drawing.Size(133, 58);
+            this.gbFiltros.TabIndex = 42;
+            this.gbFiltros.TabStop = false;
+            this.gbFiltros.Text = "Contém";
+            // 
+            // dgvtbcOrcamento
+            // 
+            this.dgvtbcOrcamento.HeaderText = "Orcamento";
+            this.dgvtbcOrcamento.MinimumWidth = 70;
+            this.dgvtbcOrcamento.Name = "dgvtbcOrcamento";
+            this.dgvtbcOrcamento.ReadOnly = true;
+            this.dgvtbcOrcamento.Width = 70;
+            // 
+            // dgvtbcCodigoPessoa
+            // 
+            this.dgvtbcCodigoPessoa.HeaderText = "Cliente";
+            this.dgvtbcCodigoPessoa.MinimumWidth = 50;
+            this.dgvtbcCodigoPessoa.Name = "dgvtbcCodigoPessoa";
+            this.dgvtbcCodigoPessoa.ReadOnly = true;
+            this.dgvtbcCodigoPessoa.Width = 50;
+            // 
+            // dgvtbcNome
+            // 
+            this.dgvtbcNome.HeaderText = "Nome";
+            this.dgvtbcNome.MinimumWidth = 30;
+            this.dgvtbcNome.Name = "dgvtbcNome";
+            this.dgvtbcNome.ReadOnly = true;
+            this.dgvtbcNome.Width = 150;
+            // 
+            // dgvtbcDataCadastro
+            // 
+            this.dgvtbcDataCadastro.HeaderText = "Data do cadastro";
+            this.dgvtbcDataCadastro.MinimumWidth = 120;
+            this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
+            this.dgvtbcDataCadastro.ReadOnly = true;
+            this.dgvtbcDataCadastro.Width = 120;
+            // 
+            // dgvtbcDataValidade
+            // 
+            this.dgvtbcDataValidade.HeaderText = "Data de validade";
+            this.dgvtbcDataValidade.MinimumWidth = 120;
+            this.dgvtbcDataValidade.Name = "dgvtbcDataValidade";
+            this.dgvtbcDataValidade.ReadOnly = true;
+            this.dgvtbcDataValidade.Width = 120;
+            // 
+            // dgvtbcValorTotalItens
+            // 
+            this.dgvtbcValorTotalItens.HeaderText = "Valor dos itens";
+            this.dgvtbcValorTotalItens.MinimumWidth = 50;
+            this.dgvtbcValorTotalItens.Name = "dgvtbcValorTotalItens";
+            this.dgvtbcValorTotalItens.ReadOnly = true;
+            this.dgvtbcValorTotalItens.Width = 110;
+            // 
+            // dgvtbcDescontoTotalItens
+            // 
+            this.dgvtbcDescontoTotalItens.HeaderText = "Descontos dos itens";
+            this.dgvtbcDescontoTotalItens.MinimumWidth = 50;
+            this.dgvtbcDescontoTotalItens.Name = "dgvtbcDescontoTotalItens";
+            this.dgvtbcDescontoTotalItens.ReadOnly = true;
+            this.dgvtbcDescontoTotalItens.Width = 130;
+            // 
+            // dgvtbcDescontoOrcamento
+            // 
+            this.dgvtbcDescontoOrcamento.HeaderText = "Desconto do orçamento";
+            this.dgvtbcDescontoOrcamento.MinimumWidth = 50;
+            this.dgvtbcDescontoOrcamento.Name = "dgvtbcDescontoOrcamento";
+            this.dgvtbcDescontoOrcamento.ReadOnly = true;
+            this.dgvtbcDescontoOrcamento.Width = 150;
+            // 
+            // dgvtbcValorTotalOrçamento
+            // 
+            this.dgvtbcValorTotalOrçamento.HeaderText = "Total do orçamento";
+            this.dgvtbcValorTotalOrçamento.MinimumWidth = 50;
+            this.dgvtbcValorTotalOrçamento.Name = "dgvtbcValorTotalOrçamento";
+            this.dgvtbcValorTotalOrçamento.ReadOnly = true;
+            this.dgvtbcValorTotalOrçamento.Width = 130;
             // 
             // fmBuscaOrcamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 461);
+            this.ClientSize = new System.Drawing.Size(1073, 461);
             this.Controls.Add(this.gbGridOrcamentos);
             this.Controls.Add(this.gbFiltrosOrcamento);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(730, 500);
+            this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "fmBuscaOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -386,6 +514,7 @@
             this.gbFiltrosOrcamento.PerformLayout();
             this.gbGridOrcamentos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).EndInit();
+            this.gbFiltros.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -420,5 +549,16 @@
         private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.GroupBox gbGridOrcamentos;
         private System.Windows.Forms.DataGridView dgvOrcamentos;
+        private System.Windows.Forms.GroupBox gbFiltros;
+        private System.Windows.Forms.CheckedListBox cblFiltros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcOrcamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPessoa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataCadastro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataValidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItens;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoTotalItens;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoOrcamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalOrçamento;
     }
 }

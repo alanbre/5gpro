@@ -501,11 +501,11 @@ namespace _5gpro.Forms
             //TODO: CRIAR TELA DE BUSCA DE ORÇAMENTO
             var buscaOrcamento = new fmBuscaOrcamento();
             buscaOrcamento.ShowDialog();
-            //if (buscaPessoa.pessoaSelecionada != null)
-            //{
-            //    pessoa = buscaPessoa.pessoaSelecionada;
-            //    PreencheCampos(pessoa);
-            //}
+            if (buscaOrcamento.orcamentoSelecionado != null)
+            {
+                orcamento = buscaOrcamento.orcamentoSelecionado;
+                PreencheCampos(orcamento);
+            }
         }
 
         private void SalvaCadastro()
@@ -851,10 +851,9 @@ namespace _5gpro.Forms
             }
         }
 
-
         private void PreencheGridItens(List<_Item> itens)
         {
-            foreach (_Item i in itens)
+            foreach (var i in itens)
             {
                 table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
             }

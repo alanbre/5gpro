@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosOrcamento = new System.Windows.Forms.GroupBox();
             this.cbVencimento = new System.Windows.Forms.CheckBox();
             this.dtpVencimento = new System.Windows.Forms.DateTimePicker();
@@ -135,7 +136,7 @@
             this.dtpCadastro.Name = "dtpCadastro";
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 5;
-            this.dtpCadastro.Value = new System.DateTime(2019, 4, 1, 0, 0, 0, 0);
+            this.dtpCadastro.Value = new System.DateTime(2019, 4, 2, 14, 40, 48, 0);
             this.dtpCadastro.ValueChanged += new System.EventHandler(this.dtpCadastro_ValueChanged);
             this.dtpCadastro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyUp);
             // 
@@ -325,6 +326,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
