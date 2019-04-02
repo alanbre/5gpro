@@ -30,8 +30,12 @@ namespace _5gpro.Forms
 
         }
 
+
+
         private void BuscaItens()
         {
+
+
             DataTable table = new DataTable();
            
             table.Columns.Add("Código", typeof(string));
