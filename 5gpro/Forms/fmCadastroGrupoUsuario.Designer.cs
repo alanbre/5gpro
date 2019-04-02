@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnBotoes = new System.Windows.Forms.Panel();
             this.btRecarregar = new System.Windows.Forms.Button();
             this.btSalvar = new System.Windows.Forms.Button();
@@ -37,18 +39,24 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.gbGrupoDeUsuario = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
+            this.tbCodGrupoUsuario = new System.Windows.Forms.TextBox();
             this.lbNomeGrupoUsuario = new System.Windows.Forms.Label();
             this.lbCodGrupoUsuario = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvPermissoes = new System.Windows.Forms.DataGridView();
+            this.dgvtbcCodigoPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNomePermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNivelPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvModulos = new System.Windows.Forms.DataGridView();
+            this.dgvtbcCodigoModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNomeModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbModulos = new System.Windows.Forms.GroupBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnBotoes.SuspendLayout();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModulos)).BeginInit();
             this.gbModulos.SuspendLayout();
             this.SuspendLayout();
@@ -154,8 +162,8 @@
             // 
             // gbGrupoDeUsuario
             // 
-            this.gbGrupoDeUsuario.Controls.Add(this.textBox2);
-            this.gbGrupoDeUsuario.Controls.Add(this.textBox1);
+            this.gbGrupoDeUsuario.Controls.Add(this.tbNomeGrupoUsuario);
+            this.gbGrupoDeUsuario.Controls.Add(this.tbCodGrupoUsuario);
             this.gbGrupoDeUsuario.Controls.Add(this.lbNomeGrupoUsuario);
             this.gbGrupoDeUsuario.Controls.Add(this.lbCodGrupoUsuario);
             this.gbGrupoDeUsuario.Location = new System.Drawing.Point(74, 12);
@@ -165,19 +173,19 @@
             this.gbGrupoDeUsuario.TabStop = false;
             this.gbGrupoDeUsuario.Text = "Grupo de Usuários";
             // 
-            // textBox2
+            // tbNomeGrupoUsuario
             // 
-            this.textBox2.Location = new System.Drawing.Point(55, 58);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(213, 20);
-            this.textBox2.TabIndex = 3;
+            this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(55, 58);
+            this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
+            this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(213, 20);
+            this.tbNomeGrupoUsuario.TabIndex = 3;
             // 
-            // textBox1
+            // tbCodGrupoUsuario
             // 
-            this.textBox1.Location = new System.Drawing.Point(55, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(103, 20);
-            this.textBox1.TabIndex = 2;
+            this.tbCodGrupoUsuario.Location = new System.Drawing.Point(55, 30);
+            this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
+            this.tbCodGrupoUsuario.Size = new System.Drawing.Size(103, 20);
+            this.tbCodGrupoUsuario.TabIndex = 2;
             // 
             // lbNomeGrupoUsuario
             // 
@@ -199,7 +207,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.dgvPermissoes);
             this.groupBox2.Location = new System.Drawing.Point(74, 309);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(747, 235);
@@ -207,25 +215,93 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Permissões";
             // 
-            // dataGridView1
+            // dgvPermissoes
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(7, 18);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(734, 211);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvPermissoes.AllowUserToAddRows = false;
+            this.dgvPermissoes.AllowUserToDeleteRows = false;
+            this.dgvPermissoes.AllowUserToOrderColumns = true;
+            this.dgvPermissoes.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvPermissoes.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvPermissoes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPermissoes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcCodigoPermissoes,
+            this.dgvtbcNomePermissoes,
+            this.dgvtbcNivelPermissoes});
+            this.dgvPermissoes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvPermissoes.Location = new System.Drawing.Point(7, 18);
+            this.dgvPermissoes.MultiSelect = false;
+            this.dgvPermissoes.Name = "dgvPermissoes";
+            this.dgvPermissoes.ReadOnly = true;
+            this.dgvPermissoes.RowHeadersVisible = false;
+            this.dgvPermissoes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPermissoes.Size = new System.Drawing.Size(734, 211);
+            this.dgvPermissoes.TabIndex = 0;
+            this.dgvPermissoes.TabStop = false;
+            this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermissoes_CellDoubleClick);
+            this.dgvPermissoes.ColumnDividerDoubleClick += new System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventHandler(this.dgvPermissoes_ColumnDividerDoubleClick);
+            // 
+            // dgvtbcCodigoPermissoes
+            // 
+            this.dgvtbcCodigoPermissoes.HeaderText = "Código";
+            this.dgvtbcCodigoPermissoes.Name = "dgvtbcCodigoPermissoes";
+            this.dgvtbcCodigoPermissoes.ReadOnly = true;
+            // 
+            // dgvtbcNomePermissoes
+            // 
+            this.dgvtbcNomePermissoes.HeaderText = "Nome";
+            this.dgvtbcNomePermissoes.MinimumWidth = 280;
+            this.dgvtbcNomePermissoes.Name = "dgvtbcNomePermissoes";
+            this.dgvtbcNomePermissoes.ReadOnly = true;
+            this.dgvtbcNomePermissoes.Width = 280;
+            // 
+            // dgvtbcNivelPermissoes
+            // 
+            this.dgvtbcNivelPermissoes.HeaderText = "Nível";
+            this.dgvtbcNivelPermissoes.Name = "dgvtbcNivelPermissoes";
+            this.dgvtbcNivelPermissoes.ReadOnly = true;
             // 
             // dgvModulos
             // 
             this.dgvModulos.AllowUserToAddRows = false;
+            this.dgvModulos.AllowUserToDeleteRows = false;
+            this.dgvModulos.AllowUserToOrderColumns = true;
+            this.dgvModulos.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModulos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvModulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvModulos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcCodigoModulos,
+            this.dgvtbcNomeModulos});
+            this.dgvModulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvModulos.Location = new System.Drawing.Point(6, 19);
+            this.dgvModulos.MultiSelect = false;
             this.dgvModulos.Name = "dgvModulos";
+            this.dgvModulos.ReadOnly = true;
+            this.dgvModulos.RowHeadersVisible = false;
+            this.dgvModulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvModulos.Size = new System.Drawing.Size(736, 173);
             this.dgvModulos.TabIndex = 0;
+            this.dgvModulos.TabStop = false;
+            this.dgvModulos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModulos_CellContentClick);
+            // 
+            // dgvtbcCodigoModulos
+            // 
+            this.dgvtbcCodigoModulos.HeaderText = "Código";
+            this.dgvtbcCodigoModulos.MinimumWidth = 70;
+            this.dgvtbcCodigoModulos.Name = "dgvtbcCodigoModulos";
+            this.dgvtbcCodigoModulos.ReadOnly = true;
+            this.dgvtbcCodigoModulos.Width = 70;
+            // 
+            // dgvtbcNomeModulos
+            // 
+            this.dgvtbcNomeModulos.HeaderText = "Nome";
+            this.dgvtbcNomeModulos.MinimumWidth = 30;
+            this.dgvtbcNomeModulos.Name = "dgvtbcNomeModulos";
+            this.dgvtbcNomeModulos.ReadOnly = true;
+            this.dgvtbcNomeModulos.Width = 150;
             // 
             // gbModulos
             // 
@@ -237,11 +313,21 @@
             this.gbModulos.TabStop = false;
             this.gbModulos.Text = "Módulos";
             // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(81, 550);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(741, 20);
+            this.tbAjuda.TabIndex = 7;
+            // 
             // fmCadastroGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 561);
+            this.ClientSize = new System.Drawing.Size(834, 579);
+            this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbModulos);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbGrupoDeUsuario);
@@ -254,10 +340,11 @@
             this.gbGrupoDeUsuario.ResumeLayout(false);
             this.gbGrupoDeUsuario.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModulos)).EndInit();
             this.gbModulos.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -272,13 +359,19 @@
         private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.Button btNovo;
         private System.Windows.Forms.GroupBox gbGrupoDeUsuario;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbNomeGrupoUsuario;
+        private System.Windows.Forms.TextBox tbCodGrupoUsuario;
         private System.Windows.Forms.Label lbNomeGrupoUsuario;
         private System.Windows.Forms.Label lbCodGrupoUsuario;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvPermissoes;
         private System.Windows.Forms.DataGridView dgvModulos;
         private System.Windows.Forms.GroupBox gbModulos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoModulos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeModulos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
+        private System.Windows.Forms.TextBox tbAjuda;
     }
 }

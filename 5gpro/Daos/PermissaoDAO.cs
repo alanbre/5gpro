@@ -20,7 +20,6 @@ namespace _5gpro.Daos
 
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
             
-
             try
             {
                 AbrirConexao();
@@ -85,6 +84,7 @@ namespace _5gpro.Daos
                     p.PermissaoId = reader.GetString(reader.GetOrdinal("idpermissao"));
                     p.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
+                    //p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
 
                     permissoesGrupo.Add(p);
                 }
@@ -99,7 +99,7 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            permissoes.Todas = permissoesGrupo;
+            permissoes.Todas = permissoesGrupo.Where(p => p.Codigo.Substring(2) != "0000").ToList();
             permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
             permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
             permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();

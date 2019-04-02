@@ -29,7 +29,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     grupousuario = new GrupoUsuario();
-                    grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     grupousuario.Permissoes = permissaoBLL.BuscaPermissoesGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas;
                   
@@ -70,7 +70,7 @@ namespace _5gpro.Daos
                 {
 
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     gruposusuarios.Add(grupousuario);
                 }
@@ -101,7 +101,7 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     listagrupousuario.Add(grupousuario);
 
@@ -116,6 +116,42 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
             return listagrupousuario;
+        }
+
+        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario)
+        {
+
+            int retorno = 0;
+            try
+            {
+                AbrirConexao();
+
+                Comando = new MySqlCommand(@"INSERT INTO grupo_usuario 
+                          (idgrupousuario, nome) 
+                          VALUES
+                          (@idusuario, @nome)
+                          ON DUPLICATE KEY UPDATE
+                           nome = @nome
+                         ;",
+                         Conexao);
+
+                Comando.Parameters.AddWithValue("@idusuario", grupousuario.GrupoUsuarioID);
+                Comando.Parameters.AddWithValue("@nome", grupousuario.Nome);
+
+                retorno = Comando.ExecuteNonQuery();
+
+                
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return retorno;
         }
 
     }

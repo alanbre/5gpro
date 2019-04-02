@@ -106,7 +106,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@senha", usuario.Senha);
                 Comando.Parameters.AddWithValue("@email", usuario.Email);
                 Comando.Parameters.AddWithValue("@telefone", usuario.Telefone);
-                Comando.Parameters.AddWithValue("@idgrupousuario", usuario.Grupousuario.Codigo);
+                Comando.Parameters.AddWithValue("@idgrupousuario", usuario.Grupousuario.GrupoUsuarioID);
 
 
                 retorno = Comando.ExecuteNonQuery();

@@ -28,6 +28,11 @@ namespace _5gpro.Bll
             return grupousuarioDAO.BuscarGrupoUsuario(nome);
         }
 
+       // public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario)
+        //{
+            //return GrupoUsuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario);
+        //}
+
 
     }
 }
