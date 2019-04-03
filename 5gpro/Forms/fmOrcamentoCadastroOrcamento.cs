@@ -11,19 +11,19 @@ namespace _5gpro.Forms
 {
     public partial class fmOrcamentoCadastroOrcamento : Form
     {
-        PessoaBLL pessoaBLL = new PessoaBLL();
-        _ItemBLL itemBLL = new _ItemBLL();
-        OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+        private PessoaBLL pessoaBLL = new PessoaBLL();
+        private _ItemBLL itemBLL = new _ItemBLL();
+        private OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+        
+        private Orcamento orcamento;
+        private List<_Item> itens = new List<_Item>();
+        private _Item itemSelecionado;
+        private Pessoa pessoa;
+        private Validacao validacao = new Validacao();
+        private FuncoesAuxiliares f = new FuncoesAuxiliares();
 
-        Orcamento orcamento;
-        List<_Item> itens = new List<_Item>();
-        _Item itemSelecionado;
-        Pessoa pessoa;
-        Validacao validacao = new Validacao();
-        FuncoesAuxiliares f = new FuncoesAuxiliares();
-
-        DataTable table = new DataTable();
-        bool editando, ignoracheckevent = false;
+        private DataTable table = new DataTable();
+        private bool editando, ignoracheckevent = false;
 
 
 
@@ -223,14 +223,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void dtpCadastro_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (char.IsNumber((char)e.KeyCode))
-            {
-                Editando(true);
-            }
-        }
-
         private void tbCliente_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
@@ -239,6 +231,12 @@ namespace _5gpro.Forms
                 AbreTelaBuscaPessoa();
             }
         }
+
+        private void tbCodItem_KeyUp(object sender, KeyEventArgs e)
+        {
+            AbreTelaBuscaItem();
+        }
+
 
 
         //EVENTOS DE KEY PRESS
@@ -341,6 +339,10 @@ namespace _5gpro.Forms
             CadastroAnterior();
         }
 
+        private void btProcuraItem_Click(object sender, EventArgs e)
+        {
+            AbreTelaBuscaItem();
+        }
 
         private void dgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -493,18 +495,6 @@ namespace _5gpro.Forms
                 tbCodCliente.Focus();
                 ignoracheckevent = false;
                 Editando(true);
-            }
-        }
-
-        private void AbreTelaBuscaOrcamento()
-        {
-            //TODO: CRIAR TELA DE BUSCA DE ORÇAMENTO
-            var buscaOrcamento = new fmBuscaOrcamento();
-            buscaOrcamento.ShowDialog();
-            if (buscaOrcamento.orcamentoSelecionado != null)
-            {
-                orcamento = buscaOrcamento.orcamentoSelecionado;
-                PreencheCampos(orcamento);
             }
         }
 
@@ -683,6 +673,38 @@ namespace _5gpro.Forms
             }
         }
 
+        private void PreencheCampos(Orcamento orcamento)
+        {
+            ignoracheckevent = true;
+            LimpaCampos(false);
+            tbCodigo.Text = orcamento.Codigo;
+            tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
+            tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
+            dtpCadastro.Value = orcamento.DataCadastro;
+            dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
+            cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
+            tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
+            tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
+            tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
+            tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
+            itens = orcamento.Itens;
+            PreencheGridItens(orcamento.Itens);
+            btInserirItem.Text = "Inserir";
+            ignoracheckevent = false;
+        }
+
+        private void AbreTelaBuscaOrcamento()
+        {
+            //TODO: CRIAR TELA DE BUSCA DE ORÇAMENTO
+            var buscaOrcamento = new fmBuscaOrcamento();
+            buscaOrcamento.ShowDialog();
+            if (buscaOrcamento.orcamentoSelecionado != null)
+            {
+                orcamento = buscaOrcamento.orcamentoSelecionado;
+                PreencheCampos(orcamento);
+            }
+        }
+
         private void AbreTelaBuscaPessoa()
         {
             var buscaPessoa = new fmBuscaPessoa();
@@ -691,6 +713,25 @@ namespace _5gpro.Forms
             {
                 pessoa = buscaPessoa.pessoaSelecionada;
                 PreencheCamposPessoa(pessoa);
+            }
+        }
+
+        private void AbreTelaBuscaItem()
+        {
+            var buscaItem = new fmBuscaItem();
+            buscaItem.ShowDialog();
+            if (buscaItem.itemSelecionado != null)
+            {
+                PreencheCamposItem(buscaItem.itemSelecionado);
+            }
+            else
+            {
+                MessageBox.Show("Item não encontrado no banco de dados",
+                "Item não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodItem.Focus();
+                tbCodItem.SelectAll();
             }
         }
 
@@ -777,37 +818,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void LimpaCampoItem()
-        {
-            tbCodItem.Clear();
-            tbDescItem.Clear();
-            tbQuantidade.Text = "0,00";
-            tbValorUnitItem.Text = "0,00";
-            tbValorTotItem.Text = "0,00";
-            tbDescontoItemPorc.Text = "0,00";
-            tbDescontoItem.Text = "0,00";
-        }
-
-        private void PreencheCampos(Orcamento orcamento)
-        {
-            ignoracheckevent = true;
-            LimpaCampos(false);
-            tbCodigo.Text = orcamento.Codigo;
-            tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
-            tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
-            dtpCadastro.Value = orcamento.DataCadastro;
-            dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
-            cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
-            tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
-            tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
-            tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
-            tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
-            itens = orcamento.Itens;
-            PreencheGridItens(orcamento.Itens);
-            btInserirItem.Text = "Inserir";
-            ignoracheckevent = false;
-        }
-
         private void LimpaCampos(bool limpaCod)
         {
             if (limpaCod) { tbCodigo.Clear(); }
@@ -825,6 +835,17 @@ namespace _5gpro.Forms
             table.Clear();
             dgvItens.Refresh();
             LimpaCampoItem();
+        }
+
+        private void LimpaCampoItem()
+        {
+            tbCodItem.Clear();
+            tbDescItem.Clear();
+            tbQuantidade.Text = "0,00";
+            tbValorUnitItem.Text = "0,00";
+            tbValorTotItem.Text = "0,00";
+            tbDescontoItemPorc.Text = "0,00";
+            tbDescontoItem.Text = "0,00";
         }
 
         private void CalculaTotalOrcamento()
@@ -850,6 +871,8 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = false;
             }
         }
+
+
 
         private void PreencheGridItens(List<_Item> itens)
         {

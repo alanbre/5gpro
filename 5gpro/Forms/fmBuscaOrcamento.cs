@@ -42,17 +42,6 @@ namespace _5gpro.Forms
         public fmBuscaOrcamento()
         {
             InitializeComponent();
-
-            //table.Columns.Add("Orcamento", typeof(string));
-            //table.Columns.Add("Código cliente", typeof(string));
-            //table.Columns.Add("Nome cliente", typeof(string));
-            //table.Columns.Add("Data do cadastro", typeof(DateTime));
-            //table.Columns.Add("Data da validade", typeof(DateTime));
-            //table.Columns.Add("Valor dos itens", typeof(decimal));
-            //table.Columns.Add("Desconto dos itens", typeof(decimal));
-            //table.Columns.Add("Desconto do orçamento", typeof(decimal));
-            //table.Columns.Add("Valor do orçamento", typeof(decimal));
-            //dgvOrcamentos.DataSource = table;
         }
 
         private void fmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e)
