@@ -1,5 +1,6 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
+using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -29,10 +30,10 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     grupousuario = new GrupoUsuario();
-                    grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    grupousuario.Permissoes = permissaoBLL.BuscaPermissoesGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                  
+                    grupousuario.Permissoes = permissaoBLL.BuscaPermissoesGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas;
+
                     reader.Close();
                 }
             }
@@ -70,7 +71,7 @@ namespace _5gpro.Daos
                 {
 
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     gruposusuarios.Add(grupousuario);
                 }
@@ -101,7 +102,7 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.Codigo = reader.GetString(reader.GetOrdinal("idgrupousuario"));
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     listagrupousuario.Add(grupousuario);
 
@@ -116,6 +117,59 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
             return listagrupousuario;
+        }
+
+        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario)
+        {
+
+            int retorno = 0;
+            try
+            {
+                AbrirConexao();
+
+                Comando = new MySqlCommand(@"INSERT INTO grupo_usuario 
+                          (idgrupousuario, nome) 
+                          VALUES
+                          (@idusuario, @nome)
+                          ON DUPLICATE KEY UPDATE
+                           nome = @nome
+                         ;",
+                         Conexao);
+
+                Comando.Parameters.AddWithValue("@idusuario", grupousuario.GrupoUsuarioID);
+                Comando.Parameters.AddWithValue("@nome", grupousuario.Nome);
+
+                retorno = Comando.ExecuteNonQuery();
+
+                if (retorno > 0)
+                {
+                    fmCadastroGrupoUsuario.PermissoesStruct permissoesstruct = new fmCadastroGrupoUsuario.PermissoesStruct();
+                    permissoesstruct = permissaoBLL.BuscaTodasPermissoes();
+
+                    Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
+                                            VALUES
+                                            (@idgrupousuario, @idpermissao, @nivel)";
+                    foreach (Permissao p in permissoesstruct.Todas)
+                    {
+                        Comando.Parameters.Clear();
+                        Comando.Parameters.AddWithValue("@idgrupousuario", grupousuario.GrupoUsuarioID);
+                        Comando.Parameters.AddWithValue("@idpermissao", p.PermissaoId);
+                        Comando.Parameters.AddWithValue("@nivel", 0);
+                        Comando.ExecuteNonQuery();
+                    }
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return retorno;
         }
 
     }

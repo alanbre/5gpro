@@ -7,16 +7,19 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using _5gpro.Forms;
 
 namespace _5gpro.Daos
 {
     class PermissaoDAO : ConexaoDAO
     {
 
-        public List<Permissao> BuscaPermissoesGrupo(string cod)
+        public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesGrupo(string cod)
         {
             List<Permissao> permissoesGrupo = new List<Permissao>();
 
+            fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+            
             try
             {
                 AbrirConexao();
@@ -32,8 +35,9 @@ namespace _5gpro.Daos
                 {
                     Permissao p = new Permissao();
 
-                    p.Codigo = reader.GetString(reader.GetOrdinal("idpermissao"));
+                    p.PermissaoId = reader.GetString(reader.GetOrdinal("idpermissao"));
                     p.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
                     p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
 
                     permissoesGrupo.Add(p);
@@ -49,8 +53,58 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            return permissoesGrupo;
+            permissoes.Todas = permissoesGrupo;
+            permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
+            permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
+            permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
+
+            return permissoes;
         }
 
+        public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
+        {
+            List<Permissao> permissoesGrupo = new List<Permissao>();
+
+            fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT * 
+                                             FROM permissao", Conexao);
+  
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Permissao p = new Permissao();
+
+                    p.PermissaoId = reader.GetString(reader.GetOrdinal("idpermissao"));
+                    p.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
+                    //p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
+
+                    permissoesGrupo.Add(p);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            permissoes.Todas = permissoesGrupo.Where(p => p.Codigo.Substring(2) != "0000").ToList();
+            permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
+            permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
+            permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
+
+            return permissoes;
+        }
     }
 }

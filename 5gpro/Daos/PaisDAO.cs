@@ -11,27 +11,40 @@ namespace _5gpro.Daos
     class PaisDAO: ConexaoDAO
     {
 
-        public int Salvar(Pais pais)
+        public int SalvarOuAtualizarPais(Pais pais)
         {
+            int retorno = 0;
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand("INSERT INTO pais (idpais, nome, sigla) VALUES(@idpais, @nome, @sigla)", Conexao);
-                Comando.Parameters.AddWithValue("@idpais", pais.idpais);
+
+                Comando = new MySqlCommand(@"INSERT INTO pais 
+                          (idpais, nome, sigla) 
+                          VALUES
+                          (@idpais, @nome, @sigla)
+                          ON DUPLICATE KEY UPDATE
+                           nome = @nome, sigla = @sigla
+                         ;",
+                         Conexao);
+
+                Comando.Parameters.AddWithValue("@idpais", pais.PaisID);
                 Comando.Parameters.AddWithValue("@nome", pais.nome);
                 Comando.Parameters.AddWithValue("@sigla", pais.sigla);
 
-                return Comando.ExecuteNonQuery();
-            }
-            catch (Exception erro)
-            {
 
-                throw erro;
+                retorno = Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
             }
             finally
             {
                 FecharConexao();
             }
+            return retorno;
         }
+
     }
 }

@@ -12,17 +12,9 @@ namespace _5gpro.Bll
     {
         PaisDAO paisdao = new PaisDAO();
 
-        public void salvar(Pais pais)
+        public int SalvarOuAtualizarItem(Pais pais)
         {
-            try
-            {
-                paisdao.Salvar(pais);
-            }
-            catch (Exception erro)
-            {
-
-                throw erro;
-            }
+            return paisdao.SalvarOuAtualizarPais(pais);
         }
     }
 }

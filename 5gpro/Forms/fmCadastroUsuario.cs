@@ -71,7 +71,7 @@ namespace _5gpro.Forms
             tbCodigoUsuario.Text = usuario.Codigo;
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            tbCodGrupoUsuario.Text = usuario.Grupousuario.Codigo;
+            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
             tbNomeUsuario.Text = usuario.Nome;
             tbSobrenomeUsuario.Text = usuario.Sobrenome;
             tbEmailUsuario.Text = usuario.Email;
@@ -91,7 +91,7 @@ namespace _5gpro.Forms
         {
             if (grupousuario != null)
             {
-                tbCodGrupoUsuario.Text = grupousuario.Codigo;
+                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
                 tbNomeGrupoUsuario.Text = grupousuario.Nome;
             }
             else
