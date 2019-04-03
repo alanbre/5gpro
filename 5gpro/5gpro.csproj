@@ -72,6 +72,8 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
+    <Compile Include="Entities\NotaSaida.cs" />
+    <Compile Include="Entities\NotaSaidaItem.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
