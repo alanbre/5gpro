@@ -135,5 +135,56 @@ namespace _5gpro.Daos
             }
             return permissaoid;
         }
+
+        //CONSTRUINDOOO \\\\\\\\\\\\\\\\\\\\\\\\
+        public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissaoCodGrupo(GrupoUsuario grupousuario)
+        {
+            List<Permissao> permissoesGrupo = new List<Permissao>();
+
+            fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT * 
+                                             FROM permissao AS p INNER JOIN permissao_has_grupo_usuario as pg 
+                                             ON p.idpermissao = pg.idpermissao
+                                             WHERE pg.idgrupousuario = @idgrupousuario   
+                                             ", Conexao);
+
+                Comando.Parameters.AddWithValue("@idgrupousuario", grupousuario.GrupoUsuarioID);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Permissao p = new Permissao();
+
+                    p.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
+                    p.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
+                    p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
+
+                    permissoesGrupo.Add(p);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            permissoes.Todas = permissoesGrupo.Where(p => p.Codigo.Substring(2) != "0000").ToList();
+            permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
+            permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
+            permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
+
+            return permissoes;
+        }
     }
 }

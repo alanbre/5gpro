@@ -18,7 +18,6 @@ namespace _5gpro.Forms
         GrupoUsuario grupousuario;
         GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
         PermissaoBLL permissaoBLL = new PermissaoBLL();
-        //PermissoesStruct permissoes = new PermissoesStruct();
         List<Permissao> listapermissoes = new List<Permissao>();
         List<Permissao> listamodulos = new List<Permissao>();
         Validacao validacao = new Validacao();
@@ -287,27 +286,6 @@ namespace _5gpro.Forms
 
                 grupousuario.GrupoUsuarioID = int.Parse(tbCodGrupoUsuario.Text);
                 grupousuario.Nome = tbNomeGrupoUsuario.Text;
-
-                //foreach (DataGridViewRow linha in dgvPermissoes.Rows)
-                //{
-                  
-                //    listapermissoes.Find(l => l.Codigo == linha.Cells[0].Value.ToString()).Nivel = linha.Cells[2].Value.ToString();
-                   
-               
-                //}
-
-
-
-                //foreach (DataGridViewRow linha in dgvPermissoes.Rows)
-                //{
-                //    Permissao permissao = new Permissao();
-                //    permissao.PermissaoId = permissaoBLL.buscarIDbyCodigo(linha.Cells[0].Value.ToString());
-                //    permissao.Codigo = linha.Cells[0].Value.ToString();
-                //    permissao.Nome = linha.Cells[1].Value.ToString();
-                //    permissao.Nivel = linha.Cells[2].Value.ToString();
-                //    listapermissoes.Add(permissao);
-                //}
-
 
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(grupousuario, controls);
