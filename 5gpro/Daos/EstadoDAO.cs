@@ -22,7 +22,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     Estado estado = new Estado();
-                    estado.CodEstado = reader.GetString(reader.GetOrdinal("idestado"));
+                    estado.EstadoID = reader.GetInt32(reader.GetOrdinal("idestado"));
                     estado.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     estados.Add(estado);
                 }
@@ -52,7 +52,7 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     Estado estado = new Estado();
-                    estado.CodEstado = reader.GetString(reader.GetOrdinal("idestado"));
+                    estado.EstadoID = reader.GetInt32(reader.GetOrdinal("idestado"));
                     estado.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     estados.Add(estado);
                 }

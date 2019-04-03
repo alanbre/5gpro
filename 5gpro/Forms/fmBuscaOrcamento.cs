@@ -55,7 +55,7 @@ namespace _5gpro.Forms
         {
             if (tbFiltroCodCidade.Text.Length > 0)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(tbFiltroCodCidade.Text);
+                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else
@@ -68,7 +68,7 @@ namespace _5gpro.Forms
         {
             if (tbCodCliente.Text.Length > 0)
             {
-                pessoa = pessoaBLL.BuscarPessoaById(tbCodCliente.Text);
+                pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodCliente.Text));
                 PreencheCamposPessoa(pessoa);
             }
             else
@@ -179,7 +179,7 @@ namespace _5gpro.Forms
         {
             if (cidade != null)
             {
-                tbFiltroCodCidade.Text = cidade.CodCidade;
+                tbFiltroCodCidade.Text = cidade.CidadeID.ToString();
                 tbNomeCidade.Text = cidade.Nome;
             }
         }
@@ -188,7 +188,7 @@ namespace _5gpro.Forms
         {
             if (pessoa != null)
             {
-                tbCodCliente.Text = pessoa.Codigo;
+                tbCodCliente.Text = pessoa.PessoaID.ToString();
                 tbNomeCliente.Text = pessoa.Nome;
             }
             else
@@ -225,11 +225,11 @@ namespace _5gpro.Forms
             {
                 if (o.DataValidade.HasValue)
                 {
-                    dgvOrcamentos.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade.Value.ToShortDateString(), o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+                    dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade.Value.ToShortDateString(), o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
                 }
                 else
                 {
-                    dgvOrcamentos.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+                    dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
                 }
                 
                 //table.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro, o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
@@ -242,7 +242,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvOrcamentos.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvOrcamentos.Rows[selectedRowIndex];
-            orcamentoSelecionado = orcamentos.Find(o => o.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            orcamentoSelecionado = orcamentos.Find(o => o.OrcamentoID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
     }

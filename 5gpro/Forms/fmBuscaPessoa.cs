@@ -53,7 +53,7 @@ namespace _5gpro.Forms
         {
             if (tbFiltroCodCidade.Text.Length > 0)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(tbFiltroCodCidade.Text);
+                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else
@@ -78,7 +78,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvPessoas.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvPessoas.Rows[selectedRowIndex];
-            pessoaSelecionada = Pessoas.Find(p => p.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            pessoaSelecionada = Pessoas.Find(p => p.PessoaID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
 
@@ -98,7 +98,7 @@ namespace _5gpro.Forms
         {
             if (cidade != null)
             {
-                tbFiltroCodCidade.Text = cidade.CodCidade;
+                tbFiltroCodCidade.Text = cidade.CidadeID.ToString();
                 tbNomeCidade.Text = cidade.Nome;
             }
         }
@@ -120,7 +120,7 @@ namespace _5gpro.Forms
 
             foreach (Pessoa p in Pessoas)
             {
-                table.Rows.Add(p.Codigo, p.Nome, p.Fantasia, p.TipoPessoa, p.Endereco, p.Cidade.Nome, p.CpfCnpj, p.Telefone, p.Email);
+                table.Rows.Add(p.PessoaID, p.Nome, p.Fantasia, p.TipoPessoa, p.Endereco, p.Cidade.Nome, p.CpfCnpj, p.Telefone, p.Email);
             }
             dgvPessoas.DataSource = table;
         }

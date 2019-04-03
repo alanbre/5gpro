@@ -18,7 +18,7 @@ namespace _5gpro.Daos
             {
                 AbrirConexao();
                 Comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Conexao);
-                Comando.Parameters.AddWithValue("@idunimedida", unimedida.Codigo);
+                Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnimedidaID);
                 Comando.Parameters.AddWithValue("@sigla", unimedida.Sigla);
                 Comando.Parameters.AddWithValue("@descricao", unimedida.Descricao);
 
@@ -49,7 +49,7 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     Unimedida unimedida = new Unimedida();
-                    unimedida.Codigo = reader.GetString(reader.GetOrdinal("idunimedida"));
+                    unimedida.UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"));
                     unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
                     unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));
                     listaunimedida.Add(unimedida);
@@ -67,7 +67,7 @@ namespace _5gpro.Daos
             return listaunimedida;
         }
 
-        public Unimedida BuscaUnimedidaByCod(string cod)
+        public Unimedida BuscaUnimedidaByCod(int cod)
         {
             Unimedida unimedida = null;
             try
@@ -81,7 +81,7 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     unimedida = new Unimedida();
-                    unimedida.Codigo = reader.GetString(reader.GetOrdinal("idunimedida"));
+                    unimedida.UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"));
                     unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
                     unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));
                 }

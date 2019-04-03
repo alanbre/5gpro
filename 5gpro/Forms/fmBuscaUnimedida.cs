@@ -55,7 +55,7 @@ namespace _5gpro.Forms
 
             foreach (Unimedida u in Listaunimedida)
             {
-                table.Rows.Add(u.Codigo, u.Sigla, u.Descricao);
+                table.Rows.Add(u.UnimedidaID, u.Sigla, u.Descricao);
             }
             dgvUnimedida.DataSource = table;
 
@@ -66,7 +66,7 @@ namespace _5gpro.Forms
             int selectedRowIndex = dgvUnimedida.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvUnimedida.Rows[selectedRowIndex];
             Unimedida = new Unimedida();
-            Unimedida.Codigo = selectedRow.Cells[0].Value.ToString();
+            Unimedida.UnimedidaID = int.Parse(selectedRow.Cells[0].Value.ToString());
             Unimedida.Sigla = Convert.ToString(selectedRow.Cells[1].Value);
             Unimedida.Descricao = Convert.ToString(selectedRow.Cells[2].Value);
             this.Close();

@@ -27,7 +27,7 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
@@ -100,7 +100,7 @@ namespace _5gpro.Daos
                          ;",
                          Conexao);
 
-                Comando.Parameters.AddWithValue("@idusuario", usuario.Codigo);
+                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
                 Comando.Parameters.AddWithValue("@nome", usuario.Nome);
                 Comando.Parameters.AddWithValue("@sobrenome", usuario.Sobrenome);
                 Comando.Parameters.AddWithValue("@senha", usuario.Senha);
@@ -123,7 +123,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public Usuario BuscarUsuarioById(string cod)
+        public Usuario BuscarUsuarioById(int cod)
         {
             Usuario usuario = null;
             try
@@ -138,7 +138,7 @@ namespace _5gpro.Daos
                 {
                     usuario = new Usuario();
 
-                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
@@ -177,7 +177,7 @@ namespace _5gpro.Daos
                 {
                     usuario = new Usuario();
 
-                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
@@ -214,7 +214,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     usuario = new Usuario();
-                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
@@ -269,7 +269,7 @@ namespace _5gpro.Daos
                 {
 
                     Usuario usuario = new Usuario();
-                    usuario.Codigo = reader.GetString(reader.GetOrdinal("idusuario"));
+                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                     usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));

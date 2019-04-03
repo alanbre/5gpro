@@ -8,10 +8,10 @@ namespace _5gpro.Entities
 {
     public class Permissao
     {
-        public string PermissaoId { get; set; }
+        public int PermissaoId { get; set; }
         public string Nome { get; set; }
-        public string Nivel { get; set; }
         public string Codigo { get; set; }
+        public string Nivel { get; set; }
 
     }
 }

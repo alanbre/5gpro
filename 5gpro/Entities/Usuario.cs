@@ -9,7 +9,7 @@ namespace _5gpro.Entities
 {
     public class Usuario
     {
-        public string Codigo { get; set; }
+        public int UsuarioID { get; set; }
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNomeUsuario", AllowEmptyStrings = false)]
         public string Nome { get; set; }
@@ -25,23 +25,6 @@ namespace _5gpro.Entities
         [Required(ErrorMessage = "Informe o grupo de acesso do usuário.|tbCodGrupoUsuario", AllowEmptyStrings = false)]
         public GrupoUsuario Grupousuario { get; set; }
 
-
-
-        public Usuario()
-        {
-
-        }
-
-        public Usuario(string codigo, string nome, string sobrenome, string senha, string email, string telefone, GrupoUsuario grupousuario)
-        {
-            this.Codigo = codigo;
-            this.Nome = nome;
-            this.Sobrenome = sobrenome;
-            this.Senha = senha;
-            this.Email = email;
-            this.Telefone = telefone;
-            this.Grupousuario = grupousuario;
-        }
 
     }
 }

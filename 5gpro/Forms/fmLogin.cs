@@ -20,7 +20,7 @@ namespace _5gpro.Forms
         private void btEntrar_Click(object sender, EventArgs e)
         {
             usuario = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
-            if (usuario.Codigo != null)
+            if (usuario.UsuarioID != null)
             {
                 this.Close();
             }
@@ -72,7 +72,7 @@ namespace _5gpro.Forms
         {
             if (usuario != null)
             {
-                tbCodigo.Text = usuario.Codigo;
+                tbCodigo.Text = usuario.UsuarioID.ToString();
                 tbNomeUsuario.Text = usuario.Nome;
             }
             else
@@ -98,7 +98,7 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                usuario = usuarioBLL.BuscarUsuarioById(tbCodigo.Text);
+                usuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
                 PreencheCamposCodUsuario(usuario);
             }
             else

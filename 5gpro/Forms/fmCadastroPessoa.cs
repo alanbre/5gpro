@@ -194,7 +194,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigo.Text));
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -224,7 +224,7 @@ namespace _5gpro.Forms
                     if (tbCodigo.Text.Length > 0)
                     {
                         
-                        Pessoa newpessoa = pessoaBLL.BuscarPessoaById(tbCodigo.Text);
+                        Pessoa newpessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigo.Text));
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;
@@ -255,7 +255,7 @@ namespace _5gpro.Forms
         {
             if (tbCodCidade.Text.Length > 0)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
+                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else
@@ -360,7 +360,7 @@ namespace _5gpro.Forms
             {
 
                 pessoa = new Pessoa();
-                pessoa.Codigo = tbCodigo.Text;
+                pessoa.PessoaID = int.Parse(tbCodigo.Text);
                 pessoa.Nome = tbNome.Text;
                 pessoa.Fantasia = tbFantasia.Text;
                 List<string> atuacoes = new List<string>();
@@ -374,7 +374,7 @@ namespace _5gpro.Forms
                 pessoa.Numero = tbNumero.Text;
                 pessoa.Bairro = tbBairro.Text;
                 pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = cidadeBLL.BuscaCidadeByCod(tbCodCidade.Text);
+                pessoa.Cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodCidade.Text));
                 pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
                 pessoa.Telefone = mtbTelefone.TextNoMask();
                 pessoa.Email = tbEmail.Text;
@@ -421,7 +421,7 @@ namespace _5gpro.Forms
                 {
                     if (pessoa != null)
                     {
-                        pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
+                        pessoa = pessoaBLL.BuscarPessoaById(pessoa.PessoaID);
                         PreencheCampos(pessoa);
                         Editando(false);
                     }
@@ -436,7 +436,7 @@ namespace _5gpro.Forms
             {
                 if (pessoa != null)
                 {
-                    pessoa = pessoaBLL.BuscarPessoaById(pessoa.Codigo);
+                    pessoa = pessoaBLL.BuscarPessoaById(pessoa.PessoaID);
                     PreencheCampos(pessoa);
                 }
                 else
@@ -615,7 +615,7 @@ namespace _5gpro.Forms
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
-            tbCodigo.Text = pessoa.Codigo;
+            tbCodigo.Text = pessoa.PessoaID.ToString() ;
             tbNome.Text = pessoa.Nome;
             tbFantasia.Text = pessoa.Fantasia;
             if (pessoa.TipoPessoa == "F")
@@ -632,14 +632,14 @@ namespace _5gpro.Forms
             tbNumero.Text = pessoa.Numero;
             tbBairro.Text = pessoa.Bairro;
             tbComplemento.Text = pessoa.Complemento;
-            tbCodCidade.Text = pessoa.Cidade.CodCidade;
+            tbCodCidade.Text = pessoa.Cidade.CidadeID.ToString();
             mtbCpfCnpj.Text = pessoa.CpfCnpj;
             mtbTelefone.Text = pessoa.Telefone;
             tbEmail.Text = pessoa.Email;
 
             if (pessoa.Cidade != null)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade.CodCidade);
+                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade.CidadeID);
                 PreencheCamposCidade(cidade);
             }
 
@@ -662,7 +662,7 @@ namespace _5gpro.Forms
         {
             if (cidade != null)
             {
-                tbCodCidade.Text = cidade.CodCidade;
+                tbCodCidade.Text = cidade.CidadeID.ToString();
                 tbNomeCidade.Text = cidade.Nome;
             }
             else

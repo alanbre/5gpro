@@ -27,7 +27,7 @@ namespace _5gpro.Bll
             return usuarioDAO.BuscaProxCodigoDisponivel();
         }
 
-        public Usuario BuscarUsuarioById(string cod)
+        public Usuario BuscarUsuarioById(int cod)
         {
             return usuarioDAO.BuscarUsuarioById(cod);
         }

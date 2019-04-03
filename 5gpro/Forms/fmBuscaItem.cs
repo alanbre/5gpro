@@ -66,7 +66,7 @@ namespace _5gpro.Forms
 
             foreach (_Item i in _itens)
             {
-                table.Rows.Add(i.Codigo, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
+                table.Rows.Add(i._ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
             }
             dgvItens.DataSource = table;
         }
@@ -130,7 +130,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = _itens.Find(p => p.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            itemSelecionado = _itens.Find(p => p._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
     }

@@ -68,7 +68,7 @@ namespace _5gpro.Forms
             ignoraCheckEvent = true;
             LimpaCampos(false);
 
-            tbCodigoUsuario.Text = usuario.Codigo;
+            tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
             tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
@@ -146,7 +146,7 @@ namespace _5gpro.Forms
             {
 
                 usuario = new Usuario();
-                usuario.Codigo = tbCodigoUsuario.Text;
+                usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
 
                 if (confirmaSenhas() == true)
                 {
@@ -273,7 +273,7 @@ namespace _5gpro.Forms
                 {
                     if (usuario != null)
                     {
-                        usuario = usuarioBLL.BuscarUsuarioById(usuario.Codigo);
+                        usuario = usuarioBLL.BuscarUsuarioById(usuario.UsuarioID);
                         PreencheCampos(usuario);
                         Editando(false);
                     }
@@ -288,7 +288,7 @@ namespace _5gpro.Forms
             {
                 if (usuario != null)
                 {
-                    usuario = usuarioBLL.BuscarUsuarioById(usuario.Codigo);
+                    usuario = usuarioBLL.BuscarUsuarioById(usuario.UsuarioID);
                     PreencheCampos(usuario);
                 }
                 else
@@ -483,7 +483,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigoUsuario.Text.Length > 0)
                 {
-                    Usuario newusuario = usuarioBLL.BuscarUsuarioById(tbCodigoUsuario.Text);
+                    Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -511,7 +511,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigoUsuario.Text.Length > 0)
                     {
-                        Usuario newusuario = usuarioBLL.BuscarUsuarioById(tbCodigoUsuario.Text);
+                        Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
                         if (newusuario != null)
                         {
                             usuario = newusuario;

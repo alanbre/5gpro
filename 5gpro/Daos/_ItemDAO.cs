@@ -30,7 +30,7 @@ namespace _5gpro.Daos
                          ;",
                          Conexao);
 
-                Comando.Parameters.AddWithValue("@iditem", _item.Codigo);
+                Comando.Parameters.AddWithValue("@iditem", _item._ItemID);
                 Comando.Parameters.AddWithValue("@descitem", _item.Descricao);
                 Comando.Parameters.AddWithValue("@denominacaocompra", _item.DescCompra);
                 Comando.Parameters.AddWithValue("@tipo", _item.TipoItem);
@@ -38,7 +38,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@valorentrada", _item.ValorEntrada);
                 Comando.Parameters.AddWithValue("@valorsaida", _item.ValorSaida);
                 Comando.Parameters.AddWithValue("@estoquenecessario", _item.Estoquenecessario);
-                Comando.Parameters.AddWithValue("@idunimedida", _item.Unimedida.Codigo);
+                Comando.Parameters.AddWithValue("@idunimedida", _item.Unimedida.UnimedidaID);
 
 
                 retorno = Comando.ExecuteNonQuery();
@@ -55,7 +55,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public _Item BuscarItemById(string cod)
+        public _Item BuscarItemById(int cod)
         {
             _Item _item = null;
             try
@@ -69,7 +69,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     _item = new _Item();
-                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
                     _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
                     _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
                     _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
@@ -77,7 +77,7 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("idunimedida")));
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
                     reader.Close();
                 }
             }
@@ -106,7 +106,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     _item = new _Item();
-                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
                     _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
                     _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
                     _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
@@ -114,7 +114,7 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("unimedida_idunimedida")));
                     reader.Close();
                 }
             }
@@ -144,7 +144,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     _item = new _Item();
-                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
                     _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
                     _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
                     _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
@@ -152,7 +152,7 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("idunimedida")));
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
                     reader.Close();
                 }
             }
@@ -199,7 +199,7 @@ namespace _5gpro.Daos
                 {
 
                     _Item _item = new _Item();
-                    _item.Codigo = reader.GetString(reader.GetOrdinal("iditem"));
+                    _item._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
                     _item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
                     _item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
                     _item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
@@ -207,7 +207,7 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetString(reader.GetOrdinal("unimedida_idunimedida")));
+                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("unimedida_idunimedida")));
                     _itens.Add(_item);
                 }
             }

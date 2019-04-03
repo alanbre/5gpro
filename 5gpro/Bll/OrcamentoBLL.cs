@@ -19,7 +19,7 @@ namespace _5gpro.Bll
             return orcamentoDAO.BuscaProxCodigoDisponivel();
         }
 
-        public Orcamento BuscaOrcamentoById(string cod)
+        public Orcamento BuscaOrcamentoById(int cod)
         {
             return orcamentoDAO.BuscaOrcamentoById(cod);
         }

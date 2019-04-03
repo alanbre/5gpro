@@ -4,7 +4,7 @@ namespace _5gpro.Entities
 {
     public class _Item
     {
-        public string Codigo { get; set; }
+        public int _ItemID { get; set; }
 
         [Required(ErrorMessage = "A Descrição é obrigatória.|tbDescricao", AllowEmptyStrings = false)]
         public string Descricao { get; set; }
@@ -32,23 +32,5 @@ namespace _5gpro.Entities
         public decimal DescontoPorc { get; set; }
         public decimal Desconto { get; set; } //=> ValorTotal * DescontoPorc / 100;
 
-
-        public _Item()
-        {
-        }
-
-        public _Item(string codigo, string descricao, string desccompra, string tipoitem, string referencia, decimal valorentrada, decimal valorsaida, decimal estoquenecessario, Unimedida unimedida)
-        {
-            this.Codigo = codigo;
-            this.Descricao = descricao;
-            this.DescCompra = desccompra;
-            this.TipoItem = tipoitem;
-            this.Referencia = referencia;
-            this.ValorEntrada = valorentrada;
-            this.ValorSaida = valorsaida;
-            this.Estoquenecessario = estoquenecessario;
-            this.Unimedida = unimedida;
-
-        }
     }
 }

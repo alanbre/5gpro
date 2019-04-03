@@ -13,7 +13,7 @@ namespace _5gpro.Bll
 
         UnimedidaDAO UnimedidaDAO = new UnimedidaDAO();
 
-        public Unimedida BuscaUnimedidaByCod(string cod)
+        public Unimedida BuscaUnimedidaByCod(int cod)
         {
             return UnimedidaDAO.BuscaUnimedidaByCod(cod);
         }

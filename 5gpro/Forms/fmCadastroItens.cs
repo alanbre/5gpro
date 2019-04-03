@@ -71,7 +71,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    _Item newitem = _itemBLL.BuscaItemById(tbCodigo.Text);
+                    _Item newitem = _itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
                     if (newitem != null)
                     {
                         _item = newitem;
@@ -99,7 +99,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        _Item newitem = _itemBLL.BuscaItemById(tbCodigo.Text);
+                        _Item newitem = _itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
                         if (newitem != null)
                         {
                             _item = newitem;
@@ -263,7 +263,7 @@ namespace _5gpro.Forms
         {
             if (unimedida != null)
             {
-                tbCodUnimedida.Text = unimedida.Codigo.ToString();
+                tbCodUnimedida.Text = unimedida.UnimedidaID.ToString();
                 tbDescricaoUndMedida.Text = unimedida.Descricao;
             }
         }
@@ -306,14 +306,14 @@ namespace _5gpro.Forms
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
-            tbCodigo.Text = _item.Codigo;
+            tbCodigo.Text = _item._ItemID.ToString();
             tbDescricao.Text = _item.Descricao;
             tbDescricaoDeCompra.Text = _item.DescCompra;
 
 
             if (_item.Unimedida != null)
             {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(_item.Unimedida.Codigo);
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(_item.Unimedida.UnimedidaID);
                 PreencheCamposUnimedida(unimedida);
             }
 
@@ -349,7 +349,7 @@ namespace _5gpro.Forms
             {
                 _item = new _Item();
 
-                _item.Codigo = tbCodigo.Text;
+                _item._ItemID = int.Parse(tbCodigo.Text);
                 _item.Descricao = tbDescricao.Text;
                 _item.DescCompra = tbDescricaoDeCompra.Text;
                 _item.Referencia = tbReferencia.Text;
@@ -382,7 +382,7 @@ namespace _5gpro.Forms
                     _item.Estoquenecessario = 0;
                 }
 
-                _item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
+                _item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
 
 
                 ControlCollection controls = (ControlCollection)this.Controls;
@@ -429,7 +429,7 @@ namespace _5gpro.Forms
                 {
                     if (_item != null)
                     {
-                        _item = _itemBLL.BuscaItemById(_item.Codigo);
+                        _item = _itemBLL.BuscaItemById(_item._ItemID);
                         PreencheCampos(_item);
                         Editando(false);
                     }
@@ -442,7 +442,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                _item = _itemBLL.BuscaItemById(_item.Codigo);
+                _item = _itemBLL.BuscaItemById(_item._ItemID);
                 PreencheCampos(_item);
                 Editando(false);
             }
@@ -576,7 +576,7 @@ namespace _5gpro.Forms
         {
             if (tbCodUnimedida.Text.Length > 0)
             {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(tbCodUnimedida.Text);
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
                 PreencheCamposUnimedida(unimedida);
             }
             else

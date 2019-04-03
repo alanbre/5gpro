@@ -66,7 +66,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvCidades.Rows[selectedRowIndex];
-            cidadeSelecionada = Cidades.Find(c => c.CodCidade == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            cidadeSelecionada = Cidades.Find(c => c.CidadeID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
 
@@ -83,7 +83,7 @@ namespace _5gpro.Forms
 
             foreach (Cidade c in Cidades)
             {
-                table.Rows.Add(c.CodCidade, c.Nome, c.Estado.CodEstado, c.Estado.Nome, c.Estado.Uf);
+                table.Rows.Add(c.CidadeID, c.Nome, c.Estado.EstadoID, c.Estado.Nome, c.Estado.Uf);
             }
             dgvCidades.DataSource = table;
         }
@@ -98,7 +98,7 @@ namespace _5gpro.Forms
             Estados.Add(buscaEstado.EstadoSelecionado);
             if (Estados != null)
             {
-                tbFiltroCodEstado.Text = Estados[0].CodEstado;
+                tbFiltroCodEstado.Text = Estados[0].EstadoID.ToString();
                 tbNomeEstado.Text = Estados[0].Nome;
             }
             tbFiltroCodEstado.Focus();

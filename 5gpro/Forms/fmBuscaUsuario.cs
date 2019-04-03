@@ -36,7 +36,7 @@ namespace _5gpro.Forms
 
             foreach (Usuario u in usuarios)
             {
-                table.Rows.Add(u.Codigo, u.Nome, u.Sobrenome, u.Email, u.Telefone);
+                table.Rows.Add(u.UsuarioID, u.Nome, u.Sobrenome, u.Email, u.Telefone);
             }
             dgvUsuarios.DataSource = table;
         }
@@ -45,7 +45,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvUsuarios.SelectedCells[0].RowIndex;           
             DataGridViewRow selectedRow = dgvUsuarios.Rows[selectedRowIndex];
-            usuarioSelecionado = usuarios.Find(u => u.Codigo == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            usuarioSelecionado = usuarios.Find(u => u.UsuarioID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
 

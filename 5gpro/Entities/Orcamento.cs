@@ -5,7 +5,7 @@ namespace _5gpro.Entities
 {
     public class Orcamento
     {
-        public string Codigo { get; set; }
+        public int OrcamentoID { get; set; }
         public Pessoa Pessoa { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime? DataValidade { get; set; } = null;

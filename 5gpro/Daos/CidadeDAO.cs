@@ -12,7 +12,7 @@ namespace _5gpro.Daos
         public EstadoBLL estadoBLL = new EstadoBLL();
 
 
-        public Cidade BuscaCidadeByCod(string cod)
+        public Cidade BuscaCidadeByCod(int cod)
         {
             Cidade cidade = null;
             try
@@ -26,7 +26,7 @@ namespace _5gpro.Daos
                 if (reader.Read())
                 {
                     cidade = new Cidade();
-                    cidade.CodCidade = reader.GetString(reader.GetOrdinal("idcidade"));
+                    cidade.CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"));
                     cidade.Nome = reader.GetString(reader.GetOrdinal("nome"));
                 }
             }
@@ -66,10 +66,10 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
                     Cidade cidade = new Cidade();
-                    cidade.CodCidade = reader.GetString(reader.GetOrdinal("idcidade"));
+                    cidade.CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"));
                     cidade.Nome = reader.GetString(reader.GetOrdinal("nomecidade"));
                     Estado estado = new Estado();
-                    estado.CodEstado = reader.GetString(reader.GetOrdinal("idestado"));
+                    estado.EstadoID = reader.GetInt32(reader.GetOrdinal("idestado"));
                     estado.Nome = reader.GetString(reader.GetOrdinal("nomeestado"));
                     estado.Uf = reader.GetString(reader.GetOrdinal("uf"));
                     cidade.Estado = estado;

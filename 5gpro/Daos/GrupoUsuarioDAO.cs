@@ -126,15 +126,18 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
+                Comando = Conexao.CreateCommand();
+                tr = Conexao.BeginTransaction();
+                Comando.Connection = Conexao;
+                Comando.Transaction = tr;
 
-                Comando = new MySqlCommand(@"INSERT INTO grupo_usuario 
+                Comando.CommandText = @"INSERT INTO grupo_usuario 
                           (idgrupousuario, nome) 
                           VALUES
                           (@idusuario, @nome)
                           ON DUPLICATE KEY UPDATE
                            nome = @nome
-                         ;",
-                         Conexao);
+                         ";
 
                 Comando.Parameters.AddWithValue("@idusuario", grupousuario.GrupoUsuarioID);
                 Comando.Parameters.AddWithValue("@nome", grupousuario.Nome);

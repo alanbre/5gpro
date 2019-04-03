@@ -7,7 +7,7 @@ namespace _5gpro.Bll
     class CidadeBLL
     {
         CidadeDAO CidadeDAO = new CidadeDAO();
-        public Cidade BuscaCidadeByCod(string cod)
+        public Cidade BuscaCidadeByCod(int cod)
         {
             return CidadeDAO.BuscaCidadeByCod(cod);
         }

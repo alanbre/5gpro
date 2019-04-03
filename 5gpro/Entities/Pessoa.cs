@@ -6,7 +6,7 @@ namespace _5gpro.Entities
 {
     public class Pessoa
     {
-        public string Codigo { get; set; }
+        public int PessoaID { get; set; }
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNome", AllowEmptyStrings = false)]
         public string Nome { get; set; }
@@ -46,18 +46,6 @@ namespace _5gpro.Entities
             }
         }
 
-        public Pessoa()
-        {
 
-        }
-
-        public Pessoa(string codigo, string nome, List<string> atuacao, string tipopessoa, Cidade cidade)
-        {
-            this.Codigo = codigo;
-            this.Nome = nome;
-            this.Atuacao = atuacao;
-            this.TipoPessoa = tipopessoa;
-            this.Cidade = cidade;
-        }
     }
 }

@@ -13,7 +13,7 @@ namespace _5gpro.Bll
             return PessoaDAO.SalvarOuAtualizarPessoa(pessoa);
         }
 
-        public Pessoa BuscarPessoaById(string cod)
+        public Pessoa BuscarPessoaById(int cod)
         {
             return PessoaDAO.BuscarPessoaById(cod);
         }

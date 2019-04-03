@@ -80,7 +80,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoById(tbCodigo.Text);
+                    Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoById(int.Parse(tbCodigo.Text));
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
@@ -109,7 +109,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoById(tbCodigo.Text);
+                        Orcamento neworcamento = orcamentoBLL.BuscaOrcamentoById(int.Parse(tbCodigo.Text));
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;
@@ -136,7 +136,7 @@ namespace _5gpro.Forms
         {
             if (tbCodCliente.Text.Length > 0)
             {
-                pessoa = pessoaBLL.BuscarPessoaById(tbCodCliente.Text);
+                pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodCliente.Text));
                 PreencheCamposPessoa(pessoa);
             }
             else
@@ -153,12 +153,12 @@ namespace _5gpro.Forms
                 _Item item;
                 if (dr == null)
                 {
-                    item = itemBLL.BuscaItemById(tbCodItem.Text);
+                    item = itemBLL.BuscaItemById(int.Parse(tbCodItem.Text));
                     PreencheCamposItem(item);
                 }
                 else
                 {
-                    item = itens.Where(i => i.Codigo == tbCodItem.Text).First();
+                    item = itens.Where(i => i._ItemID == int.Parse(tbCodItem.Text)).First();
                     PreencheCamposItem(item);
                 }
 
@@ -348,7 +348,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = itens.Find(i => i.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            itemSelecionado = itens.Find(i => i._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             btInserirItem.Text = "Alterar";
             PreencheCamposItem(itemSelecionado);
             btExcluirItem.Enabled = true;
@@ -364,7 +364,7 @@ namespace _5gpro.Forms
 
         private void btInserirItem_Click(object sender, EventArgs e)
         {
-            _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(tbCodItem.Text) : itemSelecionado;
+            _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(int.Parse(tbCodItem.Text)) : itemSelecionado;
             if (item != null)
             {
                 item.Quantidade = Convert.ToDecimal(tbQuantidade.Text);
@@ -372,20 +372,20 @@ namespace _5gpro.Forms
                 item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
                 item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
                 item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataRow dr = table.Select("Código=" + item.Codigo).FirstOrDefault();
+                DataRow dr = table.Select("Código=" + item._ItemID).FirstOrDefault();
                 if (dr == null)
                 {
                     itens.Add(item);
-                    table.Rows.Add(item.Codigo, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                    table.Rows.Add(item._ItemID, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                     btNovoItem.PerformClick();
                 }
                 else
                 {
-                    itens.Where(i => i.Codigo == item.Codigo).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i.Codigo == item.Codigo).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Codigo == item.Codigo).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i.Codigo == item.Codigo).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Codigo == item.Codigo).First().Desconto = item.Desconto;
+                    itens.Where(i => i._ItemID == item._ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i._ItemID == item._ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i._ItemID == item._ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i._ItemID == item._ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i._ItemID == item._ItemID).First().Desconto = item.Desconto;
                     dr["Quantidade"] = item.Quantidade;
                     dr["Valor unitário"] = item.ValorUnitario;
                     dr["Valor total"] = item.ValorTotal;
@@ -509,7 +509,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    orcamento.Codigo = tbCodigo.Text;
+                    orcamento.OrcamentoID = int.Parse(tbCodigo.Text);
                     orcamento.Pessoa = pessoa;
                     orcamento.DataCadastro = dtpCadastro.Value;
                     orcamento.DataValidade = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null;
@@ -556,7 +556,7 @@ namespace _5gpro.Forms
                 {
                     if (orcamento != null)
                     {
-                        orcamento = orcamentoBLL.BuscaOrcamentoById(orcamento.Codigo);
+                        orcamento = orcamentoBLL.BuscaOrcamentoById(orcamento.OrcamentoID);
                         PreencheCampos(orcamento);
                     }
                     else
@@ -571,7 +571,7 @@ namespace _5gpro.Forms
             {
                 if (orcamento != null)
                 {
-                    orcamento = orcamentoBLL.BuscaOrcamentoById(orcamento.Codigo);
+                    orcamento = orcamentoBLL.BuscaOrcamentoById(orcamento.OrcamentoID);
                     PreencheCampos(orcamento);
                 }
                 else
@@ -677,8 +677,8 @@ namespace _5gpro.Forms
         {
             ignoracheckevent = true;
             LimpaCampos(false);
-            tbCodigo.Text = orcamento.Codigo;
-            tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Codigo : "";
+            tbCodigo.Text = orcamento.OrcamentoID.ToString();
+            tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.PessoaID.ToString() : "";
             tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
             dtpCadastro.Value = orcamento.DataCadastro;
             dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
@@ -739,7 +739,7 @@ namespace _5gpro.Forms
         {
             if (pessoa != null)
             {
-                tbCodCliente.Text = pessoa.Codigo;
+                tbCodCliente.Text = pessoa.PessoaID.ToString();
                 tbNomeCliente.Text = pessoa.Nome;
             }
             else
@@ -757,7 +757,7 @@ namespace _5gpro.Forms
         {
             if (item != null)
             {
-                tbCodItem.Text = item.Codigo;
+                tbCodItem.Text = item._ItemID.ToString();
                 tbDescItem.Text = item.Descricao;
                 tbQuantidade.Text = item.Quantidade.ToString("############0.00");
                 tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
@@ -862,7 +862,7 @@ namespace _5gpro.Forms
         {
             if (itemSelecionado != null)
             {
-                itens.RemoveAll(i => i.Codigo == itemSelecionado.Codigo);
+                itens.RemoveAll(i => i._ItemID == itemSelecionado._ItemID);
                 table.Clear();
                 dgvItens.Refresh();
                 LimpaCampoItem();
@@ -878,7 +878,7 @@ namespace _5gpro.Forms
         {
             foreach (var i in itens)
             {
-                table.Rows.Add(i.Codigo, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+                table.Rows.Add(i._ItemID, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
             }
             dgvItens.Refresh();
         }

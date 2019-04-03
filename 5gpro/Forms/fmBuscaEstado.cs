@@ -28,7 +28,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Nome", typeof(string));
             foreach (Estado estado in Estados)
             {
-                table.Rows.Add(estado.CodEstado, estado.Nome);
+                table.Rows.Add(estado.EstadoID, estado.Nome);
             }
             dgvEstados.DataSource = table;
         }
@@ -37,7 +37,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvEstados.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvEstados.Rows[selectedRowIndex];
-            EstadoSelecionado = Estados.Find(est => est.CodEstado == Convert.ToString(selectedRow.Cells[0].Value));
+            EstadoSelecionado = Estados.Find(est => est.EstadoID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
     }

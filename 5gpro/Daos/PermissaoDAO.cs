@@ -35,7 +35,7 @@ namespace _5gpro.Daos
                 {
                     Permissao p = new Permissao();
 
-                    p.PermissaoId = reader.GetString(reader.GetOrdinal("idpermissao"));
+                    p.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
                     p.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
                     p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
@@ -81,7 +81,7 @@ namespace _5gpro.Daos
                 {
                     Permissao p = new Permissao();
 
-                    p.PermissaoId = reader.GetString(reader.GetOrdinal("idpermissao"));
+                    p.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
                     p.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
                     //p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));

@@ -93,7 +93,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = itens.Find(i => i.Codigo == Convert.ToString(selectedRow.Cells[0].Value));
+            itemSelecionado = itens.Find(i => i._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             btInserirItem.Text = "Alterar";
             PreencheCamposItem(itemSelecionado);
             btExcluirItem.Enabled = true;
@@ -109,7 +109,7 @@ namespace _5gpro.Forms
 
         private void btInserirItem_Click(object sender, EventArgs e)
         {
-            _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(tbCodItem.Text) : itemSelecionado;
+            _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(int.Parse(tbCodItem.Text)) : itemSelecionado;
             InserirItem(item);
         }
 
@@ -379,20 +379,20 @@ namespace _5gpro.Forms
                 item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
                 item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
                 item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(item.Codigo)).FirstOrDefault();
+                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(item._ItemID)).FirstOrDefault();
                 if (dr == null)
                 {
                     itens.Add(item);
-                    dgvItens.Rows.Add(item.Codigo, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                    dgvItens.Rows.Add(item._ItemID, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                     btNovoItem.PerformClick();
                 }
                 else
                 {
-                    itens.Where(i => i.Codigo == item.Codigo).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i.Codigo == item.Codigo).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Codigo == item.Codigo).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i.Codigo == item.Codigo).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Codigo == item.Codigo).First().Desconto = item.Desconto;
+                    itens.Where(i => i._ItemID == item._ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i._ItemID == item._ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i._ItemID == item._ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i._ItemID == item._ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i._ItemID == item._ItemID).First().Desconto = item.Desconto;
                     dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
                     dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
                     dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
@@ -419,7 +419,7 @@ namespace _5gpro.Forms
         {
             if (item != null)
             {
-                tbCodItem.Text = item.Codigo;
+                tbCodItem.Text = item._ItemID.ToString();
                 tbDescItem.Text = item.Descricao;
                 tbQuantidade.Text = item.Quantidade.ToString("############0.00");
                 tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
@@ -473,7 +473,7 @@ namespace _5gpro.Forms
         {
             if (pessoa != null)
             {
-                tbCodFornecedor.Text = pessoa.Codigo;
+                tbCodFornecedor.Text = pessoa.PessoaID.ToString();
                 tbNomeFornecedor.Text = pessoa.Nome;
             }
             else

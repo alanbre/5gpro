@@ -14,7 +14,7 @@ namespace _5gpro.Bll
             return _itemdao.SalvarOuAtualizarItem(_item);
         }
 
-        public _Item BuscaItemById(string cod)
+        public _Item BuscaItemById(int cod)
         {
             return _itemdao.BuscarItemById(cod);
         }
