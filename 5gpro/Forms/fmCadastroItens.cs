@@ -140,7 +140,7 @@ namespace _5gpro.Forms
         private void btNovo_Click(object sender, EventArgs e)
         {
 
-            NovoRegistro();
+            NovoCadastro();
 
         }
 
@@ -234,31 +234,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void NovoRegistro()
-        {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    LimpaCampos(false);
-                    tbCodigo.Text = _itemBLL.BuscaProxCodigoDisponivel();
-                    _item = null;
-                    tbDescricao.Focus();
-                    Editando(true);
-                }
-            }
-            else
-            {
-                LimpaCampos(false);
-                tbCodigo.Text = _itemBLL.BuscaProxCodigoDisponivel();
-                _item = null;
-                tbDescricao.Focus();
-                Editando(true);
-            }
-        }
 
         private void EnterTab(object sender, KeyEventArgs e)
         {

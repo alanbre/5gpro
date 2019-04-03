@@ -172,5 +172,100 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+        public GrupoUsuario BuscarProximoGrupoUsuario(string codAtual)
+        {
+            GrupoUsuario grupousuario = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT min(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario > @idgrupousuario)", Conexao);
+                Comando.Parameters.AddWithValue("@idgrupousuario", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    grupousuario = new GrupoUsuario();
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
+                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return grupousuario;
+        }
+
+        public GrupoUsuario BuscarGrupoUsuarioAnterior(string codAtual)
+        {
+            GrupoUsuario grupousuario = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT max(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario < @idgrupousuario)", Conexao);
+                Comando.Parameters.AddWithValue("@idgrupousuario", codAtual);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    grupousuario = new GrupoUsuario();
+                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
+                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return grupousuario;
+        }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT g1.idgrupousuario + 1 AS proximoid
+                                             FROM grupo_usuario AS g1
+                                             LEFT OUTER JOIN grupo_usuario AS g2 ON g1.idgrupousuario + 1 = g2.idgrupousuario
+                                             WHERE g2.idgrupousuario IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return proximoid;
+        }
+
     }
 }

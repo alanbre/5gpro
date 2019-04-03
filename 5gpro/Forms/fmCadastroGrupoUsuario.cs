@@ -37,8 +37,184 @@ namespace _5gpro.Forms
         public fmCadastroGrupoUsuario()
         {
             InitializeComponent();
+            AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
         }
 
+        private void fmCadastroItens_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                RecarregaDados(grupousuario);
+            }
+
+            if (e.KeyCode == Keys.F1)
+            {
+                NovoCadastro();
+            }
+
+            if (e.KeyCode == Keys.F2)
+            {
+                SalvaCadastro();
+            }
+
+            EnterTab(this.ActiveControl, e);
+        }
+
+        //FUNÇÕES DE KEY PRESS
+        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        //FUNÇÕES DE LEAVE
+
+        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
+        {
+            tbCodGrupoUsuario.Text = tbCodGrupoUsuario.Text == "0" ? "" : tbCodGrupoUsuario.Text;
+            if (!editando)
+            {
+                if (tbCodGrupoUsuario.Text.Length > 0)
+                {
+                    GrupoUsuario newgrupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+
+                    if (newgrupousuario != null)
+                    {
+                        grupousuario = newgrupousuario;
+                        PreencheCampos(grupousuario);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        Editando(true);
+                        LimpaCampos(false);
+                    }
+                }
+                else if (tbCodGrupoUsuario.Text.Length == 0)
+                {
+                    LimpaCampos(true);
+                    Editando(false);
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (tbCodGrupoUsuario.Text.Length > 0)
+                    {
+                        GrupoUsuario newgrupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                        if (newgrupousuario != null)
+                        {
+                            grupousuario = newgrupousuario;
+                            PreencheCampos(grupousuario);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodGrupoUsuario.Text.Length == 0)
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
+                }
+            }
+
+        }
+
+        //FALTA SETAR OS NIVEIS DE PERMISSÃO
+        private void PreencheCampos(GrupoUsuario grupousuario)
+        {
+            ignoraCheckEvent = true;
+            LimpaCampos(false);
+            tbCodGrupoUsuario.Text = grupousuario.GrupoUsuarioID.ToString();
+            tbNomeGrupoUsuario.Text = grupousuario.Nome;
+
+
+            ignoraCheckEvent = false;
+        }
+
+        private void LimpaCampos(bool cod)
+        {
+            if (cod) { tbCodGrupoUsuario.Clear(); }
+            tbCodGrupoUsuario.Clear();
+            tbNomeGrupoUsuario.Clear();
+
+        }
+
+        private void RecarregaDados(GrupoUsuario grupousuario)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (grupousuario != null)
+                    {
+                        grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(grupousuario.GrupoUsuarioID.ToString());
+                        PreencheCampos(grupousuario);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
+                }
+            }
+            else
+            {
+                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(grupousuario.GrupoUsuarioID.ToString());
+                PreencheCampos(grupousuario);
+                Editando(false);
+            }
+
+        }
+
+        private void NovoCadastro()
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    LimpaCampos(false);
+                    tbCodGrupoUsuario.Text = grupousuarioBLL.BuscaProxCodigoDisponivel();
+                    grupousuario = null;
+                    tbNomeGrupoUsuario.Focus();
+                    Editando(true);
+                }
+            }
+            else
+            {
+                LimpaCampos(false);
+                tbCodGrupoUsuario.Text = grupousuarioBLL.BuscaProxCodigoDisponivel();
+                grupousuario = null;
+                tbNomeGrupoUsuario.Focus();
+                Editando(true);
+            }
+        }
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
         private void fmCadastroGrupoUsuario_Load(object sender, EventArgs e)
         {
             PopularModulos();
@@ -141,6 +317,104 @@ namespace _5gpro.Forms
             }
         }
 
+        private void ProximoCadastro()
+        {
+            //Busca o grupo_usuario com ID maior que o atual preenchido. Só preenche se houver algum registro maior
+            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
+
+            ControlCollection controls = (ControlCollection)this.Controls;
+
+            if (!editando && tbCodGrupoUsuario.Text.Length > 0)
+            {
+
+                validacao.despintarCampos(controls);
+
+                GrupoUsuario newgrupousuario = grupousuarioBLL.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
+                if (newgrupousuario != null)
+                {
+                    grupousuario = newgrupousuario;
+                    PreencheCampos(grupousuario);
+                }
+            }
+            else if (editando && tbCodGrupoUsuario.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    validacao.despintarCampos(controls);
+                    GrupoUsuario newgrupousuario = grupousuarioBLL.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
+                    if (newgrupousuario != null)
+                    {
+                        grupousuario = newgrupousuario;
+                        PreencheCampos(grupousuario);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newgrupousuario = grupousuarioBLL.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
+                        if (newgrupousuario != null)
+                        {
+                            grupousuario = newgrupousuario;
+                            PreencheCampos(grupousuario);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CadastroAnterior()
+        {
+            //Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
+            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+
+            ControlCollection controls = (ControlCollection)this.Controls;
+
+            if (!editando && tbCodGrupoUsuario.Text.Length > 0)
+            {
+                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
+                //la do inicio do arquivo.
+
+                validacao.despintarCampos(controls);
+                GrupoUsuario newgrupousuario = grupousuarioBLL.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
+                if (newgrupousuario != null)
+                {
+                    grupousuario = newgrupousuario;
+                    PreencheCampos(grupousuario);
+                }
+            }
+            else if (editando && tbCodGrupoUsuario.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    validacao.despintarCampos(controls);
+                    GrupoUsuario newgrupousuario = grupousuarioBLL.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
+                    if (newgrupousuario != null)
+                    {
+                        grupousuario = newgrupousuario;
+                        PreencheCampos(grupousuario);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newgrupousuario = grupousuarioBLL.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
+                        if (newgrupousuario != null)
+                        {
+                            grupousuario = newgrupousuario;
+                            PreencheCampos(grupousuario);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
+        }
+
+
 
         //Botões principais
         private void AlteraBotoes()
@@ -182,13 +456,55 @@ namespace _5gpro.Forms
 
         private void btNovo_Click(object sender, EventArgs e)
         {
-
+            NovoCadastro();
         }
 
         private void btRecarregar_Click(object sender, EventArgs e)
         {
-            //PROVISÓRIO
-            SalvaCadastro();
+
         }
+
+        private void AbreTelaBuscaGrupoUsuario()
+        {
+            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
+            buscaGrupoUsuario.ShowDialog();
+            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
+            {
+                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
+                PreencheCampos(grupousuario);
+            }
+        }
+
+        //EVENTOS DE TEXTCHANGED
+
+        private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btProximo_Click(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void btAnterior_Click(object sender, EventArgs e)
+        {
+            CadastroAnterior();
+        }
+
+        private void btBuscar_Click(object sender, EventArgs e)
+        {
+            if (!editando)
+            {
+                AbreTelaBuscaGrupoUsuario();
+            }
+        }
+
+
     }
 }
