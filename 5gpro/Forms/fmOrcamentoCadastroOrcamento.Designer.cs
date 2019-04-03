@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosOrcamento = new System.Windows.Forms.GroupBox();
             this.cbVencimento = new System.Windows.Forms.CheckBox();
             this.dtpVencimento = new System.Windows.Forms.DateTimePicker();
@@ -130,15 +130,14 @@
             // 
             // dtpCadastro
             // 
+            this.dtpCadastro.Checked = false;
             this.dtpCadastro.CustomFormat = "";
             this.dtpCadastro.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpCadastro.Location = new System.Drawing.Point(9, 117);
             this.dtpCadastro.Name = "dtpCadastro";
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 5;
-            this.dtpCadastro.Value = new System.DateTime(2019, 4, 2, 14, 40, 48, 0);
             this.dtpCadastro.ValueChanged += new System.EventHandler(this.dtpCadastro_ValueChanged);
-            this.dtpCadastro.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dtpCadastro_KeyUp);
             // 
             // lbVencimento
             // 
@@ -326,8 +325,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -411,6 +410,7 @@
             this.btProcuraItem.TabIndex = 12;
             this.btProcuraItem.TabStop = false;
             this.btProcuraItem.UseVisualStyleBackColor = true;
+            this.btProcuraItem.Click += new System.EventHandler(this.btProcuraItem_Click);
             // 
             // lbValorTot
             // 
@@ -430,6 +430,7 @@
             this.tbCodItem.Size = new System.Drawing.Size(63, 20);
             this.tbCodItem.TabIndex = 2;
             this.tbCodItem.TextChanged += new System.EventHandler(this.tbCodItem_TextChanged);
+            this.tbCodItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodItem_KeyUp);
             this.tbCodItem.Leave += new System.EventHandler(this.tbCodItem_Leave);
             // 
             // tbValorTotItem
