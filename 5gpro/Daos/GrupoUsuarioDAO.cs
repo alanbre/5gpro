@@ -5,9 +5,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -119,7 +116,7 @@ namespace _5gpro.Daos
             return listagrupousuario;
         }
 
-        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario)
+        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario, List<Permissao>listapermissoes)
         {
 
             int retorno = 0;
@@ -146,13 +143,18 @@ namespace _5gpro.Daos
 
                 if (retorno > 0)
                 {
-                    fmCadastroGrupoUsuario.PermissoesStruct permissoesstruct = new fmCadastroGrupoUsuario.PermissoesStruct();
-                    permissoesstruct = permissaoBLL.BuscaTodasPermissoes();
+                    fmCadastroGrupoUsuario.PermissoesStruct todaspermissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+                    todaspermissoes = permissaoBLL.BuscaTodasPermissoes();
 
                     Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
                                             VALUES
-                                            (@idgrupousuario, @idpermissao, @nivel)";
-                    foreach (Permissao p in permissoesstruct.Todas)
+                                            (@idgrupousuario, @idpermissao, @nivel)
+                                            ON DUPLICATE KEY UPDATE
+                                             nivel = @nivel
+                                             ";
+
+                    //FAZ TODAS AS RELAÇÕES COM NIVEL 0
+                    foreach (Permissao p in todaspermissoes.Todas)
                     {
                         Comando.Parameters.Clear();
                         Comando.Parameters.AddWithValue("@idgrupousuario", grupousuario.GrupoUsuarioID);
@@ -160,8 +162,19 @@ namespace _5gpro.Daos
                         Comando.Parameters.AddWithValue("@nivel", 0);
                         Comando.ExecuteNonQuery();
                     }
-                }
 
+                    //ALTERA APENAS OS NIVEIS ENVIADOS
+                    foreach (Permissao p in listapermissoes)
+                    {
+                        Comando.Parameters.Clear();
+                        Comando.Parameters.AddWithValue("@idgrupousuario", grupousuario.GrupoUsuarioID);
+                        Comando.Parameters.AddWithValue("@idpermissao", p.PermissaoId);
+                        Comando.Parameters.AddWithValue("@nivel", p.Nivel);
+                        Comando.ExecuteNonQuery();
+                    }
+
+                }
+                tr.Commit();
             }
             catch (MySqlException ex)
             {
