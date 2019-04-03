@@ -13,7 +13,7 @@ namespace _5gpro.Bll
 
         GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
 
-        public GrupoUsuario BuscaGrupoUsuarioByCod(string cod)
+        public GrupoUsuario BuscaGrupoUsuarioByID(string cod)
         {
             return grupousuarioDAO.BuscarGrupoUsuarioById(cod);
         }
@@ -33,6 +33,21 @@ namespace _5gpro.Bll
             return grupousuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario);
         }
 
+        public GrupoUsuario BuscarProximoGrupoUsuario(string codAtual)
+        {
+            return grupousuarioDAO.BuscarProximoGrupoUsuario(codAtual);
+        }
+
+        public GrupoUsuario BuscarGrupoUsuarioAnterior(string codAtual)
+        {
+            return grupousuarioDAO.BuscarGrupoUsuarioAnterior(codAtual);
+        }
+
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            return grupousuarioDAO.BuscaProxCodigoDisponivel();
+        }
 
     }
 }

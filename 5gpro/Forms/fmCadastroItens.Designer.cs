@@ -457,6 +457,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de itens";
             this.Load += new System.EventHandler(this.fmCadastroItens_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmCadastroItens_KeyDown);
             this.pnBotoes.ResumeLayout(false);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();

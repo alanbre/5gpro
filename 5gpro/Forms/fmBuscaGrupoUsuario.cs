@@ -60,7 +60,6 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvGrupoUsuario.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvGrupoUsuario.Rows[selectedRowIndex];
-            //grupousuarioSelecionado = Listagrupousuario.Find(g => g.GrupoUsuarioID == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             grupousuarioSelecionado = Listagrupousuario.Find(g => (g.GrupoUsuarioID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
 
             this.Close();

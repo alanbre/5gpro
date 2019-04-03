@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnBotoes = new System.Windows.Forms.Panel();
             this.btRecarregar = new System.Windows.Forms.Button();
             this.btSalvar = new System.Windows.Forms.Button();
@@ -125,6 +125,7 @@
             this.btAnterior.Size = new System.Drawing.Size(48, 48);
             this.btAnterior.TabIndex = 4;
             this.btAnterior.UseVisualStyleBackColor = true;
+            this.btAnterior.Click += new System.EventHandler(this.btAnterior_Click);
             // 
             // btProximo
             // 
@@ -137,6 +138,7 @@
             this.btProximo.Size = new System.Drawing.Size(48, 48);
             this.btProximo.TabIndex = 3;
             this.btProximo.UseVisualStyleBackColor = true;
+            this.btProximo.Click += new System.EventHandler(this.btProximo_Click);
             // 
             // btBuscar
             // 
@@ -149,6 +151,7 @@
             this.btBuscar.Size = new System.Drawing.Size(48, 48);
             this.btBuscar.TabIndex = 2;
             this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
             // btNovo
             // 
@@ -182,6 +185,7 @@
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
             this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(213, 20);
             this.tbNomeGrupoUsuario.TabIndex = 3;
+            this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
             // 
             // tbCodGrupoUsuario
             // 
@@ -189,6 +193,8 @@
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(103, 20);
             this.tbCodGrupoUsuario.TabIndex = 2;
+            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodGrupoUsuario_TextChanged);
+            this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
             // lbNomeGrupoUsuario
             // 
@@ -224,8 +230,8 @@
             this.dgvPermissoes.AllowUserToDeleteRows = false;
             this.dgvPermissoes.AllowUserToOrderColumns = true;
             this.dgvPermissoes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.dgvPermissoes.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvPermissoes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPermissoes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -271,8 +277,8 @@
             this.dgvModulos.AllowUserToDeleteRows = false;
             this.dgvModulos.AllowUserToOrderColumns = true;
             this.dgvModulos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
-            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.LightGray;
+            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvModulos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvModulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvModulos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

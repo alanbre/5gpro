@@ -79,7 +79,7 @@ namespace _5gpro.Forms
 
             if (usuario.Grupousuario != null)
             {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
                 PreencheCamposGrupoUsuario(grupousuario);
             }
 
@@ -155,7 +155,7 @@ namespace _5gpro.Forms
                 
 
                 //usuario.Senha = tbSenhaUsuario.Text;
-                usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(tbCodGrupoUsuario.Text);
+                usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
                 usuario.Email = tbEmailUsuario.Text;
@@ -537,7 +537,7 @@ namespace _5gpro.Forms
         {
             if (tbCodGrupoUsuario.Text.Length > 0)
             {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByCod(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
                 PreencheCamposGrupoUsuario(grupousuario);
             }
             else
