@@ -24,7 +24,12 @@ namespace _5gpro.Bll
             return permissaoDAO.BuscaTodasPermissoes();
         }
 
-        
+        public int buscarIDbyCodigo(string codpermissao)
+        {
+            return permissaoDAO.buscarIDbyCodigo(codpermissao);
+        }
+
+
     }
 }
 

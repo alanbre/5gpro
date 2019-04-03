@@ -18,8 +18,9 @@ namespace _5gpro.Forms
         GrupoUsuario grupousuario;
         GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
         PermissaoBLL permissaoBLL = new PermissaoBLL();
-        PermissoesStruct permissoes = new PermissoesStruct();
+        //PermissoesStruct permissoes = new PermissoesStruct();
         List<Permissao> listapermissoes = new List<Permissao>();
+        List<Permissao> listamodulos = new List<Permissao>();
         Validacao validacao = new Validacao();
 
         bool editando = false;
@@ -145,9 +146,7 @@ namespace _5gpro.Forms
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodGrupoUsuario.Clear(); }
-            tbCodGrupoUsuario.Clear();
             tbNomeGrupoUsuario.Clear();
-
         }
 
         private void RecarregaDados(GrupoUsuario grupousuario)
@@ -233,15 +232,14 @@ namespace _5gpro.Forms
             }
             dgvPermissoes.Refresh();
 
-
         }
 
         public void PopularModulos()
         {
-            listapermissoes = permissaoBLL.BuscaTodasPermissoes().Modulos;
+            listamodulos = permissaoBLL.BuscaTodasPermissoes().Modulos;
 
 
-            foreach (Permissao p in listapermissoes)
+            foreach (Permissao p in listamodulos)
             {
                 dgvModulos.Rows.Add(p.Codigo, p.Nome);
             }
@@ -271,19 +269,44 @@ namespace _5gpro.Forms
             {
                 dgvPermissoes.CurrentRow.Cells[2].Value = 0;
             }
+
+            //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
+            listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+
         }
 
         ///CONSTRUINDO
         ///
         private void SalvaCadastro()
         {
-            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
-            editando = true;//RETIRAR DEPOIS DE TESTAR//
+       
             if (editando)
             {
                 grupousuario = new GrupoUsuario();
+                listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
+
                 grupousuario.GrupoUsuarioID = int.Parse(tbCodGrupoUsuario.Text);
                 grupousuario.Nome = tbNomeGrupoUsuario.Text;
+
+                //foreach (DataGridViewRow linha in dgvPermissoes.Rows)
+                //{
+                  
+                //    listapermissoes.Find(l => l.Codigo == linha.Cells[0].Value.ToString()).Nivel = linha.Cells[2].Value.ToString();
+                   
+               
+                //}
+
+
+
+                //foreach (DataGridViewRow linha in dgvPermissoes.Rows)
+                //{
+                //    Permissao permissao = new Permissao();
+                //    permissao.PermissaoId = permissaoBLL.buscarIDbyCodigo(linha.Cells[0].Value.ToString());
+                //    permissao.Codigo = linha.Cells[0].Value.ToString();
+                //    permissao.Nome = linha.Cells[1].Value.ToString();
+                //    permissao.Nivel = linha.Cells[2].Value.ToString();
+                //    listapermissoes.Add(permissao);
+                //}
 
 
                 ControlCollection controls = (ControlCollection)this.Controls;
@@ -291,7 +314,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = grupousuarioBLL.SalvarOuAtualizarGrupoUsuario(grupousuario);
+                    int resultado = grupousuarioBLL.SalvarOuAtualizarGrupoUsuario(grupousuario, listapermissoes);
                     validacao.despintarCampos(controls);
                     //resultado 0 = nada foi inserido(houve algum erro)
                     //resultado 1 = foi inserido com sucesso

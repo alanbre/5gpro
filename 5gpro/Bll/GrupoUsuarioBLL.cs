@@ -28,9 +28,9 @@ namespace _5gpro.Bll
             return grupousuarioDAO.BuscarGrupoUsuario(nome);
         }
 
-        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario)
+        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario, List<Permissao> listapermissoes)
         {
-            return grupousuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario);
+            return grupousuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario, listapermissoes);
         }
 
         public GrupoUsuario BuscarProximoGrupoUsuario(string codAtual)

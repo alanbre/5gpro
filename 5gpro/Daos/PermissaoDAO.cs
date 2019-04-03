@@ -106,5 +106,34 @@ namespace _5gpro.Daos
 
             return permissoes;
         }
+
+        public int buscarIDbyCodigo(string codpermissao)
+        {
+            int permissaoid = 0;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT p.idpermissao FROM permissao as p WHERE p.codigo = @codigo", Conexao);
+                Comando.Parameters.AddWithValue("@codigo", codpermissao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {               
+                    permissaoid = reader.GetInt32(reader.GetOrdinal("idpermissao")); 
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return permissaoid;
+        }
     }
 }
