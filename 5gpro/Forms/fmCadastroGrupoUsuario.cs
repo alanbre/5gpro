@@ -102,6 +102,7 @@ namespace _5gpro.Forms
         private void SalvaCadastro()
         {
             //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
+            editando = true;//RETIRAR DEPOIS DE TESTAR//
             if (editando)
             {
                 grupousuario = new GrupoUsuario();
@@ -114,28 +115,28 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    //int resultado = grupousuarioBLL.SalvarOuAtualizarGrupoUsuario(grupousuario);
+                    int resultado = grupousuarioBLL.SalvarOuAtualizarGrupoUsuario(grupousuario);
                     validacao.despintarCampos(controls);
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    //if (resultado == 0)
-                    //{
-                    //    MessageBox.Show("Problema ao salvar o registro",
-                    //    "Problema ao salvar",
-                    //    MessageBoxButtons.OK,
-                    //    MessageBoxIcon.Warning);
-                    //}
-                    //else if (resultado == 1)
-                    //{
-                    //    tbAjuda.Text = "Dados salvos com sucesso";
-                    //    Editando(false);
-                    //}
-                    //else if (resultado == 2)
-                    //{
-                    //    tbAjuda.Text = "Dados atualizados com sucesso";
-                    //    Editando(false);
-                    //}
+                    //resultado 0 = nada foi inserido(houve algum erro)
+                    //resultado 1 = foi inserido com sucesso
+                    //resultado 2 = foi atualizado com sucesso
+                    if (resultado == 0)
+                    {
+                        MessageBox.Show("Problema ao salvar o registro",
+                        "Problema ao salvar",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    }
+                    else if (resultado == 1)
+                    {
+                        tbAjuda.Text = "Dados salvos com sucesso";
+                        Editando(false);
+                    }
+                    else if (resultado == 2)
+                    {
+                        tbAjuda.Text = "Dados atualizados com sucesso";
+                        Editando(false);
+                    }
                 }
             }
         }
@@ -172,6 +173,22 @@ namespace _5gpro.Forms
         {
             editando = edit;
             AlteraBotoes();
+        }
+
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
+
+        private void btNovo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btRecarregar_Click(object sender, EventArgs e)
+        {
+            //PROVISÓRIO
+            SalvaCadastro();
         }
     }
 }

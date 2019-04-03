@@ -15,8 +15,9 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroPais : Form
     {
-
+        Pais pais;
         Validacao validacao = new Validacao();
+        PaisBLL paisBLL = new PaisBLL();
     
         
 
@@ -26,11 +27,15 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void salvar(Pais pais)
+    
+
+        private void SalvaCadastro()
         {
             PaisBLL pbl = new PaisBLL();
 
-            pais.idpais = tbCodpais.Text;
+
+            pais = new Pais();
+            pais.PaisID = int.Parse(tbCodpais.Text);
             pais.nome = tbNomepais.Text;
             pais.sigla = tbSiglapais.Text;
 
@@ -42,19 +47,41 @@ namespace _5gpro.Forms
             //SALVA O REGISTRO
             if (ok)
             {
-                pbl.salvar(pais);
-                
-                
-                new Limpar().limparTudo(this.Controls);
-                MessageBox.Show("País adicionado com sucesso!");
+
+                validacao.despintarCampos(controls);
+                int resultado = paisBLL.SalvarOuAtualizarItem(pais);
+
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+                else if (resultado == 1)
+                {
+                    MessageBox.Show("Dados salvos com sucesso");
+                    //tbAjuda.Text = "Dados salvos com sucesso";
+                    //Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    MessageBox.Show("Dados atualizados com sucesso");
+                    //tbAjuda.Text = "Dados atualizados com sucesso";
+                    //Editando(false);
+                }
+
+
             }
 
         }
 
         private void btSavepais_Click(object sender, EventArgs e)
         {
-            Pais pais = new Pais();
-            salvar(pais);
+            SalvaCadastro();
         }
 
         private void fmCadastroPais_Load(object sender, EventArgs e)

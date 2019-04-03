@@ -10,7 +10,7 @@ namespace _5gpro.Entities
     class Pais
     {
         [Required(ErrorMessage = "O Código é obrigatório.|tbCodpais", AllowEmptyStrings = false)]
-        public string idpais { get; set; }
+        public int PaisID { get; set; }
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNomepais", AllowEmptyStrings = false)]
         [Display(Name = "Nome do País")]
