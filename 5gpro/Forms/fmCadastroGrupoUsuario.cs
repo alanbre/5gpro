@@ -31,6 +31,7 @@ namespace _5gpro.Forms
             public List<Permissao> Modulos;
             public List<Permissao> Telas;
             public List<Permissao> Funcoes;
+            //public List<Permissao> TelasFuncoes;
 
         }
 
@@ -245,7 +246,11 @@ namespace _5gpro.Forms
             dgvPermissoes.Rows.Clear();
             foreach (Permissao p in listapermissoes)
             {
-                dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
+                //VERFICIA SE NÃO É MODULO, E ENTÃO ADICIONA
+                if (p.Codigo.Substring(2) != "0000")
+                {
+                    dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
+                }
             }
             dgvPermissoes.Refresh();
 
@@ -269,13 +274,12 @@ namespace _5gpro.Forms
 
                 foreach (Permissao p in listapermissoes)
                 {
-                    if (p.Codigo.Substring(0, 2) == codmodulo)
+                    if (p.Codigo.Substring(0, 2) == codmodulo.Substring(0, 2) && p.Codigo.Substring(2, 4) != "0000")
                     {
                         dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
                     }
-
                 }
-                   
+
             dgvPermissoes.Refresh();
         }
 
@@ -546,24 +550,14 @@ namespace _5gpro.Forms
             //OS 2 PRIMEIROS NÚMEROS DO CÓDIGO DO MÓDULO COM OS 2 PRIMEIROS
             //NÚMEROS DO CÓDIGO DA PERMISSÃO
 
-            dgvPermissoes.Rows.Clear();
             if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
             {
-                foreach (Permissao p in listapermissoes)
-                {
-                    if (p.Codigo.Substring(0, 2) == dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2))
-                    {
-                        dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
-                    }
-
-                }
+                popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
             }
             else
             {
                 popularPermissoes();
             }
-
-            dgvPermissoes.Refresh();
 
         }
 
@@ -601,11 +595,6 @@ namespace _5gpro.Forms
 
                 }
 
-
-
-                //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
-                //listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
-                //Editando(true);
             }
         }
     }
