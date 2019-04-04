@@ -1,9 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
     public class _Item
     {
+        public _Item()
+        {
+            NotaFiscalItem = new HashSet<NotaFiscalItem>();
+        }
+
         public int _ItemID { get; set; }
 
         [Required(ErrorMessage = "A Descrição é obrigatória.|tbDescricao", AllowEmptyStrings = false)]
@@ -23,6 +29,8 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "A Unidade de medida é obrigatória.|tbCodUnimedida", AllowEmptyStrings = false)]
         public Unimedida Unimedida { get; set; }
+
+        public virtual ICollection<NotaFiscalItem> NotaFiscalItem { get; set; }
 
 
         //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.

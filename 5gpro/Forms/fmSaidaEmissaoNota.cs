@@ -13,11 +13,11 @@ namespace _5gpro.Forms
     {
         private PessoaBLL pessoaBLL = new PessoaBLL();
         private _ItemBLL itemBLL = new _ItemBLL();
-        private NotaFiscalBLL notafiscalBLL = new NotaFiscalBLL();
+        private NotaFiscalBLL notaFiscalBLL = new NotaFiscalBLL();
 
         private NotaFiscal notaFiscal = new NotaFiscal();
-        private _Item itemSelecionado;
-        private List<_Item> itens = new List<_Item>();
+        private NotaFiscalItem itemSelecionado;
+        private List<NotaFiscalItem> itens = new List<NotaFiscalItem>();
         private Pessoa pessoa;
         private FuncoesAuxiliares f = new FuncoesAuxiliares();
 
@@ -101,7 +101,8 @@ namespace _5gpro.Forms
 
         private void btInserirItem_Click(object sender, EventArgs e)
         {
-            _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(int.Parse(tbCodItem.Text)) : itemSelecionado;
+            NotaFiscalItem item = new NotaFiscalItem();
+            item = itemSelecionado == null ? notaFiscalBLL.BuscaItemByCod(int.Parse(tbCodItem.Text)) : itemSelecionado;
             InserirItem(item);
         }
 
@@ -114,7 +115,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = itens.Find(i => i._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+            itemSelecionado = itens.Find(i => i.Item._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             btInserirItem.Text = "Alterar";
             PreencheCamposItem(itemSelecionado);
             btExcluirItem.Enabled = true;
@@ -313,7 +314,7 @@ namespace _5gpro.Forms
                 {
                     ignoracheckevent = true;
                     LimpaCampos(false);
-                    tbCodigo.Text = notafiscalBLL.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = notaFiscalBLL.BuscaProxCodigoDisponivel();
                     notaFiscal = null;
                     tbCodigoCliente.Focus();
                     ignoracheckevent = false;
@@ -324,7 +325,7 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = notafiscalBLL.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = notaFiscalBLL.BuscaProxCodigoDisponivel();
                 notaFiscal = null;
                 Editando(false);
                 tbCodigoCliente.Focus();
@@ -349,9 +350,6 @@ namespace _5gpro.Forms
                 notaFiscal.DescontoOrcamento = Convert.ToDecimal(tbDescontoDocumento.Text);
                 notaFiscal.ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalDocumento.Text);
 
-                ICollection<NotaFiscalItem> nfi = new List<NotaFiscalItem>();
-                //nfi = itens;
-                notaFiscal.NotaFiscalItem = nfi;
 
                 int resultado = 0;// notafiscalBLL.SalvarOuAtualizarDocumento(notaFiscal);
 
@@ -448,7 +446,7 @@ namespace _5gpro.Forms
         }
 
 
-        private void InserirItem(_Item item)
+        private void InserirItem(NotaFiscalItem item)
         {
             if (item != null)
             {
@@ -457,20 +455,20 @@ namespace _5gpro.Forms
                 item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
                 item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
                 item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(item._ItemID)).FirstOrDefault();
+                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(item.Item._ItemID)).FirstOrDefault();
                 if (dr == null)
                 {
                     itens.Add(item);
-                    dgvItens.Rows.Add(item._ItemID, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                    dgvItens.Rows.Add(item.Item._ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                     btNovoItem.PerformClick();
                 }
                 else
                 {
-                    itens.Where(i => i._ItemID == item._ItemID).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i._ItemID == item._ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i._ItemID == item._ItemID).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i._ItemID == item._ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i._ItemID == item._ItemID).First().Desconto = item.Desconto;
+                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().Desconto = item.Desconto;
                     dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
                     dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
                     dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
@@ -493,12 +491,12 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheCamposItem(_Item item)
+        private void PreencheCamposItem(NotaFiscalItem item)
         {
             if (item != null)
             {
-                tbCodItem.Text = item._ItemID.ToString();
-                tbDescItem.Text = item.Descricao;
+                tbCodItem.Text = item.Item._ItemID.ToString();
+                tbDescItem.Text = item.Item.Descricao;
                 tbQuantidade.Text = item.Quantidade.ToString("############0.00");
                 tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
                 tbValorTotItem.Text = item.ValorTotal.ToString("############0.00");
@@ -534,7 +532,9 @@ namespace _5gpro.Forms
             buscaItem.ShowDialog();
             if (buscaItem.itemSelecionado != null)
             {
-                PreencheCamposItem(buscaItem.itemSelecionado);
+                NotaFiscalItem nfi = new NotaFiscalItem();
+                nfi.Item = buscaItem.itemSelecionado;
+                PreencheCamposItem(nfi);
             }
             else
             {
