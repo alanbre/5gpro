@@ -49,10 +49,10 @@
             this.dgvtbcNomePermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNivelPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvModulos = new System.Windows.Forms.DataGridView();
-            this.dgvtbcCodigoModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNomeModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbModulos = new System.Windows.Forms.GroupBox();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.dgvtbcCodigoModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNomeModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNivelModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnBotoes.SuspendLayout();
             this.gbGrupoDeUsuario.SuspendLayout();
@@ -300,22 +300,6 @@
             this.dgvModulos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModulos_CellContentClick);
             this.dgvModulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellDoubleClick);
             // 
-            // dgvtbcCodigoModulos
-            // 
-            this.dgvtbcCodigoModulos.HeaderText = "Código";
-            this.dgvtbcCodigoModulos.MinimumWidth = 70;
-            this.dgvtbcCodigoModulos.Name = "dgvtbcCodigoModulos";
-            this.dgvtbcCodigoModulos.ReadOnly = true;
-            this.dgvtbcCodigoModulos.Width = 70;
-            // 
-            // dgvtbcNomeModulos
-            // 
-            this.dgvtbcNomeModulos.HeaderText = "Nome";
-            this.dgvtbcNomeModulos.MinimumWidth = 30;
-            this.dgvtbcNomeModulos.Name = "dgvtbcNomeModulos";
-            this.dgvtbcNomeModulos.ReadOnly = true;
-            this.dgvtbcNomeModulos.Width = 150;
-            // 
             // gbModulos
             // 
             this.gbModulos.Controls.Add(this.dgvModulos);
@@ -335,11 +319,30 @@
             this.tbAjuda.Size = new System.Drawing.Size(741, 20);
             this.tbAjuda.TabIndex = 7;
             // 
+            // dgvtbcCodigoModulos
+            // 
+            this.dgvtbcCodigoModulos.HeaderText = "Código";
+            this.dgvtbcCodigoModulos.MinimumWidth = 70;
+            this.dgvtbcCodigoModulos.Name = "dgvtbcCodigoModulos";
+            this.dgvtbcCodigoModulos.ReadOnly = true;
+            this.dgvtbcCodigoModulos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvtbcCodigoModulos.Width = 70;
+            // 
+            // dgvtbcNomeModulos
+            // 
+            this.dgvtbcNomeModulos.HeaderText = "Nome";
+            this.dgvtbcNomeModulos.MinimumWidth = 30;
+            this.dgvtbcNomeModulos.Name = "dgvtbcNomeModulos";
+            this.dgvtbcNomeModulos.ReadOnly = true;
+            this.dgvtbcNomeModulos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvtbcNomeModulos.Width = 150;
+            // 
             // dgvtbcNivelModulos
             // 
             this.dgvtbcNivelModulos.HeaderText = "Nível";
             this.dgvtbcNivelModulos.Name = "dgvtbcNivelModulos";
             this.dgvtbcNivelModulos.ReadOnly = true;
+            this.dgvtbcNivelModulos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // fmCadastroGrupoUsuario
             // 
@@ -386,12 +389,12 @@
         private System.Windows.Forms.DataGridView dgvPermissoes;
         private System.Windows.Forms.DataGridView dgvModulos;
         private System.Windows.Forms.GroupBox gbModulos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoModulos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeModulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPermissoes;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
         private System.Windows.Forms.TextBox tbAjuda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoModulos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeModulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelModulos;
     }
 }

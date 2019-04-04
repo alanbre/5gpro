@@ -263,6 +263,22 @@ namespace _5gpro.Forms
 
         }
 
+        private void popularPermissoesByCodModulo(string codmodulo)
+        {
+            dgvPermissoes.Rows.Clear();
+
+                foreach (Permissao p in listapermissoes)
+                {
+                    if (p.Codigo.Substring(0, 2) == codmodulo)
+                    {
+                        dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
+                    }
+
+                }
+                   
+            dgvPermissoes.Refresh();
+        }
+
         private void dgvModulos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -554,18 +570,38 @@ namespace _5gpro.Forms
         private void DgvModulos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
-            //if (tbCodGrupoUsuario.Text.Length > 0)
-            //{
 
-            //    if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
-            //    {
-            //        dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
-            //    }
-            //    else
-            //    {
-            //        dgvModulos.CurrentRow.Cells[2].Value = 0;
-            //    }
-            ///teste
+            if (tbCodGrupoUsuario.Text.Length > 0 && dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
+            {
+
+                if (MessageBox.Show("Deseja alterar TODAS as permissões do grupo " + dgvModulos.CurrentRow.Cells[1].Value.ToString() + " ?",
+                                        "Aviso de alteração",
+                                        MessageBoxButtons.YesNo,
+                                        MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+
+                    if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
+                    {
+                        dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
+                    }
+                    else
+                    {
+                        dgvModulos.CurrentRow.Cells[2].Value = 0;
+                    }
+
+                    foreach (Permissao p in listapermissoes)
+                    {
+                        if (p.Codigo.Substring(0, 2) == dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2))
+                        {
+                            p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
+                        }
+                    }
+                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2));
+                    Editando(true);
+
+                }
+
+
 
                 //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
                 //listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
@@ -573,4 +609,4 @@ namespace _5gpro.Forms
             }
         }
     }
-
+}
