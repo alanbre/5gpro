@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmCadastroItens
+    partial class fmCadastroItem
     {
         /// <summary>
         /// Required designer variable.

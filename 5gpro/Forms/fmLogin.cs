@@ -20,7 +20,7 @@ namespace _5gpro.Forms
         private void btEntrar_Click(object sender, EventArgs e)
         {
             usuario = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
-            if (usuario.UsuarioID != null)
+            if (usuario != null)
             {
                 this.Close();
             }

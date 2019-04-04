@@ -1,3 +1,8 @@
+-- Schema 5gprodatabase
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8 ;
+USE `5gprodatabase` ;
+
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`pais`
 -- -----------------------------------------------------
@@ -256,6 +261,55 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
   CONSTRAINT `fk_permissao_has_grupo_usuario_grupo_usuario1`
     FOREIGN KEY (`idgrupousuario`)
     REFERENCES `5gprodatabase`.`grupo_usuario` (`idgrupousuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`notafiscal`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
+  `idnotafiscal` INT NOT NULL,
+  `data_emissao` DATE NOT NULL,
+  `data_entradasaida` DATE NOT NULL,
+  `tiponf` CHAR(1) NOT NULL,
+  `valor_total_itens` DECIMAL(10,2) NULL,
+  `valor_documento` DECIMAL(10,2) NULL,
+  `desconto_total_itens` DECIMAL(10,2) NULL,
+  `desconto_documento` DECIMAL(10,2) NULL,
+  `pessoa_idpessoa` INT NULL,
+  PRIMARY KEY (`idnotafiscal`),
+  INDEX `fk_notafiscal_pessoa1_idx` (`pessoa_idpessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_notafiscal_pessoa1`
+    FOREIGN KEY (`pessoa_idpessoa`)
+    REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`notafiscal_has_item`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal_has_item` (
+  `notafiscal_idnotafiscal` INT NOT NULL,
+  `item_iditem` INT NOT NULL,
+  `quantidade` DECIMAL(10,2) NULL,
+  `valor_unitario` DECIMAL(10,2) NULL,
+  `valor_total` DECIMAL(10,2) NULL,
+  `desconto_porc` DECIMAL(10,2) NULL,
+  `desconto` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`notafiscal_idnotafiscal`, `item_iditem`),
+  INDEX `fk_notafiscal_has_item_item1_idx` (`item_iditem` ASC) VISIBLE,
+  INDEX `fk_notafiscal_has_item_notafiscal1_idx` (`notafiscal_idnotafiscal` ASC) VISIBLE,
+  CONSTRAINT `fk_notafiscal_has_item_notafiscal1`
+    FOREIGN KEY (`notafiscal_idnotafiscal`)
+    REFERENCES `5gprodatabase`.`notafiscal` (`idnotafiscal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notafiscal_has_item_item1`
+    FOREIGN KEY (`item_iditem`)
+    REFERENCES `5gprodatabase`.`item` (`iditem`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

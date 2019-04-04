@@ -26,7 +26,7 @@ namespace _5gpro
 
         private void tsmiCadastroItens_Click(object sender, EventArgs e)
         {
-            var formCadItens = new fmCadastroItens();
+            var formCadItens = new fmCadastroItem();
             formCadItens.Show(this);
         }
 
@@ -42,10 +42,10 @@ namespace _5gpro
             formCadUsuarios.Show(this);
         }
 
-        private void tsmiEntradaDoc_Click(object sender, EventArgs e)
+        private void tsmiEmissaoNF_Click(object sender, EventArgs e)
         {
-            var formEstoqueEntradaDocumentos = new fmEstoqueEntradaDocumentos();
-            formEstoqueEntradaDocumentos.Show(this);
+            var formSaidaEmissaoNota = new fmSaidaEmissaoNota();
+            formSaidaEmissaoNota.Show(this);
         }
 
         private void cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)

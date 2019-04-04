@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmCadastroItens : Form
+    public partial class fmCadastroItem : Form
     {
 
         _Item _item;
@@ -21,7 +21,7 @@ namespace _5gpro.Forms
         bool editando = false;
         bool ignoraCheckEvent;
 
-        public fmCadastroItens()
+        public fmCadastroItem()
         {
             InitializeComponent();
             AlteraBotoes();

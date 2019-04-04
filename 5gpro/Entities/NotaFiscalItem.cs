@@ -1,9 +1,9 @@
 ﻿namespace _5gpro.Entities
 {
-    class NotaSaidaItem
+    class NotaFiscalItem
     {
-        public int NotaSaidaID { get; set; }
-        public virtual NotaSaida NotaSaida { get; set; }
+        public int NotaFiscalID { get; set; }
+        public virtual NotaFiscal NotaFiscal { get; set; }
         public int ItemID { get; set; }
         public virtual _Item Item { get; set; }
         public decimal Quantidade { get; set; }
