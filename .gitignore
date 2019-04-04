@@ -8,6 +8,7 @@ artifacts/
 *.suo
 *.userprefs
 *DS_Store
+*.lock
 *.sln.ide
 \.vs/5gpro/v15/Server/sqlite3/
 
