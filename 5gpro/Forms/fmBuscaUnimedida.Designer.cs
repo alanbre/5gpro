@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvUnimedida = new System.Windows.Forms.DataGridView();
             this.tbFiltroUnimedida = new System.Windows.Forms.TextBox();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -42,6 +43,9 @@
             this.dgvUnimedida.AllowUserToAddRows = false;
             this.dgvUnimedida.AllowUserToDeleteRows = false;
             this.dgvUnimedida.AllowUserToOrderColumns = true;
+            this.dgvUnimedida.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvUnimedida.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUnimedida.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvUnimedida.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvUnimedida.Location = new System.Drawing.Point(12, 41);
@@ -49,8 +53,10 @@
             this.dgvUnimedida.Name = "dgvUnimedida";
             this.dgvUnimedida.ReadOnly = true;
             this.dgvUnimedida.RowHeadersVisible = false;
+            this.dgvUnimedida.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUnimedida.Size = new System.Drawing.Size(560, 360);
             this.dgvUnimedida.TabIndex = 3;
+            this.dgvUnimedida.TabStop = false;
             this.dgvUnimedida.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellContentClick);
             this.dgvUnimedida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellDoubleClick);
             // 
@@ -83,10 +89,15 @@
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbFiltroUnimedida);
             this.Controls.Add(this.dgvUnimedida);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(600, 450);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 450);
             this.Name = "fmBuscaUnimedida";
-            this.Text = "fmBuscaUnimedida";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Busca de Unidade de Medida";
             this.Load += new System.EventHandler(this.fmBuscaUnimedida_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnimedida)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unimedidaBindingSource)).EndInit();

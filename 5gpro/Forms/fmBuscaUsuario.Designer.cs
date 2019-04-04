@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvUsuarios = new System.Windows.Forms.DataGridView();
             this.lbNomeUsuario = new System.Windows.Forms.Label();
             this.tbFiltroNomeUsuario = new System.Windows.Forms.TextBox();
@@ -44,12 +45,22 @@
             // dgvUsuarios
             // 
             this.dgvUsuarios.AllowUserToAddRows = false;
+            this.dgvUsuarios.AllowUserToDeleteRows = false;
+            this.dgvUsuarios.AllowUserToOrderColumns = true;
+            this.dgvUsuarios.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvUsuarios.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Location = new System.Drawing.Point(13, 108);
+            this.dgvUsuarios.MultiSelect = false;
             this.dgvUsuarios.Name = "dgvUsuarios";
+            this.dgvUsuarios.ReadOnly = true;
+            this.dgvUsuarios.RowHeadersVisible = false;
+            this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsuarios.Size = new System.Drawing.Size(775, 330);
             this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.TabStop = false;
             this.dgvUsuarios.AllowUserToAddRowsChanged += new System.EventHandler(this.dgvUsuarios_AllowUserToAddRowsChanged);
             this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellDoubleClick);
             // 
@@ -144,8 +155,14 @@
             this.Controls.Add(this.tbFiltroNomeUsuario);
             this.Controls.Add(this.lbNomeUsuario);
             this.Controls.Add(this.dgvUsuarios);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "fmBuscaUsuario";
-            this.Text = "fmBuscaUsuario";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Busca de Usuários";
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

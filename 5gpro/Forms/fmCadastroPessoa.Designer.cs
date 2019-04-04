@@ -536,6 +536,7 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "fmCadastroPessoa";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de pessoas";

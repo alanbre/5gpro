@@ -27,18 +27,15 @@ namespace _5gpro.Forms
 
         public void buscaGrupousuario()
         {
-            DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Nome", typeof(string));
-
-
             Listagrupousuario = grupousuarioBLL.BuscarGrupoUsuario(tbFiltroNomeGrupoUsuario.Text);
 
+            dgvGrupoUsuario.Rows.Clear();
             foreach (GrupoUsuario gu in Listagrupousuario)
             {
-                table.Rows.Add(gu.GrupoUsuarioID, gu.Nome);
+                dgvGrupoUsuario.Rows.Add(gu.GrupoUsuarioID, gu.Nome);
+
             }
-            dgvGrupoUsuario.DataSource = table;
+            dgvGrupoUsuario.Refresh();
         }
 
         private void fmBuscaGrupoUsuario_Load(object sender, EventArgs e)
@@ -63,6 +60,11 @@ namespace _5gpro.Forms
             grupousuarioSelecionado = Listagrupousuario.Find(g => (g.GrupoUsuarioID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
 
             this.Close();
+        }
+
+        private void DgvGrupoUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
