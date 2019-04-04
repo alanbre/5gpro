@@ -184,7 +184,7 @@ namespace _5gpro.Daos
 
                 Comando = new MySqlCommand(@"SELECT * 
                                              FROM item i INNER JOIN unimedida u 
-                                             ON i.unimedida_idunimedida = u.idunimedida
+                                             ON i.idunimedida = u.idunimedida
                                              WHERE 1=1
                                              " + conDescItem + @"                                         
                                              " + conDenomItem + @"
@@ -210,7 +210,7 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("unimedida_idunimedida")));
+                    _item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
                     _itens.Add(_item);
                 }
             }

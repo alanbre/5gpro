@@ -46,7 +46,7 @@
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNotaFiscal = new System.Windows.Forms.Label();
             this.btProcuraCliente = new System.Windows.Forms.Button();
-            this.lbFornecedor = new System.Windows.Forms.Label();
+            this.lbCliente = new System.Windows.Forms.Label();
             this.tbCodigoCliente = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.tbDescontoDocumento = new System.Windows.Forms.TextBox();
@@ -207,7 +207,7 @@
             this.gbDadosDocumento.Controls.Add(this.tbCodigo);
             this.gbDadosDocumento.Controls.Add(this.lbNotaFiscal);
             this.gbDadosDocumento.Controls.Add(this.btProcuraCliente);
-            this.gbDadosDocumento.Controls.Add(this.lbFornecedor);
+            this.gbDadosDocumento.Controls.Add(this.lbCliente);
             this.gbDadosDocumento.Controls.Add(this.tbCodigoCliente);
             this.gbDadosDocumento.Location = new System.Drawing.Point(65, 6);
             this.gbDadosDocumento.Name = "gbDadosDocumento";
@@ -291,14 +291,14 @@
             this.btProcuraCliente.UseVisualStyleBackColor = true;
             this.btProcuraCliente.Click += new System.EventHandler(this.btProcuraFornecedor_Click);
             // 
-            // lbFornecedor
+            // lbCliente
             // 
-            this.lbFornecedor.AutoSize = true;
-            this.lbFornecedor.Location = new System.Drawing.Point(6, 55);
-            this.lbFornecedor.Name = "lbFornecedor";
-            this.lbFornecedor.Size = new System.Drawing.Size(61, 13);
-            this.lbFornecedor.TabIndex = 2;
-            this.lbFornecedor.Text = "Fornecedor";
+            this.lbCliente.AutoSize = true;
+            this.lbCliente.Location = new System.Drawing.Point(6, 55);
+            this.lbCliente.Name = "lbCliente";
+            this.lbCliente.Size = new System.Drawing.Size(39, 13);
+            this.lbCliente.TabIndex = 2;
+            this.lbCliente.Text = "Cliente";
             // 
             // tbCodigoCliente
             // 
@@ -781,7 +781,7 @@
         private System.Windows.Forms.TextBox tbNomeCliente;
         private System.Windows.Forms.Button btProcuraCliente;
         private System.Windows.Forms.TextBox tbCodigoCliente;
-        private System.Windows.Forms.Label lbFornecedor;
+        private System.Windows.Forms.Label lbCliente;
         private System.Windows.Forms.TextBox tbCodigo;
         private System.Windows.Forms.Label lbNotaFiscal;
         private System.Windows.Forms.DateTimePicker dtpSaida;

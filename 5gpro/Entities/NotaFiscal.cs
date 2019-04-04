@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace _5gpro.Entities
 {
-    class NotaFiscal
+    public class NotaFiscal
     {
         public NotaFiscal()
         {

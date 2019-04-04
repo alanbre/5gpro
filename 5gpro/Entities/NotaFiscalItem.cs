@@ -1,7 +1,15 @@
 ﻿namespace _5gpro.Entities
 {
-    class NotaFiscalItem
+    public class NotaFiscalItem
     {
+        public NotaFiscalItem()
+        {
+            this.Quantidade = 0;
+            this.ValorUnitario = 0;
+            this.ValorTotal = 0;
+            this.DescontoPorc = 0;
+            this.Desconto = 0;
+        }
         public int NotaFiscalID { get; set; }
         public virtual NotaFiscal NotaFiscal { get; set; }
         public int ItemID { get; set; }
