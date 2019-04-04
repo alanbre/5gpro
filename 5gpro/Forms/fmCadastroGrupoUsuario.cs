@@ -38,6 +38,13 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
             AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
+            PopularListapermissoes();
+
+        }
+
+        public void PopularListapermissoes()
+        {
+            listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
         }
 
         private void fmCadastroItens_KeyDown(object sender, KeyEventArgs e)
@@ -84,10 +91,14 @@ namespace _5gpro.Forms
                     {
                         grupousuario = newgrupousuario;
                         PreencheCampos(grupousuario);
+                        listapermissoes = permissaoBLL.BuscaPermissoesGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
+                        popularPermissoes();
                         Editando(false);
                     }
                     else
                     {
+                        listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
+                        popularPermissoes();
                         Editando(true);
                         LimpaCampos(false);
                     }
@@ -190,6 +201,8 @@ namespace _5gpro.Forms
                 {
                     LimpaCampos(false);
                     tbCodGrupoUsuario.Text = grupousuarioBLL.BuscaProxCodigoDisponivel();
+                    listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
+                    popularPermissoes();
                     grupousuario = null;
                     tbNomeGrupoUsuario.Focus();
                     Editando(true);
@@ -199,6 +212,8 @@ namespace _5gpro.Forms
             {
                 LimpaCampos(false);
                 tbCodGrupoUsuario.Text = grupousuarioBLL.BuscaProxCodigoDisponivel();
+                listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
+                popularPermissoes();
                 grupousuario = null;
                 tbNomeGrupoUsuario.Focus();
                 Editando(true);
@@ -222,12 +237,10 @@ namespace _5gpro.Forms
         public void popularPermissoes()
         {
 
-            listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
-
             dgvPermissoes.Rows.Clear();
             foreach(Permissao p in listapermissoes)
             {
-                dgvPermissoes.Rows.Add(p.Codigo, p.Nome, "0");
+                dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
             }
             dgvPermissoes.Refresh();
 
@@ -282,8 +295,6 @@ namespace _5gpro.Forms
             if (editando)
             {
                 grupousuario = new GrupoUsuario();
-                listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
-
                 grupousuario.GrupoUsuarioID = int.Parse(tbCodGrupoUsuario.Text);
                 grupousuario.Nome = tbNomeGrupoUsuario.Text;
 

@@ -16,7 +16,7 @@ namespace _5gpro.Bll
 
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesGrupo(string cod)
         {
-            return permissaoDAO.BuscaPermissoesGrupo(cod);
+            return permissaoDAO.BuscaPermissoesByIdGrupo(cod);
         }
 
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
