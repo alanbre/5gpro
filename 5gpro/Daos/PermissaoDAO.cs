@@ -14,7 +14,7 @@ namespace _5gpro.Daos
     class PermissaoDAO : ConexaoDAO
     {
 
-        public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesGrupo(string cod)
+        public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesByIdGrupo(string cod)
         {
             List<Permissao> permissoesGrupo = new List<Permissao>();
 
@@ -84,7 +84,7 @@ namespace _5gpro.Daos
                     p.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
                     p.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
-                    //p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
+                    p.Nivel = "0";
 
                     permissoesGrupo.Add(p);
                 }
