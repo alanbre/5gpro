@@ -12,14 +12,13 @@ namespace _5gpro.Forms
     public partial class fmSaidaEmissaoNota : Form
     {
         private PessoaBLL pessoaBLL = new PessoaBLL();
-        private _ItemBLL itemBLL = new _ItemBLL();
         private NotaFiscalBLL notaFiscalBLL = new NotaFiscalBLL();
 
         private NotaFiscal notaFiscal = new NotaFiscal();
         private NotaFiscalItem itemSelecionado;
         private List<NotaFiscalItem> itens = new List<NotaFiscalItem>();
         private Pessoa pessoa;
-        private FuncoesAuxiliares f = new FuncoesAuxiliares();
+        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         bool editando, ignoracheckevent = false;
 
@@ -39,17 +38,38 @@ namespace _5gpro.Forms
 
             if (e.KeyCode == Keys.F2)
             {
-                //SalvaCadastro();
+                SalvaCadastro();
             }
 
             if (e.KeyCode == Keys.F5)
             {
-                //RecarregaDados(orcamento);
+                RecarregaDados(notaFiscal);
             }
 
 
             EnterTab(this.ActiveControl, e);
         }
+
+        private void FmSaidaEmissaoNota_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+
+
 
 
         private void btNovo_Click(object sender, EventArgs e)
@@ -67,22 +87,22 @@ namespace _5gpro.Forms
 
         private void btSalvar_Click(object sender, EventArgs e)
         {
-            //SalvaCadastro();
+            SalvaCadastro();
         }
 
         private void btRecarregar_Click(object sender, EventArgs e)
         {
-            //RecarregaDados(orcamento);
+            RecarregaDados(notaFiscal);
         }
 
         private void btProximo_Click(object sender, EventArgs e)
         {
-            //ProximoCadastro();
+            ProximoCadastro();
         }
 
         private void btAnterior_Click(object sender, EventArgs e)
         {
-            //CadastroAnterior();
+            CadastroAnterior();
         }
 
         private void btProcuraFornecedor_Click(object sender, EventArgs e)
@@ -90,11 +110,10 @@ namespace _5gpro.Forms
             AbreTelaBuscaPessoa();
         }
 
-
         private void btNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCampoItem();
-            tbCodItem.Focus();
+            tbCodigoItem.Focus();
             itemSelecionado = null;
             btInserirItem.Text = "Inserir";
         }
@@ -102,7 +121,7 @@ namespace _5gpro.Forms
         private void btInserirItem_Click(object sender, EventArgs e)
         {
             NotaFiscalItem item = new NotaFiscalItem();
-            item = itemSelecionado == null ? notaFiscalBLL.BuscaItemByCod(int.Parse(tbCodItem.Text)) : itemSelecionado;
+            item = itemSelecionado == null ? notaFiscalBLL.BuscaItemByCod(int.Parse(tbCodigoItem.Text)) : itemSelecionado;
             InserirItem(item);
         }
 
@@ -111,15 +130,7 @@ namespace _5gpro.Forms
             AbreTelaBuscaItem();
         }
 
-        private void DgvItens_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = itens.Find(i => i.Item._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
-            btInserirItem.Text = "Alterar";
-            PreencheCamposItem(itemSelecionado);
-            btExcluirItem.Enabled = true;
-        }
+
 
 
         private void tbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
@@ -187,6 +198,64 @@ namespace _5gpro.Forms
 
 
 
+        private void TbCodigo_Leave(object sender, EventArgs e)
+        {
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!editando)
+            {
+                if (tbCodigo.Text.Length > 0)
+                {
+                    NotaFiscal newnotafiscal = notaFiscalBLL.BuscaNotaByCod(int.Parse(tbCodigo.Text));
+                    if (newnotafiscal != null)
+                    {
+                        notaFiscal = newnotafiscal;
+                        PreencheCampos(notaFiscal);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        Editando(true);
+                        LimpaCampos(false);
+                    }
+                }
+                else if (tbCodigo.Text.Length == 0)
+                {
+                    ignoracheckevent = true;
+                    LimpaCampos(true);
+                    ignoracheckevent = false;
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (tbCodigo.Text.Length > 0)
+                    {
+                        NotaFiscal newnotafiscal = notaFiscalBLL.BuscaNotaByCod(int.Parse(tbCodigo.Text));
+                        if (newnotafiscal != null)
+                        {
+                            notaFiscal = newnotafiscal;
+                            PreencheCampos(newnotafiscal);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodigo.Text.Length == 0)
+                    {
+                        ignoracheckevent = true;
+                        LimpaCampos(true);
+                        ignoracheckevent = false;
+                    }
+                }
+            }
+        }
 
         private void tbQuantidade_Leave(object sender, EventArgs e)
         {
@@ -231,6 +300,44 @@ namespace _5gpro.Forms
             tbValorTotalDocumento.Text = tbValorTotalDocumento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalDocumento.Text).ToString("############0.00") : "0,00";
         }
 
+        private void TbCodigoCliente_Leave(object sender, EventArgs e)
+        {
+            if (tbCodigoCliente.Text.Length > 0)
+            {
+                pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigoCliente.Text));
+                PreencheCamposPessoa(pessoa);
+            }
+            else
+            {
+                tbNomeCliente.Text = "";
+            }
+        }
+
+        private void tbCodigoItem_Leave(object sender, EventArgs e)
+        {
+            if (tbCodigoItem.Text.Length > 0)
+            {
+                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(tbCodigoItem.Text)).FirstOrDefault();
+                NotaFiscalItem item;
+                if (dr == null)
+                {
+                    item = notaFiscalBLL.BuscaItemByCod(int.Parse(tbCodigoItem.Text));
+                    btInserirItem.Text = "Inserir";
+                }
+                else
+                {
+                    item = itens.Where(i => i.Item._ItemID == int.Parse(tbCodigoItem.Text)).First();
+                    btInserirItem.Text = "Alterar";
+                }
+                PreencheCamposItem(item);
+
+            }
+            else
+            {
+                tbCodigoItem.Text = "";
+            }
+        }
+
 
 
 
@@ -252,9 +359,13 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodItem_KeyUp(object sender, KeyEventArgs e)
+        private void tbCodigoItem_KeyUp(object sender, KeyEventArgs e)
         {
-            AbreTelaBuscaItem();
+            if (e.KeyCode == Keys.F3 && !editando)
+            {
+                e.Handled = true;
+                AbreTelaBuscaItem();
+            }
         }
 
 
@@ -299,6 +410,28 @@ namespace _5gpro.Forms
             if (!ignoracheckevent) { Editando(true); }
         }
 
+        private void TbDescontoDocumento_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoracheckevent) { Editando(true); }
+        }
+
+        private void TbValorTotalDocumento_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoracheckevent) { Editando(true); }
+        }
+
+        private void DgvItens_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (dgvItens.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
+                itemSelecionado = itens.Find(i => i.Item._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+                btInserirItem.Text = "Alterar";
+                PreencheCamposItem(itemSelecionado);
+                btExcluirItem.Enabled = true;
+            }
+        }
 
 
 
@@ -336,7 +469,6 @@ namespace _5gpro.Forms
 
         private void SalvaCadastro()
         {
-
             if (editando)
             {
                 notaFiscal = new NotaFiscal();
@@ -347,11 +479,12 @@ namespace _5gpro.Forms
 
                 notaFiscal.ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text);
                 notaFiscal.DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text);
-                notaFiscal.DescontoOrcamento = Convert.ToDecimal(tbDescontoDocumento.Text);
-                notaFiscal.ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalDocumento.Text);
+                notaFiscal.DescontoDocumento = Convert.ToDecimal(tbDescontoDocumento.Text);
+                notaFiscal.ValorTotalDocumento = Convert.ToDecimal(tbValorTotalDocumento.Text);
 
+                notaFiscal.NotaFiscalItem = itens;
 
-                int resultado = 0;// notafiscalBLL.SalvarOuAtualizarDocumento(notaFiscal);
+                int resultado = notaFiscalBLL.SalvarOuAtualizarDocumento(notaFiscal);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -376,12 +509,131 @@ namespace _5gpro.Forms
             }
         }
 
-        private void EnterTab(object sender, KeyEventArgs e)
+        private void RecarregaDados(NotaFiscal notafiscal)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (editando)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (notafiscal != null)
+                    {
+                        notafiscal = notaFiscalBLL.BuscaNotaByCod(notafiscal.NotaFiscalID);
+                        PreencheCampos(notafiscal);
+                    }
+                    else
+                    {
+                        ignoracheckevent = true;
+                        LimpaCampos(true);
+                        ignoracheckevent = false;
+                    }
+                    Editando(false);
+                }
+            }
+            else
+            {
+                if (notafiscal != null)
+                {
+                    notafiscal = notaFiscalBLL.BuscaNotaByCod(notafiscal.NotaFiscalID);
+                    PreencheCampos(notafiscal);
+                }
+                else
+                {
+                    ignoracheckevent = true;
+                    LimpaCampos(true);
+                    ignoracheckevent = false;
+                }
+            }
+
+        }
+
+        private void ProximoCadastro()
+        {
+            //Busca o registro com ID maior que o atual preenchido. Só preenche se houver algum registro maior
+            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                NotaFiscal newnotafiscal = notaFiscalBLL.BuscaProximaNotaFiscal(int.Parse(tbCodigo.Text));
+                if (newnotafiscal != null)
+                {
+                    notaFiscal = newnotafiscal;
+                    itens = notaFiscal.NotaFiscalItem.ToList();
+                    PreencheCampos(notaFiscal);
+                }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    NotaFiscal newnotafiscal = notaFiscalBLL.BuscaProximaNotaFiscal(int.Parse(tbCodigo.Text));
+                    if (newnotafiscal != null)
+                    {
+                        notaFiscal = newnotafiscal;
+                        itens = notaFiscal.NotaFiscalItem.ToList();
+                        PreencheCampos(notaFiscal);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newnotafiscal = notaFiscalBLL.BuscaNotaFiscalAnterior(int.Parse(tbCodigo.Text));
+                        if (newnotafiscal != null)
+                        {
+                            notaFiscal = newnotafiscal;
+                            itens = notaFiscal.NotaFiscalItem.ToList();
+                            PreencheCampos(notaFiscal);
+                            Editando(false);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CadastroAnterior()
+        {
+            //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
+            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+            if (!editando && tbCodigo.Text.Length > 0)
+            {
+                NotaFiscal newnotafiscal = notaFiscalBLL.BuscaNotaFiscalAnterior(int.Parse(tbCodigo.Text));
+                if (newnotafiscal != null)
+                {
+                    notaFiscal = newnotafiscal;
+                    itens = notaFiscal.NotaFiscalItem.ToList();
+                    PreencheCampos(notaFiscal);
+                }
+            }
+            else if (editando && tbCodigo.Text.Length > 0)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+               "Aviso de alteração",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    NotaFiscal newnotafiscal = notaFiscalBLL.BuscaNotaFiscalAnterior(int.Parse(tbCodigo.Text));
+                    if (newnotafiscal != null)
+                    {
+                        notaFiscal = newnotafiscal;
+                        itens = notaFiscal.NotaFiscalItem.ToList();
+                        PreencheCampos(notaFiscal);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        newnotafiscal = notaFiscalBLL.BuscaProximaNotaFiscal(int.Parse(tbCodigo.Text));
+                        if (newnotafiscal != null)
+                        {
+                            notaFiscal = newnotafiscal;
+                            itens = notaFiscal.NotaFiscalItem.ToList();
+                            PreencheCampos(notaFiscal);
+                            Editando(false);
+                        }
+                    }
+                }
             }
         }
 
@@ -424,7 +676,7 @@ namespace _5gpro.Forms
             tbNomeCliente.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpSaida.Value = DateTime.Now;
-            tbValorTotItem.Text = "0,00";
+            tbValorTotalItens.Text = "0,00";
             tbDescontoTotalItens.Text = "0,00";
             tbDescontoDocumento.Text = "0,00";
             tbValorTotalDocumento.Text = "0,00";
@@ -436,7 +688,7 @@ namespace _5gpro.Forms
 
         private void LimpaCampoItem()
         {
-            tbCodItem.Clear();
+            tbCodigoItem.Clear();
             tbDescItem.Clear();
             tbQuantidade.Text = "0,00";
             tbValorUnitItem.Text = "0,00";
@@ -444,7 +696,6 @@ namespace _5gpro.Forms
             tbDescontoItemPorc.Text = "0,00";
             tbDescontoItem.Text = "0,00";
         }
-
 
         private void InserirItem(NotaFiscalItem item)
         {
@@ -455,7 +706,7 @@ namespace _5gpro.Forms
                 item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
                 item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
                 item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(item.Item._ItemID)).FirstOrDefault();
+                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item._ItemID).FirstOrDefault();
                 if (dr == null)
                 {
                     itens.Add(item);
@@ -486,16 +737,44 @@ namespace _5gpro.Forms
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodItem.Focus();
-                tbCodItem.SelectAll();
+                tbCodigoItem.Focus();
+                tbCodigoItem.SelectAll();
             }
+        }
+
+        private void PreencheCampos(NotaFiscal notafiscal)
+        {
+            ignoracheckevent = true;
+            LimpaCampos(false);
+            tbCodigo.Text = notafiscal.NotaFiscalID.ToString();
+            tbCodigoCliente.Text = notafiscal.Pessoa != null ? notafiscal.Pessoa.PessoaID.ToString() : "";
+            tbNomeCliente.Text = notafiscal.Pessoa != null ? notafiscal.Pessoa.Nome : "";
+            dtpEmissao.Value = notafiscal.DataEmissao;
+            dtpSaida.Value = notafiscal.DataEntradaSaida;
+            tbValorTotalItens.Text = notafiscal.ValorTotalItens.ToString("############0.00");
+            tbDescontoTotalItens.Text = notafiscal.DescontoTotalItens.ToString("############0.00");
+            tbDescontoDocumento.Text = notafiscal.DescontoDocumento.ToString("############0.00");
+            tbValorTotalDocumento.Text = notafiscal.ValorTotalDocumento.ToString("############0.00");
+            itens = notafiscal.NotaFiscalItem.ToList();
+            PreencheGridItens(itens);
+            btInserirItem.Text = "Inserir";
+            ignoracheckevent = false;
+        }
+
+        private void PreencheGridItens(List<NotaFiscalItem> itens)
+        {
+            foreach (var i in itens)
+            {
+                dgvItens.Rows.Add(i.Item._ItemID, i.Item.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+            }
+            dgvItens.Refresh();
         }
 
         private void PreencheCamposItem(NotaFiscalItem item)
         {
             if (item != null)
             {
-                tbCodItem.Text = item.Item._ItemID.ToString();
+                tbCodigoItem.Text = item.Item._ItemID.ToString();
                 tbDescItem.Text = item.Item.Descricao;
                 tbQuantidade.Text = item.Quantidade.ToString("############0.00");
                 tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
@@ -509,9 +788,18 @@ namespace _5gpro.Forms
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodItem.Focus();
-                tbCodItem.SelectAll();
+                tbCodigoItem.Focus();
+                tbCodigoItem.SelectAll();
 
+            }
+        }
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
 
@@ -535,15 +823,6 @@ namespace _5gpro.Forms
                 NotaFiscalItem nfi = new NotaFiscalItem();
                 nfi.Item = buscaItem.itemSelecionado;
                 PreencheCamposItem(nfi);
-            }
-            else
-            {
-                MessageBox.Show("Item não encontrado no banco de dados",
-                "Item não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodItem.Focus();
-                tbCodItem.SelectAll();
             }
         }
 

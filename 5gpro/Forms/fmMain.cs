@@ -9,7 +9,7 @@ namespace _5gpro
         public fmMain()
         {
             InitializeComponent();
-
+            
         }
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)

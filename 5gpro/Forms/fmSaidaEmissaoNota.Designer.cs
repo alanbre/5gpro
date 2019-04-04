@@ -28,15 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSaidaEmissaoNota));
             this.pnBotoes = new System.Windows.Forms.Panel();
-            this.btRecarregar = new System.Windows.Forms.Button();
-            this.btSalvar = new System.Windows.Forms.Button();
-            this.btDeletar = new System.Windows.Forms.Button();
-            this.btAnterior = new System.Windows.Forms.Button();
-            this.btProximo = new System.Windows.Forms.Button();
-            this.btBuscar = new System.Windows.Forms.Button();
-            this.btNovo = new System.Windows.Forms.Button();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
             this.dtpSaida = new System.Windows.Forms.DateTimePicker();
             this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
@@ -45,7 +39,6 @@
             this.tbNomeCliente = new System.Windows.Forms.TextBox();
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNotaFiscal = new System.Windows.Forms.Label();
-            this.btProcuraCliente = new System.Windows.Forms.Button();
             this.lbCliente = new System.Windows.Forms.Label();
             this.tbCodigoCliente = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
@@ -58,12 +51,10 @@
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.tbValorTotalItens = new System.Windows.Forms.TextBox();
             this.gbItens = new System.Windows.Forms.GroupBox();
-            this.btExcluirItem = new System.Windows.Forms.Button();
             this.tbDescontoItem = new System.Windows.Forms.TextBox();
             this.lbDescItem = new System.Windows.Forms.Label();
             this.tbDescontoItemPorc = new System.Windows.Forms.TextBox();
             this.lbDescontoPorc = new System.Windows.Forms.Label();
-            this.btNovoItem = new System.Windows.Forms.Button();
             this.dgvItens = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,13 +68,23 @@
             this.tbQuantidade = new System.Windows.Forms.TextBox();
             this.tbValorTotItem = new System.Windows.Forms.TextBox();
             this.lbValorUnit = new System.Windows.Forms.Label();
-            this.tbCodItem = new System.Windows.Forms.TextBox();
+            this.tbCodigoItem = new System.Windows.Forms.TextBox();
             this.lbQuantidade = new System.Windows.Forms.Label();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.tbValorUnitItem = new System.Windows.Forms.TextBox();
             this.btProcuraItem = new System.Windows.Forms.Button();
             this.tbDescItem = new System.Windows.Forms.TextBox();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.btExcluirItem = new System.Windows.Forms.Button();
+            this.btNovoItem = new System.Windows.Forms.Button();
+            this.btProcuraCliente = new System.Windows.Forms.Button();
+            this.btRecarregar = new System.Windows.Forms.Button();
+            this.btSalvar = new System.Windows.Forms.Button();
+            this.btDeletar = new System.Windows.Forms.Button();
+            this.btAnterior = new System.Windows.Forms.Button();
+            this.btProximo = new System.Windows.Forms.Button();
+            this.btBuscar = new System.Windows.Forms.Button();
+            this.btNovo = new System.Windows.Forms.Button();
             this.pnBotoes.SuspendLayout();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
@@ -105,97 +106,6 @@
             this.pnBotoes.Name = "pnBotoes";
             this.pnBotoes.Size = new System.Drawing.Size(56, 488);
             this.pnBotoes.TabIndex = 3;
-            // 
-            // btRecarregar
-            // 
-            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
-            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
-            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btRecarregar.Name = "btRecarregar";
-            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
-            this.btRecarregar.TabIndex = 3;
-            this.btRecarregar.UseVisualStyleBackColor = true;
-            this.btRecarregar.Click += new System.EventHandler(this.btRecarregar_Click);
-            // 
-            // btSalvar
-            // 
-            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
-            this.btSalvar.Location = new System.Drawing.Point(3, 106);
-            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btSalvar.Name = "btSalvar";
-            this.btSalvar.Size = new System.Drawing.Size(48, 48);
-            this.btSalvar.TabIndex = 0;
-            this.btSalvar.UseVisualStyleBackColor = true;
-            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
-            // 
-            // btDeletar
-            // 
-            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
-            this.btDeletar.Location = new System.Drawing.Point(3, 310);
-            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btDeletar.Name = "btDeletar";
-            this.btDeletar.Size = new System.Drawing.Size(48, 48);
-            this.btDeletar.TabIndex = 6;
-            this.btDeletar.UseVisualStyleBackColor = true;
-            // 
-            // btAnterior
-            // 
-            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
-            this.btAnterior.Location = new System.Drawing.Point(3, 259);
-            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btAnterior.Name = "btAnterior";
-            this.btAnterior.Size = new System.Drawing.Size(48, 48);
-            this.btAnterior.TabIndex = 5;
-            this.btAnterior.UseVisualStyleBackColor = true;
-            this.btAnterior.Click += new System.EventHandler(this.btAnterior_Click);
-            // 
-            // btProximo
-            // 
-            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
-            this.btProximo.Location = new System.Drawing.Point(3, 208);
-            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btProximo.Name = "btProximo";
-            this.btProximo.Size = new System.Drawing.Size(48, 48);
-            this.btProximo.TabIndex = 4;
-            this.btProximo.UseVisualStyleBackColor = true;
-            this.btProximo.Click += new System.EventHandler(this.btProximo_Click);
-            // 
-            // btBuscar
-            // 
-            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
-            this.btBuscar.Location = new System.Drawing.Point(3, 55);
-            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btBuscar.Name = "btBuscar";
-            this.btBuscar.Size = new System.Drawing.Size(48, 48);
-            this.btBuscar.TabIndex = 2;
-            this.btBuscar.UseVisualStyleBackColor = true;
-            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
-            // 
-            // btNovo
-            // 
-            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_black;
-            this.btNovo.Location = new System.Drawing.Point(3, 3);
-            this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btNovo.Name = "btNovo";
-            this.btNovo.Size = new System.Drawing.Size(48, 48);
-            this.btNovo.TabIndex = 1;
-            this.btNovo.UseVisualStyleBackColor = true;
-            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // gbDadosDocumento
             // 
@@ -257,7 +167,7 @@
             // tbNomeCliente
             // 
             this.tbNomeCliente.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tbNomeCliente.Location = new System.Drawing.Point(98, 70);
+            this.tbNomeCliente.Location = new System.Drawing.Point(98, 71);
             this.tbNomeCliente.Name = "tbNomeCliente";
             this.tbNomeCliente.ReadOnly = true;
             this.tbNomeCliente.Size = new System.Drawing.Size(355, 20);
@@ -271,6 +181,7 @@
             this.tbCodigo.Size = new System.Drawing.Size(65, 20);
             this.tbCodigo.TabIndex = 1;
             this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbNotaFiscal
             // 
@@ -280,16 +191,6 @@
             this.lbNotaFiscal.Size = new System.Drawing.Size(57, 13);
             this.lbNotaFiscal.TabIndex = 0;
             this.lbNotaFiscal.Text = "Nota fiscal";
-            // 
-            // btProcuraCliente
-            // 
-            this.btProcuraCliente.Location = new System.Drawing.Point(76, 70);
-            this.btProcuraCliente.Name = "btProcuraCliente";
-            this.btProcuraCliente.Size = new System.Drawing.Size(20, 20);
-            this.btProcuraCliente.TabIndex = 4;
-            this.btProcuraCliente.TabStop = false;
-            this.btProcuraCliente.UseVisualStyleBackColor = true;
-            this.btProcuraCliente.Click += new System.EventHandler(this.btProcuraFornecedor_Click);
             // 
             // lbCliente
             // 
@@ -308,6 +209,7 @@
             this.tbCodigoCliente.TabIndex = 3;
             this.tbCodigoCliente.TextChanged += new System.EventHandler(this.tbCodFornecedor_TextChanged);
             this.tbCodigoCliente.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodFornecedor_KeyUp);
+            this.tbCodigoCliente.Leave += new System.EventHandler(this.TbCodigoCliente_Leave);
             // 
             // gbTotais
             // 
@@ -337,6 +239,7 @@
             this.tbDescontoDocumento.Size = new System.Drawing.Size(85, 20);
             this.tbDescontoDocumento.TabIndex = 5;
             this.tbDescontoDocumento.Text = "0,00";
+            this.tbDescontoDocumento.TextChanged += new System.EventHandler(this.TbDescontoDocumento_TextChanged);
             this.tbDescontoDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoDocumento_KeyPress);
             this.tbDescontoDocumento.Leave += new System.EventHandler(this.tbDescontoDocumento_Leave);
             // 
@@ -379,6 +282,7 @@
             this.tbValorTotalDocumento.Size = new System.Drawing.Size(85, 20);
             this.tbValorTotalDocumento.TabIndex = 7;
             this.tbValorTotalDocumento.Text = "0,00";
+            this.tbValorTotalDocumento.TextChanged += new System.EventHandler(this.TbValorTotalDocumento_TextChanged);
             this.tbValorTotalDocumento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorTotalDocumento_KeyPress);
             this.tbValorTotalDocumento.Leave += new System.EventHandler(this.tbValorTotalDocumento_Leave);
             // 
@@ -430,7 +334,7 @@
             this.gbItens.Controls.Add(this.tbQuantidade);
             this.gbItens.Controls.Add(this.tbValorTotItem);
             this.gbItens.Controls.Add(this.lbValorUnit);
-            this.gbItens.Controls.Add(this.tbCodItem);
+            this.gbItens.Controls.Add(this.tbCodigoItem);
             this.gbItens.Controls.Add(this.lbQuantidade);
             this.gbItens.Controls.Add(this.lbValorTot);
             this.gbItens.Controls.Add(this.tbValorUnitItem);
@@ -442,18 +346,6 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
-            // 
-            // btExcluirItem
-            // 
-            this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btExcluirItem.Enabled = false;
-            this.btExcluirItem.Image = global::_5gpro.Properties.Resources.iosDelete_22px_Red;
-            this.btExcluirItem.Location = new System.Drawing.Point(963, 49);
-            this.btExcluirItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btExcluirItem.Name = "btExcluirItem";
-            this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
-            this.btExcluirItem.TabIndex = 17;
-            this.btExcluirItem.UseVisualStyleBackColor = true;
             // 
             // tbDescontoItem
             // 
@@ -501,26 +393,14 @@
             this.lbDescontoPorc.TabIndex = 11;
             this.lbDescontoPorc.Text = "% Desc.";
             // 
-            // btNovoItem
-            // 
-            this.btNovoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNovoItem.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
-            this.btNovoItem.Location = new System.Drawing.Point(963, 19);
-            this.btNovoItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btNovoItem.Name = "btNovoItem";
-            this.btNovoItem.Size = new System.Drawing.Size(24, 24);
-            this.btNovoItem.TabIndex = 16;
-            this.btNovoItem.UseVisualStyleBackColor = true;
-            this.btNovoItem.Click += new System.EventHandler(this.btNovoItem_Click);
-            // 
             // dgvItens
             // 
             this.dgvItens.AllowUserToAddRows = false;
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -545,6 +425,7 @@
             this.dgvItens.Size = new System.Drawing.Size(955, 186);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
+            this.dgvItens.CurrentCellChanged += new System.EventHandler(this.DgvItens_CurrentCellChanged);
             // 
             // dgvtbcCodigo
             // 
@@ -661,14 +542,15 @@
             this.lbValorUnit.TabIndex = 7;
             this.lbValorUnit.Text = "Valor Unit.";
             // 
-            // tbCodItem
+            // tbCodigoItem
             // 
-            this.tbCodItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbCodItem.Location = new System.Drawing.Point(6, 224);
-            this.tbCodItem.Name = "tbCodItem";
-            this.tbCodItem.Size = new System.Drawing.Size(63, 20);
-            this.tbCodItem.TabIndex = 2;
-            this.tbCodItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodItem_KeyUp);
+            this.tbCodigoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbCodigoItem.Location = new System.Drawing.Point(6, 224);
+            this.tbCodigoItem.Name = "tbCodigoItem";
+            this.tbCodigoItem.Size = new System.Drawing.Size(63, 20);
+            this.tbCodigoItem.TabIndex = 2;
+            this.tbCodigoItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigoItem_KeyUp);
+            this.tbCodigoItem.Leave += new System.EventHandler(this.tbCodigoItem_Leave);
             // 
             // lbQuantidade
             // 
@@ -723,6 +605,7 @@
             this.tbDescItem.ReadOnly = true;
             this.tbDescItem.Size = new System.Drawing.Size(355, 20);
             this.tbDescItem.TabIndex = 4;
+            this.tbDescItem.TabStop = false;
             // 
             // tbAjuda
             // 
@@ -734,6 +617,132 @@
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 17;
+            // 
+            // btExcluirItem
+            // 
+            this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExcluirItem.Enabled = false;
+            this.btExcluirItem.Image = ((System.Drawing.Image)(resources.GetObject("btExcluirItem.Image")));
+            this.btExcluirItem.Location = new System.Drawing.Point(963, 49);
+            this.btExcluirItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btExcluirItem.Name = "btExcluirItem";
+            this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
+            this.btExcluirItem.TabIndex = 17;
+            this.btExcluirItem.UseVisualStyleBackColor = true;
+            // 
+            // btNovoItem
+            // 
+            this.btNovoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNovoItem.Image = ((System.Drawing.Image)(resources.GetObject("btNovoItem.Image")));
+            this.btNovoItem.Location = new System.Drawing.Point(963, 19);
+            this.btNovoItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btNovoItem.Name = "btNovoItem";
+            this.btNovoItem.Size = new System.Drawing.Size(24, 24);
+            this.btNovoItem.TabIndex = 16;
+            this.btNovoItem.UseVisualStyleBackColor = true;
+            this.btNovoItem.Click += new System.EventHandler(this.btNovoItem_Click);
+            // 
+            // btProcuraCliente
+            // 
+            this.btProcuraCliente.Image = global::_5gpro.Properties.Resources.iosSearch_17px_black;
+            this.btProcuraCliente.Location = new System.Drawing.Point(73, 70);
+            this.btProcuraCliente.Name = "btProcuraCliente";
+            this.btProcuraCliente.Size = new System.Drawing.Size(22, 22);
+            this.btProcuraCliente.TabIndex = 4;
+            this.btProcuraCliente.TabStop = false;
+            this.btProcuraCliente.UseVisualStyleBackColor = true;
+            this.btProcuraCliente.Click += new System.EventHandler(this.btProcuraFornecedor_Click);
+            // 
+            // btRecarregar
+            // 
+            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btRecarregar.Image = ((System.Drawing.Image)(resources.GetObject("btRecarregar.Image")));
+            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
+            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btRecarregar.Name = "btRecarregar";
+            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
+            this.btRecarregar.TabIndex = 3;
+            this.btRecarregar.UseVisualStyleBackColor = true;
+            this.btRecarregar.Click += new System.EventHandler(this.btRecarregar_Click);
+            // 
+            // btSalvar
+            // 
+            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btSalvar.Image = ((System.Drawing.Image)(resources.GetObject("btSalvar.Image")));
+            this.btSalvar.Location = new System.Drawing.Point(3, 106);
+            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(48, 48);
+            this.btSalvar.TabIndex = 0;
+            this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
+            // 
+            // btDeletar
+            // 
+            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDeletar.Image = ((System.Drawing.Image)(resources.GetObject("btDeletar.Image")));
+            this.btDeletar.Location = new System.Drawing.Point(3, 310);
+            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btDeletar.Name = "btDeletar";
+            this.btDeletar.Size = new System.Drawing.Size(48, 48);
+            this.btDeletar.TabIndex = 6;
+            this.btDeletar.UseVisualStyleBackColor = true;
+            // 
+            // btAnterior
+            // 
+            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btAnterior.Image = ((System.Drawing.Image)(resources.GetObject("btAnterior.Image")));
+            this.btAnterior.Location = new System.Drawing.Point(3, 259);
+            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btAnterior.Name = "btAnterior";
+            this.btAnterior.Size = new System.Drawing.Size(48, 48);
+            this.btAnterior.TabIndex = 5;
+            this.btAnterior.UseVisualStyleBackColor = true;
+            this.btAnterior.Click += new System.EventHandler(this.btAnterior_Click);
+            // 
+            // btProximo
+            // 
+            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btProximo.Image = ((System.Drawing.Image)(resources.GetObject("btProximo.Image")));
+            this.btProximo.Location = new System.Drawing.Point(3, 208);
+            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btProximo.Name = "btProximo";
+            this.btProximo.Size = new System.Drawing.Size(48, 48);
+            this.btProximo.TabIndex = 4;
+            this.btProximo.UseVisualStyleBackColor = true;
+            this.btProximo.Click += new System.EventHandler(this.btProximo_Click);
+            // 
+            // btBuscar
+            // 
+            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btBuscar.Image = ((System.Drawing.Image)(resources.GetObject("btBuscar.Image")));
+            this.btBuscar.Location = new System.Drawing.Point(3, 55);
+            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btBuscar.Name = "btBuscar";
+            this.btBuscar.Size = new System.Drawing.Size(48, 48);
+            this.btBuscar.TabIndex = 2;
+            this.btBuscar.UseVisualStyleBackColor = true;
+            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
+            // 
+            // btNovo
+            // 
+            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNovo.Image = ((System.Drawing.Image)(resources.GetObject("btNovo.Image")));
+            this.btNovo.Location = new System.Drawing.Point(3, 3);
+            this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btNovo.Name = "btNovo";
+            this.btNovo.Size = new System.Drawing.Size(48, 48);
+            this.btNovo.TabIndex = 1;
+            this.btNovo.UseVisualStyleBackColor = true;
+            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // fmSaidaEmissaoNota
             // 
@@ -753,6 +762,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Emissão de notas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmSaidaEmissaoNota_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmEstoqueEntradaDocumentos_KeyDown);
             this.pnBotoes.ResumeLayout(false);
             this.gbDadosDocumento.ResumeLayout(false);
@@ -809,7 +819,7 @@
         private System.Windows.Forms.TextBox tbQuantidade;
         private System.Windows.Forms.TextBox tbValorTotItem;
         private System.Windows.Forms.Label lbValorUnit;
-        private System.Windows.Forms.TextBox tbCodItem;
+        private System.Windows.Forms.TextBox tbCodigoItem;
         private System.Windows.Forms.Label lbQuantidade;
         private System.Windows.Forms.Label lbValorTot;
         private System.Windows.Forms.TextBox tbValorUnitItem;
