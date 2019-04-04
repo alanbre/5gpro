@@ -105,6 +105,8 @@ namespace _5gpro.Forms
                 }
                 else if (tbCodGrupoUsuario.Text.Length == 0)
                 {
+                    listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
+                    popularPermissoes();
                     LimpaCampos(true);
                     Editando(false);
                 }
@@ -148,6 +150,8 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodGrupoUsuario.Text = grupousuario.GrupoUsuarioID.ToString();
             tbNomeGrupoUsuario.Text = grupousuario.Nome;
+            listapermissoes = permissaoBLL.BuscaPermissoesGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
+            popularPermissoes();
 
 
             ignoraCheckEvent = false;
@@ -157,6 +161,7 @@ namespace _5gpro.Forms
         {
             if (cod) { tbCodGrupoUsuario.Clear(); }
             tbNomeGrupoUsuario.Clear();
+            tbAjuda.Clear();
         }
 
         private void RecarregaDados(GrupoUsuario grupousuario)
@@ -238,7 +243,7 @@ namespace _5gpro.Forms
         {
 
             dgvPermissoes.Rows.Clear();
-            foreach(Permissao p in listapermissoes)
+            foreach (Permissao p in listapermissoes)
             {
                 dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
             }
@@ -249,11 +254,10 @@ namespace _5gpro.Forms
         public void PopularModulos()
         {
             listamodulos = permissaoBLL.BuscaTodasPermissoes().Modulos;
-
-
+            dgvModulos.Rows.Add("000000", "TODOS");
             foreach (Permissao p in listamodulos)
             {
-                dgvModulos.Rows.Add(p.Codigo, p.Nome);
+                dgvModulos.Rows.Add(p.Codigo, p.Nome, p.Nivel);
             }
             dgvModulos.Refresh();
 
@@ -266,32 +270,35 @@ namespace _5gpro.Forms
 
         private void dgvPermissoes_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
         {
-   
+
         }
 
         private void dgvPermissoes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
-
-            if (int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) < 3)
+            if (tbCodGrupoUsuario.Text.Length > 0)
             {
-                dgvPermissoes.CurrentRow.Cells[2].Value = int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) + 1;
-            }
-            else
-            {
-                dgvPermissoes.CurrentRow.Cells[2].Value = 0;
-            }
 
-            //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
-            listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+                if (int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) < 3)
+                {
+                    dgvPermissoes.CurrentRow.Cells[2].Value = int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) + 1;
+                }
+                else
+                {
+                    dgvPermissoes.CurrentRow.Cells[2].Value = 0;
+                }
 
+                //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
+                listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+                Editando(true);
+            }
         }
 
         ///CONSTRUINDO
         ///
         private void SalvaCadastro()
         {
-       
+
             if (editando)
             {
                 grupousuario = new GrupoUsuario();
@@ -496,7 +503,7 @@ namespace _5gpro.Forms
 
         private void tbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btProximo_Click(object sender, EventArgs e)
@@ -517,6 +524,53 @@ namespace _5gpro.Forms
             }
         }
 
+        private void DgvModulos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //AO CLICKAR UMA FILTRA AS PERMISSOES POR MÓDULO, COMPARANDO
+            //OS 2 PRIMEIROS NÚMEROS DO CÓDIGO DO MÓDULO COM OS 2 PRIMEIROS
+            //NÚMEROS DO CÓDIGO DA PERMISSÃO
 
+            dgvPermissoes.Rows.Clear();
+            if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
+            {
+                foreach (Permissao p in listapermissoes)
+                {
+                    if (p.Codigo.Substring(0, 2) == dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2))
+                    {
+                        dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
+                    }
+
+                }
+            }
+            else
+            {
+                popularPermissoes();
+            }
+
+            dgvPermissoes.Refresh();
+
+        }
+
+        private void DgvModulos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
+            //if (tbCodGrupoUsuario.Text.Length > 0)
+            //{
+
+            //    if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
+            //    {
+            //        dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
+            //    }
+            //    else
+            //    {
+            //        dgvModulos.CurrentRow.Cells[2].Value = 0;
+            //    }
+            ///teste
+
+                //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
+                //listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+                //Editando(true);
+            }
+        }
     }
-}
+
