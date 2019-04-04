@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnBotoes = new System.Windows.Forms.Panel();
             this.btRecarregar = new System.Windows.Forms.Button();
             this.btSalvar = new System.Windows.Forms.Button();
@@ -53,6 +53,7 @@
             this.dgvtbcNomeModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbModulos = new System.Windows.Forms.GroupBox();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.dgvtbcNivelModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnBotoes.SuspendLayout();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -230,8 +231,8 @@
             this.dgvPermissoes.AllowUserToDeleteRows = false;
             this.dgvPermissoes.AllowUserToOrderColumns = true;
             this.dgvPermissoes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPermissoes.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvPermissoes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPermissoes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -277,13 +278,14 @@
             this.dgvModulos.AllowUserToDeleteRows = false;
             this.dgvModulos.AllowUserToOrderColumns = true;
             this.dgvModulos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.LightGray;
-            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModulos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvModulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvModulos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigoModulos,
-            this.dgvtbcNomeModulos});
+            this.dgvtbcNomeModulos,
+            this.dgvtbcNivelModulos});
             this.dgvModulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvModulos.Location = new System.Drawing.Point(6, 19);
             this.dgvModulos.MultiSelect = false;
@@ -294,7 +296,9 @@
             this.dgvModulos.Size = new System.Drawing.Size(736, 173);
             this.dgvModulos.TabIndex = 0;
             this.dgvModulos.TabStop = false;
+            this.dgvModulos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellClick);
             this.dgvModulos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModulos_CellContentClick);
+            this.dgvModulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellDoubleClick);
             // 
             // dgvtbcCodigoModulos
             // 
@@ -330,6 +334,12 @@
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.Size = new System.Drawing.Size(741, 20);
             this.tbAjuda.TabIndex = 7;
+            // 
+            // dgvtbcNivelModulos
+            // 
+            this.dgvtbcNivelModulos.HeaderText = "Nível";
+            this.dgvtbcNivelModulos.Name = "dgvtbcNivelModulos";
+            this.dgvtbcNivelModulos.ReadOnly = true;
             // 
             // fmCadastroGrupoUsuario
             // 
@@ -382,5 +392,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
         private System.Windows.Forms.TextBox tbAjuda;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelModulos;
     }
 }
