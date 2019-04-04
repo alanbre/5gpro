@@ -11,7 +11,6 @@ namespace _5gpro.Daos
     class OrcamentoDAO : ConexaoDAO
     {
         PessoaBLL pessoaBLL = new PessoaBLL();
-        UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
 
         public Orcamento BuscaOrcamentoById(int cod)
         {

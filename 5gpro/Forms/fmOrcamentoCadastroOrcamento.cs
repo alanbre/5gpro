@@ -500,7 +500,6 @@ namespace _5gpro.Forms
 
         private void SalvaCadastro()
         {
-            //TODO: IMPLEMENTAR SALVACADASTRO
             if (editando)
             {
                 orcamento = new Orcamento();
@@ -630,7 +629,6 @@ namespace _5gpro.Forms
 
         private void CadastroAnterior()
         {
-            //TODO: IMPLEMENTAR O CADASTROANTERIOR
             //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
             //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
@@ -695,7 +693,6 @@ namespace _5gpro.Forms
 
         private void AbreTelaBuscaOrcamento()
         {
-            //TODO: CRIAR TELA DE BUSCA DE ORÇAMENTO
             var buscaOrcamento = new fmBuscaOrcamento();
             buscaOrcamento.ShowDialog();
             if (buscaOrcamento.orcamentoSelecionado != null)

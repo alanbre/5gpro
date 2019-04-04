@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmEstoqueEntradaDocumentos
+    partial class fmSaidaEmissaoNota
     {
         /// <summary>
         /// Required designer variable.
@@ -545,7 +545,6 @@
             this.dgvItens.Size = new System.Drawing.Size(955, 186);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
-            this.dgvItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItens_CellClick);
             // 
             // dgvtbcCodigo
             // 

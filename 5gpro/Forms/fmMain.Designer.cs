@@ -35,11 +35,11 @@
             this.tsmiCadastroItens = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tESTEGRIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEstoque = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEntradaDoc = new System.Windows.Forms.ToolStripMenuItem();
-            this.tESTEGRIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEmissaoNF = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +48,7 @@
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCadastros,
             this.tsmiOrcamento,
-            this.tsmiEstoque});
+            this.tsmiSaida});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.Size = new System.Drawing.Size(1162, 24);
@@ -103,6 +103,13 @@
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Text = "Cadastro de Grupo de Usuários";
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click);
             // 
+            // tESTEGRIDToolStripMenuItem
+            // 
+            this.tESTEGRIDToolStripMenuItem.Name = "tESTEGRIDToolStripMenuItem";
+            this.tESTEGRIDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.tESTEGRIDToolStripMenuItem.Text = "TESTE GRID";
+            this.tESTEGRIDToolStripMenuItem.Click += new System.EventHandler(this.tESTEGRIDToolStripMenuItem_Click);
+            // 
             // tsmiOrcamento
             // 
             this.tsmiOrcamento.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -118,27 +125,20 @@
             this.tsmiCadastroOrcamentos.Text = "Cadastros de orçamentos";
             this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.tsmiCadastroOrcamentos_Click);
             // 
-            // tsmiEstoque
+            // tsmiSaida
             // 
-            this.tsmiEstoque.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEntradaDoc});
-            this.tsmiEstoque.Name = "tsmiEstoque";
-            this.tsmiEstoque.Size = new System.Drawing.Size(61, 20);
-            this.tsmiEstoque.Text = "Estoque";
+            this.tsmiSaida.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEmissaoNF});
+            this.tsmiSaida.Name = "tsmiSaida";
+            this.tsmiSaida.Size = new System.Drawing.Size(47, 20);
+            this.tsmiSaida.Text = "Saída";
             // 
-            // tsmiEntradaDoc
+            // tsmiEmissaoNF
             // 
-            this.tsmiEntradaDoc.Name = "tsmiEntradaDoc";
-            this.tsmiEntradaDoc.Size = new System.Drawing.Size(200, 22);
-            this.tsmiEntradaDoc.Text = "Entrada de documentos";
-            this.tsmiEntradaDoc.Click += new System.EventHandler(this.tsmiEntradaDoc_Click);
-            // 
-            // tESTEGRIDToolStripMenuItem
-            // 
-            this.tESTEGRIDToolStripMenuItem.Name = "tESTEGRIDToolStripMenuItem";
-            this.tESTEGRIDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.tESTEGRIDToolStripMenuItem.Text = "TESTE GRID";
-            this.tESTEGRIDToolStripMenuItem.Click += new System.EventHandler(this.tESTEGRIDToolStripMenuItem_Click);
+            this.tsmiEmissaoNF.Name = "tsmiEmissaoNF";
+            this.tsmiEmissaoNF.Size = new System.Drawing.Size(190, 22);
+            this.tsmiEmissaoNF.Text = "Emissão de nota fiscal";
+            this.tsmiEmissaoNF.Click += new System.EventHandler(this.tsmiEmissaoNF_Click);
             // 
             // fmMain
             // 
@@ -166,8 +166,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiOrcamento;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroOrcamentos;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroUsuarios;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEstoque;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEntradaDoc;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSaida;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEmissaoNF;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeUsuáriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tESTEGRIDToolStripMenuItem;
     }
