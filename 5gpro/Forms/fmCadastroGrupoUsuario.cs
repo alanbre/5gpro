@@ -21,6 +21,7 @@ namespace _5gpro.Forms
         List<Permissao> listapermissoes = new List<Permissao>();
         List<Permissao> listamodulos = new List<Permissao>();
         Validacao validacao = new Validacao();
+        int NivelTodas = 0;
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -153,6 +154,7 @@ namespace _5gpro.Forms
             tbNomeGrupoUsuario.Text = grupousuario.Nome;
             listapermissoes = permissaoBLL.BuscaPermissoesGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
             popularPermissoes();
+            PopularModulos();
 
 
             ignoraCheckEvent = false;
@@ -209,6 +211,7 @@ namespace _5gpro.Forms
                     tbCodGrupoUsuario.Text = grupousuarioBLL.BuscaProxCodigoDisponivel();
                     listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
                     popularPermissoes();
+                    PopularModulos();
                     grupousuario = null;
                     tbNomeGrupoUsuario.Focus();
                     Editando(true);
@@ -220,6 +223,7 @@ namespace _5gpro.Forms
                 tbCodGrupoUsuario.Text = grupousuarioBLL.BuscaProxCodigoDisponivel();
                 listapermissoes = permissaoBLL.BuscaTodasPermissoes().Todas;
                 popularPermissoes();
+                PopularModulos();
                 grupousuario = null;
                 tbNomeGrupoUsuario.Focus();
                 Editando(true);
@@ -258,27 +262,30 @@ namespace _5gpro.Forms
 
         public void PopularModulos()
         {
-            listamodulos = permissaoBLL.BuscaTodasPermissoes().Modulos;
-            dgvModulos.Rows.Add("000000", "TODOS");
-            foreach (Permissao p in listamodulos)
+            dgvModulos.Rows.Clear();
+            dgvModulos.Rows.Add("000000", "TODOS", NivelTodas);
+            foreach (Permissao p in listapermissoes)
             {
-                dgvModulos.Rows.Add(p.Codigo, p.Nome, p.Nivel);
+                if (p.Codigo.Substring(2, 4) == "0000")
+                {
+                    dgvModulos.Rows.Add(p.Codigo, p.Nome, p.Nivel);
+
+                }
             }
             dgvModulos.Refresh();
-
         }
 
         private void popularPermissoesByCodModulo(string codmodulo)
         {
             dgvPermissoes.Rows.Clear();
 
-                foreach (Permissao p in listapermissoes)
+            foreach (Permissao p in listapermissoes)
+            {
+                if (p.Codigo.Substring(0, 2) == codmodulo.Substring(0, 2) && p.Codigo.Substring(2, 4) != "0000")
                 {
-                    if (p.Codigo.Substring(0, 2) == codmodulo.Substring(0, 2) && p.Codigo.Substring(2, 4) != "0000")
-                    {
-                        dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
-                    }
+                    dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
                 }
+            }
 
             dgvPermissoes.Refresh();
         }
@@ -568,7 +575,7 @@ namespace _5gpro.Forms
             if (tbCodGrupoUsuario.Text.Length > 0 && dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
             {
 
-                if (MessageBox.Show("Deseja alterar TODAS as permissões do grupo " + dgvModulos.CurrentRow.Cells[1].Value.ToString() + " ?",
+                if (MessageBox.Show("Deseja alterar TODAS as permissões do Módulo " + dgvModulos.CurrentRow.Cells[1].Value.ToString() + " ?",
                                         "Aviso de alteração",
                                         MessageBoxButtons.YesNo,
                                         MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -590,12 +597,64 @@ namespace _5gpro.Forms
                             p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
                         }
                     }
-                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2));
+                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                    PopularModulos();
                     Editando(true);
-
                 }
 
             }
+            else
+            {
+                if(tbCodGrupoUsuario.Text.Length > 0 && dgvModulos.CurrentRow.Cells[0].Value.ToString() == "000000")
+                {
+                    if (MessageBox.Show("Deseja alterar TODAS as permissões de TODOS os MÓDULOS" + " ?",
+                        "Aviso de alteração",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+
+                        if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
+                        {
+                            dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
+                        }
+                        else
+                        {
+                            dgvModulos.CurrentRow.Cells[2].Value = 0;
+                        }
+
+                        foreach (Permissao p in listapermissoes)
+                        {
+                                p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();                        
+                        }
+                        NivelTodas = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString());
+                        popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2));
+                        PopularModulos();
+                        Editando(true);
+                    }
+                }
+            }
+        }
+
+        private void DgvModulos_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void DgvModulos_CurrentCellChanged(object sender, EventArgs e)
+        {
+            //MUDAR MODULO NAS SETAS
+            if (dgvModulos.SelectedRows.Count > 0)
+            {
+                if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
+                {
+                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                }
+                else
+                {
+                    popularPermissoes();
+                }
+            }
+
         }
     }
 }

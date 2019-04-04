@@ -299,6 +299,8 @@
             this.dgvModulos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellClick);
             this.dgvModulos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModulos_CellContentClick);
             this.dgvModulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellDoubleClick);
+            this.dgvModulos.CurrentCellChanged += new System.EventHandler(this.DgvModulos_CurrentCellChanged);
+            this.dgvModulos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_RowEnter);
             // 
             // gbModulos
             // 
@@ -343,6 +345,7 @@
             this.dgvtbcNivelModulos.Name = "dgvtbcNivelModulos";
             this.dgvtbcNivelModulos.ReadOnly = true;
             this.dgvtbcNivelModulos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvtbcNivelModulos.Visible = false;
             // 
             // fmCadastroGrupoUsuario
             // 
