@@ -14,4 +14,4 @@ artifacts/
 *.ide-shm
 *.ide-wal
 
-\.vs/5gpro/v16/Server/sqlite3/
+\.vs/
