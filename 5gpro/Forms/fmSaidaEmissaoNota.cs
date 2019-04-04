@@ -339,7 +339,7 @@ namespace _5gpro.Forms
             if (editando)
             {
                 notaFiscal = new NotaFiscal();
-                notaFiscal.NotaSaidaID = int.Parse(tbCodigo.Text);
+                notaFiscal.NotaFiscalID = int.Parse(tbCodigo.Text);
                 notaFiscal.Pessoa = pessoa;
                 notaFiscal.DataEmissao = dtpEmissao.Value;
                 notaFiscal.DataEntradaSaida = dtpSaida.Value;
@@ -350,10 +350,10 @@ namespace _5gpro.Forms
                 notaFiscal.ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalDocumento.Text);
 
                 ICollection<NotaFiscalItem> nfi = new List<NotaFiscalItem>();
-                nfi = itens;
+                //nfi = itens;
                 notaFiscal.NotaFiscalItem = nfi;
 
-                int resultado = notafiscalBLL.SalvarOuAtualizarDocumento(notaFiscal);
+                int resultado = 0;// notafiscalBLL.SalvarOuAtualizarDocumento(notaFiscal);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -423,7 +423,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             tbCodigoCliente.Clear();
-            tbNomeFornecedor.Clear();
+            tbNomeCliente.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpSaida.Value = DateTime.Now;
             tbValorTotItem.Text = "0,00";
@@ -552,7 +552,7 @@ namespace _5gpro.Forms
             if (pessoa != null)
             {
                 tbCodigoCliente.Text = pessoa.PessoaID.ToString();
-                tbNomeFornecedor.Text = pessoa.Nome;
+                tbNomeCliente.Text = pessoa.Nome;
             }
             else
             {

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnBotoes = new System.Windows.Forms.Panel();
             this.btRecarregar = new System.Windows.Forms.Button();
             this.btSalvar = new System.Windows.Forms.Button();
@@ -38,16 +38,16 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
-            this.dtpEntrada = new System.Windows.Forms.DateTimePicker();
+            this.dtpSaida = new System.Windows.Forms.DateTimePicker();
             this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
-            this.lbEntrada = new System.Windows.Forms.Label();
+            this.lbSaida = new System.Windows.Forms.Label();
             this.lbEmissao = new System.Windows.Forms.Label();
-            this.tbNomeFornecedor = new System.Windows.Forms.TextBox();
+            this.tbNomeCliente = new System.Windows.Forms.TextBox();
             this.tbCodigo = new System.Windows.Forms.TextBox();
-            this.lbDocumento = new System.Windows.Forms.Label();
-            this.btProcuraFornecedor = new System.Windows.Forms.Button();
+            this.lbNotaFiscal = new System.Windows.Forms.Label();
+            this.btProcuraCliente = new System.Windows.Forms.Button();
             this.lbFornecedor = new System.Windows.Forms.Label();
-            this.tbCodFornecedor = new System.Windows.Forms.TextBox();
+            this.tbCodigoCliente = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.tbDescontoDocumento = new System.Windows.Forms.TextBox();
             this.lbDescontoDocumento = new System.Windows.Forms.Label();
@@ -199,16 +199,16 @@
             // 
             // gbDadosDocumento
             // 
-            this.gbDadosDocumento.Controls.Add(this.dtpEntrada);
+            this.gbDadosDocumento.Controls.Add(this.dtpSaida);
             this.gbDadosDocumento.Controls.Add(this.dtpEmissao);
-            this.gbDadosDocumento.Controls.Add(this.lbEntrada);
+            this.gbDadosDocumento.Controls.Add(this.lbSaida);
             this.gbDadosDocumento.Controls.Add(this.lbEmissao);
-            this.gbDadosDocumento.Controls.Add(this.tbNomeFornecedor);
+            this.gbDadosDocumento.Controls.Add(this.tbNomeCliente);
             this.gbDadosDocumento.Controls.Add(this.tbCodigo);
-            this.gbDadosDocumento.Controls.Add(this.lbDocumento);
-            this.gbDadosDocumento.Controls.Add(this.btProcuraFornecedor);
+            this.gbDadosDocumento.Controls.Add(this.lbNotaFiscal);
+            this.gbDadosDocumento.Controls.Add(this.btProcuraCliente);
             this.gbDadosDocumento.Controls.Add(this.lbFornecedor);
-            this.gbDadosDocumento.Controls.Add(this.tbCodFornecedor);
+            this.gbDadosDocumento.Controls.Add(this.tbCodigoCliente);
             this.gbDadosDocumento.Location = new System.Drawing.Point(65, 6);
             this.gbDadosDocumento.Name = "gbDadosDocumento";
             this.gbDadosDocumento.Size = new System.Drawing.Size(1162, 181);
@@ -216,14 +216,14 @@
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
             // 
-            // dtpEntrada
+            // dtpSaida
             // 
-            this.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEntrada.Location = new System.Drawing.Point(11, 152);
-            this.dtpEntrada.Name = "dtpEntrada";
-            this.dtpEntrada.Size = new System.Drawing.Size(99, 20);
-            this.dtpEntrada.TabIndex = 9;
-            this.dtpEntrada.ValueChanged += new System.EventHandler(this.dtpEntrada_ValueChanged);
+            this.dtpSaida.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpSaida.Location = new System.Drawing.Point(11, 152);
+            this.dtpSaida.Name = "dtpSaida";
+            this.dtpSaida.Size = new System.Drawing.Size(99, 20);
+            this.dtpSaida.TabIndex = 9;
+            this.dtpSaida.ValueChanged += new System.EventHandler(this.dtpEntrada_ValueChanged);
             // 
             // dtpEmissao
             // 
@@ -236,14 +236,14 @@
             this.dtpEmissao.TabIndex = 7;
             this.dtpEmissao.ValueChanged += new System.EventHandler(this.dtpEmissao_ValueChanged);
             // 
-            // lbEntrada
+            // lbSaida
             // 
-            this.lbEntrada.AutoSize = true;
-            this.lbEntrada.Location = new System.Drawing.Point(7, 136);
-            this.lbEntrada.Name = "lbEntrada";
-            this.lbEntrada.Size = new System.Drawing.Size(84, 13);
-            this.lbEntrada.TabIndex = 8;
-            this.lbEntrada.Text = "Data de entrada";
+            this.lbSaida.AutoSize = true;
+            this.lbSaida.Location = new System.Drawing.Point(7, 136);
+            this.lbSaida.Name = "lbSaida";
+            this.lbSaida.Size = new System.Drawing.Size(75, 13);
+            this.lbSaida.TabIndex = 8;
+            this.lbSaida.Text = "Data de saída";
             // 
             // lbEmissao
             // 
@@ -254,15 +254,15 @@
             this.lbEmissao.TabIndex = 6;
             this.lbEmissao.Text = "Data da emissão";
             // 
-            // tbNomeFornecedor
+            // tbNomeCliente
             // 
-            this.tbNomeFornecedor.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tbNomeFornecedor.Location = new System.Drawing.Point(98, 70);
-            this.tbNomeFornecedor.Name = "tbNomeFornecedor";
-            this.tbNomeFornecedor.ReadOnly = true;
-            this.tbNomeFornecedor.Size = new System.Drawing.Size(355, 20);
-            this.tbNomeFornecedor.TabIndex = 5;
-            this.tbNomeFornecedor.TabStop = false;
+            this.tbNomeCliente.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.tbNomeCliente.Location = new System.Drawing.Point(98, 70);
+            this.tbNomeCliente.Name = "tbNomeCliente";
+            this.tbNomeCliente.ReadOnly = true;
+            this.tbNomeCliente.Size = new System.Drawing.Size(355, 20);
+            this.tbNomeCliente.TabIndex = 5;
+            this.tbNomeCliente.TabStop = false;
             // 
             // tbCodigo
             // 
@@ -272,24 +272,24 @@
             this.tbCodigo.TabIndex = 1;
             this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
             // 
-            // lbDocumento
+            // lbNotaFiscal
             // 
-            this.lbDocumento.AutoSize = true;
-            this.lbDocumento.Location = new System.Drawing.Point(6, 16);
-            this.lbDocumento.Name = "lbDocumento";
-            this.lbDocumento.Size = new System.Drawing.Size(62, 13);
-            this.lbDocumento.TabIndex = 0;
-            this.lbDocumento.Text = "Documento";
+            this.lbNotaFiscal.AutoSize = true;
+            this.lbNotaFiscal.Location = new System.Drawing.Point(6, 16);
+            this.lbNotaFiscal.Name = "lbNotaFiscal";
+            this.lbNotaFiscal.Size = new System.Drawing.Size(57, 13);
+            this.lbNotaFiscal.TabIndex = 0;
+            this.lbNotaFiscal.Text = "Nota fiscal";
             // 
-            // btProcuraFornecedor
+            // btProcuraCliente
             // 
-            this.btProcuraFornecedor.Location = new System.Drawing.Point(76, 70);
-            this.btProcuraFornecedor.Name = "btProcuraFornecedor";
-            this.btProcuraFornecedor.Size = new System.Drawing.Size(20, 20);
-            this.btProcuraFornecedor.TabIndex = 4;
-            this.btProcuraFornecedor.TabStop = false;
-            this.btProcuraFornecedor.UseVisualStyleBackColor = true;
-            this.btProcuraFornecedor.Click += new System.EventHandler(this.btProcuraFornecedor_Click);
+            this.btProcuraCliente.Location = new System.Drawing.Point(76, 70);
+            this.btProcuraCliente.Name = "btProcuraCliente";
+            this.btProcuraCliente.Size = new System.Drawing.Size(20, 20);
+            this.btProcuraCliente.TabIndex = 4;
+            this.btProcuraCliente.TabStop = false;
+            this.btProcuraCliente.UseVisualStyleBackColor = true;
+            this.btProcuraCliente.Click += new System.EventHandler(this.btProcuraFornecedor_Click);
             // 
             // lbFornecedor
             // 
@@ -300,14 +300,14 @@
             this.lbFornecedor.TabIndex = 2;
             this.lbFornecedor.Text = "Fornecedor";
             // 
-            // tbCodFornecedor
+            // tbCodigoCliente
             // 
-            this.tbCodFornecedor.Location = new System.Drawing.Point(9, 71);
-            this.tbCodFornecedor.Name = "tbCodFornecedor";
-            this.tbCodFornecedor.Size = new System.Drawing.Size(65, 20);
-            this.tbCodFornecedor.TabIndex = 3;
-            this.tbCodFornecedor.TextChanged += new System.EventHandler(this.tbCodFornecedor_TextChanged);
-            this.tbCodFornecedor.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodFornecedor_KeyUp);
+            this.tbCodigoCliente.Location = new System.Drawing.Point(9, 71);
+            this.tbCodigoCliente.Name = "tbCodigoCliente";
+            this.tbCodigoCliente.Size = new System.Drawing.Size(65, 20);
+            this.tbCodigoCliente.TabIndex = 3;
+            this.tbCodigoCliente.TextChanged += new System.EventHandler(this.tbCodFornecedor_TextChanged);
+            this.tbCodigoCliente.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodFornecedor_KeyUp);
             // 
             // gbTotais
             // 
@@ -519,8 +519,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -735,7 +735,7 @@
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 17;
             // 
-            // fmEstoqueEntradaDocumentos
+            // fmSaidaEmissaoNota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -749,10 +749,10 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1255, 610);
-            this.Name = "fmEstoqueEntradaDocumentos";
+            this.Name = "fmSaidaEmissaoNota";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "Entrada de documentos";
+            this.Text = "Emissão de notas";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmEstoqueEntradaDocumentos_KeyDown);
             this.pnBotoes.ResumeLayout(false);
             this.gbDadosDocumento.ResumeLayout(false);
@@ -778,15 +778,15 @@
         private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.Button btNovo;
         private System.Windows.Forms.GroupBox gbDadosDocumento;
-        private System.Windows.Forms.TextBox tbNomeFornecedor;
-        private System.Windows.Forms.Button btProcuraFornecedor;
-        private System.Windows.Forms.TextBox tbCodFornecedor;
+        private System.Windows.Forms.TextBox tbNomeCliente;
+        private System.Windows.Forms.Button btProcuraCliente;
+        private System.Windows.Forms.TextBox tbCodigoCliente;
         private System.Windows.Forms.Label lbFornecedor;
         private System.Windows.Forms.TextBox tbCodigo;
-        private System.Windows.Forms.Label lbDocumento;
-        private System.Windows.Forms.DateTimePicker dtpEntrada;
+        private System.Windows.Forms.Label lbNotaFiscal;
+        private System.Windows.Forms.DateTimePicker dtpSaida;
         private System.Windows.Forms.DateTimePicker dtpEmissao;
-        private System.Windows.Forms.Label lbEntrada;
+        private System.Windows.Forms.Label lbSaida;
         private System.Windows.Forms.Label lbEmissao;
         private System.Windows.Forms.GroupBox gbTotais;
         private System.Windows.Forms.TextBox tbDescontoDocumento;

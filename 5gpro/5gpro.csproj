@@ -54,6 +54,7 @@
     <Compile Include="Bll\CidadeBLL.cs" />
     <Compile Include="Bll\EstadoBLL.cs" />
     <Compile Include="Bll\GrupoUsuarioBLL.cs" />
+    <Compile Include="Bll\NotaFiscalBLL.cs" />
     <Compile Include="Bll\OrcamentoBLL.cs" />
     <Compile Include="Bll\PermissaoBLL.cs" />
     <Compile Include="Bll\PessoaBLL.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
+    <Compile Include="Daos\NotaFiscalDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
@@ -72,8 +74,8 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
-    <Compile Include="Entities\NotaSaida.cs" />
-    <Compile Include="Entities\NotaSaidaItem.cs" />
+    <Compile Include="Entities\NotaFiscal.cs" />
+    <Compile Include="Entities\NotaFiscalItem.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
@@ -120,6 +122,12 @@
     <Compile Include="Forms\fmCadastroGrupoUsuario.Designer.cs">
       <DependentUpon>fmCadastroGrupoUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCadastroItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroItem.Designer.cs">
+      <DependentUpon>fmCadastroItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCadastroPais.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,12 +152,6 @@
     <Compile Include="Forms\fmCadastroFuncionario.Designer.cs">
       <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmCadastroItens.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmCadastroItens.Designer.cs">
-      <DependentUpon>fmCadastroItens.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\fmCadastroPessoa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,12 +170,6 @@
     <Compile Include="Forms\fmBuscaGrupoUsuario.Designer.cs">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmEstoqueEntradaDocumentos.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmEstoqueEntradaDocumentos.Designer.cs">
-      <DependentUpon>fmEstoqueEntradaDocumentos.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -191,6 +187,12 @@
     </Compile>
     <Compile Include="Forms\fmOrcamentoCadastroOrcamento.Designer.cs">
       <DependentUpon>fmOrcamentoCadastroOrcamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmSaidaEmissaoNota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSaidaEmissaoNota.Designer.cs">
+      <DependentUpon>fmSaidaEmissaoNota.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1_Load.cs">
       <SubType>Form</SubType>
@@ -234,8 +236,8 @@
     <EmbeddedResource Include="Forms\fmCadastroGrupoUsuario.resx">
       <DependentUpon>fmCadastroGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroItens.resx">
-      <DependentUpon>fmCadastroItens.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCadastroItem.resx">
+      <DependentUpon>fmCadastroItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPais.resx">
       <DependentUpon>fmCadastroPais.cs</DependentUpon>
@@ -249,9 +251,6 @@
     <EmbeddedResource Include="Forms\fmBuscaGrupoUsuario.resx">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmEstoqueEntradaDocumentos.resx">
-      <DependentUpon>fmEstoqueEntradaDocumentos.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -260,6 +259,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmOrcamentoCadastroOrcamento.resx">
       <DependentUpon>fmOrcamentoCadastroOrcamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSaidaEmissaoNota.resx">
+      <DependentUpon>fmSaidaEmissaoNota.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1_Load.resx">
       <DependentUpon>Form1_Load.cs</DependentUpon>
