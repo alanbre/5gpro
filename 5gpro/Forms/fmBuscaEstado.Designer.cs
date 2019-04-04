@@ -59,6 +59,7 @@
             this.dgvEstados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEstados.Size = new System.Drawing.Size(560, 360);
             this.dgvEstados.TabIndex = 2;
+            this.dgvEstados.TabStop = false;
             this.dgvEstados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEstados_CellDoubleClick);
             // 
             // btPesquisar

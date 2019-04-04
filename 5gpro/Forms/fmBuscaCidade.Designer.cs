@@ -127,6 +127,7 @@
             this.dgvCidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCidades.Size = new System.Drawing.Size(560, 360);
             this.dgvCidades.TabIndex = 3;
+            this.dgvCidades.TabStop = false;
             this.dgvCidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCidades_CellDoubleClick);
             // 
             // fmBuscaCidade

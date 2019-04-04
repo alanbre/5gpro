@@ -49,11 +49,11 @@
             this.dgvtbcNomePermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNivelPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvModulos = new System.Windows.Forms.DataGridView();
-            this.gbModulos = new System.Windows.Forms.GroupBox();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.dgvtbcCodigoModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNomeModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNivelModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbModulos = new System.Windows.Forms.GroupBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.pnBotoes.SuspendLayout();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -299,25 +299,8 @@
             this.dgvModulos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellClick);
             this.dgvModulos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvModulos_CellContentClick);
             this.dgvModulos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellDoubleClick);
-            // 
-            // gbModulos
-            // 
-            this.gbModulos.Controls.Add(this.dgvModulos);
-            this.gbModulos.Location = new System.Drawing.Point(74, 111);
-            this.gbModulos.Name = "gbModulos";
-            this.gbModulos.Size = new System.Drawing.Size(747, 198);
-            this.gbModulos.TabIndex = 6;
-            this.gbModulos.TabStop = false;
-            this.gbModulos.Text = "Módulos";
-            // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Enabled = false;
-            this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(81, 550);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(741, 20);
-            this.tbAjuda.TabIndex = 7;
+            this.dgvModulos.CurrentCellChanged += new System.EventHandler(this.DgvModulos_CurrentCellChanged);
+            this.dgvModulos.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_RowEnter);
             // 
             // dgvtbcCodigoModulos
             // 
@@ -343,6 +326,26 @@
             this.dgvtbcNivelModulos.Name = "dgvtbcNivelModulos";
             this.dgvtbcNivelModulos.ReadOnly = true;
             this.dgvtbcNivelModulos.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvtbcNivelModulos.Visible = false;
+            // 
+            // gbModulos
+            // 
+            this.gbModulos.Controls.Add(this.dgvModulos);
+            this.gbModulos.Location = new System.Drawing.Point(74, 111);
+            this.gbModulos.Name = "gbModulos";
+            this.gbModulos.Size = new System.Drawing.Size(747, 198);
+            this.gbModulos.TabIndex = 6;
+            this.gbModulos.TabStop = false;
+            this.gbModulos.Text = "Módulos";
+            // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Enabled = false;
+            this.tbAjuda.HideSelection = false;
+            this.tbAjuda.Location = new System.Drawing.Point(81, 550);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(741, 20);
+            this.tbAjuda.TabIndex = 7;
             // 
             // fmCadastroGrupoUsuario
             // 
@@ -354,9 +357,14 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbGrupoDeUsuario);
             this.Controls.Add(this.pnBotoes);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "fmCadastroGrupoUsuario";
-            this.Text = "fmCadastroGrupoUsuario";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Cadastro de Grupos de Usuário";
             this.Load += new System.EventHandler(this.fmCadastroGrupoUsuario_Load);
             this.pnBotoes.ResumeLayout(false);
             this.gbGrupoDeUsuario.ResumeLayout(false);

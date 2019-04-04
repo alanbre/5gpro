@@ -28,21 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoUsuario = new System.Windows.Forms.DataGridView();
             this.tbFiltroNomeGrupoUsuario = new System.Windows.Forms.TextBox();
             this.btPesquisar = new System.Windows.Forms.Button();
+            this.DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataGridViewTextBoxNomeGrupoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoUsuario)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvGrupoUsuario
             // 
             this.dgvGrupoUsuario.AllowUserToAddRows = false;
+            this.dgvGrupoUsuario.AllowUserToDeleteRows = false;
+            this.dgvGrupoUsuario.AllowUserToOrderColumns = true;
+            this.dgvGrupoUsuario.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvGrupoUsuario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvGrupoUsuario.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvGrupoUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGrupoUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DataGridViewTextBoxColumn,
+            this.DataGridViewTextBoxNomeGrupoUsuario});
             this.dgvGrupoUsuario.Location = new System.Drawing.Point(12, 43);
+            this.dgvGrupoUsuario.MultiSelect = false;
             this.dgvGrupoUsuario.Name = "dgvGrupoUsuario";
+            this.dgvGrupoUsuario.ReadOnly = true;
+            this.dgvGrupoUsuario.RowHeadersVisible = false;
+            this.dgvGrupoUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGrupoUsuario.Size = new System.Drawing.Size(560, 406);
             this.dgvGrupoUsuario.TabIndex = 0;
+            this.dgvGrupoUsuario.TabStop = false;
+            this.dgvGrupoUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvGrupoUsuario_CellContentClick);
             this.dgvGrupoUsuario.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrupoUsuario_CellDoubleClick);
             // 
             // tbFiltroNomeGrupoUsuario
@@ -62,6 +79,22 @@
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            // 
+            // DataGridViewTextBoxColumn
+            // 
+            this.DataGridViewTextBoxColumn.HeaderText = "Código";
+            this.DataGridViewTextBoxColumn.MinimumWidth = 80;
+            this.DataGridViewTextBoxColumn.Name = "DataGridViewTextBoxColumn";
+            this.DataGridViewTextBoxColumn.ReadOnly = true;
+            this.DataGridViewTextBoxColumn.Width = 80;
+            // 
+            // DataGridViewTextBoxNomeGrupoUsuario
+            // 
+            this.DataGridViewTextBoxNomeGrupoUsuario.HeaderText = "Nome";
+            this.DataGridViewTextBoxNomeGrupoUsuario.MinimumWidth = 250;
+            this.DataGridViewTextBoxNomeGrupoUsuario.Name = "DataGridViewTextBoxNomeGrupoUsuario";
+            this.DataGridViewTextBoxNomeGrupoUsuario.ReadOnly = true;
+            this.DataGridViewTextBoxNomeGrupoUsuario.Width = 250;
             // 
             // fmBuscaGrupoUsuario
             // 
@@ -90,5 +123,7 @@
         private System.Windows.Forms.DataGridView dgvGrupoUsuario;
         private System.Windows.Forms.TextBox tbFiltroNomeGrupoUsuario;
         private System.Windows.Forms.Button btPesquisar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxNomeGrupoUsuario;
     }
 }
