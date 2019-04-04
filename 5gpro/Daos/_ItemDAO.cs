@@ -1,4 +1,5 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Bll;
+using _5gpro.Entities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace _5gpro.Daos
 {
     class _ItemDAO : ConexaoDAO
     {
+        UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
+
 
         public int SalvarOuAtualizarItem(_Item _item)
         {
@@ -77,7 +80,7 @@ namespace _5gpro.Daos
                     _item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
                     _item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
                     _item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    _item.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
+                    _item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
                     reader.Close();
                 }
             }
