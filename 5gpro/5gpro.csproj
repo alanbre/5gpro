@@ -98,6 +98,12 @@
     <Compile Include="Forms\fmBuscaItem.Designer.cs">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaNotaFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaNotaFiscal.Designer.cs">
+      <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaNotaFiscal.resx">
+      <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaOrcamento.resx">
       <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>

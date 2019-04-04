@@ -845,7 +845,6 @@ namespace _5gpro.Forms
             }
         }
 
-
         private void CalculaTotalDocumento()
         {
             if (itens.Count > 0)
