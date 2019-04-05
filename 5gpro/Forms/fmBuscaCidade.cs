@@ -73,22 +73,41 @@ namespace _5gpro.Forms
         private void BuscaCidades()
         {
 
-
-            //COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
-            DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Cidade", typeof(string));
-            table.Columns.Add("Código do estado", typeof(string));
-            table.Columns.Add("Estado", typeof(string));
-            table.Columns.Add("UF", typeof(string));
-
+            dgvCidades.Rows.Clear();
             Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
             foreach (Cidade c in Cidades)
             {
-                table.Rows.Add(c.CidadeID, c.Nome, c.Estado.EstadoID, c.Estado.Nome, c.Estado.Uf);
+                rows.Add(new DataGridViewRow());
+                rows[rows.Count - 1].CreateCells(dgvCidades,
+                c.CidadeID,
+                c.Nome,
+                c.Estado.EstadoID,
+                c.Estado.Nome,
+                c.Estado.Uf
+                );
             }
-            dgvCidades.DataSource = table;
+            dgvCidades.Rows.AddRange(rows.ToArray());
+            dgvCidades.Refresh();
+
+
+
+            //COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
+            //DataTable table = new DataTable();
+            //table.Columns.Add("Código", typeof(string));
+            //table.Columns.Add("Cidade", typeof(string));
+            //table.Columns.Add("Código do estado", typeof(string));
+            //table.Columns.Add("Estado", typeof(string));
+            //table.Columns.Add("UF", typeof(string));
+
+            //Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
+
+            //foreach (Cidade c in Cidades)
+            //{
+            //    table.Rows.Add(c.CidadeID, c.Nome, c.Estado.EstadoID, c.Estado.Nome, c.Estado.Uf);
+            //}
+            //dgvCidades.DataSource = table;
         }
 
 
