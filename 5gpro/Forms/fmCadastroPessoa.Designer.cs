@@ -41,10 +41,6 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
-            this.btBuscaCidade = new System.Windows.Forms.Button();
-            this.tbNomeCidade = new System.Windows.Forms.TextBox();
-            this.tbCodCidade = new System.Windows.Forms.TextBox();
-            this.lbCidade = new System.Windows.Forms.Label();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
             this.mtbTelefone = new System.Windows.Forms.MaskedTextBox();
@@ -68,6 +64,7 @@
             this.btBuscar = new System.Windows.Forms.Button();
             this.btNovo = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -214,10 +211,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnDados.Controls.Add(this.btBuscaCidade);
-            this.pnDados.Controls.Add(this.tbNomeCidade);
-            this.pnDados.Controls.Add(this.tbCodCidade);
-            this.pnDados.Controls.Add(this.lbCidade);
+            this.pnDados.Controls.Add(this.buscaCidade);
             this.pnDados.Controls.Add(this.tbEmail);
             this.pnDados.Controls.Add(this.lbEmail);
             this.pnDados.Controls.Add(this.mtbTelefone);
@@ -236,46 +230,6 @@
             this.pnDados.Name = "pnDados";
             this.pnDados.Size = new System.Drawing.Size(1110, 305);
             this.pnDados.TabIndex = 2;
-            // 
-            // btBuscaCidade
-            // 
-            this.btBuscaCidade.Location = new System.Drawing.Point(85, 142);
-            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btBuscaCidade.Name = "btBuscaCidade";
-            this.btBuscaCidade.Size = new System.Drawing.Size(20, 20);
-            this.btBuscaCidade.TabIndex = 1;
-            this.btBuscaCidade.TabStop = false;
-            this.btBuscaCidade.UseVisualStyleBackColor = true;
-            this.btBuscaCidade.Click += new System.EventHandler(this.btBuscaCidade_Click);
-            // 
-            // tbNomeCidade
-            // 
-            this.tbNomeCidade.Enabled = false;
-            this.tbNomeCidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNomeCidade.Location = new System.Drawing.Point(107, 143);
-            this.tbNomeCidade.Name = "tbNomeCidade";
-            this.tbNomeCidade.Size = new System.Drawing.Size(436, 21);
-            this.tbNomeCidade.TabIndex = 16;
-            // 
-            // tbCodCidade
-            // 
-            this.tbCodCidade.Location = new System.Drawing.Point(15, 143);
-            this.tbCodCidade.MaxLength = 5;
-            this.tbCodCidade.Name = "tbCodCidade";
-            this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
-            this.tbCodCidade.TabIndex = 8;
-            this.tbCodCidade.TextChanged += new System.EventHandler(this.tbCodCidade_TextChanged);
-            this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
-            this.tbCodCidade.Leave += new System.EventHandler(this.tbCodCidade_Leave);
-            // 
-            // lbCidade
-            // 
-            this.lbCidade.AutoSize = true;
-            this.lbCidade.Location = new System.Drawing.Point(13, 127);
-            this.lbCidade.Name = "lbCidade";
-            this.lbCidade.Size = new System.Drawing.Size(40, 13);
-            this.lbCidade.TabIndex = 8;
-            this.lbCidade.Text = "Cidade";
             // 
             // tbEmail
             // 
@@ -521,6 +475,14 @@
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 4;
             // 
+            // buscaCidade
+            // 
+            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 16;
+            // 
             // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -591,11 +553,8 @@
         private System.Windows.Forms.Button btProximo;
         private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.TextBox tbAjuda;
-        private System.Windows.Forms.Button btBuscaCidade;
-        private System.Windows.Forms.TextBox tbNomeCidade;
-        private System.Windows.Forms.TextBox tbCodCidade;
-        private System.Windows.Forms.Label lbCidade;
         private System.Windows.Forms.CheckedListBox cblAtuacao;
         private System.Windows.Forms.Button btRecarregar;
+        private Controls.BuscaCidade buscaCidade;
     }
 }

@@ -38,7 +38,6 @@ namespace _5gpro.Forms
             table.Columns.Add("% Desc.", typeof(decimal));
             table.Columns.Add("Desc. Item", typeof(decimal));
             dgvItens.DataSource = table;
-            AlteraBotoes();
         }
 
         private void fmCadastroOrcamento_KeyDown(object sender, KeyEventArgs e)
@@ -286,12 +285,12 @@ namespace _5gpro.Forms
 
 
 
-        private void btNovo_Click(object sender, EventArgs e)
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
             NovoCadastro();
         }
 
-        private void btBuscar_Click(object sender, EventArgs e)
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
             if (!editando)
             {
@@ -299,25 +298,26 @@ namespace _5gpro.Forms
             }
         }
 
-        private void btSalvar_Click(object sender, EventArgs e)
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
             SalvaCadastro();
         }
 
-        private void btRecarregar_Click(object sender, EventArgs e)
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
             RecarregaDados(orcamento);
         }
-
-        private void btProximo_Click(object sender, EventArgs e)
+        
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
             ProximoCadastro();
         }
 
-        private void btAnterior_Click(object sender, EventArgs e)
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
+
 
         private void btProcuraItem_Click(object sender, EventArgs e)
         {
@@ -439,6 +439,15 @@ namespace _5gpro.Forms
             if (!ignoracheckevent) { Editando(true); }
         }
 
+        private void TbDescontoOrcamento_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void TbValorTotalOrcamento_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
 
 
 
@@ -721,37 +730,11 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AlteraBotoes()
-        {
-            if (editando)
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
-            }
-            else
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
-            }
-        }
-
         private void Editando(bool edit)
         {
             editando = edit;
             buscaPessoa.Editando(edit);
-            AlteraBotoes();
+            menuVertical.Editando(edit);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)
@@ -815,6 +798,7 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = false;
             }
         }
+
 
         private void PreencheGridItens(List<_Item> itens)
         {

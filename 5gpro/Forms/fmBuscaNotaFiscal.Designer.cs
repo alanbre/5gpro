@@ -58,7 +58,7 @@
             this.btProcuraCliente = new System.Windows.Forms.Button();
             this.tbCodCliente = new System.Windows.Forms.TextBox();
             this.lbCliente = new System.Windows.Forms.Label();
-            this.buscaCidade1 = new _5gpro.Controls.buscaCidade();
+            this.buscaCidade1 = new _5gpro.Controls.BuscaCidade();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -424,6 +424,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoTotalItens;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoOrcamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalOrçamento;
-        private Controls.buscaCidade buscaCidade1;
+        private Controls.BuscaCidade buscaCidade1;
     }
 }

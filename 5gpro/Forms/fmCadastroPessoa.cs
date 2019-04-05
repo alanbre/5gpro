@@ -11,9 +11,7 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form
     {
         Pessoa pessoa;
-        Cidade cidade;
         PessoaBLL pessoaBLL = new PessoaBLL();
-        CidadeBLL cidadeBLL = new CidadeBLL();
         Validacao validacao = new Validacao();
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
@@ -22,8 +20,8 @@ namespace _5gpro.Forms
         bool ignoraCheckEvent;
 
 
-       
-       
+
+
 
         public fmCadastroPessoa()
         {
@@ -91,11 +89,6 @@ namespace _5gpro.Forms
             SalvaCadastro();
         }
 
-        private void btBuscaCidade_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaCidade();
-        }
-
         private void btRecarregar_Click(object sender, EventArgs e)
         {
             //Se não houver uma pessoa setada (por qualquer motivo) ele limpa os campos. Se tiver pessoa recarrega com as informações do banco.
@@ -125,7 +118,7 @@ namespace _5gpro.Forms
         //EVENTOS DE KEY PRESS
         private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -188,7 +181,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            
+
             tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
@@ -223,7 +216,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        
+
                         Pessoa newpessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigo.Text));
                         if (newpessoa != null)
                         {
@@ -245,22 +238,9 @@ namespace _5gpro.Forms
                 }
                 else
                 {
-                    
-                }
-                
-            }
-        }
 
-        private void tbCodCidade_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodCidade.Text));
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
+                }
+
             }
         }
 
@@ -274,15 +254,6 @@ namespace _5gpro.Forms
             {
                 e.Handled = true;
                 AbreTelaBuscaPessoa();
-            }
-        }
-
-        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaCidade();
             }
         }
 
@@ -374,7 +345,7 @@ namespace _5gpro.Forms
                 pessoa.Numero = tbNumero.Text;
                 pessoa.Bairro = tbBairro.Text;
                 pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodCidade.Text));
+                pessoa.Cidade = buscaCidade.cidade;
                 pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
                 pessoa.Telefone = mtbTelefone.TextNoMask();
                 pessoa.Email = tbEmail.Text;
@@ -597,8 +568,7 @@ namespace _5gpro.Forms
             tbNumero.Clear();
             tbBairro.Clear();
             tbComplemento.Clear();
-            tbCodCidade.Clear();
-            tbNomeCidade.Clear();
+            buscaCidade.Limpa();
             mtbCpfCnpj.Clear();
             mtbTelefone.Clear();
             tbEmail.Clear();
@@ -615,7 +585,7 @@ namespace _5gpro.Forms
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
-            tbCodigo.Text = pessoa.PessoaID.ToString() ;
+            tbCodigo.Text = pessoa.PessoaID.ToString();
             tbNome.Text = pessoa.Nome;
             tbFantasia.Text = pessoa.Fantasia;
             if (pessoa.TipoPessoa == "F")
@@ -632,16 +602,11 @@ namespace _5gpro.Forms
             tbNumero.Text = pessoa.Numero;
             tbBairro.Text = pessoa.Bairro;
             tbComplemento.Text = pessoa.Complemento;
-            tbCodCidade.Text = pessoa.Cidade.CidadeID.ToString();
             mtbCpfCnpj.Text = pessoa.CpfCnpj;
             mtbTelefone.Text = pessoa.Telefone;
             tbEmail.Text = pessoa.Email;
 
-            if (pessoa.Cidade != null)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade.CidadeID);
-                PreencheCamposCidade(cidade);
-            }
+            buscaCidade.PreencheCampos(pessoa.Cidade);
 
             foreach (string atuacao in pessoa.Atuacao)
             {
@@ -657,38 +622,5 @@ namespace _5gpro.Forms
             }
             ignoraCheckEvent = false;
         }
-
-        private void PreencheCamposCidade(Cidade cidade)
-        {
-            if (cidade != null)
-            {
-                tbCodCidade.Text = cidade.CidadeID.ToString();
-                tbNomeCidade.Text = cidade.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Cidade não encontrada no banco de dados",
-                "Cidade não encontrada",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodCidade.Focus();
-                tbCodCidade.SelectAll();
-            }
-        }
-
-        private void AbreTelaBuscaCidade()
-        {
-            var buscaCidade = new fmBuscaCidade();
-            buscaCidade.ShowDialog();
-            if (buscaCidade.cidadeSelecionada != null)
-            {
-                cidade = buscaCidade.cidadeSelecionada;
-                PreencheCamposCidade(cidade);
-                Editando(true);
-            }
-        }
-
-
-
     }
 }

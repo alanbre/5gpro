@@ -30,8 +30,8 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbFiltrosOrcamento = new System.Windows.Forms.GroupBox();
-            this.buscaPessoa = new _5gpro.Controls.buscaPessoa();
-            this.buscaCidade = new _5gpro.Controls.buscaCidade();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.cblFiltros = new System.Windows.Forms.CheckedListBox();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -480,7 +480,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoTotalItens;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoOrcamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalOrçamento;
-        private Controls.buscaCidade buscaCidade;
-        private Controls.buscaPessoa buscaPessoa;
+        private Controls.BuscaCidade buscaCidade;
+        private Controls.BuscaPessoa buscaPessoa;
     }
 }

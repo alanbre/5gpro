@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Controls
 {
-    partial class buscaCidade
+    partial class BuscaCidade
     {
         /// <summary> 
         /// Variável de designer necessária.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.tbNomeCidade = new System.Windows.Forms.TextBox();
-            this.tbFiltroCodigoCidade = new System.Windows.Forms.TextBox();
+            this.tbCodigoCidade = new System.Windows.Forms.TextBox();
             this.lbFiltroCidade = new System.Windows.Forms.Label();
             this.btBuscaCidade = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -44,16 +44,17 @@
             this.tbNomeCidade.TabIndex = 7;
             this.tbNomeCidade.TabStop = false;
             // 
-            // tbFiltroCodigoCidade
+            // tbCodigoCidade
             // 
-            this.tbFiltroCodigoCidade.Location = new System.Drawing.Point(6, 17);
-            this.tbFiltroCodigoCidade.Margin = new System.Windows.Forms.Padding(2);
-            this.tbFiltroCodigoCidade.MaxLength = 5;
-            this.tbFiltroCodigoCidade.Name = "tbFiltroCodigoCidade";
-            this.tbFiltroCodigoCidade.Size = new System.Drawing.Size(65, 20);
-            this.tbFiltroCodigoCidade.TabIndex = 5;
-            this.tbFiltroCodigoCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbFiltroCodigoCidade_KeyUp);
-            this.tbFiltroCodigoCidade.Leave += new System.EventHandler(this.TbFiltroCodigoCidade_Leave);
+            this.tbCodigoCidade.Location = new System.Drawing.Point(6, 17);
+            this.tbCodigoCidade.Margin = new System.Windows.Forms.Padding(2);
+            this.tbCodigoCidade.MaxLength = 5;
+            this.tbCodigoCidade.Name = "tbCodigoCidade";
+            this.tbCodigoCidade.Size = new System.Drawing.Size(65, 20);
+            this.tbCodigoCidade.TabIndex = 5;
+            this.tbCodigoCidade.TextChanged += new System.EventHandler(this.TbCodigoCidade_TextChanged);
+            this.tbCodigoCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbFiltroCodigoCidade_KeyUp);
+            this.tbCodigoCidade.Leave += new System.EventHandler(this.TbFiltroCodigoCidade_Leave);
             // 
             // lbFiltroCidade
             // 
@@ -83,7 +84,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.btBuscaCidade);
             this.Controls.Add(this.tbNomeCidade);
-            this.Controls.Add(this.tbFiltroCodigoCidade);
+            this.Controls.Add(this.tbCodigoCidade);
             this.Controls.Add(this.lbFiltroCidade);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "buscaCidade";
@@ -97,7 +98,7 @@
 
         private System.Windows.Forms.Button btBuscaCidade;
         private System.Windows.Forms.TextBox tbNomeCidade;
-        private System.Windows.Forms.TextBox tbFiltroCodigoCidade;
+        private System.Windows.Forms.TextBox tbCodigoCidade;
         private System.Windows.Forms.Label lbFiltroCidade;
     }
 }

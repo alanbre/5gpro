@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace _5gpro.Controls
 {
-    public partial class buscaPessoa : UserControl
+    public partial class BuscaPessoa : UserControl
     {
         public Pessoa pessoa = new Pessoa();
         public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
@@ -39,7 +39,7 @@ namespace _5gpro.Controls
 
 
 
-        public buscaPessoa()
+        public BuscaPessoa()
         {
             InitializeComponent();
         }
@@ -64,12 +64,14 @@ namespace _5gpro.Controls
 
         private void TbCodigoPessoa_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3 && !editando)
+            if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
                 AbreTelaBuscaPessoa();
             }
         }
+
+
 
         private void AbreTelaBuscaPessoa()
         {
@@ -101,6 +103,13 @@ namespace _5gpro.Controls
             }
         }
 
+        public void PreencheCampos(Pessoa pessoa)
+        {
+            this.pessoa = pessoa;
+            tbCodigoPessoa.Text = this.pessoa != null ? this.pessoa.PessoaID.ToString() : "";
+            tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
+        }
+
         public void Editando(bool edit)
         {
             editando = edit;
@@ -113,12 +122,6 @@ namespace _5gpro.Controls
             pessoa = null;
         }
 
-        public void PreencheCampos(Pessoa pessoa)
-        {
-            this.pessoa = pessoa;
-            tbCodigoPessoa.Text = this.pessoa != null ? this.pessoa.PessoaID.ToString() : "";
-            tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
-        }
 
 
 

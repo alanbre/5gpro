@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Controls
 {
-    partial class buscaPessoa
+    partial class BuscaPessoa
     {
         /// <summary> 
         /// Variável de designer necessária.

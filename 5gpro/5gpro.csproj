@@ -61,17 +61,23 @@
     <Compile Include="Bll\UnimedidaBLL.cs" />
     <Compile Include="Bll\UsuarioBLL.cs" />
     <Compile Include="Bll\_ItemBLL.cs" />
-    <Compile Include="Controls\buscaCidade.cs">
+    <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\buscaCidade.Designer.cs">
-      <DependentUpon>buscaCidade.cs</DependentUpon>
+    <Compile Include="Controls\BuscaCidade.Designer.cs">
+      <DependentUpon>BuscaCidade.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\buscaPessoa.cs">
+    <Compile Include="Controls\BuscaPessoa.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\buscaPessoa.Designer.cs">
-      <DependentUpon>buscaPessoa.cs</DependentUpon>
+    <Compile Include="Controls\BuscaPessoa.Designer.cs">
+      <DependentUpon>BuscaPessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MenuVertical.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuVertical.Designer.cs">
+      <DependentUpon>MenuVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
@@ -227,11 +233,14 @@
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\buscaCidade.resx">
-      <DependentUpon>buscaCidade.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\BuscaCidade.resx">
+      <DependentUpon>BuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\buscaPessoa.resx">
-      <DependentUpon>buscaPessoa.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\BuscaPessoa.resx">
+      <DependentUpon>BuscaPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MenuVertical.resx">
+      <DependentUpon>MenuVertical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
@@ -469,6 +478,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_search_filled_17px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_recurring_appointment_filled_45px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_search_filled_45px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_recurring_appointment_filled_43px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
