@@ -60,6 +60,23 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
+        private void FmOrcamentoCadastroOrcamento_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
 
 
 

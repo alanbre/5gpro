@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGridDocumentos = new System.Windows.Forms.GroupBox();
             this.dgvOrcamentos = new System.Windows.Forms.DataGridView();
             this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,11 +54,8 @@
             this.lbAFiltroDataEmissao = new System.Windows.Forms.Label();
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
-            this.tbNomeCliente = new System.Windows.Forms.TextBox();
-            this.btProcuraCliente = new System.Windows.Forms.Button();
-            this.tbCodCliente = new System.Windows.Forms.TextBox();
-            this.lbCliente = new System.Windows.Forms.Label();
-            this.buscaCidade1 = new _5gpro.Controls.BuscaCidade();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -83,8 +80,8 @@
             this.dgvOrcamentos.AllowUserToDeleteRows = false;
             this.dgvOrcamentos.AllowUserToOrderColumns = true;
             this.dgvOrcamentos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrcamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -187,7 +184,8 @@
             // 
             this.gbFiltrosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltrosDocumento.Controls.Add(this.buscaCidade1);
+            this.gbFiltrosDocumento.Controls.Add(this.buscaPessoa);
+            this.gbFiltrosDocumento.Controls.Add(this.buscaCidade);
             this.gbFiltrosDocumento.Controls.Add(this.btPesquisar);
             this.gbFiltrosDocumento.Controls.Add(this.lbAValorTotalDocumento);
             this.gbFiltrosDocumento.Controls.Add(this.tbFiltroValorTotalDocumentoInicial);
@@ -201,10 +199,6 @@
             this.gbFiltrosDocumento.Controls.Add(this.lbAFiltroDataEmissao);
             this.gbFiltrosDocumento.Controls.Add(this.dtpFiltroDataEmissaoFinal);
             this.gbFiltrosDocumento.Controls.Add(this.dtpFiltroDataEmissaoInicial);
-            this.gbFiltrosDocumento.Controls.Add(this.tbNomeCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.btProcuraCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.tbCodCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.lbCliente);
             this.gbFiltrosDocumento.Location = new System.Drawing.Point(12, 12);
             this.gbFiltrosDocumento.Name = "gbFiltrosDocumento";
             this.gbFiltrosDocumento.Size = new System.Drawing.Size(1068, 174);
@@ -333,47 +327,22 @@
             this.dtpFiltroDataEmissaoInicial.TabIndex = 13;
             this.dtpFiltroDataEmissaoInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
-            // tbNomeCliente
+            // buscaCidade
             // 
-            this.tbNomeCliente.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tbNomeCliente.Location = new System.Drawing.Point(100, 72);
-            this.tbNomeCliente.Name = "tbNomeCliente";
-            this.tbNomeCliente.ReadOnly = true;
-            this.tbNomeCliente.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeCliente.TabIndex = 7;
-            this.tbNomeCliente.TabStop = false;
+            this.buscaCidade.Location = new System.Drawing.Point(3, 16);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 41;
             // 
-            // btProcuraCliente
+            // buscaPessoa
             // 
-            this.btProcuraCliente.Location = new System.Drawing.Point(77, 71);
-            this.btProcuraCliente.Name = "btProcuraCliente";
-            this.btProcuraCliente.Size = new System.Drawing.Size(20, 20);
-            this.btProcuraCliente.TabIndex = 6;
-            this.btProcuraCliente.TabStop = false;
-            this.btProcuraCliente.UseVisualStyleBackColor = true;
-            // 
-            // tbCodCliente
-            // 
-            this.tbCodCliente.Location = new System.Drawing.Point(10, 71);
-            this.tbCodCliente.Name = "tbCodCliente";
-            this.tbCodCliente.Size = new System.Drawing.Size(65, 20);
-            this.tbCodCliente.TabIndex = 5;
-            // 
-            // lbCliente
-            // 
-            this.lbCliente.AutoSize = true;
-            this.lbCliente.Location = new System.Drawing.Point(7, 55);
-            this.lbCliente.Name = "lbCliente";
-            this.lbCliente.Size = new System.Drawing.Size(39, 13);
-            this.lbCliente.TabIndex = 4;
-            this.lbCliente.Text = "Cliente";
-            // 
-            // buscaCidade1
-            // 
-            this.buscaCidade1.Location = new System.Drawing.Point(6, 16);
-            this.buscaCidade1.Name = "buscaCidade1";
-            this.buscaCidade1.Size = new System.Drawing.Size(450, 45);
-            this.buscaCidade1.TabIndex = 41;
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 54);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 42;
             // 
             // fmBuscaNotaFiscal
             // 
@@ -411,10 +380,6 @@
         private System.Windows.Forms.Label lbAFiltroDataEmissao;
         private System.Windows.Forms.DateTimePicker dtpFiltroDataEmissaoFinal;
         private System.Windows.Forms.DateTimePicker dtpFiltroDataEmissaoInicial;
-        private System.Windows.Forms.TextBox tbNomeCliente;
-        private System.Windows.Forms.Button btProcuraCliente;
-        private System.Windows.Forms.TextBox tbCodCliente;
-        private System.Windows.Forms.Label lbCliente;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcOrcamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPessoa;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
@@ -424,6 +389,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoTotalItens;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoOrcamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalOrçamento;
-        private Controls.BuscaCidade buscaCidade1;
+        private Controls.BuscaCidade buscaCidade;
+        private Controls.BuscaPessoa buscaPessoa;
     }
 }

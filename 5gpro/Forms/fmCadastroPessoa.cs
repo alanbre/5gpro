@@ -26,7 +26,6 @@ namespace _5gpro.Forms
         public fmCadastroPessoa()
         {
             InitializeComponent();
-            AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
         }
 
         private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
@@ -70,13 +69,12 @@ namespace _5gpro.Forms
 
 
 
-        //EVENTOS DE CLICK
-        private void btNovo_Click(object sender, EventArgs e)
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
             NovoCadastro();
         }
 
-        private void btBuscar_Click(object sender, EventArgs e)
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
             if (!editando)
             {
@@ -84,34 +82,29 @@ namespace _5gpro.Forms
             }
         }
 
-        private void btSalvar_Click(object sender, EventArgs e)
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
             SalvaCadastro();
         }
 
-        private void btRecarregar_Click(object sender, EventArgs e)
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
-            //Se não houver uma pessoa setada (por qualquer motivo) ele limpa os campos. Se tiver pessoa recarrega com as informações do banco.
-            //Desta forma é necessário ter carregado um registro pra poder recarregar.
             RecarregaDados(pessoa);
         }
 
-        private void btRight_Click(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
-        private void btLeft_Click(object sender, EventArgs e)
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
 
-        private void btDeletar_Click(object sender, EventArgs e)
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
-            if (!editando)
-            {
+            ProximoCadastro();
+        }
 
-            }
+        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
+        {
+
         }
 
 
@@ -518,36 +511,10 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AlteraBotoes()
-        {
-            if (editando)
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
-            }
-            else
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
-            }
-        }
-
         private void Editando(bool edit)
         {
             editando = edit;
-            AlteraBotoes();
+            menuVertical.Editando(edit);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)
@@ -622,5 +589,6 @@ namespace _5gpro.Forms
             }
             ignoraCheckEvent = false;
         }
+
     }
 }
