@@ -1,6 +1,7 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
 using _5gpro.Forms;
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -9,8 +10,8 @@ namespace _5gpro.Controls
     public partial class buscaPessoa : UserControl
     {
         public Pessoa pessoa = new Pessoa();
-        private int atuacao;
-        public bool editando = false;
+        public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
+        private bool editando = false;
 
         PessoaBLL pessoaBLL = new PessoaBLL();
 
@@ -35,6 +36,8 @@ namespace _5gpro.Controls
                 }
             }
         }
+
+
 
         public buscaPessoa()
         {
@@ -101,6 +104,39 @@ namespace _5gpro.Controls
         public void Editando(bool edit)
         {
             editando = edit;
+        }
+
+        public void Limpa()
+        {
+            tbCodigoPessoa.Clear();
+            tbNomePessoa.Clear();
+            pessoa = null;
+        }
+
+        public void PreencheCampos(Pessoa pessoa)
+        {
+            this.pessoa = pessoa;
+            tbCodigoPessoa.Text = this.pessoa != null ? this.pessoa.PessoaID.ToString() : "";
+            tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
+        }
+
+
+
+
+        //--------------------------------------------------
+        //CRIA O EVENTO Text_Changed DO USERCONTROL
+        //--------------------------------------------------
+        public delegate void text_changedEventHandler(object sender, EventArgs e);
+
+        [Category("Action")]
+        [Description("É acionado quando o conteúdo do código da pessoa é alterado")]
+        public event text_changedEventHandler Text_Changed;
+        //--------------------------------------------------
+
+        private void TbCodigoPessoa_TextChanged(object sender, EventArgs e)
+        {
+            if (this.Text_Changed != null)
+                this.Text_Changed(this, e);
         }
     }
 }

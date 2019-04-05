@@ -64,6 +64,7 @@
             this.tbCodigoPessoa.Name = "tbCodigoPessoa";
             this.tbCodigoPessoa.Size = new System.Drawing.Size(65, 20);
             this.tbCodigoPessoa.TabIndex = 6;
+            this.tbCodigoPessoa.TextChanged += new System.EventHandler(this.TbCodigoPessoa_TextChanged);
             this.tbCodigoPessoa.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoPessoa_KeyUp);
             this.tbCodigoPessoa.Leave += new System.EventHandler(this.TbCodigoPessoa_Leave);
             // 
@@ -84,6 +85,7 @@
             this.Controls.Add(this.btProcuraCliente);
             this.Controls.Add(this.tbCodigoPessoa);
             this.Controls.Add(this.lbPessoa);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "buscaPessoa";
             this.Size = new System.Drawing.Size(449, 39);
             this.ResumeLayout(false);
