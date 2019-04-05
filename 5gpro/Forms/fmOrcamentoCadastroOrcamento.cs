@@ -1,4 +1,5 @@
 ﻿using _5gpro.Bll;
+using _5gpro.Controls;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -11,14 +12,12 @@ namespace _5gpro.Forms
 {
     public partial class fmOrcamentoCadastroOrcamento : Form
     {
-        private PessoaBLL pessoaBLL = new PessoaBLL();
         private _ItemBLL itemBLL = new _ItemBLL();
         private OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
-        
+
         private Orcamento orcamento;
         private List<_Item> itens = new List<_Item>();
         private _Item itemSelecionado;
-        private Pessoa pessoa;
         private Validacao validacao = new Validacao();
         private FuncoesAuxiliares f = new FuncoesAuxiliares();
 
@@ -132,19 +131,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodCliente_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCliente.Text.Length > 0)
-            {
-                pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodCliente.Text));
-                PreencheCamposPessoa(pessoa);
-            }
-            else
-            {
-                tbNomeCliente.Text = "";
-            }
-        }
-
         private void tbCodItem_Leave(object sender, EventArgs e)
         {
             if (tbCodItem.Text.Length > 0)
@@ -223,18 +209,12 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCliente_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3 && !editando)
-            {
-                e.Handled = true;
-                AbreTelaBuscaPessoa();
-            }
-        }
-
         private void tbCodItem_KeyUp(object sender, KeyEventArgs e)
         {
-            AbreTelaBuscaItem();
+            if (e.KeyCode == Keys.F3)
+            {
+                AbreTelaBuscaItem();
+            }
         }
 
 
@@ -414,11 +394,7 @@ namespace _5gpro.Forms
             ExcluirItem(itemSelecionado);
         }
 
-
-
-
-
-        private void tbCodCliente_TextChanged(object sender, EventArgs e)
+        private void BuscaPessoa_Text_Changed(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
@@ -466,6 +442,7 @@ namespace _5gpro.Forms
 
 
 
+
         //PADRÕES CRIADAS
         private void NovoCadastro()
         {
@@ -480,7 +457,7 @@ namespace _5gpro.Forms
                     LimpaCampos(false);
                     tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
                     orcamento = null;
-                    tbCodCliente.Focus();
+                    buscaPessoa.Focus();
                     ignoracheckevent = false;
                     Editando(true);
                 }
@@ -492,7 +469,7 @@ namespace _5gpro.Forms
                 tbCodigo.Text = orcamentoBLL.BuscaProxCodigoDisponivel();
                 orcamento = null;
                 Editando(false);
-                tbCodCliente.Focus();
+                buscaPessoa.Focus();
                 ignoracheckevent = false;
                 Editando(true);
             }
@@ -509,7 +486,7 @@ namespace _5gpro.Forms
                 if (ok)
                 {
                     orcamento.OrcamentoID = int.Parse(tbCodigo.Text);
-                    orcamento.Pessoa = pessoa;
+                    orcamento.Pessoa = buscaPessoa.pessoa;
                     orcamento.DataCadastro = dtpCadastro.Value;
                     orcamento.DataValidade = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null;
                     orcamento.Itens = itens;
@@ -676,8 +653,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigo.Text = orcamento.OrcamentoID.ToString();
-            tbCodCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.PessoaID.ToString() : "";
-            tbNomeCliente.Text = orcamento.Pessoa != null ? orcamento.Pessoa.Nome : "";
+            buscaPessoa.PreencheCampos(orcamento.Pessoa);
             dtpCadastro.Value = orcamento.DataCadastro;
             dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
             cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
@@ -702,17 +678,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaPessoa()
-        {
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
-            if (buscaPessoa.pessoaSelecionada != null)
-            {
-                pessoa = buscaPessoa.pessoaSelecionada;
-                PreencheCamposPessoa(pessoa);
-            }
-        }
-
         private void AbreTelaBuscaItem()
         {
             var buscaItem = new fmBuscaItem();
@@ -729,24 +694,6 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning);
                 tbCodItem.Focus();
                 tbCodItem.SelectAll();
-            }
-        }
-
-        private void PreencheCamposPessoa(Pessoa pessoa)
-        {
-            if (pessoa != null)
-            {
-                tbCodCliente.Text = pessoa.PessoaID.ToString();
-                tbNomeCliente.Text = pessoa.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Cliente não encontrado no banco de dados",
-                "Cliente não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodCliente.Focus();
-                tbCodCliente.SelectAll();
             }
         }
 
@@ -803,6 +750,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
+            buscaPessoa.Editando(edit);
             AlteraBotoes();
         }
 
@@ -818,8 +766,7 @@ namespace _5gpro.Forms
         private void LimpaCampos(bool limpaCod)
         {
             if (limpaCod) { tbCodigo.Clear(); }
-            tbCodCliente.Clear();
-            tbNomeCliente.Clear();
+            buscaPessoa.Limpa();
             dtpCadastro.Value = DateTime.Now;
             dtpVencimento.Value = DateTime.Now;
             dtpVencimento.Enabled = false;
@@ -868,8 +815,6 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = false;
             }
         }
-
-
 
         private void PreencheGridItens(List<_Item> itens)
         {

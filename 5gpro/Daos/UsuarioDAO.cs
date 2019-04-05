@@ -14,7 +14,7 @@ namespace _5gpro.Daos
 
         public Usuario Logar(string idusuario, string senha)
         {
-            Usuario usuario = new Usuario();
+            Usuario usuario = null;
 
             try
             {
@@ -27,6 +27,7 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
+                    usuario = new Usuario();
                     usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
                     usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
