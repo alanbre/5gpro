@@ -74,7 +74,7 @@ namespace _5gpro.Forms
         {
 
 
-            COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
+            //COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Cidade", typeof(string));
