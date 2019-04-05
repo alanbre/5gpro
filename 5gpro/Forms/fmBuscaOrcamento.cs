@@ -10,12 +10,10 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaOrcamento : Form
     {
-        Cidade cidade = null;
         Pessoa pessoa = null;
         public Orcamento orcamentoSelecionado = null;
         List<Orcamento> orcamentos;
 
-        CidadeBLL cidadeBLL = new CidadeBLL();
         PessoaBLL pessoaBLL = new PessoaBLL();
         OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
 
@@ -49,21 +47,6 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
-
-
-        private void tbFiltroCodCidade_Leave(object sender, EventArgs e)
-        {
-            if (tbFiltroCodCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodCidade.Text));
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
-            }
-        }
-
         private void tbCodCliente_Leave(object sender, EventArgs e)
         {
             if (tbCodCliente.Text.Length > 0)
@@ -88,16 +71,6 @@ namespace _5gpro.Forms
         }
 
 
-
-        private void tbFiltroCodCidade_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaCidade();
-            }
-        }
-
         private void tbCodCliente_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3)
@@ -107,13 +80,6 @@ namespace _5gpro.Forms
             }
         }
 
-
-
-
-        private void btBuscaCidade_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaCidade();
-        }
 
         private void btProcuraCliente_Click(object sender, EventArgs e)
         {
@@ -153,17 +119,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaCidade()
-        {
-            var buscaCidade = new fmBuscaCidade();
-            buscaCidade.ShowDialog();
-            if (buscaCidade.cidadeSelecionada != null)
-            {
-                cidade = buscaCidade.cidadeSelecionada;
-                PreencheCamposCidade(cidade);
-            }
-        }
-
         private void AbreTelaBuscaPessoa()
         {
             var buscaPessoa = new fmBuscaPessoa();
@@ -172,15 +127,6 @@ namespace _5gpro.Forms
             {
                 pessoa = buscaPessoa.pessoaSelecionada;
                 PreencheCamposPessoa(pessoa);
-            }
-        }
-
-        private void PreencheCamposCidade(Cidade cidade)
-        {
-            if (cidade != null)
-            {
-                tbFiltroCodCidade.Text = cidade.CidadeID.ToString();
-                tbNomeCidade.Text = cidade.Nome;
             }
         }
 
@@ -206,7 +152,7 @@ namespace _5gpro.Forms
         {
             dgvOrcamentos.Rows.Clear();
             Filtros f = new Filtros();
-            f.filtroCidade = cidade;
+            f.filtroCidade = buscaCidade.cidade;
             f.filtroPessoa = pessoa;
             f.filtroDataCadastroInicial = dtpFiltroDataCadastroInicial.Value;
             f.filtroDataCadastroFinal = dtpFiltroDataCadastroFinal.Value;

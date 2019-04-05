@@ -28,9 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGridDocumentos = new System.Windows.Forms.GroupBox();
             this.dgvOrcamentos = new System.Windows.Forms.DataGridView();
+            this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcCodigoPessoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataValidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescontoTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorTotalDocumento = new System.Windows.Forms.Label();
@@ -46,22 +55,10 @@
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
             this.tbNomeCliente = new System.Windows.Forms.TextBox();
-            this.btBuscaCidade = new System.Windows.Forms.Button();
             this.btProcuraCliente = new System.Windows.Forms.Button();
-            this.tbNomeCidade = new System.Windows.Forms.TextBox();
             this.tbCodCliente = new System.Windows.Forms.TextBox();
-            this.tbFiltroCodCidade = new System.Windows.Forms.TextBox();
             this.lbCliente = new System.Windows.Forms.Label();
-            this.lbFiltroCidade = new System.Windows.Forms.Label();
-            this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcCodigoPessoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataValidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescontoTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buscaCidade1 = new _5gpro.Controls.buscaCidade();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -86,8 +83,8 @@
             this.dgvOrcamentos.AllowUserToDeleteRows = false;
             this.dgvOrcamentos.AllowUserToOrderColumns = true;
             this.dgvOrcamentos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvOrcamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -114,10 +111,83 @@
             this.dgvOrcamentos.TabIndex = 0;
             this.dgvOrcamentos.TabStop = false;
             // 
+            // dgvtbcOrcamento
+            // 
+            this.dgvtbcOrcamento.HeaderText = "Nota Fiscal";
+            this.dgvtbcOrcamento.MinimumWidth = 90;
+            this.dgvtbcOrcamento.Name = "dgvtbcOrcamento";
+            this.dgvtbcOrcamento.ReadOnly = true;
+            this.dgvtbcOrcamento.Width = 90;
+            // 
+            // dgvtbcCodigoPessoa
+            // 
+            this.dgvtbcCodigoPessoa.HeaderText = "Cliente";
+            this.dgvtbcCodigoPessoa.MinimumWidth = 50;
+            this.dgvtbcCodigoPessoa.Name = "dgvtbcCodigoPessoa";
+            this.dgvtbcCodigoPessoa.ReadOnly = true;
+            this.dgvtbcCodigoPessoa.Width = 50;
+            // 
+            // dgvtbcNome
+            // 
+            this.dgvtbcNome.HeaderText = "Nome";
+            this.dgvtbcNome.MinimumWidth = 30;
+            this.dgvtbcNome.Name = "dgvtbcNome";
+            this.dgvtbcNome.ReadOnly = true;
+            this.dgvtbcNome.Width = 150;
+            // 
+            // dgvtbcDataCadastro
+            // 
+            this.dgvtbcDataCadastro.HeaderText = "Data do cadastro";
+            this.dgvtbcDataCadastro.MinimumWidth = 120;
+            this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
+            this.dgvtbcDataCadastro.ReadOnly = true;
+            this.dgvtbcDataCadastro.Width = 120;
+            // 
+            // dgvtbcDataValidade
+            // 
+            this.dgvtbcDataValidade.HeaderText = "Data de validade";
+            this.dgvtbcDataValidade.MinimumWidth = 120;
+            this.dgvtbcDataValidade.Name = "dgvtbcDataValidade";
+            this.dgvtbcDataValidade.ReadOnly = true;
+            this.dgvtbcDataValidade.Width = 120;
+            // 
+            // dgvtbcValorTotalItens
+            // 
+            this.dgvtbcValorTotalItens.HeaderText = "Valor dos itens";
+            this.dgvtbcValorTotalItens.MinimumWidth = 50;
+            this.dgvtbcValorTotalItens.Name = "dgvtbcValorTotalItens";
+            this.dgvtbcValorTotalItens.ReadOnly = true;
+            this.dgvtbcValorTotalItens.Width = 110;
+            // 
+            // dgvtbcDescontoTotalItens
+            // 
+            this.dgvtbcDescontoTotalItens.HeaderText = "Descontos dos itens";
+            this.dgvtbcDescontoTotalItens.MinimumWidth = 50;
+            this.dgvtbcDescontoTotalItens.Name = "dgvtbcDescontoTotalItens";
+            this.dgvtbcDescontoTotalItens.ReadOnly = true;
+            this.dgvtbcDescontoTotalItens.Width = 130;
+            // 
+            // dgvtbcDescontoOrcamento
+            // 
+            this.dgvtbcDescontoOrcamento.HeaderText = "Desconto do orçamento";
+            this.dgvtbcDescontoOrcamento.MinimumWidth = 50;
+            this.dgvtbcDescontoOrcamento.Name = "dgvtbcDescontoOrcamento";
+            this.dgvtbcDescontoOrcamento.ReadOnly = true;
+            this.dgvtbcDescontoOrcamento.Width = 150;
+            // 
+            // dgvtbcValorTotalOrçamento
+            // 
+            this.dgvtbcValorTotalOrçamento.HeaderText = "Total do orçamento";
+            this.dgvtbcValorTotalOrçamento.MinimumWidth = 50;
+            this.dgvtbcValorTotalOrçamento.Name = "dgvtbcValorTotalOrçamento";
+            this.dgvtbcValorTotalOrçamento.ReadOnly = true;
+            this.dgvtbcValorTotalOrçamento.Width = 130;
+            // 
             // gbFiltrosDocumento
             // 
             this.gbFiltrosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltrosDocumento.Controls.Add(this.buscaCidade1);
             this.gbFiltrosDocumento.Controls.Add(this.btPesquisar);
             this.gbFiltrosDocumento.Controls.Add(this.lbAValorTotalDocumento);
             this.gbFiltrosDocumento.Controls.Add(this.tbFiltroValorTotalDocumentoInicial);
@@ -132,13 +202,9 @@
             this.gbFiltrosDocumento.Controls.Add(this.dtpFiltroDataEmissaoFinal);
             this.gbFiltrosDocumento.Controls.Add(this.dtpFiltroDataEmissaoInicial);
             this.gbFiltrosDocumento.Controls.Add(this.tbNomeCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.btBuscaCidade);
             this.gbFiltrosDocumento.Controls.Add(this.btProcuraCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.tbNomeCidade);
             this.gbFiltrosDocumento.Controls.Add(this.tbCodCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.tbFiltroCodCidade);
             this.gbFiltrosDocumento.Controls.Add(this.lbCliente);
-            this.gbFiltrosDocumento.Controls.Add(this.lbFiltroCidade);
             this.gbFiltrosDocumento.Location = new System.Drawing.Point(12, 12);
             this.gbFiltrosDocumento.Name = "gbFiltrosDocumento";
             this.gbFiltrosDocumento.Size = new System.Drawing.Size(1068, 174);
@@ -277,16 +343,6 @@
             this.tbNomeCliente.TabIndex = 7;
             this.tbNomeCliente.TabStop = false;
             // 
-            // btBuscaCidade
-            // 
-            this.btBuscaCidade.Location = new System.Drawing.Point(77, 32);
-            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btBuscaCidade.Name = "btBuscaCidade";
-            this.btBuscaCidade.Size = new System.Drawing.Size(20, 20);
-            this.btBuscaCidade.TabIndex = 2;
-            this.btBuscaCidade.TabStop = false;
-            this.btBuscaCidade.UseVisualStyleBackColor = true;
-            // 
             // btProcuraCliente
             // 
             this.btProcuraCliente.Location = new System.Drawing.Point(77, 71);
@@ -296,29 +352,12 @@
             this.btProcuraCliente.TabStop = false;
             this.btProcuraCliente.UseVisualStyleBackColor = true;
             // 
-            // tbNomeCidade
-            // 
-            this.tbNomeCidade.Location = new System.Drawing.Point(100, 33);
-            this.tbNomeCidade.Name = "tbNomeCidade";
-            this.tbNomeCidade.ReadOnly = true;
-            this.tbNomeCidade.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeCidade.TabIndex = 3;
-            this.tbNomeCidade.TabStop = false;
-            // 
             // tbCodCliente
             // 
             this.tbCodCliente.Location = new System.Drawing.Point(10, 71);
             this.tbCodCliente.Name = "tbCodCliente";
             this.tbCodCliente.Size = new System.Drawing.Size(65, 20);
             this.tbCodCliente.TabIndex = 5;
-            // 
-            // tbFiltroCodCidade
-            // 
-            this.tbFiltroCodCidade.Location = new System.Drawing.Point(9, 32);
-            this.tbFiltroCodCidade.MaxLength = 5;
-            this.tbFiltroCodCidade.Name = "tbFiltroCodCidade";
-            this.tbFiltroCodCidade.Size = new System.Drawing.Size(65, 20);
-            this.tbFiltroCodCidade.TabIndex = 1;
             // 
             // lbCliente
             // 
@@ -329,86 +368,12 @@
             this.lbCliente.TabIndex = 4;
             this.lbCliente.Text = "Cliente";
             // 
-            // lbFiltroCidade
+            // buscaCidade1
             // 
-            this.lbFiltroCidade.AutoSize = true;
-            this.lbFiltroCidade.Location = new System.Drawing.Point(6, 16);
-            this.lbFiltroCidade.Name = "lbFiltroCidade";
-            this.lbFiltroCidade.Size = new System.Drawing.Size(40, 13);
-            this.lbFiltroCidade.TabIndex = 0;
-            this.lbFiltroCidade.Text = "Cidade";
-            // 
-            // dgvtbcOrcamento
-            // 
-            this.dgvtbcOrcamento.HeaderText = "Nota Fiscal";
-            this.dgvtbcOrcamento.MinimumWidth = 90;
-            this.dgvtbcOrcamento.Name = "dgvtbcOrcamento";
-            this.dgvtbcOrcamento.ReadOnly = true;
-            this.dgvtbcOrcamento.Width = 90;
-            // 
-            // dgvtbcCodigoPessoa
-            // 
-            this.dgvtbcCodigoPessoa.HeaderText = "Cliente";
-            this.dgvtbcCodigoPessoa.MinimumWidth = 50;
-            this.dgvtbcCodigoPessoa.Name = "dgvtbcCodigoPessoa";
-            this.dgvtbcCodigoPessoa.ReadOnly = true;
-            this.dgvtbcCodigoPessoa.Width = 50;
-            // 
-            // dgvtbcNome
-            // 
-            this.dgvtbcNome.HeaderText = "Nome";
-            this.dgvtbcNome.MinimumWidth = 30;
-            this.dgvtbcNome.Name = "dgvtbcNome";
-            this.dgvtbcNome.ReadOnly = true;
-            this.dgvtbcNome.Width = 150;
-            // 
-            // dgvtbcDataCadastro
-            // 
-            this.dgvtbcDataCadastro.HeaderText = "Data do cadastro";
-            this.dgvtbcDataCadastro.MinimumWidth = 120;
-            this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
-            this.dgvtbcDataCadastro.ReadOnly = true;
-            this.dgvtbcDataCadastro.Width = 120;
-            // 
-            // dgvtbcDataValidade
-            // 
-            this.dgvtbcDataValidade.HeaderText = "Data de validade";
-            this.dgvtbcDataValidade.MinimumWidth = 120;
-            this.dgvtbcDataValidade.Name = "dgvtbcDataValidade";
-            this.dgvtbcDataValidade.ReadOnly = true;
-            this.dgvtbcDataValidade.Width = 120;
-            // 
-            // dgvtbcValorTotalItens
-            // 
-            this.dgvtbcValorTotalItens.HeaderText = "Valor dos itens";
-            this.dgvtbcValorTotalItens.MinimumWidth = 50;
-            this.dgvtbcValorTotalItens.Name = "dgvtbcValorTotalItens";
-            this.dgvtbcValorTotalItens.ReadOnly = true;
-            this.dgvtbcValorTotalItens.Width = 110;
-            // 
-            // dgvtbcDescontoTotalItens
-            // 
-            this.dgvtbcDescontoTotalItens.HeaderText = "Descontos dos itens";
-            this.dgvtbcDescontoTotalItens.MinimumWidth = 50;
-            this.dgvtbcDescontoTotalItens.Name = "dgvtbcDescontoTotalItens";
-            this.dgvtbcDescontoTotalItens.ReadOnly = true;
-            this.dgvtbcDescontoTotalItens.Width = 130;
-            // 
-            // dgvtbcDescontoOrcamento
-            // 
-            this.dgvtbcDescontoOrcamento.HeaderText = "Desconto do orçamento";
-            this.dgvtbcDescontoOrcamento.MinimumWidth = 50;
-            this.dgvtbcDescontoOrcamento.Name = "dgvtbcDescontoOrcamento";
-            this.dgvtbcDescontoOrcamento.ReadOnly = true;
-            this.dgvtbcDescontoOrcamento.Width = 150;
-            // 
-            // dgvtbcValorTotalOrçamento
-            // 
-            this.dgvtbcValorTotalOrçamento.HeaderText = "Total do orçamento";
-            this.dgvtbcValorTotalOrçamento.MinimumWidth = 50;
-            this.dgvtbcValorTotalOrçamento.Name = "dgvtbcValorTotalOrçamento";
-            this.dgvtbcValorTotalOrçamento.ReadOnly = true;
-            this.dgvtbcValorTotalOrçamento.Width = 130;
+            this.buscaCidade1.Location = new System.Drawing.Point(6, 16);
+            this.buscaCidade1.Name = "buscaCidade1";
+            this.buscaCidade1.Size = new System.Drawing.Size(450, 45);
+            this.buscaCidade1.TabIndex = 41;
             // 
             // fmBuscaNotaFiscal
             // 
@@ -447,13 +412,9 @@
         private System.Windows.Forms.DateTimePicker dtpFiltroDataEmissaoFinal;
         private System.Windows.Forms.DateTimePicker dtpFiltroDataEmissaoInicial;
         private System.Windows.Forms.TextBox tbNomeCliente;
-        private System.Windows.Forms.Button btBuscaCidade;
         private System.Windows.Forms.Button btProcuraCliente;
-        private System.Windows.Forms.TextBox tbNomeCidade;
         private System.Windows.Forms.TextBox tbCodCliente;
-        private System.Windows.Forms.TextBox tbFiltroCodCidade;
         private System.Windows.Forms.Label lbCliente;
-        private System.Windows.Forms.Label lbFiltroCidade;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcOrcamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPessoa;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
@@ -463,5 +424,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoTotalItens;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoOrcamento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalOrçamento;
+        private Controls.buscaCidade buscaCidade1;
     }
 }

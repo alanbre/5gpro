@@ -61,6 +61,12 @@
     <Compile Include="Bll\UnimedidaBLL.cs" />
     <Compile Include="Bll\UsuarioBLL.cs" />
     <Compile Include="Bll\_ItemBLL.cs" />
+    <Compile Include="Controls\buscaCidade.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\buscaCidade.Designer.cs">
+      <DependentUpon>buscaCidade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
@@ -215,6 +221,9 @@
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\buscaCidade.resx">
+      <DependentUpon>buscaCidade.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
