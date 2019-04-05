@@ -19,7 +19,7 @@ namespace _5gpro.Properties {
     // através de uma ferramenta como ResGen ou Visual Studio.
     // Para adicionar ou remover um associado, edite o arquivo .ResX e execute ResGen novamente
     // com a opção /str, ou recrie o projeto do VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -366,6 +366,26 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap iosRight_64px_blue {
             get {
                 object obj = ResourceManager.GetObject("iosRight_64px_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosSearch_17px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosSearch_17px_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap iosSearch_18px_black {
+            get {
+                object obj = ResourceManager.GetObject("iosSearch_18px_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

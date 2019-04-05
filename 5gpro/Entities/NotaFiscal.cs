@@ -16,9 +16,9 @@ namespace _5gpro.Entities
         public DateTime DataEntradaSaida { get; set; }
 
         public decimal ValorTotalItens { get; set; }
-        public decimal ValorTotalOrcamento { get; set; }
+        public decimal ValorTotalDocumento { get; set; }
         public decimal DescontoTotalItens { get; set; }
-        public decimal DescontoOrcamento { get; set; }
+        public decimal DescontoDocumento { get; set; }
 
         public virtual ICollection<NotaFiscalItem> NotaFiscalItem { get; set; }
     }

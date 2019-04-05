@@ -277,11 +277,11 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
   `valor_documento` DECIMAL(10,2) NULL,
   `desconto_total_itens` DECIMAL(10,2) NULL,
   `desconto_documento` DECIMAL(10,2) NULL,
-  `pessoa_idpessoa` INT NULL,
+  `idpessoa` INT NULL,
   PRIMARY KEY (`idnotafiscal`),
-  INDEX `fk_notafiscal_pessoa1_idx` (`pessoa_idpessoa` ASC) VISIBLE,
+  INDEX `fk_notafiscal_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_notafiscal_pessoa1`
-    FOREIGN KEY (`pessoa_idpessoa`)
+    FOREIGN KEY (`idpessoa`)
     REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -292,23 +292,23 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`notafiscal_has_item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal_has_item` (
-  `notafiscal_idnotafiscal` INT NOT NULL,
-  `item_iditem` INT NOT NULL,
+  `idnotafiscal` INT NOT NULL,
+  `iditem` INT NOT NULL,
   `quantidade` DECIMAL(10,2) NULL,
   `valor_unitario` DECIMAL(10,2) NULL,
   `valor_total` DECIMAL(10,2) NULL,
   `desconto_porc` DECIMAL(10,2) NULL,
   `desconto` DECIMAL(10,2) NULL,
-  PRIMARY KEY (`notafiscal_idnotafiscal`, `item_iditem`),
-  INDEX `fk_notafiscal_has_item_item1_idx` (`item_iditem` ASC) VISIBLE,
-  INDEX `fk_notafiscal_has_item_notafiscal1_idx` (`notafiscal_idnotafiscal` ASC) VISIBLE,
+  PRIMARY KEY (`idnotafiscal`, `iditem`),
+  INDEX `fk_notafiscal_has_item_item1_idx` (`iditem` ASC) VISIBLE,
+  INDEX `fk_notafiscal_has_item_notafiscal1_idx` (`idnotafiscal` ASC) VISIBLE,
   CONSTRAINT `fk_notafiscal_has_item_notafiscal1`
-    FOREIGN KEY (`notafiscal_idnotafiscal`)
+    FOREIGN KEY (`idnotafiscal`)
     REFERENCES `5gprodatabase`.`notafiscal` (`idnotafiscal`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_notafiscal_has_item_item1`
-    FOREIGN KEY (`item_iditem`)
+    FOREIGN KEY (`iditem`)
     REFERENCES `5gprodatabase`.`item` (`iditem`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
