@@ -30,6 +30,19 @@ namespace _5gpro.Controls
             }
         }
 
+        private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
+        {
+            if (tbFiltroCodigoCidade.Text.Length > 0)
+            {
+                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodigoCidade.Text));
+                PreencheCamposCidade(cidade);
+            }
+            else
+            {
+                tbNomeCidade.Text = "";
+            }
+        }
+
 
         private void AbreTelaBuscaCidade()
         {
@@ -61,17 +74,5 @@ namespace _5gpro.Controls
             }
         }
 
-        private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
-        {
-            if (tbFiltroCodigoCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodigoCidade.Text));
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
-            }
-        }
     }
 }
