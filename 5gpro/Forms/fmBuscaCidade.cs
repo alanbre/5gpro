@@ -14,8 +14,8 @@ namespace _5gpro.Forms
         public Cidade cidadeSelecionada;
         private CidadeBLL cidadeBLL = new CidadeBLL();
         private EstadoBLL estadoBLL = new EstadoBLL();
-        
-        
+
+
 
 
         public fmBuscaCidade()
@@ -72,6 +72,9 @@ namespace _5gpro.Forms
 
         private void BuscaCidades()
         {
+
+
+            COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Cidade", typeof(string));
@@ -106,7 +109,7 @@ namespace _5gpro.Forms
 
         private void tbFiltroNomeCidade_TextChanged(object sender, EventArgs e)
         {
-            BuscaCidades(); 
+            BuscaCidades();
         }
     }
 }
