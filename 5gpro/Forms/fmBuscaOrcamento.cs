@@ -10,16 +10,12 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaOrcamento : Form
     {
-        Pessoa pessoa = null;
         public Orcamento orcamentoSelecionado = null;
         List<Orcamento> orcamentos;
 
-        PessoaBLL pessoaBLL = new PessoaBLL();
         OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
-
-        DataTable table = new DataTable();
 
         public struct Filtros
         {
@@ -47,19 +43,6 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
-        private void tbCodCliente_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCliente.Text.Length > 0)
-            {
-                pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodCliente.Text));
-                PreencheCamposPessoa(pessoa);
-            }
-            else
-            {
-                tbNomeCliente.Text = "";
-            }
-        }
-
         private void tbFiltroValorTotalOrcamentoInicial_Leave(object sender, EventArgs e)
         {
             tbFiltroValorTotalOrcamentoInicial.Text = tbFiltroValorTotalOrcamentoInicial.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text).ToString("############0.00") : "0,00";
@@ -69,24 +52,6 @@ namespace _5gpro.Forms
         {
             tbFiltroValorTotalOrcamentoFinal.Text = tbFiltroValorTotalOrcamentoFinal.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text).ToString("############0.00") : "999999,00";
         }
-
-
-        private void tbCodCliente_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaPessoa();
-            }
-        }
-
-
-        private void btProcuraCliente_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaPessoa();
-        }
-
-
 
         private void tbFiltroValorTotalOrcamentoInicial_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -119,41 +84,12 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaPessoa()
-        {
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
-            if (buscaPessoa.pessoaSelecionada != null)
-            {
-                pessoa = buscaPessoa.pessoaSelecionada;
-                PreencheCamposPessoa(pessoa);
-            }
-        }
-
-        private void PreencheCamposPessoa(Pessoa pessoa)
-        {
-            if (pessoa != null)
-            {
-                tbCodCliente.Text = pessoa.PessoaID.ToString();
-                tbNomeCliente.Text = pessoa.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Cliente não encontrado no banco de dados",
-                "Cliente não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodCliente.Focus();
-                tbCodCliente.SelectAll();
-            }
-        }
-
         private void btPesquisar_Click(object sender, EventArgs e)
         {
             dgvOrcamentos.Rows.Clear();
             Filtros f = new Filtros();
             f.filtroCidade = buscaCidade.cidade;
-            f.filtroPessoa = pessoa;
+            f.filtroPessoa = buscaPessoa.pessoa;
             f.filtroDataCadastroInicial = dtpFiltroDataCadastroInicial.Value;
             f.filtroDataCadastroFinal = dtpFiltroDataCadastroFinal.Value;
             f.filtroDataValidadeInicial = dtpFiltroDataValidadeInicial.Value;
@@ -177,12 +113,9 @@ namespace _5gpro.Forms
                 {
                     dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
                 }
-                
-                //table.Rows.Add(o.Codigo, o.Pessoa.Codigo, o.Pessoa.Nome, o.DataCadastro, o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
             }
             dgvOrcamentos.Refresh();
         }
-
 
         private void dgvOrcamentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
