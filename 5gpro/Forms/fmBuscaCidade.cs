@@ -79,35 +79,29 @@ namespace _5gpro.Forms
 
             foreach (Cidade c in Cidades)
             {
-                rows.Add(new DataGridViewRow());
-                rows[rows.Count - 1].CreateCells(dgvCidades,
+                DataGridViewRow linha = new DataGridViewRow();
+                linha.CreateCells(dgvCidades,
                 c.CidadeID,
                 c.Nome,
                 c.Estado.EstadoID,
                 c.Estado.Nome,
                 c.Estado.Uf
                 );
+                rows.Add(linha);
+
+                //MÉTODO QUE PRIMEIRO ADICIONA A LINHA A LISTA DEPOIS CRIA AS CÉLULAS
+                //rows.Add(new DataGridViewRow());
+                //rows[rows.Count - 1].CreateCells(dgvCidades,
+                //c.CidadeID,
+                //c.Nome,
+                //c.Estado.EstadoID,
+                //c.Estado.Nome,
+                //c.Estado.Uf
+                //);
             }
             dgvCidades.Rows.AddRange(rows.ToArray());
             dgvCidades.Refresh();
 
-
-
-            //COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
-            //DataTable table = new DataTable();
-            //table.Columns.Add("Código", typeof(string));
-            //table.Columns.Add("Cidade", typeof(string));
-            //table.Columns.Add("Código do estado", typeof(string));
-            //table.Columns.Add("Estado", typeof(string));
-            //table.Columns.Add("UF", typeof(string));
-
-            //Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
-
-            //foreach (Cidade c in Cidades)
-            //{
-            //    table.Rows.Add(c.CidadeID, c.Nome, c.Estado.EstadoID, c.Estado.Nome, c.Estado.Uf);
-            //}
-            //dgvCidades.DataSource = table;
         }
 
 
