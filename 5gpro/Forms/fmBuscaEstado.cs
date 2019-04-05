@@ -22,15 +22,34 @@ namespace _5gpro.Forms
 
         private void btPesquisar_Click(object sender, EventArgs e)
         {
+
+            dgvEstados.Rows.Clear();
             Estados = estadoBLL.BuscaEstadoByNome(tbFiltroNomeEstado.Text);
-            DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Nome", typeof(string));
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
+
             foreach (Estado estado in Estados)
             {
-                table.Rows.Add(estado.EstadoID, estado.Nome);
+                DataGridViewRow linha = new DataGridViewRow();
+                linha.CreateCells(dgvEstados,
+                    estado.EstadoID,
+                    estado.Nome
+                );
+                rows.Add(linha);
+
             }
-            dgvEstados.DataSource = table;
+            dgvEstados.Rows.AddRange(rows.ToArray());
+            dgvEstados.Refresh();
+
+
+            //MÉTODO ANTIGO COMENTADO POR SEGURANÇA
+            //DataTable table = new DataTable();
+            //table.Columns.Add("Código", typeof(string));
+            //table.Columns.Add("Nome", typeof(string));
+            //foreach (Estado estado in Estados)
+            //{
+            //    table.Rows.Add(estado.EstadoID, estado.Nome);
+            //}
+            //dgvEstados.DataSource = table;
         }
 
         private void dgvEstados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
