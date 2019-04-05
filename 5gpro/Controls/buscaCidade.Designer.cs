@@ -28,27 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btBuscaCidade = new System.Windows.Forms.Button();
             this.tbNomeCidade = new System.Windows.Forms.TextBox();
             this.tbFiltroCodigoCidade = new System.Windows.Forms.TextBox();
             this.lbFiltroCidade = new System.Windows.Forms.Label();
+            this.btBuscaCidade = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btBuscaCidade
-            // 
-            this.btBuscaCidade.Image = global::_5gpro.Properties.Resources.iosSearch_17px_black;
-            this.btBuscaCidade.Location = new System.Drawing.Point(67, 15);
-            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btBuscaCidade.Name = "btBuscaCidade";
-            this.btBuscaCidade.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaCidade.TabIndex = 6;
-            this.btBuscaCidade.TabStop = false;
-            this.btBuscaCidade.UseVisualStyleBackColor = true;
-            this.btBuscaCidade.Click += new System.EventHandler(this.BtBuscaCidade_Click);
             // 
             // tbNomeCidade
             // 
-            this.tbNomeCidade.Location = new System.Drawing.Point(91, 16);
+            this.tbNomeCidade.Location = new System.Drawing.Point(94, 17);
+            this.tbNomeCidade.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeCidade.Name = "tbNomeCidade";
             this.tbNomeCidade.ReadOnly = true;
             this.tbNomeCidade.Size = new System.Drawing.Size(346, 20);
@@ -57,7 +46,8 @@
             // 
             // tbFiltroCodigoCidade
             // 
-            this.tbFiltroCodigoCidade.Location = new System.Drawing.Point(3, 16);
+            this.tbFiltroCodigoCidade.Location = new System.Drawing.Point(6, 17);
+            this.tbFiltroCodigoCidade.Margin = new System.Windows.Forms.Padding(2);
             this.tbFiltroCodigoCidade.MaxLength = 5;
             this.tbFiltroCodigoCidade.Name = "tbFiltroCodigoCidade";
             this.tbFiltroCodigoCidade.Size = new System.Drawing.Size(65, 20);
@@ -68,11 +58,24 @@
             // lbFiltroCidade
             // 
             this.lbFiltroCidade.AutoSize = true;
-            this.lbFiltroCidade.Location = new System.Drawing.Point(0, 0);
+            this.lbFiltroCidade.Location = new System.Drawing.Point(3, 1);
+            this.lbFiltroCidade.Margin = new System.Windows.Forms.Padding(2);
             this.lbFiltroCidade.Name = "lbFiltroCidade";
             this.lbFiltroCidade.Size = new System.Drawing.Size(40, 13);
             this.lbFiltroCidade.TabIndex = 4;
             this.lbFiltroCidade.Text = "Cidade";
+            // 
+            // btBuscaCidade
+            // 
+            this.btBuscaCidade.Image = global::_5gpro.Properties.Resources.iosSearch_17px_black;
+            this.btBuscaCidade.Location = new System.Drawing.Point(70, 16);
+            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(2);
+            this.btBuscaCidade.Name = "btBuscaCidade";
+            this.btBuscaCidade.Size = new System.Drawing.Size(22, 22);
+            this.btBuscaCidade.TabIndex = 6;
+            this.btBuscaCidade.TabStop = false;
+            this.btBuscaCidade.UseVisualStyleBackColor = true;
+            this.btBuscaCidade.Click += new System.EventHandler(this.BtBuscaCidade_Click);
             // 
             // buscaCidade
             // 
