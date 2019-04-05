@@ -33,6 +33,8 @@
             this.btPesquisar = new System.Windows.Forms.Button();
             this.tbFiltroNomeEstado = new System.Windows.Forms.TextBox();
             this.lbFiltroNomeEstado = new System.Windows.Forms.Label();
+            this.dgvtbcCodEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNomeEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,6 +51,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvEstados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvEstados.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvEstados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcCodEstado,
+            this.dgvtbcNomeEstado});
             this.dgvEstados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvEstados.Location = new System.Drawing.Point(12, 52);
             this.dgvEstados.MinimumSize = new System.Drawing.Size(560, 360);
@@ -88,6 +93,18 @@
             this.lbFiltroNomeEstado.TabIndex = 3;
             this.lbFiltroNomeEstado.Text = "Nome da estado";
             // 
+            // dgvtbcCodEstado
+            // 
+            this.dgvtbcCodEstado.HeaderText = "Código";
+            this.dgvtbcCodEstado.Name = "dgvtbcCodEstado";
+            this.dgvtbcCodEstado.ReadOnly = true;
+            // 
+            // dgvtbcNomeEstado
+            // 
+            this.dgvtbcNomeEstado.HeaderText = "Nome";
+            this.dgvtbcNomeEstado.Name = "dgvtbcNomeEstado";
+            this.dgvtbcNomeEstado.ReadOnly = true;
+            // 
             // fmBuscaEstado
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -117,5 +134,7 @@
         private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.TextBox tbFiltroNomeEstado;
         private System.Windows.Forms.Label lbFiltroNomeEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodEstado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeEstado;
     }
 }

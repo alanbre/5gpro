@@ -11,6 +11,7 @@ namespace _5gpro.Forms
     {
         public List<Cidade> Cidades;
         public List<Estado> Estados;
+        Estado estado;
         public Cidade cidadeSelecionada;
         private CidadeBLL cidadeBLL = new CidadeBLL();
         private EstadoBLL estadoBLL = new EstadoBLL();
@@ -110,16 +111,34 @@ namespace _5gpro.Forms
         {
             var buscaEstado = new fmBuscaEstado();
             buscaEstado.ShowDialog();
-            Estados = new List<Estado>();
-            Estados.Add(buscaEstado.EstadoSelecionado);
-            if (Estados != null)
+            if (buscaEstado.EstadoSelecionado != null)
             {
-                tbFiltroCodEstado.Text = Estados[0].EstadoID.ToString();
-                tbNomeEstado.Text = Estados[0].Nome;
+                estado = buscaEstado.EstadoSelecionado;
+                PreencheCamposEstado(estado);
+                //Editando(true);
+     
             }
             tbFiltroCodEstado.Focus();
         }
 
+
+        private void PreencheCamposEstado(Estado estado)
+        {
+            if (estado != null)
+            {
+                tbFiltroCodEstado.Text = estado.EstadoID.ToString();
+                tbNomeEstado.Text = estado.Nome;
+            }
+            else
+            {
+                MessageBox.Show("Estado não encontrado no banco de dados",
+                "Estado não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                //tbCodCidade.Focus();
+                //tbCodCidade.SelectAll();
+            }
+        }
         private void tbFiltroNomeCidade_TextChanged(object sender, EventArgs e)
         {
             BuscaCidades();
