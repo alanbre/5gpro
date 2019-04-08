@@ -8,7 +8,8 @@ namespace _5gpro.Forms
 {
     public partial class fmLogin : Form
     {
-        public Usuario usuario;
+        public Usuario usuariologado;
+
         UsuarioBLL usuarioBLL = new UsuarioBLL();
 
 
@@ -19,8 +20,8 @@ namespace _5gpro.Forms
 
         private void btEntrar_Click(object sender, EventArgs e)
         {
-            usuario = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
-            if (usuario != null)
+            usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
+            if (usuariologado != null)
             {
                 this.Close();
             }
@@ -89,8 +90,8 @@ namespace _5gpro.Forms
             buscaUsuario.ShowDialog();
             if (buscaUsuario.usuarioSelecionado != null)
             {
-                usuario = buscaUsuario.usuarioSelecionado;
-                PreencheCamposCodUsuario(usuario);
+                usuariologado = buscaUsuario.usuarioSelecionado;
+                PreencheCamposCodUsuario(usuariologado);
             }
         }
 
@@ -98,8 +99,8 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                usuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
-                PreencheCamposCodUsuario(usuario);
+                usuariologado = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
+                PreencheCamposCodUsuario(usuariologado);
             }
             else
             {

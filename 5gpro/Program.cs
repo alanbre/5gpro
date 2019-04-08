@@ -23,9 +23,9 @@ namespace _5gpro
             {
                 fmLogin formLogin = new fmLogin();
                 formLogin.ShowDialog();
-                if (formLogin.usuario != null)
+                if (formLogin.usuariologado != null)
                 {
-                    Application.Run(new fmMain());
+                    Application.Run(new fmMain(formLogin.usuariologado));
                 }
                 else
                 {

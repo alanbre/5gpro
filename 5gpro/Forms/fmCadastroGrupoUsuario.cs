@@ -409,7 +409,7 @@ namespace _5gpro.Forms
         public void PopularModulos()
         {
             dgvModulos.Rows.Clear();
-            dgvModulos.Rows.Add("000000", "TODOS", NivelTodas);
+            dgvModulos.Rows.Add("000000", "Todos", NivelTodas);
             foreach (Permissao p in listapermissoes)
             {
                 if (p.Codigo.Substring(2, 4) == "0000")
