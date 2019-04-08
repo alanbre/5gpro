@@ -16,16 +16,21 @@ namespace _5gpro.Forms
         _ItemBLL _itemBLL = new _ItemBLL();
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
         Validacao validacao = new Validacao();
+        PermissaoBLL permissaoBLL = new PermissaoBLL();
 
 
         bool editando = false;
         bool ignoraCheckEvent;
+        int nivel = 0;
 
         public fmCadastroItem()
         {
             InitializeComponent();
             AlteraBotoes();
+            
         }
+
+
 
         private void fmCadastroItens_KeyDown(object sender, KeyEventArgs e)
         {
@@ -594,6 +599,11 @@ namespace _5gpro.Forms
 
             Limpar limpar = new Limpar();
             limpar.limparComExcessao(controls, excecoes);
+        }
+
+        private void Button1_Click_2(object sender, EventArgs e)
+        {
+            Console.WriteLine(nivel);
         }
     }
 }

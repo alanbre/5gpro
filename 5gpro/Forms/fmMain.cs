@@ -7,17 +7,13 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain(Usuario usuario)
+        public fmMain()
         {
             InitializeComponent();
-            usuariologado = usuario;
-            
         }
 
-        public Usuario usuariologado;
-        fmLogin formLogin = new fmLogin();
         
-
+      
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
