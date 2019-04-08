@@ -11,6 +11,7 @@ namespace _5gpro.Forms
     {
         public List<Cidade> Cidades;
         public List<Estado> Estados;
+        Estado estado;
         public Cidade cidadeSelecionada;
         private CidadeBLL cidadeBLL = new CidadeBLL();
         private EstadoBLL estadoBLL = new EstadoBLL();
@@ -73,22 +74,35 @@ namespace _5gpro.Forms
         private void BuscaCidades()
         {
 
-
-            //COMENTADO ATÉ OS TESTES DO NOVO MÉTODO TERMINAREM
-            DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Cidade", typeof(string));
-            table.Columns.Add("Código do estado", typeof(string));
-            table.Columns.Add("Estado", typeof(string));
-            table.Columns.Add("UF", typeof(string));
-
+            dgvCidades.Rows.Clear();
             Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
+            List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
             foreach (Cidade c in Cidades)
             {
-                table.Rows.Add(c.CidadeID, c.Nome, c.Estado.EstadoID, c.Estado.Nome, c.Estado.Uf);
+                DataGridViewRow linha = new DataGridViewRow();
+                linha.CreateCells(dgvCidades,
+                c.CidadeID,
+                c.Nome,
+                c.Estado.EstadoID,
+                c.Estado.Nome,
+                c.Estado.Uf
+                );
+                rows.Add(linha);
+
+                //MÉTODO QUE PRIMEIRO ADICIONA A LINHA A LISTA DEPOIS CRIA AS CÉLULAS
+                //rows.Add(new DataGridViewRow());
+                //rows[rows.Count - 1].CreateCells(dgvCidades,
+                //c.CidadeID,
+                //c.Nome,
+                //c.Estado.EstadoID,
+                //c.Estado.Nome,
+                //c.Estado.Uf
+                //);
             }
-            dgvCidades.DataSource = table;
+            dgvCidades.Rows.AddRange(rows.ToArray());
+            dgvCidades.Refresh();
+
         }
 
 
@@ -97,16 +111,34 @@ namespace _5gpro.Forms
         {
             var buscaEstado = new fmBuscaEstado();
             buscaEstado.ShowDialog();
-            Estados = new List<Estado>();
-            Estados.Add(buscaEstado.EstadoSelecionado);
-            if (Estados != null)
+            if (buscaEstado.EstadoSelecionado != null)
             {
-                tbFiltroCodEstado.Text = Estados[0].EstadoID.ToString();
-                tbNomeEstado.Text = Estados[0].Nome;
+                estado = buscaEstado.EstadoSelecionado;
+                PreencheCamposEstado(estado);
+                //Editando(true);
+     
             }
             tbFiltroCodEstado.Focus();
         }
 
+
+        private void PreencheCamposEstado(Estado estado)
+        {
+            if (estado != null)
+            {
+                tbFiltroCodEstado.Text = estado.EstadoID.ToString();
+                tbNomeEstado.Text = estado.Nome;
+            }
+            else
+            {
+                MessageBox.Show("Estado não encontrado no banco de dados",
+                "Estado não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                //tbCodCidade.Focus();
+                //tbCodCidade.SelectAll();
+            }
+        }
         private void tbFiltroNomeCidade_TextChanged(object sender, EventArgs e)
         {
             BuscaCidades();

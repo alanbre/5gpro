@@ -41,10 +41,7 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
-            this.btBuscaCidade = new System.Windows.Forms.Button();
-            this.tbNomeCidade = new System.Windows.Forms.TextBox();
-            this.tbCodCidade = new System.Windows.Forms.TextBox();
-            this.lbCidade = new System.Windows.Forms.Label();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
             this.mtbTelefone = new System.Windows.Forms.MaskedTextBox();
@@ -59,20 +56,12 @@
             this.lbNumero = new System.Windows.Forms.Label();
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
-            this.pnBotoes = new System.Windows.Forms.Panel();
-            this.btRecarregar = new System.Windows.Forms.Button();
-            this.btSalvar = new System.Windows.Forms.Button();
-            this.btDeletar = new System.Windows.Forms.Button();
-            this.btAnterior = new System.Windows.Forms.Button();
-            this.btProximo = new System.Windows.Forms.Button();
-            this.btBuscar = new System.Windows.Forms.Button();
-            this.btNovo = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
             this.pnDados.SuspendLayout();
-            this.pnBotoes.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnDadosGerais
@@ -87,7 +76,7 @@
             this.pnDadosGerais.Controls.Add(this.lbNome);
             this.pnDadosGerais.Controls.Add(this.tbCodigo);
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
-            this.pnDadosGerais.Location = new System.Drawing.Point(72, 12);
+            this.pnDadosGerais.Location = new System.Drawing.Point(69, 12);
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 138);
             this.pnDadosGerais.TabIndex = 0;
@@ -177,7 +166,7 @@
             // 
             this.gbTipoDePessoa.Controls.Add(this.rbPessoaJuridica);
             this.gbTipoDePessoa.Controls.Add(this.rbPessoaFisica);
-            this.gbTipoDePessoa.Location = new System.Drawing.Point(72, 156);
+            this.gbTipoDePessoa.Location = new System.Drawing.Point(69, 156);
             this.gbTipoDePessoa.Name = "gbTipoDePessoa";
             this.gbTipoDePessoa.Size = new System.Drawing.Size(215, 45);
             this.gbTipoDePessoa.TabIndex = 1;
@@ -214,10 +203,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnDados.Controls.Add(this.btBuscaCidade);
-            this.pnDados.Controls.Add(this.tbNomeCidade);
-            this.pnDados.Controls.Add(this.tbCodCidade);
-            this.pnDados.Controls.Add(this.lbCidade);
+            this.pnDados.Controls.Add(this.buscaCidade);
             this.pnDados.Controls.Add(this.tbEmail);
             this.pnDados.Controls.Add(this.lbEmail);
             this.pnDados.Controls.Add(this.mtbTelefone);
@@ -232,50 +218,18 @@
             this.pnDados.Controls.Add(this.lbNumero);
             this.pnDados.Controls.Add(this.tbRua);
             this.pnDados.Controls.Add(this.lbRua);
-            this.pnDados.Location = new System.Drawing.Point(72, 207);
+            this.pnDados.Location = new System.Drawing.Point(69, 207);
             this.pnDados.Name = "pnDados";
             this.pnDados.Size = new System.Drawing.Size(1110, 305);
             this.pnDados.TabIndex = 2;
             // 
-            // btBuscaCidade
+            // buscaCidade
             // 
-            this.btBuscaCidade.Location = new System.Drawing.Point(85, 142);
-            this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btBuscaCidade.Name = "btBuscaCidade";
-            this.btBuscaCidade.Size = new System.Drawing.Size(20, 20);
-            this.btBuscaCidade.TabIndex = 1;
-            this.btBuscaCidade.TabStop = false;
-            this.btBuscaCidade.UseVisualStyleBackColor = true;
-            this.btBuscaCidade.Click += new System.EventHandler(this.btBuscaCidade_Click);
-            // 
-            // tbNomeCidade
-            // 
-            this.tbNomeCidade.Enabled = false;
-            this.tbNomeCidade.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbNomeCidade.Location = new System.Drawing.Point(107, 143);
-            this.tbNomeCidade.Name = "tbNomeCidade";
-            this.tbNomeCidade.Size = new System.Drawing.Size(436, 21);
-            this.tbNomeCidade.TabIndex = 16;
-            // 
-            // tbCodCidade
-            // 
-            this.tbCodCidade.Location = new System.Drawing.Point(15, 143);
-            this.tbCodCidade.MaxLength = 5;
-            this.tbCodCidade.Name = "tbCodCidade";
-            this.tbCodCidade.Size = new System.Drawing.Size(68, 20);
-            this.tbCodCidade.TabIndex = 8;
-            this.tbCodCidade.TextChanged += new System.EventHandler(this.tbCodCidade_TextChanged);
-            this.tbCodCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodCidade_KeyUp);
-            this.tbCodCidade.Leave += new System.EventHandler(this.tbCodCidade_Leave);
-            // 
-            // lbCidade
-            // 
-            this.lbCidade.AutoSize = true;
-            this.lbCidade.Location = new System.Drawing.Point(13, 127);
-            this.lbCidade.Name = "lbCidade";
-            this.lbCidade.Size = new System.Drawing.Size(40, 13);
-            this.lbCidade.TabIndex = 8;
-            this.lbCidade.Text = "Cidade";
+            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 8;
             // 
             // tbEmail
             // 
@@ -283,7 +237,7 @@
             this.tbEmail.MaxLength = 45;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
-            this.tbEmail.TabIndex = 15;
+            this.tbEmail.TabIndex = 14;
             this.tbEmail.TextChanged += new System.EventHandler(this.tbEmail_TextChanged);
             // 
             // lbEmail
@@ -292,7 +246,7 @@
             this.lbEmail.Location = new System.Drawing.Point(13, 251);
             this.lbEmail.Name = "lbEmail";
             this.lbEmail.Size = new System.Drawing.Size(35, 13);
-            this.lbEmail.TabIndex = 14;
+            this.lbEmail.TabIndex = 13;
             this.lbEmail.Text = "E-mail";
             // 
             // mtbTelefone
@@ -301,7 +255,7 @@
             this.mtbTelefone.Mask = "(##) ####-####";
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
-            this.mtbTelefone.TabIndex = 13;
+            this.mtbTelefone.TabIndex = 12;
             this.mtbTelefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbTelefone_MaskInputRejected);
             // 
             // lbTelefone
@@ -310,7 +264,7 @@
             this.lbTelefone.Location = new System.Drawing.Point(13, 212);
             this.lbTelefone.Name = "lbTelefone";
             this.lbTelefone.Size = new System.Drawing.Size(49, 13);
-            this.lbTelefone.TabIndex = 12;
+            this.lbTelefone.TabIndex = 11;
             this.lbTelefone.Text = "Telefone";
             // 
             // mtbCpfCnpj
@@ -320,7 +274,7 @@
             this.mtbCpfCnpj.Mask = "###.###.###-##";
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
-            this.mtbCpfCnpj.TabIndex = 11;
+            this.mtbCpfCnpj.TabIndex = 10;
             this.mtbCpfCnpj.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbCpfCnpj_MaskInputRejected);
             // 
             // lbCpf
@@ -329,7 +283,7 @@
             this.lbCpf.Location = new System.Drawing.Point(13, 173);
             this.lbCpf.Name = "lbCpf";
             this.lbCpf.Size = new System.Drawing.Size(59, 13);
-            this.lbCpf.TabIndex = 10;
+            this.lbCpf.TabIndex = 9;
             this.lbCpf.Text = "CPF/CNPJ";
             // 
             // tbComplemento
@@ -404,112 +358,6 @@
             this.lbRua.TabIndex = 0;
             this.lbRua.Text = "Rua";
             // 
-            // pnBotoes
-            // 
-            this.pnBotoes.Controls.Add(this.btRecarregar);
-            this.pnBotoes.Controls.Add(this.btSalvar);
-            this.pnBotoes.Controls.Add(this.btDeletar);
-            this.pnBotoes.Controls.Add(this.btAnterior);
-            this.pnBotoes.Controls.Add(this.btProximo);
-            this.pnBotoes.Controls.Add(this.btBuscar);
-            this.pnBotoes.Controls.Add(this.btNovo);
-            this.pnBotoes.Location = new System.Drawing.Point(10, 11);
-            this.pnBotoes.Name = "pnBotoes";
-            this.pnBotoes.Size = new System.Drawing.Size(56, 488);
-            this.pnBotoes.TabIndex = 3;
-            // 
-            // btRecarregar
-            // 
-            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
-            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
-            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btRecarregar.Name = "btRecarregar";
-            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
-            this.btRecarregar.TabIndex = 6;
-            this.btRecarregar.UseVisualStyleBackColor = true;
-            this.btRecarregar.Click += new System.EventHandler(this.btRecarregar_Click);
-            // 
-            // btSalvar
-            // 
-            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
-            this.btSalvar.Location = new System.Drawing.Point(3, 106);
-            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btSalvar.Name = "btSalvar";
-            this.btSalvar.Size = new System.Drawing.Size(48, 48);
-            this.btSalvar.TabIndex = 0;
-            this.btSalvar.UseVisualStyleBackColor = true;
-            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
-            // 
-            // btDeletar
-            // 
-            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
-            this.btDeletar.Location = new System.Drawing.Point(3, 310);
-            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btDeletar.Name = "btDeletar";
-            this.btDeletar.Size = new System.Drawing.Size(48, 48);
-            this.btDeletar.TabIndex = 5;
-            this.btDeletar.UseVisualStyleBackColor = true;
-            this.btDeletar.Click += new System.EventHandler(this.btDeletar_Click);
-            // 
-            // btAnterior
-            // 
-            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
-            this.btAnterior.Location = new System.Drawing.Point(3, 259);
-            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btAnterior.Name = "btAnterior";
-            this.btAnterior.Size = new System.Drawing.Size(48, 48);
-            this.btAnterior.TabIndex = 4;
-            this.btAnterior.UseVisualStyleBackColor = true;
-            this.btAnterior.Click += new System.EventHandler(this.btLeft_Click);
-            // 
-            // btProximo
-            // 
-            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
-            this.btProximo.Location = new System.Drawing.Point(3, 208);
-            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btProximo.Name = "btProximo";
-            this.btProximo.Size = new System.Drawing.Size(48, 48);
-            this.btProximo.TabIndex = 3;
-            this.btProximo.UseVisualStyleBackColor = true;
-            this.btProximo.Click += new System.EventHandler(this.btRight_Click);
-            // 
-            // btBuscar
-            // 
-            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
-            this.btBuscar.Location = new System.Drawing.Point(3, 55);
-            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btBuscar.Name = "btBuscar";
-            this.btBuscar.Size = new System.Drawing.Size(48, 48);
-            this.btBuscar.TabIndex = 2;
-            this.btBuscar.UseVisualStyleBackColor = true;
-            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
-            // 
-            // btNovo
-            // 
-            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_black;
-            this.btNovo.Location = new System.Drawing.Point(3, 3);
-            this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btNovo.Name = "btNovo";
-            this.btNovo.Size = new System.Drawing.Size(48, 48);
-            this.btNovo.TabIndex = 1;
-            this.btNovo.UseVisualStyleBackColor = true;
-            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
-            // 
             // tbAjuda
             // 
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -521,13 +369,28 @@
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 4;
             // 
+            // menuVertical
+            // 
+            this.menuVertical.Location = new System.Drawing.Point(11, 11);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 3;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
+            // 
             // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1194, 562);
+            this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
-            this.Controls.Add(this.pnBotoes);
             this.Controls.Add(this.pnDados);
             this.Controls.Add(this.gbTipoDePessoa);
             this.Controls.Add(this.pnDadosGerais);
@@ -549,7 +412,6 @@
             this.gbTipoDePessoa.PerformLayout();
             this.pnDados.ResumeLayout(false);
             this.pnDados.PerformLayout();
-            this.pnBotoes.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,19 +445,9 @@
         private System.Windows.Forms.Label lbTelefone;
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.Label lbEmail;
-        private System.Windows.Forms.Panel pnBotoes;
-        private System.Windows.Forms.Button btNovo;
-        private System.Windows.Forms.Button btSalvar;
-        private System.Windows.Forms.Button btDeletar;
-        private System.Windows.Forms.Button btAnterior;
-        private System.Windows.Forms.Button btProximo;
-        private System.Windows.Forms.Button btBuscar;
         private System.Windows.Forms.TextBox tbAjuda;
-        private System.Windows.Forms.Button btBuscaCidade;
-        private System.Windows.Forms.TextBox tbNomeCidade;
-        private System.Windows.Forms.TextBox tbCodCidade;
-        private System.Windows.Forms.Label lbCidade;
         private System.Windows.Forms.CheckedListBox cblAtuacao;
-        private System.Windows.Forms.Button btRecarregar;
+        private Controls.BuscaCidade buscaCidade;
+        private Controls.MenuVertical menuVertical;
     }
 }

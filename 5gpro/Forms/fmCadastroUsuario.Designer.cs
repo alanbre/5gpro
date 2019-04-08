@@ -28,14 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnBotoes = new System.Windows.Forms.Panel();
-            this.btRecarregar = new System.Windows.Forms.Button();
-            this.btSalvar = new System.Windows.Forms.Button();
-            this.btDeletar = new System.Windows.Forms.Button();
-            this.btAnterior = new System.Windows.Forms.Button();
-            this.btProximo = new System.Windows.Forms.Button();
-            this.btBuscar = new System.Windows.Forms.Button();
-            this.btNovo = new System.Windows.Forms.Button();
             this.pnDadosGerais = new System.Windows.Forms.Panel();
             this.lbConfirmaSenha = new System.Windows.Forms.Label();
             this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
@@ -59,114 +51,10 @@
             this.tbEmailUsuario = new System.Windows.Forms.TextBox();
             this.lbEmailUsuario = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.pnBotoes.SuspendLayout();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.pnDadosGerais.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pnBotoes
-            // 
-            this.pnBotoes.Controls.Add(this.btRecarregar);
-            this.pnBotoes.Controls.Add(this.btSalvar);
-            this.pnBotoes.Controls.Add(this.btDeletar);
-            this.pnBotoes.Controls.Add(this.btAnterior);
-            this.pnBotoes.Controls.Add(this.btProximo);
-            this.pnBotoes.Controls.Add(this.btBuscar);
-            this.pnBotoes.Controls.Add(this.btNovo);
-            this.pnBotoes.Location = new System.Drawing.Point(10, 11);
-            this.pnBotoes.Name = "pnBotoes";
-            this.pnBotoes.Size = new System.Drawing.Size(56, 376);
-            this.pnBotoes.TabIndex = 2;
-            // 
-            // btRecarregar
-            // 
-            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_48px_blue;
-            this.btRecarregar.Location = new System.Drawing.Point(3, 157);
-            this.btRecarregar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btRecarregar.Name = "btRecarregar";
-            this.btRecarregar.Size = new System.Drawing.Size(48, 48);
-            this.btRecarregar.TabIndex = 6;
-            this.btRecarregar.UseVisualStyleBackColor = true;
-            // 
-            // btSalvar
-            // 
-            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_black;
-            this.btSalvar.Location = new System.Drawing.Point(3, 106);
-            this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btSalvar.Name = "btSalvar";
-            this.btSalvar.Size = new System.Drawing.Size(48, 48);
-            this.btSalvar.TabIndex = 0;
-            this.btSalvar.UseVisualStyleBackColor = true;
-            this.btSalvar.Click += new System.EventHandler(this.btSalvar_Click);
-            // 
-            // btDeletar
-            // 
-            this.btDeletar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDeletar.Image = global::_5gpro.Properties.Resources.iosDelete_48px_black;
-            this.btDeletar.Location = new System.Drawing.Point(3, 310);
-            this.btDeletar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btDeletar.Name = "btDeletar";
-            this.btDeletar.Size = new System.Drawing.Size(48, 48);
-            this.btDeletar.TabIndex = 5;
-            this.btDeletar.UseVisualStyleBackColor = true;
-            // 
-            // btAnterior
-            // 
-            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
-            this.btAnterior.Location = new System.Drawing.Point(3, 259);
-            this.btAnterior.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btAnterior.Name = "btAnterior";
-            this.btAnterior.Size = new System.Drawing.Size(48, 48);
-            this.btAnterior.TabIndex = 4;
-            this.btAnterior.UseVisualStyleBackColor = true;
-            this.btAnterior.Click += new System.EventHandler(this.btAnterior_Click);
-            // 
-            // btProximo
-            // 
-            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
-            this.btProximo.Location = new System.Drawing.Point(3, 208);
-            this.btProximo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btProximo.Name = "btProximo";
-            this.btProximo.Size = new System.Drawing.Size(48, 48);
-            this.btProximo.TabIndex = 3;
-            this.btProximo.UseVisualStyleBackColor = true;
-            this.btProximo.Click += new System.EventHandler(this.btProximo_Click);
-            // 
-            // btBuscar
-            // 
-            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_48px_black;
-            this.btBuscar.Location = new System.Drawing.Point(3, 55);
-            this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btBuscar.Name = "btBuscar";
-            this.btBuscar.Size = new System.Drawing.Size(48, 48);
-            this.btBuscar.TabIndex = 2;
-            this.btBuscar.UseVisualStyleBackColor = true;
-            this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
-            // 
-            // btNovo
-            // 
-            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_black;
-            this.btNovo.Location = new System.Drawing.Point(3, 3);
-            this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
-            this.btNovo.Name = "btNovo";
-            this.btNovo.Size = new System.Drawing.Size(48, 48);
-            this.btNovo.TabIndex = 1;
-            this.btNovo.UseVisualStyleBackColor = true;
-            this.btNovo.Click += new System.EventHandler(this.btNovo_Click);
             // 
             // pnDadosGerais
             // 
@@ -191,11 +79,13 @@
             // lbConfirmaSenha
             // 
             this.lbConfirmaSenha.AutoSize = true;
+            this.lbConfirmaSenha.ForeColor = System.Drawing.Color.Red;
             this.lbConfirmaSenha.Location = new System.Drawing.Point(266, 111);
             this.lbConfirmaSenha.Name = "lbConfirmaSenha";
             this.lbConfirmaSenha.Size = new System.Drawing.Size(114, 13);
             this.lbConfirmaSenha.TabIndex = 9;
             this.lbConfirmaSenha.Text = "Senhas não são iguais";
+            this.lbConfirmaSenha.Visible = false;
             // 
             // cbMostrarSenhaUsuario
             // 
@@ -203,7 +93,7 @@
             this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(262, 69);
             this.cbMostrarSenhaUsuario.Name = "cbMostrarSenhaUsuario";
             this.cbMostrarSenhaUsuario.Size = new System.Drawing.Size(61, 17);
-            this.cbMostrarSenhaUsuario.TabIndex = 6;
+            this.cbMostrarSenhaUsuario.TabIndex = 4;
             this.cbMostrarSenhaUsuario.TabStop = false;
             this.cbMostrarSenhaUsuario.Text = "Mostrar";
             this.cbMostrarSenhaUsuario.UseVisualStyleBackColor = true;
@@ -213,8 +103,9 @@
             // 
             this.tbConfirmaSenhaUsuario.Location = new System.Drawing.Point(9, 105);
             this.tbConfirmaSenhaUsuario.Name = "tbConfirmaSenhaUsuario";
+            this.tbConfirmaSenhaUsuario.PasswordChar = '*';
             this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(250, 20);
-            this.tbConfirmaSenhaUsuario.TabIndex = 8;
+            this.tbConfirmaSenhaUsuario.TabIndex = 6;
             this.tbConfirmaSenhaUsuario.TextChanged += new System.EventHandler(this.tbConfirmaSenhaUsuario_TextChanged);
             this.tbConfirmaSenhaUsuario.Leave += new System.EventHandler(this.tbConfirmaSenhaUsuario_Leave);
             // 
@@ -224,15 +115,16 @@
             this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 89);
             this.lbConfirmaSenhaUsuario.Name = "lbConfirmaSenhaUsuario";
             this.lbConfirmaSenhaUsuario.Size = new System.Drawing.Size(89, 13);
-            this.lbConfirmaSenhaUsuario.TabIndex = 7;
+            this.lbConfirmaSenhaUsuario.TabIndex = 5;
             this.lbConfirmaSenhaUsuario.Text = "Confirme a senha";
             // 
             // tbSenhaUsuario
             // 
             this.tbSenhaUsuario.Location = new System.Drawing.Point(9, 66);
             this.tbSenhaUsuario.Name = "tbSenhaUsuario";
+            this.tbSenhaUsuario.PasswordChar = '*';
             this.tbSenhaUsuario.Size = new System.Drawing.Size(250, 20);
-            this.tbSenhaUsuario.TabIndex = 5;
+            this.tbSenhaUsuario.TabIndex = 3;
             this.tbSenhaUsuario.TextChanged += new System.EventHandler(this.tbSenhaUsuario_TextChanged);
             this.tbSenhaUsuario.Leave += new System.EventHandler(this.tbSenhaUsuario_Leave);
             // 
@@ -242,7 +134,7 @@
             this.lbSenhaUsuario.Location = new System.Drawing.Point(6, 50);
             this.lbSenhaUsuario.Name = "lbSenhaUsuario";
             this.lbSenhaUsuario.Size = new System.Drawing.Size(38, 13);
-            this.lbSenhaUsuario.TabIndex = 4;
+            this.lbSenhaUsuario.TabIndex = 2;
             this.lbSenhaUsuario.Text = "Senha";
             // 
             // lbGrupoUsuario
@@ -251,7 +143,7 @@
             this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 128);
             this.lbGrupoUsuario.Name = "lbGrupoUsuario";
             this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
-            this.lbGrupoUsuario.TabIndex = 10;
+            this.lbGrupoUsuario.TabIndex = 7;
             this.lbGrupoUsuario.Text = "Grupo Usuário";
             // 
             // tbNomeGrupoUsuario
@@ -260,7 +152,7 @@
             this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 144);
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
             this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(433, 20);
-            this.tbNomeGrupoUsuario.TabIndex = 13;
+            this.tbNomeGrupoUsuario.TabIndex = 10;
             this.tbNomeGrupoUsuario.TabStop = false;
             this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
             // 
@@ -278,7 +170,7 @@
             this.btGrupoUsuario.Location = new System.Drawing.Point(80, 144);
             this.btGrupoUsuario.Name = "btGrupoUsuario";
             this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
-            this.btGrupoUsuario.TabIndex = 12;
+            this.btGrupoUsuario.TabIndex = 9;
             this.btGrupoUsuario.TabStop = false;
             this.btGrupoUsuario.UseVisualStyleBackColor = true;
             this.btGrupoUsuario.Click += new System.EventHandler(this.btGrupoUsuario_Click);
@@ -296,8 +188,8 @@
             this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 144);
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
-            this.tbCodGrupoUsuario.TabIndex = 11;
-            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodUsuario_TextChanged);
+            this.tbCodGrupoUsuario.TabIndex = 8;
+            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodigoUsuario_TextChanged);
             this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
             // tbNomeUsuario
@@ -394,18 +286,34 @@
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(750, 20);
-            this.tbAjuda.TabIndex = 6;
+            this.tbAjuda.TabIndex = 3;
             this.tbAjuda.TabStop = false;
+            // 
+            // menuVertical
+            // 
+            this.menuVertical.Location = new System.Drawing.Point(11, 11);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 2;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
             // fmCadastroUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 453);
+            this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnDadosGerais);
-            this.Controls.Add(this.pnBotoes);
+            this.KeyPreview = true;
             this.Location = new System.Drawing.Point(10, 11);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -415,8 +323,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de Usuário";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
-            this.Load += new System.EventHandler(this.fmCadastroUsuario_Load);
-            this.pnBotoes.ResumeLayout(false);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyUp);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -427,15 +334,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnBotoes;
-        private System.Windows.Forms.Button btRecarregar;
-        private System.Windows.Forms.Button btSalvar;
-        private System.Windows.Forms.Button btDeletar;
-        private System.Windows.Forms.Button btAnterior;
-        private System.Windows.Forms.Button btProximo;
-        private System.Windows.Forms.Button btBuscar;
-        private System.Windows.Forms.Button btNovo;
         private System.Windows.Forms.Panel pnDadosGerais;
         private System.Windows.Forms.Label lbCodigoUsuario;
         private System.Windows.Forms.TextBox tbCodigoUsuario;
@@ -459,5 +357,6 @@
         private System.Windows.Forms.MaskedTextBox mtbTelefoneUsuario;
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.Label lbConfirmaSenha;
+        private Controls.MenuVertical menuVertical;
     }
 }

@@ -1,17 +1,21 @@
 ﻿using _5gpro.Bll;
 using _5gpro.Entities;
 using _5gpro.Forms;
+using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace _5gpro.Controls
 {
-    public partial class buscaCidade : UserControl
+    public partial class BuscaCidade : UserControl
     {
         public Cidade cidade = null;
 
         private readonly CidadeBLL cidadeBLL = new CidadeBLL();
 
-        public buscaCidade()
+        private bool editando = false;
+
+        public BuscaCidade()
         {
             InitializeComponent();
         }
@@ -27,6 +31,19 @@ namespace _5gpro.Controls
             {
                 e.Handled = true;
                 AbreTelaBuscaCidade();
+            }
+        }
+
+        private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
+        {
+            if (tbCodigoCidade.Text.Length > 0)
+            {
+                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
+                PreencheCamposCidade(cidade);
+            }
+            else
+            {
+                tbNomeCidade.Text = "";
             }
         }
 
@@ -46,7 +63,7 @@ namespace _5gpro.Controls
         {
             if (cidade != null)
             {
-                tbFiltroCodigoCidade.Text = cidade.CidadeID.ToString();
+                tbCodigoCidade.Text = cidade.CidadeID.ToString();
                 tbNomeCidade.Text = cidade.Nome;
             }
             else
@@ -55,23 +72,47 @@ namespace _5gpro.Controls
                 "Cidade não encontrada",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbFiltroCodigoCidade.Clear();
-                tbFiltroCodigoCidade.Focus();
-                tbFiltroCodigoCidade.SelectAll();
+                tbCodigoCidade.Clear();
+                tbCodigoCidade.Focus();
+                tbCodigoCidade.SelectAll();
             }
         }
 
-        private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
+        public void PreencheCampos(Cidade cidade)
         {
-            if (tbFiltroCodigoCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodigoCidade.Text));
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
-            }
+            this.cidade = null;
+            tbCodigoCidade.Text = this.cidade != null ? this.cidade.CidadeID.ToString() : "";
+            tbNomeCidade.Text = this.cidade != null ? this.cidade.Nome : "";
+        }
+
+        public void Editando(bool edit)
+        {
+            editando = edit;
+        }
+
+        public void Limpa()
+        {
+            tbCodigoCidade.Clear();
+            tbNomeCidade.Clear();
+            cidade = null;
+        }
+
+
+
+
+        //--------------------------------------------------
+        //CRIA O EVENTO Text_Changed DO USERCONTROL
+        //--------------------------------------------------
+        public delegate void text_changedEventHandler(object sender, EventArgs e);
+
+        [Category("Action")]
+        [Description("É acionado quando o conteúdo do código da pessoa é alterado")]
+        public event text_changedEventHandler Text_Changed;
+        //--------------------------------------------------
+
+        private void TbCodigoCidade_TextChanged(object sender, EventArgs e)
+        {
+            this.Text_Changed?.Invoke(this, e);  //o editor falou que era melhor fazer assim haha.
         }
     }
 }
