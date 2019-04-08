@@ -35,7 +35,6 @@
             this.tsmiCadastroItens = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tESTEGRIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,8 +61,7 @@
             this.tsmiCadastroPaises,
             this.tsmiCadastroItens,
             this.tsmiCadastroUsuarios,
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem,
-            this.tESTEGRIDToolStripMenuItem});
+            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem});
             this.tsmiCadastros.Name = "tsmiCadastros";
             this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
             this.tsmiCadastros.Text = "Cadastro";
@@ -102,13 +100,6 @@
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Text = "Cadastro de Grupo de Usuários";
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click);
-            // 
-            // tESTEGRIDToolStripMenuItem
-            // 
-            this.tESTEGRIDToolStripMenuItem.Name = "tESTEGRIDToolStripMenuItem";
-            this.tESTEGRIDToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.tESTEGRIDToolStripMenuItem.Text = "TESTE GRID";
-            this.tESTEGRIDToolStripMenuItem.Click += new System.EventHandler(this.tESTEGRIDToolStripMenuItem_Click);
             // 
             // tsmiOrcamento
             // 
@@ -169,7 +160,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiSaida;
         private System.Windows.Forms.ToolStripMenuItem tsmiEmissaoNF;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeUsuáriosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tESTEGRIDToolStripMenuItem;
     }
 }
 

@@ -54,10 +54,5 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
-        private void tESTEGRIDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formTesteGrid = new Form1_Load();
-            formTesteGrid.Show(this);
-        }
     }
 }
