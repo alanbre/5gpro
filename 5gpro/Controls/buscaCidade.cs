@@ -13,8 +13,6 @@ namespace _5gpro.Controls
 
         private readonly CidadeBLL cidadeBLL = new CidadeBLL();
 
-        private bool editando = false;
-
         public BuscaCidade()
         {
             InitializeComponent();
@@ -80,14 +78,9 @@ namespace _5gpro.Controls
 
         public void PreencheCampos(Cidade cidade)
         {
-            this.cidade = null;
+            this.cidade = cidade;
             tbCodigoCidade.Text = this.cidade != null ? this.cidade.CidadeID.ToString() : "";
             tbNomeCidade.Text = this.cidade != null ? this.cidade.Nome : "";
-        }
-
-        public void Editando(bool edit)
-        {
-            editando = edit;
         }
 
         public void Limpa()

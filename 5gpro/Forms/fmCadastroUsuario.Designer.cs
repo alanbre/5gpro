@@ -83,7 +83,7 @@
             this.lbConfirmaSenha.Location = new System.Drawing.Point(266, 111);
             this.lbConfirmaSenha.Name = "lbConfirmaSenha";
             this.lbConfirmaSenha.Size = new System.Drawing.Size(114, 13);
-            this.lbConfirmaSenha.TabIndex = 9;
+            this.lbConfirmaSenha.TabIndex = 7;
             this.lbConfirmaSenha.Text = "Senhas não são iguais";
             this.lbConfirmaSenha.Visible = false;
             // 

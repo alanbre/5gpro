@@ -67,6 +67,12 @@
     <Compile Include="Controls\BuscaCidade.Designer.cs">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaItem.Designer.cs">
+      <DependentUpon>BuscaItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaPessoa.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -229,6 +235,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaItem.resx">
+      <DependentUpon>BuscaItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaPessoa.resx">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
