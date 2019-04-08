@@ -10,28 +10,24 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroPessoa : Form
     {
-        Pessoa pessoa;
-        Cidade cidade;
-        PessoaBLL pessoaBLL = new PessoaBLL();
-        CidadeBLL cidadeBLL = new CidadeBLL();
-        Validacao validacao = new Validacao();
+        private Pessoa pessoa;
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly Validacao validacao = new Validacao();
 
-        FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         bool editando = false;
         bool ignoraCheckEvent;
 
 
-       
-       
+
+
 
         public fmCadastroPessoa()
         {
             InitializeComponent();
-            AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
         }
 
-        private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
+        private void FmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
@@ -54,7 +50,7 @@ namespace _5gpro.Forms
 
 
 
-        private void rbPessoaFisica_CheckedChanged(object sender, EventArgs e)
+        private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CPF
             mtbCpfCnpj.Clear();
@@ -62,7 +58,7 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void rbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
+        private void RbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CNPJ
             mtbCpfCnpj.Clear();
@@ -72,13 +68,12 @@ namespace _5gpro.Forms
 
 
 
-        //EVENTOS DE CLICK
-        private void btNovo_Click(object sender, EventArgs e)
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
             NovoCadastro();
         }
 
-        private void btBuscar_Click(object sender, EventArgs e)
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
             if (!editando)
             {
@@ -86,46 +81,36 @@ namespace _5gpro.Forms
             }
         }
 
-        private void btSalvar_Click(object sender, EventArgs e)
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
             SalvaCadastro();
         }
 
-        private void btBuscaCidade_Click(object sender, EventArgs e)
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
-            AbreTelaBuscaCidade();
-        }
-
-        private void btRecarregar_Click(object sender, EventArgs e)
-        {
-            //Se não houver uma pessoa setada (por qualquer motivo) ele limpa os campos. Se tiver pessoa recarrega com as informações do banco.
-            //Desta forma é necessário ter carregado um registro pra poder recarregar.
             RecarregaDados(pessoa);
         }
 
-        private void btRight_Click(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
-        private void btLeft_Click(object sender, EventArgs e)
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
 
-        private void btDeletar_Click(object sender, EventArgs e)
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
-            if (!editando)
-            {
+            ProximoCadastro();
+        }
 
-            }
+        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
+        {
+
         }
 
 
         //EVENTOS DE KEY PRESS
-        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
@@ -134,61 +119,61 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE TEXTCHANGED
-        private void tbNome_TextChanged(object sender, EventArgs e)
+        private void TbNome_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbFantasia_TextChanged(object sender, EventArgs e)
+        private void TbFantasia_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbRua_TextChanged(object sender, EventArgs e)
+        private void TbRua_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbNumero_TextChanged(object sender, EventArgs e)
+        private void TbNumero_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbBairro_TextChanged(object sender, EventArgs e)
+        private void TbBairro_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbComplemento_TextChanged(object sender, EventArgs e)
+        private void TbComplemento_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbCodCidade_TextChanged(object sender, EventArgs e)
+        private void TbCodCidade_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void mtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void mtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbEmail_TextChanged(object sender, EventArgs e)
+        private void TbEmail_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
         //EVENTOS DE LEAVE
-        private void tbCodigo_Leave(object sender, EventArgs e)
+        private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            
+
             tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
@@ -223,7 +208,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        
+
                         Pessoa newpessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigo.Text));
                         if (newpessoa != null)
                         {
@@ -245,22 +230,9 @@ namespace _5gpro.Forms
                 }
                 else
                 {
-                    
-                }
-                
-            }
-        }
 
-        private void tbCodCidade_Leave(object sender, EventArgs e)
-        {
-            if (tbCodCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodCidade.Text));
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
+                }
+
             }
         }
 
@@ -268,7 +240,7 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE KEY UP
-        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
             {
@@ -277,24 +249,15 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaCidade();
-            }
-        }
 
-
-        private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
 
-        private void fmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
+        private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (editando)
             {
@@ -359,25 +322,28 @@ namespace _5gpro.Forms
             if (editando)
             {
 
-                pessoa = new Pessoa();
-                pessoa.PessoaID = int.Parse(tbCodigo.Text);
-                pessoa.Nome = tbNome.Text;
-                pessoa.Fantasia = tbFantasia.Text;
+                pessoa = new Pessoa
+                {
+                    PessoaID = int.Parse(tbCodigo.Text),
+                    Nome = tbNome.Text,
+                    Fantasia = tbFantasia.Text,
+                    TipoPessoa = rbPessoaFisica.Checked ? "F" : "J",
+                    Rua = tbRua.Text,
+                    Numero = tbNumero.Text,
+                    Bairro = tbBairro.Text,
+                    Complemento = tbComplemento.Text,
+                    Cidade = buscaCidade.cidade,
+                    CpfCnpj = mtbCpfCnpj.TextNoMask(),
+                    Telefone = mtbTelefone.TextNoMask(),
+                    Email = tbEmail.Text
+                };
+
                 List<string> atuacoes = new List<string>();
                 foreach (string s in cblAtuacao.CheckedItems)
                 {
                     atuacoes.Add(s);
                 }
                 pessoa.Atuacao = atuacoes;
-                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-                pessoa.Rua = tbRua.Text;
-                pessoa.Numero = tbNumero.Text;
-                pessoa.Bairro = tbBairro.Text;
-                pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodCidade.Text));
-                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-                pessoa.Telefone = mtbTelefone.TextNoMask();
-                pessoa.Email = tbEmail.Text;
 
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(pessoa, controls);
@@ -547,36 +513,10 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AlteraBotoes()
-        {
-            if (editando)
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
-            }
-            else
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
-            }
-        }
-
         private void Editando(bool edit)
         {
             editando = edit;
-            AlteraBotoes();
+            menuVertical.Editando(edit);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)
@@ -597,8 +537,7 @@ namespace _5gpro.Forms
             tbNumero.Clear();
             tbBairro.Clear();
             tbComplemento.Clear();
-            tbCodCidade.Clear();
-            tbNomeCidade.Clear();
+            buscaCidade.Limpa();
             mtbCpfCnpj.Clear();
             mtbTelefone.Clear();
             tbEmail.Clear();
@@ -615,7 +554,7 @@ namespace _5gpro.Forms
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
-            tbCodigo.Text = pessoa.PessoaID.ToString() ;
+            tbCodigo.Text = pessoa.PessoaID.ToString();
             tbNome.Text = pessoa.Nome;
             tbFantasia.Text = pessoa.Fantasia;
             if (pessoa.TipoPessoa == "F")
@@ -632,16 +571,11 @@ namespace _5gpro.Forms
             tbNumero.Text = pessoa.Numero;
             tbBairro.Text = pessoa.Bairro;
             tbComplemento.Text = pessoa.Complemento;
-            tbCodCidade.Text = pessoa.Cidade.CidadeID.ToString();
             mtbCpfCnpj.Text = pessoa.CpfCnpj;
             mtbTelefone.Text = pessoa.Telefone;
             tbEmail.Text = pessoa.Email;
 
-            if (pessoa.Cidade != null)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(pessoa.Cidade.CidadeID);
-                PreencheCamposCidade(cidade);
-            }
+            buscaCidade.PreencheCampos(pessoa.Cidade);
 
             foreach (string atuacao in pessoa.Atuacao)
             {
@@ -657,38 +591,6 @@ namespace _5gpro.Forms
             }
             ignoraCheckEvent = false;
         }
-
-        private void PreencheCamposCidade(Cidade cidade)
-        {
-            if (cidade != null)
-            {
-                tbCodCidade.Text = cidade.CidadeID.ToString();
-                tbNomeCidade.Text = cidade.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Cidade não encontrada no banco de dados",
-                "Cidade não encontrada",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodCidade.Focus();
-                tbCodCidade.SelectAll();
-            }
-        }
-
-        private void AbreTelaBuscaCidade()
-        {
-            var buscaCidade = new fmBuscaCidade();
-            buscaCidade.ShowDialog();
-            if (buscaCidade.cidadeSelecionada != null)
-            {
-                cidade = buscaCidade.cidadeSelecionada;
-                PreencheCamposCidade(cidade);
-                Editando(true);
-            }
-        }
-
-
 
     }
 }

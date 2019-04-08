@@ -8,8 +8,10 @@ namespace _5gpro.Forms
 {
     public partial class fmLogin : Form
     {
-        public Usuario usuario;
+        public Usuario usuariologado;
+
         UsuarioBLL usuarioBLL = new UsuarioBLL();
+        NetworkAdapter adap = new NetworkAdapter();
 
 
         public fmLogin()
@@ -19,10 +21,19 @@ namespace _5gpro.Forms
 
         private void btEntrar_Click(object sender, EventArgs e)
         {
-            usuario = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
-            if (usuario != null)
-            {
-                this.Close();
+            usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
+            if (usuariologado != null)
+            {  
+                if (usuarioBLL.BuscaLogado(usuariologado, adap.Mac) != null)
+                {
+                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome);
+                }
+                else
+                {
+                    usuarioBLL.GravarLogado(usuariologado, adap.Mac);
+                    this.Close();
+                }
+               
             }
             else
             {
@@ -89,8 +100,8 @@ namespace _5gpro.Forms
             buscaUsuario.ShowDialog();
             if (buscaUsuario.usuarioSelecionado != null)
             {
-                usuario = buscaUsuario.usuarioSelecionado;
-                PreencheCamposCodUsuario(usuario);
+                usuariologado = buscaUsuario.usuarioSelecionado;
+                PreencheCamposCodUsuario(usuariologado);
             }
         }
 
@@ -98,8 +109,8 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                usuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
-                PreencheCamposCodUsuario(usuario);
+                usuariologado = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
+                PreencheCamposCodUsuario(usuariologado);
             }
             else
             {

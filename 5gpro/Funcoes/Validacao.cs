@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
+using _5gpro.Entities;
 
 namespace _5gpro.Funcoes
 {
 
     public class Validacao
     {
+
 
         public static IEnumerable<ValidationResult> getValidationErros(object obj)
         {
@@ -81,6 +83,18 @@ namespace _5gpro.Funcoes
         {
             foreach (Control ctrl in controls)
             {
+                //GROUPBOX
+                if (ctrl is GroupBox)
+                {
+                    foreach (Control ctrlgb in ctrl.Controls)
+                    {
+                        if (ctrlgb is TextBox && !ctrlgb.Name.Equals("tbAjuda"))
+                        {
+                            ctrlgb.BackColor = System.Drawing.Color.White;
+                        }
+                    }
+                }
+
                 //PAINEL
                 if (ctrl is Panel)
                 {

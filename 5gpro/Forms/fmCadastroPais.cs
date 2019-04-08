@@ -36,8 +36,8 @@ namespace _5gpro.Forms
 
             pais = new Pais();
             pais.PaisID = int.Parse(tbCodpais.Text);
-            pais.nome = tbNomepais.Text;
-            pais.sigla = tbSiglapais.Text;
+            pais.Nome = tbNomepais.Text;
+            pais.Sigla = tbSiglapais.Text;
 
             ControlCollection controls = (ControlCollection)this.Controls;
 

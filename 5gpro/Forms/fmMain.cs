@@ -1,4 +1,6 @@
-﻿using _5gpro.Forms;
+﻿using _5gpro.Entities;
+using _5gpro.Forms;
+using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;
 
@@ -9,13 +11,15 @@ namespace _5gpro
         public fmMain()
         {
             InitializeComponent();
-            
         }
 
+        
+      
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
             formCadPessoas.Show(this);
+            
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)
@@ -54,10 +58,13 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
-        private void tESTEGRIDToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
-            var formTesteGrid = new Form1_Load();
-            formTesteGrid.Show(this);
+            NetworkAdapter adap = new NetworkAdapter();
+            Console.WriteLine("IP: "+adap.IP);
+            Console.WriteLine("MAC: "+adap.Mac);
+            Console.WriteLine("Nome PC: "+adap.Nome);
+
         }
     }
 }

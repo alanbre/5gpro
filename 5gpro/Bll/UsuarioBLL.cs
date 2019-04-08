@@ -10,7 +10,7 @@ namespace _5gpro.Bll
 {
     class UsuarioBLL
     {
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        private readonly UsuarioDAO usuarioDAO = new UsuarioDAO();
 
         public int SalvarOuAtualizarUsuario(Usuario usuario)
         {
@@ -45,6 +45,21 @@ namespace _5gpro.Bll
         public List<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
         {
             return usuarioDAO.BuscaUsuarios(codGrupoUsuario, nomeUsuario, sobrenomeUsuario);
+        }
+
+        public int GravarLogado(Usuario usuario, string mac)
+        {
+            return usuarioDAO.GravarLogado(usuario, mac);
+        }
+
+        public int RemoverLogado(Usuario usuario, string mac)
+        {
+            return usuarioDAO.RemoverLogado(usuario, mac);
+        }
+
+        public Logado BuscaLogado(Usuario usuario, string mac)
+        {
+            return usuarioDAO.BuscaLogado(usuario, mac);
         }
     }
 }

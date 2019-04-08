@@ -7,7 +7,7 @@ namespace _5gpro.Bll
 {
     class OrcamentoBLL
     {
-        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+        private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
         public int SalvarOuAtualizarOrcamento(Orcamento orcamento)
         {

@@ -7,13 +7,12 @@ using System.Windows.Forms;
 
 namespace _5gpro.Controls
 {
-    public partial class buscaPessoa : UserControl
+    public partial class BuscaPessoa : UserControl
     {
         public Pessoa pessoa = new Pessoa();
         public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
-        private bool editando = false;
 
-        PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
 
         [Description("Texto do Label"), Category("Appearance")]
         public string LabelText
@@ -39,7 +38,7 @@ namespace _5gpro.Controls
 
 
 
-        public buscaPessoa()
+        public BuscaPessoa()
         {
             InitializeComponent();
         }
@@ -58,18 +57,21 @@ namespace _5gpro.Controls
             }
             else
             {
+                pessoa = null;
                 tbNomePessoa.Text = "";
             }
         }
 
         private void TbCodigoPessoa_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3 && !editando)
+            if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
                 AbreTelaBuscaPessoa();
             }
         }
+
+
 
         private void AbreTelaBuscaPessoa()
         {
@@ -101,9 +103,11 @@ namespace _5gpro.Controls
             }
         }
 
-        public void Editando(bool edit)
+        public void PreencheCampos(Pessoa pessoa)
         {
-            editando = edit;
+            this.pessoa = pessoa;
+            tbCodigoPessoa.Text = this.pessoa != null ? this.pessoa.PessoaID.ToString() : "";
+            tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
         }
 
         public void Limpa()
@@ -113,12 +117,6 @@ namespace _5gpro.Controls
             pessoa = null;
         }
 
-        public void PreencheCampos(Pessoa pessoa)
-        {
-            this.pessoa = pessoa;
-            tbCodigoPessoa.Text = this.pessoa != null ? this.pessoa.PessoaID.ToString() : "";
-            tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
-        }
 
 
 
@@ -135,8 +133,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoPessoa_TextChanged(object sender, EventArgs e)
         {
-            if (this.Text_Changed != null)
-                this.Text_Changed(this, e);
+            this.Text_Changed?.Invoke(this, e);
         }
     }
 }

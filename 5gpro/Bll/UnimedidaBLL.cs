@@ -11,7 +11,7 @@ namespace _5gpro.Bll
     class UnimedidaBLL
     {
 
-        UnimedidaDAO UnimedidaDAO = new UnimedidaDAO();
+        private readonly UnimedidaDAO UnimedidaDAO = new UnimedidaDAO();
 
         public Unimedida BuscaUnimedidaByCod(int cod)
         {

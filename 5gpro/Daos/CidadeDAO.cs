@@ -14,7 +14,7 @@ namespace _5gpro.Daos
 
         public Cidade BuscaCidadeByCod(int cod)
         {
-            Cidade cidade = null;
+            Cidade cidade = new Cidade();
             try
             {
                 AbrirConexao();
@@ -25,9 +25,15 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    cidade = new Cidade();
-                    cidade.CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"));
-                    cidade.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    cidade = new Cidade
+                    {
+                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
+                }
+                else
+                {
+                    cidade = null;
                 }
             }
             catch (MySqlException ex)
@@ -41,10 +47,10 @@ namespace _5gpro.Daos
             return cidade;
         }
 
-        public List<Cidade> BuscaCidades(string codEstado, string nomeCidade)
+        public List<Cidade> BuscaCidades(int codEstado, string nomeCidade)
         {
             List<Cidade> cidades = new List<Cidade>();
-            string conCodEstado = codEstado.Length > 0 ? "AND e.idestado = @idestado" : "";
+            string conCodEstado = codEstado > 0 ? "AND e.idestado = @idestado" : "";
             string conNomeCidade = nomeCidade.Length > 0 ? "AND c.nome LIKE @nomecidade" : "";
 
             try
@@ -58,21 +64,26 @@ namespace _5gpro.Daos
                                              " + conNomeCidade + @"
                                              ORDER BY c.idcidade;", Conexao);
 
-                if (codEstado.Length > 0) { Comando.Parameters.AddWithValue("@idestado", codEstado); }
+                if (codEstado > 0) { Comando.Parameters.AddWithValue("@idestado", codEstado); }
                 if (nomeCidade.Length > 0) { Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
 
                 IDataReader reader = Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    Cidade cidade = new Cidade();
-                    cidade.CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"));
-                    cidade.Nome = reader.GetString(reader.GetOrdinal("nomecidade"));
-                    Estado estado = new Estado();
-                    estado.EstadoID = reader.GetInt32(reader.GetOrdinal("idestado"));
-                    estado.Nome = reader.GetString(reader.GetOrdinal("nomeestado"));
-                    estado.Uf = reader.GetString(reader.GetOrdinal("uf"));
-                    cidade.Estado = estado;
+                    Estado estado = new Estado
+                    {
+                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                        Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
+                        Uf = reader.GetString(reader.GetOrdinal("uf"))
+                    };
+
+                    Cidade cidade = new Cidade
+                    {
+                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                        Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
+                        Estado = estado
+                    };
                     cidades.Add(cidade);
                 }
             }

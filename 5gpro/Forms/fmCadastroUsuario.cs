@@ -21,140 +21,279 @@ namespace _5gpro.Forms
         UsuarioBLL usuarioBLL = new UsuarioBLL();
         Validacao validacao = new Validacao();
 
-        bool editando = false;
-        bool ignoraCheckEvent;
+        bool editando, ignoraCheckEvent = false;
 
         public fmCadastroUsuario()
         {
             InitializeComponent();
-            lbConfirmaSenha.Text = "";
-            AlteraBotoes();  //ALTERA BOTÕES PARA CERTIFICAR QUE VÃO ESTAR CORRETOS AO ABRIR A TELA
+        }
 
-            tbSenhaUsuario.UseSystemPasswordChar = true;  //Iniciar com senha oculta
-            tbConfirmaSenhaUsuario.UseSystemPasswordChar = true;
-
+        private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            //mudar aqui para this.activecontrol
+            EnterTab(sender, e);
         }
 
         private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
-
+            Editando(true);
         }
 
-        private void EnterTab(object sender, KeyEventArgs e)
+        private void fmCadastroUsuario_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (editando)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
-        private void LimpaCampos(bool limpaCodigo)
-        {
-            if (limpaCodigo) { tbCodigoUsuario.Clear(); }
-            tbSenhaUsuario.Clear();
-            tbConfirmaSenhaUsuario.Clear();
-            tbCodGrupoUsuario.Clear();
-            tbNomeGrupoUsuario.Clear();
-            tbNomeUsuario.Clear();
-            tbSobrenomeUsuario.Clear();
-            tbEmailUsuario.Clear();
-            mtbTelefoneUsuario.Clear();
-            tbAjuda.Clear();
-        }
-
-        private void PreencheCampos(Usuario usuario)
-        {
-            ignoraCheckEvent = true;
-            LimpaCampos(false);
-
-            tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
-            tbSenhaUsuario.Text = usuario.Senha;
-            tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
-            tbNomeUsuario.Text = usuario.Nome;
-            tbSobrenomeUsuario.Text = usuario.Sobrenome;
-            tbEmailUsuario.Text = usuario.Email;
-            mtbTelefoneUsuario.Text = usuario.Telefone;
-
-            if (usuario.Grupousuario != null)
-            {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-
-
-            ignoraCheckEvent = false;
-        }
-
-        private void PreencheCamposGrupoUsuario(GrupoUsuario grupousuario)
-        {
-            if (grupousuario != null)
-            {
-                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
-                tbNomeGrupoUsuario.Text = grupousuario.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Grupo de usuários não encontrado no banco de dados",
-                "Grupo de usuários não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodGrupoUsuario.Focus();
-                tbNomeGrupoUsuario.SelectAll();
-            }
-        }
 
         //Mostrar e ocultar campo senha
         private void cbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e)
         {
             if (cbMostrarSenhaUsuario.Checked)
             {
-                tbSenhaUsuario.UseSystemPasswordChar = false;
-                tbConfirmaSenhaUsuario.UseSystemPasswordChar = false;
+                tbSenhaUsuario.PasswordChar = '\0';
+                tbConfirmaSenhaUsuario.PasswordChar = '\0';
             }
             else
             {
-                tbSenhaUsuario.UseSystemPasswordChar = true;
-                tbConfirmaSenhaUsuario.UseSystemPasswordChar = true;
+                tbSenhaUsuario.PasswordChar = '*';
+                tbConfirmaSenhaUsuario.PasswordChar = '*';
             }
 
         }
 
-        public bool confirmaSenhas()
+
+        //EVENTOS DE TEXTCHANGED
+        private void tbSenhaUsuario_TextChanged(object sender, EventArgs e)
         {
-            bool iguais = false;
-            if (tbSenhaUsuario.Text.Equals( tbConfirmaSenhaUsuario.Text))
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbConfirmaSenhaUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void TbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbNomeUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbSobrenomeUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbEmailUsuario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void mtbTelefoneUsuario_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+
+        //EVENTOS DE LEAVE
+        private void tbCodigoUsuario_Leave(object sender, EventArgs e)
+        {
+            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
+            if (!editando)
             {
-                lbConfirmaSenha.Text = "";
-                iguais  = true;
+                if (tbCodigoUsuario.Text.Length > 0)
+                {
+                    Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
+                    if (newusuario != null)
+                    {
+                        usuario = newusuario;
+                        PreencheCampos(usuario);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        Editando(true);
+                        LimpaCampos(false);
+                    }
+                }
+                else if (tbCodigoUsuario.Text.Length == 0)
+                {
+                    LimpaCampos(true);
+                    Editando(false);
+                }
             }
             else
             {
-                lbConfirmaSenha.ForeColor = Color.Red;
-                lbConfirmaSenha.Text = "Senhas não são iguais";
-                iguais = false;
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (tbCodigoUsuario.Text.Length > 0)
+                    {
+                        Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
+                        if (newusuario != null)
+                        {
+                            usuario = newusuario;
+                            PreencheCampos(usuario);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodigoUsuario.Text.Length == 0)
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
+                }
             }
-            return iguais;
         }
 
+        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
+        {
+            if (tbCodGrupoUsuario.Text.Length > 0)
+            {
+                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                PreencheCamposGrupoUsuario(grupousuario);
+            }
+            else
+            {
+                tbNomeGrupoUsuario.Text = "";
+            }
+        }
+
+        private void tbSenhaUsuario_Leave(object sender, EventArgs e)
+        {
+            if(tbConfirmaSenhaUsuario.TextLength > 0)
+            {
+                ConfirmaSenhas();
+            }
+        }
+
+        private void tbConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
+        {
+            ConfirmaSenhas();
+        }
+
+
+        //EVENTOS DE CLICK
+        private void btGrupoUsuario_Click(object sender, EventArgs e)
+        {
+            AbreTelaBuscaGrupoUsuario();
+        }
+
+
+        //MENU
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
+        {
+            NovoCadastro();
+        }
+
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
+        {
+            if (!editando)
+            {
+                AbreTelaBuscaUsuario();
+            }
+        }
+
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
+
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
+        {
+            RecarregaDados(usuario);
+        }
+
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
+        {
+            CadastroAnterior();
+        }
+
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        //PADRÕES CRIADAS
+        private void NovoCadastro()
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    LimpaCampos(false);
+                    tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
+                    usuario = null;
+                    Editando(true);
+                }
+            }
+            else
+            {
+                LimpaCampos(false);
+                tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
+                usuario = null;
+                Editando(true);
+            }
+        }
 
         private void SalvaCadastro()
         {
             //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
+
             if (editando)
             {
-
                 usuario = new Usuario();
-                usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
 
-                if (confirmaSenhas() == true)
+                if (ConfirmaSenhas() == true)
                 {
                     usuario.Senha = tbSenhaUsuario.Text;
                 }
-                
+                else
+                {
+                    MessageBox.Show("As senhas devem ser iguais",
+                        "Senhas não conferem",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    tbConfirmaSenhaUsuario.Focus();
+                    tbConfirmaSenhaUsuario.SelectAll();
+                    return;
+                }
 
-                //usuario.Senha = tbSenhaUsuario.Text;
+                usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
                 usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
@@ -193,73 +332,21 @@ namespace _5gpro.Forms
             }
         }
 
-        //PADRÕES CRIADAS
-        private void NovoCadastro()
+        private void AbreTelaBuscaUsuario()
         {
-            if (editando)
+            var buscaUsuario = new fmBuscaUsuario();
+            buscaUsuario.ShowDialog();
+            if (buscaUsuario.usuarioSelecionado != null)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    LimpaCampos(false);
-                    tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
-                    usuario = null;
-                    Editando(true);
-                }
-            }
-            else
-            {
-                LimpaCampos(false);
-                tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
-                usuario = null;
-                Editando(true);
-            }
-        }
-
-        private void AbreTelaBuscaGrupoUsuario()
-        {
-            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
-            buscaGrupoUsuario.ShowDialog();
-            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
-            {
-                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-        }
-
-        //Botões principais
-        private void AlteraBotoes()
-        {
-            if (editando)
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
-            }
-            else
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
+                usuario = buscaUsuario.usuarioSelecionado;
+                PreencheCampos(usuario);
             }
         }
 
         private void Editando(bool edit)
         {
             editando = edit;
-            AlteraBotoes();
+            menuVertical.Editando(edit);
         }
 
         private void RecarregaDados(Usuario usuario)
@@ -299,7 +386,6 @@ namespace _5gpro.Forms
             }
 
         }
-
 
         private void ProximoCadastro()
         {
@@ -397,204 +483,91 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaUsuario()
+        private void AbreTelaBuscaGrupoUsuario()
         {
-            var buscaUsuario = new fmBuscaUsuario();
-            buscaUsuario.ShowDialog();
-            if (buscaUsuario.usuarioSelecionado != null)
+            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
+            buscaGrupoUsuario.ShowDialog();
+            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
             {
-                usuario = buscaUsuario.usuarioSelecionado;
-                PreencheCampos(usuario);
+                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
+                PreencheCamposGrupoUsuario(grupousuario);
             }
         }
 
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void tbLoginUsuario_TextChanged(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbSenhaUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbConfirmaSenhaUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbCodUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbNomeUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbSobrenomeUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbEmailUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void mtbTelefoneUsuario_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void fmCadastroUsuario_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (editando)
+            if (e.KeyCode == Keys.Enter)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
 
-        public void existeLogin(string login)
+        private void LimpaCampos(bool limpaCodigo)
         {
-            
+            if (limpaCodigo) { tbCodigoUsuario.Clear(); }
+            tbSenhaUsuario.Clear();
+            tbConfirmaSenhaUsuario.Clear();
+            tbCodGrupoUsuario.Clear();
+            tbNomeGrupoUsuario.Clear();
+            tbNomeUsuario.Clear();
+            tbSobrenomeUsuario.Clear();
+            tbEmailUsuario.Clear();
+            mtbTelefoneUsuario.Clear();
+            tbAjuda.Clear();
         }
 
-
-        //EVENTOS DE LEAVE
-        private void tbCodigoUsuario_Leave(object sender, EventArgs e)
+        private bool ConfirmaSenhas()
         {
-            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
-            if (!editando)
-            {
-                if (tbCodigoUsuario.Text.Length > 0)
-                {
-                    Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
-                    if (newusuario != null)
-                    {
-                        usuario = newusuario;
-                        PreencheCampos(usuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodigoUsuario.Text.Length == 0)
-                {
-                    LimpaCampos(true);
-                    Editando(false);
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (tbCodigoUsuario.Text.Length > 0)
-                    {
-                        Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
-                        if (newusuario != null)
-                        {
-                            usuario = newusuario;
-                            PreencheCampos(usuario);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodigoUsuario.Text.Length == 0)
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
-                }
-            }
+            lbConfirmaSenha.Visible = !tbSenhaUsuario.Text.Equals(tbConfirmaSenhaUsuario.Text);
+            return tbSenhaUsuario.Text.Equals(tbConfirmaSenhaUsuario.Text);
         }
 
-        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
+        private void PreencheCampos(Usuario usuario)
         {
-            if (tbCodGrupoUsuario.Text.Length > 0)
+            ignoraCheckEvent = true;
+            LimpaCampos(false);
+
+            tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
+            tbSenhaUsuario.Text = usuario.Senha;
+            tbConfirmaSenhaUsuario.Text = usuario.Senha;
+            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
+            tbNomeUsuario.Text = usuario.Nome;
+            tbSobrenomeUsuario.Text = usuario.Sobrenome;
+            tbEmailUsuario.Text = usuario.Email;
+            mtbTelefoneUsuario.Text = usuario.Telefone;
+
+            if (usuario.Grupousuario != null)
             {
                 grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
                 PreencheCamposGrupoUsuario(grupousuario);
             }
+
+
+            ignoraCheckEvent = false;
+        }
+
+        private void FmCadastroUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PreencheCamposGrupoUsuario(GrupoUsuario grupousuario)
+        {
+            if (grupousuario != null)
+            {
+                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
+                tbNomeGrupoUsuario.Text = grupousuario.Nome;
+            }
             else
             {
-                tbNomeGrupoUsuario.Text = "";
+                MessageBox.Show("Grupo de usuários não encontrado no banco de dados",
+                "Grupo de usuários não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodGrupoUsuario.Focus();
+                tbNomeGrupoUsuario.SelectAll();
             }
-        }
-
-        private void btNovo_Click(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
-
-        private void btBuscar_Click(object sender, EventArgs e)
-        {
-            if (!editando)
-            {
-                AbreTelaBuscaUsuario();
-            }
-        }
-
-        private void btSalvar_Click(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
-
-        private void btProximo_Click(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
-        private void btAnterior_Click(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
-
-        private void btGrupoUsuario_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaGrupoUsuario();
-        }
-
-        private void tbConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
-        {
-            confirmaSenhas();
-        }
-
-        private void tbSenhaUsuario_Leave(object sender, EventArgs e)
-        {
-            if(tbConfirmaSenhaUsuario.TextLength > 0)
-            {
-                confirmaSenhas();
-            }
-        }
-
-        private void fmCadastroUsuario_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

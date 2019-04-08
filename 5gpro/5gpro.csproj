@@ -40,6 +40,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,18 +61,36 @@
     <Compile Include="Bll\PessoaBLL.cs" />
     <Compile Include="Bll\UnimedidaBLL.cs" />
     <Compile Include="Bll\UsuarioBLL.cs" />
-    <Compile Include="Bll\_ItemBLL.cs" />
-    <Compile Include="Controls\buscaCidade.cs">
+    <Compile Include="Bll\ItemBLL.cs" />
+    <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\buscaCidade.Designer.cs">
-      <DependentUpon>buscaCidade.cs</DependentUpon>
+    <Compile Include="Controls\BuscaCidade.Designer.cs">
+      <DependentUpon>BuscaCidade.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\buscaPessoa.cs">
+    <Compile Include="Controls\BuscaEstado.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controls\buscaPessoa.Designer.cs">
-      <DependentUpon>buscaPessoa.cs</DependentUpon>
+    <Compile Include="Controls\BuscaEstado.Designer.cs">
+      <DependentUpon>BuscaEstado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuscaItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaItem.Designer.cs">
+      <DependentUpon>BuscaItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuscaPessoa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaPessoa.Designer.cs">
+      <DependentUpon>BuscaPessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MenuVertical.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuVertical.Designer.cs">
+      <DependentUpon>MenuVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
@@ -80,19 +99,20 @@
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
-    <Compile Include="Daos\_ItemDAO.cs" />
+    <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
+    <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscal.cs" />
     <Compile Include="Entities\NotaFiscalItem.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Entities\_Item.cs" />
+    <Compile Include="Entities\Item.cs" />
     <Compile Include="Bll\PaisBLL.cs" />
     <Compile Include="Daos\PaisDAO.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
@@ -212,26 +232,30 @@
     <Compile Include="Forms\fmSaidaEmissaoNota.Designer.cs">
       <DependentUpon>fmSaidaEmissaoNota.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Form1_Load.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Form1_Load.Designer.cs">
-      <DependentUpon>Form1_Load.cs</DependentUpon>
-    </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
     <Compile Include="Funcoes\FuncoesBanco.cs" />
     <Compile Include="Funcoes\Limpar.cs" />
+    <Compile Include="Funcoes\NetworkAdapter.cs" />
     <Compile Include="Funcoes\Validacao.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Controls\buscaCidade.resx">
-      <DependentUpon>buscaCidade.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\BuscaCidade.resx">
+      <DependentUpon>BuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Controls\buscaPessoa.resx">
-      <DependentUpon>buscaPessoa.cs</DependentUpon>
+    <EmbeddedResource Include="Controls\BuscaEstado.resx">
+      <DependentUpon>BuscaEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaItem.resx">
+      <DependentUpon>BuscaItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaPessoa.resx">
+      <DependentUpon>BuscaPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MenuVertical.resx">
+      <DependentUpon>MenuVertical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
@@ -289,9 +313,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSaidaEmissaoNota.resx">
       <DependentUpon>fmSaidaEmissaoNota.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Form1_Load.resx">
-      <DependentUpon>Form1_Load.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -469,6 +490,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_search_filled_17px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_recurring_appointment_filled_45px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_search_filled_45px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_recurring_appointment_filled_43px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

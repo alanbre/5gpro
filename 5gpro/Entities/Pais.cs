@@ -14,10 +14,10 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNomepais", AllowEmptyStrings = false)]
         [Display(Name = "Nome do País")]
-        public string nome { get; set; }
+        public string Nome { get; set; }
 
         [Required(ErrorMessage = "A Sigla é obrigatório.|tbSiglapais", AllowEmptyStrings = false)]
-        public string sigla { get; set; }
+        public string Sigla { get; set; }
 
 
     }

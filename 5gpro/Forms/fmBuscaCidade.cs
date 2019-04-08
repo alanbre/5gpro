@@ -10,11 +10,8 @@ namespace _5gpro.Forms
     public partial class fmBuscaCidade : Form
     {
         public List<Cidade> Cidades;
-        public List<Estado> Estados;
-        Estado estado;
         public Cidade cidadeSelecionada;
-        private CidadeBLL cidadeBLL = new CidadeBLL();
-        private EstadoBLL estadoBLL = new EstadoBLL();
+        private readonly CidadeBLL cidadeBLL = new CidadeBLL();
 
 
 
@@ -22,48 +19,20 @@ namespace _5gpro.Forms
         public fmBuscaCidade()
         {
             InitializeComponent();
-            tbFiltroCodEstado.Focus();
         }
 
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void FmBuscaCidade_KeyDown(object sender, KeyEventArgs e)
+        {
+            EnterTab(this.ActiveControl, e);
+        }
+
+
+        private void BtPesquisar_Click(object sender, EventArgs e)
         {
             BuscaCidades();
         }
 
-        private void btProcuraEstado_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaEstado();
-        }
-
-        private void tbFiltroCodEstado_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaEstado();
-            }
-
-        }
-
-        private void tbFiltroCodEstado_Leave(object sender, EventArgs e)
-        {
-            if (tbFiltroCodEstado.Text.Length > 0)
-            {
-                Estados = estadoBLL.BuscaEstadoByCod(tbFiltroCodEstado.Text);
-                tbNomeEstado.Text = Estados[0].Nome;
-            }
-            else
-            {
-                tbNomeEstado.Text = "";
-            }
-        }
-
-        private void tbFiltroCodEstado_Enter(object sender, EventArgs e)
-        {
-            tbFiltroCodEstado.SelectAll();
-        }
-
-        private void dgvCidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvCidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvCidades.Rows[selectedRowIndex];
@@ -71,11 +40,18 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        private void TbFiltroNomeCidade_TextChanged(object sender, EventArgs e)
+        {
+            BuscaCidades();
+        }
+
+
+
         private void BuscaCidades()
         {
-
             dgvCidades.Rows.Clear();
-            Cidades = cidadeBLL.BuscaCidades(tbFiltroCodEstado.Text, tbFiltroNomeCidade.Text);
+            int codEstado = buscaEstado.estado?.EstadoID ?? 0;
+            Cidades = cidadeBLL.BuscaCidades(codEstado, tbFiltroNomeCidade.Text);
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
             foreach (Cidade c in Cidades)
@@ -105,44 +81,15 @@ namespace _5gpro.Forms
 
         }
 
-
-
-        private void AbreTelaBuscaEstado()
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            var buscaEstado = new fmBuscaEstado();
-            buscaEstado.ShowDialog();
-            if (buscaEstado.EstadoSelecionado != null)
+            if (e.KeyCode == Keys.Enter)
             {
-                estado = buscaEstado.EstadoSelecionado;
-                PreencheCamposEstado(estado);
-                //Editando(true);
-     
-            }
-            tbFiltroCodEstado.Focus();
-        }
-
-
-        private void PreencheCamposEstado(Estado estado)
-        {
-            if (estado != null)
-            {
-                tbFiltroCodEstado.Text = estado.EstadoID.ToString();
-                tbNomeEstado.Text = estado.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Estado não encontrado no banco de dados",
-                "Estado não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                //tbCodCidade.Focus();
-                //tbCodCidade.SelectAll();
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
-        private void tbFiltroNomeCidade_TextChanged(object sender, EventArgs e)
-        {
-            BuscaCidades();
-        }
+
     }
 }
 

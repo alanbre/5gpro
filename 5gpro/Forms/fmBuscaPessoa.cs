@@ -9,11 +9,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaPessoa : Form
     {
-        Cidade cidade;
         public Pessoa pessoaSelecionada = null;
-        List<Pessoa> Pessoas;
-        PessoaBLL pessoaBLL = new PessoaBLL();
-        CidadeBLL cidadeBLL = new CidadeBLL();
+        private List<Pessoa> Pessoas;
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
 
         public fmBuscaPessoa()
         {
@@ -26,55 +24,25 @@ namespace _5gpro.Forms
         }
 
 
-        //EVENTOS DE CLICK
-        private void btBuscaCidade_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaCidade();
-        }
-
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void BtPesquisar_Click(object sender, EventArgs e)
         {
             BuscaPessoas();
         }
 
-        //EVENTOS DE KEY UP
-        private void tbCodCidade_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaCidade();
-            }
-        }
-
-
-        //EVENTOS DE LEAVE
-        private void tbFiltroCodCidade_Leave(object sender, EventArgs e)
-        {
-            if (tbFiltroCodCidade.Text.Length > 0)
-            {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbFiltroCodCidade.Text));
-                PreencheCamposCidade(cidade);
-            }
-            else
-            {
-                tbNomeCidade.Text = "";
-            }
-        }
 
         //EVENTOS DE TEXT CHANGED
-        private void tbFiltroNome_TextChanged(object sender, EventArgs e)
+        private void TbFiltroNome_TextChanged(object sender, EventArgs e)
         {
             if (tbFiltroNome.Text.Length > 0) { BuscaPessoas(); }
         }
 
-        private void tbCpfCnpj_TextChanged(object sender, EventArgs e)
+        private void TbCpfCnpj_TextChanged(object sender, EventArgs e)
         {
             if (tbCpfCnpj.Text.Length > 0) { BuscaPessoas(); }
         }
 
         //EVENTOS DE CELL DOUBLE CLICK
-        private void dgvPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvPessoas.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvPessoas.Rows[selectedRowIndex];
@@ -82,26 +50,6 @@ namespace _5gpro.Forms
             this.Close();
         }
 
-
-        private void AbreTelaBuscaCidade()
-        {
-            var buscaCidade = new fmBuscaCidade();
-            buscaCidade.ShowDialog();
-            if (buscaCidade.cidadeSelecionada != null)
-            {
-                cidade = buscaCidade.cidadeSelecionada;
-                PreencheCamposCidade(cidade);
-            }
-        }
-
-        private void PreencheCamposCidade(Cidade cidade)
-        {
-            if (cidade != null)
-            {
-                tbFiltroCodCidade.Text = cidade.CidadeID.ToString();
-                tbNomeCidade.Text = cidade.Nome;
-            }
-        }
 
         private void BuscaPessoas()
         {
@@ -116,7 +64,8 @@ namespace _5gpro.Forms
             table.Columns.Add("Telefone", typeof(string));
             table.Columns.Add("E-Mail", typeof(string));
 
-            Pessoas = pessoaBLL.BuscarPessoas(tbFiltroNome.Text, tbCpfCnpj.Text, tbFiltroCodCidade.Text);
+            int idcidade = buscaCidade.cidade?.CidadeID ?? 0;
+            Pessoas = pessoaBLL.BuscarPessoas(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
 
             foreach (Pessoa p in Pessoas)
             {
@@ -124,13 +73,6 @@ namespace _5gpro.Forms
             }
             dgvPessoas.DataSource = table;
         }
-
-        private void dgvPessoas_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
 
         private void EnterTab(object sender, KeyEventArgs e)
         {

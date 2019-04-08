@@ -12,16 +12,16 @@ namespace _5gpro.Forms
 {
     public partial class fmOrcamentoCadastroOrcamento : Form
     {
-        private _ItemBLL itemBLL = new _ItemBLL();
-        private OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+        private readonly ItemBLL itemBLL = new ItemBLL();
+        private readonly OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
 
         private Orcamento orcamento;
-        private List<_Item> itens = new List<_Item>();
-        private _Item itemSelecionado;
-        private Validacao validacao = new Validacao();
-        private FuncoesAuxiliares f = new FuncoesAuxiliares();
+        private List<Item> itens = new List<Item>();
+        private Item itemSelecionado;
+        private readonly Validacao validacao = new Validacao();
+        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
-        private DataTable table = new DataTable();
+        private readonly DataTable table = new DataTable();
         private bool editando, ignoracheckevent = false;
 
 
@@ -38,10 +38,9 @@ namespace _5gpro.Forms
             table.Columns.Add("% Desc.", typeof(decimal));
             table.Columns.Add("Desc. Item", typeof(decimal));
             dgvItens.DataSource = table;
-            AlteraBotoes();
         }
 
-        private void fmCadastroOrcamento_KeyDown(object sender, KeyEventArgs e)
+        private void FmCadastroOrcamento_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
@@ -61,18 +60,35 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
+        private void FmOrcamentoCadastroOrcamento_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
 
 
 
 
-        private void cbVencimento_CheckedChanged(object sender, EventArgs e)
+        private void CbVencimento_CheckedChanged(object sender, EventArgs e)
         {
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
             if (!ignoracheckevent) { Editando(true); }
         }
 
 
-        private void tbCodigo_Leave(object sender, EventArgs e)
+        private void TbCodigo_Leave(object sender, EventArgs e)
         {
             tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
@@ -131,12 +147,12 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodItem_Leave(object sender, EventArgs e)
+        private void TbCodItem_Leave(object sender, EventArgs e)
         {
             if (tbCodItem.Text.Length > 0)
             {
                 DataRow dr = table.Select("Código=" + tbCodItem.Text).FirstOrDefault();
-                _Item item;
+                Item item;
                 if (dr == null)
                 {
                     item = itemBLL.BuscaItemById(int.Parse(tbCodItem.Text));
@@ -144,7 +160,7 @@ namespace _5gpro.Forms
                 }
                 else
                 {
-                    item = itens.Where(i => i._ItemID == int.Parse(tbCodItem.Text)).First();
+                    item = itens.Where(i => i.ItemID == int.Parse(tbCodItem.Text)).First();
                     PreencheCamposItem(item);
                 }
 
@@ -155,52 +171,52 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbQuantidade_Leave(object sender, EventArgs e)
+        private void TbQuantidade_Leave(object sender, EventArgs e)
         {
             tbQuantidade.Text = tbQuantidade.Text.Length > 0 ? Convert.ToDecimal(tbQuantidade.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
-        private void tbValorUnitItem_Leave(object sender, EventArgs e)
+        private void TbValorUnitItem_Leave(object sender, EventArgs e)
         {
             tbValorUnitItem.Text = tbValorUnitItem.Text.Length > 0 ? Convert.ToDecimal(tbValorUnitItem.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
-        private void tbValorTotItem_Leave(object sender, EventArgs e)
+        private void TbValorTotItem_Leave(object sender, EventArgs e)
         {
             tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ? Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
-        private void tbDescontoItemPorc_Leave(object sender, EventArgs e)
+        private void TbDescontoItemPorc_Leave(object sender, EventArgs e)
         {
             tbDescontoItemPorc.Text = tbDescontoItemPorc.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItemPorc.Text).ToString("##0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
-        private void tbDescontoItem_Leave(object sender, EventArgs e)
+        private void TbDescontoItem_Leave(object sender, EventArgs e)
         {
             tbDescontoItem.Text = tbDescontoItem.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
 
-        private void tbDescontoOrcamento_Leave(object sender, EventArgs e)
+        private void TbDescontoOrcamento_Leave(object sender, EventArgs e)
         {
             tbDescontoOrcamento.Text = tbDescontoOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbDescontoOrcamento.Text).ToString("############0.00") : "0,00";
             CalculaTotalOrcamento();
         }
 
-        private void tbValorTotalOrcamento_Leave(object sender, EventArgs e)
+        private void TbValorTotalOrcamento_Leave(object sender, EventArgs e)
         {
             tbValorTotalOrcamento.Text = tbValorTotalOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00") : "0,00";
         }
 
 
 
-        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
             {
@@ -209,7 +225,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodItem_KeyUp(object sender, KeyEventArgs e)
+        private void TbCodItem_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3)
             {
@@ -220,7 +236,7 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE KEY PRESS
-        private void tbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -229,7 +245,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbValorUnitItem_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbValorUnitItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -238,7 +254,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbValorTotItem_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbValorTotItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -247,7 +263,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbDescontoItemPorc_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbDescontoItemPorc_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -256,7 +272,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbDescontoItem_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbDescontoItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -265,7 +281,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbDescontoOrcamento_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbDescontoOrcamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -274,7 +290,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbValorTotalOrcamento_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbValorTotalOrcamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (f.ValidaTeclaDigitadaDecimal(e))
             {
@@ -286,12 +302,12 @@ namespace _5gpro.Forms
 
 
 
-        private void btNovo_Click(object sender, EventArgs e)
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
             NovoCadastro();
         }
 
-        private void btBuscar_Click(object sender, EventArgs e)
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
             if (!editando)
             {
@@ -299,42 +315,43 @@ namespace _5gpro.Forms
             }
         }
 
-        private void btSalvar_Click(object sender, EventArgs e)
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
             SalvaCadastro();
         }
 
-        private void btRecarregar_Click(object sender, EventArgs e)
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
             RecarregaDados(orcamento);
         }
-
-        private void btProximo_Click(object sender, EventArgs e)
+        
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
             ProximoCadastro();
         }
 
-        private void btAnterior_Click(object sender, EventArgs e)
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
 
-        private void btProcuraItem_Click(object sender, EventArgs e)
+
+        private void BtProcuraItem_Click(object sender, EventArgs e)
         {
             AbreTelaBuscaItem();
         }
 
-        private void dgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = itens.Find(i => i._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+            itemSelecionado = itens.Find(i => i.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             btInserirItem.Text = "Alterar";
             PreencheCamposItem(itemSelecionado);
             btExcluirItem.Enabled = true;
         }
 
-        private void btNovoItem_Click(object sender, EventArgs e)
+        private void BtNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCampoItem();
             tbCodItem.Focus();
@@ -342,9 +359,9 @@ namespace _5gpro.Forms
             btInserirItem.Text = "Inserir";
         }
 
-        private void btInserirItem_Click(object sender, EventArgs e)
+        private void BtInserirItem_Click(object sender, EventArgs e)
         {
-            _Item item = itemSelecionado == null ? itemBLL.BuscaItemById(int.Parse(tbCodItem.Text)) : itemSelecionado;
+            Item item = itemSelecionado ?? itemBLL.BuscaItemById(int.Parse(tbCodItem.Text));
             if (item != null)
             {
                 item.Quantidade = Convert.ToDecimal(tbQuantidade.Text);
@@ -352,20 +369,20 @@ namespace _5gpro.Forms
                 item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
                 item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
                 item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataRow dr = table.Select("Código=" + item._ItemID).FirstOrDefault();
+                DataRow dr = table.Select("Código=" + item.ItemID).FirstOrDefault();
                 if (dr == null)
                 {
                     itens.Add(item);
-                    table.Rows.Add(item._ItemID, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                    table.Rows.Add(item.ItemID, item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                     btNovoItem.PerformClick();
                 }
                 else
                 {
-                    itens.Where(i => i._ItemID == item._ItemID).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i._ItemID == item._ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i._ItemID == item._ItemID).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i._ItemID == item._ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i._ItemID == item._ItemID).First().Desconto = item.Desconto;
+                    itens.Where(i => i.ItemID == item.ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i.ItemID == item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.ItemID == item.ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i.ItemID == item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.ItemID == item.ItemID).First().Desconto = item.Desconto;
                     dr["Quantidade"] = item.Quantidade;
                     dr["Valor unitário"] = item.ValorUnitario;
                     dr["Valor total"] = item.ValorTotal;
@@ -389,9 +406,9 @@ namespace _5gpro.Forms
 
         }
 
-        private void btDeletarItem_Click(object sender, EventArgs e)
+        private void BtDeletarItem_Click(object sender, EventArgs e)
         {
-            ExcluirItem(itemSelecionado);
+            ExcluirItem();
         }
 
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e)
@@ -399,46 +416,55 @@ namespace _5gpro.Forms
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void dtpCadastro_ValueChanged(object sender, EventArgs e)
+        private void DtpCadastro_ValueChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void dtpVencimento_ValueChanged(object sender, EventArgs e)
+        private void DtpVencimento_ValueChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void tbCodItem_TextChanged(object sender, EventArgs e)
+        private void TbCodItem_TextChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void tbQuantidade_TextChanged(object sender, EventArgs e)
+        private void TbQuantidade_TextChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void tbValorUnitItem_TextChanged(object sender, EventArgs e)
+        private void TbValorUnitItem_TextChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void tbValorTotItem_TextChanged(object sender, EventArgs e)
+        private void TbValorTotItem_TextChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void tbDescontoItemPorc_TextChanged(object sender, EventArgs e)
+        private void TbDescontoItemPorc_TextChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
-        private void tbDescontoItem_TextChanged(object sender, EventArgs e)
+        private void TbDescontoItem_TextChanged(object sender, EventArgs e)
         {
             if (!ignoracheckevent) { Editando(true); }
         }
 
+        private void TbDescontoOrcamento_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void TbValorTotalOrcamento_TextChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
 
 
 
@@ -697,11 +723,11 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheCamposItem(_Item item)
+        private void PreencheCamposItem(Item item)
         {
             if (item != null)
             {
-                tbCodItem.Text = item._ItemID.ToString();
+                tbCodItem.Text = item.ItemID.ToString();
                 tbDescItem.Text = item.Descricao;
                 tbQuantidade.Text = item.Quantidade.ToString("############0.00");
                 tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
@@ -721,37 +747,10 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AlteraBotoes()
-        {
-            if (editando)
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
-            }
-            else
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
-            }
-        }
-
         private void Editando(bool edit)
         {
             editando = edit;
-            buscaPessoa.Editando(edit);
-            AlteraBotoes();
+            menuVertical.Editando(edit);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)
@@ -802,11 +801,11 @@ namespace _5gpro.Forms
             }
         }
 
-        private void ExcluirItem(_Item item)
+        private void ExcluirItem()
         {
             if (itemSelecionado != null)
             {
-                itens.RemoveAll(i => i._ItemID == itemSelecionado._ItemID);
+                itens.RemoveAll(i => i.ItemID == itemSelecionado.ItemID);
                 table.Clear();
                 dgvItens.Refresh();
                 LimpaCampoItem();
@@ -816,11 +815,12 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheGridItens(List<_Item> itens)
+
+        private void PreencheGridItens(List<Item> itens)
         {
             foreach (var i in itens)
             {
-                table.Rows.Add(i._ItemID, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+                table.Rows.Add(i.ItemID, i.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
             }
             dgvItens.Refresh();
         }

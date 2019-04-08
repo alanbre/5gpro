@@ -3,9 +3,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -48,10 +45,12 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    Unimedida unimedida = new Unimedida();
-                    unimedida.UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"));
-                    unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
-                    unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));
+                    Unimedida unimedida = new Unimedida
+                    {
+                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                        Sigla = reader.GetString(reader.GetOrdinal("sigla")),
+                        Descricao = reader.GetString(reader.GetOrdinal("descricao"))
+                    };
                     listaunimedida.Add(unimedida);
 
                 }
@@ -69,7 +68,7 @@ namespace _5gpro.Daos
 
         public Unimedida BuscaUnimedidaByCod(int cod)
         {
-            Unimedida unimedida = null;
+            Unimedida unimedida = new Unimedida();
             try
             {
                 AbrirConexao();
@@ -78,12 +77,18 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Comando.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    unimedida = new Unimedida();
-                    unimedida.UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"));
-                    unimedida.Sigla = reader.GetString(reader.GetOrdinal("sigla"));
-                    unimedida.Descricao = reader.GetString(reader.GetOrdinal("descricao"));
+                    unimedida = new Unimedida
+                    {
+                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                        Sigla = reader.GetString(reader.GetOrdinal("sigla")),
+                        Descricao = reader.GetString(reader.GetOrdinal("descricao"))
+                    };
+                }
+                else
+                {
+                    unimedida = null;
                 }
             }
             catch (MySqlException ex)

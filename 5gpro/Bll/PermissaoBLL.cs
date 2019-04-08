@@ -11,7 +11,7 @@ namespace _5gpro.Bll
 {
     class PermissaoBLL
     {
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
       
 
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesGrupo(string cod)
@@ -24,11 +24,10 @@ namespace _5gpro.Bll
             return permissaoDAO.BuscaTodasPermissoes();
         }
 
-        public int buscarIDbyCodigo(string codpermissao)
+        public int BuscarIDbyCodigo(string codpermissao)
         {
-            return permissaoDAO.buscarIDbyCodigo(codpermissao);
+            return permissaoDAO.BuscarIDbyCodigo(codpermissao);
         }
-
 
     }
 }

@@ -28,8 +28,8 @@ namespace _5gpro.Daos
                          Conexao);
 
                 Comando.Parameters.AddWithValue("@idpais", pais.PaisID);
-                Comando.Parameters.AddWithValue("@nome", pais.nome);
-                Comando.Parameters.AddWithValue("@sigla", pais.sigla);
+                Comando.Parameters.AddWithValue("@nome", pais.Nome);
+                Comando.Parameters.AddWithValue("@sigla", pais.Sigla);
 
 
                 retorno = Comando.ExecuteNonQuery();

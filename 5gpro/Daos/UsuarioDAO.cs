@@ -14,7 +14,7 @@ namespace _5gpro.Daos
 
         public Usuario Logar(string idusuario, string senha)
         {
-            Usuario usuario = null;
+            Usuario usuario = new Usuario();
 
             try
             {
@@ -33,6 +33,10 @@ namespace _5gpro.Daos
                     usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
                     usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                 }
+                else
+                {
+                    usuario = null;
+                }
             }
             catch (MySqlException ex)
             {
@@ -43,6 +47,115 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
             return usuario;
+        }
+
+        public Logado BuscaLogado(Usuario usuario, string mac)
+        {
+            Logado usulogado = null;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT *
+                                             FROM logado AS l
+                                             WHERE l.idusuario = @idusuario AND l.mac = @mac
+                                                ;", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usulogado.LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado"));
+                    usulogado.Usuario = BuscarUsuarioById(reader.GetInt32(reader.GetOrdinal("idusuario")));
+                    usulogado.Mac = reader.GetString(reader.GetOrdinal("mac"));
+                    reader.Close();
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return usulogado;
+        }
+
+        //Registra login na tabela Logado
+        public int GravarLogado(Usuario usuario, string mac)
+        {
+            int retorno = 0;
+            try
+            {
+                AbrirConexao();
+                Comando = Conexao.CreateCommand();
+                tr = Conexao.BeginTransaction();
+                Comando.Connection = Conexao;
+                Comando.Transaction = tr;
+
+
+                Comando.CommandText = @"INSERT INTO logado
+                         (idusuario, mac)
+                          VALUES
+                         (@idusuario, @mac)
+                          ";
+
+                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Comando.Parameters.AddWithValue("@mac", mac);
+
+                retorno = Comando.ExecuteNonQuery();
+
+                tr.Commit();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return retorno;
+        }
+
+        //Remove login da tabela Logado
+        public int RemoverLogado(Usuario usuario, string mac)
+        {
+            int retorno = 0;
+            try
+            {
+                AbrirConexao();
+                Comando = Conexao.CreateCommand();
+                tr = Conexao.BeginTransaction();
+                Comando.Connection = Conexao;
+                Comando.Transaction = tr;
+
+
+                Comando.CommandText = @"DELETE FROM logado AS l
+                           WHERE l.idusuario = @idusuario AND l.mac = @mac
+                          ";
+
+                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Comando.Parameters.AddWithValue("@mac", mac);
+
+                retorno = Comando.ExecuteNonQuery();
+
+                tr.Commit();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return retorno;
         }
 
         public string BuscaProxCodigoDisponivel()
@@ -126,7 +239,7 @@ namespace _5gpro.Daos
 
         public Usuario BuscarUsuarioById(int cod)
         {
-            Usuario usuario = null;
+            Usuario usuario = new Usuario();
             try
             {
                 AbrirConexao();
@@ -137,17 +250,21 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usuario = new Usuario();
-
-                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
-                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
-                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
-                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
-                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
-
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Senha = reader.GetString(reader.GetOrdinal("senha")),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
+                    };
                     reader.Close();
+                }
+                else
+                {
+                    usuario = null;
                 }
             }
             catch (MySqlException ex)
@@ -165,7 +282,7 @@ namespace _5gpro.Daos
 
         public Usuario BuscarProximoUsuario(string codAtual)
         {
-            Usuario usuario = null;
+            Usuario usuario = new Usuario();
             try
             {
                 AbrirConexao();
@@ -176,17 +293,22 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usuario = new Usuario();
-
-                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
-                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
-                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
-                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
-                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Senha = reader.GetString(reader.GetOrdinal("senha")),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
+                    };
 
                     reader.Close();
+                }
+                else
+                {
+                    usuario = null;
                 }
             }
             catch (MySqlException ex)
@@ -203,7 +325,7 @@ namespace _5gpro.Daos
 
         public Usuario BuscarUsuarioAnterior(string codAtual)
         {
-            Usuario usuario = null;
+            Usuario usuario = new Usuario();
             try
             {
                 AbrirConexao();
@@ -214,16 +336,22 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usuario = new Usuario();
-                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
-                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
-                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
-                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
-                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Senha = reader.GetString(reader.GetOrdinal("senha")),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
+                    };
 
                     reader.Close();
+                }
+                else
+                {
+                    usuario = null;
                 }
             }
             catch (MySqlException ex)
@@ -269,14 +397,16 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
 
-                    Usuario usuario = new Usuario();
-                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
-                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
-                    usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
-                    usuario.Email = reader.GetString(reader.GetOrdinal("email"));
-                    usuario.Telefone = reader.GetString(reader.GetOrdinal("telefone"));
+                    Usuario usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Senha = reader.GetString(reader.GetOrdinal("senha")),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
+                    };
 
                     usuarios.Add(usuario);
                 }
