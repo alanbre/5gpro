@@ -596,13 +596,14 @@ namespace _5gpro.Forms
 
         }
 
-
-
-
-
-
-
-
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
 
 
     }

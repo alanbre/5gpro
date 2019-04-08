@@ -189,7 +189,7 @@
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
             this.tbCodGrupoUsuario.TabIndex = 8;
-            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodigoUsuario_TextChanged);
+            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.TbCodGrupoUsuario_TextChanged);
             this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
             // tbNomeUsuario
