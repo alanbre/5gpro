@@ -10,11 +10,10 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroPessoa : Form
     {
-        Pessoa pessoa;
-        PessoaBLL pessoaBLL = new PessoaBLL();
-        Validacao validacao = new Validacao();
+        private Pessoa pessoa;
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly Validacao validacao = new Validacao();
 
-        FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -28,7 +27,7 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void fmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
+        private void FmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
@@ -51,7 +50,7 @@ namespace _5gpro.Forms
 
 
 
-        private void rbPessoaFisica_CheckedChanged(object sender, EventArgs e)
+        private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CPF
             mtbCpfCnpj.Clear();
@@ -59,7 +58,7 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void rbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
+        private void RbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CNPJ
             mtbCpfCnpj.Clear();
@@ -109,7 +108,7 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE KEY PRESS
-        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
 
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -120,59 +119,59 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE TEXTCHANGED
-        private void tbNome_TextChanged(object sender, EventArgs e)
+        private void TbNome_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbFantasia_TextChanged(object sender, EventArgs e)
+        private void TbFantasia_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbRua_TextChanged(object sender, EventArgs e)
+        private void TbRua_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbNumero_TextChanged(object sender, EventArgs e)
+        private void TbNumero_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbBairro_TextChanged(object sender, EventArgs e)
+        private void TbBairro_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbComplemento_TextChanged(object sender, EventArgs e)
+        private void TbComplemento_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbCodCidade_TextChanged(object sender, EventArgs e)
+        private void TbCodCidade_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void mtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void mtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbEmail_TextChanged(object sender, EventArgs e)
+        private void TbEmail_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
         //EVENTOS DE LEAVE
-        private void tbCodigo_Leave(object sender, EventArgs e)
+        private void TbCodigo_Leave(object sender, EventArgs e)
         {
 
             tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
@@ -241,7 +240,7 @@ namespace _5gpro.Forms
 
 
         //EVENTOS DE KEY UP
-        private void tbCodigo_KeyUp(object sender, KeyEventArgs e)
+        private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
             {
@@ -251,14 +250,14 @@ namespace _5gpro.Forms
         }
 
 
-        private void cblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
 
-        private void fmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
+        private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (editando)
             {
@@ -323,25 +322,28 @@ namespace _5gpro.Forms
             if (editando)
             {
 
-                pessoa = new Pessoa();
-                pessoa.PessoaID = int.Parse(tbCodigo.Text);
-                pessoa.Nome = tbNome.Text;
-                pessoa.Fantasia = tbFantasia.Text;
+                pessoa = new Pessoa
+                {
+                    PessoaID = int.Parse(tbCodigo.Text),
+                    Nome = tbNome.Text,
+                    Fantasia = tbFantasia.Text,
+                    TipoPessoa = rbPessoaFisica.Checked ? "F" : "J",
+                    Rua = tbRua.Text,
+                    Numero = tbNumero.Text,
+                    Bairro = tbBairro.Text,
+                    Complemento = tbComplemento.Text,
+                    Cidade = buscaCidade.cidade,
+                    CpfCnpj = mtbCpfCnpj.TextNoMask(),
+                    Telefone = mtbTelefone.TextNoMask(),
+                    Email = tbEmail.Text
+                };
+
                 List<string> atuacoes = new List<string>();
                 foreach (string s in cblAtuacao.CheckedItems)
                 {
                     atuacoes.Add(s);
                 }
                 pessoa.Atuacao = atuacoes;
-                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-                pessoa.Rua = tbRua.Text;
-                pessoa.Numero = tbNumero.Text;
-                pessoa.Bairro = tbBairro.Text;
-                pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = buscaCidade.cidade;
-                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-                pessoa.Telefone = mtbTelefone.TextNoMask();
-                pessoa.Email = tbEmail.Text;
 
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(pessoa, controls);

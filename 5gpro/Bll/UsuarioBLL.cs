@@ -10,7 +10,7 @@ namespace _5gpro.Bll
 {
     class UsuarioBLL
     {
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        private readonly UsuarioDAO usuarioDAO = new UsuarioDAO();
 
         public int SalvarOuAtualizarUsuario(Usuario usuario)
         {

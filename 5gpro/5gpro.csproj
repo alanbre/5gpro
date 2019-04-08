@@ -61,12 +61,18 @@
     <Compile Include="Bll\PessoaBLL.cs" />
     <Compile Include="Bll\UnimedidaBLL.cs" />
     <Compile Include="Bll\UsuarioBLL.cs" />
-    <Compile Include="Bll\_ItemBLL.cs" />
+    <Compile Include="Bll\ItemBLL.cs" />
     <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\BuscaCidade.Designer.cs">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuscaEstado.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaEstado.Designer.cs">
+      <DependentUpon>BuscaEstado.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\BuscaItem.cs">
       <SubType>UserControl</SubType>
@@ -93,7 +99,7 @@
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
-    <Compile Include="Daos\_ItemDAO.cs" />
+    <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
     <Compile Include="Entities\Cidade.cs" />
@@ -106,7 +112,7 @@
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Entities\_Item.cs" />
+    <Compile Include="Entities\Item.cs" />
     <Compile Include="Bll\PaisBLL.cs" />
     <Compile Include="Daos\PaisDAO.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
@@ -238,6 +244,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaEstado.resx">
+      <DependentUpon>BuscaEstado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaItem.resx">
       <DependentUpon>BuscaItem.cs</DependentUpon>

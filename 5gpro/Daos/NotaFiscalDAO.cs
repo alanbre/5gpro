@@ -11,6 +11,7 @@ namespace _5gpro.Daos
     {
         private readonly UnimedidaBLL unidadeBLL = new UnimedidaBLL();
         private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+
         public string BuscaProxCodigoDisponivel()
         {
             string proximoid = null;
@@ -51,8 +52,8 @@ namespace _5gpro.Daos
 
         public NotaFiscal BuscaNotaByCod(int codigo)
         {
-            NotaFiscal notafiscal = null;
-            PessoaBLL pessoaBLL = new PessoaBLL();
+            NotaFiscal notafiscal = new NotaFiscal();
+            
 
             try
             {
@@ -77,6 +78,10 @@ namespace _5gpro.Daos
                     };
                     reader.Close();
                 }
+                else
+                {
+                    notafiscal = null;
+                }
             }
             catch (MySqlException ex)
             {
@@ -95,7 +100,7 @@ namespace _5gpro.Daos
 
         public NotaFiscalItem BuscaItemByCod(int codigo)
         {
-            NotaFiscalItem nfi = null;
+            NotaFiscalItem nfi = new NotaFiscalItem();
             try
             {
                 AbrirConexao();
@@ -106,9 +111,9 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    _Item item = new _Item
+                    Item item = new Item
                     {
-                        _ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
                         Descricao = reader.GetString(reader.GetOrdinal("descitem")),
                         DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
                         TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
@@ -124,6 +129,10 @@ namespace _5gpro.Daos
                     };
                     reader.Close();
                 }
+                else
+                {
+                    nfi = null;
+                }
             }
             catch (MySqlException ex)
             {
@@ -138,7 +147,7 @@ namespace _5gpro.Daos
 
         public NotaFiscal BuscaProximaNotaFiscal(int codAtual)
         {
-            NotaFiscal notafiscal = null;
+            NotaFiscal notafiscal = new NotaFiscal();
 
             try
             {
@@ -163,6 +172,10 @@ namespace _5gpro.Daos
                     };
                     reader.Close();
                 }
+                else
+                {
+                    notafiscal = null;
+                }
             }
             catch (MySqlException ex)
             {
@@ -180,7 +193,7 @@ namespace _5gpro.Daos
 
         public NotaFiscal BuscaNotaFiscalAnterior(int codAtual)
         {
-            NotaFiscal notafiscal = null;
+            NotaFiscal notafiscal = new NotaFiscal();
             try
             {
                 AbrirConexao();
@@ -203,6 +216,10 @@ namespace _5gpro.Daos
                         Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
+                }
+                else
+                {
+                    notafiscal = null;
                 }
             }
             catch (MySqlException ex)
@@ -266,7 +283,7 @@ namespace _5gpro.Daos
                     {
                         Comando.Parameters.Clear();
                         Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalID);
-                        Comando.Parameters.AddWithValue("@iditem", i.Item._ItemID);
+                        Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
                         Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
                         Comando.Parameters.AddWithValue("@valor_unitario", i.ValorUnitario);
                         Comando.Parameters.AddWithValue("@valor_total", i.ValorTotal);
@@ -305,9 +322,9 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    _Item i = new _Item
+                    Item i = new Item
                     {
-                        _ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
                         Descricao = reader.GetString(reader.GetOrdinal("descitem")),
                         DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
                         TipoItem = reader.GetString(reader.GetOrdinal("tipo")),

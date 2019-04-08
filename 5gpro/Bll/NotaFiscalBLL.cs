@@ -5,7 +5,7 @@ namespace _5gpro.Bll
 {
     class NotaFiscalBLL
     {
-        NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
+        private readonly NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
 
         public string BuscaProxCodigoDisponivel()
         {

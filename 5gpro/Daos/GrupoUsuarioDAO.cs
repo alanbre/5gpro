@@ -11,11 +11,11 @@ namespace _5gpro.Daos
 
     class GrupoUsuarioDAO : ConexaoDAO
     {
-        public PermissaoBLL permissaoBLL = new PermissaoBLL();
+        private readonly PermissaoBLL permissaoBLL = new PermissaoBLL();
 
         public GrupoUsuario BuscarGrupoUsuarioById(string cod)
         {
-            GrupoUsuario grupousuario = null;
+            GrupoUsuario grupousuario = new GrupoUsuario(); ;
             try
             {
                 AbrirConexao();
@@ -26,12 +26,18 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    grupousuario.Permissoes = permissaoBLL.BuscaPermissoesGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas;
+                    grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Permissoes = permissaoBLL.BuscaPermissoesGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
+                    };
 
                     reader.Close();
+                }
+                else
+                {
+                    grupousuario = null;
                 }
             }
             catch (MySqlException ex)
@@ -67,9 +73,11 @@ namespace _5gpro.Daos
                 while (reader.Read())
                 {
 
-                    GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    GrupoUsuario grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
                     gruposusuarios.Add(grupousuario);
                 }
                 reader.Close();
@@ -98,9 +106,11 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    GrupoUsuario grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
                     listagrupousuario.Add(grupousuario);
 
                 }
@@ -190,7 +200,7 @@ namespace _5gpro.Daos
 
         public GrupoUsuario BuscarProximoGrupoUsuario(string codAtual)
         {
-            GrupoUsuario grupousuario = null;
+            GrupoUsuario grupousuario = new GrupoUsuario();
             try
             {
                 AbrirConexao();
@@ -201,10 +211,16 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
                     reader.Close();
+                }
+                else
+                {
+                    grupousuario = null;
                 }
             }
             catch (MySqlException ex)
@@ -221,7 +237,7 @@ namespace _5gpro.Daos
 
         public GrupoUsuario BuscarGrupoUsuarioAnterior(string codAtual)
         {
-            GrupoUsuario grupousuario = null;
+            GrupoUsuario grupousuario = new GrupoUsuario();
             try
             {
                 AbrirConexao();
@@ -232,10 +248,16 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario")));
-                    grupousuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
                     reader.Close();
+                }
+                else
+                {
+                    grupousuario = null;
                 }
             }
             catch (MySqlException ex)

@@ -102,7 +102,7 @@
             this.cbVencimento.TabIndex = 7;
             this.cbVencimento.TabStop = false;
             this.cbVencimento.UseVisualStyleBackColor = true;
-            this.cbVencimento.CheckedChanged += new System.EventHandler(this.cbVencimento_CheckedChanged);
+            this.cbVencimento.CheckedChanged += new System.EventHandler(this.CbVencimento_CheckedChanged);
             // 
             // dtpVencimento
             // 
@@ -112,7 +112,7 @@
             this.dtpVencimento.Name = "dtpVencimento";
             this.dtpVencimento.Size = new System.Drawing.Size(99, 20);
             this.dtpVencimento.TabIndex = 6;
-            this.dtpVencimento.ValueChanged += new System.EventHandler(this.dtpVencimento_ValueChanged);
+            this.dtpVencimento.ValueChanged += new System.EventHandler(this.DtpVencimento_ValueChanged);
             // 
             // dtpCadastro
             // 
@@ -123,7 +123,7 @@
             this.dtpCadastro.Name = "dtpCadastro";
             this.dtpCadastro.Size = new System.Drawing.Size(100, 20);
             this.dtpCadastro.TabIndex = 4;
-            this.dtpCadastro.ValueChanged += new System.EventHandler(this.dtpCadastro_ValueChanged);
+            this.dtpCadastro.ValueChanged += new System.EventHandler(this.DtpCadastro_ValueChanged);
             // 
             // lbVencimento
             // 
@@ -149,8 +149,8 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(65, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
-            this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
+            this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigo_KeyUp);
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbCodigo
             // 
@@ -185,7 +185,7 @@
             this.dgvItens.Size = new System.Drawing.Size(955, 189);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
-            this.dgvItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItens_CellClick);
+            this.dgvItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItens_CellClick);
             // 
             // tbQuantidade
             // 
@@ -196,9 +196,9 @@
             this.tbQuantidade.Size = new System.Drawing.Size(63, 20);
             this.tbQuantidade.TabIndex = 6;
             this.tbQuantidade.Text = "0,00";
-            this.tbQuantidade.TextChanged += new System.EventHandler(this.tbQuantidade_TextChanged);
-            this.tbQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbQuantidade_KeyPress);
-            this.tbQuantidade.Leave += new System.EventHandler(this.tbQuantidade_Leave);
+            this.tbQuantidade.TextChanged += new System.EventHandler(this.TbQuantidade_TextChanged);
+            this.tbQuantidade.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbQuantidade_KeyPress);
+            this.tbQuantidade.Leave += new System.EventHandler(this.TbQuantidade_Leave);
             // 
             // lbValorUnit
             // 
@@ -229,9 +229,9 @@
             this.tbValorUnitItem.Size = new System.Drawing.Size(63, 20);
             this.tbValorUnitItem.TabIndex = 8;
             this.tbValorUnitItem.Text = "0,00";
-            this.tbValorUnitItem.TextChanged += new System.EventHandler(this.tbValorUnitItem_TextChanged);
-            this.tbValorUnitItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorUnitItem_KeyPress);
-            this.tbValorUnitItem.Leave += new System.EventHandler(this.tbValorUnitItem_Leave);
+            this.tbValorUnitItem.TextChanged += new System.EventHandler(this.TbValorUnitItem_TextChanged);
+            this.tbValorUnitItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorUnitItem_KeyPress);
+            this.tbValorUnitItem.Leave += new System.EventHandler(this.TbValorUnitItem_Leave);
             // 
             // tbDescItem
             // 
@@ -253,7 +253,7 @@
             this.btProcuraItem.TabIndex = 3;
             this.btProcuraItem.TabStop = false;
             this.btProcuraItem.UseVisualStyleBackColor = true;
-            this.btProcuraItem.Click += new System.EventHandler(this.btProcuraItem_Click);
+            this.btProcuraItem.Click += new System.EventHandler(this.BtProcuraItem_Click);
             // 
             // lbValorTot
             // 
@@ -272,9 +272,9 @@
             this.tbCodItem.Name = "tbCodItem";
             this.tbCodItem.Size = new System.Drawing.Size(63, 20);
             this.tbCodItem.TabIndex = 2;
-            this.tbCodItem.TextChanged += new System.EventHandler(this.tbCodItem_TextChanged);
-            this.tbCodItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodItem_KeyUp);
-            this.tbCodItem.Leave += new System.EventHandler(this.tbCodItem_Leave);
+            this.tbCodItem.TextChanged += new System.EventHandler(this.TbCodItem_TextChanged);
+            this.tbCodItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodItem_KeyUp);
+            this.tbCodItem.Leave += new System.EventHandler(this.TbCodItem_Leave);
             // 
             // tbValorTotItem
             // 
@@ -285,9 +285,9 @@
             this.tbValorTotItem.Size = new System.Drawing.Size(87, 20);
             this.tbValorTotItem.TabIndex = 10;
             this.tbValorTotItem.Text = "0,00";
-            this.tbValorTotItem.TextChanged += new System.EventHandler(this.tbValorTotItem_TextChanged);
-            this.tbValorTotItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorTotItem_KeyPress);
-            this.tbValorTotItem.Leave += new System.EventHandler(this.tbValorTotItem_Leave);
+            this.tbValorTotItem.TextChanged += new System.EventHandler(this.TbValorTotItem_TextChanged);
+            this.tbValorTotItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorTotItem_KeyPress);
+            this.tbValorTotItem.Leave += new System.EventHandler(this.TbValorTotItem_Leave);
             // 
             // lbCodItem
             // 
@@ -308,7 +308,7 @@
             this.btInserirItem.TabIndex = 15;
             this.btInserirItem.Text = "Inserir";
             this.btInserirItem.UseVisualStyleBackColor = true;
-            this.btInserirItem.Click += new System.EventHandler(this.btInserirItem_Click);
+            this.btInserirItem.Click += new System.EventHandler(this.BtInserirItem_Click);
             // 
             // gbItens
             // 
@@ -351,7 +351,7 @@
             this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
             this.btExcluirItem.TabIndex = 17;
             this.btExcluirItem.UseVisualStyleBackColor = true;
-            this.btExcluirItem.Click += new System.EventHandler(this.btDeletarItem_Click);
+            this.btExcluirItem.Click += new System.EventHandler(this.BtDeletarItem_Click);
             // 
             // tbDescontoItem
             // 
@@ -362,9 +362,9 @@
             this.tbDescontoItem.Size = new System.Drawing.Size(63, 20);
             this.tbDescontoItem.TabIndex = 14;
             this.tbDescontoItem.Text = "0,00";
-            this.tbDescontoItem.TextChanged += new System.EventHandler(this.tbDescontoItem_TextChanged);
-            this.tbDescontoItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoItem_KeyPress);
-            this.tbDescontoItem.Leave += new System.EventHandler(this.tbDescontoItem_Leave);
+            this.tbDescontoItem.TextChanged += new System.EventHandler(this.TbDescontoItem_TextChanged);
+            this.tbDescontoItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbDescontoItem_KeyPress);
+            this.tbDescontoItem.Leave += new System.EventHandler(this.TbDescontoItem_Leave);
             // 
             // lbDescItem
             // 
@@ -385,9 +385,9 @@
             this.tbDescontoItemPorc.Size = new System.Drawing.Size(62, 20);
             this.tbDescontoItemPorc.TabIndex = 12;
             this.tbDescontoItemPorc.Text = "0,00";
-            this.tbDescontoItemPorc.TextChanged += new System.EventHandler(this.tbDescontoItemPorc_TextChanged);
-            this.tbDescontoItemPorc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoItemPorc_KeyPress);
-            this.tbDescontoItemPorc.Leave += new System.EventHandler(this.tbDescontoItemPorc_Leave);
+            this.tbDescontoItemPorc.TextChanged += new System.EventHandler(this.TbDescontoItemPorc_TextChanged);
+            this.tbDescontoItemPorc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbDescontoItemPorc_KeyPress);
+            this.tbDescontoItemPorc.Leave += new System.EventHandler(this.TbDescontoItemPorc_Leave);
             // 
             // lbDescontoPorc
             // 
@@ -409,7 +409,7 @@
             this.btNovoItem.Size = new System.Drawing.Size(24, 24);
             this.btNovoItem.TabIndex = 16;
             this.btNovoItem.UseVisualStyleBackColor = true;
-            this.btNovoItem.Click += new System.EventHandler(this.btNovoItem_Click);
+            this.btNovoItem.Click += new System.EventHandler(this.BtNovoItem_Click);
             // 
             // lbTotalItens
             // 
@@ -461,8 +461,8 @@
             this.tbDescontoOrcamento.TabIndex = 5;
             this.tbDescontoOrcamento.Text = "0,00";
             this.tbDescontoOrcamento.TextChanged += new System.EventHandler(this.TbDescontoOrcamento_TextChanged);
-            this.tbDescontoOrcamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDescontoOrcamento_KeyPress);
-            this.tbDescontoOrcamento.Leave += new System.EventHandler(this.tbDescontoOrcamento_Leave);
+            this.tbDescontoOrcamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbDescontoOrcamento_KeyPress);
+            this.tbDescontoOrcamento.Leave += new System.EventHandler(this.TbDescontoOrcamento_Leave);
             // 
             // lbDesconto
             // 
@@ -504,8 +504,8 @@
             this.tbValorTotalOrcamento.TabIndex = 7;
             this.tbValorTotalOrcamento.Text = "0,00";
             this.tbValorTotalOrcamento.TextChanged += new System.EventHandler(this.TbValorTotalOrcamento_TextChanged);
-            this.tbValorTotalOrcamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbValorTotalOrcamento_KeyPress);
-            this.tbValorTotalOrcamento.Leave += new System.EventHandler(this.tbValorTotalOrcamento_Leave);
+            this.tbValorTotalOrcamento.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorTotalOrcamento_KeyPress);
+            this.tbValorTotalOrcamento.Leave += new System.EventHandler(this.TbValorTotalOrcamento_Leave);
             // 
             // lbTotalOrcamento
             // 
@@ -570,7 +570,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Orçamentos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmOrcamentoCadastroOrcamento_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmCadastroOrcamento_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroOrcamento_KeyDown);
             this.gbDadosOrcamento.ResumeLayout(false);
             this.gbDadosOrcamento.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();

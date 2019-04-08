@@ -2,12 +2,7 @@
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -15,9 +10,9 @@ namespace _5gpro.Forms
     public partial class fmBuscaItem : Form
     {
 
-        public List<_Item> _itens;
-        public _Item itemSelecionado;
-        private _ItemBLL itemBLL = new _ItemBLL();
+        public List<Item> itens;
+        public Item itemSelecionado;
+        private readonly ItemBLL itemBLL = new ItemBLL();
 
 
         public fmBuscaItem()
@@ -62,11 +57,11 @@ namespace _5gpro.Forms
                 tipodoitem = "";
             }
 
-            _itens = itemBLL.BuscaItens(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
+            itens = itemBLL.BuscaItens(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
 
-            foreach (_Item i in _itens)
+            foreach (Item i in itens)
             {
-                table.Rows.Add(i._ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
+                table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
             }
             dgvItens.DataSource = table;
         }
@@ -130,7 +125,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-            itemSelecionado = _itens.Find(p => p._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+            itemSelecionado = itens.Find(p => p.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
     }

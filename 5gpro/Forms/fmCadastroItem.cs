@@ -11,9 +11,9 @@ namespace _5gpro.Forms
     public partial class fmCadastroItem : Form
     {
 
-        _Item _item;
+        Item item;
         Unimedida unimedida = new Unimedida();
-        _ItemBLL _itemBLL = new _ItemBLL();
+        ItemBLL itemBLL = new ItemBLL();
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
         Validacao validacao = new Validacao();
         PermissaoBLL permissaoBLL = new PermissaoBLL();
@@ -35,7 +35,7 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(_item);
+                RecarregaDados(item);
             }
 
             if (e.KeyCode == Keys.F1)
@@ -75,11 +75,11 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    _Item newitem = _itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
+                    Item newitem = itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
                     if (newitem != null)
                     {
-                        _item = newitem;
-                        PreencheCampos(_item);
+                        item = newitem;
+                        PreencheCampos(item);
                         Editando(false);
                     }
                     else
@@ -103,11 +103,11 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        _Item newitem = _itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
+                        Item newitem = itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
                         if (newitem != null)
                         {
-                            _item = newitem;
-                            PreencheCampos(_item);
+                            item = newitem;
+                            PreencheCampos(item);
                             Editando(false);
                         }
                         else
@@ -282,8 +282,8 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = _itemBLL.BuscaProxCodigoDisponivel();
-                    _item = null;
+                    tbCodigo.Text = itemBLL.BuscaProxCodigoDisponivel();
+                    item = null;
                     tbDescricao.Focus();
                     Editando(true);
                 }
@@ -291,8 +291,8 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = _itemBLL.BuscaProxCodigoDisponivel();
-                _item = null;
+                tbCodigo.Text = itemBLL.BuscaProxCodigoDisponivel();
+                item = null;
                 tbDescricao.Focus();
                 Editando(true);
             }
@@ -306,22 +306,22 @@ namespace _5gpro.Forms
             PreencheCamposUnimedida(unimedida);
         }
 
-        private void PreencheCampos(_Item _item)
+        private void PreencheCampos(Item item)
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
-            tbCodigo.Text = _item._ItemID.ToString();
-            tbDescricao.Text = _item.Descricao;
-            tbDescricaoDeCompra.Text = _item.DescCompra;
+            tbCodigo.Text = item.ItemID.ToString();
+            tbDescricao.Text = item.Descricao;
+            tbDescricaoDeCompra.Text = item.DescCompra;
 
 
-            if (_item.Unimedida != null)
+            if (item.Unimedida != null)
             {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(_item.Unimedida.UnimedidaID);
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(item.Unimedida.UnimedidaID);
                 PreencheCamposUnimedida(unimedida);
             }
 
-            if (_item.TipoItem == "P")
+            if (item.TipoItem == "P")
             {
                 rbProduto.Checked = true;
                 rbServico.Checked = false;
@@ -332,10 +332,10 @@ namespace _5gpro.Forms
                 rbServico.Checked = true;
             }
 
-            tbReferencia.Text = _item.Referencia;
-            tbPrecoUltimaEntrada.Text = _item.ValorEntrada.ToString();
-            tbEstoqueNecessario.Text = _item.Estoquenecessario.ToString();
-            tbPrecoVenda.Text = _item.ValorSaida.ToString();
+            tbReferencia.Text = item.Referencia;
+            tbPrecoUltimaEntrada.Text = item.ValorEntrada.ToString();
+            tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
+            tbPrecoVenda.Text = item.ValorSaida.ToString();
 
             ignoraCheckEvent = false;
         }
@@ -351,51 +351,51 @@ namespace _5gpro.Forms
 
             if (editando)
             {
-                _item = new _Item();
+                item = new Item();
 
-                _item._ItemID = int.Parse(tbCodigo.Text);
-                _item.Descricao = tbDescricao.Text;
-                _item.DescCompra = tbDescricaoDeCompra.Text;
-                _item.Referencia = tbReferencia.Text;
-                _item.TipoItem = rbProduto.Checked ? "P" : "S";
+                item.ItemID = int.Parse(tbCodigo.Text);
+                item.Descricao = tbDescricao.Text;
+                item.DescCompra = tbDescricaoDeCompra.Text;
+                item.Referencia = tbReferencia.Text;
+                item.TipoItem = rbProduto.Checked ? "P" : "S";
 
                 if (tbPrecoUltimaEntrada.TextLength > 0)
                 {
-                    _item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
+                    item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
                 }
                 else
                 {
-                    _item.ValorEntrada = 0;
+                    item.ValorEntrada = 0;
                 }
 
                 if (tbPrecoVenda.TextLength > 0)
                 {
-                    _item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
+                    item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
                 }
                 else
                 {
-                    _item.ValorSaida = 0;
+                    item.ValorSaida = 0;
                 }
 
                 if (tbEstoqueNecessario.TextLength > 0)
                 {
-                    _item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+                    item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
                 }
                 else
                 {
-                    _item.Estoquenecessario = 0;
+                    item.Estoquenecessario = 0;
                 }
 
-                _item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
+                item.Unimedida = unimedidaBLL.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
 
 
                 ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(_item, controls);
+                bool ok = validacao.ValidarEntidade(item, controls);
 
                 if (ok)
                 {
                     validacao.despintarCampos(controls);
-                    int resultado = _itemBLL.SalvarOuAtualizarItem(_item);
+                    int resultado = itemBLL.SalvarOuAtualizarItem(item);
 
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -422,7 +422,7 @@ namespace _5gpro.Forms
 
         }
 
-        private void RecarregaDados(_Item _item)
+        private void RecarregaDados(Item item)
         {
             if (editando)
             {
@@ -431,10 +431,10 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (_item != null)
+                    if (item != null)
                     {
-                        _item = _itemBLL.BuscaItemById(_item._ItemID);
-                        PreencheCampos(_item);
+                        item = itemBLL.BuscaItemById(item.ItemID);
+                        PreencheCampos(item);
                         Editando(false);
                     }
                     else
@@ -446,8 +446,8 @@ namespace _5gpro.Forms
             }
             else
             {
-                _item = _itemBLL.BuscaItemById(_item._ItemID);
-                PreencheCampos(_item);
+                item = itemBLL.BuscaItemById(item.ItemID);
+                PreencheCampos(item);
                 Editando(false);
             }
 
@@ -463,11 +463,11 @@ namespace _5gpro.Forms
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 validacao.despintarCampos(controls);
-                _Item newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                Item newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
                 if (newitem != null)
                 {
-                    _item = newitem;
-                    PreencheCampos(_item);
+                    item = newitem;
+                    PreencheCampos(item);
                 }
             }
             else if (editando && tbCodigo.Text.Length > 0)
@@ -478,20 +478,20 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    _Item newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                    Item newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
                     if (newitem != null)
                     {
-                        _item = newitem;
-                        PreencheCampos(_item);
+                        item = newitem;
+                        PreencheCampos(item);
                         Editando(false);
                     }
                     else
                     {
-                        newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                        newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
                         if (newitem != null)
                         {
-                            _item = newitem;
-                            PreencheCampos(_item);
+                            item = newitem;
+                            PreencheCampos(item);
                             Editando(false);
                         }
                     }
@@ -509,11 +509,11 @@ namespace _5gpro.Forms
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 validacao.despintarCampos(controls);
-                _Item newitem = _itemBLL.BuscarItemAnterior(tbCodigo.Text);
+                Item newitem = itemBLL.BuscarItemAnterior(tbCodigo.Text);
                 if (newitem != null)
                 {
-                    _item = newitem;
-                    PreencheCampos(_item);
+                    item = newitem;
+                    PreencheCampos(item);
                 }
             }
             else if (editando && tbCodigo.Text.Length > 0)
@@ -524,20 +524,20 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    _Item newitem = _itemBLL.BuscarItemAnterior(tbCodigo.Text);
+                    Item newitem = itemBLL.BuscarItemAnterior(tbCodigo.Text);
                     if (newitem != null)
                     {
-                        _item = newitem;
-                        PreencheCampos(_item);
+                        item = newitem;
+                        PreencheCampos(item);
                         Editando(false);
                     }
                     else
                     {
-                        newitem = _itemBLL.BuscarProximoItem(tbCodigo.Text);
+                        newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
                         if (newitem != null)
                         {
-                            _item = newitem;
-                            PreencheCampos(_item);
+                            item = newitem;
+                            PreencheCampos(item);
                             Editando(false);
                         }
                     }
@@ -560,8 +560,8 @@ namespace _5gpro.Forms
             buscaItem.ShowDialog();
             if (buscaItem.itemSelecionado != null)
             {
-                _item = buscaItem.itemSelecionado;
-                PreencheCampos(_item);
+                item = buscaItem.itemSelecionado;
+                PreencheCampos(item);
             }
         }
 
