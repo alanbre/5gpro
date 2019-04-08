@@ -549,6 +549,11 @@ namespace _5gpro.Forms
             ignoraCheckEvent = false;
         }
 
+        private void FmCadastroUsuario_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void PreencheCamposGrupoUsuario(GrupoUsuario grupousuario)
         {
             if (grupousuario != null)

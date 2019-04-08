@@ -323,6 +323,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de Usuário";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
+            this.Load += new System.EventHandler(this.FmCadastroUsuario_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyUp);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
