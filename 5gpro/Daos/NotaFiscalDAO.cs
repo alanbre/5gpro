@@ -9,8 +9,8 @@ namespace _5gpro.Daos
 {
     class NotaFiscalDAO : ConexaoDAO
     {
-        UnimedidaBLL unidadeBLL = new UnimedidaBLL();
-        PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly UnimedidaBLL unidadeBLL = new UnimedidaBLL();
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
         public string BuscaProxCodigoDisponivel()
         {
             string proximoid = null;
@@ -64,15 +64,17 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    notafiscal = new NotaFiscal();
-                    notafiscal.NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal"));
-                    notafiscal.DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao"));
-                    notafiscal.DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida"));
-                    notafiscal.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    notafiscal.ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento"));
-                    notafiscal.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    notafiscal.DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"));
-                    notafiscal.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    notafiscal = new NotaFiscal
+                    {
+                        NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                        DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                        DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     reader.Close();
                 }
             }
@@ -93,7 +95,7 @@ namespace _5gpro.Daos
 
         public NotaFiscalItem BuscaItemByCod(int codigo)
         {
-            NotaFiscalItem _item = null;
+            NotaFiscalItem nfi = null;
             try
             {
                 AbrirConexao();
@@ -104,18 +106,22 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    _Item item = new _Item();
-                    item._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
-                    item.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
-                    item.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
-                    item.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
-                    item.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
-                    item.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
-                    item.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
-                    item.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    item.Unimedida = unidadeBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
-                    _item = new NotaFiscalItem();
-                    _item.Item = item;
+                    _Item item = new _Item
+                    {
+                        _ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Unimedida = unidadeBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                    };
+                    nfi = new NotaFiscalItem
+                    {
+                        Item = item
+                    };
                     reader.Close();
                 }
             }
@@ -127,7 +133,7 @@ namespace _5gpro.Daos
             {
                 FecharConexao();
             }
-            return _item;
+            return nfi;
         }
 
         public NotaFiscal BuscaProximaNotaFiscal(int codAtual)
@@ -144,15 +150,17 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    notafiscal = new NotaFiscal();
-                    notafiscal.NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal"));
-                    notafiscal.DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao"));
-                    notafiscal.DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida"));
-                    notafiscal.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    notafiscal.ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento"));
-                    notafiscal.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    notafiscal.DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"));
-                    notafiscal.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    notafiscal = new NotaFiscal
+                    {
+                        NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                        DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                        DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     reader.Close();
                 }
             }
@@ -183,15 +191,17 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    notafiscal = new NotaFiscal();
-                    notafiscal.NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal"));
-                    notafiscal.DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao"));
-                    notafiscal.DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida"));
-                    notafiscal.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    notafiscal.ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento"));
-                    notafiscal.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    notafiscal.DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"));
-                    notafiscal.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    notafiscal = new NotaFiscal
+                    {
+                        NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                        DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                        DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     reader.Close();
                 }
             }
@@ -295,24 +305,28 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    NotaFiscalItem nfi = new NotaFiscalItem();
-                    _Item i = new _Item();
-                    i._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
-                    i.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
-                    i.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
-                    i.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
-                    i.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
-                    i.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
-                    i.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
-                    i.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    i.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
+                    _Item i = new _Item
+                    {
+                        _ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                    };
 
-                    nfi.Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade"));
-                    nfi.ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario"));
-                    nfi.ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total"));
-                    nfi.DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc"));
-                    nfi.Desconto = reader.GetDecimal(reader.GetOrdinal("desconto"));
-                    nfi.Item = i;
+                    NotaFiscalItem nfi = new NotaFiscalItem
+                    {
+                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                        ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario")),
+                        ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total")),
+                        DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc")),
+                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
+                        Item = i
+                    };
                     itensNotaFiscal.Add(nfi);
                 }
                 reader.Close();

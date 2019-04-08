@@ -83,7 +83,7 @@
             this.lbConfirmaSenha.Location = new System.Drawing.Point(266, 111);
             this.lbConfirmaSenha.Name = "lbConfirmaSenha";
             this.lbConfirmaSenha.Size = new System.Drawing.Size(114, 13);
-            this.lbConfirmaSenha.TabIndex = 9;
+            this.lbConfirmaSenha.TabIndex = 7;
             this.lbConfirmaSenha.Text = "Senhas não são iguais";
             this.lbConfirmaSenha.Visible = false;
             // 
@@ -143,7 +143,7 @@
             this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 128);
             this.lbGrupoUsuario.Name = "lbGrupoUsuario";
             this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
-            this.lbGrupoUsuario.TabIndex = 7;
+            this.lbGrupoUsuario.TabIndex = 8;
             this.lbGrupoUsuario.Text = "Grupo Usuário";
             // 
             // tbNomeGrupoUsuario
@@ -152,7 +152,7 @@
             this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 144);
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
             this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(433, 20);
-            this.tbNomeGrupoUsuario.TabIndex = 10;
+            this.tbNomeGrupoUsuario.TabIndex = 11;
             this.tbNomeGrupoUsuario.TabStop = false;
             this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
             // 
@@ -170,7 +170,7 @@
             this.btGrupoUsuario.Location = new System.Drawing.Point(80, 144);
             this.btGrupoUsuario.Name = "btGrupoUsuario";
             this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
-            this.btGrupoUsuario.TabIndex = 9;
+            this.btGrupoUsuario.TabIndex = 10;
             this.btGrupoUsuario.TabStop = false;
             this.btGrupoUsuario.UseVisualStyleBackColor = true;
             this.btGrupoUsuario.Click += new System.EventHandler(this.btGrupoUsuario_Click);
@@ -188,7 +188,7 @@
             this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 144);
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
-            this.tbCodGrupoUsuario.TabIndex = 8;
+            this.tbCodGrupoUsuario.TabIndex = 9;
             this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodigoUsuario_TextChanged);
             this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
