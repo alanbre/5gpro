@@ -313,3 +313,20 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal_has_item` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`logado`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
+  `idlogado` INT NOT NULL AUTO_INCREMENT,
+  `idusuario` INT(11) NOT NULL,
+  `mac` VARCHAR(45) NULL,
+  PRIMARY KEY (`idlogado`),
+  INDEX `fk_usuariologado_usuario1_idx` (`idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_usuariologado_usuario1`
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;

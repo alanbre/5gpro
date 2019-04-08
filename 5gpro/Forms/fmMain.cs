@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;
 
@@ -57,5 +58,13 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            NetworkAdapter adap = new NetworkAdapter();
+            Console.WriteLine("IP: "+adap.IP);
+            Console.WriteLine("MAC: "+adap.Mac);
+            Console.WriteLine("Nome PC: "+adap.Nome);
+
+        }
     }
 }

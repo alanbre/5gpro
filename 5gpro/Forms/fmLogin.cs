@@ -23,6 +23,10 @@ namespace _5gpro.Forms
             usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
             if (usuariologado != null)
             {
+                //if (usuarioBLL.BuscaLogado())
+                //{
+
+                //}
                 this.Close();
             }
             else

@@ -30,6 +30,7 @@ namespace _5gpro.Forms
 
         private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
         {
+            //mudar aqui para this.activecontrol
             EnterTab(sender, e);
         }
 

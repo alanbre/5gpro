@@ -26,8 +26,7 @@ namespace _5gpro.Forms
         public fmCadastroItem()
         {
             InitializeComponent();
-            AlteraBotoes();
-            
+            AlteraBotoes(); 
         }
 
 

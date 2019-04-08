@@ -46,5 +46,20 @@ namespace _5gpro.Bll
         {
             return usuarioDAO.BuscaUsuarios(codGrupoUsuario, nomeUsuario, sobrenomeUsuario);
         }
+
+        public int GravarLogado(Usuario usuario, string mac)
+        {
+            return usuarioDAO.GravarLogado(usuario, mac);
+        }
+
+        public int RemoverLogado(Usuario usuario, string mac)
+        {
+            return usuarioDAO.RemoverLogado(usuario, mac);
+        }
+
+        public Logado BuscaLogado(Usuario usuario, string mac)
+        {
+            return usuarioDAO.BuscaLogado(usuario, mac);
+        }
     }
 }
