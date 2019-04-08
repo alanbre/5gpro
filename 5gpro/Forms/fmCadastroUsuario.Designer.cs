@@ -93,7 +93,7 @@
             this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(262, 69);
             this.cbMostrarSenhaUsuario.Name = "cbMostrarSenhaUsuario";
             this.cbMostrarSenhaUsuario.Size = new System.Drawing.Size(61, 17);
-            this.cbMostrarSenhaUsuario.TabIndex = 4;
+            this.cbMostrarSenhaUsuario.TabIndex = 8;
             this.cbMostrarSenhaUsuario.TabStop = false;
             this.cbMostrarSenhaUsuario.Text = "Mostrar";
             this.cbMostrarSenhaUsuario.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             this.tbConfirmaSenhaUsuario.Name = "tbConfirmaSenhaUsuario";
             this.tbConfirmaSenhaUsuario.PasswordChar = '*';
             this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(250, 20);
-            this.tbConfirmaSenhaUsuario.TabIndex = 6;
+            this.tbConfirmaSenhaUsuario.TabIndex = 5;
             this.tbConfirmaSenhaUsuario.TextChanged += new System.EventHandler(this.tbConfirmaSenhaUsuario_TextChanged);
             this.tbConfirmaSenhaUsuario.Leave += new System.EventHandler(this.tbConfirmaSenhaUsuario_Leave);
             // 
@@ -115,7 +115,7 @@
             this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 89);
             this.lbConfirmaSenhaUsuario.Name = "lbConfirmaSenhaUsuario";
             this.lbConfirmaSenhaUsuario.Size = new System.Drawing.Size(89, 13);
-            this.lbConfirmaSenhaUsuario.TabIndex = 5;
+            this.lbConfirmaSenhaUsuario.TabIndex = 4;
             this.lbConfirmaSenhaUsuario.Text = "Confirme a senha";
             // 
             // tbSenhaUsuario
@@ -143,7 +143,7 @@
             this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 128);
             this.lbGrupoUsuario.Name = "lbGrupoUsuario";
             this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
-            this.lbGrupoUsuario.TabIndex = 8;
+            this.lbGrupoUsuario.TabIndex = 6;
             this.lbGrupoUsuario.Text = "Grupo Usuário";
             // 
             // tbNomeGrupoUsuario
@@ -188,8 +188,8 @@
             this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 144);
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
-            this.tbCodGrupoUsuario.TabIndex = 9;
-            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodigoUsuario_TextChanged);
+            this.tbCodGrupoUsuario.TabIndex = 7;
+            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.TbCodGrupoUsuario_TextChanged);
             this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
             // tbNomeUsuario
@@ -323,7 +323,8 @@
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de Usuário";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyUp);
+            this.Load += new System.EventHandler(this.FmCadastroUsuario_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.panel2.ResumeLayout(false);

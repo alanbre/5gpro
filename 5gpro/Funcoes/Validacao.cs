@@ -81,6 +81,18 @@ namespace _5gpro.Funcoes
         {
             foreach (Control ctrl in controls)
             {
+                //GROUPBOX
+                if (ctrl is GroupBox)
+                {
+                    foreach (Control ctrlgb in ctrl.Controls)
+                    {
+                        if (ctrlgb is TextBox && !ctrlgb.Name.Equals("tbAjuda"))
+                        {
+                            ctrlgb.BackColor = System.Drawing.Color.White;
+                        }
+                    }
+                }
+
                 //PAINEL
                 if (ctrl is Panel)
                 {

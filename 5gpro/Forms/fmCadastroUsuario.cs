@@ -28,7 +28,7 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void FmCadastroUsuario_KeyUp(object sender, KeyEventArgs e)
+        private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
         {
             EnterTab(sender, e);
         }
@@ -57,8 +57,6 @@ namespace _5gpro.Forms
         }
 
 
-
-
         //Mostrar e ocultar campo senha
         private void cbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e)
         {
@@ -76,7 +74,6 @@ namespace _5gpro.Forms
         }
 
 
-
         //EVENTOS DE TEXTCHANGED
         private void tbSenhaUsuario_TextChanged(object sender, EventArgs e)
         {
@@ -88,7 +85,7 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void tbCodigoUsuario_TextChanged(object sender, EventArgs e)
+        private void TbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
@@ -547,6 +544,11 @@ namespace _5gpro.Forms
 
 
             ignoraCheckEvent = false;
+        }
+
+        private void FmCadastroUsuario_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void PreencheCamposGrupoUsuario(GrupoUsuario grupousuario)

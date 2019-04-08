@@ -1,4 +1,5 @@
-﻿using _5gpro.Forms;
+﻿using _5gpro.Entities;
+using _5gpro.Forms;
 using System;
 using System.Windows.Forms;
 
@@ -6,16 +7,22 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain()
+        public fmMain(Usuario usuario)
         {
             InitializeComponent();
+            usuariologado = usuario;
             
         }
+
+        public Usuario usuariologado;
+        fmLogin formLogin = new fmLogin();
+        
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
             formCadPessoas.Show(this);
+            
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)
@@ -54,10 +61,5 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
-        private void tESTEGRIDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formTesteGrid = new Form1_Load();
-            formTesteGrid.Show(this);
-        }
     }
 }
