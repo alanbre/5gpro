@@ -11,6 +11,7 @@ namespace _5gpro.Forms
         public Usuario usuariologado;
 
         UsuarioBLL usuarioBLL = new UsuarioBLL();
+        NetworkAdapter adap = new NetworkAdapter();
 
 
         public fmLogin()
@@ -22,12 +23,17 @@ namespace _5gpro.Forms
         {
             usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
             if (usuariologado != null)
-            {
-                //if (usuarioBLL.BuscaLogado())
-                //{
-
-                //}
-                this.Close();
+            {  
+                if (usuarioBLL.BuscaLogado(usuariologado, adap.Mac) != null)
+                {
+                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome);
+                }
+                else
+                {
+                    usuarioBLL.GravarLogado(usuariologado, adap.Mac);
+                    this.Close();
+                }
+               
             }
             else
             {
