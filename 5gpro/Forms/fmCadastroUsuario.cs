@@ -28,7 +28,7 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void FmCadastroUsuario_KeyUp(object sender, KeyEventArgs e)
+        private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
         {
             EnterTab(sender, e);
         }

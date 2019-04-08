@@ -324,7 +324,7 @@
             this.Text = "Cadastro de Usuário";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
             this.Load += new System.EventHandler(this.FmCadastroUsuario_Load);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyUp);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.panel2.ResumeLayout(false);

@@ -41,6 +41,11 @@ namespace _5gpro.Forms
 
         }
 
+        private void FmCadastroGrupoUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            EnterTab(this.ActiveControl, e);
+        }
+
         private void fmCadastroGrupoUsuario_Load(object sender, EventArgs e)
         {
             PopularModulos();
@@ -595,6 +600,7 @@ namespace _5gpro.Forms
             menuVertical.Editando(edit);
 
         }
+
 
         private void EnterTab(object sender, KeyEventArgs e)
         {
