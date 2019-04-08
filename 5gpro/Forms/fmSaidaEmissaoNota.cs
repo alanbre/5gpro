@@ -76,9 +76,7 @@ namespace _5gpro.Forms
 
         private void BtInserirItem_Click(object sender, EventArgs e)
         {
-            NotaFiscalItem item = new NotaFiscalItem();
-            item = itemSelecionado ?? buscaItem.nfi;
-            InserirItem(item);
+            InserirItem(itemSelecionado ?? buscaItem.nfi);
         }
 
 
@@ -295,7 +293,7 @@ namespace _5gpro.Forms
         {
             if (buscaItem.nfi != null)
             {
-                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(buscaItem.nfi.Item._ItemID.ToString())).FirstOrDefault();
+                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(buscaItem.nfi.Item.ItemID.ToString())).FirstOrDefault();
                 NotaFiscalItem item;
                 if (dr == null)
                 {
@@ -305,7 +303,7 @@ namespace _5gpro.Forms
                 }
                 else
                 {
-                    item = itens.Where(i => i.Item._ItemID == buscaItem.nfi.Item._ItemID).First();
+                    item = itens.Where(i => i.Item.ItemID == buscaItem.nfi.Item.ItemID).First();
                     btInserirItem.Text = "Alterar";
                     btExcluirItem.Enabled = true;
                 }
@@ -385,7 +383,7 @@ namespace _5gpro.Forms
             {
                 int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
-                itemSelecionado = itens.Find(i => i.Item._ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+                itemSelecionado = itens.Find(i => i.Item.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
                 btInserirItem.Text = "Alterar";
                 PreencheCamposItem(itemSelecionado);
                 btExcluirItem.Enabled = true;
@@ -646,20 +644,20 @@ namespace _5gpro.Forms
                 item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
                 item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
                 item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item._ItemID).FirstOrDefault();
+                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
                 if (dr == null)
                 {
                     itens.Add(item);
-                    dgvItens.Rows.Add(item.Item._ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                    dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                     btNovoItem.PerformClick();
                 }
                 else
                 {
-                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Item._ItemID == item.Item._ItemID).First().Desconto = item.Desconto;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
                     dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
                     dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
                     dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
@@ -703,7 +701,7 @@ namespace _5gpro.Forms
         {
             foreach (var i in itens)
             {
-                dgvItens.Rows.Add(i.Item._ItemID, i.Item.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+                dgvItens.Rows.Add(i.Item.ItemID, i.Item.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
             }
             dgvItens.Refresh();
         }

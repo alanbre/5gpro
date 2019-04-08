@@ -10,9 +10,9 @@ namespace _5gpro.Bll
 {
     class EstadoBLL
     {
-        EstadoDAO EstadoDAO = new EstadoDAO();
+        private readonly EstadoDAO EstadoDAO = new EstadoDAO();
 
-        public List<Estado> BuscaEstadoByCod(string cod)
+        public Estado BuscaEstadoByCod(int cod)
         {
             return EstadoDAO.BuscaEstadoByCod(cod);
         }

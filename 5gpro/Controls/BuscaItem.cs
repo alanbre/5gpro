@@ -40,6 +40,7 @@ namespace _5gpro.Controls
             }
             else
             {
+                nfi = null;
                 tbDescricaoItem.Text = "";
             }
             this.Codigo_Leave?.Invoke(this, e);
@@ -66,7 +67,7 @@ namespace _5gpro.Controls
         {
             if (nfi.Item != null)
             {
-                tbCodigoItem.Text = nfi.Item._ItemID.ToString();
+                tbCodigoItem.Text = nfi.Item.ItemID.ToString();
                 tbDescricaoItem.Text = nfi.Item.Descricao;
             }
             else
@@ -83,7 +84,7 @@ namespace _5gpro.Controls
         public void PreencheCampos(NotaFiscalItem item)
         {
             this.nfi = item;
-            tbCodigoItem.Text = item.Item._ItemID.ToString();
+            tbCodigoItem.Text = item.Item.ItemID.ToString();
             tbDescricaoItem.Text = item.Item.Descricao;
         }
 

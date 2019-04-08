@@ -10,7 +10,7 @@ namespace _5gpro.Bll
 {
     class PaisBLL
     {
-        PaisDAO paisdao = new PaisDAO();
+        private readonly PaisDAO paisdao = new PaisDAO();
 
         public int SalvarOuAtualizarItem(Pais pais)
         {

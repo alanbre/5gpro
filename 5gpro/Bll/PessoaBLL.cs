@@ -6,7 +6,7 @@ namespace _5gpro.Bll
 {
     class PessoaBLL
     {
-        PessoaDAO PessoaDAO = new PessoaDAO();
+        private readonly PessoaDAO PessoaDAO = new PessoaDAO();
 
         public int SalvarOuAtualizarPessoa(Pessoa pessoa)
         {
@@ -28,9 +28,9 @@ namespace _5gpro.Bll
             return PessoaDAO.BuscarPessoaAnterior(codAtual);
         }
 
-        public List<Pessoa> BuscarPessoas(string nome, string cpfcnpj, string cidade)
+        public List<Pessoa> BuscarPessoas(string nome, string cpfcnpj, int idcidade)
         {
-            return PessoaDAO.BuscarPessoas(nome, cpfcnpj, cidade);
+            return PessoaDAO.BuscarPessoas(nome, cpfcnpj, idcidade);
         }
 
         public string BuscaProxCodigoDisponivel()

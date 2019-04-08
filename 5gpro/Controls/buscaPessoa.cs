@@ -11,9 +11,8 @@ namespace _5gpro.Controls
     {
         public Pessoa pessoa = new Pessoa();
         public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
-        private bool editando = false;
 
-        PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
 
         [Description("Texto do Label"), Category("Appearance")]
         public string LabelText
@@ -58,6 +57,7 @@ namespace _5gpro.Controls
             }
             else
             {
+                pessoa = null;
                 tbNomePessoa.Text = "";
             }
         }
@@ -110,11 +110,6 @@ namespace _5gpro.Controls
             tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
         }
 
-        public void Editando(bool edit)
-        {
-            editando = edit;
-        }
-
         public void Limpa()
         {
             tbCodigoPessoa.Clear();
@@ -138,8 +133,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoPessoa_TextChanged(object sender, EventArgs e)
         {
-            if (this.Text_Changed != null)
-                this.Text_Changed(this, e);
+            this.Text_Changed?.Invoke(this, e);
         }
     }
 }

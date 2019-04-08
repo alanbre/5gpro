@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.lbEstado = new System.Windows.Forms.Label();
-            this.tbFiltroCodEstado = new System.Windows.Forms.TextBox();
-            this.btProcuraEstado = new System.Windows.Forms.Button();
-            this.tbNomeEstado = new System.Windows.Forms.TextBox();
             this.lbFiltroNomeCidade = new System.Windows.Forms.Label();
             this.tbFiltroNomeCidade = new System.Windows.Forms.TextBox();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -42,46 +38,9 @@
             this.dgvtbcCodEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNomeEstado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcUf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buscaEstado = new _5gpro.Controls.BuscaEstado();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lbEstado
-            // 
-            this.lbEstado.AutoSize = true;
-            this.lbEstado.Location = new System.Drawing.Point(12, 9);
-            this.lbEstado.Name = "lbEstado";
-            this.lbEstado.Size = new System.Drawing.Size(40, 13);
-            this.lbEstado.TabIndex = 0;
-            this.lbEstado.Text = "Estado";
-            // 
-            // tbFiltroCodEstado
-            // 
-            this.tbFiltroCodEstado.Location = new System.Drawing.Point(12, 25);
-            this.tbFiltroCodEstado.Name = "tbFiltroCodEstado";
-            this.tbFiltroCodEstado.Size = new System.Drawing.Size(54, 20);
-            this.tbFiltroCodEstado.TabIndex = 0;
-            this.tbFiltroCodEstado.Enter += new System.EventHandler(this.tbFiltroCodEstado_Enter);
-            this.tbFiltroCodEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbFiltroCodEstado_KeyUp);
-            this.tbFiltroCodEstado.Leave += new System.EventHandler(this.tbFiltroCodEstado_Leave);
-            // 
-            // btProcuraEstado
-            // 
-            this.btProcuraEstado.Location = new System.Drawing.Point(68, 25);
-            this.btProcuraEstado.Name = "btProcuraEstado";
-            this.btProcuraEstado.Size = new System.Drawing.Size(20, 20);
-            this.btProcuraEstado.TabIndex = 0;
-            this.btProcuraEstado.TabStop = false;
-            this.btProcuraEstado.UseVisualStyleBackColor = true;
-            this.btProcuraEstado.Click += new System.EventHandler(this.btProcuraEstado_Click);
-            // 
-            // tbNomeEstado
-            // 
-            this.tbNomeEstado.Location = new System.Drawing.Point(90, 25);
-            this.tbNomeEstado.Name = "tbNomeEstado";
-            this.tbNomeEstado.ReadOnly = true;
-            this.tbNomeEstado.Size = new System.Drawing.Size(414, 20);
-            this.tbNomeEstado.TabIndex = 1;
-            this.tbNomeEstado.TabStop = false;
             // 
             // lbFiltroNomeCidade
             // 
@@ -89,7 +48,7 @@
             this.lbFiltroNomeCidade.Location = new System.Drawing.Point(12, 48);
             this.lbFiltroNomeCidade.Name = "lbFiltroNomeCidade";
             this.lbFiltroNomeCidade.Size = new System.Drawing.Size(85, 13);
-            this.lbFiltroNomeCidade.TabIndex = 4;
+            this.lbFiltroNomeCidade.TabIndex = 1;
             this.lbFiltroNomeCidade.Text = "Nome da cidade";
             // 
             // tbFiltroNomeCidade
@@ -97,18 +56,18 @@
             this.tbFiltroNomeCidade.Location = new System.Drawing.Point(12, 64);
             this.tbFiltroNomeCidade.Name = "tbFiltroNomeCidade";
             this.tbFiltroNomeCidade.Size = new System.Drawing.Size(492, 20);
-            this.tbFiltroNomeCidade.TabIndex = 1;
-            this.tbFiltroNomeCidade.TextChanged += new System.EventHandler(this.tbFiltroNomeCidade_TextChanged);
+            this.tbFiltroNomeCidade.TabIndex = 2;
+            this.tbFiltroNomeCidade.TextChanged += new System.EventHandler(this.TbFiltroNomeCidade_TextChanged);
             // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(510, 64);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 2;
+            this.btPesquisar.TabIndex = 3;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
             // dgvCidades
             // 
@@ -137,9 +96,9 @@
             this.dgvCidades.RowHeadersVisible = false;
             this.dgvCidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCidades.Size = new System.Drawing.Size(560, 360);
-            this.dgvCidades.TabIndex = 3;
+            this.dgvCidades.TabIndex = 4;
             this.dgvCidades.TabStop = false;
-            this.dgvCidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCidades_CellDoubleClick);
+            this.dgvCidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCidades_CellDoubleClick);
             // 
             // dgvtbcCodCidade
             // 
@@ -171,19 +130,25 @@
             this.dgvtbcUf.Name = "dgvtbcUf";
             this.dgvtbcUf.ReadOnly = true;
             // 
+            // buscaEstado
+            // 
+            this.buscaEstado.Location = new System.Drawing.Point(6, 5);
+            this.buscaEstado.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaEstado.Name = "buscaEstado";
+            this.buscaEstado.Size = new System.Drawing.Size(442, 39);
+            this.buscaEstado.TabIndex = 0;
+            // 
             // fmBuscaCidade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 461);
+            this.Controls.Add(this.buscaEstado);
             this.Controls.Add(this.dgvCidades);
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbFiltroNomeCidade);
             this.Controls.Add(this.lbFiltroNomeCidade);
-            this.Controls.Add(this.tbNomeEstado);
-            this.Controls.Add(this.btProcuraEstado);
-            this.Controls.Add(this.tbFiltroCodEstado);
-            this.Controls.Add(this.lbEstado);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 500);
@@ -191,6 +156,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca Cidades";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaCidade_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -198,11 +164,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label lbEstado;
-        private System.Windows.Forms.TextBox tbFiltroCodEstado;
-        private System.Windows.Forms.Button btProcuraEstado;
-        private System.Windows.Forms.TextBox tbNomeEstado;
         private System.Windows.Forms.Label lbFiltroNomeCidade;
         private System.Windows.Forms.TextBox tbFiltroNomeCidade;
         private System.Windows.Forms.Button btPesquisar;
@@ -212,5 +173,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeEstado;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcUf;
+        private Controls.BuscaEstado buscaEstado;
     }
 }

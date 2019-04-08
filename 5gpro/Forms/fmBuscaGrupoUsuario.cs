@@ -2,12 +2,6 @@
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -17,7 +11,7 @@ namespace _5gpro.Forms
 
         public List<GrupoUsuario> Listagrupousuario;
         public GrupoUsuario GrupoUsuario;
-        private GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
+        private readonly GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
         public GrupoUsuario grupousuarioSelecionado;
 
         public fmBuscaGrupoUsuario()
@@ -25,7 +19,7 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        public void buscaGrupousuario()
+        public void BuscaGrupousuario()
         {
             Listagrupousuario = grupousuarioBLL.BuscarGrupoUsuario(tbFiltroNomeGrupoUsuario.Text);
 
@@ -38,33 +32,23 @@ namespace _5gpro.Forms
             dgvGrupoUsuario.Refresh();
         }
 
-        private void fmBuscaGrupoUsuario_Load(object sender, EventArgs e)
+        private void TbFiltroNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
-            
+            BuscaGrupousuario();
         }
 
-        private void tbFiltroNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
+        private void BtPesquisar_Click(object sender, EventArgs e)
         {
-            buscaGrupousuario();
+            BuscaGrupousuario();
         }
 
-        private void btPesquisar_Click(object sender, EventArgs e)
-        {
-            buscaGrupousuario();
-        }
-
-        private void dgvGrupoUsuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvGrupoUsuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvGrupoUsuario.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvGrupoUsuario.Rows[selectedRowIndex];
             grupousuarioSelecionado = Listagrupousuario.Find(g => (g.GrupoUsuarioID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
 
             this.Close();
-        }
-
-        private void DgvGrupoUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
     }
 }

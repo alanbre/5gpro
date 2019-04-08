@@ -104,7 +104,7 @@
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
             this.cblAtuacao.TabIndex = 7;
             this.cblAtuacao.TabStop = false;
-            this.cblAtuacao.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cblAtuacao_ItemCheck);
+            this.cblAtuacao.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CblAtuacao_ItemCheck);
             // 
             // tbFantasia
             // 
@@ -113,7 +113,7 @@
             this.tbFantasia.Name = "tbFantasia";
             this.tbFantasia.Size = new System.Drawing.Size(528, 20);
             this.tbFantasia.TabIndex = 5;
-            this.tbFantasia.TextChanged += new System.EventHandler(this.tbFantasia_TextChanged);
+            this.tbFantasia.TextChanged += new System.EventHandler(this.TbFantasia_TextChanged);
             // 
             // lbFantasia
             // 
@@ -131,7 +131,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(527, 20);
             this.tbNome.TabIndex = 3;
-            this.tbNome.TextChanged += new System.EventHandler(this.tbNome_TextChanged);
+            this.tbNome.TextChanged += new System.EventHandler(this.TbNome_TextChanged);
             // 
             // lbNome
             // 
@@ -149,9 +149,9 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCodigo_KeyPress);
-            this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodigo_KeyUp);
-            this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
+            this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCodigo_KeyPress);
+            this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigo_KeyUp);
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbCodigo
             // 
@@ -182,7 +182,7 @@
             this.rbPessoaJuridica.TabIndex = 1;
             this.rbPessoaJuridica.Text = "Pessoa Jurídica";
             this.rbPessoaJuridica.UseVisualStyleBackColor = true;
-            this.rbPessoaJuridica.CheckedChanged += new System.EventHandler(this.rbPessoaJuridica_CheckedChanged);
+            this.rbPessoaJuridica.CheckedChanged += new System.EventHandler(this.RbPessoaJuridica_CheckedChanged);
             // 
             // rbPessoaFisica
             // 
@@ -195,7 +195,7 @@
             this.rbPessoaFisica.TabStop = true;
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
-            this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.rbPessoaFisica_CheckedChanged);
+            this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.RbPessoaFisica_CheckedChanged);
             // 
             // pnDados
             // 
@@ -238,7 +238,7 @@
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
             this.tbEmail.TabIndex = 14;
-            this.tbEmail.TextChanged += new System.EventHandler(this.tbEmail_TextChanged);
+            this.tbEmail.TextChanged += new System.EventHandler(this.TbEmail_TextChanged);
             // 
             // lbEmail
             // 
@@ -256,7 +256,7 @@
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 12;
-            this.mtbTelefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbTelefone_MaskInputRejected);
+            this.mtbTelefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MtbTelefone_MaskInputRejected);
             // 
             // lbTelefone
             // 
@@ -275,7 +275,7 @@
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
             this.mtbCpfCnpj.TabIndex = 10;
-            this.mtbCpfCnpj.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbCpfCnpj_MaskInputRejected);
+            this.mtbCpfCnpj.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MtbCpfCnpj_MaskInputRejected);
             // 
             // lbCpf
             // 
@@ -293,7 +293,7 @@
             this.tbComplemento.Name = "tbComplemento";
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
             this.tbComplemento.TabIndex = 7;
-            this.tbComplemento.TextChanged += new System.EventHandler(this.tbComplemento_TextChanged);
+            this.tbComplemento.TextChanged += new System.EventHandler(this.TbComplemento_TextChanged);
             // 
             // lbComplemento
             // 
@@ -311,7 +311,7 @@
             this.tbBairro.Name = "tbBairro";
             this.tbBairro.Size = new System.Drawing.Size(528, 20);
             this.tbBairro.TabIndex = 5;
-            this.tbBairro.TextChanged += new System.EventHandler(this.tbBairro_TextChanged);
+            this.tbBairro.TextChanged += new System.EventHandler(this.TbBairro_TextChanged);
             // 
             // lbBairro
             // 
@@ -329,7 +329,7 @@
             this.tbNumero.Name = "tbNumero";
             this.tbNumero.Size = new System.Drawing.Size(64, 20);
             this.tbNumero.TabIndex = 3;
-            this.tbNumero.TextChanged += new System.EventHandler(this.tbNumero_TextChanged);
+            this.tbNumero.TextChanged += new System.EventHandler(this.TbNumero_TextChanged);
             // 
             // lbNumero
             // 
@@ -347,7 +347,7 @@
             this.tbRua.Name = "tbRua";
             this.tbRua.Size = new System.Drawing.Size(528, 20);
             this.tbRua.TabIndex = 1;
-            this.tbRua.TextChanged += new System.EventHandler(this.tbRua_TextChanged);
+            this.tbRua.TextChanged += new System.EventHandler(this.TbRua_TextChanged);
             // 
             // lbRua
             // 
@@ -403,8 +403,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de pessoas";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroPessoa_FormClosing);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmCadastroPessoa_KeyDown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCadastroPessoa_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroPessoa_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
             this.gbAtuacao.ResumeLayout(false);

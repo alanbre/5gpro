@@ -11,7 +11,7 @@ namespace _5gpro.Forms
     {
         public List<Estado> Estados;
         public Estado EstadoSelecionado;
-        private EstadoBLL estadoBLL = new EstadoBLL();
+        private readonly EstadoBLL estadoBLL = new EstadoBLL();
 
 
         public fmBuscaEstado()
@@ -20,7 +20,7 @@ namespace _5gpro.Forms
             tbFiltroNomeEstado.Focus();
         }
 
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void BtPesquisar_Click(object sender, EventArgs e)
         {
 
             dgvEstados.Rows.Clear();
@@ -52,12 +52,26 @@ namespace _5gpro.Forms
             //dgvEstados.DataSource = table;
         }
 
-        private void dgvEstados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvEstados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvEstados.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvEstados.Rows[selectedRowIndex];
             EstadoSelecionado = Estados.Find(est => est.EstadoID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
+        }
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void FmBuscaEstado_KeyDown(object sender, KeyEventArgs e)
+        {
+            EnterTab(this.ActiveControl, e);
         }
     }
 }

@@ -10,11 +10,11 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO : ConexaoDAO
     {
-        PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
 
         public Orcamento BuscaOrcamentoById(int cod)
         {
-            Orcamento orcamento = null;
+            Orcamento orcamento = new Orcamento();
 
             try
             {
@@ -26,16 +26,22 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    orcamento = new Orcamento();
-                    orcamento.OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento"));
-                    orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
-                    orcamento.DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade"));
-                    orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
-                    orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
-                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    orcamento = new Orcamento
+                    {
+                        OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
+                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                        DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     reader.Close();
+                }
+                else
+                {
+                    orcamento = null;
                 }
             }
             catch (MySqlException ex)
@@ -55,7 +61,7 @@ namespace _5gpro.Daos
 
         public Orcamento BuscaProximoOrcamento(string codAtual)
         {
-            Orcamento orcamento = null;
+            Orcamento orcamento = new Orcamento();
 
             try
             {
@@ -67,16 +73,22 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    orcamento = new Orcamento();
-                    orcamento.OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento"));
-                    orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
-                    orcamento.DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade"));
-                    orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
-                    orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
-                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    orcamento = new Orcamento
+                    {
+                        OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
+                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                        DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     reader.Close();
+                }
+                else
+                {
+                    orcamento = null;
                 }
             }
             catch (MySqlException ex)
@@ -95,7 +107,7 @@ namespace _5gpro.Daos
 
         public Orcamento BuscaOrcamentoAnterior(string codAtual)
         {
-            Orcamento orcamento = null;
+            Orcamento orcamento = new Orcamento();
             try
             {
                 AbrirConexao();
@@ -106,16 +118,22 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    orcamento = new Orcamento();
-                    orcamento.OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento"));
-                    orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
-                    orcamento.DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade"));
-                    orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
-                    orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
-                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    orcamento = new Orcamento
+                    {
+                        OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
+                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                        DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     reader.Close();
+                }
+                else
+                {
+                    orcamento = null;
                 }
             }
             catch (MySqlException ex)
@@ -138,7 +156,6 @@ namespace _5gpro.Daos
             string wherePessoa = f.filtroPessoa != null ? "AND idpessoa = @idpessoa" : "";
             string whereCidade = f.filtroCidade != null ? "AND idcidade = @idcidade" : "";
             string contemValidade = f.contemValidade ? "NOT" : "";
-            string contemEfeteviacao = f.contemEfetivacao ? "NOT" : "";
 
             try
             {
@@ -166,15 +183,17 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    Orcamento orcamento = new Orcamento();
-                    orcamento.OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento"));
-                    orcamento.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
-                    orcamento.DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade"));
-                    orcamento.ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens"));
-                    orcamento.ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento"));
-                    orcamento.DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens"));
-                    orcamento.DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"));
-                    orcamento.Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    Orcamento orcamento = new Orcamento
+                    {
+                        OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
+                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                        DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                    };
                     orcamento.Itens = BuscaItensDoOrcamento(orcamento);
                     orcamentos.Add(orcamento);
                 }
@@ -230,9 +249,9 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
-        public List<_Item> BuscaItensDoOrcamento(Orcamento orcamento)
+        public List<Item> BuscaItensDoOrcamento(Orcamento orcamento)
         {
-            List<_Item> itensOrcamento = new List<_Item>();
+            List<Item> itensOrcamento = new List<Item>();
             try
             {
                 AbrirConexao();
@@ -246,21 +265,23 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    _Item i = new _Item();
-                    i._ItemID = reader.GetInt32(reader.GetOrdinal("iditem"));
-                    i.Descricao = reader.GetString(reader.GetOrdinal("descitem"));
-                    i.DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra"));
-                    i.TipoItem = reader.GetString(reader.GetOrdinal("tipo"));
-                    i.Referencia = reader.GetString(reader.GetOrdinal("referencia"));
-                    i.ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada"));
-                    i.ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida"));
-                    i.Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario"));
-                    i.Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")));
-                    i.Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade"));
-                    i.ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario"));
-                    i.ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total"));
-                    i.DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc"));
-                    i.Desconto = reader.GetDecimal(reader.GetOrdinal("desconto"));
+                    Item i = new Item
+                    {
+                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida"))),
+                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                        ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario")),
+                        ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total")),
+                        DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc")),
+                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto"))
+                    };
                     itensOrcamento.Add(i);
                 }
                 reader.Close();
@@ -318,11 +339,11 @@ namespace _5gpro.Daos
                     Comando.CommandText = @"INSERT INTO orcamento_has_item (idorcamento, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
                                             VALUES
                                             (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
-                    foreach (_Item i in orcamento.Itens)
+                    foreach (Item i in orcamento.Itens)
                     {
                         Comando.Parameters.Clear();
                         Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-                        Comando.Parameters.AddWithValue("@iditem", i._ItemID);
+                        Comando.Parameters.AddWithValue("@iditem", i.ItemID);
                         Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
                         Comando.Parameters.AddWithValue("@valor_unitario", i.ValorUnitario);
                         Comando.Parameters.AddWithValue("@valor_total", i.ValorTotal);

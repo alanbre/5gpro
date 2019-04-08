@@ -33,12 +33,13 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    Permissao p = new Permissao();
-
-                    p.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
-                    p.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
-                    p.Nivel = reader.GetString(reader.GetOrdinal("nivel"));
+                    Permissao p = new Permissao
+                    {
+                        PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+                        Nivel = reader.GetString(reader.GetOrdinal("nivel"))
+                    };
 
                     permissoesGrupo.Add(p);
                 }
@@ -79,12 +80,13 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    Permissao p = new Permissao();
-
-                    p.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
-                    p.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    p.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
-                    p.Nivel = "0";
+                    Permissao p = new Permissao
+                    {
+                        PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+                        Nivel = "0"
+                    };
 
                     permissoesGrupo.Add(p);
                 }
@@ -108,7 +110,7 @@ namespace _5gpro.Daos
             return permissoes;
         }
 
-        public int buscarIDbyCodigo(string codpermissao)
+        public int BuscarIDbyCodigo(string codpermissao)
         {
             int permissaoid = 0;
 

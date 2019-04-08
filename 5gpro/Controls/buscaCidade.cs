@@ -41,6 +41,7 @@ namespace _5gpro.Controls
             }
             else
             {
+                cidade = null;
                 tbNomeCidade.Text = "";
             }
         }

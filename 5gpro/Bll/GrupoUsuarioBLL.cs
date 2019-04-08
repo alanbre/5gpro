@@ -11,7 +11,7 @@ namespace _5gpro.Bll
     class GrupoUsuarioBLL
     {
 
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
+        private readonly GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
 
         public GrupoUsuario BuscaGrupoUsuarioByID(string cod)
         {
