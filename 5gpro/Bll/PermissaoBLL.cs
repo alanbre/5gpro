@@ -29,7 +29,6 @@ namespace _5gpro.Bll
             return permissaoDAO.BuscarIDbyCodigo(codpermissao);
         }
 
-
     }
 }
 

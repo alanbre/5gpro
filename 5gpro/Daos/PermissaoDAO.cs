@@ -19,7 +19,7 @@ namespace _5gpro.Daos
             List<Permissao> permissoesGrupo = new List<Permissao>();
 
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
-            
+
             try
             {
                 AbrirConexao();
@@ -74,7 +74,7 @@ namespace _5gpro.Daos
                 AbrirConexao();
                 Comando = new MySqlCommand(@"SELECT * 
                                              FROM permissao", Conexao);
-  
+
 
                 IDataReader reader = Comando.ExecuteReader();
 
@@ -123,8 +123,8 @@ namespace _5gpro.Daos
                 IDataReader reader = Comando.ExecuteReader();
 
                 if (reader.Read())
-                {               
-                    permissaoid = reader.GetInt32(reader.GetOrdinal("idpermissao")); 
+                {
+                    permissaoid = reader.GetInt32(reader.GetOrdinal("idpermissao"));
                     reader.Close();
                 }
             }
@@ -138,6 +138,7 @@ namespace _5gpro.Daos
             }
             return permissaoid;
         }
+
 
     }
 }

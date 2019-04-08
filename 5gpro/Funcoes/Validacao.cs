@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
+using _5gpro.Entities;
 
 namespace _5gpro.Funcoes
 {
 
     public class Validacao
     {
+
 
         public static IEnumerable<ValidationResult> getValidationErros(object obj)
         {
