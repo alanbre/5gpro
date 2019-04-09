@@ -685,8 +685,9 @@ namespace _5gpro.Forms
         {
             if (!ignoracheckevent)
             {
+                //Arrumar
                 editando = edit;
-                menuVertical.Editando(edit);
+                menuVertical.Editando(edit, 3);
             }
         }
 

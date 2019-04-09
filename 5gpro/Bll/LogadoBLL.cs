@@ -22,9 +22,14 @@ namespace _5gpro.Bll
             return logadoDAO.RemoverLogado(mac);
         }
 
-        public Logado BuscaLogado(Usuario usuario)
+        public Logado BuscaLogadoByUsuario(Usuario usuario)
         {
-            return logadoDAO.BuscaLogado(usuario);
+            return logadoDAO.BuscaLogadoByUsuario(usuario);
+        }
+
+        public Logado BuscaLogadoByMac(string mac)
+        {
+            return logadoDAO.BuscaLogadoByMac(mac);
         }
     }
 }

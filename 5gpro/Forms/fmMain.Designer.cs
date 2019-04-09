@@ -99,6 +99,7 @@
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Name = "cadastroDeGrupoDeUsuáriosToolStripMenuItem";
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Text = "Cadastro de Grupo de Usuários";
+            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Visible = false;
             this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click);
             // 
             // tsmiOrcamento

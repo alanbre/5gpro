@@ -13,7 +13,7 @@ namespace _5gpro.Daos
     {
         public UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-        public Logado BuscaLogado(Usuario usuario)
+        public Logado BuscaLogadoByUsuario(Usuario usuario)
         {
             Logado usulogado = null;
 
@@ -23,6 +23,44 @@ namespace _5gpro.Daos
                 Comando = new MySqlCommand(@"SELECT * FROM logado WHERE idusuario = @idusuario;", Conexao);
 
                 Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    usulogado = new Logado();
+                    usulogado.LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado"));
+                    usulogado.Usuario = usuarioDAO.BuscarUsuarioById(reader.GetInt32(reader.GetOrdinal("idusuario")));
+                    usulogado.Mac = reader.GetString(reader.GetOrdinal("mac"));
+                    usulogado.NomePC = reader.GetString(reader.GetOrdinal("nomepc"));
+                    usulogado.IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"));
+
+                    reader.Close();
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return usulogado;
+        }
+
+        public Logado BuscaLogadoByMac(string mac)
+        {
+            Logado usulogado = null;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT * FROM logado WHERE mac = @mac;", Conexao);
+
+                Comando.Parameters.AddWithValue("@mac", mac);
 
                 IDataReader reader = Comando.ExecuteReader();
 

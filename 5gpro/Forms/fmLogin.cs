@@ -26,7 +26,7 @@ namespace _5gpro.Forms
 
             if (usuariologado != null)
             {  
-                if (logadoBLL.BuscaLogado(usuariologado) != null)
+                if (logadoBLL.BuscaLogadoByUsuario(usuariologado) != null)
                 {
                     MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 

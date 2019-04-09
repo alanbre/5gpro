@@ -29,6 +29,15 @@ namespace _5gpro.Bll
             return permissaoDAO.BuscarIDbyCodigo(codpermissao);
         }
 
+        public List<Permissao> BuscarListaPermissoesByCodGrupo(string codgrupousuario)
+        {
+            return permissaoDAO.BuscarListaPermissoesByCodGrupo(codgrupousuario);
+        }
+
+        public int BuscarNivelPermissao(string codgrupousuario, string codpermissao)
+        {
+            return permissaoDAO.BuscarNivelPermissao(codgrupousuario, codpermissao);
+        }
     }
 }
 

@@ -345,8 +345,9 @@ namespace _5gpro.Forms
 
         private void Editando(bool edit)
         {
+            //ARRUMAR
             editando = edit;
-            menuVertical.Editando(edit);
+            menuVertical.Editando(edit, 3);
         }
 
         private void RecarregaDados(Usuario usuario)
