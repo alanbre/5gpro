@@ -15,6 +15,7 @@ namespace _5gpro
             SetarUsuariologado(usuario);
         }
         private UsuarioDAO usuarioDAO = new UsuarioDAO();
+        private LogadoDAO logadoDAO = new LogadoDAO();
         private Usuario usuariologadomain;
 
         public void SetarUsuariologado(Usuario usuario)
@@ -68,7 +69,7 @@ namespace _5gpro
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Retira usuário da tabela Logado
-            usuarioDAO.RemoverLogado(usuariologadomain);
+            logadoDAO.RemoverLogado(usuariologadomain);
         }
     }
 }

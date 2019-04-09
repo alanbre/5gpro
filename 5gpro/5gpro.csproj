@@ -55,6 +55,7 @@
     <Compile Include="Bll\CidadeBLL.cs" />
     <Compile Include="Bll\EstadoBLL.cs" />
     <Compile Include="Bll\GrupoUsuarioBLL.cs" />
+    <Compile Include="Bll\LogadoBLL.cs" />
     <Compile Include="Bll\NotaFiscalBLL.cs" />
     <Compile Include="Bll\OrcamentoBLL.cs" />
     <Compile Include="Bll\PermissaoBLL.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
+    <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
