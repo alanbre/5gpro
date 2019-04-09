@@ -22,15 +22,17 @@ namespace _5gpro.Forms
         private void btEntrar_Click(object sender, EventArgs e)
         {
             usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
+
             if (usuariologado != null)
             {  
-                if (usuarioBLL.BuscaLogado(usuariologado, adap.Mac) != null)
+                if (usuarioBLL.BuscaLogado(usuariologado) != null)
                 {
-                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome);
+                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
                 }
                 else
                 {
-                    usuarioBLL.GravarLogado(usuariologado, adap.Mac);
+                    usuarioBLL.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
                     this.Close();
                 }
                

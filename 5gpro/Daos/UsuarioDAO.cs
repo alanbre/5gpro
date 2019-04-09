@@ -49,25 +49,28 @@ namespace _5gpro.Daos
             return usuario;
         }
 
-        public Logado BuscaLogado(Usuario usuario, string mac)
+        public Logado BuscaLogado(Usuario usuario)
         {
             Logado usulogado = null;
 
             try
             {
                 AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT *
-                                             FROM logado AS l
-                                             WHERE l.idusuario = @idusuario AND l.mac = @mac
-                                                ;", Conexao);
+                Comando = new MySqlCommand(@"SELECT * FROM logado WHERE idusuario = @idusuario;", Conexao);
+
+                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
 
                 IDataReader reader = Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
+                    usulogado = new Logado();
                     usulogado.LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado"));
                     usulogado.Usuario = BuscarUsuarioById(reader.GetInt32(reader.GetOrdinal("idusuario")));
                     usulogado.Mac = reader.GetString(reader.GetOrdinal("mac"));
+                    usulogado.NomePC = reader.GetString(reader.GetOrdinal("nomepc"));
+                    usulogado.IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"));
+                    
                     reader.Close();
                 }
 
@@ -85,7 +88,7 @@ namespace _5gpro.Daos
         }
 
         //Registra login na tabela Logado
-        public int GravarLogado(Usuario usuario, string mac)
+        public int GravarLogado(Usuario usuario, string mac, string nomepc, string ipdopc)
         {
             int retorno = 0;
             try
@@ -98,13 +101,15 @@ namespace _5gpro.Daos
 
 
                 Comando.CommandText = @"INSERT INTO logado
-                         (idusuario, mac)
+                         (idusuario, mac, nomepc, ipdopc)
                           VALUES
-                         (@idusuario, @mac)
+                         (@idusuario, @mac, @nomepc, @ipdopc)
                           ";
 
                 Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
                 Comando.Parameters.AddWithValue("@mac", mac);
+                Comando.Parameters.AddWithValue("@nomepc", nomepc);
+                Comando.Parameters.AddWithValue("@ipdopc", ipdopc);
 
                 retorno = Comando.ExecuteNonQuery();
 
@@ -123,7 +128,7 @@ namespace _5gpro.Daos
         }
 
         //Remove login da tabela Logado
-        public int RemoverLogado(Usuario usuario, string mac)
+        public int RemoverLogado(Usuario usuario)
         {
             int retorno = 0;
             try
@@ -135,12 +140,9 @@ namespace _5gpro.Daos
                 Comando.Transaction = tr;
 
 
-                Comando.CommandText = @"DELETE FROM logado AS l
-                           WHERE l.idusuario = @idusuario AND l.mac = @mac
-                          ";
+                Comando.CommandText = @"DELETE FROM logado WHERE idusuario = @idusuario";
 
                 Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Comando.Parameters.AddWithValue("@mac", mac);
 
                 retorno = Comando.ExecuteNonQuery();
 

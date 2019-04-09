@@ -322,6 +322,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
   `idlogado` INT NOT NULL AUTO_INCREMENT,
   `idusuario` INT(11) NOT NULL,
   `mac` VARCHAR(45) NULL,
+  `nomepc` VARCHAR(45) NULL,
+  `ipdopc` VARCHAR(45) NULL,
   PRIMARY KEY (`idlogado`),
   INDEX `fk_usuariologado_usuario1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_usuariologado_usuario1`
