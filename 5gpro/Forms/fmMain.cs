@@ -23,6 +23,7 @@ namespace _5gpro
         private Logado logado = new Logado();
         private LogadoBLL logadoBLL = new LogadoBLL();
         private NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel = 0;
 
         private void FiltroDePermissoes()
         {
@@ -37,8 +38,28 @@ namespace _5gpro
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
-            var formCadPessoas = new fmCadastroPessoa();
-            formCadPessoas.Show(this);
+            //CÓDIGO TELA CADASTRO DE PESSOA : 010100
+
+            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
+
+            //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel > 0)
+            {
+                var formCadPessoas = new fmCadastroPessoa();
+                formCadPessoas.Show(this);
+            }
+            else
+            {
+                MessageBox.Show("Você não tem permissao",
+                "Acesso Negado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation);
+            }
+        
             
         }
 

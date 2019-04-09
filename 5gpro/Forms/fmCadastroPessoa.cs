@@ -40,7 +40,7 @@ namespace _5gpro.Forms
             string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
 
-            //Aqui busca o nivel de permissão através do código do G.Usuario e do código da Tela
+            //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
             Editando(editando);
 
@@ -94,11 +94,11 @@ namespace _5gpro.Forms
 
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
-            //COMENTEI POR ENQUANTO
-           // if (!editando)
-            //{
+          
+           if (!editando || Nivel == 1)
+            {
                 AbreTelaBuscaPessoa();
-            //}
+            }
         }
 
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
