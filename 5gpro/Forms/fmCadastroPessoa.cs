@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
+//CÓDIGO TELA CADASTRO DE PESSOA : 010100
+
 namespace _5gpro.Forms
 {
     public partial class fmCadastroPessoa : Form
@@ -13,6 +15,12 @@ namespace _5gpro.Forms
         private Pessoa pessoa;
         private readonly PessoaBLL pessoaBLL = new PessoaBLL();
         private readonly Validacao validacao = new Validacao();
+
+        private Logado logado;
+        private readonly LogadoBLL logadoBLL = new LogadoBLL();
+        private readonly PermissaoBLL permissaoBLL = new PermissaoBLL();
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
 
 
         bool editando = false;
@@ -25,6 +33,19 @@ namespace _5gpro.Forms
         public fmCadastroPessoa()
         {
             InitializeComponent();
+            SetarNivel();
+        }
+
+        private void SetarNivel()
+        {
+            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
+
+            //Aqui busca o nivel de permissão através do código do G.Usuario e do código da Tela
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Editando(editando);
+
         }
 
         private void FmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
@@ -516,7 +537,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit);
+            menuVertical.Editando(edit, Nivel);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)

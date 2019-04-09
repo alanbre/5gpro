@@ -4,6 +4,7 @@ using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace _5gpro
@@ -13,12 +14,27 @@ namespace _5gpro
         public fmMain()
         {
             InitializeComponent();
+            FiltroDePermissoes();
+
         }
 
+        private Permissao permissao = new Permissao();
+        private PermissaoBLL permissaoBLL = new PermissaoBLL();
+        private Logado logado = new Logado();
         private LogadoBLL logadoBLL = new LogadoBLL();
         private NetworkAdapter adap = new NetworkAdapter();
 
-      
+        private void FiltroDePermissoes()
+        {
+            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            List<Permissao> listapermissoes = permissaoBLL.BuscarListaPermissoesByCodGrupo(logado.Usuario.Grupousuario.GrupoUsuarioID.ToString());
+
+            if (logado.Usuario.Grupousuario.GrupoUsuarioID == 999)
+            {
+                cadastroDeGrupoDeUsuáriosToolStripMenuItem.Visible = true;
+            }
+        }
+
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();

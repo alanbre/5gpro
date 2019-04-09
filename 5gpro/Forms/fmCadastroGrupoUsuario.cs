@@ -15,6 +15,8 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroGrupoUsuario : Form
     {
+        //CÓDIGO DA TELA CAD.GRUPO USUARIO = 010400
+
         GrupoUsuario grupousuario;
         GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
         PermissaoBLL permissaoBLL = new PermissaoBLL();
@@ -596,8 +598,9 @@ namespace _5gpro.Forms
 
         private void Editando(bool edit)
         {
+            //ARRUMAR SE FUNCIONAR
             editando = edit;
-            menuVertical.Editando(edit);
+            menuVertical.Editando(edit, 3);
 
         }
 
