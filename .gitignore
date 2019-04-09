@@ -15,3 +15,5 @@ artifacts/
 *.ide-wal
 
 \.vs/
+*.ide
+*.ide
