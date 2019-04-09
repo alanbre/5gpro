@@ -28,8 +28,6 @@ namespace _5gpro.Forms
 
 
 
-
-
         public fmCadastroPessoa()
         {
             InitializeComponent();
@@ -96,10 +94,11 @@ namespace _5gpro.Forms
 
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
-            if (!editando)
-            {
+            //COMENTEI POR ENQUANTO
+           // if (!editando)
+            //{
                 AbreTelaBuscaPessoa();
-            }
+            //}
         }
 
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
