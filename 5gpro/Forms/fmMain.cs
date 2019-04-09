@@ -104,5 +104,6 @@ namespace _5gpro
             //Retira usuário da tabela Logado
             logadoBLL.RemoverLogado(adap.Mac);
         }
+
     }
 }
