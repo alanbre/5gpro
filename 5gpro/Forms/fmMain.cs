@@ -1,5 +1,8 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Bll;
+using _5gpro.Daos;
+using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;
 
@@ -12,7 +15,9 @@ namespace _5gpro
             InitializeComponent();
         }
 
-        
+        private LogadoBLL logadoBLL = new LogadoBLL();
+        private NetworkAdapter adap = new NetworkAdapter();
+
       
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
@@ -57,5 +62,10 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
+        private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Retira usuário da tabela Logado
+            logadoBLL.RemoverLogado(adap.Mac);
+        }
     }
 }

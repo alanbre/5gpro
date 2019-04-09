@@ -11,6 +11,8 @@ namespace _5gpro.Forms
         public Usuario usuariologado;
 
         UsuarioBLL usuarioBLL = new UsuarioBLL();
+        LogadoBLL logadoBLL = new LogadoBLL();
+        NetworkAdapter adap = new NetworkAdapter();
 
 
         public fmLogin()
@@ -21,9 +23,20 @@ namespace _5gpro.Forms
         private void btEntrar_Click(object sender, EventArgs e)
         {
             usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
+
             if (usuariologado != null)
-            {
-                this.Close();
+            {  
+                if (logadoBLL.BuscaLogado(usuariologado) != null)
+                {
+                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                }
+                else
+                {
+                    logadoBLL.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
+                    this.Close();
+                }
+               
             }
             else
             {

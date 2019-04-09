@@ -55,6 +55,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +70,7 @@
     <Compile Include="Bll\CidadeBLL.cs" />
     <Compile Include="Bll\EstadoBLL.cs" />
     <Compile Include="Bll\GrupoUsuarioBLL.cs" />
+    <Compile Include="Bll\LogadoBLL.cs" />
     <Compile Include="Bll\NotaFiscalBLL.cs" />
     <Compile Include="Bll\OrcamentoBLL.cs" />
     <Compile Include="Bll\PermissaoBLL.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
+    <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
@@ -119,6 +122,7 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
+    <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscal.cs" />
     <Compile Include="Entities\NotaFiscalItem.cs" />
     <Compile Include="Entities\Orcamento.cs" />
@@ -251,6 +255,7 @@
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
     <Compile Include="Funcoes\FuncoesBanco.cs" />
     <Compile Include="Funcoes\Limpar.cs" />
+    <Compile Include="Funcoes\NetworkAdapter.cs" />
     <Compile Include="Funcoes\Validacao.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />

@@ -27,13 +27,11 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usuario = new Usuario
-                    {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-                        Senha = reader.GetString(reader.GetOrdinal("senha"))
-                    };
+                    usuario = new Usuario();
+                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
+                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
+                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
                 }
                 else
                 {
@@ -50,6 +48,8 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
+
+
 
         public string BuscaProxCodigoDisponivel()
         {

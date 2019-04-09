@@ -46,5 +46,6 @@ namespace _5gpro.Bll
         {
             return usuarioDAO.BuscaUsuarios(codGrupoUsuario, nomeUsuario, sobrenomeUsuario);
         }
+
     }
 }
