@@ -17,9 +17,9 @@ namespace _5gpro.Bll
             return logadoDAO.GravarLogado(usuario, mac, nomepc, ipdopc);
         }
 
-        public int RemoverLogado(Usuario usuario)
+        public int RemoverLogado(string mac)
         {
-            return logadoDAO.RemoverLogado(usuario);
+            return logadoDAO.RemoverLogado(mac);
         }
 
         public Logado BuscaLogado(Usuario usuario)

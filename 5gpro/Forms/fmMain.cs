@@ -1,4 +1,5 @@
-﻿using _5gpro.Daos;
+﻿using _5gpro.Bll;
+using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
@@ -9,19 +10,14 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain(Usuario usuario)
+        public fmMain()
         {
             InitializeComponent();
-            SetarUsuariologado(usuario);
         }
-        private UsuarioDAO usuarioDAO = new UsuarioDAO();
-        private LogadoDAO logadoDAO = new LogadoDAO();
-        private Usuario usuariologadomain;
 
-        public void SetarUsuariologado(Usuario usuario)
-        {
-            usuariologadomain = usuario;
-        }
+        private LogadoBLL logadoBLL = new LogadoBLL();
+        private NetworkAdapter adap = new NetworkAdapter();
+
       
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
@@ -69,7 +65,7 @@ namespace _5gpro
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Retira usuário da tabela Logado
-            logadoDAO.RemoverLogado(usuariologadomain);
+            logadoBLL.RemoverLogado(adap.Mac);
         }
     }
 }

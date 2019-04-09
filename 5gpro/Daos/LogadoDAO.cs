@@ -92,7 +92,7 @@ namespace _5gpro.Daos
         }
 
         //Remove login da tabela Logado
-        public int RemoverLogado(Usuario usuario)
+        public int RemoverLogado(string mac)
         {
             int retorno = 0;
             try
@@ -104,9 +104,9 @@ namespace _5gpro.Daos
                 Comando.Transaction = tr;
 
 
-                Comando.CommandText = @"DELETE FROM logado WHERE idusuario = @idusuario";
+                Comando.CommandText = @"DELETE FROM logado WHERE mac = @mac";
 
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Comando.Parameters.AddWithValue("@mac", mac);
 
                 retorno = Comando.ExecuteNonQuery();
 
