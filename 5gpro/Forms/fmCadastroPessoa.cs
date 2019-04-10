@@ -16,6 +16,7 @@ namespace _5gpro.Forms
         private readonly PessoaBLL pessoaBLL = new PessoaBLL();
         private readonly Validacao validacao = new Validacao();
 
+        //Controle de Permissões
         private Logado logado;
         private readonly LogadoBLL logadoBLL = new LogadoBLL();
         private readonly PermissaoBLL permissaoBLL = new PermissaoBLL();
@@ -36,11 +37,12 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
+            //Busca o usuário logado no pc, através do MAC
             logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
             string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
 
-            //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
             Editando(editando);
 
@@ -53,12 +55,12 @@ namespace _5gpro.Forms
                 RecarregaDados(pessoa);
             }
 
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1 && Nivel > 1)
             {
                 NovoCadastro();
             }
 
-            if (e.KeyCode == Keys.F2)
+            if (e.KeyCode == Keys.F2 && Nivel > 1)
             {
                 SalvaCadastro();
             }

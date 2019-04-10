@@ -21,12 +21,33 @@ namespace _5gpro.Forms
         UsuarioBLL usuarioBLL = new UsuarioBLL();
         Validacao validacao = new Validacao();
 
+        //Controle de Permissões
+        private Logado logado;
+        private readonly LogadoBLL logadoBLL = new LogadoBLL();
+        private readonly PermissaoBLL permissaoBLL = new PermissaoBLL();
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+
         bool editando = false;
         bool ignoraCheckEvent;
 
         public fmCadastroUsuario()
         {
             InitializeComponent();
+            SetarNivel();
+        }
+
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010200").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Editando(editando);
+
         }
 
         private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
@@ -212,7 +233,7 @@ namespace _5gpro.Forms
 
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
-            if (!editando)
+            if (!editando || Nivel == 1)
             {
                 AbreTelaBuscaUsuario();
             }
@@ -345,9 +366,8 @@ namespace _5gpro.Forms
 
         private void Editando(bool edit)
         {
-            //ARRUMAR
             editando = edit;
-            menuVertical.Editando(edit, 3);
+            menuVertical.Editando(edit, Nivel);
         }
 
         private void RecarregaDados(Usuario usuario)

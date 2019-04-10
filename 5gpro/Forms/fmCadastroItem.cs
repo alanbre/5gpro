@@ -18,18 +18,52 @@ namespace _5gpro.Forms
         Validacao validacao = new Validacao();
         PermissaoBLL permissaoBLL = new PermissaoBLL();
 
+        //Controle de Permissões
+        private Logado logado;
+        private readonly LogadoBLL logadoBLL = new LogadoBLL();
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
 
         bool editando = false;
         bool ignoraCheckEvent;
-        int nivel = 0;
+
 
         public fmCadastroItem()
         {
             InitializeComponent();
-            AlteraBotoes(); 
+            SetarNivel();
+            
         }
 
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010300").ToString();
 
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Editando(editando);
+
+        }
+
+        private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            {
+                e.Handled = true;
+                AbreTelaBuscaUnimedida();
+            }
+        }
+
+        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
 
         private void fmCadastroItens_KeyDown(object sender, KeyEventArgs e)
         {
@@ -51,14 +85,56 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
-
-        //FUNÇÕES DE KEY PRESS
-        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
+        private void fmCadastroItens_Load(object sender, EventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            tbCodigo.Focus();
+        }
+
+
+        //EVENTOS DE TEXTCHANGED
+        private void tbDescricao_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbDescricaoDeCompra_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbReferencia_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbPrecoUltimaEntrada_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbEstoqueNecessario_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbPrecoVenda_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void tbCodUnimedida_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void rbProduto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void rbServico_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
         }
 
 
@@ -126,119 +202,69 @@ namespace _5gpro.Forms
 
         }
 
+        private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
+        {
+            if (tbCodUnimedida.Text.Length > 0)
+            {
+                unimedida = unimedidaBLL.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
+                PreencheCamposUnimedida(unimedida);
+            }
+            else
+            {
+                tbDescricaoUndMedida.Text = "";
+            }
+        }
 
 
-        //FUNÇÕES DE CLICK
+        //MENU
+        private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
+        {
+            NovoCadastro();
+
+        }
+
+        private void MenuVertical1_Proximo_Clicked(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void MenuVertical1_Recarregar_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuVertical1_Salvar_Clicked(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
+
+        private void MenuVertical1_Anterior_Clicked(object sender, EventArgs e)
+        {
+            CadastroAnterior();
+        }
+
+        private void MenuVertical1_Buscar_Clicked(object sender, EventArgs e)
+        {
+            if (!editando || Nivel == 1)
+            {
+                AbreTelaBuscaItem();
+            }
+        }
+
+        private void MenuVertical1_Excluir_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //EVENTOS DE CLICK
         private void btBuscaUndMedida_Click(object sender, EventArgs e)
         {
             AbreTelaBuscaUnimedida();
         }
 
-        private void btSalvar_Click(object sender, EventArgs e)
-        {
 
-            SalvaCadastro();
-
-        }
-
-        private void btNovo_Click(object sender, EventArgs e)
-        {
-
-            NovoCadastro();
-
-        }
-
-
-        //FUNÇÕES DE KEY UP
-        private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaUnimedida();
-            }
-        }
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void tbDescricao_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbDescricaoDeCompra_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbReferencia_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbPrecoUltimaEntrada_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbEstoqueNecessario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbPrecoVenda_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-
-        private void fmCadastroItens_Load(object sender, EventArgs e)
-        {
-            tbCodigo.Focus();
-        }
-
-        private void tbCodUnimedida_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void rbProduto_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-        private void rbServico_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-
-        private void AlteraBotoes()
-        {
-            if (editando)
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_black;
-                btNovo.Enabled = false;
-                btSalvar.Image = Properties.Resources.iosOk_48px_Green;
-                btSalvar.Enabled = true;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_black;
-                btBuscar.Enabled = false;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_black;
-                btDeletar.Enabled = false;
-            }
-            else
-            {
-                btNovo.Image = Properties.Resources.iosPlus_48px_blue;
-                btNovo.Enabled = true;
-                btSalvar.Image = Properties.Resources.iosOk_48px_black;
-                btSalvar.Enabled = false;
-                btBuscar.Image = Properties.Resources.iosSearch_48px_Blue;
-                btBuscar.Enabled = true;
-                btDeletar.Image = Properties.Resources.iosDelete_48px_Red;
-                btDeletar.Enabled = false;
-            }
-        }
-
-
+        //PADRÕES CRIADAS
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -343,7 +369,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            AlteraBotoes();
+            menuVertical.Editando(edit, Nivel);
         }
 
         private void SalvaCadastro()
@@ -453,7 +479,7 @@ namespace _5gpro.Forms
 
         }
 
-        private void btProximo_Click(object sender, EventArgs e)
+        private void ProximoCadastro()
         {
             //Busca o item com ID maior que o atual preenchido. Só preenche se houver algum registro maior
             //Caso não houver registro com ID maior, verifica se item existe. Se não existir busca o maior anterior ao digitado
@@ -499,7 +525,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void btAnterior_Click(object sender, EventArgs e)
+        private void CadastroAnterior()
         {
             //Busca o item com ID menor que o atual preenchido. Só preenche se houver algum registro menor
             //Caso não houver registro com ID menor, verifica se item existe. Se não existir busca o proximo ao digitado
@@ -545,15 +571,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void btBuscar_Click(object sender, EventArgs e)
-        {
-            //ABRE O FORM DE BUSCA ITEM
-            if (!editando)
-            {
-                AbreTelaBuscaItem();
-            }
-        }
-
         private void AbreTelaBuscaItem()
         {
             var buscaItem = new fmBuscaItem();
@@ -565,44 +582,5 @@ namespace _5gpro.Forms
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ControlCollection controls = (ControlCollection)this.Controls;
-            List<string> botoes = new List<string>();
-            botoes.Add("tbCodigo");
-            botoes.Add("tbDescricao");
-
-            validacao.pintarBotoes(botoes, controls);
-
-        }
-
-        private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
-        {
-            if (tbCodUnimedida.Text.Length > 0)
-            {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
-                PreencheCamposUnimedida(unimedida);
-            }
-            else
-            {
-                tbDescricaoUndMedida.Text = "";
-            }
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            ControlCollection controls = (ControlCollection)this.Controls;
-            List<string> excecoes = new List<string>();
-            excecoes.Add("tbCodigo");
-            excecoes.Add("tbDescricao");
-
-            Limpar limpar = new Limpar();
-            limpar.limparComExcessao(controls, excecoes);
-        }
-
-        private void Button1_Click_2(object sender, EventArgs e)
-        {
-            Console.WriteLine(nivel);
-        }
     }
 }

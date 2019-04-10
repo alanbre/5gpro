@@ -47,11 +47,17 @@
             this.gbModulos = new System.Windows.Forms.GroupBox();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.gbIndice = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModulos)).BeginInit();
             this.gbModulos.SuspendLayout();
+            this.gbIndice.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbGrupoDeUsuario
@@ -116,7 +122,7 @@
             // 
             this.dgvPermissoes.AllowUserToAddRows = false;
             this.dgvPermissoes.AllowUserToDeleteRows = false;
-            this.dgvPermissoes.AllowUserToOrderColumns = true;
+            this.dgvPermissoes.AllowUserToResizeColumns = false;
             this.dgvPermissoes.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -144,6 +150,7 @@
             this.dgvtbcCodigoPermissoes.HeaderText = "Código";
             this.dgvtbcCodigoPermissoes.Name = "dgvtbcCodigoPermissoes";
             this.dgvtbcCodigoPermissoes.ReadOnly = true;
+            this.dgvtbcCodigoPermissoes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // dgvtbcNomePermissoes
             // 
@@ -151,6 +158,7 @@
             this.dgvtbcNomePermissoes.MinimumWidth = 280;
             this.dgvtbcNomePermissoes.Name = "dgvtbcNomePermissoes";
             this.dgvtbcNomePermissoes.ReadOnly = true;
+            this.dgvtbcNomePermissoes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.dgvtbcNomePermissoes.Width = 280;
             // 
             // dgvtbcNivelPermissoes
@@ -158,12 +166,12 @@
             this.dgvtbcNivelPermissoes.HeaderText = "Nível";
             this.dgvtbcNivelPermissoes.Name = "dgvtbcNivelPermissoes";
             this.dgvtbcNivelPermissoes.ReadOnly = true;
+            this.dgvtbcNivelPermissoes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // dgvModulos
             // 
             this.dgvModulos.AllowUserToAddRows = false;
             this.dgvModulos.AllowUserToDeleteRows = false;
-            this.dgvModulos.AllowUserToOrderColumns = true;
             this.dgvModulos.AllowUserToResizeRows = false;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
             this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
@@ -246,11 +254,61 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
             this.menuVertical.Load += new System.EventHandler(this.MenuVertical1_Load);
             // 
+            // gbIndice
+            // 
+            this.gbIndice.Controls.Add(this.label4);
+            this.gbIndice.Controls.Add(this.label3);
+            this.gbIndice.Controls.Add(this.label2);
+            this.gbIndice.Controls.Add(this.label1);
+            this.gbIndice.Location = new System.Drawing.Point(478, 12);
+            this.gbIndice.Name = "gbIndice";
+            this.gbIndice.Size = new System.Drawing.Size(253, 104);
+            this.gbIndice.TabIndex = 9;
+            this.gbIndice.TabStop = false;
+            this.gbIndice.Text = "Índice";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(41, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "0 - Não visualiza";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(41, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "1 - Visualiza e busca";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(41, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(137, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "2 - Visualiza, busca e grava";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(170, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "3 - Visualiza, busca, grava e exclui";
+            // 
             // fmCadastroGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 579);
+            this.Controls.Add(this.gbIndice);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbModulos);
@@ -272,6 +330,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvModulos)).EndInit();
             this.gbModulos.ResumeLayout(false);
+            this.gbIndice.ResumeLayout(false);
+            this.gbIndice.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -287,13 +347,18 @@
         private System.Windows.Forms.DataGridView dgvPermissoes;
         private System.Windows.Forms.DataGridView dgvModulos;
         private System.Windows.Forms.GroupBox gbModulos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPermissoes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoModulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeModulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelModulos;
         private Controls.MenuVertical menuVertical;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
+        private System.Windows.Forms.GroupBox gbIndice;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }

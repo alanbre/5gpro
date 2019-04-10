@@ -96,17 +96,13 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
 
-
-                Comando.CommandText = @"INSERT INTO logado
+                Comando = new MySqlCommand(@"INSERT INTO logado
                          (idusuario, mac, nomepc, ipdopc)
                           VALUES
                          (@idusuario, @mac, @nomepc, @ipdopc)
-                          ";
+                         ;",
+                        Conexao);
 
                 Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
                 Comando.Parameters.AddWithValue("@mac", mac);
@@ -115,7 +111,6 @@ namespace _5gpro.Daos
 
                 retorno = Comando.ExecuteNonQuery();
 
-                tr.Commit();
             }
             catch (MySqlException ex)
             {
@@ -136,19 +131,13 @@ namespace _5gpro.Daos
             try
             {
                 AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
 
-
-                Comando.CommandText = @"DELETE FROM logado WHERE mac = @mac";
+                Comando = new MySqlCommand(@"DELETE FROM logado WHERE mac = @mac", Conexao);
 
                 Comando.Parameters.AddWithValue("@mac", mac);
 
                 retorno = Comando.ExecuteNonQuery();
 
-                tr.Commit();
             }
             catch (MySqlException ex)
             {
