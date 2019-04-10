@@ -16,6 +16,7 @@ namespace _5gpro.Forms
         private readonly PessoaBLL pessoaBLL = new PessoaBLL();
         private readonly Validacao validacao = new Validacao();
 
+        //Controle de Permissões
         private Logado logado;
         private readonly LogadoBLL logadoBLL = new LogadoBLL();
         private readonly PermissaoBLL permissaoBLL = new PermissaoBLL();

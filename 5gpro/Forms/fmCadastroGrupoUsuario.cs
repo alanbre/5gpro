@@ -25,6 +25,7 @@ namespace _5gpro.Forms
         Validacao validacao = new Validacao();
         int NivelTodas = 0;
 
+        //Controle de permissões
         private Logado logado;
         private readonly LogadoBLL logadoBLL = new LogadoBLL();
         private readonly NetworkAdapter adap = new NetworkAdapter();
