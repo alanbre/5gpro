@@ -38,6 +38,11 @@ namespace _5gpro.Bll
         {
             return permissaoDAO.BuscarNivelPermissao(codgrupousuario, codpermissao);
         }
+
+        public List<int> BuscarIDPermissoesNpraN()
+        {
+            return permissaoDAO.BuscarIDPermissoesNpraN();
+        }
     }
 }
 

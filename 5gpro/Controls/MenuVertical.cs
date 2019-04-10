@@ -26,6 +26,10 @@ namespace _5gpro.Controls
                         btSalvar.Enabled = false;
                         btBuscar.Enabled = false;
                         btExcluir.Enabled = false;
+
+                        btAnterior.Enabled = false;
+                        btProximo.Enabled = false;
+                        btRecarregar.Enabled = false;
                     }
                     else
                     {
@@ -33,6 +37,10 @@ namespace _5gpro.Controls
                         btSalvar.Enabled = false;
                         btBuscar.Enabled = false;
                         btExcluir.Enabled = false;
+
+                        btAnterior.Enabled = false;
+                        btProximo.Enabled = false;
+                        btRecarregar.Enabled = false;
                     }
                     break;
 
@@ -82,14 +90,14 @@ namespace _5gpro.Controls
                         btNovo.Enabled = false;
                         btSalvar.Enabled = true;
                         btBuscar.Enabled = false;
-                        btExcluir.Enabled = false;
+                        btExcluir.Enabled = true;
                     }
                     else
                     {
                         btNovo.Enabled = true;
                         btSalvar.Enabled = false;
                         btBuscar.Enabled = true;
-                        btExcluir.Enabled = false;
+                        btExcluir.Enabled = true;
                     }
                     break;
             }

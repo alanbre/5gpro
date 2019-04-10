@@ -110,6 +110,38 @@ namespace _5gpro.Daos
             return permissoes;
         }
 
+        public Permissao BuscarPermissaoByID(string idpermissao)
+        {
+            Permissao permissao = null;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT * FROM permissao as p WHERE p.idpermissao = @idpermissao", Conexao);
+                Comando.Parameters.AddWithValue("@idpermissao", idpermissao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    permissao.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
+                    permissao.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                    permissao.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
+                    permissao.Nivel = "0";
+                    reader.Close();
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+            return permissao;
+        }
+
         public int BuscarIDbyCodigo(string codpermissao)
         {
             int permissaoid = 0;
@@ -212,6 +244,38 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
             return nivel;
+        }
+
+        public List<int> BuscarIDPermissoesNpraN()
+        {
+            List<int> idpermissoesNpraN = new List<int>();
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT DISTINCT p.idpermissao 
+                                             FROM permissao_has_grupo_usuario as p", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int a = reader.GetInt32(reader.GetOrdinal("idpermissao"));
+
+                    idpermissoesNpraN.Add(a);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return idpermissoesNpraN;
         }
 
 

@@ -256,6 +256,7 @@
     <Compile Include="Funcoes\FuncoesBanco.cs" />
     <Compile Include="Funcoes\Limpar.cs" />
     <Compile Include="Funcoes\NetworkAdapter.cs" />
+    <Compile Include="Funcoes\PermissoesUpdate.cs" />
     <Compile Include="Funcoes\Validacao.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />

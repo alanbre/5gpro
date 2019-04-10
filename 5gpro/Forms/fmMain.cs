@@ -25,10 +25,29 @@ namespace _5gpro
         private NetworkAdapter adap = new NetworkAdapter();
         private int Nivel = 0;
 
+        //CÓDIGOS DAS TELAS
+        //Cadastro de Pessoa = 010100
+        //Cadastro de Usuário = 010200
+        //Cadastro de Item = 010300
+        //Cadastro de Orçamento = 020100
+        //Cadastro de Nota Fiscal = 030100
+        //Cadastro de Grupo de Usuário = 010400
+
         private void FiltroDePermissoes()
         {
+
+            //Busca o usuário logado no pc, através do MAC
             logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
-            List<Permissao> listapermissoes = permissaoBLL.BuscarListaPermissoesByCodGrupo(logado.Usuario.Grupousuario.GrupoUsuarioID.ToString());
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+
+            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel <= 0)
+            {
+
+            }
+            //List<Permissao> listapermissoes = permissaoBLL.BuscarListaPermissoesByCodGrupo(logado.Usuario.Grupousuario.GrupoUsuarioID.ToString());
 
             if (logado.Usuario.Grupousuario.GrupoUsuarioID == 999)
             {

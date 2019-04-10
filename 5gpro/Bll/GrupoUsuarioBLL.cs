@@ -43,11 +43,14 @@ namespace _5gpro.Bll
             return grupousuarioDAO.BuscarGrupoUsuarioAnterior(codAtual);
         }
 
-
         public string BuscaProxCodigoDisponivel()
         {
             return grupousuarioDAO.BuscaProxCodigoDisponivel();
         }
 
+        public List<int> BuscarIDGrupoUsuariosNpraN()
+        {
+            return grupousuarioDAO.BuscarIDGrupoUsuariosNpraN();
+        }
     }
 }

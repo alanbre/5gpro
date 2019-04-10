@@ -305,5 +305,37 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
+        public List<int> BuscarIDGrupoUsuariosNpraN()
+        {
+            List<int> idgrupousuariosNpraN = new List<int>();
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT DISTINCT p.idgrupousuario 
+                                             FROM permissao_has_grupo_usuario as p", Conexao);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int a = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
+
+                    idgrupousuariosNpraN.Add(a);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return idgrupousuariosNpraN;
+        }
+
     }
 }

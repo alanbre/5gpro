@@ -36,11 +36,12 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
+            //Busca o usuário logado no pc, atrvés do MAC
             logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
             string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
 
-            //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
             Editando(editando);
 
