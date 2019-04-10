@@ -25,6 +25,11 @@ namespace _5gpro.Forms
         Validacao validacao = new Validacao();
         int NivelTodas = 0;
 
+        private Logado logado;
+        private readonly LogadoBLL logadoBLL = new LogadoBLL();
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+
         bool editando, ignoraCheckEvent = false;
 
         public struct PermissoesStruct
@@ -36,10 +41,25 @@ namespace _5gpro.Forms
 
         }
 
+
         public fmCadastroGrupoUsuario()
         {
             InitializeComponent();
             PopularListapermissoes();
+            SetarNivel();
+
+        }
+
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010400").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Editando(editando);
 
         }
 
@@ -598,10 +618,8 @@ namespace _5gpro.Forms
 
         private void Editando(bool edit)
         {
-            //ARRUMAR SE FUNCIONAR
             editando = edit;
-            menuVertical.Editando(edit, 3);
-
+            menuVertical.Editando(edit, Nivel);
         }
 
 

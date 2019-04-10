@@ -24,34 +24,72 @@ namespace _5gpro
         private LogadoBLL logadoBLL = new LogadoBLL();
         private NetworkAdapter adap = new NetworkAdapter();
         private int Nivel = 0;
+        private string Codgrupousuario;
+        private string Codpermissao;
 
         //CÓDIGOS DAS TELAS
         //Cadastro de Pessoa = 010100
         //Cadastro de Usuário = 010200
         //Cadastro de Item = 010300
+        //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Orçamento = 020100
         //Cadastro de Nota Fiscal = 030100
-        //Cadastro de Grupo de Usuário = 010400
+
 
         private void FiltroDePermissoes()
         {
 
             //Busca o usuário logado no pc, através do MAC
             logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
 
-            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
+
+            Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
             Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
 
-            if (Nivel <= 0)
+            if (Nivel == 0)
             {
-
+                tsmiCadastroPessoas.Visible = false;
             }
-            //List<Permissao> listapermissoes = permissaoBLL.BuscarListaPermissoesByCodGrupo(logado.Usuario.Grupousuario.GrupoUsuarioID.ToString());
 
-            if (logado.Usuario.Grupousuario.GrupoUsuarioID == 999)
+            Codpermissao = permissaoBLL.BuscarIDbyCodigo("010200").ToString();
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel == 0)
             {
-                cadastroDeGrupoDeUsuáriosToolStripMenuItem.Visible = true;
+                tsmiCadastroUsuarios.Visible = false;
+            }
+
+            Codpermissao = permissaoBLL.BuscarIDbyCodigo("010300").ToString();
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel == 0)
+            {
+                tsmiCadastroItens.Visible = false;
+            }
+
+            Codpermissao = permissaoBLL.BuscarIDbyCodigo("010400").ToString();
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel == 0)
+            {
+                tsmiCadastroGrupoUsuario.Visible = false;
+            }
+
+            Codpermissao = permissaoBLL.BuscarIDbyCodigo("020100").ToString();
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel == 0)
+            {
+                tsmiCadastroOrcamentos.Visible = false;
+            }
+
+            Codpermissao = permissaoBLL.BuscarIDbyCodigo("030100").ToString();
+            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            if (Nivel == 0)
+            {
+                tsmiEmissaoNF.Visible = false;
             }
         }
 
@@ -100,7 +138,7 @@ namespace _5gpro
             formOrcamentoCadOrcamentos.Show(this);
         }
 
-        private void tsmiCadastroUsuariosMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroUsuarios_Click(object sender, EventArgs e)
         {
             var formCadUsuarios = new fmCadastroUsuario();
             formCadUsuarios.Show(this);
@@ -112,7 +150,7 @@ namespace _5gpro
             formSaidaEmissaoNota.Show(this);
         }
 
-        private void cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)
         {
             var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
             formCadGrupoUsuarios.Show(this);

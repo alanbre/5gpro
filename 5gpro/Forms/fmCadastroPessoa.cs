@@ -36,7 +36,7 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, atrvés do MAC
+            //Busca o usuário logado no pc, através do MAC
             logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
             string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();

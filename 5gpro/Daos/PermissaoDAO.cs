@@ -171,46 +171,6 @@ namespace _5gpro.Daos
             return permissaoid;
         }
 
-        public List<Permissao> BuscarListaPermissoesByCodGrupo(string codgrupousuario)
-        {
-            List<Permissao> listapermissoes = new List<Permissao>();
-            Permissao permissao = null;
-
-            try
-            {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * FROM permissao as p
-                                             INNER JOIN permissao_has_grupo_usuario AS pg 
-                                             WHERE p.idpermissao = pg.idpermissao
-                                             AND pg.idgrupousuario = @idgrupousuario"
-                                                , Conexao);
-
-                Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
-
-                IDataReader reader = Comando.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    permissao = new Permissao();
-                    permissao.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
-                    permissao.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    permissao.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
-                    permissao.Nivel = reader.GetString(reader.GetOrdinal("nivel"));                 
-                    reader.Close();
-
-                    listapermissoes.Add(permissao);
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                FecharConexao();
-            }
-            return listapermissoes;
-        }
 
         public int BuscarNivelPermissao(string codgrupousuario, string codpermissao)
         {

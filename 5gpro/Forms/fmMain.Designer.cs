@@ -34,7 +34,7 @@
             this.tsmiCadastroPaises = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroItens = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroGrupoUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +61,7 @@
             this.tsmiCadastroPaises,
             this.tsmiCadastroItens,
             this.tsmiCadastroUsuarios,
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem});
+            this.tsmiCadastroGrupoUsuario});
             this.tsmiCadastros.Name = "tsmiCadastros";
             this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
             this.tsmiCadastros.Text = "Cadastro";
@@ -92,15 +92,14 @@
             this.tsmiCadastroUsuarios.Name = "tsmiCadastroUsuarios";
             this.tsmiCadastroUsuarios.Size = new System.Drawing.Size(237, 22);
             this.tsmiCadastroUsuarios.Text = "Cadastro de Usuários";
-            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.tsmiCadastroUsuariosMenuItem_Click);
+            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.tsmiCadastroUsuarios_Click);
             // 
-            // cadastroDeGrupoDeUsuáriosToolStripMenuItem
+            // tsmiCadastroGrupoUsuario
             // 
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Name = "cadastroDeGrupoDeUsuáriosToolStripMenuItem";
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Text = "Cadastro de Grupo de Usuários";
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Visible = false;
-            this.cadastroDeGrupoDeUsuáriosToolStripMenuItem.Click += new System.EventHandler(this.cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click);
+            this.tsmiCadastroGrupoUsuario.Name = "tsmiCadastroGrupoUsuario";
+            this.tsmiCadastroGrupoUsuario.Size = new System.Drawing.Size(237, 22);
+            this.tsmiCadastroGrupoUsuario.Text = "Cadastro de Grupo de Usuários";
+            this.tsmiCadastroGrupoUsuario.Click += new System.EventHandler(this.tsmiCadastroDeGrupoDeUsuários_Click);
             // 
             // tsmiOrcamento
             // 
@@ -161,7 +160,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroUsuarios;
         private System.Windows.Forms.ToolStripMenuItem tsmiSaida;
         private System.Windows.Forms.ToolStripMenuItem tsmiEmissaoNF;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeUsuáriosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroGrupoUsuario;
     }
 }
 

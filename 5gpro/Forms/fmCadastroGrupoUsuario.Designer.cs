@@ -37,9 +37,6 @@
             this.lbCodGrupoUsuario = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvPermissoes = new System.Windows.Forms.DataGridView();
-            this.dgvtbcCodigoPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNomePermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNivelPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvModulos = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigoModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNomeModulos = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +44,9 @@
             this.gbModulos = new System.Windows.Forms.GroupBox();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.dgvtbcCodigoPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNomePermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNivelPermissoes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
@@ -116,7 +116,7 @@
             // 
             this.dgvPermissoes.AllowUserToAddRows = false;
             this.dgvPermissoes.AllowUserToDeleteRows = false;
-            this.dgvPermissoes.AllowUserToOrderColumns = true;
+            this.dgvPermissoes.AllowUserToResizeColumns = false;
             this.dgvPermissoes.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -139,31 +139,10 @@
             this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermissoes_CellDoubleClick);
             this.dgvPermissoes.ColumnDividerDoubleClick += new System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventHandler(this.dgvPermissoes_ColumnDividerDoubleClick);
             // 
-            // dgvtbcCodigoPermissoes
-            // 
-            this.dgvtbcCodigoPermissoes.HeaderText = "Código";
-            this.dgvtbcCodigoPermissoes.Name = "dgvtbcCodigoPermissoes";
-            this.dgvtbcCodigoPermissoes.ReadOnly = true;
-            // 
-            // dgvtbcNomePermissoes
-            // 
-            this.dgvtbcNomePermissoes.HeaderText = "Nome";
-            this.dgvtbcNomePermissoes.MinimumWidth = 280;
-            this.dgvtbcNomePermissoes.Name = "dgvtbcNomePermissoes";
-            this.dgvtbcNomePermissoes.ReadOnly = true;
-            this.dgvtbcNomePermissoes.Width = 280;
-            // 
-            // dgvtbcNivelPermissoes
-            // 
-            this.dgvtbcNivelPermissoes.HeaderText = "Nível";
-            this.dgvtbcNivelPermissoes.Name = "dgvtbcNivelPermissoes";
-            this.dgvtbcNivelPermissoes.ReadOnly = true;
-            // 
             // dgvModulos
             // 
             this.dgvModulos.AllowUserToAddRows = false;
             this.dgvModulos.AllowUserToDeleteRows = false;
-            this.dgvModulos.AllowUserToOrderColumns = true;
             this.dgvModulos.AllowUserToResizeRows = false;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
             this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
@@ -246,6 +225,29 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
             this.menuVertical.Load += new System.EventHandler(this.MenuVertical1_Load);
             // 
+            // dgvtbcCodigoPermissoes
+            // 
+            this.dgvtbcCodigoPermissoes.HeaderText = "Código";
+            this.dgvtbcCodigoPermissoes.Name = "dgvtbcCodigoPermissoes";
+            this.dgvtbcCodigoPermissoes.ReadOnly = true;
+            this.dgvtbcCodigoPermissoes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // dgvtbcNomePermissoes
+            // 
+            this.dgvtbcNomePermissoes.HeaderText = "Nome";
+            this.dgvtbcNomePermissoes.MinimumWidth = 280;
+            this.dgvtbcNomePermissoes.Name = "dgvtbcNomePermissoes";
+            this.dgvtbcNomePermissoes.ReadOnly = true;
+            this.dgvtbcNomePermissoes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvtbcNomePermissoes.Width = 280;
+            // 
+            // dgvtbcNivelPermissoes
+            // 
+            this.dgvtbcNivelPermissoes.HeaderText = "Nível";
+            this.dgvtbcNivelPermissoes.Name = "dgvtbcNivelPermissoes";
+            this.dgvtbcNivelPermissoes.ReadOnly = true;
+            this.dgvtbcNivelPermissoes.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
             // fmCadastroGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,13 +289,13 @@
         private System.Windows.Forms.DataGridView dgvPermissoes;
         private System.Windows.Forms.DataGridView dgvModulos;
         private System.Windows.Forms.GroupBox gbModulos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPermissoes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoModulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeModulos;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelModulos;
         private Controls.MenuVertical menuVertical;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomePermissoes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNivelPermissoes;
     }
 }
