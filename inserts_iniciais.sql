@@ -5603,3 +5603,17 @@ INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários')
 
 INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
              VALUES (9999, 'ADMIN', 'ADMIN', 'admin', '', '', 999);
+
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (1, 'Módulo de Cadastros', '010000');
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (2, 'Módulo de Orçamentos', '020000');
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (3, 'Módulo de Saidas', '030000');
+
+
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (4, 'Cadastro de Pessoa', '010100');
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (5, 'Cadastro de Usuario', '010200');
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (6, 'Cadastro de Item', '010300');
+
+
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (7, 'Cadastro de Orçamentos', '020100');
+
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES (8, 'Cadastro de Nota Fiscal', '030100');

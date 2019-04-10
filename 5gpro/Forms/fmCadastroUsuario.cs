@@ -21,7 +21,8 @@ namespace _5gpro.Forms
         UsuarioBLL usuarioBLL = new UsuarioBLL();
         Validacao validacao = new Validacao();
 
-        bool editando, ignoraCheckEvent = false;
+        bool editando = false;
+        bool ignoraCheckEvent;
 
         public fmCadastroUsuario()
         {
@@ -30,8 +31,7 @@ namespace _5gpro.Forms
 
         private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
         {
-            //mudar aqui para this.activecontrol
-            EnterTab(sender, e);
+            EnterTab(this.ActiveControl, e);
         }
 
         private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
@@ -543,7 +543,6 @@ namespace _5gpro.Forms
                 grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
                 PreencheCamposGrupoUsuario(grupousuario);
             }
-
 
             ignoraCheckEvent = false;
         }
