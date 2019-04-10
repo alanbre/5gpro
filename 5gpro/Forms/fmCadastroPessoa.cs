@@ -54,12 +54,12 @@ namespace _5gpro.Forms
                 RecarregaDados(pessoa);
             }
 
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1 && Nivel > 1)
             {
                 NovoCadastro();
             }
 
-            if (e.KeyCode == Keys.F2)
+            if (e.KeyCode == Keys.F2 && Nivel > 1)
             {
                 SalvaCadastro();
             }
