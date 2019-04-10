@@ -14,6 +14,9 @@ namespace _5gpro.Forms
     {
         private readonly OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
 
+        private NotaFiscal notafiscal = null;
+        private readonly NotaFiscalAux nfa = new NotaFiscalAux();
+
         private Orcamento orcamento = new Orcamento();
         private List<OrcamentoItem> itens = new List<OrcamentoItem>();
         private OrcamentoItem itemSelecionado;
@@ -91,7 +94,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        Editando(true);
+                        Editando(true); 
                         LimpaCampos(false);
                     }
                 }
@@ -424,6 +427,9 @@ namespace _5gpro.Forms
         }
 
 
+
+
+
         //PADRÕES CRIADAS
         private void NovoCadastro()
         {
@@ -644,6 +650,12 @@ namespace _5gpro.Forms
             itens = orcamento.OrcamentoItem.ToList();
             PreencheGridItens(orcamento.OrcamentoItem.ToList());
             btInserirItem.Text = "Inserir";
+            if (orcamento.NotaFiscal != null)
+            {
+                btNotaGerar.Enabled = false;
+                tbNotaNumero.Text = orcamento.NotaFiscal.NotaFiscalID.ToString();
+                tbNotaNumero.Text = orcamento.NotaFiscal.DataEmissao.ToShortDateString();
+            }
             ignoracheckevent = false;
         }
 
@@ -686,6 +698,7 @@ namespace _5gpro.Forms
             if (!ignoracheckevent)
             {
                 //Arrumar
+                btNotaGerar.Enabled = !edit;
                 editando = edit;
                 menuVertical.Editando(edit, 3);
             }
@@ -761,6 +774,9 @@ namespace _5gpro.Forms
             tbAjuda.Text = "";
             dgvItens.Rows.Clear();
             dgvItens.Refresh();
+            btNotaGerar.Enabled = false;
+            tbNotaNumero.Clear();
+            tbNotaDataEmissao.Clear();
             LimpaCamposItem(limpaCod);
         }
 

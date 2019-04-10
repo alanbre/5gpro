@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Management;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Funcoes
 {
     class NetworkAdapter
     {
-        private string _MAC;
-        private string _IP;
+        private string _MAC = "";
+        private string _IP = "";
         private string NomePC;
 
         public string Mac
@@ -39,9 +35,8 @@ namespace _5gpro.Funcoes
                 string[] addresses = (string[])mo["IPAddress"];
                 this._IP = addresses[0];
                 this._MAC = addresses[1];
-                this.NomePC = Environment.MachineName;
-
             }
+            this.NomePC = Environment.MachineName;
         }
     }
 }

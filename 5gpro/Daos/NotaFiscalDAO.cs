@@ -12,9 +12,9 @@ namespace _5gpro.Daos
         private readonly UnimedidaBLL unidadeBLL = new UnimedidaBLL();
         private readonly PessoaBLL pessoaBLL = new PessoaBLL();
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 AbrirConexao();
@@ -29,13 +29,8 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
                     reader.Close();
-                }
-                else
-                {
-                    //FIZ ESSE ELSE PARA CASO N TIVER NENHUM REGISTRO NA BASE... PODE DAR PROBLEMA EM ALGUM MOMENTO xD 
-                    proximoid = "1";
                 }
             }
             catch (MySqlException ex)

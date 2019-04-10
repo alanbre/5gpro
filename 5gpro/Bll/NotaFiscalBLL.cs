@@ -7,7 +7,7 @@ namespace _5gpro.Bll
     {
         private readonly NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
             return notaFiscalDAO.BuscaProxCodigoDisponivel();
         }

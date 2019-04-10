@@ -27,13 +27,13 @@ namespace _5gpro
 
         private void FiltroDePermissoes()
         {
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
-            List<Permissao> listapermissoes = permissaoBLL.BuscarListaPermissoesByCodGrupo(logado.Usuario.Grupousuario.GrupoUsuarioID.ToString());
+            //logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            //List<Permissao> listapermissoes = permissaoBLL.BuscarListaPermissoesByCodGrupo(logado.Usuario.Grupousuario.GrupoUsuarioID.ToString());
 
-            if (logado.Usuario.Grupousuario.GrupoUsuarioID == 999)
-            {
-                cadastroDeGrupoDeUsuáriosToolStripMenuItem.Visible = true;
-            }
+            //if (logado.Usuario.Grupousuario.GrupoUsuarioID == 999)
+            //{
+            //    cadastroDeGrupoDeUsuáriosToolStripMenuItem.Visible = true;
+            //}
         }
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
