@@ -18,13 +18,14 @@ namespace _5gpro.Funcoes
 
                 // Esse comando trás o diretório do projeto
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
-
+                Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
                 AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
                 MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(projectDirectory + "/create_tables.sql"));
 
 
                 mySqlScript.Execute();
+                Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
                 return true;
             }
             catch (MySqlException ex)
