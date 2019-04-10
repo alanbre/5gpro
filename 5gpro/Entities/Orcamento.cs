@@ -12,6 +12,8 @@ namespace _5gpro.Entities
 
         public int OrcamentoID { get; set; }
         public Pessoa Pessoa { get; set; }
+
+        public NotaFiscal NotaFiscal { get; set; } = null;
         public DateTime DataCadastro { get; set; }
         public DateTime? DataValidade { get; set; } = null;
 

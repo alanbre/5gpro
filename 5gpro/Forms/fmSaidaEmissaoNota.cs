@@ -438,7 +438,7 @@ namespace _5gpro.Forms
                 {
                     ignoracheckevent = true;
                     LimpaCampos(false);
-                    tbCodigo.Text = notaFiscalBLL.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = notaFiscalBLL.BuscaProxCodigoDisponivel().ToString();
                     notaFiscal = null;
                     buscaPessoa.Focus();
                     ignoracheckevent = false;
@@ -449,7 +449,7 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = notaFiscalBLL.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = notaFiscalBLL.BuscaProxCodigoDisponivel().ToString();
                 notaFiscal = null;
                 Editando(false);
                 buscaPessoa.Focus();
