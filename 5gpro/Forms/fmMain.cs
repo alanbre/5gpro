@@ -25,7 +25,7 @@ namespace _5gpro
         private NetworkAdapter adap = new NetworkAdapter();
         private int Nivel = 0;
         private string Codgrupousuario;
-        private string Codpermissao;
+        private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
         //CÓDIGOS DAS TELAS
         //Cadastro de Pessoa = 010100
@@ -35,63 +35,55 @@ namespace _5gpro
         //Cadastro de Orçamento = 020100
         //Cadastro de Nota Fiscal = 030100
 
+        public struct PermissaoNivelStruct
+        {
+            public Permissao permissao;
+            public int Nivel;
+
+        }
 
         private void FiltroDePermissoes()
         {
 
             //Busca o usuário logado no pc, através do MAC
             logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+
             Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
 
-            if (int.Parse(Codgrupousuario) != 999)
+            if (Codgrupousuario != "999")
             {
+                listapermissaonivel = permissaoBLL.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
 
-                Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
-                Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
-
-                if (Nivel == 0)
+                foreach (PermissaoNivelStruct p in listapermissaonivel)
                 {
-                    tsmiCadastroPessoas.Visible = false;
-                }
+                    switch (p.permissao.Codigo)
+                    {
 
-                Codpermissao = permissaoBLL.BuscarIDbyCodigo("010200").ToString();
-                Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+                        case "010100":
+                            tsmiCadastroPessoas.Visible = p.Nivel == 0 ? false : true;
+                            break;
 
-                if (Nivel == 0)
-                {
-                    tsmiCadastroUsuarios.Visible = false;
-                }
+                        case "010200":
+                            tsmiCadastroUsuarios.Visible = p.Nivel == 0 ? false : true;
+                            break;
 
-                Codpermissao = permissaoBLL.BuscarIDbyCodigo("010300").ToString();
-                Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+                        case "010300":
+                            tsmiCadastroItens.Visible = p.Nivel == 0 ? false : true;
+                            break;
 
-                if (Nivel == 0)
-                {
-                    tsmiCadastroItens.Visible = false;
-                }
+                        case "010400":
+                            tsmiCadastroGrupoUsuario.Visible = p.Nivel == 0 ? false : true;
+                            break;
 
-                Codpermissao = permissaoBLL.BuscarIDbyCodigo("010400").ToString();
-                Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+                        case "020100":
+                            tsmiCadastroOrcamentos.Visible = p.Nivel == 0 ? false : true;
+                            break;
 
-                if (Nivel == 0)
-                {
-                    tsmiCadastroGrupoUsuario.Visible = false;
-                }
+                        case "030100":
+                            tsmiEmissaoNF.Visible = p.Nivel == 0 ? false : true;
+                            break;
 
-                Codpermissao = permissaoBLL.BuscarIDbyCodigo("020100").ToString();
-                Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
-
-                if (Nivel == 0)
-                {
-                    tsmiCadastroOrcamentos.Visible = false;
-                }
-
-                Codpermissao = permissaoBLL.BuscarIDbyCodigo("030100").ToString();
-                Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
-
-                if (Nivel == 0)
-                {
-                    tsmiEmissaoNF.Visible = false;
+                    }
                 }
             }
         }
@@ -119,8 +111,8 @@ namespace _5gpro
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Exclamation);
             }
-        
-            
+
+
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)

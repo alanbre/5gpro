@@ -9,6 +9,8 @@ namespace _5gpro.Forms
     public partial class fmLogin : Form
     {
         public Usuario usuariologado;
+        public Logado logado;
+       
 
         UsuarioBLL usuarioBLL = new UsuarioBLL();
         LogadoBLL logadoBLL = new LogadoBLL();
@@ -25,10 +27,12 @@ namespace _5gpro.Forms
             usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
 
             if (usuariologado != null)
-            {  
-                if (logadoBLL.BuscaLogadoByUsuario(usuariologado) != null)
+            {
+                logado = logadoBLL.BuscaLogadoByUsuario(usuariologado);
+                if (logado != null)
                 {
-                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    
+                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 }
                 else
@@ -93,8 +97,6 @@ namespace _5gpro.Forms
             {
                 new Limpar().limparTudo(this.Controls);
             }
-
-
         }
 
         private void btProcuraUsuario_Click(object sender, EventArgs e)
@@ -103,8 +105,7 @@ namespace _5gpro.Forms
             buscaUsuario.ShowDialog();
             if (buscaUsuario.usuarioSelecionado != null)
             {
-                usuariologado = buscaUsuario.usuarioSelecionado;
-                PreencheCamposCodUsuario(usuariologado);
+                PreencheCamposCodUsuario(buscaUsuario.usuarioSelecionado);
             }
         }
 
@@ -112,8 +113,7 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                usuariologado = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
-                PreencheCamposCodUsuario(usuariologado);
+                PreencheCamposCodUsuario(usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text)));
             }
             else
             {
