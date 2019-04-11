@@ -5613,6 +5613,7 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 (4, 'Cadastro de Pessoa', '010100'),
 (5, 'Cadastro de Usuario', '010200'),
 (6, 'Cadastro de Item', '010300'),
+(9, 'Cadastro de Grupo de usuários'. '010400'),
 
 
 (7, 'Cadastro de Orçamentos', '020100'),
