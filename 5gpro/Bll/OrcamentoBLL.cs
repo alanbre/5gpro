@@ -38,5 +38,10 @@ namespace _5gpro.Bll
         {
             return orcamentoDAO.BuscaOrcamentos(f);
         }
+
+        public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscal notafiscal)
+        {
+            return orcamentoDAO.VincularNotaAoOrcamento(orcamento, notafiscal);
+        }
     }
 }

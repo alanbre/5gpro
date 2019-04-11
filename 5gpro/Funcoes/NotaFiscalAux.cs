@@ -7,6 +7,8 @@ namespace _5gpro.Funcoes
     class NotaFiscalAux
     {
         NotaFiscalBLL notaFiscalBLL = new NotaFiscalBLL();
+        OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+
 
         public NotaFiscal GerarNotaFiscal(Orcamento orcamento)
         {
@@ -36,7 +38,7 @@ namespace _5gpro.Funcoes
             }
 
             int resultado = notaFiscalBLL.SalvarOuAtualizarDocumento(notafiscal);
-
+            if (resultado > 0) { resultado = orcamentoBLL.VincularNotaAoOrcamento(orcamento, notafiscal); }
             return resultado > 0 ? notafiscal : null;
         }
     }

@@ -18,7 +18,9 @@ namespace _5gpro.Daos
             GrupoUsuario grupousuario = new GrupoUsuario(); ;
             try
             {
+
                 AbrirConexao();
+
                 Comando = new MySqlCommand("SELECT * FROM grupo_usuario WHERE idgrupousuario = @idgrupousuario", Conexao);
                 Comando.Parameters.AddWithValue("@idgrupousuario", cod);
 
@@ -126,7 +128,7 @@ namespace _5gpro.Daos
             return listagrupousuario;
         }
 
-        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario, List<Permissao>listapermissoes)
+        public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario, List<Permissao> listapermissoes)
         {
 
             int retorno = 0;

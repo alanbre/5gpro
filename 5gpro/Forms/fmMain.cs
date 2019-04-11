@@ -107,14 +107,14 @@ namespace _5gpro
             //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
 
-            if (Nivel > 0)
+            if (Nivel > 0 || Codgrupousuario == "999")
             {
                 var formCadPessoas = new fmCadastroPessoa();
                 formCadPessoas.Show(this);
             }
             else
             {
-                MessageBox.Show("Você não tem permissao",
+                MessageBox.Show("Você não tem permissão",
                 "Acesso Negado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Exclamation);

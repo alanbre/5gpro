@@ -11,6 +11,7 @@ namespace _5gpro.Daos
     class OrcamentoDAO : ConexaoDAO
     {
         private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly NotaFiscalBLL notafiscalBLL = new NotaFiscalBLL();
 
         public Orcamento BuscaOrcamentoById(int cod)
         {
@@ -35,7 +36,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -82,7 +84,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -127,7 +130,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -192,7 +196,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
                     orcamentos.Add(orcamento);
@@ -368,6 +373,26 @@ namespace _5gpro.Daos
             finally
             {
                 FecharConexao();
+            }
+            return retorno;
+        }
+
+        public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscal notafiscal)
+        {
+            int retorno = 0;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"UPDATE orcamento SET idnotafiscal = @idnotafiscal WHERE idorcamento = @idorcamento", Conexao);
+                Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
+                Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalID);
+
+                retorno = Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex);
             }
             return retorno;
         }
