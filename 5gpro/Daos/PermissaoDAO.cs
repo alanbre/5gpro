@@ -38,49 +38,31 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    
                     string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
+
+                    Permissao p = new Permissao
+                    {
+                        PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+                        Nivel = reader.GetString(reader.GetOrdinal("nivel"))
+                    };
+                    permissoes.Todas.Add(p);
 
                     if (codfiltro.Substring(2) == "0000")
                     {
-                        Permissao p = new Permissao
-                        {
-                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                            Nivel = reader.GetString(reader.GetOrdinal("nivel"))
-                        };
                         permissoes.Modulos.Add(p);
-                        permissoes.Todas.Add(p);
                     }
 
                     if (codfiltro.Substring(4) == "00")
                     {
-                        Permissao p = new Permissao
-                        {
-                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                            Nivel = reader.GetString(reader.GetOrdinal("nivel"))
-                        };
-
                         permissoes.Telas.Add(p);
-                        permissoes.Todas.Add(p);
-
                     }
 
                     if (codfiltro.Substring(4) != "00")
                     {
-                        Permissao p = new Permissao
-                        {
-                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                            Nivel = reader.GetString(reader.GetOrdinal("nivel"))
-                        };
-
                         permissoes.Funcoes.Add(p);
-                        permissoes.Todas.Add(p);
-
                     }
 
                 }
@@ -148,11 +130,6 @@ namespace _5gpro.Daos
 
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
         {
-            //List<Permissao> TodaspermissoesGrupo = new List<Permissao>();
-            //List<Permissao> ModulospermissoesGrupo = new List<Permissao>();
-            //List<Permissao> TelaspermissoesGrupo = new List<Permissao>();
-            //List<Permissao> FuncoespermissoesGrupo = new List<Permissao>();
-
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
             
             permissoes.Todas = new List<Permissao>();
@@ -173,46 +150,28 @@ namespace _5gpro.Daos
                 {
                     string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
 
+                    Permissao p = new Permissao
+                    {
+                        PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+                        Nivel = "0"
+                    };
+                    permissoes.Todas.Add(p);
+
                     if (codfiltro.Substring(2) == "0000")
                     {
-                        Permissao p = new Permissao
-                        {
-                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                            Nivel = "0"
-                        };
-
                         permissoes.Modulos.Add(p);
-                        permissoes.Todas.Add(p);
                     }
 
                     if (codfiltro.Substring(4) == "00")
                     {
-                        Permissao p = new Permissao
-                        {
-                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                            Nivel = "0"
-                        };
-
                         permissoes.Telas.Add(p);
-                        permissoes.Todas.Add(p);
                     }
 
                     if (codfiltro.Substring(4) != "00")
                     {
-                        Permissao p = new Permissao
-                        {
-                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                            Nivel = "0"
-                        };
-
                         permissoes.Funcoes.Add(p);
-                        permissoes.Todas.Add(p);
                     }
                 }
                 reader.Close();
@@ -225,11 +184,6 @@ namespace _5gpro.Daos
             {
                 FecharConexao();
             }
-
-            //permissoes.Todas = TodaspermissoesGrupo;
-            //permissoes.Modulos = ModulospermissoesGrupo;
-            //permissoes.Telas = TelaspermissoesGrupo;
-            //permissoes.Funcoes = FuncoespermissoesGrupo;
 
             return permissoes;
         }
