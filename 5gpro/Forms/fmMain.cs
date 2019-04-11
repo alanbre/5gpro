@@ -11,19 +11,12 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain()
-        {
-            InitializeComponent();
-            FiltroDePermissoes();
-
-        }
 
         private Permissao permissao = new Permissao();
         private PermissaoBLL permissaoBLL = new PermissaoBLL();
         private Logado logado = new Logado();
         private LogadoBLL logadoBLL = new LogadoBLL();
         private NetworkAdapter adap = new NetworkAdapter();
-        private int Nivel = 0;
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
@@ -34,6 +27,13 @@ namespace _5gpro
         //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Orçamento = 020100
         //Cadastro de Nota Fiscal = 030100
+
+        public fmMain()
+        {
+            InitializeComponent();
+            FiltroDePermissoes();
+
+        }
 
         public struct PermissaoNivelStruct
         {
