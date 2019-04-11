@@ -425,6 +425,7 @@ namespace _5gpro.Forms
                     dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
                 }
             }
+            dgvPermissoes.Sort(dgvPermissoes.Columns[1], ListSortDirection.Ascending); //Ordena pela coluna 1
             dgvPermissoes.Refresh();
 
         }
