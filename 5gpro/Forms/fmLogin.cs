@@ -30,10 +30,8 @@ namespace _5gpro.Forms
             {
                 logado = logadoBLL.BuscaLogadoByUsuario(usuariologado);
                 if (logado != null)
-                {
-                    
+                {                  
                     MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
                 }
                 else
                 {
@@ -113,7 +111,7 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                PreencheCamposCodUsuario(usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text)));
+                PreencheCamposCodUsuario(usuarioBLL.BuscarUsuarioByIdLogin(int.Parse(tbCodigo.Text)));
             }
             else
             {

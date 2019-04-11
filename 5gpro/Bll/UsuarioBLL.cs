@@ -26,10 +26,15 @@ namespace _5gpro.Bll
         {
             return usuarioDAO.BuscaProxCodigoDisponivel();
         }
-
+        
         public Usuario BuscarUsuarioById(int cod)
         {
             return usuarioDAO.BuscarUsuarioById(cod);
+        }
+
+        public Usuario BuscarUsuarioByIdLogin(int cod)
+        {
+            return usuarioDAO.BuscarUsuarioByIdLogin(cod);
         }
 
         public Usuario BuscarProximoUsuario(string codAtual)
@@ -47,5 +52,6 @@ namespace _5gpro.Bll
             return usuarioDAO.BuscaUsuarios(codGrupoUsuario, nomeUsuario, sobrenomeUsuario);
         }
 
+        
     }
 }

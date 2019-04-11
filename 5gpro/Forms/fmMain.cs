@@ -90,29 +90,8 @@ namespace _5gpro
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
-            //CÓDIGO TELA CADASTRO DE PESSOA : 010100
-
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
-
-            //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
-
-            if (Nivel > 0 || Codgrupousuario == "999")
-            {
-                var formCadPessoas = new fmCadastroPessoa();
-                formCadPessoas.Show(this);
-            }
-            else
-            {
-                MessageBox.Show("Você não tem permissão",
-                "Acesso Negado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-            }
-
-
+            var formCadPessoas = new fmCadastroPessoa();
+            formCadPessoas.Show(this);
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)
