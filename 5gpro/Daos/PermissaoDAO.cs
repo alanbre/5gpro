@@ -124,6 +124,7 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
+                    permissao = new Permissao();
                     permissao.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
                     permissao.Nome = reader.GetString(reader.GetOrdinal("nome"));
                     permissao.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
@@ -236,6 +237,44 @@ namespace _5gpro.Daos
             }
 
             return idpermissoesNpraN;
+        }
+
+        public List<fmMain.PermissaoNivelStruct> PermissoesNiveisStructByCodGrupoUsuario(string codgrupousuario)
+        {
+            List<fmMain.PermissaoNivelStruct> listacomniveis = new List<fmMain.PermissaoNivelStruct>();
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"SELECT * 
+                                             FROM permissao_has_grupo_usuario as p
+                                             WHERE p.idgrupousuario = @idgrupousuario
+                                            ", Conexao);
+
+                Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
+                    permissaonivel.permissao = BuscarPermissaoByID(reader.GetString(reader.GetOrdinal("idpermissao")));
+                    permissaonivel.Nivel = reader.GetInt32(reader.GetOrdinal("nivel"));
+
+                    listacomniveis.Add(permissaonivel);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return listacomniveis;
         }
 
 
