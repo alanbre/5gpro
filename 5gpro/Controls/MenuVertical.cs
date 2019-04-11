@@ -17,32 +17,6 @@ namespace _5gpro.Controls
         {
             switch (nivel)
             {
-                //NIVEL 0
-                case 0:
-
-                    if (editando)
-                    {
-                        btNovo.Enabled = false;
-                        btSalvar.Enabled = false;
-                        btBuscar.Enabled = false;
-                        btExcluir.Enabled = false;
-
-                        btAnterior.Enabled = false;
-                        btProximo.Enabled = false;
-                        btRecarregar.Enabled = false;
-                    }
-                    else
-                    {
-                        btNovo.Enabled = false;
-                        btSalvar.Enabled = false;
-                        btBuscar.Enabled = false;
-                        btExcluir.Enabled = false;
-
-                        btAnterior.Enabled = false;
-                        btProximo.Enabled = false;
-                        btRecarregar.Enabled = false;
-                    }
-                    break;
 
                 //NIVEL 1
                 case 1:
