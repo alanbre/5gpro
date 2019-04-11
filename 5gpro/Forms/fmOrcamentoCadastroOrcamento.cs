@@ -90,6 +90,7 @@ namespace _5gpro.Forms
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
+                        notafiscal = orcamento.NotaFiscal;
                         PreencheCampos(orcamento);
                     }
                     else
@@ -118,6 +119,7 @@ namespace _5gpro.Forms
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;
+                            notafiscal = orcamento.NotaFiscal;
                             PreencheCampos(neworcamento);
                             Editando(false);
                         }
@@ -358,6 +360,14 @@ namespace _5gpro.Forms
             }
         }
 
+        private void BtNotaGerar_Click(object sender, EventArgs e)
+        {
+            if (orcamento.NotaFiscal == null)
+            {
+                notafiscal = nfa.GerarNotaFiscal(orcamento);
+                PreencheCamposNotaFiscal(notafiscal);
+            }
+        }
 
 
 
@@ -654,7 +664,13 @@ namespace _5gpro.Forms
             {
                 btNotaGerar.Enabled = false;
                 tbNotaNumero.Text = orcamento.NotaFiscal.NotaFiscalID.ToString();
-                tbNotaNumero.Text = orcamento.NotaFiscal.DataEmissao.ToShortDateString();
+                tbNotaDataEmissao.Text = orcamento.NotaFiscal.DataEmissao.ToShortDateString();
+            }
+            else
+            {
+                btNotaGerar.Enabled = true;
+                tbNotaNumero.Clear();
+                tbNotaDataEmissao.Clear();
             }
             ignoracheckevent = false;
         }
@@ -693,9 +709,16 @@ namespace _5gpro.Forms
             }
         }
 
+        private void PreencheCamposNotaFiscal(NotaFiscal notafiscal)
+        {
+            tbNotaDataEmissao.Text = notafiscal.DataEmissao.ToShortDateString();
+            tbNotaNumero.Text = notafiscal.NotaFiscalID.ToString();
+            btNotaGerar.Enabled = false;
+        }
+
         private void Editando(bool edit)
         {
-            if (!ignoracheckevent)
+            if (!ignoracheckevent && notafiscal == null)
             {
                 //Arrumar
                 btNotaGerar.Enabled = !edit;

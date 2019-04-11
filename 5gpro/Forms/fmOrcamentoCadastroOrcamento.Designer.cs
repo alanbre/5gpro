@@ -30,6 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosOrcamento = new System.Windows.Forms.GroupBox();
+            this.gbDadosNota = new System.Windows.Forms.GroupBox();
+            this.btNotaGerar = new System.Windows.Forms.Button();
+            this.tbNotaDataEmissao = new System.Windows.Forms.TextBox();
+            this.lbDataEmissao = new System.Windows.Forms.Label();
+            this.tbNotaNumero = new System.Windows.Forms.TextBox();
+            this.lbNotaNumero = new System.Windows.Forms.Label();
             this.cbVencimento = new System.Windows.Forms.CheckBox();
             this.dtpVencimento = new System.Windows.Forms.DateTimePicker();
             this.dtpCadastro = new System.Windows.Forms.DateTimePicker();
@@ -69,20 +75,14 @@
             this.tbValorTotalOrcamento = new System.Windows.Forms.TextBox();
             this.lbTotalOrcamento = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.gbDadosNota = new System.Windows.Forms.GroupBox();
-            this.lbNotaNumero = new System.Windows.Forms.Label();
-            this.tbNotaNumero = new System.Windows.Forms.TextBox();
-            this.lbDataEmissao = new System.Windows.Forms.Label();
-            this.tbNotaDataEmissao = new System.Windows.Forms.TextBox();
-            this.btNotaGerar = new System.Windows.Forms.Button();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.buscaItem = new _5gpro.Controls.BuscaItem();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbDadosOrcamento.SuspendLayout();
+            this.gbDadosNota.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.gbItens.SuspendLayout();
             this.gbTotais.SuspendLayout();
-            this.gbDadosNota.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDadosOrcamento
@@ -104,6 +104,66 @@
             this.gbDadosOrcamento.TabIndex = 0;
             this.gbDadosOrcamento.TabStop = false;
             this.gbDadosOrcamento.Text = "Dados do orçamento";
+            // 
+            // gbDadosNota
+            // 
+            this.gbDadosNota.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDadosNota.Controls.Add(this.btNotaGerar);
+            this.gbDadosNota.Controls.Add(this.tbNotaDataEmissao);
+            this.gbDadosNota.Controls.Add(this.lbDataEmissao);
+            this.gbDadosNota.Controls.Add(this.tbNotaNumero);
+            this.gbDadosNota.Controls.Add(this.lbNotaNumero);
+            this.gbDadosNota.Location = new System.Drawing.Point(1000, 19);
+            this.gbDadosNota.Name = "gbDadosNota";
+            this.gbDadosNota.Size = new System.Drawing.Size(156, 92);
+            this.gbDadosNota.TabIndex = 8;
+            this.gbDadosNota.TabStop = false;
+            this.gbDadosNota.Text = "Nota Fiscal";
+            // 
+            // btNotaGerar
+            // 
+            this.btNotaGerar.Enabled = false;
+            this.btNotaGerar.Location = new System.Drawing.Point(6, 58);
+            this.btNotaGerar.Name = "btNotaGerar";
+            this.btNotaGerar.Size = new System.Drawing.Size(94, 23);
+            this.btNotaGerar.TabIndex = 4;
+            this.btNotaGerar.Text = "Gerar nota fiscal";
+            this.btNotaGerar.UseVisualStyleBackColor = true;
+            this.btNotaGerar.Click += new System.EventHandler(this.BtNotaGerar_Click);
+            // 
+            // tbNotaDataEmissao
+            // 
+            this.tbNotaDataEmissao.Enabled = false;
+            this.tbNotaDataEmissao.Location = new System.Drawing.Point(75, 32);
+            this.tbNotaDataEmissao.Name = "tbNotaDataEmissao";
+            this.tbNotaDataEmissao.Size = new System.Drawing.Size(73, 20);
+            this.tbNotaDataEmissao.TabIndex = 3;
+            // 
+            // lbDataEmissao
+            // 
+            this.lbDataEmissao.AutoSize = true;
+            this.lbDataEmissao.Location = new System.Drawing.Point(72, 16);
+            this.lbDataEmissao.Name = "lbDataEmissao";
+            this.lbDataEmissao.Size = new System.Drawing.Size(71, 13);
+            this.lbDataEmissao.TabIndex = 2;
+            this.lbDataEmissao.Text = "Data emissão";
+            // 
+            // tbNotaNumero
+            // 
+            this.tbNotaNumero.Enabled = false;
+            this.tbNotaNumero.Location = new System.Drawing.Point(6, 32);
+            this.tbNotaNumero.Name = "tbNotaNumero";
+            this.tbNotaNumero.Size = new System.Drawing.Size(56, 20);
+            this.tbNotaNumero.TabIndex = 1;
+            // 
+            // lbNotaNumero
+            // 
+            this.lbNotaNumero.AutoSize = true;
+            this.lbNotaNumero.Location = new System.Drawing.Point(6, 16);
+            this.lbNotaNumero.Name = "lbNotaNumero";
+            this.lbNotaNumero.Size = new System.Drawing.Size(44, 13);
+            this.lbNotaNumero.TabIndex = 0;
+            this.lbNotaNumero.Text = "Número";
             // 
             // cbVencimento
             // 
@@ -545,65 +605,6 @@
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 16;
             // 
-            // gbDadosNota
-            // 
-            this.gbDadosNota.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDadosNota.Controls.Add(this.btNotaGerar);
-            this.gbDadosNota.Controls.Add(this.tbNotaDataEmissao);
-            this.gbDadosNota.Controls.Add(this.lbDataEmissao);
-            this.gbDadosNota.Controls.Add(this.tbNotaNumero);
-            this.gbDadosNota.Controls.Add(this.lbNotaNumero);
-            this.gbDadosNota.Location = new System.Drawing.Point(1000, 19);
-            this.gbDadosNota.Name = "gbDadosNota";
-            this.gbDadosNota.Size = new System.Drawing.Size(156, 92);
-            this.gbDadosNota.TabIndex = 8;
-            this.gbDadosNota.TabStop = false;
-            this.gbDadosNota.Text = "Nota Fiscal";
-            // 
-            // lbNotaNumero
-            // 
-            this.lbNotaNumero.AutoSize = true;
-            this.lbNotaNumero.Location = new System.Drawing.Point(6, 16);
-            this.lbNotaNumero.Name = "lbNotaNumero";
-            this.lbNotaNumero.Size = new System.Drawing.Size(44, 13);
-            this.lbNotaNumero.TabIndex = 0;
-            this.lbNotaNumero.Text = "Número";
-            // 
-            // tbNotaNumero
-            // 
-            this.tbNotaNumero.Enabled = false;
-            this.tbNotaNumero.Location = new System.Drawing.Point(6, 32);
-            this.tbNotaNumero.Name = "tbNotaNumero";
-            this.tbNotaNumero.Size = new System.Drawing.Size(56, 20);
-            this.tbNotaNumero.TabIndex = 1;
-            // 
-            // lbDataEmissao
-            // 
-            this.lbDataEmissao.AutoSize = true;
-            this.lbDataEmissao.Location = new System.Drawing.Point(72, 16);
-            this.lbDataEmissao.Name = "lbDataEmissao";
-            this.lbDataEmissao.Size = new System.Drawing.Size(71, 13);
-            this.lbDataEmissao.TabIndex = 2;
-            this.lbDataEmissao.Text = "Data emissão";
-            // 
-            // tbNotaDataEmissao
-            // 
-            this.tbNotaDataEmissao.Enabled = false;
-            this.tbNotaDataEmissao.Location = new System.Drawing.Point(75, 32);
-            this.tbNotaDataEmissao.Name = "tbNotaDataEmissao";
-            this.tbNotaDataEmissao.Size = new System.Drawing.Size(73, 20);
-            this.tbNotaDataEmissao.TabIndex = 3;
-            // 
-            // btNotaGerar
-            // 
-            this.btNotaGerar.Enabled = false;
-            this.btNotaGerar.Location = new System.Drawing.Point(6, 58);
-            this.btNotaGerar.Name = "btNotaGerar";
-            this.btNotaGerar.Size = new System.Drawing.Size(94, 23);
-            this.btNotaGerar.TabIndex = 4;
-            this.btNotaGerar.Text = "Gerar nota fiscal";
-            this.btNotaGerar.UseVisualStyleBackColor = true;
-            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(7, 12);
@@ -657,13 +658,13 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroOrcamento_KeyDown);
             this.gbDadosOrcamento.ResumeLayout(false);
             this.gbDadosOrcamento.PerformLayout();
+            this.gbDadosNota.ResumeLayout(false);
+            this.gbDadosNota.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();
             this.gbItens.ResumeLayout(false);
             this.gbItens.PerformLayout();
             this.gbTotais.ResumeLayout(false);
             this.gbTotais.PerformLayout();
-            this.gbDadosNota.ResumeLayout(false);
-            this.gbDadosNota.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
