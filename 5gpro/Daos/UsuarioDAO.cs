@@ -130,11 +130,53 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+        /// <summary>
+        /// Retorna apenas o ID e o nome do usuário. Feito para tela de Login
+        /// </summary>
+        /// <param name="cod"></param>
+        /// <returns></returns>
+        public Usuario BuscarUsuarioByIdLogin(int cod)
+        {
+            Usuario usuario = new Usuario();
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand("SELECT u.idusuario, u.nome FROM usuario AS u WHERE idusuario = @idusuario", Conexao);
+                Comando.Parameters.AddWithValue("@idusuario", cod);
+
+                IDataReader reader = Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                    };
+                    reader.Close();
+                }
+                else
+                {
+                    usuario = null;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                FecharConexao();
+            }
+
+            return usuario;
+        }
+
         public Usuario BuscarUsuarioById(int cod)
         {
             Usuario usuario = new Usuario();
-            GrupoUsuario grupousuario = new GrupoUsuario();
-
             try
             {
                 AbrirConexao();
@@ -145,11 +187,6 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    //grupousuario = new GrupoUsuario
-                    //{
-
-                    //};
-                    
                     usuario = new Usuario
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
@@ -181,48 +218,6 @@ namespace _5gpro.Daos
 
             return usuario;
         }
-
-        //public Usuario BuscarUsuarioById(int cod)
-        //{
-        //    Usuario usuario = new Usuario();
-        //    try
-        //    {
-        //        AbrirConexao();
-        //        Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario", Conexao);
-        //        Comando.Parameters.AddWithValue("@idusuario", cod);
-
-        //        IDataReader reader = Comando.ExecuteReader();
-
-        //        if (reader.Read())
-        //        {
-        //            usuario = new Usuario
-        //            {
-        //                UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-        //                Senha = reader.GetString(reader.GetOrdinal("senha")),
-        //                Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-        //                Nome = reader.GetString(reader.GetOrdinal("nome")),
-        //                Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-        //                Email = reader.GetString(reader.GetOrdinal("email")),
-        //                Telefone = reader.GetString(reader.GetOrdinal("telefone"))
-        //            };
-        //            reader.Close();
-        //        }
-        //        else
-        //        {
-        //            usuario = null;
-        //        }
-        //    }
-        //    catch (MySqlException ex)
-        //    {
-        //        Console.WriteLine("Error: {0}", ex.ToString());
-        //    }
-        //    finally
-        //    {
-        //        FecharConexao();
-        //    }
-
-        //    return usuario;
-        //}
 
 
         public Usuario BuscarProximoUsuario(string codAtual)

@@ -14,11 +14,16 @@ namespace _5gpro.Daos
     class PermissaoDAO : ConexaoDAO
     {
 
+        //TENTANDO MELHORAR
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesByIdGrupo(string cod)
         {
-            List<Permissao> permissoesGrupo = new List<Permissao>();
 
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+
+            permissoes.Todas = new List<Permissao>();
+            permissoes.Modulos = new List<Permissao>();
+            permissoes.Telas = new List<Permissao>();
+            permissoes.Funcoes = new List<Permissao>();
 
             try
             {
@@ -33,6 +38,9 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    
+                    string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
+
                     Permissao p = new Permissao
                     {
                         PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
@@ -40,8 +48,23 @@ namespace _5gpro.Daos
                         Codigo = reader.GetString(reader.GetOrdinal("codigo")),
                         Nivel = reader.GetString(reader.GetOrdinal("nivel"))
                     };
+                    permissoes.Todas.Add(p);
 
-                    permissoesGrupo.Add(p);
+                    if (codfiltro.Substring(2) == "0000")
+                    {
+                        permissoes.Modulos.Add(p);
+                    }
+
+                    if (codfiltro.Substring(4) == "00")
+                    {
+                        permissoes.Telas.Add(p);
+                    }
+
+                    if (codfiltro.Substring(4) != "00")
+                    {
+                        permissoes.Funcoes.Add(p);
+                    }
+
                 }
                 reader.Close();
             }
@@ -54,20 +77,65 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            permissoes.Todas = permissoesGrupo;
-            permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
-            permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
-            permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
-
             return permissoes;
         }
 
+        //public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesByIdGrupo(string cod)
+        //{
+        //    List<Permissao> permissoesGrupo = new List<Permissao>();
+
+        //    fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+
+        //    try
+        //    {
+        //        AbrirConexao();
+        //        Comando = new MySqlCommand(@"SELECT * 
+        //                                     FROM permissao_has_grupo_usuario pg INNER JOIN permissao p 
+        //                                     ON pg.idpermissao = p.idpermissao 
+        //                                     WHERE idgrupousuario = @idgrupousuario", Conexao);
+        //        Comando.Parameters.AddWithValue("@idgrupousuario", cod);
+
+        //        IDataReader reader = Comando.ExecuteReader();
+
+        //        while (reader.Read())
+        //        {
+        //            Permissao p = new Permissao
+        //            {
+        //                PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+        //                Nome = reader.GetString(reader.GetOrdinal("nome")),
+        //                Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+        //                Nivel = reader.GetString(reader.GetOrdinal("nivel"))
+        //            };
+
+        //            permissoesGrupo.Add(p);
+        //        }
+        //        reader.Close();
+        //    }
+        //    catch (MySqlException ex)
+        //    {
+        //        Console.WriteLine("Error: {0}", ex.ToString());
+        //    }
+        //    finally
+        //    {
+        //        FecharConexao();
+        //    }
+
+        //    permissoes.Todas = permissoesGrupo;
+        //    permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
+        //    permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
+        //    permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
+
+        //    return permissoes;
+        //}
+
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
         {
-            List<Permissao> permissoesGrupo = new List<Permissao>();
-
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
-
+            
+            permissoes.Todas = new List<Permissao>();
+            permissoes.Modulos = new List<Permissao>();
+            permissoes.Telas = new List<Permissao>();
+            permissoes.Funcoes = new List<Permissao>();
 
             try
             {
@@ -80,6 +148,8 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
+
                     Permissao p = new Permissao
                     {
                         PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
@@ -87,8 +157,22 @@ namespace _5gpro.Daos
                         Codigo = reader.GetString(reader.GetOrdinal("codigo")),
                         Nivel = "0"
                     };
+                    permissoes.Todas.Add(p);
 
-                    permissoesGrupo.Add(p);
+                    if (codfiltro.Substring(2) == "0000")
+                    {
+                        permissoes.Modulos.Add(p);
+                    }
+
+                    if (codfiltro.Substring(4) == "00")
+                    {
+                        permissoes.Telas.Add(p);
+                    }
+
+                    if (codfiltro.Substring(4) != "00")
+                    {
+                        permissoes.Funcoes.Add(p);
+                    }
                 }
                 reader.Close();
             }
@@ -101,14 +185,56 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            permissoes.Todas = permissoesGrupo;
-            permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
-            permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
-            permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
-
-
             return permissoes;
         }
+
+
+        //public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
+        //{
+        //    List<Permissao> permissoesGrupo = new List<Permissao>();
+
+        //    fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+
+        //    try
+        //    {
+        //        AbrirConexao();
+        //        Comando = new MySqlCommand(@"SELECT * 
+        //                                     FROM permissao", Conexao);
+
+
+        //        IDataReader reader = Comando.ExecuteReader();
+
+        //        while (reader.Read())
+        //        {
+        //            Permissao p = new Permissao
+        //            {
+        //                PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+        //                Nome = reader.GetString(reader.GetOrdinal("nome")),
+        //                Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+        //                Nivel = "0"
+        //            };
+
+        //            permissoesGrupo.Add(p);
+        //        }
+        //        reader.Close();
+        //    }
+        //    catch (MySqlException ex)
+        //    {
+        //        Console.WriteLine("Error: {0}", ex.ToString());
+        //    }
+        //    finally
+        //    {
+        //        FecharConexao();
+        //    }
+
+        //    permissoes.Todas = permissoesGrupo;
+        //    permissoes.Modulos = permissoesGrupo.Where(p => p.Codigo.Substring(2) == "0000").ToList();
+        //    permissoes.Telas = permissoesGrupo.Where(p => p.Codigo.Substring(4) == "00").ToList();
+        //    permissoes.Funcoes = permissoesGrupo.Where(p => p.Codigo.Substring(4) != "00").ToList();
+
+
+        //    return permissoes;
+        //}
 
         public Permissao BuscarPermissaoByID(string idpermissao)
         {

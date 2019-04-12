@@ -11,19 +11,12 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain()
-        {
-            InitializeComponent();
-            FiltroDePermissoes();
-
-        }
 
         private Permissao permissao = new Permissao();
         private PermissaoBLL permissaoBLL = new PermissaoBLL();
         private Logado logado = new Logado();
         private LogadoBLL logadoBLL = new LogadoBLL();
         private NetworkAdapter adap = new NetworkAdapter();
-        private int Nivel = 0;
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
@@ -34,6 +27,13 @@ namespace _5gpro
         //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Orçamento = 020100
         //Cadastro de Nota Fiscal = 030100
+
+        public fmMain()
+        {
+            InitializeComponent();
+            FiltroDePermissoes();
+
+        }
 
         public struct PermissaoNivelStruct
         {
@@ -90,29 +90,8 @@ namespace _5gpro
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
-            //CÓDIGO TELA CADASTRO DE PESSOA : 010100
-
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010100").ToString();
-
-            //Aqui busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
-
-            if (Nivel > 0 || Codgrupousuario == "999")
-            {
-                var formCadPessoas = new fmCadastroPessoa();
-                formCadPessoas.Show(this);
-            }
-            else
-            {
-                MessageBox.Show("Você não tem permissão",
-                "Acesso Negado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation);
-            }
-
-
+            var formCadPessoas = new fmCadastroPessoa();
+            formCadPessoas.Show(this);
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)
