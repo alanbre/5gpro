@@ -145,19 +145,19 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    grupousuario = new GrupoUsuario
-                    {
+                    //grupousuario = new GrupoUsuario
+                    //{
 
-                    };
-
+                    //};
+                    
                     usuario = new Usuario
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
 
-                        Grupousuario = grupousuario,
-                        //Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-
+                        //Grupousuario = grupousuario,
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetInt32(reader.GetOrdinal("idgrupousuario"))),
+                        
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
@@ -242,7 +242,7 @@ namespace _5gpro.Daos
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetInt32(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
@@ -285,7 +285,7 @@ namespace _5gpro.Daos
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetInt32(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
@@ -346,7 +346,7 @@ namespace _5gpro.Daos
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetInt32(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),

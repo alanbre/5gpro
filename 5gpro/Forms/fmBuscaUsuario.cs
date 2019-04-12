@@ -2,12 +2,7 @@
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -32,7 +27,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Email", typeof(string));
             table.Columns.Add("Telefone", typeof(string));
 
-            usuarios = usuarioBLL.BuscaUsuarios(tbFiltroCodUsuario.Text, tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
+            usuarios = usuarioBLL.BuscaUsuarios(buscaGrupoUsuario.grupoUsuario.GrupoUsuarioID.ToString(), tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
 
             foreach (Usuario u in usuarios)
             {

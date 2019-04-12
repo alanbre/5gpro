@@ -78,7 +78,7 @@
             this.btBuscaCidade.UseVisualStyleBackColor = true;
             this.btBuscaCidade.Click += new System.EventHandler(this.BtBuscaCidade_Click);
             // 
-            // buscaCidade
+            // BuscaCidade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,7 +87,7 @@
             this.Controls.Add(this.tbCodigoCidade);
             this.Controls.Add(this.lbFiltroCidade);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "buscaCidade";
+            this.Name = "BuscaCidade";
             this.Size = new System.Drawing.Size(442, 39);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -81,7 +81,7 @@ namespace _5gpro.Forms
 
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
@@ -644,36 +644,8 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheCampos(Orcamento orcamento)
-        {
-            ignoracheckevent = true;
-            LimpaCampos(false);
-            tbCodigo.Text = orcamento.OrcamentoID.ToString();
-            buscaPessoa.PreencheCampos(orcamento.Pessoa);
-            dtpCadastro.Value = orcamento.DataCadastro;
-            dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
-            cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
-            tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
-            tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
-            tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
-            tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
-            itens = orcamento.OrcamentoItem.ToList();
-            PreencheGridItens(orcamento.OrcamentoItem.ToList());
-            btInserirItem.Text = "Inserir";
-            if (orcamento.NotaFiscal != null)
-            {
-                btNotaGerar.Enabled = false;
-                tbNotaNumero.Text = orcamento.NotaFiscal.NotaFiscalID.ToString();
-                tbNotaDataEmissao.Text = orcamento.NotaFiscal.DataEmissao.ToShortDateString();
-            }
-            else
-            {
-                btNotaGerar.Enabled = true;
-                tbNotaNumero.Clear();
-                tbNotaDataEmissao.Clear();
-            }
-            ignoracheckevent = false;
-        }
+
+
 
         private void AbreTelaBuscaOrcamento()
         {
@@ -686,44 +658,16 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheCamposItem(OrcamentoItem item)
+        private void ExcluirItem()
         {
-            if (item != null)
+            if (itemSelecionado != null)
             {
-                ignoracheckevent = true;
-                buscaItem.PreencheCampos(item.Item);
-                tbQuantidade.Text = item.Quantidade.ToString("############0.00");
-                tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
-                tbValorTotItem.Text = item.ValorTotal.ToString("############0.00");
-                tbDescontoItemPorc.Text = item.DescontoPorc.ToString("##0.00");
-                tbDescontoItem.Text = item.Desconto.ToString("############0.00");
-                ignoracheckevent = false;
-            }
-            else
-            {
-                MessageBox.Show("Item não encontrado no banco de dados",
-                "Item não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                buscaItem.Focus();
-            }
-        }
-
-        private void PreencheCamposNotaFiscal(NotaFiscal notafiscal)
-        {
-            tbNotaDataEmissao.Text = notafiscal.DataEmissao.ToShortDateString();
-            tbNotaNumero.Text = notafiscal.NotaFiscalID.ToString();
-            btNotaGerar.Enabled = false;
-        }
-
-        private void Editando(bool edit)
-        {
-            if (!ignoracheckevent && notafiscal == null)
-            {
-                //Arrumar
-                btNotaGerar.Enabled = !edit;
-                editando = edit;
-                menuVertical.Editando(edit, 3);
+                itens.RemoveAll(i => i.Item.ItemID == itemSelecionado.Item.ItemID);
+                dgvItens.Rows.Clear();
+                dgvItens.Refresh();
+                LimpaCamposItem(false);
+                PreencheGridItens(itens);
+                CalculaTotalOrcamento();
             }
         }
 
@@ -773,6 +717,19 @@ namespace _5gpro.Forms
             }
         }
 
+        private void CalculaTotalOrcamento()
+        {
+            if (itens.Count > 0)
+            {
+                tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
+                tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
+                tbValorTotalOrcamento.Text = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
+            }
+        }
+
+
+
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -781,6 +738,19 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
+        private void Editando(bool edit)
+        {
+            if (!ignoracheckevent && notafiscal == null)
+            {
+                //Arrumar
+                btNotaGerar.Enabled = !edit;
+                editando = edit;
+                menuVertical.Editando(edit, 3);
+            }
+        }
+
+
 
         private void LimpaCampos(bool limpaCod)
         {
@@ -817,29 +787,68 @@ namespace _5gpro.Forms
             if (focus) { buscaItem.Focus(); }
         }
 
-        private void CalculaTotalOrcamento()
+
+
+        private void PreencheCampos(Orcamento orcamento)
         {
-            if (itens.Count > 0)
+            ignoracheckevent = true;
+            LimpaCampos(false);
+            tbCodigo.Text = orcamento.OrcamentoID.ToString();
+            buscaPessoa.PreencheCampos(orcamento.Pessoa);
+            dtpCadastro.Value = orcamento.DataCadastro;
+            dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
+            cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
+            tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
+            tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
+            tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
+            tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
+            itens = orcamento.OrcamentoItem.ToList();
+            PreencheGridItens(orcamento.OrcamentoItem.ToList());
+            btInserirItem.Text = "Inserir";
+            if (orcamento.NotaFiscal != null)
             {
-                tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
-                tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
-                tbValorTotalOrcamento.Text = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
+                btNotaGerar.Enabled = false;
+                tbNotaNumero.Text = orcamento.NotaFiscal.NotaFiscalID.ToString();
+                tbNotaDataEmissao.Text = orcamento.NotaFiscal.DataEmissao.ToShortDateString();
             }
+            else
+            {
+                btNotaGerar.Enabled = true;
+                tbNotaNumero.Clear();
+                tbNotaDataEmissao.Clear();
+            }
+            ignoracheckevent = false;
         }
 
-        private void ExcluirItem()
+        private void PreencheCamposNotaFiscal(NotaFiscal notafiscal)
         {
-            if (itemSelecionado != null)
-            {
-                itens.RemoveAll(i => i.Item.ItemID == itemSelecionado.Item.ItemID);
-                dgvItens.Rows.Clear();
-                dgvItens.Refresh();
-                LimpaCamposItem(false);
-                PreencheGridItens(itens);
-                CalculaTotalOrcamento();
-            }
+            tbNotaDataEmissao.Text = notafiscal.DataEmissao.ToShortDateString();
+            tbNotaNumero.Text = notafiscal.NotaFiscalID.ToString();
+            btNotaGerar.Enabled = false;
         }
 
+        private void PreencheCamposItem(OrcamentoItem item)
+        {
+            if (item != null)
+            {
+                ignoracheckevent = true;
+                buscaItem.PreencheCampos(item.Item);
+                tbQuantidade.Text = item.Quantidade.ToString("############0.00");
+                tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
+                tbValorTotItem.Text = item.ValorTotal.ToString("############0.00");
+                tbDescontoItemPorc.Text = item.DescontoPorc.ToString("##0.00");
+                tbDescontoItem.Text = item.Desconto.ToString("############0.00");
+                ignoracheckevent = false;
+            }
+            else
+            {
+                MessageBox.Show("Item não encontrado no banco de dados",
+                "Item não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                buscaItem.Focus();
+            }
+        }
 
         private void PreencheGridItens(List<OrcamentoItem> itens)
         {

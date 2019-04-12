@@ -13,7 +13,7 @@ namespace _5gpro.Bll
 
         private readonly GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
 
-        public GrupoUsuario BuscaGrupoUsuarioByID(string cod)
+        public GrupoUsuario BuscaGrupoUsuarioByID(int cod)
         {
             return grupousuarioDAO.BuscarGrupoUsuarioById(cod);
         }

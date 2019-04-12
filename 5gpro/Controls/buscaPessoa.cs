@@ -50,6 +50,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoPessoa_Leave(object sender, System.EventArgs e)
         {
+            if (!int.TryParse(tbCodigoPessoa.Text, out int codigo)) { tbCodigoPessoa.Clear(); }
             if (tbCodigoPessoa.Text.Length > 0)
             {
                 pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigoPessoa.Text));

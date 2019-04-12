@@ -2,13 +2,6 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -136,7 +129,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigoUsuario_Leave(object sender, EventArgs e)
         {
-            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
+            if (!int.TryParse(tbCodigoUsuario.Text, out int codigo)) { tbCodigoUsuario.Clear(); }
             if (!editando)
             {
                 if (tbCodigoUsuario.Text.Length > 0)
@@ -188,19 +181,6 @@ namespace _5gpro.Forms
                         Editando(false);
                     }
                 }
-            }
-        }
-
-        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
-        {
-            if (tbCodGrupoUsuario.Text.Length > 0)
-            {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-            else
-            {
-                tbNomeGrupoUsuario.Text = "";
             }
         }
 
@@ -315,7 +295,7 @@ namespace _5gpro.Forms
                 }
 
                 usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-                usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(buscaGrupoUsuario.grupoUsuario.GrupoUsuarioID);
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
                 usuario.Email = tbEmailUsuario.Text;
@@ -529,8 +509,7 @@ namespace _5gpro.Forms
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
             tbSenhaUsuario.Clear();
             tbConfirmaSenhaUsuario.Clear();
-            tbCodGrupoUsuario.Clear();
-            tbNomeGrupoUsuario.Clear();
+            buscaGrupoUsuario.Limpa();
             tbNomeUsuario.Clear();
             tbSobrenomeUsuario.Clear();
             tbEmailUsuario.Clear();
@@ -552,7 +531,7 @@ namespace _5gpro.Forms
             tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
+            buscaGrupoUsuario.PreencheCampos(usuario.Grupousuario);
             tbNomeUsuario.Text = usuario.Nome;
             tbSobrenomeUsuario.Text = usuario.Sobrenome;
             tbEmailUsuario.Text = usuario.Email;
@@ -560,7 +539,7 @@ namespace _5gpro.Forms
 
             if (usuario.Grupousuario != null)
             {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(buscaGrupoUsuario.grupoUsuario.GrupoUsuarioID);
                 PreencheCamposGrupoUsuario(grupousuario);
             }
 
@@ -576,8 +555,7 @@ namespace _5gpro.Forms
         {
             if (grupousuario != null)
             {
-                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
-                tbNomeGrupoUsuario.Text = grupousuario.Nome;
+                buscaGrupoUsuario.PreencheCampos(grupousuario);
             }
             else
             {
@@ -585,8 +563,7 @@ namespace _5gpro.Forms
                 "Grupo de usuários não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodGrupoUsuario.Focus();
-                tbNomeGrupoUsuario.SelectAll();
+                buscaGrupoUsuario.Focus();
             }
         }
     }

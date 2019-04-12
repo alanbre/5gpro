@@ -87,12 +87,12 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
         {
-            tbCodGrupoUsuario.Text = tbCodGrupoUsuario.Text == "0" ? "" : tbCodGrupoUsuario.Text;
+            if (!int.TryParse(tbCodGrupoUsuario.Text, out int codigo)) { tbCodGrupoUsuario.Clear(); }
             if (!editando)
             {
                 if (tbCodGrupoUsuario.Text.Length > 0)
                 {
-                    GrupoUsuario newgrupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                    GrupoUsuario newgrupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(int.Parse(tbCodGrupoUsuario.Text));
 
                     if (newgrupousuario != null)
                     {
@@ -127,7 +127,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodGrupoUsuario.Text.Length > 0)
                     {
-                        GrupoUsuario newgrupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                        GrupoUsuario newgrupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(int.Parse(tbCodGrupoUsuario.Text));
                         if (newgrupousuario != null)
                         {
                             grupousuario = newgrupousuario;
@@ -356,7 +356,7 @@ namespace _5gpro.Forms
                 {
                     if (grupousuario != null)
                     {
-                        grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(grupousuario.GrupoUsuarioID.ToString());
+                        grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(grupousuario.GrupoUsuarioID);
                         PreencheCampos(grupousuario);
                         Editando(false);
                     }
@@ -369,7 +369,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(grupousuario.GrupoUsuarioID.ToString());
+                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(grupousuario.GrupoUsuarioID);
                 PreencheCampos(grupousuario);
                 Editando(false);
             }

@@ -13,7 +13,7 @@ namespace _5gpro.Daos
     {
         private readonly PermissaoBLL permissaoBLL = new PermissaoBLL();
 
-        public GrupoUsuario BuscarGrupoUsuarioById(string cod)
+        public GrupoUsuario BuscarGrupoUsuarioById(int cod)
         {
             GrupoUsuario grupousuario = new GrupoUsuario(); ;
             try
