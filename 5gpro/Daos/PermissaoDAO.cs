@@ -11,8 +11,15 @@ using _5gpro.Forms;
 
 namespace _5gpro.Daos
 {
-    class PermissaoDAO : ConexaoDAO
+    public class PermissaoDAO
     {
+
+        public ConexaoDAO Connect { get; }
+        public PermissaoDAO(ConexaoDAO c)
+        {
+            Connect = c;
+        }
+
 
         //TENTANDO MELHORAR
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesByIdGrupo(string cod)
@@ -27,14 +34,14 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * 
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * 
                                              FROM permissao_has_grupo_usuario pg INNER JOIN permissao p 
                                              ON pg.idpermissao = p.idpermissao 
-                                             WHERE idgrupousuario = @idgrupousuario", Conexao);
-                Comando.Parameters.AddWithValue("@idgrupousuario", cod);
+                                             WHERE idgrupousuario = @idgrupousuario", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idgrupousuario", cod);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -74,7 +81,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return permissoes;
@@ -139,12 +146,12 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * 
-                                             FROM permissao", Conexao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * 
+                                             FROM permissao", Connect.Conexao);
 
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -182,7 +189,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return permissoes;
@@ -242,11 +249,11 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM permissao as p WHERE p.idpermissao = @idpermissao", Conexao);
-                Comando.Parameters.AddWithValue("@idpermissao", idpermissao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM permissao as p WHERE p.idpermissao = @idpermissao", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idpermissao", idpermissao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -264,7 +271,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return permissao;
         }
@@ -275,11 +282,11 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT p.idpermissao FROM permissao as p WHERE p.codigo = @codigo", Conexao);
-                Comando.Parameters.AddWithValue("@codigo", codpermissao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT p.idpermissao FROM permissao as p WHERE p.codigo = @codigo", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@codigo", codpermissao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -293,7 +300,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return permissaoid;
         }
@@ -305,16 +312,16 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT pg.nivel FROM permissao_has_grupo_usuario as pg 
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT pg.nivel FROM permissao_has_grupo_usuario as pg 
                                              WHERE idgrupousuario = @idgrupousuario 
-                                             AND idpermissao = @idpermissao", Conexao);
-                        
-                
-                Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
-                Comando.Parameters.AddWithValue("@idpermissao", codpermissao);
+                                             AND idpermissao = @idpermissao", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
+
+                Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
+                Connect.Comando.Parameters.AddWithValue("@idpermissao", codpermissao);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -328,7 +335,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return nivel;
         }
@@ -339,11 +346,11 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT DISTINCT p.idpermissao 
-                                             FROM permissao_has_grupo_usuario as p", Conexao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT DISTINCT p.idpermissao 
+                                             FROM permissao_has_grupo_usuario as p", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -359,7 +366,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return idpermissoesNpraN;
@@ -371,15 +378,15 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * 
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * 
                                              FROM permissao_has_grupo_usuario as p
                                              WHERE p.idgrupousuario = @idgrupousuario
-                                            ", Conexao);
+                                            ", Connect.Conexao);
 
-                Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
+                Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -397,7 +404,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return listacomniveis;

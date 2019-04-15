@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 using System;
@@ -11,7 +11,7 @@ namespace _5gpro.Controls
     {
         public Cidade cidade = null;
 
-        private readonly CidadeBLL cidadeBLL = new CidadeBLL();
+        private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
         public BuscaCidade()
         {
@@ -36,7 +36,7 @@ namespace _5gpro.Controls
         {
             if (tbCodigoCidade.Text.Length > 0)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
+                cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else

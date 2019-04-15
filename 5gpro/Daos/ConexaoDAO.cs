@@ -6,10 +6,10 @@ namespace _5gpro.Daos
     public class ConexaoDAO
     {
         //protected static string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-        protected static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
-        protected MySqlConnection Conexao;
-        protected MySqlTransaction tr = null;
-        protected MySqlCommand Comando = null;
+        public static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
+        public MySqlConnection Conexao;
+        public MySqlTransaction tr = null;
+        public MySqlCommand Comando = null;
 
         //MÉTODO PARA CONECTAR NO BANCO
         public void AbrirConexao()

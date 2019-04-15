@@ -9,22 +9,28 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
-    class LogadoDAO : ConexaoDAO
+    public class LogadoDAO
     {
-        public UsuarioDAO usuarioDAO = new UsuarioDAO();
+        public ConexaoDAO Connect { get; }
+        public LogadoDAO(ConexaoDAO c)
+        {
+            Connect = c;
+        }
+
+         
 
         public Logado BuscaLogadoByUsuario(Usuario usuario)
         {
             Logado usulogado = null;
-
+            UsuarioDAO usuarioDAO = new UsuarioDAO(Connect);
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * FROM logado WHERE idusuario = @idusuario;", Conexao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM logado WHERE idusuario = @idusuario;", Connect.Conexao);
 
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -45,7 +51,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return usulogado;
@@ -54,15 +60,15 @@ namespace _5gpro.Daos
         public Logado BuscaLogadoByMac(string mac)
         {
             Logado usulogado = null;
-
+            UsuarioDAO usuarioDAO = new UsuarioDAO(Connect);
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * FROM logado WHERE mac = @mac;", Conexao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM logado WHERE mac = @mac;", Connect.Conexao);
 
-                Comando.Parameters.AddWithValue("@mac", mac);
+                Connect.Comando.Parameters.AddWithValue("@mac", mac);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -83,7 +89,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return usulogado;
@@ -95,21 +101,21 @@ namespace _5gpro.Daos
             int retorno = 0;
             try
             {
-                AbrirConexao();
+                Connect.AbrirConexao();
 
-                Comando = new MySqlCommand(@"INSERT INTO logado
+                Connect.Comando = new MySqlCommand(@"INSERT INTO logado
                          (idusuario, mac, nomepc, ipdopc)
                           VALUES
                          (@idusuario, @mac, @nomepc, @ipdopc)
                          ;",
-                        Conexao);
+                        Connect.Conexao);
 
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Comando.Parameters.AddWithValue("@mac", mac);
-                Comando.Parameters.AddWithValue("@nomepc", nomepc);
-                Comando.Parameters.AddWithValue("@ipdopc", ipdopc);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Connect.Comando.Parameters.AddWithValue("@mac", mac);
+                Connect.Comando.Parameters.AddWithValue("@nomepc", nomepc);
+                Connect.Comando.Parameters.AddWithValue("@ipdopc", ipdopc);
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = Connect.Comando.ExecuteNonQuery();
 
             }
             catch (MySqlException ex)
@@ -119,7 +125,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return retorno;
         }
@@ -130,13 +136,13 @@ namespace _5gpro.Daos
             int retorno = 0;
             try
             {
-                AbrirConexao();
+                Connect.AbrirConexao();
 
-                Comando = new MySqlCommand(@"DELETE FROM logado WHERE mac = @mac", Conexao);
+                Connect.Comando = new MySqlCommand(@"DELETE FROM logado WHERE mac = @mac", Connect.Conexao);
 
-                Comando.Parameters.AddWithValue("@mac", mac);
+                Connect.Comando.Parameters.AddWithValue("@mac", mac);
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = Connect.Comando.ExecuteNonQuery();
 
             }
             catch (MySqlException ex)
@@ -146,7 +152,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return retorno;
         }

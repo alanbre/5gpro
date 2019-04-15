@@ -80,16 +80,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\CidadeBLL.cs" />
-    <Compile Include="Bll\EstadoBLL.cs" />
-    <Compile Include="Bll\GrupoUsuarioBLL.cs" />
-    <Compile Include="Bll\LogadoBLL.cs" />
     <Compile Include="Bll\NotaFiscalBLL.cs" />
     <Compile Include="Bll\OrcamentoBLL.cs" />
-    <Compile Include="Bll\PermissaoBLL.cs" />
     <Compile Include="Bll\PessoaBLL.cs" />
     <Compile Include="Bll\UnimedidaBLL.cs" />
-    <Compile Include="Bll\UsuarioBLL.cs" />
     <Compile Include="Bll\ItemBLL.cs" />
     <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
