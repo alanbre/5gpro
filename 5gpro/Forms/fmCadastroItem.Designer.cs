@@ -29,15 +29,12 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.buscaUnidadeMedida = new _5gpro.Controls.BuscaUnidadeMedida();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
             this.tbReferencia = new System.Windows.Forms.TextBox();
             this.lbReferencia = new System.Windows.Forms.Label();
-            this.tbDescricaoUndMedida = new System.Windows.Forms.TextBox();
-            this.btBuscaUndMedida = new System.Windows.Forms.Button();
-            this.tbCodUnimedida = new System.Windows.Forms.TextBox();
-            this.lbUndMedida = new System.Windows.Forms.Label();
             this.tbDescricaoDeCompra = new System.Windows.Forms.TextBox();
             this.lbDescricaoFornecedor = new System.Windows.Forms.Label();
             this.tbDescricao = new System.Windows.Forms.TextBox();
@@ -68,13 +65,10 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.buscaUnidadeMedida);
             this.pnDadosGerais.Controls.Add(this.gbTipoDeItem);
             this.pnDadosGerais.Controls.Add(this.tbReferencia);
             this.pnDadosGerais.Controls.Add(this.lbReferencia);
-            this.pnDadosGerais.Controls.Add(this.tbDescricaoUndMedida);
-            this.pnDadosGerais.Controls.Add(this.btBuscaUndMedida);
-            this.pnDadosGerais.Controls.Add(this.tbCodUnimedida);
-            this.pnDadosGerais.Controls.Add(this.lbUndMedida);
             this.pnDadosGerais.Controls.Add(this.tbDescricaoDeCompra);
             this.pnDadosGerais.Controls.Add(this.lbDescricaoFornecedor);
             this.pnDadosGerais.Controls.Add(this.tbDescricao);
@@ -86,6 +80,14 @@
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 218);
             this.pnDadosGerais.TabIndex = 0;
             // 
+            // buscaUnidadeMedida
+            // 
+            this.buscaUnidadeMedida.Location = new System.Drawing.Point(9, 129);
+            this.buscaUnidadeMedida.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaUnidadeMedida.Name = "buscaUnidadeMedida";
+            this.buscaUnidadeMedida.Size = new System.Drawing.Size(277, 41);
+            this.buscaUnidadeMedida.TabIndex = 6;
+            // 
             // gbTipoDeItem
             // 
             this.gbTipoDeItem.Controls.Add(this.rbServico);
@@ -93,7 +95,7 @@
             this.gbTipoDeItem.Location = new System.Drawing.Point(286, 138);
             this.gbTipoDeItem.Name = "gbTipoDeItem";
             this.gbTipoDeItem.Size = new System.Drawing.Size(131, 45);
-            this.gbTipoDeItem.TabIndex = 0;
+            this.gbTipoDeItem.TabIndex = 7;
             this.gbTipoDeItem.TabStop = false;
             this.gbTipoDeItem.Text = "Tipo de item";
             // 
@@ -103,7 +105,7 @@
             this.rbServico.Location = new System.Drawing.Point(68, 19);
             this.rbServico.Name = "rbServico";
             this.rbServico.Size = new System.Drawing.Size(61, 17);
-            this.rbServico.TabIndex = 9;
+            this.rbServico.TabIndex = 1;
             this.rbServico.Text = "Serviço";
             this.rbServico.UseVisualStyleBackColor = true;
             this.rbServico.CheckedChanged += new System.EventHandler(this.rbServico_CheckedChanged);
@@ -115,7 +117,7 @@
             this.rbProduto.Location = new System.Drawing.Point(6, 19);
             this.rbProduto.Name = "rbProduto";
             this.rbProduto.Size = new System.Drawing.Size(62, 17);
-            this.rbProduto.TabIndex = 8;
+            this.rbProduto.TabIndex = 0;
             this.rbProduto.TabStop = true;
             this.rbProduto.Text = "Produto";
             this.rbProduto.UseVisualStyleBackColor = true;
@@ -126,7 +128,7 @@
             this.tbReferencia.Location = new System.Drawing.Point(15, 186);
             this.tbReferencia.Name = "tbReferencia";
             this.tbReferencia.Size = new System.Drawing.Size(265, 20);
-            this.tbReferencia.TabIndex = 10;
+            this.tbReferencia.TabIndex = 9;
             this.tbReferencia.TextChanged += new System.EventHandler(this.tbReferencia_TextChanged);
             // 
             // lbReferencia
@@ -135,46 +137,8 @@
             this.lbReferencia.Location = new System.Drawing.Point(12, 170);
             this.lbReferencia.Name = "lbReferencia";
             this.lbReferencia.Size = new System.Drawing.Size(59, 13);
-            this.lbReferencia.TabIndex = 11;
+            this.lbReferencia.TabIndex = 8;
             this.lbReferencia.Text = "Referência";
-            // 
-            // tbDescricaoUndMedida
-            // 
-            this.tbDescricaoUndMedida.Enabled = false;
-            this.tbDescricaoUndMedida.Location = new System.Drawing.Point(99, 147);
-            this.tbDescricaoUndMedida.Name = "tbDescricaoUndMedida";
-            this.tbDescricaoUndMedida.Size = new System.Drawing.Size(181, 20);
-            this.tbDescricaoUndMedida.TabIndex = 9;
-            this.tbDescricaoUndMedida.TabStop = false;
-            // 
-            // btBuscaUndMedida
-            // 
-            this.btBuscaUndMedida.Location = new System.Drawing.Point(77, 147);
-            this.btBuscaUndMedida.Name = "btBuscaUndMedida";
-            this.btBuscaUndMedida.Size = new System.Drawing.Size(20, 20);
-            this.btBuscaUndMedida.TabIndex = 8;
-            this.btBuscaUndMedida.TabStop = false;
-            this.btBuscaUndMedida.UseVisualStyleBackColor = true;
-            this.btBuscaUndMedida.Click += new System.EventHandler(this.btBuscaUndMedida_Click);
-            // 
-            // tbCodUnimedida
-            // 
-            this.tbCodUnimedida.Location = new System.Drawing.Point(16, 147);
-            this.tbCodUnimedida.Name = "tbCodUnimedida";
-            this.tbCodUnimedida.Size = new System.Drawing.Size(59, 20);
-            this.tbCodUnimedida.TabIndex = 7;
-            this.tbCodUnimedida.TextChanged += new System.EventHandler(this.tbCodUnimedida_TextChanged);
-            this.tbCodUnimedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCodUnimedida_KeyUp);
-            this.tbCodUnimedida.Leave += new System.EventHandler(this.tbCodUnimedida_Leave_1);
-            // 
-            // lbUndMedida
-            // 
-            this.lbUndMedida.AutoSize = true;
-            this.lbUndMedida.Location = new System.Drawing.Point(13, 131);
-            this.lbUndMedida.Name = "lbUndMedida";
-            this.lbUndMedida.Size = new System.Drawing.Size(99, 13);
-            this.lbUndMedida.TabIndex = 6;
-            this.lbUndMedida.Text = "Unidade de medida";
             // 
             // tbDescricaoDeCompra
             // 
@@ -251,7 +215,7 @@
             this.tcItens.Name = "tcItens";
             this.tcItens.SelectedIndex = 0;
             this.tcItens.Size = new System.Drawing.Size(1108, 298);
-            this.tcItens.TabIndex = 0;
+            this.tcItens.TabIndex = 1;
             // 
             // tpEstoque
             // 
@@ -274,7 +238,7 @@
             this.tbEstoqueNecessario.Location = new System.Drawing.Point(6, 58);
             this.tbEstoqueNecessario.Name = "tbEstoqueNecessario";
             this.tbEstoqueNecessario.Size = new System.Drawing.Size(108, 20);
-            this.tbEstoqueNecessario.TabIndex = 12;
+            this.tbEstoqueNecessario.TabIndex = 3;
             this.tbEstoqueNecessario.TextChanged += new System.EventHandler(this.tbEstoqueNecessario_TextChanged);
             // 
             // lbEstoqueNecessario
@@ -283,7 +247,7 @@
             this.lbEstoqueNecessario.Location = new System.Drawing.Point(6, 42);
             this.lbEstoqueNecessario.Name = "lbEstoqueNecessario";
             this.lbEstoqueNecessario.Size = new System.Drawing.Size(100, 13);
-            this.lbEstoqueNecessario.TabIndex = 3;
+            this.lbEstoqueNecessario.TabIndex = 2;
             this.lbEstoqueNecessario.Text = "Estoque necessário";
             // 
             // btHistEntradas
@@ -293,7 +257,7 @@
             this.btHistEntradas.Location = new System.Drawing.Point(94, 19);
             this.btHistEntradas.Name = "btHistEntradas";
             this.btHistEntradas.Size = new System.Drawing.Size(20, 20);
-            this.btHistEntradas.TabIndex = 2;
+            this.btHistEntradas.TabIndex = 4;
             this.btHistEntradas.TabStop = false;
             this.btHistEntradas.UseVisualStyleBackColor = true;
             // 
@@ -302,7 +266,7 @@
             this.tbPrecoUltimaEntrada.Location = new System.Drawing.Point(6, 19);
             this.tbPrecoUltimaEntrada.Name = "tbPrecoUltimaEntrada";
             this.tbPrecoUltimaEntrada.Size = new System.Drawing.Size(86, 20);
-            this.tbPrecoUltimaEntrada.TabIndex = 11;
+            this.tbPrecoUltimaEntrada.TabIndex = 1;
             this.tbPrecoUltimaEntrada.TextChanged += new System.EventHandler(this.tbPrecoUltimaEntrada_TextChanged);
             // 
             // lbPrecoUltimaEntrada
@@ -331,7 +295,7 @@
             this.tbPrecoVenda.Location = new System.Drawing.Point(6, 19);
             this.tbPrecoVenda.Name = "tbPrecoVenda";
             this.tbPrecoVenda.Size = new System.Drawing.Size(86, 20);
-            this.tbPrecoVenda.TabIndex = 13;
+            this.tbPrecoVenda.TabIndex = 1;
             this.tbPrecoVenda.TextChanged += new System.EventHandler(this.tbPrecoVenda_TextChanged);
             // 
             // lbPrecoVenda
@@ -349,7 +313,7 @@
             this.menuVertical.Margin = new System.Windows.Forms.Padding(0);
             this.menuVertical.Name = "menuVertical";
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
-            this.menuVertical.TabIndex = 1;
+            this.menuVertical.TabIndex = 2;
             this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical1_Novo_Clicked);
             this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical1_Buscar_Clicked);
             this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical1_Salvar_Clicked);
@@ -394,10 +358,6 @@
         private System.Windows.Forms.Panel pnDadosGerais;
         private System.Windows.Forms.TextBox tbReferencia;
         private System.Windows.Forms.Label lbReferencia;
-        private System.Windows.Forms.TextBox tbDescricaoUndMedida;
-        private System.Windows.Forms.Button btBuscaUndMedida;
-        private System.Windows.Forms.TextBox tbCodUnimedida;
-        private System.Windows.Forms.Label lbUndMedida;
         private System.Windows.Forms.TextBox tbDescricaoDeCompra;
         private System.Windows.Forms.Label lbDescricaoFornecedor;
         private System.Windows.Forms.TextBox tbDescricao;
@@ -419,5 +379,6 @@
         private System.Windows.Forms.Label lbPrecoVenda;
         private System.Windows.Forms.TextBox tbPrecoVenda;
         private Controls.MenuVertical menuVertical;
+        private Controls.BuscaUnidadeMedida buscaUnidadeMedida;
     }
 }

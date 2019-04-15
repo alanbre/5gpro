@@ -29,6 +29,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoEstado_Leave(object sender, EventArgs e)
         {
+            if (!int.TryParse(tbCodigoEstado.Text, out int codigo)) { tbCodigoEstado.Clear(); }
             if (tbCodigoEstado.Text.Length > 0)
             {
                 estado = estadoDAO.BuscaEstadoByCod(int.Parse(tbCodigoEstado.Text));

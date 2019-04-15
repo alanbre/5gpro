@@ -33,6 +33,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoItem_Leave(object sender, System.EventArgs e)
         {
+            if (!int.TryParse(tbCodigoItem.Text, out int codigo)) { tbCodigoItem.Clear(); }
             if (tbCodigoItem.Text.Length > 0)
             {
                 item = itemBLL.BuscaItemById(int.Parse(tbCodigoItem.Text));
