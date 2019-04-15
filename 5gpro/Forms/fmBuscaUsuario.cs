@@ -47,7 +47,7 @@ namespace _5gpro.Forms
             }
             dgvUsuarios.DataSource = table;
 
-          
+
         }
 
         private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

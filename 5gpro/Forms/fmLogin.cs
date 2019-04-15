@@ -121,5 +121,10 @@ namespace _5gpro.Forms
                 tbNomeUsuario.Text = "";
             }
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+           Console.WriteLine(usuarioDAO.BuscarUsuarioAnterior("2").Grupousuario.GrupoUsuarioID);
+        }
     }
 }

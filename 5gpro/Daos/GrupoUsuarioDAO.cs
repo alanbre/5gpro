@@ -41,7 +41,7 @@ namespace _5gpro.Daos
                     {
                         GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Permissoes = permissaoDAO.BuscaPermissoesByIdGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
+                        //Permissoes = permissaoDAO.BuscaPermissoesByIdGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
                     };
 
                     reader.Close();
@@ -62,7 +62,7 @@ namespace _5gpro.Daos
             return grupousuario;
         }
 
-        public List<GrupoUsuario> BuscarGrupoUsuario(string nome)
+        public IEnumerable<GrupoUsuario> BuscarGrupoUsuario(string nome)
         {
             List<GrupoUsuario> gruposusuarios = new List<GrupoUsuario>();
             string conNomeGrupoUsuario = nome.Length > 0 ? "AND nome LIKE @nome" : "";
@@ -77,7 +77,6 @@ namespace _5gpro.Daos
                                              ORDER BY idgrupousuario", Connect.Conexao);
 
                 if (conNomeGrupoUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
@@ -104,6 +103,7 @@ namespace _5gpro.Daos
             return gruposusuarios;
         }
 
+
         public List<GrupoUsuario> BuscarTodosGrupoUsuarios()
         {
             PermissaoDAO permissaoDAO = new PermissaoDAO(Connect);
@@ -121,7 +121,7 @@ namespace _5gpro.Daos
                     {
                         GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Permissoes = permissaoDAO.BuscaPermissoesByIdGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
+                        //Permissoes = permissaoDAO.BuscaPermissoesByIdGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
                     };
                     listagrupousuario.Add(grupousuario);
 

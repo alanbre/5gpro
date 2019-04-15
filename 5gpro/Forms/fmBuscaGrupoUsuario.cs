@@ -3,16 +3,18 @@ using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
     public partial class fmBuscaGrupoUsuario : Form
     {
+        static ConexaoDAO connection = new ConexaoDAO();
 
         public List<GrupoUsuario> Listagrupousuario;
         public GrupoUsuario GrupoUsuario;
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(new ConexaoDAO());
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
         
         public GrupoUsuario grupousuarioSelecionado;
 
@@ -23,7 +25,7 @@ namespace _5gpro.Forms
 
         public void BuscaGrupousuario()
         {
-            Listagrupousuario = grupousuarioDAO.BuscarGrupoUsuario(tbFiltroNomeGrupoUsuario.Text);
+            Listagrupousuario = grupousuarioDAO.BuscarGrupoUsuario(tbFiltroNomeGrupoUsuario.Text).ToList();
 
             dgvGrupoUsuario.Rows.Clear();
             foreach (GrupoUsuario gu in Listagrupousuario)

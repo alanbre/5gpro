@@ -17,17 +17,17 @@ namespace _5gpro.Forms
     public partial class fmCadastroUsuario : Form
     {
         Usuario usuario;
-        static ConexaoDAO conexao = new ConexaoDAO();
+        static ConexaoDAO connection = new ConexaoDAO();
         GrupoUsuario grupousuario = new GrupoUsuario();
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(conexao);
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO(conexao);
-        LogadoDAO logadoDAO = new LogadoDAO(conexao);
+        UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+        LogadoDAO logadoDAO = new LogadoDAO(connection);
         Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(conexao);
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
 
