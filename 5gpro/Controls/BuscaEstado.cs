@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using _5gpro.Bll;
 using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;

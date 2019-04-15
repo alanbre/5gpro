@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 
@@ -6,15 +6,15 @@ namespace _5gpro.Funcoes
 {
     class NotaFiscalAux
     {
-        NotaFiscalBLL notaFiscalBLL = new NotaFiscalBLL();
-        OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+        NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
+        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
 
         public NotaFiscal GerarNotaFiscal(Orcamento orcamento)
         {
             NotaFiscal notafiscal = new NotaFiscal();
 
-            notafiscal.NotaFiscalID = notaFiscalBLL.BuscaProxCodigoDisponivel();
+            notafiscal.NotaFiscalID = notaFiscalDAO.BuscaProxCodigoDisponivel();
 
             notafiscal.Pessoa = orcamento.Pessoa;
             notafiscal.DataEmissao = DateTime.Now;
@@ -37,8 +37,8 @@ namespace _5gpro.Funcoes
                 notafiscal.NotaFiscalItem.Add(nfi);
             }
 
-            int resultado = notaFiscalBLL.SalvarOuAtualizarDocumento(notafiscal);
-            if (resultado > 0) { resultado = orcamentoBLL.VincularNotaAoOrcamento(orcamento, notafiscal); }
+            int resultado = notaFiscalDAO.SalvarOuAtualizarDocumento(notafiscal);
+            if (resultado > 0) { resultado = orcamentoDAO.VincularNotaAoOrcamento(orcamento, notafiscal); }
             return resultado > 0 ? notafiscal : null;
         }
     }

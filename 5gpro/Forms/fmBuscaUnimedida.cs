@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Daos;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
@@ -18,7 +17,7 @@ namespace _5gpro.Forms
 
         public List<Unimedida> Listaunimedida;
         public Unimedida Unimedida;
-        private UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
+        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
 
         //Unimedida unimedida = new Unimedida();
 
@@ -51,7 +50,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Descrição", typeof(string));
 
 
-            Listaunimedida = unimedidaBLL.BuscarTodasUnimedidas();
+            Listaunimedida = unimedidaDAO.BuscarTodasUnimedidas();
 
             foreach (Unimedida u in Listaunimedida)
             {

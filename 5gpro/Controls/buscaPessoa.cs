@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 using System;
@@ -12,7 +12,7 @@ namespace _5gpro.Controls
         public Pessoa pessoa = new Pessoa();
         public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
 
-        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         [Description("Texto do Label"), Category("Appearance")]
         public string LabelText
@@ -52,7 +52,7 @@ namespace _5gpro.Controls
         {
             if (tbCodigoPessoa.Text.Length > 0)
             {
-                pessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigoPessoa.Text));
+                pessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigoPessoa.Text));
                 PreencheCamposPessoa(pessoa);
             }
             else

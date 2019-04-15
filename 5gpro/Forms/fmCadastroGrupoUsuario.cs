@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Daos;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -455,7 +454,9 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
+
                     int resultado = grupousuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario, listapermissoes);
+
                     validacao.despintarCampos(controls);
                     //resultado 0 = nada foi inserido(houve algum erro)
                     //resultado 1 = foi inserido com sucesso
@@ -619,7 +620,6 @@ namespace _5gpro.Forms
             editando = edit;
             menuVertical.Editando(edit, Nivel);
         }
-
 
         private void EnterTab(object sender, KeyEventArgs e)
         {

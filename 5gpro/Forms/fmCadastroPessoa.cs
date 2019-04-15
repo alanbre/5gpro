@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Daos;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -13,7 +12,7 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form
     {
         private Pessoa pessoa;
-        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly Validacao validacao = new Validacao();
 
         //Controle de Permissões
@@ -201,7 +200,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    Pessoa newpessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigo.Text));
+                    Pessoa newpessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigo.Text));
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -231,7 +230,7 @@ namespace _5gpro.Forms
                     if (tbCodigo.Text.Length > 0)
                     {
 
-                        Pessoa newpessoa = pessoaBLL.BuscarPessoaById(int.Parse(tbCodigo.Text));
+                        Pessoa newpessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigo.Text));
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;
@@ -309,7 +308,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
                     pessoa = null;
                     Editando(false);
                     tbNome.Focus();
@@ -319,7 +318,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = pessoaBLL.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
                 pessoa = null;
                 Editando(false);
                 tbNome.Focus();
@@ -372,7 +371,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = pessoaBLL.SalvarOuAtualizarPessoa(pessoa);
+                    int resultado = pessoaDAO.SalvarOuAtualizarPessoa(pessoa);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -409,7 +408,7 @@ namespace _5gpro.Forms
                 {
                     if (pessoa != null)
                     {
-                        pessoa = pessoaBLL.BuscarPessoaById(pessoa.PessoaID);
+                        pessoa = pessoaDAO.BuscarPessoaById(pessoa.PessoaID);
                         PreencheCampos(pessoa);
                         Editando(false);
                     }
@@ -424,7 +423,7 @@ namespace _5gpro.Forms
             {
                 if (pessoa != null)
                 {
-                    pessoa = pessoaBLL.BuscarPessoaById(pessoa.PessoaID);
+                    pessoa = pessoaDAO.BuscarPessoaById(pessoa.PessoaID);
                     PreencheCampos(pessoa);
                 }
                 else
@@ -450,7 +449,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                Pessoa newpessoa = pessoaDAO.BuscarProximaPessoa(tbCodigo.Text);
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;
@@ -465,7 +464,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaDAO.BuscarProximaPessoa(tbCodigo.Text);
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -474,7 +473,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                        newpessoa = pessoaDAO.BuscarPessoaAnterior(tbCodigo.Text);
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;
@@ -499,7 +498,7 @@ namespace _5gpro.Forms
                 //la do inicio do arquivo.
 
                 validacao.despintarCampos(controls);
-                Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                Pessoa newpessoa = pessoaDAO.BuscarPessoaAnterior(tbCodigo.Text);
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;
@@ -514,7 +513,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaBLL.BuscarPessoaAnterior(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaDAO.BuscarPessoaAnterior(tbCodigo.Text);
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -523,7 +522,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newpessoa = pessoaBLL.BuscarProximaPessoa(tbCodigo.Text);
+                        newpessoa = pessoaDAO.BuscarProximaPessoa(tbCodigo.Text);
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;

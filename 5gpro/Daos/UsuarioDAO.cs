@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;

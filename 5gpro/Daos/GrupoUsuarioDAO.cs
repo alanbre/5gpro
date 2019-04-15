@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
@@ -140,7 +139,7 @@ namespace _5gpro.Daos
 
         public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario, List<Permissao> listapermissoes)
         {
-            PermissaoDAO permissaoDAO = new PermissaoDAO(Connect);
+            PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
             int retorno = 0;
             try
             {
@@ -167,6 +166,7 @@ namespace _5gpro.Daos
                 {
                     fmCadastroGrupoUsuario.PermissoesStruct todaspermissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
                     todaspermissoes = permissaoDAO.BuscaTodasPermissoes();
+                    
 
                     Connect.Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
                                             VALUES

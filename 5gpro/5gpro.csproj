@@ -80,11 +80,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\NotaFiscalBLL.cs" />
-    <Compile Include="Bll\OrcamentoBLL.cs" />
-    <Compile Include="Bll\PessoaBLL.cs" />
-    <Compile Include="Bll\UnimedidaBLL.cs" />
-    <Compile Include="Bll\ItemBLL.cs" />
     <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,7 +133,6 @@
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Bll\PaisBLL.cs" />
     <Compile Include="Daos\PaisDAO.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pais.cs" />

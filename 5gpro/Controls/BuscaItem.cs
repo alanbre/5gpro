@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 using System;
@@ -10,7 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaItem : UserControl
     {
         public Item item = null;
-        private readonly ItemBLL itemBLL = new ItemBLL();
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
         public BuscaItem()
         {
@@ -35,7 +35,7 @@ namespace _5gpro.Controls
         {
             if (tbCodigoItem.Text.Length > 0)
             {
-                item = itemBLL.BuscaItemById(int.Parse(tbCodigoItem.Text));
+                item = itemDAO.BuscarItemById(int.Parse(tbCodigoItem.Text));
                 PreencheCamposItem(item);
             }
             else
