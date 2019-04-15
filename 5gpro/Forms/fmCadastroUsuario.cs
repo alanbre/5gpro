@@ -3,6 +3,13 @@ using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -132,7 +139,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigoUsuario_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbCodigoUsuario.Text, out int codigo)) { tbCodigoUsuario.Clear(); }
+            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
             if (!editando)
             {
                 if (tbCodigoUsuario.Text.Length > 0)
@@ -525,7 +532,8 @@ namespace _5gpro.Forms
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
             tbSenhaUsuario.Clear();
             tbConfirmaSenhaUsuario.Clear();
-            buscaGrupoUsuario.Limpa();
+            tbCodGrupoUsuario.Clear();
+            tbNomeGrupoUsuario.Clear();
             tbNomeUsuario.Clear();
             tbSobrenomeUsuario.Clear();
             tbEmailUsuario.Clear();
@@ -547,7 +555,7 @@ namespace _5gpro.Forms
             tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            buscaGrupoUsuario.PreencheCampos(usuario.Grupousuario);
+            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
             tbNomeUsuario.Text = usuario.Nome;
             tbSobrenomeUsuario.Text = usuario.Sobrenome;
             tbEmailUsuario.Text = usuario.Email;
@@ -571,7 +579,8 @@ namespace _5gpro.Forms
         {
             if (grupousuario != null)
             {
-                buscaGrupoUsuario.PreencheCampos(grupousuario);
+                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
+                tbNomeGrupoUsuario.Text = grupousuario.Nome;
             }
             else
             {
@@ -579,7 +588,8 @@ namespace _5gpro.Forms
                 "Grupo de usuários não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaGrupoUsuario.Focus();
+                tbCodGrupoUsuario.Focus();
+                tbNomeGrupoUsuario.SelectAll();
             }
         }
     }

@@ -41,8 +41,6 @@
             this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
-            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorTotalDocumento = new System.Windows.Forms.Label();
             this.tbFiltroValorTotalDocumentoInicial = new System.Windows.Forms.TextBox();
@@ -56,6 +54,8 @@
             this.lbAFiltroDataEmissao = new System.Windows.Forms.Label();
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -206,23 +206,6 @@
             this.gbFiltrosDocumento.TabStop = false;
             this.gbFiltrosDocumento.Text = "Filtros do documento";
             // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 54);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 42;
-            // 
-            // buscaCidade
-            // 
-            this.buscaCidade.Location = new System.Drawing.Point(3, 16);
-            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCidade.Name = "buscaCidade";
-            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 41;
-            // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(10, 143);
@@ -311,9 +294,9 @@
             this.lbFiltroDataEmissao.AutoSize = true;
             this.lbFiltroDataEmissao.Location = new System.Drawing.Point(452, 16);
             this.lbFiltroDataEmissao.Name = "lbFiltroDataEmissao";
-            this.lbFiltroDataEmissao.Size = new System.Drawing.Size(86, 13);
+            this.lbFiltroDataEmissao.Size = new System.Drawing.Size(89, 13);
             this.lbFiltroDataEmissao.TabIndex = 12;
-            this.lbFiltroDataEmissao.Text = "Data da emissão";
+            this.lbFiltroDataEmissao.Text = "Data de cadastro";
             // 
             // lbAFiltroDataEmissao
             // 
@@ -343,6 +326,23 @@
             this.dtpFiltroDataEmissaoInicial.Size = new System.Drawing.Size(100, 20);
             this.dtpFiltroDataEmissaoInicial.TabIndex = 13;
             this.dtpFiltroDataEmissaoInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            // 
+            // buscaCidade
+            // 
+            this.buscaCidade.Location = new System.Drawing.Point(3, 16);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 41;
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 54);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 42;
             // 
             // fmBuscaNotaFiscal
             // 

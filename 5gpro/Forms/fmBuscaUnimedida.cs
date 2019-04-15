@@ -13,17 +13,17 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaUnidadeMedida : Form
+    public partial class fmBuscaUnimedida : Form
     {
 
-        public List<UnidadeMedida> Listaunimedida;
-        public UnidadeMedida unidadeMedidaSelecionada;
+        public List<Unimedida> Listaunimedida;
+        public Unimedida Unimedida;
         private UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
 
         //Unimedida unimedida = new Unimedida();
 
 
-        public fmBuscaUnidadeMedida()
+        public fmBuscaUnimedida()
         {
             InitializeComponent();
         }
@@ -53,9 +53,9 @@ namespace _5gpro.Forms
 
             Listaunimedida = unimedidaBLL.BuscarTodasUnimedidas();
 
-            foreach (UnidadeMedida u in Listaunimedida)
+            foreach (Unimedida u in Listaunimedida)
             {
-                table.Rows.Add(u.UnidadeMedidaID, u.Sigla, u.Descricao);
+                table.Rows.Add(u.UnimedidaID, u.Sigla, u.Descricao);
             }
             dgvUnimedida.DataSource = table;
 
@@ -65,10 +65,10 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvUnimedida.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvUnimedida.Rows[selectedRowIndex];
-            unidadeMedidaSelecionada = new UnidadeMedida();
-            unidadeMedidaSelecionada.UnidadeMedidaID = int.Parse(selectedRow.Cells[0].Value.ToString());
-            unidadeMedidaSelecionada.Sigla = Convert.ToString(selectedRow.Cells[1].Value);
-            unidadeMedidaSelecionada.Descricao = Convert.ToString(selectedRow.Cells[2].Value);
+            Unimedida = new Unimedida();
+            Unimedida.UnimedidaID = int.Parse(selectedRow.Cells[0].Value.ToString());
+            Unimedida.Sigla = Convert.ToString(selectedRow.Cells[1].Value);
+            Unimedida.Descricao = Convert.ToString(selectedRow.Cells[2].Value);
             this.Close();
         }
     }

@@ -1,7 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
-using _5gpro.Funcoes;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -35,7 +34,6 @@ namespace _5gpro.Controls
 
         private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
         {
-            if(!int.TryParse(tbCodigoCidade.Text, out int codigo)){ tbCodigoCidade.Clear(); }
             if (tbCodigoCidade.Text.Length > 0)
             {
                 cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
@@ -44,7 +42,7 @@ namespace _5gpro.Controls
             else
             {
                 cidade = null;
-                tbNomeCidade.Clear();
+                tbNomeCidade.Text = "";
             }
         }
 
@@ -110,6 +108,5 @@ namespace _5gpro.Controls
         {
             this.Text_Changed?.Invoke(this, e);  //o editor falou que era melhor fazer assim haha.
         }
-
     }
 }

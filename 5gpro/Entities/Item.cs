@@ -28,7 +28,7 @@ namespace _5gpro.Entities
         public decimal Estoquenecessario { get; set; }
 
         [Required(ErrorMessage = "A Unidade de medida é obrigatória.|tbCodUnimedida", AllowEmptyStrings = false)]
-        public UnidadeMedida Unimedida { get; set; }
+        public Unimedida Unimedida { get; set; }
 
         public virtual ICollection<NotaFiscalItem> NotaFiscalItem { get; set; }
     }

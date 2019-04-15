@@ -88,7 +88,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbCodGrupoUsuario.Text, out int codigo)) { tbCodGrupoUsuario.Clear(); }
+            tbCodGrupoUsuario.Text = tbCodGrupoUsuario.Text == "0" ? "" : tbCodGrupoUsuario.Text;
             if (!editando)
             {
                 if (tbCodGrupoUsuario.Text.Length > 0)

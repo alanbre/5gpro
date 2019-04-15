@@ -220,7 +220,7 @@ namespace _5gpro.Forms
 
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)

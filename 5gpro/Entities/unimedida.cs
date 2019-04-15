@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    public class UnidadeMedida
+    public class Unimedida
     {
-        public int UnidadeMedidaID { get; set; }
+        public int UnimedidaID { get; set; }
         public string Sigla { get; set; }
         public string Descricao { get; set; }
 
