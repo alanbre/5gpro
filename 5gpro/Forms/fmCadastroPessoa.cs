@@ -129,17 +129,6 @@ namespace _5gpro.Forms
         }
 
 
-        //EVENTOS DE KEY PRESS
-        private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-
         //EVENTOS DE TEXTCHANGED
         private void TbNome_TextChanged(object sender, EventArgs e)
         {
@@ -196,7 +185,7 @@ namespace _5gpro.Forms
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
 
-            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)

@@ -3,12 +3,7 @@ using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -17,6 +12,8 @@ namespace _5gpro.Forms
     {
         List<Usuario> usuarios;
         public Usuario usuarioSelecionado = null;
+        static ConexaoDAO connection = new ConexaoDAO();
+
 
 
         public fmBuscaUsuario()
@@ -26,7 +23,6 @@ namespace _5gpro.Forms
 
         private void BuscaUsuario()
         {
-            ConexaoDAO connection = new ConexaoDAO();
             UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
 
             DataTable table = new DataTable();
@@ -38,7 +34,7 @@ namespace _5gpro.Forms
 
 
 
-        usuarios = usuarioDAO.BuscaUsuarios(tbFiltroCodUsuario.Text, tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
+        usuarios = usuarioDAO.BuscaUsuarios(tbFiltroCodUsuario.Text, tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text).ToList();
 
             foreach (Usuario u in usuarios)
             {

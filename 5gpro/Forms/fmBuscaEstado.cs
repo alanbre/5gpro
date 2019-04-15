@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace _5gpro.Forms
     {
         public List<Estado> Estados;
         public Estado EstadoSelecionado;
-        private readonly EstadoBLL estadoBLL = new EstadoBLL();
+        private readonly EstadoDAO estadoDAO = new EstadoDAO();
 
 
         public fmBuscaEstado()
@@ -24,7 +24,7 @@ namespace _5gpro.Forms
         {
 
             dgvEstados.Rows.Clear();
-            Estados = estadoBLL.BuscaEstadoByNome(tbFiltroNomeEstado.Text);
+            Estados = estadoDAO.BuscaEstadoByNome(tbFiltroNomeEstado.Text);
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
             foreach (Estado estado in Estados)

@@ -99,6 +99,12 @@
     <Compile Include="Controls\BuscaEstado.Designer.cs">
       <DependentUpon>BuscaEstado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaGrupoUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaGrupoUsuario.Designer.cs">
+      <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -110,6 +116,12 @@
     </Compile>
     <Compile Include="Controls\BuscaPessoa.Designer.cs">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuscaUnidadeMedida.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaUnidadeMedida.Designer.cs">
+      <DependentUpon>BuscaUnidadeMedida.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\MenuVertical.cs">
       <SubType>UserControl</SubType>
@@ -137,7 +149,7 @@
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
     <Compile Include="Entities\Permissao.cs" />
-    <Compile Include="Entities\Unimedida.cs" />
+    <Compile Include="Entities\UnidadeMedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Bll\PaisBLL.cs" />
@@ -169,11 +181,11 @@
     <Compile Include="Forms\fmBuscaOrcamento.Designer.cs">
       <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaUnimedida.cs">
+    <Compile Include="Forms\fmBuscaUnidadeMedida.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaUnimedida.Designer.cs">
-      <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    <Compile Include="Forms\fmBuscaUnidadeMedida.Designer.cs">
+      <DependentUpon>fmBuscaUnidadeMedida.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaUsuario.cs">
       <SubType>Form</SubType>
@@ -277,11 +289,17 @@
     <EmbeddedResource Include="Controls\BuscaEstado.resx">
       <DependentUpon>BuscaEstado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaGrupoUsuario.resx">
+      <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaItem.resx">
       <DependentUpon>BuscaItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaPessoa.resx">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaUnidadeMedida.resx">
+      <DependentUpon>BuscaUnidadeMedida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MenuVertical.resx">
       <DependentUpon>MenuVertical.cs</DependentUpon>
@@ -304,8 +322,8 @@
     <EmbeddedResource Include="Forms\fmBuscaPessoa.resx">
       <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaUnimedida.resx">
-      <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmBuscaUnidadeMedida.resx">
+      <DependentUpon>fmBuscaUnidadeMedida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaUsuario.resx">
       <DependentUpon>fmBuscaUsuario.cs</DependentUpon>

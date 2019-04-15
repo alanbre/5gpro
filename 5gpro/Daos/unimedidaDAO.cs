@@ -9,13 +9,13 @@ namespace _5gpro.Daos
     class UnimedidaDAO : ConexaoDAO
     {
 
-        public int Salvar(Unimedida unimedida)
+        public int Salvar(UnidadeMedida unimedida)
         {
             try
             {
                 AbrirConexao();
                 Comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Conexao);
-                Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnimedidaID);
+                Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnidadeMedidaID);
                 Comando.Parameters.AddWithValue("@sigla", unimedida.Sigla);
                 Comando.Parameters.AddWithValue("@descricao", unimedida.Descricao);
 
@@ -32,10 +32,10 @@ namespace _5gpro.Daos
             }
         }
 
-        public List<Unimedida> BuscarTodasUnimedidas()
+        public List<UnidadeMedida> BuscarTodasUnimedidas()
         {
             
-            List<Unimedida> listaunimedida = new List<Unimedida>();
+            List<UnidadeMedida> listaunimedida = new List<UnidadeMedida>();
             try
             {
                 AbrirConexao();
@@ -45,9 +45,9 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
-                    Unimedida unimedida = new Unimedida
+                    UnidadeMedida unimedida = new UnidadeMedida
                     {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                        UnidadeMedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
                         Sigla = reader.GetString(reader.GetOrdinal("sigla")),
                         Descricao = reader.GetString(reader.GetOrdinal("descricao"))
                     };
@@ -66,9 +66,9 @@ namespace _5gpro.Daos
             return listaunimedida;
         }
 
-        public Unimedida BuscaUnimedidaByCod(int cod)
+        public UnidadeMedida BuscaUnimedidaByCod(int cod)
         {
-            Unimedida unimedida = new Unimedida();
+            UnidadeMedida unimedida = new UnidadeMedida();
             try
             {
                 AbrirConexao();
@@ -79,9 +79,9 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    unimedida = new Unimedida
+                    unimedida = new UnidadeMedida
                     {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                        UnidadeMedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
                         Sigla = reader.GetString(reader.GetOrdinal("sigla")),
                         Descricao = reader.GetString(reader.GetOrdinal("descricao"))
                     };

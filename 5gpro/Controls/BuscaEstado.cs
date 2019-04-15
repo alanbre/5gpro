@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using _5gpro.Bll;
+using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 
@@ -10,7 +11,7 @@ namespace _5gpro.Controls
     {
         public Estado estado = null;
 
-        private readonly EstadoBLL estadoBLL = new EstadoBLL();
+        private readonly EstadoDAO estadoDAO = new EstadoDAO();
 
         public BuscaEstado()
         {
@@ -28,9 +29,10 @@ namespace _5gpro.Controls
 
         private void TbCodigoEstado_Leave(object sender, EventArgs e)
         {
+            if (!int.TryParse(tbCodigoEstado.Text, out int codigo)) { tbCodigoEstado.Clear(); }
             if (tbCodigoEstado.Text.Length > 0)
             {
-                estado = estadoBLL.BuscaEstadoByCod(int.Parse(tbCodigoEstado.Text));
+                estado = estadoDAO.BuscaEstadoByCod(int.Parse(tbCodigoEstado.Text));
                 PreencheCamposEstado(estado);
             }
             else

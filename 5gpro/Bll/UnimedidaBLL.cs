@@ -13,12 +13,12 @@ namespace _5gpro.Bll
 
         private readonly UnimedidaDAO UnimedidaDAO = new UnimedidaDAO();
 
-        public Unimedida BuscaUnimedidaByCod(int cod)
+        public UnidadeMedida BuscaUnimedidaByCod(int cod)
         {
             return UnimedidaDAO.BuscaUnimedidaByCod(cod);
         }
 
-        public List<Unimedida> BuscarTodasUnimedidas()
+        public List<UnidadeMedida> BuscarTodasUnimedidas()
         {
             return UnimedidaDAO.BuscarTodasUnimedidas();
         }

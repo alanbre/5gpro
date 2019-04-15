@@ -20,7 +20,7 @@ namespace _5gpro.Daos
 
         
 
-        public GrupoUsuario BuscarGrupoUsuarioById(string cod)
+        public GrupoUsuario BuscarGrupoUsuarioById(int cod)
         {
             GrupoUsuario grupousuario = new GrupoUsuario();
             PermissaoDAO permissaoDAO = new PermissaoDAO(Connect);

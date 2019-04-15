@@ -3,13 +3,6 @@ using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -17,16 +10,17 @@ namespace _5gpro.Forms
     public partial class fmCadastroUsuario : Form
     {
         Usuario usuario;
+        static ConexaoDAO conexao = new ConexaoDAO();
         GrupoUsuario grupousuario = new GrupoUsuario();
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(new ConexaoDAO());
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(conexao);
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO(new ConexaoDAO());
-        LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        UsuarioDAO usuarioDAO = new UsuarioDAO(conexao);
+        LogadoDAO logadoDAO = new LogadoDAO(conexao);
         Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(conexao);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
 
@@ -138,7 +132,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigoUsuario_Leave(object sender, EventArgs e)
         {
-            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
+            if (!int.TryParse(tbCodigoUsuario.Text, out int codigo)) { tbCodigoUsuario.Clear(); }
             if (!editando)
             {
                 if (tbCodigoUsuario.Text.Length > 0)
@@ -531,8 +525,7 @@ namespace _5gpro.Forms
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
             tbSenhaUsuario.Clear();
             tbConfirmaSenhaUsuario.Clear();
-            tbCodGrupoUsuario.Clear();
-            tbNomeGrupoUsuario.Clear();
+            buscaGrupoUsuario.Limpa();
             tbNomeUsuario.Clear();
             tbSobrenomeUsuario.Clear();
             tbEmailUsuario.Clear();
@@ -554,7 +547,7 @@ namespace _5gpro.Forms
             tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
+            buscaGrupoUsuario.PreencheCampos(usuario.Grupousuario);
             tbNomeUsuario.Text = usuario.Nome;
             tbSobrenomeUsuario.Text = usuario.Sobrenome;
             tbEmailUsuario.Text = usuario.Email;
@@ -578,8 +571,7 @@ namespace _5gpro.Forms
         {
             if (grupousuario != null)
             {
-                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
-                tbNomeGrupoUsuario.Text = grupousuario.Nome;
+                buscaGrupoUsuario.PreencheCampos(grupousuario);
             }
             else
             {
@@ -587,8 +579,7 @@ namespace _5gpro.Forms
                 "Grupo de usuários não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodGrupoUsuario.Focus();
-                tbNomeGrupoUsuario.SelectAll();
+                buscaGrupoUsuario.Focus();
             }
         }
     }

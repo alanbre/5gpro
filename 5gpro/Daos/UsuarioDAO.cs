@@ -391,7 +391,7 @@ namespace _5gpro.Daos
         //    return usuarios;
         //}
 
-        public List<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
+        public IEnumerable<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
         {
 
             List<Usuario> usuarios = new List<Usuario>();
