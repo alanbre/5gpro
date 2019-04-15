@@ -1,11 +1,8 @@
 ﻿using _5gpro.Entities;
 using System;
 using MySql.Data.MySqlClient;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace _5gpro.Daos
 {
@@ -17,7 +14,7 @@ namespace _5gpro.Daos
             Connect = c;
         }
 
-         
+
 
         public Logado BuscaLogadoByUsuario(Usuario usuario)
         {
@@ -34,12 +31,20 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usulogado = new Logado();
-                    usulogado.LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado"));
-                    usulogado.Usuario = usuarioDAO.BuscarUsuarioById(reader.GetInt32(reader.GetOrdinal("idusuario")));
-                    usulogado.Mac = reader.GetString(reader.GetOrdinal("mac"));
-                    usulogado.NomePC = reader.GetString(reader.GetOrdinal("nomepc"));
-                    usulogado.IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"));
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"))
+                    };
+
+                    usulogado = new Logado
+                    {
+                        LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado")),
+                        Usuario = usuario,
+                        Mac = reader.GetString(reader.GetOrdinal("mac")),
+                        NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
+                        IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
+                    };
+
 
                     reader.Close();
                 }
@@ -60,11 +65,16 @@ namespace _5gpro.Daos
         public Logado BuscaLogadoByMac(string mac)
         {
             Logado usulogado = null;
+            Usuario usuario = null;
+            GrupoUsuario grupousuario = null;
+
             UsuarioDAO usuarioDAO = new UsuarioDAO(Connect);
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM logado WHERE mac = @mac;", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM logado l INNER JOIN usuario u
+                                                    ON l.idusuario = u.idusuario
+                                                    WHERE mac = @mac;", Connect.Conexao);
 
                 Connect.Comando.Parameters.AddWithValue("@mac", mac);
 
@@ -72,14 +82,28 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    usulogado = new Logado();
-                    usulogado.LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado"));
-                    usulogado.Usuario = usuarioDAO.BuscarUsuarioById(reader.GetInt32(reader.GetOrdinal("idusuario")));
-                    usulogado.Mac = reader.GetString(reader.GetOrdinal("mac"));
-                    usulogado.NomePC = reader.GetString(reader.GetOrdinal("nomepc"));
-                    usulogado.IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"));
+                    grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"))
+                    };
+
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Grupousuario = grupousuario
+                    };
+
+                    usulogado = new Logado
+                    {
+                        LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado")),
+                        Usuario = usuario,
+                        Mac = reader.GetString(reader.GetOrdinal("mac")),
+                        NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
+                        IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
+                    };
 
                     reader.Close();
+
                 }
 
             }

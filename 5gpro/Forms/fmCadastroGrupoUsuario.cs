@@ -18,7 +18,6 @@ namespace _5gpro.Forms
         GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
         PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
         List<Permissao> listapermissoes = new List<Permissao>();
-        List<Permissao> listamodulos = new List<Permissao>();
         Validacao validacao = new Validacao();
         int NivelTodas = 0;
 
