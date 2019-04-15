@@ -1,10 +1,10 @@
-﻿using _5gpro.Bll;
-using _5gpro.Daos;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro
@@ -13,9 +13,9 @@ namespace _5gpro
     {
 
         private Permissao permissao = new Permissao();
-        private PermissaoBLL permissaoBLL = new PermissaoBLL();
+        private PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
         private Logado logado = new Logado();
-        private LogadoBLL logadoBLL = new LogadoBLL();
+        private LogadoDAO logadoDAO = new LogadoDAO(fmLogin.connect);
         private NetworkAdapter adap = new NetworkAdapter();
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
@@ -35,6 +35,8 @@ namespace _5gpro
 
         }
 
+        static ConexaoDAO connection = new ConexaoDAO();
+
         public struct PermissaoNivelStruct
         {
             public Permissao permissao;
@@ -46,13 +48,13 @@ namespace _5gpro
         {
 
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
 
             Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
 
             if (Codgrupousuario != "999")
             {
-                listapermissaonivel = permissaoBLL.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
+                listapermissaonivel = permissaoDAO.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
 
                 foreach (PermissaoNivelStruct p in listapermissaonivel)
                 {
@@ -133,8 +135,93 @@ namespace _5gpro
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Retira usuário da tabela Logado
-            logadoBLL.RemoverLogado(adap.Mac);
+            logadoDAO.RemoverLogado(adap.Mac);
         }
 
+
+
+        //IGNORAR ESSA PARTE, APENAS PARA FINS DE TESTE
+        private void StartProgress()
+
+        {
+            if (this.InvokeRequired)
+
+                BeginInvoke(
+
+                new MethodInvoker(delegate () { StartProgress(); }));
+
+            else
+
+            {
+
+                progressBar1.Style =
+
+                ProgressBarStyle.Marquee;
+
+                progressBar1.MarqueeAnimationSpeed = 100;
+
+                progressBar1.Value = 0;
+
+            }
+
+        }
+
+        private void StopProgress()
+
+        {
+
+            if (this.InvokeRequired)
+
+                BeginInvoke(
+
+                new MethodInvoker(delegate () { StopProgress(); }));
+
+            else
+
+            {
+
+                progressBar1.Style =
+
+                ProgressBarStyle.Blocks;
+
+                progressBar1.MarqueeAnimationSpeed = 0;
+
+                progressBar1.Value = 100;
+
+            }
+
+        }
+
+
+
+
+
+        private void SeuOutroMetodoSincronizar()
+
+        {
+            StartProgress();
+            List<Usuario> usuarios = new List<Usuario>();
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+            Console.WriteLine("Aguarde !!");
+            usuarios = usuarioDAO.BuscaUsuarios(textBox1.Text, textBox2.Text, textBox3.Text).ToList();
+            Console.WriteLine("Finalizado !!");
+
+
+            StopProgress();
+
+        }
+
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+            //StartProgress();
+
+            //StopProgress();
+
+            SeuOutroMetodoSincronizar();
+
+
+        }
     }
 }

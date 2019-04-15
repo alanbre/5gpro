@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmBuscaUnidadeMedida
+    partial class fmBuscaUnimedida
     {
         /// <summary>
         /// Required designer variable.
@@ -79,7 +79,7 @@
             // 
             // unimedidaBindingSource
             // 
-            this.unimedidaBindingSource.DataSource = typeof(_5gpro.Entities.UnidadeMedida);
+            this.unimedidaBindingSource.DataSource = typeof(_5gpro.Entities.Unimedida);
             // 
             // fmBuscaUnimedida
             // 

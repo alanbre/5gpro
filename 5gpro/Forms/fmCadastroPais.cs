@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -17,7 +17,7 @@ namespace _5gpro.Forms
     {
         Pais pais;
         Validacao validacao = new Validacao();
-        PaisBLL paisBLL = new PaisBLL();
+        PaisDAO paisDAO = new PaisDAO();
     
         
 
@@ -31,7 +31,7 @@ namespace _5gpro.Forms
 
         private void SalvaCadastro()
         {
-            PaisBLL pbl = new PaisBLL();
+            PaisDAO pbl = new PaisDAO();
 
 
             pais = new Pais();
@@ -49,7 +49,7 @@ namespace _5gpro.Forms
             {
 
                 validacao.despintarCampos(controls);
-                int resultado = paisBLL.SalvarOuAtualizarItem(pais);
+                int resultado = paisDAO.SalvarOuAtualizarPais(pais);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso

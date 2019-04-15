@@ -2,6 +2,7 @@
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace _5gpro
@@ -18,6 +19,7 @@ namespace _5gpro
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
 
             if (carregaSistema.Carrega())
             {
@@ -44,5 +46,8 @@ namespace _5gpro
             }
 
         }
+
+
+
     }
 }

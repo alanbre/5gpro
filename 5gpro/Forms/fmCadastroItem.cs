@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Daos;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -12,15 +11,15 @@ namespace _5gpro.Forms
     {
 
         Item item;
-        UnidadeMedida unimedida = new UnidadeMedida();
-        ItemBLL itemBLL = new ItemBLL();
-        UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
+        Unimedida unimedida = new Unimedida();
+        ItemDAO itemDAO = new ItemDAO();
+        UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
         Validacao validacao = new Validacao();
-        PermissaoBLL permissaoBLL = new PermissaoBLL();
+        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoBLL logadoBLL = new LogadoBLL();
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
 
@@ -38,12 +37,12 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
             string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010300").ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010300").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
             Editando(editando);
 
         }
@@ -146,12 +145,12 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
+            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    Item newitem = itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
+                    Item newitem = itemDAO.BuscarItemById(int.Parse(tbCodigo.Text));
                     if (newitem != null)
                     {
                         item = newitem;
@@ -179,7 +178,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        Item newitem = itemBLL.BuscaItemById(int.Parse(tbCodigo.Text));
+                        Item newitem = itemDAO.BuscarItemById(int.Parse(tbCodigo.Text));
                         if (newitem != null)
                         {
                             item = newitem;
@@ -201,6 +200,20 @@ namespace _5gpro.Forms
             }
 
         }
+
+        private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
+        {
+            if (tbCodUnimedida.Text.Length > 0)
+            {
+                unimedida = unimedidaDAO.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
+                PreencheCamposUnimedida(unimedida);
+            }
+            else
+            {
+                tbDescricaoUndMedida.Text = "";
+            }
+        }
+
 
         //MENU
         private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
@@ -265,7 +278,8 @@ namespace _5gpro.Forms
             if (cod) { tbCodigo.Clear(); }
             tbDescricao.Clear();
             tbDescricaoDeCompra.Clear();
-            buscaUnidadeMedida.Limpa();
+            tbCodUnimedida.Clear();
+            tbDescricaoUndMedida.Clear();
             tbReferencia.Clear();
             tbPrecoUltimaEntrada.Clear();
             tbEstoqueNecessario.Clear();
@@ -274,11 +288,12 @@ namespace _5gpro.Forms
             rbServico.Checked = false;
         }
 
-        private void PreencheCamposUnimedida(UnidadeMedida unimedida)
+        private void PreencheCamposUnimedida(Unimedida unimedida)
         {
             if (unimedida != null)
             {
-                buscaUnidadeMedida.PreencheCampos(unimedida);
+                tbCodUnimedida.Text = unimedida.UnimedidaID.ToString();
+                tbDescricaoUndMedida.Text = unimedida.Descricao;
             }
         }
 
@@ -292,7 +307,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = itemBLL.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel();
                     item = null;
                     tbDescricao.Focus();
                     Editando(true);
@@ -301,7 +316,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = itemBLL.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel();
                 item = null;
                 tbDescricao.Focus();
                 Editando(true);
@@ -310,9 +325,9 @@ namespace _5gpro.Forms
 
         private void AbreTelaBuscaUnimedida()
         {
-            var buscaUnimedida = new fmBuscaUnidadeMedida();
+            var buscaUnimedida = new fmBuscaUnimedida();
             buscaUnimedida.ShowDialog();
-            unimedida = buscaUnimedida.unidadeMedidaSelecionada;
+            unimedida = buscaUnimedida.Unimedida;
             PreencheCamposUnimedida(unimedida);
         }
 
@@ -327,7 +342,7 @@ namespace _5gpro.Forms
 
             if (item.Unimedida != null)
             {
-                unimedida = unimedidaBLL.BuscaUnimedidaByCod(item.Unimedida.UnidadeMedidaID);
+                unimedida = unimedidaDAO.BuscaUnimedidaByCod(item.Unimedida.UnimedidaID);
                 PreencheCamposUnimedida(unimedida);
             }
 
@@ -396,7 +411,7 @@ namespace _5gpro.Forms
                     item.Estoquenecessario = 0;
                 }
 
-                item.Unimedida = buscaUnidadeMedida.unidadeMedida;
+                item.Unimedida = unimedidaDAO.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
 
 
                 ControlCollection controls = (ControlCollection)this.Controls;
@@ -405,7 +420,7 @@ namespace _5gpro.Forms
                 if (ok)
                 {
                     validacao.despintarCampos(controls);
-                    int resultado = itemBLL.SalvarOuAtualizarItem(item);
+                    int resultado = itemDAO.SalvarOuAtualizarItem(item);
 
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -443,7 +458,7 @@ namespace _5gpro.Forms
                 {
                     if (item != null)
                     {
-                        item = itemBLL.BuscaItemById(item.ItemID);
+                        item = itemDAO.BuscarItemById(item.ItemID);
                         PreencheCampos(item);
                         Editando(false);
                     }
@@ -456,7 +471,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                item = itemBLL.BuscaItemById(item.ItemID);
+                item = itemDAO.BuscarItemById(item.ItemID);
                 PreencheCampos(item);
                 Editando(false);
             }
@@ -473,7 +488,7 @@ namespace _5gpro.Forms
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 validacao.despintarCampos(controls);
-                Item newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
+                Item newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
                 if (newitem != null)
                 {
                     item = newitem;
@@ -488,7 +503,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Item newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
+                    Item newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
                     if (newitem != null)
                     {
                         item = newitem;
@@ -497,7 +512,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
+                        newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
                         if (newitem != null)
                         {
                             item = newitem;
@@ -519,7 +534,7 @@ namespace _5gpro.Forms
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 validacao.despintarCampos(controls);
-                Item newitem = itemBLL.BuscarItemAnterior(tbCodigo.Text);
+                Item newitem = itemDAO.BuscarItemAnterior(tbCodigo.Text);
                 if (newitem != null)
                 {
                     item = newitem;
@@ -534,7 +549,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Item newitem = itemBLL.BuscarItemAnterior(tbCodigo.Text);
+                    Item newitem = itemDAO.BuscarItemAnterior(tbCodigo.Text);
                     if (newitem != null)
                     {
                         item = newitem;
@@ -543,7 +558,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newitem = itemBLL.BuscarProximoItem(tbCodigo.Text);
+                        newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
                         if (newitem != null)
                         {
                             item = newitem;

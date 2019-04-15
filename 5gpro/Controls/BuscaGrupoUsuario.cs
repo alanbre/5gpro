@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using _5gpro.Bll;
+using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 
@@ -9,8 +10,9 @@ namespace _5gpro.Controls
 {
     public partial class BuscaGrupoUsuario : UserControl
     {
+        static ConexaoDAO connection = new ConexaoDAO();
         public GrupoUsuario grupoUsuario = new GrupoUsuario();
-        private readonly GrupoUsuarioBLL grupoUsuarioBLL = new GrupoUsuarioBLL();
+        private readonly GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO(connection);
 
         public BuscaGrupoUsuario()
         {
@@ -31,7 +33,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbNomeGrupoUsuario.Text, out int codigo)) { tbNomeGrupoUsuario.Clear(); }
             if (tbNomeGrupoUsuario.Text.Length > 0)
             {
-                grupoUsuario = grupoUsuarioBLL.BuscaGrupoUsuarioByID(int.Parse(tbNomeGrupoUsuario.Text));
+                grupoUsuario = grupoUsuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbNomeGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupoUsuario);
             }
             else

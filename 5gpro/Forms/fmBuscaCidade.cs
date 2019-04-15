@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace _5gpro.Forms
     {
         public List<Cidade> Cidades;
         public Cidade cidadeSelecionada;
-        private readonly CidadeBLL cidadeBLL = new CidadeBLL();
+        private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
 
 
@@ -51,7 +51,7 @@ namespace _5gpro.Forms
         {
             dgvCidades.Rows.Clear();
             int codEstado = buscaEstado.estado?.EstadoID ?? 0;
-            Cidades = cidadeBLL.BuscaCidades(codEstado, tbFiltroNomeCidade.Text);
+            Cidades = cidadeDAO.BuscaCidades(codEstado, tbFiltroNomeCidade.Text);
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
             foreach (Cidade c in Cidades)

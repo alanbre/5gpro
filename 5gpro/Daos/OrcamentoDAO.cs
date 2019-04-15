@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
@@ -10,8 +9,8 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO : ConexaoDAO
     {
-        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
-        private readonly NotaFiscalBLL notafiscalBLL = new NotaFiscalBLL();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private readonly NotaFiscalDAO notafiscalDAO = new NotaFiscalDAO();
 
         public Orcamento BuscaOrcamentoById(int cod)
         {
@@ -36,8 +35,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
-                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -84,8 +83,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
-                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -130,8 +129,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
-                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -196,8 +195,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
-                        NotaFiscal = notafiscalBLL.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
                     orcamentos.Add(orcamento);

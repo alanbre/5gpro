@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace _5gpro.Daos
 {
     class ItemDAO : ConexaoDAO
     {
-        private readonly UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
+        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
 
 
         public int SalvarOuAtualizarItem(Item item)
@@ -38,7 +37,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@valorentrada", item.ValorEntrada);
                 Comando.Parameters.AddWithValue("@valorsaida", item.ValorSaida);
                 Comando.Parameters.AddWithValue("@estoquenecessario", item.Estoquenecessario);
-                Comando.Parameters.AddWithValue("@idunimedida", item.Unimedida.UnidadeMedidaID);
+                Comando.Parameters.AddWithValue("@idunimedida", item.Unimedida.UnimedidaID);
 
 
                 retorno = Comando.ExecuteNonQuery();
@@ -78,7 +77,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Unimedida = unimedidaBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                        Unimedida = unimedidaDAO.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
                     };
                     reader.Close();
                 }
@@ -226,7 +225,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Unimedida = unimedidaBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                        Unimedida = unimedidaDAO.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
                     };
                     itens.Add(item);
                 }

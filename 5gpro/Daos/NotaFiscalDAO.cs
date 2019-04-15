@@ -1,5 +1,4 @@
 ﻿using _5gpro.Entities;
-using _5gpro.Bll;
 using MySql.Data.MySqlClient;
 using System;
 using System.Data;
@@ -9,8 +8,8 @@ namespace _5gpro.Daos
 {
     class NotaFiscalDAO : ConexaoDAO
     {
-        private readonly UnimedidaBLL unidadeBLL = new UnimedidaBLL();
-        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         public int BuscaProxCodigoDisponivel()
         {
@@ -69,7 +68,7 @@ namespace _5gpro.Daos
                         ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
                 }
@@ -116,7 +115,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Unimedida = unidadeBLL.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                        Unimedida = unimedidaDAO.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
                     };
                     nfi = new NotaFiscalItem
                     {
@@ -163,7 +162,7 @@ namespace _5gpro.Daos
                         ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
                 }
@@ -208,7 +207,7 @@ namespace _5gpro.Daos
                         ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
                 }

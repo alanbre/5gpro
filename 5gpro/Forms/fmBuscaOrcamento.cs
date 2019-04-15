@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -13,7 +13,7 @@ namespace _5gpro.Forms
         public Orcamento orcamentoSelecionado = null;
         List<Orcamento> orcamentos;
 
-        OrcamentoBLL orcamentoBLL = new OrcamentoBLL();
+        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
@@ -101,7 +101,7 @@ namespace _5gpro.Forms
             f.filtroValorTotalInical = Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text);
             f.filtroValorTotalFinal = Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text);
 
-            orcamentos = orcamentoBLL.BuscaOrcamentos(f);
+            orcamentos = orcamentoDAO.BuscaOrcamentos(f);
 
             foreach (var o in orcamentos)
             {

@@ -1,7 +1,6 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
-using _5gpro.Funcoes;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -12,8 +11,7 @@ namespace _5gpro.Controls
     {
         public Cidade cidade = null;
 
-        private readonly CidadeBLL cidadeBLL = new CidadeBLL();
-        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
+        private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
         public BuscaCidade()
         {
@@ -36,16 +34,15 @@ namespace _5gpro.Controls
 
         private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
         {
-            if(!int.TryParse(tbCodigoCidade.Text, out int codigo)){ tbCodigoCidade.Clear(); }
             if (tbCodigoCidade.Text.Length > 0)
             {
-                cidade = cidadeBLL.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
+                cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else
             {
                 cidade = null;
-                tbNomeCidade.Clear();
+                tbNomeCidade.Text = "";
             }
         }
 
@@ -111,6 +108,5 @@ namespace _5gpro.Controls
         {
             this.Text_Changed?.Invoke(this, e);  //o editor falou que era melhor fazer assim haha.
         }
-
     }
 }

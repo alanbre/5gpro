@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -10,10 +10,11 @@ namespace _5gpro.Forms
     {
         public Usuario usuariologado;
         public Logado logado;
-       
+        public static ConexaoDAO connect = new ConexaoDAO();
 
-        UsuarioBLL usuarioBLL = new UsuarioBLL();
-        LogadoBLL logadoBLL = new LogadoBLL();
+        public UsuarioDAO usuarioDAO = new UsuarioDAO(connect);
+        public LogadoDAO logadoDAO = new LogadoDAO(connect);
+
         NetworkAdapter adap = new NetworkAdapter();
 
 
@@ -24,18 +25,19 @@ namespace _5gpro.Forms
 
         private void btEntrar_Click(object sender, EventArgs e)
         {
-            usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
+
+            usuariologado = usuarioDAO.Logar(tbCodigo.Text, tbSenha.Text);
 
             if (usuariologado != null)
             {
-                logado = logadoBLL.BuscaLogadoByUsuario(usuariologado);
+                logado = logadoDAO.BuscaLogadoByUsuario(usuariologado);
                 if (logado != null)
                 {                  
                     MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
-                    logadoBLL.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
+                    logadoDAO.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
                     this.Close();
                 }
                
@@ -109,15 +111,19 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (tbCodigo.Text.Length > 0)
             {
-                PreencheCamposCodUsuario(usuarioBLL.BuscarUsuarioByIdLogin(int.Parse(tbCodigo.Text)));
+                PreencheCamposCodUsuario(usuarioDAO.BuscarUsuarioByIdLogin(int.Parse(tbCodigo.Text)));
             }
             else
             {
                 tbNomeUsuario.Text = "";
             }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+           Console.WriteLine(usuarioDAO.BuscarUsuarioAnterior("2").Grupousuario.GrupoUsuarioID);
         }
     }
 }
