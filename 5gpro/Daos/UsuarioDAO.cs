@@ -427,7 +427,7 @@ namespace _5gpro.Daos
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(reader.GetInt32(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),

@@ -19,14 +19,9 @@ namespace _5gpro.Daos
         }
 
         
-
-<<<<<<< HEAD
         public GrupoUsuario BuscarGrupoUsuarioById(int cod)
         {
-=======
-        public GrupoUsuario BuscarGrupoUsuarioById(string cod)
-        {
->>>>>>> parent of 588e932... Merge branch 'master' of https://github.com/alanbre/5gpro
+
             GrupoUsuario grupousuario = new GrupoUsuario();
             PermissaoDAO permissaoDAO = new PermissaoDAO(Connect);
 

@@ -198,7 +198,7 @@ namespace _5gpro.Forms
         {
             if (tbCodGrupoUsuario.Text.Length > 0)
             {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupousuario);
             }
             else
@@ -318,7 +318,7 @@ namespace _5gpro.Forms
                 }
 
                 usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-                usuario.Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(tbCodGrupoUsuario.Text);
+                usuario.Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
                 usuario.Email = tbEmailUsuario.Text;
@@ -563,7 +563,7 @@ namespace _5gpro.Forms
 
             if (usuario.Grupousuario != null)
             {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupousuario);
             }
 
