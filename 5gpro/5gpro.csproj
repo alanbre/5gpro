@@ -80,8 +80,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\CidadeBLL.cs" />
-    <Compile Include="Bll\EstadoBLL.cs" />
     <Compile Include="Bll\NotaFiscalBLL.cs" />
     <Compile Include="Bll\OrcamentoBLL.cs" />
     <Compile Include="Bll\PessoaBLL.cs" />
