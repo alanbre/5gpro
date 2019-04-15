@@ -13,9 +13,9 @@ namespace _5gpro
     {
 
         private Permissao permissao = new Permissao();
-        private PermissaoBLL permissaoBLL = new PermissaoBLL();
+        private PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
         private Logado logado = new Logado();
-        private LogadoBLL logadoBLL = new LogadoBLL();
+        private LogadoDAO logadoDAO = new LogadoDAO(fmLogin.connect);
         private NetworkAdapter adap = new NetworkAdapter();
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
@@ -46,13 +46,13 @@ namespace _5gpro
         {
 
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
 
             Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
 
             if (Codgrupousuario != "999")
             {
-                listapermissaonivel = permissaoBLL.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
+                listapermissaonivel = permissaoDAO.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
 
                 foreach (PermissaoNivelStruct p in listapermissaonivel)
                 {
@@ -133,7 +133,7 @@ namespace _5gpro
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Retira usuário da tabela Logado
-            logadoBLL.RemoverLogado(adap.Mac);
+            logadoDAO.RemoverLogado(adap.Mac);
         }
 
     }

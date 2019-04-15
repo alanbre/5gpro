@@ -1,4 +1,5 @@
 ﻿using _5gpro.Bll;
+using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ namespace _5gpro.Forms
     public partial class fmBuscaUsuario : Form
     {
         List<Usuario> usuarios;
-        private UsuarioBLL usuarioBLL = new UsuarioBLL();
         public Usuario usuarioSelecionado = null;
+
 
         public fmBuscaUsuario()
         {
@@ -25,6 +26,9 @@ namespace _5gpro.Forms
 
         private void BuscaUsuario()
         {
+            ConexaoDAO connection = new ConexaoDAO();
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
@@ -32,13 +36,17 @@ namespace _5gpro.Forms
             table.Columns.Add("Email", typeof(string));
             table.Columns.Add("Telefone", typeof(string));
 
-            usuarios = usuarioBLL.BuscaUsuarios(tbFiltroCodUsuario.Text, tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
+
+
+        usuarios = usuarioDAO.BuscaUsuarios(tbFiltroCodUsuario.Text, tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
 
             foreach (Usuario u in usuarios)
             {
                 table.Rows.Add(u.UsuarioID, u.Nome, u.Sobrenome, u.Email, u.Telefone);
             }
             dgvUsuarios.DataSource = table;
+
+          
         }
 
         private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

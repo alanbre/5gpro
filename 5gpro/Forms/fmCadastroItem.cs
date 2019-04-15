@@ -16,11 +16,11 @@ namespace _5gpro.Forms
         ItemBLL itemBLL = new ItemBLL();
         UnimedidaBLL unimedidaBLL = new UnimedidaBLL();
         Validacao validacao = new Validacao();
-        PermissaoBLL permissaoBLL = new PermissaoBLL();
+        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoBLL logadoBLL = new LogadoBLL();
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
 
@@ -38,12 +38,12 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoBLL.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
             string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoBLL.BuscarIDbyCodigo("010300").ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010300").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoBLL.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
             Editando(editando);
 
         }
