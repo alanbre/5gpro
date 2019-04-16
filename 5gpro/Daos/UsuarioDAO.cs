@@ -1,16 +1,22 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
+using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading;
 
 namespace _5gpro.Daos
 {
-    class UsuarioDAO : ConexaoDAO
+    public class UsuarioDAO
     {
+        public ConexaoDAO Connect { get; }
+        public UsuarioDAO(ConexaoDAO c)
+        {
+            Connect = c;
+        }
 
-        public GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
+        public List<GrupoUsuario> listagrupousuarios = new List<GrupoUsuario>();
 
         public Usuario Logar(string idusuario, string senha)
         {
@@ -18,12 +24,12 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario AND senha = @senha", Conexao);
-                Comando.Parameters.AddWithValue("@idusuario", idusuario);
-                Comando.Parameters.AddWithValue("@senha", senha);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario AND senha = @senha", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", idusuario);
+                Connect.Comando.Parameters.AddWithValue("@senha", senha);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -44,138 +50,27 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return usuario;
         }
 
-        public Logado BuscaLogado(Usuario usuario, string mac)
-        {
-            Logado usulogado = null;
 
-            try
-            {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT *
-                                             FROM logado AS l
-                                             WHERE l.idusuario = @idusuario AND l.mac = @mac
-                                                ;", Conexao);
-
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Comando.Parameters.AddWithValue("@mac", mac);
-
-                IDataReader reader = Comando.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    usulogado.LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado"));
-                    usulogado.Usuario = BuscarUsuarioById(reader.GetInt32(reader.GetOrdinal("idusuario")));
-                    usulogado.Mac = reader.GetString(reader.GetOrdinal("mac"));
-                    reader.Close();
-                }
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                FecharConexao();
-            }
-
-            return usulogado;
-        }
-
-        //Registra login na tabela Logado
-        public int GravarLogado(Usuario usuario, string mac)
-        {
-            int retorno = 0;
-            try
-            {
-                AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
-
-
-                Comando.CommandText = @"INSERT INTO logado
-                         (idusuario, mac)
-                          VALUES
-                         (@idusuario, @mac)
-                          ";
-
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Comando.Parameters.AddWithValue("@mac", mac);
-
-                retorno = Comando.ExecuteNonQuery();
-
-                tr.Commit();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                FecharConexao();
-            }
-            return retorno;
-        }
-
-        //Remove login da tabela Logado
-        public int RemoverLogado(Logado logado)
-        {
-            //Usuario usuario, string mac
-            int retorno = 0;
-            try
-            {
-                AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
-
-
-                Comando.CommandText = @"DELETE FROM logado AS l
-                           WHERE l.idusuario = @idusuario AND l.mac = @mac
-                          ";
-
-                Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID.ToString());
-                Comando.Parameters.AddWithValue("@mac", logado.Mac);
-
-                retorno = Comando.ExecuteNonQuery();
-
-                tr.Commit();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                FecharConexao();
-            }
-            return retorno;
-        }
 
         public string BuscaProxCodigoDisponivel()
         {
             string proximoid = null;
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT u1.idusuario + 1 AS proximoid
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT u1.idusuario + 1 AS proximoid
                                              FROM usuario AS u1
                                              LEFT OUTER JOIN usuario AS u2 ON u1.idusuario + 1 = u2.idusuario
                                              WHERE u2.idusuario IS NULL
                                              ORDER BY proximoid
-                                             LIMIT 1;", Conexao);
+                                             LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -194,7 +89,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return proximoid;
@@ -206,9 +101,9 @@ namespace _5gpro.Daos
             int retorno = 0;
             try
             {
-                AbrirConexao();
+                Connect.AbrirConexao();
 
-                Comando = new MySqlCommand(@"INSERT INTO usuario 
+                Connect.Comando = new MySqlCommand(@"INSERT INTO usuario 
                           (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
                           VALUES
                           (@idusuario, @nome, @sobrenome, @senha, @email, @telefone, @idgrupousuario)
@@ -216,18 +111,18 @@ namespace _5gpro.Daos
                            nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email,
                            telefone = @telefone, idgrupousuario = @idgrupousuario
                          ;",
-                         Conexao);
+                         Connect.Conexao);
 
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Comando.Parameters.AddWithValue("@nome", usuario.Nome);
-                Comando.Parameters.AddWithValue("@sobrenome", usuario.Sobrenome);
-                Comando.Parameters.AddWithValue("@senha", usuario.Senha);
-                Comando.Parameters.AddWithValue("@email", usuario.Email);
-                Comando.Parameters.AddWithValue("@telefone", usuario.Telefone);
-                Comando.Parameters.AddWithValue("@idgrupousuario", usuario.Grupousuario.GrupoUsuarioID);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Connect.Comando.Parameters.AddWithValue("@nome", usuario.Nome);
+                Connect.Comando.Parameters.AddWithValue("@sobrenome", usuario.Sobrenome);
+                Connect.Comando.Parameters.AddWithValue("@senha", usuario.Senha);
+                Connect.Comando.Parameters.AddWithValue("@email", usuario.Email);
+                Connect.Comando.Parameters.AddWithValue("@telefone", usuario.Telefone);
+                Connect.Comando.Parameters.AddWithValue("@idgrupousuario", usuario.Grupousuario.GrupoUsuarioID);
 
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = Connect.Comando.ExecuteNonQuery();
             }
             catch (MySqlException ex)
             {
@@ -236,33 +131,35 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return retorno;
         }
 
-        public Usuario BuscarUsuarioById(int cod)
+        /// <summary>
+        /// Retorna apenas o ID e o nome do usuário. Feito para tela de Login
+        /// </summary>
+        /// <param name="cod"></param>
+        /// <returns></returns>
+        public Usuario BuscarUsuarioByIdLogin(int cod)
         {
             Usuario usuario = new Usuario();
+
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario", Conexao);
-                Comando.Parameters.AddWithValue("@idusuario", cod);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT u.idusuario, u.nome FROM usuario AS u WHERE idusuario = @idusuario", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", cod);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
+
                     usuario = new Usuario
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
                     };
                     reader.Close();
                 }
@@ -277,7 +174,58 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
+            }
+
+            return usuario;
+        }
+
+
+        public Usuario BuscarUsuarioById(int cod)
+        {
+            Usuario usuario = new Usuario();
+            GrupoUsuario grupousuario = new GrupoUsuario();
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", cod);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    grupousuario = new GrupoUsuario
+                    {
+                        GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"))
+                    };
+
+                    usuario = new Usuario
+                    {
+                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                        Senha = reader.GetString(reader.GetOrdinal("senha")),
+                        Grupousuario = grupousuario,
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
+                        Email = reader.GetString(reader.GetOrdinal("email")),
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
+                    };
+
+                    reader.Close();
+                }
+                else
+                {
+                    usuario = null;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
             }
 
             return usuario;
@@ -287,21 +235,25 @@ namespace _5gpro.Daos
         public Usuario BuscarProximoUsuario(string codAtual)
         {
             Usuario usuario = new Usuario();
+            GrupoUsuario grupousuario = new GrupoUsuario();
+
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = (SELECT min(idusuario) FROM usuario WHERE idusuario > @idusuario)", Conexao);
-                Comando.Parameters.AddWithValue("@idusuario", codAtual);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM usuario WHERE idusuario = (SELECT min(idusuario) FROM usuario WHERE idusuario > @idusuario)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", codAtual);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
+                    grupousuario.GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
+
                     usuario = new Usuario
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuario,
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
@@ -321,7 +273,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return usuario;
@@ -332,19 +284,24 @@ namespace _5gpro.Daos
             Usuario usuario = new Usuario();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = (SELECT max(idusuario) FROM usuario WHERE idusuario < @idusuario)", Conexao);
-                Comando.Parameters.AddWithValue("@idusuario", codAtual);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM usuario u WHERE u.idusuario = (SELECT max(idusuario) FROM usuario WHERE idusuario < @idusuario)", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                Connect.Comando.Parameters.AddWithValue("@idusuario", codAtual);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
+
+                    GrupoUsuario grupousuario = new GrupoUsuario();
+                    grupousuario.GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
+
                     usuario = new Usuario
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuario,
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
@@ -364,48 +321,50 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return usuario;
         }
 
-        public List<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
+
+        public IEnumerable<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
         {
 
             List<Usuario> usuarios = new List<Usuario>();
+            GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(Connect);
 
             string conCodGrupoUsuario = codGrupoUsuario.Length > 0 ? "AND g.idgrupousuario = @idgrupousuario" : "";
             string conNomeUsuario = nomeUsuario.Length > 0 ? "AND u.nome LIKE @nomeusuario" : "";
             string conSobrenomeUsuario = sobrenomeUsuario.Length > 0 ? "AND u.sobrenome LIKE @sobrenomeusuario" : "";
 
-
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT *
-                                             FROM usuario u INNER JOIN grupo_usuario g 
-                                             ON u.idgrupousuario = g.idgrupousuario
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT *
+                                             FROM usuario u
                                              WHERE 1=1
                                              " + conCodGrupoUsuario + @"
                                              " + conNomeUsuario + @"
                                              " + conSobrenomeUsuario + @"
-                                             ORDER BY u.idusuario;", Conexao);
+                                             ORDER BY u.idusuario;", Connect.Conexao);
 
-                if (codGrupoUsuario.Length > 0) { Comando.Parameters.AddWithValue("@idgrupousuario", codGrupoUsuario); }
-                if (nomeUsuario.Length > 0) { Comando.Parameters.AddWithValue("@nomeusuario", "%" + nomeUsuario + "%"); }
-                if (sobrenomeUsuario.Length > 0) { Comando.Parameters.AddWithValue("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
+                if (codGrupoUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codGrupoUsuario); }
+                if (nomeUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomeusuario", "%" + nomeUsuario + "%"); }
+                if (sobrenomeUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
+                    GrupoUsuario grupousuario = new GrupoUsuario();
+                    grupousuario.GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
 
                     Usuario usuario = new Usuario
                     {
                         UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
                         Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                        Grupousuario = grupousuario,
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
@@ -421,7 +380,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return usuarios;
         }

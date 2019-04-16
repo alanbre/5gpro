@@ -3,33 +3,97 @@ using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain(Usuario usuario)
+
+        private Permissao permissao = new Permissao();
+        private PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        private Logado logado = new Logado();
+        private LogadoDAO logadoDAO = new LogadoDAO(fmLogin.connect);
+        private NetworkAdapter adap = new NetworkAdapter();
+        private string Codgrupousuario;
+        private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
+
+        //CÓDIGOS DAS TELAS
+        //Cadastro de Pessoa = 010100
+        //Cadastro de Usuário = 010200
+        //Cadastro de Item = 010300
+        //Cadastro de Grupo de Usuário = 010400
+        //Cadastro de Orçamento = 020100
+        //Cadastro de Nota Fiscal = 030100
+
+        public fmMain()
         {
             InitializeComponent();
-            SetarLogado(usuario);
+            FiltroDePermissoes();
+
         }
 
-        public Usuario usuariologadomain;
+        static ConexaoDAO connection = new ConexaoDAO();
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
-        NetworkAdapter adap = new NetworkAdapter();
-
-        public void SetarLogado(Usuario usuario)
+        public struct PermissaoNivelStruct
         {
-            usuariologadomain = usuario;
+            public Permissao permissao;
+            public int Nivel;
+
+        }
+
+        private void FiltroDePermissoes()
+        {
+
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+
+            Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+
+            if (Codgrupousuario != "999")
+            {
+                listapermissaonivel = permissaoDAO.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
+
+                foreach (PermissaoNivelStruct p in listapermissaonivel)
+                {
+                    switch (p.permissao.Codigo)
+                    {
+
+                        case "010100":
+                            tsmiCadastroPessoas.Visible = p.Nivel == 0 ? false : true;
+                            break;
+
+                        case "010200":
+                            tsmiCadastroUsuarios.Visible = p.Nivel == 0 ? false : true;
+                            break;
+
+                        case "010300":
+                            tsmiCadastroItens.Visible = p.Nivel == 0 ? false : true;
+                            break;
+
+                        case "010400":
+                            tsmiCadastroGrupoUsuario.Visible = p.Nivel == 0 ? false : true;
+                            break;
+
+                        case "020100":
+                            tsmiCadastroOrcamentos.Visible = p.Nivel == 0 ? false : true;
+                            break;
+
+                        case "030100":
+                            tsmiEmissaoNF.Visible = p.Nivel == 0 ? false : true;
+                            break;
+
+                    }
+                }
+            }
         }
 
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
             formCadPessoas.Show(this);
-            
         }
 
         private void tsmiCadastroPaises_Click(object sender, EventArgs e)
@@ -50,7 +114,7 @@ namespace _5gpro
             formOrcamentoCadOrcamentos.Show(this);
         }
 
-        private void tsmiCadastroUsuariosMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroUsuarios_Click(object sender, EventArgs e)
         {
             var formCadUsuarios = new fmCadastroUsuario();
             formCadUsuarios.Show(this);
@@ -62,17 +126,102 @@ namespace _5gpro
             formSaidaEmissaoNota.Show(this);
         }
 
-        private void cadastroDeGrupoDeUsuáriosToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)
         {
             var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
             formCadGrupoUsuarios.Show(this);
         }
 
-
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //Logado lol = usuarioDAO.BuscaLogado(usuariologadomain, adap.Mac);
-            usuarioDAO.RemoverLogado(usuarioDAO.BuscaLogado(usuariologadomain, adap.Mac));
+            //Retira usuário da tabela Logado
+            logadoDAO.RemoverLogado(adap.Mac);
+        }
+
+
+
+        //IGNORAR ESSA PARTE, APENAS PARA FINS DE TESTE
+        private void StartProgress()
+
+        {
+            if (this.InvokeRequired)
+
+                BeginInvoke(
+
+                new MethodInvoker(delegate () { StartProgress(); }));
+
+            else
+
+            {
+
+                progressBar1.Style =
+
+                ProgressBarStyle.Marquee;
+
+                progressBar1.MarqueeAnimationSpeed = 100;
+
+                progressBar1.Value = 0;
+
+            }
+
+        }
+
+        private void StopProgress()
+
+        {
+
+            if (this.InvokeRequired)
+
+                BeginInvoke(
+
+                new MethodInvoker(delegate () { StopProgress(); }));
+
+            else
+
+            {
+
+                progressBar1.Style =
+
+                ProgressBarStyle.Blocks;
+
+                progressBar1.MarqueeAnimationSpeed = 0;
+
+                progressBar1.Value = 100;
+
+            }
+
+        }
+
+
+
+
+
+        private void SeuOutroMetodoSincronizar()
+
+        {
+            StartProgress();
+            List<Usuario> usuarios = new List<Usuario>();
+            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+            Console.WriteLine("Aguarde !!");
+            usuarios = usuarioDAO.BuscaUsuarios(textBox1.Text, textBox2.Text, textBox3.Text).ToList();
+            Console.WriteLine("Finalizado !!");
+
+
+            StopProgress();
+
+        }
+
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
+            //StartProgress();
+
+            //StopProgress();
+
+            SeuOutroMetodoSincronizar();
+
+
         }
     }
 }

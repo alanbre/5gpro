@@ -5603,3 +5603,19 @@ INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários')
 
 INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
              VALUES (9999, 'ADMIN', 'ADMIN', 'admin', '', '', 999);
+
+INSERT INTO permissao (idpermissao, nome, codigo) VALUES 
+(1, 'Módulo de Cadastros', '010000'),
+(2, 'Módulo de Orçamentos', '020000'),
+(3, 'Módulo de Saidas', '030000'),
+
+
+(4, 'Cadastro de Pessoa', '010100'),
+(5, 'Cadastro de Usuario', '010200'),
+(6, 'Cadastro de Item', '010300'),
+(9, 'Cadastro de Grupo de usuários', '010400'),
+
+
+(7, 'Cadastro de Orçamentos', '020100'),
+
+(8, 'Cadastro de Nota Fiscal', '030100');

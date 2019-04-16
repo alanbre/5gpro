@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ namespace _5gpro.Daos
 {
     class CidadeDAO : ConexaoDAO
     {
-        public EstadoBLL estadoBLL = new EstadoBLL();
+        public EstadoDAO estadoDAO = new EstadoDAO();
 
 
         public Cidade BuscaCidadeByCod(int cod)

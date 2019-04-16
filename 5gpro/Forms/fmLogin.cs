@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -9,8 +9,12 @@ namespace _5gpro.Forms
     public partial class fmLogin : Form
     {
         public Usuario usuariologado;
+        public Logado logado;
+        public static ConexaoDAO connect = new ConexaoDAO();
 
-        UsuarioBLL usuarioBLL = new UsuarioBLL();
+        public UsuarioDAO usuarioDAO = new UsuarioDAO(connect);
+        public LogadoDAO logadoDAO = new LogadoDAO(connect);
+
         NetworkAdapter adap = new NetworkAdapter();
 
 
@@ -21,16 +25,19 @@ namespace _5gpro.Forms
 
         private void btEntrar_Click(object sender, EventArgs e)
         {
-            usuariologado = usuarioBLL.Logar(tbCodigo.Text, tbSenha.Text);
+
+            usuariologado = usuarioDAO.Logar(tbCodigo.Text, tbSenha.Text);
+
             if (usuariologado != null)
-            {  
-                if (usuarioBLL.BuscaLogado(usuariologado, adap.Mac) != null)
-                {
-                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+adap.Nome);
+            {
+                logado = logadoDAO.BuscaLogadoByUsuario(usuariologado);
+                if (logado != null)
+                {                  
+                    MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
-                    usuarioBLL.GravarLogado(usuariologado, adap.Mac);
+                    logadoDAO.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
                     this.Close();
                 }
                
@@ -90,8 +97,6 @@ namespace _5gpro.Forms
             {
                 new Limpar().limparTudo(this.Controls);
             }
-
-
         }
 
         private void btProcuraUsuario_Click(object sender, EventArgs e)
@@ -100,8 +105,7 @@ namespace _5gpro.Forms
             buscaUsuario.ShowDialog();
             if (buscaUsuario.usuarioSelecionado != null)
             {
-                usuariologado = buscaUsuario.usuarioSelecionado;
-                PreencheCamposCodUsuario(usuariologado);
+                PreencheCamposCodUsuario(buscaUsuario.usuarioSelecionado);
             }
         }
 
@@ -109,13 +113,17 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                usuariologado = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigo.Text));
-                PreencheCamposCodUsuario(usuariologado);
+                PreencheCamposCodUsuario(usuarioDAO.BuscarUsuarioByIdLogin(int.Parse(tbCodigo.Text)));
             }
             else
             {
                 tbNomeUsuario.Text = "";
             }
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+           Console.WriteLine(usuarioDAO.BuscarUsuarioAnterior("2").Grupousuario.GrupoUsuarioID);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using _5gpro.Bll;
-using _5gpro.Entities;
+﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
@@ -10,7 +9,8 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO : ConexaoDAO
     {
-        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private readonly NotaFiscalDAO notafiscalDAO = new NotaFiscalDAO();
 
         public Orcamento BuscaOrcamentoById(int cod)
         {
@@ -35,7 +35,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -54,7 +55,7 @@ namespace _5gpro.Daos
             }
             if (orcamento != null)
             {
-                orcamento.Itens = BuscaItensDoOrcamento(orcamento);
+                orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
             }
             return orcamento;
         }
@@ -82,7 +83,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -100,7 +102,7 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            if (orcamento != null) { orcamento.Itens = BuscaItensDoOrcamento(orcamento); }
+            if (orcamento != null) { orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento); }
 
             return orcamento;
         }
@@ -127,7 +129,8 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     reader.Close();
                 }
@@ -145,7 +148,7 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            if (orcamento != null) { orcamento.Itens = BuscaItensDoOrcamento(orcamento); }
+            if (orcamento != null) { orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento); }
 
             return orcamento;
         }
@@ -192,9 +195,10 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaBLL.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
-                    orcamento.Itens = BuscaItensDoOrcamento(orcamento);
+                    orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
                     orcamentos.Add(orcamento);
                 }
                 reader.Close();
@@ -249,9 +253,9 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
-        public List<Item> BuscaItensDoOrcamento(Orcamento orcamento)
+        public List<OrcamentoItem> BuscaItensDoOrcamento(Orcamento orcamento)
         {
-            List<Item> itensOrcamento = new List<Item>();
+            List<OrcamentoItem> itensOrcamento = new List<OrcamentoItem>();
             try
             {
                 AbrirConexao();
@@ -276,13 +280,19 @@ namespace _5gpro.Daos
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
                         Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida"))),
+                    };
+
+                    OrcamentoItem oi = new OrcamentoItem
+                    {
                         Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
                         ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario")),
                         ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total")),
                         DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto"))
+                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
+                        Item = i
                     };
-                    itensOrcamento.Add(i);
+
+                    itensOrcamento.Add(oi);
                 }
                 reader.Close();
             }
@@ -339,16 +349,16 @@ namespace _5gpro.Daos
                     Comando.CommandText = @"INSERT INTO orcamento_has_item (idorcamento, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
                                             VALUES
                                             (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
-                    foreach (Item i in orcamento.Itens)
+                    foreach (OrcamentoItem oi in orcamento.OrcamentoItem)
                     {
                         Comando.Parameters.Clear();
                         Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-                        Comando.Parameters.AddWithValue("@iditem", i.ItemID);
-                        Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
-                        Comando.Parameters.AddWithValue("@valor_unitario", i.ValorUnitario);
-                        Comando.Parameters.AddWithValue("@valor_total", i.ValorTotal);
-                        Comando.Parameters.AddWithValue("@desconto_porc", i.DescontoPorc);
-                        Comando.Parameters.AddWithValue("@desconto", i.Desconto);
+                        Comando.Parameters.AddWithValue("@iditem", oi.Item.ItemID);
+                        Comando.Parameters.AddWithValue("@quantidade", oi.Quantidade);
+                        Comando.Parameters.AddWithValue("@valor_unitario", oi.ValorUnitario);
+                        Comando.Parameters.AddWithValue("@valor_total", oi.ValorTotal);
+                        Comando.Parameters.AddWithValue("@desconto_porc", oi.DescontoPorc);
+                        Comando.Parameters.AddWithValue("@desconto", oi.Desconto);
                         Comando.ExecuteNonQuery();
                     }
                 }
@@ -362,6 +372,26 @@ namespace _5gpro.Daos
             finally
             {
                 FecharConexao();
+            }
+            return retorno;
+        }
+
+        public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscal notafiscal)
+        {
+            int retorno = 0;
+
+            try
+            {
+                AbrirConexao();
+                Comando = new MySqlCommand(@"UPDATE orcamento SET idnotafiscal = @idnotafiscal WHERE idorcamento = @idorcamento", Conexao);
+                Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
+                Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalID);
+
+                retorno = Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine(ex);
             }
             return retorno;
         }

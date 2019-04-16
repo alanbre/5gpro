@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
 using System;
@@ -9,8 +9,8 @@ namespace _5gpro.Controls
 {
     public partial class BuscaItem : UserControl
     {
-        public NotaFiscalItem nfi = null;
-        private readonly NotaFiscalBLL notaFiscalBLL = new NotaFiscalBLL();
+        public Item item = null;
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
         public BuscaItem()
         {
@@ -35,12 +35,12 @@ namespace _5gpro.Controls
         {
             if (tbCodigoItem.Text.Length > 0)
             {
-                nfi = notaFiscalBLL.BuscaItemByCod(int.Parse(tbCodigoItem.Text));
-                PreencheCamposItem(nfi);
+                item = itemDAO.BuscarItemById(int.Parse(tbCodigoItem.Text));
+                PreencheCamposItem(item);
             }
             else
             {
-                nfi = null;
+                item = null;
                 tbDescricaoItem.Text = "";
             }
             this.Codigo_Leave?.Invoke(this, e);
@@ -55,20 +55,17 @@ namespace _5gpro.Controls
             buscaItem.ShowDialog();
             if (buscaItem.itemSelecionado != null)
             {
-                NotaFiscalItem nfi = new NotaFiscalItem
-                {
-                    Item = buscaItem.itemSelecionado
-                };
-                PreencheCamposItem(nfi);
+                Item item = buscaItem.itemSelecionado;
+                PreencheCamposItem(item);
             }
         }
 
-        private void PreencheCamposItem(NotaFiscalItem nfi)
+        private void PreencheCamposItem(Item item)
         {
-            if (nfi.Item != null)
+            if (item != null)
             {
-                tbCodigoItem.Text = nfi.Item.ItemID.ToString();
-                tbDescricaoItem.Text = nfi.Item.Descricao;
+                tbCodigoItem.Text = item.ItemID.ToString();
+                tbDescricaoItem.Text = item.Descricao;
             }
             else
             {
@@ -81,16 +78,16 @@ namespace _5gpro.Controls
             }
         }
 
-        public void PreencheCampos(NotaFiscalItem item)
+        public void PreencheCampos(Item item)
         {
-            this.nfi = item;
-            tbCodigoItem.Text = item.Item.ItemID.ToString();
-            tbDescricaoItem.Text = item.Item.Descricao;
+            this.item = item;
+            tbCodigoItem.Text = item.ItemID.ToString();
+            tbDescricaoItem.Text = item.Descricao;
         }
 
         public void Limpa()
         {
-            this.nfi = null;
+            this.item = null;
             tbCodigoItem.Clear();
             tbDescricaoItem.Clear();
         }

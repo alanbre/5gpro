@@ -31,14 +31,5 @@ namespace _5gpro.Entities
         public Unimedida Unimedida { get; set; }
 
         public virtual ICollection<NotaFiscalItem> NotaFiscalItem { get; set; }
-
-
-        //ADICIONEI ESSES DADOS PARA O ORÇAMENTO.
-        public decimal Quantidade { get; set; }
-        public decimal ValorUnitario { get; set; }
-        public decimal ValorTotal { get; set; } //=> Quantidade * ValorUnitario;
-        public decimal DescontoPorc { get; set; }
-        public decimal Desconto { get; set; } //=> ValorTotal * DescontoPorc / 100;
-
     }
 }

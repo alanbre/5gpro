@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
@@ -16,22 +16,45 @@ namespace _5gpro.Forms
     public partial class fmCadastroUsuario : Form
     {
         Usuario usuario;
+        static ConexaoDAO connection = new ConexaoDAO();
         GrupoUsuario grupousuario = new GrupoUsuario();
-        GrupoUsuarioBLL grupousuarioBLL = new GrupoUsuarioBLL();
-        UsuarioBLL usuarioBLL = new UsuarioBLL();
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+        LogadoDAO logadoDAO = new LogadoDAO(connection);
         Validacao validacao = new Validacao();
 
-        bool editando, ignoraCheckEvent = false;
+        //Controle de Permissões
+        private Logado logado;
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+
+        bool editando = false;
+        bool ignoraCheckEvent;
 
         public fmCadastroUsuario()
         {
             InitializeComponent();
+            SetarNivel();
+        }
+
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010200").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Editando(editando);
+
         }
 
         private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
         {
-            //mudar aqui para this.activecontrol
-            EnterTab(sender, e);
+            EnterTab(this.ActiveControl, e);
         }
 
         private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
@@ -120,7 +143,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigoUsuario.Text.Length > 0)
                 {
-                    Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
+                    Usuario newusuario = usuarioDAO.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -148,7 +171,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigoUsuario.Text.Length > 0)
                     {
-                        Usuario newusuario = usuarioBLL.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
+                        Usuario newusuario = usuarioDAO.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
                         if (newusuario != null)
                         {
                             usuario = newusuario;
@@ -174,7 +197,7 @@ namespace _5gpro.Forms
         {
             if (tbCodGrupoUsuario.Text.Length > 0)
             {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupousuario);
             }
             else
@@ -212,7 +235,7 @@ namespace _5gpro.Forms
 
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
-            if (!editando)
+            if (!editando || Nivel == 1)
             {
                 AbreTelaBuscaUsuario();
             }
@@ -256,7 +279,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
+                    tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel();
                     usuario = null;
                     Editando(true);
                 }
@@ -264,7 +287,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigoUsuario.Text = usuarioBLL.BuscaProxCodigoDisponivel();
+                tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel();
                 usuario = null;
                 Editando(true);
             }
@@ -294,7 +317,7 @@ namespace _5gpro.Forms
                 }
 
                 usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-                usuario.Grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                usuario.Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
                 usuario.Email = tbEmailUsuario.Text;
@@ -306,7 +329,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = usuarioBLL.SalvarOuAtualizarUsuario(usuario);
+                    int resultado = usuarioDAO.SalvarOuAtualizarUsuario(usuario);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -346,7 +369,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit);
+            menuVertical.Editando(edit, Nivel);
         }
 
         private void RecarregaDados(Usuario usuario)
@@ -360,7 +383,7 @@ namespace _5gpro.Forms
                 {
                     if (usuario != null)
                     {
-                        usuario = usuarioBLL.BuscarUsuarioById(usuario.UsuarioID);
+                        usuario = usuarioDAO.BuscarUsuarioById(usuario.UsuarioID);
                         PreencheCampos(usuario);
                         Editando(false);
                     }
@@ -375,7 +398,7 @@ namespace _5gpro.Forms
             {
                 if (usuario != null)
                 {
-                    usuario = usuarioBLL.BuscarUsuarioById(usuario.UsuarioID);
+                    usuario = usuarioDAO.BuscarUsuarioById(usuario.UsuarioID);
                     PreencheCampos(usuario);
                 }
                 else
@@ -399,7 +422,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                Usuario newusuario = usuarioBLL.BuscarProximoUsuario(tbCodigoUsuario.Text);
+                Usuario newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
                 if (newusuario != null)
                 {
                     usuario = newusuario;
@@ -414,7 +437,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Usuario newusuario = usuarioBLL.BuscarProximoUsuario(tbCodigoUsuario.Text);
+                    Usuario newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -423,7 +446,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newusuario = usuarioBLL.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
+                        newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
                         if (newusuario != null)
                         {
                             usuario = newusuario;
@@ -447,7 +470,7 @@ namespace _5gpro.Forms
 
 
                 validacao.despintarCampos(controls);
-                Usuario newusuario = usuarioBLL.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
+                Usuario newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
                 if (newusuario != null)
                 {
                     usuario = newusuario;
@@ -462,7 +485,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Usuario newusuario = usuarioBLL.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
+                    Usuario newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -471,7 +494,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newusuario = usuarioBLL.BuscarProximoUsuario(tbCodigoUsuario.Text);
+                        newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
                         if (newusuario != null)
                         {
                             usuario = newusuario;
@@ -539,10 +562,9 @@ namespace _5gpro.Forms
 
             if (usuario.Grupousuario != null)
             {
-                grupousuario = grupousuarioBLL.BuscaGrupoUsuarioByID(tbCodGrupoUsuario.Text);
+                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupousuario);
             }
-
 
             ignoraCheckEvent = false;
         }

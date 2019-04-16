@@ -12,6 +12,22 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -31,6 +47,18 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>EBBAD2D790FA564A504ED8E63BBF89B3681E490F</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>5gpro_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
@@ -52,16 +80,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bll\CidadeBLL.cs" />
-    <Compile Include="Bll\EstadoBLL.cs" />
-    <Compile Include="Bll\GrupoUsuarioBLL.cs" />
-    <Compile Include="Bll\NotaFiscalBLL.cs" />
-    <Compile Include="Bll\OrcamentoBLL.cs" />
-    <Compile Include="Bll\PermissaoBLL.cs" />
-    <Compile Include="Bll\PessoaBLL.cs" />
-    <Compile Include="Bll\UnimedidaBLL.cs" />
-    <Compile Include="Bll\UsuarioBLL.cs" />
-    <Compile Include="Bll\ItemBLL.cs" />
     <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -95,6 +113,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
+    <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
@@ -109,11 +128,11 @@
     <Compile Include="Entities\NotaFiscal.cs" />
     <Compile Include="Entities\NotaFiscalItem.cs" />
     <Compile Include="Entities\Orcamento.cs" />
+    <Compile Include="Entities\OrcamentoItem.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Bll\PaisBLL.cs" />
     <Compile Include="Daos\PaisDAO.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pais.cs" />
@@ -238,6 +257,8 @@
     <Compile Include="Funcoes\FuncoesBanco.cs" />
     <Compile Include="Funcoes\Limpar.cs" />
     <Compile Include="Funcoes\NetworkAdapter.cs" />
+    <Compile Include="Funcoes\NotaFiscalAux.cs" />
+    <Compile Include="Funcoes\PermissoesUpdate.cs" />
     <Compile Include="Funcoes\Validacao.cs" />
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
@@ -324,6 +345,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="5gpro_TemporaryKey.pfx" />
     <None Include="Properties\DataSources\_5gpro.Entities.Unimedida.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -499,6 +521,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_recurring_appointment_filled_43px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

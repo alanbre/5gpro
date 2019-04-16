@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace _5gpro.Forms
 
         public List<Item> itens;
         public Item itemSelecionado;
-        private readonly ItemBLL itemBLL = new ItemBLL();
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
 
         public fmBuscaItem()
@@ -57,7 +57,7 @@ namespace _5gpro.Forms
                 tipodoitem = "";
             }
 
-            itens = itemBLL.BuscaItens(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
+            itens = itemDAO.BuscaItem(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
 
             foreach (Item i in itens)
             {

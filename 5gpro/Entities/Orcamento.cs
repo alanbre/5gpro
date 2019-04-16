@@ -5,14 +5,23 @@ namespace _5gpro.Entities
 {
     public class Orcamento
     {
+        public Orcamento()
+        {
+            OrcamentoItem = new HashSet<OrcamentoItem>();
+        }
+
         public int OrcamentoID { get; set; }
         public Pessoa Pessoa { get; set; }
+
+        public NotaFiscal NotaFiscal { get; set; } = null;
         public DateTime DataCadastro { get; set; }
         public DateTime? DataValidade { get; set; } = null;
-        public List<Item> Itens { get; set; }
+
         public decimal ValorTotalItens { get; set; }
         public decimal ValorTotalOrcamento { get; set; }
         public decimal DescontoTotalItens { get; set; }
         public decimal DescontoOrcamento { get; set; }
+
+        public virtual ICollection<OrcamentoItem> OrcamentoItem { get; set; }
     }
 }

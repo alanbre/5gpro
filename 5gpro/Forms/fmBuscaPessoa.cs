@@ -1,4 +1,4 @@
-﻿using _5gpro.Bll;
+﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace _5gpro.Forms
     {
         public Pessoa pessoaSelecionada = null;
         private List<Pessoa> Pessoas;
-        private readonly PessoaBLL pessoaBLL = new PessoaBLL();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         public fmBuscaPessoa()
         {
@@ -65,7 +65,7 @@ namespace _5gpro.Forms
             table.Columns.Add("E-Mail", typeof(string));
 
             int idcidade = buscaCidade.cidade?.CidadeID ?? 0;
-            Pessoas = pessoaBLL.BuscarPessoas(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
+            Pessoas = pessoaDAO.BuscarPessoas(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
 
             foreach (Pessoa p in Pessoas)
             {
