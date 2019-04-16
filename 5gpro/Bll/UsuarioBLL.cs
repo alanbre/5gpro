@@ -52,9 +52,9 @@ namespace _5gpro.Bll
             return usuarioDAO.GravarLogado(usuario, mac);
         }
 
-        public int RemoverLogado(Usuario usuario, string mac)
+        public int RemoverLogado(Logado logado)
         {
-            return usuarioDAO.RemoverLogado(usuario, mac);
+            return usuarioDAO.RemoverLogado(logado);
         }
 
         public Logado BuscaLogado(Usuario usuario, string mac)

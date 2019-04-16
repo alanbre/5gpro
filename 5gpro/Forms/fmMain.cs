@@ -1,4 +1,5 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Daos;
+using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using System;
@@ -8,13 +9,22 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-        public fmMain()
+        public fmMain(Usuario usuario)
         {
             InitializeComponent();
+            SetarLogado(usuario);
         }
 
-        
-      
+        public Usuario usuariologadomain;
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        NetworkAdapter adap = new NetworkAdapter();
+
+        public void SetarLogado(Usuario usuario)
+        {
+            usuariologadomain = usuario;
+        }
+
         private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
         {
             var formCadPessoas = new fmCadastroPessoa();
@@ -58,13 +68,11 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            NetworkAdapter adap = new NetworkAdapter();
-            Console.WriteLine("IP: "+adap.IP);
-            Console.WriteLine("MAC: "+adap.Mac);
-            Console.WriteLine("Nome PC: "+adap.Nome);
 
+        private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Logado lol = usuarioDAO.BuscaLogado(usuariologadomain, adap.Mac);
+            usuarioDAO.RemoverLogado(usuarioDAO.BuscaLogado(usuariologadomain, adap.Mac));
         }
     }
 }

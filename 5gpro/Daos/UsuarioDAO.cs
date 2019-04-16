@@ -61,6 +61,9 @@ namespace _5gpro.Daos
                                              WHERE l.idusuario = @idusuario AND l.mac = @mac
                                                 ;", Conexao);
 
+                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
+                Comando.Parameters.AddWithValue("@mac", mac);
+
                 IDataReader reader = Comando.ExecuteReader();
 
                 if (reader.Read())
@@ -123,8 +126,9 @@ namespace _5gpro.Daos
         }
 
         //Remove login da tabela Logado
-        public int RemoverLogado(Usuario usuario, string mac)
+        public int RemoverLogado(Logado logado)
         {
+            //Usuario usuario, string mac
             int retorno = 0;
             try
             {
@@ -139,8 +143,8 @@ namespace _5gpro.Daos
                            WHERE l.idusuario = @idusuario AND l.mac = @mac
                           ";
 
-                Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Comando.Parameters.AddWithValue("@mac", mac);
+                Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID.ToString());
+                Comando.Parameters.AddWithValue("@mac", logado.Mac);
 
                 retorno = Comando.ExecuteNonQuery();
 
