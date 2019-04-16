@@ -7,10 +7,11 @@ using System.Collections.Generic;
 
 namespace _5gpro.Funcoes
 {
-    class PermissoesUpdate : Daos.ConexaoDAO
+    class PermissoesUpdate
     {
-        private PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
-        private GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(new ConexaoDAO());
+        private static ConexaoDAO connection = new ConexaoDAO();
+        private PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
         private List<GrupoUsuario> listagrupos = new List<GrupoUsuario>();
         private fmCadastroGrupoUsuario.PermissoesStruct listapermissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
         private List<int> idpermissoesNpraN = new List<int>();
@@ -55,14 +56,14 @@ namespace _5gpro.Funcoes
             int retorno = 0;
             try
             {
-                AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
+                connection.AbrirConexao();
+                connection.Comando = connection.Conexao.CreateCommand();
+                connection.tr = connection.Conexao.BeginTransaction();
+                connection.Comando.Connection = connection.Conexao;
+                connection.Comando.Transaction = connection.tr;
 
 
-                Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
+                connection.Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
                                             VALUES
                                             (@idgrupousuario, @idpermissao, @nivel)
                                             ON DUPLICATE KEY UPDATE
@@ -71,16 +72,16 @@ namespace _5gpro.Funcoes
 
                 foreach (GrupoUsuario g in listagrupos)
                 {
-                    Comando.Parameters.Clear();
-                    Comando.Parameters.AddWithValue("@idgrupousuario", g.GrupoUsuarioID);
-                    Comando.Parameters.AddWithValue("@idpermissao", inseriridpermissao);
-                    Comando.Parameters.AddWithValue("@nivel", 0);
-                    Comando.ExecuteNonQuery();
+                    connection.Comando.Parameters.Clear();
+                    connection.Comando.Parameters.AddWithValue("@idgrupousuario", g.GrupoUsuarioID);
+                    connection.Comando.Parameters.AddWithValue("@idpermissao", inseriridpermissao);
+                    connection.Comando.Parameters.AddWithValue("@nivel", 0);
+                    connection.Comando.ExecuteNonQuery();
                 }
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = connection.Comando.ExecuteNonQuery();
 
-                tr.Commit();
+                connection.tr.Commit();
             }
             catch (MySqlException ex)
             {
@@ -89,7 +90,7 @@ namespace _5gpro.Funcoes
             }
             finally
             {
-                FecharConexao();
+                connection.FecharConexao();
             }
             return retorno;
         }
@@ -99,14 +100,14 @@ namespace _5gpro.Funcoes
             int retorno = 0;
             try
             {
-                AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
+                connection.AbrirConexao();
+                connection.Comando = connection.Conexao.CreateCommand();
+                connection.tr = connection.Conexao.BeginTransaction();
+                connection.Comando.Connection = connection.Conexao;
+                connection.Comando.Transaction = connection.tr;
 
 
-                Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
+                connection.Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
                                             VALUES
                                             (@idgrupousuario, @idpermissao, @nivel)
                                             ON DUPLICATE KEY UPDATE
@@ -115,16 +116,16 @@ namespace _5gpro.Funcoes
 
                 foreach (Permissao p in listapermissoes.Todas)
                 {
-                    Comando.Parameters.Clear();
-                    Comando.Parameters.AddWithValue("@idgrupousuario", inseriridgrupousuario);
-                    Comando.Parameters.AddWithValue("@idpermissao", p.PermissaoId);
-                    Comando.Parameters.AddWithValue("@nivel", 0);
-                    Comando.ExecuteNonQuery();
+                    connection.Comando.Parameters.Clear();
+                    connection.Comando.Parameters.AddWithValue("@idgrupousuario", inseriridgrupousuario);
+                    connection.Comando.Parameters.AddWithValue("@idpermissao", p.PermissaoId);
+                    connection.Comando.Parameters.AddWithValue("@nivel", 0);
+                    connection.Comando.ExecuteNonQuery();
                 }
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = connection.Comando.ExecuteNonQuery();
 
-                tr.Commit();
+                connection.tr.Commit();
             }
             catch (MySqlException ex)
             {
@@ -133,7 +134,7 @@ namespace _5gpro.Funcoes
             }
             finally
             {
-                FecharConexao();
+                connection.FecharConexao();
             }
             return retorno;
         }
