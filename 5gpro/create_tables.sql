@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
   `cnpj` VARCHAR(14) NULL DEFAULT NULL,
   `endereco` VARCHAR(45) NULL DEFAULT NULL,
   `telefone` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
   `idcidade` INT(11) NOT NULL,
   `tipo_pessoa` CHAR(1) NULL DEFAULT NULL,
   PRIMARY KEY (`idpessoa`),

@@ -5597,6 +5597,13 @@ INSERT INTO `cidade` (`idcidade`, `nome`, `idestado`) VALUES
 (5563, 'Wanderlândia', 27),
 (5564, 'Xambioá', 27);
 
+INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES 
+(1, 'm', 'Metro'),
+(2, 'h', 'Hora'),
+(3, 'min', 'Minuto'),
+(4, 'L', 'Litro'),
+(5, 'm²', 'Metro');
+
 INSERT INTO atuacao (`idatuacao`, `descricao`) VALUES (1, 'Cliente'), (2, 'Fornecedor');
 
 INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
