@@ -106,7 +106,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoCidade_TextChanged(object sender, EventArgs e)
         {
-            this.Text_Changed?.Invoke(this, e);  //o editor falou que era melhor fazer assim haha.
+            this.Text_Changed?.Invoke(this, e);
         }
     }
 }

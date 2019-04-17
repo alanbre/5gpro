@@ -609,9 +609,9 @@ namespace _5gpro.Forms
         {
             var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
             buscaGrupoUsuario.ShowDialog();
-            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
+            if (buscaGrupoUsuario.grupoUsuarioSelecionado != null)
             {
-                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
+                grupousuario = buscaGrupoUsuario.grupoUsuarioSelecionado;
                 PreencheCampos(grupousuario);
             }
         }
