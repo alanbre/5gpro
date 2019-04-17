@@ -367,6 +367,38 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`operacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`operacao` (
+  `idoperacao` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(100) NULL,
+  `condicao` VARCHAR(45) NULL,
+  `desconto` DECIMAL NULL,
+  `entrada` DECIMAL NULL,
+  PRIMARY KEY (`idoperacao`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`parcelaoperacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
+  `idparcelaoperacao` INT NOT NULL,
+  `numero` INT NULL,
+  `dias` INT NULL,
+  `idoperacao` INT NOT NULL,
+  PRIMARY KEY (`idparcelaoperacao`),
+  INDEX `fk_parcelaoperacao_operacao1_idx` (`idoperacao` ASC) VISIBLE,
+  CONSTRAINT `fk_parcelaoperacao_operacao1`
+    FOREIGN KEY (`idoperacao`)
+    REFERENCES `5gprodatabase`.`operacao` (`idoperacao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

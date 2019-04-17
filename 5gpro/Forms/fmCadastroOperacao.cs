@@ -54,5 +54,12 @@ namespace _5gpro.Forms
             tbEntrada.Enabled = false;
             tbEntrada.Text = "";
         }
+
+        private void BtDias_Click(object sender, EventArgs e)
+        {
+            var fmdiasavencer = new fmDiasAVencer();
+            fmdiasavencer.Show(this);
+        }
+
     }
 }

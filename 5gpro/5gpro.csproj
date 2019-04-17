@@ -134,8 +134,10 @@
     <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscal.cs" />
     <Compile Include="Entities\NotaFiscalItem.cs" />
+    <Compile Include="Entities\Operacao.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
+    <Compile Include="Entities\ParcelaOperacao.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
@@ -240,6 +242,12 @@
     <Compile Include="Forms\fmBuscaGrupoUsuario.Designer.cs">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmDiasAVencer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmDiasAVencer.Designer.cs">
+      <DependentUpon>fmDiasAVencer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -341,6 +349,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaGrupoUsuario.resx">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmDiasAVencer.resx">
+      <DependentUpon>fmDiasAVencer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>

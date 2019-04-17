@@ -47,8 +47,7 @@ namespace _5gpro.Daos
         public NotaFiscal BuscaNotaByCod(int codigo)
         {
             NotaFiscal notafiscal = new NotaFiscal();
-            
-
+           
             try
             {
                 AbrirConexao();
