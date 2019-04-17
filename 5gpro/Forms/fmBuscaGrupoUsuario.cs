@@ -15,7 +15,7 @@ namespace _5gpro.Forms
         public GrupoUsuario GrupoUsuario;
         GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
         
-        public GrupoUsuario grupousuarioSelecionado;
+        public GrupoUsuario grupoUsuarioSelecionado;
 
         public fmBuscaGrupoUsuario()
         {
@@ -49,7 +49,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvGrupoUsuario.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvGrupoUsuario.Rows[selectedRowIndex];
-            grupousuarioSelecionado = Listagrupousuario.Find(g => (g.GrupoUsuarioID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            grupoUsuarioSelecionado = Listagrupousuario.Find(g => (g.GrupoUsuarioID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
 
             this.Close();
         }

@@ -195,19 +195,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
-        {
-            if (tbCodGrupoUsuario.Text.Length > 0)
-            {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-            else
-            {
-                tbNomeGrupoUsuario.Text = "";
-            }
-        }
-
         private void tbSenhaUsuario_Leave(object sender, EventArgs e)
         {
             if (tbConfirmaSenhaUsuario.TextLength > 0)
@@ -219,13 +206,6 @@ namespace _5gpro.Forms
         private void tbConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
         {
             ConfirmaSenhas();
-        }
-
-
-        //EVENTOS DE CLICK
-        private void btGrupoUsuario_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaGrupoUsuario();
         }
 
 
@@ -319,7 +299,7 @@ namespace _5gpro.Forms
                 }
 
                 usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-                usuario.Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
+                usuario.Grupousuario = buscaGrupoUsuario.grupoUsuario;
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
                 usuario.Email = tbEmailUsuario.Text;
@@ -508,17 +488,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaGrupoUsuario()
-        {
-            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
-            buscaGrupoUsuario.ShowDialog();
-            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
-            {
-                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-        }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -533,8 +502,7 @@ namespace _5gpro.Forms
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
             tbSenhaUsuario.Clear();
             tbConfirmaSenhaUsuario.Clear();
-            tbCodGrupoUsuario.Clear();
-            tbNomeGrupoUsuario.Clear();
+            buscaGrupoUsuario.Limpa();
             tbNomeUsuario.Clear();
             tbSobrenomeUsuario.Clear();
             tbEmailUsuario.Clear();
@@ -556,42 +524,14 @@ namespace _5gpro.Forms
             tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
+            buscaGrupoUsuario.PreencheCampos(usuario.Grupousuario);
             tbNomeUsuario.Text = usuario.Nome;
             tbSobrenomeUsuario.Text = usuario.Sobrenome;
             tbEmailUsuario.Text = usuario.Email;
             mtbTelefoneUsuario.Text = usuario.Telefone;
 
-            if (usuario.Grupousuario != null)
-            {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-
             ignoraCheckEvent = false;
         }
 
-        private void FmCadastroUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PreencheCamposGrupoUsuario(GrupoUsuario grupousuario)
-        {
-            if (grupousuario != null)
-            {
-                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
-                tbNomeGrupoUsuario.Text = grupousuario.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Grupo de usuários não encontrado no banco de dados",
-                "Grupo de usuários não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodGrupoUsuario.Focus();
-                tbNomeGrupoUsuario.SelectAll();
-            }
-        }
     }
 }

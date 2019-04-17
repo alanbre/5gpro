@@ -92,6 +92,12 @@
     <Compile Include="Controls\BuscaEstado.Designer.cs">
       <DependentUpon>BuscaEstado.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaGrupoUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaGrupoUsuario.Designer.cs">
+      <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -274,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaEstado.resx">
       <DependentUpon>BuscaEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaGrupoUsuario.resx">
+      <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaItem.resx">
       <DependentUpon>BuscaItem.cs</DependentUpon>

@@ -29,18 +29,15 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.buscaGrupoUsuario = new _5gpro.Controls.BuscaGrupoUsuario();
             this.lbConfirmaSenha = new System.Windows.Forms.Label();
             this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
             this.tbConfirmaSenhaUsuario = new System.Windows.Forms.TextBox();
             this.lbConfirmaSenhaUsuario = new System.Windows.Forms.Label();
             this.tbSenhaUsuario = new System.Windows.Forms.TextBox();
             this.lbSenhaUsuario = new System.Windows.Forms.Label();
-            this.lbGrupoUsuario = new System.Windows.Forms.Label();
-            this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
             this.lbCodigoUsuario = new System.Windows.Forms.Label();
-            this.btGrupoUsuario = new System.Windows.Forms.Button();
             this.tbCodigoUsuario = new System.Windows.Forms.TextBox();
-            this.tbCodGrupoUsuario = new System.Windows.Forms.TextBox();
             this.tbNomeUsuario = new System.Windows.Forms.TextBox();
             this.lbNomeUsuario = new System.Windows.Forms.Label();
             this.lbSobrenomeUsuario = new System.Windows.Forms.Label();
@@ -59,22 +56,26 @@
             // pnDadosGerais
             // 
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.buscaGrupoUsuario);
             this.pnDadosGerais.Controls.Add(this.lbConfirmaSenha);
             this.pnDadosGerais.Controls.Add(this.cbMostrarSenhaUsuario);
             this.pnDadosGerais.Controls.Add(this.tbConfirmaSenhaUsuario);
             this.pnDadosGerais.Controls.Add(this.lbConfirmaSenhaUsuario);
             this.pnDadosGerais.Controls.Add(this.tbSenhaUsuario);
             this.pnDadosGerais.Controls.Add(this.lbSenhaUsuario);
-            this.pnDadosGerais.Controls.Add(this.lbGrupoUsuario);
-            this.pnDadosGerais.Controls.Add(this.tbNomeGrupoUsuario);
             this.pnDadosGerais.Controls.Add(this.lbCodigoUsuario);
-            this.pnDadosGerais.Controls.Add(this.btGrupoUsuario);
             this.pnDadosGerais.Controls.Add(this.tbCodigoUsuario);
-            this.pnDadosGerais.Controls.Add(this.tbCodGrupoUsuario);
             this.pnDadosGerais.Location = new System.Drawing.Point(72, 14);
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(750, 184);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // buscaGrupoUsuario
+            // 
+            this.buscaGrupoUsuario.Location = new System.Drawing.Point(3, 131);
+            this.buscaGrupoUsuario.Name = "buscaGrupoUsuario";
+            this.buscaGrupoUsuario.Size = new System.Drawing.Size(442, 39);
+            this.buscaGrupoUsuario.TabIndex = 8;
             // 
             // lbConfirmaSenha
             // 
@@ -93,7 +94,7 @@
             this.cbMostrarSenhaUsuario.Location = new System.Drawing.Point(262, 69);
             this.cbMostrarSenhaUsuario.Name = "cbMostrarSenhaUsuario";
             this.cbMostrarSenhaUsuario.Size = new System.Drawing.Size(61, 17);
-            this.cbMostrarSenhaUsuario.TabIndex = 8;
+            this.cbMostrarSenhaUsuario.TabIndex = 4;
             this.cbMostrarSenhaUsuario.TabStop = false;
             this.cbMostrarSenhaUsuario.Text = "Mostrar";
             this.cbMostrarSenhaUsuario.UseVisualStyleBackColor = true;
@@ -105,7 +106,7 @@
             this.tbConfirmaSenhaUsuario.Name = "tbConfirmaSenhaUsuario";
             this.tbConfirmaSenhaUsuario.PasswordChar = '*';
             this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(250, 20);
-            this.tbConfirmaSenhaUsuario.TabIndex = 5;
+            this.tbConfirmaSenhaUsuario.TabIndex = 6;
             this.tbConfirmaSenhaUsuario.TextChanged += new System.EventHandler(this.tbConfirmaSenhaUsuario_TextChanged);
             this.tbConfirmaSenhaUsuario.Leave += new System.EventHandler(this.tbConfirmaSenhaUsuario_Leave);
             // 
@@ -115,7 +116,7 @@
             this.lbConfirmaSenhaUsuario.Location = new System.Drawing.Point(6, 89);
             this.lbConfirmaSenhaUsuario.Name = "lbConfirmaSenhaUsuario";
             this.lbConfirmaSenhaUsuario.Size = new System.Drawing.Size(89, 13);
-            this.lbConfirmaSenhaUsuario.TabIndex = 4;
+            this.lbConfirmaSenhaUsuario.TabIndex = 5;
             this.lbConfirmaSenhaUsuario.Text = "Confirme a senha";
             // 
             // tbSenhaUsuario
@@ -137,25 +138,6 @@
             this.lbSenhaUsuario.TabIndex = 2;
             this.lbSenhaUsuario.Text = "Senha";
             // 
-            // lbGrupoUsuario
-            // 
-            this.lbGrupoUsuario.AutoSize = true;
-            this.lbGrupoUsuario.Location = new System.Drawing.Point(7, 128);
-            this.lbGrupoUsuario.Name = "lbGrupoUsuario";
-            this.lbGrupoUsuario.Size = new System.Drawing.Size(75, 13);
-            this.lbGrupoUsuario.TabIndex = 6;
-            this.lbGrupoUsuario.Text = "Grupo Usuário";
-            // 
-            // tbNomeGrupoUsuario
-            // 
-            this.tbNomeGrupoUsuario.Enabled = false;
-            this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(103, 144);
-            this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
-            this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(433, 20);
-            this.tbNomeGrupoUsuario.TabIndex = 11;
-            this.tbNomeGrupoUsuario.TabStop = false;
-            this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
-            // 
             // lbCodigoUsuario
             // 
             this.lbCodigoUsuario.AutoSize = true;
@@ -165,16 +147,6 @@
             this.lbCodigoUsuario.TabIndex = 0;
             this.lbCodigoUsuario.Text = "Código";
             // 
-            // btGrupoUsuario
-            // 
-            this.btGrupoUsuario.Location = new System.Drawing.Point(80, 144);
-            this.btGrupoUsuario.Name = "btGrupoUsuario";
-            this.btGrupoUsuario.Size = new System.Drawing.Size(20, 20);
-            this.btGrupoUsuario.TabIndex = 10;
-            this.btGrupoUsuario.TabStop = false;
-            this.btGrupoUsuario.UseVisualStyleBackColor = true;
-            this.btGrupoUsuario.Click += new System.EventHandler(this.btGrupoUsuario_Click);
-            // 
             // tbCodigoUsuario
             // 
             this.tbCodigoUsuario.Location = new System.Drawing.Point(9, 27);
@@ -182,15 +154,6 @@
             this.tbCodigoUsuario.Size = new System.Drawing.Size(100, 20);
             this.tbCodigoUsuario.TabIndex = 1;
             this.tbCodigoUsuario.Leave += new System.EventHandler(this.tbCodigoUsuario_Leave);
-            // 
-            // tbCodGrupoUsuario
-            // 
-            this.tbCodGrupoUsuario.Location = new System.Drawing.Point(9, 144);
-            this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
-            this.tbCodGrupoUsuario.Size = new System.Drawing.Size(68, 20);
-            this.tbCodGrupoUsuario.TabIndex = 7;
-            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.TbCodGrupoUsuario_TextChanged);
-            this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
             // 
             // tbNomeUsuario
             // 
@@ -308,7 +271,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 453);
+            this.ClientSize = new System.Drawing.Size(834, 454);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.panel2);
@@ -323,7 +286,6 @@
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de Usuário";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
-            this.Load += new System.EventHandler(this.FmCadastroUsuario_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
@@ -343,13 +305,9 @@
         private System.Windows.Forms.Label lbNomeUsuario;
         private System.Windows.Forms.TextBox tbNomeUsuario;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox tbCodGrupoUsuario;
         private System.Windows.Forms.Label lbTelefoneUsuario;
         private System.Windows.Forms.TextBox tbEmailUsuario;
         private System.Windows.Forms.Label lbEmailUsuario;
-        private System.Windows.Forms.TextBox tbNomeGrupoUsuario;
-        private System.Windows.Forms.Button btGrupoUsuario;
-        private System.Windows.Forms.Label lbGrupoUsuario;
         private System.Windows.Forms.TextBox tbSenhaUsuario;
         private System.Windows.Forms.Label lbSenhaUsuario;
         private System.Windows.Forms.TextBox tbConfirmaSenhaUsuario;
@@ -359,5 +317,6 @@
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.Label lbConfirmaSenha;
         private Controls.MenuVertical menuVertical;
+        private Controls.BuscaGrupoUsuario buscaGrupoUsuario;
     }
 }
