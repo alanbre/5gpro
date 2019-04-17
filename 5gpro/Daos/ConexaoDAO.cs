@@ -18,7 +18,6 @@ namespace _5gpro.Daos
         {
             try
             {
-                Console.WriteLine(Conecta);
                 Conexao = new MySqlConnection(Conecta);
                 Conexao.Open();
             }
