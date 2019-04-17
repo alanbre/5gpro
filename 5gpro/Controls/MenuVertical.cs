@@ -13,76 +13,96 @@ namespace _5gpro.Controls
             InitializeComponent();
         }
 
-        private void AlteraBotoes(int nivel)
+        private void AlteraBotoes(int nivel, string Codgrupousuario)
         {
-            switch (nivel)
+            if (Codgrupousuario == "999")
             {
+                if (editando)
+                {
+                    btNovo.Enabled = false;
+                    btSalvar.Enabled = true;
+                    btBuscar.Enabled = false;
+                    btExcluir.Enabled = true;
+                }
+                else
+                {
+                    btNovo.Enabled = true;
+                    btSalvar.Enabled = false;
+                    btBuscar.Enabled = true;
+                    btExcluir.Enabled = true;
+                }
+            }
+            else
+            {
+                switch (nivel)
+                {
 
-                //NIVEL 1
-                case 1:
+                    //NIVEL 1
+                    case 1:
 
-                    if (editando)
-                    {
-                        btNovo.Enabled = false;
-                        btSalvar.Enabled = false;
-                        btBuscar.Enabled = true;
-                        btExcluir.Enabled = false;
-                    }
-                    else
-                    {
-                        btNovo.Enabled = false;
-                        btSalvar.Enabled = false;
-                        btBuscar.Enabled = true;
-                        btExcluir.Enabled = false;
-                    }
-                    break;
+                        if (editando)
+                        {
+                            btNovo.Enabled = false;
+                            btSalvar.Enabled = false;
+                            btBuscar.Enabled = true;
+                            btExcluir.Enabled = false;
+                        }
+                        else
+                        {
+                            btNovo.Enabled = false;
+                            btSalvar.Enabled = false;
+                            btBuscar.Enabled = true;
+                            btExcluir.Enabled = false;
+                        }
+                        break;
 
-                //NIVEL 2
-                case 2:
+                    //NIVEL 2
+                    case 2:
 
-                    if (editando)
-                    {
-                        btNovo.Enabled = false;
-                        btSalvar.Enabled = true;
-                        btBuscar.Enabled = false;
-                        btExcluir.Enabled = false;
-                    }
-                    else
-                    {
-                        btNovo.Enabled = true;
-                        btSalvar.Enabled = false;
-                        btBuscar.Enabled = true;
-                        btExcluir.Enabled = false;
-                    }
-                    break;
+                        if (editando)
+                        {
+                            btNovo.Enabled = false;
+                            btSalvar.Enabled = true;
+                            btBuscar.Enabled = false;
+                            btExcluir.Enabled = false;
+                        }
+                        else
+                        {
+                            btNovo.Enabled = true;
+                            btSalvar.Enabled = false;
+                            btBuscar.Enabled = true;
+                            btExcluir.Enabled = false;
+                        }
+                        break;
 
-                //NIVEL 3
-                case 3:
+                    //NIVEL 3
+                    case 3:
 
-                    if (editando)
-                    {
-                        btNovo.Enabled = false;
-                        btSalvar.Enabled = true;
-                        btBuscar.Enabled = false;
-                        btExcluir.Enabled = true;
-                    }
-                    else
-                    {
-                        btNovo.Enabled = true;
-                        btSalvar.Enabled = false;
-                        btBuscar.Enabled = true;
-                        btExcluir.Enabled = true;
-                    }
-                    break;
+                        if (editando)
+                        {
+                            btNovo.Enabled = false;
+                            btSalvar.Enabled = true;
+                            btBuscar.Enabled = false;
+                            btExcluir.Enabled = true;
+                        }
+                        else
+                        {
+                            btNovo.Enabled = true;
+                            btSalvar.Enabled = false;
+                            btBuscar.Enabled = true;
+                            btExcluir.Enabled = true;
+                        }
+                        break;
+                }
             }
 
         }
 
         //Editando recebe o nivel de acesso da tela
-        public void Editando(bool edit, int nivel)
+        public void Editando(bool edit, int nivel, string Codgrupousuario)
         {
             editando = edit;
-            AlteraBotoes(nivel);
+            AlteraBotoes(nivel, Codgrupousuario);
         }
 
 

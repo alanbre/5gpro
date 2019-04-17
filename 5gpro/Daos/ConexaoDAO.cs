@@ -5,8 +5,8 @@ namespace _5gpro.Daos
 {
     public class ConexaoDAO
     {
-        public static string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-        //public static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan; pooling = true";
+        //public static string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+        public static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan; pooling = true";
         public MySqlConnection Conexao;
         public MySqlTransaction tr = null;
         public MySqlCommand Comando = null;

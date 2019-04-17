@@ -29,6 +29,7 @@ namespace _5gpro.Forms
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
+        private string CodGrupoUsuario;
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -43,11 +44,12 @@ namespace _5gpro.Forms
         {
             //Busca o usuário logado no pc, através do MAC
             logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010200").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
 
         }
@@ -208,7 +210,7 @@ namespace _5gpro.Forms
 
         private void tbSenhaUsuario_Leave(object sender, EventArgs e)
         {
-            if(tbConfirmaSenhaUsuario.TextLength > 0)
+            if (tbConfirmaSenhaUsuario.TextLength > 0)
             {
                 ConfirmaSenhas();
             }
@@ -369,7 +371,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit, Nivel);
+            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
 
         private void RecarregaDados(Usuario usuario)

@@ -22,6 +22,14 @@ namespace _5gpro.Forms
         private OrcamentoItem itemSelecionado;
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
+        //Controle de Permissões
+        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        private Logado logado;
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+        private string CodGrupoUsuario;
+
         private bool editando, ignoracheckevent = false;
 
 
@@ -29,6 +37,19 @@ namespace _5gpro.Forms
         public fmOrcamentoCadastroOrcamento()
         {
             InitializeComponent();
+            SetarNivel();
+        }
+
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("020100").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            Editando(editando);
         }
 
         private void FmCadastroOrcamento_KeyDown(object sender, KeyEventArgs e)
@@ -720,10 +741,9 @@ namespace _5gpro.Forms
         {
             if (!ignoracheckevent && notafiscal == null)
             {
-                //Arrumar
                 btNotaGerar.Enabled = !edit;
                 editando = edit;
-                menuVertical.Editando(edit, 3);
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
 
