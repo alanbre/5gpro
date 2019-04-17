@@ -72,12 +72,12 @@ namespace _5gpro.Forms
                 RecarregaDados(item);
             }
 
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1 && Nivel > 1 || CodGrupoUsuario == "999")
             {
                 NovoCadastro();
             }
 
-            if (e.KeyCode == Keys.F2)
+            if (e.KeyCode == Keys.F2 && Nivel > 1 || CodGrupoUsuario == "999")
             {
                 SalvaCadastro();
             }
