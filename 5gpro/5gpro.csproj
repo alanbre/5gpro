@@ -67,6 +67,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
@@ -190,6 +191,12 @@
     </Compile>
     <Compile Include="Forms\fmCadastroItem.Designer.cs">
       <DependentUpon>fmCadastroItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroOperacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroOperacao.Designer.cs">
+      <DependentUpon>fmCadastroOperacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmCadastroPais.cs">
       <SubType>Form</SubType>
@@ -319,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroItem.resx">
       <DependentUpon>fmCadastroItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroOperacao.resx">
+      <DependentUpon>fmCadastroOperacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPais.resx">
       <DependentUpon>fmCadastroPais.cs</DependentUpon>

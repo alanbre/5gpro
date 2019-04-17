@@ -132,6 +132,12 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
+        private void tsmiCadastroDeOperações_Click(object sender, EventArgs e)
+        {
+            var formCadOperacao = new fmCadastroOperacao();
+            formCadOperacao.Show(this);
+        }
+
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Retira usuário da tabela Logado
@@ -223,5 +229,7 @@ namespace _5gpro
 
 
         }
+
+
     }
 }

@@ -2,6 +2,8 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
+using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -122,9 +124,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-           Console.WriteLine(usuarioDAO.BuscarUsuarioAnterior("2").Grupousuario.GrupoUsuarioID);
-        }
+
     }
 }
