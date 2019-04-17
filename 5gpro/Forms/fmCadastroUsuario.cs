@@ -140,7 +140,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigoUsuario_Leave(object sender, EventArgs e)
         {
-            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
+            if (!int.TryParse(tbCodigoUsuario.Text, out int codigo)) { tbCodigoUsuario.Clear(); }
             if (!editando)
             {
                 if (tbCodigoUsuario.Text.Length > 0)

@@ -38,7 +38,7 @@ namespace _5gpro.Forms
 
 
 
-        usuarios = usuarioDAO.BuscaUsuarios(tbFiltroCodUsuario.Text, tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text).ToList();
+            usuarios = usuarioDAO.BuscaUsuarios(buscaGrupoUsuario.grupoUsuario.GrupoUsuarioID.ToString(), tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text).ToList();
 
             foreach (Usuario u in usuarios)
             {
@@ -70,11 +70,6 @@ namespace _5gpro.Forms
         private void tbFiltroSobrenomeUsuario_TextChanged(object sender, EventArgs e)
         {
             BuscaUsuario();
-        }
-
-        private void dgvUsuarios_AllowUserToAddRowsChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
