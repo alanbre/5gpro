@@ -50,6 +50,7 @@
             this.tbNparcelas = new System.Windows.Forms.TextBox();
             this.lbNparcelas = new System.Windows.Forms.Label();
             this.menuVertical1 = new _5gpro.Controls.MenuVertical();
+            this.button1 = new System.Windows.Forms.Button();
             this.gbDadosOperacao.SuspendLayout();
             this.gbCondicaoOperacao.SuspendLayout();
             this.tcOpcoes.SuspendLayout();
@@ -197,6 +198,7 @@
             // 
             // tpAprazo
             // 
+            this.tpAprazo.Controls.Add(this.button1);
             this.tpAprazo.Controls.Add(this.gbEntrada);
             this.tpAprazo.Controls.Add(this.tbEntrada);
             this.tpAprazo.Controls.Add(this.tbNparcelas);
@@ -276,6 +278,15 @@
             this.menuVertical1.Size = new System.Drawing.Size(53, 364);
             this.menuVertical1.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(127, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 7;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // fmCadastroOperacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,5 +342,6 @@
         private System.Windows.Forms.TextBox tbEntrada;
         private System.Windows.Forms.TextBox tbNparcelas;
         private System.Windows.Forms.Label lbNparcelas;
+        private System.Windows.Forms.Button button1;
     }
 }

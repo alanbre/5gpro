@@ -1,0 +1,1 @@
+DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan
