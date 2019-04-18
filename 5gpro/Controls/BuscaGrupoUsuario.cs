@@ -112,8 +112,6 @@ namespace _5gpro.Controls
         //--------------------------------------------------
 
 
-
-
         private void TbCodigoGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
             this.Text_Changed?.Invoke(this, e);

@@ -167,7 +167,7 @@
             this.tcOpcoes.Location = new System.Drawing.Point(66, 282);
             this.tcOpcoes.Name = "tcOpcoes";
             this.tcOpcoes.SelectedIndex = 0;
-            this.tcOpcoes.Size = new System.Drawing.Size(659, 244);
+            this.tcOpcoes.Size = new System.Drawing.Size(466, 206);
             this.tcOpcoes.TabIndex = 3;
             // 
             // tpAvista
@@ -210,7 +210,7 @@
             this.tpAprazo.Location = new System.Drawing.Point(4, 22);
             this.tpAprazo.Name = "tpAprazo";
             this.tpAprazo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAprazo.Size = new System.Drawing.Size(651, 218);
+            this.tpAprazo.Size = new System.Drawing.Size(458, 180);
             this.tpAprazo.TabIndex = 1;
             this.tpAprazo.Text = "Opções A Prazo";
             this.tpAprazo.UseVisualStyleBackColor = true;
