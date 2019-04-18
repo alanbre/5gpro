@@ -357,6 +357,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
   `mac` VARCHAR(45) NULL,
   `nomepc` VARCHAR(45) NULL,
   `ipdopc` VARCHAR(45) NULL,
+  `data_update` DATETIME NULL,
   PRIMARY KEY (`idlogado`),
   INDEX `fk_usuariologado_usuario1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_usuariologado_usuario1`
@@ -365,6 +366,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
 
 
 -- -----------------------------------------------------

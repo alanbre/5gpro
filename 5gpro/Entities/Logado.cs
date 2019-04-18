@@ -1,4 +1,6 @@
-﻿namespace _5gpro.Entities
+﻿using System;
+
+namespace _5gpro.Entities
 {
     public class Logado
     {
@@ -7,5 +9,7 @@
         public Usuario Usuario { get; set; }
         public string NomePC { get; set; }
         public string IPdoPC { get; set; }
+
+        public DateTime? DataUpdate { get; set; } = DateTime.Now;
     }
 }

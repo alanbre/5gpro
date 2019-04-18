@@ -55,12 +55,12 @@ namespace _5gpro.Forms
                 RecarregaDados(pessoa);
             }
 
-            if (e.KeyCode == Keys.F1 && Nivel > 1 || CodGrupoUsuario == "999")
+            if (e.KeyCode == Keys.F1)
             {
                 NovoCadastro();
             }
 
-            if (e.KeyCode == Keys.F2 && Nivel > 1 || CodGrupoUsuario == "999")
+            if (e.KeyCode == Keys.F2)
             {
                 SalvaCadastro();
             }
@@ -96,8 +96,8 @@ namespace _5gpro.Forms
 
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
-          
-           if (!editando || Nivel == 1)
+
+            if (!editando || Nivel == 1)
             {
                 AbreTelaBuscaPessoa();
             }
@@ -300,12 +300,24 @@ namespace _5gpro.Forms
         //PADRÕES CRIADAS
         private void NovoCadastro()
         {
-            if (editando)
+            if (Nivel > 1 || CodGrupoUsuario == "999")
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (editando)
+                {
+                    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        LimpaCampos(false);
+                        tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
+                        pessoa = null;
+                        Editando(false);
+                        tbNome.Focus();
+                        Editando(true);
+                    }
+                }
+                else
                 {
                     LimpaCampos(false);
                     tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
@@ -314,15 +326,6 @@ namespace _5gpro.Forms
                     tbNome.Focus();
                     Editando(true);
                 }
-            }
-            else
-            {
-                LimpaCampos(false);
-                tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
-                pessoa = null;
-                Editando(false);
-                tbNome.Focus();
-                Editando(true);
             }
         }
 
@@ -339,59 +342,62 @@ namespace _5gpro.Forms
 
         private void SalvaCadastro()
         {
-            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
-            if (editando)
+            if (Nivel > 1 || CodGrupoUsuario == "999")
             {
-
-                pessoa = new Pessoa
+                //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
+                if (editando)
                 {
-                    PessoaID = int.Parse(tbCodigo.Text),
-                    Nome = tbNome.Text,
-                    Fantasia = tbFantasia.Text,
-                    TipoPessoa = rbPessoaFisica.Checked ? "F" : "J",
-                    Rua = tbRua.Text,
-                    Numero = tbNumero.Text,
-                    Bairro = tbBairro.Text,
-                    Complemento = tbComplemento.Text,
-                    Cidade = buscaCidade.cidade,
-                    CpfCnpj = mtbCpfCnpj.TextNoMask(),
-                    Telefone = mtbTelefone.TextNoMask(),
-                    Email = tbEmail.Text
-                };
 
-                List<string> atuacoes = new List<string>();
-                foreach (string s in cblAtuacao.CheckedItems)
-                {
-                    atuacoes.Add(s);
-                }
-                pessoa.Atuacao = atuacoes;
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(pessoa, controls);
-
-                if (ok)
-                {
-                    int resultado = pessoaDAO.SalvarOuAtualizarPessoa(pessoa);
-                    validacao.despintarCampos(controls);
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
+                    pessoa = new Pessoa
                     {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                        PessoaID = int.Parse(tbCodigo.Text),
+                        Nome = tbNome.Text,
+                        Fantasia = tbFantasia.Text,
+                        TipoPessoa = rbPessoaFisica.Checked ? "F" : "J",
+                        Rua = tbRua.Text,
+                        Numero = tbNumero.Text,
+                        Bairro = tbBairro.Text,
+                        Complemento = tbComplemento.Text,
+                        Cidade = buscaCidade.cidade,
+                        CpfCnpj = mtbCpfCnpj.TextNoMask(),
+                        Telefone = mtbTelefone.TextNoMask(),
+                        Email = tbEmail.Text
+                    };
+
+                    List<string> atuacoes = new List<string>();
+                    foreach (string s in cblAtuacao.CheckedItems)
+                    {
+                        atuacoes.Add(s);
                     }
-                    else if (resultado == 1)
+                    pessoa.Atuacao = atuacoes;
+
+                    ControlCollection controls = (ControlCollection)this.Controls;
+                    bool ok = validacao.ValidarEntidade(pessoa, controls);
+
+                    if (ok)
                     {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
+                        int resultado = pessoaDAO.SalvarOuAtualizarPessoa(pessoa);
+                        validacao.despintarCampos(controls);
+                        // resultado 0 = nada foi inserido (houve algum erro)
+                        // resultado 1 = foi inserido com sucesso
+                        // resultado 2 = foi atualizado com sucesso
+                        if (resultado == 0)
+                        {
+                            MessageBox.Show("Problema ao salvar o registro",
+                            "Problema ao salvar",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                        }
+                        else if (resultado == 1)
+                        {
+                            tbAjuda.Text = "Dados salvos com sucesso";
+                            Editando(false);
+                        }
+                        else if (resultado == 2)
+                        {
+                            tbAjuda.Text = "Dados atualizados com sucesso";
+                            Editando(false);
+                        }
                     }
                 }
             }

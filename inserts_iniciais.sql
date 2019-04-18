@@ -5629,3 +5629,8 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 
 (10, 'Módulo Financeiro', '040000'),
 (11, 'Cadastro de Operacao', '040100');
+
+CREATE EVENT DELETA_LOGADOS_5SEC
+ON SCHEDULE
+EVERY 5 SECOND
+DO DELETE FROM logado WHERE data_update < DATE_SUB(NOW(), INTERVAL 5 SECOND);
