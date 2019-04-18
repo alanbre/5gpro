@@ -9,6 +9,7 @@ namespace _5gpro.Daos
     public class LogadoDAO
     {
         public ConexaoDAO Connect { get; }
+
         public LogadoDAO(ConexaoDAO c)
         {
             Connect = c;
@@ -128,9 +129,9 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
 
                 Connect.Comando = new MySqlCommand(@"INSERT INTO logado
-                         (idusuario, mac, nomepc, ipdopc)
+                         (idusuario, mac, nomepc, ipdopc, data_update)
                           VALUES
-                         (@idusuario, @mac, @nomepc, @ipdopc)
+                         (@idusuario, @mac, @nomepc, @ipdopc, @data_update)
                          ;",
                         Connect.Conexao);
 
@@ -138,6 +139,7 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@mac", mac);
                 Connect.Comando.Parameters.AddWithValue("@nomepc", nomepc);
                 Connect.Comando.Parameters.AddWithValue("@ipdopc", ipdopc);
+                Connect.Comando.Parameters.AddWithValue("@data_update", DateTime.Now);
 
                 retorno = Connect.Comando.ExecuteNonQuery();
 
@@ -181,5 +183,26 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+        public void AtualizarLogado(string mac)
+        {
+            try
+            {
+                Connect.AbrirConexao();
+
+                Connect.Comando = new MySqlCommand(@"UPDATE logado SET data_update = NOW() WHERE mac = @mac", Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@mac", mac);
+
+                Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+        }
     }
 }

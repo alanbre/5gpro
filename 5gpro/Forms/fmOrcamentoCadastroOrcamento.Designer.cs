@@ -611,7 +611,7 @@
             this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
             this.menuVertical.Name = "menuVertical";
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
-            this.menuVertical.TabIndex = 17;
+            this.menuVertical.TabIndex = 3;
             this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
             this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
             this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
@@ -641,7 +641,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1239, 581);
+            this.ClientSize = new System.Drawing.Size(1239, 582);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);

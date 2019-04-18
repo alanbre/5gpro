@@ -357,11 +357,45 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
   `mac` VARCHAR(45) NULL,
   `nomepc` VARCHAR(45) NULL,
   `ipdopc` VARCHAR(45) NULL,
+  `data_update` DATETIME NULL,
   PRIMARY KEY (`idlogado`),
   INDEX `fk_usuariologado_usuario1_idx` (`idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_usuariologado_usuario1`
     FOREIGN KEY (`idusuario`)
     REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`operacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`operacao` (
+  `idoperacao` INT NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(100) NULL,
+  `condicao` VARCHAR(45) NULL,
+  `desconto` DECIMAL NULL,
+  `entrada` DECIMAL NULL,
+  PRIMARY KEY (`idoperacao`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`parcelaoperacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
+  `idparcelaoperacao` INT NOT NULL,
+  `numero` INT NULL,
+  `dias` INT NULL,
+  `idoperacao` INT NOT NULL,
+  PRIMARY KEY (`idparcelaoperacao`),
+  INDEX `fk_parcelaoperacao_operacao1_idx` (`idoperacao` ASC) VISIBLE,
+  CONSTRAINT `fk_parcelaoperacao_operacao1`
+    FOREIGN KEY (`idoperacao`)
+    REFERENCES `5gprodatabase`.`operacao` (`idoperacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

@@ -44,6 +44,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.tsmiCadastroDeOperações = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,7 +67,8 @@
             this.tsmiCadastroPaises,
             this.tsmiCadastroItens,
             this.tsmiCadastroUsuarios,
-            this.tsmiCadastroGrupoUsuario});
+            this.tsmiCadastroGrupoUsuario,
+            this.tsmiCadastroDeOperações});
             this.tsmiCadastros.Name = "tsmiCadastros";
             this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
             this.tsmiCadastros.Text = "Cadastro";
@@ -174,6 +176,13 @@
             this.progressBar1.Size = new System.Drawing.Size(312, 23);
             this.progressBar1.TabIndex = 5;
             // 
+            // tsmiCadastroDeOperações
+            // 
+            this.tsmiCadastroDeOperações.Name = "tsmiCadastroDeOperações";
+            this.tsmiCadastroDeOperações.Size = new System.Drawing.Size(237, 22);
+            this.tsmiCadastroDeOperações.Text = "Cadastro de Operações";
+            this.tsmiCadastroDeOperações.Click += new System.EventHandler(this.tsmiCadastroDeOperações_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -214,6 +223,7 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroDeOperações;
     }
 }
 

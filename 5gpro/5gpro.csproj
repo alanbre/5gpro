@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -60,6 +61,34 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,6 +96,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
@@ -91,6 +121,12 @@
     </Compile>
     <Compile Include="Controls\BuscaEstado.Designer.cs">
       <DependentUpon>BuscaEstado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuscaGrupoUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaGrupoUsuario.Designer.cs">
+      <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\BuscaItem.cs">
       <SubType>UserControl</SubType>
@@ -127,8 +163,10 @@
     <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscal.cs" />
     <Compile Include="Entities\NotaFiscalItem.cs" />
+    <Compile Include="Entities\Operacao.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
+    <Compile Include="Entities\ParcelaOperacao.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
@@ -185,6 +223,12 @@
     <Compile Include="Forms\fmCadastroItem.Designer.cs">
       <DependentUpon>fmCadastroItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCadastroOperacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroOperacao.Designer.cs">
+      <DependentUpon>fmCadastroOperacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCadastroPais.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +270,12 @@
     </Compile>
     <Compile Include="Forms\fmBuscaGrupoUsuario.Designer.cs">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmDiasAVencer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmDiasAVencer.Designer.cs">
+      <DependentUpon>fmDiasAVencer.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
@@ -269,6 +319,9 @@
     <EmbeddedResource Include="Controls\BuscaEstado.resx">
       <DependentUpon>BuscaEstado.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaGrupoUsuario.resx">
+      <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaItem.resx">
       <DependentUpon>BuscaItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,6 +364,9 @@
     <EmbeddedResource Include="Forms\fmCadastroItem.resx">
       <DependentUpon>fmCadastroItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroOperacao.resx">
+      <DependentUpon>fmCadastroOperacao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPais.resx">
       <DependentUpon>fmCadastroPais.cs</DependentUpon>
     </EmbeddedResource>
@@ -322,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaGrupoUsuario.resx">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmDiasAVencer.resx">
+      <DependentUpon>fmDiasAVencer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>
@@ -346,7 +405,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="5gpro_TemporaryKey.pfx" />
-    <None Include="Properties\DataSources\_5gpro.Entities.Unimedida.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -525,7 +583,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 e x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

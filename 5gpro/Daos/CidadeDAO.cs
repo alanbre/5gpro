@@ -6,7 +6,7 @@ using System.Data;
 
 namespace _5gpro.Daos
 {
-    class CidadeDAO : ConexaoDAO
+    class CidadeDAO: ConexaoDAO
     {
         public EstadoDAO estadoDAO = new EstadoDAO();
 

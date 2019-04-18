@@ -120,9 +120,9 @@ namespace _5gpro.Daos
                         Complemento = reader.GetString(reader.GetOrdinal("complemento")),
                         Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetInt32(reader.GetOrdinal("idcidade"))),
                         Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"))
+                        Email = reader.GetString(reader.GetOrdinal("email"))
                     };
+                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     reader.Close();
                 }
                 else

@@ -22,6 +22,7 @@ namespace _5gpro.Forms
         private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
+        private string CodGrupoUsuario;
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -38,11 +39,11 @@ namespace _5gpro.Forms
         {
             //Busca o usuário logado no pc, através do MAC
             logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010300").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
 
         }
@@ -71,12 +72,12 @@ namespace _5gpro.Forms
                 RecarregaDados(item);
             }
 
-            if (e.KeyCode == Keys.F1)
+            if (e.KeyCode == Keys.F1 && Nivel > 1 || CodGrupoUsuario == "999")
             {
                 NovoCadastro();
             }
 
-            if (e.KeyCode == Keys.F2)
+            if (e.KeyCode == Keys.F2 && Nivel > 1 || CodGrupoUsuario == "999")
             {
                 SalvaCadastro();
             }
@@ -145,7 +146,7 @@ namespace _5gpro.Forms
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
-            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
@@ -368,7 +369,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit, Nivel);
+            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
 
         private void SalvaCadastro()

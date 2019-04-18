@@ -25,6 +25,7 @@ namespace _5gpro.Forms
         private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
+        private string CodGrupoUsuario;
 
         bool editando, ignoraCheckEvent = false;
 
@@ -50,11 +51,11 @@ namespace _5gpro.Forms
         {
             //Busca o usuário logado no pc, através do MAC
             logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010400").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
 
         }
@@ -87,7 +88,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
         {
-            tbCodGrupoUsuario.Text = tbCodGrupoUsuario.Text == "0" ? "" : tbCodGrupoUsuario.Text;
+            if (!int.TryParse(tbCodGrupoUsuario.Text, out int codigo)) { tbCodGrupoUsuario.Clear(); }
             if (!editando)
             {
                 if (tbCodGrupoUsuario.Text.Length > 0)
@@ -608,9 +609,9 @@ namespace _5gpro.Forms
         {
             var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
             buscaGrupoUsuario.ShowDialog();
-            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
+            if (buscaGrupoUsuario.grupoUsuarioSelecionado != null)
             {
-                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
+                grupousuario = buscaGrupoUsuario.grupoUsuarioSelecionado;
                 PreencheCampos(grupousuario);
             }
         }
@@ -618,7 +619,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit, Nivel);
+            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)

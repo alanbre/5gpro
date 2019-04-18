@@ -12,6 +12,7 @@ namespace _5gpro.Forms
 {
     public partial class fmOrcamentoCadastroOrcamento : Form
     {
+        private static ConexaoDAO connection = new ConexaoDAO();
         private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
         private NotaFiscal notafiscal = null;
@@ -22,6 +23,14 @@ namespace _5gpro.Forms
         private OrcamentoItem itemSelecionado;
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
+        //Controle de Permissões
+        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private Logado logado;
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+        private string CodGrupoUsuario;
+
         private bool editando, ignoracheckevent = false;
 
 
@@ -29,6 +38,19 @@ namespace _5gpro.Forms
         public fmOrcamentoCadastroOrcamento()
         {
             InitializeComponent();
+            SetarNivel();
+        }
+
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("020100").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            Editando(editando);
         }
 
         private void FmCadastroOrcamento_KeyDown(object sender, KeyEventArgs e)
@@ -81,7 +103,7 @@ namespace _5gpro.Forms
 
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
@@ -102,7 +124,7 @@ namespace _5gpro.Forms
                 else if (tbCodigo.Text.Length == 0)
                 {
                     ignoracheckevent = true;
-                    LimpaCampos(true);
+                    LimpaCampos(false);
                     ignoracheckevent = false;
                 }
             }
@@ -720,10 +742,9 @@ namespace _5gpro.Forms
         {
             if (!ignoracheckevent && notafiscal == null)
             {
-                //Arrumar
                 btNotaGerar.Enabled = !edit;
                 editando = edit;
-                menuVertical.Editando(edit, 3);
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
 

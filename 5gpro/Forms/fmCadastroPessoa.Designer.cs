@@ -41,7 +41,6 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
-            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
             this.mtbTelefone = new System.Windows.Forms.MaskedTextBox();
@@ -58,6 +57,7 @@
             this.lbRua = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -223,14 +223,6 @@
             this.pnDados.Size = new System.Drawing.Size(1110, 305);
             this.pnDados.TabIndex = 2;
             // 
-            // buscaCidade
-            // 
-            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
-            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCidade.Name = "buscaCidade";
-            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 8;
-            // 
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(15, 267);
@@ -384,6 +376,14 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
+            // buscaCidade
+            // 
+            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 15;
+            // 
             // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,7 +447,7 @@
         private System.Windows.Forms.Label lbEmail;
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.CheckedListBox cblAtuacao;
-        private Controls.BuscaCidade buscaCidade;
         private Controls.MenuVertical menuVertical;
+        private Controls.BuscaCidade buscaCidade;
     }
 }

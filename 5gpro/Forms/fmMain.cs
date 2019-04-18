@@ -5,6 +5,7 @@ using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace _5gpro
@@ -32,7 +33,8 @@ namespace _5gpro
         {
             InitializeComponent();
             FiltroDePermissoes();
-
+            Thread t = new Thread(new ThreadStart(AtualizaLogado));
+            t.Start();
         }
 
         static ConexaoDAO connection = new ConexaoDAO();
@@ -132,6 +134,12 @@ namespace _5gpro
             formCadGrupoUsuarios.Show(this);
         }
 
+        private void tsmiCadastroDeOperações_Click(object sender, EventArgs e)
+        {
+            var formCadOperacao = new fmCadastroOperacao();
+            formCadOperacao.Show(this);
+        }
+
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             //Retira usuário da tabela Logado
@@ -193,7 +201,14 @@ namespace _5gpro
         }
 
 
-
+        private void AtualizaLogado()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                logadoDAO.AtualizarLogado(logado.Mac);
+            }
+        }
 
 
         private void SeuOutroMetodoSincronizar()
@@ -223,5 +238,7 @@ namespace _5gpro
 
 
         }
+
+
     }
 }

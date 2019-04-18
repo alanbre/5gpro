@@ -29,6 +29,7 @@ namespace _5gpro.Forms
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
+        private string CodGrupoUsuario;
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -43,11 +44,12 @@ namespace _5gpro.Forms
         {
             //Busca o usuário logado no pc, através do MAC
             logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
-            string Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010200").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(Codgrupousuario, Codpermissao);
+
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
 
         }
@@ -138,7 +140,7 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void tbCodigoUsuario_Leave(object sender, EventArgs e)
         {
-            tbCodigoUsuario.Text = tbCodigoUsuario.Text == "0" ? "" : tbCodigoUsuario.Text;
+            if (!int.TryParse(tbCodigoUsuario.Text, out int codigo)) { tbCodigoUsuario.Clear(); }
             if (!editando)
             {
                 if (tbCodigoUsuario.Text.Length > 0)
@@ -193,22 +195,9 @@ namespace _5gpro.Forms
             }
         }
 
-        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
-        {
-            if (tbCodGrupoUsuario.Text.Length > 0)
-            {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-            else
-            {
-                tbNomeGrupoUsuario.Text = "";
-            }
-        }
-
         private void tbSenhaUsuario_Leave(object sender, EventArgs e)
         {
-            if(tbConfirmaSenhaUsuario.TextLength > 0)
+            if (tbConfirmaSenhaUsuario.TextLength > 0)
             {
                 ConfirmaSenhas();
             }
@@ -217,13 +206,6 @@ namespace _5gpro.Forms
         private void tbConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
         {
             ConfirmaSenhas();
-        }
-
-
-        //EVENTOS DE CLICK
-        private void btGrupoUsuario_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaGrupoUsuario();
         }
 
 
@@ -317,7 +299,7 @@ namespace _5gpro.Forms
                 }
 
                 usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-                usuario.Grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
+                usuario.Grupousuario = buscaGrupoUsuario.grupoUsuario;
                 usuario.Nome = tbNomeUsuario.Text;
                 usuario.Sobrenome = tbSobrenomeUsuario.Text;
                 usuario.Email = tbEmailUsuario.Text;
@@ -369,7 +351,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit, Nivel);
+            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
 
         private void RecarregaDados(Usuario usuario)
@@ -506,17 +488,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaGrupoUsuario()
-        {
-            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
-            buscaGrupoUsuario.ShowDialog();
-            if (buscaGrupoUsuario.grupousuarioSelecionado != null)
-            {
-                grupousuario = buscaGrupoUsuario.grupousuarioSelecionado;
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-        }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -531,8 +502,7 @@ namespace _5gpro.Forms
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
             tbSenhaUsuario.Clear();
             tbConfirmaSenhaUsuario.Clear();
-            tbCodGrupoUsuario.Clear();
-            tbNomeGrupoUsuario.Clear();
+            buscaGrupoUsuario.Limpa();
             tbNomeUsuario.Clear();
             tbSobrenomeUsuario.Clear();
             tbEmailUsuario.Clear();
@@ -554,42 +524,14 @@ namespace _5gpro.Forms
             tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;
             tbConfirmaSenhaUsuario.Text = usuario.Senha;
-            tbCodGrupoUsuario.Text = (usuario.Grupousuario.GrupoUsuarioID).ToString();
+            buscaGrupoUsuario.PreencheCampos(usuario.Grupousuario);
             tbNomeUsuario.Text = usuario.Nome;
             tbSobrenomeUsuario.Text = usuario.Sobrenome;
             tbEmailUsuario.Text = usuario.Email;
             mtbTelefoneUsuario.Text = usuario.Telefone;
 
-            if (usuario.Grupousuario != null)
-            {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
-                PreencheCamposGrupoUsuario(grupousuario);
-            }
-
             ignoraCheckEvent = false;
         }
 
-        private void FmCadastroUsuario_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PreencheCamposGrupoUsuario(GrupoUsuario grupousuario)
-        {
-            if (grupousuario != null)
-            {
-                tbCodGrupoUsuario.Text = (grupousuario.GrupoUsuarioID).ToString();
-                tbNomeGrupoUsuario.Text = grupousuario.Nome;
-            }
-            else
-            {
-                MessageBox.Show("Grupo de usuários não encontrado no banco de dados",
-                "Grupo de usuários não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                tbCodGrupoUsuario.Focus();
-                tbNomeGrupoUsuario.SelectAll();
-            }
-        }
     }
 }

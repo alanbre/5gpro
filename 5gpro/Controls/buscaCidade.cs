@@ -9,14 +9,16 @@ namespace _5gpro.Controls
 {
     public partial class BuscaCidade : UserControl
     {
-        public Cidade cidade = null;
-
-        private readonly CidadeDAO cidadeDAO = new CidadeDAO();
-
         public BuscaCidade()
         {
             InitializeComponent();
         }
+
+
+        public Cidade cidade = null;
+
+        private readonly CidadeDAO cidadeDAO = new CidadeDAO();
+
 
         private void BtBuscaCidade_Click(object sender, System.EventArgs e)
         {
@@ -34,15 +36,16 @@ namespace _5gpro.Controls
 
         private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
         {
+            if (!int.TryParse(tbCodigoCidade.Text, out int codigo)) { tbCodigoCidade.Clear(); }
             if (tbCodigoCidade.Text.Length > 0)
             {
-                cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
+                //cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else
             {
                 cidade = null;
-                tbNomeCidade.Text = "";
+                tbNomeCidade.Clear();
             }
         }
 
@@ -106,7 +109,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoCidade_TextChanged(object sender, EventArgs e)
         {
-            this.Text_Changed?.Invoke(this, e);  //o editor falou que era melhor fazer assim haha.
+            this.Text_Changed?.Invoke(this, e);
         }
     }
 }

@@ -18,11 +18,32 @@ namespace _5gpro.Forms
         private NotaFiscalItem itemSelecionado;
         private List<NotaFiscalItem> itens = new List<NotaFiscalItem>();
 
+        //Controle de Permissões
+        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        private Logado logado;
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+        private string CodGrupoUsuario;
+
         bool editando, ignoracheckevent = false;
 
         public fmSaidaEmissaoNota()
         {
             InitializeComponent();
+            SetarNivel();
+        }
+
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("030100").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            Editando(editando);
         }
 
         private void FmEstoqueEntradaDocumentos_KeyDown(object sender, KeyEventArgs e)
@@ -220,7 +241,7 @@ namespace _5gpro.Forms
 
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            tbCodigo.Text = tbCodigo.Text == "0" ? "" : tbCodigo.Text;
+            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
             {
                 if (tbCodigo.Text.Length > 0)
@@ -635,9 +656,8 @@ namespace _5gpro.Forms
         {
             if (!ignoracheckevent)
             {
-                //ARRUMAR
                 editando = edit;
-                menuVertical.Editando(edit, 3);
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
 
