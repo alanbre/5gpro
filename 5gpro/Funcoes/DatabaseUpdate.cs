@@ -1,10 +1,11 @@
-﻿using MySql.Data.MySqlClient;
+﻿using _5gpro.Daos;
+using MySql.Data.MySqlClient;
 using System;
 using System.IO;
 
 namespace _5gpro.Funcoes
 {
-    class DatabaseUpdate : Daos.ConexaoDAO
+    class DatabaseUpdate : ConexaoDAO
     {
         int VersaoDB = 0;
 
