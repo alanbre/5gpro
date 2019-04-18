@@ -86,7 +86,6 @@ namespace _5gpro.Daos
             return permissoes;
         }
 
-
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
         {
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();

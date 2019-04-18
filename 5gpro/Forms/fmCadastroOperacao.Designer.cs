@@ -43,14 +43,16 @@
             this.lbDesconto = new System.Windows.Forms.Label();
             this.tbDeconto = new System.Windows.Forms.TextBox();
             this.tpAprazo = new System.Windows.Forms.TabPage();
+            this.btDias = new System.Windows.Forms.Button();
             this.gbEntrada = new System.Windows.Forms.GroupBox();
             this.rbNao = new System.Windows.Forms.RadioButton();
             this.rbSim = new System.Windows.Forms.RadioButton();
             this.tbEntrada = new System.Windows.Forms.TextBox();
             this.tbNparcelas = new System.Windows.Forms.TextBox();
             this.lbNparcelas = new System.Windows.Forms.Label();
+            this.lbAcrescimo = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.menuVertical1 = new _5gpro.Controls.MenuVertical();
-            this.button1 = new System.Windows.Forms.Button();
             this.gbDadosOperacao.SuspendLayout();
             this.gbCondicaoOperacao.SuspendLayout();
             this.tcOpcoes.SuspendLayout();
@@ -69,7 +71,7 @@
             this.gbDadosOperacao.Controls.Add(this.lbCodigo);
             this.gbDadosOperacao.Location = new System.Drawing.Point(66, 13);
             this.gbDadosOperacao.Name = "gbDadosOperacao";
-            this.gbDadosOperacao.Size = new System.Drawing.Size(722, 207);
+            this.gbDadosOperacao.Size = new System.Drawing.Size(659, 207);
             this.gbDadosOperacao.TabIndex = 1;
             this.gbDadosOperacao.TabStop = false;
             this.gbDadosOperacao.Text = "Dados da operação";
@@ -165,7 +167,7 @@
             this.tcOpcoes.Location = new System.Drawing.Point(66, 282);
             this.tcOpcoes.Name = "tcOpcoes";
             this.tcOpcoes.SelectedIndex = 0;
-            this.tcOpcoes.Size = new System.Drawing.Size(662, 244);
+            this.tcOpcoes.Size = new System.Drawing.Size(466, 206);
             this.tcOpcoes.TabIndex = 3;
             // 
             // tpAvista
@@ -175,7 +177,7 @@
             this.tpAvista.Location = new System.Drawing.Point(4, 22);
             this.tpAvista.Name = "tpAvista";
             this.tpAvista.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAvista.Size = new System.Drawing.Size(654, 218);
+            this.tpAvista.Size = new System.Drawing.Size(651, 218);
             this.tpAvista.TabIndex = 0;
             this.tpAvista.Text = "Opções A Vista";
             this.tpAvista.UseVisualStyleBackColor = true;
@@ -198,7 +200,9 @@
             // 
             // tpAprazo
             // 
-            this.tpAprazo.Controls.Add(this.button1);
+            this.tpAprazo.Controls.Add(this.textBox4);
+            this.tpAprazo.Controls.Add(this.lbAcrescimo);
+            this.tpAprazo.Controls.Add(this.btDias);
             this.tpAprazo.Controls.Add(this.gbEntrada);
             this.tpAprazo.Controls.Add(this.tbEntrada);
             this.tpAprazo.Controls.Add(this.tbNparcelas);
@@ -206,10 +210,20 @@
             this.tpAprazo.Location = new System.Drawing.Point(4, 22);
             this.tpAprazo.Name = "tpAprazo";
             this.tpAprazo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAprazo.Size = new System.Drawing.Size(654, 218);
+            this.tpAprazo.Size = new System.Drawing.Size(458, 180);
             this.tpAprazo.TabIndex = 1;
             this.tpAprazo.Text = "Opções A Prazo";
             this.tpAprazo.UseVisualStyleBackColor = true;
+            // 
+            // btDias
+            // 
+            this.btDias.Location = new System.Drawing.Point(126, 18);
+            this.btDias.Name = "btDias";
+            this.btDias.Size = new System.Drawing.Size(41, 23);
+            this.btDias.TabIndex = 7;
+            this.btDias.Text = "Dias";
+            this.btDias.UseVisualStyleBackColor = true;
+            this.btDias.Click += new System.EventHandler(this.BtDias_Click);
             // 
             // gbEntrada
             // 
@@ -270,6 +284,22 @@
             this.lbNparcelas.TabIndex = 0;
             this.lbNparcelas.Text = "Nº Parcelas";
             // 
+            // lbAcrescimo
+            // 
+            this.lbAcrescimo.AutoSize = true;
+            this.lbAcrescimo.Location = new System.Drawing.Point(7, 123);
+            this.lbAcrescimo.Name = "lbAcrescimo";
+            this.lbAcrescimo.Size = new System.Drawing.Size(56, 13);
+            this.lbAcrescimo.TabIndex = 8;
+            this.lbAcrescimo.Text = "Acréscimo";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(6, 140);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(114, 20);
+            this.textBox4.TabIndex = 9;
+            // 
             // menuVertical1
             // 
             this.menuVertical1.Location = new System.Drawing.Point(9, 9);
@@ -278,20 +308,11 @@
             this.menuVertical1.Size = new System.Drawing.Size(53, 364);
             this.menuVertical1.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(127, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // fmCadastroOperacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 538);
+            this.ClientSize = new System.Drawing.Size(742, 538);
             this.Controls.Add(this.tcOpcoes);
             this.Controls.Add(this.gbCondicaoOperacao);
             this.Controls.Add(this.gbDadosOperacao);
@@ -342,6 +363,8 @@
         private System.Windows.Forms.TextBox tbEntrada;
         private System.Windows.Forms.TextBox tbNparcelas;
         private System.Windows.Forms.Label lbNparcelas;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btDias;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label lbAcrescimo;
     }
 }

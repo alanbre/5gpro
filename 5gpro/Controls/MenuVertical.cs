@@ -105,8 +105,7 @@ namespace _5gpro.Controls
             AlteraBotoes(nivel, Codgrupousuario);
         }
 
-
-        
+      
         //Eventos de click nos botões
         public delegate void novoEventHandler(object sender, EventArgs e);
         public delegate void buscarEventHandler(object sender, EventArgs e);
