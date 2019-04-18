@@ -1,14 +1,14 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.IO;
 
 namespace _5gpro.Daos
 {
     public class ConexaoDAO
-    {
-
-        public string Conecta = ConfigurationManager.ConnectionStrings["connectionAppConfig"].ConnectionString; 
+    {   
+        protected string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
         public MySqlConnection Conexao;
         public MySqlTransaction tr = null;
         public MySqlCommand Comando = null;

@@ -72,8 +72,6 @@
             // 
             this.gbFiltrosOrcamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltrosOrcamento.Controls.Add(this.buscaPessoa);
-            this.gbFiltrosOrcamento.Controls.Add(this.buscaCidade);
             this.gbFiltrosOrcamento.Controls.Add(this.gbFiltros);
             this.gbFiltrosOrcamento.Controls.Add(this.btPesquisar);
             this.gbFiltrosOrcamento.Controls.Add(this.label1);
@@ -92,6 +90,8 @@
             this.gbFiltrosOrcamento.Controls.Add(this.lbAFiltroDataCadastro);
             this.gbFiltrosOrcamento.Controls.Add(this.dtpFiltroDataCadastroFinal);
             this.gbFiltrosOrcamento.Controls.Add(this.dtpFiltroDataCadastroInicial);
+            this.gbFiltrosOrcamento.Controls.Add(this.buscaPessoa);
+            this.gbFiltrosOrcamento.Controls.Add(this.buscaCidade);
             this.gbFiltrosOrcamento.Location = new System.Drawing.Point(12, 12);
             this.gbFiltrosOrcamento.Name = "gbFiltrosOrcamento";
             this.gbFiltrosOrcamento.Size = new System.Drawing.Size(1048, 174);
