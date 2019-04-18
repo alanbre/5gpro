@@ -377,6 +377,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`operacao` (
   `condicao` VARCHAR(45) NULL,
   `desconto` DECIMAL NULL,
   `entrada` DECIMAL NULL,
+  `acrescimo` DECIMAL NULL,
   PRIMARY KEY (`idoperacao`))
 ENGINE = InnoDB;
 
@@ -385,7 +386,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL,
+  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,

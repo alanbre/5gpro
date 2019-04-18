@@ -122,7 +122,9 @@
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
     <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalDAO.cs" />
+    <Compile Include="Daos\OperacaoDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
+    <Compile Include="Daos\ParcelaOperacaoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
     <Compile Include="Daos\ItemDAO.cs" />
@@ -163,6 +165,12 @@
     </Compile>
     <Compile Include="Forms\fmBuscaNotaFiscal.Designer.cs">
       <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaOperacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaOperacao.Designer.cs">
+      <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaOrcamento.cs">
       <SubType>Form</SubType>
@@ -242,11 +250,11 @@
     <Compile Include="Forms\fmBuscaGrupoUsuario.Designer.cs">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmDiasAVencer.cs">
+    <Compile Include="Forms\fmBuscaParcelasOperacao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmDiasAVencer.Designer.cs">
-      <DependentUpon>fmDiasAVencer.cs</DependentUpon>
+    <Compile Include="Forms\fmBuscaParcelasOperacao.Designer.cs">
+      <DependentUpon>fmBuscaParcelasOperacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
@@ -314,6 +322,9 @@
     <EmbeddedResource Include="Forms\fmBuscaNotaFiscal.resx">
       <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaOperacao.resx">
+      <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaOrcamento.resx">
       <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>
     </EmbeddedResource>
@@ -350,8 +361,8 @@
     <EmbeddedResource Include="Forms\fmBuscaGrupoUsuario.resx">
       <DependentUpon>fmBuscaGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmDiasAVencer.resx">
-      <DependentUpon>fmDiasAVencer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmBuscaParcelasOperacao.resx">
+      <DependentUpon>fmBuscaParcelasOperacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>

@@ -8,7 +8,8 @@ namespace _5gpro.Daos
     public class ConexaoDAO
     {
 
-        public string Conecta = ConfigurationManager.ConnectionStrings["connectionAppConfig"].ConnectionString; 
+        //public string Conecta = ConfigurationManager.ConnectionStrings["connectionAppConfig"].ConnectionString;
+        public string Conecta = "Server=192.168.2.114; Database=5gprodatabase; Uid=5gprouser; Password=5gproedualan";
         public MySqlConnection Conexao;
         public MySqlTransaction tr = null;
         public MySqlCommand Comando = null;

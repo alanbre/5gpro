@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    class ParcelaOperacao
+    public class ParcelaOperacao
     {
         public int ParcelaOperacaoID { get; set; }
         public int Numero { get; set; }

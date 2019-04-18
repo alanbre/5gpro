@@ -19,7 +19,6 @@ namespace _5gpro.Forms
         static ConexaoDAO connection = new ConexaoDAO();
 
 
-
         public fmBuscaUsuario()
         {
             InitializeComponent();
