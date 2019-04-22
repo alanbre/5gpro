@@ -18,7 +18,7 @@ namespace _5gpro.Forms
         Operacao operacao;
         OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
         Validacao validacao = new Validacao();
-        int variaveldias = 30;
+        public int variaveldias = 30;
 
         bool editando, ignoraCheckEvent = false;
 
@@ -64,9 +64,9 @@ namespace _5gpro.Forms
 
         private void BtEditar_Click(object sender, EventArgs e)
         {
-            var fmdiasavencer = new fmBuscaParcelasOperacao();
-            fmdiasavencer.listaparcelasbusca = listaparcelas;
+            var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelas);
             fmdiasavencer.Show(this);
+
         }
 
 
@@ -424,6 +424,14 @@ namespace _5gpro.Forms
                     parcela.Dias = variaveldias * a;
                     //parcela.Operacao = operacao;
                     listaparcelas.Add(parcela);
+                }
+                if (listaparcelas.Count > 0)
+                {
+                    MostrarEsconder(true);
+                }
+                else
+                {
+                    MostrarEsconder(false);
                 }
             }
 

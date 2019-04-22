@@ -43,6 +43,9 @@
             this.lbDesconto = new System.Windows.Forms.Label();
             this.tbDesconto = new System.Windows.Forms.TextBox();
             this.tpAprazo = new System.Windows.Forms.TabPage();
+            this.btRemover = new System.Windows.Forms.Button();
+            this.tbVisualizar = new System.Windows.Forms.TextBox();
+            this.btGerar = new System.Windows.Forms.Button();
             this.tbAcrescimo = new System.Windows.Forms.TextBox();
             this.lbAcrescimo = new System.Windows.Forms.Label();
             this.btEditar = new System.Windows.Forms.Button();
@@ -54,9 +57,6 @@
             this.lbNparcelas = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.btGerar = new System.Windows.Forms.Button();
-            this.tbVisualizar = new System.Windows.Forms.TextBox();
-            this.btRemover = new System.Windows.Forms.Button();
             this.gbDadosOperacao.SuspendLayout();
             this.gbCondicaoOperacao.SuspendLayout();
             this.tcOpcoes.SuspendLayout();
@@ -222,6 +222,35 @@
             this.tpAprazo.Text = "Opções A Prazo";
             this.tpAprazo.UseVisualStyleBackColor = true;
             // 
+            // btRemover
+            // 
+            this.btRemover.Location = new System.Drawing.Point(372, 66);
+            this.btRemover.Name = "btRemover";
+            this.btRemover.Size = new System.Drawing.Size(75, 23);
+            this.btRemover.TabIndex = 12;
+            this.btRemover.Text = "Remover";
+            this.btRemover.UseVisualStyleBackColor = true;
+            this.btRemover.Visible = false;
+            this.btRemover.Click += new System.EventHandler(this.BtRemover_Click);
+            // 
+            // tbVisualizar
+            // 
+            this.tbVisualizar.Location = new System.Drawing.Point(298, 41);
+            this.tbVisualizar.Name = "tbVisualizar";
+            this.tbVisualizar.Size = new System.Drawing.Size(149, 20);
+            this.tbVisualizar.TabIndex = 11;
+            this.tbVisualizar.Visible = false;
+            // 
+            // btGerar
+            // 
+            this.btGerar.Location = new System.Drawing.Point(232, 66);
+            this.btGerar.Name = "btGerar";
+            this.btGerar.Size = new System.Drawing.Size(44, 23);
+            this.btGerar.TabIndex = 10;
+            this.btGerar.Text = "Gerar";
+            this.btGerar.UseVisualStyleBackColor = true;
+            this.btGerar.Click += new System.EventHandler(this.BtGerar_Click);
+            // 
             // tbAcrescimo
             // 
             this.tbAcrescimo.Location = new System.Drawing.Point(15, 119);
@@ -247,6 +276,7 @@
             this.btEditar.TabIndex = 7;
             this.btEditar.Text = "Editar";
             this.btEditar.UseVisualStyleBackColor = true;
+            this.btEditar.Visible = false;
             this.btEditar.Click += new System.EventHandler(this.BtEditar_Click);
             // 
             // gbEntrada
@@ -326,33 +356,6 @@
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.Size = new System.Drawing.Size(741, 20);
             this.tbAjuda.TabIndex = 8;
-            // 
-            // btGerar
-            // 
-            this.btGerar.Location = new System.Drawing.Point(232, 66);
-            this.btGerar.Name = "btGerar";
-            this.btGerar.Size = new System.Drawing.Size(44, 23);
-            this.btGerar.TabIndex = 10;
-            this.btGerar.Text = "Gerar";
-            this.btGerar.UseVisualStyleBackColor = true;
-            this.btGerar.Click += new System.EventHandler(this.BtGerar_Click);
-            // 
-            // tbVisualizar
-            // 
-            this.tbVisualizar.Location = new System.Drawing.Point(298, 41);
-            this.tbVisualizar.Name = "tbVisualizar";
-            this.tbVisualizar.Size = new System.Drawing.Size(149, 20);
-            this.tbVisualizar.TabIndex = 11;
-            // 
-            // btRemover
-            // 
-            this.btRemover.Location = new System.Drawing.Point(372, 66);
-            this.btRemover.Name = "btRemover";
-            this.btRemover.Size = new System.Drawing.Size(75, 23);
-            this.btRemover.TabIndex = 12;
-            this.btRemover.Text = "Remover";
-            this.btRemover.UseVisualStyleBackColor = true;
-            this.btRemover.Click += new System.EventHandler(this.BtRemover_Click);
             // 
             // fmCadastroOperacao
             // 

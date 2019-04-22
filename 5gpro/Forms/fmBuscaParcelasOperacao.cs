@@ -16,9 +16,10 @@ namespace _5gpro.Forms
 
         public List<ParcelaOperacao> listaparcelasbusca;
 
-        public fmBuscaParcelasOperacao()
+        public fmBuscaParcelasOperacao(List<ParcelaOperacao> lista)
         {
             InitializeComponent();
+            listaparcelasbusca = lista;
             BuscaParcelas();
         }
 
