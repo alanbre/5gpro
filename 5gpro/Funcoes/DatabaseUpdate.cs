@@ -23,7 +23,7 @@ namespace _5gpro.Funcoes
                 Conecta = "SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
                 //Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
 
-                AbrirConexao();
+        AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
                 MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(projectDirectory + "/create_tables.sql"));
 
