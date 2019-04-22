@@ -43,7 +43,6 @@ namespace _5gpro.Forms
                 table.Rows.Add(o.OperacaoID, o.Nome, o.Descricao, o.Condicao, o.Desconto, o.Entrada);
             }
             dgvOperacao.DataSource = table;
-
         }
 
         private void DgvOperacao_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

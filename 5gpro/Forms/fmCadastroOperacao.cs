@@ -139,7 +139,7 @@ namespace _5gpro.Forms
                     }
 
                     operacao.Desconto = 0;
-                 
+
                 }
                 else
                 {
@@ -289,7 +289,11 @@ namespace _5gpro.Forms
                         tbEntrada.Clear();
                     }
                     tbDesconto.Clear();
-                    tbNparcelas.Text = operacao.Parcelas.Count.ToString();
+
+                    listaparcelas = operacao.Parcelas;
+                    tbNparcelas.Clear();
+                    Gerar();
+
                     tbAcrescimo.Text = operacao.Acrescimo.ToString();
                     break;
             }
@@ -402,6 +406,11 @@ namespace _5gpro.Forms
 
         private void BtGerar_Click(object sender, EventArgs e)
         {
+            Gerar();
+        }
+
+        private void Gerar()
+        {
 
             if (tbNparcelas.Text.Length > 0)
             {
@@ -413,7 +422,6 @@ namespace _5gpro.Forms
                     parcela = new ParcelaOperacao();
                     parcela.Numero = a;
                     parcela.Dias = variaveldias * a;
-                    //parcela.Operacao = operacao;
                     listaparcelas.Add(parcela);
                 }
                 if (listaparcelas.Count > 0)
@@ -428,7 +436,20 @@ namespace _5gpro.Forms
                     MostrarEsconder(false);
                 }
             }
-
+            else
+            {
+                if (listaparcelas.Count > 0)
+                {
+                    tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
+                    MostrarEsconder(true);
+                    tbNparcelas.Clear();
+                    tbNparcelas.Enabled = false;
+                }
+                else
+                {
+                    MostrarEsconder(false);
+                }
+            }
         }
 
         private void MostrarEsconder(bool a)
