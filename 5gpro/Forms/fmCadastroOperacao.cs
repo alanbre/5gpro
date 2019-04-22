@@ -139,14 +139,14 @@ namespace _5gpro.Forms
                     }
 
                     operacao.Desconto = 0;
-
-                    
+                 
                 }
                 else
                 {
                     operacao.Condicao = "AV";
                     operacao.Entrada = 0;
                     operacao.Acrescimo = 0;
+                    listaparcelas = new List<ParcelaOperacao>();
                     if (tbDesconto.Text.Length > 0)
                     {
                         operacao.Desconto = decimal.Parse(tbDesconto.Text);
@@ -156,8 +156,6 @@ namespace _5gpro.Forms
                         operacao.Desconto = 0;
                     }
                 }
-
-
 
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(operacao, controls);
@@ -202,7 +200,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodOperacao.Text = operacaoDAO.BuscaProxCodigoDisponivel();
+                    tbCodOperacao.Text = operacaoDAO.BuscaProxCodigoDisponivel().ToString();
                     operacao = null;
                     tbNomeOperacao.Focus();
                     Editando(true);
@@ -211,7 +209,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodOperacao.Text = operacaoDAO.BuscaProxCodigoDisponivel();
+                tbCodOperacao.Text = operacaoDAO.BuscaProxCodigoDisponivel().ToString();
                 operacao = null;
                 tbNomeOperacao.Focus();
                 Editando(true);
@@ -394,14 +392,7 @@ namespace _5gpro.Forms
 
         private void TbNparcelas_TextChanged(object sender, EventArgs e)
         {
-            if (tbNparcelas.Text.Length > 0)
-            {
-                btEditar.Enabled = true;
-            }
-            else
-            {
-                btEditar.Enabled = false;
-            }
+
         }
 
         private void TbNparcelas_Leave(object sender, EventArgs e)
@@ -427,7 +418,10 @@ namespace _5gpro.Forms
                 }
                 if (listaparcelas.Count > 0)
                 {
+                    tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
                     MostrarEsconder(true);
+                    tbNparcelas.Clear();
+                    tbNparcelas.Enabled = false;
                 }
                 else
                 {
@@ -441,12 +435,14 @@ namespace _5gpro.Forms
         {
             if (a)
             {
+                gbVisualizar.Visible = true;
                 tbVisualizar.Visible = true;
                 btEditar.Visible = true;
                 btRemover.Visible = true;
             }
             else
             {
+                gbVisualizar.Visible = false;
                 tbVisualizar.Clear();
                 tbVisualizar.Visible = false;
                 btEditar.Visible = false;
@@ -463,7 +459,13 @@ namespace _5gpro.Forms
             {
                 listaparcelas = new List<ParcelaOperacao>();
                 MostrarEsconder(false);
+                tbNparcelas.Enabled = true;
             }
+        }
+
+        private void MenuVertical_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void FmCadastroOperacao_Load(object sender, EventArgs e)

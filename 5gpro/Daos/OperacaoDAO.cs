@@ -33,7 +33,7 @@ namespace _5gpro.Daos
                 Connect.Comando.CommandText = @"INSERT INTO operacao 
                           (idoperacao, nome, descricao, condicao, desconto, entrada, acrescimo) 
                           VALUES
-                          (@idusuario, @nome, @descricao, @condicao, @desconto, @entrada, @acrescimo)
+                          (@idoperacao, @nome, @descricao, @condicao, @desconto, @entrada, @acrescimo)
                           ON DUPLICATE KEY UPDATE
                            nome = @nome, descricao = @descricao, condicao = @condicao, desconto = @desconto, entrada = @entrada, acrescimo = @acrescimo
                          ";
@@ -48,14 +48,15 @@ namespace _5gpro.Daos
 
                 retorno = Connect.Comando.ExecuteNonQuery();
 
-                if (retorno > 0 && listaparcelas.Count > 0)
+                if (retorno > 0 && listaparcelas.Count > 0 && operacao.Condicao.Equals("AP"))
                 {
 
-                    Connect.Comando.CommandText = @"INSERT INTO parcelaoperacao (idparcelaoperacao, numero, dias, idoperacao)
+                    Connect.Comando.CommandText = @"INSERT INTO parcelaoperacao 
+                                            (idparcelaoperacao, numero, dias, idoperacao)
                                             VALUES
                                             (@idparcelaoperacao, @numero, @dias, @idoperacao)
                                             ON DUPLICATE KEY UPDATE
-                                             numero = @numero, dias = @dias, idoperacao = @idoperacao, 
+                                             numero = @numero, dias = @dias, idoperacao = @idoperacao 
                                              ";
 
                     foreach (ParcelaOperacao p in listaparcelas)
@@ -86,7 +87,7 @@ namespace _5gpro.Daos
 
         public IEnumerable<Operacao> BuscaOperacoes(string nomeOperacao)
         {
-
+            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
             List<Operacao> operacoes = new List<Operacao>();
 
             string conNomeOperacao = nomeOperacao.Length > 0 ? "AND o.nome LIKE @nomeoperacao" : "";
@@ -95,7 +96,9 @@ namespace _5gpro.Daos
             {
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM operacao o
+                                             FROM operacao o 
+                                             LEFT JOIN parcelaoperacao p 
+                                             ON o.idoperacao = p.idoperacao
                                              WHERE 1=1
                                              " + conNomeOperacao + @"
                                              ORDER BY o.nome;", Connect.Conexao);
@@ -106,19 +109,51 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+                        Operacao operacaoparcela = new Operacao();
+                        operacaoparcela.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacaoparcela
+                        };
+
+                        parcelas.Add(parcela);
+                    }
 
                     Operacao operacao = new Operacao
                     {
-                        OperacaoID = int.Parse(reader.GetString(reader.GetOrdinal("idoperacao"))),
+                        OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Descricao = reader.GetString(reader.GetOrdinal("descricao")),
                         Condicao = reader.GetString(reader.GetOrdinal("condicao")),
                         Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                         Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo"))
+                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                     };
 
-                    operacoes.Add(operacao);
+                    //O Any funciona como o IEnumerable
+                    if (!operacoes.Any(l => l.OperacaoID == reader.GetInt32(reader.GetOrdinal("idoperacao"))))
+                    {
+                        operacoes.Add(operacao);
+                    }
+
+                }
+
+                foreach (Operacao o in operacoes)
+                {
+                    o.Parcelas = new List<ParcelaOperacao>();
+                    foreach (ParcelaOperacao p in parcelas)
+                    {
+                        if (p.Operacao.OperacaoID == o.OperacaoID)
+                        {
+                            o.Parcelas.Add(p);
+                        }
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -133,12 +168,13 @@ namespace _5gpro.Daos
         }
 
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
+
                 Connect.Comando = new MySqlCommand(@"SELECT o1.idoperacao + 1 AS proximoid
                                              FROM operacao AS o1
                                              LEFT OUTER JOIN operacao AS o2 ON o1.idoperacao + 1 = o2.idoperacao
@@ -150,7 +186,7 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
                     reader.Close();
                 }
             }

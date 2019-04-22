@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
@@ -123,7 +124,6 @@ namespace _5gpro.Forms
                 tbNomeUsuario.Text = "";
             }
         }
-
 
     }
 }

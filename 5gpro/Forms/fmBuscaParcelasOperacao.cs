@@ -37,6 +37,5 @@ namespace _5gpro.Forms
             dgvParcelasOperacao.DataSource = table;
 
         }
-
     }
 }
