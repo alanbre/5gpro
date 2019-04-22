@@ -38,7 +38,6 @@ namespace _5gpro.Forms
 
         }
 
-
         public fmCadastroGrupoUsuario()
         {
             InitializeComponent();

@@ -5625,7 +5625,10 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 
 (7, 'Cadastro de Orçamentos', '020100'),
 
-(8, 'Cadastro de Nota Fiscal', '030100');
+(8, 'Cadastro de Nota Fiscal', '030100'),
+
+(10, 'Módulo Financeiro', '040000'),
+(11, 'Cadastro de Operacao', '040100');
 
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE

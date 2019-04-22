@@ -49,8 +49,6 @@ namespace _5gpro.Controls
         }
 
 
-
-
         private void AbreTelaBuscaGrupoUsuario()
         {
             var buscaGrupoUsuario = new fmBuscaGrupoUsuario();

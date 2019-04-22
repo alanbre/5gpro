@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
+
 namespace _5gpro.Controls
 {
     public partial class BuscaCidade : UserControl
@@ -16,7 +17,7 @@ namespace _5gpro.Controls
 
 
         public Cidade cidade = null;
-
+        
         private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
 
