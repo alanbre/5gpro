@@ -18,7 +18,6 @@ namespace _5gpro.Daos
             Connect = c;
         }
 
-
         public int SalvarOuAtualizarOperacao(Operacao operacao, List<ParcelaOperacao> listaparcelas)
         {
             int retorno = 0;
@@ -210,7 +209,11 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM operacao WHERE idoperacao = (SELECT min(idoperacao) FROM operacao WHERE idoperacao > @idoperacao)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM operacao
+                                                   WHERE idoperacao = (SELECT min(idoperacao) 
+                                                   FROM operacao 
+                                                   WHERE idoperacao > @idoperacao)", Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idoperacao", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
@@ -253,7 +256,12 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM operacao WHERE idoperacao = (SELECT max(idoperacao) FROM operacao WHERE idoperacao < @idoperacao)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * 
+                                                   FROM operacao 
+                                                   WHERE idoperacao = (SELECT max(idoperacao) 
+                                                   FROM operacao 
+                                                   WHERE idoperacao < @idoperacao)", Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idoperacao", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();

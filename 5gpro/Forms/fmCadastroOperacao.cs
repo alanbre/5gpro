@@ -308,7 +308,6 @@ namespace _5gpro.Forms
 
             if (!editando && tbCodOperacao.Text.Length > 0)
             {
-
                 validacao.despintarCampos(controls);
 
                 Operacao newoperacao = operacaoDAO.BuscarProximaOperacao(tbCodOperacao.Text);
@@ -354,8 +353,6 @@ namespace _5gpro.Forms
 
             if (!editando && tbCodOperacao.Text.Length > 0)
             {
-                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-                //la do inicio do arquivo.
 
                 validacao.despintarCampos(controls);
                 Operacao newoperacao = operacaoDAO.BuscarOperacaoAnterior(tbCodOperacao.Text);
@@ -438,6 +435,7 @@ namespace _5gpro.Forms
             }
             else
             {
+
                 if (listaparcelas.Count > 0)
                 {
                     tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
