@@ -9,7 +9,8 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO : ConexaoDAO
     {
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private static ConexaoDAO connection = new ConexaoDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
         private readonly NotaFiscalDAO notafiscalDAO = new NotaFiscalDAO();
 
         public Orcamento BuscaOrcamentoById(int cod)

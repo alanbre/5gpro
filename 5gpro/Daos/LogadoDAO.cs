@@ -39,7 +39,6 @@ namespace _5gpro.Daos
 
                     usulogado = new Logado
                     {
-                        LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado")),
                         Usuario = usuario,
                         Mac = reader.GetString(reader.GetOrdinal("mac")),
                         NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
@@ -96,7 +95,6 @@ namespace _5gpro.Daos
 
                     usulogado = new Logado
                     {
-                        LogadoID = reader.GetInt32(reader.GetOrdinal("idlogado")),
                         Usuario = usuario,
                         Mac = reader.GetString(reader.GetOrdinal("mac")),
                         NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
@@ -194,6 +192,27 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@mac", mac);
 
                 Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+        }
+
+        public void RemoveTodosLocks(Logado logado)
+        {
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("DELETE FROM 5gprodatabase.lock WHERE idusuario = @idusuario", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
+
+                Connect.Comando.ExecuteNonQuery();
+
             }
             catch (MySqlException ex)
             {

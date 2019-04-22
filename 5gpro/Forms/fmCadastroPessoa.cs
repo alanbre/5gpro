@@ -12,7 +12,8 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form
     {
         private Pessoa pessoa;
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private static ConexaoDAO connection = new ConexaoDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
         private readonly Validacao validacao = new Validacao();
 
         //Controle de Permissões
@@ -24,7 +25,7 @@ namespace _5gpro.Forms
         private string CodGrupoUsuario;
 
 
-        bool editando = false;
+        bool editando, locked = false;
         bool ignoraCheckEvent;
 
 
@@ -57,7 +58,8 @@ namespace _5gpro.Forms
 
             if (e.KeyCode == Keys.F1)
             {
-                NovoCadastro();
+                if(!editando)
+                    NovoCadastro();
             }
 
             if (e.KeyCode == Keys.F2)
@@ -198,26 +200,7 @@ namespace _5gpro.Forms
             if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
             {
-                if (tbCodigo.Text.Length > 0)
-                {
-                    Pessoa newpessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigo.Text));
-                    if (newpessoa != null)
-                    {
-                        pessoa = newpessoa;
-                        PreencheCampos(pessoa);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodigo.Text.Length == 0)
-                {
-                    LimpaCampos(true);
-                    Editando(false);
-                }
+                CarregaDados();
             }
             else
             {
@@ -227,33 +210,8 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (tbCodigo.Text.Length > 0)
-                    {
-
-                        Pessoa newpessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigo.Text));
-                        if (newpessoa != null)
-                        {
-                            pessoa = newpessoa;
-                            PreencheCampos(pessoa);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodigo.Text.Length == 0)
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
+                    CarregaDados();
                 }
-                else
-                {
-
-                }
-
             }
         }
 
@@ -287,12 +245,18 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-
+                    if (pessoa != null && locked)
+                        pessoaDAO.Unlock(pessoa.PessoaID, logado); locked = false;
                 }
                 else
                 {
                     e.Cancel = true;
                 }
+            }
+            else
+            {
+                if (pessoa != null && locked)
+                    pessoaDAO.Unlock(pessoa.PessoaID, logado); locked = false;
             }
         }
 
@@ -311,6 +275,11 @@ namespace _5gpro.Forms
                     {
                         LimpaCampos(false);
                         tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
+                        if (!locked)
+                        {
+                            pessoaDAO.Lock(int.Parse(tbCodigo.Text), logado);
+                            locked = true;
+                        }
                         pessoa = null;
                         Editando(false);
                         tbNome.Focus();
@@ -321,6 +290,11 @@ namespace _5gpro.Forms
                 {
                     LimpaCampos(false);
                     tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
+                    if (!locked)
+                    {
+                        pessoaDAO.Lock(int.Parse(tbCodigo.Text), logado);
+                        locked = true;
+                    }
                     pessoa = null;
                     Editando(false);
                     tbNome.Focus();
@@ -335,7 +309,17 @@ namespace _5gpro.Forms
             buscaPessoa.ShowDialog();
             if (buscaPessoa.pessoaSelecionada != null)
             {
+                if (pessoa != null && locked)
+                {
+                    pessoaDAO.Unlock(pessoa.PessoaID, logado);
+                    locked = false;
+                }
                 pessoa = buscaPessoa.pessoaSelecionada;
+                if (!locked)
+                {
+                    pessoaDAO.Lock(pessoa.PessoaID, logado);
+                    locked = true;
+                }
                 PreencheCampos(pessoa);
             }
         }
@@ -414,7 +398,9 @@ namespace _5gpro.Forms
                 {
                     if (pessoa != null)
                     {
-                        pessoa = pessoaDAO.BuscarPessoaById(pessoa.PessoaID);
+                        var result = pessoaDAO.BuscarPessoaById(pessoa.PessoaID, logado);
+                        pessoa = result.Item1;
+                        
                         PreencheCampos(pessoa);
                         Editando(false);
                     }
@@ -429,7 +415,8 @@ namespace _5gpro.Forms
             {
                 if (pessoa != null)
                 {
-                    pessoa = pessoaDAO.BuscarPessoaById(pessoa.PessoaID);
+                    var result = pessoaDAO.BuscarPessoaById(pessoa.PessoaID, logado);
+                    pessoa = result.Item1;
                     PreencheCampos(pessoa);
                 }
                 else
@@ -540,10 +527,46 @@ namespace _5gpro.Forms
             }
         }
 
+        private void CarregaDados()
+        {
+            if (tbCodigo.Text.Length > 0)
+            {
+                var newpessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigo.Text));
+                if (newpessoa != null)
+                {
+                    pessoa = newpessoa;
+                    PreencheCampos(pessoa);
+                    Editando(false);
+                }
+                else
+                {
+                    if (pessoa != null && locked)
+                    {
+                        pessoaDAO.Unlock(pessoa.PessoaID, logado);
+                        locked = false;
+                    }
+                    if (!locked)
+                    {
+                        pessoaDAO.Lock(int.Parse(tbCodigo.Text), logado);
+                        locked = true;
+                    }
+                    Editando(true);
+                    LimpaCampos(false);
+                }
+            }
+            else if (tbCodigo.Text.Length == 0)
+            {
+                if (pessoa != null && locked)
+                    pessoaDAO.Unlock(pessoa.PessoaID, logado);
+                LimpaCampos(true);
+                Editando(false);
+            }
+        }
+
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            menuVertical.Editando(edit, Nivel, CodGrupoUsuario, locked);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)
@@ -617,6 +640,11 @@ namespace _5gpro.Forms
                 }
             }
             ignoraCheckEvent = false;
+        }
+
+        private void Lock(bool locked)
+        {
+
         }
 
     }

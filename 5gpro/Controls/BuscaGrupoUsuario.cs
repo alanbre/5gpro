@@ -30,10 +30,10 @@ namespace _5gpro.Controls
 
         private void TbCodigoGrupoUsuario_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbNomeGrupoUsuario.Text, out int codigo)) { tbNomeGrupoUsuario.Clear(); }
-            if (tbNomeGrupoUsuario.Text.Length > 0)
+            if (!int.TryParse(tbCodigoGrupoUsuario.Text, out int codigo)) { tbCodigoGrupoUsuario.Clear(); }
+            if (tbCodigoGrupoUsuario.Text.Length > 0)
             {
-                grupoUsuario = grupoUsuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbNomeGrupoUsuario.Text));
+                grupoUsuario = grupoUsuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodigoGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupoUsuario);
             }
             else
