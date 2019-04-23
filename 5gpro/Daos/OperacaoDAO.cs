@@ -136,6 +136,7 @@ namespace _5gpro.Daos
                     };
 
                     //O Any funciona como o IEnumerable
+                    //Para não adicionar repetidos
                     if (!operacoes.Any(l => l.OperacaoID == reader.GetInt32(reader.GetOrdinal("idoperacao"))))
                     {
                         operacoes.Add(operacao);
@@ -205,38 +206,58 @@ namespace _5gpro.Daos
         public Operacao BuscarProximaOperacao(string codAtual)
         {
             Operacao operacao = new Operacao();
+            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM operacao
-                                                   WHERE idoperacao = (SELECT min(idoperacao) 
-                                                   FROM operacao 
-                                                   WHERE idoperacao > @idoperacao)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM operacao o 
+                                                    LEFT JOIN parcelaoperacao p ON o.idoperacao = p.idoperacao
+                                                    WHERE o.idoperacao = (SELECT min(idoperacao) 
+                                                    FROM operacao 
+                                                    WHERE idoperacao > @idoperacao)", Connect.Conexao);
 
                 Connect.Comando.Parameters.AddWithValue("@idoperacao", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+                        Operacao operacaoparcela = new Operacao
+                        {
+                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"))
+                        };
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacaoparcela
+                        };
+
+                        parcelas.Add(parcela);
+                    }
+
                     operacao = new Operacao
                     {
-                        OperacaoID = int.Parse(reader.GetString(reader.GetOrdinal("idoperacao"))),
+                        OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Descricao = reader.GetString(reader.GetOrdinal("descricao")),
                         Condicao = reader.GetString(reader.GetOrdinal("condicao")),
                         Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                         Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo"))
+                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                     };
-                    reader.Close();
+
                 }
-                else
-                {
-                    operacao = null;
-                }
+
+                operacao.Parcelas = parcelas;
+
             }
+
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error: {0}", ex.ToString());
@@ -252,38 +273,56 @@ namespace _5gpro.Daos
         public Operacao BuscarOperacaoAnterior(string codAtual)
         {
             Operacao operacao = new Operacao();
+            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
-                                                   FROM operacao 
-                                                   WHERE idoperacao = (SELECT max(idoperacao) 
-                                                   FROM operacao 
-                                                   WHERE idoperacao < @idoperacao)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM operacao o 
+                                                    LEFT JOIN parcelaoperacao p ON o.idoperacao = p.idoperacao
+                                                    WHERE o.idoperacao = (SELECT max(idoperacao) 
+                                                    FROM operacao 
+                                                    WHERE idoperacao < @idoperacao)", Connect.Conexao);
+
 
                 Connect.Comando.Parameters.AddWithValue("@idoperacao", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
-                if (reader.Read())
+                while (reader.Read())
                 {
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+                        Operacao operacaoparcela = new Operacao
+                        {
+                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"))
+                        };
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacaoparcela
+                        };
+
+                        parcelas.Add(parcela);
+                    }
+
                     operacao = new Operacao
                     {
-                        OperacaoID = int.Parse(reader.GetString(reader.GetOrdinal("idoperacao"))),
+                        OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
                         Descricao = reader.GetString(reader.GetOrdinal("descricao")),
                         Condicao = reader.GetString(reader.GetOrdinal("condicao")),
                         Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                         Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo"))
+                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                     };
-                    reader.Close();
+
                 }
-                else
-                {
-                    operacao = null;
-                }
+
+                operacao.Parcelas = parcelas;
             }
             catch (MySqlException ex)
             {
