@@ -13,7 +13,7 @@ namespace _5gpro.Forms
         static ConexaoDAO connection = new ConexaoDAO();
 
         ParcelaOperacao parcela = new ParcelaOperacao();
-        List<ParcelaOperacao> listaparcelas = new List<ParcelaOperacao>();
+        public List<ParcelaOperacao> listaparcelasprincipal = new List<ParcelaOperacao>();
 
         Operacao operacao;
         OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
@@ -204,7 +204,7 @@ namespace _5gpro.Forms
 
         private void BtEditar_Click(object sender, EventArgs e)
         {
-            var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelas);
+            var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelasprincipal, this);
             fmdiasavencer.Show(this);
 
         }
@@ -218,7 +218,7 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                listaparcelas = new List<ParcelaOperacao>();
+                listaparcelasprincipal = new List<ParcelaOperacao>();
                 MostrarEsconder(false);
                 tbNparcelas.Enabled = true;
             }
@@ -266,7 +266,7 @@ namespace _5gpro.Forms
                         operacao.Condicao = "AV";
                         operacao.Entrada = 0;
                         operacao.Acrescimo = 0;
-                        listaparcelas = new List<ParcelaOperacao>();
+                        listaparcelasprincipal = new List<ParcelaOperacao>();
                         if (tbDesconto.Text.Length > 0)
                         {
                             operacao.Desconto = decimal.Parse(tbDesconto.Text);
@@ -296,7 +296,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao, listaparcelas);
+                    int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao, listaparcelasprincipal);
                     //resultado 0 = nada foi inserido(houve algum erro)
                     //resultado 1 = foi inserido com sucesso
                     //resultado 2 = foi atualizado com sucesso
@@ -420,7 +420,7 @@ namespace _5gpro.Forms
                     }
                     tbDesconto.Clear();
 
-                    listaparcelas = operacao.Parcelas;
+                    listaparcelasprincipal = operacao.Parcelas;
                     tbNparcelas.Clear();
                     Gerar();
 
@@ -527,18 +527,18 @@ namespace _5gpro.Forms
             if (tbNparcelas.Text.Length > 0)
             {
                 int numero = int.Parse(tbNparcelas.Text);
-                listaparcelas = new List<ParcelaOperacao>();
+                listaparcelasprincipal = new List<ParcelaOperacao>();
 
                 for (int a = 1; a <= numero; a++)
                 {
                     parcela = new ParcelaOperacao();
                     parcela.Numero = a;
                     parcela.Dias = variaveldias * a;
-                    listaparcelas.Add(parcela);
+                    listaparcelasprincipal.Add(parcela);
                 }
-                if (listaparcelas.Count > 0)
+                if (listaparcelasprincipal.Count > 0)
                 {
-                    tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
+                    tbVisualizar.Text = listaparcelasprincipal.Count + " Parcela(s)";
                     MostrarEsconder(true);
                     tbNparcelas.Clear();
                     tbNparcelas.Enabled = false;
@@ -551,9 +551,9 @@ namespace _5gpro.Forms
             else
             {
 
-                if (listaparcelas.Count > 0)
+                if (listaparcelasprincipal.Count > 0)
                 {
-                    tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
+                    tbVisualizar.Text = listaparcelasprincipal.Count + " Parcela(s)";
                     MostrarEsconder(true);
                     tbNparcelas.Clear();
                     tbNparcelas.Enabled = false;
