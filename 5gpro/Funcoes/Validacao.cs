@@ -7,13 +7,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 using _5gpro.Entities;
+using System.Drawing;
 
 namespace _5gpro.Funcoes
 {
 
     public class Validacao
     {
-
 
         public static IEnumerable<ValidationResult> getValidationErros(object obj)
         {
@@ -86,6 +86,8 @@ namespace _5gpro.Funcoes
                 //GROUPBOX
                 if (ctrl is GroupBox)
                 {
+                    ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+
                     foreach (Control ctrlgb in ctrl.Controls)
                     {
                         if (ctrlgb is TextBox && !ctrlgb.Name.Equals("tbAjuda"))
@@ -147,7 +149,6 @@ namespace _5gpro.Funcoes
 
                 foreach (Control ct in c)
                 {
-                    //ct.BackColor = System.Drawing.Color.Salmon;
                     ct.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFD2CA");
 
                 }
