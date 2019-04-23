@@ -8,8 +8,9 @@ namespace _5gpro.Daos
 {
     class NotaFiscalDAO : ConexaoDAO
     {
+        private static ConexaoDAO connection = new ConexaoDAO();
         private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
 
         public int BuscaProxCodigoDisponivel()
         {

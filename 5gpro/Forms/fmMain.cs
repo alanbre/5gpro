@@ -21,6 +21,9 @@ namespace _5gpro
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
+
+        Thread t;
+
         //CÓDIGOS DAS TELAS
         //Cadastro de Pessoa = 010100
         //Cadastro de Usuário = 010200
@@ -33,7 +36,7 @@ namespace _5gpro
         {
             InitializeComponent();
             FiltroDePermissoes();
-            Thread t = new Thread(new ThreadStart(AtualizaLogado));
+            t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
         }
 
@@ -142,6 +145,8 @@ namespace _5gpro
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            t.Abort();
+            logadoDAO.RemoveTodosLocks(logado);
             //Retira usuário da tabela Logado
             logadoDAO.RemoverLogado(adap.Mac);
         }

@@ -352,21 +352,19 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `5gprodatabase`.`logado`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
-  `idlogado` INT NOT NULL AUTO_INCREMENT,
   `idusuario` INT(11) NOT NULL,
   `mac` VARCHAR(45) NULL,
   `nomepc` VARCHAR(45) NULL,
   `ipdopc` VARCHAR(45) NULL,
   `data_update` DATETIME NULL,
-  PRIMARY KEY (`idlogado`),
-  INDEX `fk_usuariologado_usuario1_idx` (`idusuario` ASC) VISIBLE,
-  CONSTRAINT `fk_usuariologado_usuario1`
+  PRIMARY KEY (`idusuario`),
+  INDEX `fk_logado_usuario1_idx` (`idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_logado_usuario1`
     FOREIGN KEY (`idusuario`)
     REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
-
 
 
 -- -----------------------------------------------------
@@ -397,6 +395,24 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
   CONSTRAINT `fk_parcelaoperacao_operacao1`
     FOREIGN KEY (`idoperacao`)
     REFERENCES `5gprodatabase`.`operacao` (`idoperacao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`lock`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lock` (
+  `idlock` INT NOT NULL AUTO_INCREMENT,
+  `tabela` VARCHAR(30) NULL,
+  `codigo_registro` INT NULL,
+  `idusuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idlock`),
+  INDEX `fk_lock_logado1_idx` (`idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_lock_logado1`
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `5gprodatabase`.`logado` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
