@@ -414,7 +414,6 @@
             this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical1_Load);
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical1_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
-            this.menuVertical.Load += new System.EventHandler(this.MenuVertical_Load);
             // 
             // fmCadastroOperacao
             // 
@@ -434,7 +433,6 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de Operação";
-            this.Load += new System.EventHandler(this.FmCadastroOperacao_Load);
             this.gbDadosOperacao.ResumeLayout(false);
             this.gbDadosOperacao.PerformLayout();
             this.gbCondicaoOperacao.ResumeLayout(false);
