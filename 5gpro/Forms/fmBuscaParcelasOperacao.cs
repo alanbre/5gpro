@@ -1,12 +1,7 @@
 ﻿using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -14,7 +9,7 @@ namespace _5gpro.Forms
     public partial class fmBuscaParcelasOperacao : Form
     {
 
-        public List<ParcelaOperacao> listaparcelasbusca;
+        List<ParcelaOperacao> listaparcelasbusca;
         public fmCadastroOperacao telacadoperacao;
         ParcelaOperacao parcela;
 
@@ -26,41 +21,29 @@ namespace _5gpro.Forms
             telacadoperacao = cadoperacao;
         }
 
-        private void AlterarRB()
-        {
-            if (rbSelecionar.Checked)
-                tbNumeroParcela.Enabled = true;
-
-            if (rbTodas.Checked)
-            {
-                tbNumeroParcela.Enabled = false;
-                tbNumeroParcela.Clear();
-            }                      
-        }
-
         private void EditarDias()
         {
-            if (rbTodas.Checked)
-            {
-                if(int.TryParse(tbDias.Text, out int codigo))
-                {
-                    int numero = listaparcelasbusca.Count;
-                    listaparcelasbusca = new List<ParcelaOperacao>();
 
-                    for (int a = 1; a <= numero; a++)
-                    {
-                        parcela = new ParcelaOperacao();
-                        parcela.Numero = a;
-                        parcela.Dias = int.Parse(tbDias.Text) * a;
-                        listaparcelasbusca.Add(parcela);
-                    }
-                    BuscaParcelas();
-                }
-                else
+            if (int.TryParse(tbDias.Text, out int codigo))
+            {
+
+                int numero = listaparcelasbusca.Count;
+                listaparcelasbusca = new List<ParcelaOperacao>();
+
+                for (int a = 1; a <= numero; a++)
                 {
-                    tbDias.Clear();
-                    MessageBox.Show("Apenas números", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    parcela = new ParcelaOperacao();
+                    parcela.Numero = a;
+                    parcela.Dias = int.Parse(tbDias.Text) * a;
+                    listaparcelasbusca.Add(parcela);
                 }
+                BuscaParcelas();
+
+            }
+            else
+            {
+                tbDias.Clear();
+                MessageBox.Show("Apenas números", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -76,22 +59,13 @@ namespace _5gpro.Forms
                 table.Rows.Add(p.Numero, p.Dias);
             }
             dgvParcelasOperacao.DataSource = table;
+            dgvParcelasOperacao.Columns["Parcela"].ReadOnly = true;
 
         }
 
         private void BtAplicar_Click(object sender, EventArgs e)
         {
             EditarDias();
-        }
-
-        private void RbTodas_CheckedChanged(object sender, EventArgs e)
-        {
-            AlterarRB();
-        }
-
-        private void RbSelecionar_CheckedChanged(object sender, EventArgs e)
-        {
-            AlterarRB();
         }
 
         private void BtSalvar_Click(object sender, EventArgs e)
@@ -101,9 +75,15 @@ namespace _5gpro.Forms
                               MessageBoxButtons.YesNo,
                               MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                telacadoperacao.listaparcelasprincipal = listaparcelasbusca;              
+                telacadoperacao.listaparcelasprincipal = listaparcelasbusca;
+                this.Dispose();
             }
 
+        }
+
+        private void DgvParcelasOperacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
         }
     }
 }
