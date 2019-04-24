@@ -150,8 +150,6 @@ namespace _5gpro.Daos
             if (pessoa != null)
                 pessoa.Atuacao = BuscaAtuacoes(pessoa);
 
-
-
             return pessoa;
         }
 

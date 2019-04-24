@@ -439,9 +439,30 @@ namespace _5gpro.Daos
             return operacao;
         }
 
-        public void RemoverParcelasOperacao(int codoperacao)
+        public int RemoverParcelasOperacao(string codoperacao)
         {
+            int retorno = 0;
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao", Connect.Conexao);
 
+                Connect.Comando.Parameters.AddWithValue("@idoperacao", codoperacao);
+                retorno = Connect.Comando.ExecuteNonQuery();
+
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return retorno;
         }
     }
 }

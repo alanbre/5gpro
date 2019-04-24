@@ -158,7 +158,7 @@ namespace _5gpro.Forms
 
         private void MenuVertical1_Salvar_Clicked(object sender, EventArgs e)
         {
-            SalvaCadastro();
+            SalvaCadastro(false);
         }
 
         private void MenuVertical1_Proximo_Clicked(object sender, EventArgs e)
@@ -218,7 +218,7 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-               
+
                 listaparcelasprincipal = new List<ParcelaOperacao>();
                 MostrarEsconder(false);
                 tbNparcelas.Enabled = true;
@@ -231,7 +231,7 @@ namespace _5gpro.Forms
 
 
         //PADRÕES CRIADAS
-        private void SalvaCadastro()
+        private void SalvaCadastro(bool gerar)
         {
             if (editando)
             {
@@ -525,6 +525,11 @@ namespace _5gpro.Forms
 
             if (tbNparcelas.Text.Length > 0)
             {
+                if (tbCodOperacao.Text.Length > 0)
+                {
+                    operacaoDAO.RemoverParcelasOperacao(tbCodOperacao.Text);
+                }
+
                 int numero = int.Parse(tbNparcelas.Text);
                 listaparcelasprincipal = new List<ParcelaOperacao>();
 
@@ -561,6 +566,9 @@ namespace _5gpro.Forms
                     MostrarEsconder(false);
                 }
             }
+            SalvaCadastro(true);
+
+
         }
 
         private void MostrarEsconder(bool a)

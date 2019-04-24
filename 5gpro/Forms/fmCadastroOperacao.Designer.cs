@@ -275,7 +275,7 @@
             // 
             // tbVisualizar
             // 
-            this.tbVisualizar.Location = new System.Drawing.Point(6, 24);
+            this.tbVisualizar.Location = new System.Drawing.Point(6, 21);
             this.tbVisualizar.Name = "tbVisualizar";
             this.tbVisualizar.ReadOnly = true;
             this.tbVisualizar.Size = new System.Drawing.Size(122, 20);

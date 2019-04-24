@@ -25,13 +25,11 @@ namespace _5gpro.Forms
 
             if (int.TryParse(tbDias.Text, out int codigo))
             {
-
                 foreach (ParcelaOperacao p in listaparcelasbusca)
                 {
                     p.Dias = p.Numero * int.Parse(tbDias.Text);
                 }
                 BuscaParcelas();
-
             }
             else
             {
