@@ -13,60 +13,128 @@ namespace _5gpro.Forms
         static ConexaoDAO connection = new ConexaoDAO();
 
         ParcelaOperacao parcela = new ParcelaOperacao();
-        List<ParcelaOperacao> listaparcelas = new List<ParcelaOperacao>();
+        public List<ParcelaOperacao> listaparcelasprincipal = new List<ParcelaOperacao>();
 
         Operacao operacao;
         OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
         Validacao validacao = new Validacao();
         public int variaveldias = 30;
 
+        //Controle de permissões
+        private Logado logado;
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private int Nivel;
+        private string CodGrupoUsuario;
+        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+
         bool editando, ignoraCheckEvent = false;
 
         public fmCadastroOperacao()
         {
             InitializeComponent();
-            RemoverTabs();
+            SetarNivel();
+            LimpaCampos(true);
         }
 
-        //RADIONBUTTONS
-
-        private void RemoverTabs()
+        private void SetarNivel()
         {
-            tcOpcoes.TabPages.Remove(tpAvista);
-            tcOpcoes.TabPages.Remove(tpAprazo);
-        }
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("040100").ToString();
 
-        private void RbAvista_CheckedChanged(object sender, EventArgs e)
-        {
-            tcOpcoes.TabPages.Remove(tpAvista);
-            tcOpcoes.TabPages.Remove(tpAprazo);
-            tcOpcoes.TabPages.Add(tpAvista);
-        }
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            Editando(editando);
 
-        private void RbAprazo_CheckedChanged(object sender, EventArgs e)
-        {
-            tcOpcoes.TabPages.Remove(tpAvista);
-            tcOpcoes.TabPages.Remove(tpAprazo);
-            tcOpcoes.TabPages.Add(tpAprazo);
         }
 
 
-        private void RbSim_CheckedChanged(object sender, EventArgs e)
+        //EVENTOS DE TEXTCHANGED
+        private void TbNomeOperacao_TextChanged(object sender, EventArgs e)
         {
-            tbEntrada.Enabled = true;
+            if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void RbNao_CheckedChanged(object sender, EventArgs e)
+        private void TbDescOperacao_TextChanged(object sender, EventArgs e)
         {
-            tbEntrada.Enabled = false;
-            tbEntrada.Text = "";
+            if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void BtEditar_Click(object sender, EventArgs e)
+        private void TbDesconto_TextChanged(object sender, EventArgs e)
         {
-            var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelas);
-            fmdiasavencer.Show(this);
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
 
+        private void TbEntrada_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void TbAcrescimo_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void TbNparcelas_TextChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+
+        //EVENTOS DE LEAVE
+        private void TbCodOperacao_Leave(object sender, EventArgs e)
+        {
+            if (!int.TryParse(tbCodOperacao.Text, out int codigo)) { tbCodOperacao.Clear(); }
+            if (!editando)
+            {
+                if (tbCodOperacao.Text.Length > 0)
+                {
+                    Operacao newoperacao = operacaoDAO.BuscarOperacaoById(int.Parse(tbCodOperacao.Text));
+
+                    if (newoperacao != null)
+                    {
+                        operacao = newoperacao;
+                        PreencheCampos(operacao);
+                        Editando(false);
+                    }
+                    else
+                    {
+                        Editando(true);
+                        LimpaCampos(false);
+                    }
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (tbCodOperacao.Text.Length > 0)
+                    {
+                        Operacao newoperacao = operacaoDAO.BuscarOperacaoById(int.Parse(tbCodOperacao.Text));
+                        if (newoperacao != null)
+                        {
+                            operacao = newoperacao;
+                            PreencheCampos(operacao);
+                            Editando(false);
+                        }
+                        else
+                        {
+                            Editando(true);
+                            LimpaCampos(false);
+                        }
+                    }
+                    else if (tbCodOperacao.Text.Length == 0)
+                    {
+                        LimpaCampos(true);
+                        Editando(false);
+                    }
+                }
+            }
         }
 
 
@@ -104,8 +172,64 @@ namespace _5gpro.Forms
         }
 
 
-        //PADRÕES CRIADAS
+        //RADIONBUTTONS
+        private void RbAvista_CheckedChanged(object sender, EventArgs e)
+        {
+            HDavista(true);
+            HDaprazo(false);
+            tcOpcoes.SelectedTab = tpAvista;
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
 
+        private void RbAprazo_CheckedChanged(object sender, EventArgs e)
+        {
+            HDavista(false);
+            HDaprazo(true);
+            tcOpcoes.SelectedTab = tpAprazo;
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void RbSim_CheckedChanged(object sender, EventArgs e)
+        {
+            tbEntrada.Enabled = true;
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void RbNao_CheckedChanged(object sender, EventArgs e)
+        {
+            tbEntrada.Enabled = false;
+            tbEntrada.Text = "";
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void BtEditar_Click(object sender, EventArgs e)
+        {
+            var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelasprincipal, this);
+            fmdiasavencer.Show(this);
+
+        }
+
+
+        //EVENTOS DE CLICK
+        private void BtRemover_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Remover parcelas?",
+               "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                listaparcelasprincipal = new List<ParcelaOperacao>();
+                MostrarEsconder(false);
+                tbNparcelas.Enabled = true;
+            }
+        }
+        private void BtGerar_Click(object sender, EventArgs e)
+        {
+            Gerar();
+        }
+
+
+        //PADRÕES CRIADAS
         private void SalvaCadastro()
         {
 
@@ -121,51 +245,58 @@ namespace _5gpro.Forms
                     operacao.Condicao = "AP";
 
                     if (rbSim.Checked && tbEntrada.Text.Length > 0)
-                    {
                         operacao.Entrada = decimal.Parse(tbEntrada.Text);
-                    }
                     else
-                    {
                         operacao.Entrada = 0;
-                    }
+
 
                     if (tbAcrescimo.Text.Length > 0)
-                    {
                         operacao.Acrescimo = decimal.Parse(tbAcrescimo.Text);
-                    }
                     else
-                    {
                         operacao.Acrescimo = 0;
-                    }
 
                     operacao.Desconto = 0;
+
 
                 }
                 else
                 {
-                    operacao.Condicao = "AV";
-                    operacao.Entrada = 0;
-                    operacao.Acrescimo = 0;
-                    listaparcelas = new List<ParcelaOperacao>();
-                    if (tbDesconto.Text.Length > 0)
+                    if (rbAvista.Checked)
                     {
-                        operacao.Desconto = decimal.Parse(tbDesconto.Text);
-                    }
-                    else
-                    {
-                        operacao.Desconto = 0;
+                        operacao.Condicao = "AV";
+                        operacao.Entrada = 0;
+                        operacao.Acrescimo = 0;
+                        listaparcelasprincipal = new List<ParcelaOperacao>();
+                        if (tbDesconto.Text.Length > 0)
+                        {
+                            operacao.Desconto = decimal.Parse(tbDesconto.Text);
+                        }
+                        else
+                        {
+                            operacao.Desconto = 0;
+                        }
                     }
                 }
 
                 ControlCollection controls = (ControlCollection)this.Controls;
                 bool ok = validacao.ValidarEntidade(operacao, controls);
+                if (ok) { validacao.despintarCampos(controls); }
+
+                if (operacao.Condicao != null)
+                {
+                    if (tbVisualizar.Text.Length <= 0 && operacao.Condicao.Equals("AP"))
+                    {
+                        ok = false;
+                        MessageBox.Show("Deve Gerar as parcelas",
+                                        "",
+                                         MessageBoxButtons.OK,
+                                         MessageBoxIcon.Warning);
+                    }
+                }
 
                 if (ok)
                 {
-
-                    int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao, listaparcelas);
-
-                    validacao.despintarCampos(controls);
+                    int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao, listaparcelasprincipal);
                     //resultado 0 = nada foi inserido(houve algum erro)
                     //resultado 1 = foi inserido com sucesso
                     //resultado 2 = foi atualizado com sucesso
@@ -230,16 +361,14 @@ namespace _5gpro.Forms
             rbSim.Checked = false;
             rbAprazo.Checked = false;
             rbAvista.Checked = false;
-            RemoverTabs();
+            HDavista(false);
+            HDaprazo(false);
         }
 
-        //FALTA FAZER
         private void Editando(bool edit)
         {
             editando = edit;
-            menuVertical.Editando(edit, 3, "999");
-
-            //menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
 
         private void AbreTelaBuscaOperacao()
@@ -291,7 +420,7 @@ namespace _5gpro.Forms
                     }
                     tbDesconto.Clear();
 
-                    listaparcelas = operacao.Parcelas;
+                    listaparcelasprincipal = operacao.Parcelas;
                     tbNparcelas.Clear();
                     Gerar();
 
@@ -392,39 +521,24 @@ namespace _5gpro.Forms
             }
         }
 
-        private void TbNparcelas_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TbNparcelas_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtGerar_Click(object sender, EventArgs e)
-        {
-            Gerar();
-        }
-
         private void Gerar()
         {
 
             if (tbNparcelas.Text.Length > 0)
             {
                 int numero = int.Parse(tbNparcelas.Text);
-                listaparcelas = new List<ParcelaOperacao>();
+                listaparcelasprincipal = new List<ParcelaOperacao>();
 
                 for (int a = 1; a <= numero; a++)
                 {
                     parcela = new ParcelaOperacao();
                     parcela.Numero = a;
                     parcela.Dias = variaveldias * a;
-                    listaparcelas.Add(parcela);
+                    listaparcelasprincipal.Add(parcela);
                 }
-                if (listaparcelas.Count > 0)
+                if (listaparcelasprincipal.Count > 0)
                 {
-                    tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
+                    tbVisualizar.Text = listaparcelasprincipal.Count + " Parcela(s)";
                     MostrarEsconder(true);
                     tbNparcelas.Clear();
                     tbNparcelas.Enabled = false;
@@ -437,9 +551,9 @@ namespace _5gpro.Forms
             else
             {
 
-                if (listaparcelas.Count > 0)
+                if (listaparcelasprincipal.Count > 0)
                 {
-                    tbVisualizar.Text = listaparcelas.Count + " Parcela(s)";
+                    tbVisualizar.Text = listaparcelasprincipal.Count + " Parcela(s)";
                     MostrarEsconder(true);
                     tbNparcelas.Clear();
                     tbNparcelas.Enabled = false;
@@ -470,27 +584,22 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BtRemover_Click(object sender, EventArgs e)
+        private void HDavista(bool a)
         {
-            if (MessageBox.Show("Remover parcelas?",
-               "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                listaparcelas = new List<ParcelaOperacao>();
-                MostrarEsconder(false);
-                tbNparcelas.Enabled = true;
-            }
-        }
-
-        private void MenuVertical_Load(object sender, EventArgs e)
-        {
+            if (a)
+                pnAvista.Enabled = true;
+            else
+                pnAvista.Enabled = false;
 
         }
 
-        private void FmCadastroOperacao_Load(object sender, EventArgs e)
+        private void HDaprazo(bool a)
         {
-
+            if (a)
+                pnAprazo.Enabled = true;
+            else
+                pnAprazo.Enabled = false;
         }
+
     }
 }

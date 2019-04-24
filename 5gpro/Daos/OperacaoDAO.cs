@@ -83,6 +83,84 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+       public Operacao BuscarOperacaoById(int CodOperacao)
+        {
+
+            Operacao operacao = new Operacao();
+            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT *
+                                             FROM operacao o 
+                                             LEFT JOIN parcelaoperacao p 
+                                             ON o.idoperacao = p.idoperacao
+                                             WHERE o.idoperacao = @idoperacao", Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@idoperacao", CodOperacao);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    operacao = new Operacao
+                    {
+                        OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Descricao = reader.GetString(reader.GetOrdinal("descricao")),
+                        Condicao = reader.GetString(reader.GetOrdinal("condicao")),
+                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
+                        Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
+                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                    };
+
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacao
+                        };
+
+                        parcelas.Add(parcela);
+                    }
+                }
+
+                while (reader.Read())
+                {
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacao
+                        };
+
+                        parcelas.Add(parcela);
+                    }
+                }
+
+                operacao.Parcelas = parcelas;
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return operacao;
+        }
+
 
         public IEnumerable<Operacao> BuscaOperacoes(string nomeOperacao)
         {
@@ -221,26 +299,8 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                    {
-                        Operacao operacaoparcela = new Operacao
-                        {
-                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"))
-                        };
-
-                        ParcelaOperacao parcela = new ParcelaOperacao
-                        {
-                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                            Operacao = operacaoparcela
-                        };
-
-                        parcelas.Add(parcela);
-                    }
-
                     operacao = new Operacao
                     {
                         OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
@@ -252,6 +312,36 @@ namespace _5gpro.Daos
                         Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                     };
 
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacao
+                        };
+
+                        parcelas.Add(parcela);
+                    }
+                }
+
+                while (reader.Read())
+                {
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacao
+                        };
+
+                        parcelas.Add(parcela);
+                    }
                 }
 
                 operacao.Parcelas = parcelas;
@@ -289,26 +379,8 @@ namespace _5gpro.Daos
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
-                while (reader.Read())
+                if (reader.Read())
                 {
-                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                    {
-                        Operacao operacaoparcela = new Operacao
-                        {
-                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"))
-                        };
-
-                        ParcelaOperacao parcela = new ParcelaOperacao
-                        {
-                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                            Operacao = operacaoparcela
-                        };
-
-                        parcelas.Add(parcela);
-                    }
-
                     operacao = new Operacao
                     {
                         OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
@@ -319,6 +391,37 @@ namespace _5gpro.Daos
                         Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
                         Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                     };
+
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacao
+                        };
+
+                        parcelas.Add(parcela);
+                    }
+                }
+
+                while (reader.Read())
+                {
+                    if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
+                    {
+
+                        ParcelaOperacao parcela = new ParcelaOperacao
+                        {
+                            ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
+                            Numero = reader.GetInt32(reader.GetOrdinal("numero")),
+                            Dias = reader.GetInt32(reader.GetOrdinal("dias")),
+                            Operacao = operacao
+                        };
+
+                        parcelas.Add(parcela);
+                    }
 
                 }
 
