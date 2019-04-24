@@ -438,5 +438,10 @@ namespace _5gpro.Daos
 
             return operacao;
         }
+
+        public void RemoverParcelasOperacao(int codoperacao)
+        {
+
+        }
     }
 }

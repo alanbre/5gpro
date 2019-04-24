@@ -9,9 +9,8 @@ namespace _5gpro.Forms
     public partial class fmBuscaParcelasOperacao : Form
     {
 
-        List<ParcelaOperacao> listaparcelasbusca;
+        List<ParcelaOperacao> listaparcelasbusca = new List<ParcelaOperacao>();
         public fmCadastroOperacao telacadoperacao;
-        ParcelaOperacao parcela;
 
         public fmBuscaParcelasOperacao(List<ParcelaOperacao> lista, fmCadastroOperacao cadoperacao)
         {
@@ -27,15 +26,9 @@ namespace _5gpro.Forms
             if (int.TryParse(tbDias.Text, out int codigo))
             {
 
-                int numero = listaparcelasbusca.Count;
-                listaparcelasbusca = new List<ParcelaOperacao>();
-
-                for (int a = 1; a <= numero; a++)
+                foreach (ParcelaOperacao p in listaparcelasbusca)
                 {
-                    parcela = new ParcelaOperacao();
-                    parcela.Numero = a;
-                    parcela.Dias = int.Parse(tbDias.Text) * a;
-                    listaparcelasbusca.Add(parcela);
+                    p.Dias = p.Numero * int.Parse(tbDias.Text);
                 }
                 BuscaParcelas();
 
@@ -80,10 +73,18 @@ namespace _5gpro.Forms
             }
 
         }
-
         private void DgvParcelasOperacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            foreach (ParcelaOperacao p in listaparcelasbusca)
+            {
+                p.Dias = 999;
+                BuscaParcelas();
+            }
         }
     }
 }

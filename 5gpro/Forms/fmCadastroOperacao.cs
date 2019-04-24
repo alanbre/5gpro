@@ -218,6 +218,7 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+               
                 listaparcelasprincipal = new List<ParcelaOperacao>();
                 MostrarEsconder(false);
                 tbNparcelas.Enabled = true;
@@ -232,7 +233,6 @@ namespace _5gpro.Forms
         //PADRÕES CRIADAS
         private void SalvaCadastro()
         {
-
             if (editando)
             {
                 operacao = new Operacao();
@@ -256,7 +256,6 @@ namespace _5gpro.Forms
                         operacao.Acrescimo = 0;
 
                     operacao.Desconto = 0;
-
 
                 }
                 else
@@ -550,7 +549,6 @@ namespace _5gpro.Forms
             }
             else
             {
-
                 if (listaparcelasprincipal.Count > 0)
                 {
                     tbVisualizar.Text = listaparcelasprincipal.Count + " Parcela(s)";
