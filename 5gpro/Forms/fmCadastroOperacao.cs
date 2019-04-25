@@ -218,6 +218,7 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+
                 listaparcelasprincipal = new List<ParcelaOperacao>();
                 MostrarEsconder(false);
                 tbNparcelas.Enabled = true;
@@ -232,54 +233,60 @@ namespace _5gpro.Forms
         //PADRÕES CRIADAS
         private void SalvaCadastro()
         {
-
-            if (editando)
+            bool ok = false;
+            if (tbCodOperacao.Text.Length > 0)
             {
-                operacao = new Operacao();
-                operacao.OperacaoID = int.Parse(tbCodOperacao.Text);
-                operacao.Nome = tbNomeOperacao.Text;
-                operacao.Descricao = tbDescOperacao.Text;
-
-                if (rbAprazo.Checked)
+                if (editando)
                 {
-                    operacao.Condicao = "AP";
+                    operacao = new Operacao();
+                    operacao.OperacaoID = int.Parse(tbCodOperacao.Text);
+                    operacao.Nome = tbNomeOperacao.Text;
+                    operacao.Descricao = tbDescOperacao.Text;
 
-                    if (rbSim.Checked && tbEntrada.Text.Length > 0)
-                        operacao.Entrada = decimal.Parse(tbEntrada.Text);
-                    else
-                        operacao.Entrada = 0;
-
-
-                    if (tbAcrescimo.Text.Length > 0)
-                        operacao.Acrescimo = decimal.Parse(tbAcrescimo.Text);
-                    else
-                        operacao.Acrescimo = 0;
-
-                    operacao.Desconto = 0;
-
-
-                }
-                else
-                {
-                    if (rbAvista.Checked)
+                    if (rbAprazo.Checked)
                     {
-                        operacao.Condicao = "AV";
-                        operacao.Entrada = 0;
-                        operacao.Acrescimo = 0;
-                        listaparcelasprincipal = new List<ParcelaOperacao>();
-                        if (tbDesconto.Text.Length > 0)
-                        {
-                            operacao.Desconto = decimal.Parse(tbDesconto.Text);
-                        }
+                        operacao.Condicao = "AP";
+
+                        operacao.Parcelas = listaparcelasprincipal;
+
+                        if (rbSim.Checked && tbEntrada.Text.Length > 0)
+                            operacao.Entrada = decimal.Parse(tbEntrada.Text);
                         else
+                            operacao.Entrada = 0;
+
+
+                        if (tbAcrescimo.Text.Length > 0)
+                            operacao.Acrescimo = decimal.Parse(tbAcrescimo.Text);
+                        else
+                            operacao.Acrescimo = 0;
+
+                        operacao.Desconto = 0;
+
+                    }
+                    else
+                    {
+                        if (rbAvista.Checked)
                         {
-                            operacao.Desconto = 0;
+                            operacao.Condicao = "AV";
+                            operacao.Entrada = 0;
+                            operacao.Acrescimo = 0;
+                            listaparcelasprincipal = new List<ParcelaOperacao>();
+                            if (tbDesconto.Text.Length > 0)
+                            {
+                                operacao.Desconto = decimal.Parse(tbDesconto.Text);
+                            }
+                            else
+                            {
+                                operacao.Desconto = 0;
+                            }
                         }
                     }
                 }
 
+
+
                 ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(operacao, controls);
+                ok = validacao.ValidarEntidade(operacao, controls);
                 if (ok) { validacao.despintarCampos(controls); }
 
                 if (operacao.Condicao != null)
@@ -293,33 +300,49 @@ namespace _5gpro.Forms
                                          MessageBoxIcon.Warning);
                     }
                 }
-
-                if (ok)
+            }
+            else
+            {
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                                    "Aviso",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao, listaparcelasprincipal);
-                    //resultado 0 = nada foi inserido(houve algum erro)
-                    //resultado 1 = foi inserido com sucesso
-                    //resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                    }
-                    else if (resultado == 1)
-                    {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
-                    }
+                    tbCodOperacao.Text = operacaoDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
+            }
+
+            if (ok)
+            {
+                if (operacaoDAO.OperacaoExist(operacao.OperacaoID))
+                    operacaoDAO.RemoverParcelasOperacao(tbCodOperacao.Text);
+
+                int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao);
+                //resultado 0 = nada foi inserido(houve algum erro)
+                //resultado 1 = foi inserido com sucesso
+                //resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
                 }
             }
+
         }
+
 
         private void NovoCadastro()
         {
@@ -526,6 +549,7 @@ namespace _5gpro.Forms
 
             if (tbNparcelas.Text.Length > 0)
             {
+
                 int numero = int.Parse(tbNparcelas.Text);
                 listaparcelasprincipal = new List<ParcelaOperacao>();
 
@@ -550,7 +574,6 @@ namespace _5gpro.Forms
             }
             else
             {
-
                 if (listaparcelasprincipal.Count > 0)
                 {
                     tbVisualizar.Text = listaparcelasprincipal.Count + " Parcela(s)";

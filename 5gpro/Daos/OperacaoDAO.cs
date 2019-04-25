@@ -18,7 +18,7 @@ namespace _5gpro.Daos
             Connect = c;
         }
 
-        public int SalvarOuAtualizarOperacao(Operacao operacao, List<ParcelaOperacao> listaparcelas)
+        public int SalvarOuAtualizarOperacao(Operacao operacao)
         {
             int retorno = 0;
             try
@@ -47,7 +47,7 @@ namespace _5gpro.Daos
 
                 retorno = Connect.Comando.ExecuteNonQuery();
 
-                if (retorno > 0 && listaparcelas.Count > 0 && operacao.Condicao.Equals("AP"))
+                if (retorno > 0 && operacao.Parcelas.Count > 0 && operacao.Condicao.Equals("AP"))
                 {
 
                     Connect.Comando.CommandText = @"INSERT INTO parcelaoperacao 
@@ -58,7 +58,7 @@ namespace _5gpro.Daos
                                              numero = @numero, dias = @dias, idoperacao = @idoperacao 
                                              ";
 
-                    foreach (ParcelaOperacao p in listaparcelas)
+                    foreach (ParcelaOperacao p in operacao.Parcelas)
                     {
                         Connect.Comando.Parameters.Clear();
                         Connect.Comando.Parameters.AddWithValue("@idparcelaoperacao", p.ParcelaOperacaoID);
@@ -83,10 +83,10 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-       public Operacao BuscarOperacaoById(int CodOperacao)
+        public Operacao BuscarOperacaoById(int CodOperacao)
         {
 
-            Operacao operacao = new Operacao();
+            Operacao operacao = null;
             List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
 
             try
@@ -146,7 +146,7 @@ namespace _5gpro.Daos
                     }
                 }
 
-                operacao.Parcelas = parcelas;
+                if (operacao != null) { operacao.Parcelas = parcelas; }
 
             }
             catch (MySqlException ex)
@@ -283,7 +283,7 @@ namespace _5gpro.Daos
 
         public Operacao BuscarProximaOperacao(string codAtual)
         {
-            Operacao operacao = new Operacao();
+            Operacao operacao = null;
             List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
 
             try
@@ -344,7 +344,7 @@ namespace _5gpro.Daos
                     }
                 }
 
-                operacao.Parcelas = parcelas;
+                if (operacao != null) { operacao.Parcelas = parcelas; }
 
             }
 
@@ -362,7 +362,7 @@ namespace _5gpro.Daos
 
         public Operacao BuscarOperacaoAnterior(string codAtual)
         {
-            Operacao operacao = new Operacao();
+            Operacao operacao = null;
             List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
 
             try
@@ -425,7 +425,8 @@ namespace _5gpro.Daos
 
                 }
 
-                operacao.Parcelas = parcelas;
+                if (operacao != null) { operacao.Parcelas = parcelas; }
+
             }
             catch (MySqlException ex)
             {
@@ -437,6 +438,63 @@ namespace _5gpro.Daos
             }
 
             return operacao;
+        }
+
+        public int RemoverParcelasOperacao(string codoperacao)
+        {
+            int retorno = 0;
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao", Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@idoperacao", codoperacao);
+                retorno = Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return retorno;
+        }
+
+        public bool OperacaoExist(int CodOperacao)
+        {
+
+            bool existe = false;
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT *
+                                             FROM operacao o 
+                                             WHERE o.idoperacao = @idoperacao", Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@idoperacao", CodOperacao);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    existe = true;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return existe;
         }
     }
 }
