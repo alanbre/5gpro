@@ -5632,6 +5632,19 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 
 (13, 'Cadastro de Contas a Receber', '050100');
 
+INSERT INTO formapagamento (idformapagamento, nome) VALUES
+(01, 'Dinheiro'),
+(02, 'Cheque'),
+(03, 'Cartão de Crédito'),
+(04, 'Cartão de Débito'),
+(05, 'Crédito Loja'),
+(10, 'Vale Alimentação'),
+(11, 'Vale Refeição'),
+(12, 'Vale Presente'),
+(13, 'Vale Combustível'),
+(15, 'Boleto Bancário'),
+(99, 'Outros');
+
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE
 EVERY 5 SECOND

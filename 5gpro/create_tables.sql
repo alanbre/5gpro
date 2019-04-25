@@ -386,7 +386,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
+  `idparcelaoperacao` INT NOT NULL,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,
@@ -415,6 +415,16 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lock` (
     REFERENCES `5gprodatabase`.`logado` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`formapagamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`formapagamento` (
+  `idformapagamento` INT NOT NULL,
+  `nome` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`idformapagamento`))
 ENGINE = InnoDB;
 
 
