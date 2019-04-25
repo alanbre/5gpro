@@ -16,7 +16,7 @@ namespace _5gpro.Daos
             Connect = c;
         }
 
-        public int SalvarOuAtualizarPessoa(Pessoa pessoa)
+        public int SalvaOuAtualiza(Pessoa pessoa)
         {
 
             int retorno = 0;
@@ -103,7 +103,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public Pessoa BuscarPessoaById(int cod)
+        public Pessoa BuscaById(int cod)
         {
             Pessoa pessoa = new Pessoa();
             try
@@ -155,7 +155,7 @@ namespace _5gpro.Daos
             return pessoa;
         }
 
-        public Tuple<Pessoa, int> BuscarPessoaById(int cod, Logado logado)
+        public Tuple<Pessoa, int> BuscaById(int cod, Logado logado)
         {
             Pessoa pessoa = new Pessoa();
             int dono = 0;
@@ -225,7 +225,7 @@ namespace _5gpro.Daos
             return Tuple.Create<Pessoa, int>(pessoa, dono);
         }
 
-        public Pessoa BuscarProximaPessoa(string codAtual)
+        public Pessoa BuscaProximo(string codAtual)
         {
             Pessoa pessoa = new Pessoa();
             try
@@ -273,7 +273,7 @@ namespace _5gpro.Daos
             return pessoa;
         }
 
-        public Pessoa BuscarPessoaAnterior(string codAtual)
+        public Pessoa BuscaAnterior(string codAtual)
         {
             Pessoa pessoa = new Pessoa();
             try
@@ -321,7 +321,7 @@ namespace _5gpro.Daos
             return pessoa;
         }
 
-        public List<Pessoa> BuscarPessoas(string nome, string cpfCnpj, int idcidade)
+        public List<Pessoa> Busca(string nome, string cpfCnpj, int idcidade)
         {
             List<Pessoa> pessoas = new List<Pessoa>();
             string conCodPessoa = nome.Length > 0 ? "AND nome LIKE @nome" : "";

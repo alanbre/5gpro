@@ -360,7 +360,7 @@ namespace _5gpro.Forms
 
                     if (ok)
                     {
-                        int resultado = pessoaDAO.SalvarOuAtualizarPessoa(pessoa);
+                        int resultado = pessoaDAO.SalvaOuAtualiza(pessoa);
                         validacao.despintarCampos(controls);
                         // resultado 0 = nada foi inserido (houve algum erro)
                         // resultado 1 = foi inserido com sucesso
@@ -398,7 +398,7 @@ namespace _5gpro.Forms
                 {
                     if (pessoa != null)
                     {
-                        var result = pessoaDAO.BuscarPessoaById(pessoa.PessoaID, logado);
+                        var result = pessoaDAO.BuscaById(pessoa.PessoaID, logado);
                         pessoa = result.Item1;
                         
                         PreencheCampos(pessoa);
@@ -415,7 +415,7 @@ namespace _5gpro.Forms
             {
                 if (pessoa != null)
                 {
-                    var result = pessoaDAO.BuscarPessoaById(pessoa.PessoaID, logado);
+                    var result = pessoaDAO.BuscaById(pessoa.PessoaID, logado);
                     pessoa = result.Item1;
                     PreencheCampos(pessoa);
                 }
@@ -442,7 +442,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                Pessoa newpessoa = pessoaDAO.BuscarProximaPessoa(tbCodigo.Text);
+                Pessoa newpessoa = pessoaDAO.BuscaProximo(tbCodigo.Text);
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;
@@ -457,7 +457,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaDAO.BuscarProximaPessoa(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaDAO.BuscaProximo(tbCodigo.Text);
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -466,7 +466,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newpessoa = pessoaDAO.BuscarPessoaAnterior(tbCodigo.Text);
+                        newpessoa = pessoaDAO.BuscaAnterior(tbCodigo.Text);
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;
@@ -491,7 +491,7 @@ namespace _5gpro.Forms
                 //la do inicio do arquivo.
 
                 validacao.despintarCampos(controls);
-                Pessoa newpessoa = pessoaDAO.BuscarPessoaAnterior(tbCodigo.Text);
+                Pessoa newpessoa = pessoaDAO.BuscaAnterior(tbCodigo.Text);
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;
@@ -506,7 +506,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaDAO.BuscarPessoaAnterior(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaDAO.BuscaAnterior(tbCodigo.Text);
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -515,7 +515,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newpessoa = pessoaDAO.BuscarProximaPessoa(tbCodigo.Text);
+                        newpessoa = pessoaDAO.BuscaProximo(tbCodigo.Text);
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;
@@ -531,7 +531,7 @@ namespace _5gpro.Forms
         {
             if (tbCodigo.Text.Length > 0)
             {
-                var newpessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigo.Text));
+                var newpessoa = pessoaDAO.BuscaById(int.Parse(tbCodigo.Text));
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;

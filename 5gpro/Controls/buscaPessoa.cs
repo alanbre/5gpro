@@ -54,7 +54,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoPessoa.Text, out int codigo)) { tbCodigoPessoa.Clear(); }
             if (tbCodigoPessoa.Text.Length > 0)
             {
-                pessoa = pessoaDAO.BuscarPessoaById(int.Parse(tbCodigoPessoa.Text));
+                pessoa = pessoaDAO.BuscaById(int.Parse(tbCodigoPessoa.Text));
                 PreencheCamposPessoa(pessoa);
             }
             else

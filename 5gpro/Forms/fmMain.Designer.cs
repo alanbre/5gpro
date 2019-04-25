@@ -40,6 +40,8 @@
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEmissaoNF = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiContasReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +50,8 @@
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCadastros,
             this.tsmiOrcamento,
-            this.tsmiSaida});
+            this.tsmiSaida,
+            this.tsmiContasReceber});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.Size = new System.Drawing.Size(1162, 24);
@@ -140,6 +143,21 @@
             this.tsmiEmissaoNF.Text = "Emissão de nota fiscal";
             this.tsmiEmissaoNF.Click += new System.EventHandler(this.tsmiEmissaoNF_Click);
             // 
+            // tsmiContasReceber
+            // 
+            this.tsmiContasReceber.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCadastroContaReceber});
+            this.tsmiContasReceber.Name = "tsmiContasReceber";
+            this.tsmiContasReceber.Size = new System.Drawing.Size(107, 20);
+            this.tsmiContasReceber.Text = "Contas a receber";
+            // 
+            // tsmiCadastroContaReceber
+            // 
+            this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
+            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCadastroContaReceber.Text = "Cadastro de conta";
+            this.tsmiCadastroContaReceber.Click += new System.EventHandler(this.TsmiCadastroContaReceber_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -171,6 +189,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiEmissaoNF;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroGrupoUsuario;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroDeOperações;
+        private System.Windows.Forms.ToolStripMenuItem tsmiContasReceber;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroContaReceber;
     }
 }
 

@@ -66,7 +66,7 @@ namespace _5gpro.Forms
             table.Columns.Add("E-Mail", typeof(string));
 
             int idcidade = buscaCidade.cidade?.CidadeID ?? 0;
-            Pessoas = pessoaDAO.BuscarPessoas(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
+            Pessoas = pessoaDAO.Busca(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
 
             foreach (Pessoa p in Pessoas)
             {
