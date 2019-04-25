@@ -69,19 +69,30 @@ namespace _5gpro.Forms
                 telacadoperacao.listaparcelasprincipal = listaparcelasbusca;
                 this.Dispose();
             }
-
         }
+
         private void DgvParcelasOperacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
+            if (dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString() == null) { MessageBox.Show("VAZIO", "VAZIO", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            // listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void DgvParcelasOperacao_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (ParcelaOperacao p in listaparcelasbusca)
+            dgvParcelasOperacao.Rows[e.RowIndex].ErrorText = String.Empty;
+        }
+
+        private void DgvParcelasOperacao_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            string headerText = dgvParcelasOperacao.Columns[e.ColumnIndex].HeaderText;
+
+            if (!headerText.Equals("Dias")) return;
+
+            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
             {
-                p.Dias = 999;
-                BuscaParcelas();
+                dgvParcelasOperacao.Rows[e.RowIndex].ErrorText =
+                    "Campo dias não pode estar vazio";
+                e.Cancel = true;
             }
         }
     }

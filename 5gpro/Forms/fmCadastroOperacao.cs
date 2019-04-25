@@ -206,7 +206,6 @@ namespace _5gpro.Forms
         {
             var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelasprincipal, this);
             fmdiasavencer.Show(this);
-
         }
 
 
@@ -282,8 +281,6 @@ namespace _5gpro.Forms
                         }
                     }
                 }
-
-
 
                 ControlCollection controls = (ControlCollection)this.Controls;
                 ok = validacao.ValidarEntidade(operacao, controls);
