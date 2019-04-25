@@ -37,7 +37,7 @@ namespace _5gpro.Daos
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
                     };
-                    orcamento.Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    orcamento.Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
                     orcamento.NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")));
                     reader.Close();
                 }
@@ -85,7 +85,7 @@ namespace _5gpro.Daos
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
                     };
-                    orcamento.Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    orcamento.Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
                     orcamento.NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")));
                     reader.Close();
                 }
@@ -131,7 +131,7 @@ namespace _5gpro.Daos
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
                     };
-                    orcamento.Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
+                    orcamento.Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
                     orcamento.NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")));
                     reader.Close();
                 }
@@ -196,7 +196,7 @@ namespace _5gpro.Daos
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
+                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
                         NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
                     };
                     orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);

@@ -31,6 +31,8 @@ namespace _5gpro
         //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Orçamento = 020100
         //Cadastro de Nota Fiscal = 030100
+        //Cadastro de Operações = 040100
+        //Cadastro de Contas a Receber = 050100
 
         public fmMain()
         {
@@ -141,6 +143,12 @@ namespace _5gpro
         {
             var formCadOperacao = new fmCadastroOperacao();
             formCadOperacao.Show(this);
+        }
+
+        private void TsmiCadastroContaReceber_Click(object sender, EventArgs e)
+        {
+            var formCadContaReceber = new fmCarCadastroConta();
+            formCadContaReceber.Show(this);
         }
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
