@@ -88,7 +88,7 @@
             this.gbDadosOperacao.Controls.Add(this.lbCodigo);
             this.gbDadosOperacao.Location = new System.Drawing.Point(66, 13);
             this.gbDadosOperacao.Name = "gbDadosOperacao";
-            this.gbDadosOperacao.Size = new System.Drawing.Size(659, 207);
+            this.gbDadosOperacao.Size = new System.Drawing.Size(583, 207);
             this.gbDadosOperacao.TabIndex = 1;
             this.gbDadosOperacao.TabStop = false;
             this.gbDadosOperacao.Text = "Dados da operação";
@@ -187,7 +187,7 @@
             this.tcOpcoes.Location = new System.Drawing.Point(66, 282);
             this.tcOpcoes.Name = "tcOpcoes";
             this.tcOpcoes.SelectedIndex = 0;
-            this.tcOpcoes.Size = new System.Drawing.Size(745, 241);
+            this.tcOpcoes.Size = new System.Drawing.Size(583, 221);
             this.tcOpcoes.TabIndex = 3;
             // 
             // tpAvista
@@ -196,7 +196,7 @@
             this.tpAvista.Location = new System.Drawing.Point(4, 22);
             this.tpAvista.Name = "tpAvista";
             this.tpAvista.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAvista.Size = new System.Drawing.Size(737, 215);
+            this.tpAvista.Size = new System.Drawing.Size(484, 195);
             this.tpAvista.TabIndex = 0;
             this.tpAvista.Text = "Opções A Vista";
             this.tpAvista.UseVisualStyleBackColor = true;
@@ -213,7 +213,7 @@
             // 
             this.gbDesconto.Controls.Add(this.tbDesconto);
             this.gbDesconto.Controls.Add(this.lbPorcentoDesconto);
-            this.gbDesconto.Location = new System.Drawing.Point(15, 13);
+            this.gbDesconto.Location = new System.Drawing.Point(10, 47);
             this.gbDesconto.Name = "gbDesconto";
             this.gbDesconto.Size = new System.Drawing.Size(113, 50);
             this.gbDesconto.TabIndex = 3;
@@ -244,7 +244,7 @@
             this.tpAprazo.Location = new System.Drawing.Point(4, 22);
             this.tpAprazo.Name = "tpAprazo";
             this.tpAprazo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAprazo.Size = new System.Drawing.Size(737, 215);
+            this.tpAprazo.Size = new System.Drawing.Size(575, 195);
             this.tpAprazo.TabIndex = 1;
             this.tpAprazo.Text = "Opções A Prazo";
             this.tpAprazo.UseVisualStyleBackColor = true;
@@ -257,7 +257,7 @@
             this.pnAprazo.Controls.Add(this.gbParcelas);
             this.pnAprazo.Location = new System.Drawing.Point(6, 6);
             this.pnAprazo.Name = "pnAprazo";
-            this.pnAprazo.Size = new System.Drawing.Size(725, 203);
+            this.pnAprazo.Size = new System.Drawing.Size(563, 185);
             this.pnAprazo.TabIndex = 18;
             // 
             // gbVisualizar
@@ -424,7 +424,7 @@
             this.tbAjuda.HideSelection = false;
             this.tbAjuda.Location = new System.Drawing.Point(70, 529);
             this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(741, 20);
+            this.tbAjuda.Size = new System.Drawing.Size(752, 20);
             this.tbAjuda.TabIndex = 8;
             // 
             // menuVertical

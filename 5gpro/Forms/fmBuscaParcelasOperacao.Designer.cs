@@ -95,8 +95,7 @@
             this.dgvParcelasOperacao.Size = new System.Drawing.Size(304, 232);
             this.dgvParcelasOperacao.TabIndex = 8;
             this.dgvParcelasOperacao.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelasOperacao_CellEndEdit);
-            this.dgvParcelasOperacao.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.DgvParcelasOperacao_CellValidating);
-            this.dgvParcelasOperacao.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelasOperacao_CellValueChanged);
+            this.dgvParcelasOperacao.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelasOperacao_CellEnter);
             // 
             // fmBuscaParcelasOperacao
             // 

@@ -82,6 +82,11 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
+        public void Dias_Changed()
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
 
         //EVENTOS DE LEAVE
         private void TbCodOperacao_Leave(object sender, EventArgs e)
@@ -175,14 +180,25 @@ namespace _5gpro.Forms
         //RADIONBUTTONS
         private void RbAvista_CheckedChanged(object sender, EventArgs e)
         {
+
+            listaparcelasprincipal.Clear();
+            MostrarEsconder(false);
+            tbNparcelas.Enabled = true;
+
             HDavista(true);
             HDaprazo(false);
             tcOpcoes.SelectedTab = tpAvista;
             if (!ignoraCheckEvent) { Editando(true); }
+
+
         }
 
         private void RbAprazo_CheckedChanged(object sender, EventArgs e)
         {
+            listaparcelasprincipal.Clear();
+            MostrarEsconder(false);
+            tbNparcelas.Enabled = true;
+
             HDavista(false);
             HDaprazo(true);
             tcOpcoes.SelectedTab = tpAprazo;
@@ -205,7 +221,7 @@ namespace _5gpro.Forms
         private void BtEditar_Click(object sender, EventArgs e)
         {
             var fmdiasavencer = new fmBuscaParcelasOperacao(listaparcelasprincipal, this);
-            fmdiasavencer.Show(this);
+            fmdiasavencer.ShowDialog();
         }
 
 
@@ -217,8 +233,8 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-
-                listaparcelasprincipal = new List<ParcelaOperacao>();
+                //listaparcelasprincipal = new List<ParcelaOperacao>();
+                listaparcelasprincipal.Clear();
                 MostrarEsconder(false);
                 tbNparcelas.Enabled = true;
             }
@@ -248,12 +264,13 @@ namespace _5gpro.Forms
 
                         operacao.Parcelas = listaparcelasprincipal;
 
+                        if (!int.TryParse(tbEntrada.Text, out int codigo)) { tbEntrada.Clear(); }
                         if (rbSim.Checked && tbEntrada.Text.Length > 0)
                             operacao.Entrada = decimal.Parse(tbEntrada.Text);
                         else
                             operacao.Entrada = 0;
 
-
+                        if (!int.TryParse(tbAcrescimo.Text, out int cod)) { tbAcrescimo.Clear(); }
                         if (tbAcrescimo.Text.Length > 0)
                             operacao.Acrescimo = decimal.Parse(tbAcrescimo.Text);
                         else
@@ -270,6 +287,8 @@ namespace _5gpro.Forms
                             operacao.Entrada = 0;
                             operacao.Acrescimo = 0;
                             listaparcelasprincipal = new List<ParcelaOperacao>();
+
+                            if (!int.TryParse(tbDesconto.Text, out int codigo)) { tbDesconto.Clear(); }
                             if (tbDesconto.Text.Length > 0)
                             {
                                 operacao.Desconto = decimal.Parse(tbDesconto.Text);
@@ -340,7 +359,6 @@ namespace _5gpro.Forms
 
         }
 
-
         private void NovoCadastro()
         {
             if (editando)
@@ -383,6 +401,10 @@ namespace _5gpro.Forms
             rbAvista.Checked = false;
             HDavista(false);
             HDaprazo(false);
+
+            listaparcelasprincipal.Clear();
+            MostrarEsconder(false);
+            tbNparcelas.Enabled = true;
         }
 
         private void Editando(bool edit)
@@ -543,6 +565,8 @@ namespace _5gpro.Forms
 
         private void Gerar()
         {
+
+            if (!int.TryParse(tbNparcelas.Text, out int codigo)) { tbNparcelas.Clear(); }
 
             if (tbNparcelas.Text.Length > 0)
             {

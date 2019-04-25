@@ -20,8 +20,8 @@ namespace _5gpro.Funcoes
                 // Esse comando trás o diretório do projeto
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
 
-                //Conecta = "SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
-                Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                Conecta = "SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
 
                 AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
@@ -30,8 +30,8 @@ namespace _5gpro.Funcoes
 
                 mySqlScript.Execute();
 
-                //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
-                Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
 
                 return true;
             }

@@ -11,6 +11,7 @@ namespace _5gpro.Forms
 
         List<ParcelaOperacao> listaparcelasbusca = new List<ParcelaOperacao>();
         public fmCadastroOperacao telacadoperacao;
+        string diasalvo;
 
         public fmBuscaParcelasOperacao(List<ParcelaOperacao> lista, fmCadastroOperacao cadoperacao)
         {
@@ -30,6 +31,7 @@ namespace _5gpro.Forms
                     p.Dias = p.Numero * int.Parse(tbDias.Text);
                 }
                 BuscaParcelas();
+                telacadoperacao.Dias_Changed();
             }
             else
             {
@@ -59,41 +61,24 @@ namespace _5gpro.Forms
             EditarDias();
         }
 
-        private void BtSalvar_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Salvar alteração ?",
-                             "Aviso de alteração",
-                              MessageBoxButtons.YesNo,
-                              MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                telacadoperacao.listaparcelasprincipal = listaparcelasbusca;
-                this.Dispose();
-            }
-        }
-
-        private void DgvParcelasOperacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString() == null) { MessageBox.Show("VAZIO", "VAZIO", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-            // listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
-        }
-
         private void DgvParcelasOperacao_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            dgvParcelasOperacao.Rows[e.RowIndex].ErrorText = String.Empty;
+            if (!int.TryParse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString(), out int codigo)
+                || string.IsNullOrWhiteSpace(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString()))
+            {
+                dgvParcelasOperacao.CurrentRow.Cells[1].Value = diasalvo;
+            }
+
+            if (!dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString().Equals(diasalvo))
+            {
+                listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
+                telacadoperacao.Dias_Changed();
+            }
         }
 
-        private void DgvParcelasOperacao_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        private void DgvParcelasOperacao_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            string headerText = dgvParcelasOperacao.Columns[e.ColumnIndex].HeaderText;
-
-            if (!headerText.Equals("Dias")) return;
-
-            if (string.IsNullOrEmpty(e.FormattedValue.ToString()))
-            {
-                dgvParcelasOperacao.Rows[e.RowIndex].ErrorText =
-                    "Campo dias não pode estar vazio";
-                e.Cancel = true;
-            }
+            diasalvo = dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString();
         }
     }
 }
