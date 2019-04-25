@@ -303,10 +303,16 @@ namespace _5gpro.Forms
             }
             else
             {
-                MessageBox.Show("Código inválido", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                                    "Aviso",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodOperacao.Text = operacaoDAO.BuscaProxCodigoDisponivel().ToString();
+                }
                 ok = false;
-                
             }
+
             if (ok)
             {
                 if (operacaoDAO.OperacaoExist(operacao.OperacaoID))
