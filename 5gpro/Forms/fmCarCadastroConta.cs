@@ -20,7 +20,7 @@ namespace _5gpro.Forms
         private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
@@ -36,7 +36,7 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(contaReceber);
+                RecarregaDados();
             }
 
             if (e.KeyCode == Keys.F1)
@@ -50,6 +50,64 @@ namespace _5gpro.Forms
             }
 
             EnterTab(this.ActiveControl, e);
+        }
+
+
+        //MENU
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
+        {
+            NovoCadastro();
+        }
+
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
+        {
+            AbreTelaBusca();
+        }
+
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
+        {
+            SalvaCadastro();
+        }
+
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
+        {
+            RecarregaDados();
+        }
+
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
+        {
+            CadastroAnterior();
+        }
+
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
+        {
+            ProximoCadastro();
+        }
+
+        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void BtSalvarParcela_Click(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void DtpDataCadatroConta_ValueChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
+        {
+            Editando(true);
+        }
+
+        private void BuscaFormaPagamento_Text_Changed(object sender, EventArgs e)
+        {
+            Editando(true);
         }
 
 
@@ -98,7 +156,6 @@ namespace _5gpro.Forms
                     ContaReceberID = int.Parse(tbCodigoConta.Text),
                     DataCadastro = dtpDataCadatroConta.Value,
                     Operacao = buscaOperacao.operacao,
-                    FormaPagamento = buscaFormaPagamento.formaPagamento,
 
                     ValorOriginal = Convert.ToDecimal(tbValorOriginalConta),
                     Multa = Convert.ToDecimal(tbMultaConta.Text),
@@ -107,8 +164,8 @@ namespace _5gpro.Forms
 
                     Parcelas = parcelas
                 };
-                int resultado = 0;
-                //int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
+
+                int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -133,42 +190,31 @@ namespace _5gpro.Forms
             }
         }
 
-        private void RecarregaDados(ContaReceber contaReceber)
+        private void RecarregaDados()
         {
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (contaReceber != null)
-                    {
-                        contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
-                        //PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        ignoracheckevent = true;
-                        LimpaCampos(true);
-                        ignoracheckevent = false;
-                    }
+                    return;
                 }
+            }
+
+            if (contaReceber != null)
+            {
+                contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
+                PreencheCampos(contaReceber);
+                if (editando)
+                    Editando(false);
             }
             else
             {
-                if (contaReceber != null)
-                {
-                    contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
-                    //PreencheCampos(orcamento);
-                }
-                else
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(true);
-                    ignoracheckevent = false;
-                }
+                ignoracheckevent = true;
+                LimpaCampos(true);
+                ignoracheckevent = false;
             }
 
         }
@@ -195,7 +241,7 @@ namespace _5gpro.Forms
                     contaReceber = newcontaRebeceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
-                    if(editando)
+                    if (editando)
                         Editando(false);
                 }
             }
@@ -235,7 +281,6 @@ namespace _5gpro.Forms
             tbCodigoConta.Text = contaReceber.ContaReceberID.ToString();
             dtpDataCadatroConta.Value = contaReceber.DataCadastro;
             buscaOperacao.operacao = contaReceber.Operacao;
-            buscaFormaPagamento.formaPagamento = contaReceber.FormaPagamento;
             tbValorOriginalConta.Text = contaReceber.ValorOriginal.ToString("############0.00");
             tbValorFinalConta.Text = contaReceber.ValorFinal.ToString("############0.00");
             tbMultaConta.Text = contaReceber.Multa.ToString("############0.00");
@@ -249,6 +294,20 @@ namespace _5gpro.Forms
         {
 
         }
+
+        private void AbreTelaBusca()
+        {
+            if (editando)
+                return;
+            var buscaContaReceber = new fmBuscaContaReceber();
+            buscaContaReceber.ShowDialog();
+            if (buscaContaReceber.contaReceberSelecionada != null)
+            {
+                contaReceber = buscaContaReceber.contaReceberSelecionada;
+                PreencheCampos(contaReceber);
+            }
+        }
+
 
         private void LimpaCampos(bool limpaCod)
         {
@@ -293,7 +352,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
 
         private void SetarNivel()
         {

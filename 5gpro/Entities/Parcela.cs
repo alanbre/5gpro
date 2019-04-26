@@ -2,9 +2,11 @@
 
 namespace _5gpro.Entities
 {
-    class Parcela
+    public class Parcela
     {
         public int ParcelaID { get; set; }
+
+        public int Sequencia { get; set; }
 
         public DateTime DataVencimento { get; set; }
 
@@ -15,5 +17,7 @@ namespace _5gpro.Entities
         public decimal Juros { get; set; }
 
         public DateTime? DataQuitacao { get; set; }
+
+        public FormaPagamento FormaPagamento { get; set; }
     }
 }

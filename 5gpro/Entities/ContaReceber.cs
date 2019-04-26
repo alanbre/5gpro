@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace _5gpro.Entities
 {
-    class ContaReceber
+    public class ContaReceber
     {
         public ContaReceber()
         {
@@ -16,9 +16,6 @@ namespace _5gpro.Entities
         public DateTime DataCadastro { get; set; }
 
         public Operacao Operacao { get; set; }
-
-        public FormaPagamento FormaPagamento { get; set; }
-
 
         public decimal ValorOriginal { get; set; }
 
