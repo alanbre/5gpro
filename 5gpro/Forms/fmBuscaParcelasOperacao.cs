@@ -11,6 +11,7 @@ namespace _5gpro.Forms
 
         List<ParcelaOperacao> listaparcelasbusca = new List<ParcelaOperacao>();
         public fmCadastroOperacao telacadoperacao;
+        string diasalvo;
 
         public fmBuscaParcelasOperacao(List<ParcelaOperacao> lista, fmCadastroOperacao cadoperacao)
         {
@@ -30,6 +31,7 @@ namespace _5gpro.Forms
                     p.Dias = p.Numero * int.Parse(tbDias.Text);
                 }
                 BuscaParcelas();
+                telacadoperacao.Dias_Changed();
             }
             else
             {
@@ -59,30 +61,24 @@ namespace _5gpro.Forms
             EditarDias();
         }
 
-        private void BtSalvar_Click(object sender, EventArgs e)
+        private void DgvParcelasOperacao_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (MessageBox.Show("Salvar alteração ?",
-                             "Aviso de alteração",
-                              MessageBoxButtons.YesNo,
-                              MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (!int.TryParse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString(), out int codigo)
+                || string.IsNullOrWhiteSpace(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString()))
             {
-                telacadoperacao.listaparcelasprincipal = listaparcelasbusca;
-                this.Dispose();
+                dgvParcelasOperacao.CurrentRow.Cells[1].Value = diasalvo;
             }
 
-        }
-        private void DgvParcelasOperacao_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
+            if (!dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString().Equals(diasalvo))
+            {
+                listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
+                telacadoperacao.Dias_Changed();
+            }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void DgvParcelasOperacao_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (ParcelaOperacao p in listaparcelasbusca)
-            {
-                p.Dias = 999;
-                BuscaParcelas();
-            }
+            diasalvo = dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString();
         }
     }
 }

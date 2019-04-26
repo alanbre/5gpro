@@ -33,8 +33,6 @@
             this.lbDias = new System.Windows.Forms.Label();
             this.gbAlterar = new System.Windows.Forms.GroupBox();
             this.btAplicar = new System.Windows.Forms.Button();
-            this.btSalvar = new System.Windows.Forms.Button();
-            this.btCancelar = new System.Windows.Forms.Button();
             this.dgvParcelasOperacao = new System.Windows.Forms.DataGridView();
             this.gbAlterar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelasOperacao)).BeginInit();
@@ -78,25 +76,6 @@
             this.btAplicar.UseVisualStyleBackColor = true;
             this.btAplicar.Click += new System.EventHandler(this.BtAplicar_Click);
             // 
-            // btSalvar
-            // 
-            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_22px_Green;
-            this.btSalvar.Location = new System.Drawing.Point(218, 263);
-            this.btSalvar.Name = "btSalvar";
-            this.btSalvar.Size = new System.Drawing.Size(48, 30);
-            this.btSalvar.TabIndex = 6;
-            this.btSalvar.UseVisualStyleBackColor = true;
-            this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
-            // 
-            // btCancelar
-            // 
-            this.btCancelar.Image = global::_5gpro.Properties.Resources.delete_32_black;
-            this.btCancelar.Location = new System.Drawing.Point(272, 263);
-            this.btCancelar.Name = "btCancelar";
-            this.btCancelar.Size = new System.Drawing.Size(48, 30);
-            this.btCancelar.TabIndex = 7;
-            this.btCancelar.UseVisualStyleBackColor = true;
-            // 
             // dgvParcelasOperacao
             // 
             this.dgvParcelasOperacao.AllowUserToAddRows = false;
@@ -115,7 +94,8 @@
             this.dgvParcelasOperacao.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvParcelasOperacao.Size = new System.Drawing.Size(304, 232);
             this.dgvParcelasOperacao.TabIndex = 8;
-            this.dgvParcelasOperacao.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelasOperacao_CellValueChanged);
+            this.dgvParcelasOperacao.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelasOperacao_CellEndEdit);
+            this.dgvParcelasOperacao.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelasOperacao_CellEnter);
             // 
             // fmBuscaParcelasOperacao
             // 
@@ -123,8 +103,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 316);
             this.Controls.Add(this.dgvParcelasOperacao);
-            this.Controls.Add(this.btCancelar);
-            this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.gbAlterar);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -145,8 +123,6 @@
         private System.Windows.Forms.Label lbDias;
         private System.Windows.Forms.GroupBox gbAlterar;
         private System.Windows.Forms.Button btAplicar;
-        private System.Windows.Forms.Button btSalvar;
-        private System.Windows.Forms.Button btCancelar;
         private System.Windows.Forms.DataGridView dgvParcelasOperacao;
     }
 }

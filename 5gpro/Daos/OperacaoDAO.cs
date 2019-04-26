@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -47,7 +45,7 @@ namespace _5gpro.Daos
 
                 retorno = Connect.Comando.ExecuteNonQuery();
 
-                if (retorno > 0 && operacao.Parcelas.Count > 0 && operacao.Condicao.Equals("AP"))
+                if (retorno > 0 && operacao.Condicao.Equals("AP"))
                 {
 
                     Connect.Comando.CommandText = @"INSERT INTO parcelaoperacao 
@@ -146,7 +144,10 @@ namespace _5gpro.Daos
                     }
                 }
 
+                reader.Close();
+
                 if (operacao != null) { operacao.Parcelas = parcelas; }
+
 
             }
             catch (MySqlException ex)
@@ -222,6 +223,8 @@ namespace _5gpro.Daos
 
                 }
 
+                reader.Close();
+
                 foreach (Operacao o in operacoes)
                 {
                     o.Parcelas = new List<ParcelaOperacao>();
@@ -267,6 +270,8 @@ namespace _5gpro.Daos
                     proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
                     reader.Close();
                 }
+
+                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -343,6 +348,8 @@ namespace _5gpro.Daos
                         parcelas.Add(parcela);
                     }
                 }
+
+                reader.Close();
 
                 if (operacao != null) { operacao.Parcelas = parcelas; }
 
@@ -425,6 +432,8 @@ namespace _5gpro.Daos
 
                 }
 
+                reader.Close();
+
                 if (operacao != null) { operacao.Parcelas = parcelas; }
 
             }
@@ -484,6 +493,8 @@ namespace _5gpro.Daos
                 {
                     existe = true;
                 }
+
+                reader.Close();
             }
             catch (MySqlException ex)
             {
