@@ -78,6 +78,33 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
+-- Table `5gprodatabase`.`grupopessoa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupopessoa` (
+  `idgrupopessoa` INT NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  PRIMARY KEY (`idgrupopessoa`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`subgrupopessoa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
+  `idsubgrupopessoa` INT NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  `idgrupopessoa` INT NOT NULL,
+  PRIMARY KEY (`idsubgrupopessoa`),
+  INDEX `fk_subgrupopessoa_grupopessoa1_idx` (`idgrupopessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_subgrupopessoa_grupopessoa1`
+    FOREIGN KEY (`idgrupopessoa`)
+    REFERENCES `5gprodatabase`.`grupopessoa` (`idgrupopessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `5gprodatabase`.`pessoa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
@@ -95,11 +122,18 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
   `email` VARCHAR(100) NULL DEFAULT NULL,
   `idcidade` INT(11) NOT NULL,
   `tipo_pessoa` CHAR(1) NULL DEFAULT NULL,
+  `idsubgrupopessoa` INT NOT NULL,
   PRIMARY KEY (`idpessoa`),
   INDEX `fk_pessoa_cidade1_idx` (`idcidade` ASC) VISIBLE,
+  INDEX `fk_pessoa_subgrupopessoa1_idx` (`idsubgrupopessoa` ASC) VISIBLE,
   CONSTRAINT `fk_pessoa_cidade1`
     FOREIGN KEY (`idcidade`)
-    REFERENCES `5gprodatabase`.`cidade` (`idcidade`))
+    REFERENCES `5gprodatabase`.`cidade` (`idcidade`),
+  CONSTRAINT `fk_pessoa_subgrupopessoa1`
+    FOREIGN KEY (`idsubgrupopessoa`)
+    REFERENCES `5gprodatabase`.`subgrupopessoa` (`idsubgrupopessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -166,6 +200,33 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
+-- Table `5gprodatabase`.`grupoitem`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupoitem` (
+  `idgrupoitem` INT NOT NULL,
+  `Nome` VARCHAR(150) NOT NULL,
+  PRIMARY KEY (`idgrupoitem`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`subgrupoitem`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupoitem` (
+  `idsubgrupoitem` INT NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  `idgrupoitem` INT NOT NULL,
+  PRIMARY KEY (`idsubgrupoitem`),
+  INDEX `fk_subgrupoitem_GrupoItem1_idx` (`idgrupoitem` ASC) VISIBLE,
+  CONSTRAINT `fk_subgrupoitem_GrupoItem1`
+    FOREIGN KEY (`idgrupoitem`)
+    REFERENCES `5gprodatabase`.`grupoitem` (`idgrupoitem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `5gprodatabase`.`item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
@@ -178,11 +239,18 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
   `valorsaida` DECIMAL(15,2) NULL DEFAULT NULL,
   `estoquenecessario` DECIMAL(10,0) NULL DEFAULT NULL,
   `idunimedida` INT(11) NOT NULL,
+  `idsubgrupoitem` INT NOT NULL,
   PRIMARY KEY (`iditem`),
   INDEX `fk_item_unimedida1_idx` (`idunimedida` ASC) VISIBLE,
+  INDEX `fk_item_subgrupoitem1_idx` (`idsubgrupoitem` ASC) VISIBLE,
   CONSTRAINT `fk_item_unimedida1`
     FOREIGN KEY (`idunimedida`)
-    REFERENCES `5gprodatabase`.`unimedida` (`idunimedida`))
+    REFERENCES `5gprodatabase`.`unimedida` (`idunimedida`),
+  CONSTRAINT `fk_item_subgrupoitem1`
+    FOREIGN KEY (`idsubgrupoitem`)
+    REFERENCES `5gprodatabase`.`subgrupoitem` (`idsubgrupoitem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;

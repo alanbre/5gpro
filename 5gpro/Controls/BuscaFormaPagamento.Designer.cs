@@ -37,7 +37,7 @@
             // btBuscaFormaPagamento
             // 
             this.btBuscaFormaPagamento.Image = global::_5gpro.Properties.Resources.iosSearch_17px_black;
-            this.btBuscaFormaPagamento.Location = new System.Drawing.Point(63, 17);
+            this.btBuscaFormaPagamento.Location = new System.Drawing.Point(70, 16);
             this.btBuscaFormaPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.btBuscaFormaPagamento.Name = "btBuscaFormaPagamento";
             this.btBuscaFormaPagamento.Size = new System.Drawing.Size(22, 22);
@@ -48,7 +48,7 @@
             // 
             // tbNomeFormaPagamento
             // 
-            this.tbNomeFormaPagamento.Location = new System.Drawing.Point(89, 18);
+            this.tbNomeFormaPagamento.Location = new System.Drawing.Point(94, 17);
             this.tbNomeFormaPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeFormaPagamento.Name = "tbNomeFormaPagamento";
             this.tbNomeFormaPagamento.ReadOnly = true;
@@ -58,7 +58,7 @@
             // 
             // tbCodigoFormaPagamento
             // 
-            this.tbCodigoFormaPagamento.Location = new System.Drawing.Point(0, 18);
+            this.tbCodigoFormaPagamento.Location = new System.Drawing.Point(6, 17);
             this.tbCodigoFormaPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.tbCodigoFormaPagamento.MaxLength = 5;
             this.tbCodigoFormaPagamento.Name = "tbCodigoFormaPagamento";
@@ -71,7 +71,7 @@
             // lbCodigoFormaPagamento
             // 
             this.lbCodigoFormaPagamento.AutoSize = true;
-            this.lbCodigoFormaPagamento.Location = new System.Drawing.Point(-3, 2);
+            this.lbCodigoFormaPagamento.Location = new System.Drawing.Point(3, 1);
             this.lbCodigoFormaPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.lbCodigoFormaPagamento.Name = "lbCodigoFormaPagamento";
             this.lbCodigoFormaPagamento.Size = new System.Drawing.Size(107, 13);
@@ -88,7 +88,7 @@
             this.Controls.Add(this.lbCodigoFormaPagamento);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "BuscaFormaPagamento";
-            this.Size = new System.Drawing.Size(437, 39);
+            this.Size = new System.Drawing.Size(442, 39);
             this.ResumeLayout(false);
             this.PerformLayout();
 

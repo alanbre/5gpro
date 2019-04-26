@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
@@ -56,7 +57,10 @@
             this.tbPrecoVenda = new System.Windows.Forms.TextBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.buscaSubGrupoItem1 = new _5gpro.Controls.BuscaSubGrupoItem();
             this.pnDadosGerais.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
             this.tcItens.SuspendLayout();
             this.tpEstoque.SuspendLayout();
@@ -68,6 +72,7 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.panel1);
             this.pnDadosGerais.Controls.Add(this.gbTipoDeItem);
             this.pnDadosGerais.Controls.Add(this.tbReferencia);
             this.pnDadosGerais.Controls.Add(this.lbReferencia);
@@ -83,14 +88,24 @@
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
             this.pnDadosGerais.Location = new System.Drawing.Point(74, 12);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 218);
+            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 345);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.buscaSubGrupoItem1);
+            this.panel1.Controls.Add(this.buscaGrupoItem);
+            this.panel1.Location = new System.Drawing.Point(16, 221);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(645, 96);
+            this.panel1.TabIndex = 14;
             // 
             // gbTipoDeItem
             // 
             this.gbTipoDeItem.Controls.Add(this.rbServico);
             this.gbTipoDeItem.Controls.Add(this.rbProduto);
-            this.gbTipoDeItem.Location = new System.Drawing.Point(286, 138);
+            this.gbTipoDeItem.Location = new System.Drawing.Point(412, 147);
             this.gbTipoDeItem.Name = "gbTipoDeItem";
             this.gbTipoDeItem.Size = new System.Drawing.Size(131, 45);
             this.gbTipoDeItem.TabIndex = 0;
@@ -123,7 +138,7 @@
             // 
             // tbReferencia
             // 
-            this.tbReferencia.Location = new System.Drawing.Point(15, 186);
+            this.tbReferencia.Location = new System.Drawing.Point(16, 186);
             this.tbReferencia.Name = "tbReferencia";
             this.tbReferencia.Size = new System.Drawing.Size(265, 20);
             this.tbReferencia.TabIndex = 10;
@@ -132,7 +147,7 @@
             // lbReferencia
             // 
             this.lbReferencia.AutoSize = true;
-            this.lbReferencia.Location = new System.Drawing.Point(12, 170);
+            this.lbReferencia.Location = new System.Drawing.Point(13, 170);
             this.lbReferencia.Name = "lbReferencia";
             this.lbReferencia.Size = new System.Drawing.Size(59, 13);
             this.lbReferencia.TabIndex = 11;
@@ -247,10 +262,10 @@
             // 
             this.tcItens.Controls.Add(this.tpEstoque);
             this.tcItens.Controls.Add(this.tpVendas);
-            this.tcItens.Location = new System.Drawing.Point(74, 236);
+            this.tcItens.Location = new System.Drawing.Point(74, 363);
             this.tcItens.Name = "tcItens";
             this.tcItens.SelectedIndex = 0;
-            this.tcItens.Size = new System.Drawing.Size(1108, 298);
+            this.tcItens.Size = new System.Drawing.Size(1108, 171);
             this.tcItens.TabIndex = 0;
             // 
             // tpEstoque
@@ -265,7 +280,7 @@
             this.tpEstoque.Location = new System.Drawing.Point(4, 22);
             this.tpEstoque.Name = "tpEstoque";
             this.tpEstoque.Padding = new System.Windows.Forms.Padding(3);
-            this.tpEstoque.Size = new System.Drawing.Size(1100, 272);
+            this.tpEstoque.Size = new System.Drawing.Size(1100, 145);
             this.tpEstoque.TabIndex = 0;
             this.tpEstoque.Text = "Estoque";
             // 
@@ -322,7 +337,7 @@
             this.tpVendas.Location = new System.Drawing.Point(4, 22);
             this.tpVendas.Name = "tpVendas";
             this.tpVendas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVendas.Size = new System.Drawing.Size(1100, 272);
+            this.tpVendas.Size = new System.Drawing.Size(1100, 145);
             this.tpVendas.TabIndex = 1;
             this.tpVendas.Text = "Vendas";
             // 
@@ -358,6 +373,20 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical1_Excluir_Clicked);
             // 
+            // buscaGrupoItem
+            // 
+            this.buscaGrupoItem.Location = new System.Drawing.Point(3, 3);
+            this.buscaGrupoItem.Name = "buscaGrupoItem";
+            this.buscaGrupoItem.Size = new System.Drawing.Size(442, 39);
+            this.buscaGrupoItem.TabIndex = 12;
+            // 
+            // buscaSubGrupoItem1
+            // 
+            this.buscaSubGrupoItem1.Location = new System.Drawing.Point(3, 48);
+            this.buscaSubGrupoItem1.Name = "buscaSubGrupoItem1";
+            this.buscaSubGrupoItem1.Size = new System.Drawing.Size(442, 39);
+            this.buscaSubGrupoItem1.TabIndex = 13;
+            // 
             // fmCadastroItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -378,6 +407,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmCadastroItens_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.gbTipoDeItem.ResumeLayout(false);
             this.gbTipoDeItem.PerformLayout();
             this.tcItens.ResumeLayout(false);
@@ -419,5 +449,8 @@
         private System.Windows.Forms.Label lbPrecoVenda;
         private System.Windows.Forms.TextBox tbPrecoVenda;
         private Controls.MenuVertical menuVertical;
+        private Controls.BuscaGrupoItem buscaGrupoItem;
+        private System.Windows.Forms.Panel panel1;
+        private Controls.BuscaSubGrupoItem buscaSubGrupoItem1;
     }
 }
