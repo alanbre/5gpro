@@ -161,6 +161,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
+    <Compile Include="Daos\FormaPagamentoDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
     <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalDAO.cs" />
@@ -198,6 +199,12 @@
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaFormaPagamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaFormaPagamento.Designer.cs">
+      <DependentUpon>fmBuscaFormaPagamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaItem.cs">
       <SubType>Form</SubType>
@@ -372,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
       <DependentUpon>fmBuscaEstado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaFormaPagamento.resx">
+      <DependentUpon>fmBuscaFormaPagamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>

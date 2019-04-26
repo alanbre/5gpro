@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Forms;
 
 namespace _5gpro.Controls
 {
@@ -11,7 +12,7 @@ namespace _5gpro.Controls
     {
         public FormaPagamento formaPagamento = new FormaPagamento();
         private static ConexaoDAO conexao = new ConexaoDAO();
-        //private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO();
+        private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO(conexao);
 
         public BuscaFormaPagamento()
         {
@@ -32,12 +33,12 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoFormaPagamento.Text, out int codigo)) { tbCodigoFormaPagamento.Clear(); }
             if (tbCodigoFormaPagamento.Text.Length > 0)
             {
-                //formaPagamento = formaPagamentoDAO.BuscarFormaPagamentoById(int.Parse(tbCodigoFormaPagamento.Text));
-                //PreencheCamposFormaPagamento(formaPagamento);
+                formaPagamento = formaPagamentoDAO.BuscarByID(int.Parse(tbCodigoFormaPagamento.Text));
+                PreencheCamposFormaPagamento(formaPagamento);
             }
             else
             {
-                //formaPagamento = null;
+                formaPagamento = null;
                 tbNomeFormaPagamento.Clear();
             }
         }
@@ -50,46 +51,46 @@ namespace _5gpro.Controls
 
         private void AbreTelaBuscaFormaPagamento()
         {
-            //var buscaFormaPagamento = new fmBuscaFormaPagamento();
-            //buscaFormaPagamento.ShowDialog();
-            //if (buscaFormaPagamento.operacaoSelecionada != null)
-            //{
-                //formaPagamento = buscaFormaPagamento.operacaoSelecionada;
-                //PreencheCamposFormaPagamento(formaPagamento);
-            //}
+            var buscaFormaPagamento = new fmBuscaFormaPagamento();
+            buscaFormaPagamento.ShowDialog();
+            if (buscaFormaPagamento.formapagamentoSelecionada != null)
+            {
+                formaPagamento = buscaFormaPagamento.formapagamentoSelecionada;
+                PreencheCamposFormaPagamento(formaPagamento);
+            }
         }
 
-        private void PreencheCamposFormaPagamento()//FormaPagamento formaPagamento)
+        private void PreencheCamposFormaPagamento(FormaPagamento formaPagamento)
         {
-            //if (formaPagamento != null)
-            //{
-                //tbCodigoFormaPagamento.Text = formaPagamento.FormaPagamentoID.ToString();
-                //tbNomeFormaPagamento.Text = formaPagamento.Nome;
-            //}
-            //else
-            //{
-                //MessageBox.Show("Cidade não encontrada no banco de dados",
-                //"Cidade não encontrada",
-                //MessageBoxButtons.OK,
-                //MessageBoxIcon.Warning);
-                //tbCodigoFormaPagamento.Clear();
-                //tbCodigoFormaPagamento.Focus();
-                //tbCodigoFormaPagamento.SelectAll();
-            //}
+            if (formaPagamento != null)
+            {
+                tbCodigoFormaPagamento.Text = formaPagamento.FormaPagamentoID.ToString();
+                tbNomeFormaPagamento.Text = formaPagamento.Nome;
+            }
+            else
+            {
+                MessageBox.Show("Forma de pagamento não encontrada no banco de dados",
+                "Forma de pagamento não encontrada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodigoFormaPagamento.Clear();
+                tbCodigoFormaPagamento.Focus();
+                tbCodigoFormaPagamento.SelectAll();
+            }
         }
 
-        public void PreencheCampos()//FormaPagamento formaPagamento)
+        public void PreencheCampos(FormaPagamento formaPagamento)
         {
-            //this.formaPagamento = formaPagamento;
-            //tbCodigoFormaPagamento.Text = this.formaPagamento != null ? formaPagamento.FormaPagamentoID.ToString() : "";
-            //tbNomeFormaPagamento.Text = this.formaPagamento != null ? this.formaPagamento.Nome : "";
+            this.formaPagamento = formaPagamento;
+            tbCodigoFormaPagamento.Text = this.formaPagamento != null ? formaPagamento.FormaPagamentoID.ToString() : "";
+            tbNomeFormaPagamento.Text = this.formaPagamento != null ? this.formaPagamento.Nome : "";
         }
 
         public void Limpa()
         {
             tbCodigoFormaPagamento.Clear();
             tbNomeFormaPagamento.Clear();
-            //formaPagamento = null;
+            formaPagamento = null;
         }
 
 
