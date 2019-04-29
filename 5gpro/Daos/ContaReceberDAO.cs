@@ -51,13 +51,13 @@ namespace _5gpro.Daos
 
                 if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
                 {
-                    Connect.Comando.CommandText = @"DELETE FROM parcela WHERE idconta_receber = @idconta_receber";
+                    Connect.Comando.CommandText = @"DELETE FROM parcela_conta_receber WHERE idconta_receber = @idconta_receber";
                     Connect.Comando.ExecuteNonQuery();
 
-                    Connect.Comando.CommandText = @"INSERT INTO parcela
-                                            (sequencia, data_vencimento, valor, multa, juros, data_quitacao)
+                    Connect.Comando.CommandText = @"INSERT INTO parcela_conta_receber
+                                            (sequencia, data_vencimento, valor, multa, juros, data_quitacao, idconta_receber, id_formapagamento)
                                             VALUES
-                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @data_quitacao)";
+                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @data_quitacao, @idconta_receber, @id_formapagamento)";
                     foreach (Parcela parcela in contaReceber.Parcelas)
                     {
                         Connect.Comando.Parameters.Clear();
@@ -67,6 +67,8 @@ namespace _5gpro.Daos
                         Connect.Comando.Parameters.AddWithValue("@multa", parcela.Multa);
                         Connect.Comando.Parameters.AddWithValue("@juros", parcela.Juros);
                         Connect.Comando.Parameters.AddWithValue("@data_quitacao", parcela.DataQuitacao);
+                        Connect.Comando.Parameters.AddWithValue("@idconta_receber", contaReceber.ContaReceberID);
+                        Connect.Comando.Parameters.AddWithValue("@id_formapagamento", parcela.FormaPagamento.FormaPagamentoID);
                         Connect.Comando.ExecuteNonQuery();
                     }
                 }
@@ -116,7 +118,7 @@ namespace _5gpro.Daos
                     }
                 }
 
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela p INNER JOIN forma_pagamento fp
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela_conta_receber p INNER JOIN formapagamento fp
                                                      ON p.idformapagamento = fp.idformapagamento 
                                                      WHERE idconta_receber = @idconta_receber)", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", codigo);
@@ -127,7 +129,7 @@ namespace _5gpro.Daos
                     {
                         Parcela parcela = new Parcela
                         {
-                            ParcelaID = reader.GetInt32(reader.GetOrdinal("idparcela")),
+                            ParcelaID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber")),
                             DataQuitacao = reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                             DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
@@ -220,7 +222,7 @@ namespace _5gpro.Daos
                     }
                 }
 
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela p INNER JOIN forma_pagamento fp
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela_conta_receber p INNER JOIN formapagamento fp
                                                      ON p.idformapagamento = fp.idformapagamento 
                                                      WHERE idconta_receber = @idconta_receber)", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", codigo);
@@ -231,7 +233,7 @@ namespace _5gpro.Daos
                     {
                         Parcela parcela = new Parcela
                         {
-                            ParcelaID = reader.GetInt32(reader.GetOrdinal("idparcela")),
+                            ParcelaID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber")),
                             DataQuitacao = reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                             DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
@@ -290,7 +292,7 @@ namespace _5gpro.Daos
                     }
                 }
 
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela p INNER JOIN forma_pagamento fp
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela_conta_receber p INNER JOIN formapagamento fp
                                                      ON p.idformapagamento = fp.idformapagamento 
                                                      WHERE idconta_receber = @idconta_receber)", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", codigo);
@@ -301,7 +303,7 @@ namespace _5gpro.Daos
                     {
                         Parcela parcela = new Parcela
                         {
-                            ParcelaID = reader.GetInt32(reader.GetOrdinal("idparcela")),
+                            ParcelaID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber")),
                             DataQuitacao = reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                             DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),

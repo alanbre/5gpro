@@ -16,6 +16,11 @@ namespace _5gpro.Entities
 
         public decimal Juros { get; set; }
 
+        public decimal ValorFinal { get
+            {
+                return this.Valor + this.Multa + this.Juros;
+            } }
+
         public DateTime? DataQuitacao { get; set; }
 
         public FormaPagamento FormaPagamento { get; set; }

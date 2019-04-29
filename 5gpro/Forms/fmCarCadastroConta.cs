@@ -13,10 +13,10 @@ namespace _5gpro.Forms
         private Parcela parcelaSelecionada = null;
         private bool editando, ignoracheckevent = false;
         private ContaReceber contaReceber = null;
-        private List<Parcela> parcelas = null;
+        private List<Parcela> parcelas = new List<Parcela>();
 
-
-        private static ConexaoDAO connection = new ConexaoDAO();
+        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
+        private readonly static ConexaoDAO connection = new ConexaoDAO();
         private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
 
         //Controle de Permissões
@@ -36,17 +36,17 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados();
+                Recarrega();
             }
 
             if (e.KeyCode == Keys.F1)
             {
-                NovoCadastro();
+                Novo();
             }
 
             if (e.KeyCode == Keys.F2)
             {
-                SalvaCadastro();
+                Salva();
             }
 
             EnterTab(this.ActiveControl, e);
@@ -54,35 +54,17 @@ namespace _5gpro.Forms
 
 
         //MENU
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
 
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-            AbreTelaBusca();
-        }
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
 
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
 
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-            RecarregaDados();
-        }
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
 
-        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
 
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
 
         private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
         {
@@ -90,33 +72,44 @@ namespace _5gpro.Forms
         }
 
 
-        private void BtSalvarParcela_Click(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
+        private void BtGerarParcelas_Click(object sender, EventArgs e) => GerarParcelas();
 
-        private void DtpDataCadatroConta_ValueChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
+        private void BtSalvarParcela_Click(object sender, EventArgs e) => Editando(true);
 
-        private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
+        private void DtpDataCadatroConta_ValueChanged(object sender, EventArgs e) => Editando(true);
 
-        private void BuscaFormaPagamento_Text_Changed(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
+        private void BuscaOperacao_Text_Changed(object sender, EventArgs e) => Editando(true);
+
+        private void TbValorOriginalConta_TextChanged(object sender, EventArgs e) => Editando(true);
+
+        private void TbMultaConta_TextChanged(object sender, EventArgs e) => Editando(true);
+
+        private void TbJurosConta_TextChanged(object sender, EventArgs e) => Editando(true);
+
+        private void TbValorFinalConta_TextChanged(object sender, EventArgs e) => Editando(true);
 
 
+        private void TbValorOriginalParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbMultaParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbJurosParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbValorFinalParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbValorOriginalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbMultaConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbJurosConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+
+        private void TbValorFinalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
 
 
 
 
 
-        private void NovoCadastro()
+        private void Novo()
         {
             if (editando)
             {
@@ -147,7 +140,20 @@ namespace _5gpro.Forms
             }
         }
 
-        private void SalvaCadastro()
+        private void Busca()
+        {
+            if (editando)
+                return;
+            var buscaContaReceber = new fmBuscaContaReceber();
+            buscaContaReceber.ShowDialog();
+            if (buscaContaReceber.contaReceberSelecionada != null)
+            {
+                contaReceber = buscaContaReceber.contaReceberSelecionada;
+                PreencheCampos(contaReceber);
+            }
+        }
+
+        private void Salva()
         {
             if (editando)
             {
@@ -190,7 +196,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void RecarregaDados()
+        private void Recarrega()
         {
             if (editando)
             {
@@ -219,7 +225,7 @@ namespace _5gpro.Forms
 
         }
 
-        private void ProximoCadastro()
+        private void Proximo()
         {
             if (editando)
             {
@@ -247,7 +253,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void CadastroAnterior()
+        private void Anterior()
         {
             if (editando)
             {
@@ -274,6 +280,7 @@ namespace _5gpro.Forms
             }
         }
 
+
         private void PreencheCampos(ContaReceber contaReceber)
         {
             ignoracheckevent = true;
@@ -292,27 +299,47 @@ namespace _5gpro.Forms
 
         private void PreencheGridParcelas(List<Parcela> parcelas)
         {
-
+            foreach (var parcela in parcelas)
+                dgvParcelas.Rows.Add(parcela.Sequencia, parcela.DataVencimento, parcela.Valor, parcela.Multa, parcela.Multa, parcela.ValorFinal, parcela.DataQuitacao?.Date);
+            dgvParcelas.Refresh();
         }
 
-        private void AbreTelaBusca()
+        private void GerarParcelas()
         {
-            if (editando)
-                return;
-            var buscaContaReceber = new fmBuscaContaReceber();
-            buscaContaReceber.ShowDialog();
-            if (buscaContaReceber.contaReceberSelecionada != null)
+            if (buscaOperacao.operacao == null)
             {
-                contaReceber = buscaContaReceber.contaReceberSelecionada;
-                PreencheCampos(contaReceber);
+                MessageBox.Show("Você deve selecionar um operação para gerar as parcelas!",
+                 "Operação não selecionada",
+                 MessageBoxButtons.OK,
+                 MessageBoxIcon.Warning);
+                return;
             }
+            var parcelasOperacao = buscaOperacao.operacao.Parcelas;
+
+
+
+            int sequencia = 1;
+            foreach(var parcela in parcelasOperacao)
+            {
+                var par = new Parcela
+                {
+                    Sequencia = sequencia,
+                    DataVencimento = DateTime.Today.AddDays(parcela.Dias),
+                    Multa = 0,
+                    Juros = 0,
+                    Valor = Convert.ToDecimal(tbValorOriginalConta.Text) / parcelasOperacao.Count
+                };
+                sequencia++;
+                this.parcelas.Add(par);
+            }
+
+            PreencheGridParcelas(parcelas);
         }
 
 
         private void LimpaCampos(bool limpaCod)
         {
             if (limpaCod) { tbCodigoConta.Clear(); }
-            buscaFormaPagamento.Limpa();
             buscaOperacao.Limpa();
             dtpDataCadatroConta.Value = DateTime.Now;
             dtpDataVencimentoParcela.Value = DateTime.Now;
@@ -352,6 +379,8 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
+
+
 
         private void SetarNivel()
         {

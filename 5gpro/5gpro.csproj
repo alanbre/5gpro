@@ -221,6 +221,7 @@
     </Compile>
     <Compile Include="Forms\fmBuscaContaRecebercs.Designer.cs">
       <DependentUpon>fmBuscaContaRecebercs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaFormaPagamento.cs">
       <SubType>Form</SubType>
     </Compile>
