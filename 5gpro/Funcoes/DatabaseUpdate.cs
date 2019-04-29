@@ -21,11 +21,11 @@ namespace _5gpro.Funcoes
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
 
                 //Conecta = "SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
-                //Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-                Conecta = "SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan; pooling = true";
+                Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan; pooling = true";
 
 
-        AbrirConexao();
+                AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
                 MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(projectDirectory + "/create_tables.sql"));
 
