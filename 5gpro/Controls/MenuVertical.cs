@@ -7,6 +7,7 @@ namespace _5gpro.Controls
     public partial class MenuVertical : UserControl
     {
         private bool editando = false;
+        public bool locked = false;
 
         public MenuVertical()
         {
@@ -62,7 +63,7 @@ namespace _5gpro.Controls
                         if (editando)
                         {
                             btNovo.Enabled = false;
-                            btSalvar.Enabled = true;
+                            btSalvar.Enabled = locked ? false : true;
                             btBuscar.Enabled = false;
                             btExcluir.Enabled = false;
                         }
@@ -81,9 +82,9 @@ namespace _5gpro.Controls
                         if (editando)
                         {
                             btNovo.Enabled = false;
-                            btSalvar.Enabled = true;
+                            btSalvar.Enabled = locked ? false : true; 
                             btBuscar.Enabled = false;
-                            btExcluir.Enabled = true;
+                            btExcluir.Enabled = locked ? false : true;
                         }
                         else
                         {
@@ -105,7 +106,14 @@ namespace _5gpro.Controls
             AlteraBotoes(nivel, Codgrupousuario);
         }
 
-      
+        public void Editando(bool edit, int nivel, string Codgrupousuario, bool locked)
+        {
+            this.editando = edit;
+            this.locked = locked;
+            AlteraBotoes(nivel, Codgrupousuario);
+        }
+
+
         //Eventos de click nos botões
         public delegate void novoEventHandler(object sender, EventArgs e);
         public delegate void buscarEventHandler(object sender, EventArgs e);

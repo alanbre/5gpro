@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace _5gpro.Entities
+﻿namespace _5gpro.Entities
 {
-    class ParcelaOperacao
+    public class ParcelaOperacao
     {
         public int ParcelaOperacaoID { get; set; }
         public int Numero { get; set; }

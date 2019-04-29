@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmDiasAVencer : Form
+    public partial class fmCadastroCheque : Form
     {
-        public fmDiasAVencer()
+        public fmCadastroCheque()
         {
             InitializeComponent();
         }

@@ -21,6 +21,9 @@ namespace _5gpro
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
+
+        Thread t;
+
         //CÓDIGOS DAS TELAS
         //Cadastro de Pessoa = 010100
         //Cadastro de Usuário = 010200
@@ -28,12 +31,14 @@ namespace _5gpro
         //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Orçamento = 020100
         //Cadastro de Nota Fiscal = 030100
+        //Cadastro de Operações = 040100
+        //Cadastro de Contas a Receber = 050100
 
         public fmMain()
         {
             InitializeComponent();
             FiltroDePermissoes();
-            Thread t = new Thread(new ThreadStart(AtualizaLogado));
+            t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
         }
 
@@ -140,66 +145,19 @@ namespace _5gpro
             formCadOperacao.Show(this);
         }
 
+        private void TsmiCadastroContaReceber_Click(object sender, EventArgs e)
+        {
+            var formCadContaReceber = new fmCarCadastroConta();
+            formCadContaReceber.Show(this);
+        }
+
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            t.Abort();
+            logadoDAO.RemoveTodosLocks(logado);
             //Retira usuário da tabela Logado
             logadoDAO.RemoverLogado(adap.Mac);
         }
-
-
-
-        //IGNORAR ESSA PARTE, APENAS PARA FINS DE TESTE
-        private void StartProgress()
-
-        {
-            if (this.InvokeRequired)
-
-                BeginInvoke(
-
-                new MethodInvoker(delegate () { StartProgress(); }));
-
-            else
-
-            {
-
-                progressBar1.Style =
-
-                ProgressBarStyle.Marquee;
-
-                progressBar1.MarqueeAnimationSpeed = 100;
-
-                progressBar1.Value = 0;
-
-            }
-
-        }
-
-        private void StopProgress()
-
-        {
-
-            if (this.InvokeRequired)
-
-                BeginInvoke(
-
-                new MethodInvoker(delegate () { StopProgress(); }));
-
-            else
-
-            {
-
-                progressBar1.Style =
-
-                ProgressBarStyle.Blocks;
-
-                progressBar1.MarqueeAnimationSpeed = 0;
-
-                progressBar1.Value = 100;
-
-            }
-
-        }
-
 
         private void AtualizaLogado()
         {
@@ -209,36 +167,6 @@ namespace _5gpro
                 logadoDAO.AtualizarLogado(logado.Mac);
             }
         }
-
-
-        private void SeuOutroMetodoSincronizar()
-
-        {
-            StartProgress();
-            List<Usuario> usuarios = new List<Usuario>();
-            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-            Console.WriteLine("Aguarde !!");
-            usuarios = usuarioDAO.BuscaUsuarios(textBox1.Text, textBox2.Text, textBox3.Text).ToList();
-            Console.WriteLine("Finalizado !!");
-
-
-            StopProgress();
-
-        }
-
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-
-            //StartProgress();
-
-            //StopProgress();
-
-            SeuOutroMetodoSincronizar();
-
-
-        }
-
 
     }
 }

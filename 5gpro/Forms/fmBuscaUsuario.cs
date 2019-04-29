@@ -14,10 +14,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaUsuario : Form
     {
-        List<Usuario> usuarios;
+        IEnumerable<Usuario> usuarios;
         public Usuario usuarioSelecionado = null;
         static ConexaoDAO connection = new ConexaoDAO();
-
 
 
         public fmBuscaUsuario()
@@ -37,15 +36,13 @@ namespace _5gpro.Forms
             table.Columns.Add("Telefone", typeof(string));
 
 
-
-            usuarios = usuarioDAO.BuscaUsuarios(buscaGrupoUsuario.grupoUsuario.GrupoUsuarioID.ToString(), tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text).ToList();
-
+            usuarios = usuarioDAO.BuscaUsuarios(buscaGrupoUsuario.grupoUsuario?.GrupoUsuarioID.ToString() ?? "", tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
+           
             foreach (Usuario u in usuarios)
             {
                 table.Rows.Add(u.UsuarioID, u.Nome, u.Sobrenome, u.Email, u.Telefone);
             }
             dgvUsuarios.DataSource = table;
-
 
         }
 
@@ -53,7 +50,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvUsuarios.SelectedCells[0].RowIndex;           
             DataGridViewRow selectedRow = dgvUsuarios.Rows[selectedRowIndex];
-            usuarioSelecionado = usuarios.Find(u => u.UsuarioID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            usuarioSelecionado = usuarios.ToList().Find(u => u.UsuarioID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
 

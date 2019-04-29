@@ -208,7 +208,7 @@
             // mtbTelefoneUsuario
             // 
             this.mtbTelefoneUsuario.Location = new System.Drawing.Point(9, 147);
-            this.mtbTelefoneUsuario.Mask = "(##) ####-####";
+            this.mtbTelefoneUsuario.Mask = "(##) ####-#####";
             this.mtbTelefoneUsuario.Name = "mtbTelefoneUsuario";
             this.mtbTelefoneUsuario.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefoneUsuario.TabIndex = 7;

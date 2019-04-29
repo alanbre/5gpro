@@ -6,22 +6,30 @@ using System.Data;
 
 namespace _5gpro.Daos
 {
-    class PessoaDAO : ConexaoDAO
+    class PessoaDAO
     {
-        public int SalvarOuAtualizarPessoa(Pessoa pessoa)
+
+        public ConexaoDAO Connect { get; }
+
+        public PessoaDAO(ConexaoDAO c)
+        {
+            Connect = c;
+        }
+
+        public int SalvaOuAtualiza(Pessoa pessoa)
         {
 
             int retorno = 0;
             try
             {
-                AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
+                Connect.AbrirConexao();
+                Connect.Comando = Connect.Conexao.CreateCommand();
+                Connect.tr = Connect.Conexao.BeginTransaction();
+                Connect.Comando.Connection = Connect.Conexao;
+                Connect.Comando.Transaction = Connect.tr;
 
 
-                Comando.CommandText = @"INSERT INTO pessoa
+                Connect.Comando.CommandText = @"INSERT INTO pessoa
                          (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa)
                           VALUES
                          (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa)
@@ -30,58 +38,58 @@ namespace _5gpro.Daos
                           cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa
                           ";
 
-                Comando.Parameters.AddWithValue("@idpessoa", pessoa.PessoaID);
-                Comando.Parameters.AddWithValue("@nome", pessoa.Nome);
-                Comando.Parameters.AddWithValue("@fantasia", pessoa.Fantasia);
-                Comando.Parameters.AddWithValue("@rua", pessoa.Rua);
-                Comando.Parameters.AddWithValue("@numero", pessoa.Numero);
-                Comando.Parameters.AddWithValue("@bairro", pessoa.Bairro);
-                Comando.Parameters.AddWithValue("@complemento", pessoa.Complemento);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", pessoa.PessoaID);
+                Connect.Comando.Parameters.AddWithValue("@nome", pessoa.Nome);
+                Connect.Comando.Parameters.AddWithValue("@fantasia", pessoa.Fantasia);
+                Connect.Comando.Parameters.AddWithValue("@rua", pessoa.Rua);
+                Connect.Comando.Parameters.AddWithValue("@numero", pessoa.Numero);
+                Connect.Comando.Parameters.AddWithValue("@bairro", pessoa.Bairro);
+                Connect.Comando.Parameters.AddWithValue("@complemento", pessoa.Complemento);
                 if (pessoa.TipoPessoa == "F")
                 {
-                    Comando.Parameters.AddWithValue("@cpf", pessoa.CpfCnpj);
-                    Comando.Parameters.AddWithValue("@cnpj", "");
+                    Connect.Comando.Parameters.AddWithValue("@cpf", pessoa.CpfCnpj);
+                    Connect.Comando.Parameters.AddWithValue("@cnpj", "");
                 }
                 else
                 {
-                    Comando.Parameters.AddWithValue("@cpf", "");
-                    Comando.Parameters.AddWithValue("@cnpj", pessoa.CpfCnpj);
+                    Connect.Comando.Parameters.AddWithValue("@cpf", "");
+                    Connect.Comando.Parameters.AddWithValue("@cnpj", pessoa.CpfCnpj);
                 }
-                Comando.Parameters.AddWithValue("@endereco", pessoa.Rua + ", " + pessoa.Numero + "-" + pessoa.Bairro);
-                Comando.Parameters.AddWithValue("@telefone", pessoa.Telefone);
-                Comando.Parameters.AddWithValue("@email", pessoa.Email);
-                Comando.Parameters.AddWithValue("@idcidade", pessoa.Cidade.CidadeID);
-                Comando.Parameters.AddWithValue("@tipoPessoa", pessoa.TipoPessoa);
+                Connect.Comando.Parameters.AddWithValue("@endereco", pessoa.Rua + ", " + pessoa.Numero + "-" + pessoa.Bairro);
+                Connect.Comando.Parameters.AddWithValue("@telefone", pessoa.Telefone);
+                Connect.Comando.Parameters.AddWithValue("@email", pessoa.Email);
+                Connect.Comando.Parameters.AddWithValue("@idcidade", pessoa.Cidade.CidadeID);
+                Connect.Comando.Parameters.AddWithValue("@tipoPessoa", pessoa.TipoPessoa);
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = Connect.Comando.ExecuteNonQuery();
 
 
                 if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
                 {
-                    Comando.CommandText = @"UPDATE atuacao_has_pessoa SET ativo = FALSE where pessoa_idpessoa = @idpessoa";
-                    Comando.ExecuteNonQuery();
+                    Connect.Comando.CommandText = @"UPDATE atuacao_has_pessoa SET ativo = FALSE where pessoa_idpessoa = @idpessoa";
+                    Connect.Comando.ExecuteNonQuery();
 
                     foreach (string atuacao in pessoa.Atuacao)
                     {
                         switch (atuacao)
                         {
                             case "Cliente":
-                                Comando.CommandText = @"INSERT INTO atuacao_has_pessoa (pessoa_idpessoa, atuacao_idatuacao, ativo)
+                                Connect.Comando.CommandText = @"INSERT INTO atuacao_has_pessoa (pessoa_idpessoa, atuacao_idatuacao, ativo)
                                                         VALUES (@idpessoa, 1, TRUE)
                                                         ON DUPLICATE KEY UPDATE
                                                         ativo = TRUE";
                                 break;
                             case "Fornecedor":
-                                Comando.CommandText = @"INSERT INTO atuacao_has_pessoa (pessoa_idpessoa, atuacao_idatuacao, ativo)
+                                Connect.Comando.CommandText = @"INSERT INTO atuacao_has_pessoa (pessoa_idpessoa, atuacao_idatuacao, ativo)
                                                         VALUES (@idpessoa, 2, TRUE)
                                                         ON DUPLICATE KEY UPDATE
                                                         ativo = TRUE";
                                 break;
                         }
-                        Comando.ExecuteNonQuery();
+                        Connect.Comando.ExecuteNonQuery();
                     }
                 }
-                tr.Commit();
+                Connect.tr.Commit();
             }
             catch (MySqlException ex)
             {
@@ -90,44 +98,45 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return retorno;
         }
 
-        public Pessoa BuscarPessoaById(int cod)
+        public Pessoa BuscaById(int cod)
         {
             Pessoa pessoa = new Pessoa();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = @idpessoa", Conexao);
-                Comando.Parameters.AddWithValue("@idpessoa", cod);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = @idpessoa", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", cod);
 
-                IDataReader reader = Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    pessoa = new Pessoa
+
+                    if (reader.Read())
                     {
-                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                        Rua = reader.GetString(reader.GetOrdinal("rua")),
-                        Numero = reader.GetString(reader.GetOrdinal("numero")),
-                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                        Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetInt32(reader.GetOrdinal("idcidade"))),
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                        Email = reader.GetString(reader.GetOrdinal("email"))
-                    };
-                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-                    reader.Close();
-                }
-                else
-                {
-                    pessoa = null;
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                            Rua = reader.GetString(reader.GetOrdinal("rua")),
+                            Numero = reader.GetString(reader.GetOrdinal("numero")),
+                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                            Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetInt32(reader.GetOrdinal("idcidade"))),
+                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                            Email = reader.GetString(reader.GetOrdinal("email"))
+                        };
+                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                    }
+                    else
+                    {
+                        pessoa = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -136,23 +145,94 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
+            if (pessoa != null)
+                pessoa.Atuacao = BuscaAtuacoes(pessoa);
 
-            if (pessoa != null) { pessoa.Atuacao = BuscaAtuacoes(pessoa); }
             return pessoa;
         }
 
-        public Pessoa BuscarProximaPessoa(string codAtual)
+        public Tuple<Pessoa, int> BuscaById(int cod, Logado logado)
+        {
+            Pessoa pessoa = new Pessoa();
+            int dono = 0;
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = @idpessoa", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", cod);
+
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
+
+                    if (reader.Read())
+                    {
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                            Rua = reader.GetString(reader.GetOrdinal("rua")),
+                            Numero = reader.GetString(reader.GetOrdinal("numero")),
+                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                            Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetInt32(reader.GetOrdinal("idcidade"))),
+                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                            Email = reader.GetString(reader.GetOrdinal("email"))
+                        };
+                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                    }
+                    else
+                    {
+                        pessoa = null;
+                    }
+                }
+
+
+                if (pessoa != null)
+                {
+                    Connect.Comando.CommandText = "SELECT * FROM 5gprodatabase.lock WHERE tabela = 'pessoa' AND codigo_registro = @codigo_registro AND idusuario != @idusuario";
+                    Connect.Comando.Parameters.AddWithValue("@codigo_registro", cod);
+                    Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
+                    using (var reader = Connect.Comando.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            dono = reader.GetInt32(reader.GetOrdinal("idusuario"));
+                        }
+                        
+                    }
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            if (pessoa != null)
+                pessoa.Atuacao = BuscaAtuacoes(pessoa);
+
+
+
+            return Tuple.Create<Pessoa, int>(pessoa, dono);
+        }
+
+        public Pessoa BuscaProximo(string codAtual)
         {
             Pessoa pessoa = new Pessoa();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)", Conexao);
-                Comando.Parameters.AddWithValue("@idpessoa", codAtual);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", codAtual);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -184,23 +264,23 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             if (pessoa != null) { pessoa.Atuacao = BuscaAtuacoes(pessoa); }
             return pessoa;
         }
 
-        public Pessoa BuscarPessoaAnterior(string codAtual)
+        public Pessoa BuscaAnterior(string codAtual)
         {
             Pessoa pessoa = new Pessoa();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)", Conexao);
-                Comando.Parameters.AddWithValue("@idpessoa", codAtual);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", codAtual);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -232,14 +312,14 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             if (pessoa != null) { pessoa.Atuacao = BuscaAtuacoes(pessoa); }
             return pessoa;
         }
 
-        public List<Pessoa> BuscarPessoas(string nome, string cpfCnpj, int idcidade)
+        public List<Pessoa> Busca(string nome, string cpfCnpj, int idcidade)
         {
             List<Pessoa> pessoas = new List<Pessoa>();
             string conCodPessoa = nome.Length > 0 ? "AND nome LIKE @nome" : "";
@@ -248,19 +328,19 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT *
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT *
                                              FROM pessoa 
                                              WHERE 1=1
                                              " + conCodPessoa + @"
                                              " + conCpfCnpj + @"
                                              " + conCidade + @"
-                                             ORDER BY idpessoa", Conexao);
-                if (conCodPessoa.Length > 0) { Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-                if (conCpfCnpj.Length > 0) { Comando.Parameters.AddWithValue("@cpfcnpj", "%" + cpfCnpj + "%"); }
-                if (conCidade.Length > 0) { Comando.Parameters.AddWithValue("@idcidade", idcidade); }
+                                             ORDER BY idpessoa", Connect.Conexao);
+                if (conCodPessoa.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
+                if (conCpfCnpj.Length > 0) { Connect.Comando.Parameters.AddWithValue("@cpfcnpj", "%" + cpfCnpj + "%"); }
+                if (conCidade.Length > 0) { Connect.Comando.Parameters.AddWithValue("@idcidade", idcidade); }
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -290,7 +370,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return pessoas;
         }
@@ -300,11 +380,11 @@ namespace _5gpro.Daos
             List<string> atuacoes = new List<string>();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM atuacao_has_pessoa WHERE pessoa_idpessoa = @idpessoa AND ativo = TRUE", Conexao);
-                Comando.Parameters.AddWithValue("@idpessoa", pessoa.PessoaID);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM atuacao_has_pessoa WHERE pessoa_idpessoa = @idpessoa AND ativo = TRUE", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", pessoa.PessoaID);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -326,7 +406,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return atuacoes;
         }
@@ -336,15 +416,15 @@ namespace _5gpro.Daos
             string proximoid = null;
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT p1.idpessoa + 1 AS proximoid
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT p1.idpessoa + 1 AS proximoid
                                              FROM pessoa AS p1
                                              LEFT OUTER JOIN pessoa AS p2 ON p1.idpessoa + 1 = p2.idpessoa
                                              WHERE p2.idpessoa IS NULL
                                              ORDER BY proximoid
-                                             LIMIT 1;", Conexao);
+                                             LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -363,10 +443,56 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return proximoid;
+        }
+
+        public void Lock(int codigo, Logado logado)
+        {
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("INSERT INTO 5gprodatabase.lock (idusuario, tabela, codigo_registro) VALUES (@idusuario, @tabela, @codigo_registro)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
+                Connect.Comando.Parameters.AddWithValue("@tabela", "pessoa");
+                Connect.Comando.Parameters.AddWithValue("@codigo_registro", codigo);
+
+                Connect.Comando.ExecuteNonQuery();
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+        }
+
+        public void Unlock(int codigo, Logado logado)
+        {
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("DELETE FROM 5gprodatabase.lock WHERE tabela = @tabela AND codigo_registro = @codigo_registro AND idusuario = @idusuario", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
+                Connect.Comando.Parameters.AddWithValue("@tabela", "pessoa");
+                Connect.Comando.Parameters.AddWithValue("@codigo_registro", codigo);
+
+                Connect.Comando.ExecuteNonQuery();
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
         }
     }
 }

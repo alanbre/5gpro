@@ -5615,7 +5615,7 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 (1, 'Módulo de Cadastros', '010000'),
 (2, 'Módulo de Orçamentos', '020000'),
 (3, 'Módulo de Saidas', '030000'),
-
+(12, 'Módulo de Contas a Receber', '050000'),
 
 (4, 'Cadastro de Pessoa', '010100'),
 (5, 'Cadastro de Usuario', '010200'),
@@ -5625,7 +5625,25 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 
 (7, 'Cadastro de Orçamentos', '020100'),
 
-(8, 'Cadastro de Nota Fiscal', '030100');
+(8, 'Cadastro de Nota Fiscal', '030100'),
+
+(10, 'Módulo Financeiro', '040000'),
+(11, 'Cadastro de Operacao', '040100'),
+
+(13, 'Cadastro de Contas a Receber', '050100');
+
+INSERT INTO formapagamento (idformapagamento, nome) VALUES
+(01, 'Dinheiro'),
+(02, 'Cheque'),
+(03, 'Cartão de Crédito'),
+(04, 'Cartão de Débito'),
+(05, 'Crédito Loja'),
+(10, 'Vale Alimentação'),
+(11, 'Vale Refeição'),
+(12, 'Vale Presente'),
+(13, 'Vale Combustível'),
+(15, 'Boleto Bancário'),
+(99, 'Outros');
 
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE

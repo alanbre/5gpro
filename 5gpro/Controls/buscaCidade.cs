@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
+
 namespace _5gpro.Controls
 {
     public partial class BuscaCidade : UserControl
@@ -16,7 +17,7 @@ namespace _5gpro.Controls
 
 
         public Cidade cidade = null;
-
+        
         private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
 
@@ -39,7 +40,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoCidade.Text, out int codigo)) { tbCodigoCidade.Clear(); }
             if (tbCodigoCidade.Text.Length > 0)
             {
-                //cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
+                cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else

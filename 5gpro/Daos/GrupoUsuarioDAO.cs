@@ -40,7 +40,6 @@ namespace _5gpro.Daos
                     {
                         GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        //Permissoes = permissaoDAO.BuscaPermissoesByIdGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
                     };
 
                     reader.Close();
@@ -120,7 +119,6 @@ namespace _5gpro.Daos
                     {
                         GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
                         Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        //Permissoes = permissaoDAO.BuscaPermissoesByIdGrupo(reader.GetString(reader.GetOrdinal("idgrupousuario"))).Todas
                     };
                     listagrupousuario.Add(grupousuario);
 

@@ -8,8 +8,9 @@ namespace _5gpro.Daos
 {
     class NotaFiscalDAO : ConexaoDAO
     {
+        private static ConexaoDAO connection = new ConexaoDAO();
         private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
 
         public int BuscaProxCodigoDisponivel()
         {
@@ -67,7 +68,7 @@ namespace _5gpro.Daos
                         ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
                 }
@@ -161,7 +162,7 @@ namespace _5gpro.Daos
                         ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
                 }
@@ -206,7 +207,7 @@ namespace _5gpro.Daos
                         ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
                         DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                         DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaDAO.BuscarPessoaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
+                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
                     };
                     reader.Close();
                 }
