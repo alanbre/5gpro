@@ -20,8 +20,10 @@ namespace _5gpro.Funcoes
                 // Esse comando trás o diretório do projeto
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
 
-                //Conecta = "SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
                 Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan; pooling = true";
+
 
                 AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
@@ -30,8 +32,9 @@ namespace _5gpro.Funcoes
 
                 mySqlScript.Execute();
 
-                //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
                 Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan";
 
                 return true;
             }
@@ -109,16 +112,16 @@ namespace _5gpro.Funcoes
                 Comando.Connection = Conexao;
                 Comando.Transaction = tr;
 
-                if (versaoAtual < 2)
+                if (versaoAtual < 2 )
                 {
-
+                    
                     try
                     {
                         Comando.CommandText = "ALTER TABLE pessoa ADD COLUMN tipo_pessoa CHAR(1)";
                         Comando.ExecuteNonQuery();
                         Comando.CommandText = "ALTER TABLE configuracao MODIFY COLUMN idconfiguracao INT NOT NULL AUTO_INCREMENT";
                         Comando.ExecuteNonQuery();
-
+                        
                         AtualizaVersaoBD(2);
                         return true;
                     }
