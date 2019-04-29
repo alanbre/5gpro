@@ -1,17 +1,17 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace _5gpro.Entities
 {
-    public class ContaReceber
+    public class ContaPagar
     {
-        public ContaReceber()
+        public ContaPagar()
         {
-            Parcelas = new HashSet<ParcelaContaReceber>();
+            Parcelas = new HashSet<ParcelaContaPagar>();
         }
 
 
-        public int ContaReceberID { get; set; }
+        public int ContaPagarID { get; set; }
 
         public DateTime DataCadastro { get; set; }
 
@@ -25,6 +25,6 @@ namespace _5gpro.Entities
 
         public decimal ValorFinal { get; set; }
 
-        public virtual ICollection<ParcelaContaReceber> Parcelas { get; set; }
+        public virtual ICollection<ParcelaContaPagar> Parcelas { get; set; }
     }
 }

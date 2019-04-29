@@ -3,21 +3,26 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmCarCadastroConta : Form
+    public partial class fmCapCadastroConta : Form
     {
-        private ParcelaContaReceber parcelaSelecionada = null;
+        private ParcelaContaPagar parcelaSelecionada = null;
         private bool editando, ignoracheckevent = false;
-        private ContaReceber contaReceber = null;
-        private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
+        private ContaPagar contaPagar = null;
+        private List<ParcelaContaPagar> parcelas = new List<ParcelaContaPagar>();
 
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
         private readonly static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
+        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO(connection);
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
@@ -27,33 +32,12 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
-        public fmCarCadastroConta()
+        public fmCapCadastroConta()
         {
             InitializeComponent();
         }
 
-        private void FmCarCadastroConta_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F5)
-            {
-                Recarrega();
-            }
 
-            if (e.KeyCode == Keys.F1)
-            {
-                Novo();
-            }
-
-            if (e.KeyCode == Keys.F2)
-            {
-                Salva();
-            }
-
-            EnterTab(this.ActiveControl, e);
-        }
-
-
-        //MENU
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
 
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
@@ -66,63 +50,10 @@ namespace _5gpro.Forms
 
         private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
 
-        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
-        {
-
-        }
 
 
-        private void BtGerarParcelas_Click(object sender, EventArgs e) => GerarParcelas();
-
-        private void BtSalvarParcela_Click(object sender, EventArgs e) => Editando(true);
-
-        private void DtpDataCadatroConta_ValueChanged(object sender, EventArgs e) => Editando(true);
-
-        private void BuscaOperacao_Text_Changed(object sender, EventArgs e) => Editando(true);
-
-        private void TbValorOriginalConta_TextChanged(object sender, EventArgs e) => Editando(true);
-
-        private void TbMultaConta_TextChanged(object sender, EventArgs e) => Editando(true);
-
-        private void TbJurosConta_TextChanged(object sender, EventArgs e) => Editando(true);
-
-        private void TbValorFinalConta_TextChanged(object sender, EventArgs e) => Editando(true);
 
 
-        private void TbValorOriginalParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbMultaParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbJurosParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbValorFinalParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbValorOriginalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbMultaConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbJurosConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-        private void TbValorFinalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-
-        private void TbMultaParcela_Leave(object sender, EventArgs e)
-        {
-            FormataCampoDecimal((TextBox)sender);
-            CalculaTotalParcela();
-        }
-
-        private void TbJurosParcela_Leave(object sender, EventArgs e)
-        {
-            FormataCampoDecimal((TextBox)sender);
-            CalculaTotalParcela();
-        }
-
-        private void TbValorOriginalParcela_Leave(object sender, EventArgs e)
-        {
-            FormataCampoDecimal((TextBox)sender);
-            CalculaTotalParcela();
-        }
 
 
 
@@ -137,8 +68,8 @@ namespace _5gpro.Forms
                 {
                     ignoracheckevent = true;
                     LimpaCampos(false);
-                    tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
-                    contaReceber = null;
+                    tbCodigoConta.Text = contaPagarDAO.BuscaProxCodigoDisponivel().ToString();
+                    contaPagar = null;
                     dtpDataCadatroConta.Focus();
                     ignoracheckevent = false;
                     Editando(true);
@@ -148,8 +79,8 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 LimpaCampos(false);
-                tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
-                contaReceber = null;
+                tbCodigoConta.Text = contaPagarDAO.BuscaProxCodigoDisponivel().ToString();
+                contaPagar = null;
                 Editando(false);
                 dtpDataCadatroConta.Focus();
                 ignoracheckevent = false;
@@ -161,12 +92,12 @@ namespace _5gpro.Forms
         {
             if (editando)
                 return;
-            var buscaContaReceber = new fmBuscaContaReceber();
-            buscaContaReceber.ShowDialog();
-            if (buscaContaReceber.contaReceberSelecionada != null)
+            var buscaContaPagar = new fmBuscaContaPagar();
+            buscaContaPagar.ShowDialog();
+            if (buscaContaPagar.contaPagarSelecionada != null)
             {
-                contaReceber = buscaContaReceber.contaReceberSelecionada;
-                PreencheCampos(contaReceber);
+                contaPagar = buscaContaPagar.contaPagarSelecionada;
+                PreencheCampos(contaPagar);
             }
         }
 
@@ -174,9 +105,9 @@ namespace _5gpro.Forms
         {
             if (editando)
             {
-                contaReceber = new ContaReceber
+                contaPagar = new ContaPagar
                 {
-                    ContaReceberID = int.Parse(tbCodigoConta.Text),
+                    ContaPagarID = int.Parse(tbCodigoConta.Text),
                     DataCadastro = dtpDataCadatroConta.Value,
                     Operacao = buscaOperacao.operacao,
 
@@ -188,7 +119,7 @@ namespace _5gpro.Forms
                     Parcelas = parcelas
                 };
 
-                int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
+                int resultado = contaPagarDAO.SalvaOuAtualiza(contaPagar);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -226,10 +157,10 @@ namespace _5gpro.Forms
                 }
             }
 
-            if (contaReceber != null)
+            if (contaPagar != null)
             {
-                contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
-                PreencheCampos(contaReceber);
+                contaPagar = contaPagarDAO.BuscaById(contaPagar.ContaPagarID);
+                PreencheCampos(contaPagar);
                 if (editando)
                     Editando(false);
             }
@@ -258,12 +189,12 @@ namespace _5gpro.Forms
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaRebeceber = contaReceberDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
-                if (newcontaRebeceber != null)
+                var newcontaPagar = contaPagarDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
+                if (newcontaPagar != null)
                 {
-                    contaReceber = newcontaRebeceber;
-                    parcelas = contaReceber.Parcelas.ToList();
-                    PreencheCampos(contaReceber);
+                    contaPagar = newcontaPagar;
+                    parcelas = contaPagar.Parcelas.ToList();
+                    PreencheCampos(contaPagar);
                     if (editando)
                         Editando(false);
                 }
@@ -285,12 +216,12 @@ namespace _5gpro.Forms
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaRebeceber = contaReceberDAO.BuscaAnterior(int.Parse(tbCodigoConta.Text));
-                if (newcontaRebeceber != null)
+                var newcontaPagar = contaPagarDAO.BuscaAnterior(int.Parse(tbCodigoConta.Text));
+                if (newcontaPagar != null)
                 {
-                    contaReceber = newcontaRebeceber;
-                    parcelas = contaReceber.Parcelas.ToList();
-                    PreencheCampos(contaReceber);
+                    contaPagar = newcontaPagar;
+                    parcelas = contaPagar.Parcelas.ToList();
+                    PreencheCampos(contaPagar);
                     if (editando)
                         Editando(false);
                 }
@@ -298,23 +229,23 @@ namespace _5gpro.Forms
         }
 
 
-        private void PreencheCampos(ContaReceber contaReceber)
+        private void PreencheCampos(ContaPagar contaPagar)
         {
             ignoracheckevent = true;
             LimpaCampos(false);
-            tbCodigoConta.Text = contaReceber.ContaReceberID.ToString();
-            dtpDataCadatroConta.Value = contaReceber.DataCadastro;
-            buscaOperacao.operacao = contaReceber.Operacao;
-            tbValorOriginalConta.Text = contaReceber.ValorOriginal.ToString("############0.00");
-            tbValorFinalConta.Text = contaReceber.ValorFinal.ToString("############0.00");
-            tbMultaConta.Text = contaReceber.Multa.ToString("############0.00");
-            tbJurosConta.Text = contaReceber.Juros.ToString("############0.00");
-            parcelas = contaReceber.Parcelas.ToList();
+            tbCodigoConta.Text = contaPagar.ContaPagarID.ToString();
+            dtpDataCadatroConta.Value = contaPagar.DataCadastro;
+            buscaOperacao.operacao = contaPagar.Operacao;
+            tbValorOriginalConta.Text = contaPagar.ValorOriginal.ToString("############0.00");
+            tbValorFinalConta.Text = contaPagar.ValorFinal.ToString("############0.00");
+            tbMultaConta.Text = contaPagar.Multa.ToString("############0.00");
+            tbJurosConta.Text = contaPagar.Juros.ToString("############0.00");
+            parcelas = contaPagar.Parcelas.ToList();
             PreencheGridParcelas(parcelas);
             ignoracheckevent = false;
         }
 
-        private void PreencheGridParcelas(List<ParcelaContaReceber> parcelas)
+        private void PreencheGridParcelas(List<ParcelaContaPagar> parcelas)
         {
             foreach (var parcela in parcelas)
                 dgvParcelas.Rows.Add(parcela.Sequencia, parcela.DataVencimento, parcela.Valor, parcela.Multa, parcela.Multa, parcela.ValorFinal, parcela.DataQuitacao?.Date);
@@ -338,7 +269,7 @@ namespace _5gpro.Forms
             int sequencia = 1;
             foreach (var parcela in parcelasOperacao)
             {
-                var par = new ParcelaContaReceber
+                var par = new ParcelaContaPagar
                 {
                     Sequencia = sequencia,
                     DataVencimento = DateTime.Today.AddDays(parcela.Dias),

@@ -2,9 +2,9 @@
 
 namespace _5gpro.Entities
 {
-    public class Parcela
+    public class ParcelaContaReceber
     {
-        public int ParcelaID { get; set; }
+        public int ParcelaContaReceberID { get; set; }
 
         public int Sequencia { get; set; }
 
