@@ -171,6 +171,7 @@
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Daos\CidadeDAO.cs" />
+    <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\FormaPagamentoDAO.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
     <Compile Include="Entities\Cidade.cs" />
+    <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\FormaPagamento.cs" />
@@ -199,7 +201,8 @@
     <Compile Include="Entities\Operacao.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
-    <Compile Include="Entities\Parcela.cs" />
+    <Compile Include="Entities\ParcelaContaPagar.cs" />
+    <Compile Include="Entities\ParcelaContaReceber.cs" />
     <Compile Include="Entities\ParcelaOperacao.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\SubGrupoItem.cs" />
@@ -215,6 +218,18 @@
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaContaPagar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaContaPagar.Designer.cs">
+      <DependentUpon>fmBuscaContaPagar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaContaReceber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaContaReceber.Designer.cs">
+      <DependentUpon>fmBuscaContaReceber.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaFormaPagamento.cs">
       <SubType>Form</SubType>
@@ -342,6 +357,12 @@
     <Compile Include="Forms\fmBuscaParcelasOperacao.Designer.cs">
       <DependentUpon>fmBuscaParcelasOperacao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCapCadastroConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCapCadastroConta.Designer.cs">
+      <DependentUpon>fmCapCadastroConta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCarCadastroConta.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,6 +438,12 @@
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaContaPagar.resx">
+      <DependentUpon>fmBuscaContaPagar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaContaReceber.resx">
+      <DependentUpon>fmBuscaContaReceber.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
       <DependentUpon>fmBuscaEstado.cs</DependentUpon>
     </EmbeddedResource>
@@ -479,6 +506,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaParcelasOperacao.resx">
       <DependentUpon>fmBuscaParcelasOperacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCapCadastroConta.resx">
+      <DependentUpon>fmCapCadastroConta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCarCadastroConta.resx">
       <DependentUpon>fmCarCadastroConta.cs</DependentUpon>

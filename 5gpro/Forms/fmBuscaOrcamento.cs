@@ -55,20 +55,12 @@ namespace _5gpro.Forms
 
         private void tbFiltroValorTotalOrcamentoInicial_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void tbFiltroValorTotalOrcamentoFinal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
 

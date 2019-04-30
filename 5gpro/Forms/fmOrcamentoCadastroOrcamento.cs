@@ -242,65 +242,37 @@ namespace _5gpro.Forms
         //EVENTOS DE KEY PRESS
         private void TbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void TbValorUnitItem_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void TbValorTotItem_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void TbDescontoItemPorc_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void TbDescontoItem_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void TbDescontoOrcamento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
         private void TbValorTotalOrcamento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (f.ValidaTeclaDigitadaDecimal(e))
-            {
-                e.Handled = true;
-                return;
-            }
+            f.ValidaTeclaDigitadaDecimal(e);
         }
 
 

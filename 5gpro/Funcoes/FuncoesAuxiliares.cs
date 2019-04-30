@@ -5,15 +5,11 @@ namespace _5gpro.Funcoes
 {
     class FuncoesAuxiliares
     {
-        public bool ValidaTeclaDigitadaDecimal(KeyPressEventArgs e)
+        public void ValidaTeclaDigitadaDecimal(KeyPressEventArgs e)
         {
             if (!Char.IsNumber(e.KeyChar) && !Char.IsControl(e.KeyChar) && e.KeyChar != Char.Parse(","))
             {
-                return true;
-            }
-            else
-            {
-                return false;
+                e.Handled = true;
             }
         }
     }
