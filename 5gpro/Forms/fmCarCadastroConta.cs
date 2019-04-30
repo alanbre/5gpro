@@ -27,10 +27,7 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
-        public fmCarCadastroConta()
-        {
-            InitializeComponent();
-        }
+        public fmCarCadastroConta() => InitializeComponent();
 
         private void FmCarCadastroConta_KeyDown(object sender, KeyEventArgs e)
         {
@@ -106,6 +103,31 @@ namespace _5gpro.Forms
         private void TbValorFinalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
 
 
+
+        private void TbValorOriginalConta_Leave(object sender, EventArgs e)
+        {
+            if(tbValorOriginalConta.Enabled)
+                FormataCampoDecimal((TextBox)sender);
+        }
+
+        private void TbMultaConta_Leave(object sender, EventArgs e)
+        {
+            if (tbMultaConta.Enabled)
+                FormataCampoDecimal((TextBox)sender);
+        }
+
+        private void TbJurosConta_Leave(object sender, EventArgs e)
+        {
+            if (tbJurosConta.Enabled)
+                FormataCampoDecimal((TextBox)sender);
+        }
+
+        private void TbValorFinalConta_Leave(object sender, EventArgs e)
+        {
+            if (tbValorFinalConta.Enabled)
+                FormataCampoDecimal((TextBox)sender);
+        }
+
         private void TbMultaParcela_Leave(object sender, EventArgs e)
         {
             FormataCampoDecimal((TextBox)sender);
@@ -123,6 +145,22 @@ namespace _5gpro.Forms
             FormataCampoDecimal((TextBox)sender);
             CalculaTotalParcela();
         }
+
+        private void DgvParcelas_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (dgvParcelas.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = dgvParcelas.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dgvParcelas.Rows[selectedRowIndex];
+                parcelaSelecionada = parcelas.Find(p => p.Sequencia == Convert.ToInt32(selectedRow.Cells[0].Value));
+                PreencheCamposParcelas(parcelaSelecionada);
+                btSalvarParcela.Enabled = true;
+            }
+        }
+
+
+
+
 
 
 
@@ -317,8 +355,19 @@ namespace _5gpro.Forms
         private void PreencheGridParcelas(List<ParcelaContaReceber> parcelas)
         {
             foreach (var parcela in parcelas)
-                dgvParcelas.Rows.Add(parcela.Sequencia, parcela.DataVencimento, parcela.Valor, parcela.Multa, parcela.Multa, parcela.ValorFinal, parcela.DataQuitacao?.Date);
+                dgvParcelas.Rows.Add(parcela.Sequencia, parcela.DataVencimento.ToShortDateString(), parcela.Valor, parcela.Multa, parcela.Multa, parcela.ValorFinal, parcela.DataQuitacao?.Date);
             dgvParcelas.Refresh();
+        }
+
+        private void PreencheCamposParcelas(ParcelaContaReceber parcela)
+        {
+            tbCodigoParcela.Text = parcela.Sequencia.ToString();
+            dtpDataVencimentoParcela.Value = parcela.DataVencimento;
+            tbValorOriginalParcela.Text = parcela.Valor.ToString();
+            tbMultaParcela.Text = parcela.Multa.ToString();
+            tbJurosParcela.Text = parcela.Juros.ToString();
+            tbValorFinalParcela.Text = parcela.ValorFinal.ToString();
+            tbDataQuitacao.Text = parcela.DataQuitacao != null ? parcela.DataQuitacao.Value.ToShortDateString() : "";
         }
 
         private void GerarParcelas()
@@ -412,7 +461,7 @@ namespace _5gpro.Forms
             //Busca o usuário logado no pc, através do MAC
             logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("020100").ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("050100").ToString();
 
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);

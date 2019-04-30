@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
-            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.dtpDataCadatroConta = new System.Windows.Forms.DateTimePicker();
             this.lbDataCadastroConta = new System.Windows.Forms.Label();
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
@@ -38,7 +37,6 @@
             this.gbParcelas = new System.Windows.Forms.GroupBox();
             this.tbDataQuitacao = new System.Windows.Forms.TextBox();
             this.lbDataQuitacao = new System.Windows.Forms.Label();
-            this.buscaFormaPagamento = new _5gpro.Controls.BuscaFormaPagamento();
             this.btSalvarParcela = new System.Windows.Forms.Button();
             this.tbValorFinalParcela = new System.Windows.Forms.TextBox();
             this.lbValorFinalParcela = new System.Windows.Forms.Label();
@@ -71,6 +69,8 @@
             this.tbValorOriginalConta = new System.Windows.Forms.TextBox();
             this.lbValorOriginalConta = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.buscaFormaPagamento = new _5gpro.Controls.BuscaFormaPagamento();
+            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbDadosConta.SuspendLayout();
             this.gbParcelas.SuspendLayout();
@@ -93,15 +93,6 @@
             this.gbDadosConta.TabIndex = 0;
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
-            // 
-            // buscaOperacao
-            // 
-            this.buscaOperacao.Location = new System.Drawing.Point(1, 98);
-            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaOperacao.Name = "buscaOperacao";
-            this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
-            this.buscaOperacao.TabIndex = 4;
-            this.buscaOperacao.Text_Changed += new _5gpro.Controls.BuscaOperacao.text_changedEventHandler(this.BuscaOperacao_Text_Changed);
             // 
             // dtpDataCadatroConta
             // 
@@ -182,15 +173,6 @@
             this.lbDataQuitacao.Size = new System.Drawing.Size(74, 13);
             this.lbDataQuitacao.TabIndex = 13;
             this.lbDataQuitacao.Text = "Data quitação";
-            // 
-            // buscaFormaPagamento
-            // 
-            this.buscaFormaPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buscaFormaPagamento.Location = new System.Drawing.Point(3, 311);
-            this.buscaFormaPagamento.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaFormaPagamento.Name = "buscaFormaPagamento";
-            this.buscaFormaPagamento.Size = new System.Drawing.Size(442, 39);
-            this.buscaFormaPagamento.TabIndex = 15;
             // 
             // btSalvarParcela
             // 
@@ -329,8 +311,8 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvParcelas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -354,6 +336,7 @@
             this.dgvParcelas.Size = new System.Drawing.Size(766, 255);
             this.dgvParcelas.TabIndex = 0;
             this.dgvParcelas.TabStop = false;
+            this.dgvParcelas.CurrentCellChanged += new System.EventHandler(this.DgvParcelas_CurrentCellChanged);
             // 
             // dgvtbcSequencia
             // 
@@ -442,6 +425,7 @@
             this.tbValorFinalConta.Text = "0,00";
             this.tbValorFinalConta.TextChanged += new System.EventHandler(this.TbValorFinalConta_TextChanged);
             this.tbValorFinalConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorFinalConta_KeyPress);
+            this.tbValorFinalConta.Leave += new System.EventHandler(this.TbValorFinalConta_Leave);
             // 
             // lbValorTotalConta
             // 
@@ -461,6 +445,7 @@
             this.tbJurosConta.Text = "0,00";
             this.tbJurosConta.TextChanged += new System.EventHandler(this.TbJurosConta_TextChanged);
             this.tbJurosConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbJurosConta_KeyPress);
+            this.tbJurosConta.Leave += new System.EventHandler(this.TbJurosConta_Leave);
             // 
             // lbJurosConta
             // 
@@ -480,6 +465,7 @@
             this.tbMultaConta.Text = "0,00";
             this.tbMultaConta.TextChanged += new System.EventHandler(this.TbMultaConta_TextChanged);
             this.tbMultaConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbMultaConta_KeyPress);
+            this.tbMultaConta.Leave += new System.EventHandler(this.TbMultaConta_Leave);
             // 
             // lbMultaConta
             // 
@@ -499,6 +485,7 @@
             this.tbValorOriginalConta.Text = "0,00";
             this.tbValorOriginalConta.TextChanged += new System.EventHandler(this.TbValorOriginalConta_TextChanged);
             this.tbValorOriginalConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorOriginalConta_KeyPress);
+            this.tbValorOriginalConta.Leave += new System.EventHandler(this.TbValorOriginalConta_Leave);
             // 
             // lbValorOriginalConta
             // 
@@ -519,6 +506,24 @@
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(959, 20);
             this.tbAjuda.TabIndex = 4;
+            // 
+            // buscaFormaPagamento
+            // 
+            this.buscaFormaPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buscaFormaPagamento.Location = new System.Drawing.Point(3, 311);
+            this.buscaFormaPagamento.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaFormaPagamento.Name = "buscaFormaPagamento";
+            this.buscaFormaPagamento.Size = new System.Drawing.Size(442, 39);
+            this.buscaFormaPagamento.TabIndex = 15;
+            // 
+            // buscaOperacao
+            // 
+            this.buscaOperacao.Location = new System.Drawing.Point(1, 98);
+            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaOperacao.Name = "buscaOperacao";
+            this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
+            this.buscaOperacao.TabIndex = 4;
+            this.buscaOperacao.Text_Changed += new _5gpro.Controls.BuscaOperacao.text_changedEventHandler(this.BuscaOperacao_Text_Changed);
             // 
             // menuVertical
             // 
