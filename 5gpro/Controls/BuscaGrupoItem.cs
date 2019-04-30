@@ -35,7 +35,6 @@ namespace _5gpro.Controls
             {
                 grupoItem = grupoItemDAO.BuscarByID(int.Parse(tbCodigoGrupoItem.Text));
                 PreencheCamposGrupoItem(grupoItem);
-
             }
             else
             {

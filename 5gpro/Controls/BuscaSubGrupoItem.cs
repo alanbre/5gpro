@@ -10,6 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaSubGrupoItem : UserControl
     {
 
+        public GrupoItem grupodobuscagrupo;
         public SubGrupoItem subgrupoItem = null;
         private GrupoItem grupofiltro = null;
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
@@ -18,6 +19,12 @@ namespace _5gpro.Controls
         public BuscaSubGrupoItem()
         {
             InitializeComponent();
+        }
+
+        public void ReadOnlySubitem()
+        {
+            tbCodigoSubGrupoItem.ReadOnly = true;
+            tbNomeSubGrupoItem.Focus();
         }
 
         public void GrupoFiltro(GrupoItem grupoitem)
@@ -144,6 +151,23 @@ namespace _5gpro.Controls
         private void BuscaSubGrupoItem_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void BuscaSubGrupoItem_Enter(object sender, EventArgs e)
+        {
+            if (grupodobuscagrupo == null)
+            {
+                tbCodigoSubGrupoItem.ReadOnly = true;
+            }
+        }
+
+        private void TbCodigoSubGrupoItem_Click(object sender, EventArgs e)
+        {
+            tbCodigoSubGrupoItem.ReadOnly = true;
+            if (grupodobuscagrupo != null)
+            {
+                tbCodigoSubGrupoItem.ReadOnly = false;
+            }
         }
     }
 }

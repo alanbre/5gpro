@@ -583,9 +583,15 @@ namespace _5gpro.Forms
         }
 
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
-        {         
+        {
+            buscaSubGrupoItem.grupodobuscagrupo = buscaGrupoItemTelaCadItem.grupoItem;
             buscaSubGrupoItem.GrupoFiltro(buscaGrupoItemTelaCadItem.grupoItem);
             buscaSubGrupoItem.Limpa();
+        }
+
+        private void BuscaSubGrupoItem_Click(object sender, EventArgs e)
+        {
+            buscaSubGrupoItem.ReadOnlySubitem();
         }
     }
 }

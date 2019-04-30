@@ -41,6 +41,7 @@
             this.tbCodigoSubGrupoItem.Name = "tbCodigoSubGrupoItem";
             this.tbCodigoSubGrupoItem.Size = new System.Drawing.Size(65, 20);
             this.tbCodigoSubGrupoItem.TabIndex = 0;
+            this.tbCodigoSubGrupoItem.Click += new System.EventHandler(this.TbCodigoSubGrupoItem_Click);
             this.tbCodigoSubGrupoItem.TextChanged += new System.EventHandler(this.TbCodigoSubGrupoItem_TextChanged);
             this.tbCodigoSubGrupoItem.Enter += new System.EventHandler(this.TbCodigoSubGrupoItem_Enter);
             this.tbCodigoSubGrupoItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoSubGrupoItem_KeyUp);
@@ -88,6 +89,7 @@
             this.Name = "BuscaSubGrupoItem";
             this.Size = new System.Drawing.Size(442, 39);
             this.Load += new System.EventHandler(this.BuscaSubGrupoItem_Load);
+            this.Enter += new System.EventHandler(this.BuscaSubGrupoItem_Enter);
             this.ResumeLayout(false);
             this.PerformLayout();
 
