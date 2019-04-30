@@ -10,13 +10,32 @@ namespace _5gpro.Controls
     public partial class BuscaSubGrupoItem : UserControl
     {
 
-        public SubGrupoItem subgrupoItem = new SubGrupoItem();
+        public SubGrupoItem subgrupoItem = null;
+        private GrupoItem grupofiltro = null;
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
         private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO(conexao);
+
 
         public BuscaSubGrupoItem()
         {
             InitializeComponent();
+        }
+
+        public void GrupoFiltro(GrupoItem grupoitem)
+        {
+            if(grupoitem != null)
+            {
+                tbCodigoSubGrupoItem.Enabled = true;
+                btBuscaSubGrupoItem.Enabled = true;
+                tbNomeSubGrupoItem.Enabled = true;
+                grupofiltro = grupoitem;
+            }
+            else
+            {
+                tbCodigoSubGrupoItem.Enabled = false;
+                btBuscaSubGrupoItem.Enabled = false;
+                tbNomeSubGrupoItem.Enabled = false;
+            }
         }
 
         private void TbCodigoSubGrupoItem_KeyUp(object sender, KeyEventArgs e)
@@ -34,8 +53,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoSubGrupoItem.Text, out int codigo)) { tbCodigoSubGrupoItem.Clear(); }
             if (tbCodigoSubGrupoItem.Text.Length > 0)
             {
-                //ARRUMAR////
-                subgrupoItem = subgrupoItemDAO.BuscarByID(int.Parse(tbCodigoSubGrupoItem.Text), 1);
+                subgrupoItem = subgrupoItemDAO.BuscarByID(int.Parse(tbCodigoSubGrupoItem.Text), grupofiltro.GrupoItemID);
                 PreencheCamposSubGrupoItem(subgrupoItem);
             }
             else
@@ -52,8 +70,7 @@ namespace _5gpro.Controls
 
         private void AbreTelaBuscaSubGrupoItem()
         {
-            //ARRUMAR///
-            var buscaSubGrupoItem = new fmBuscaSubGrupoItem(1);
+            var buscaSubGrupoItem = new fmBuscaSubGrupoItem(grupofiltro.GrupoItemID);
             buscaSubGrupoItem.ShowDialog();
             if (buscaSubGrupoItem.subgrupoitemSelecionado != null)
             {
