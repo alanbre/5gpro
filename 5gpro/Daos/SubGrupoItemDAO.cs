@@ -25,7 +25,7 @@ namespace _5gpro.Daos
             GrupoItem grupoitem = null;
 
             string conNome = nome.Length > 0 ? "AND g.nome LIKE @nome" : "";
-            string conGrupoItem = "AND g.idgrupoitem = @nome";
+            string conGrupoItem = "AND g.idgrupoitem = @idgrupoitem";
 
             try
             {

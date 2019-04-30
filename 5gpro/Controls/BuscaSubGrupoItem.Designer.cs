@@ -42,6 +42,7 @@
             this.tbCodigoSubGrupoItem.Size = new System.Drawing.Size(65, 20);
             this.tbCodigoSubGrupoItem.TabIndex = 0;
             this.tbCodigoSubGrupoItem.TextChanged += new System.EventHandler(this.TbCodigoSubGrupoItem_TextChanged);
+            this.tbCodigoSubGrupoItem.Enter += new System.EventHandler(this.TbCodigoSubGrupoItem_Enter);
             this.tbCodigoSubGrupoItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoSubGrupoItem_KeyUp);
             this.tbCodigoSubGrupoItem.Leave += new System.EventHandler(this.TbCodigoSubGrupoItem_Leave);
             // 
@@ -52,7 +53,8 @@
             this.btBuscaSubGrupoItem.Location = new System.Drawing.Point(70, 16);
             this.btBuscaSubGrupoItem.Name = "btBuscaSubGrupoItem";
             this.btBuscaSubGrupoItem.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaSubGrupoItem.TabIndex = 1;
+            this.btBuscaSubGrupoItem.TabIndex = 0;
+            this.btBuscaSubGrupoItem.TabStop = false;
             this.btBuscaSubGrupoItem.UseVisualStyleBackColor = true;
             this.btBuscaSubGrupoItem.Click += new System.EventHandler(this.BtBuscaSubGrupoItem_Click);
             // 
@@ -63,7 +65,8 @@
             this.tbNomeSubGrupoItem.Name = "tbNomeSubGrupoItem";
             this.tbNomeSubGrupoItem.ReadOnly = true;
             this.tbNomeSubGrupoItem.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeSubGrupoItem.TabIndex = 2;
+            this.tbNomeSubGrupoItem.TabIndex = 0;
+            this.tbNomeSubGrupoItem.TabStop = false;
             // 
             // lbSubGrupoItem
             // 
@@ -71,7 +74,7 @@
             this.lbSubGrupoItem.Location = new System.Drawing.Point(3, 1);
             this.lbSubGrupoItem.Name = "lbSubGrupoItem";
             this.lbSubGrupoItem.Size = new System.Drawing.Size(81, 13);
-            this.lbSubGrupoItem.TabIndex = 3;
+            this.lbSubGrupoItem.TabIndex = 0;
             this.lbSubGrupoItem.Text = "Sub-Grupo Item";
             // 
             // BuscaSubGrupoItem
@@ -84,6 +87,7 @@
             this.Controls.Add(this.tbCodigoSubGrupoItem);
             this.Name = "BuscaSubGrupoItem";
             this.Size = new System.Drawing.Size(442, 39);
+            this.Load += new System.EventHandler(this.BuscaSubGrupoItem_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

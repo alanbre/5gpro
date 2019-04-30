@@ -50,7 +50,8 @@
             this.btBuscaGrupoItem.Location = new System.Drawing.Point(70, 16);
             this.btBuscaGrupoItem.Name = "btBuscaGrupoItem";
             this.btBuscaGrupoItem.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaGrupoItem.TabIndex = 1;
+            this.btBuscaGrupoItem.TabIndex = 0;
+            this.btBuscaGrupoItem.TabStop = false;
             this.btBuscaGrupoItem.UseVisualStyleBackColor = true;
             this.btBuscaGrupoItem.Click += new System.EventHandler(this.BtBuscaGrupoItem_Click);
             // 
@@ -60,7 +61,8 @@
             this.tbNomeGrupoItem.Name = "tbNomeGrupoItem";
             this.tbNomeGrupoItem.ReadOnly = true;
             this.tbNomeGrupoItem.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeGrupoItem.TabIndex = 2;
+            this.tbNomeGrupoItem.TabIndex = 0;
+            this.tbNomeGrupoItem.TabStop = false;
             // 
             // lbGrupoItem
             // 
@@ -68,7 +70,7 @@
             this.lbGrupoItem.Location = new System.Drawing.Point(3, 1);
             this.lbGrupoItem.Name = "lbGrupoItem";
             this.lbGrupoItem.Size = new System.Drawing.Size(59, 13);
-            this.lbGrupoItem.TabIndex = 3;
+            this.lbGrupoItem.TabIndex = 0;
             this.lbGrupoItem.Text = "Grupo Item";
             // 
             // BuscaGrupoItem

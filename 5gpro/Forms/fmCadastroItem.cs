@@ -32,7 +32,7 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
             SetarNivel();
-            
+
         }
 
         private void SetarNivel()
@@ -582,6 +582,10 @@ namespace _5gpro.Forms
             }
         }
 
-
+        private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
+        {         
+            buscaSubGrupoItem.GrupoFiltro(buscaGrupoItemTelaCadItem.grupoItem);
+            buscaSubGrupoItem.Limpa();
+        }
     }
 }
