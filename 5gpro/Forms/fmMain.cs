@@ -33,6 +33,7 @@ namespace _5gpro
         //Cadastro de Nota Fiscal = 030100
         //Cadastro de Operações = 040100
         //Cadastro de Contas a Receber = 050100
+        //Cadastro de Contas a Pagar = 060100
 
         public fmMain()
         {

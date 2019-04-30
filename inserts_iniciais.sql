@@ -5615,22 +5615,24 @@ INSERT INTO permissao (idpermissao, nome, codigo) VALUES
 (1, 'Módulo de Cadastros', '010000'),
 (2, 'Módulo de Orçamentos', '020000'),
 (3, 'Módulo de Saidas', '030000'),
-(12, 'Módulo de Contas a Receber', '050000'),
+(4, 'Módulo de Contas a Receber', '050000'),
+(5, 'Módulo de Contas a Receber', '060000'),
 
-(4, 'Cadastro de Pessoa', '010100'),
-(5, 'Cadastro de Usuario', '010200'),
-(6, 'Cadastro de Item', '010300'),
+(6, 'Cadastro de Pessoa', '010100'),
+(7, 'Cadastro de Usuario', '010200'),
+(8, 'Cadastro de Item', '010300'),
 (9, 'Cadastro de Grupo de usuários', '010400'),
 
 
-(7, 'Cadastro de Orçamentos', '020100'),
+(10, 'Cadastro de Orçamentos', '020100'),
 
-(8, 'Cadastro de Nota Fiscal', '030100'),
+(11, 'Cadastro de Nota Fiscal', '030100'),
 
-(10, 'Módulo Financeiro', '040000'),
-(11, 'Cadastro de Operacao', '040100'),
+(12, 'Módulo Financeiro', '040000'),
+(13, 'Cadastro de Operacao', '040100'),
 
-(13, 'Cadastro de Contas a Receber', '050100');
+(14, 'Cadastro de Contas a Receber', '050100'),
+(15, 'Cadastro de Contas a Pagar', '060100');
 
 INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (01, 'Dinheiro'),
