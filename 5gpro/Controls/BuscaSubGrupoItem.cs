@@ -138,7 +138,7 @@ namespace _5gpro.Controls
 
         private void TbCodigoSubGrupoItem_Enter(object sender, EventArgs e)
         {
-             tbCodigoSubGrupoItem.ReadOnly = true;
+             //tbCodigoSubGrupoItem.ReadOnly = true;
         }
 
         private void BuscaSubGrupoItem_Load(object sender, EventArgs e)
