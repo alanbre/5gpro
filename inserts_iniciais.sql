@@ -5611,28 +5611,28 @@ INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários')
 INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
              VALUES (9999, 'ADMIN', 'ADMIN', 'admin', '', '', 999);
 
-INSERT INTO permissao (idpermissao, nome, codigo) VALUES 
-(1, 'Módulo de Cadastros', '010000'),
-(2, 'Módulo de Orçamentos', '020000'),
-(3, 'Módulo de Saidas', '030000'),
-(4, 'Módulo de Contas a Receber', '050000'),
-(5, 'Módulo de Contas a Receber', '060000'),
+INSERT INTO permissao ( nome, codigo) VALUES 
+('Módulo de Cadastros', '010000'),
+('Módulo de Orçamentos', '020000'),
+('Módulo de Saidas', '030000'),
+('Módulo de Contas a Receber', '050000'),
+('Módulo de Contas a Receber', '060000'),
 
-(6, 'Cadastro de Pessoa', '010100'),
-(7, 'Cadastro de Usuario', '010200'),
-(8, 'Cadastro de Item', '010300'),
-(9, 'Cadastro de Grupo de usuários', '010400'),
+('Cadastro de Pessoa', '010100'),
+('Cadastro de Usuario', '010200'),
+('Cadastro de Item', '010300'),
+('Cadastro de Grupo de usuários', '010400'),
 
 
-(10, 'Cadastro de Orçamentos', '020100'),
+('Cadastro de Orçamentos', '020100'),
 
-(11, 'Cadastro de Nota Fiscal', '030100'),
+('Cadastro de Nota Fiscal', '030100'),
 
-(12, 'Módulo Financeiro', '040000'),
-(13, 'Cadastro de Operacao', '040100'),
+('Módulo Financeiro', '040000'),
+('Cadastro de Operacao', '040100'),
 
-(14, 'Cadastro de Contas a Receber', '050100'),
-(15, 'Cadastro de Contas a Pagar', '060100');
+('Cadastro de Contas a Receber', '050100'),
+('Cadastro de Contas a Pagar', '060100');
 
 INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (01, 'Dinheiro'),
