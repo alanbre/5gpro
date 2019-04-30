@@ -365,14 +365,14 @@
             // buscaSubGrupoItem
             // 
             this.buscaSubGrupoItem.Enabled = false;
-            this.buscaSubGrupoItem.Location = new System.Drawing.Point(16, 274);
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(12, 257);
             this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
             this.buscaSubGrupoItem.Size = new System.Drawing.Size(442, 39);
             this.buscaSubGrupoItem.TabIndex = 13;
             // 
             // buscaGrupoItemTelaCadItem
             // 
-            this.buscaGrupoItemTelaCadItem.Location = new System.Drawing.Point(16, 229);
+            this.buscaGrupoItemTelaCadItem.Location = new System.Drawing.Point(12, 212);
             this.buscaGrupoItemTelaCadItem.Name = "buscaGrupoItemTelaCadItem";
             this.buscaGrupoItemTelaCadItem.Size = new System.Drawing.Size(442, 39);
             this.buscaGrupoItemTelaCadItem.TabIndex = 12;
@@ -440,7 +440,7 @@
         private System.Windows.Forms.Label lbPrecoVenda;
         private System.Windows.Forms.TextBox tbPrecoVenda;
         private Controls.MenuVertical menuVertical;
-        private Controls.BuscaSubGrupoItem buscaSubGrupoItem;
         private Controls.BuscaGrupoItem buscaGrupoItemTelaCadItem;
+        private Controls.BuscaSubGrupoItem buscaSubGrupoItem;
     }
 }

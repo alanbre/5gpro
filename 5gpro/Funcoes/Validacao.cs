@@ -83,6 +83,33 @@ namespace _5gpro.Funcoes
         {
             foreach (Control ctrl in controls)
             {
+
+                ////CONTROLS
+                //if (ctrl.Name.Equals("buscaSubGrupoItem"))
+                //{
+                //    ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+                //    foreach (Control ctrlc in ctrl.Controls)
+                //    {
+                //        if (ctrlc is TextBox && !ctrlc.Name.Equals("tbAjuda"))
+                //        {
+                //            ctrlc.BackColor = System.Drawing.Color.White;
+                //        }
+                //    }
+                //}
+
+                //USERCONTROL
+                if (ctrl is UserControl)
+                {
+                    ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+                    foreach (Control ctrlcu in ctrl.Controls)
+                    {
+                        if (ctrlcu is TextBox && !ctrlcu.Name.Equals("tbAjuda"))
+                        {
+                            ctrlcu.BackColor = System.Drawing.Color.White;
+                        }
+                    }
+                }
+
                 //GROUPBOX
                 if (ctrl is GroupBox)
                 {
@@ -93,6 +120,11 @@ namespace _5gpro.Funcoes
                         if (ctrlgb is TextBox && !ctrlgb.Name.Equals("tbAjuda"))
                         {
                             ctrlgb.BackColor = System.Drawing.Color.White;
+                        }
+
+                        if (ctrlgb is Controls.BuscaSubGrupoItem)
+                        {
+                            ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                         }
                     }
                 }
@@ -106,8 +138,13 @@ namespace _5gpro.Funcoes
                         {
                             ctrlp.BackColor = System.Drawing.Color.White;
                         }
+                        if (ctrlp is Controls.BuscaSubGrupoItem)
+                        {
+                            ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
+                        }
                     }
                 }
+
                 //TABPAGE
                 if (ctrl is TabControl)
                 {
@@ -122,6 +159,7 @@ namespace _5gpro.Funcoes
                         }
                     }
                 }
+
                 //TEXTBOX
                 if (ctrl is TextBox && !ctrl.Name.Equals("tbAjuda"))
                 {
@@ -156,7 +194,6 @@ namespace _5gpro.Funcoes
             }
 
         }
-
 
     }
 }

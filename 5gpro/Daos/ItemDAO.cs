@@ -13,19 +13,18 @@ namespace _5gpro.Daos
 
         public int SalvarOuAtualizarItem(Item item)
         {
-
             int retorno = 0;
             try
             {
                 AbrirConexao();
 
                 Comando = new MySqlCommand(@"INSERT INTO item 
-                          (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida) 
+                          (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem) 
                           VALUES
-                          (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida)
+                          (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem)
                           ON DUPLICATE KEY UPDATE
                            descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
-                           valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida
+                           valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem
                          ;",
                          Conexao);
 
@@ -38,6 +37,7 @@ namespace _5gpro.Daos
                 Comando.Parameters.AddWithValue("@valorsaida", item.ValorSaida);
                 Comando.Parameters.AddWithValue("@estoquenecessario", item.Estoquenecessario);
                 Comando.Parameters.AddWithValue("@idunimedida", item.Unimedida.UnimedidaID);
+                Comando.Parameters.AddWithValue("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
 
 
                 retorno = Comando.ExecuteNonQuery();
@@ -261,6 +261,10 @@ namespace _5gpro.Daos
                     proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
                     reader.Close();
                 }
+                else
+                {
+                    proximoid = "1";
+                }
             }
             catch (MySqlException ex)
             {
@@ -270,7 +274,6 @@ namespace _5gpro.Daos
             {
                 FecharConexao();
             }
-
             return proximoid;
         }
     }
