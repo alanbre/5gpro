@@ -582,9 +582,10 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
-        {
+        private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
+        {         
             buscaSubGrupoItem.GrupoFiltro(buscaGrupoItemTelaCadItem.grupoItem);
+            buscaSubGrupoItem.Limpa();
         }
     }
 }

@@ -15,7 +15,6 @@ namespace _5gpro.Controls
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
         private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO(conexao);
 
-
         public BuscaSubGrupoItem()
         {
             InitializeComponent();
@@ -25,6 +24,7 @@ namespace _5gpro.Controls
         {
             if(grupoitem != null)
             {
+                tbCodigoSubGrupoItem.ReadOnly = false;
                 tbCodigoSubGrupoItem.Enabled = true;
                 btBuscaSubGrupoItem.Enabled = true;
                 tbNomeSubGrupoItem.Enabled = true;
@@ -32,9 +32,11 @@ namespace _5gpro.Controls
             }
             else
             {
+                tbCodigoSubGrupoItem.ReadOnly = true;
                 tbCodigoSubGrupoItem.Enabled = false;
                 btBuscaSubGrupoItem.Enabled = false;
                 tbNomeSubGrupoItem.Enabled = false;
+                tbNomeSubGrupoItem.Focus();
             }
         }
 
@@ -134,5 +136,14 @@ namespace _5gpro.Controls
             this.Text_Changed?.Invoke(this, e);
         }
 
+        private void TbCodigoSubGrupoItem_Enter(object sender, EventArgs e)
+        {
+             tbCodigoSubGrupoItem.ReadOnly = true;
+        }
+
+        private void BuscaSubGrupoItem_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
