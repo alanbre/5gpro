@@ -369,7 +369,7 @@ namespace _5gpro.Forms
             tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = item.ValorSaida.ToString();
 
-            buscaGrupoItemTelaCadItem.PreencheCampos(grupoitemdao.BuscarByID(item.SubGrupoItem.GrupoItem.GrupoItemID));
+            buscaGrupoItemTelaCadItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
             buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
 
             ignoraCheckEvent = false;
@@ -638,6 +638,8 @@ namespace _5gpro.Forms
 
         private void BuscaGrupoItemTelaCadItem_Text_Changed(object sender, EventArgs e)
         {
+            if (!ignoraCheckEvent) { Editando(true); }
+
             if (buscaGrupoItemTelaCadItem.grupoItem != null)
             {
                 buscaSubGrupoItem.Limpa();
@@ -650,6 +652,11 @@ namespace _5gpro.Forms
                 buscaSubGrupoItem.Limpa();
                 buscaSubGrupoItem.EscolhaOGrupo();
             }
+        }
+
+        private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
         }
     }
 }
