@@ -12,8 +12,8 @@ namespace _5gpro.Forms
     {
         public Orcamento orcamentoSelecionado = null;
         List<Orcamento> orcamentos;
-
-        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+        static ConexaoDAO connection = new ConexaoDAO();
+        OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 

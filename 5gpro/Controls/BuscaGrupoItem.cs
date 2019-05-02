@@ -35,7 +35,6 @@ namespace _5gpro.Controls
             {
                 grupoItem = grupoItemDAO.BuscarByID(int.Parse(tbCodigoGrupoItem.Text));
                 PreencheCamposGrupoItem(grupoItem);
-
             }
             else
             {
@@ -73,8 +72,7 @@ namespace _5gpro.Controls
                 "Grupo de itens não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodigoGrupoItem.Focus();
-                tbNomeGrupoItem.SelectAll();
+                Limpa();
             }
         }
 

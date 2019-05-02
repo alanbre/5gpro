@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvUnimedida = new System.Windows.Forms.DataGridView();
-            this.tbFiltroUnimedida = new System.Windows.Forms.TextBox();
+            this.tbFiltroDescUnimedida = new System.Windows.Forms.TextBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.unimedidaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnimedida)).BeginInit();
@@ -57,15 +57,15 @@
             this.dgvUnimedida.Size = new System.Drawing.Size(560, 360);
             this.dgvUnimedida.TabIndex = 3;
             this.dgvUnimedida.TabStop = false;
-            this.dgvUnimedida.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellContentClick);
             this.dgvUnimedida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellDoubleClick);
             // 
-            // tbFiltroUnimedida
+            // tbFiltroDescUnimedida
             // 
-            this.tbFiltroUnimedida.Location = new System.Drawing.Point(12, 12);
-            this.tbFiltroUnimedida.Name = "tbFiltroUnimedida";
-            this.tbFiltroUnimedida.Size = new System.Drawing.Size(483, 20);
-            this.tbFiltroUnimedida.TabIndex = 4;
+            this.tbFiltroDescUnimedida.Location = new System.Drawing.Point(12, 12);
+            this.tbFiltroDescUnimedida.Name = "tbFiltroDescUnimedida";
+            this.tbFiltroDescUnimedida.Size = new System.Drawing.Size(483, 20);
+            this.tbFiltroDescUnimedida.TabIndex = 4;
+            this.tbFiltroDescUnimedida.TextChanged += new System.EventHandler(this.TbFiltroDescUnimedida_TextChanged);
             // 
             // btPesquisar
             // 
@@ -87,7 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 411);
             this.Controls.Add(this.btPesquisar);
-            this.Controls.Add(this.tbFiltroUnimedida);
+            this.Controls.Add(this.tbFiltroDescUnimedida);
             this.Controls.Add(this.dgvUnimedida);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -110,7 +110,7 @@
 
         private System.Windows.Forms.DataGridView dgvUnimedida;
         private System.Windows.Forms.BindingSource unimedidaBindingSource;
-        private System.Windows.Forms.TextBox tbFiltroUnimedida;
+        private System.Windows.Forms.TextBox tbFiltroDescUnimedida;
         private System.Windows.Forms.Button btPesquisar;
     }
 }

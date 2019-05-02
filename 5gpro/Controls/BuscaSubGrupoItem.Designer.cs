@@ -36,19 +36,16 @@
             // 
             // tbCodigoSubGrupoItem
             // 
-            this.tbCodigoSubGrupoItem.Enabled = false;
             this.tbCodigoSubGrupoItem.Location = new System.Drawing.Point(6, 17);
             this.tbCodigoSubGrupoItem.Name = "tbCodigoSubGrupoItem";
             this.tbCodigoSubGrupoItem.Size = new System.Drawing.Size(65, 20);
             this.tbCodigoSubGrupoItem.TabIndex = 0;
             this.tbCodigoSubGrupoItem.TextChanged += new System.EventHandler(this.TbCodigoSubGrupoItem_TextChanged);
-            this.tbCodigoSubGrupoItem.Enter += new System.EventHandler(this.TbCodigoSubGrupoItem_Enter);
             this.tbCodigoSubGrupoItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoSubGrupoItem_KeyUp);
             this.tbCodigoSubGrupoItem.Leave += new System.EventHandler(this.TbCodigoSubGrupoItem_Leave);
             // 
             // btBuscaSubGrupoItem
             // 
-            this.btBuscaSubGrupoItem.Enabled = false;
             this.btBuscaSubGrupoItem.Image = global::_5gpro.Properties.Resources.iosSearch_17px_black;
             this.btBuscaSubGrupoItem.Location = new System.Drawing.Point(70, 16);
             this.btBuscaSubGrupoItem.Name = "btBuscaSubGrupoItem";
@@ -60,13 +57,13 @@
             // 
             // tbNomeSubGrupoItem
             // 
-            this.tbNomeSubGrupoItem.Enabled = false;
             this.tbNomeSubGrupoItem.Location = new System.Drawing.Point(94, 17);
             this.tbNomeSubGrupoItem.Name = "tbNomeSubGrupoItem";
             this.tbNomeSubGrupoItem.ReadOnly = true;
             this.tbNomeSubGrupoItem.Size = new System.Drawing.Size(346, 20);
             this.tbNomeSubGrupoItem.TabIndex = 0;
             this.tbNomeSubGrupoItem.TabStop = false;
+            this.tbNomeSubGrupoItem.Text = "Escolha o Grupo";
             // 
             // lbSubGrupoItem
             // 
@@ -87,7 +84,6 @@
             this.Controls.Add(this.tbCodigoSubGrupoItem);
             this.Name = "BuscaSubGrupoItem";
             this.Size = new System.Drawing.Size(442, 39);
-            this.Load += new System.EventHandler(this.BuscaSubGrupoItem_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

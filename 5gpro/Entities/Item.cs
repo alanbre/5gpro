@@ -31,5 +31,9 @@ namespace _5gpro.Entities
         public Unimedida Unimedida { get; set; }
 
         public virtual ICollection<NotaFiscalItem> NotaFiscalItem { get; set; }
+
+        [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoItem", AllowEmptyStrings = false)]
+        public SubGrupoItem SubGrupoItem { get; set; }
+
     }
 }

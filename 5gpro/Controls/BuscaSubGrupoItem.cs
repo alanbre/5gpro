@@ -11,33 +11,19 @@ namespace _5gpro.Controls
     {
 
         public SubGrupoItem subgrupoItem = null;
-        private GrupoItem grupofiltro = null;
+        private GrupoItem gruporecebido = null;
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
         private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO(conexao);
 
         public BuscaSubGrupoItem()
         {
             InitializeComponent();
+            this.Enabled = false;
         }
 
-        public void GrupoFiltro(GrupoItem grupoitem)
+        public void EnviarGrupo(GrupoItem grupoitem)
         {
-            if(grupoitem != null)
-            {
-                tbCodigoSubGrupoItem.ReadOnly = false;
-                tbCodigoSubGrupoItem.Enabled = true;
-                btBuscaSubGrupoItem.Enabled = true;
-                tbNomeSubGrupoItem.Enabled = true;
-                grupofiltro = grupoitem;
-            }
-            else
-            {
-                tbCodigoSubGrupoItem.ReadOnly = true;
-                tbCodigoSubGrupoItem.Enabled = false;
-                btBuscaSubGrupoItem.Enabled = false;
-                tbNomeSubGrupoItem.Enabled = false;
-                tbNomeSubGrupoItem.Focus();
-            }
+            gruporecebido = grupoitem;
         }
 
         private void TbCodigoSubGrupoItem_KeyUp(object sender, KeyEventArgs e)
@@ -53,15 +39,23 @@ namespace _5gpro.Controls
         {
 
             if (!int.TryParse(tbCodigoSubGrupoItem.Text, out int codigo)) { tbCodigoSubGrupoItem.Clear(); }
-            if (tbCodigoSubGrupoItem.Text.Length > 0)
+
+            if (gruporecebido == null)
             {
-                subgrupoItem = subgrupoItemDAO.BuscarByID(int.Parse(tbCodigoSubGrupoItem.Text), grupofiltro.GrupoItemID);
-                PreencheCamposSubGrupoItem(subgrupoItem);
+                tbNomeSubGrupoItem.Text = "Escolha o Grupo";
             }
             else
             {
-                subgrupoItem = null;
-                tbNomeSubGrupoItem.Clear();
+                if (tbCodigoSubGrupoItem.Text.Length > 0)
+                {
+                    subgrupoItem = subgrupoItemDAO.BuscarByID(int.Parse(tbCodigoSubGrupoItem.Text), gruporecebido.GrupoItemID);
+                    PreencheCamposSubGrupoItem(subgrupoItem);
+                }
+                else
+                {
+                    subgrupoItem = null;
+                    tbNomeSubGrupoItem.Clear();
+                }
             }
         }
 
@@ -72,12 +66,19 @@ namespace _5gpro.Controls
 
         private void AbreTelaBuscaSubGrupoItem()
         {
-            var buscaSubGrupoItem = new fmBuscaSubGrupoItem(grupofiltro.GrupoItemID);
-            buscaSubGrupoItem.ShowDialog();
-            if (buscaSubGrupoItem.subgrupoitemSelecionado != null)
+            if (gruporecebido == null)
             {
-                subgrupoItem = buscaSubGrupoItem.subgrupoitemSelecionado;
-                PreencheCamposSubGrupoItem(subgrupoItem);
+                MessageBox.Show("Escolha o Grupo antes!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                var buscaSubGrupoItem = new fmBuscaSubGrupoItem(gruporecebido.GrupoItemID);
+                buscaSubGrupoItem.ShowDialog();
+                if (buscaSubGrupoItem.subgrupoitemSelecionado != null)
+                {
+                    subgrupoItem = buscaSubGrupoItem.subgrupoitemSelecionado;
+                    PreencheCamposSubGrupoItem(subgrupoItem);
+                }
             }
         }
 
@@ -94,8 +95,7 @@ namespace _5gpro.Controls
                 "Sub-Grupo de itens não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodigoSubGrupoItem.Focus();
-                tbNomeSubGrupoItem.SelectAll();
+                Limpa();
             }
         }
 
@@ -111,6 +111,11 @@ namespace _5gpro.Controls
             {
                 Limpa();
             }
+        }
+
+        public void EscolhaOGrupo()
+        {
+            tbNomeSubGrupoItem.Text = "Escolha o Grupo";
         }
 
         public void Limpa()
@@ -136,14 +141,5 @@ namespace _5gpro.Controls
             this.Text_Changed?.Invoke(this, e);
         }
 
-        private void TbCodigoSubGrupoItem_Enter(object sender, EventArgs e)
-        {
-             //tbCodigoSubGrupoItem.ReadOnly = true;
-        }
-
-        private void BuscaSubGrupoItem_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

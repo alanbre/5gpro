@@ -13,7 +13,7 @@ namespace _5gpro.Forms
     public partial class fmOrcamentoCadastroOrcamento : Form
     {
         private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+        private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
 
         private NotaFiscal notafiscal = null;
         private readonly NotaFiscalAux nfa = new NotaFiscalAux();

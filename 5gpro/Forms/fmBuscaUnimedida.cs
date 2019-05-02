@@ -14,12 +14,11 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaUnimedida : Form
     {
-
-        public List<Unimedida> Listaunimedida;
+        static ConexaoDAO connection = new ConexaoDAO();
+        public List<Unimedida> listaunimedida;
         public Unimedida Unimedida;
-        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
-
-        //Unimedida unimedida = new Unimedida();
+        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
+        public Unimedida unimedidaSelecionada;
 
 
         public fmBuscaUnimedida()
@@ -27,48 +26,46 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void dgvUnimedida_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void BuscaUnimedida()
         {
-
-
-        }
-
-
-
-        private void btPesquisar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        //Buscando todas Unimedidas do banco
-        private void fmBuscaUnimedida_Load(object sender, EventArgs e)
-        {
-
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Sigla", typeof(string));
             table.Columns.Add("Descrição", typeof(string));
 
+            listaunimedida = unimedidaDAO.BuscarUnimedida(tbFiltroDescUnimedida.Text).ToList();
 
-            Listaunimedida = unimedidaDAO.BuscarTodasUnimedidas();
-
-            foreach (Unimedida u in Listaunimedida)
+            dgvUnimedida.Rows.Clear();
+            foreach (Unimedida u in listaunimedida)
             {
                 table.Rows.Add(u.UnimedidaID, u.Sigla, u.Descricao);
+
             }
             dgvUnimedida.DataSource = table;
+        }
 
+
+        private void btPesquisar_Click(object sender, EventArgs e)
+        {
+            BuscaUnimedida();
+        }
+
+        private void fmBuscaUnimedida_Load(object sender, EventArgs e)
+        {
+            BuscaUnimedida();
         }
 
         private void dgvUnimedida_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvUnimedida.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvUnimedida.Rows[selectedRowIndex];
-            Unimedida = new Unimedida();
-            Unimedida.UnimedidaID = int.Parse(selectedRow.Cells[0].Value.ToString());
-            Unimedida.Sigla = Convert.ToString(selectedRow.Cells[1].Value);
-            Unimedida.Descricao = Convert.ToString(selectedRow.Cells[2].Value);
+            unimedidaSelecionada = listaunimedida.Find(u => (u.UnimedidaID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
+        }
+
+        private void TbFiltroDescUnimedida_TextChanged(object sender, EventArgs e)
+        {
+            BuscaUnimedida();
         }
     }
 }

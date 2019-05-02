@@ -15,8 +15,6 @@ namespace _5gpro.Daos
             Connect = c;
         }
 
-
-
         public Logado BuscaLogadoByUsuario(Usuario usuario)
         {
             Logado usulogado = null;

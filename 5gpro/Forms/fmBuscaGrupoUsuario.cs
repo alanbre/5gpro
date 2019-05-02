@@ -13,8 +13,7 @@ namespace _5gpro.Forms
 
         public List<GrupoUsuario> Listagrupousuario;
         public GrupoUsuario GrupoUsuario;
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
-        
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);       
         public GrupoUsuario grupoUsuarioSelecionado;
 
         public fmBuscaGrupoUsuario()

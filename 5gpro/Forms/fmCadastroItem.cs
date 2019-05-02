@@ -3,30 +3,33 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
     public partial class fmCadastroItem : Form
     {
+        static ConexaoDAO connection = new ConexaoDAO();
+        public Unimedida unimedidadostestes = null;
 
         Item item;
         Unimedida unimedida = new Unimedida();
-        ItemDAO itemDAO = new ItemDAO();
-        UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
+        ItemDAO itemDAO = new ItemDAO(connection);
+        UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
         Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        GrupoItemDAO grupoitemdao = new GrupoItemDAO(connection);
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
 
         bool editando = false;
         bool ignoraCheckEvent;
-
 
         public fmCadastroItem()
         {
@@ -204,9 +207,10 @@ namespace _5gpro.Forms
 
         private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
         {
+            if (!int.TryParse(tbCodUnimedida.Text, out int codigo)) { tbCodUnimedida.Clear(); }
             if (tbCodUnimedida.Text.Length > 0)
             {
-                unimedida = unimedidaDAO.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
+                unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodUnimedida.Text));
                 PreencheCamposUnimedida(unimedida);
             }
             else
@@ -287,6 +291,8 @@ namespace _5gpro.Forms
             tbPrecoVenda.Clear();
             rbProduto.Checked = true;
             rbServico.Checked = false;
+            buscaGrupoItemTelaCadItem.Limpa();
+            buscaSubGrupoItem.Limpa();
         }
 
         private void PreencheCamposUnimedida(Unimedida unimedida)
@@ -343,7 +349,7 @@ namespace _5gpro.Forms
 
             if (item.Unimedida != null)
             {
-                unimedida = unimedidaDAO.BuscaUnimedidaByCod(item.Unimedida.UnimedidaID);
+                unimedida = unimedidaDAO.BuscaUnimedidaByID(item.Unimedida.UnimedidaID);
                 PreencheCamposUnimedida(unimedida);
             }
 
@@ -363,6 +369,9 @@ namespace _5gpro.Forms
             tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = item.ValorSaida.ToString();
 
+            buscaGrupoItemTelaCadItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
+            buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
+
             ignoraCheckEvent = false;
         }
 
@@ -374,79 +383,108 @@ namespace _5gpro.Forms
 
         private void SalvaCadastro()
         {
+            bool ok = false;
 
-            if (editando)
+            if (tbCodigo.Text.Length > 0)
             {
-                item = new Item();
-
-                item.ItemID = int.Parse(tbCodigo.Text);
-                item.Descricao = tbDescricao.Text;
-                item.DescCompra = tbDescricaoDeCompra.Text;
-                item.Referencia = tbReferencia.Text;
-                item.TipoItem = rbProduto.Checked ? "P" : "S";
-
-                if (tbPrecoUltimaEntrada.TextLength > 0)
+                if (editando)
                 {
-                    item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
-                }
-                else
-                {
-                    item.ValorEntrada = 0;
-                }
+                    item = new Item();
 
-                if (tbPrecoVenda.TextLength > 0)
-                {
-                    item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
-                }
-                else
-                {
-                    item.ValorSaida = 0;
-                }
+                    item.ItemID = int.Parse(tbCodigo.Text);
+                    item.Descricao = tbDescricao.Text;
+                    item.DescCompra = tbDescricaoDeCompra.Text;
+                    item.Referencia = tbReferencia.Text;
+                    item.TipoItem = rbProduto.Checked ? "P" : "S";
 
-                if (tbEstoqueNecessario.TextLength > 0)
-                {
-                    item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
-                }
-                else
-                {
-                    item.Estoquenecessario = 0;
-                }
-
-                item.Unimedida = unimedidaDAO.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
-
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(item, controls);
-
-                if (ok)
-                {
-                    validacao.despintarCampos(controls);
-                    int resultado = itemDAO.SalvarOuAtualizarItem(item);
-
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
+                    if (buscaSubGrupoItem.subgrupoItem != null)
                     {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                        item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
                     }
-                    else if (resultado == 1)
+
+                    if (tbPrecoUltimaEntrada.TextLength > 0)
                     {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
+                        item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
                     }
-                    else if (resultado == 2)
+                    else
                     {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
+                        item.ValorEntrada = 0;
                     }
+
+                    if (tbPrecoVenda.TextLength > 0)
+                    {
+                        item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
+                    }
+                    else
+                    {
+                        item.ValorSaida = 0;
+                    }
+
+                    if (tbEstoqueNecessario.TextLength > 0)
+                    {
+                        item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
+                    }
+                    else
+                    {
+                        item.Estoquenecessario = 0;
+                    }
+
+                    if (tbCodUnimedida.Text.Length > 0)
+                    {
+                        item.Unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodUnimedida.Text));
+                    }
+                    else
+                    {
+                        item.Unimedida = null;
+                    }
+
+                    item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
+
+                    ControlCollection controls = (ControlCollection)this.Controls;
+
+                    ok = validacao.ValidarEntidade(item, controls);
+                    if (ok) { validacao.despintarCampos(controls); }
                 }
             }
+            else
+            {
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                                    "Aviso",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
+            }
+            if (ok)
+            {
+                int resultado = itemDAO.SalvarOuAtualizarItem(item);
 
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                }
+            }
         }
+
+
 
         private void RecarregaDados(Item item)
         {
@@ -583,9 +621,42 @@ namespace _5gpro.Forms
         }
 
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
-        {         
-            buscaSubGrupoItem.GrupoFiltro(buscaGrupoItemTelaCadItem.grupoItem);
-            buscaSubGrupoItem.Limpa();
+        {
+            if (buscaGrupoItemTelaCadItem.grupoItem != null)
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
+                buscaSubGrupoItem.Enabled = true;
+            }
+            else
+            {
+                buscaSubGrupoItem.Enabled = false;
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EscolhaOGrupo();
+            }
+        }
+
+        private void BuscaGrupoItemTelaCadItem_Text_Changed(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+
+            if (buscaGrupoItemTelaCadItem.grupoItem != null)
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
+                buscaSubGrupoItem.Enabled = true;
+            }
+            else
+            {
+                buscaSubGrupoItem.Enabled = false;
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EscolhaOGrupo();
+            }
+        }
+
+        private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
         }
     }
 }

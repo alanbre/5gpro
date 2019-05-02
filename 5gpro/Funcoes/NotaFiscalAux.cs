@@ -6,8 +6,9 @@ namespace _5gpro.Funcoes
 {
     class NotaFiscalAux
     {
+        static ConexaoDAO connection = new ConexaoDAO();
         NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
-        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
+        OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
 
 
         public NotaFiscal GerarNotaFiscal(Orcamento orcamento)

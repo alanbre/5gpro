@@ -9,7 +9,7 @@ namespace _5gpro.Daos
     class NotaFiscalDAO : ConexaoDAO
     {
         private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
+        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
         private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
 
         public int BuscaProxCodigoDisponivel()
@@ -45,7 +45,7 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
-        public NotaFiscal BuscaNotaByCod(int codigo)
+        public NotaFiscal BuscaNotaByID(int codigo)
         {
             NotaFiscal notafiscal = new NotaFiscal();
            
@@ -92,7 +92,7 @@ namespace _5gpro.Daos
             return notafiscal;
         }
 
-        public NotaFiscalItem BuscaItemByCod(int codigo)
+        public NotaFiscalItem BuscaItemByID(int codigo)
         {
             NotaFiscalItem nfi = new NotaFiscalItem();
             try
@@ -115,7 +115,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Unimedida = unimedidaDAO.BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                        Unimedida = unimedidaDAO.BuscaUnimedidaByID(reader.GetInt32(reader.GetOrdinal("idunimedida")))
                     };
                     nfi = new NotaFiscalItem
                     {
@@ -326,7 +326,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Unimedida = new UnimedidaDAO().BuscaUnimedidaByCod(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                        //Unimedida = new UnimedidaDAO().BuscaUnimedidaByID(reader.GetInt32(reader.GetOrdinal("idunimedida")))
                     };
 
                     NotaFiscalItem nfi = new NotaFiscalItem

@@ -218,7 +218,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaByCod(int.Parse(tbCodigo.Text));
+                    NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaByID(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
                         notaFiscal = newnotafiscal;
@@ -247,7 +247,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaByCod(int.Parse(tbCodigo.Text));
+                        NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaByID(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
                             notaFiscal = newnotafiscal;
@@ -506,7 +506,7 @@ namespace _5gpro.Forms
                 {
                     if (notafiscal != null)
                     {
-                        notafiscal = notaFiscalDAO.BuscaNotaByCod(notafiscal.NotaFiscalID);
+                        notafiscal = notaFiscalDAO.BuscaNotaByID(notafiscal.NotaFiscalID);
                         PreencheCampos(notafiscal);
                         Editando(false);
                     }
@@ -523,7 +523,7 @@ namespace _5gpro.Forms
             {
                 if (notafiscal != null)
                 {
-                    notafiscal = notaFiscalDAO.BuscaNotaByCod(notafiscal.NotaFiscalID);
+                    notafiscal = notaFiscalDAO.BuscaNotaByID(notafiscal.NotaFiscalID);
                     PreencheCampos(notafiscal);
                 }
                 else
