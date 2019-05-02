@@ -62,12 +62,15 @@ namespace _5gpro.Daos
         {
             Item item = null;
             SubGrupoItem subgrupoitem = null;
+            GrupoItem grupoitem = null;
             Unimedida unimedida = null;
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM item WHERE iditem = @iditem", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM item i
+                                                    INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
+                                                    WHERE iditem = @iditem", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@iditem", cod);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
@@ -79,9 +82,16 @@ namespace _5gpro.Daos
                         UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
                     };
 
+                    grupoitem = new GrupoItem
+                    {
+                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                    };
+
                     subgrupoitem = new SubGrupoItem
                     {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem"))
+                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        GrupoItem = grupoitem
                     };
 
                     item = new Item
@@ -119,12 +129,17 @@ namespace _5gpro.Daos
         {
             Item item = null;
             SubGrupoItem subgrupoitem = null;
+            GrupoItem grupoitem = null;
             Unimedida unimedida = null;
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM item WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM item i
+                                                     INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
+                                                     WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)"
+                                                     , Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@iditem", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
@@ -136,9 +151,16 @@ namespace _5gpro.Daos
                         UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
                     };
 
+                    grupoitem = new GrupoItem
+                    {
+                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                    };
+
                     subgrupoitem = new SubGrupoItem
                     {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem"))
+                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        GrupoItem = grupoitem
                     };
 
                     item = new Item
@@ -177,12 +199,17 @@ namespace _5gpro.Daos
         {
             Item item = new Item();
             SubGrupoItem subgrupoitem = null;
+            GrupoItem grupoitem = null;
             Unimedida unimedida = null;
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM item WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM item i 
+                                                     INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
+                                                     WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)"
+                                                    , Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@iditem", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
@@ -194,9 +221,16 @@ namespace _5gpro.Daos
                         UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
                     };
 
+                    grupoitem = new GrupoItem
+                    {
+                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                    };
+
                     subgrupoitem = new SubGrupoItem
                     {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem"))
+                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        GrupoItem = grupoitem
                     };
 
                     item = new Item
@@ -234,6 +268,7 @@ namespace _5gpro.Daos
         public List<Item> BuscaItem(string descItem, string denomItem, string tipoItem)
         {
             SubGrupoItem subgrupoitem = null;
+            GrupoItem grupoitem = null;
             Unimedida unimedida = null;
             List<Item> itens = new List<Item>();
             string conDescItem = descItem.Length > 0 ? "AND i.descitem LIKE @descitem" : "";
@@ -244,9 +279,9 @@ namespace _5gpro.Daos
             {
                 Connect.AbrirConexao();
 
-                Connect.Comando = new MySqlCommand(@"SELECT * 
-                                             FROM item i INNER JOIN unimedida u 
-                                             ON i.idunimedida = u.idunimedida
+                Connect.Comando = new MySqlCommand(@"SELECT * FROM item i
+                                             INNER JOIN unimedida u ON i.idunimedida = u.idunimedida
+                                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                                              WHERE 1=1
                                              " + conDescItem + @"                                         
                                              " + conDenomItem + @"
@@ -269,9 +304,16 @@ namespace _5gpro.Daos
                         Descricao = reader.GetString(reader.GetOrdinal("descricao"))
                     };
 
+                    grupoitem = new GrupoItem
+                    {
+                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                    };
+
                     subgrupoitem = new SubGrupoItem
                     {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem"))
+                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        GrupoItem = grupoitem
                     };
 
                     Item item = new Item

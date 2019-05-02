@@ -19,6 +19,7 @@ namespace _5gpro.Forms
         UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
         Validacao validacao = new Validacao();
         PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        GrupoItemDAO grupoitemdao = new GrupoItemDAO(connection);
 
         //Controle de Permissões
         private Logado logado;
@@ -290,6 +291,8 @@ namespace _5gpro.Forms
             tbPrecoVenda.Clear();
             rbProduto.Checked = true;
             rbServico.Checked = false;
+            buscaGrupoItemTelaCadItem.Limpa();
+            buscaSubGrupoItem.Limpa();
         }
 
         private void PreencheCamposUnimedida(Unimedida unimedida)
@@ -365,6 +368,9 @@ namespace _5gpro.Forms
             tbPrecoUltimaEntrada.Text = item.ValorEntrada.ToString();
             tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = item.ValorSaida.ToString();
+
+            buscaGrupoItemTelaCadItem.PreencheCampos(grupoitemdao.BuscarByID(item.SubGrupoItem.GrupoItem.GrupoItemID));
+            buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
 
             ignoraCheckEvent = false;
         }
