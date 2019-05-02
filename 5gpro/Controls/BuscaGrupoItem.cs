@@ -72,8 +72,7 @@ namespace _5gpro.Controls
                 "Grupo de itens não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodigoGrupoItem.Focus();
-                tbNomeGrupoItem.SelectAll();
+                Limpa();
             }
         }
 

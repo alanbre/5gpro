@@ -6,20 +6,25 @@ using System.Data;
 
 namespace _5gpro.Daos
 {
-    class UnimedidaDAO : ConexaoDAO
+    class UnimedidaDAO
     {
+        public ConexaoDAO Connect { get; }
+        public UnimedidaDAO(ConexaoDAO c)
+        {
+            Connect = c;
+        }
 
         public int Salvar(Unimedida unimedida)
         {
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Conexao);
-                Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnimedidaID);
-                Comando.Parameters.AddWithValue("@sigla", unimedida.Sigla);
-                Comando.Parameters.AddWithValue("@descricao", unimedida.Descricao);
-
-                return Comando.ExecuteNonQuery();
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnimedidaID);
+                Connect.Comando.Parameters.AddWithValue("@sigla", unimedida.Sigla);
+                Connect.Comando.Parameters.AddWithValue("@descricao", unimedida.Descricao);
+               
+                return Connect.Comando.ExecuteNonQuery();
             }
             catch (Exception erro)
             {
@@ -28,9 +33,52 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
         }
+
+        public IEnumerable<Unimedida> BuscarUnimedida(string descricao)
+        {
+            List<Unimedida> listaunimedida = new List<Unimedida>();
+            string conDescUnimedida  = descricao.Length > 0 ? "AND descricao LIKE @descricao" : "";
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT *
+                                             FROM unimedida 
+                                             WHERE 1=1
+                                             " + conDescUnimedida + @"
+                                             ORDER BY idunimedida", Connect.Conexao);
+
+                if (conDescUnimedida.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + descricao + "%"); }
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    Unimedida unimedida = new Unimedida
+                    {
+                        UnimedidaID = int.Parse(reader.GetString(reader.GetOrdinal("idunimedida"))),
+                        Descricao = reader.GetString(reader.GetOrdinal("descricao")),
+                        Sigla = reader.GetString(reader.GetOrdinal("sigla"))
+                    };
+                    listaunimedida.Add(unimedida);
+                }
+                reader.Close();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return listaunimedida;
+        }
+
 
         public List<Unimedida> BuscarTodasUnimedidas()
         {
@@ -38,10 +86,10 @@ namespace _5gpro.Daos
             List<Unimedida> listaunimedida = new List<Unimedida>();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM unimedida", Conexao);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM unimedida", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -61,21 +109,21 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return listaunimedida;
         }
 
-        public Unimedida BuscaUnimedidaByCod(int cod)
+        public Unimedida BuscaUnimedidaByID(int cod)
         {
             Unimedida unimedida = new Unimedida();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM unimedida WHERE idunimedida = @idunimedida", Conexao);
-                Comando.Parameters.AddWithValue("@idunimedida", cod);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM unimedida WHERE idunimedida = @idunimedida", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idunimedida", cod);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -97,7 +145,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return unimedida;
         }

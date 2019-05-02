@@ -10,19 +10,19 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroItem : Form
     {
-
+        static ConexaoDAO connection = new ConexaoDAO();
         public Unimedida unimedidadostestes = null;
 
         Item item;
         Unimedida unimedida = new Unimedida();
-        ItemDAO itemDAO = new ItemDAO();
-        UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
+        ItemDAO itemDAO = new ItemDAO(connection);
+        UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
         Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
@@ -206,9 +206,10 @@ namespace _5gpro.Forms
 
         private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
         {
+            if (!int.TryParse(tbCodUnimedida.Text, out int codigo)) { tbCodUnimedida.Clear(); }
             if (tbCodUnimedida.Text.Length > 0)
             {
-                unimedida = unimedidaDAO.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
+                unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodUnimedida.Text));
                 PreencheCamposUnimedida(unimedida);
             }
             else
@@ -345,7 +346,7 @@ namespace _5gpro.Forms
 
             if (item.Unimedida != null)
             {
-                unimedida = unimedidaDAO.BuscaUnimedidaByCod(item.Unimedida.UnimedidaID);
+                unimedida = unimedidaDAO.BuscaUnimedidaByID(item.Unimedida.UnimedidaID);
                 PreencheCamposUnimedida(unimedida);
             }
 
@@ -424,7 +425,7 @@ namespace _5gpro.Forms
 
                     if (tbCodUnimedida.Text.Length > 0)
                     {
-                        item.Unimedida = unimedidaDAO.BuscaUnimedidaByCod(int.Parse(tbCodUnimedida.Text));
+                        item.Unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodUnimedida.Text));
                     }
                     else
                     {

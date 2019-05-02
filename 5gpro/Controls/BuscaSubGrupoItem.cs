@@ -95,8 +95,7 @@ namespace _5gpro.Controls
                 "Sub-Grupo de itens não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                tbCodigoSubGrupoItem.Focus();
-                tbNomeSubGrupoItem.SelectAll();
+                Limpa();
             }
         }
 

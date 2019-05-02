@@ -369,6 +369,7 @@ namespace _5gpro.Daos
                         Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
                         Email = reader.GetString(reader.GetOrdinal("email")),
                         Telefone = reader.GetString(reader.GetOrdinal("telefone"))
+                        
                     };
 
                     usuarios.Add(usuario);

@@ -13,10 +13,10 @@ namespace _5gpro.Forms
     {
         public Usuario usuariologado;
         public Logado logado;
-        public static ConexaoDAO connect = new ConexaoDAO();
+        public static ConexaoDAO connection = new ConexaoDAO();
 
-        public UsuarioDAO usuarioDAO = new UsuarioDAO(connect);
-        public LogadoDAO logadoDAO = new LogadoDAO(connect);
+        public UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+        public LogadoDAO logadoDAO = new LogadoDAO(connection);
 
         NetworkAdapter adap = new NetworkAdapter();
 
@@ -124,6 +124,5 @@ namespace _5gpro.Forms
                 tbNomeUsuario.Text = "";
             }
         }
-
     }
 }

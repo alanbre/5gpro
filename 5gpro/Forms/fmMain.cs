@@ -16,7 +16,7 @@ namespace _5gpro
         private Permissao permissao = new Permissao();
         private PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
         private Logado logado = new Logado();
-        private LogadoDAO logadoDAO = new LogadoDAO(fmLogin.connect);
+        private LogadoDAO logadoDAO = new LogadoDAO(fmLogin.connection);
         private NetworkAdapter adap = new NetworkAdapter();
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();

@@ -39,7 +39,7 @@ namespace _5gpro.Daos
                     grupousuario = new GrupoUsuario
                     {
                         GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),                        
                     };
 
                     reader.Close();
