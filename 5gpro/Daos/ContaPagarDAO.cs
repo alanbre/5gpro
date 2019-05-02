@@ -153,7 +153,7 @@ namespace _5gpro.Daos
             }
 
             if (contaPagar != null)
-                contaPagar.Operacao = operacaoDAO.BuscarOperacaoById(contaPagar.Operacao.OperacaoID);
+                contaPagar.Operacao = operacaoDAO.BuscaById(contaPagar.Operacao.OperacaoID);
             return contaPagar;
         }
 
@@ -257,7 +257,7 @@ namespace _5gpro.Daos
             }
 
             if (contaPagar != null)
-                contaPagar.Operacao = operacaoDAO.BuscarOperacaoById(contaPagar.Operacao.OperacaoID);
+                contaPagar.Operacao = operacaoDAO.BuscaById(contaPagar.Operacao.OperacaoID);
             return contaPagar;
         }
 
@@ -327,7 +327,7 @@ namespace _5gpro.Daos
             }
 
             if (contaPagar != null)
-                contaPagar.Operacao = operacaoDAO.BuscarOperacaoById(contaPagar.Operacao.OperacaoID);
+                contaPagar.Operacao = operacaoDAO.BuscaById(contaPagar.Operacao.OperacaoID);
             return contaPagar;
         }
     }

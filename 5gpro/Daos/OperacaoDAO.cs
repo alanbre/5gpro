@@ -81,7 +81,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public Operacao BuscarOperacaoById(int CodOperacao)
+        public Operacao BuscaById(int CodOperacao)
         {
 
             Operacao operacao = null;

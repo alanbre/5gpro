@@ -32,7 +32,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoOperacao.Text, out int codigo)) { tbCodigoOperacao.Clear(); }
             if (tbCodigoOperacao.Text.Length > 0)
             {
-                operacao = operacaoDAO.BuscarOperacaoById(int.Parse(tbCodigoOperacao.Text));
+                operacao = operacaoDAO.BuscaById(int.Parse(tbCodigoOperacao.Text));
                 PreencheCamposOperacao(operacao);
             }
             else
@@ -69,8 +69,8 @@ namespace _5gpro.Controls
             }
             else
             {
-                MessageBox.Show("Cidade não encontrada no banco de dados",
-                "Cidade não encontrada",
+                MessageBox.Show("Operação não encontrada na base de dados",
+                "Operação não encontrada",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
                 tbCodigoOperacao.Clear();
