@@ -9,7 +9,6 @@
             bool retorno = databaseUpdate.CriarTabelasSeNaoExistirem();
             new PermissoesUpdate().AtualizarNpraN();
 
-
             return retorno;// && databaseUpdate.AtualizaBD();
            
         }

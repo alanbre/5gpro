@@ -24,6 +24,7 @@ namespace _5gpro.Daos
             Orcamento orcamento = new Orcamento();
             Pessoa pessoa = null;
             NotaFiscal notafiscal = null;
+            Cidade cidade = null;
 
             try
             {
@@ -45,6 +46,11 @@ namespace _5gpro.Daos
 
                 if (reader.Read())
                 {
+                    cidade = new Cidade
+                    {
+                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
+                    };
+
                     pessoa = new Pessoa
                     {
                         PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
@@ -55,7 +61,7 @@ namespace _5gpro.Daos
                         Numero = reader.GetString(reader.GetOrdinal("numero")),
                         Bairro = reader.GetString(reader.GetOrdinal("bairro")),
                         Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                        Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetInt32(reader.GetOrdinal("idcidade"))),
+                        Cidade = cidade,
                         Telefone = reader.GetString(reader.GetOrdinal("telefone")),
                         Email = reader.GetString(reader.GetOrdinal("email"))
                     };
@@ -122,29 +128,85 @@ namespace _5gpro.Daos
         public Orcamento BuscaProximoOrcamento(string codAtual)
         {
             Orcamento orcamento = new Orcamento();
+            Pessoa pessoa = null;
+            NotaFiscal notafiscal = null;
+            Cidade cidade = null;
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM orcamento WHERE idorcamento = (SELECT min(idorcamento) FROM orcamento WHERE idorcamento > @idorcamento)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                                                    p.complemento, p.idcidade, p.telefone, p.email,
+                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
+                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
+                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
+                                                    FROM orcamento o 
+                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
+                                                    WHERE o.idorcamento = (SELECT min(idorcamento) FROM orcamento WHERE idorcamento > @idorcamento)", Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idorcamento", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
+                    cidade = new Cidade
+                    {
+                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
+                    };
+
+                    pessoa = new Pessoa
+                    {
+                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                        Rua = reader.GetString(reader.GetOrdinal("rua")),
+                        Numero = reader.GetString(reader.GetOrdinal("numero")),
+                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                        Cidade = cidade,
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                        Email = reader.GetString(reader.GetOrdinal("email"))
+                    };
+
+                    try
+                    {
+                        notafiscal = new NotaFiscal
+                        {
+                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
+                            DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
+                            Pessoa = pessoa
+                        };
+                    }
+                    catch (Exception)
+                    {
+                        notafiscal = null;
+                    }
+
                     orcamento = new Orcamento
                     {
                         OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
                         DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
                         DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
                     };
-                    orcamento.Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
-                    //orcamento.NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")));
+                    orcamento.Pessoa = pessoa;
+                    if (notafiscal != null)
+                    {
+                        orcamento.NotaFiscal = notafiscal;
+                    }
+
                     reader.Close();
                 }
                 else
@@ -168,29 +230,88 @@ namespace _5gpro.Daos
 
         public Orcamento BuscaOrcamentoAnterior(string codAtual)
         {
+
             Orcamento orcamento = new Orcamento();
+            Pessoa pessoa = null;
+            NotaFiscal notafiscal = null;
+            Cidade cidade = null;
+
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM orcamento WHERE idorcamento = (SELECT max(idorcamento) FROM orcamento WHERE idorcamento < @idorcamento)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                                                    p.complemento, p.idcidade, p.telefone, p.email,
+                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
+                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
+                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
+                                                    FROM orcamento o 
+                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
+                                                    WHERE o.idorcamento = (SELECT max(idorcamento) FROM orcamento WHERE idorcamento < @idorcamento)", Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idorcamento", codAtual);
 
                 IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
+
+                    cidade = new Cidade
+                    {
+                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
+                    };
+
+                    pessoa = new Pessoa
+                    {
+                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                        Rua = reader.GetString(reader.GetOrdinal("rua")),
+                        Numero = reader.GetString(reader.GetOrdinal("numero")),
+                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                        Cidade = cidade,
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                        Email = reader.GetString(reader.GetOrdinal("email"))
+                    };
+
+                    try
+                    {
+                        notafiscal = new NotaFiscal
+                        {
+                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
+                            DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
+                            Pessoa = pessoa
+                        };
+                    }
+                    catch (Exception)
+                    {
+                        notafiscal = null;
+                    }
+
                     orcamento = new Orcamento
                     {
                         OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
                         DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
                         DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
                     };
-                    orcamento.Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")));
-                    //orcamento.NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")));
+                    orcamento.Pessoa = pessoa;
+                    if (notafiscal != null)
+                    {
+                        orcamento.NotaFiscal = notafiscal;
+                    }
+
                     reader.Close();
                 }
                 else
@@ -210,21 +331,33 @@ namespace _5gpro.Daos
             if (orcamento != null) { orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento); }
 
             return orcamento;
+
         }
 
         public List<Orcamento> BuscaOrcamentos(fmBuscaOrcamento.Filtros f)
         {
             List<Orcamento> orcamentos = new List<Orcamento>();
-            string wherePessoa = f.filtroPessoa != null ? "AND idpessoa = @idpessoa" : "";
-            string whereCidade = f.filtroCidade != null ? "AND idcidade = @idcidade" : "";
+            Pessoa pessoa = null;
+            NotaFiscal notafiscal = null;
+            Cidade cidade = null;
+
+            string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            string whereCidade = f.filtroCidade != null ? "AND p.idcidade = @idcidade" : "";
             string contemValidade = f.contemValidade ? "NOT" : "";
 
             try
             {
                 Connect.AbrirConexao();
                 //TODO: Adicionar aos filtros a data de efetivação.
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM orcamento 
+                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                                                    p.complemento, p.idcidade, p.telefone, p.email,
+                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
+                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
+                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
+                                                    FROM orcamento o 
+                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal 
                                              WHERE 1 = 1 "
                                              + whereCidade + ""
                                              + wherePessoa + "" +
@@ -245,17 +378,56 @@ namespace _5gpro.Daos
 
                 while (reader.Read())
                 {
+                    cidade = new Cidade
+                    {
+                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
+                    };
+
+                    pessoa = new Pessoa
+                    {
+                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                        Rua = reader.GetString(reader.GetOrdinal("rua")),
+                        Numero = reader.GetString(reader.GetOrdinal("numero")),
+                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                        Cidade = cidade,
+                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                        Email = reader.GetString(reader.GetOrdinal("email"))
+                    };
+
+                    try
+                    {
+                        notafiscal = new NotaFiscal
+                        {
+                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
+                            DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
+                            Pessoa = pessoa
+                        };
+                    }
+                    catch (Exception)
+                    {
+                        notafiscal = null;
+                    }
+
                     Orcamento orcamento = new Orcamento
                     {
                         OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
                         DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
                         DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
                         ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
                         DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa"))),
-                        //NotaFiscal = notafiscalDAO.BuscaNotaByCod(reader.GetInt32(reader.GetOrdinal("idnotafiscal")))
+                        Pessoa = pessoa,
+                        NotaFiscal = notafiscal
                     };
                     orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
                     orcamentos.Add(orcamento);
