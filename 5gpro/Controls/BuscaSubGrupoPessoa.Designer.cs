@@ -49,6 +49,9 @@
             this.tbCodigoSubGrupoPessoa.Name = "tbCodigoSubGrupoPessoa";
             this.tbCodigoSubGrupoPessoa.Size = new System.Drawing.Size(65, 20);
             this.tbCodigoSubGrupoPessoa.TabIndex = 1;
+            this.tbCodigoSubGrupoPessoa.TextChanged += new System.EventHandler(this.TbCodigoSubGrupoPessoa_TextChanged);
+            this.tbCodigoSubGrupoPessoa.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoSubGrupoPessoa_KeyUp);
+            this.tbCodigoSubGrupoPessoa.Leave += new System.EventHandler(this.TbCodigoSubGrupoPessoa_Leave);
             // 
             // tbNomeSubGrupoPessoa
             // 
@@ -67,6 +70,7 @@
             this.btBuscaSubGrupoPessoa.Size = new System.Drawing.Size(22, 22);
             this.btBuscaSubGrupoPessoa.TabIndex = 3;
             this.btBuscaSubGrupoPessoa.UseVisualStyleBackColor = true;
+            this.btBuscaSubGrupoPessoa.Click += new System.EventHandler(this.BtBuscaSubGrupoPessoa_Click);
             // 
             // BuscaSubGrupoPessoa
             // 

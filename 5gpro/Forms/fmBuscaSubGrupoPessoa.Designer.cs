@@ -55,6 +55,7 @@
             this.dgvSubGrupoPessoa.Size = new System.Drawing.Size(298, 308);
             this.dgvSubGrupoPessoa.TabIndex = 0;
             this.dgvSubGrupoPessoa.TabStop = false;
+            this.dgvSubGrupoPessoa.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGrupoPessoa_CellDoubleClick);
             // 
             // tbNomeSubGrupo
             // 
@@ -62,6 +63,7 @@
             this.tbNomeSubGrupo.Name = "tbNomeSubGrupo";
             this.tbNomeSubGrupo.Size = new System.Drawing.Size(216, 20);
             this.tbNomeSubGrupo.TabIndex = 1;
+            this.tbNomeSubGrupo.TextChanged += new System.EventHandler(this.TbNomeSubGrupo_TextChanged);
             // 
             // btPesquisarSubGrupoPessoa
             // 
@@ -71,6 +73,7 @@
             this.btPesquisarSubGrupoPessoa.TabIndex = 2;
             this.btPesquisarSubGrupoPessoa.Text = "Pesquisar";
             this.btPesquisarSubGrupoPessoa.UseVisualStyleBackColor = true;
+            this.btPesquisarSubGrupoPessoa.Click += new System.EventHandler(this.BtPesquisarSubGrupoPessoa_Click);
             // 
             // fmBuscaSubGrupoPessoa
             // 
@@ -87,6 +90,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Busca Sub-Grupo de Pessoas";
+            this.Load += new System.EventHandler(this.FmBuscaSubGrupoPessoa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGrupoPessoa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

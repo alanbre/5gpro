@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    class SubGrupoPessoa
+    public class SubGrupoPessoa
     {
         public int SubGrupoPessoaID { get; set; }
         public string Nome { get; set; }

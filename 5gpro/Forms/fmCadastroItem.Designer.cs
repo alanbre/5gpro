@@ -339,7 +339,6 @@
             this.buscaGrupoItemTelaCadItem.Name = "buscaGrupoItemTelaCadItem";
             this.buscaGrupoItemTelaCadItem.Size = new System.Drawing.Size(442, 39);
             this.buscaGrupoItemTelaCadItem.TabIndex = 8;
-            this.buscaGrupoItemTelaCadItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItemTelaCadItem_Text_Changed);
             this.buscaGrupoItemTelaCadItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
             // 
             // fmCadastroItem
