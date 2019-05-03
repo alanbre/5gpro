@@ -18,6 +18,8 @@ namespace _5gpro.Forms
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
         private readonly static ConexaoDAO connection = new ConexaoDAO();
         private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
+        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
@@ -27,7 +29,11 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
-        public fmCarCadastroConta() => InitializeComponent();
+        public fmCarCadastroConta()
+        {
+            InitializeComponent();
+            SetarNivel();
+        }
 
         private void FmCarCadastroConta_KeyDown(object sender, KeyEventArgs e)
         {
@@ -71,7 +77,7 @@ namespace _5gpro.Forms
 
         private void BtGerarParcelas_Click(object sender, EventArgs e) => GerarParcelas();
 
-        private void BtSalvarParcela_Click(object sender, EventArgs e) => Editando(true);
+        private void BtSalvarParcela_Click(object sender, EventArgs e) => SalvaParcela();
 
         private void DtpDataCadatroConta_ValueChanged(object sender, EventArgs e) => Editando(true);
 
@@ -106,7 +112,7 @@ namespace _5gpro.Forms
 
         private void TbValorOriginalConta_Leave(object sender, EventArgs e)
         {
-            if(tbValorOriginalConta.Enabled)
+            if (tbValorOriginalConta.Enabled)
                 FormataCampoDecimal((TextBox)sender);
         }
 
@@ -158,6 +164,7 @@ namespace _5gpro.Forms
             }
         }
 
+        private void TbCodigoConta_Leave(object sender, EventArgs e) => CarregaDados();
 
 
 
@@ -168,31 +175,22 @@ namespace _5gpro.Forms
         {
             if (editando)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(false);
-                    tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
-                    contaReceber = null;
-                    dtpDataCadatroConta.Focus();
-                    ignoracheckevent = false;
-                    Editando(true);
-                }
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
             }
-            else
-            {
-                ignoracheckevent = true;
-                LimpaCampos(false);
-                tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
-                contaReceber = null;
-                Editando(false);
-                dtpDataCadatroConta.Focus();
-                ignoracheckevent = false;
-                Editando(true);
-            }
+
+            ignoracheckevent = true;
+            LimpaCampos(false);
+            tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
+            contaReceber = null;
+            dtpDataCadatroConta.Focus();
+            ignoracheckevent = false;
+            btGerarParcelas.Enabled = true;
+            tbValorContaGerar.Enabled = true;
+            Editando(true);
+
         }
 
         private void Busca()
@@ -218,12 +216,14 @@ namespace _5gpro.Forms
                     DataCadastro = dtpDataCadatroConta.Value,
                     Operacao = buscaOperacao.operacao,
 
-                    ValorOriginal = Convert.ToDecimal(tbValorOriginalConta),
+                    ValorOriginal = Convert.ToDecimal(tbValorOriginalConta.Text),
                     Multa = Convert.ToDecimal(tbMultaConta.Text),
                     Juros = Convert.ToDecimal(tbJurosConta.Text),
                     ValorFinal = Convert.ToDecimal(tbValorFinalConta.Text),
 
-                    Parcelas = parcelas
+                    Parcelas = parcelas,
+
+                    Pessoa = buscaPessoa.pessoa
                 };
 
                 int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
@@ -237,6 +237,7 @@ namespace _5gpro.Forms
                     "Problema ao salvar",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                    return;
                 }
                 else if (resultado == 1)
                 {
@@ -248,6 +249,9 @@ namespace _5gpro.Forms
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
                 }
+                btGerarParcelas.Enabled = false;
+                tbValorContaGerar.Enabled = false;
+                tbValorContaGerar.Clear();
             }
         }
 
@@ -267,6 +271,7 @@ namespace _5gpro.Forms
             if (contaReceber != null)
             {
                 contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
+                contaReceber.Operacao = operacaoDAO.BuscaById(contaReceber.Operacao.OperacaoID);
                 PreencheCampos(contaReceber);
                 if (editando)
                     Editando(false);
@@ -288,18 +293,18 @@ namespace _5gpro.Forms
                     "Aviso de alteração",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning) == DialogResult.No)
-                {
                     return;
-                }
             }
 
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaRebeceber = contaReceberDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
-                if (newcontaRebeceber != null)
+                var newcontaReceber = contaReceberDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
+                if (newcontaReceber != null)
                 {
-                    contaReceber = newcontaRebeceber;
+                    newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
+                    newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
+                    contaReceber = newcontaReceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
                     if (editando)
@@ -326,6 +331,8 @@ namespace _5gpro.Forms
                 var newcontaRebeceber = contaReceberDAO.BuscaAnterior(int.Parse(tbCodigoConta.Text));
                 if (newcontaRebeceber != null)
                 {
+                    newcontaRebeceber.Operacao = operacaoDAO.BuscaById(newcontaRebeceber.Operacao.OperacaoID);
+                    newcontaRebeceber.Pessoa = pessoaDAO.BuscaById(newcontaRebeceber.Pessoa.PessoaID);
                     contaReceber = newcontaRebeceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
@@ -334,6 +341,51 @@ namespace _5gpro.Forms
                 }
             }
         }
+
+        private void CarregaDados()
+        {
+            int codigo = 0;
+            if (!int.TryParse(tbCodigoConta.Text, out codigo)) { tbCodigoConta.Clear(); }
+            if (contaReceber?.ContaReceberID == codigo)
+                return;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            if (tbCodigoConta.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+            var newcontaReceber = contaReceberDAO.BuscaById(codigo);
+            if (newcontaReceber != null)
+            {
+                newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
+                newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
+                contaReceber = newcontaReceber;
+                btGerarParcelas.Enabled = false;
+                tbValorContaGerar.Enabled = false;
+                PreencheCampos(contaReceber);
+                Editando(false);
+            }
+            else
+            {
+                Editando(true);
+                LimpaCampos(false);
+                btGerarParcelas.Enabled = true;
+                tbValorContaGerar.Enabled = true;
+            }
+
+        }
+
+
 
 
         private void PreencheCampos(ContaReceber contaReceber)
@@ -348,6 +400,8 @@ namespace _5gpro.Forms
             tbMultaConta.Text = contaReceber.Multa.ToString("############0.00");
             tbJurosConta.Text = contaReceber.Juros.ToString("############0.00");
             parcelas = contaReceber.Parcelas.ToList();
+            buscaOperacao.PreencheCampos(contaReceber.Operacao);
+            buscaPessoa.PreencheCampos(contaReceber.Pessoa);
             PreencheGridParcelas(parcelas);
             ignoracheckevent = false;
         }
@@ -355,7 +409,7 @@ namespace _5gpro.Forms
         private void PreencheGridParcelas(List<ParcelaContaReceber> parcelas)
         {
             foreach (var parcela in parcelas)
-                dgvParcelas.Rows.Add(parcela.Sequencia, parcela.DataVencimento.ToShortDateString(), parcela.Valor, parcela.Multa, parcela.Multa, parcela.ValorFinal, parcela.DataQuitacao?.Date);
+                dgvParcelas.Rows.Add(parcela.Sequencia, parcela.DataVencimento.ToShortDateString(), parcela.Valor.ToString("############0.00"), parcela.Multa.ToString("############0.00"), parcela.Juros.ToString("############0.00"), parcela.ValorFinal.ToString("############0.00"), parcela.DataQuitacao?.Date);
             dgvParcelas.Refresh();
         }
 
@@ -380,6 +434,13 @@ namespace _5gpro.Forms
                  MessageBoxIcon.Warning);
                 return;
             }
+            parcelas.Clear();
+            dgvParcelas.Rows.Clear();
+            dgvParcelas.Refresh();
+            tbMultaConta.Text = "0,00";
+            tbJurosConta.Text = "0,00";
+            tbValorOriginalConta.Text = "0,00";
+            tbValorFinalConta.Text = "0,00";
             var parcelasOperacao = buscaOperacao.operacao.Parcelas;
 
 
@@ -393,11 +454,13 @@ namespace _5gpro.Forms
                     DataVencimento = DateTime.Today.AddDays(parcela.Dias),
                     Multa = 0,
                     Juros = 0,
-                    Valor = Convert.ToDecimal(tbValorOriginalConta.Text) / parcelasOperacao.Count
+                    Valor = Convert.ToDecimal(tbValorContaGerar.Text) / parcelasOperacao.Count
                 };
                 sequencia++;
                 this.parcelas.Add(par);
+                tbValorOriginalConta.Text = (Convert.ToDecimal(tbValorOriginalConta.Text) + par.Valor).ToString();
             }
+            tbValorFinalConta.Text = tbValorOriginalConta.Text;
 
             PreencheGridParcelas(parcelas);
         }
@@ -405,6 +468,53 @@ namespace _5gpro.Forms
         private void CalculaTotalParcela()
         {
             tbValorFinalParcela.Text = (Convert.ToDecimal(tbValorOriginalParcela.Text) + Convert.ToDecimal(tbMultaParcela.Text) + Convert.ToDecimal(tbJurosParcela.Text)).ToString("############0.00");
+        }
+
+        private void SalvaParcela()
+        {
+            if (parcelaSelecionada == null)
+                return;
+
+            var dr = dgvParcelas.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == parcelaSelecionada.Sequencia).FirstOrDefault();
+            if (dr == null)
+            {
+                MessageBox.Show("Parcela não encontrada!", "Erro ao selecionar parcela",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                var ptemp = parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).FirstOrDefault();
+                ptemp.Valor = Convert.ToDecimal(tbValorOriginalParcela.Text);
+                ptemp.Multa = Convert.ToDecimal(tbMultaParcela.Text);
+                ptemp.Juros = Convert.ToDecimal(tbJurosParcela.Text);
+                ptemp.DataVencimento = dtpDataVencimentoParcela.Value;
+                ptemp.FormaPagamento = buscaFormaPagamento.formaPagamento;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Valor = ptemp.Valor;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().DataVencimento = ptemp.DataVencimento;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Multa = ptemp.Multa;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Juros = ptemp.Juros;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().FormaPagamento = ptemp.FormaPagamento;
+                dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor.ToString("############0.00");
+                dr.Cells[dgvtbcDataVencimento.Index].Value = ptemp.DataVencimento.ToShortDateString();
+                dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa.ToString("############0.00");
+                dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros.ToString("############0.00");
+                dgvParcelas.Update();
+                dgvParcelas.Refresh();
+            }
+            CalculaTotalConta();
+        }
+
+        private void CalculaTotalConta()
+        {
+            if (parcelas.Count > 0)
+            {
+                tbValorOriginalConta.Text = parcelas.Sum(p => p.Valor).ToString("############0.00");
+                tbMultaConta.Text = parcelas.Sum(p => p.Multa).ToString("############0.00");
+                tbJurosConta.Text = parcelas.Sum(p => p.Juros).ToString("############0.00");
+                tbValorFinalConta.Text = parcelas.Sum(p => p.ValorFinal).ToString("############0.00");
+            }
         }
 
         private void FormataCampoDecimal(TextBox sender)
@@ -416,13 +526,16 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigoConta.Clear(); }
             buscaOperacao.Limpa();
+            buscaPessoa.Limpa();
             dtpDataCadatroConta.Value = DateTime.Now;
             dtpDataVencimentoParcela.Value = DateTime.Now;
             tbValorOriginalConta.Text = "0,00";
             tbValorFinalConta.Text = "0,00";
             tbMultaConta.Text = "0,00";
             tbJurosConta.Text = "0,00";
-            tbAjuda.Text = "";
+            tbAjuda.Clear();
+            parcelas.Clear();
+            tbValorContaGerar.Clear();
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
             LimpaCamposParcela(limpaCod);

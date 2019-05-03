@@ -364,7 +364,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `5gprodatabase`.`permissao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
-  `idpermissao` INT(11) NOT NULL,
+  `idpermissao` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL DEFAULT NULL,
   `codigo` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`idpermissao`),
@@ -454,7 +454,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
+  `idparcelaoperacao` INT NOT NULL,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,
@@ -493,6 +493,64 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`formapagamento` (
   `idformapagamento` INT NOT NULL,
   `nome` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`idformapagamento`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`conta_receber`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
+  `idconta_receber` INT NOT NULL,
+  `data_cadastro` DATETIME NOT NULL,
+  `idoperacao` INT NOT NULL,
+  `valor_original` DECIMAL(10,2) NOT NULL,
+  `multa` DECIMAL(10,2) NOT NULL,
+  `juros` DECIMAL(10,2) NOT NULL,
+  `valor_final` DECIMAL(10,2) NOT NULL,
+  `idpessoa` INT(11) NOT NULL,
+  PRIMARY KEY (`idconta_receber`),
+  INDEX `fk_conta_receber_operacao1_idx` (`idoperacao` ASC) VISIBLE,
+  INDEX `fk_conta_receber_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_conta_receber_operacao1`
+    FOREIGN KEY (`idoperacao`)
+    REFERENCES `5gprodatabase`.`operacao` (`idoperacao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_conta_receber_pessoa1`
+    FOREIGN KEY (`idpessoa`)
+    REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`parcela_conta_receber`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
+  `idparcela_conta_receber` INT NOT NULL AUTO_INCREMENT,
+  `sequencia` INT NOT NULL,
+  `data_vencimento` DATETIME NOT NULL,
+  `valor` DECIMAL(10,2) NOT NULL,
+  `multa` DECIMAL(10,2) NOT NULL,
+  `juros` DECIMAL(10,2) NOT NULL,
+  `valor_final` DECIMAL(10,2) NOT NULL,
+  `data_quitacao` DATETIME NULL,
+  `idconta_receber` INT NOT NULL,
+  `idformapagamento` INT NULL,
+  PRIMARY KEY (`idparcela_conta_receber`),
+  INDEX `fk_parcela_conta_receber_conta_receber1_idx` (`idconta_receber` ASC) VISIBLE,
+  INDEX `fk_parcela_conta_receber_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
+  CONSTRAINT `fk_parcela_conta_receber_conta_receber1`
+    FOREIGN KEY (`idconta_receber`)
+    REFERENCES `5gprodatabase`.`conta_receber` (`idconta_receber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_parcela_conta_receber_formapagamento1`
+    FOREIGN KEY (`idformapagamento`)
+    REFERENCES `5gprodatabase`.`formapagamento` (`idformapagamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

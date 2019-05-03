@@ -99,7 +99,7 @@ namespace _5gpro.Forms
         {
             if (buscaItem.item != null)
             {
-                NotaFiscalItem nfi = new NotaFiscalItem();
+                var nfi = new NotaFiscalItem();
                 nfi.Item = buscaItem.item;
                 InserirItem(itemSelecionado ?? nfi);
             }

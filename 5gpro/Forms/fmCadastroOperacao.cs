@@ -9,6 +9,13 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroOperacao : Form
     {
+        //TODO: Implementar recarregamento da operação
+        //TODO: Possibilitar usuário poder alterar a quantidade de parcelas.
+        //TODO: Verificar botão "Aplicar" na tela fmBuscaParcelasOperacao para não apresentar erro se caso não tiver nada preenchido....
+
+
+
+
         //CÓDIGO DA TELA CAD.OPERAÇÃO = 040100
         static ConexaoDAO connection = new ConexaoDAO();
 
@@ -96,7 +103,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodOperacao.Text.Length > 0)
                 {
-                    Operacao newoperacao = operacaoDAO.BuscarOperacaoById(int.Parse(tbCodOperacao.Text));
+                    Operacao newoperacao = operacaoDAO.BuscaById(int.Parse(tbCodOperacao.Text));
 
                     if (newoperacao != null)
                     {
@@ -120,7 +127,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodOperacao.Text.Length > 0)
                     {
-                        Operacao newoperacao = operacaoDAO.BuscarOperacaoById(int.Parse(tbCodOperacao.Text));
+                        Operacao newoperacao = operacaoDAO.BuscaById(int.Parse(tbCodOperacao.Text));
                         if (newoperacao != null)
                         {
                             operacao = newoperacao;

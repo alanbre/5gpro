@@ -10,7 +10,7 @@ namespace _5gpro.Controls
 {
     public partial class BuscaFormaPagamento : UserControl
     {
-        public FormaPagamento formaPagamento = new FormaPagamento();
+        public FormaPagamento formaPagamento = null;
         private static ConexaoDAO conexao = new ConexaoDAO();
         private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO(conexao);
 

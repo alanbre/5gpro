@@ -15,6 +15,8 @@ namespace _5gpro.Entities
 
         public DateTime DataCadastro { get; set; }
 
+        public Pessoa Pessoa { get; set; }
+
         public Operacao Operacao { get; set; }
 
         public decimal ValorOriginal { get; set; }

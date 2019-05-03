@@ -58,7 +58,7 @@ namespace _5gpro.Forms
 
             if (e.KeyCode == Keys.F1)
             {
-                if(!editando)
+                if (!editando)
                     NovoCadastro();
             }
 
@@ -197,22 +197,20 @@ namespace _5gpro.Forms
         //EVENTOS DE LEAVE
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
-            if (!editando)
-            {
-                CarregaDados();
-            }
-            else
-            {
+            int codigo = 0;
+            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
+            if (pessoa?.PessoaID == codigo)
+                return;
 
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    CarregaDados();
-                }
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
             }
+
+            CarregaDados();
         }
 
 
@@ -245,18 +243,12 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (pessoa != null && locked)
-                        pessoaDAO.Unlock(pessoa.PessoaID, logado); locked = false;
+                    
                 }
                 else
                 {
                     e.Cancel = true;
                 }
-            }
-            else
-            {
-                if (pessoa != null && locked)
-                    pessoaDAO.Unlock(pessoa.PessoaID, logado); locked = false;
             }
         }
 
@@ -275,11 +267,6 @@ namespace _5gpro.Forms
                     {
                         LimpaCampos(false);
                         tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
-                        if (!locked)
-                        {
-                            pessoaDAO.Lock(int.Parse(tbCodigo.Text), logado);
-                            locked = true;
-                        }
                         pessoa = null;
                         Editando(false);
                         tbNome.Focus();
@@ -290,11 +277,6 @@ namespace _5gpro.Forms
                 {
                     LimpaCampos(false);
                     tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
-                    if (!locked)
-                    {
-                        pessoaDAO.Lock(int.Parse(tbCodigo.Text), logado);
-                        locked = true;
-                    }
                     pessoa = null;
                     Editando(false);
                     tbNome.Focus();
@@ -309,17 +291,7 @@ namespace _5gpro.Forms
             buscaPessoa.ShowDialog();
             if (buscaPessoa.pessoaSelecionada != null)
             {
-                if (pessoa != null && locked)
-                {
-                    pessoaDAO.Unlock(pessoa.PessoaID, logado);
-                    locked = false;
-                }
                 pessoa = buscaPessoa.pessoaSelecionada;
-                if (!locked)
-                {
-                    pessoaDAO.Lock(pessoa.PessoaID, logado);
-                    locked = true;
-                }
                 PreencheCampos(pessoa);
             }
         }
@@ -400,7 +372,7 @@ namespace _5gpro.Forms
                     {
                         var result = pessoaDAO.BuscaById(pessoa.PessoaID, logado);
                         pessoa = result.Item1;
-                        
+
                         PreencheCampos(pessoa);
                         Editando(false);
                     }
@@ -540,24 +512,12 @@ namespace _5gpro.Forms
                 }
                 else
                 {
-                    if (pessoa != null && locked)
-                    {
-                        pessoaDAO.Unlock(pessoa.PessoaID, logado);
-                        locked = false;
-                    }
-                    if (!locked)
-                    {
-                        pessoaDAO.Lock(int.Parse(tbCodigo.Text), logado);
-                        locked = true;
-                    }
                     Editando(true);
                     LimpaCampos(false);
                 }
             }
             else if (tbCodigo.Text.Length == 0)
             {
-                if (pessoa != null && locked)
-                    pessoaDAO.Unlock(pessoa.PessoaID, logado);
                 LimpaCampos(true);
                 Editando(false);
             }
@@ -640,11 +600,6 @@ namespace _5gpro.Forms
                 }
             }
             ignoraCheckEvent = false;
-        }
-
-        private void Lock(bool locked)
-        {
-
         }
 
     }
