@@ -140,6 +140,11 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
+        private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
 
         //FUNÇÕES DE LEAVE
         private void tbCodUnimedida_Leave(object sender, EventArgs e)
@@ -654,9 +659,5 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
     }
 }

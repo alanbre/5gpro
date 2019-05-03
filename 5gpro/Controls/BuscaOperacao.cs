@@ -69,8 +69,8 @@ namespace _5gpro.Controls
             }
             else
             {
-                MessageBox.Show("Cidade não encontrada no banco de dados",
-                "Cidade não encontrada",
+                MessageBox.Show("Operação não encontrada no banco de dados",
+                "Operação não encontrada",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
                 tbCodigoOperacao.Clear();
