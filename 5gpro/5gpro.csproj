@@ -170,6 +170,12 @@
     <Compile Include="Controls\BuscaUnimedida.Designer.cs">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\DecimalBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\DecimalBox.Designer.cs">
+      <DependentUpon>DecimalBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MenuVertical.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -440,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaUnimedida.resx">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\DecimalBox.resx">
+      <DependentUpon>DecimalBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MenuVertical.resx">
       <DependentUpon>MenuVertical.cs</DependentUpon>
