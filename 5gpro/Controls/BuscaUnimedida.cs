@@ -9,7 +9,7 @@ namespace _5gpro.Controls
 {
     public partial class BuscaUnimedida : UserControl
     {
-        public Unimedida unimedida = new Unimedida();
+        public Unimedida unimedida = null;
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
         private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO(conexao);
 
@@ -38,7 +38,7 @@ namespace _5gpro.Controls
             else
             {
                 unimedida = null;
-                tbSiglaUnimedida.Clear();
+                Limpa();
             }
         }
 

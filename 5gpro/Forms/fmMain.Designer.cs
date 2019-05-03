@@ -154,7 +154,7 @@
             // tsmiCadastroContaReceber
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
-            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(170, 22);
             this.tsmiCadastroContaReceber.Text = "Cadastro de conta";
             this.tsmiCadastroContaReceber.Click += new System.EventHandler(this.TsmiCadastroContaReceber_Click);
             // 

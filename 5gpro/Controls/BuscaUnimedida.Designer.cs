@@ -50,8 +50,8 @@
             this.tbSiglaUnimedida.Location = new System.Drawing.Point(94, 17);
             this.tbSiglaUnimedida.Name = "tbSiglaUnimedida";
             this.tbSiglaUnimedida.ReadOnly = true;
-            this.tbSiglaUnimedida.Size = new System.Drawing.Size(61, 20);
-            this.tbSiglaUnimedida.TabIndex = 1;
+            this.tbSiglaUnimedida.Size = new System.Drawing.Size(44, 20);
+            this.tbSiglaUnimedida.TabIndex = 0;
             // 
             // lbUnimedida
             // 
@@ -59,7 +59,7 @@
             this.lbUnimedida.Location = new System.Drawing.Point(3, 1);
             this.lbUnimedida.Name = "lbUnimedida";
             this.lbUnimedida.Size = new System.Drawing.Size(57, 13);
-            this.lbUnimedida.TabIndex = 2;
+            this.lbUnimedida.TabIndex = 0;
             this.lbUnimedida.Text = "Unimedida";
             // 
             // btBuscaUnimedida
@@ -68,17 +68,17 @@
             this.btBuscaUnimedida.Location = new System.Drawing.Point(70, 16);
             this.btBuscaUnimedida.Name = "btBuscaUnimedida";
             this.btBuscaUnimedida.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaUnimedida.TabIndex = 3;
+            this.btBuscaUnimedida.TabIndex = 0;
             this.btBuscaUnimedida.UseVisualStyleBackColor = true;
             this.btBuscaUnimedida.Click += new System.EventHandler(this.BtBuscaUnimedida_Click);
             // 
             // tbDescricaoUnimedida
             // 
-            this.tbDescricaoUnimedida.Location = new System.Drawing.Point(162, 17);
+            this.tbDescricaoUnimedida.Location = new System.Drawing.Point(144, 17);
             this.tbDescricaoUnimedida.Name = "tbDescricaoUnimedida";
             this.tbDescricaoUnimedida.ReadOnly = true;
-            this.tbDescricaoUnimedida.Size = new System.Drawing.Size(277, 20);
-            this.tbDescricaoUnimedida.TabIndex = 4;
+            this.tbDescricaoUnimedida.Size = new System.Drawing.Size(171, 20);
+            this.tbDescricaoUnimedida.TabIndex = 0;
             // 
             // BuscaUnimedida
             // 
@@ -90,7 +90,7 @@
             this.Controls.Add(this.tbSiglaUnimedida);
             this.Controls.Add(this.tbCodigoUnimedida);
             this.Name = "BuscaUnimedida";
-            this.Size = new System.Drawing.Size(442, 39);
+            this.Size = new System.Drawing.Size(318, 39);
             this.ResumeLayout(false);
             this.PerformLayout();
 

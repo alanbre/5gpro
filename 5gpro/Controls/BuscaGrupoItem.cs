@@ -13,7 +13,7 @@ namespace _5gpro.Controls
         public GrupoItem grupoItem = null;
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
         private readonly GrupoItemDAO grupoItemDAO = new GrupoItemDAO(conexao);
-        
+
         public BuscaGrupoItem()
         {
             InitializeComponent();
@@ -111,6 +111,18 @@ namespace _5gpro.Controls
         private void TbCodigoGrupoItem_TextChanged(object sender, EventArgs e)
         {
             this.Text_Changed?.Invoke(this, e);
+
+            if (!int.TryParse(tbCodigoGrupoItem.Text, out int codigo)) { tbCodigoGrupoItem.Clear(); }
+            if (tbCodigoGrupoItem.Text.Length > 0)
+            {
+                grupoItem = grupoItemDAO.BuscarByID(int.Parse(tbCodigoGrupoItem.Text));
+                PreencheCamposGrupoItem(grupoItem);
+            }
+            else
+            {
+                grupoItem = null;
+                tbNomeGrupoItem.Clear();
+            }
         }
     }
 }

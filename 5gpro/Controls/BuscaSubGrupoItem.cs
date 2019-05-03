@@ -18,7 +18,6 @@ namespace _5gpro.Controls
         public BuscaSubGrupoItem()
         {
             InitializeComponent();
-            this.Enabled = false;
         }
 
         public void EnviarGrupo(GrupoItem grupoitem)

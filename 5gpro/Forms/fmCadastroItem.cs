@@ -51,14 +51,6 @@ namespace _5gpro.Forms
 
         }
 
-        private void tbCodUnimedida_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F3)
-            {
-                e.Handled = true;
-                AbreTelaBuscaUnimedida();
-            }
-        }
 
         private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -147,10 +139,6 @@ namespace _5gpro.Forms
 
 
         //FUNÇÕES DE LEAVE
-        private void tbCodUnimedida_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         private void tbCodigo_Leave(object sender, EventArgs e)
         {
@@ -210,21 +198,6 @@ namespace _5gpro.Forms
 
         }
 
-        private void tbCodUnimedida_Leave_1(object sender, EventArgs e)
-        {
-            if (!int.TryParse(tbCodUnimedida.Text, out int codigo)) { tbCodUnimedida.Clear(); }
-            if (tbCodUnimedida.Text.Length > 0)
-            {
-                unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodUnimedida.Text));
-                PreencheCamposUnimedida(unimedida);
-            }
-            else
-            {
-                tbDescricaoUndMedida.Text = "";
-            }
-        }
-
-
         //MENU
         private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
         {
@@ -266,13 +239,6 @@ namespace _5gpro.Forms
         }
 
 
-        //EVENTOS DE CLICK
-        private void btBuscaUndMedida_Click(object sender, EventArgs e)
-        {
-            AbreTelaBuscaUnimedida();
-        }
-
-
         //PADRÕES CRIADAS
         private void EnterTab(object sender, KeyEventArgs e)
         {
@@ -288,8 +254,6 @@ namespace _5gpro.Forms
             if (cod) { tbCodigo.Clear(); }
             tbDescricao.Clear();
             tbDescricaoDeCompra.Clear();
-            tbCodUnimedida.Clear();
-            tbDescricaoUndMedida.Clear();
             tbReferencia.Clear();
             tbPrecoUltimaEntrada.Clear();
             tbEstoqueNecessario.Clear();
@@ -304,8 +268,8 @@ namespace _5gpro.Forms
         {
             if (unimedida != null)
             {
-                tbCodUnimedida.Text = unimedida.UnimedidaID.ToString();
-                tbDescricaoUndMedida.Text = unimedida.Descricao;
+                //tbCodUnimedida.Text = unimedida.UnimedidaID.ToString();
+                //tbDescricaoUndMedida.Text = unimedida.Descricao;
             }
         }
 
@@ -402,11 +366,6 @@ namespace _5gpro.Forms
                     item.Referencia = tbReferencia.Text;
                     item.TipoItem = rbProduto.Checked ? "P" : "S";
 
-                    if (buscaSubGrupoItem.subgrupoItem != null)
-                    {
-                        item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
-                    }
-
                     if (tbPrecoUltimaEntrada.TextLength > 0)
                     {
                         item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
@@ -434,14 +393,7 @@ namespace _5gpro.Forms
                         item.Estoquenecessario = 0;
                     }
 
-                    if (tbCodUnimedida.Text.Length > 0)
-                    {
-                        item.Unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodUnimedida.Text));
-                    }
-                    else
-                    {
-                        item.Unimedida = null;
-                    }
+                    item.Unimedida = buscaUnimedidaItem.unimedida;
 
                     item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
 
@@ -631,11 +583,9 @@ namespace _5gpro.Forms
             {
                 buscaSubGrupoItem.Limpa();
                 buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
-                buscaSubGrupoItem.Enabled = true;
             }
             else
             {
-                buscaSubGrupoItem.Enabled = false;
                 buscaSubGrupoItem.Limpa();
                 buscaSubGrupoItem.EscolhaOGrupo();
             }
@@ -649,15 +599,26 @@ namespace _5gpro.Forms
             {
                 buscaSubGrupoItem.Limpa();
                 buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
-                buscaSubGrupoItem.Enabled = true;
             }
             else
             {
-                buscaSubGrupoItem.Enabled = false;
                 buscaSubGrupoItem.Limpa();
                 buscaSubGrupoItem.EscolhaOGrupo();
             }
         }
 
+        private void BuscaGrupoItemTelaCadItem_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (buscaGrupoItemTelaCadItem.grupoItem != null)
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
+            }
+            else
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EscolhaOGrupo();
+            }
+        }
     }
 }
