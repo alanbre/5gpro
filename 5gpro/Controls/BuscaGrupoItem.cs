@@ -13,7 +13,7 @@ namespace _5gpro.Controls
         public GrupoItem grupoItem = null;
         private static readonly ConexaoDAO conexao = new ConexaoDAO();
         private readonly GrupoItemDAO grupoItemDAO = new GrupoItemDAO(conexao);
-        
+
         public BuscaGrupoItem()
         {
             InitializeComponent();

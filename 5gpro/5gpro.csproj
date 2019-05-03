@@ -134,6 +134,12 @@
     <Compile Include="Controls\BuscaGrupoItem.Designer.cs">
       <DependentUpon>BuscaGrupoItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaGrupoPessoa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaGrupoPessoa.Designer.cs">
+      <DependentUpon>BuscaGrupoPessoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaGrupoUsuario.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -164,6 +170,12 @@
     <Compile Include="Controls\BuscaSubGrupoItem.Designer.cs">
       <DependentUpon>BuscaSubGrupoItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaSubGrupoPessoa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaSubGrupoPessoa.Designer.cs">
+      <DependentUpon>BuscaSubGrupoPessoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaUnimedida.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -188,6 +200,7 @@
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\FormaPagamentoDAO.cs" />
     <Compile Include="Daos\GrupoItemDAO.cs" />
+    <Compile Include="Daos\GrupoPessoaDAO.cs" />
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
     <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalDAO.cs" />
@@ -196,6 +209,7 @@
     <Compile Include="Daos\ParcelaOperacaoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
     <Compile Include="Daos\SubGrupoItemDAO.cs" />
+    <Compile Include="Daos\SubGrupoPessoaDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
@@ -206,6 +220,7 @@
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\FormaPagamento.cs" />
     <Compile Include="Entities\GrupoItem.cs" />
+    <Compile Include="Entities\GrupoPessoa.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
     <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscal.cs" />
@@ -218,6 +233,7 @@
     <Compile Include="Entities\ParcelaOperacao.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\SubGrupoItem.cs" />
+    <Compile Include="Entities\SubGrupoPessoa.cs" />
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Item.cs" />
@@ -255,6 +271,12 @@
     <Compile Include="Forms\fmBuscaGrupoItem.Designer.cs">
       <DependentUpon>fmBuscaGrupoItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmBuscaGrupoPessoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaGrupoPessoa.Designer.cs">
+      <DependentUpon>fmBuscaGrupoPessoa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +306,12 @@
     </Compile>
     <Compile Include="Forms\fmBuscaSubGrupoItem.Designer.cs">
       <DependentUpon>fmBuscaSubGrupoItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaSubGrupoPessoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaSubGrupoPessoa.Designer.cs">
+      <DependentUpon>fmBuscaSubGrupoPessoa.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaUnimedida.cs">
       <SubType>Form</SubType>
@@ -429,6 +457,9 @@
     <EmbeddedResource Include="Controls\BuscaGrupoItem.resx">
       <DependentUpon>BuscaGrupoItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaGrupoPessoa.resx">
+      <DependentUpon>BuscaGrupoPessoa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaGrupoUsuario.resx">
       <DependentUpon>BuscaGrupoUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -443,6 +474,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaSubGrupoItem.resx">
       <DependentUpon>BuscaSubGrupoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaSubGrupoPessoa.resx">
+      <DependentUpon>BuscaSubGrupoPessoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaUnimedida.resx">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
@@ -471,6 +505,9 @@
     <EmbeddedResource Include="Forms\fmBuscaGrupoItem.resx">
       <DependentUpon>fmBuscaGrupoItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaGrupoPessoa.resx">
+      <DependentUpon>fmBuscaGrupoPessoa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -488,6 +525,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaSubGrupoItem.resx">
       <DependentUpon>fmBuscaSubGrupoItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaSubGrupoPessoa.resx">
+      <DependentUpon>fmBuscaSubGrupoPessoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaUnimedida.resx">
       <DependentUpon>fmBuscaUnimedida.cs</DependentUpon>

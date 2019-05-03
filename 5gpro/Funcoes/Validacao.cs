@@ -84,19 +84,6 @@ namespace _5gpro.Funcoes
             foreach (Control ctrl in controls)
             {
 
-                ////CONTROLS
-                //if (ctrl.Name.Equals("buscaSubGrupoItem"))
-                //{
-                //    ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
-                //    foreach (Control ctrlc in ctrl.Controls)
-                //    {
-                //        if (ctrlc is TextBox && !ctrlc.Name.Equals("tbAjuda"))
-                //        {
-                //            ctrlc.BackColor = System.Drawing.Color.White;
-                //        }
-                //    }
-                //}
-
                 //USERCONTROL
                 if (ctrl is UserControl)
                 {
@@ -122,7 +109,7 @@ namespace _5gpro.Funcoes
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
 
-                        if (ctrlgb is Controls.BuscaSubGrupoItem)
+                        if (ctrlgb is Controls.BuscaSubGrupoItem || ctrlgb is Controls.BuscaUnimedida)
                         {
                             ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                         }
@@ -138,7 +125,7 @@ namespace _5gpro.Funcoes
                         {
                             ctrlp.BackColor = System.Drawing.Color.White;
                         }
-                        if (ctrlp is Controls.BuscaSubGrupoItem)
+                        if (ctrlp is Controls.BuscaSubGrupoItem || ctrlp is Controls.BuscaUnimedida)
                         {
                             ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
                         }
