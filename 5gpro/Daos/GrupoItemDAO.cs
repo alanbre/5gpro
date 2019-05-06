@@ -3,9 +3,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -15,6 +12,41 @@ namespace _5gpro.Daos
         public GrupoItemDAO(ConexaoDAO c)
         {
             Connect = c;
+        }
+
+        public int SalvarOuAtualizar(GrupoItem grupoitem)
+        {
+            int retorno = 0;
+            try
+            {
+                Connect.AbrirConexao();
+
+                Connect.Comando = new MySqlCommand(@"INSERT INTO grupoitem 
+                          (idgrupoitem, nome) 
+                          VALUES
+                          (@idgrupoitem, @nome)
+                          ON DUPLICATE KEY UPDATE
+                           nome = @nome
+                         ;",
+                         Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitem.GrupoItemID);
+                Connect.Comando.Parameters.AddWithValue("@nome", grupoitem.Nome);
+
+
+
+                retorno = Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return retorno;
         }
 
         public IEnumerable<GrupoItem> BuscaTodos(string nome)
@@ -101,6 +133,42 @@ namespace _5gpro.Daos
             }
 
             return grupoitem;
+        }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT i1.idgrupoitem + 1 AS proximoid
+                                             FROM grupoitem AS i1
+                                             LEFT OUTER JOIN grupoitem AS i2 ON i1.idgrupoitem + 1 = i2.idgrupoitem
+                                             WHERE i2.idgrupoitem IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Connect.Conexao);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+                else
+                {
+                    proximoid = "1";
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return proximoid;
         }
 
     }

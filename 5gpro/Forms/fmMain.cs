@@ -34,6 +34,8 @@ namespace _5gpro
         //Cadastro de Operações = 040100
         //Cadastro de Contas a Receber = 050100
         //Cadastro de Contas a Pagar = 060100
+        //Cadastro de Grupo de Itens = 010500
+        //Cadastro de Grupo de Pessoas = 010600
 
         public fmMain()
         {
