@@ -29,7 +29,7 @@ namespace _5gpro.Controls
         public DecimalBox()
         {
             InitializeComponent();
-            //this._valor = Convert.ToDecimal(tbDecimal.Text);
+            tbDecimal.Size = this.Size;
         }
 
         private void TbDecimal_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);

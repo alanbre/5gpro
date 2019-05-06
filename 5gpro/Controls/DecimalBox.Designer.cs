@@ -38,6 +38,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDecimal.Location = new System.Drawing.Point(0, 0);
             this.tbDecimal.Margin = new System.Windows.Forms.Padding(0);
+            this.tbDecimal.MaximumSize = new System.Drawing.Size(1000, 1000);
             this.tbDecimal.Name = "tbDecimal";
             this.tbDecimal.Size = new System.Drawing.Size(100, 20);
             this.tbDecimal.TabIndex = 0;
