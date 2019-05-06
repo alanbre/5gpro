@@ -327,6 +327,8 @@ namespace _5gpro.Forms
                     }
                     pessoa.Atuacao = atuacoes;
 
+                    pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
+
                     ControlCollection controls = (ControlCollection)this.Controls;
                     bool ok = validacao.ValidarEntidade(pessoa, controls);
 

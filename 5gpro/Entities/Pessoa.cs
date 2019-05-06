@@ -28,6 +28,9 @@ namespace _5gpro.Entities
         public string Telefone { get; set; }
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoPessoa", AllowEmptyStrings = false)]
+        public SubGrupoPessoa SubGrupoPessoa { get; set; }
+
         public string Endereco
         {
             get

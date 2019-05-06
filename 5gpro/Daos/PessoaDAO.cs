@@ -30,12 +30,12 @@ namespace _5gpro.Daos
 
 
                 Connect.Comando.CommandText = @"INSERT INTO pessoa
-                         (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa)
+                         (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa)
                           VALUES
-                         (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa)
+                         (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa)
                           ON DUPLICATE KEY UPDATE
                           nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, complemento = @complemento,
-                          cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa
+                          cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa, idsubgrupopessoa = @idsubgrupopessoa
                           ";
 
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", pessoa.PessoaID);
@@ -60,6 +60,7 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@email", pessoa.Email);
                 Connect.Comando.Parameters.AddWithValue("@idcidade", pessoa.Cidade.CidadeID);
                 Connect.Comando.Parameters.AddWithValue("@tipoPessoa", pessoa.TipoPessoa);
+                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", pessoa.SubGrupoPessoa.SubGrupoPessoaID);
 
                 retorno = Connect.Comando.ExecuteNonQuery();
 
@@ -106,10 +107,23 @@ namespace _5gpro.Daos
         public Pessoa BuscaById(int cod)
         {
             Pessoa pessoa = new Pessoa();
+            SubGrupoPessoa subgrupopessoa = null;
+            GrupoPessoa grupopessoa = null;
+            Estado estado = null;
+            Cidade cidade = null;
+
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM pessoa WHERE idpessoa = @idpessoa", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT *, c.nome AS nomecidade, e.nome AS nomeestado, s.nome AS nomesubgrupopessoa, 
+                                                   g.nome AS nomegrupopessoa, p.nome AS nomepessoa
+                                                   FROM pessoa p
+                                                   INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
+                                                   INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
+                                                   INNER JOIN cidade c ON p.idcidade = c.idcidade
+                                                   INNER JOIN estado e ON e.idestado = c.idestado
+                                                   WHERE p.idpessoa = @idpessoa", Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", cod);
 
                 using (var reader = Connect.Comando.ExecuteReader())
@@ -117,6 +131,33 @@ namespace _5gpro.Daos
 
                     if (reader.Read())
                     {
+
+                        grupopessoa = new GrupoPessoa
+                        {
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
+                        };
+
+                        subgrupopessoa = new SubGrupoPessoa
+                        {
+                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
+                        };
+
+                        estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
+                            Uf = reader.GetString(reader.GetOrdinal("uf"))
+                        };
+
+                        cidade = new Cidade
+                        {
+                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
+                            Estado = estado
+                        };
+
                         pessoa = new Pessoa
                         {
                             PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
@@ -127,9 +168,10 @@ namespace _5gpro.Daos
                             Numero = reader.GetString(reader.GetOrdinal("numero")),
                             Bairro = reader.GetString(reader.GetOrdinal("bairro")),
                             Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = new CidadeDAO().BuscaCidadeByCod(reader.GetInt32(reader.GetOrdinal("idcidade"))),
+                            Cidade = cidade,
                             Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email"))
+                            Email = reader.GetString(reader.GetOrdinal("email")),
+                            SubGrupoPessoa = subgrupopessoa
                         };
                         pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
                     }
