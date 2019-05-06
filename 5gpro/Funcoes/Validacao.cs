@@ -113,6 +113,10 @@ namespace _5gpro.Funcoes
                         {
                             ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                         }
+                        if (ctrlgb is Controls.BuscaCidade || ctrlgb is Controls.BuscaSubGrupoPessoa)
+                        {
+                            ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
+                        }
                     }
                 }
 
@@ -126,6 +130,10 @@ namespace _5gpro.Funcoes
                             ctrlp.BackColor = System.Drawing.Color.White;
                         }
                         if (ctrlp is Controls.BuscaSubGrupoItem || ctrlp is Controls.BuscaUnimedida)
+                        {
+                            ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
+                        }
+                        if (ctrlp is Controls.BuscaCidade || ctrlp is Controls.BuscaSubGrupoPessoa)
                         {
                             ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
                         }

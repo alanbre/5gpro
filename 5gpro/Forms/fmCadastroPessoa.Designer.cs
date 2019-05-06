@@ -98,6 +98,7 @@
             this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
             this.buscaGrupoPessoa.Size = new System.Drawing.Size(442, 39);
             this.buscaGrupoPessoa.TabIndex = 7;
+            this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave);
             // 
             // gbAtuacao
             // 

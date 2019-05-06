@@ -30,7 +30,7 @@ namespace _5gpro.Daos
             {
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM subgrupoitem g 
+                                             FROM subgrupopessoa g 
                                              WHERE 1=1
                                              " + conGrupoPessoa + @"
                                              " + conNome + @"

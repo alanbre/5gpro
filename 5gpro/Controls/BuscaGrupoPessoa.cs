@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using _5gpro.Daos;
 using _5gpro.Entities;
@@ -116,18 +110,6 @@ namespace _5gpro.Controls
         private void TbCodigoGrupoPessoa_TextChanged(object sender, EventArgs e)
         {
             this.Text_Changed?.Invoke(this, e);
-
-            if (!int.TryParse(tbCodigoGrupoPessoa.Text, out int codigo)) { tbCodigoGrupoPessoa.Clear(); }
-            if (tbCodigoGrupoPessoa.Text.Length > 0)
-            {
-                grupoPessoa = grupoPessoaDAO.BuscarByID(int.Parse(tbCodigoGrupoPessoa.Text));
-                PreencheCamposGrupoPessoa(grupoPessoa);
-            }
-            else
-            {
-                grupoPessoa = null;
-                tbNomeGrupoPessoa.Clear();
-            }
         }
     }
 }
