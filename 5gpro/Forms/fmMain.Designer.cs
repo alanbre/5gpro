@@ -46,6 +46,7 @@
             this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.tESTETROCOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +75,8 @@
             this.tsmiCadastroUsuarios,
             this.tsmiCadastroGrupoUsuario,
             this.tsmiCadastroDeOperações,
-            this.cadastroDeGrupoDeItensToolStripMenuItem});
+            this.cadastroDeGrupoDeItensToolStripMenuItem,
+            this.tESTETROCOToolStripMenuItem});
             this.tsmiCadastros.Name = "tsmiCadastros";
             this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
             this.tsmiCadastros.Text = "Cadastro";
@@ -170,7 +172,7 @@
             // tsmiCarCadastroContaReceber
             // 
             this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(170, 22);
             this.tsmiCarCadastroContaReceber.Text = "Cadastro de conta";
             this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
             // 
@@ -185,7 +187,7 @@
             // tsmiCapCadastroConta
             // 
             this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(170, 22);
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
             // 
@@ -193,6 +195,13 @@
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
+            // 
+            // tESTETROCOToolStripMenuItem
+            // 
+            this.tESTETROCOToolStripMenuItem.Name = "tESTETROCOToolStripMenuItem";
+            this.tESTETROCOToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.tESTETROCOToolStripMenuItem.Text = "TESTE TROCO";
+            this.tESTETROCOToolStripMenuItem.Click += new System.EventHandler(this.TESTETROCOToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -232,6 +241,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCapCadastroConta;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroContaReceber;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeItensToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tESTETROCOToolStripMenuItem;
     }
 }
 

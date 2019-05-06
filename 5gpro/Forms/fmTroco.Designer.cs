@@ -53,13 +53,13 @@
             this.tbPagamento1 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento1 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pnTroco = new System.Windows.Forms.Panel();
+            this.lbValorTroco = new System.Windows.Forms.Label();
+            this.lbTroco = new System.Windows.Forms.Label();
+            this.btSalvar = new System.Windows.Forms.Button();
             this.pnTotal.SuspendLayout();
             this.gbFormasPagamento.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnTroco.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbTotal
@@ -81,7 +81,7 @@
             this.pnTotal.Location = new System.Drawing.Point(12, 12);
             this.pnTotal.Name = "pnTotal";
             this.pnTotal.Size = new System.Drawing.Size(299, 42);
-            this.pnTotal.TabIndex = 1;
+            this.pnTotal.TabIndex = 0;
             // 
             // lbValorTotal
             // 
@@ -119,7 +119,7 @@
             this.gbFormasPagamento.Location = new System.Drawing.Point(12, 60);
             this.gbFormasPagamento.Name = "gbFormasPagamento";
             this.gbFormasPagamento.Size = new System.Drawing.Size(299, 249);
-            this.gbFormasPagamento.TabIndex = 2;
+            this.gbFormasPagamento.TabIndex = 1;
             this.gbFormasPagamento.TabStop = false;
             this.gbFormasPagamento.Text = "Formas de pagamento";
             // 
@@ -130,9 +130,11 @@
             this.tbPagamento7.Name = "tbPagamento7";
             this.tbPagamento7.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento7.TabIndex = 20;
+            this.tbPagamento7.Leave += new System.EventHandler(this.TbPagamento7_Leave);
             // 
             // tbNomeFormaPagamento7
             // 
+            this.tbNomeFormaPagamento7.Enabled = false;
             this.tbNomeFormaPagamento7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento7.Location = new System.Drawing.Point(53, 211);
             this.tbNomeFormaPagamento7.Name = "tbNomeFormaPagamento7";
@@ -146,6 +148,8 @@
             this.tbCodigoFormaPagamento7.Name = "tbCodigoFormaPagamento7";
             this.tbCodigoFormaPagamento7.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento7.TabIndex = 18;
+            this.tbCodigoFormaPagamento7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento7_KeyUp);
+            this.tbCodigoFormaPagamento7.Leave += new System.EventHandler(this.TbCodigoFormaPagamento7_Leave);
             // 
             // tbPagamento6
             // 
@@ -154,6 +158,7 @@
             this.tbPagamento6.Name = "tbPagamento6";
             this.tbPagamento6.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento6.TabIndex = 17;
+            this.tbPagamento6.Leave += new System.EventHandler(this.TbPagamento6_Leave);
             // 
             // tbNomeFormaPagamento6
             // 
@@ -171,6 +176,8 @@
             this.tbCodigoFormaPagamento6.Name = "tbCodigoFormaPagamento6";
             this.tbCodigoFormaPagamento6.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento6.TabIndex = 15;
+            this.tbCodigoFormaPagamento6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento6_KeyUp);
+            this.tbCodigoFormaPagamento6.Leave += new System.EventHandler(this.TbCodigoFormaPagamento6_Leave);
             // 
             // tbPagamento5
             // 
@@ -179,6 +186,7 @@
             this.tbPagamento5.Name = "tbPagamento5";
             this.tbPagamento5.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento5.TabIndex = 14;
+            this.tbPagamento5.Leave += new System.EventHandler(this.TbPagamento5_Leave);
             // 
             // tbNomeFormaPagamento5
             // 
@@ -196,6 +204,8 @@
             this.tbCodigoFormaPagamento5.Name = "tbCodigoFormaPagamento5";
             this.tbCodigoFormaPagamento5.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento5.TabIndex = 12;
+            this.tbCodigoFormaPagamento5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento5_KeyUp);
+            this.tbCodigoFormaPagamento5.Leave += new System.EventHandler(this.TbCodigoFormaPagamento5_Leave);
             // 
             // tbPagamento4
             // 
@@ -204,6 +214,7 @@
             this.tbPagamento4.Name = "tbPagamento4";
             this.tbPagamento4.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento4.TabIndex = 11;
+            this.tbPagamento4.Leave += new System.EventHandler(this.TbPagamento4_Leave);
             // 
             // tbNomeFormaPagamento4
             // 
@@ -221,6 +232,8 @@
             this.tbCodigoFormaPagamento4.Name = "tbCodigoFormaPagamento4";
             this.tbCodigoFormaPagamento4.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento4.TabIndex = 9;
+            this.tbCodigoFormaPagamento4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento4_KeyUp);
+            this.tbCodigoFormaPagamento4.Leave += new System.EventHandler(this.TbCodigoFormaPagamento4_Leave);
             // 
             // tbPagamento3
             // 
@@ -229,6 +242,7 @@
             this.tbPagamento3.Name = "tbPagamento3";
             this.tbPagamento3.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento3.TabIndex = 8;
+            this.tbPagamento3.Leave += new System.EventHandler(this.TbPagamento3_Leave);
             // 
             // tbNomeFormaPagamento3
             // 
@@ -246,6 +260,8 @@
             this.tbCodigoFormaPagamento3.Name = "tbCodigoFormaPagamento3";
             this.tbCodigoFormaPagamento3.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento3.TabIndex = 6;
+            this.tbCodigoFormaPagamento3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento3_KeyUp);
+            this.tbCodigoFormaPagamento3.Leave += new System.EventHandler(this.TbCodigoFormaPagamento3_Leave);
             // 
             // tbPagamento2
             // 
@@ -254,6 +270,7 @@
             this.tbPagamento2.Name = "tbPagamento2";
             this.tbPagamento2.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento2.TabIndex = 5;
+            this.tbPagamento2.Leave += new System.EventHandler(this.TbPagamento2_Leave);
             // 
             // tbNomeFormaPagamento2
             // 
@@ -271,6 +288,8 @@
             this.tbCodigoFormaPagamento2.Name = "tbCodigoFormaPagamento2";
             this.tbCodigoFormaPagamento2.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento2.TabIndex = 3;
+            this.tbCodigoFormaPagamento2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento2_KeyUp);
+            this.tbCodigoFormaPagamento2.Leave += new System.EventHandler(this.TbCodigoFormaPagamento2_Leave);
             // 
             // tbPagamento1
             // 
@@ -279,6 +298,7 @@
             this.tbPagamento1.Name = "tbPagamento1";
             this.tbPagamento1.Size = new System.Drawing.Size(89, 26);
             this.tbPagamento1.TabIndex = 2;
+            this.tbPagamento1.Leave += new System.EventHandler(this.TbPagamento1_Leave);
             // 
             // tbNomeFormaPagamento1
             // 
@@ -296,50 +316,54 @@
             this.tbCodigoFormaPagamento1.Name = "tbCodigoFormaPagamento1";
             this.tbCodigoFormaPagamento1.Size = new System.Drawing.Size(41, 26);
             this.tbCodigoFormaPagamento1.TabIndex = 0;
+            this.tbCodigoFormaPagamento1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento1_KeyUp);
+            this.tbCodigoFormaPagamento1.Leave += new System.EventHandler(this.TbCodigoFormaPagamento1_Leave);
             // 
-            // panel2
+            // pnTroco
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Location = new System.Drawing.Point(12, 315);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(299, 42);
-            this.panel2.TabIndex = 2;
+            this.pnTroco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnTroco.Controls.Add(this.lbValorTroco);
+            this.pnTroco.Controls.Add(this.lbTroco);
+            this.pnTroco.Location = new System.Drawing.Point(12, 315);
+            this.pnTroco.Name = "pnTroco";
+            this.pnTroco.Size = new System.Drawing.Size(299, 42);
+            this.pnTroco.TabIndex = 2;
             // 
-            // label2
+            // lbValorTroco
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label2.Location = new System.Drawing.Point(222, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "R$ 0,00";
+            this.lbValorTroco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbValorTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbValorTroco.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbValorTroco.Location = new System.Drawing.Point(141, 9);
+            this.lbValorTroco.Name = "lbValorTroco";
+            this.lbValorTroco.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lbValorTroco.Size = new System.Drawing.Size(151, 20);
+            this.lbValorTroco.TabIndex = 1;
+            this.lbValorTroco.Text = "R$ 0,00";
+            this.lbValorTroco.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label3
+            // lbTroco
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label3.Location = new System.Drawing.Point(3, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Troco";
+            this.lbTroco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbTroco.AutoSize = true;
+            this.lbTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTroco.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.lbTroco.Location = new System.Drawing.Point(3, 9);
+            this.lbTroco.Name = "lbTroco";
+            this.lbTroco.Size = new System.Drawing.Size(54, 20);
+            this.lbTroco.TabIndex = 0;
+            this.lbTroco.Text = "Troco";
             // 
-            // button1
+            // btSalvar
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button1.Location = new System.Drawing.Point(12, 363);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(72, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Salvar - F2";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btSalvar.BackColor = System.Drawing.Color.Transparent;
+            this.btSalvar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btSalvar.Location = new System.Drawing.Point(12, 363);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(72, 23);
+            this.btSalvar.TabIndex = 3;
+            this.btSalvar.Text = "Salvar - F2";
+            this.btSalvar.UseVisualStyleBackColor = false;
             // 
             // fmTroco
             // 
@@ -347,8 +371,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(323, 399);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.btSalvar);
+            this.Controls.Add(this.pnTroco);
             this.Controls.Add(this.gbFormasPagamento);
             this.Controls.Add(this.pnTotal);
             this.KeyPreview = true;
@@ -358,12 +382,13 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Pagamento";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmTroco_KeyDown);
             this.pnTotal.ResumeLayout(false);
             this.pnTotal.PerformLayout();
             this.gbFormasPagamento.ResumeLayout(false);
             this.gbFormasPagamento.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnTroco.ResumeLayout(false);
+            this.pnTroco.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -395,9 +420,9 @@
         private System.Windows.Forms.TextBox tbPagamento1;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento1;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel pnTroco;
+        private System.Windows.Forms.Label lbValorTroco;
+        private System.Windows.Forms.Label lbTroco;
+        private System.Windows.Forms.Button btSalvar;
     }
 }
