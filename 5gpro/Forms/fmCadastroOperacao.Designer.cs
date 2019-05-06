@@ -196,7 +196,7 @@
             this.tpAvista.Location = new System.Drawing.Point(4, 22);
             this.tpAvista.Name = "tpAvista";
             this.tpAvista.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAvista.Size = new System.Drawing.Size(484, 195);
+            this.tpAvista.Size = new System.Drawing.Size(575, 195);
             this.tpAvista.TabIndex = 0;
             this.tpAvista.Text = "Opções A Vista";
             this.tpAvista.UseVisualStyleBackColor = true;
@@ -445,7 +445,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(834, 561);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.tcOpcoes);

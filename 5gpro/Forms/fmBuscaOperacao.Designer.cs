@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvOperacao = new System.Windows.Forms.DataGridView();
             this.lbNome = new System.Windows.Forms.Label();
             this.tbNomeOperacao = new System.Windows.Forms.TextBox();
@@ -42,8 +42,8 @@
             this.dgvOperacao.AllowUserToDeleteRows = false;
             this.dgvOperacao.AllowUserToOrderColumns = true;
             this.dgvOperacao.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvOperacao.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvOperacao.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOperacao.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvOperacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOperacao.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -89,6 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbNomeOperacao);

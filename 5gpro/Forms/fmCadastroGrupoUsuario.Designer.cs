@@ -48,10 +48,10 @@
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbIndice = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
@@ -267,23 +267,14 @@
             this.gbIndice.TabStop = false;
             this.gbIndice.Text = "Índice";
             // 
-            // label1
+            // label4
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "0 - Não visualiza";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 37);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(104, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "1 - Visualiza e busca";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(41, 80);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(170, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "3 - Visualiza, busca, grava e exclui";
             // 
             // label3
             // 
@@ -294,19 +285,29 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "2 - Visualiza, busca e grava";
             // 
-            // label4
+            // label2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 80);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(170, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "3 - Visualiza, busca, grava e exclui";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(41, 37);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(104, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "1 - Visualiza e busca";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(41, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "0 - Não visualiza";
             // 
             // fmCadastroGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(834, 579);
             this.Controls.Add(this.gbIndice);
             this.Controls.Add(this.menuVertical);

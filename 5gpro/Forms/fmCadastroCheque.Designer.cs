@@ -31,13 +31,13 @@
             this.menuVertical1 = new _5gpro.Controls.MenuVertical();
             this.buscaPessoa1 = new _5gpro.Controls.BuscaPessoa();
             this.gbDadosPessoais = new System.Windows.Forms.GroupBox();
-            this.gbTipo = new System.Windows.Forms.GroupBox();
-            this.rbCliente = new System.Windows.Forms.RadioButton();
-            this.rbFornecedor = new System.Windows.Forms.RadioButton();
-            this.lbCpfCnpj = new System.Windows.Forms.Label();
-            this.lbTelefone = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbTelefone = new System.Windows.Forms.Label();
+            this.lbCpfCnpj = new System.Windows.Forms.Label();
+            this.gbTipo = new System.Windows.Forms.GroupBox();
+            this.rbFornecedor = new System.Windows.Forms.RadioButton();
+            this.rbCliente = new System.Windows.Forms.RadioButton();
             this.gbDadosPessoais.SuspendLayout();
             this.gbTipo.SuspendLayout();
             this.SuspendLayout();
@@ -74,6 +74,42 @@
             this.gbDadosPessoais.TabStop = false;
             this.gbDadosPessoais.Text = "Dados Pessoais";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(251, 125);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(35, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "label4";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(186, 125);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "label3";
+            // 
+            // lbTelefone
+            // 
+            this.lbTelefone.AutoSize = true;
+            this.lbTelefone.Location = new System.Drawing.Point(113, 125);
+            this.lbTelefone.Name = "lbTelefone";
+            this.lbTelefone.Size = new System.Drawing.Size(49, 13);
+            this.lbTelefone.TabIndex = 4;
+            this.lbTelefone.Text = "Telefone";
+            // 
+            // lbCpfCnpj
+            // 
+            this.lbCpfCnpj.AutoSize = true;
+            this.lbCpfCnpj.Location = new System.Drawing.Point(10, 125);
+            this.lbCpfCnpj.Name = "lbCpfCnpj";
+            this.lbCpfCnpj.Size = new System.Drawing.Size(27, 13);
+            this.lbCpfCnpj.TabIndex = 3;
+            this.lbCpfCnpj.Text = "CPF";
+            // 
             // gbTipo
             // 
             this.gbTipo.Controls.Add(this.rbFornecedor);
@@ -84,17 +120,6 @@
             this.gbTipo.TabIndex = 2;
             this.gbTipo.TabStop = false;
             this.gbTipo.Text = "Tipo";
-            // 
-            // rbCliente
-            // 
-            this.rbCliente.AutoSize = true;
-            this.rbCliente.Location = new System.Drawing.Point(7, 20);
-            this.rbCliente.Name = "rbCliente";
-            this.rbCliente.Size = new System.Drawing.Size(57, 17);
-            this.rbCliente.TabIndex = 0;
-            this.rbCliente.TabStop = true;
-            this.rbCliente.Text = "Cliente";
-            this.rbCliente.UseVisualStyleBackColor = true;
             // 
             // rbFornecedor
             // 
@@ -107,46 +132,22 @@
             this.rbFornecedor.Text = "Fornecedor";
             this.rbFornecedor.UseVisualStyleBackColor = true;
             // 
-            // lbCpfCnpj
+            // rbCliente
             // 
-            this.lbCpfCnpj.AutoSize = true;
-            this.lbCpfCnpj.Location = new System.Drawing.Point(10, 125);
-            this.lbCpfCnpj.Name = "lbCpfCnpj";
-            this.lbCpfCnpj.Size = new System.Drawing.Size(27, 13);
-            this.lbCpfCnpj.TabIndex = 3;
-            this.lbCpfCnpj.Text = "CPF";
-            // 
-            // lbTelefone
-            // 
-            this.lbTelefone.AutoSize = true;
-            this.lbTelefone.Location = new System.Drawing.Point(113, 125);
-            this.lbTelefone.Name = "lbTelefone";
-            this.lbTelefone.Size = new System.Drawing.Size(49, 13);
-            this.lbTelefone.TabIndex = 4;
-            this.lbTelefone.Text = "Telefone";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(186, 125);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(251, 125);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "label4";
+            this.rbCliente.AutoSize = true;
+            this.rbCliente.Location = new System.Drawing.Point(7, 20);
+            this.rbCliente.Name = "rbCliente";
+            this.rbCliente.Size = new System.Drawing.Size(57, 17);
+            this.rbCliente.TabIndex = 0;
+            this.rbCliente.TabStop = true;
+            this.rbCliente.Text = "Cliente";
+            this.rbCliente.UseVisualStyleBackColor = true;
             // 
             // fmCadastroCheque
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.gbDadosPessoais);
             this.Controls.Add(this.menuVertical1);

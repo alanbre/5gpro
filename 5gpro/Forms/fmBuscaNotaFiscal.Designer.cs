@@ -41,6 +41,8 @@
             this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorTotalDocumento = new System.Windows.Forms.Label();
             this.tbFiltroValorTotalDocumentoInicial = new System.Windows.Forms.TextBox();
@@ -54,8 +56,6 @@
             this.lbAFiltroDataEmissao = new System.Windows.Forms.Label();
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
-            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -206,6 +206,23 @@
             this.gbFiltrosDocumento.TabStop = false;
             this.gbFiltrosDocumento.Text = "Filtros do documento";
             // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 54);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 42;
+            // 
+            // buscaCidade
+            // 
+            this.buscaCidade.Location = new System.Drawing.Point(3, 16);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 41;
+            // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(10, 143);
@@ -327,28 +344,12 @@
             this.dtpFiltroDataEmissaoInicial.TabIndex = 13;
             this.dtpFiltroDataEmissaoInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
-            // buscaCidade
-            // 
-            this.buscaCidade.Location = new System.Drawing.Point(3, 16);
-            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCidade.Name = "buscaCidade";
-            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 41;
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 54);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 42;
-            // 
             // fmBuscaNotaFiscal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1093, 461);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1093, 462);
             this.Controls.Add(this.gbGridDocumentos);
             this.Controls.Add(this.gbFiltrosDocumento);
             this.MinimumSize = new System.Drawing.Size(1000, 500);

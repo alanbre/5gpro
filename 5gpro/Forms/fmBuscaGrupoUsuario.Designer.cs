@@ -30,10 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoUsuario = new System.Windows.Forms.DataGridView();
-            this.tbFiltroNomeGrupoUsuario = new System.Windows.Forms.TextBox();
-            this.btPesquisar = new System.Windows.Forms.Button();
             this.DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridViewTextBoxNomeGrupoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tbFiltroNomeGrupoUsuario = new System.Windows.Forms.TextBox();
+            this.btPesquisar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoUsuario)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,6 +61,22 @@
             this.dgvGrupoUsuario.TabStop = false;
             this.dgvGrupoUsuario.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvGrupoUsuario_CellDoubleClick);
             // 
+            // DataGridViewTextBoxColumn
+            // 
+            this.DataGridViewTextBoxColumn.HeaderText = "Código";
+            this.DataGridViewTextBoxColumn.MinimumWidth = 80;
+            this.DataGridViewTextBoxColumn.Name = "DataGridViewTextBoxColumn";
+            this.DataGridViewTextBoxColumn.ReadOnly = true;
+            this.DataGridViewTextBoxColumn.Width = 80;
+            // 
+            // DataGridViewTextBoxNomeGrupoUsuario
+            // 
+            this.DataGridViewTextBoxNomeGrupoUsuario.HeaderText = "Nome";
+            this.DataGridViewTextBoxNomeGrupoUsuario.MinimumWidth = 250;
+            this.DataGridViewTextBoxNomeGrupoUsuario.Name = "DataGridViewTextBoxNomeGrupoUsuario";
+            this.DataGridViewTextBoxNomeGrupoUsuario.ReadOnly = true;
+            this.DataGridViewTextBoxNomeGrupoUsuario.Width = 250;
+            // 
             // tbFiltroNomeGrupoUsuario
             // 
             this.tbFiltroNomeGrupoUsuario.Location = new System.Drawing.Point(13, 17);
@@ -79,27 +95,12 @@
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
-            // DataGridViewTextBoxColumn
-            // 
-            this.DataGridViewTextBoxColumn.HeaderText = "Código";
-            this.DataGridViewTextBoxColumn.MinimumWidth = 80;
-            this.DataGridViewTextBoxColumn.Name = "DataGridViewTextBoxColumn";
-            this.DataGridViewTextBoxColumn.ReadOnly = true;
-            this.DataGridViewTextBoxColumn.Width = 80;
-            // 
-            // DataGridViewTextBoxNomeGrupoUsuario
-            // 
-            this.DataGridViewTextBoxNomeGrupoUsuario.HeaderText = "Nome";
-            this.DataGridViewTextBoxNomeGrupoUsuario.MinimumWidth = 250;
-            this.DataGridViewTextBoxNomeGrupoUsuario.Name = "DataGridViewTextBoxNomeGrupoUsuario";
-            this.DataGridViewTextBoxNomeGrupoUsuario.ReadOnly = true;
-            this.DataGridViewTextBoxNomeGrupoUsuario.Width = 250;
-            // 
             // fmBuscaGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 461);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(584, 462);
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbFiltroNomeGrupoUsuario);
             this.Controls.Add(this.dgvGrupoUsuario);
