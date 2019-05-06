@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -133,6 +134,12 @@ namespace _5gpro.Daos
             if (contaReceber != null)
                 contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
+        }
+
+        public IEnumerable<ContaReceber> Busca(fmBuscaContaReceber.Filtros f )
+        {
+            var contaRecebers = new List<ContaReceber>();
+            return contaRecebers;
         }
 
         public int BuscaProxCodigoDisponivel()

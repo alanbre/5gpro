@@ -20,3 +20,4 @@ artifacts/
 .vs/5gpro/v16/Server/sqlite3/storage.ide
 5gpro/Daos/ConexaoDAO.cs
 5gpro/Funcoes/DatabaseUpdate.cs
+5gpro/Funcoes/DatabaseUpdate.cs
