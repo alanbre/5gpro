@@ -554,6 +554,57 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`conta_pagar`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_pagar` (
+  `idconta_pagar` INT NOT NULL,
+  `data_cadastro` DATETIME NOT NULL,
+  `valor_original` DECIMAL(10,2) NOT NULL,
+  `multa` DECIMAL(10,2) NOT NULL,
+  `juros` DECIMAL(10,2) NOT NULL,
+  `valor_final` DECIMAL(10,2) NOT NULL,
+  `idpessoa` INT(11) NOT NULL,
+  PRIMARY KEY (`idconta_pagar`),
+  INDEX `fk_conta_pagar_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_conta_pagar_pessoa1`
+    FOREIGN KEY (`idpessoa`)
+    REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`parcela_conta_pagar`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
+  `idparcela_conta_pagar` INT NOT NULL AUTO_INCREMENT,
+  `sequencia` INT NULL,
+  `data_vencimento` DATETIME NULL,
+  `valor` DECIMAL(10,2) NULL,
+  `multa` DECIMAL(10,2) NULL,
+  `juros` DECIMAL(10,2) NULL,
+  `valor_final` DECIMAL(10,2) NULL,
+  `data_quitacao` DATETIME NULL,
+  `idconta_pagar` INT NOT NULL,
+  `idformapagamento` INT NULL,
+  PRIMARY KEY (`idparcela_conta_pagar`),
+  INDEX `fk_parcela_conta_pagar_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
+  INDEX `fk_parcela_conta_pagar_conta_pagar1_idx` (`idconta_pagar` ASC) VISIBLE,
+  CONSTRAINT `fk_parcela_conta_pagar_formapagamento1`
+    FOREIGN KEY (`idformapagamento`)
+    REFERENCES `5gprodatabase`.`formapagamento` (`idformapagamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_parcela_conta_pagar_conta_pagar1`
+    FOREIGN KEY (`idconta_pagar`)
+    REFERENCES `5gprodatabase`.`conta_pagar` (`idconta_pagar`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

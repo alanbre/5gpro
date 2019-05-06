@@ -17,7 +17,7 @@ namespace _5gpro.Forms
         {
             public Pessoa filtroPessoa;
             public Operacao filtroOperacao;
-            public decimal filtroValorIinicial;
+            public decimal filtroValorInicial;
             public decimal filtroValorFinal;
             public DateTime filtroDataCadastroInicial;
             public DateTime filtroDataCadastroFinal;
@@ -33,6 +33,13 @@ namespace _5gpro.Forms
         }
 
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
+        private void DgvContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvContas.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvContas.Rows[selectedRowIndex];
+            contaReceberSelecionada = contaReceberDAO.BuscaById(Convert.ToInt32(selectedRow.Cells[0].Value));
+            this.Close();
+        }
 
 
 
@@ -42,7 +49,7 @@ namespace _5gpro.Forms
             {
                 filtroOperacao = buscaOperacao.operacao,
                 filtroPessoa = buscaPessoa.pessoa,
-                filtroValorIinicial = dbValorInicial.Valor,
+                filtroValorInicial = dbValorInicial.Valor,
                 filtroValorFinal = dbValorFinal.Valor,
                 filtroDataCadastroInicial = dtpDataCadastroInicial.Value,
                 filtroDataCadastroFinal = dtpDataCadastroFinal.Value,
@@ -58,7 +65,6 @@ namespace _5gpro.Forms
 
             dgvContas.Refresh();
         }
-
         private void DatasIniciais()
         {
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);

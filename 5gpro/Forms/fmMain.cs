@@ -146,10 +146,17 @@ namespace _5gpro
             formCadOperacao.Show(this);
         }
 
-        private void TsmiCadastroContaReceber_Click(object sender, EventArgs e)
+        private void TsmiCarCadastroContaReceber_Click(object sender, EventArgs e)
         {
-            var formCadContaReceber = new fmCarCadastroConta();
-            formCadContaReceber.Show(this);
+            var formCarCadContaReceber = new fmCarCadastroConta();
+            formCarCadContaReceber.Show(this);
+        }
+
+
+        private void TsmiCapCadastroContaReceber_Click(object sender, EventArgs e)
+        {
+            var formCapCadContaPagar = new fmCapCadastroConta();
+            formCapCadContaPagar.Show(this);
         }
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
