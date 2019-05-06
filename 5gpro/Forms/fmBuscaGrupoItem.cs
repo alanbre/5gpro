@@ -62,5 +62,20 @@ namespace _5gpro.Forms
             grupoitemSelecionado = listagrupoitem.Find(g => g.GrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
+
+        private void BtCancelar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtSalvar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtNovo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

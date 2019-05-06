@@ -44,6 +44,8 @@
             this.tsmiCarCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.contasAPagarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroDeGrupoDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +73,8 @@
             this.tsmiCadastroItens,
             this.tsmiCadastroUsuarios,
             this.tsmiCadastroGrupoUsuario,
-            this.tsmiCadastroDeOperações});
+            this.tsmiCadastroDeOperações,
+            this.cadastroDeGrupoDeItensToolStripMenuItem});
             this.tsmiCadastros.Name = "tsmiCadastros";
             this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
             this.tsmiCadastros.Text = "Cadastro";
@@ -179,6 +182,13 @@
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
             // 
+            // cadastroDeGrupoDeItensToolStripMenuItem
+            // 
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Name = "cadastroDeGrupoDeItensToolStripMenuItem";
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Text = "Cadastro de Grupo de Itens";
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeGrupoDeItensToolStripMenuItem_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -215,6 +225,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastroContaReceber;
         private System.Windows.Forms.ToolStripMenuItem contasAPagarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapCadastroConta;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroContaReceber;
+        private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeItensToolStripMenuItem;
     }
 }
 

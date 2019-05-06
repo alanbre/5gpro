@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.buscaSubGrupoPessoa = new _5gpro.Controls.BuscaSubGrupoPessoa();
+            this.buscaGrupoPessoa = new _5gpro.Controls.BuscaGrupoPessoa();
             this.gbAtuacao = new System.Windows.Forms.GroupBox();
             this.cblAtuacao = new System.Windows.Forms.CheckedListBox();
             this.tbFantasia = new System.Windows.Forms.TextBox();
@@ -41,6 +43,7 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
             this.mtbTelefone = new System.Windows.Forms.MaskedTextBox();
@@ -57,7 +60,6 @@
             this.lbRua = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.pnDadosGerais.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
@@ -69,6 +71,8 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.buscaSubGrupoPessoa);
+            this.pnDadosGerais.Controls.Add(this.buscaGrupoPessoa);
             this.pnDadosGerais.Controls.Add(this.gbAtuacao);
             this.pnDadosGerais.Controls.Add(this.tbFantasia);
             this.pnDadosGerais.Controls.Add(this.lbFantasia);
@@ -78,8 +82,23 @@
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
             this.pnDadosGerais.Location = new System.Drawing.Point(69, 12);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 138);
+            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 237);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // buscaSubGrupoPessoa
+            // 
+            this.buscaSubGrupoPessoa.Location = new System.Drawing.Point(10, 179);
+            this.buscaSubGrupoPessoa.Name = "buscaSubGrupoPessoa";
+            this.buscaSubGrupoPessoa.Size = new System.Drawing.Size(442, 39);
+            this.buscaSubGrupoPessoa.TabIndex = 8;
+            // 
+            // buscaGrupoPessoa
+            // 
+            this.buscaGrupoPessoa.Location = new System.Drawing.Point(10, 134);
+            this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
+            this.buscaGrupoPessoa.Size = new System.Drawing.Size(442, 39);
+            this.buscaGrupoPessoa.TabIndex = 7;
+            this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave);
             // 
             // gbAtuacao
             // 
@@ -166,7 +185,7 @@
             // 
             this.gbTipoDePessoa.Controls.Add(this.rbPessoaJuridica);
             this.gbTipoDePessoa.Controls.Add(this.rbPessoaFisica);
-            this.gbTipoDePessoa.Location = new System.Drawing.Point(69, 156);
+            this.gbTipoDePessoa.Location = new System.Drawing.Point(69, 255);
             this.gbTipoDePessoa.Name = "gbTipoDePessoa";
             this.gbTipoDePessoa.Size = new System.Drawing.Size(215, 45);
             this.gbTipoDePessoa.TabIndex = 1;
@@ -218,10 +237,18 @@
             this.pnDados.Controls.Add(this.lbNumero);
             this.pnDados.Controls.Add(this.tbRua);
             this.pnDados.Controls.Add(this.lbRua);
-            this.pnDados.Location = new System.Drawing.Point(69, 207);
+            this.pnDados.Location = new System.Drawing.Point(69, 306);
             this.pnDados.Name = "pnDados";
-            this.pnDados.Size = new System.Drawing.Size(1110, 305);
+            this.pnDados.Size = new System.Drawing.Size(1110, 299);
             this.pnDados.TabIndex = 2;
+            // 
+            // buscaCidade
+            // 
+            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 15;
             // 
             // tbEmail
             // 
@@ -355,7 +382,7 @@
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 530);
+            this.tbAjuda.Location = new System.Drawing.Point(72, 623);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
@@ -376,19 +403,11 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
-            // buscaCidade
-            // 
-            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
-            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCidade.Name = "buscaCidade";
-            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 15;
-            // 
             // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1194, 562);
+            this.ClientSize = new System.Drawing.Size(1194, 655);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.pnDados);
@@ -449,5 +468,7 @@
         private System.Windows.Forms.CheckedListBox cblAtuacao;
         private Controls.MenuVertical menuVertical;
         private Controls.BuscaCidade buscaCidade;
+        private Controls.BuscaSubGrupoPessoa buscaSubGrupoPessoa;
+        private Controls.BuscaGrupoPessoa buscaGrupoPessoa;
     }
 }

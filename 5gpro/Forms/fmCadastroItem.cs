@@ -260,17 +260,8 @@ namespace _5gpro.Forms
             tbPrecoVenda.Clear();
             rbProduto.Checked = true;
             rbServico.Checked = false;
-            buscaGrupoItemTelaCadItem.Limpa();
+            buscaGrupoItem.Limpa();
             buscaSubGrupoItem.Limpa();
-        }
-
-        private void PreencheCamposUnimedida(Unimedida unimedida)
-        {
-            if (unimedida != null)
-            {
-                //tbCodUnimedida.Text = unimedida.UnimedidaID.ToString();
-                //tbDescricaoUndMedida.Text = unimedida.Descricao;
-            }
         }
 
         private void NovoCadastro()
@@ -299,14 +290,6 @@ namespace _5gpro.Forms
             }
         }
 
-        private void AbreTelaBuscaUnimedida()
-        {
-            var buscaUnimedida = new fmBuscaUnimedida();
-            buscaUnimedida.ShowDialog();
-            unimedida = buscaUnimedida.Unimedida;
-            PreencheCamposUnimedida(unimedida);
-        }
-
         private void PreencheCampos(Item item)
         {
             ignoraCheckEvent = true;
@@ -314,13 +297,7 @@ namespace _5gpro.Forms
             tbCodigo.Text = item.ItemID.ToString();
             tbDescricao.Text = item.Descricao;
             tbDescricaoDeCompra.Text = item.DescCompra;
-
-
-            if (item.Unimedida != null)
-            {
-                unimedida = unimedidaDAO.BuscaUnimedidaByID(item.Unimedida.UnimedidaID);
-                PreencheCamposUnimedida(unimedida);
-            }
+          
 
             if (item.TipoItem == "P")
             {
@@ -338,8 +315,9 @@ namespace _5gpro.Forms
             tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = item.ValorSaida.ToString();
 
-            buscaGrupoItemTelaCadItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
+            buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
             buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
+
 
             ignoraCheckEvent = false;
         }
@@ -581,14 +559,14 @@ namespace _5gpro.Forms
         {
             if (!ignoraCheckEvent) { Editando(true); }
 
-            if (buscaGrupoItemTelaCadItem.grupoItem != null)
+            if (buscaGrupoItem.grupoItem != null)
             {
                 buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
+                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
             }
             else
             {
-                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItemTelaCadItem.grupoItem);
+                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
                 buscaSubGrupoItem.Limpa();
                 buscaSubGrupoItem.EscolhaOGrupo();
             }

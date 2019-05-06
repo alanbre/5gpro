@@ -50,7 +50,7 @@
             this.tbNomeGrupoPessoa.Name = "tbNomeGrupoPessoa";
             this.tbNomeGrupoPessoa.ReadOnly = true;
             this.tbNomeGrupoPessoa.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeGrupoPessoa.TabIndex = 1;
+            this.tbNomeGrupoPessoa.TabIndex = 0;
             // 
             // btBuscaGrupoPessoa
             // 
@@ -58,7 +58,7 @@
             this.btBuscaGrupoPessoa.Location = new System.Drawing.Point(70, 16);
             this.btBuscaGrupoPessoa.Name = "btBuscaGrupoPessoa";
             this.btBuscaGrupoPessoa.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaGrupoPessoa.TabIndex = 2;
+            this.btBuscaGrupoPessoa.TabIndex = 0;
             this.btBuscaGrupoPessoa.UseVisualStyleBackColor = true;
             this.btBuscaGrupoPessoa.Click += new System.EventHandler(this.BtBuscaGrupoPessoa_Click);
             // 
@@ -68,7 +68,7 @@
             this.lbGrupoPessoa.Location = new System.Drawing.Point(3, 1);
             this.lbGrupoPessoa.Name = "lbGrupoPessoa";
             this.lbGrupoPessoa.Size = new System.Drawing.Size(74, 13);
-            this.lbGrupoPessoa.TabIndex = 3;
+            this.lbGrupoPessoa.TabIndex = 0;
             this.lbGrupoPessoa.Text = "Grupo Pessoa";
             // 
             // BuscaGrupoPessoa

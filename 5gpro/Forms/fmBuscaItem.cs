@@ -20,13 +20,6 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-
         private void BuscaItens()
         {
 

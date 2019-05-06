@@ -21,12 +21,15 @@ namespace _5gpro.Entities
         public string Bairro { get; set; }
         public string Complemento { get; set; }
 
-        [Required(ErrorMessage = "A Cidade é obrigatória.|tbCodCidade", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "A Cidade é obrigatória.|buscaCidade", AllowEmptyStrings = false)]
         public Cidade Cidade { get; set; }
 
         public string CpfCnpj { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoPessoa", AllowEmptyStrings = false)]
+        public SubGrupoPessoa SubGrupoPessoa { get; set; }
 
         public string Endereco
         {

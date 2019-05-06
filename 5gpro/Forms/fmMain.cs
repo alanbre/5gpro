@@ -176,5 +176,10 @@ namespace _5gpro
             }
         }
 
+        private void CadastroDeGrupoDeItensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoItem = new fmCadastroGrupoItem();
+            formCadGrupoItem.Show(this);
+        }
     }
 }
