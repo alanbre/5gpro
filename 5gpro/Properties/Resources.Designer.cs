@@ -93,6 +93,36 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Left_22px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Left_22px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Right_22px_ {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Right_22px_", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_search_filled_blue_17px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_search_filled_blue_17px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosDelete_22px_Red {
             get {
                 object obj = ResourceManager.GetObject("iosDelete_22px_Red", resourceCulture);
@@ -516,6 +546,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap plus_32_blue {
             get {
                 object obj = ResourceManager.GetObject("plus_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap refresh_22px {
+            get {
+                object obj = ResourceManager.GetObject("refresh_22px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

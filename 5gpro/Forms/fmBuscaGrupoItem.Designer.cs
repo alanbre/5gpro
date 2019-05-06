@@ -31,8 +31,19 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoItens = new System.Windows.Forms.DataGridView();
             this.tbNomeGrupoIten = new System.Windows.Forms.TextBox();
-            this.btPesquisar = new System.Windows.Forms.Button();
+            this.gbNovo = new System.Windows.Forms.GroupBox();
+            this.lbCodigo = new System.Windows.Forms.Label();
+            this.lbNome = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btNovo = new System.Windows.Forms.Button();
+            this.btSalvar = new System.Windows.Forms.Button();
+            this.btCancelar = new System.Windows.Forms.Button();
+            this.gbBusca = new System.Windows.Forms.GroupBox();
+            this.lbNomeBusca = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoItens)).BeginInit();
+            this.gbNovo.SuspendLayout();
+            this.gbBusca.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvGrupoItens
@@ -46,43 +57,131 @@
             this.dgvGrupoItens.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvGrupoItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrupoItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvGrupoItens.Location = new System.Drawing.Point(12, 38);
+            this.dgvGrupoItens.Location = new System.Drawing.Point(6, 70);
             this.dgvGrupoItens.MultiSelect = false;
             this.dgvGrupoItens.Name = "dgvGrupoItens";
             this.dgvGrupoItens.ReadOnly = true;
             this.dgvGrupoItens.RowHeadersVisible = false;
             this.dgvGrupoItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrupoItens.Size = new System.Drawing.Size(298, 308);
+            this.dgvGrupoItens.Size = new System.Drawing.Size(286, 156);
             this.dgvGrupoItens.TabIndex = 0;
             this.dgvGrupoItens.TabStop = false;
             this.dgvGrupoItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvGrupoItens_CellDoubleClick);
             // 
             // tbNomeGrupoIten
             // 
-            this.tbNomeGrupoIten.Location = new System.Drawing.Point(12, 12);
+            this.tbNomeGrupoIten.Location = new System.Drawing.Point(6, 44);
             this.tbNomeGrupoIten.Name = "tbNomeGrupoIten";
-            this.tbNomeGrupoIten.Size = new System.Drawing.Size(217, 20);
+            this.tbNomeGrupoIten.Size = new System.Drawing.Size(286, 20);
             this.tbNomeGrupoIten.TabIndex = 1;
             this.tbNomeGrupoIten.TextChanged += new System.EventHandler(this.TbNomeGrupoIten_TextChanged);
             // 
-            // btPesquisar
+            // gbNovo
             // 
-            this.btPesquisar.Location = new System.Drawing.Point(235, 10);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btPesquisar.TabIndex = 2;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
+            this.gbNovo.Controls.Add(this.textBox2);
+            this.gbNovo.Controls.Add(this.textBox1);
+            this.gbNovo.Controls.Add(this.lbNome);
+            this.gbNovo.Controls.Add(this.lbCodigo);
+            this.gbNovo.Location = new System.Drawing.Point(41, 12);
+            this.gbNovo.Name = "gbNovo";
+            this.gbNovo.Size = new System.Drawing.Size(269, 121);
+            this.gbNovo.TabIndex = 3;
+            this.gbNovo.TabStop = false;
+            this.gbNovo.Text = "Novo";
+            // 
+            // lbCodigo
+            // 
+            this.lbCodigo.AutoSize = true;
+            this.lbCodigo.Location = new System.Drawing.Point(7, 28);
+            this.lbCodigo.Name = "lbCodigo";
+            this.lbCodigo.Size = new System.Drawing.Size(40, 13);
+            this.lbCodigo.TabIndex = 0;
+            this.lbCodigo.Text = "Código";
+            // 
+            // lbNome
+            // 
+            this.lbNome.AutoSize = true;
+            this.lbNome.Location = new System.Drawing.Point(7, 68);
+            this.lbNome.Name = "lbNome";
+            this.lbNome.Size = new System.Drawing.Size(82, 13);
+            this.lbNome.TabIndex = 1;
+            this.lbNome.Text = "Nome do Grupo";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(10, 45);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(79, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(10, 85);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(156, 20);
+            this.textBox2.TabIndex = 3;
+            // 
+            // btNovo
+            // 
+            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
+            this.btNovo.Location = new System.Drawing.Point(12, 36);
+            this.btNovo.Name = "btNovo";
+            this.btNovo.Size = new System.Drawing.Size(23, 21);
+            this.btNovo.TabIndex = 4;
+            this.btNovo.UseVisualStyleBackColor = true;
+            this.btNovo.Click += new System.EventHandler(this.BtNovo_Click);
+            // 
+            // btSalvar
+            // 
+            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_22px_Green;
+            this.btSalvar.Location = new System.Drawing.Point(12, 63);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(23, 22);
+            this.btSalvar.TabIndex = 5;
+            this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
+            // 
+            // btCancelar
+            // 
+            this.btCancelar.Image = global::_5gpro.Properties.Resources.iosDelete_22px_Red;
+            this.btCancelar.Location = new System.Drawing.Point(12, 91);
+            this.btCancelar.Name = "btCancelar";
+            this.btCancelar.Size = new System.Drawing.Size(23, 22);
+            this.btCancelar.TabIndex = 6;
+            this.btCancelar.UseVisualStyleBackColor = true;
+            this.btCancelar.Click += new System.EventHandler(this.BtCancelar_Click);
+            // 
+            // gbBusca
+            // 
+            this.gbBusca.Controls.Add(this.lbNomeBusca);
+            this.gbBusca.Controls.Add(this.dgvGrupoItens);
+            this.gbBusca.Controls.Add(this.tbNomeGrupoIten);
+            this.gbBusca.Location = new System.Drawing.Point(12, 139);
+            this.gbBusca.Name = "gbBusca";
+            this.gbBusca.Size = new System.Drawing.Size(298, 232);
+            this.gbBusca.TabIndex = 7;
+            this.gbBusca.TabStop = false;
+            this.gbBusca.Text = "Busca";
+            // 
+            // lbNomeBusca
+            // 
+            this.lbNomeBusca.AutoSize = true;
+            this.lbNomeBusca.Location = new System.Drawing.Point(7, 25);
+            this.lbNomeBusca.Name = "lbNomeBusca";
+            this.lbNomeBusca.Size = new System.Drawing.Size(35, 13);
+            this.lbNomeBusca.TabIndex = 2;
+            this.lbNomeBusca.Text = "Nome";
             // 
             // fmBuscaGrupoItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 358);
-            this.Controls.Add(this.btPesquisar);
-            this.Controls.Add(this.tbNomeGrupoIten);
-            this.Controls.Add(this.dgvGrupoItens);
+            this.ClientSize = new System.Drawing.Size(322, 395);
+            this.Controls.Add(this.gbBusca);
+            this.Controls.Add(this.btCancelar);
+            this.Controls.Add(this.btSalvar);
+            this.Controls.Add(this.btNovo);
+            this.Controls.Add(this.gbNovo);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -93,8 +192,11 @@
             this.Text = "Busca de Grupo de Itens";
             this.Load += new System.EventHandler(this.FmBuscaGrupoItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoItens)).EndInit();
+            this.gbNovo.ResumeLayout(false);
+            this.gbNovo.PerformLayout();
+            this.gbBusca.ResumeLayout(false);
+            this.gbBusca.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -102,6 +204,15 @@
 
         private System.Windows.Forms.DataGridView dgvGrupoItens;
         private System.Windows.Forms.TextBox tbNomeGrupoIten;
-        private System.Windows.Forms.Button btPesquisar;
+        private System.Windows.Forms.GroupBox gbNovo;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label lbNome;
+        private System.Windows.Forms.Label lbCodigo;
+        private System.Windows.Forms.Button btNovo;
+        private System.Windows.Forms.Button btSalvar;
+        private System.Windows.Forms.Button btCancelar;
+        private System.Windows.Forms.GroupBox gbBusca;
+        private System.Windows.Forms.Label lbNomeBusca;
     }
 }

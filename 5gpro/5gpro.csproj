@@ -194,6 +194,12 @@
     <Compile Include="Controls\MenuVertical.Designer.cs">
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MiniMenuVertical.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MiniMenuVertical.Designer.cs">
+      <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </Compile>
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
@@ -330,6 +336,12 @@
     </Compile>
     <Compile Include="Forms\fmCadastroCheque.Designer.cs">
       <DependentUpon>fmCadastroCheque.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCadastroGrupoItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroGrupoItem.Designer.cs">
+      <DependentUpon>fmCadastroGrupoItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmCadastroGrupoUsuario.cs">
       <SubType>Form</SubType>
@@ -487,6 +499,9 @@
     <EmbeddedResource Include="Controls\MenuVertical.resx">
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
+      <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -540,6 +555,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroFuncionario.resx">
       <DependentUpon>fmCadastroFuncionario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroGrupoItem.resx">
+      <DependentUpon>fmCadastroGrupoItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroGrupoUsuario.resx">
       <DependentUpon>fmCadastroGrupoUsuario.cs</DependentUpon>
@@ -780,6 +798,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh_22px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Left_22px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Right_22px_.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_search_filled_blue_17px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
