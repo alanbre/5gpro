@@ -111,7 +111,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(296, 216);
-            this.Controls.Add(this.miniMenuVertical1);
+            this.Controls.Add(this.miniMenuVertical);
             this.Controls.Add(this.gbNovoGrupoItem);
             this.KeyPreview = true;
             this.MaximizeBox = false;

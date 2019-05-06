@@ -31,14 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoItens = new System.Windows.Forms.DataGridView();
             this.tbNomeGrupoIten = new System.Windows.Forms.TextBox();
-            this.gbNovo = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lbNome = new System.Windows.Forms.Label();
-            this.lbCodigo = new System.Windows.Forms.Label();
-            this.btNovo = new System.Windows.Forms.Button();
-            this.btSalvar = new System.Windows.Forms.Button();
-            this.btCancelar = new System.Windows.Forms.Button();
             this.gbBusca = new System.Windows.Forms.GroupBox();
             this.lbNomeBusca = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoItens)).BeginInit();
@@ -75,81 +67,6 @@
             this.tbNomeGrupoIten.TabIndex = 1;
             this.tbNomeGrupoIten.TextChanged += new System.EventHandler(this.TbNomeGrupoIten_TextChanged);
             // 
-            // gbNovo
-            // 
-            this.gbNovo.Controls.Add(this.textBox2);
-            this.gbNovo.Controls.Add(this.textBox1);
-            this.gbNovo.Controls.Add(this.lbNome);
-            this.gbNovo.Controls.Add(this.lbCodigo);
-            this.gbNovo.Location = new System.Drawing.Point(41, 12);
-            this.gbNovo.Name = "gbNovo";
-            this.gbNovo.Size = new System.Drawing.Size(269, 121);
-            this.gbNovo.TabIndex = 3;
-            this.gbNovo.TabStop = false;
-            this.gbNovo.Text = "Novo";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(10, 85);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(156, 20);
-            this.textBox2.TabIndex = 3;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(10, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(79, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // lbNome
-            // 
-            this.lbNome.AutoSize = true;
-            this.lbNome.Location = new System.Drawing.Point(7, 68);
-            this.lbNome.Name = "lbNome";
-            this.lbNome.Size = new System.Drawing.Size(82, 13);
-            this.lbNome.TabIndex = 1;
-            this.lbNome.Text = "Nome do Grupo";
-            // 
-            // lbCodigo
-            // 
-            this.lbCodigo.AutoSize = true;
-            this.lbCodigo.Location = new System.Drawing.Point(7, 28);
-            this.lbCodigo.Name = "lbCodigo";
-            this.lbCodigo.Size = new System.Drawing.Size(40, 13);
-            this.lbCodigo.TabIndex = 0;
-            this.lbCodigo.Text = "Código";
-            // 
-            // btNovo
-            // 
-            this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
-            this.btNovo.Location = new System.Drawing.Point(12, 36);
-            this.btNovo.Name = "btNovo";
-            this.btNovo.Size = new System.Drawing.Size(23, 21);
-            this.btNovo.TabIndex = 4;
-            this.btNovo.UseVisualStyleBackColor = true;
-            this.btNovo.Click += new System.EventHandler(this.BtNovo_Click);
-            // 
-            // btSalvar
-            // 
-            this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_22px_Green;
-            this.btSalvar.Location = new System.Drawing.Point(12, 63);
-            this.btSalvar.Name = "btSalvar";
-            this.btSalvar.Size = new System.Drawing.Size(23, 22);
-            this.btSalvar.TabIndex = 5;
-            this.btSalvar.UseVisualStyleBackColor = true;
-            this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
-            // 
-            // btCancelar
-            // 
-            this.btCancelar.Image = global::_5gpro.Properties.Resources.iosDelete_22px_Red;
-            this.btCancelar.Location = new System.Drawing.Point(12, 91);
-            this.btCancelar.Name = "btCancelar";
-            this.btCancelar.Size = new System.Drawing.Size(23, 22);
-            this.btCancelar.TabIndex = 6;
-            this.btCancelar.UseVisualStyleBackColor = true;
-            this.btCancelar.Click += new System.EventHandler(this.BtCancelar_Click);
-            // 
             // gbBusca
             // 
             this.gbBusca.Controls.Add(this.lbNomeBusca);
@@ -176,7 +93,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(322, 395);
+            this.ClientSize = new System.Drawing.Size(322, 253);
             this.Controls.Add(this.gbBusca);
             this.KeyPreview = true;
             this.MaximizeBox = false;
