@@ -72,9 +72,9 @@
             this.lbValorOriginalConta = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.buscaFormaPagamento = new _5gpro.Controls.BuscaFormaPagamento();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbDadosConta.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -452,9 +452,7 @@
             this.tbValorFinalConta.Size = new System.Drawing.Size(82, 20);
             this.tbValorFinalConta.TabIndex = 7;
             this.tbValorFinalConta.Text = "0,00";
-            this.tbValorFinalConta.TextChanged += new System.EventHandler(this.TbValorFinalConta_TextChanged);
             this.tbValorFinalConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorFinalConta_KeyPress);
-            this.tbValorFinalConta.Leave += new System.EventHandler(this.TbValorFinalConta_Leave);
             // 
             // lbValorTotalConta
             // 
@@ -473,9 +471,7 @@
             this.tbJurosConta.Size = new System.Drawing.Size(82, 20);
             this.tbJurosConta.TabIndex = 5;
             this.tbJurosConta.Text = "0,00";
-            this.tbJurosConta.TextChanged += new System.EventHandler(this.TbJurosConta_TextChanged);
             this.tbJurosConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbJurosConta_KeyPress);
-            this.tbJurosConta.Leave += new System.EventHandler(this.TbJurosConta_Leave);
             // 
             // lbJurosConta
             // 
@@ -494,9 +490,7 @@
             this.tbMultaConta.Size = new System.Drawing.Size(82, 20);
             this.tbMultaConta.TabIndex = 3;
             this.tbMultaConta.Text = "0,00";
-            this.tbMultaConta.TextChanged += new System.EventHandler(this.TbMultaConta_TextChanged);
             this.tbMultaConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbMultaConta_KeyPress);
-            this.tbMultaConta.Leave += new System.EventHandler(this.TbMultaConta_Leave);
             // 
             // lbMultaConta
             // 
@@ -515,9 +509,7 @@
             this.tbValorOriginalConta.Size = new System.Drawing.Size(82, 20);
             this.tbValorOriginalConta.TabIndex = 1;
             this.tbValorOriginalConta.Text = "0,00";
-            this.tbValorOriginalConta.TextChanged += new System.EventHandler(this.TbValorOriginalConta_TextChanged);
             this.tbValorOriginalConta.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbValorOriginalConta_KeyPress);
-            this.tbValorOriginalConta.Leave += new System.EventHandler(this.TbValorOriginalConta_Leave);
             // 
             // lbValorOriginalConta
             // 
@@ -548,6 +540,15 @@
             this.buscaFormaPagamento.Size = new System.Drawing.Size(442, 39);
             this.buscaFormaPagamento.TabIndex = 15;
             // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(2, 98);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 4;
+            // 
             // buscaOperacao
             // 
             this.buscaOperacao.Location = new System.Drawing.Point(2, 137);
@@ -570,21 +571,12 @@
             this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
-            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(2, 98);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 4;
             // 
             // fmCarCadastroConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1036, 646);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);

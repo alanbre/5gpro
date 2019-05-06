@@ -36,25 +36,31 @@
             this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroGrupoUsuario = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroDeOperações = new System.Windows.Forms.ToolStripMenuItem();
+            this.cadastroDeGrupoDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEmissaoNF = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiContasReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCarCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeGrupoDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // msMain
             // 
+            this.msMain.BackColor = System.Drawing.Color.Transparent;
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCadastros,
             this.tsmiOrcamento,
             this.tsmiSaida,
-            this.tsmiContasReceber});
+            this.tsmiContasReceber,
+            this.tsmiContasPagar});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
+            this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.msMain.Size = new System.Drawing.Size(1162, 24);
             this.msMain.TabIndex = 0;
             this.msMain.Text = "msMenu";
@@ -115,8 +121,16 @@
             this.tsmiCadastroDeOperações.Text = "Cadastro de Operações";
             this.tsmiCadastroDeOperações.Click += new System.EventHandler(this.tsmiCadastroDeOperações_Click);
             // 
+            // cadastroDeGrupoDeItensToolStripMenuItem
+            // 
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Name = "cadastroDeGrupoDeItensToolStripMenuItem";
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Text = "Cadastro de Grupo de Itens";
+            this.cadastroDeGrupoDeItensToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeGrupoDeItensToolStripMenuItem_Click);
+            // 
             // tsmiOrcamento
             // 
+            this.tsmiOrcamento.BackColor = System.Drawing.Color.Transparent;
             this.tsmiOrcamento.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCadastroOrcamentos});
             this.tsmiOrcamento.Name = "tsmiOrcamento";
@@ -148,29 +162,43 @@
             // tsmiContasReceber
             // 
             this.tsmiContasReceber.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCadastroContaReceber});
+            this.tsmiCarCadastroContaReceber});
             this.tsmiContasReceber.Name = "tsmiContasReceber";
             this.tsmiContasReceber.Size = new System.Drawing.Size(107, 20);
             this.tsmiContasReceber.Text = "Contas a receber";
             // 
+            // tsmiCarCadastroContaReceber
+            // 
+            this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarCadastroContaReceber.Text = "Cadastro de conta";
+            this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
+            // 
+            // tsmiContasPagar
+            // 
+            this.tsmiContasPagar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCapCadastroConta});
+            this.tsmiContasPagar.Name = "tsmiContasPagar";
+            this.tsmiContasPagar.Size = new System.Drawing.Size(98, 20);
+            this.tsmiContasPagar.Text = "Contas a pagar";
+            // 
+            // tsmiCapCadastroConta
+            // 
+            this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapCadastroConta.Text = "Cadastro de conta";
+            this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
+            // 
             // tsmiCadastroContaReceber
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
-            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(170, 22);
-            this.tsmiCadastroContaReceber.Text = "Cadastro de conta";
-            this.tsmiCadastroContaReceber.Click += new System.EventHandler(this.TsmiCadastroContaReceber_Click);
-            // 
-            // cadastroDeGrupoDeItensToolStripMenuItem
-            // 
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Name = "cadastroDeGrupoDeItensToolStripMenuItem";
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Text = "Cadastro de Grupo de Itens";
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeGrupoDeItensToolStripMenuItem_Click);
+            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
             // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1162, 585);
             this.Controls.Add(this.msMain);
             this.Name = "fmMain";
@@ -199,6 +227,9 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroGrupoUsuario;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroDeOperações;
         private System.Windows.Forms.ToolStripMenuItem tsmiContasReceber;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastroContaReceber;
+        private System.Windows.Forms.ToolStripMenuItem tsmiContasPagar;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCapCadastroConta;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroContaReceber;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeItensToolStripMenuItem;
     }

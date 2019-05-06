@@ -9,13 +9,11 @@ namespace _5gpro.Daos
 {
     class ContaReceberDAO
     {
-        static private ConexaoDAO Connect { get; set; }
-
+        private static ConexaoDAO Connect;
         public ContaReceberDAO(ConexaoDAO c)
         {
             Connect = c;
         }
-
         public int SalvaOuAtualiza(ContaReceber contaReceber)
         {
             int retorno = 0;
@@ -87,7 +85,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public ContaReceber BuscaById(int codigo)
         {
             var contaReceber = new ContaReceber();
@@ -135,13 +132,86 @@ namespace _5gpro.Daos
                 contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
         }
-
         public IEnumerable<ContaReceber> Busca(fmBuscaContaReceber.Filtros f )
         {
             var contaRecebers = new List<ContaReceber>();
+            string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            string whereOperacao = f.filtroOperacao != null ? "AND op.idoperacao = @idoperacao": "";
+
+
+            Operacao operacao = null;
+            Pessoa pessoa = null;
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro,
+                                                    op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
+                                                    cr.valor_final
+                                                    FROM 
+                                                    conta_receber cr 
+                                                    LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
+                                                    LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
+                                                    LEFT JOIN parcela_conta_receber pa ON pa.idconta_receber = cr.idconta_receber
+                                                    WHERE 1 = 1"
+                                             + whereOperacao + ""
+                                             + wherePessoa + "" +
+                                          @" AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
+                                             AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
+                                             AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
+                                             GROUP BY cr.idconta_receber", Connect.Conexao);
+                if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
+                if (f.filtroOperacao != null) { Connect.Comando.Parameters.AddWithValue("@idoperacao", f.filtroOperacao.OperacaoID); }
+
+                Connect.Comando.Parameters.AddWithValue("@valor_conta_inicial", f.filtroValorInicial);
+                Connect.Comando.Parameters.AddWithValue("@valor_conta_final", f.filtroValorFinal);
+                Connect.Comando.Parameters.AddWithValue("@data_cadastro_inicial", f.filtroDataCadastroInicial);
+                Connect.Comando.Parameters.AddWithValue("@data_cadastro_final", f.filtroDataCadastroFinal);
+                Connect.Comando.Parameters.AddWithValue("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
+                Connect.Comando.Parameters.AddWithValue("@data_vencimento_final", f.filtroDataVencimentoFinal);
+
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+
+                        operacao = new Operacao
+                        {
+                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomeoperacao"))
+                        };
+
+                        var contaReceber = new ContaReceber
+                        {
+                            ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
+                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
+                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
+                        };
+
+                        contaReceber.Pessoa = pessoa;
+                        contaReceber.Operacao = operacao;
+                        contaRecebers.Add(contaReceber);
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
             return contaRecebers;
         }
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -155,12 +225,12 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    reader.Close();
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -174,7 +244,6 @@ namespace _5gpro.Daos
 
             return proximoid;
         }
-
         public ContaReceber BuscaProximo(int codigo)
         {
             var contaReceber = new ContaReceber();
@@ -221,7 +290,6 @@ namespace _5gpro.Daos
                 contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
         }
-
         public ContaReceber BuscaAnterior(int codigo)
         {
             var contaReceber = new ContaReceber();
@@ -268,8 +336,6 @@ namespace _5gpro.Daos
                 contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
         }
-
-
         private List<ParcelaContaReceber> BuscaParcelasDaConta(ContaReceber contaReceber)
         {
             var parcelas = new List<ParcelaContaReceber>();

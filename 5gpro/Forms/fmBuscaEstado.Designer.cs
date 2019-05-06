@@ -125,7 +125,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 469);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(597, 470);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvEstados);
             this.KeyPreview = true;
