@@ -35,7 +35,6 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
             SetarNivel();
-
         }
 
         private void SetarNivel()
@@ -48,7 +47,6 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
-
         }
 
 
@@ -67,12 +65,12 @@ namespace _5gpro.Forms
                 RecarregaDados(item);
             }
 
-            if (e.KeyCode == Keys.F1 && Nivel > 1 || CodGrupoUsuario == "999")
+            if (e.KeyCode == Keys.F1 && Nivel > 1 || e.KeyCode == Keys.F1 && CodGrupoUsuario == "999")
             {
                 NovoCadastro();
             }
 
-            if (e.KeyCode == Keys.F2 && Nivel > 1 || CodGrupoUsuario == "999")
+            if (e.KeyCode == Keys.F2 && Nivel > 1 || e.KeyCode == Keys.F2 && CodGrupoUsuario == "999")
             {
                 SalvaCadastro();
             }

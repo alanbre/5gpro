@@ -59,6 +59,12 @@ namespace _5gpro.Controls
             }
         }
 
+        private void AbreTelaCadGrupoItem()
+        {
+            var cadGrupoItem = new fmCadastroGrupoItem();
+            cadGrupoItem.ShowDialog();
+        }
+
         private void PreencheCamposGrupoItem(GrupoItem grupoItem)
         {
             if (grupoItem != null)
@@ -111,6 +117,11 @@ namespace _5gpro.Controls
         private void TbCodigoGrupoItem_TextChanged(object sender, EventArgs e)
         {
             this.Text_Changed?.Invoke(this, e);
+        }
+
+        private void BtAdd_Click(object sender, EventArgs e)
+        {
+            AbreTelaCadGrupoItem();
         }
     }
 }

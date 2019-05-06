@@ -118,9 +118,6 @@ namespace _5gpro.Controls
         public delegate void novoEventHandler(object sender, EventArgs e);
         public delegate void buscarEventHandler(object sender, EventArgs e);
         public delegate void salvarEventHandler(object sender, EventArgs e);
-        public delegate void recarregarEventHandler(object sender, EventArgs e);
-        public delegate void anteriorEventHandler(object sender, EventArgs e);
-        public delegate void proximoEventHandler(object sender, EventArgs e);
         public delegate void excluirEventHandler(object sender, EventArgs e);
 
 
@@ -135,18 +132,6 @@ namespace _5gpro.Controls
         [Category("Action")]
         [Description("É acionado quando botão salvar é clicado")]
         public event salvarEventHandler Salvar_Clicked;
-
-        [Category("Action")]
-        [Description("É acionado quando botão recarregar é clicado")]
-        public event recarregarEventHandler Recarregar_Clicked;
-
-        [Category("Action")]
-        [Description("É acionado quando botão anterior é clicado")]
-        public event anteriorEventHandler Anterior_Clicked;
-
-        [Category("Action")]
-        [Description("É acionado quando botão próximo é clicado")]
-        public event proximoEventHandler Proximo_Clicked;
 
         [Category("Action")]
         [Description("É acionado quando botão excluir é clicado")]
@@ -165,21 +150,6 @@ namespace _5gpro.Controls
         private void BtSalvar_Click(object sender, EventArgs e)
         {
             this.Salvar_Clicked?.Invoke(this, e);
-        }
-
-        private void BtRecarregar_Click(object sender, EventArgs e)
-        {
-            this.Recarregar_Clicked?.Invoke(this, e);
-        }
-
-        private void BtAnterior_Click(object sender, EventArgs e)
-        {
-            this.Anterior_Clicked?.Invoke(this, e);
-        }
-
-        private void BtProximo_Click(object sender, EventArgs e)
-        {
-            this.Proximo_Clicked?.Invoke(this, e);
         }
 
         private void BtExcluir_Click(object sender, EventArgs e)

@@ -30,17 +30,18 @@
         {
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbNovoGrupoItem = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbNomeGrupo = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.miniMenuVertical1 = new _5gpro.Controls.MiniMenuVertical();
+            this.tbCodigo = new System.Windows.Forms.TextBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.miniMenuVertical = new _5gpro.Controls.MiniMenuVertical();
             this.gbNovoGrupoItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbCodigo
             // 
             this.lbCodigo.AutoSize = true;
-            this.lbCodigo.Location = new System.Drawing.Point(6, 26);
+            this.lbCodigo.Location = new System.Drawing.Point(6, 28);
             this.lbCodigo.Name = "lbCodigo";
             this.lbCodigo.Size = new System.Drawing.Size(40, 13);
             this.lbCodigo.TabIndex = 1;
@@ -48,46 +49,61 @@
             // 
             // gbNovoGrupoItem
             // 
-            this.gbNovoGrupoItem.Controls.Add(this.textBox2);
+            this.gbNovoGrupoItem.Controls.Add(this.tbNomeGrupo);
             this.gbNovoGrupoItem.Controls.Add(this.lbNome);
-            this.gbNovoGrupoItem.Controls.Add(this.textBox1);
+            this.gbNovoGrupoItem.Controls.Add(this.tbCodigo);
             this.gbNovoGrupoItem.Controls.Add(this.lbCodigo);
-            this.gbNovoGrupoItem.Location = new System.Drawing.Point(41, 46);
+            this.gbNovoGrupoItem.Location = new System.Drawing.Point(71, 12);
             this.gbNovoGrupoItem.Name = "gbNovoGrupoItem";
-            this.gbNovoGrupoItem.Size = new System.Drawing.Size(257, 127);
+            this.gbNovoGrupoItem.Size = new System.Drawing.Size(255, 121);
             this.gbNovoGrupoItem.TabIndex = 2;
             this.gbNovoGrupoItem.TabStop = false;
-            this.gbNovoGrupoItem.Text = "Novo";
+            this.gbNovoGrupoItem.Text = "Novo Grupo de Itens";
             // 
-            // textBox2
+            // tbNomeGrupo
             // 
-            this.textBox2.Location = new System.Drawing.Point(9, 87);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 20);
-            this.textBox2.TabIndex = 4;
+            this.tbNomeGrupo.Location = new System.Drawing.Point(9, 89);
+            this.tbNomeGrupo.Name = "tbNomeGrupo";
+            this.tbNomeGrupo.Size = new System.Drawing.Size(184, 20);
+            this.tbNomeGrupo.TabIndex = 4;
+            this.tbNomeGrupo.TextChanged += new System.EventHandler(this.TbNomeGrupo_TextChanged);
             // 
             // lbNome
             // 
             this.lbNome.AutoSize = true;
-            this.lbNome.Location = new System.Drawing.Point(9, 70);
+            this.lbNome.Location = new System.Drawing.Point(9, 72);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(82, 13);
             this.lbNome.TabIndex = 3;
             this.lbNome.Text = "Nome do Grupo";
             // 
-            // textBox1
+            // tbCodigo
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(82, 20);
-            this.textBox1.TabIndex = 2;
+            this.tbCodigo.Location = new System.Drawing.Point(9, 45);
+            this.tbCodigo.Name = "tbCodigo";
+            this.tbCodigo.Size = new System.Drawing.Size(82, 20);
+            this.tbCodigo.TabIndex = 2;
+            this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCodigo_KeyPress);
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
-            // miniMenuVertical1
+            // tbAjuda
             // 
-            this.miniMenuVertical1.Location = new System.Drawing.Point(6, -1);
-            this.miniMenuVertical1.Name = "miniMenuVertical1";
-            this.miniMenuVertical1.Size = new System.Drawing.Size(29, 211);
-            this.miniMenuVertical1.TabIndex = 3;
+            this.tbAjuda.Location = new System.Drawing.Point(71, 193);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.ReadOnly = true;
+            this.tbAjuda.Size = new System.Drawing.Size(255, 20);
+            this.tbAjuda.TabIndex = 5;
+            // 
+            // miniMenuVertical
+            // 
+            this.miniMenuVertical.Location = new System.Drawing.Point(12, 3);
+            this.miniMenuVertical.Name = "miniMenuVertical";
+            this.miniMenuVertical.Size = new System.Drawing.Size(53, 210);
+            this.miniMenuVertical.TabIndex = 3;
+            this.miniMenuVertical.Novo_Clicked += new _5gpro.Controls.MiniMenuVertical.novoEventHandler(this.MiniMenuVertical_Novo_Clicked);
+            this.miniMenuVertical.Buscar_Clicked += new _5gpro.Controls.MiniMenuVertical.buscarEventHandler(this.MiniMenuVertical_Buscar_Clicked);
+            this.miniMenuVertical.Salvar_Clicked += new _5gpro.Controls.MiniMenuVertical.salvarEventHandler(this.MiniMenuVertical_Salvar_Clicked);
+            this.miniMenuVertical.Excluir_Clicked += new _5gpro.Controls.MiniMenuVertical.excluirEventHandler(this.MiniMenuVertical_Excluir_Clicked);
             // 
             // fmCadastroGrupoItem
             // 
@@ -95,7 +111,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(296, 216);
-            this.Controls.Add(this.miniMenuVertical1);
+            this.Controls.Add(this.miniMenuVertical);
             this.Controls.Add(this.gbNovoGrupoItem);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -104,18 +120,22 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Cadastro Grupo de Itens";
+            this.Load += new System.EventHandler(this.FmCadastroGrupoItem_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroGrupoItem_KeyDown);
             this.gbNovoGrupoItem.ResumeLayout(false);
             this.gbNovoGrupoItem.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Label lbCodigo;
         private System.Windows.Forms.GroupBox gbNovoGrupoItem;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbNomeGrupo;
         private System.Windows.Forms.Label lbNome;
-        private System.Windows.Forms.TextBox textBox1;
-        private Controls.MiniMenuVertical miniMenuVertical1;
+        private System.Windows.Forms.TextBox tbCodigo;
+        private Controls.MiniMenuVertical miniMenuVertical;
+        private System.Windows.Forms.TextBox tbAjuda;
     }
 }
