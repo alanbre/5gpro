@@ -12,6 +12,9 @@ namespace _5gpro.Forms
         private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO(connection);
         private List<FormaPagamento> formasPagamento = new List<FormaPagamento>();
 
+        private decimal total = 0.00m;
+
+
         public fmTroco()
         {
             InitializeComponent();
@@ -132,17 +135,16 @@ namespace _5gpro.Forms
         }
         private void CalculaTotalPagamento()
         {
-            decimal total = 0m;
-            if (Decimal.TryParse(tbPagamento1.Text, out decimal valor)) { total += valor; valor = 0m; }
-            if (Decimal.TryParse(tbPagamento2.Text, out valor)) { total += valor; valor = 0m; }
-            if (Decimal.TryParse(tbPagamento3.Text, out valor)) { total += valor; valor = 0m; }
-            if (Decimal.TryParse(tbPagamento4.Text, out valor)) { total += valor; valor = 0m; }
-            if (Decimal.TryParse(tbPagamento5.Text, out valor)) { total += valor; valor = 0m; }
-            if (Decimal.TryParse(tbPagamento6.Text, out valor)) { total += valor; valor = 0m; }
-            if (Decimal.TryParse(tbPagamento7.Text, out valor)) { total += valor; valor = 0m; }
+            total = 0.00m;
+            total += dbPagamento1.Valor;
+            total += dbPagamento2.Valor;
+            total += dbPagamento3.Valor;
+            total += dbPagamento4.Valor;
+            total += dbPagamento5.Valor;
+            total += dbPagamento6.Valor;
+            total += dbPagamento7.Valor;
             lbValorTroco.Text = total.ToString("R$ ############0.00");
-            lbValorTroco.ForeColor = (total - Decimal.Parse(lbValorTotal.Text.Substring(2))) > 0 ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+            lbValorTroco.ForeColor = (total - Decimal.Parse(lbValorTotal.Text.Substring(2))) < 0 ? System.Drawing.Color.Red : System.Drawing.Color.Green;
         }
-
     }
 }

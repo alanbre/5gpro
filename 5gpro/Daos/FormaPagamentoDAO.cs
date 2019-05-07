@@ -29,7 +29,7 @@ namespace _5gpro.Daos
                                              FROM formapagamento f 
                                              WHERE 1=1
                                              " + conNome + @"
-                                             ORDER BY f.nome;", Connect.Conexao);
+                                             ORDER BY f.idformapagamento;", Connect.Conexao);
                           
 
                 if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }

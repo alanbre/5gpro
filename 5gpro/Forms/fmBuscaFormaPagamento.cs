@@ -27,7 +27,7 @@ namespace _5gpro.Forms
         private void BuscaFormaPagamento()
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
 
             listaformapagamento = formapagamentoDAO.BuscaTodos(tbNomeFormaPagamento.Text).ToList();

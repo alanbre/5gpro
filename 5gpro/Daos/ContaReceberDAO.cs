@@ -27,12 +27,12 @@ namespace _5gpro.Daos
 
 
                 Connect.Comando.CommandText = @"INSERT INTO conta_receber
-                         (idconta_receber, data_cadastro, idoperacao, valor_original, multa, juros, valor_final, idpessoa)
+                         (idconta_receber, data_cadastro, idoperacao, valor_original, multa, juros, acrescimo, valor_final, idpessoa)
                           VALUES
-                         (@idconta_receber, @data_cadastro, @idoperacao, @valor_original, @multa, @juros, @valor_final, @idpessoa)
+                         (@idconta_receber, @data_cadastro, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @valor_final, @idpessoa)
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, idoperacao = @idoperacao, valor_original = @valor_original,
-                          multa = @multa, juros = @juros, valor_final = @valor_final, idpessoa = @idpessoa
+                          multa = @multa, juros = @juros, acrescimo = @acrescimo, valor_final = @valor_final, idpessoa = @idpessoa
                           ";
 
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", contaReceber.ContaReceberID);
@@ -41,6 +41,7 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@valor_original", contaReceber.ValorOriginal);
                 Connect.Comando.Parameters.AddWithValue("@multa", contaReceber.Multa);
                 Connect.Comando.Parameters.AddWithValue("@juros", contaReceber.Juros);
+                Connect.Comando.Parameters.AddWithValue("@acrescimo", contaReceber.Acrescimo);
                 Connect.Comando.Parameters.AddWithValue("@valor_final", contaReceber.ValorFinal);
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", contaReceber.Pessoa.PessoaID);
 
@@ -54,10 +55,10 @@ namespace _5gpro.Daos
                     Connect.Comando.ExecuteNonQuery();
 
                     Connect.Comando.CommandText = @"INSERT INTO parcela_conta_receber
-                                            (sequencia, data_vencimento, valor, multa, juros, valor_final, data_quitacao, idconta_receber, idformapagamento)
+                                            (sequencia, data_vencimento, valor, multa, juros, acrescimo, valor_final, data_quitacao, idconta_receber, idformapagamento)
                                             VALUES
-                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento)";
-                    foreach (ParcelaContaReceber parcela in contaReceber.Parcelas)
+                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento)";
+                    foreach (var parcela in contaReceber.Parcelas)
                     {
                         Connect.Comando.Parameters.Clear();
                         Connect.Comando.Parameters.AddWithValue("@sequencia", parcela.Sequencia);
@@ -65,6 +66,7 @@ namespace _5gpro.Daos
                         Connect.Comando.Parameters.AddWithValue("@valor", parcela.Valor);
                         Connect.Comando.Parameters.AddWithValue("@multa", parcela.Multa);
                         Connect.Comando.Parameters.AddWithValue("@juros", parcela.Juros);
+                        Connect.Comando.Parameters.AddWithValue("@acrescimo", parcela.Acrescimo);
                         Connect.Comando.Parameters.AddWithValue("@valor_final", parcela.ValorFinal);
                         Connect.Comando.Parameters.AddWithValue("@data_quitacao", parcela.DataQuitacao);
                         Connect.Comando.Parameters.AddWithValue("@idconta_receber", contaReceber.ContaReceberID);
@@ -97,26 +99,7 @@ namespace _5gpro.Daos
 
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    if (reader.Read())
-                    {
-                        contaReceber = new ContaReceber
-                        {
-                            ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        };
-                        contaReceber.Operacao = new Operacao();
-                        contaReceber.Operacao.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
-                        contaReceber.Pessoa = new Pessoa();
-                        contaReceber.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-                    }
-                    else
-                    {
-                        contaReceber = null;
-                    }
+                    LeDadosReader(reader);
                 }
             }
             catch (MySqlException ex)
@@ -193,6 +176,7 @@ namespace _5gpro.Daos
                             ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                             ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
                         };
 
@@ -256,26 +240,7 @@ namespace _5gpro.Daos
 
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    if (reader.Read())
-                    {
-                        contaReceber = new ContaReceber
-                        {
-                            ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        };
-                        contaReceber.Operacao = new Operacao();
-                        contaReceber.Operacao.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
-                        contaReceber.Pessoa = new Pessoa();
-                        contaReceber.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-                    }
-                    else
-                    {
-                        contaReceber = null;
-                    }
+                    LeDadosReader(reader);
                 }
             }
             catch (MySqlException ex)
@@ -301,26 +266,7 @@ namespace _5gpro.Daos
 
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    if (reader.Read())
-                    {
-                        contaReceber = new ContaReceber
-                        {
-                            ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        };
-                        contaReceber.Operacao = new Operacao();
-                        contaReceber.Operacao.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
-                        contaReceber.Pessoa = new Pessoa();
-                        contaReceber.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-                    }
-                    else
-                    {
-                        contaReceber = null;
-                    }
+                    LeDadosReader(reader);
                 }
             }
             catch (MySqlException ex)
@@ -375,6 +321,32 @@ namespace _5gpro.Daos
             }
 
             return parcelas;
+        }
+        private ContaReceber LeDadosReader(IDataReader reader)
+        {
+            var contaReceber = new ContaReceber();
+            if (reader.Read())
+            {
+                contaReceber = new ContaReceber
+                {
+                    ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
+                    DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                    ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
+                    Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                    Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                    ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
+                };
+                contaReceber.Operacao = new Operacao();
+                contaReceber.Operacao.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
+                contaReceber.Pessoa = new Pessoa();
+                contaReceber.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+            }
+            else
+            {
+                contaReceber = null;
+            }
+            return contaReceber;
         }
     }
 }

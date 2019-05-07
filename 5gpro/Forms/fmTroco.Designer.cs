@@ -32,31 +32,31 @@
             this.pnTotal = new System.Windows.Forms.Panel();
             this.lbValorTotal = new System.Windows.Forms.Label();
             this.gbFormasPagamento = new System.Windows.Forms.GroupBox();
-            this.tbPagamento7 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento7 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento7 = new System.Windows.Forms.TextBox();
-            this.tbPagamento6 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento6 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento6 = new System.Windows.Forms.TextBox();
-            this.tbPagamento5 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento5 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento5 = new System.Windows.Forms.TextBox();
-            this.tbPagamento4 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento4 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento4 = new System.Windows.Forms.TextBox();
-            this.tbPagamento3 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento3 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento3 = new System.Windows.Forms.TextBox();
-            this.tbPagamento2 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento2 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento2 = new System.Windows.Forms.TextBox();
-            this.tbPagamento1 = new System.Windows.Forms.TextBox();
             this.tbNomeFormaPagamento1 = new System.Windows.Forms.TextBox();
             this.tbCodigoFormaPagamento1 = new System.Windows.Forms.TextBox();
             this.pnTroco = new System.Windows.Forms.Panel();
             this.lbValorTroco = new System.Windows.Forms.Label();
             this.lbTroco = new System.Windows.Forms.Label();
             this.btSalvar = new System.Windows.Forms.Button();
+            this.dbPagamento1 = new _5gpro.Controls.DecimalBox();
+            this.dbPagamento2 = new _5gpro.Controls.DecimalBox();
+            this.dbPagamento3 = new _5gpro.Controls.DecimalBox();
+            this.dbPagamento6 = new _5gpro.Controls.DecimalBox();
+            this.dbPagamento5 = new _5gpro.Controls.DecimalBox();
+            this.dbPagamento4 = new _5gpro.Controls.DecimalBox();
+            this.dbPagamento7 = new _5gpro.Controls.DecimalBox();
             this.pnTotal.SuspendLayout();
             this.gbFormasPagamento.SuspendLayout();
             this.pnTroco.SuspendLayout();
@@ -95,25 +95,25 @@
             // 
             // gbFormasPagamento
             // 
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento7);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento7);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento6);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento5);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento4);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento3);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento2);
+            this.gbFormasPagamento.Controls.Add(this.dbPagamento1);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento7);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento7);
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento6);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento6);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento6);
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento5);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento5);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento5);
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento4);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento4);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento4);
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento3);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento3);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento3);
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento2);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento2);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento2);
-            this.gbFormasPagamento.Controls.Add(this.tbPagamento1);
             this.gbFormasPagamento.Controls.Add(this.tbNomeFormaPagamento1);
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento1);
             this.gbFormasPagamento.Location = new System.Drawing.Point(12, 60);
@@ -122,15 +122,6 @@
             this.gbFormasPagamento.TabIndex = 1;
             this.gbFormasPagamento.TabStop = false;
             this.gbFormasPagamento.Text = "Formas de pagamento";
-            // 
-            // tbPagamento7
-            // 
-            this.tbPagamento7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento7.Location = new System.Drawing.Point(204, 211);
-            this.tbPagamento7.Name = "tbPagamento7";
-            this.tbPagamento7.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento7.TabIndex = 20;
-            this.tbPagamento7.Leave += new System.EventHandler(this.TbPagamento7_Leave);
             // 
             // tbNomeFormaPagamento7
             // 
@@ -151,15 +142,6 @@
             this.tbCodigoFormaPagamento7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento7_KeyUp);
             this.tbCodigoFormaPagamento7.Leave += new System.EventHandler(this.TbCodigoFormaPagamento7_Leave);
             // 
-            // tbPagamento6
-            // 
-            this.tbPagamento6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento6.Location = new System.Drawing.Point(204, 179);
-            this.tbPagamento6.Name = "tbPagamento6";
-            this.tbPagamento6.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento6.TabIndex = 17;
-            this.tbPagamento6.Leave += new System.EventHandler(this.TbPagamento6_Leave);
-            // 
             // tbNomeFormaPagamento6
             // 
             this.tbNomeFormaPagamento6.Enabled = false;
@@ -178,15 +160,6 @@
             this.tbCodigoFormaPagamento6.TabIndex = 15;
             this.tbCodigoFormaPagamento6.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento6_KeyUp);
             this.tbCodigoFormaPagamento6.Leave += new System.EventHandler(this.TbCodigoFormaPagamento6_Leave);
-            // 
-            // tbPagamento5
-            // 
-            this.tbPagamento5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento5.Location = new System.Drawing.Point(204, 147);
-            this.tbPagamento5.Name = "tbPagamento5";
-            this.tbPagamento5.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento5.TabIndex = 14;
-            this.tbPagamento5.Leave += new System.EventHandler(this.TbPagamento5_Leave);
             // 
             // tbNomeFormaPagamento5
             // 
@@ -207,15 +180,6 @@
             this.tbCodigoFormaPagamento5.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento5_KeyUp);
             this.tbCodigoFormaPagamento5.Leave += new System.EventHandler(this.TbCodigoFormaPagamento5_Leave);
             // 
-            // tbPagamento4
-            // 
-            this.tbPagamento4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento4.Location = new System.Drawing.Point(204, 115);
-            this.tbPagamento4.Name = "tbPagamento4";
-            this.tbPagamento4.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento4.TabIndex = 11;
-            this.tbPagamento4.Leave += new System.EventHandler(this.TbPagamento4_Leave);
-            // 
             // tbNomeFormaPagamento4
             // 
             this.tbNomeFormaPagamento4.Enabled = false;
@@ -234,15 +198,6 @@
             this.tbCodigoFormaPagamento4.TabIndex = 9;
             this.tbCodigoFormaPagamento4.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento4_KeyUp);
             this.tbCodigoFormaPagamento4.Leave += new System.EventHandler(this.TbCodigoFormaPagamento4_Leave);
-            // 
-            // tbPagamento3
-            // 
-            this.tbPagamento3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento3.Location = new System.Drawing.Point(204, 83);
-            this.tbPagamento3.Name = "tbPagamento3";
-            this.tbPagamento3.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento3.TabIndex = 8;
-            this.tbPagamento3.Leave += new System.EventHandler(this.TbPagamento3_Leave);
             // 
             // tbNomeFormaPagamento3
             // 
@@ -263,15 +218,6 @@
             this.tbCodigoFormaPagamento3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento3_KeyUp);
             this.tbCodigoFormaPagamento3.Leave += new System.EventHandler(this.TbCodigoFormaPagamento3_Leave);
             // 
-            // tbPagamento2
-            // 
-            this.tbPagamento2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento2.Location = new System.Drawing.Point(204, 51);
-            this.tbPagamento2.Name = "tbPagamento2";
-            this.tbPagamento2.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento2.TabIndex = 5;
-            this.tbPagamento2.Leave += new System.EventHandler(this.TbPagamento2_Leave);
-            // 
             // tbNomeFormaPagamento2
             // 
             this.tbNomeFormaPagamento2.Enabled = false;
@@ -290,15 +236,6 @@
             this.tbCodigoFormaPagamento2.TabIndex = 3;
             this.tbCodigoFormaPagamento2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento2_KeyUp);
             this.tbCodigoFormaPagamento2.Leave += new System.EventHandler(this.TbCodigoFormaPagamento2_Leave);
-            // 
-            // tbPagamento1
-            // 
-            this.tbPagamento1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbPagamento1.Location = new System.Drawing.Point(204, 19);
-            this.tbPagamento1.Name = "tbPagamento1";
-            this.tbPagamento1.Size = new System.Drawing.Size(89, 26);
-            this.tbPagamento1.TabIndex = 2;
-            this.tbPagamento1.Leave += new System.EventHandler(this.TbPagamento1_Leave);
             // 
             // tbNomeFormaPagamento1
             // 
@@ -365,6 +302,104 @@
             this.btSalvar.Text = "Salvar - F2";
             this.btSalvar.UseVisualStyleBackColor = false;
             // 
+            // dbPagamento1
+            // 
+            this.dbPagamento1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento1.Location = new System.Drawing.Point(204, 19);
+            this.dbPagamento1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento1.Name = "dbPagamento1";
+            this.dbPagamento1.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento1.TabIndex = 21;
+            this.dbPagamento1.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPagamento2
+            // 
+            this.dbPagamento2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento2.Location = new System.Drawing.Point(204, 51);
+            this.dbPagamento2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento2.Name = "dbPagamento2";
+            this.dbPagamento2.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento2.TabIndex = 22;
+            this.dbPagamento2.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPagamento3
+            // 
+            this.dbPagamento3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento3.Location = new System.Drawing.Point(204, 83);
+            this.dbPagamento3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento3.Name = "dbPagamento3";
+            this.dbPagamento3.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento3.TabIndex = 23;
+            this.dbPagamento3.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPagamento6
+            // 
+            this.dbPagamento6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento6.Location = new System.Drawing.Point(204, 179);
+            this.dbPagamento6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento6.Name = "dbPagamento6";
+            this.dbPagamento6.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento6.TabIndex = 26;
+            this.dbPagamento6.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPagamento5
+            // 
+            this.dbPagamento5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento5.Location = new System.Drawing.Point(204, 147);
+            this.dbPagamento5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento5.Name = "dbPagamento5";
+            this.dbPagamento5.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento5.TabIndex = 25;
+            this.dbPagamento5.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPagamento4
+            // 
+            this.dbPagamento4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento4.Location = new System.Drawing.Point(204, 115);
+            this.dbPagamento4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento4.Name = "dbPagamento4";
+            this.dbPagamento4.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento4.TabIndex = 24;
+            this.dbPagamento4.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPagamento7
+            // 
+            this.dbPagamento7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dbPagamento7.Location = new System.Drawing.Point(204, 211);
+            this.dbPagamento7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dbPagamento7.Name = "dbPagamento7";
+            this.dbPagamento7.Size = new System.Drawing.Size(91, 26);
+            this.dbPagamento7.TabIndex = 27;
+            this.dbPagamento7.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
             // fmTroco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,30 +434,30 @@
         private System.Windows.Forms.Panel pnTotal;
         private System.Windows.Forms.Label lbValorTotal;
         private System.Windows.Forms.GroupBox gbFormasPagamento;
-        private System.Windows.Forms.TextBox tbPagamento7;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento7;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento7;
-        private System.Windows.Forms.TextBox tbPagamento6;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento6;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento6;
-        private System.Windows.Forms.TextBox tbPagamento5;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento5;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento5;
-        private System.Windows.Forms.TextBox tbPagamento4;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento4;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento4;
-        private System.Windows.Forms.TextBox tbPagamento3;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento3;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento3;
-        private System.Windows.Forms.TextBox tbPagamento2;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento2;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento2;
-        private System.Windows.Forms.TextBox tbPagamento1;
         private System.Windows.Forms.TextBox tbNomeFormaPagamento1;
         private System.Windows.Forms.TextBox tbCodigoFormaPagamento1;
         private System.Windows.Forms.Panel pnTroco;
         private System.Windows.Forms.Label lbValorTroco;
         private System.Windows.Forms.Label lbTroco;
         private System.Windows.Forms.Button btSalvar;
+        private Controls.DecimalBox dbPagamento1;
+        private Controls.DecimalBox dbPagamento7;
+        private Controls.DecimalBox dbPagamento6;
+        private Controls.DecimalBox dbPagamento5;
+        private Controls.DecimalBox dbPagamento4;
+        private Controls.DecimalBox dbPagamento3;
+        private Controls.DecimalBox dbPagamento2;
     }
 }
