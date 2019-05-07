@@ -11,7 +11,7 @@ namespace _5gpro.Forms
     public partial class fmCarCadastroConta : Form
     {
         private ParcelaContaReceber parcelaSelecionada = null;
-        private bool editando, ignoracheckevent = false;
+        private bool editando, ignoracheckevent, novo = false;
         private ContaReceber contaReceber = null;
         private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
 
@@ -40,16 +40,19 @@ namespace _5gpro.Forms
             if (e.KeyCode == Keys.F5)
             {
                 Recarrega();
+                return;
             }
 
             if (e.KeyCode == Keys.F1)
             {
                 Novo();
+                return;
             }
 
             if (e.KeyCode == Keys.F2)
             {
                 Salva();
+                return;
             }
 
             EnterTab(this.ActiveControl, e);
@@ -67,30 +70,12 @@ namespace _5gpro.Forms
         private void BtSalvarParcela_Click(object sender, EventArgs e) => SalvaParcela();
         private void DtpDataCadatroConta_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void BuscaOperacao_Text_Changed(object sender, EventArgs e) => Editando(true);
-        private void TbValorOriginalParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbMultaParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbJurosParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbValorFinalParcela_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbValorOriginalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbMultaConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbJurosConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void TbValorFinalConta_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
         private void TbCodigoConta_Leave(object sender, EventArgs e) => CarregaDados();
-        private void TbMultaParcela_Leave(object sender, EventArgs e)
-        {
-            FormataCampoDecimal((TextBox)sender);
-            CalculaTotalParcela();
-        }
-        private void TbJurosParcela_Leave(object sender, EventArgs e)
-        {
-            FormataCampoDecimal((TextBox)sender);
-            CalculaTotalParcela();
-        }
-        private void TbValorOriginalParcela_Leave(object sender, EventArgs e)
-        {
-            FormataCampoDecimal((TextBox)sender);
-            CalculaTotalParcela();
-        }
+        private void DbValorOriginalParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void DbMultaParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void DbJurosParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void LbAcrescimoParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void DbAcrescimoParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
         private void DgvParcelas_CurrentCellChanged(object sender, EventArgs e)
         {
             if (dgvParcelas.SelectedRows.Count > 0)
@@ -113,6 +98,7 @@ namespace _5gpro.Forms
             if (editando)
                 return;
 
+            novo = true;
             ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
@@ -120,8 +106,9 @@ namespace _5gpro.Forms
             dtpDataCadatroConta.Focus();
             ignoracheckevent = false;
             btGerarParcelas.Enabled = true;
-            tbValorContaGerar.Enabled = true;
+            dbValorContaGerar.Enabled = true;
             Editando(true);
+            novo = false;
         }
         private void Busca()
         {
@@ -146,10 +133,11 @@ namespace _5gpro.Forms
                 DataCadastro = dtpDataCadatroConta.Value,
                 Operacao = buscaOperacao.operacao,
 
-                ValorOriginal = Convert.ToDecimal(tbValorOriginalConta.Text),
-                Multa = Convert.ToDecimal(tbMultaConta.Text),
-                Juros = Convert.ToDecimal(tbJurosConta.Text),
-                ValorFinal = Convert.ToDecimal(tbValorFinalConta.Text),
+                ValorOriginal = dbValorOriginalConta.Valor,
+                Multa = dbMultaConta.Valor,
+                Juros = dbJurosConta.Valor,
+                Acrescimo = dbAcrescimoConta.Valor,
+                ValorFinal = dbValorFinalConta.Valor,
 
                 Parcelas = parcelas,
 
@@ -180,8 +168,8 @@ namespace _5gpro.Forms
                 Editando(false);
             }
             btGerarParcelas.Enabled = false;
-            tbValorContaGerar.Enabled = false;
-            tbValorContaGerar.Clear();
+            dbValorContaGerar.Enabled = false;
+            dbValorContaGerar.Valor = 0.00m;
 
         }
         private void Recarrega()
@@ -269,6 +257,8 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            if (novo)
+                return;
             int codigo = 0;
             if (!int.TryParse(tbCodigoConta.Text, out codigo)) { tbCodigoConta.Clear(); }
             if (contaReceber?.ContaReceberID == codigo)
@@ -296,7 +286,7 @@ namespace _5gpro.Forms
                 newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
                 contaReceber = newcontaReceber;
                 btGerarParcelas.Enabled = false;
-                tbValorContaGerar.Enabled = false;
+                dbValorContaGerar.Enabled = false;
                 PreencheCampos(contaReceber);
                 Editando(false);
             }
@@ -305,7 +295,7 @@ namespace _5gpro.Forms
                 Editando(true);
                 LimpaCampos(false);
                 btGerarParcelas.Enabled = true;
-                tbValorContaGerar.Enabled = true;
+                dbValorContaGerar.Enabled = true;
             }
 
         }
@@ -316,10 +306,11 @@ namespace _5gpro.Forms
             tbCodigoConta.Text = contaReceber.ContaReceberID.ToString();
             dtpDataCadatroConta.Value = contaReceber.DataCadastro;
             buscaOperacao.operacao = contaReceber.Operacao;
-            tbValorOriginalConta.Text = contaReceber.ValorOriginal.ToString("############0.00");
-            tbValorFinalConta.Text = contaReceber.ValorFinal.ToString("############0.00");
-            tbMultaConta.Text = contaReceber.Multa.ToString("############0.00");
-            tbJurosConta.Text = contaReceber.Juros.ToString("############0.00");
+            dbValorOriginalConta.Valor = contaReceber.ValorOriginal;
+            dbValorFinalConta.Valor = contaReceber.ValorFinal;
+            dbMultaConta.Valor = contaReceber.Multa;
+            dbJurosConta.Valor = contaReceber.Juros;
+            dbAcrescimoConta.Valor = contaReceber.Acrescimo;
             parcelas = contaReceber.Parcelas.ToList();
             buscaOperacao.PreencheCampos(contaReceber.Operacao);
             buscaPessoa.PreencheCampos(contaReceber.Pessoa);
@@ -331,10 +322,11 @@ namespace _5gpro.Forms
             foreach (var parcela in parcelas)
                 dgvParcelas.Rows.Add(parcela.Sequencia,
                                      parcela.DataVencimento.ToShortDateString(),
-                                     parcela.Valor.ToString("############0.00"),
-                                     parcela.Multa.ToString("############0.00"),
-                                     parcela.Juros.ToString("############0.00"),
-                                     parcela.ValorFinal.ToString("############0.00"),
+                                     parcela.Valor,
+                                     parcela.Multa,
+                                     parcela.Juros,
+                                     parcela.Acrescimo,
+                                     parcela.ValorFinal,
                                      parcela.DataQuitacao?.Date);
             dgvParcelas.Refresh();
         }
@@ -342,10 +334,11 @@ namespace _5gpro.Forms
         {
             tbCodigoParcela.Text = parcela.Sequencia.ToString();
             dtpDataVencimentoParcela.Value = parcela.DataVencimento;
-            tbValorOriginalParcela.Text = parcela.Valor.ToString();
-            tbMultaParcela.Text = parcela.Multa.ToString();
-            tbJurosParcela.Text = parcela.Juros.ToString();
-            tbValorFinalParcela.Text = parcela.ValorFinal.ToString();
+            dbValorOriginalParcela.Valor = parcela.Valor;
+            dbMultaParcela.Valor = parcela.Multa;
+            dbJurosParcela.Valor = parcela.Juros;
+            dbAcrescimoParcela.Valor = parcela.Acrescimo;
+            dbValorFinalParcela.Valor = parcela.ValorFinal;
             tbDataQuitacao.Text = parcela.DataQuitacao != null ? parcela.DataQuitacao.Value.ToShortDateString() : "";
         }
         private void GerarParcelas()
@@ -361,10 +354,11 @@ namespace _5gpro.Forms
             parcelas.Clear();
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
-            tbMultaConta.Text = "0,00";
-            tbJurosConta.Text = "0,00";
-            tbValorOriginalConta.Text = "0,00";
-            tbValorFinalConta.Text = "0,00";
+            dbMultaConta.Valor = 0.00m;
+            dbJurosConta.Valor = 0.00m;
+            dbAcrescimoParcela.Valor = 0.00m;
+            dbValorOriginalConta.Valor = 0.00m;
+            dbValorFinalConta.Valor = 0.00m;
             var parcelasOperacao = buscaOperacao.operacao.Parcelas;
 
 
@@ -376,21 +370,22 @@ namespace _5gpro.Forms
                 {
                     Sequencia = sequencia,
                     DataVencimento = DateTime.Today.AddDays(parcela.Dias),
-                    Multa = 0,
-                    Juros = 0,
-                    Valor = Convert.ToDecimal(tbValorContaGerar.Text) / parcelasOperacao.Count
+                    Multa = 0.00m,
+                    Juros = 0.00m,
+                    Valor = dbValorContaGerar.Valor / parcelasOperacao.Count,
+                    Acrescimo = dbValorContaGerar.Valor  * buscaOperacao.operacao.Acrescimo / 100 / parcelasOperacao.Count
                 };
                 sequencia++;
                 this.parcelas.Add(par);
-                tbValorOriginalConta.Text = (Convert.ToDecimal(tbValorOriginalConta.Text) + par.Valor).ToString();
+                dbValorOriginalConta.Valor += par.Valor;
+                dbAcrescimoConta.Valor += par.Acrescimo;
+                dbValorFinalConta.Valor += par.Valor + par.Acrescimo;
             }
-            tbValorFinalConta.Text = tbValorOriginalConta.Text;
-
             PreencheGridParcelas(parcelas);
         }
         private void CalculaTotalParcela()
         {
-            tbValorFinalParcela.Text = (Convert.ToDecimal(tbValorOriginalParcela.Text) + Convert.ToDecimal(tbMultaParcela.Text) + Convert.ToDecimal(tbJurosParcela.Text)).ToString("############0.00");
+            dbValorFinalParcela.Valor = dbValorOriginalParcela.Valor + dbMultaParcela.Valor + dbJurosParcela.Valor + dbAcrescimoParcela.Valor;
         }
         private void SalvaParcela()
         {
@@ -408,38 +403,40 @@ namespace _5gpro.Forms
             else
             {
                 var ptemp = parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).FirstOrDefault();
-                ptemp.Valor = Convert.ToDecimal(tbValorOriginalParcela.Text);
-                ptemp.Multa = Convert.ToDecimal(tbMultaParcela.Text);
-                ptemp.Juros = Convert.ToDecimal(tbJurosParcela.Text);
+                ptemp.Valor = dbValorOriginalParcela.Valor;
+                ptemp.Multa = dbMultaParcela.Valor;
+                ptemp.Juros = dbJurosParcela.Valor;
+                ptemp.Acrescimo = dbAcrescimoParcela.Valor;
                 ptemp.DataVencimento = dtpDataVencimentoParcela.Value;
                 ptemp.FormaPagamento = buscaFormaPagamento.formaPagamento;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Valor = ptemp.Valor;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().DataVencimento = ptemp.DataVencimento;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Multa = ptemp.Multa;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Juros = ptemp.Juros;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Acrescimo = ptemp.Acrescimo;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().FormaPagamento = ptemp.FormaPagamento;
-                dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor.ToString("############0.00");
+                dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor;
                 dr.Cells[dgvtbcDataVencimento.Index].Value = ptemp.DataVencimento.ToShortDateString();
-                dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa.ToString("############0.00");
-                dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros.ToString("############0.00");
+                dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa;
+                dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros;
+                dr.Cells[dgvtbcAcrescimo.Index].Value = ptemp.Acrescimo;
+                dr.Cells[dgvtbcValorFinal.Index].Value = ptemp.ValorFinal;
                 dgvParcelas.Update();
                 dgvParcelas.Refresh();
             }
+            Editando(true);
             CalculaTotalConta();
         }
         private void CalculaTotalConta()
         {
             if (parcelas.Count > 0)
             {
-                tbValorOriginalConta.Text = parcelas.Sum(p => p.Valor).ToString("############0.00");
-                tbMultaConta.Text = parcelas.Sum(p => p.Multa).ToString("############0.00");
-                tbJurosConta.Text = parcelas.Sum(p => p.Juros).ToString("############0.00");
-                tbValorFinalConta.Text = parcelas.Sum(p => p.ValorFinal).ToString("############0.00");
+                dbValorOriginalConta.Valor = parcelas.Sum(p => p.Valor);
+                dbMultaConta.Valor = parcelas.Sum(p => p.Multa);
+                dbJurosConta.Valor = parcelas.Sum(p => p.Juros);
+                dbAcrescimoConta.Valor = parcelas.Sum(p => p.Acrescimo);
+                dbValorFinalConta.Valor = parcelas.Sum(p => p.ValorFinal);
             }
-        }
-        private void FormataCampoDecimal(TextBox sender)
-        {
-            sender.Text = sender.Text.Length > 0 ? Convert.ToDecimal(sender.Text).ToString("############0.00") : "0,00";
         }
         private void LimpaCampos(bool limpaCod)
         {
@@ -448,23 +445,25 @@ namespace _5gpro.Forms
             buscaPessoa.Limpa();
             dtpDataCadatroConta.Value = DateTime.Now;
             dtpDataVencimentoParcela.Value = DateTime.Now;
-            tbValorOriginalConta.Text = "0,00";
-            tbValorFinalConta.Text = "0,00";
-            tbMultaConta.Text = "0,00";
-            tbJurosConta.Text = "0,00";
+            dbValorOriginalConta.Valor = 0.00m;
+            dbValorFinalConta.Valor = 0.00m;
+            dbMultaConta.Valor = 0.00m;
+            dbJurosConta.Valor = 0.00m;
+            dbAcrescimoConta.Valor = 0.00m;
             tbAjuda.Clear();
             parcelas.Clear();
-            tbValorContaGerar.Clear();
+            dbValorContaGerar.Valor = 0.00m;
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
             LimpaCamposParcela(limpaCod);
         }
         private void LimpaCamposParcela(bool focus)
         {
-            tbValorOriginalParcela.Text = "0,00";
-            tbValorFinalParcela.Text = "0,00";
-            tbMultaParcela.Text = "0,00";
-            tbJurosParcela.Text = "0,00";
+            dbValorOriginalParcela.Valor = 0.00m;
+            dbValorFinalParcela.Valor = 0.00m;
+            dbMultaParcela.Valor = 0.00m;
+            dbJurosParcela.Valor = 0.00m;
+            dbAcrescimoParcela.Valor = 0.00m;
             this.parcelaSelecionada = null;
         }
         private void EnterTab(object sender, KeyEventArgs e)

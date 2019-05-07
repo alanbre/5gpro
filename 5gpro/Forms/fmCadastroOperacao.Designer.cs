@@ -79,7 +79,7 @@
             // 
             // gbDadosOperacao
             // 
-            this.gbDadosOperacao.BackColor = System.Drawing.SystemColors.Control;
+            this.gbDadosOperacao.BackColor = System.Drawing.Color.White;
             this.gbDadosOperacao.Controls.Add(this.tbDescOperacao);
             this.gbDadosOperacao.Controls.Add(this.tbNomeOperacao);
             this.gbDadosOperacao.Controls.Add(this.tbCodOperacao);

@@ -183,5 +183,11 @@ namespace _5gpro
             var formCadGrupoItem = new fmCadastroGrupoItem();
             formCadGrupoItem.Show(this);
         }
+
+        private void TESTETROCOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formTroco = new fmTroco();
+            formTroco.Show(this);
+        }
     }
 }
