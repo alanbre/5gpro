@@ -93,6 +93,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Delete_Subtra_22px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Delete_Subtra_22px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Left_22px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Left_22px", resourceCulture);

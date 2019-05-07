@@ -391,6 +391,12 @@
     <Compile Include="Forms\fmCadastroPessoa.Designer.cs">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCadastroSubGrupoItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroSubGrupoItem.Designer.cs">
+      <DependentUpon>fmCadastroSubGrupoItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCadastroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -573,6 +579,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroSubGrupoItem.resx">
+      <DependentUpon>fmCadastroSubGrupoItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUsuario.resx">
       <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
@@ -810,6 +819,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8_search_filled_blue_17px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

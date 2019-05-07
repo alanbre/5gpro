@@ -35,7 +35,6 @@ namespace _5gpro.Forms
             public List<Permissao> Modulos;
             public List<Permissao> Telas;
             public List<Permissao> Funcoes;
-
         }
 
         public fmCadastroGrupoUsuario()
