@@ -13,7 +13,7 @@ namespace _5gpro.Entities
         public decimal Acrescimo { get; set; }
         public decimal ValorFinal { get
             {
-                return this.Valor + this.Multa + this.Juros;
+                return this.Valor + this.Multa + this.Juros + this.Acrescimo;
             } }
         public DateTime? DataQuitacao { get; set; }
         public FormaPagamento FormaPagamento { get; set; }

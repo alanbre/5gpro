@@ -99,7 +99,7 @@ namespace _5gpro.Daos
 
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    LeDadosReader(reader);
+                    contaReceber = LeDadosReader(reader);
                 }
             }
             catch (MySqlException ex)
@@ -231,7 +231,6 @@ namespace _5gpro.Daos
         public ContaReceber BuscaProximo(int codigo)
         {
             var contaReceber = new ContaReceber();
-            var parcelas = new List<ParcelaContaReceber>();
             try
             {
                 Connect.AbrirConexao();
@@ -240,7 +239,7 @@ namespace _5gpro.Daos
 
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    LeDadosReader(reader);
+                    contaReceber = LeDadosReader(reader);
                 }
             }
             catch (MySqlException ex)
@@ -266,7 +265,7 @@ namespace _5gpro.Daos
 
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    LeDadosReader(reader);
+                    contaReceber = LeDadosReader(reader);
                 }
             }
             catch (MySqlException ex)
@@ -303,6 +302,7 @@ namespace _5gpro.Daos
                             DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                             Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
                             Valor = reader.GetDecimal(reader.GetOrdinal("valor"))
                         };
