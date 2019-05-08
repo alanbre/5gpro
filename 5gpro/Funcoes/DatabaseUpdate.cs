@@ -28,7 +28,7 @@ namespace _5gpro.Funcoes
 
                 AbrirConexao();
                 // Aqui vai abrir o arquivo SQL e executá-lo.
-                MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(projectDirectory + "/create_tables.sql"));
+                MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(workingDirectory + "\\create_tables.sql"));
 
 
                 mySqlScript.Execute();
