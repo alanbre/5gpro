@@ -107,11 +107,6 @@ namespace _5gpro
             formCadPessoas.Show(this);
         }
 
-        private void tsmiCadastroPaises_Click(object sender, EventArgs e)
-        {
-            var formCadPais = new fmCadastroPais();
-            formCadPais.Show(this);
-        }
 
         private void tsmiCadastroItens_Click(object sender, EventArgs e)
         {
@@ -196,5 +191,10 @@ namespace _5gpro
             formTroco.Show(this);
         }
 
+        private void CadastroDeGrupoDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
+            formCadGrupoPessoa.Show(this);
+        }
     }
 }

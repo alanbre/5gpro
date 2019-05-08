@@ -2,47 +2,55 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmCadastroSubGrupoItem : Form
+    public partial class fmCadastroSubGrupoPessoa : Form
     {
 
         static ConexaoDAO connection = new ConexaoDAO();
-        GrupoItem grupoitemreferencia = null;
-        fmCadastroGrupoItem telacadgrupoitem = null;
-        GrupoItemDAO grupoitemDAO = new GrupoItemDAO(connection);
+        GrupoPessoa grupopessoareferencia = null;
+        fmCadastroGrupoPessoa telacadgrupopessoa = null;
+        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO(connection);
         Validacao validacao = new Validacao();
-        SubGrupoItem subgrupoitem = null;
-        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO(connection);
+        SubGrupoPessoa subgrupopessoa = null;
+        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO(connection);
 
         bool editando = false;
         bool ignoraCheckEvent;
 
-        public fmCadastroSubGrupoItem(GrupoItem grupoitemrecebido, fmCadastroGrupoItem cadgrupoitem)
+        public fmCadastroSubGrupoPessoa(GrupoPessoa grupopessoarecebido, fmCadastroGrupoPessoa cadgrupopessoa)
         {
             InitializeComponent();
-            tbNome.Focus();
+            tbNomeSub.Focus();
 
-            SetarDados(grupoitemrecebido, cadgrupoitem);
-            if (cadgrupoitem.subgrupoitemSelecionado != null)
+            SetarDados(grupopessoarecebido, cadgrupopessoa);
+            if (cadgrupopessoa.subgrupopessoaSelecionado != null)
             {
-                subgrupoitem = cadgrupoitem.subgrupoitemSelecionado;
-                PreencheCampos(subgrupoitem);
+                subgrupopessoa = cadgrupopessoa.subgrupopessoaSelecionado;
+                PreencheCampos(subgrupopessoa);
             }
             else
             {
-                tbCodigo.Text = subgrupoitemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = subgrupopessoaDAO.BuscaProxCodigoDisponivel();
             }
         }
 
-        private void SetarDados(GrupoItem grupoitem, fmCadastroGrupoItem tcg)
+        private void SetarDados(GrupoPessoa grupopessoa, fmCadastroGrupoPessoa tcg)
         {
-            grupoitemreferencia = grupoitem;
-            telacadgrupoitem = tcg;
-            
+            grupopessoareferencia = grupopessoa;
+            telacadgrupopessoa = tcg;
+
         }
+
 
         //EVENTOS DE CLICK
         private void BtSalvar_Click(object sender, EventArgs e)
@@ -77,11 +85,11 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscarByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
-                    if (newsubgrupoitem != null)
+                    SubGrupoPessoa newsubgrupopessoa = subgrupopessoaDAO.BuscarByID(int.Parse(tbCodigo.Text), grupopessoareferencia.GrupoPessoaID);
+                    if (newsubgrupopessoa != null)
                     {
-                        subgrupoitem = newsubgrupoitem;
-                        PreencheCampos(subgrupoitem);
+                        subgrupopessoa = newsubgrupopessoa;
+                        PreencheCampos(subgrupopessoa);
                         Editando(false);
                     }
                     else
@@ -105,11 +113,11 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscarByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
-                        if (newsubgrupoitem != null)
+                        SubGrupoPessoa newsubgrupopessoa = subgrupopessoaDAO.BuscarByID(int.Parse(tbCodigo.Text), grupopessoareferencia.GrupoPessoaID);
+                        if (newsubgrupopessoa != null)
                         {
-                            subgrupoitem = newsubgrupoitem;
-                            PreencheCampos(subgrupoitem);
+                            subgrupopessoa = newsubgrupopessoa;
+                            PreencheCampos(subgrupopessoa);
                             Editando(false);
                         }
                         else
@@ -127,31 +135,29 @@ namespace _5gpro.Forms
             }
         }
 
-
         //EVENTOS DE TEXTCHANGED
-        private void TbNome_TextChanged(object sender, EventArgs e)
+        private void TbNomeSub_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
-
 
         //PADRÕES CRIADAS
         private void SalvaCadastro()
         {
             if (editando)
             {
-                subgrupoitem = new SubGrupoItem();
+                subgrupopessoa = new SubGrupoPessoa();
 
-                subgrupoitem.SubGrupoItemID = int.Parse(tbCodigo.Text);
-                subgrupoitem.Nome = tbNome.Text;
-                subgrupoitem.GrupoItem = grupoitemreferencia;
+                subgrupopessoa.SubGrupoPessoaID = int.Parse(tbCodigo.Text);
+                subgrupopessoa.Nome = tbNomeSub.Text;
+                subgrupopessoa.GrupoPessoa = grupopessoareferencia;
 
                 ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(subgrupoitem, controls);
+                bool ok = validacao.ValidarEntidade(subgrupopessoa, controls);
 
                 if (ok)
                 {
-                    int resultado = subgrupoitemDAO.SalvarOuAtualizar(subgrupoitem);
+                    int resultado = subgrupopessoaDAO.SalvarOuAtualizar(subgrupopessoa);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -182,7 +188,7 @@ namespace _5gpro.Forms
         private void Editando(bool edit)
         {
             editando = edit;
-            AlterarBotoes(editando);       
+            AlterarBotoes(editando);
         }
 
         private void AlterarBotoes(bool editando)
@@ -205,27 +211,27 @@ namespace _5gpro.Forms
         private void LimpaCampos(bool limpaCodigo)
         {
             if (limpaCodigo) { tbCodigo.Clear(); }
-            tbNome.Clear();
+            tbNomeSub.Clear();
         }
 
-        private void PreencheCampos(SubGrupoItem subgrupoitem)
+        private void PreencheCampos(SubGrupoPessoa subgrupopessoa)
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
 
-            tbCodigo.Text = subgrupoitem.SubGrupoItemID.ToString();
-            tbNome.Text = subgrupoitem.Nome;
+            tbCodigo.Text = subgrupopessoa.SubGrupoPessoaID.ToString();
+            tbNomeSub.Text = subgrupopessoa.Nome;
 
             ignoraCheckEvent = false;
         }
 
-        private void FmCadastroSubGrupoItem_FormClosing(object sender, FormClosingEventArgs e)
+        private void FmCadastroSubGrupoPessoa_FormClosing(object sender, FormClosingEventArgs e)
         {
-            telacadgrupoitem.AtualizarDgvSub();
-            telacadgrupoitem.subgrupoitemSelecionado = null;
+            telacadgrupopessoa.AtualizarDgvSub();
+            telacadgrupopessoa.subgrupopessoaSelecionado = null;
         }
 
-        private void FmCadastroSubGrupoItem_KeyDown(object sender, KeyEventArgs e)
+        private void FmCadastroSubGrupoPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             EnterTab(this.ActiveControl, e);
         }

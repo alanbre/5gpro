@@ -91,6 +91,7 @@
             this.Name = "fmBuscaFormaPagamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Forma de Pagamento";
             this.Load += new System.EventHandler(this.FmBuscaFormaPagamento_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFormaPagamento)).EndInit();

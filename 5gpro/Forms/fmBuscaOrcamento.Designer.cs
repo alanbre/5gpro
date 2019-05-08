@@ -437,6 +437,7 @@
             this.Name = "fmBuscaOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de orçamento";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmBuscaOrcamento_KeyDown);
             this.gbFiltrosOrcamento.ResumeLayout(false);

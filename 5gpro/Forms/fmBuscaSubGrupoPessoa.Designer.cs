@@ -90,6 +90,7 @@
             this.Name = "fmBuscaSubGrupoPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Sub-Grupo de Pessoas";
             this.Load += new System.EventHandler(this.FmBuscaSubGrupoPessoa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGrupoPessoa)).EndInit();

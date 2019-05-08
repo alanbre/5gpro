@@ -322,6 +322,7 @@
             this.Name = "fmCadastroGrupoUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Grupos de Usuário";
             this.Load += new System.EventHandler(this.fmCadastroGrupoUsuario_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroGrupoUsuario_KeyDown);

@@ -17,6 +17,40 @@ namespace _5gpro.Daos
             Connect = c;
         }
 
+        public int SalvarOuAtualizar(SubGrupoPessoa subgrupoipessoa)
+        {
+            int retorno = 0;
+            try
+            {
+                Connect.AbrirConexao();
+
+                Connect.Comando = new MySqlCommand(@"INSERT INTO subgrupopessoa 
+                          (idsubgrupopessoa, nome, idgrupopessoa) 
+                          VALUES
+                          (@idsubgrupopessoa, @nome, @idgrupopessoa)
+                          ON DUPLICATE KEY UPDATE
+                           nome = @nome, idgrupopessoa = @idgrupopessoa
+                         ;",
+                         Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", subgrupoipessoa.SubGrupoPessoaID);
+                Connect.Comando.Parameters.AddWithValue("@nome", subgrupoipessoa.Nome);
+                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", subgrupoipessoa.GrupoPessoa.GrupoPessoaID);
+
+                retorno = Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return retorno;
+        }
+
         public IEnumerable<SubGrupoPessoa> BuscaTodos(string nome, int grupopessoaID)
         {
             List<SubGrupoPessoa> listasubgrupopessoa = new List<SubGrupoPessoa>();
@@ -119,6 +153,68 @@ namespace _5gpro.Daos
             }
 
             return subgrupopessoa;
+        }
+
+        public string BuscaProxCodigoDisponivel()
+        {
+            string proximoid = null;
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT i1.idsubgrupopessoa + 1 AS proximoid
+                                             FROM subgrupopessoa AS i1
+                                             LEFT OUTER JOIN subgrupopessoa AS i2 ON i1.idsubgrupopessoa + 1 = i2.idsubgrupopessoa
+                                             WHERE i2.idsubgrupopessoa IS NULL
+                                             ORDER BY proximoid
+                                             LIMIT 1;", Connect.Conexao);
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
+                    reader.Close();
+                }
+                else
+                {
+                    proximoid = "1";
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return proximoid;
+        }
+
+        public int Remover(string idsub)
+        {
+            int retorno = 0;
+            try
+            {
+                Connect.AbrirConexao();
+
+                Connect.Comando = new MySqlCommand(@"DELETE FROM subgrupopessoa WHERE idsubgrupopessoa = @idsubgrupopessoa", Connect.Conexao);
+
+                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", idsub);
+
+                retorno = Connect.Comando.ExecuteNonQuery();
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                retorno = 0;
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return retorno;
         }
     }
 }

@@ -340,6 +340,7 @@
             this.Name = "fmBuscaContaReceber";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de contas a receber";
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();

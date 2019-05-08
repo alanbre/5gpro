@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.dgvContas = new System.Windows.Forms.DataGridView();
             this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,8 +75,8 @@
             this.dgvContas.AllowUserToDeleteRows = false;
             this.dgvContas.AllowUserToOrderColumns = true;
             this.dgvContas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvContas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvContas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvContas.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvContas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -322,6 +322,7 @@
             this.Name = "fmBuscaContaPagar";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca contas a pagar";
             this.gbResultados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).EndInit();

@@ -354,6 +354,7 @@
             this.Controls.Add(this.gbFiltrosDocumento);
             this.MinimumSize = new System.Drawing.Size(1000, 500);
             this.Name = "fmBuscaNotaFiscal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca notas fiscais";
             this.gbGridDocumentos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).EndInit();

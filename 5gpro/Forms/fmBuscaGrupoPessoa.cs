@@ -24,7 +24,7 @@ namespace _5gpro.Forms
         private void BuscaGrupoPessoa()
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
 
             listagrupopessoa = grupoPessoaDAO.BuscaTodos(tbNomeGrupoPessoa.Text).ToList();
@@ -46,10 +46,6 @@ namespace _5gpro.Forms
             BuscaGrupoPessoa();
         }
 
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
-            BuscaGrupoPessoa();
-        }
 
         private void DgvGrupoPessoa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
