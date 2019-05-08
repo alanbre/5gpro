@@ -196,6 +196,84 @@ namespace _5gpro.Daos
             }
             return contaRecebers;
         }
+        public IEnumerable<ContaReceber> Busca(fmCarQuitacaoConta.Filtros f)
+        {
+            var contaRecebers = new List<ContaReceber>();
+            string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            string whereConta = f.filtroConta > 0 ? "AND cr.idconta_receber = @idconta_receber" : "";
+
+
+            Pessoa pessoa = null;
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * 
+                                                    FROM conta_receber cr
+                                                    LEFT JOIN parcela_conta_receber pcr
+	                                                    ON cr.idconta_receber = pcr.idconta_receber
+                                                    LEFT JOIN pessoa p
+	                                                    ON p.idpessoa = cr.idpessoa
+                                                    WHERE 1=1 "
+                                                    + wherePessoa + ""
+                                                    + whereConta + "" +
+                                                    @"AND pcr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
+                                                      AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
+                                                      AND pcr.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
+                                                      AND pcr.data_quitacao IS NULL
+                                                      GROUP BY cr.idconta_receber", Connect.Conexao);
+                if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
+                if (f.filtroConta > 0) { Connect.Comando.Parameters.AddWithValue("@idconta_receber", f.filtroConta); }
+
+                Connect.Comando.Parameters.AddWithValue("@valor_conta_inicial", f.filtroValorInicial);
+                Connect.Comando.Parameters.AddWithValue("@valor_conta_final", f.filtroValorFinal);
+                Connect.Comando.Parameters.AddWithValue("@data_cadastro_inicial", f.filtroDataCadastroInicial);
+                Connect.Comando.Parameters.AddWithValue("@data_cadastro_final", f.filtroDataCadastroFinal);
+                Connect.Comando.Parameters.AddWithValue("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
+                Connect.Comando.Parameters.AddWithValue("@data_vencimento_final", f.filtroDataVencimentoFinal);
+
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+
+                        
+
+                        var contaReceber = new ContaReceber
+                        {
+                            ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
+                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
+                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
+                        };
+
+                        contaReceber.Pessoa = pessoa;
+                        contaRecebers.Add(contaReceber);
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            foreach (var contaReceber in contaRecebers)
+                contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
+
+            return contaRecebers;
+        }
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;

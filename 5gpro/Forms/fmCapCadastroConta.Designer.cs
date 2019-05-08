@@ -40,11 +40,11 @@
             this.lbMultaConta = new System.Windows.Forms.Label();
             this.lbValorOriginalConta = new System.Windows.Forms.Label();
             this.gbParcelas = new System.Windows.Forms.GroupBox();
+            this.btExcluirParcela = new System.Windows.Forms.Button();
             this.dbValorFinalParcela = new _5gpro.Controls.DecimalBox();
             this.dbJurosParcela = new _5gpro.Controls.DecimalBox();
             this.dbMultaParcela = new _5gpro.Controls.DecimalBox();
             this.dbValorOriginalParcela = new _5gpro.Controls.DecimalBox();
-            this.btExcluirItem = new System.Windows.Forms.Button();
             this.btNovaParcela = new System.Windows.Forms.Button();
             this.tbDataQuitacao = new System.Windows.Forms.TextBox();
             this.lbDataQuitacao = new System.Windows.Forms.Label();
@@ -206,7 +206,7 @@
             this.gbParcelas.Controls.Add(this.dbJurosParcela);
             this.gbParcelas.Controls.Add(this.dbMultaParcela);
             this.gbParcelas.Controls.Add(this.dbValorOriginalParcela);
-            this.gbParcelas.Controls.Add(this.btExcluirItem);
+            this.gbParcelas.Controls.Add(this.btExcluirParcela);
             this.gbParcelas.Controls.Add(this.btNovaParcela);
             this.gbParcelas.Controls.Add(this.tbDataQuitacao);
             this.gbParcelas.Controls.Add(this.lbDataQuitacao);
@@ -279,17 +279,18 @@
             131072});
             this.dbValorOriginalParcela.Leave += new System.EventHandler(this.DbValorOriginalParcela_Leave);
             // 
-            // btExcluirItem
+            // btExcluirParcela
             // 
-            this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btExcluirItem.Enabled = false;
-            this.btExcluirItem.Image = global::_5gpro.Properties.Resources.iosDelete_22px_Red;
-            this.btExcluirItem.Location = new System.Drawing.Point(744, 46);
-            this.btExcluirItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btExcluirItem.Name = "btExcluirItem";
-            this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
-            this.btExcluirItem.TabIndex = 18;
-            this.btExcluirItem.UseVisualStyleBackColor = true;
+            this.btExcluirParcela.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExcluirParcela.Enabled = false;
+            this.btExcluirParcela.Image = global::_5gpro.Properties.Resources.iosDelete_22px_Red;
+            this.btExcluirParcela.Location = new System.Drawing.Point(744, 46);
+            this.btExcluirParcela.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btExcluirParcela.Name = "btExcluirParcela";
+            this.btExcluirParcela.Size = new System.Drawing.Size(24, 24);
+            this.btExcluirParcela.TabIndex = 18;
+            this.btExcluirParcela.UseVisualStyleBackColor = true;
+            this.btExcluirParcela.Click += new System.EventHandler(this.BtExcluirParcela_Click);
             // 
             // btNovaParcela
             // 
@@ -640,7 +641,7 @@
         private System.Windows.Forms.Label lbCodigoConta;
         private Controls.MenuVertical menuVertical;
         private Controls.BuscaPessoa buscaPessoa;
-        private System.Windows.Forms.Button btExcluirItem;
+        private System.Windows.Forms.Button btExcluirParcela;
         private System.Windows.Forms.Button btNovaParcela;
         private Controls.DecimalBox dbValorOriginalParcela;
         private Controls.DecimalBox dbMultaParcela;

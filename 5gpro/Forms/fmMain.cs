@@ -33,6 +33,7 @@ namespace _5gpro
         //Cadastro de Nota Fiscal = 030100
         //Cadastro de Operações = 040100
         //Cadastro de Contas a Receber = 050100
+        //Quitação de Contas a Receber = 050200
         //Cadastro de Contas a Pagar = 060100
         //Cadastro de Grupo de Itens = 010500
         //Cadastro de Grupo de Pessoas = 010600
@@ -147,6 +148,11 @@ namespace _5gpro
         {
             var formCarCadContaReceber = new fmCarCadastroConta();
             formCarCadContaReceber.Show(this);
+        }
+        private void TsmiCarQuitacaoConta_Click(object sender, EventArgs e)
+        {
+            var formCarQuitacaoConta = new fmCarQuitacaoConta();
+            formCarQuitacaoConta.Show(this);
         }
 
 
