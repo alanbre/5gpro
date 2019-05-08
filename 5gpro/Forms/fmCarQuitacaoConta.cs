@@ -76,7 +76,7 @@ namespace _5gpro.Forms
                 {
                     dgvParcelas.Rows.Add(cr.ContaReceberID,
                                          par.Sequencia,
-                                         par.DataVencimento.Date,
+                                         par.DataVencimento,
                                          par.Valor,
                                          par.Multa,
                                          par.Juros,
