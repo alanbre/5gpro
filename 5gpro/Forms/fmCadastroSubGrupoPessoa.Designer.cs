@@ -55,7 +55,7 @@
             this.tbNomeSub.Location = new System.Drawing.Point(6, 71);
             this.tbNomeSub.Name = "tbNomeSub";
             this.tbNomeSub.Size = new System.Drawing.Size(177, 20);
-            this.tbNomeSub.TabIndex = 3;
+            this.tbNomeSub.TabIndex = 0;
             this.tbNomeSub.TextChanged += new System.EventHandler(this.TbNomeSub_TextChanged);
             // 
             // tbCodigo
@@ -64,7 +64,8 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.ReadOnly = true;
             this.tbCodigo.Size = new System.Drawing.Size(105, 20);
-            this.tbCodigo.TabIndex = 2;
+            this.tbCodigo.TabIndex = 0;
+            this.tbCodigo.TabStop = false;
             this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbNomeSub
@@ -73,7 +74,7 @@
             this.lbNomeSub.Location = new System.Drawing.Point(3, 55);
             this.lbNomeSub.Name = "lbNomeSub";
             this.lbNomeSub.Size = new System.Drawing.Size(35, 13);
-            this.lbNomeSub.TabIndex = 1;
+            this.lbNomeSub.TabIndex = 0;
             this.lbNomeSub.Text = "Nome";
             // 
             // lbCodigoSub
@@ -87,11 +88,12 @@
             // 
             // btSalvar
             // 
+            this.btSalvar.Enabled = false;
             this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_22px_Green;
             this.btSalvar.Location = new System.Drawing.Point(119, 125);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(47, 24);
-            this.btSalvar.TabIndex = 2;
+            this.btSalvar.TabIndex = 1;
             this.btSalvar.UseVisualStyleBackColor = true;
             this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
             // 
@@ -101,7 +103,7 @@
             this.btCancelar.Location = new System.Drawing.Point(172, 125);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(47, 24);
-            this.btCancelar.TabIndex = 1;
+            this.btCancelar.TabIndex = 2;
             this.btCancelar.UseVisualStyleBackColor = true;
             this.btCancelar.Click += new System.EventHandler(this.BtCancelar_Click);
             // 

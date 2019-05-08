@@ -285,6 +285,7 @@ namespace _5gpro.Forms
                     ignoraCheckEvent = false;
                 }
             }
+            AlterarBotoesSubAdd();
         }
 
         private void ProximoCadastro()
@@ -331,6 +332,7 @@ namespace _5gpro.Forms
                     }
                 }
             }
+            AlterarBotoesSubAdd();
         }
 
         private void CadastroAnterior()
@@ -376,6 +378,7 @@ namespace _5gpro.Forms
                     }
                 }
             }
+            AlterarBotoesSubAdd();
         }
 
         private void AlterarBotoesSubAdd()
