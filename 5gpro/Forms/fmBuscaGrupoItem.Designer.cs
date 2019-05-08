@@ -102,6 +102,7 @@
             this.Name = "fmBuscaGrupoItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Grupo de Itens";
             this.Load += new System.EventHandler(this.FmBuscaGrupoItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoItens)).EndInit();

@@ -243,9 +243,7 @@
     <Compile Include="Entities\Unimedida.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Item.cs" />
-    <Compile Include="Daos\PaisDAO.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
-    <Compile Include="Entities\Pais.cs" />
     <Compile Include="Entities\Pessoa.cs" />
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
@@ -366,12 +364,6 @@
     </Compile>
     <Compile Include="Forms\fmCadastroOperacao.Designer.cs">
       <DependentUpon>fmCadastroOperacao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\fmCadastroPais.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmCadastroPais.Designer.cs">
-      <DependentUpon>fmCadastroPais.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaEstado.cs">
       <SubType>Form</SubType>
@@ -594,9 +586,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroOperacao.resx">
       <DependentUpon>fmCadastroOperacao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroPais.resx">
-      <DependentUpon>fmCadastroPais.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>

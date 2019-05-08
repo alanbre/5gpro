@@ -23,6 +23,8 @@ namespace _5gpro.Forms
         public fmCadastroSubGrupoItem(GrupoItem grupoitemrecebido, fmCadastroGrupoItem cadgrupoitem)
         {
             InitializeComponent();
+            tbNome.Focus();
+
             SetarDados(grupoitemrecebido, cadgrupoitem);
             if (cadgrupoitem.subgrupoitemSelecionado != null)
             {

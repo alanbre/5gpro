@@ -654,6 +654,7 @@
             this.Name = "fmOrcamentoCadastroOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Orçamentos";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmOrcamentoCadastroOrcamento_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroOrcamento_KeyDown);

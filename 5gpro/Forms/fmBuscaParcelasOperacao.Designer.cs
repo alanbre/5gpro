@@ -111,6 +111,7 @@
             this.Name = "fmBuscaParcelasOperacao";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parcelas";
             this.gbAlterar.ResumeLayout(false);
             this.gbAlterar.PerformLayout();

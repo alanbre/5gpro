@@ -121,6 +121,7 @@
             this.Name = "fmCadastroSubGrupoPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro Sub-Grupo Pessoa";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCadastroSubGrupoPessoa_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroSubGrupoPessoa_KeyDown);

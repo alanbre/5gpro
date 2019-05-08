@@ -30,6 +30,8 @@ namespace _5gpro.Forms
         public fmCadastroSubGrupoPessoa(GrupoPessoa grupopessoarecebido, fmCadastroGrupoPessoa cadgrupopessoa)
         {
             InitializeComponent();
+            tbNomeSub.Focus();
+
             SetarDados(grupopessoarecebido, cadgrupopessoa);
             if (cadgrupopessoa.subgrupopessoaSelecionado != null)
             {

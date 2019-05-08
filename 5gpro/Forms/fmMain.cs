@@ -106,11 +106,6 @@ namespace _5gpro
             formCadPessoas.Show(this);
         }
 
-        private void tsmiCadastroPaises_Click(object sender, EventArgs e)
-        {
-            var formCadPais = new fmCadastroPais();
-            formCadPais.Show(this);
-        }
 
         private void tsmiCadastroItens_Click(object sender, EventArgs e)
         {

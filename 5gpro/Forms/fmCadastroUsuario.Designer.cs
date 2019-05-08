@@ -285,6 +285,7 @@
             this.Name = "fmCadastroUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Usuário";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyDown);

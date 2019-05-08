@@ -459,6 +459,7 @@
             this.Name = "fmCadastroOperacao";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Operação";
             this.gbDadosOperacao.ResumeLayout(false);
             this.gbDadosOperacao.PerformLayout();

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoPessoa = new System.Windows.Forms.DataGridView();
             this.tbNomeGrupoPessoa = new System.Windows.Forms.TextBox();
             this.gbBusca = new System.Windows.Forms.GroupBox();
@@ -43,8 +43,8 @@
             this.dgvGrupoPessoa.AllowUserToDeleteRows = false;
             this.dgvGrupoPessoa.AllowUserToOrderColumns = true;
             this.dgvGrupoPessoa.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvGrupoPessoa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvGrupoPessoa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvGrupoPessoa.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvGrupoPessoa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrupoPessoa.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -102,6 +102,7 @@
             this.Name = "fmBuscaGrupoPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Grupo de Pessoa";
             this.Load += new System.EventHandler(this.FmBuscaGrupoPessoa_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoPessoa)).EndInit();

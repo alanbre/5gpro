@@ -90,6 +90,7 @@
             this.Name = "fmBuscaSubGrupoItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Sub-Grupo Item";
             this.Load += new System.EventHandler(this.FmBuscaSubGrupoItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGrupoItem)).EndInit();

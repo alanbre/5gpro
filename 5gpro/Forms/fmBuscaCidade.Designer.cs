@@ -156,6 +156,7 @@
             this.Name = "fmBuscaCidade";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Cidades";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaCidade_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCidades)).EndInit();

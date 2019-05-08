@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
@@ -52,9 +55,6 @@
             this.tbPrecoVenda = new System.Windows.Forms.TextBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
-            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
-            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
             this.pnDadosGerais.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
             this.tcItens.SuspendLayout();
@@ -83,6 +83,28 @@
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 345);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // buscaSubGrupoItem
+            // 
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(12, 257);
+            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
+            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaSubGrupoItem.TabIndex = 13;
+            // 
+            // buscaGrupoItem
+            // 
+            this.buscaGrupoItem.Location = new System.Drawing.Point(12, 212);
+            this.buscaGrupoItem.Name = "buscaGrupoItem";
+            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaGrupoItem.TabIndex = 12;
+            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
+            // 
+            // buscaUnimedidaItem
+            // 
+            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 128);
+            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
+            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
+            this.buscaUnimedidaItem.TabIndex = 6;
             // 
             // gbTipoDeItem
             // 
@@ -318,28 +340,6 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical1_Excluir_Clicked);
             // 
-            // buscaGrupoItem
-            // 
-            this.buscaGrupoItem.Location = new System.Drawing.Point(12, 212);
-            this.buscaGrupoItem.Name = "buscaGrupoItem";
-            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaGrupoItem.TabIndex = 12;
-            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
-            // 
-            // buscaUnimedidaItem
-            // 
-            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 128);
-            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
-            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
-            this.buscaUnimedidaItem.TabIndex = 6;
-            // 
-            // buscaSubGrupoItem
-            // 
-            this.buscaSubGrupoItem.Location = new System.Drawing.Point(12, 257);
-            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
-            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaSubGrupoItem.TabIndex = 13;
-            // 
             // fmCadastroItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,6 +356,7 @@
             this.Name = "fmCadastroItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de itens";
             this.Load += new System.EventHandler(this.fmCadastroItens_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmCadastroItens_KeyDown);

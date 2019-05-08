@@ -162,6 +162,7 @@
             this.Name = "fmBuscaItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Itens";
             this.Load += new System.EventHandler(this.fmBuscaItem_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();
