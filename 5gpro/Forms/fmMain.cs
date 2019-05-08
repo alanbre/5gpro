@@ -189,5 +189,11 @@ namespace _5gpro
             var formTroco = new fmTroco();
             formTroco.Show(this);
         }
+
+        private void CadastroDeGrupoDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
+            formCadGrupoPessoa.Show(this);
+        }
     }
 }

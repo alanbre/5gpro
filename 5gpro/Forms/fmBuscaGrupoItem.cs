@@ -59,19 +59,5 @@ namespace _5gpro.Forms
             this.Close();
         }
 
-        private void BtCancelar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtSalvar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtNovo_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

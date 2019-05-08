@@ -118,6 +118,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(247, 197);
             this.Name = "fmCadastroSubGrupoItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

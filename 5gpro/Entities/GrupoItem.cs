@@ -7,7 +7,7 @@ namespace _5gpro.Entities
     {
         public int GrupoItemID { get; set; }
 
-        [Required(ErrorMessage = "O Nome é obrigatório.|tbNomeGrupo", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "O Nome é obrigatório.|tbNomeGrupoItem", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
         public List<SubGrupoItem> SubGrupoItens { get; set; }

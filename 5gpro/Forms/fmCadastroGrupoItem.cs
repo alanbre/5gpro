@@ -172,7 +172,7 @@ namespace _5gpro.Forms
                 }
                 else
                 {
-                    MessageBox.Show("Problema ao remover Sub-Grupo, o mesmo deve estar vinculado a algum item", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Problema ao remover Sub-Grupo, o mesmo deve estar vinculado a algum item ou serviço", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -198,7 +198,7 @@ namespace _5gpro.Forms
             if (grupoitem != null)
             {
                 dgvSubGruposItens.Rows.Clear();
-                listadesubgrupo = subgrupoitemDAO.BuscaComFiltro(grupoitem, tbBuscaNomeSub.Text).ToList();
+                listadesubgrupo = subgrupoitemDAO.BuscaTodos(tbBuscaNomeSub.Text, grupoitem.GrupoItemID).ToList();
                 foreach (SubGrupoItem s in listadesubgrupo)
                 {
                     dgvSubGruposItens.Rows.Add(s.SubGrupoItemID, s.Nome);
@@ -405,7 +405,7 @@ namespace _5gpro.Forms
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodigo.Clear(); }
-            tbNomeGrupo.Clear();
+            tbNomeGrupoItem.Clear();
         }
 
         private void NovoCadastro()
@@ -420,7 +420,7 @@ namespace _5gpro.Forms
                     LimpaCampos(false);
                     tbCodigo.Text = grupoitemDAO.BuscaProxCodigoDisponivel();
                     grupoitem = null;
-                    tbNomeGrupo.Focus();
+                    tbNomeGrupoItem.Focus();
                     Editando(true);
                 }
             }
@@ -429,7 +429,7 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
                 tbCodigo.Text = grupoitemDAO.BuscaProxCodigoDisponivel();
                 grupoitem = null;
-                tbNomeGrupo.Focus();
+                tbNomeGrupoItem.Focus();
                 Editando(true);
             }
             AlterarBotoesSubAdd();
@@ -441,7 +441,7 @@ namespace _5gpro.Forms
             ignoraCheckEvent = true;
             LimpaCampos(false);
             tbCodigo.Text = grupoitem.GrupoItemID.ToString();
-            tbNomeGrupo.Text = grupoitem.Nome;
+            tbNomeGrupoItem.Text = grupoitem.Nome;
 
             if (grupoitem.SubGrupoItens != null)
             {
@@ -498,7 +498,7 @@ namespace _5gpro.Forms
                     grupoitem = new GrupoItem();
 
                     grupoitem.GrupoItemID = int.Parse(tbCodigo.Text);
-                    grupoitem.Nome = tbNomeGrupo.Text;
+                    grupoitem.Nome = tbNomeGrupoItem.Text;
 
                     ControlCollection controls = (ControlCollection)this.Controls;
 
