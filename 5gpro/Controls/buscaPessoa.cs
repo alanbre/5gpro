@@ -9,7 +9,7 @@ namespace _5gpro.Controls
 {
     public partial class BuscaPessoa : UserControl
     {
-        public Pessoa pessoa = new Pessoa();
+        public Pessoa pessoa = null;
         public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
 
         private static ConexaoDAO connection = new ConexaoDAO();

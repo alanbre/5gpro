@@ -84,9 +84,11 @@ namespace _5gpro.Forms
                 PreencheCamposParcelas(parcelaSelecionada);
                 btSalvarParcela.Enabled = true;
                 btNovaParcela.Enabled = false;
+                btExcluirParcela.Enabled = true;
             }
         }
         private void BtNovaParcela_Click(object sender, EventArgs e) => InserirParcela();
+        private void BtExcluirParcela_Click(object sender, EventArgs e) => ExcluirParcela();
 
 
 
@@ -302,10 +304,10 @@ namespace _5gpro.Forms
             foreach (var parcela in parcelas)
                 dgvParcelas.Rows.Add(parcela.Sequencia,
                                      parcela.DataVencimento.ToShortDateString(),
-                                     parcela.Valor.ToString("############0.00"),
-                                     parcela.Multa.ToString("############0.00"),
-                                     parcela.Multa.ToString("############0.00"),
-                                     parcela.ValorFinal.ToString("############0.00"),
+                                     parcela.Valor,
+                                     parcela.Multa,
+                                     parcela.Juros,
+                                     parcela.ValorFinal,
                                      parcela.DataQuitacao?.Date);
             dgvParcelas.Refresh();
         }
@@ -328,6 +330,15 @@ namespace _5gpro.Forms
             tbCodigoParcela.Text = codigo;
             dtpDataVencimentoParcela.Focus();
             btNovaParcela.Enabled = false;
+            Editando(true);
+        }
+        private void ExcluirParcela()
+        {
+            parcelas.Remove(parcelas.Single(p => p.Sequencia.ToString() == tbCodigoParcela.Text));
+            dgvParcelas.Rows.Clear();
+            LimpaCamposParcela();
+            PreencheGridParcelas(parcelas);
+            CalculaTotalConta();
             Editando(true);
         }
         private void CalculaTotalParcela()
@@ -353,10 +364,10 @@ namespace _5gpro.Forms
                 parcelas.Add(parcela);
                 dgvParcelas.Rows.Add(parcela.Sequencia,
                                      parcela.DataVencimento.ToShortDateString(),
-                                     parcela.Valor.ToString("############0.00"),
-                                     parcela.Multa.ToString("############0.00"),
-                                     parcela.Juros.ToString("############0.00"),
-                                     parcela.ValorFinal.ToString("############0.00"),
+                                     parcela.Valor,
+                                     parcela.Multa,
+                                     parcela.Juros,
+                                     parcela.ValorFinal,
                                      parcela.DataQuitacao?.Date);
                 dgvParcelas.Refresh();
                 btNovaParcela.Enabled = true;
@@ -375,15 +386,17 @@ namespace _5gpro.Forms
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Multa = ptemp.Multa;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Juros = ptemp.Juros;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().FormaPagamento = ptemp.FormaPagamento;
-                dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor.ToString("############0.00");
+                dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor;
                 dr.Cells[dgvtbcDataVencimento.Index].Value = ptemp.DataVencimento.ToShortDateString();
-                dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa.ToString("############0.00");
-                dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros.ToString("############0.00");
+                dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa;
+                dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros;
                 dgvParcelas.Update();
                 dgvParcelas.Refresh();
             }
             CalculaTotalConta();
+            LimpaCamposParcela();
             btNovaParcela.Enabled = true;
+            btExcluirParcela.Enabled = false;
         }
         private void CalculaTotalConta()
         {
@@ -414,11 +427,16 @@ namespace _5gpro.Forms
         }
         private void LimpaCamposParcela()
         {
+            tbCodigoParcela.Clear();
+            dtpDataVencimentoParcela.Value = DateTime.Today;
             dbValorOriginalParcela.Valor = 0.00m;
             dbValorFinalParcela.Valor = 0.00m;
             dbMultaParcela.Valor = 0.00m;
             dbJurosParcela.Valor = 0.00m;
+            tbDataQuitacao.Clear();
             this.parcelaSelecionada = null;
+            btNovaParcela.Enabled = true;
+            btExcluirParcela.Enabled = false;
         }
         private void EnterTab(object sender, KeyEventArgs e)
         {

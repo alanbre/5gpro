@@ -427,6 +427,12 @@
     <Compile Include="Forms\fmCarCadastroConta.Designer.cs">
       <DependentUpon>fmCarCadastroConta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCarQuitacaoConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCarQuitacaoConta.Designer.cs">
+      <DependentUpon>fmCarQuitacaoConta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -603,6 +609,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCarCadastroConta.resx">
       <DependentUpon>fmCarCadastroConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCarQuitacaoConta.resx">
+      <DependentUpon>fmCarQuitacaoConta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmLogin.resx">
       <DependentUpon>fmLogin.cs</DependentUpon>
