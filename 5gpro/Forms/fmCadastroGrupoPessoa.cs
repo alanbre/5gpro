@@ -386,7 +386,18 @@ namespace _5gpro.Forms
             if (grupopessoa != null)
             {
                 btAddSub.Enabled = true;
-                btRemoverSub.Enabled = true;
+
+                if (grupopessoa.SubGrupoPessoas != null)
+                {
+                    if (grupopessoa.SubGrupoPessoas.Count > 0)
+                    {
+                        btRemoverSub.Enabled = true;
+                    }
+                    else
+                    {
+                        btRemoverSub.Enabled = false;
+                    }
+                }
             }
             else
             {
@@ -464,22 +475,38 @@ namespace _5gpro.Forms
 
             if (grupopessoa != null)
             {
+                grupopessoa = grupopessoaDAO.BuscarByID(grupopessoa.GrupoPessoaID);
                 if (grupopessoa.SubGrupoPessoas != null)
                 {
-                    dgvSubGruposPessoas.Rows.Clear();
-                    grupopessoa.SubGrupoPessoas = grupopessoaDAO.BuscarByID(grupopessoa.GrupoPessoaID).SubGrupoPessoas;
-                    foreach (SubGrupoPessoa s in grupopessoa.SubGrupoPessoas)
+                    if (grupopessoa.SubGrupoPessoas.Count > 0)
                     {
-                        dgvSubGruposPessoas.Rows.Add(s.SubGrupoPessoaID, s.Nome);
+                        dgvSubGruposPessoas.Rows.Clear();
+                        grupopessoa.SubGrupoPessoas = grupopessoaDAO.BuscarByID(grupopessoa.GrupoPessoaID).SubGrupoPessoas;
+                        foreach (SubGrupoPessoa s in grupopessoa.SubGrupoPessoas)
+                        {
+                            dgvSubGruposPessoas.Rows.Add(s.SubGrupoPessoaID, s.Nome);
+                        }
+                        dgvSubGruposPessoas.Refresh();
                     }
+                    else
+                    {
+                        dgvSubGruposPessoas.Rows.Clear();
+                        dgvSubGruposPessoas.Refresh();
+                    }
+                }
+                else
+                {
+                    dgvSubGruposPessoas.Rows.Clear();
                     dgvSubGruposPessoas.Refresh();
                 }
             }
             else
             {
                 dgvSubGruposPessoas.Rows.Clear();
+                dgvSubGruposPessoas.Refresh();
             }
             ignoraCheckEvent = false;
+            AlterarBotoesSubAdd();
 
         }
 
@@ -545,6 +572,7 @@ namespace _5gpro.Forms
                 }
             }
             AlterarBotoesSubAdd();
+            AtualizarDgvSub();
         }
 
         private void AbreTelaBuscaGrupoPessoa()

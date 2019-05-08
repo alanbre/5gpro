@@ -47,6 +47,7 @@
             this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +59,8 @@
             this.tsmiOrcamento,
             this.tsmiSaida,
             this.tsmiContasReceber,
-            this.tsmiContasPagar});
+            this.tsmiContasPagar,
+            this.relatóriosToolStripMenuItem});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -203,6 +205,12 @@
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
             // 
+            // relatóriosToolStripMenuItem
+            // 
+            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,6 +251,7 @@
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeItensToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tESTETROCOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDePessoasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
     }
 }
 
