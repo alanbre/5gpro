@@ -158,7 +158,7 @@ namespace _5gpro.Forms
             string codsub = dgvSubGruposItens.SelectedCells[0].Value.ToString();
             string nomesub = dgvSubGruposItens.SelectedCells[1].Value.ToString();
 
-            if (MessageBox.Show("Deseja excluir o sub-grupo "+nomesub+" ?",
+            if (MessageBox.Show("Deseja excluir o sub-grupo " + nomesub + " ?",
                                 "Aviso de alteração",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning) == DialogResult.Yes)
@@ -173,6 +173,7 @@ namespace _5gpro.Forms
                 else
                 {
                     MessageBox.Show("Problema ao remover Sub-Grupo, o mesmo deve estar vinculado a algum item ou serviço", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AtualizarDgvSub();
                 }
             }
         }
@@ -387,7 +388,18 @@ namespace _5gpro.Forms
             if (grupoitem != null)
             {
                 btAddSub.Enabled = true;
-                btRemoverSub.Enabled = true;
+
+                if (grupoitem.SubGrupoItens != null)
+                {
+                    if (grupoitem.SubGrupoItens.Count > 0)
+                    {
+                        btRemoverSub.Enabled = true;
+                    }
+                    else
+                    {
+                        btRemoverSub.Enabled = false;
+                    }
+                }
             }
             else
             {
@@ -466,22 +478,38 @@ namespace _5gpro.Forms
 
             if (grupoitem != null)
             {
+                grupoitem = grupoitemDAO.BuscarByID(grupoitem.GrupoItemID);
                 if (grupoitem.SubGrupoItens != null)
                 {
-                    dgvSubGruposItens.Rows.Clear();
-                    grupoitem.SubGrupoItens = grupoitemDAO.BuscarByID(grupoitem.GrupoItemID).SubGrupoItens;
-                    foreach (SubGrupoItem s in grupoitem.SubGrupoItens)
+                    if (grupoitem.SubGrupoItens.Count > 0)
                     {
-                        dgvSubGruposItens.Rows.Add(s.SubGrupoItemID, s.Nome);
+                        dgvSubGruposItens.Rows.Clear();
+                        grupoitem.SubGrupoItens = grupoitemDAO.BuscarByID(grupoitem.GrupoItemID).SubGrupoItens;
+                        foreach (SubGrupoItem s in grupoitem.SubGrupoItens)
+                        {
+                            dgvSubGruposItens.Rows.Add(s.SubGrupoItemID, s.Nome);
+                        }
+                        dgvSubGruposItens.Refresh();
                     }
+                    else
+                    {
+                        dgvSubGruposItens.Rows.Clear();
+                        dgvSubGruposItens.Refresh();
+                    }
+                }
+                else
+                {
+                    dgvSubGruposItens.Rows.Clear();
                     dgvSubGruposItens.Refresh();
                 }
             }
             else
             {
                 dgvSubGruposItens.Rows.Clear();
+                dgvSubGruposItens.Refresh();
             }
             ignoraCheckEvent = false;
+            AlterarBotoesSubAdd();
         }
 
         private void Editando(bool edit)
@@ -546,6 +574,7 @@ namespace _5gpro.Forms
                 }
             }
             AlterarBotoesSubAdd();
+            AtualizarDgvSub();
         }
 
         private void AbreTelaBuscaGrupoItem()

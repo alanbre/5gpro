@@ -167,12 +167,14 @@ namespace _5gpro.Forms
                     {
                         MessageBox.Show("Salvo", "Aviso de alteração", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
+                        telacadgrupoitem.AtualizarDgvSub();
                         Editando(false);
                     }
                     else if (resultado == 2)
                     {
                         MessageBox.Show("Atualizado", "Aviso de alteração", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
+                        telacadgrupoitem.AtualizarDgvSub();
                         Editando(false);
                     }
                 }
