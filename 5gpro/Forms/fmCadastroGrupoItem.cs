@@ -2,6 +2,8 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -16,6 +18,7 @@ namespace _5gpro.Forms
         Validacao validacao = new Validacao();
         PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
         public SubGrupoItem subgrupoitemSelecionado = null;
+        List<SubGrupoItem> listadesubgrupo = new List<SubGrupoItem>();
 
         //Controle de Permissões
         private Logado logado;
@@ -186,6 +189,22 @@ namespace _5gpro.Forms
             subgrupoitemSelecionado = grupoitem.SubGrupoItens.Find(g => (g.SubGrupoItemID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
 
             AbreTelaCadSubGrupoItem();
+        }
+
+
+        //EVENTOS DE TEXTCHANGED
+        private void TbBuscaNomeSub_TextChanged(object sender, EventArgs e)
+        {
+            if (grupoitem != null)
+            {
+                dgvSubGruposItens.Rows.Clear();
+                listadesubgrupo = subgrupoitemDAO.BuscaComFiltro(grupoitem, tbBuscaNomeSub.Text).ToList();
+                foreach (SubGrupoItem s in listadesubgrupo)
+                {
+                    dgvSubGruposItens.Rows.Add(s.SubGrupoItemID, s.Nome);
+                }
+                dgvSubGruposItens.Refresh();
+            }
         }
 
 
@@ -414,6 +433,7 @@ namespace _5gpro.Forms
                 Editando(true);
             }
             AlterarBotoesSubAdd();
+            AtualizarDgvSub();
         }
 
         private void PreencheCampos(GrupoItem grupoitem)
@@ -532,6 +552,7 @@ namespace _5gpro.Forms
             if (buscaGrupoItem.grupoitemSelecionado != null)
             {
                 grupoitem = buscaGrupoItem.grupoitemSelecionado;
+                AlterarBotoesSubAdd();
                 PreencheCampos(grupoitem);
             }
         }
@@ -540,11 +561,6 @@ namespace _5gpro.Forms
         {
             var cadSubGrupoItem = new fmCadastroSubGrupoItem(grupoitem, this);
             cadSubGrupoItem.ShowDialog();
-        }
-
-        private void TbBuscaNomeSub_TextChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

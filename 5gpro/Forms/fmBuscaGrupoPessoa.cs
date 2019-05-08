@@ -24,7 +24,7 @@ namespace _5gpro.Forms
         private void BuscaGrupoPessoa()
         {
             DataTable table = new DataTable();
-            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
 
             listagrupopessoa = grupoPessoaDAO.BuscaTodos(tbNomeGrupoPessoa.Text).ToList();

@@ -132,11 +132,6 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
-        private void FmCadastroSubGrupoItem_KeyDown(object sender, KeyEventArgs e)
-        {
-            EnterTab(this.ActiveControl, e);
-        }
-
 
         //PADRÕES CRIADAS
         private void SalvaCadastro()
@@ -226,6 +221,11 @@ namespace _5gpro.Forms
         {
             telacadgrupoitem.AtualizarDgvSub();
             telacadgrupoitem.subgrupoitemSelecionado = null;
+        }
+
+        private void FmCadastroSubGrupoItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            EnterTab(this.ActiveControl, e);
         }
     }
 }

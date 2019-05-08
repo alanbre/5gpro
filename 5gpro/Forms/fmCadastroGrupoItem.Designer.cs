@@ -34,13 +34,13 @@
             this.tbNomeGrupo = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.tbCodigo = new System.Windows.Forms.TextBox();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.dgvSubGruposItens = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigoSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNomeSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btAddSub = new System.Windows.Forms.Button();
-            this.btRemoverSub = new System.Windows.Forms.Button();
             this.tbBuscaNomeSub = new System.Windows.Forms.TextBox();
+            this.btRemoverSub = new System.Windows.Forms.Button();
+            this.btAddSub = new System.Windows.Forms.Button();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbNovoGrupoItem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGruposItens)).BeginInit();
@@ -94,14 +94,6 @@
             this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCodigo_KeyPress);
             this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Location = new System.Drawing.Point(71, 193);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.ReadOnly = true;
-            this.tbAjuda.Size = new System.Drawing.Size(255, 20);
-            this.tbAjuda.TabIndex = 5;
-            // 
             // dgvSubGruposItens
             // 
             this.dgvSubGruposItens.AllowUserToAddRows = false;
@@ -121,7 +113,7 @@
             this.dgvSubGruposItens.ReadOnly = true;
             this.dgvSubGruposItens.RowHeadersVisible = false;
             this.dgvSubGruposItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubGruposItens.Size = new System.Drawing.Size(483, 219);
+            this.dgvSubGruposItens.Size = new System.Drawing.Size(483, 208);
             this.dgvSubGruposItens.TabIndex = 4;
             this.dgvSubGruposItens.TabStop = false;
             this.dgvSubGruposItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposItens_CellDoubleClick);
@@ -138,16 +130,13 @@
             this.dgvtbcNomeSub.Name = "dgvtbcNomeSub";
             this.dgvtbcNomeSub.ReadOnly = true;
             // 
-            // btAddSub
+            // tbBuscaNomeSub
             // 
-            this.btAddSub.Enabled = false;
-            this.btAddSub.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
-            this.btAddSub.Location = new System.Drawing.Point(559, 165);
-            this.btAddSub.Name = "btAddSub";
-            this.btAddSub.Size = new System.Drawing.Size(22, 22);
-            this.btAddSub.TabIndex = 5;
-            this.btAddSub.UseVisualStyleBackColor = true;
-            this.btAddSub.Click += new System.EventHandler(this.BtAddSub_Click);
+            this.tbBuscaNomeSub.Location = new System.Drawing.Point(71, 139);
+            this.tbBuscaNomeSub.Name = "tbBuscaNomeSub";
+            this.tbBuscaNomeSub.Size = new System.Drawing.Size(482, 20);
+            this.tbBuscaNomeSub.TabIndex = 7;
+            this.tbBuscaNomeSub.TextChanged += new System.EventHandler(this.TbBuscaNomeSub_TextChanged);
             // 
             // btRemoverSub
             // 
@@ -160,13 +149,24 @@
             this.btRemoverSub.UseVisualStyleBackColor = true;
             this.btRemoverSub.Click += new System.EventHandler(this.BtRemoverSub_Click);
             // 
-            // tbBuscaNomeSub
+            // btAddSub
             // 
-            this.tbBuscaNomeSub.Location = new System.Drawing.Point(71, 139);
-            this.tbBuscaNomeSub.Name = "tbBuscaNomeSub";
-            this.tbBuscaNomeSub.Size = new System.Drawing.Size(482, 20);
-            this.tbBuscaNomeSub.TabIndex = 7;
-            this.tbBuscaNomeSub.TextChanged += new System.EventHandler(this.TbBuscaNomeSub_TextChanged);
+            this.btAddSub.Enabled = false;
+            this.btAddSub.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
+            this.btAddSub.Location = new System.Drawing.Point(559, 165);
+            this.btAddSub.Name = "btAddSub";
+            this.btAddSub.Size = new System.Drawing.Size(22, 22);
+            this.btAddSub.TabIndex = 5;
+            this.btAddSub.UseVisualStyleBackColor = true;
+            this.btAddSub.Click += new System.EventHandler(this.BtAddSub_Click);
+            // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Location = new System.Drawing.Point(70, 380);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.ReadOnly = true;
+            this.tbAjuda.Size = new System.Drawing.Size(483, 20);
+            this.tbAjuda.TabIndex = 9;
             // 
             // menuVertical
             // 
@@ -188,7 +188,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(593, 397);
+            this.ClientSize = new System.Drawing.Size(593, 412);
+            this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbBuscaNomeSub);
             this.Controls.Add(this.btRemoverSub);
@@ -198,9 +199,11 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(609, 436);
             this.Name = "fmCadastroGrupoItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro Grupo de Itens";
             this.Load += new System.EventHandler(this.FmCadastroGrupoItem_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroGrupoItem_KeyDown);
@@ -218,7 +221,6 @@
         private System.Windows.Forms.TextBox tbNomeGrupo;
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.TextBox tbCodigo;
-        private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.DataGridView dgvSubGruposItens;
         private System.Windows.Forms.Button btAddSub;
         private System.Windows.Forms.Button btRemoverSub;
@@ -226,5 +228,6 @@
         private Controls.MenuVertical menuVertical;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoSub;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeSub;
+        private System.Windows.Forms.TextBox tbAjuda;
     }
 }

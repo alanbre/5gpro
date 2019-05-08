@@ -110,6 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(231, 158);
             this.Controls.Add(this.gbCadSubGrupo);
             this.Controls.Add(this.btCancelar);
@@ -120,6 +121,7 @@
             this.Name = "fmCadastroSubGrupoItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro Sub-Grupo Item";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCadastroSubGrupoItem_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroSubGrupoItem_KeyDown);

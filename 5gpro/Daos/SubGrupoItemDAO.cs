@@ -220,5 +220,57 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
+        public IEnumerable<SubGrupoItem> BuscaComFiltro(GrupoItem grupoitemparametro, string nomesub)
+        {
+            GrupoItem grupoitem = null;
+            SubGrupoItem subgrupoitem = null;
+            List<SubGrupoItem> listadesubgrupoitem = new List<SubGrupoItem>();
+
+            string conCodGrupoItem = grupoitemparametro.GrupoItemID.ToString().Length > 0 ? "AND s.idgrupoitem = @idgrupoitem" : "";
+            string conNomeSubGrupoItem = nomesub.Length > 0 ? "AND s.nome LIKE @nomesub" : "";
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT *
+                                             FROM subgrupoitem s
+                                             WHERE 1=1
+                                             " + conCodGrupoItem + @"
+                                             " + conNomeSubGrupoItem + @"
+                                             ORDER BY s.idsubgrupoitem;", Connect.Conexao);
+
+                if (conCodGrupoItem.Length > 0) { Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitemparametro.GrupoItemID); }
+                if (conNomeSubGrupoItem.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomesub", "%" + nomesub + "%"); }
+
+                IDataReader reader = Connect.Comando.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    grupoitem = new GrupoItem
+                    {
+                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                    };
+
+                    subgrupoitem = new SubGrupoItem
+                    {
+                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        GrupoItem = grupoitem
+                    };
+
+                    listadesubgrupoitem.Add(subgrupoitem);
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return listadesubgrupoitem;
+        }
     }
 }
