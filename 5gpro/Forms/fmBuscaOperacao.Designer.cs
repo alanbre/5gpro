@@ -95,8 +95,14 @@
             this.Controls.Add(this.tbNomeOperacao);
             this.Controls.Add(this.lbNome);
             this.Controls.Add(this.dgvOperacao);
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "fmBuscaOperacao";
-            this.Text = "fmBuscaOperacao";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Busca Operação";
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperacao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

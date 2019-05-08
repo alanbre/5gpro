@@ -87,7 +87,8 @@ namespace _5gpro.Funcoes
                 //USERCONTROL
                 if (ctrl is UserControl)
                 {
-                    ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+                    //ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+                    ctrl.BackColor = System.Drawing.Color.White;
                     foreach (Control ctrlcu in ctrl.Controls)
                     {
                         if (ctrlcu is TextBox && !ctrlcu.Name.Equals("tbAjuda"))
@@ -100,7 +101,8 @@ namespace _5gpro.Funcoes
                 //GROUPBOX
                 if (ctrl is GroupBox)
                 {
-                    ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+                    //ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
+                    ctrl.BackColor = System.Drawing.Color.White;
 
                     foreach (Control ctrlgb in ctrl.Controls)
                     {
@@ -111,11 +113,13 @@ namespace _5gpro.Funcoes
 
                         if (ctrlgb is Controls.BuscaSubGrupoItem || ctrlgb is Controls.BuscaUnimedida)
                         {
-                            ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            ctrlgb.BackColor = System.Drawing.Color.White;
                         }
                         if (ctrlgb is Controls.BuscaCidade || ctrlgb is Controls.BuscaSubGrupoPessoa)
                         {
-                            ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            ctrlgb.BackColor = System.Drawing.Color.White;
                         }
                     }
                 }
@@ -131,11 +135,13 @@ namespace _5gpro.Funcoes
                         }
                         if (ctrlp is Controls.BuscaSubGrupoItem || ctrlp is Controls.BuscaUnimedida)
                         {
-                            ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            //ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            ctrlp.BackColor = System.Drawing.Color.White;
                         }
                         if (ctrlp is Controls.BuscaCidade || ctrlp is Controls.BuscaSubGrupoPessoa)
                         {
-                            ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            //ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
+                            ctrlp.BackColor = System.Drawing.Color.White;
                         }
                     }
                 }

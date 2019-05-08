@@ -2,13 +2,6 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -59,10 +52,6 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
-        private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
 
         private void fmCadastroUsuario_FormClosing(object sender, FormClosingEventArgs e)
         {

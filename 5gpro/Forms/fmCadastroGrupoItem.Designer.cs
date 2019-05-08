@@ -28,14 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbNovoGrupoItem = new System.Windows.Forms.GroupBox();
             this.tbNomeGrupo = new System.Windows.Forms.TextBox();
             this.lbNome = new System.Windows.Forms.Label();
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.miniMenuVertical = new _5gpro.Controls.MiniMenuVertical();
+            this.dgvSubGruposItens = new System.Windows.Forms.DataGridView();
+            this.dgvtbcCodigoSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNomeSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btAddSub = new System.Windows.Forms.Button();
+            this.btRemoverSub = new System.Windows.Forms.Button();
+            this.tbBuscaNomeSub = new System.Windows.Forms.TextBox();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbNovoGrupoItem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubGruposItens)).BeginInit();
             this.SuspendLayout();
             // 
             // lbCodigo
@@ -94,24 +102,98 @@
             this.tbAjuda.Size = new System.Drawing.Size(255, 20);
             this.tbAjuda.TabIndex = 5;
             // 
-            // miniMenuVertical
+            // dgvSubGruposItens
             // 
-            this.miniMenuVertical.Location = new System.Drawing.Point(12, 3);
-            this.miniMenuVertical.Name = "miniMenuVertical";
-            this.miniMenuVertical.Size = new System.Drawing.Size(53, 210);
-            this.miniMenuVertical.TabIndex = 3;
-            this.miniMenuVertical.Novo_Clicked += new _5gpro.Controls.MiniMenuVertical.novoEventHandler(this.MiniMenuVertical_Novo_Clicked);
-            this.miniMenuVertical.Buscar_Clicked += new _5gpro.Controls.MiniMenuVertical.buscarEventHandler(this.MiniMenuVertical_Buscar_Clicked);
-            this.miniMenuVertical.Salvar_Clicked += new _5gpro.Controls.MiniMenuVertical.salvarEventHandler(this.MiniMenuVertical_Salvar_Clicked);
-            this.miniMenuVertical.Excluir_Clicked += new _5gpro.Controls.MiniMenuVertical.excluirEventHandler(this.MiniMenuVertical_Excluir_Clicked);
+            this.dgvSubGruposItens.AllowUserToAddRows = false;
+            this.dgvSubGruposItens.AllowUserToDeleteRows = false;
+            this.dgvSubGruposItens.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvSubGruposItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvSubGruposItens.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvSubGruposItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSubGruposItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcCodigoSub,
+            this.dgvtbcNomeSub});
+            this.dgvSubGruposItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvSubGruposItens.Location = new System.Drawing.Point(70, 165);
+            this.dgvSubGruposItens.MultiSelect = false;
+            this.dgvSubGruposItens.Name = "dgvSubGruposItens";
+            this.dgvSubGruposItens.ReadOnly = true;
+            this.dgvSubGruposItens.RowHeadersVisible = false;
+            this.dgvSubGruposItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvSubGruposItens.Size = new System.Drawing.Size(483, 219);
+            this.dgvSubGruposItens.TabIndex = 4;
+            this.dgvSubGruposItens.TabStop = false;
+            this.dgvSubGruposItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposItens_CellDoubleClick);
+            // 
+            // dgvtbcCodigoSub
+            // 
+            this.dgvtbcCodigoSub.HeaderText = "Código";
+            this.dgvtbcCodigoSub.Name = "dgvtbcCodigoSub";
+            this.dgvtbcCodigoSub.ReadOnly = true;
+            // 
+            // dgvtbcNomeSub
+            // 
+            this.dgvtbcNomeSub.HeaderText = "Nome";
+            this.dgvtbcNomeSub.Name = "dgvtbcNomeSub";
+            this.dgvtbcNomeSub.ReadOnly = true;
+            // 
+            // btAddSub
+            // 
+            this.btAddSub.Enabled = false;
+            this.btAddSub.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
+            this.btAddSub.Location = new System.Drawing.Point(559, 165);
+            this.btAddSub.Name = "btAddSub";
+            this.btAddSub.Size = new System.Drawing.Size(22, 22);
+            this.btAddSub.TabIndex = 5;
+            this.btAddSub.UseVisualStyleBackColor = true;
+            this.btAddSub.Click += new System.EventHandler(this.BtAddSub_Click);
+            // 
+            // btRemoverSub
+            // 
+            this.btRemoverSub.Enabled = false;
+            this.btRemoverSub.Image = global::_5gpro.Properties.Resources.icons8_Delete_Subtra_22px;
+            this.btRemoverSub.Location = new System.Drawing.Point(559, 193);
+            this.btRemoverSub.Name = "btRemoverSub";
+            this.btRemoverSub.Size = new System.Drawing.Size(22, 22);
+            this.btRemoverSub.TabIndex = 6;
+            this.btRemoverSub.UseVisualStyleBackColor = true;
+            this.btRemoverSub.Click += new System.EventHandler(this.BtRemoverSub_Click);
+            // 
+            // tbBuscaNomeSub
+            // 
+            this.tbBuscaNomeSub.Location = new System.Drawing.Point(71, 139);
+            this.tbBuscaNomeSub.Name = "tbBuscaNomeSub";
+            this.tbBuscaNomeSub.Size = new System.Drawing.Size(482, 20);
+            this.tbBuscaNomeSub.TabIndex = 7;
+            this.tbBuscaNomeSub.TextChanged += new System.EventHandler(this.TbBuscaNomeSub_TextChanged);
+            // 
+            // menuVertical
+            // 
+            this.menuVertical.Location = new System.Drawing.Point(9, 9);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(0);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 8;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
             // fmCadastroGrupoItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(296, 216);
-            this.Controls.Add(this.miniMenuVertical);
+            this.ClientSize = new System.Drawing.Size(593, 397);
+            this.Controls.Add(this.menuVertical);
+            this.Controls.Add(this.tbBuscaNomeSub);
+            this.Controls.Add(this.btRemoverSub);
+            this.Controls.Add(this.btAddSub);
+            this.Controls.Add(this.dgvSubGruposItens);
             this.Controls.Add(this.gbNovoGrupoItem);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -124,6 +206,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroGrupoItem_KeyDown);
             this.gbNovoGrupoItem.ResumeLayout(false);
             this.gbNovoGrupoItem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSubGruposItens)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,7 +218,13 @@
         private System.Windows.Forms.TextBox tbNomeGrupo;
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.TextBox tbCodigo;
-        private Controls.MiniMenuVertical miniMenuVertical;
         private System.Windows.Forms.TextBox tbAjuda;
+        private System.Windows.Forms.DataGridView dgvSubGruposItens;
+        private System.Windows.Forms.Button btAddSub;
+        private System.Windows.Forms.Button btRemoverSub;
+        private System.Windows.Forms.TextBox tbBuscaNomeSub;
+        private Controls.MenuVertical menuVertical;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoSub;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeSub;
     }
 }
