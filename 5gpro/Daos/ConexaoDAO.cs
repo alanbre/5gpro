@@ -10,19 +10,6 @@ namespace _5gpro.Daos
     public class ConexaoDAO
     {
         protected string Conecta = DatabaseUpdate.dataBaseString;
-        //protected string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-
-        //Localhost
-        //public static string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-
-        //DALVA
-        //public static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan; pooling = true";
-
-        //Casa Eduardo Note
-        //public static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan; pooling = true";
-
-        //Itamar PC
-        //public static string Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan; pooling = true";
 
         public MySqlConnection Conexao;
         public MySqlTransaction tr = null;

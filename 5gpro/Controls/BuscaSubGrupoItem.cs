@@ -81,11 +81,6 @@ namespace _5gpro.Controls
             }
         }
 
-        private void AbreTelaCadSubGrupoItem()
-        {
-            //var cadSubGrupoItem = new fmCadastroSubGrupoItem();
-            //cadSubGrupoItem.ShowDialog();
-        }
 
         private void PreencheCamposSubGrupoItem(SubGrupoItem subgrupoItem)
         {
@@ -148,7 +143,6 @@ namespace _5gpro.Controls
 
         private void BtAdd_Click(object sender, EventArgs e)
         {
-            AbreTelaCadSubGrupoItem();
         }
     }
 }

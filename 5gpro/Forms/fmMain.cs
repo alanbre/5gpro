@@ -184,7 +184,10 @@ namespace _5gpro
             }
         }
 
-
-
+        private void PrimeiroToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var formRlPrimeiro = new rlPrimeiro();
+            //formRlPrimeiro.Show(this);
+        }
     }
 }
