@@ -32,7 +32,6 @@
             this.btBuscaSubGrupoItem = new System.Windows.Forms.Button();
             this.tbNomeSubGrupoItem = new System.Windows.Forms.TextBox();
             this.lbSubGrupoItem = new System.Windows.Forms.Label();
-            this.btAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbCodigoSubGrupoItem
@@ -75,27 +74,16 @@
             this.lbSubGrupoItem.TabIndex = 0;
             this.lbSubGrupoItem.Text = "Sub-Grupo Item";
             // 
-            // btAdd
-            // 
-            this.btAdd.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
-            this.btAdd.Location = new System.Drawing.Point(442, 16);
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(22, 22);
-            this.btAdd.TabIndex = 1;
-            this.btAdd.UseVisualStyleBackColor = true;
-            this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
-            // 
             // BuscaSubGrupoItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btAdd);
             this.Controls.Add(this.lbSubGrupoItem);
             this.Controls.Add(this.tbNomeSubGrupoItem);
             this.Controls.Add(this.btBuscaSubGrupoItem);
             this.Controls.Add(this.tbCodigoSubGrupoItem);
             this.Name = "BuscaSubGrupoItem";
-            this.Size = new System.Drawing.Size(465, 39);
+            this.Size = new System.Drawing.Size(442, 39);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,6 +95,5 @@
         private System.Windows.Forms.Button btBuscaSubGrupoItem;
         private System.Windows.Forms.TextBox tbNomeSubGrupoItem;
         private System.Windows.Forms.Label lbSubGrupoItem;
-        private System.Windows.Forms.Button btAdd;
     }
 }

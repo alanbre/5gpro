@@ -44,11 +44,12 @@
             this.tsmiEmissaoNF = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiContasReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCarCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCarQuitacaoConta = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCarQuitacaoConta = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.primeiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,9 +184,16 @@
             // tsmiCarCadastroContaReceber
             // 
             this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(178, 22);
             this.tsmiCarCadastroContaReceber.Text = "Cadastro de Contas";
             this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
+            // 
+            // tsmiCarQuitacaoConta
+            // 
+            this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
+            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
+            this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
             // 
             // tsmiContasPagar
             // 
@@ -198,27 +206,29 @@
             // tsmiCapCadastroConta
             // 
             this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(170, 22);
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
+            // 
+            // relatóriosToolStripMenuItem
+            // 
+            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.primeiroToolStripMenuItem});
+            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
+            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.relatóriosToolStripMenuItem.Text = "Relatórios";
             // 
             // tsmiCadastroContaReceber
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
             // 
-            // tsmiCarQuitacaoConta
+            // primeiroToolStripMenuItem
             // 
-            this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
-            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(180, 22);
-            this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
-            this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
-            // 
-            // relatóriosToolStripMenuItem
-            // 
-            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.relatóriosToolStripMenuItem.Text = "Relatórios";
+            this.primeiroToolStripMenuItem.Name = "primeiroToolStripMenuItem";
+            this.primeiroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.primeiroToolStripMenuItem.Text = "Primeiro";
+            this.primeiroToolStripMenuItem.Click += new System.EventHandler(this.PrimeiroToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -262,6 +272,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCarQuitacaoConta;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDePessoasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem primeiroToolStripMenuItem;
     }
 }
 
