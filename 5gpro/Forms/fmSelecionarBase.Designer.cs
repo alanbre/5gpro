@@ -30,12 +30,12 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvBases = new System.Windows.Forms.DataGridView();
-            this.dgvtbcDataBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcServer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcUid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btEntrar = new System.Windows.Forms.Button();
             this.btSair = new System.Windows.Forms.Button();
+            this.dgvtbcDataBase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcServer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcUid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBases)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,9 +51,9 @@
             this.dgvBases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBases.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcDataBase,
-            this.dgvtbcPassword,
             this.dgvtbcServer,
-            this.dgvtbcUid});
+            this.dgvtbcUid,
+            this.dgvtbcPassword});
             this.dgvBases.Location = new System.Drawing.Point(12, 12);
             this.dgvBases.MultiSelect = false;
             this.dgvBases.Name = "dgvBases";
@@ -63,30 +63,6 @@
             this.dgvBases.Size = new System.Drawing.Size(412, 210);
             this.dgvBases.TabIndex = 0;
             this.dgvBases.TabStop = false;
-            // 
-            // dgvtbcDataBase
-            // 
-            this.dgvtbcDataBase.HeaderText = "DataBase";
-            this.dgvtbcDataBase.Name = "dgvtbcDataBase";
-            this.dgvtbcDataBase.ReadOnly = true;
-            // 
-            // dgvtbcPassword
-            // 
-            this.dgvtbcPassword.HeaderText = "Password";
-            this.dgvtbcPassword.Name = "dgvtbcPassword";
-            this.dgvtbcPassword.ReadOnly = true;
-            // 
-            // dgvtbcServer
-            // 
-            this.dgvtbcServer.HeaderText = "Server";
-            this.dgvtbcServer.Name = "dgvtbcServer";
-            this.dgvtbcServer.ReadOnly = true;
-            // 
-            // dgvtbcUid
-            // 
-            this.dgvtbcUid.HeaderText = "UID";
-            this.dgvtbcUid.Name = "dgvtbcUid";
-            this.dgvtbcUid.ReadOnly = true;
             // 
             // btEntrar
             // 
@@ -107,6 +83,30 @@
             this.btSair.Text = "Sair";
             this.btSair.UseVisualStyleBackColor = true;
             this.btSair.Click += new System.EventHandler(this.BtSair_Click);
+            // 
+            // dgvtbcDataBase
+            // 
+            this.dgvtbcDataBase.HeaderText = "DataBase";
+            this.dgvtbcDataBase.Name = "dgvtbcDataBase";
+            this.dgvtbcDataBase.ReadOnly = true;
+            // 
+            // dgvtbcServer
+            // 
+            this.dgvtbcServer.HeaderText = "Server";
+            this.dgvtbcServer.Name = "dgvtbcServer";
+            this.dgvtbcServer.ReadOnly = true;
+            // 
+            // dgvtbcUid
+            // 
+            this.dgvtbcUid.HeaderText = "UID";
+            this.dgvtbcUid.Name = "dgvtbcUid";
+            this.dgvtbcUid.ReadOnly = true;
+            // 
+            // dgvtbcPassword
+            // 
+            this.dgvtbcPassword.HeaderText = "Password";
+            this.dgvtbcPassword.Name = "dgvtbcPassword";
+            this.dgvtbcPassword.ReadOnly = true;
             // 
             // fmSelecionarBase
             // 
@@ -133,8 +133,8 @@
         private System.Windows.Forms.Button btEntrar;
         private System.Windows.Forms.Button btSair;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataBase;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcPassword;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcServer;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcUid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcPassword;
     }
 }
