@@ -16,9 +16,11 @@ namespace _5gpro.Forms
     public partial class fmCarQuitacaoConta : Form
     {
 
-        private IEnumerable<ContaReceber> contasReceber;
+        private List<ParcelaContaReceber> parcelasContaReceber;
         private static ConexaoDAO connection = new ConexaoDAO();
         private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
+        private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO(connection);
+        private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
@@ -50,6 +52,15 @@ namespace _5gpro.Forms
         }
 
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
+        private void DgvParcelas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) => SelecionaLinha();
+        private void DgvParcelas_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Space)
+                return;
+            SelecionaLinha();
+
+        }
+
 
 
 
@@ -68,32 +79,59 @@ namespace _5gpro.Forms
                 filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value
             };
 
-            contasReceber = contaReceberDAO.Busca(f);
+            parcelasContaReceber = parcelaContaReceberDAO.Busca(f).ToList();
             dgvParcelas.Rows.Clear();
-            foreach (var cr in contasReceber)
+            foreach (var par in parcelasContaReceber)
             {
-                foreach(var par in cr.Parcelas)
-                {
-                    dgvParcelas.Rows.Add(cr.ContaReceberID,
-                                         par.Sequencia,
-                                         par.DataVencimento,
-                                         par.Valor,
-                                         par.Multa,
-                                         par.Juros,
-                                         par.Acrescimo,
-                                         par.ValorFinal,
-                                         par.DataQuitacao?.Date);
-                }
+                dgvParcelas.Rows.Add(par.ContaReceberID,
+                                     par.Sequencia,
+                                     par.DataVencimento,
+                                     par.Valor,
+                                     par.Multa,
+                                     par.Juros,
+                                     par.Acrescimo,
+                                     par.ValorFinal
+                                     );
             }
 
             dgvParcelas.Refresh();
         }
-
         private void DatasIniciais()
         {
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
             dtpDataVencimentoInicial.Value = DateTime.Today.AddDays(-30);
         }
+        private void SelecionaLinha()
+        {
+            var parcelaSelecionada = parcelasContaReceber.Single(p => p.ContaReceberID == (int) dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[1].Value);
+            if(parcelasContaReceberSelecionadas.Contains(parcelaSelecionada))
+            {
+                parcelasContaReceberSelecionadas.Remove(parcelaSelecionada);
+                dgvParcelas.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
+                dgvParcelas.CurrentRow.DefaultCellStyle.BackColor = Color.White;
+                dgvParcelas.CurrentRow.DefaultCellStyle.ForeColor = Color.Black;
+            }
+            else
+            {
+                parcelasContaReceberSelecionadas.Add(parcelaSelecionada);
+                dgvParcelas.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Blue;
+                dgvParcelas.CurrentRow.DefaultCellStyle.BackColor = Color.DarkBlue;
+                dgvParcelas.CurrentRow.DefaultCellStyle.ForeColor = Color.White;
+            }
+            CalculaTotais();
+        }
+
+        private void CalculaTotais()
+        {
+            tbCount.Text = parcelasContaReceberSelecionadas.Count.ToString();
+            dbValor.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Valor);
+            dbMulta.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Multa);
+            dbJuros.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Juros);
+            dbAcrescimo.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Acrescimo);
+            dbValorTotal.Valor = parcelasContaReceberSelecionadas.Sum(p => p.ValorFinal);
+            lbTotal.Text = dbValorTotal.Valor.ToString("TOTAL: R$ ########0.00");
+        }
+
 
         private void SetarNivel()
         {
