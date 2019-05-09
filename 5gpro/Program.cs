@@ -2,6 +2,7 @@
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,39 +16,41 @@ namespace _5gpro
         [STAThread]
         static void Main()
         {
-            CarregaSistema carregaSistema = new CarregaSistema();
-            
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            var carregaSistema = new CarregaSistema();
 
-            if (carregaSistema.Carrega())
+
+
+            if (System.Diagnostics.Debugger.IsAttached)
             {
-                fmLogin formLogin = new fmLogin();
-                formLogin.ShowDialog();
-                if (formLogin.usuariologado != null)
-                {
-                    Application.Run(new fmMain());               
-                }
-                else
-                {
+                var formSelecionaBase = new fmSelecionarBase();
+                formSelecionaBase.ShowDialog();
+                if (!carregaSistema.Carrega(formSelecionaBase.baseSelecionada))
                     Application.Exit();
-                }
             }
             else
             {
-                if (MessageBox.Show("Problema ao abrir o sistema",
-                "Erro ao abrir sistema",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error) == DialogResult.OK)
-                {
-
-                }
+                if (!carregaSistema.Carrega())
+                    Application.Exit();
             }
 
+            
+
+            var formLogin = new fmLogin();
+            formLogin.ShowDialog();
+            if (formLogin.usuariologado != null)
+            {
+                Application.Run(new fmMain());
+            }
+            else
+            {
+                Application.Exit();
+            }
+
+
         }
-
-
-
     }
 }
+

@@ -55,6 +55,89 @@ namespace _5gpro
 
         }
 
+
+        private void TsmiCadastroPessoas_Click(object sender, EventArgs e)
+        {
+            var formCadPessoas = new fmCadastroPessoa();
+            formCadPessoas.Show(this);
+        }
+        private void TsmiCadastroItens_Click(object sender, EventArgs e)
+        {
+            var formCadItens = new fmCadastroItem();
+            formCadItens.Show(this);
+        }
+        private void TsmiCadastroOrcamentos_Click(object sender, EventArgs e)
+        {
+            var formOrcamentoCadOrcamentos = new fmOrcamentoCadastroOrcamento();
+            formOrcamentoCadOrcamentos.Show(this);
+        }
+        private void TsmiCadastroUsuarios_Click(object sender, EventArgs e)
+        {
+            var formCadUsuarios = new fmCadastroUsuario();
+            formCadUsuarios.Show(this);
+        }
+        private void TsmiEmissaoNF_Click(object sender, EventArgs e)
+        {
+            var formSaidaEmissaoNota = new fmSaidaEmissaoNota();
+            formSaidaEmissaoNota.Show(this);
+        }
+        private void TsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
+            formCadGrupoUsuarios.Show(this);
+        }
+        private void TsmiCadastroDeOperações_Click(object sender, EventArgs e)
+        {
+            var formCadOperacao = new fmCadastroOperacao();
+            formCadOperacao.Show(this);
+        }
+        private void TsmiCarCadastroContaReceber_Click(object sender, EventArgs e)
+        {
+            var formCarCadContaReceber = new fmCarCadastroConta();
+            formCarCadContaReceber.Show(this);
+        }
+        private void TsmiCarQuitacaoConta_Click(object sender, EventArgs e)
+        {
+            var formCarQuitacaoConta = new fmCarQuitacaoConta();
+            formCarQuitacaoConta.Show(this);
+        }
+        private void TsmiCapCadastroContaReceber_Click(object sender, EventArgs e)
+        {
+            var formCapCadContaPagar = new fmCapCadastroConta();
+            formCapCadContaPagar.Show(this);
+        }
+        private void CadastroDeGrupoDeItensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoItem = new fmCadastroGrupoItem();
+            formCadGrupoItem.Show(this);
+        }
+        private void CadastroDeGrupoDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
+            formCadGrupoPessoa.Show(this);
+        }
+        private void TESTETROCOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formTroco = new fmTroco();
+            formTroco.Show(this);
+        }
+        private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
+            logadoDAO.RemoveTodosLocks(logado);
+            //Retira usuário da tabela Logado
+            logadoDAO.RemoverLogado(adap.Mac);
+        }
+
+
+        private void AtualizaLogado()
+        {
+            while (true)
+            {
+                Thread.Sleep(1000);
+                logadoDAO.AtualizarLogado(logado.Mac);
+            }
+        }
         private void FiltroDePermissoes()
         {
 
@@ -99,102 +182,6 @@ namespace _5gpro
                     }
                 }
             }
-        }
-
-        private void tsmiCadastroPessoas_Click(object sender, EventArgs e)
-        {
-            var formCadPessoas = new fmCadastroPessoa();
-            formCadPessoas.Show(this);
-        }
-
-
-        private void tsmiCadastroItens_Click(object sender, EventArgs e)
-        {
-            var formCadItens = new fmCadastroItem();
-            formCadItens.Show(this);
-        }
-
-        private void tsmiCadastroOrcamentos_Click(object sender, EventArgs e)
-        {
-            var formOrcamentoCadOrcamentos = new fmOrcamentoCadastroOrcamento();
-            formOrcamentoCadOrcamentos.Show(this);
-        }
-
-        private void tsmiCadastroUsuarios_Click(object sender, EventArgs e)
-        {
-            var formCadUsuarios = new fmCadastroUsuario();
-            formCadUsuarios.Show(this);
-        }
-
-        private void tsmiEmissaoNF_Click(object sender, EventArgs e)
-        {
-            var formSaidaEmissaoNota = new fmSaidaEmissaoNota();
-            formSaidaEmissaoNota.Show(this);
-        }
-
-        private void tsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
-            formCadGrupoUsuarios.Show(this);
-        }
-
-        private void tsmiCadastroDeOperações_Click(object sender, EventArgs e)
-        {
-            var formCadOperacao = new fmCadastroOperacao();
-            formCadOperacao.Show(this);
-        }
-
-        private void TsmiCarCadastroContaReceber_Click(object sender, EventArgs e)
-        {
-            var formCarCadContaReceber = new fmCarCadastroConta();
-            formCarCadContaReceber.Show(this);
-        }
-        private void TsmiCarQuitacaoConta_Click(object sender, EventArgs e)
-        {
-            var formCarQuitacaoConta = new fmCarQuitacaoConta();
-            formCarQuitacaoConta.Show(this);
-        }
-
-
-        private void TsmiCapCadastroContaReceber_Click(object sender, EventArgs e)
-        {
-            var formCapCadContaPagar = new fmCapCadastroConta();
-            formCapCadContaPagar.Show(this);
-        }
-
-        private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            t.Abort();
-            logadoDAO.RemoveTodosLocks(logado);
-            //Retira usuário da tabela Logado
-            logadoDAO.RemoverLogado(adap.Mac);
-        }
-
-        private void AtualizaLogado()
-        {
-            while (true)
-            {
-                Thread.Sleep(1000);
-                logadoDAO.AtualizarLogado(logado.Mac);
-            }
-        }
-
-        private void CadastroDeGrupoDeItensToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoItem = new fmCadastroGrupoItem();
-            formCadGrupoItem.Show(this);
-        }
-
-        private void TESTETROCOToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formTroco = new fmTroco();
-            formTroco.Show(this);
-        }
-
-        private void CadastroDeGrupoDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
-            formCadGrupoPessoa.Show(this);
         }
 
         private void PrimeiroToolStripMenuItem_Click(object sender, EventArgs e)

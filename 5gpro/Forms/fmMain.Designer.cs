@@ -90,35 +90,35 @@
             this.tsmiCadastroPessoas.Name = "tsmiCadastroPessoas";
             this.tsmiCadastroPessoas.Size = new System.Drawing.Size(237, 22);
             this.tsmiCadastroPessoas.Text = "Cadastro de Pessoas";
-            this.tsmiCadastroPessoas.Click += new System.EventHandler(this.tsmiCadastroPessoas_Click);
+            this.tsmiCadastroPessoas.Click += new System.EventHandler(this.TsmiCadastroPessoas_Click);
             // 
             // tsmiCadastroItens
             // 
             this.tsmiCadastroItens.Name = "tsmiCadastroItens";
             this.tsmiCadastroItens.Size = new System.Drawing.Size(237, 22);
             this.tsmiCadastroItens.Text = "Cadastro de Itens";
-            this.tsmiCadastroItens.Click += new System.EventHandler(this.tsmiCadastroItens_Click);
+            this.tsmiCadastroItens.Click += new System.EventHandler(this.TsmiCadastroItens_Click);
             // 
             // tsmiCadastroUsuarios
             // 
             this.tsmiCadastroUsuarios.Name = "tsmiCadastroUsuarios";
             this.tsmiCadastroUsuarios.Size = new System.Drawing.Size(237, 22);
             this.tsmiCadastroUsuarios.Text = "Cadastro de Usuários";
-            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.tsmiCadastroUsuarios_Click);
+            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.TsmiCadastroUsuarios_Click);
             // 
             // tsmiCadastroGrupoUsuario
             // 
             this.tsmiCadastroGrupoUsuario.Name = "tsmiCadastroGrupoUsuario";
             this.tsmiCadastroGrupoUsuario.Size = new System.Drawing.Size(237, 22);
             this.tsmiCadastroGrupoUsuario.Text = "Cadastro de Grupo de Usuários";
-            this.tsmiCadastroGrupoUsuario.Click += new System.EventHandler(this.tsmiCadastroDeGrupoDeUsuários_Click);
+            this.tsmiCadastroGrupoUsuario.Click += new System.EventHandler(this.TsmiCadastroDeGrupoDeUsuários_Click);
             // 
             // tsmiCadastroDeOperações
             // 
             this.tsmiCadastroDeOperações.Name = "tsmiCadastroDeOperações";
             this.tsmiCadastroDeOperações.Size = new System.Drawing.Size(237, 22);
             this.tsmiCadastroDeOperações.Text = "Cadastro de Operações";
-            this.tsmiCadastroDeOperações.Click += new System.EventHandler(this.tsmiCadastroDeOperações_Click);
+            this.tsmiCadastroDeOperações.Click += new System.EventHandler(this.TsmiCadastroDeOperações_Click);
             // 
             // cadastroDeGrupoDeItensToolStripMenuItem
             // 
@@ -155,7 +155,7 @@
             this.tsmiCadastroOrcamentos.Name = "tsmiCadastroOrcamentos";
             this.tsmiCadastroOrcamentos.Size = new System.Drawing.Size(208, 22);
             this.tsmiCadastroOrcamentos.Text = "Cadastros de orçamentos";
-            this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.tsmiCadastroOrcamentos_Click);
+            this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.TsmiCadastroOrcamentos_Click);
             // 
             // tsmiSaida
             // 
@@ -170,7 +170,7 @@
             this.tsmiEmissaoNF.Name = "tsmiEmissaoNF";
             this.tsmiEmissaoNF.Size = new System.Drawing.Size(190, 22);
             this.tsmiEmissaoNF.Text = "Emissão de nota fiscal";
-            this.tsmiEmissaoNF.Click += new System.EventHandler(this.tsmiEmissaoNF_Click);
+            this.tsmiEmissaoNF.Click += new System.EventHandler(this.TsmiEmissaoNF_Click);
             // 
             // tsmiContasReceber
             // 
