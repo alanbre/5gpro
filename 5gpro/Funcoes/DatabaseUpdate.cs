@@ -17,32 +17,19 @@ namespace _5gpro.Funcoes
                 dataBaseString = dataBase;
             try
             {
-                // Esse comando trás o diretório atual (Ex \bin\Debug)
                 string workingDirectory = Environment.CurrentDirectory;
-                // Ou: Directory.GetCurrentDirectory() devolve o mesmo resultado
-
-                // Esse comando trás o diretório do projeto
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
 
                 Conecta = dataBaseString.Split(';')[1] + ";" + dataBaseString.Split(';')[2] + ";" + dataBaseString.Split(';')[3];
-                //Conecta = "SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
-                //Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-                //Conecta = "SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan; pooling = true";
-                Conecta = "SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan; pooling = true";
 
 
                 AbrirConexao();
-                // Aqui vai abrir o arquivo SQL e executá-lo.
                 MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(workingDirectory + "\\create_tables.sql"));
 
 
                 mySqlScript.Execute();
 
                 Conecta = dataBaseString;
-                //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
-                //Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
-                //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan";
-                Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
 
 
                 return true;
