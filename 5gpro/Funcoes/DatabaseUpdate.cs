@@ -8,9 +8,13 @@ namespace _5gpro.Funcoes
     class DatabaseUpdate : ConexaoDAO
     {
         int VersaoDB = 0;
+        public static string dataBaseString = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
 
-        public bool CriarTabelasSeNaoExistirem()
+
+        public bool CriarTabelasSeNaoExistirem(string dataBase)
         {
+            if(dataBase.Length > 0)
+                dataBaseString = dataBase;
             try
             {
                 // Esse comando trás o diretório atual (Ex \bin\Debug)
@@ -20,8 +24,9 @@ namespace _5gpro.Funcoes
                 // Esse comando trás o diretório do projeto
                 string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
 
+                Conecta = dataBaseString.Split(';')[1] + ";" + dataBaseString.Split(';')[2] + ";" + dataBaseString.Split(';')[3];
                 //Conecta = "SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
-                Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
                 //Conecta = "SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan; pooling = true";
                 //Conecta = "SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan; pooling = true";
 
@@ -33,10 +38,44 @@ namespace _5gpro.Funcoes
 
                 mySqlScript.Execute();
 
+                Conecta = dataBaseString;
                 //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.111; UID=5gprouser; PWD=5gproedualan";
-                Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+                //Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
                 //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.0.103; UID=5gprouser; PWD=5gproedualan";
                 //Conecta = "DATABASE=5gprodatabase; SERVER=192.168.2.114; UID=5gprouser; PWD=5gproedualan";
+
+
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+
+                Console.WriteLine("Error: {0}", ex.ToString());
+                return false;
+            }
+            finally
+            {
+                FecharConexao();
+            }
+        }
+
+        public bool CriarTabelasSeNaoExistirem()
+        {
+            try
+            {
+                string workingDirectory = Environment.CurrentDirectory;
+                string projectDirectory = Directory.GetParent(workingDirectory).Parent.FullName;
+
+                Conecta = dataBaseString.Split(';')[1] + ";" + dataBaseString.Split(';')[2] + ";" + dataBaseString.Split(';')[3];
+
+
+                AbrirConexao();
+                MySqlScript mySqlScript = new MySqlScript(Conexao, File.ReadAllText(workingDirectory + "\\create_tables.sql"));
+
+
+                mySqlScript.Execute();
+
+                Conecta = dataBaseString;
 
 
                 return true;

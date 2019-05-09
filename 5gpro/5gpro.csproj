@@ -468,6 +468,12 @@
     <Compile Include="Forms\fmTroco.Designer.cs">
       <DependentUpon>fmTroco.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmSelecionarBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSelecionarBase.Designer.cs">
+      <DependentUpon>fmSelecionarBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
@@ -635,6 +641,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmTroco.resx">
       <DependentUpon>fmTroco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSelecionarBase.resx">
+      <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

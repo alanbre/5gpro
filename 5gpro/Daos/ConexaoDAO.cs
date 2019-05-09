@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using _5gpro.Funcoes;
 using System.ComponentModel;
 using System.Configuration;
 using System.IO;
@@ -7,8 +8,9 @@ using System.IO;
 namespace _5gpro.Daos
 {
     public class ConexaoDAO
-    {   
-        protected string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
+    {
+        protected string Conecta = DatabaseUpdate.dataBaseString;
+        //protected string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";
 
         //Localhost
         //public static string Conecta = "DATABASE=5gprodatabase; SERVER=localhost; UID=5gprouser; PWD=5gproedualan";

@@ -63,6 +63,7 @@
             this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbTotal = new System.Windows.Forms.Label();
             this.dbValorTotal = new _5gpro.Controls.DecimalBox();
             this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
             this.dbJuros = new _5gpro.Controls.DecimalBox();
@@ -71,7 +72,7 @@
             this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
-            this.lbTotal = new System.Windows.Forms.Label();
+            this.btQuitar = new System.Windows.Forms.Button();
             this.gbPesquisa.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -278,6 +279,7 @@
             // 
             this.gbPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPagamento.Controls.Add(this.btQuitar);
             this.gbPagamento.Controls.Add(this.lbTotal);
             this.gbPagamento.Controls.Add(this.dbValorTotal);
             this.gbPagamento.Controls.Add(this.lbValorTotal);
@@ -411,6 +413,16 @@
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
+            // lbTotal
+            // 
+            this.lbTotal.AutoSize = true;
+            this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotal.Location = new System.Drawing.Point(6, 71);
+            this.lbTotal.Name = "lbTotal";
+            this.lbTotal.Size = new System.Drawing.Size(304, 42);
+            this.lbTotal.TabIndex = 13;
+            this.lbTotal.Text = "TOTAL: R$ 0,00";
+            // 
             // dbValorTotal
             // 
             this.dbValorTotal.Location = new System.Drawing.Point(333, 32);
@@ -504,15 +516,14 @@
             0,
             131072});
             // 
-            // lbTotal
+            // btQuitar
             // 
-            this.lbTotal.AutoSize = true;
-            this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotal.Location = new System.Drawing.Point(6, 71);
-            this.lbTotal.Name = "lbTotal";
-            this.lbTotal.Size = new System.Drawing.Size(304, 42);
-            this.lbTotal.TabIndex = 13;
-            this.lbTotal.Text = "TOTAL: R$ 0,00";
+            this.btQuitar.Location = new System.Drawing.Point(405, 30);
+            this.btQuitar.Name = "btQuitar";
+            this.btQuitar.Size = new System.Drawing.Size(75, 23);
+            this.btQuitar.TabIndex = 14;
+            this.btQuitar.Text = "Quitar";
+            this.btQuitar.UseVisualStyleBackColor = true;
             // 
             // fmCarQuitacaoConta
             // 
@@ -584,5 +595,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
         private System.Windows.Forms.Label lbTotal;
+        private System.Windows.Forms.Button btQuitar;
     }
 }
