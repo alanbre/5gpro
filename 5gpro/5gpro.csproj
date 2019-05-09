@@ -121,6 +121,9 @@
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -504,6 +507,12 @@
     </Compile>
     <Compile Include="Forms\fmSelecionarBase.Designer.cs">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TentandoRelat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\TentandoRelat.Designer.cs">
+      <DependentUpon>TentandoRelat.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
