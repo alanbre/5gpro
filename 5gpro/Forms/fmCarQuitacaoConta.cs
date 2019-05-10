@@ -143,5 +143,25 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
         }
+
+        private void BtQuitar_Click(object sender, EventArgs e)
+        {
+            var formTroco = new fmTroco(dbValorTotal.Valor);
+            formTroco.ShowDialog();
+            if (formTroco.pago)
+            {
+                int retorno = parcelaContaReceberDAO.QuitarParcelas(parcelasContaReceberSelecionadas);
+                if (retorno == 1)
+                {
+                    MessageBox.Show("Parcelas selecionadas quitadas!");
+                    parcelasContaReceberSelecionadas.Clear();
+                    btPesquisar.PerformClick();
+                }
+                else
+                {
+                    MessageBox.Show("Houve problema ao quitar as parcelas!");
+                }
+            }
+        }
     }
 }

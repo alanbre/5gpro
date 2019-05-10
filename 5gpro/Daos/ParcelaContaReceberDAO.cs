@@ -26,7 +26,6 @@ namespace _5gpro.Daos
 
             try
             {
-                Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela_conta_receber pcr
                                                      LEFT JOIN conta_receber cr
                                                          ON pcr.idconta_receber = cr.idconta_receber
@@ -37,7 +36,7 @@ namespace _5gpro.Daos
                                                       AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
                                                       AND pcr.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
                                                       AND pcr.data_quitacao IS NULL
-                                                      GROUP BY cr.idconta_receber", Connect.Conexao);
+                                                      GROUP BY cr.idconta_receber");
 
                 if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
                 if (f.filtroConta > 0) { Connect.Comando.Parameters.AddWithValue("@idconta_receber", f.filtroConta); }
@@ -49,6 +48,8 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
                 Connect.Comando.Parameters.AddWithValue("@data_vencimento_final", f.filtroDataVencimentoFinal);
 
+                Connect.AbrirConexao();
+                Connect.Comando.Connection = Connect.Conexao;
                 using (var reader = Connect.Comando.ExecuteReader())
                 {
                     while (reader.Read())
@@ -68,6 +69,40 @@ namespace _5gpro.Daos
             return parcelas;
         }
 
+        public int QuitarParcelas(List<ParcelaContaReceber> parcelas)
+        {
+            int retorno = 0;
+            try
+            {
+
+                Connect.Comando = new MySqlCommand(@"UPDATE parcela_conta_receber 
+                                                     SET data_quitacao = @data_quitacao
+                                                     WHERE idparcela_conta_receber = @idparcela_conta_receber
+                                                     AND idconta_receber = @idconta_receber");
+                Connect.AbrirConexao();
+                Connect.Comando.Connection = Connect.Conexao;
+                foreach (var p in parcelas)
+                {
+                    Connect.Comando.Parameters.Clear();
+                    Connect.Comando.Parameters.AddWithValue("@data_quitacao", DateTime.Now);
+                    Connect.Comando.Parameters.AddWithValue("@idparcela_conta_receber", p.ParcelaContaReceberID);
+                    Connect.Comando.Parameters.AddWithValue("@idconta_receber", p.ContaReceberID);
+                    Connect.Comando.ExecuteNonQuery();
+                }
+                retorno = 1;
+
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return retorno;
+        }
+
         private ParcelaContaReceber LeDadosReader(IDataReader reader)
         {
             var parcela = new ParcelaContaReceber()
@@ -84,5 +119,6 @@ namespace _5gpro.Daos
             };
             return parcela;
         }
+
     }
 }

@@ -37,7 +37,6 @@
             this.tsmiCadastroDeOperações = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeGrupoDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroDeGrupoDePessoasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tESTETROCOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,8 +47,8 @@
             this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.primeiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,8 +78,7 @@
             this.tsmiCadastroGrupoUsuario,
             this.tsmiCadastroDeOperações,
             this.cadastroDeGrupoDeItensToolStripMenuItem,
-            this.cadastroDeGrupoDePessoasToolStripMenuItem,
-            this.tESTETROCOToolStripMenuItem});
+            this.cadastroDeGrupoDePessoasToolStripMenuItem});
             this.tsmiCadastros.Name = "tsmiCadastros";
             this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
             this.tsmiCadastros.Text = "Cadastro";
@@ -133,13 +131,6 @@
             this.cadastroDeGrupoDePessoasToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
             this.cadastroDeGrupoDePessoasToolStripMenuItem.Text = "Cadastro de Grupo de Pessoas";
             this.cadastroDeGrupoDePessoasToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeGrupoDePessoasToolStripMenuItem_Click);
-            // 
-            // tESTETROCOToolStripMenuItem
-            // 
-            this.tESTETROCOToolStripMenuItem.Name = "tESTETROCOToolStripMenuItem";
-            this.tESTETROCOToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.tESTETROCOToolStripMenuItem.Text = "TESTE TROCO";
-            this.tESTETROCOToolStripMenuItem.Click += new System.EventHandler(this.TESTETROCOToolStripMenuItem_Click);
             // 
             // tsmiOrcamento
             // 
@@ -206,7 +197,7 @@
             // tsmiCapCadastroConta
             // 
             this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(170, 22);
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
             // 
@@ -218,17 +209,17 @@
             this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.relatóriosToolStripMenuItem.Text = "Relatórios";
             // 
+            // primeiroToolStripMenuItem
+            // 
+            this.primeiroToolStripMenuItem.Name = "primeiroToolStripMenuItem";
+            this.primeiroToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
+            this.primeiroToolStripMenuItem.Text = "Primeiro";
+            this.primeiroToolStripMenuItem.Click += new System.EventHandler(this.PrimeiroToolStripMenuItem_Click);
+            // 
             // tsmiCadastroContaReceber
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
-            // 
-            // primeiroToolStripMenuItem
-            // 
-            this.primeiroToolStripMenuItem.Name = "primeiroToolStripMenuItem";
-            this.primeiroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.primeiroToolStripMenuItem.Text = "Primeiro";
-            this.primeiroToolStripMenuItem.Click += new System.EventHandler(this.PrimeiroToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -268,7 +259,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCapCadastroConta;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroContaReceber;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeItensToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tESTETROCOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiCarQuitacaoConta;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDePessoasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
