@@ -80,6 +80,7 @@
             this.btAdd.Size = new System.Drawing.Size(22, 22);
             this.btAdd.TabIndex = 1;
             this.btAdd.UseVisualStyleBackColor = true;
+            this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
             // 
             // BuscaGrupoPessoa
             // 

@@ -542,6 +542,7 @@
             this.Name = "fmCarQuitacaoConta";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quitação de contas a receber";
             this.gbPesquisa.ResumeLayout(false);
             this.gbPesquisa.PerformLayout();

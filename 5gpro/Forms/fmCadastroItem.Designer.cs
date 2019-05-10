@@ -238,7 +238,7 @@
             // tpEstoque
             // 
             this.tpEstoque.AutoScroll = true;
-            this.tpEstoque.BackColor = System.Drawing.SystemColors.Control;
+            this.tpEstoque.BackColor = System.Drawing.Color.White;
             this.tpEstoque.Controls.Add(this.tbEstoqueNecessario);
             this.tpEstoque.Controls.Add(this.lbEstoqueNecessario);
             this.tpEstoque.Controls.Add(this.btHistEntradas);
@@ -298,7 +298,7 @@
             // 
             // tpVendas
             // 
-            this.tpVendas.BackColor = System.Drawing.SystemColors.Control;
+            this.tpVendas.BackColor = System.Drawing.Color.White;
             this.tpVendas.Controls.Add(this.tbPrecoVenda);
             this.tpVendas.Controls.Add(this.lbPrecoVenda);
             this.tpVendas.Location = new System.Drawing.Point(4, 22);
