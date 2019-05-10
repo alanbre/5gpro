@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmOrcamentoCadastroOrcamento : Form
+    public partial class fmOrcCadastro : Form
     {
         private static ConexaoDAO connection = new ConexaoDAO();
         private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
@@ -35,7 +35,7 @@ namespace _5gpro.Forms
 
 
 
-        public fmOrcamentoCadastroOrcamento()
+        public fmOrcCadastro()
         {
             InitializeComponent();
             SetarNivel();

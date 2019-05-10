@@ -68,7 +68,7 @@ namespace _5gpro
         }
         private void TsmiCadastroOrcamentos_Click(object sender, EventArgs e)
         {
-            var formOrcamentoCadOrcamentos = new fmOrcamentoCadastroOrcamento();
+            var formOrcamentoCadOrcamentos = new fmOrcCadastro();
             formOrcamentoCadOrcamentos.Show(this);
         }
         private void TsmiCadastroUsuarios_Click(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace _5gpro
         }
         private void TsmiEmissaoNF_Click(object sender, EventArgs e)
         {
-            var formSaidaEmissaoNota = new fmSaidaEmissaoNota();
+            var formSaidaEmissaoNota = new fmSaiEmissaoNota();
             formSaidaEmissaoNota.Show(this);
         }
         private void TsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)

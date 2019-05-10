@@ -224,8 +224,7 @@ namespace _5gpro.Funcoes
 
         private string CreateTableSQL()
         {
-            string create = @"
-  -- MySQL Workbench Forward Engineering
+            string create = @"-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -734,6 +733,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
   `valor_original` DECIMAL(10,2) NOT NULL,
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
+  `acrescimo` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NOT NULL,
   PRIMARY KEY (`idconta_receber`),
@@ -762,6 +762,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `valor` DECIMAL(10,2) NOT NULL,
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
+  `acrescimo` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `data_quitacao` DATETIME NULL,
   `idconta_receber` INT NOT NULL,
@@ -855,8 +856,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-                        ";
+";
             return create;
         }
     }
