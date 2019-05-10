@@ -32,6 +32,7 @@ namespace _5gpro.Forms
             DatasIniciais();
         }
 
+        private void FmBuscaContaReceber_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -79,6 +80,16 @@ namespace _5gpro.Forms
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
             dtpDataVencimentoInicial.Value = DateTime.Today.AddDays(-30);
         }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+
 
     }
 }

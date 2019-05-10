@@ -33,7 +33,6 @@
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorConta = new System.Windows.Forms.Label();
-            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.lbADataVencimentoParcela = new System.Windows.Forms.Label();
             this.dtpDataVencimentoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataVencimentoInicial = new System.Windows.Forms.DateTimePicker();
@@ -42,10 +41,7 @@
             this.dtpDataCadastroFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataCadastroInicial = new System.Windows.Forms.DateTimePicker();
             this.lbDataCadastro = new System.Windows.Forms.Label();
-            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
-            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.dgvContas = new System.Windows.Forms.DataGridView();
             this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -58,6 +54,10 @@
             this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
+            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
+            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbFiltros.SuspendLayout();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
@@ -94,7 +94,7 @@
             this.btPesquisar.Location = new System.Drawing.Point(170, 113);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btPesquisar.TabIndex = 13;
+            this.btPesquisar.TabIndex = 14;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
@@ -106,20 +106,8 @@
             this.lbAValorConta.Margin = new System.Windows.Forms.Padding(0);
             this.lbAValorConta.Name = "lbAValorConta";
             this.lbAValorConta.Size = new System.Drawing.Size(13, 13);
-            this.lbAValorConta.TabIndex = 12;
+            this.lbAValorConta.TabIndex = 4;
             this.lbAValorConta.Text = "a";
-            // 
-            // dbValorFinal
-            // 
-            this.dbValorFinal.Location = new System.Drawing.Point(94, 115);
-            this.dbValorFinal.Name = "dbValorFinal";
-            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
-            this.dbValorFinal.TabIndex = 5;
-            this.dbValorFinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
             // 
             // lbADataVencimentoParcela
             // 
@@ -128,7 +116,7 @@
             this.lbADataVencimentoParcela.Margin = new System.Windows.Forms.Padding(0);
             this.lbADataVencimentoParcela.Name = "lbADataVencimentoParcela";
             this.lbADataVencimentoParcela.Size = new System.Drawing.Size(13, 13);
-            this.lbADataVencimentoParcela.TabIndex = 8;
+            this.lbADataVencimentoParcela.TabIndex = 12;
             this.lbADataVencimentoParcela.Text = "a";
             // 
             // dtpDataVencimentoFinal
@@ -137,7 +125,7 @@
             this.dtpDataVencimentoFinal.Location = new System.Drawing.Point(571, 71);
             this.dtpDataVencimentoFinal.Name = "dtpDataVencimentoFinal";
             this.dtpDataVencimentoFinal.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataVencimentoFinal.TabIndex = 11;
+            this.dtpDataVencimentoFinal.TabIndex = 13;
             // 
             // dtpDataVencimentoInicial
             // 
@@ -145,7 +133,7 @@
             this.dtpDataVencimentoInicial.Location = new System.Drawing.Point(460, 71);
             this.dtpDataVencimentoInicial.Name = "dtpDataVencimentoInicial";
             this.dtpDataVencimentoInicial.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataVencimentoInicial.TabIndex = 9;
+            this.dtpDataVencimentoInicial.TabIndex = 11;
             // 
             // lbDataVencimento
             // 
@@ -163,7 +151,7 @@
             this.lbADataCadastro.Margin = new System.Windows.Forms.Padding(0);
             this.lbADataCadastro.Name = "lbADataCadastro";
             this.lbADataCadastro.Size = new System.Drawing.Size(13, 13);
-            this.lbADataCadastro.TabIndex = 1;
+            this.lbADataCadastro.TabIndex = 8;
             this.lbADataCadastro.Text = "a";
             // 
             // dtpDataCadastroFinal
@@ -172,7 +160,7 @@
             this.dtpDataCadastroFinal.Location = new System.Drawing.Point(570, 32);
             this.dtpDataCadastroFinal.Name = "dtpDataCadastroFinal";
             this.dtpDataCadastroFinal.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadastroFinal.TabIndex = 7;
+            this.dtpDataCadastroFinal.TabIndex = 9;
             // 
             // dtpDataCadastroInicial
             // 
@@ -180,7 +168,7 @@
             this.dtpDataCadastroInicial.Location = new System.Drawing.Point(459, 32);
             this.dtpDataCadastroInicial.Name = "dtpDataCadastroInicial";
             this.dtpDataCadastroInicial.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadastroInicial.TabIndex = 1;
+            this.dtpDataCadastroInicial.TabIndex = 7;
             // 
             // lbDataCadastro
             // 
@@ -191,18 +179,6 @@
             this.lbDataCadastro.TabIndex = 6;
             this.lbDataCadastro.Text = "Data cadastro";
             // 
-            // dbValorInicial
-            // 
-            this.dbValorInicial.Location = new System.Drawing.Point(9, 115);
-            this.dbValorInicial.Name = "dbValorInicial";
-            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
-            this.dbValorInicial.TabIndex = 3;
-            this.dbValorInicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // lbValorInicial
             // 
             this.lbValorInicial.AutoSize = true;
@@ -211,23 +187,6 @@
             this.lbValorInicial.Size = new System.Drawing.Size(76, 13);
             this.lbValorInicial.TabIndex = 2;
             this.lbValorInicial.Text = "Valor da conta";
-            // 
-            // buscaOperacao
-            // 
-            this.buscaOperacao.Location = new System.Drawing.Point(3, 55);
-            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaOperacao.Name = "buscaOperacao";
-            this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
-            this.buscaOperacao.TabIndex = 1;
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 16);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 0;
             // 
             // gbResultados
             // 
@@ -340,6 +299,47 @@
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
+            // dbValorFinal
+            // 
+            this.dbValorFinal.Location = new System.Drawing.Point(94, 115);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
+            this.dbValorFinal.TabIndex = 5;
+            this.dbValorFinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorInicial
+            // 
+            this.dbValorInicial.Location = new System.Drawing.Point(9, 115);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
+            this.dbValorInicial.TabIndex = 3;
+            this.dbValorInicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // buscaOperacao
+            // 
+            this.buscaOperacao.Location = new System.Drawing.Point(3, 55);
+            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaOperacao.Name = "buscaOperacao";
+            this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
+            this.buscaOperacao.TabIndex = 1;
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 16);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 0;
+            // 
             // fmBuscaContaReceber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -357,6 +357,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de contas a receber";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaContaReceber_KeyDown);
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();
             this.gbResultados.ResumeLayout(false);
