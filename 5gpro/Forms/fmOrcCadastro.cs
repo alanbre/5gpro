@@ -15,7 +15,7 @@ namespace _5gpro.Forms
         private static ConexaoDAO connection = new ConexaoDAO();
         private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
 
-        private NotaFiscal notafiscal = null;
+        private NotaFiscalPropria notafiscal = null;
         private readonly NotaFiscalAux nfa = new NotaFiscalAux();
 
         private Orcamento orcamento = new Orcamento();
@@ -657,7 +657,7 @@ namespace _5gpro.Forms
             if (orcamento.NotaFiscal != null)
             {
                 btNotaGerar.Enabled = false;
-                tbNotaNumero.Text = orcamento.NotaFiscal.NotaFiscalID.ToString();
+                tbNotaNumero.Text = orcamento.NotaFiscal.NotaFiscalPropriaID.ToString();
                 tbNotaDataEmissao.Text = orcamento.NotaFiscal.DataEmissao.ToShortDateString();
             }
             else
@@ -703,10 +703,10 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheCamposNotaFiscal(NotaFiscal notafiscal)
+        private void PreencheCamposNotaFiscal(NotaFiscalPropria notafiscal)
         {
             tbNotaDataEmissao.Text = notafiscal.DataEmissao.ToShortDateString();
-            tbNotaNumero.Text = notafiscal.NotaFiscalID.ToString();
+            tbNotaNumero.Text = notafiscal.NotaFiscalPropriaID.ToString();
             btNotaGerar.Enabled = false;
         }
 

@@ -11,12 +11,12 @@ namespace _5gpro.Forms
 {
     public partial class fmSaiEmissaoNota : Form
     {
-        private readonly NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
+        private readonly NotaFiscalPropriaDAO notaFiscalDAO = new NotaFiscalPropriaDAO();
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
-        private NotaFiscal notaFiscal = new NotaFiscal();
-        private NotaFiscalItem itemSelecionado;
-        private List<NotaFiscalItem> itens = new List<NotaFiscalItem>();
+        private NotaFiscalPropria notaFiscal = new NotaFiscalPropria();
+        private NotaFiscalPropriaItem itemSelecionado;
+        private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
 
         //Controle de Permissões
         PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
@@ -99,7 +99,7 @@ namespace _5gpro.Forms
         {
             if (buscaItem.item != null)
             {
-                var nfi = new NotaFiscalItem();
+                var nfi = new NotaFiscalPropriaItem();
                 nfi.Item = buscaItem.item;
                 InserirItem(itemSelecionado ?? nfi);
             }
@@ -218,7 +218,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaByID(int.Parse(tbCodigo.Text));
+                    NotaFiscalPropria newnotafiscal = notaFiscalDAO.BuscaByID(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
                         notaFiscal = newnotafiscal;
@@ -247,7 +247,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaByID(int.Parse(tbCodigo.Text));
+                        NotaFiscalPropria newnotafiscal = notaFiscalDAO.BuscaByID(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
                             notaFiscal = newnotafiscal;
@@ -318,7 +318,7 @@ namespace _5gpro.Forms
             if (buscaItem.item != null)
             {
                 DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => r.Cells[0].Value.ToString().Equals(buscaItem.item.ItemID.ToString())).FirstOrDefault();
-                NotaFiscalItem item = new NotaFiscalItem();
+                NotaFiscalPropriaItem item = new NotaFiscalPropriaItem();
                 if (dr == null)
                 {
                     item.Item = buscaItem.item;
@@ -455,9 +455,9 @@ namespace _5gpro.Forms
         {
             if (editando)
             {
-                notaFiscal = new NotaFiscal
+                notaFiscal = new NotaFiscalPropria
                 {
-                    NotaFiscalID = int.Parse(tbCodigo.Text),
+                    NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
                     Pessoa = buscaPessoa.pessoa,
                     DataEmissao = dtpEmissao.Value,
                     DataEntradaSaida = dtpSaida.Value,
@@ -470,7 +470,7 @@ namespace _5gpro.Forms
                     NotaFiscalItem = itens
                 };
 
-                int resultado = notaFiscalDAO.SalvarOuAtualizarDocumento(notaFiscal);
+                int resultado = notaFiscalDAO.SalvarOuAtualizar(notaFiscal);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -495,7 +495,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void RecarregaDados(NotaFiscal notafiscal)
+        private void RecarregaDados(NotaFiscalPropria notafiscal)
         {
             if (editando)
             {
@@ -506,7 +506,7 @@ namespace _5gpro.Forms
                 {
                     if (notafiscal != null)
                     {
-                        notafiscal = notaFiscalDAO.BuscaNotaByID(notafiscal.NotaFiscalID);
+                        notafiscal = notaFiscalDAO.BuscaByID(notafiscal.NotaFiscalPropriaID);
                         PreencheCampos(notafiscal);
                         Editando(false);
                     }
@@ -523,7 +523,7 @@ namespace _5gpro.Forms
             {
                 if (notafiscal != null)
                 {
-                    notafiscal = notaFiscalDAO.BuscaNotaByID(notafiscal.NotaFiscalID);
+                    notafiscal = notaFiscalDAO.BuscaByID(notafiscal.NotaFiscalPropriaID);
                     PreencheCampos(notafiscal);
                 }
                 else
@@ -542,7 +542,7 @@ namespace _5gpro.Forms
             //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
             {
-                NotaFiscal newnotafiscal = notaFiscalDAO.BuscaProximaNotaFiscal(int.Parse(tbCodigo.Text));
+                NotaFiscalPropria newnotafiscal = notaFiscalDAO.Proximo(int.Parse(tbCodigo.Text));
                 if (newnotafiscal != null)
                 {
                     notaFiscal = newnotafiscal;
@@ -557,7 +557,7 @@ namespace _5gpro.Forms
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    NotaFiscal newnotafiscal = notaFiscalDAO.BuscaProximaNotaFiscal(int.Parse(tbCodigo.Text));
+                    NotaFiscalPropria newnotafiscal = notaFiscalDAO.Proximo(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
                         notaFiscal = newnotafiscal;
@@ -567,7 +567,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newnotafiscal = notaFiscalDAO.BuscaNotaFiscalAnterior(int.Parse(tbCodigo.Text));
+                        newnotafiscal = notaFiscalDAO.Anterior(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
                             notaFiscal = newnotafiscal;
@@ -586,7 +586,7 @@ namespace _5gpro.Forms
             //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
             {
-                NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaFiscalAnterior(int.Parse(tbCodigo.Text));
+                NotaFiscalPropria newnotafiscal = notaFiscalDAO.Anterior(int.Parse(tbCodigo.Text));
                 if (newnotafiscal != null)
                 {
                     notaFiscal = newnotafiscal;
@@ -601,7 +601,7 @@ namespace _5gpro.Forms
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    NotaFiscal newnotafiscal = notaFiscalDAO.BuscaNotaFiscalAnterior(int.Parse(tbCodigo.Text));
+                    NotaFiscalPropria newnotafiscal = notaFiscalDAO.Anterior(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
                         notaFiscal = newnotafiscal;
@@ -611,7 +611,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newnotafiscal = notaFiscalDAO.BuscaProximaNotaFiscal(int.Parse(tbCodigo.Text));
+                        newnotafiscal = notaFiscalDAO.Proximo(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
                             notaFiscal = newnotafiscal;
@@ -663,7 +663,7 @@ namespace _5gpro.Forms
             if (focus) { buscaItem.Focus(); }
         }
 
-        private void InserirItem(NotaFiscalItem item)
+        private void InserirItem(NotaFiscalPropriaItem item)
         {
             if (item != null)
             {
@@ -723,11 +723,11 @@ namespace _5gpro.Forms
             }
         }
 
-        private void PreencheCampos(NotaFiscal notafiscal)
+        private void PreencheCampos(NotaFiscalPropria notafiscal)
         {
             ignoracheckevent = true;
             LimpaCampos(false);
-            tbCodigo.Text = notafiscal.NotaFiscalID.ToString();
+            tbCodigo.Text = notafiscal.NotaFiscalPropriaID.ToString();
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpSaida.Value = notafiscal.DataEntradaSaida;
@@ -741,7 +741,7 @@ namespace _5gpro.Forms
             ignoracheckevent = false;
         }
 
-        private void PreencheGridItens(List<NotaFiscalItem> itens)
+        private void PreencheGridItens(List<NotaFiscalPropriaItem> itens)
         {
             foreach (var i in itens)
             {
@@ -750,7 +750,7 @@ namespace _5gpro.Forms
             dgvItens.Refresh();
         }
 
-        public void PreencheCamposItem(NotaFiscalItem item)
+        public void PreencheCamposItem(NotaFiscalPropriaItem item)
         {
             if (item != null)
             {
