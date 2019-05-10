@@ -75,19 +75,22 @@
             // 
             // pnTotal
             // 
+            this.pnTotal.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnTotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnTotal.Controls.Add(this.lbValorTotal);
             this.pnTotal.Controls.Add(this.lbTotal);
             this.pnTotal.Location = new System.Drawing.Point(12, 12);
             this.pnTotal.Name = "pnTotal";
-            this.pnTotal.Size = new System.Drawing.Size(299, 42);
+            this.pnTotal.Size = new System.Drawing.Size(327, 42);
             this.pnTotal.TabIndex = 0;
             // 
             // lbValorTotal
             // 
+            this.lbValorTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbValorTotal.AutoSize = true;
             this.lbValorTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbValorTotal.Location = new System.Drawing.Point(222, 9);
+            this.lbValorTotal.Location = new System.Drawing.Point(250, 9);
             this.lbValorTotal.Name = "lbValorTotal";
             this.lbValorTotal.Size = new System.Drawing.Size(72, 20);
             this.lbValorTotal.TabIndex = 1;
@@ -95,6 +98,8 @@
             // 
             // gbFormasPagamento
             // 
+            this.gbFormasPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbFormasPagamento.Controls.Add(this.dbPagamento7);
             this.gbFormasPagamento.Controls.Add(this.dbPagamento6);
             this.gbFormasPagamento.Controls.Add(this.dbPagamento5);
@@ -118,116 +123,132 @@
             this.gbFormasPagamento.Controls.Add(this.tbCodigoFormaPagamento1);
             this.gbFormasPagamento.Location = new System.Drawing.Point(12, 60);
             this.gbFormasPagamento.Name = "gbFormasPagamento";
-            this.gbFormasPagamento.Size = new System.Drawing.Size(299, 249);
+            this.gbFormasPagamento.Size = new System.Drawing.Size(327, 249);
             this.gbFormasPagamento.TabIndex = 1;
             this.gbFormasPagamento.TabStop = false;
             this.gbFormasPagamento.Text = "Formas de pagamento";
             // 
             // dbPagamento7
             // 
+            this.dbPagamento7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento7.Location = new System.Drawing.Point(204, 211);
+            this.dbPagamento7.Location = new System.Drawing.Point(232, 211);
             this.dbPagamento7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento7.Name = "dbPagamento7";
             this.dbPagamento7.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento7.TabIndex = 27;
+            this.dbPagamento7.TabIndex = 20;
             this.dbPagamento7.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento7.Leave += new System.EventHandler(this.DbPagamento7_Leave);
             // 
             // dbPagamento6
             // 
+            this.dbPagamento6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento6.Location = new System.Drawing.Point(204, 179);
+            this.dbPagamento6.Location = new System.Drawing.Point(232, 179);
             this.dbPagamento6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento6.Name = "dbPagamento6";
             this.dbPagamento6.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento6.TabIndex = 26;
+            this.dbPagamento6.TabIndex = 17;
             this.dbPagamento6.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento6.Leave += new System.EventHandler(this.DbPagamento6_Leave);
             // 
             // dbPagamento5
             // 
+            this.dbPagamento5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento5.Location = new System.Drawing.Point(204, 147);
+            this.dbPagamento5.Location = new System.Drawing.Point(232, 147);
             this.dbPagamento5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento5.Name = "dbPagamento5";
             this.dbPagamento5.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento5.TabIndex = 25;
+            this.dbPagamento5.TabIndex = 14;
             this.dbPagamento5.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento5.Leave += new System.EventHandler(this.DbPagamento5_Leave);
             // 
             // dbPagamento4
             // 
+            this.dbPagamento4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento4.Location = new System.Drawing.Point(204, 115);
+            this.dbPagamento4.Location = new System.Drawing.Point(232, 115);
             this.dbPagamento4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento4.Name = "dbPagamento4";
             this.dbPagamento4.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento4.TabIndex = 24;
+            this.dbPagamento4.TabIndex = 11;
             this.dbPagamento4.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento4.Leave += new System.EventHandler(this.DbPagamento4_Leave);
             // 
             // dbPagamento3
             // 
+            this.dbPagamento3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento3.Location = new System.Drawing.Point(204, 83);
+            this.dbPagamento3.Location = new System.Drawing.Point(232, 83);
             this.dbPagamento3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento3.Name = "dbPagamento3";
             this.dbPagamento3.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento3.TabIndex = 23;
+            this.dbPagamento3.TabIndex = 8;
             this.dbPagamento3.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento3.Leave += new System.EventHandler(this.DbPagamento3_Leave);
             // 
             // dbPagamento2
             // 
+            this.dbPagamento2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento2.Location = new System.Drawing.Point(204, 51);
+            this.dbPagamento2.Location = new System.Drawing.Point(232, 51);
             this.dbPagamento2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento2.Name = "dbPagamento2";
             this.dbPagamento2.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento2.TabIndex = 22;
+            this.dbPagamento2.TabIndex = 5;
             this.dbPagamento2.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento2.Leave += new System.EventHandler(this.DbPagamento2_Leave);
             // 
             // dbPagamento1
             // 
+            this.dbPagamento1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dbPagamento1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dbPagamento1.Location = new System.Drawing.Point(204, 19);
+            this.dbPagamento1.Location = new System.Drawing.Point(232, 19);
             this.dbPagamento1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dbPagamento1.Name = "dbPagamento1";
             this.dbPagamento1.Size = new System.Drawing.Size(91, 26);
-            this.dbPagamento1.TabIndex = 21;
+            this.dbPagamento1.TabIndex = 2;
             this.dbPagamento1.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
+            this.dbPagamento1.Leave += new System.EventHandler(this.DbPagamento1_Leave);
             // 
             // tbNomeFormaPagamento7
             // 
+            this.tbNomeFormaPagamento7.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento7.Enabled = false;
             this.tbNomeFormaPagamento7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento7.Location = new System.Drawing.Point(53, 211);
             this.tbNomeFormaPagamento7.Name = "tbNomeFormaPagamento7";
-            this.tbNomeFormaPagamento7.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento7.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento7.TabIndex = 19;
             // 
             // tbCodigoFormaPagamento7
@@ -236,17 +257,19 @@
             this.tbCodigoFormaPagamento7.Location = new System.Drawing.Point(6, 211);
             this.tbCodigoFormaPagamento7.Name = "tbCodigoFormaPagamento7";
             this.tbCodigoFormaPagamento7.Size = new System.Drawing.Size(41, 26);
-            this.tbCodigoFormaPagamento7.TabIndex = 18;
+            this.tbCodigoFormaPagamento7.TabIndex = 18;     
             this.tbCodigoFormaPagamento7.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoFormaPagamento7_KeyUp);
             this.tbCodigoFormaPagamento7.Leave += new System.EventHandler(this.TbCodigoFormaPagamento7_Leave);
             // 
             // tbNomeFormaPagamento6
             // 
+            this.tbNomeFormaPagamento6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento6.Enabled = false;
             this.tbNomeFormaPagamento6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento6.Location = new System.Drawing.Point(53, 179);
             this.tbNomeFormaPagamento6.Name = "tbNomeFormaPagamento6";
-            this.tbNomeFormaPagamento6.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento6.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento6.TabIndex = 16;
             // 
             // tbCodigoFormaPagamento6
@@ -261,11 +284,13 @@
             // 
             // tbNomeFormaPagamento5
             // 
+            this.tbNomeFormaPagamento5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento5.Enabled = false;
             this.tbNomeFormaPagamento5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento5.Location = new System.Drawing.Point(53, 147);
             this.tbNomeFormaPagamento5.Name = "tbNomeFormaPagamento5";
-            this.tbNomeFormaPagamento5.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento5.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento5.TabIndex = 13;
             // 
             // tbCodigoFormaPagamento5
@@ -280,11 +305,13 @@
             // 
             // tbNomeFormaPagamento4
             // 
+            this.tbNomeFormaPagamento4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento4.Enabled = false;
             this.tbNomeFormaPagamento4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento4.Location = new System.Drawing.Point(53, 115);
             this.tbNomeFormaPagamento4.Name = "tbNomeFormaPagamento4";
-            this.tbNomeFormaPagamento4.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento4.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento4.TabIndex = 10;
             // 
             // tbCodigoFormaPagamento4
@@ -299,11 +326,13 @@
             // 
             // tbNomeFormaPagamento3
             // 
+            this.tbNomeFormaPagamento3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento3.Enabled = false;
             this.tbNomeFormaPagamento3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento3.Location = new System.Drawing.Point(53, 83);
             this.tbNomeFormaPagamento3.Name = "tbNomeFormaPagamento3";
-            this.tbNomeFormaPagamento3.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento3.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento3.TabIndex = 7;
             // 
             // tbCodigoFormaPagamento3
@@ -318,11 +347,13 @@
             // 
             // tbNomeFormaPagamento2
             // 
+            this.tbNomeFormaPagamento2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento2.Enabled = false;
             this.tbNomeFormaPagamento2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento2.Location = new System.Drawing.Point(53, 51);
             this.tbNomeFormaPagamento2.Name = "tbNomeFormaPagamento2";
-            this.tbNomeFormaPagamento2.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento2.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento2.TabIndex = 4;
             // 
             // tbCodigoFormaPagamento2
@@ -337,11 +368,13 @@
             // 
             // tbNomeFormaPagamento1
             // 
+            this.tbNomeFormaPagamento1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento1.Enabled = false;
             this.tbNomeFormaPagamento1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeFormaPagamento1.Location = new System.Drawing.Point(53, 19);
             this.tbNomeFormaPagamento1.Name = "tbNomeFormaPagamento1";
-            this.tbNomeFormaPagamento1.Size = new System.Drawing.Size(145, 26);
+            this.tbNomeFormaPagamento1.Size = new System.Drawing.Size(173, 26);
             this.tbNomeFormaPagamento1.TabIndex = 1;
             // 
             // tbCodigoFormaPagamento1
@@ -356,12 +389,14 @@
             // 
             // pnTroco
             // 
+            this.pnTroco.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnTroco.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnTroco.Controls.Add(this.lbValorTroco);
             this.pnTroco.Controls.Add(this.lbTroco);
             this.pnTroco.Location = new System.Drawing.Point(12, 315);
             this.pnTroco.Name = "pnTroco";
-            this.pnTroco.Size = new System.Drawing.Size(299, 42);
+            this.pnTroco.Size = new System.Drawing.Size(327, 42);
             this.pnTroco.TabIndex = 2;
             // 
             // lbValorTroco
@@ -369,7 +404,7 @@
             this.lbValorTroco.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbValorTroco.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbValorTroco.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.lbValorTroco.Location = new System.Drawing.Point(141, 9);
+            this.lbValorTroco.Location = new System.Drawing.Point(169, 9);
             this.lbValorTroco.Name = "lbValorTroco";
             this.lbValorTroco.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.lbValorTroco.Size = new System.Drawing.Size(151, 20);
@@ -399,13 +434,14 @@
             this.btSalvar.TabIndex = 3;
             this.btSalvar.Text = "Salvar - F2";
             this.btSalvar.UseVisualStyleBackColor = false;
+            this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
             // 
             // fmTroco
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(323, 399);
+            this.ClientSize = new System.Drawing.Size(351, 399);
             this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.pnTroco);
             this.Controls.Add(this.gbFormasPagamento);
@@ -413,6 +449,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(339, 437);
             this.Name = "fmTroco";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

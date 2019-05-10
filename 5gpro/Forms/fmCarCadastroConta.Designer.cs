@@ -525,6 +525,7 @@
             // 
             // dbAcrescimoConta
             // 
+            this.dbAcrescimoConta.Enabled = false;
             this.dbAcrescimoConta.Location = new System.Drawing.Point(6, 149);
             this.dbAcrescimoConta.Name = "dbAcrescimoConta";
             this.dbAcrescimoConta.Size = new System.Drawing.Size(82, 22);
@@ -546,6 +547,7 @@
             // 
             // dbValorFinalConta
             // 
+            this.dbValorFinalConta.Enabled = false;
             this.dbValorFinalConta.Location = new System.Drawing.Point(6, 190);
             this.dbValorFinalConta.Name = "dbValorFinalConta";
             this.dbValorFinalConta.Size = new System.Drawing.Size(82, 22);
@@ -558,6 +560,7 @@
             // 
             // dbJurosConta
             // 
+            this.dbJurosConta.Enabled = false;
             this.dbJurosConta.Location = new System.Drawing.Point(6, 108);
             this.dbJurosConta.Name = "dbJurosConta";
             this.dbJurosConta.Size = new System.Drawing.Size(82, 22);
@@ -570,6 +573,7 @@
             // 
             // dbMultaConta
             // 
+            this.dbMultaConta.Enabled = false;
             this.dbMultaConta.Location = new System.Drawing.Point(6, 69);
             this.dbMultaConta.Name = "dbMultaConta";
             this.dbMultaConta.Size = new System.Drawing.Size(82, 22);
@@ -582,6 +586,7 @@
             // 
             // dbValorOriginalConta
             // 
+            this.dbValorOriginalConta.Enabled = false;
             this.dbValorOriginalConta.Location = new System.Drawing.Point(6, 32);
             this.dbValorOriginalConta.Name = "dbValorOriginalConta";
             this.dbValorOriginalConta.Size = new System.Drawing.Size(82, 22);

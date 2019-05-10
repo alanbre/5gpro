@@ -392,6 +392,7 @@
             this.btQuitar.TabIndex = 14;
             this.btQuitar.Text = "Quitar";
             this.btQuitar.UseVisualStyleBackColor = true;
+            this.btQuitar.Click += new System.EventHandler(this.BtQuitar_Click);
             // 
             // lbTotal
             // 

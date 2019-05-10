@@ -649,6 +649,7 @@
             this.Controls.Add(this.gbItens);
             this.Controls.Add(this.gbDadosOrcamento);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1255, 620);
             this.Name = "fmOrcamentoCadastroOrcamento";

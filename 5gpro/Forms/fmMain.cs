@@ -116,11 +116,7 @@ namespace _5gpro
             var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
             formCadGrupoPessoa.Show(this);
         }
-        private void TESTETROCOToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formTroco = new fmTroco();
-            formTroco.Show(this);
-        }
+
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             t.Abort();
