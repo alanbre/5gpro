@@ -480,17 +480,17 @@
     <Compile Include="Forms\fmMain.Designer.cs">
       <DependentUpon>fmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmOrcamentoCadastroOrcamento.cs">
+    <Compile Include="Forms\fmOrcCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmOrcamentoCadastroOrcamento.Designer.cs">
-      <DependentUpon>fmOrcamentoCadastroOrcamento.cs</DependentUpon>
+    <Compile Include="Forms\fmOrcCadastro.Designer.cs">
+      <DependentUpon>fmOrcCadastro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmSaidaEmissaoNota.cs">
+    <Compile Include="Forms\fmSaiEmissaoNota.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmSaidaEmissaoNota.Designer.cs">
-      <DependentUpon>fmSaidaEmissaoNota.cs</DependentUpon>
+    <Compile Include="Forms\fmSaiEmissaoNota.Designer.cs">
+      <DependentUpon>fmSaiEmissaoNota.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmTroco.cs">
       <SubType>Form</SubType>
@@ -675,11 +675,11 @@
     <EmbeddedResource Include="Forms\fmMain.resx">
       <DependentUpon>fmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmOrcamentoCadastroOrcamento.resx">
-      <DependentUpon>fmOrcamentoCadastroOrcamento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmOrcCadastro.resx">
+      <DependentUpon>fmOrcCadastro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmSaidaEmissaoNota.resx">
-      <DependentUpon>fmSaidaEmissaoNota.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmSaiEmissaoNota.resx">
+      <DependentUpon>fmSaiEmissaoNota.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmTroco.resx">
       <DependentUpon>fmTroco.cs</DependentUpon>
