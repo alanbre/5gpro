@@ -124,6 +124,5 @@ namespace _5gpro.Forms
                 tbNomeUsuario.Text = "";
             }
         }
-
     }
 }
