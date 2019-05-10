@@ -130,7 +130,7 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
-                                                    cr.valor_final
+                                                    cr.valor_final, cr.acrescimo
                                                     FROM 
                                                     conta_receber cr 
                                                     LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao

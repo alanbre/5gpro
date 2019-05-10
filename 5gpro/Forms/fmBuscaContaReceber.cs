@@ -61,7 +61,16 @@ namespace _5gpro.Forms
             dgvContas.Rows.Clear();
 
             foreach (var cr in contasReceber)
-                dgvContas.Rows.Add(cr.ContaReceberID, cr.Pessoa.PessoaID, cr.Pessoa.Nome, cr.DataCadastro.ToShortDateString(), cr.Operacao.Nome, cr.ValorOriginal, cr.Multa, cr.Juros, cr.ValorFinal);
+                dgvContas.Rows.Add(cr.ContaReceberID,
+                                   cr.Pessoa.PessoaID,
+                                   cr.Pessoa.Nome,
+                                   cr.DataCadastro,
+                                   cr.Operacao.Nome,
+                                   cr.ValorOriginal,
+                                   cr.Multa,
+                                   cr.Juros,
+                                   cr.Acrescimo,
+                                   cr.ValorFinal);
 
             dgvContas.Refresh();
         }

@@ -29,16 +29,9 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.dgvContas = new System.Windows.Forms.DataGridView();
-            this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorConta = new System.Windows.Forms.Label();
@@ -54,6 +47,14 @@
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
             this.gbFiltros.SuspendLayout();
@@ -100,56 +101,6 @@
             this.dgvContas.TabIndex = 0;
             this.dgvContas.TabStop = false;
             this.dgvContas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvContas_CellDoubleClick);
-            // 
-            // dgvtbcConta
-            // 
-            this.dgvtbcConta.HeaderText = "Conta";
-            this.dgvtbcConta.Name = "dgvtbcConta";
-            this.dgvtbcConta.ReadOnly = true;
-            // 
-            // dgvtbcFornecedor
-            // 
-            this.dgvtbcFornecedor.HeaderText = "Fornecedor";
-            this.dgvtbcFornecedor.Name = "dgvtbcFornecedor";
-            this.dgvtbcFornecedor.ReadOnly = true;
-            this.dgvtbcFornecedor.Width = 70;
-            // 
-            // dgvtbcNome
-            // 
-            this.dgvtbcNome.HeaderText = "Nome";
-            this.dgvtbcNome.Name = "dgvtbcNome";
-            this.dgvtbcNome.ReadOnly = true;
-            this.dgvtbcNome.Width = 120;
-            // 
-            // dgvtbcDataCadastro
-            // 
-            this.dgvtbcDataCadastro.HeaderText = "Data cad.";
-            this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
-            this.dgvtbcDataCadastro.ReadOnly = true;
-            // 
-            // dgvtbcValorOriginal
-            // 
-            this.dgvtbcValorOriginal.HeaderText = "Valor original";
-            this.dgvtbcValorOriginal.Name = "dgvtbcValorOriginal";
-            this.dgvtbcValorOriginal.ReadOnly = true;
-            // 
-            // dgvtbcMulta
-            // 
-            this.dgvtbcMulta.HeaderText = "Multa";
-            this.dgvtbcMulta.Name = "dgvtbcMulta";
-            this.dgvtbcMulta.ReadOnly = true;
-            // 
-            // dgvtbcJuros
-            // 
-            this.dgvtbcJuros.HeaderText = "Juros";
-            this.dgvtbcJuros.Name = "dgvtbcJuros";
-            this.dgvtbcJuros.ReadOnly = true;
-            // 
-            // dgvtbcValorFinal
-            // 
-            this.dgvtbcValorFinal.HeaderText = "Valor final";
-            this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
-            this.dgvtbcValorFinal.ReadOnly = true;
             // 
             // gbFiltros
             // 
@@ -308,6 +259,59 @@
             this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
             this.buscaPessoa.TabIndex = 0;
             // 
+            // dgvtbcConta
+            // 
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcConta.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvtbcConta.HeaderText = "Conta";
+            this.dgvtbcConta.Name = "dgvtbcConta";
+            this.dgvtbcConta.ReadOnly = true;
+            // 
+            // dgvtbcFornecedor
+            // 
+            this.dgvtbcFornecedor.HeaderText = "Fornecedor";
+            this.dgvtbcFornecedor.Name = "dgvtbcFornecedor";
+            this.dgvtbcFornecedor.ReadOnly = true;
+            this.dgvtbcFornecedor.Width = 70;
+            // 
+            // dgvtbcNome
+            // 
+            this.dgvtbcNome.HeaderText = "Nome";
+            this.dgvtbcNome.Name = "dgvtbcNome";
+            this.dgvtbcNome.ReadOnly = true;
+            this.dgvtbcNome.Width = 120;
+            // 
+            // dgvtbcDataCadastro
+            // 
+            this.dgvtbcDataCadastro.HeaderText = "Data cad.";
+            this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
+            this.dgvtbcDataCadastro.ReadOnly = true;
+            // 
+            // dgvtbcValorOriginal
+            // 
+            this.dgvtbcValorOriginal.HeaderText = "Valor original";
+            this.dgvtbcValorOriginal.Name = "dgvtbcValorOriginal";
+            this.dgvtbcValorOriginal.ReadOnly = true;
+            // 
+            // dgvtbcMulta
+            // 
+            this.dgvtbcMulta.HeaderText = "Multa";
+            this.dgvtbcMulta.Name = "dgvtbcMulta";
+            this.dgvtbcMulta.ReadOnly = true;
+            // 
+            // dgvtbcJuros
+            // 
+            this.dgvtbcJuros.HeaderText = "Juros";
+            this.dgvtbcJuros.Name = "dgvtbcJuros";
+            this.dgvtbcJuros.ReadOnly = true;
+            // 
+            // dgvtbcValorFinal
+            // 
+            this.dgvtbcValorFinal.HeaderText = "Valor final";
+            this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
+            this.dgvtbcValorFinal.ReadOnly = true;
+            // 
             // fmBuscaContaPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,14 +340,6 @@
 
         private System.Windows.Forms.GroupBox gbResultados;
         private System.Windows.Forms.DataGridView dgvContas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcConta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcFornecedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataCadastro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
         private System.Windows.Forms.GroupBox gbFiltros;
         private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.Label lbAValorConta;
@@ -359,5 +355,13 @@
         private Controls.DecimalBox dbValorInicial;
         private System.Windows.Forms.Label lbValorInicial;
         private Controls.BuscaPessoa buscaPessoa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcConta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcFornecedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataCadastro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
     }
 }

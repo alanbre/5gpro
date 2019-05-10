@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorConta = new System.Windows.Forms.Label();
@@ -55,6 +56,7 @@
             this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros.SuspendLayout();
             this.gbResultados.SuspendLayout();
@@ -82,7 +84,7 @@
             this.gbFiltros.Controls.Add(this.buscaPessoa);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(925, 143);
+            this.gbFiltros.Size = new System.Drawing.Size(982, 143);
             this.gbFiltros.TabIndex = 0;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
@@ -229,10 +231,12 @@
             // 
             // gbResultados
             // 
+            this.gbResultados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbResultados.Controls.Add(this.dgvContas);
             this.gbResultados.Location = new System.Drawing.Point(12, 161);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(925, 401);
+            this.gbResultados.Size = new System.Drawing.Size(982, 401);
             this.gbResultados.TabIndex = 1;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Contas a receber";
@@ -256,6 +260,7 @@
             this.dgvtbcValorOriginal,
             this.dgvtbcMulta,
             this.dgvtbcJuros,
+            this.dgvtbcAcrescimo,
             this.dgvtbcValorFinal});
             this.dgvContas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvContas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -265,7 +270,7 @@
             this.dgvContas.ReadOnly = true;
             this.dgvContas.RowHeadersVisible = false;
             this.dgvContas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContas.Size = new System.Drawing.Size(919, 382);
+            this.dgvContas.Size = new System.Drawing.Size(976, 382);
             this.dgvContas.TabIndex = 0;
             this.dgvContas.TabStop = false;
             this.dgvContas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvContas_CellDoubleClick);
@@ -292,6 +297,9 @@
             // 
             // dgvtbcDataCadastro
             // 
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcDataCadastro.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvtbcDataCadastro.HeaderText = "Data cad.";
             this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
             this.dgvtbcDataCadastro.ReadOnly = true;
@@ -320,6 +328,12 @@
             this.dgvtbcJuros.Name = "dgvtbcJuros";
             this.dgvtbcJuros.ReadOnly = true;
             // 
+            // dgvtbcAcrescimo
+            // 
+            this.dgvtbcAcrescimo.HeaderText = "Acréscimo";
+            this.dgvtbcAcrescimo.Name = "dgvtbcAcrescimo";
+            this.dgvtbcAcrescimo.ReadOnly = true;
+            // 
             // dgvtbcValorFinal
             // 
             this.dgvtbcValorFinal.HeaderText = "Valor final";
@@ -331,12 +345,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(949, 574);
+            this.ClientSize = new System.Drawing.Size(1006, 574);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.gbFiltros);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1022, 612);
             this.Name = "fmBuscaContaReceber";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -378,6 +393,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
     }
 }
