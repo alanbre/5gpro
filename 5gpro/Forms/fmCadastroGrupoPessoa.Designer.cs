@@ -127,6 +127,7 @@
             // 
             // btRemoverSub
             // 
+            this.btRemoverSub.Enabled = false;
             this.btRemoverSub.Image = global::_5gpro.Properties.Resources.icons8_Delete_Subtra_22px;
             this.btRemoverSub.Location = new System.Drawing.Point(500, 76);
             this.btRemoverSub.Name = "btRemoverSub";
@@ -137,6 +138,7 @@
             // 
             // btAddSub
             // 
+            this.btAddSub.Enabled = false;
             this.btAddSub.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
             this.btAddSub.Location = new System.Drawing.Point(500, 48);
             this.btAddSub.Name = "btAddSub";
