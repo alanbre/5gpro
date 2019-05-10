@@ -27,12 +27,12 @@ namespace _5gpro.Daos
 
 
                 Connect.Comando.CommandText = @"INSERT INTO conta_pagar
-                         (idconta_pagar, data_cadastro, valor_original, multa, juros, valor_final, idpessoa)
+                         (idconta_pagar, data_cadastro, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa)
                           VALUES
-                         (@idconta_pagar, @data_cadastro, @valor_original, @multa, @juros, @valor_final, @idpessoa)
+                         (@idconta_pagar, @data_cadastro, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa)
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, valor_original = @valor_original, multa = @multa,
-                          juros = @juros, valor_final = @valor_final, idpessoa = @idpessoa
+                          juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa
                           ";
 
                 Connect.Comando.Parameters.AddWithValue("@idconta_pagar", contaPagar.ContaPagarID);
@@ -40,6 +40,8 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@valor_original", contaPagar.ValorOriginal);
                 Connect.Comando.Parameters.AddWithValue("@multa", contaPagar.Multa);
                 Connect.Comando.Parameters.AddWithValue("@juros", contaPagar.Juros);
+                Connect.Comando.Parameters.AddWithValue("@acrescimo", contaPagar.Acrescimo);
+                Connect.Comando.Parameters.AddWithValue("@desconto", contaPagar.Desconto);
                 Connect.Comando.Parameters.AddWithValue("@valor_final", contaPagar.ValorFinal);
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", contaPagar.Pessoa.PessoaID);
 
@@ -53,9 +55,9 @@ namespace _5gpro.Daos
                     Connect.Comando.ExecuteNonQuery();
 
                     Connect.Comando.CommandText = @"INSERT INTO parcela_conta_pagar
-                                            (sequencia, data_vencimento, valor, multa, juros, valor_final, data_quitacao, idconta_pagar, idformapagamento)
+                                            (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_pagar, idformapagamento)
                                             VALUES
-                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento)";
+                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento)";
                     foreach (ParcelaContaPagar parcela in contaPagar.Parcelas)
                     {
                         Connect.Comando.Parameters.Clear();
@@ -64,6 +66,8 @@ namespace _5gpro.Daos
                         Connect.Comando.Parameters.AddWithValue("@valor", parcela.Valor);
                         Connect.Comando.Parameters.AddWithValue("@multa", parcela.Multa);
                         Connect.Comando.Parameters.AddWithValue("@juros", parcela.Juros);
+                        Connect.Comando.Parameters.AddWithValue("@acrescimo", parcela.Acrescimo);
+                        Connect.Comando.Parameters.AddWithValue("@desconto", parcela.Desconto);
                         Connect.Comando.Parameters.AddWithValue("@valor_final", parcela.ValorFinal);
                         Connect.Comando.Parameters.AddWithValue("@data_quitacao", parcela.DataQuitacao);
                         Connect.Comando.Parameters.AddWithValue("@idconta_pagar", contaPagar.ContaPagarID);
@@ -121,7 +125,7 @@ namespace _5gpro.Daos
             {
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro,
-                                                    cp.valor_original, cp.multa, cp.juros, cp.valor_final
+                                                    cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final
                                                     FROM 
                                                     conta_pagar cp 
                                                     LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
@@ -158,6 +162,8 @@ namespace _5gpro.Daos
                             ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                             ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
                         };
 
@@ -275,6 +281,8 @@ namespace _5gpro.Daos
                     ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                     Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                     Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                    Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                     ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
                 };
                 contaPagar.Pessoa = new Pessoa();
@@ -306,6 +314,8 @@ namespace _5gpro.Daos
                             DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                             DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                             Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
                             Valor = reader.GetDecimal(reader.GetOrdinal("valor"))

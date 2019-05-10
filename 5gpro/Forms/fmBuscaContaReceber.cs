@@ -71,6 +71,7 @@ namespace _5gpro.Forms
                                    cr.Multa,
                                    cr.Juros,
                                    cr.Acrescimo,
+                                   cr.Desconto,
                                    cr.ValorFinal);
 
             dgvContas.Refresh();

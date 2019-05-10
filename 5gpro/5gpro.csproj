@@ -260,8 +260,8 @@
     <Compile Include="Entities\GrupoPessoa.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
     <Compile Include="Entities\Logado.cs" />
-    <Compile Include="Entities\NotaFiscal.cs" />
-    <Compile Include="Entities\NotaFiscalItem.cs" />
+    <Compile Include="Entities\NotaFiscalPropria.cs" />
+    <Compile Include="Entities\NotaFiscalPropriaItem.cs" />
     <Compile Include="Entities\Operacao.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
@@ -525,6 +525,9 @@
     <Compile Include="Funcoes\NotaFiscalAux.cs" />
     <Compile Include="Funcoes\PermissoesUpdate.cs" />
     <Compile Include="Funcoes\Validacao.cs" />
+    <Compile Include="GradientPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
