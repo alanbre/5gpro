@@ -7,15 +7,15 @@ namespace _5gpro.Funcoes
     class NotaFiscalAux
     {
         static ConexaoDAO connection = new ConexaoDAO();
-        NotaFiscalDAO notaFiscalDAO = new NotaFiscalDAO();
+        NotaFiscalPropriaDAO notaFiscalDAO = new NotaFiscalPropriaDAO();
         OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
 
 
-        public NotaFiscal GerarNotaFiscal(Orcamento orcamento)
+        public NotaFiscalPropria GerarNotaFiscal(Orcamento orcamento)
         {
-            NotaFiscal notafiscal = new NotaFiscal();
+            NotaFiscalPropria notafiscal = new NotaFiscalPropria();
 
-            notafiscal.NotaFiscalID = notaFiscalDAO.BuscaProxCodigoDisponivel();
+            notafiscal.NotaFiscalPropriaID = notaFiscalDAO.BuscaProxCodigoDisponivel();
 
             notafiscal.Pessoa = orcamento.Pessoa;
             notafiscal.DataEmissao = DateTime.Now;
@@ -27,7 +27,7 @@ namespace _5gpro.Funcoes
 
             foreach (OrcamentoItem oi in orcamento.OrcamentoItem)
             {
-                NotaFiscalItem nfi = new NotaFiscalItem();
+                NotaFiscalPropriaItem nfi = new NotaFiscalPropriaItem();
                 nfi.Item = oi.Item;
                 nfi.NotaFiscal = notafiscal;
                 nfi.Quantidade = oi.Quantidade;
@@ -38,7 +38,7 @@ namespace _5gpro.Funcoes
                 notafiscal.NotaFiscalItem.Add(nfi);
             }
 
-            int resultado = notaFiscalDAO.SalvarOuAtualizarDocumento(notafiscal);
+            int resultado = notaFiscalDAO.SalvarOuAtualizar(notafiscal);
             if (resultado > 0) { resultado = orcamentoDAO.VincularNotaAoOrcamento(orcamento, notafiscal); }
             return resultado > 0 ? notafiscal : null;
         }

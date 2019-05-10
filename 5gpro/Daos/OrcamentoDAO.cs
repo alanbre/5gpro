@@ -17,13 +17,13 @@ namespace _5gpro.Daos
 
         private static ConexaoDAO connection = new ConexaoDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
-        private readonly NotaFiscalDAO notafiscalDAO = new NotaFiscalDAO();
+        private readonly NotaFiscalPropriaDAO notafiscalDAO = new NotaFiscalPropriaDAO();
 
         public Orcamento BuscaOrcamentoById(int cod)
         {
             Orcamento orcamento = new Orcamento();
             Pessoa pessoa = null;
-            NotaFiscal notafiscal = null;
+            NotaFiscalPropria notafiscal = null;
             Cidade cidade = null;
 
             try
@@ -68,9 +68,9 @@ namespace _5gpro.Daos
 
                     try
                     {
-                        notafiscal = new NotaFiscal
+                        notafiscal = new NotaFiscalPropria
                         {
-                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
                             DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
                             DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
                             ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
@@ -129,7 +129,7 @@ namespace _5gpro.Daos
         {
             Orcamento orcamento = new Orcamento();
             Pessoa pessoa = null;
-            NotaFiscal notafiscal = null;
+            NotaFiscalPropria notafiscal = null;
             Cidade cidade = null;
 
             try
@@ -174,9 +174,9 @@ namespace _5gpro.Daos
 
                     try
                     {
-                        notafiscal = new NotaFiscal
+                        notafiscal = new NotaFiscalPropria
                         {
-                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
                             DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
                             DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
                             ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
@@ -233,7 +233,7 @@ namespace _5gpro.Daos
 
             Orcamento orcamento = new Orcamento();
             Pessoa pessoa = null;
-            NotaFiscal notafiscal = null;
+            NotaFiscalPropria notafiscal = null;
             Cidade cidade = null;
 
             try
@@ -279,9 +279,9 @@ namespace _5gpro.Daos
 
                     try
                     {
-                        notafiscal = new NotaFiscal
+                        notafiscal = new NotaFiscalPropria
                         {
-                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
                             DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
                             DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
                             ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
@@ -338,7 +338,7 @@ namespace _5gpro.Daos
         {
             List<Orcamento> orcamentos = new List<Orcamento>();
             Pessoa pessoa = null;
-            NotaFiscal notafiscal = null;
+            NotaFiscalPropria notafiscal = null;
             Cidade cidade = null;
 
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
@@ -400,9 +400,9 @@ namespace _5gpro.Daos
 
                     try
                     {
-                        notafiscal = new NotaFiscal
+                        notafiscal = new NotaFiscalPropria
                         {
-                            NotaFiscalID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
                             DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
                             DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
                             ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
@@ -612,7 +612,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscal notafiscal)
+        public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscalPropria notafiscal)
         {
             int retorno = 0;
 
@@ -621,7 +621,7 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"UPDATE orcamento SET idnotafiscal = @idnotafiscal WHERE idorcamento = @idorcamento", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalID);
+                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
 
                 retorno = Connect.Comando.ExecuteNonQuery();
             }

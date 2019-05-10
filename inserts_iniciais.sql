@@ -5617,6 +5617,7 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Módulo de Saidas', '030000'),
 ('Módulo de Contas a Receber', '050000'),
 ('Módulo de Contas a Receber', '060000'),
+('Módulo de Entradas', '070000'),
 
 ('Cadastro de Pessoa', '010100'),
 ('Cadastro de Usuario', '010200'),
@@ -5635,7 +5636,8 @@ INSERT INTO permissao ( nome, codigo) VALUES
 
 ('Cadastro de Contas a Receber', '050100'),
 ('Quitação de Contas a Receber', '050200'),
-('Cadastro de Contas a Pagar', '060100');
+('Cadastro de Contas a Pagar', '060100'),
+('Entrada de notas', '070100');
 
 INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (01, 'Dinheiro'),

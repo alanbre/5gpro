@@ -7,7 +7,7 @@ namespace _5gpro.Entities
     {
         public Item()
         {
-            NotaFiscalItem = new HashSet<NotaFiscalItem>();
+            NotaFiscalItem = new HashSet<NotaFiscalPropriaItem>();
         }
 
         public int ItemID { get; set; }
@@ -30,7 +30,7 @@ namespace _5gpro.Entities
         [Required(ErrorMessage = "A Unidade de medida é obrigatória.|buscaUnimedidaItem", AllowEmptyStrings = false)]
         public Unimedida Unimedida { get; set; }
 
-        public virtual ICollection<NotaFiscalItem> NotaFiscalItem { get; set; }
+        public virtual ICollection<NotaFiscalPropriaItem> NotaFiscalItem { get; set; }
 
         [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoItem", AllowEmptyStrings = false)]
         public SubGrupoItem SubGrupoItem { get; set; }

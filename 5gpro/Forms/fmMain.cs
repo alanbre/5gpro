@@ -37,6 +37,7 @@ namespace _5gpro
         //Cadastro de Contas a Pagar = 060100
         //Cadastro de Grupo de Itens = 010500
         //Cadastro de Grupo de Pessoas = 010600
+        //Entrada de notas = 070100
 
         public fmMain()
         {
@@ -68,7 +69,7 @@ namespace _5gpro
         }
         private void TsmiCadastroOrcamentos_Click(object sender, EventArgs e)
         {
-            var formOrcamentoCadOrcamentos = new fmOrcamentoCadastroOrcamento();
+            var formOrcamentoCadOrcamentos = new fmOrcCadastro();
             formOrcamentoCadOrcamentos.Show(this);
         }
         private void TsmiCadastroUsuarios_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace _5gpro
         }
         private void TsmiEmissaoNF_Click(object sender, EventArgs e)
         {
-            var formSaidaEmissaoNota = new fmSaidaEmissaoNota();
+            var formSaidaEmissaoNota = new fmSaiEmissaoNota();
             formSaidaEmissaoNota.Show(this);
         }
         private void TsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)
@@ -115,6 +116,11 @@ namespace _5gpro
         {
             var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
             formCadGrupoPessoa.Show(this);
+        }
+        private void TsmiEntradaNotas_Click(object sender, EventArgs e)
+        {
+            var formEntradaNotas = new fmEntEntradaNota();
+            formEntradaNotas.Show(this);
         }
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -185,5 +191,6 @@ namespace _5gpro
             //var formRlPrimeiro = new rlPrimeiro();
             //formRlPrimeiro.Show(this);
         }
+
     }
 }
