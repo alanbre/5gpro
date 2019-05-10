@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram version="1" name="5gpromodel" time="201905101746">
+	<entities>
+		<data-source id="mysql8-16aa37e62c0-4db65bab18806215">
+			<entity id="1" name="atuacao" fq-name="`5gprodatabase`.atuacao">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="2" name="atuacao_has_pessoa" fq-name="`5gprodatabase`.atuacao_has_pessoa">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="3" name="cidade" fq-name="`5gprodatabase`.cidade">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="4" name="configuracao" fq-name="`5gprodatabase`.configuracao">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="5" name="conta_pagar" fq-name="`5gprodatabase`.conta_pagar">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="6" name="conta_receber" fq-name="`5gprodatabase`.conta_receber">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="7" name="estado" fq-name="`5gprodatabase`.estado">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="8" name="formapagamento" fq-name="`5gprodatabase`.formapagamento">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="9" name="grupo_usuario" fq-name="`5gprodatabase`.grupo_usuario">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="10" name="grupoitem" fq-name="`5gprodatabase`.grupoitem">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="11" name="grupopessoa" fq-name="`5gprodatabase`.grupopessoa">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="12" name="item" fq-name="`5gprodatabase`.item">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="13" name="lock" fq-name="`5gprodatabase`.`lock`">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="14" name="logado" fq-name="`5gprodatabase`.logado">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="15" name="notafiscal" fq-name="`5gprodatabase`.notafiscal">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="16" name="notafiscal_has_item" fq-name="`5gprodatabase`.notafiscal_has_item">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="17" name="operacao" fq-name="`5gprodatabase`.operacao">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="18" name="orcamento" fq-name="`5gprodatabase`.orcamento">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="19" name="orcamento_has_item" fq-name="`5gprodatabase`.orcamento_has_item">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="20" name="pais" fq-name="`5gprodatabase`.pais">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="21" name="parcela_conta_pagar" fq-name="`5gprodatabase`.parcela_conta_pagar">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="22" name="parcela_conta_receber" fq-name="`5gprodatabase`.parcela_conta_receber">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="23" name="parcelaoperacao" fq-name="`5gprodatabase`.parcelaoperacao">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="24" name="permissao" fq-name="`5gprodatabase`.permissao">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="25" name="permissao_has_grupo_usuario" fq-name="`5gprodatabase`.permissao_has_grupo_usuario">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="26" name="pessoa" fq-name="`5gprodatabase`.pessoa">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="27" name="registromovimentacao" fq-name="`5gprodatabase`.registromovimentacao">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="28" name="subgrupoitem" fq-name="`5gprodatabase`.subgrupoitem">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="29" name="subgrupopessoa" fq-name="`5gprodatabase`.subgrupopessoa">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="30" name="unimedida" fq-name="`5gprodatabase`.unimedida">
+				<path name="5gprodatabase"/>
+			</entity>
+			<entity id="31" name="usuario" fq-name="`5gprodatabase`.usuario">
+				<path name="5gprodatabase"/>
+			</entity>
+		</data-source>
+	</entities>
+	<notes/>
+	<relations>
+		<relation name="fk_atuacao_has_pessoa_atuacao1" fq-name="`5gprodatabase`.atuacao_has_pessoa.fk_atuacao_has_pessoa_atuacao1" type="fk" pk-ref="1" fk-ref="2"/>
+		<relation name="fk_pessoa_cidade1" fq-name="`5gprodatabase`.pessoa.fk_pessoa_cidade1" type="fk" pk-ref="3" fk-ref="26"/>
+		<relation name="fk_parcela_conta_pagar_conta_pagar1" fq-name="`5gprodatabase`.parcela_conta_pagar.fk_parcela_conta_pagar_conta_pagar1" type="fk" pk-ref="5" fk-ref="21"/>
+		<relation name="fk_parcela_conta_receber_conta_receber1" fq-name="`5gprodatabase`.parcela_conta_receber.fk_parcela_conta_receber_conta_receber1" type="fk" pk-ref="6" fk-ref="22"/>
+		<relation name="fk_cidade_estado1" fq-name="`5gprodatabase`.cidade.fk_cidade_estado1" type="fk" pk-ref="7" fk-ref="3"/>
+		<relation name="fk_parcela_conta_pagar_formapagamento1" fq-name="`5gprodatabase`.parcela_conta_pagar.fk_parcela_conta_pagar_formapagamento1" type="fk" pk-ref="8" fk-ref="21"/>
+		<relation name="fk_parcela_conta_receber_formapagamento1" fq-name="`5gprodatabase`.parcela_conta_receber.fk_parcela_conta_receber_formapagamento1" type="fk" pk-ref="8" fk-ref="22"/>
+		<relation name="fk_permissao_has_grupo_usuario_grupo_usuario1" fq-name="`5gprodatabase`.permissao_has_grupo_usuario.fk_permissao_has_grupo_usuario_grupo_usuario1" type="fk" pk-ref="9" fk-ref="25"/>
+		<relation name="fk_usuario_grupo_usuario1" fq-name="`5gprodatabase`.usuario.fk_usuario_grupo_usuario1" type="fk" pk-ref="9" fk-ref="31"/>
+		<relation name="fk_subgrupoitem_GrupoItem1" fq-name="`5gprodatabase`.subgrupoitem.fk_subgrupoitem_GrupoItem1" type="fk" pk-ref="10" fk-ref="28"/>
+		<relation name="fk_subgrupopessoa_grupopessoa1" fq-name="`5gprodatabase`.subgrupopessoa.fk_subgrupopessoa_grupopessoa1" type="fk" pk-ref="11" fk-ref="29"/>
+		<relation name="fk_notafiscal_has_item_item1" fq-name="`5gprodatabase`.notafiscal_has_item.fk_notafiscal_has_item_item1" type="fk" pk-ref="12" fk-ref="16"/>
+		<relation name="fk_orcamento_has_item_item1" fq-name="`5gprodatabase`.orcamento_has_item.fk_orcamento_has_item_item1" type="fk" pk-ref="12" fk-ref="19"/>
+		<relation name="fk_registromovimentacao_item1" fq-name="`5gprodatabase`.registromovimentacao.fk_registromovimentacao_item1" type="fk" pk-ref="12" fk-ref="27"/>
+		<relation name="fk_lock_logado1" fq-name="`5gprodatabase`.`lock`.fk_lock_logado1" type="fk" pk-ref="14" fk-ref="13"/>
+		<relation name="fk_notafiscal_has_item_notafiscal1" fq-name="`5gprodatabase`.notafiscal_has_item.fk_notafiscal_has_item_notafiscal1" type="fk" pk-ref="15" fk-ref="16"/>
+		<relation name="fk_orcamento_notafiscal1" fq-name="`5gprodatabase`.orcamento.fk_orcamento_notafiscal1" type="fk" pk-ref="15" fk-ref="18"/>
+		<relation name="fk_conta_receber_operacao1" fq-name="`5gprodatabase`.conta_receber.fk_conta_receber_operacao1" type="fk" pk-ref="17" fk-ref="6"/>
+		<relation name="fk_parcelaoperacao_operacao1" fq-name="`5gprodatabase`.parcelaoperacao.fk_parcelaoperacao_operacao1" type="fk" pk-ref="17" fk-ref="23"/>
+		<relation name="fk_orcamento_has_item_orcamento1" fq-name="`5gprodatabase`.orcamento_has_item.fk_orcamento_has_item_orcamento1" type="fk" pk-ref="18" fk-ref="19"/>
+		<relation name="fk_estado_pais1" fq-name="`5gprodatabase`.estado.fk_estado_pais1" type="fk" pk-ref="20" fk-ref="7"/>
+		<relation name="fk_permissao_has_grupo_usuario_permissao1" fq-name="`5gprodatabase`.permissao_has_grupo_usuario.fk_permissao_has_grupo_usuario_permissao1" type="fk" pk-ref="24" fk-ref="25"/>
+		<relation name="fk_atuacao_has_pessoa_pessoa1" fq-name="`5gprodatabase`.atuacao_has_pessoa.fk_atuacao_has_pessoa_pessoa1" type="fk" pk-ref="26" fk-ref="2"/>
+		<relation name="fk_conta_pagar_pessoa1" fq-name="`5gprodatabase`.conta_pagar.fk_conta_pagar_pessoa1" type="fk" pk-ref="26" fk-ref="5"/>
+		<relation name="fk_conta_receber_pessoa1" fq-name="`5gprodatabase`.conta_receber.fk_conta_receber_pessoa1" type="fk" pk-ref="26" fk-ref="6"/>
+		<relation name="fk_notafiscal_pessoa1" fq-name="`5gprodatabase`.notafiscal.fk_notafiscal_pessoa1" type="fk" pk-ref="26" fk-ref="15"/>
+		<relation name="fk_orcamento_pessoa1" fq-name="`5gprodatabase`.orcamento.fk_orcamento_pessoa1" type="fk" pk-ref="26" fk-ref="18"/>
+		<relation name="fk_item_subgrupoitem1" fq-name="`5gprodatabase`.item.fk_item_subgrupoitem1" type="fk" pk-ref="28" fk-ref="12"/>
+		<relation name="fk_pessoa_subgrupopessoa1" fq-name="`5gprodatabase`.pessoa.fk_pessoa_subgrupopessoa1" type="fk" pk-ref="29" fk-ref="26"/>
+		<relation name="fk_item_unimedida1" fq-name="`5gprodatabase`.item.fk_item_unimedida1" type="fk" pk-ref="30" fk-ref="12"/>
+		<relation name="fk_logado_usuario1" fq-name="`5gprodatabase`.logado.fk_logado_usuario1" type="fk" pk-ref="31" fk-ref="14"/>
+	</relations>
+</diagram>
