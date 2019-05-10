@@ -59,6 +59,12 @@ namespace _5gpro.Controls
             }
         }
 
+        private void AbreTelaCadGrupoPessoa()
+        {
+            var cadGrupoPessoa = new fmCadastroGrupoPessoa();
+            cadGrupoPessoa.ShowDialog();
+        }
+
         private void PreencheCamposGrupoPessoa(GrupoPessoa grupoPessoa)
         {
             if (grupoPessoa != null)
@@ -110,6 +116,11 @@ namespace _5gpro.Controls
         private void TbCodigoGrupoPessoa_TextChanged(object sender, EventArgs e)
         {
             this.Text_Changed?.Invoke(this, e);
+        }
+
+        private void BtAdd_Click(object sender, EventArgs e)
+        {
+            AbreTelaCadGrupoPessoa();
         }
     }
 }

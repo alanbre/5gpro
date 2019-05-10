@@ -594,6 +594,23 @@ namespace _5gpro.Forms
             }
         }
 
+        private void BuscaGrupoPessoa_Leave_1(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+
+            if (buscaGrupoPessoa.grupoPessoa != null)
+            {
+                buscaSubGrupoPessoa.Limpa();
+                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+            }
+            else
+            {
+                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+                buscaSubGrupoPessoa.Limpa();
+                buscaSubGrupoPessoa.EscolhaOGrupo();
+            }
+        }
+
         private void PreencheCampos(Pessoa pessoa)
         {
             ignoraCheckEvent = true;
