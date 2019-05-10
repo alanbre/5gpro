@@ -54,6 +54,8 @@
             this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
@@ -65,7 +67,7 @@
             this.gbResultados.Controls.Add(this.dgvContas);
             this.gbResultados.Location = new System.Drawing.Point(12, 152);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(925, 410);
+            this.gbResultados.Size = new System.Drawing.Size(967, 410);
             this.gbResultados.TabIndex = 3;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Contas a pagar";
@@ -88,6 +90,8 @@
             this.dgvtbcValorOriginal,
             this.dgvtbcMulta,
             this.dgvtbcJuros,
+            this.dgvtbcAcrescimo,
+            this.dgvtbcDesconto,
             this.dgvtbcValorFinal});
             this.dgvContas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvContas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -97,7 +101,7 @@
             this.dgvContas.ReadOnly = true;
             this.dgvContas.RowHeadersVisible = false;
             this.dgvContas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContas.Size = new System.Drawing.Size(919, 391);
+            this.dgvContas.Size = new System.Drawing.Size(961, 391);
             this.dgvContas.TabIndex = 0;
             this.dgvContas.TabStop = false;
             this.dgvContas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvContas_CellDoubleClick);
@@ -122,7 +126,7 @@
             this.gbFiltros.Controls.Add(this.buscaPessoa);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(925, 134);
+            this.gbFiltros.Size = new System.Drawing.Size(967, 134);
             this.gbFiltros.TabIndex = 2;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
@@ -306,6 +310,18 @@
             this.dgvtbcJuros.Name = "dgvtbcJuros";
             this.dgvtbcJuros.ReadOnly = true;
             // 
+            // dgvtbcAcrescimo
+            // 
+            this.dgvtbcAcrescimo.HeaderText = "Acréscimo";
+            this.dgvtbcAcrescimo.Name = "dgvtbcAcrescimo";
+            this.dgvtbcAcrescimo.ReadOnly = true;
+            // 
+            // dgvtbcDesconto
+            // 
+            this.dgvtbcDesconto.HeaderText = "Desconto";
+            this.dgvtbcDesconto.Name = "dgvtbcDesconto";
+            this.dgvtbcDesconto.ReadOnly = true;
+            // 
             // dgvtbcValorFinal
             // 
             this.dgvtbcValorFinal.HeaderText = "Valor final";
@@ -317,7 +333,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(949, 574);
+            this.ClientSize = new System.Drawing.Size(991, 574);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.gbFiltros);
             this.KeyPreview = true;
@@ -362,6 +378,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
     }
 }

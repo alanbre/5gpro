@@ -33,6 +33,7 @@
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorConta = new System.Windows.Forms.Label();
+            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.lbADataVencimentoParcela = new System.Windows.Forms.Label();
             this.dtpDataVencimentoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataVencimentoInicial = new System.Windows.Forms.DateTimePicker();
@@ -41,7 +42,10 @@
             this.dtpDataCadastroFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataCadastroInicial = new System.Windows.Forms.DateTimePicker();
             this.lbDataCadastro = new System.Windows.Forms.Label();
+            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
+            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.dgvContas = new System.Windows.Forms.DataGridView();
             this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -53,11 +57,8 @@
             this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
-            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
-            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbFiltros.SuspendLayout();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
@@ -84,7 +85,7 @@
             this.gbFiltros.Controls.Add(this.buscaPessoa);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(982, 143);
+            this.gbFiltros.Size = new System.Drawing.Size(1040, 143);
             this.gbFiltros.TabIndex = 0;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
@@ -108,6 +109,18 @@
             this.lbAValorConta.Size = new System.Drawing.Size(13, 13);
             this.lbAValorConta.TabIndex = 4;
             this.lbAValorConta.Text = "a";
+            // 
+            // dbValorFinal
+            // 
+            this.dbValorFinal.Location = new System.Drawing.Point(94, 115);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
+            this.dbValorFinal.TabIndex = 5;
+            this.dbValorFinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
             // 
             // lbADataVencimentoParcela
             // 
@@ -179,6 +192,18 @@
             this.lbDataCadastro.TabIndex = 6;
             this.lbDataCadastro.Text = "Data cadastro";
             // 
+            // dbValorInicial
+            // 
+            this.dbValorInicial.Location = new System.Drawing.Point(9, 115);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
+            this.dbValorInicial.TabIndex = 3;
+            this.dbValorInicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
             // lbValorInicial
             // 
             this.lbValorInicial.AutoSize = true;
@@ -188,6 +213,23 @@
             this.lbValorInicial.TabIndex = 2;
             this.lbValorInicial.Text = "Valor da conta";
             // 
+            // buscaOperacao
+            // 
+            this.buscaOperacao.Location = new System.Drawing.Point(3, 55);
+            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaOperacao.Name = "buscaOperacao";
+            this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
+            this.buscaOperacao.TabIndex = 1;
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 16);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 0;
+            // 
             // gbResultados
             // 
             this.gbResultados.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -195,7 +237,7 @@
             this.gbResultados.Controls.Add(this.dgvContas);
             this.gbResultados.Location = new System.Drawing.Point(12, 161);
             this.gbResultados.Name = "gbResultados";
-            this.gbResultados.Size = new System.Drawing.Size(982, 401);
+            this.gbResultados.Size = new System.Drawing.Size(1040, 401);
             this.gbResultados.TabIndex = 1;
             this.gbResultados.TabStop = false;
             this.gbResultados.Text = "Contas a receber";
@@ -220,6 +262,7 @@
             this.dgvtbcMulta,
             this.dgvtbcJuros,
             this.dgvtbcAcrescimo,
+            this.dgvtbcDesconto,
             this.dgvtbcValorFinal});
             this.dgvContas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvContas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -229,7 +272,7 @@
             this.dgvContas.ReadOnly = true;
             this.dgvContas.RowHeadersVisible = false;
             this.dgvContas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContas.Size = new System.Drawing.Size(976, 382);
+            this.dgvContas.Size = new System.Drawing.Size(1034, 382);
             this.dgvContas.TabIndex = 0;
             this.dgvContas.TabStop = false;
             this.dgvContas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvContas_CellDoubleClick);
@@ -293,59 +336,24 @@
             this.dgvtbcAcrescimo.Name = "dgvtbcAcrescimo";
             this.dgvtbcAcrescimo.ReadOnly = true;
             // 
+            // dgvtbcDesconto
+            // 
+            this.dgvtbcDesconto.HeaderText = "Desconto";
+            this.dgvtbcDesconto.Name = "dgvtbcDesconto";
+            this.dgvtbcDesconto.ReadOnly = true;
+            // 
             // dgvtbcValorFinal
             // 
             this.dgvtbcValorFinal.HeaderText = "Valor final";
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
-            // dbValorFinal
-            // 
-            this.dbValorFinal.Location = new System.Drawing.Point(94, 115);
-            this.dbValorFinal.Name = "dbValorFinal";
-            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
-            this.dbValorFinal.TabIndex = 5;
-            this.dbValorFinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorInicial
-            // 
-            this.dbValorInicial.Location = new System.Drawing.Point(9, 115);
-            this.dbValorInicial.Name = "dbValorInicial";
-            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
-            this.dbValorInicial.TabIndex = 3;
-            this.dbValorInicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaOperacao
-            // 
-            this.buscaOperacao.Location = new System.Drawing.Point(3, 55);
-            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaOperacao.Name = "buscaOperacao";
-            this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
-            this.buscaOperacao.TabIndex = 1;
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 16);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 0;
-            // 
             // fmBuscaContaReceber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1006, 574);
+            this.ClientSize = new System.Drawing.Size(1064, 574);
             this.Controls.Add(this.gbResultados);
             this.Controls.Add(this.gbFiltros);
             this.KeyPreview = true;
@@ -395,6 +403,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
     }
 }

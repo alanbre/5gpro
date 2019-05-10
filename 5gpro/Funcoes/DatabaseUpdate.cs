@@ -225,7 +225,7 @@ namespace _5gpro.Funcoes
         private string CreateTableSQL()
         {
             string create = @"
-  -- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -736,6 +736,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
   `juros` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NOT NULL,
+  `acrescimo` DECIMAL(10,2) NULL,
+  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idconta_receber`),
   INDEX `fk_conta_receber_operacao1_idx` (`idoperacao` ASC) VISIBLE,
   INDEX `fk_conta_receber_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
@@ -766,6 +768,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `data_quitacao` DATETIME NULL,
   `idconta_receber` INT NOT NULL,
   `idformapagamento` INT NULL,
+  `acrescimo` DECIMAL(10,2) NULL,
+  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idparcela_conta_receber`),
   INDEX `fk_parcela_conta_receber_conta_receber1_idx` (`idconta_receber` ASC) VISIBLE,
   INDEX `fk_parcela_conta_receber_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
@@ -793,6 +797,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_pagar` (
   `juros` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NOT NULL,
+  `acrescimo` DECIMAL(10,2) NULL,
+  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idconta_pagar`),
   INDEX `fk_conta_pagar_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_conta_pagar_pessoa1`
@@ -817,6 +823,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
   `data_quitacao` DATETIME NULL,
   `idconta_pagar` INT NOT NULL,
   `idformapagamento` INT NULL,
+  `acrescimo` DECIMAL(10,2) NULL,
+  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idparcela_conta_pagar`),
   INDEX `fk_parcela_conta_pagar_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
   INDEX `fk_parcela_conta_pagar_conta_pagar1_idx` (`idconta_pagar` ASC) VISIBLE,
@@ -855,6 +863,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
                         ";
             return create;

@@ -11,9 +11,10 @@ namespace _5gpro.Entities
         public decimal Multa { get; set; }
         public decimal Juros { get; set; }
         public decimal Acrescimo { get; set; }
+        public decimal Desconto { get; set; }
         public decimal ValorFinal { get
             {
-                return this.Valor + this.Multa + this.Juros + this.Acrescimo;
+                return this.Valor + this.Multa + this.Juros + this.Acrescimo - this.Desconto;
             } }
         public DateTime? DataQuitacao { get; set; }
         public FormaPagamento FormaPagamento { get; set; }

@@ -58,10 +58,7 @@ namespace _5gpro.Forms
             if (e.KeyCode != Keys.Space)
                 return;
             SelecionaLinha();
-
         }
-
-
 
 
         private void Pesquisar()
@@ -90,6 +87,7 @@ namespace _5gpro.Forms
                                      par.Multa,
                                      par.Juros,
                                      par.Acrescimo,
+                                     par.Desconto,
                                      par.ValorFinal
                                      );
             }
@@ -128,6 +126,7 @@ namespace _5gpro.Forms
             dbMulta.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Multa);
             dbJuros.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Juros);
             dbAcrescimo.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Acrescimo);
+            dbDesconto.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Desconto);
             dbValorTotal.Valor = parcelasContaReceberSelecionadas.Sum(p => p.ValorFinal);
             lbTotal.Text = dbValorTotal.Valor.ToString("TOTAL: R$ ########0.00");
         }
@@ -162,6 +161,16 @@ namespace _5gpro.Forms
                     MessageBox.Show("Houve problema ao quitar as parcelas!");
                 }
             }
+        }
+
+        private void DbValorTotal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LbValorTotal_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

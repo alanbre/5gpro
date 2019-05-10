@@ -17,6 +17,8 @@ namespace _5gpro.Entities
         public decimal Multa { get; set; }
         public decimal Juros { get; set; }
         public decimal ValorFinal { get; set; }
+        public decimal Acrescimo { get; set; }
+        public decimal Desconto { get; set; }
         public virtual ICollection<ParcelaContaPagar> Parcelas { get; set; }
     }
 }
