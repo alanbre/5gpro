@@ -13,7 +13,7 @@ namespace _5gpro.Funcoes
 
         public bool CriarTabelasSeNaoExistirem(string dataBase)
         {
-            if(dataBase.Length > 0)
+            if (dataBase.Length > 0)
                 dataBaseString = dataBase;
             try
             {
@@ -143,16 +143,16 @@ namespace _5gpro.Funcoes
                 Comando.Connection = Conexao;
                 Comando.Transaction = tr;
 
-                if (versaoAtual < 2 )
+                if (versaoAtual < 2)
                 {
-                    
+
                     try
                     {
                         Comando.CommandText = "ALTER TABLE pessoa ADD COLUMN tipo_pessoa CHAR(1)";
                         Comando.ExecuteNonQuery();
                         Comando.CommandText = "ALTER TABLE configuracao MODIFY COLUMN idconfiguracao INT NOT NULL AUTO_INCREMENT";
                         Comando.ExecuteNonQuery();
-                        
+
                         AtualizaVersaoBD(2);
                         return true;
                     }

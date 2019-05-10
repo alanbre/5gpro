@@ -130,15 +130,15 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
-                                                    cr.valor_final
+                                                    cr.valor_final, cr.acrescimo
                                                     FROM 
                                                     conta_receber cr 
                                                     LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
                                                     LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
                                                     LEFT JOIN parcela_conta_receber pa ON pa.idconta_receber = cr.idconta_receber
-                                                    WHERE 1 = 1"
-                                             + whereOperacao + ""
-                                             + wherePessoa + "" +
+                                                    WHERE 1 = 1 "
+                                             + whereOperacao + " "
+                                             + wherePessoa + " " +
                                           @" AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
                                              AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
                                              AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final

@@ -321,7 +321,7 @@ namespace _5gpro.Forms
         {
             foreach (var parcela in parcelas)
                 dgvParcelas.Rows.Add(parcela.Sequencia,
-                                     parcela.DataVencimento.ToShortDateString(),
+                                     parcela.DataVencimento,
                                      parcela.Valor,
                                      parcela.Multa,
                                      parcela.Juros,

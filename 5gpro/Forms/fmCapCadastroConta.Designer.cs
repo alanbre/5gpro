@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.dbValorFinalConta = new _5gpro.Controls.DecimalBox();
@@ -40,11 +41,11 @@
             this.lbMultaConta = new System.Windows.Forms.Label();
             this.lbValorOriginalConta = new System.Windows.Forms.Label();
             this.gbParcelas = new System.Windows.Forms.GroupBox();
-            this.btExcluirParcela = new System.Windows.Forms.Button();
             this.dbValorFinalParcela = new _5gpro.Controls.DecimalBox();
             this.dbJurosParcela = new _5gpro.Controls.DecimalBox();
             this.dbMultaParcela = new _5gpro.Controls.DecimalBox();
             this.dbValorOriginalParcela = new _5gpro.Controls.DecimalBox();
+            this.btExcluirParcela = new System.Windows.Forms.Button();
             this.btNovaParcela = new System.Windows.Forms.Button();
             this.tbDataQuitacao = new System.Windows.Forms.TextBox();
             this.lbDataQuitacao = new System.Windows.Forms.Label();
@@ -59,13 +60,6 @@
             this.tbCodigoParcela = new System.Windows.Forms.TextBox();
             this.lbCodigoParcela = new System.Windows.Forms.Label();
             this.dgvParcelas = new System.Windows.Forms.DataGridView();
-            this.dgvtbcSequencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataVencimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataQuitacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.dtpDataCadatroConta = new System.Windows.Forms.DateTimePicker();
@@ -73,6 +67,13 @@
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
             this.lbCodigoConta = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.dgvtbcSequencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataVencimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataQuitacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbTotais.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -454,54 +455,6 @@
             this.dgvParcelas.TabStop = false;
             this.dgvParcelas.CurrentCellChanged += new System.EventHandler(this.DgvParcelas_CurrentCellChanged);
             // 
-            // dgvtbcSequencia
-            // 
-            this.dgvtbcSequencia.HeaderText = "Parcela";
-            this.dgvtbcSequencia.Name = "dgvtbcSequencia";
-            this.dgvtbcSequencia.ReadOnly = true;
-            this.dgvtbcSequencia.Width = 50;
-            // 
-            // dgvtbcDataVencimento
-            // 
-            this.dgvtbcDataVencimento.HeaderText = "Data de vencimento";
-            this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
-            this.dgvtbcDataVencimento.ReadOnly = true;
-            this.dgvtbcDataVencimento.Width = 130;
-            // 
-            // dgvtbcValorOriginal
-            // 
-            this.dgvtbcValorOriginal.HeaderText = "Valor original";
-            this.dgvtbcValorOriginal.Name = "dgvtbcValorOriginal";
-            this.dgvtbcValorOriginal.ReadOnly = true;
-            this.dgvtbcValorOriginal.Width = 90;
-            // 
-            // dgvtbcMulta
-            // 
-            this.dgvtbcMulta.HeaderText = "Multa";
-            this.dgvtbcMulta.Name = "dgvtbcMulta";
-            this.dgvtbcMulta.ReadOnly = true;
-            this.dgvtbcMulta.Width = 40;
-            // 
-            // dgvtbcJuros
-            // 
-            this.dgvtbcJuros.HeaderText = "Juros";
-            this.dgvtbcJuros.Name = "dgvtbcJuros";
-            this.dgvtbcJuros.ReadOnly = true;
-            this.dgvtbcJuros.Width = 40;
-            // 
-            // dgvtbcValorFinal
-            // 
-            this.dgvtbcValorFinal.HeaderText = "Valor final";
-            this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
-            this.dgvtbcValorFinal.ReadOnly = true;
-            this.dgvtbcValorFinal.Width = 90;
-            // 
-            // dgvtbcDataQuitacao
-            // 
-            this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
-            this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
-            this.dgvtbcDataQuitacao.ReadOnly = true;
-            // 
             // gbDadosConta
             // 
             this.gbDadosConta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -577,6 +530,57 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 
+            // dgvtbcSequencia
+            // 
+            this.dgvtbcSequencia.HeaderText = "Parcela";
+            this.dgvtbcSequencia.Name = "dgvtbcSequencia";
+            this.dgvtbcSequencia.ReadOnly = true;
+            this.dgvtbcSequencia.Width = 50;
+            // 
+            // dgvtbcDataVencimento
+            // 
+            this.dgvtbcDataVencimento.HeaderText = "Data de vencimento";
+            this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
+            this.dgvtbcDataVencimento.ReadOnly = true;
+            this.dgvtbcDataVencimento.Width = 130;
+            // 
+            // dgvtbcValorOriginal
+            // 
+            this.dgvtbcValorOriginal.HeaderText = "Valor original";
+            this.dgvtbcValorOriginal.Name = "dgvtbcValorOriginal";
+            this.dgvtbcValorOriginal.ReadOnly = true;
+            this.dgvtbcValorOriginal.Width = 90;
+            // 
+            // dgvtbcMulta
+            // 
+            this.dgvtbcMulta.HeaderText = "Multa";
+            this.dgvtbcMulta.Name = "dgvtbcMulta";
+            this.dgvtbcMulta.ReadOnly = true;
+            this.dgvtbcMulta.Width = 40;
+            // 
+            // dgvtbcJuros
+            // 
+            this.dgvtbcJuros.HeaderText = "Juros";
+            this.dgvtbcJuros.Name = "dgvtbcJuros";
+            this.dgvtbcJuros.ReadOnly = true;
+            this.dgvtbcJuros.Width = 40;
+            // 
+            // dgvtbcValorFinal
+            // 
+            this.dgvtbcValorFinal.HeaderText = "Valor final";
+            this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
+            this.dgvtbcValorFinal.ReadOnly = true;
+            this.dgvtbcValorFinal.Width = 90;
+            // 
+            // dgvtbcDataQuitacao
+            // 
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
+            this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
+            this.dgvtbcDataQuitacao.ReadOnly = true;
+            // 
             // fmCapCadastroConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -627,13 +631,6 @@
         private System.Windows.Forms.TextBox tbCodigoParcela;
         private System.Windows.Forms.Label lbCodigoParcela;
         private System.Windows.Forms.DataGridView dgvParcelas;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcSequencia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataVencimento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataQuitacao;
         private System.Windows.Forms.GroupBox gbDadosConta;
         private System.Windows.Forms.DateTimePicker dtpDataCadatroConta;
         private System.Windows.Forms.Label lbDataCadastroConta;
@@ -651,5 +648,12 @@
         private Controls.DecimalBox dbValorFinalConta;
         private Controls.DecimalBox dbJurosConta;
         private Controls.DecimalBox dbMultaConta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcSequencia;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataVencimento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataQuitacao;
     }
 }
