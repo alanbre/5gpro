@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaNotaFiscal : Form
+    public partial class fmBuscaNotaFiscalProria : Form
     {
-        public fmBuscaNotaFiscal()
+        public fmBuscaNotaFiscalProria()
         {
             InitializeComponent();
         }

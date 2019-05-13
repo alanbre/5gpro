@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<data-sources>
-	<data-source id="mysql8-16aa37e62c0-4db65bab18806215" provider="mysql" driver="mysql8" name="MySQL 8+ - localhost" save-password="true" read-only="false">
-		<connection host="localhost" port="3306" server="" database="" url="jdbc:mysql://localhost:3306/" user="5gprouser" password="RgMWMk5GQAMEHgcwd/c=" home="C:\Program Files\MySQL\MySQL Router 8.0" type="dev">
-			<provider-property name="@dbeaver-serverTimezone@" value="America/Sao_Paulo"/>
-		</connection>
-	</data-source>
-	<filters/>
-</data-sources>

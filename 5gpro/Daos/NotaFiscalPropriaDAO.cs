@@ -85,7 +85,7 @@ namespace _5gpro.Daos
             }
             if (notafiscal != null)
             {
-                notafiscal.NotaFiscalItem = BuscaItensDaNotaFiscal(notafiscal);
+                notafiscal.NotaFiscalPropriaItem = BuscaItensDaNotaFiscal(notafiscal);
             }
             return notafiscal;
         }
@@ -130,7 +130,7 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            if (notafiscal != null) { notafiscal.NotaFiscalItem = BuscaItensDaNotaFiscal(notafiscal); }
+            if (notafiscal != null) { notafiscal.NotaFiscalPropriaItem = BuscaItensDaNotaFiscal(notafiscal); }
 
             return notafiscal;
         }
@@ -174,7 +174,7 @@ namespace _5gpro.Daos
                 FecharConexao();
             }
 
-            if (notafiscal != null) { notafiscal.NotaFiscalItem = BuscaItensDaNotaFiscal(notafiscal); }
+            if (notafiscal != null) { notafiscal.NotaFiscalPropriaItem = BuscaItensDaNotaFiscal(notafiscal); }
 
             return notafiscal;
         }
@@ -221,7 +221,7 @@ namespace _5gpro.Daos
                     Comando.CommandText = @"INSERT INTO notafiscal_has_item (idnotafiscal, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
                                             VALUES
                                             (@idnotafiscal, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
-                    foreach (NotaFiscalPropriaItem i in notafiscal.NotaFiscalItem)
+                    foreach (NotaFiscalPropriaItem i in notafiscal.NotaFiscalPropriaItem)
                     {
                         Comando.Parameters.Clear();
                         Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);

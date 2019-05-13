@@ -34,17 +34,6 @@ namespace _5gpro.Forms
             SetarNivel();
         }
 
-        private void SetarNivel()
-        {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("030100").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
-            Editando(editando);
-        }
 
         private void FmEstoqueEntradaDocumentos_KeyDown(object sender, KeyEventArgs e)
         {
@@ -467,7 +456,7 @@ namespace _5gpro.Forms
                     DescontoDocumento = Convert.ToDecimal(tbDescontoDocumento.Text),
                     ValorTotalDocumento = Convert.ToDecimal(tbValorTotalDocumento.Text),
 
-                    NotaFiscalItem = itens
+                    NotaFiscalPropriaItem = itens
                 };
 
                 int resultado = notaFiscalDAO.SalvarOuAtualizar(notaFiscal);
@@ -546,7 +535,7 @@ namespace _5gpro.Forms
                 if (newnotafiscal != null)
                 {
                     notaFiscal = newnotafiscal;
-                    itens = notaFiscal.NotaFiscalItem.ToList();
+                    itens = notaFiscal.NotaFiscalPropriaItem.ToList();
                     PreencheCampos(notaFiscal);
                 }
             }
@@ -561,7 +550,7 @@ namespace _5gpro.Forms
                     if (newnotafiscal != null)
                     {
                         notaFiscal = newnotafiscal;
-                        itens = notaFiscal.NotaFiscalItem.ToList();
+                        itens = notaFiscal.NotaFiscalPropriaItem.ToList();
                         PreencheCampos(notaFiscal);
                         Editando(false);
                     }
@@ -571,7 +560,7 @@ namespace _5gpro.Forms
                         if (newnotafiscal != null)
                         {
                             notaFiscal = newnotafiscal;
-                            itens = notaFiscal.NotaFiscalItem.ToList();
+                            itens = notaFiscal.NotaFiscalPropriaItem.ToList();
                             PreencheCampos(notaFiscal);
                             Editando(false);
                         }
@@ -590,7 +579,7 @@ namespace _5gpro.Forms
                 if (newnotafiscal != null)
                 {
                     notaFiscal = newnotafiscal;
-                    itens = notaFiscal.NotaFiscalItem.ToList();
+                    itens = notaFiscal.NotaFiscalPropriaItem.ToList();
                     PreencheCampos(notaFiscal);
                 }
             }
@@ -605,7 +594,7 @@ namespace _5gpro.Forms
                     if (newnotafiscal != null)
                     {
                         notaFiscal = newnotafiscal;
-                        itens = notaFiscal.NotaFiscalItem.ToList();
+                        itens = notaFiscal.NotaFiscalPropriaItem.ToList();
                         PreencheCampos(notaFiscal);
                         Editando(false);
                     }
@@ -615,7 +604,7 @@ namespace _5gpro.Forms
                         if (newnotafiscal != null)
                         {
                             notaFiscal = newnotafiscal;
-                            itens = notaFiscal.NotaFiscalItem.ToList();
+                            itens = notaFiscal.NotaFiscalPropriaItem.ToList();
                             PreencheCampos(notaFiscal);
                             Editando(false);
                         }
@@ -735,7 +724,7 @@ namespace _5gpro.Forms
             tbDescontoTotalItens.Text = notafiscal.DescontoTotalItens.ToString("############0.00");
             tbDescontoDocumento.Text = notafiscal.DescontoDocumento.ToString("############0.00");
             tbValorTotalDocumento.Text = notafiscal.ValorTotalDocumento.ToString("############0.00");
-            itens = notafiscal.NotaFiscalItem.ToList();
+            itens = notafiscal.NotaFiscalPropriaItem.ToList();
             PreencheGridItens(itens);
             btInserirItem.Text = "Inserir";
             ignoracheckevent = false;
@@ -791,6 +780,17 @@ namespace _5gpro.Forms
                 tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
                 tbValorTotalDocumento.Text = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - Convert.ToDecimal(tbDescontoDocumento.Text)).ToString("############0.00");
             }
+        }
+        private void SetarNivel()
+        {
+            //Busca o usuário logado no pc, através do MAC
+            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("030100").ToString();
+
+            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            Editando(editando);
         }
     }
 }

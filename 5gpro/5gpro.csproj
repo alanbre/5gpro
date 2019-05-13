@@ -240,6 +240,7 @@
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
     <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalPropriaDAO.cs" />
+    <Compile Include="Daos\NotaFiscalTerceirosDAO.cs" />
     <Compile Include="Daos\OperacaoDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
     <Compile Include="Daos\ParcelaContaReceberDAO.cs" />
@@ -262,6 +263,8 @@
     <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscalPropria.cs" />
     <Compile Include="Entities\NotaFiscalPropriaItem.cs" />
+    <Compile Include="Entities\NotaFiscalTerceiros.cs" />
+    <Compile Include="Entities\NotaFiscalTerceirosItem.cs" />
     <Compile Include="Entities\Operacao.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
@@ -318,11 +321,17 @@
     <Compile Include="Forms\fmBuscaItem.Designer.cs">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscal.cs">
+    <Compile Include="Forms\fmBuscaNotaFiscalProria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscal.Designer.cs">
-      <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
+    <Compile Include="Forms\fmBuscaNotaFiscalProria.Designer.cs">
+      <DependentUpon>fmBuscaNotaFiscalProria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmBuscaNotaFiscalTerceiros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaNotaFiscalTerceiros.Designer.cs">
+      <DependentUpon>fmBuscaNotaFiscalTerceiros.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaOperacao.cs">
       <SubType>Form</SubType>
@@ -606,8 +615,8 @@
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaNotaFiscal.resx">
-      <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmBuscaNotaFiscalProria.resx">
+      <DependentUpon>fmBuscaNotaFiscalProria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaOperacao.resx">
       <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
