@@ -326,7 +326,7 @@ namespace _5gpro.Forms
                     {
                         atuacoes.Add(s);
                     }
-                    pessoa.Atuacao = atuacoes;
+                    //pessoa.Atuacao = atuacoes;
 
                     pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
 
@@ -638,18 +638,18 @@ namespace _5gpro.Forms
 
             buscaCidade.PreencheCampos(pessoa.Cidade);
 
-            foreach (string atuacao in pessoa.Atuacao)
-            {
-                switch (atuacao)
-                {
-                    case "Cliente":
-                        cblAtuacao.SetItemChecked(0, true);
-                        break;
-                    case "Fornecedor":
-                        cblAtuacao.SetItemChecked(1, true);
-                        break;
-                }
-            }
+            //foreach (string atuacao in pessoa.Atuacao)
+            //{
+            //    switch (atuacao)
+            //    {
+            //        case "Cliente":
+            //            cblAtuacao.SetItemChecked(0, true);
+            //            break;
+            //        case "Fornecedor":
+            //            cblAtuacao.SetItemChecked(1, true);
+            //            break;
+            //    }
+            //}
 
             buscaGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa.GrupoPessoa);
             buscaSubGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa);

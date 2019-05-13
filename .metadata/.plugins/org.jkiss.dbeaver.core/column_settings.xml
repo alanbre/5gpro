@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <items>
+	<item id="NodeList/MySQLCatalog">
+		<column name="Schema Name" visible="true" order="0" width="140"/>
+		<column name="Default Charset" visible="true" order="1" width="95"/>
+		<column name="Default Collation" visible="true" order="2" width="103"/>
+		<column name="SQL Path" visible="true" order="3" width="62"/>
+		<column name="Database size" visible="true" order="4" width="84"/>
+	</item>
 	<item id="NodeList/MySQLTableColumn">
 		<column name="Column Name" visible="true" order="0" width="140"/>
 		<column name="#" visible="true" order="1" width="27"/>

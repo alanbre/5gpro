@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_R-jsoXNhEemgusmjwjRwNw" elementId="org.eclipse.e4.legacy.ide.application" contributorURI="platform:/plugin/org.jkiss.dbeaver.core.application" selectedElement="_R-kTsHNhEemgusmjwjRwNw" bindingContexts="_R-kTsnNhEemgusmjwjRwNw">
-  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone&quot; name=&quot;5gpromodel.erd&quot; tooltip=&quot;General/Diagrams/5gpromodel.erd&quot;>&#xD;&#xA;&lt;persistable path=&quot;/General/Diagrams/5gpromodel.erd&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone&quot; name=&quot;5gpromodel.erd&quot; tooltip=&quot;General1/Diagrams/5gpromodel.erd&quot;>&#xD;&#xA;&lt;persistable path=&quot;/General1/Diagrams/5gpromodel.erd&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
+  <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workbench>&#xD;&#xA;&lt;mruList>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jkiss.dbeaver.ui.editors.sql.SQLEditor&quot; name=&quot;Script.sql&quot; tooltip=&quot;General/Scripts/Script.sql&quot;>&#xD;&#xA;&lt;persistable path=&quot;/General/Scripts/Script.sql&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone&quot; name=&quot;5gpromodel.erd&quot; tooltip=&quot;General/Diagrams/5gpromodel.erd&quot;>&#xD;&#xA;&lt;persistable path=&quot;/General/Diagrams/5gpromodel.erd&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;file factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; id=&quot;org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone&quot; name=&quot;5gpromodel.erd&quot; tooltip=&quot;General1/Diagrams/5gpromodel.erd&quot;>&#xD;&#xA;&lt;persistable path=&quot;/General1/Diagrams/5gpromodel.erd&quot;/>&#xD;&#xA;&lt;/file>&#xD;&#xA;&lt;/mruList>&#xD;&#xA;&lt;/workbench>"/>
   <tags>activeSchemeId:org.jkiss.dbeaver.defaultKeyScheme</tags>
   <tags>ModelMigrationProcessor.001</tags>
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_R-kTsHNhEemgusmjwjRwNw" elementId="IDEWindow" contributorURI="platform:/plugin/org.jkiss.dbeaver.core.application" selectedElement="_SHaGoHNhEemgusmjwjRwNw" label="%trimmedwindow.label.dbeaver" x="200" y="200" width="1440" height="810">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_R-kTsHNhEemgusmjwjRwNw" elementId="IDEWindow" contributorURI="platform:/plugin/org.jkiss.dbeaver.core.application" selectedElement="_SHaGoHNhEemgusmjwjRwNw" label="%trimmedwindow.label.dbeaver" x="200" y="200" width="1386" height="788">
     <persistedState key="coolBarVisible" value="true"/>
     <persistedState key="perspectiveBarVisible" value="true"/>
     <persistedState key="isRestored" value="true"/>
@@ -11,6 +11,7 @@
     <persistedState key="aggregateWorkingSetId"/>
     <persistedState key="show_in_time" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;show_in_time/>"/>
     <tags>topLevel</tags>
+    <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_SHaGoHNhEemgusmjwjRwNw" selectedElement="_SHatsHNhEemgusmjwjRwNw" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_SHatsHNhEemgusmjwjRwNw" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_SLf8cnNhEemgusmjwjRwNw">
         <children xsi:type="advanced:Perspective" xmi:id="_SLf8cnNhEemgusmjwjRwNw" elementId="org.jkiss.dbeaver.core.perspective" selectedElement="_SLf8c3NhEemgusmjwjRwNw" label="DBeaver" iconURI="platform:/plugin/org.jkiss.dbeaver.ui/icons/dbeaver_perspective.png">
@@ -32,9 +33,10 @@
           <tags>persp.viewSC:org.eclipse.debug.ui.VariableView</tags>
           <tags>persp.viewSC:org.eclipse.debug.ui.BreakpointView</tags>
           <tags>persp.actionSet:org.eclipse.ui.edit.text.actionSet.annotationNavigation</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_SLf8c3NhEemgusmjwjRwNw" selectedElement="_SLf8fnNhEemgusmjwjRwNw" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_SLf8c3NhEemgusmjwjRwNw" selectedElement="_SLf8dHNhEemgusmjwjRwNw" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_SLf8dHNhEemgusmjwjRwNw" containerData="3000" selectedElement="_SLf8dXNhEemgusmjwjRwNw">
               <children xsi:type="basic:PartStack" xmi:id="_SLf8dXNhEemgusmjwjRwNw" elementId="navigation" containerData="7000" selectedElement="_SLf8d3NhEemgusmjwjRwNw">
+                <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_SLf8dnNhEemgusmjwjRwNw" elementId="org.jkiss.dbeaver.core.databaseNavigator" ref="_SLZ10HNhEemgusmjwjRwNw" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:Database</tags>
@@ -142,24 +144,9 @@
       <tags>categoryTag:General</tags>
     </sharedElements>
     <sharedElements xsi:type="advanced:Area" xmi:id="_SLZOwHNhEemgusmjwjRwNw" elementId="org.eclipse.ui.editorss" selectedElement="_SLZOwXNhEemgusmjwjRwNw">
-      <children xsi:type="basic:PartStack" xmi:id="_SLZOwXNhEemgusmjwjRwNw" elementId="org.eclipse.e4.primaryDataStack" selectedElement="_z-ZH0HNkEemqWIc5IZp7yA">
+      <children xsi:type="basic:PartStack" xmi:id="_SLZOwXNhEemgusmjwjRwNw" elementId="org.eclipse.e4.primaryDataStack">
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
-        <tags>active</tags>
-        <children xsi:type="basic:Part" xmi:id="_t_C0gHNkEemgaN914zgMGw" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="5gpromodel.erd" iconURI="platform:/plugin/org.jkiss.dbeaver.ext.erd/icons/erd.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone&quot; name=&quot;5gpromodel.erd&quot; partName=&quot;5gpromodel.erd&quot; title=&quot;5gpromodel.erd&quot; tooltip=&quot;General1/Diagrams/5gpromodel.erd&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/General1/Diagrams/5gpromodel.erd&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone</tags>
-          <tags>removeOnHide</tags>
-        </children>
-        <children xsi:type="basic:Part" xmi:id="_z-ZH0HNkEemqWIc5IZp7yA" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="5gpromodel.erd" iconURI="platform:/plugin/org.jkiss.dbeaver.ext.erd/icons/erd.png" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone&quot; name=&quot;5gpromodel.erd&quot; partName=&quot;5gpromodel.erd&quot; title=&quot;5gpromodel.erd&quot; tooltip=&quot;General/Diagrams/5gpromodel.erd&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/General/Diagrams/5gpromodel.erd&quot;/>&#xD;&#xA;&lt;/editor>"/>
-          <tags>Editor</tags>
-          <tags>org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone</tags>
-          <tags>removeOnHide</tags>
-          <tags>active</tags>
-          <tags>activeOnClose</tags>
-        </children>
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_SLZ10HNhEemgusmjwjRwNw" elementId="org.jkiss.dbeaver.core.databaseNavigator" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Database Navigator" iconURI="platform:/plugin/org.jkiss.dbeaver.ui/icons/databases.png" tooltip="" closeable="true">
@@ -180,6 +167,7 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:Database</tags>
+      <tags>active</tags>
       <tags>activeOnClose</tags>
       <menus xmi:id="_XMPScHNhEemgusmjwjRwNw" elementId="org.jkiss.dbeaver.core.projectNavigator">
         <tags>ViewMenu</tags>
@@ -294,7 +282,7 @@
       <children xsi:type="menu:ToolBar" xmi:id="_SImZcHNhEemgusmjwjRwNw" elementId="dbeaver-general">
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_SInAgHNhEemgusmjwjRwNw" elementId="dbeaver-transactions">
+      <children xsi:type="menu:ToolBar" xmi:id="_SInAgHNhEemgusmjwjRwNw" elementId="dbeaver-transactions" visible="false">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SInAgXNhEemgusmjwjRwNw" elementId="dbeaver-edit" visible="false">
@@ -1860,7 +1848,7 @@
   <addons xmi:id="_R-kTwXNhEemgusmjwjRwNw" elementId="MinMax Addon" contributorURI="platform:/plugin/org.jkiss.dbeaver.core.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_R-kTwnNhEemgusmjwjRwNw" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.jkiss.dbeaver.core.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_R-n-EHNhEemgusmjwjRwNw" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_zqMBwHV6Eem8T4_LID03_Q" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_R-3OoHNhEemgusmjwjRwNw" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_R-3OoXNhEemgusmjwjRwNw" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>

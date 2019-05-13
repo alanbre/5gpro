@@ -14,7 +14,10 @@ namespace _5gpro.Entities
         [Required(ErrorMessage = "O Nome fantasia é obrigatório.|tbFantasia", AllowEmptyStrings = false)]
         public string Fantasia { get; set; }
 
-        public List<string> Atuacao { get; set; }
+        // public List<string> Atuacao { get; set; }
+        public string Atuacao { get; set; }
+        public string Situacao { get; set; }
+
         public string TipoPessoa { get; set; }
         public string Rua { get; set; }
         public string Numero { get; set; }

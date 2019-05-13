@@ -7986,3 +7986,64 @@ java.lang.Exception: The project description file (.project) for 'General1' is m
 	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:661)
 	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:597)
 	at org.eclipse.equinox.launcher.Main.run(Main.java:1476)
+!SESSION 2019-05-13 09:29:45.768 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_77
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\Eduardo\Documents\Projects Visual Studio 2019\5gpro
+
+!ENTRY org.eclipse.core.resources 4 568 2019-05-13 09:34:55.203
+!MESSAGE Could not write metadata for '/General'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\Eduardo\Documents\Projects Visual Studio 2019\5gpro\.metadata\.plugins\org.eclipse.core.resources\.projects\General\.markers.snap (O sistema não pode encontrar o caminho especificado)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:44)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1774)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1855)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1210)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1151)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.jkiss.dbeaver.model 4 0 2019-05-13 09:41:44.323
+!MESSAGE Error loading ER diagram from '5gpromodel.erd'
+!SUBENTRY 1 org.jkiss.dbeaver.model 4 0 2019-05-13 09:41:44.323
+!MESSAGE Resource '/General1/Diagrams/5gpromodel.erd' does not exist.
+!STACK 0
+java.lang.Exception: Resource '/General1/Diagrams/5gpromodel.erd' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:330)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:204)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:278)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:271)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone.loadContentFromFile(ERDEditorStandalone.java:170)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone.access$0(ERDEditorStandalone.java:158)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone$1.evaluate(ERDEditorStandalone.java:132)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone$1.evaluate(ERDEditorStandalone.java:1)
+	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:86)
+	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:71)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:102)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+
+!ENTRY org.eclipse.core.resources 4 568 2019-05-13 09:44:58.587
+!MESSAGE Could not write metadata for '/General'.
+!STACK 0
+java.io.FileNotFoundException: C:\Users\Eduardo\Documents\Projects Visual Studio 2019\5gpro\.metadata\.plugins\org.eclipse.core.resources\.projects\General\.markers.snap (O sistema não pode encontrar o caminho especificado)
+	at java.io.FileOutputStream.open0(Native Method)
+	at java.io.FileOutputStream.open(FileOutputStream.java:270)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:213)
+	at java.io.FileOutputStream.<init>(FileOutputStream.java:133)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:48)
+	at org.eclipse.core.internal.localstore.SafeChunkyOutputStream.<init>(SafeChunkyOutputStream.java:44)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1774)
+	at org.eclipse.core.internal.resources.SaveManager.visitAndSnap(SaveManager.java:1855)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1210)
+	at org.eclipse.core.internal.resources.SaveManager.save(SaveManager.java:1151)
+	at org.eclipse.core.internal.resources.DelayedSnapshotJob.run(DelayedSnapshotJob.java:55)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)

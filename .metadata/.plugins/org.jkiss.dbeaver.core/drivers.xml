@@ -15,8 +15,8 @@
 	<provider id="mysql">
 		<driver id="mysql8" categories="sql" custom="false" embedded="false" name="MySQL 8+" class="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://{host}[:{port}]/[{database}]" port="3306" description="Driver for MySQL 8 and later">
 			<library type="jar" path="maven:/mysql:mysql-connector-java:RELEASE" custom="false" version="8.0.11">
-				<file id="mysql:mysql-connector-java" version="8.0.11" path="${home}\.dbeaver-drivers\maven\maven-central\mysql\mysql-connector-java-8.0.11.jar"/>
-				<file id="com.google.protobuf:protobuf-java" version="2.6.0" path="${home}\.dbeaver-drivers\maven\maven-central\com.google.protobuf\protobuf-java-2.6.0.jar"/>
+				<file id="mysql:mysql-connector-java" version="8.0.11" path="${drivers_home}\maven\maven-central\mysql\mysql-connector-java-8.0.11.jar"/>
+				<file id="com.google.protobuf:protobuf-java" version="2.6.0" path="${drivers_home}\maven\maven-central\com.google.protobuf\protobuf-java-2.6.0.jar"/>
 			</library>
 		</driver>
 	</provider>
