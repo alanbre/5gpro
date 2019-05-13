@@ -1,0 +1,208 @@
+2019-05-10 17:47:09.315 - DBeaver 6.0.4.201905052017 is starting
+2019-05-10 17:47:09.316 - OS: Windows 7 6.1 (amd64)
+2019-05-10 17:47:09.317 - Java version: 1.8.0_77 by Oracle Corporation (64bit)
+2019-05-10 17:47:09.319 - Install path: 'file:/C:/Program Files/DBeaver/'
+2019-05-10 17:47:09.320 - Instance path: 'file:/D:/workspace/5gpro/'
+2019-05-10 17:47:09.322 - Memory available 77Mb/910Mb
+2019-05-10 17:47:09.331 - Starting RMI server at 47050
+2019-05-10 17:47:09.422 - Run workbench
+2019-05-10 17:47:09.430 - > Start org.eclipse.e4.ui.workbench.swt [0.14.500.v20190214-0851]
+2019-05-10 17:47:09.432 - > Start org.eclipse.e4.core.services [2.1.400.v20181215-2145]
+2019-05-10 17:47:09.434 - > Start org.eclipse.e4.core.contexts [1.8.0.v20190214-1713]
+2019-05-10 17:47:09.441 - > Start org.eclipse.e4.ui.services [1.3.400.v20190212-2214]
+2019-05-10 17:47:09.468 - > Start org.eclipse.e4.ui.di [1.2.500.v20190214-1316]
+2019-05-10 17:47:09.495 - > Start com.ibm.icu.base [58.2.0.v20170418-1837]
+2019-05-10 17:47:09.497 - > Start org.eclipse.emf.common [2.15.0.v20181220-0846]
+2019-05-10 17:47:09.510 - > Start org.eclipse.emf.ecore [2.17.0.v20190116-0940]
+2019-05-10 17:47:09.552 - > Start org.eclipse.emf.ecore.xmi [2.15.0.v20180706-1146]
+2019-05-10 17:47:09.669 - > Start org.eclipse.core.filesystem [1.7.300.v20190218-2054]
+2019-05-10 17:47:09.706 - > Start org.eclipse.core.resources [3.13.300.v20190218-2054]
+2019-05-10 17:47:09.820 - > Start org.eclipse.e4.ui.workbench.addons.swt [1.3.400.v20190224-1542]
+2019-05-10 17:47:09.829 - > Start org.eclipse.core.expressions [3.6.300.v20190218-1215]
+2019-05-10 17:47:09.853 - > Start org.eclipse.e4.ui.workbench.renderers.swt [0.14.500.v20190220-1002]
+2019-05-10 17:47:09.932 - > Start org.eclipse.e4.ui.bindings [0.12.400.v20190131-1604]
+2019-05-10 17:47:09.976 - > Start org.eclipse.e4.core.di.extensions [0.15.300.v20190213-1308]
+2019-05-10 17:47:10.253 - > Start org.eclipse.e4.ui.css.swt [0.13.400.v20190223-1254]
+2019-05-10 17:47:10.300 - > Start org.eclipse.e4.ui.css.swt.theme [0.12.200.v20190212-2214]
+2019-05-10 17:47:10.340 - > Start org.jkiss.dbeaver.ui [5.1.23.201905052017]
+2019-05-10 17:47:10.577 - Initializing DBeaver 6.0.4
+2019-05-10 17:47:10.583 - Host plugin: org.jkiss.dbeaver.core.application 6.0.4.201905052017
+2019-05-10 17:47:10.587 - Initialize Core...
+2019-05-10 17:47:10.593 - Can't find BC security provider. Use default JCE.
+2019-05-10 17:47:10.596 - BouncyCastle not registered, using the default JCE provider
+2019-05-10 17:47:10.599 - > Start org.jkiss.dbeaver.registry [1.0.2.201905052017]
+2019-05-10 17:47:10.655 - > Start org.eclipse.team.core [3.8.500.v20190216-2155]
+2019-05-10 17:47:10.759 - Total database drivers: 73 (73)
+2019-05-10 17:47:10.792 - > Start org.jkiss.dbeaver.ui.navigator [1.0.8.201905052017]
+2019-05-10 17:47:10.793 - Project [P/General] already added
+2019-05-10 17:47:10.807 - > Start org.eclipse.equinox.security [1.3.100.v20190215-2139]
+2019-05-10 17:47:10.816 - > Start org.eclipse.ui.net [1.3.300.v20180827-1041]
+2019-05-10 17:47:10.817 - Proxy service 'org.eclipse.core.net.proxy.IProxyService' loaded
+2019-05-10 17:47:10.820 - > Start org.eclipse.core.net [1.3.400.v20181030-1645]
+2019-05-10 17:47:10.822 - Core initialized (235ms)
+2019-05-10 17:47:10.824 - Configure workbench window
+2019-05-10 17:47:10.830 - > Start org.eclipse.help [3.8.300.v20190216-1017]
+2019-05-10 17:47:11.540 - Create actions
+2019-05-10 17:47:11.542 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2019-05-10 17:47:11.545 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2019-05-10 17:47:11.618 - > Start org.eclipse.ui.editors [3.11.400.v20190218-1547]
+2019-05-10 17:47:11.620 - > Start org.eclipse.core.filebuffers [3.6.500.v20190218-1547]
+2019-05-10 17:47:11.931 - > Start org.eclipse.search [3.11.500.v20190218-2126]
+2019-05-10 17:47:11.946 - > Start org.eclipse.ui.workbench.texteditor [3.11.300.v20190218-2126]
+2019-05-10 17:47:11.953 - Initialize workbench window
+2019-05-10 17:47:11.963 - Finish initialization
+2019-05-10 17:47:12.031 - > Start org.jkiss.dbeaver.ui.editors.base [1.0.8.201905052017]
+2019-05-10 17:47:12.105 - > Start org.jkiss.dbeaver.ext.erd [2.0.110.201905052017]
+2019-05-10 17:47:12.112 - > Start org.jkiss.dbeaver.ui.editors.sql [1.0.8.201905052017]
+2019-05-10 17:47:12.168 - > Start org.eclipse.gef [3.11.0.201606061308]
+2019-05-10 17:47:12.188 - > Start org.eclipse.draw2d [3.10.100.201606061308]
+2019-05-10 17:47:12.387 - Error loading ER diagram from '5gpromodel.erd'
+org.eclipse.core.internal.resources.ResourceException(/General1/Diagrams/5gpromodel.erd)[368]: java.lang.Exception: Resource '/General1/Diagrams/5gpromodel.erd' does not exist.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Resource.checkExists(Resource.java:330)
+	at org.eclipse.core.internal.resources.Resource.checkAccessible(Resource.java:204)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:278)
+	at org.eclipse.core.internal.resources.File.getContents(File.java:271)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone.loadContentFromFile(ERDEditorStandalone.java:170)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone.access$0(ERDEditorStandalone.java:158)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone$1.evaluate(ERDEditorStandalone.java:132)
+	at org.jkiss.dbeaver.ext.erd.editor.ERDEditorStandalone$1.evaluate(ERDEditorStandalone.java:1)
+	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:86)
+	at org.jkiss.dbeaver.ui.LoadingJob.run(LoadingJob.java:71)
+	at org.jkiss.dbeaver.model.runtime.AbstractJob.run(AbstractJob.java:102)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+2019-05-10 17:47:12.835 - > Start org.eclipse.equinox.p2.core [2.6.0.v20190215-2242]
+2019-05-10 17:47:12.837 - > Start org.eclipse.equinox.p2.operations [2.5.300.v20190202-1801]
+2019-05-10 17:47:12.839 - > Start org.eclipse.equinox.p2.engine [2.6.200.v20190215-2242]
+2019-05-10 17:47:12.845 - > Start org.eclipse.equinox.p2.metadata [2.4.300.v20190215-2242]
+2019-05-10 17:47:12.852 - > Start org.eclipse.equinox.p2.ui.sdk.scheduler [1.4.200.v20181102-0649]
+2019-05-10 17:47:12.853 - > Start org.eclipse.equinox.p2.updatechecker [1.2.100.v20180827-1122]
+2019-05-10 17:47:12.858 - > Start org.eclipse.equinox.p2.metadata.repository [1.3.100.v20180822-1302]
+2019-05-10 17:47:12.859 - > Start org.eclipse.equinox.p2.repository [2.4.300.v20190215-2242]
+2019-05-10 17:47:12.895 - > Start org.jkiss.dbeaver.ui.editors.data [1.0.8.201905052017]
+2019-05-10 17:47:12.953 - > Start org.jkiss.dbeaver.ext.sample.database [1.0.45.201905052017]
+2019-05-10 17:47:12.955 - > Start org.jkiss.dbeaver.ext.ui.tipoftheday [1.0.14.201905052017]
+2019-05-10 17:47:13.089 - > Start org.eclipse.equinox.p2.ui [2.5.500.v20190220-1158]
+2019-05-10 17:47:15.418 - org.eclipse.core.internal.resources.ResourceException: Project 'General1' is not open.
+org.eclipse.core.internal.resources.ResourceException(/General1)[372]: java.lang.Exception: Project 'General1' is not open.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	at org.eclipse.core.internal.resources.Project.checkAccessible(Project.java:148)
+	at org.eclipse.core.internal.resources.Project.getDescription(Project.java:393)
+	at org.jkiss.dbeaver.model.navigator.DBNProject.getNodeDescription(DBNProject.java:82)
+	at org.jkiss.dbeaver.ui.navigator.database.NavigatorViewBase.onSelectionChange(NavigatorViewBase.java:197)
+	at org.jkiss.dbeaver.ui.navigator.database.NavigatorViewBase.lambda$0(NavigatorViewBase.java:117)
+	at org.eclipse.jface.viewers.Viewer$1.run(Viewer.java:151)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:45)
+	at org.eclipse.ui.internal.JFaceUtil.lambda$0(JFaceUtil.java:47)
+	at org.eclipse.jface.util.SafeRunnable.run(SafeRunnable.java:176)
+	at org.eclipse.jface.viewers.Viewer.fireSelectionChanged(Viewer.java:148)
+	at org.eclipse.jface.viewers.StructuredViewer.updateSelection(StructuredViewer.java:2181)
+	at org.eclipse.jface.viewers.StructuredViewer.handleSelect(StructuredViewer.java:1225)
+	at org.eclipse.jface.viewers.StructuredViewer$4.widgetSelected(StructuredViewer.java:1254)
+	at org.eclipse.jface.util.OpenStrategy.fireSelectionEvent(OpenStrategy.java:244)
+	at org.eclipse.jface.util.OpenStrategy.access$4(OpenStrategy.java:239)
+	at org.eclipse.jface.util.OpenStrategy$1.handleEvent(OpenStrategy.java:404)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:3944)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3547)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:566)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.jkiss.dbeaver.core.application.DBeaverApplication.start(DBeaverApplication.java:187)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:661)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:597)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1476)
+2019-05-10 17:47:15.755 - null
+org.jkiss.dbeaver.DBException: Can't open project 'General1'
+	at org.jkiss.dbeaver.model.navigator.DBNProject.readChildNodes(DBNProject.java:147)
+	at org.jkiss.dbeaver.model.navigator.DBNResource.getChildren(DBNResource.java:145)
+	at org.jkiss.dbeaver.model.navigator.DBNProject.getChildren(DBNProject.java:135)
+	at org.jkiss.dbeaver.ui.navigator.NavigatorUtils.getNodeChildrenFiltered(NavigatorUtils.java:593)
+	at org.jkiss.dbeaver.ui.navigator.database.DatabaseNavigatorContentProvider.getChildren(DatabaseNavigatorContentProvider.java:120)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1422)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:350)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:903)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:621)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:815)
+	at org.eclipse.jface.viewers.TreeViewer.createChildren(TreeViewer.java:604)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.createChildren(AbstractTreeViewer.java:766)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.handleTreeExpand(AbstractTreeViewer.java:1541)
+	at org.eclipse.jface.viewers.TreeViewer.handleTreeExpand(TreeViewer.java:889)
+	at org.jkiss.dbeaver.ui.navigator.database.DatabaseNavigatorTree$2.handleTreeExpand(DatabaseNavigatorTree.java:169)
+	at org.eclipse.jface.viewers.AbstractTreeViewer$3.treeExpanded(AbstractTreeViewer.java:1553)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:136)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:89)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4131)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1055)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1079)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1064)
+	at org.eclipse.swt.widgets.Tree.wmNotifyChild(Tree.java:7529)
+	at org.eclipse.swt.widgets.Control.wmNotify(Control.java:5809)
+	at org.eclipse.swt.widgets.Composite.wmNotify(Composite.java:1988)
+	at org.eclipse.swt.widgets.Control.WM_NOTIFY(Control.java:5367)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4824)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4770)
+	at org.eclipse.swt.internal.win32.OS.CallWindowProc(Native Method)
+	at org.eclipse.swt.widgets.Tree.callWindowProc(Tree.java:1554)
+	at org.eclipse.swt.widgets.Tree.WM_LBUTTONDOWN(Tree.java:6430)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4804)
+	at org.eclipse.swt.widgets.Tree.windowProc(Tree.java:5962)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:4770)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(Native Method)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3545)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1173)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1062)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:155)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:644)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:338)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:566)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.jkiss.dbeaver.core.application.DBeaverApplication.start(DBeaverApplication.java:187)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:203)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:137)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:107)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:400)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:255)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:661)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:597)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1476)
+Caused by: org.eclipse.core.internal.resources.ResourceException: The project description file (.project) for 'General1' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.read(FileSystemResourceManager.java:906)
+	at org.eclipse.core.internal.resources.SaveManager.restoreMetaInfo(SaveManager.java:892)
+	at org.eclipse.core.internal.resources.SaveManager.restore(SaveManager.java:763)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1064)
+	at org.eclipse.core.internal.resources.Project.open(Project.java:1110)
+	at org.jkiss.dbeaver.model.navigator.DBNProject.readChildNodes(DBNProject.java:144)
+	... 56 more
+Caused by: java.lang.Exception: The project description file (.project) for 'General1' is missing.  This file contains important information about the project.  The project will not function properly until this file is restored.
+	at org.eclipse.core.internal.resources.ResourceException.provideStackTrace(ResourceException.java:42)
+	at org.eclipse.core.internal.resources.ResourceException.<init>(ResourceException.java:38)
+	... 62 more
+2019-05-10 17:47:23.375 - Connect with 'MySQL 8+ - localhost' (mysql8-16aa37e62c0-4db65bab18806215)
+2019-05-10 17:47:23.379 - > Start org.jkiss.dbeaver.ext.mysql [2.1.93.201905052017]
+2019-05-10 17:47:23.622 - Connected (mysql8-16aa37e62c0-4db65bab18806215, MySQL Connector/J [mysql-connector-java-8.0.11 (Revision: 6d4eaa273bc181b4cf1c8ad0821a2227f116fedf)])
+2019-05-10 17:53:26.632 - DBeaver is stopping
+2019-05-10 17:53:26.632 - Stop RMI server
