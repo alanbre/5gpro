@@ -69,6 +69,19 @@ namespace _5gpro.Forms
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void DtpEmissao_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
+        private void BtInserirItem_Click(object sender, EventArgs e) => InserirItem();
+        private void BtExcluirItem_Click(object sender, EventArgs e) => ExcluirItem();
+        private void DbQuantidade_Leave(object sender, EventArgs e) => CalculaTotalItem();
+        private void DbValorUnitItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
+        private void DbValorTotItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
+        private void DbDescontoItemPorc_Leave(object sender, EventArgs e)
+        {
+            CalculaDescontoItem();
+            CalculaTotalItem();
+        }
+        private void DbDescontoItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
+        private void DgvItens_CurrentCellChanged(object sender, EventArgs e) => SelecionarItem();
+        private void BuscaItem_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
 
 
         private void Novo()
@@ -252,9 +265,9 @@ namespace _5gpro.Forms
             btInserirItem.Text = "Inserir";
             if (focus) { buscaItem.Focus(); }
         }
-        private void InserirItem(NotaFiscalTerceirosItem item)
+        private void InserirItem()
         {
-            if (item == null)
+            if (buscaItem.item == null)
             {
                 MessageBox.Show("Item não encontrado no banco de dados",
                 "Item não encontrado",
@@ -263,6 +276,10 @@ namespace _5gpro.Forms
                 buscaItem.Focus();
                 return;
             }
+
+            var item = new NotaFiscalTerceirosItem();
+            item.Item = buscaItem.item;
+
 
 
             item.Quantidade = dbQuantidade.Valor;
@@ -298,19 +315,52 @@ namespace _5gpro.Forms
 
 
         }
-        private void ExcluirItem()
+        private void BuscaItem()
         {
-            if (itemSelecionado != null)
+            if (buscaItem.item == null)
+                return;
+            var item = new NotaFiscalTerceirosItem();
+            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem.item.ItemID).FirstOrDefault();
+            if (dr == null)
             {
-                itens.RemoveAll(i => i.Item.ItemID == itemSelecionado.Item.ItemID);
-                dgvItens.Rows.Clear();
-                dgvItens.Refresh();
-                LimpaCamposItem(false);
-                PreencheGridItens(itens);
-                CalculaTotalDocumento();
-                itemSelecionado = null;
+                item.Item = buscaItem.item;
+                btInserirItem.Text = "Inserir";
                 btExcluirItem.Enabled = false;
             }
+            else
+            {
+                item = itens.Single(i => i.ItemID == buscaItem.item.ItemID);
+                btInserirItem.Text = "Alterar";
+                btExcluirItem.Enabled = true;
+            }
+            PreencheCamposItem(item);
+        }
+        private void ExcluirItem()
+        {
+
+            if (itemSelecionado == null)
+                return;
+
+            itens.RemoveAll(i => i.Item.ItemID == itemSelecionado.Item.ItemID);
+            dgvItens.Rows.Clear();
+            dgvItens.Refresh();
+            LimpaCamposItem(false);
+            PreencheGridItens(itens);
+            CalculaTotalDocumento();
+            itemSelecionado = null;
+            btExcluirItem.Enabled = false;
+
+        }
+        private void SelecionarItem()
+        {
+            if (dgvItens.SelectedRows.Count <= 0)
+                return;
+
+            int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
+            var selectedRow = dgvItens.Rows[selectedRowIndex];
+            itemSelecionado = itens.Find(i => i.Item.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+            PreencheCamposItem(itemSelecionado);
+            btExcluirItem.Enabled = true;
         }
         private void PreencheCampos(NotaFiscalTerceiros notafiscal)
         {
@@ -337,7 +387,7 @@ namespace _5gpro.Forms
             }
             dgvItens.Refresh();
         }
-        public void PreencheCamposItem(NotaFiscalTerceirosItem item)
+        private void PreencheCamposItem(NotaFiscalTerceirosItem item)
         {
             if (item == null)
             {
@@ -365,6 +415,14 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+        private void CalculaTotalItem()
+        {
+            dbValorTotItem.Valor = dbQuantidade.Valor * dbValorUnitItem.Valor;
+        }
+        private void CalculaDescontoItem()
+        {
+            dbDescontoItem.Valor = dbValorTotItem.Valor * dbDescontoItemPorc.Valor / 100;
+        }
         private void CalculaTotalDocumento()
         {
             if (itens.Count > 0)
@@ -374,10 +432,8 @@ namespace _5gpro.Forms
                 dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
             }
         }
-        private void BtInserirItem_Click(object sender, EventArgs e)
-        {
 
-        }
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC

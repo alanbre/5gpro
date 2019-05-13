@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _5gpro.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,10 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaNotaFiscalProria : Form
+    public partial class fmBuscaNotaFiscalPropria : Form
     {
-        public fmBuscaNotaFiscalProria()
+        public NotaFiscalPropria notaFiscalPropriaSelecionada = null;
+        public fmBuscaNotaFiscalPropria()
         {
             InitializeComponent();
         }

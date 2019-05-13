@@ -321,11 +321,11 @@
     <Compile Include="Forms\fmBuscaItem.Designer.cs">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscalProria.cs">
+    <Compile Include="Forms\fmBuscaNotaFiscalPropria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscalProria.Designer.cs">
-      <DependentUpon>fmBuscaNotaFiscalProria.cs</DependentUpon>
+    <Compile Include="Forms\fmBuscaNotaFiscalPropria.Designer.cs">
+      <DependentUpon>fmBuscaNotaFiscalPropria.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaNotaFiscalTerceiros.cs">
       <SubType>Form</SubType>
@@ -615,8 +615,8 @@
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaNotaFiscalProria.resx">
-      <DependentUpon>fmBuscaNotaFiscalProria.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmBuscaNotaFiscalPropria.resx">
+      <DependentUpon>fmBuscaNotaFiscalPropria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaOperacao.resx">
       <DependentUpon>fmBuscaOperacao.cs</DependentUpon>

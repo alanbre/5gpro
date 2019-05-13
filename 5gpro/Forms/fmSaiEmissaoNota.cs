@@ -14,7 +14,7 @@ namespace _5gpro.Forms
         private readonly NotaFiscalPropriaDAO notaFiscalDAO = new NotaFiscalPropriaDAO();
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
-        private NotaFiscalPropria notaFiscal = new NotaFiscalPropria();
+        private NotaFiscalPropria notaFiscalPropria = new NotaFiscalPropria();
         private NotaFiscalPropriaItem itemSelecionado;
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
 
@@ -39,17 +39,17 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F1)
             {
-                NovoCadastro();
+                Novo();
             }
 
             if (e.KeyCode == Keys.F2)
             {
-                SalvaCadastro();
+                Salva();
             }
 
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(notaFiscal);
+                Recarrega(notaFiscalPropria);
             }
 
 
@@ -83,7 +83,6 @@ namespace _5gpro.Forms
             itemSelecionado = null;
             btInserirItem.Text = "Inserir";
         }
-
         private void BtInserirItem_Click(object sender, EventArgs e)
         {
             if (buscaItem.item != null)
@@ -101,53 +100,26 @@ namespace _5gpro.Forms
                 buscaItem.Focus();
             }
         }
-
-        private void BtExcluirItem_Click(object sender, EventArgs e)
-        {
-            ExcluirItem();
-        }
+        private void BtExcluirItem_Click(object sender, EventArgs e) => ExcluirItem();
 
 
 
-        //MENU
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
-
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-            if (!editando)
-            {
-                //AbreTelaBuscaOrcamento();
-            }
-        }
-
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
-
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-            RecarregaDados(notaFiscal);
-        }
-
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega(notaFiscalPropria);
         private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
-
         private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
             ProximoCadastro();
         }
-
         private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
         {
 
         }
-
         private void DgvItens_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvItens.SelectedRows.Count > 0)
@@ -160,46 +132,34 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = true;
             }
         }
-
-
-
         private void TbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbValorUnitItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbValorTotItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbDescontoItemPorc_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbDescontoItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbDescontoDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbValorTotalDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
-
-
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
             if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
@@ -210,8 +170,8 @@ namespace _5gpro.Forms
                     NotaFiscalPropria newnotafiscal = notaFiscalDAO.BuscaByID(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
-                        notaFiscal = newnotafiscal;
-                        PreencheCampos(notaFiscal);
+                        notaFiscalPropria = newnotafiscal;
+                        PreencheCampos(notaFiscalPropria);
                         Editando(false);
                     }
                     else
@@ -239,7 +199,7 @@ namespace _5gpro.Forms
                         NotaFiscalPropria newnotafiscal = notaFiscalDAO.BuscaByID(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
-                            notaFiscal = newnotafiscal;
+                            notaFiscalPropria = newnotafiscal;
                             PreencheCampos(newnotafiscal);
                             Editando(false);
                         }
@@ -258,50 +218,42 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void TbQuantidade_Leave(object sender, EventArgs e)
         {
             tbQuantidade.Text = tbQuantidade.Text.Length > 0 ? Convert.ToDecimal(tbQuantidade.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbValorUnitItem_Leave(object sender, EventArgs e)
         {
             tbValorUnitItem.Text = tbValorUnitItem.Text.Length > 0 ? Convert.ToDecimal(tbValorUnitItem.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbValorTotItem_Leave(object sender, EventArgs e)
         {
             tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ? Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbDescontoItemPorc_Leave(object sender, EventArgs e)
         {
             tbDescontoItemPorc.Text = tbDescontoItemPorc.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItemPorc.Text).ToString("##0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbDescontoItem_Leave(object sender, EventArgs e)
         {
             tbDescontoItem.Text = tbDescontoItem.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbDescontoDocumento_Leave(object sender, EventArgs e)
         {
             tbDescontoDocumento.Text = tbDescontoDocumento.Text.Length > 0 ? Convert.ToDecimal(tbDescontoDocumento.Text).ToString("############0.00") : "0,00";
             CalculaTotalDocumento();
         }
-
         private void TbValorTotalDocumento_Leave(object sender, EventArgs e)
         {
             tbValorTotalDocumento.Text = tbValorTotalDocumento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalDocumento.Text).ToString("############0.00") : "0,00";
         }
-
         private void BuscaItem_Codigo_Leave(object sender, EventArgs e)
         {
             if (buscaItem.item != null)
@@ -409,7 +361,7 @@ namespace _5gpro.Forms
 
 
 
-        private void NovoCadastro()
+        private void Novo()
         {
             if (editando)
             {
@@ -421,7 +373,7 @@ namespace _5gpro.Forms
                     ignoracheckevent = true;
                     LimpaCampos(false);
                     tbCodigo.Text = notaFiscalDAO.BuscaProxCodigoDisponivel().ToString();
-                    notaFiscal = null;
+                    notaFiscalPropria = null;
                     buscaPessoa.Focus();
                     ignoracheckevent = false;
                     Editando(true);
@@ -432,19 +384,31 @@ namespace _5gpro.Forms
                 ignoracheckevent = true;
                 LimpaCampos(false);
                 tbCodigo.Text = notaFiscalDAO.BuscaProxCodigoDisponivel().ToString();
-                notaFiscal = null;
+                notaFiscalPropria = null;
                 Editando(false);
                 buscaPessoa.Focus();
                 ignoracheckevent = false;
                 Editando(true);
             }
         }
+        private void Busca()
+        {
+            if (editando)
+                return;
+            var buscaNotaFiscalPropria = new fmBuscaNotaFiscalPropria();
+            buscaNotaFiscalPropria.ShowDialog();
+            if (buscaNotaFiscalPropria.notaFiscalPropriaSelecionada != null)
+            {
+                notaFiscalPropria = buscaNotaFiscalPropria.notaFiscalPropriaSelecionada;
+                PreencheCampos(notaFiscalPropria);
+            }
+        }
 
-        private void SalvaCadastro()
+        private void Salva()
         {
             if (editando)
             {
-                notaFiscal = new NotaFiscalPropria
+                notaFiscalPropria = new NotaFiscalPropria
                 {
                     NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
                     Pessoa = buscaPessoa.pessoa,
@@ -459,7 +423,7 @@ namespace _5gpro.Forms
                     NotaFiscalPropriaItem = itens
                 };
 
-                int resultado = notaFiscalDAO.SalvarOuAtualizar(notaFiscal);
+                int resultado = notaFiscalDAO.SalvarOuAtualizar(notaFiscalPropria);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -484,7 +448,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void RecarregaDados(NotaFiscalPropria notafiscal)
+        private void Recarrega(NotaFiscalPropria notafiscal)
         {
             if (editando)
             {
@@ -534,9 +498,9 @@ namespace _5gpro.Forms
                 NotaFiscalPropria newnotafiscal = notaFiscalDAO.Proximo(int.Parse(tbCodigo.Text));
                 if (newnotafiscal != null)
                 {
-                    notaFiscal = newnotafiscal;
-                    itens = notaFiscal.NotaFiscalPropriaItem.ToList();
-                    PreencheCampos(notaFiscal);
+                    notaFiscalPropria = newnotafiscal;
+                    itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                    PreencheCampos(notaFiscalPropria);
                 }
             }
             else if (editando && tbCodigo.Text.Length > 0)
@@ -549,9 +513,9 @@ namespace _5gpro.Forms
                     NotaFiscalPropria newnotafiscal = notaFiscalDAO.Proximo(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
-                        notaFiscal = newnotafiscal;
-                        itens = notaFiscal.NotaFiscalPropriaItem.ToList();
-                        PreencheCampos(notaFiscal);
+                        notaFiscalPropria = newnotafiscal;
+                        itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                        PreencheCampos(notaFiscalPropria);
                         Editando(false);
                     }
                     else
@@ -559,9 +523,9 @@ namespace _5gpro.Forms
                         newnotafiscal = notaFiscalDAO.Anterior(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
-                            notaFiscal = newnotafiscal;
-                            itens = notaFiscal.NotaFiscalPropriaItem.ToList();
-                            PreencheCampos(notaFiscal);
+                            notaFiscalPropria = newnotafiscal;
+                            itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                            PreencheCampos(notaFiscalPropria);
                             Editando(false);
                         }
                     }
@@ -578,9 +542,9 @@ namespace _5gpro.Forms
                 NotaFiscalPropria newnotafiscal = notaFiscalDAO.Anterior(int.Parse(tbCodigo.Text));
                 if (newnotafiscal != null)
                 {
-                    notaFiscal = newnotafiscal;
-                    itens = notaFiscal.NotaFiscalPropriaItem.ToList();
-                    PreencheCampos(notaFiscal);
+                    notaFiscalPropria = newnotafiscal;
+                    itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                    PreencheCampos(notaFiscalPropria);
                 }
             }
             else if (editando && tbCodigo.Text.Length > 0)
@@ -593,9 +557,9 @@ namespace _5gpro.Forms
                     NotaFiscalPropria newnotafiscal = notaFiscalDAO.Anterior(int.Parse(tbCodigo.Text));
                     if (newnotafiscal != null)
                     {
-                        notaFiscal = newnotafiscal;
-                        itens = notaFiscal.NotaFiscalPropriaItem.ToList();
-                        PreencheCampos(notaFiscal);
+                        notaFiscalPropria = newnotafiscal;
+                        itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                        PreencheCampos(notaFiscalPropria);
                         Editando(false);
                     }
                     else
@@ -603,9 +567,9 @@ namespace _5gpro.Forms
                         newnotafiscal = notaFiscalDAO.Proximo(int.Parse(tbCodigo.Text));
                         if (newnotafiscal != null)
                         {
-                            notaFiscal = newnotafiscal;
-                            itens = notaFiscal.NotaFiscalPropriaItem.ToList();
-                            PreencheCampos(notaFiscal);
+                            notaFiscalPropria = newnotafiscal;
+                            itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                            PreencheCampos(notaFiscalPropria);
                             Editando(false);
                         }
                     }

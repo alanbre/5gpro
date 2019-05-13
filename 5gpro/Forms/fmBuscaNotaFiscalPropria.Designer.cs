@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmBuscaNotaFiscalProria
+    partial class fmBuscaNotaFiscalPropria
     {
         /// <summary>
         /// Required designer variable.
