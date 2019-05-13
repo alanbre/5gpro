@@ -492,15 +492,17 @@ namespace _5gpro.Daos
             Cidade cidade = null;
 
             List<Pessoa> pessoas = new List<Pessoa>();
-            string conCodPessoa = nome.Length > 0 ? "AND nome LIKE @nome" : "";
+            string conCodPessoa = nome.Length > 0 ? "AND p.nome LIKE @nome" : "";
             string conCpfCnpj = cpfCnpj.Length > 0 ? "AND (cpf LIKE @cpfcnpj OR cnpj LIKE @cpfcnpj)" : "";
             string conCidade = idcidade > 0 ? "AND idcidade = @idcidade" : "";
 
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *, c.nome AS nomecidade, e.nome AS nomeestado, s.nome AS nomesubgrupopessoa, 
-                                             g.nome AS nomegrupopessoa, p.nome AS nomepessoa
+                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
+                                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
+                                             telefone, email, p.cpf, p.cnpj
                                              FROM pessoa p
                                              INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                                              INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
@@ -550,7 +552,7 @@ namespace _5gpro.Daos
                     pessoa = new Pessoa
                     {
                         PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
                         Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
                         TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
                         Rua = reader.GetString(reader.GetOrdinal("rua")),
