@@ -244,18 +244,6 @@ CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8mb4 COLLAT
 USE `5gprodatabase` ;
 
 -- -----------------------------------------------------
--- Table `5gprodatabase`.`atuacao`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`atuacao` (
-  `idatuacao` INT(11) NOT NULL,
-  `descricao` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idatuacao`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
 -- Table `5gprodatabase`.`pais`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pais` (
@@ -298,89 +286,6 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`cidade` (
   CONSTRAINT `fk_cidade_estado1`
     FOREIGN KEY (`idestado`)
     REFERENCES `5gprodatabase`.`estado` (`idestado`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`grupopessoa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupopessoa` (
-  `idgrupopessoa` INT NOT NULL,
-  `nome` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`idgrupopessoa`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`subgrupopessoa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
-  `idsubgrupopessoa` INT NOT NULL,
-  `nome` VARCHAR(150) NOT NULL,
-  `idgrupopessoa` INT NOT NULL,
-  PRIMARY KEY (`idsubgrupopessoa`),
-  INDEX `fk_subgrupopessoa_grupopessoa1_idx` (`idgrupopessoa` ASC) VISIBLE,
-  CONSTRAINT `fk_subgrupopessoa_grupopessoa1`
-    FOREIGN KEY (`idgrupopessoa`)
-    REFERENCES `5gprodatabase`.`grupopessoa` (`idgrupopessoa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`pessoa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
-  `idpessoa` INT(11) NOT NULL,
-  `nome` VARCHAR(255) NOT NULL,
-  `fantasia` VARCHAR(255) NULL DEFAULT NULL,
-  `rua` VARCHAR(150) NULL DEFAULT NULL,
-  `numero` VARCHAR(10) NULL DEFAULT NULL,
-  `bairro` VARCHAR(45) NULL DEFAULT NULL,
-  `complemento` VARCHAR(45) NULL DEFAULT NULL,
-  `cpf` VARCHAR(11) NULL DEFAULT NULL,
-  `cnpj` VARCHAR(14) NULL DEFAULT NULL,
-  `endereco` VARCHAR(45) NULL DEFAULT NULL,
-  `telefone` VARCHAR(45) NULL DEFAULT NULL,
-  `email` VARCHAR(100) NULL DEFAULT NULL,
-  `idcidade` INT(11) NOT NULL,
-  `tipo_pessoa` CHAR(1) NULL DEFAULT NULL,
-  `idsubgrupopessoa` INT NOT NULL,
-  PRIMARY KEY (`idpessoa`),
-  INDEX `fk_pessoa_cidade1_idx` (`idcidade` ASC) VISIBLE,
-  INDEX `fk_pessoa_subgrupopessoa1_idx` (`idsubgrupopessoa` ASC) VISIBLE,
-  CONSTRAINT `fk_pessoa_cidade1`
-    FOREIGN KEY (`idcidade`)
-    REFERENCES `5gprodatabase`.`cidade` (`idcidade`),
-  CONSTRAINT `fk_pessoa_subgrupopessoa1`
-    FOREIGN KEY (`idsubgrupopessoa`)
-    REFERENCES `5gprodatabase`.`subgrupopessoa` (`idsubgrupopessoa`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
-
--- -----------------------------------------------------
--- Table `5gprodatabase`.`atuacao_has_pessoa`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`atuacao_has_pessoa` (
-  `atuacao_idatuacao` INT(11) NOT NULL,
-  `pessoa_idpessoa` INT(11) NOT NULL,
-  `ativo` TINYINT(1) NULL DEFAULT NULL,
-  PRIMARY KEY (`atuacao_idatuacao`, `pessoa_idpessoa`),
-  INDEX `fk_atuacao_has_pessoa_pessoa1_idx` (`pessoa_idpessoa` ASC) VISIBLE,
-  INDEX `fk_atuacao_has_pessoa_atuacao1_idx` (`atuacao_idatuacao` ASC) VISIBLE,
-  CONSTRAINT `fk_atuacao_has_pessoa_atuacao1`
-    FOREIGN KEY (`atuacao_idatuacao`)
-    REFERENCES `5gprodatabase`.`atuacao` (`idatuacao`),
-  CONSTRAINT `fk_atuacao_has_pessoa_pessoa1`
-    FOREIGN KEY (`pessoa_idpessoa`)
-    REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
@@ -476,6 +381,70 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
   CONSTRAINT `fk_item_subgrupoitem1`
     FOREIGN KEY (`idsubgrupoitem`)
     REFERENCES `5gprodatabase`.`subgrupoitem` (`idsubgrupoitem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`grupopessoa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupopessoa` (
+  `idgrupopessoa` INT NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  PRIMARY KEY (`idgrupopessoa`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`subgrupopessoa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
+  `idsubgrupopessoa` INT NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
+  `idgrupopessoa` INT NOT NULL,
+  PRIMARY KEY (`idsubgrupopessoa`),
+  INDEX `fk_subgrupopessoa_grupopessoa1_idx` (`idgrupopessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_subgrupopessoa_grupopessoa1`
+    FOREIGN KEY (`idgrupopessoa`)
+    REFERENCES `5gprodatabase`.`grupopessoa` (`idgrupopessoa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`pessoa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
+  `idpessoa` INT(11) NOT NULL,
+  `nome` VARCHAR(255) NOT NULL,
+  `fantasia` VARCHAR(255) NULL DEFAULT NULL,
+  `rua` VARCHAR(150) NULL DEFAULT NULL,
+  `numero` VARCHAR(10) NULL DEFAULT NULL,
+  `bairro` VARCHAR(45) NULL DEFAULT NULL,
+  `complemento` VARCHAR(45) NULL DEFAULT NULL,
+  `cpf` VARCHAR(11) NULL DEFAULT NULL,
+  `cnpj` VARCHAR(14) NULL DEFAULT NULL,
+  `endereco` VARCHAR(45) NULL DEFAULT NULL,
+  `telefone` VARCHAR(45) NULL DEFAULT NULL,
+  `email` VARCHAR(100) NULL DEFAULT NULL,
+  `idcidade` INT(11) NOT NULL,
+  `tipo_pessoa` CHAR(1) NULL DEFAULT NULL,
+  `idsubgrupopessoa` INT NOT NULL,
+  `atuacao` VARCHAR(45) NOT NULL,
+  `situacao` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idpessoa`),
+  INDEX `fk_pessoa_cidade1_idx` (`idcidade` ASC) VISIBLE,
+  INDEX `fk_pessoa_subgrupopessoa1_idx` (`idsubgrupopessoa` ASC) VISIBLE,
+  CONSTRAINT `fk_pessoa_cidade1`
+    FOREIGN KEY (`idcidade`)
+    REFERENCES `5gprodatabase`.`cidade` (`idcidade`),
+  CONSTRAINT `fk_pessoa_subgrupopessoa1`
+    FOREIGN KEY (`idsubgrupopessoa`)
+    REFERENCES `5gprodatabase`.`subgrupopessoa` (`idsubgrupopessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -734,10 +703,9 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
   `acrescimo` DECIMAL(10,2) NOT NULL,
+  `desconto` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NOT NULL,
-  `acrescimo` DECIMAL(10,2) NULL,
-  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idconta_receber`),
   INDEX `fk_conta_receber_operacao1_idx` (`idoperacao` ASC) VISIBLE,
   INDEX `fk_conta_receber_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
@@ -765,12 +733,11 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
   `acrescimo` DECIMAL(10,2) NOT NULL,
+  `desconto` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `data_quitacao` DATETIME NULL,
   `idconta_receber` INT NOT NULL,
   `idformapagamento` INT NULL,
-  `acrescimo` DECIMAL(10,2) NULL,
-  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idparcela_conta_receber`),
   INDEX `fk_parcela_conta_receber_conta_receber1_idx` (`idconta_receber` ASC) VISIBLE,
   INDEX `fk_parcela_conta_receber_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
@@ -796,10 +763,10 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_pagar` (
   `valor_original` DECIMAL(10,2) NOT NULL,
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
+  `acrescimo` DECIMAL(10,2) NOT NULL,
+  `desconto` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NOT NULL,
-  `acrescimo` DECIMAL(10,2) NULL,
-  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idconta_pagar`),
   INDEX `fk_conta_pagar_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_conta_pagar_pessoa1`
@@ -820,12 +787,12 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
   `valor` DECIMAL(10,2) NULL,
   `multa` DECIMAL(10,2) NULL,
   `juros` DECIMAL(10,2) NULL,
+  `acrescimo` DECIMAL(10,2) NOT NULL,
+  `desconto` DECIMAL(10,2) NOT NULL,
   `valor_final` DECIMAL(10,2) NULL,
   `data_quitacao` DATETIME NULL,
   `idconta_pagar` INT NOT NULL,
   `idformapagamento` INT NULL,
-  `acrescimo` DECIMAL(10,2) NULL,
-  `desconto` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idparcela_conta_pagar`),
   INDEX `fk_parcela_conta_pagar_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
   INDEX `fk_parcela_conta_pagar_conta_pagar1_idx` (`idconta_pagar` ASC) VISIBLE,
@@ -843,15 +810,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `5gprodatabase`.`registromovimentacao`
+-- Table `5gprodatabase`.`registro_estoque`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`registromovimentacao` (
-  `idregistromovimentacao` INT NOT NULL AUTO_INCREMENT,
-  `tipomovimentacao` VARCHAR(45) NOT NULL,
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`registro_estoque` (
+  `idregistro_estoque` INT NOT NULL AUTO_INCREMENT,
+  `tipomovimentacao` CHAR(1) NOT NULL,
   `data` DATE NOT NULL,
   `documento` VARCHAR(60) NOT NULL,
   `iditem` INT(11) NOT NULL,
-  PRIMARY KEY (`idregistromovimentacao`),
+  PRIMARY KEY (`idregistro_estoque`),
   INDEX `fk_registromovimentacao_item1_idx` (`iditem` ASC) VISIBLE,
   CONSTRAINT `fk_registromovimentacao_item1`
     FOREIGN KEY (`iditem`)
@@ -864,6 +831,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 ";
             return create;
         }

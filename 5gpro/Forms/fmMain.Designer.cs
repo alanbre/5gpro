@@ -39,6 +39,8 @@
             this.cadastroDeGrupoDePessoasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEntrada = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEntradaNotas = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEmissaoNF = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiContasReceber = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,8 +51,6 @@
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.primeiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEntrada = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEntradaNotas = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -151,6 +151,21 @@
             this.tsmiCadastroOrcamentos.Text = "Cadastros de orçamentos";
             this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.TsmiCadastroOrcamentos_Click);
             // 
+            // tsmiEntrada
+            // 
+            this.tsmiEntrada.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiEntradaNotas});
+            this.tsmiEntrada.Name = "tsmiEntrada";
+            this.tsmiEntrada.Size = new System.Drawing.Size(59, 20);
+            this.tsmiEntrada.Text = "Entrada";
+            // 
+            // tsmiEntradaNotas
+            // 
+            this.tsmiEntradaNotas.Name = "tsmiEntradaNotas";
+            this.tsmiEntradaNotas.Size = new System.Drawing.Size(162, 22);
+            this.tsmiEntradaNotas.Text = "Entrada de notas";
+            this.tsmiEntradaNotas.Click += new System.EventHandler(this.TsmiEntradaNotas_Click);
+            // 
             // tsmiSaida
             // 
             this.tsmiSaida.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -223,21 +238,6 @@
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
-            // 
-            // tsmiEntrada
-            // 
-            this.tsmiEntrada.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEntradaNotas});
-            this.tsmiEntrada.Name = "tsmiEntrada";
-            this.tsmiEntrada.Size = new System.Drawing.Size(59, 20);
-            this.tsmiEntrada.Text = "Entrada";
-            // 
-            // tsmiEntradaNotas
-            // 
-            this.tsmiEntradaNotas.Name = "tsmiEntradaNotas";
-            this.tsmiEntradaNotas.Size = new System.Drawing.Size(180, 22);
-            this.tsmiEntradaNotas.Text = "Entrada de notas";
-            this.tsmiEntradaNotas.Click += new System.EventHandler(this.TsmiEntradaNotas_Click);
             // 
             // fmMain
             // 

@@ -607,6 +607,7 @@
             this.Name = "fmEntEntradaNota";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de entradas";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEntEntradaNota_KeyDown);
             this.gbTotais.ResumeLayout(false);

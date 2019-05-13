@@ -5604,8 +5604,6 @@ INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES
 (4, 'L', 'Litro'),
 (5, 'm²', 'Metro');
 
-INSERT INTO atuacao (`idatuacao`, `descricao`) VALUES (1, 'Cliente'), (2, 'Fornecedor');
-
 INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
 
 INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 

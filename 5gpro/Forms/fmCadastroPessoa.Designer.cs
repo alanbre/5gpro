@@ -56,6 +56,9 @@
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.gbSituacao = new System.Windows.Forms.GroupBox();
+            this.rbAtivo = new System.Windows.Forms.RadioButton();
+            this.rbInativo = new System.Windows.Forms.RadioButton();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.buscaGrupoPessoa = new _5gpro.Controls.BuscaGrupoPessoa();
@@ -64,6 +67,7 @@
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
             this.pnDados.SuspendLayout();
+            this.gbSituacao.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnDadosGerais
@@ -71,6 +75,7 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.gbSituacao);
             this.pnDadosGerais.Controls.Add(this.buscaGrupoPessoa);
             this.pnDadosGerais.Controls.Add(this.buscaSubGrupoPessoa);
             this.pnDadosGerais.Controls.Add(this.gbAtuacao);
@@ -365,6 +370,41 @@
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 4;
             // 
+            // gbSituacao
+            // 
+            this.gbSituacao.Controls.Add(this.rbInativo);
+            this.gbSituacao.Controls.Add(this.rbAtivo);
+            this.gbSituacao.Location = new System.Drawing.Point(429, 6);
+            this.gbSituacao.Name = "gbSituacao";
+            this.gbSituacao.Size = new System.Drawing.Size(118, 35);
+            this.gbSituacao.TabIndex = 10;
+            this.gbSituacao.TabStop = false;
+            this.gbSituacao.Text = "Situação";
+            // 
+            // rbAtivo
+            // 
+            this.rbAtivo.AutoSize = true;
+            this.rbAtivo.Checked = true;
+            this.rbAtivo.Location = new System.Drawing.Point(7, 15);
+            this.rbAtivo.Name = "rbAtivo";
+            this.rbAtivo.Size = new System.Drawing.Size(49, 17);
+            this.rbAtivo.TabIndex = 0;
+            this.rbAtivo.TabStop = true;
+            this.rbAtivo.Text = "Ativo";
+            this.rbAtivo.UseVisualStyleBackColor = true;
+            this.rbAtivo.CheckedChanged += new System.EventHandler(this.RbAtivo_CheckedChanged);
+            // 
+            // rbInativo
+            // 
+            this.rbInativo.AutoSize = true;
+            this.rbInativo.Location = new System.Drawing.Point(62, 15);
+            this.rbInativo.Name = "rbInativo";
+            this.rbInativo.Size = new System.Drawing.Size(57, 17);
+            this.rbInativo.TabIndex = 1;
+            this.rbInativo.Text = "Inativo";
+            this.rbInativo.UseVisualStyleBackColor = true;
+            this.rbInativo.CheckedChanged += new System.EventHandler(this.RbInativo_CheckedChanged);
+            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(11, 11);
@@ -432,6 +472,8 @@
             this.gbTipoDePessoa.PerformLayout();
             this.pnDados.ResumeLayout(false);
             this.pnDados.PerformLayout();
+            this.gbSituacao.ResumeLayout(false);
+            this.gbSituacao.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -471,5 +513,8 @@
         private Controls.BuscaCidade buscaCidade;
         private Controls.BuscaSubGrupoPessoa buscaSubGrupoPessoa;
         private Controls.BuscaGrupoPessoa buscaGrupoPessoa;
+        private System.Windows.Forms.GroupBox gbSituacao;
+        private System.Windows.Forms.RadioButton rbInativo;
+        private System.Windows.Forms.RadioButton rbAtivo;
     }
 }
