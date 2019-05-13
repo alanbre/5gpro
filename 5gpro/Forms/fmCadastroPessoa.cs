@@ -28,8 +28,6 @@ namespace _5gpro.Forms
         bool editando, locked = false;
         bool ignoraCheckEvent;
 
-
-
         public fmCadastroPessoa()
         {
             InitializeComponent();
@@ -69,26 +67,6 @@ namespace _5gpro.Forms
 
             EnterTab(this.ActiveControl, e);
         }
-
-
-
-
-        private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
-        {
-            //ALTERA A MASCARA DO CAMPO PARA CPF
-            mtbCpfCnpj.Clear();
-            mtbCpfCnpj.Mask = "###.###.###-##";
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void RbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
-        {
-            //ALTERA A MASCARA DO CAMPO PARA CNPJ
-            mtbCpfCnpj.Clear();
-            mtbCpfCnpj.Mask = "##.###.###/####-##";
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
 
 
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
@@ -193,6 +171,32 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
+        private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
+        {
+            //ALTERA A MASCARA DO CAMPO PARA CPF
+            mtbCpfCnpj.Clear();
+            mtbCpfCnpj.Mask = "###.###.###-##";
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void RbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
+        {
+            //ALTERA A MASCARA DO CAMPO PARA CNPJ
+            mtbCpfCnpj.Clear();
+            mtbCpfCnpj.Mask = "##.###.###/####-##";
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void RbAtivo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void RbInativo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
 
         //EVENTOS DE LEAVE
         private void TbCodigo_Leave(object sender, EventArgs e)
@@ -214,8 +218,6 @@ namespace _5gpro.Forms
         }
 
 
-
-
         //EVENTOS DE KEY UP
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
@@ -226,13 +228,10 @@ namespace _5gpro.Forms
             }
         }
 
-
         private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
-
-
 
         private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -321,12 +320,25 @@ namespace _5gpro.Forms
                         Email = tbEmail.Text
                     };
 
-                    List<string> atuacoes = new List<string>();
+                    string atuacaostring = "";
                     foreach (string s in cblAtuacao.CheckedItems)
                     {
-                        atuacoes.Add(s);
+                        switch (s)
+                        {
+                            case "Cliente":
+                                atuacaostring = atuacaostring + "C";
+                                break;
+                            case "Fornecedor":
+                                atuacaostring = atuacaostring + "F";
+                                break;
+                        }
                     }
-                    //pessoa.Atuacao = atuacoes;
+                    pessoa.Atuacao = atuacaostring;
+
+                    if (rbAtivo.Checked)
+                        pessoa.Situacao = "A";
+                    else
+                        pessoa.Situacao = "I";
 
                     pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
 
@@ -574,24 +586,9 @@ namespace _5gpro.Forms
             }
             rbPessoaFisica.Checked = true;
             rbPessoaJuridica.Checked = false;
+            rbAtivo.Checked = true;
+            rbInativo.Checked = false;
             tbAjuda.Clear();
-        }
-
-        private void BuscaGrupoPessoa_Leave(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-
-            if (buscaGrupoPessoa.grupoPessoa != null)
-            {
-                buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
-            }
-            else
-            {
-                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
-                buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EscolhaOGrupo();
-            }
         }
 
         private void BuscaGrupoPessoa_Leave_1(object sender, EventArgs e)
@@ -638,26 +635,35 @@ namespace _5gpro.Forms
 
             buscaCidade.PreencheCampos(pessoa.Cidade);
 
-            //foreach (string atuacao in pessoa.Atuacao)
-            //{
-            //    switch (atuacao)
-            //    {
-            //        case "Cliente":
-            //            cblAtuacao.SetItemChecked(0, true);
-            //            break;
-            //        case "Fornecedor":
-            //            cblAtuacao.SetItemChecked(1, true);
-            //            break;
-            //    }
-            //}
 
+            switch (pessoa.Atuacao)
+            {
+                case "CF":
+                    cblAtuacao.SetItemChecked(0, true);
+                    cblAtuacao.SetItemChecked(1, true);
+                    break;
+                case "C":
+                    cblAtuacao.SetItemChecked(0, true);
+                    break;
+                case "F":
+                    cblAtuacao.SetItemChecked(1, true);
+                    break;
+            }
+            switch (pessoa.Situacao)
+            {
+                case "A":
+                    rbAtivo.Checked = true;
+                    rbInativo.Checked = false;
+                    break;
+                case "I":
+                    rbAtivo.Checked = false;
+                    rbInativo.Checked = true;
+                    break;
+            }
             buscaGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa.GrupoPessoa);
             buscaSubGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa);
 
             ignoraCheckEvent = false;
         }
-
-
-
     }
 }

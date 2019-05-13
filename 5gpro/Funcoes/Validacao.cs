@@ -121,6 +121,10 @@ namespace _5gpro.Funcoes
                             //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
+                        if (ctrlgb is CheckedListBox)
+                        {
+                            ctrlgb.BackColor = System.Drawing.Color.White;
+                        }
                     }
                 }
 
@@ -142,6 +146,20 @@ namespace _5gpro.Funcoes
                         {
                             //ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlp.BackColor = System.Drawing.Color.White;
+                        }
+                        if (ctrlp is CheckedListBox)
+                        {
+                            ctrlp.BackColor = System.Drawing.Color.White;
+                        }
+                        if (ctrlp is GroupBox)
+                        {
+                            foreach (Control ct in ctrlp.Controls)
+                            {
+                                if (ct is CheckedListBox)
+                                {
+                                    ct.BackColor = System.Drawing.Color.White;
+                                }
+                            }
                         }
                     }
                 }
