@@ -2,9 +2,6 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -52,7 +49,7 @@ namespace _5gpro.Daos
         public NotaFiscalTerceiros BuscaByID(int codigo)
         {
             var notafiscal = new NotaFiscalTerceiros();
-
+            var pessoa = new Pessoa();
             try
             {
                 Connect.AbrirConexao();
@@ -73,7 +70,8 @@ namespace _5gpro.Daos
                             DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                             DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"))
                         };
-                        reader.Close();
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        notafiscal.Pessoa = pessoa;
                     }
                     else
                     {
@@ -98,7 +96,7 @@ namespace _5gpro.Daos
         public NotaFiscalTerceiros Proximo(int codAtual)
         {
             var notafiscal = new NotaFiscalTerceiros();
-
+            var pessoa = new Pessoa();
             try
             {
                 Connect.AbrirConexao();
@@ -119,6 +117,8 @@ namespace _5gpro.Daos
                             DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                             DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"))
                         };
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        notafiscal.Pessoa = pessoa;
                     }
                     else
                     {
@@ -142,6 +142,7 @@ namespace _5gpro.Daos
         public NotaFiscalTerceiros Anterior(int codAtual)
         {
             var notafiscal = new NotaFiscalTerceiros();
+            var pessoa = new Pessoa();
             try
             {
                 Connect.AbrirConexao();
@@ -162,6 +163,8 @@ namespace _5gpro.Daos
                             DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
                             DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"))
                         };
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        notafiscal.Pessoa = pessoa;
                     }
                     else
                     {

@@ -29,48 +29,35 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmEntEntradaNota));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
+            this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotalItens = new _5gpro.Controls.DecimalBox();
             this.lbDescontoDocumento = new System.Windows.Forms.Label();
             this.lbDescontoTotalItens = new System.Windows.Forms.Label();
             this.lbValorTotalDocumento = new System.Windows.Forms.Label();
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.gbItens = new System.Windows.Forms.GroupBox();
-            this.btExcluirItem = new System.Windows.Forms.Button();
-            this.lbDescItem = new System.Windows.Forms.Label();
-            this.lbDescontoPorc = new System.Windows.Forms.Label();
-            this.btNovoItem = new System.Windows.Forms.Button();
-            this.dgvItens = new System.Windows.Forms.DataGridView();
-            this.btInserirItem = new System.Windows.Forms.Button();
-            this.lbValorUnit = new System.Windows.Forms.Label();
-            this.lbQuantidade = new System.Windows.Forms.Label();
-            this.lbValorTot = new System.Windows.Forms.Label();
-            this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
-            this.dtpEntrada = new System.Windows.Forms.DateTimePicker();
-            this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
-            this.lbEntrada = new System.Windows.Forms.Label();
-            this.lbEmissao = new System.Windows.Forms.Label();
-            this.tbCodigo = new System.Windows.Forms.TextBox();
-            this.lbNumeroDocumento = new System.Windows.Forms.Label();
-            this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotalItens = new _5gpro.Controls.DecimalBox();
             this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
             this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
             this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
             this.dbValorUnitItem = new _5gpro.Controls.DecimalBox();
             this.dbQuantidade = new _5gpro.Controls.DecimalBox();
             this.buscaItem = new _5gpro.Controls.BuscaItem();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.btExcluirItem = new System.Windows.Forms.Button();
+            this.lbDescItem = new System.Windows.Forms.Label();
+            this.lbDescontoPorc = new System.Windows.Forms.Label();
+            this.btNovoItem = new System.Windows.Forms.Button();
+            this.dgvItens = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,6 +65,19 @@
             this.dgvtbcValorTotalItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescontoPorc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescontoItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btInserirItem = new System.Windows.Forms.Button();
+            this.lbValorUnit = new System.Windows.Forms.Label();
+            this.lbQuantidade = new System.Windows.Forms.Label();
+            this.lbValorTot = new System.Windows.Forms.Label();
+            this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.dtpEntrada = new System.Windows.Forms.DateTimePicker();
+            this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
+            this.lbEntrada = new System.Windows.Forms.Label();
+            this.lbEmissao = new System.Windows.Forms.Label();
+            this.tbCodigo = new System.Windows.Forms.TextBox();
+            this.lbNumeroDocumento = new System.Windows.Forms.Label();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
@@ -114,6 +114,57 @@
             this.gbTotais.TabIndex = 2;
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
+            // 
+            // dbValorTotalDocumento
+            // 
+            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 152);
+            this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
+            this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 20);
+            this.dbValorTotalDocumento.TabIndex = 7;
+            this.dbValorTotalDocumento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbDescontoDocumento
+            // 
+            this.dbDescontoDocumento.Location = new System.Drawing.Point(9, 113);
+            this.dbDescontoDocumento.Name = "dbDescontoDocumento";
+            this.dbDescontoDocumento.Size = new System.Drawing.Size(85, 20);
+            this.dbDescontoDocumento.TabIndex = 5;
+            this.dbDescontoDocumento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoDocumento.Leave += new System.EventHandler(this.DbDescontoDocumento_Leave);
+            // 
+            // dbDescontoTotalItens
+            // 
+            this.dbDescontoTotalItens.Enabled = false;
+            this.dbDescontoTotalItens.Location = new System.Drawing.Point(9, 74);
+            this.dbDescontoTotalItens.Name = "dbDescontoTotalItens";
+            this.dbDescontoTotalItens.Size = new System.Drawing.Size(85, 20);
+            this.dbDescontoTotalItens.TabIndex = 3;
+            this.dbDescontoTotalItens.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorTotalItens
+            // 
+            this.dbValorTotalItens.Enabled = false;
+            this.dbValorTotalItens.Location = new System.Drawing.Point(9, 35);
+            this.dbValorTotalItens.Name = "dbValorTotalItens";
+            this.dbValorTotalItens.Size = new System.Drawing.Size(85, 20);
+            this.dbValorTotalItens.TabIndex = 1;
+            this.dbValorTotalItens.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbDescontoDocumento
             // 
@@ -181,262 +232,6 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
-            // 
-            // btExcluirItem
-            // 
-            this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btExcluirItem.Enabled = false;
-            this.btExcluirItem.Image = ((System.Drawing.Image)(resources.GetObject("btExcluirItem.Image")));
-            this.btExcluirItem.Location = new System.Drawing.Point(963, 49);
-            this.btExcluirItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btExcluirItem.Name = "btExcluirItem";
-            this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
-            this.btExcluirItem.TabIndex = 14;
-            this.btExcluirItem.UseVisualStyleBackColor = true;
-            this.btExcluirItem.Click += new System.EventHandler(this.BtExcluirItem_Click);
-            // 
-            // lbDescItem
-            // 
-            this.lbDescItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbDescItem.AutoSize = true;
-            this.lbDescItem.Location = new System.Drawing.Point(73, 292);
-            this.lbDescItem.Name = "lbDescItem";
-            this.lbDescItem.Size = new System.Drawing.Size(58, 13);
-            this.lbDescItem.TabIndex = 10;
-            this.lbDescItem.Text = "Desc. Item";
-            // 
-            // lbDescontoPorc
-            // 
-            this.lbDescontoPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbDescontoPorc.AutoSize = true;
-            this.lbDescontoPorc.Location = new System.Drawing.Point(3, 292);
-            this.lbDescontoPorc.Name = "lbDescontoPorc";
-            this.lbDescontoPorc.Size = new System.Drawing.Size(46, 13);
-            this.lbDescontoPorc.TabIndex = 8;
-            this.lbDescontoPorc.Text = "% Desc.";
-            // 
-            // btNovoItem
-            // 
-            this.btNovoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btNovoItem.Image = ((System.Drawing.Image)(resources.GetObject("btNovoItem.Image")));
-            this.btNovoItem.Location = new System.Drawing.Point(963, 19);
-            this.btNovoItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
-            this.btNovoItem.Name = "btNovoItem";
-            this.btNovoItem.Size = new System.Drawing.Size(24, 24);
-            this.btNovoItem.TabIndex = 13;
-            this.btNovoItem.UseVisualStyleBackColor = true;
-            // 
-            // dgvItens
-            // 
-            this.dgvItens.AllowUserToAddRows = false;
-            this.dgvItens.AllowUserToDeleteRows = false;
-            this.dgvItens.AllowUserToOrderColumns = true;
-            this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
-            this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvtbcCodigo,
-            this.dgvtbcDescricao,
-            this.dgvtbcQuantidade,
-            this.dgvtbcValorUnitario,
-            this.dgvtbcValorTotalItem,
-            this.dgvtbcDescontoPorc,
-            this.dgvtbcDescontoItem});
-            this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvItens.Location = new System.Drawing.Point(6, 19);
-            this.dgvItens.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
-            this.dgvItens.MultiSelect = false;
-            this.dgvItens.Name = "dgvItens";
-            this.dgvItens.ReadOnly = true;
-            this.dgvItens.RowHeadersVisible = false;
-            this.dgvItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItens.Size = new System.Drawing.Size(955, 186);
-            this.dgvItens.TabIndex = 0;
-            this.dgvItens.TabStop = false;
-            this.dgvItens.CurrentCellChanged += new System.EventHandler(this.DgvItens_CurrentCellChanged);
-            // 
-            // btInserirItem
-            // 
-            this.btInserirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btInserirItem.Location = new System.Drawing.Point(144, 304);
-            this.btInserirItem.Name = "btInserirItem";
-            this.btInserirItem.Size = new System.Drawing.Size(59, 24);
-            this.btInserirItem.TabIndex = 12;
-            this.btInserirItem.Text = "Inserir";
-            this.btInserirItem.UseVisualStyleBackColor = true;
-            this.btInserirItem.Click += new System.EventHandler(this.BtInserirItem_Click);
-            // 
-            // lbValorUnit
-            // 
-            this.lbValorUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbValorUnit.AutoSize = true;
-            this.lbValorUnit.Location = new System.Drawing.Point(72, 255);
-            this.lbValorUnit.Name = "lbValorUnit";
-            this.lbValorUnit.Size = new System.Drawing.Size(56, 13);
-            this.lbValorUnit.TabIndex = 4;
-            this.lbValorUnit.Text = "Valor Unit.";
-            // 
-            // lbQuantidade
-            // 
-            this.lbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbQuantidade.AutoSize = true;
-            this.lbQuantidade.Location = new System.Drawing.Point(6, 255);
-            this.lbQuantidade.Name = "lbQuantidade";
-            this.lbQuantidade.Size = new System.Drawing.Size(62, 13);
-            this.lbQuantidade.TabIndex = 2;
-            this.lbQuantidade.Text = "Quantidade";
-            // 
-            // lbValorTot
-            // 
-            this.lbValorTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbValorTot.AutoSize = true;
-            this.lbValorTot.Location = new System.Drawing.Point(141, 255);
-            this.lbValorTot.Name = "lbValorTot";
-            this.lbValorTot.Size = new System.Drawing.Size(53, 13);
-            this.lbValorTot.TabIndex = 6;
-            this.lbValorTot.Text = "Valor Tot.";
-            // 
-            // gbDadosDocumento
-            // 
-            this.gbDadosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbDadosDocumento.Controls.Add(this.buscaPessoa);
-            this.gbDadosDocumento.Controls.Add(this.dtpEntrada);
-            this.gbDadosDocumento.Controls.Add(this.dtpEmissao);
-            this.gbDadosDocumento.Controls.Add(this.lbEntrada);
-            this.gbDadosDocumento.Controls.Add(this.lbEmissao);
-            this.gbDadosDocumento.Controls.Add(this.tbCodigo);
-            this.gbDadosDocumento.Controls.Add(this.lbNumeroDocumento);
-            this.gbDadosDocumento.Location = new System.Drawing.Point(67, 10);
-            this.gbDadosDocumento.Name = "gbDadosDocumento";
-            this.gbDadosDocumento.Size = new System.Drawing.Size(1162, 181);
-            this.gbDadosDocumento.TabIndex = 0;
-            this.gbDadosDocumento.TabStop = false;
-            this.gbDadosDocumento.Text = "Dados do documento";
-            // 
-            // dtpEntrada
-            // 
-            this.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEntrada.Location = new System.Drawing.Point(11, 152);
-            this.dtpEntrada.Name = "dtpEntrada";
-            this.dtpEntrada.Size = new System.Drawing.Size(99, 20);
-            this.dtpEntrada.TabIndex = 6;
-            this.dtpEntrada.ValueChanged += new System.EventHandler(this.DtpEntrada_ValueChanged);
-            // 
-            // dtpEmissao
-            // 
-            this.dtpEmissao.Checked = false;
-            this.dtpEmissao.CustomFormat = "";
-            this.dtpEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEmissao.Location = new System.Drawing.Point(10, 113);
-            this.dtpEmissao.Name = "dtpEmissao";
-            this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
-            this.dtpEmissao.TabIndex = 4;
-            this.dtpEmissao.ValueChanged += new System.EventHandler(this.DtpEmissao_ValueChanged);
-            // 
-            // lbEntrada
-            // 
-            this.lbEntrada.AutoSize = true;
-            this.lbEntrada.Location = new System.Drawing.Point(7, 136);
-            this.lbEntrada.Name = "lbEntrada";
-            this.lbEntrada.Size = new System.Drawing.Size(84, 13);
-            this.lbEntrada.TabIndex = 5;
-            this.lbEntrada.Text = "Data de entrada";
-            // 
-            // lbEmissao
-            // 
-            this.lbEmissao.AutoSize = true;
-            this.lbEmissao.Location = new System.Drawing.Point(7, 94);
-            this.lbEmissao.Name = "lbEmissao";
-            this.lbEmissao.Size = new System.Drawing.Size(86, 13);
-            this.lbEmissao.TabIndex = 3;
-            this.lbEmissao.Text = "Data da emissão";
-            // 
-            // tbCodigo
-            // 
-            this.tbCodigo.Location = new System.Drawing.Point(9, 32);
-            this.tbCodigo.Name = "tbCodigo";
-            this.tbCodigo.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigo.TabIndex = 1;
-            // 
-            // lbNumeroDocumento
-            // 
-            this.lbNumeroDocumento.AutoSize = true;
-            this.lbNumeroDocumento.Location = new System.Drawing.Point(6, 16);
-            this.lbNumeroDocumento.Name = "lbNumeroDocumento";
-            this.lbNumeroDocumento.Size = new System.Drawing.Size(77, 13);
-            this.lbNumeroDocumento.TabIndex = 0;
-            this.lbNumeroDocumento.Text = "N° Documento";
-            // 
-            // menuVertical
-            // 
-            this.menuVertical.Location = new System.Drawing.Point(9, 15);
-            this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
-            this.menuVertical.Name = "menuVertical";
-            this.menuVertical.Size = new System.Drawing.Size(53, 364);
-            this.menuVertical.TabIndex = 3;
-            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
-            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
-            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
-            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
-            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
-            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
-            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
-            // dbValorTotalDocumento
-            // 
-            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 152);
-            this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
-            this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 20);
-            this.dbValorTotalDocumento.TabIndex = 7;
-            this.dbValorTotalDocumento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoDocumento
-            // 
-            this.dbDescontoDocumento.Location = new System.Drawing.Point(9, 113);
-            this.dbDescontoDocumento.Name = "dbDescontoDocumento";
-            this.dbDescontoDocumento.Size = new System.Drawing.Size(85, 20);
-            this.dbDescontoDocumento.TabIndex = 5;
-            this.dbDescontoDocumento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoTotalItens
-            // 
-            this.dbDescontoTotalItens.Enabled = false;
-            this.dbDescontoTotalItens.Location = new System.Drawing.Point(9, 74);
-            this.dbDescontoTotalItens.Name = "dbDescontoTotalItens";
-            this.dbDescontoTotalItens.Size = new System.Drawing.Size(85, 20);
-            this.dbDescontoTotalItens.TabIndex = 3;
-            this.dbDescontoTotalItens.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorTotalItens
-            // 
-            this.dbValorTotalItens.Enabled = false;
-            this.dbValorTotalItens.Location = new System.Drawing.Point(9, 35);
-            this.dbValorTotalItens.Name = "dbValorTotalItens";
-            this.dbValorTotalItens.Size = new System.Drawing.Size(85, 20);
-            this.dbValorTotalItens.TabIndex = 1;
-            this.dbValorTotalItens.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
             // 
             // dbDescontoItem
             // 
@@ -512,21 +307,89 @@
             this.buscaItem.TabIndex = 1;
             this.buscaItem.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.BuscaItem_Codigo_Leave);
             // 
-            // buscaPessoa
+            // btExcluirItem
             // 
-            this.buscaPessoa.LabelText = "Fornecedor";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 55);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 2;
-            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
+            this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btExcluirItem.Enabled = false;
+            this.btExcluirItem.Image = ((System.Drawing.Image)(resources.GetObject("btExcluirItem.Image")));
+            this.btExcluirItem.Location = new System.Drawing.Point(963, 49);
+            this.btExcluirItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btExcluirItem.Name = "btExcluirItem";
+            this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
+            this.btExcluirItem.TabIndex = 14;
+            this.btExcluirItem.UseVisualStyleBackColor = true;
+            this.btExcluirItem.Click += new System.EventHandler(this.BtExcluirItem_Click);
+            // 
+            // lbDescItem
+            // 
+            this.lbDescItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbDescItem.AutoSize = true;
+            this.lbDescItem.Location = new System.Drawing.Point(73, 292);
+            this.lbDescItem.Name = "lbDescItem";
+            this.lbDescItem.Size = new System.Drawing.Size(58, 13);
+            this.lbDescItem.TabIndex = 10;
+            this.lbDescItem.Text = "Desc. Item";
+            // 
+            // lbDescontoPorc
+            // 
+            this.lbDescontoPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbDescontoPorc.AutoSize = true;
+            this.lbDescontoPorc.Location = new System.Drawing.Point(3, 292);
+            this.lbDescontoPorc.Name = "lbDescontoPorc";
+            this.lbDescontoPorc.Size = new System.Drawing.Size(46, 13);
+            this.lbDescontoPorc.TabIndex = 8;
+            this.lbDescontoPorc.Text = "% Desc.";
+            // 
+            // btNovoItem
+            // 
+            this.btNovoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNovoItem.Image = ((System.Drawing.Image)(resources.GetObject("btNovoItem.Image")));
+            this.btNovoItem.Location = new System.Drawing.Point(963, 19);
+            this.btNovoItem.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
+            this.btNovoItem.Name = "btNovoItem";
+            this.btNovoItem.Size = new System.Drawing.Size(24, 24);
+            this.btNovoItem.TabIndex = 13;
+            this.btNovoItem.UseVisualStyleBackColor = true;
+            // 
+            // dgvItens
+            // 
+            this.dgvItens.AllowUserToAddRows = false;
+            this.dgvItens.AllowUserToDeleteRows = false;
+            this.dgvItens.AllowUserToOrderColumns = true;
+            this.dgvItens.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcCodigo,
+            this.dgvtbcDescricao,
+            this.dgvtbcQuantidade,
+            this.dgvtbcValorUnitario,
+            this.dgvtbcValorTotalItem,
+            this.dgvtbcDescontoPorc,
+            this.dgvtbcDescontoItem});
+            this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvItens.Location = new System.Drawing.Point(6, 19);
+            this.dgvItens.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
+            this.dgvItens.MultiSelect = false;
+            this.dgvItens.Name = "dgvItens";
+            this.dgvItens.ReadOnly = true;
+            this.dgvItens.RowHeadersVisible = false;
+            this.dgvItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvItens.Size = new System.Drawing.Size(955, 186);
+            this.dgvItens.TabIndex = 0;
+            this.dgvItens.TabStop = false;
+            this.dgvItens.CurrentCellChanged += new System.EventHandler(this.DgvItens_CurrentCellChanged);
             // 
             // dgvtbcCodigo
             // 
-            dataGridViewCellStyle9.Format = "N0";
-            dataGridViewCellStyle9.NullValue = null;
-            this.dgvtbcCodigo.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcCodigo.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvtbcCodigo.Frozen = true;
             this.dgvtbcCodigo.HeaderText = "Código";
             this.dgvtbcCodigo.MinimumWidth = 60;
@@ -545,9 +408,9 @@
             // 
             // dgvtbcQuantidade
             // 
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvtbcQuantidade.Frozen = true;
             this.dgvtbcQuantidade.HeaderText = "Quantidade";
             this.dgvtbcQuantidade.MinimumWidth = 70;
@@ -557,9 +420,9 @@
             // 
             // dgvtbcValorUnitario
             // 
-            dataGridViewCellStyle11.Format = "C2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
             this.dgvtbcValorUnitario.MinimumWidth = 100;
             this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
@@ -567,9 +430,9 @@
             // 
             // dgvtbcValorTotalItem
             // 
-            dataGridViewCellStyle12.Format = "C2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvtbcValorTotalItem.HeaderText = "Valor total";
             this.dgvtbcValorTotalItem.MinimumWidth = 80;
             this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
@@ -578,8 +441,8 @@
             // 
             // dgvtbcDescontoPorc
             // 
-            dataGridViewCellStyle13.NullValue = null;
-            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle6.NullValue = null;
+            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDescontoPorc.HeaderText = "% Desc";
             this.dgvtbcDescontoPorc.MinimumWidth = 50;
             this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
@@ -588,14 +451,152 @@
             // 
             // dgvtbcDescontoItem
             // 
-            dataGridViewCellStyle14.Format = "C2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle7.Format = "C2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvtbcDescontoItem.HeaderText = "Desconto";
             this.dgvtbcDescontoItem.MinimumWidth = 70;
             this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
             this.dgvtbcDescontoItem.ReadOnly = true;
             this.dgvtbcDescontoItem.Width = 70;
+            // 
+            // btInserirItem
+            // 
+            this.btInserirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btInserirItem.Location = new System.Drawing.Point(144, 304);
+            this.btInserirItem.Name = "btInserirItem";
+            this.btInserirItem.Size = new System.Drawing.Size(59, 24);
+            this.btInserirItem.TabIndex = 12;
+            this.btInserirItem.Text = "Inserir";
+            this.btInserirItem.UseVisualStyleBackColor = true;
+            this.btInserirItem.Click += new System.EventHandler(this.BtInserirItem_Click);
+            // 
+            // lbValorUnit
+            // 
+            this.lbValorUnit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbValorUnit.AutoSize = true;
+            this.lbValorUnit.Location = new System.Drawing.Point(72, 255);
+            this.lbValorUnit.Name = "lbValorUnit";
+            this.lbValorUnit.Size = new System.Drawing.Size(56, 13);
+            this.lbValorUnit.TabIndex = 4;
+            this.lbValorUnit.Text = "Valor Unit.";
+            // 
+            // lbQuantidade
+            // 
+            this.lbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbQuantidade.AutoSize = true;
+            this.lbQuantidade.Location = new System.Drawing.Point(6, 255);
+            this.lbQuantidade.Name = "lbQuantidade";
+            this.lbQuantidade.Size = new System.Drawing.Size(62, 13);
+            this.lbQuantidade.TabIndex = 2;
+            this.lbQuantidade.Text = "Quantidade";
+            // 
+            // lbValorTot
+            // 
+            this.lbValorTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbValorTot.AutoSize = true;
+            this.lbValorTot.Location = new System.Drawing.Point(141, 255);
+            this.lbValorTot.Name = "lbValorTot";
+            this.lbValorTot.Size = new System.Drawing.Size(53, 13);
+            this.lbValorTot.TabIndex = 6;
+            this.lbValorTot.Text = "Valor Tot.";
+            // 
+            // gbDadosDocumento
+            // 
+            this.gbDadosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDadosDocumento.Controls.Add(this.buscaPessoa);
+            this.gbDadosDocumento.Controls.Add(this.dtpEntrada);
+            this.gbDadosDocumento.Controls.Add(this.dtpEmissao);
+            this.gbDadosDocumento.Controls.Add(this.lbEntrada);
+            this.gbDadosDocumento.Controls.Add(this.lbEmissao);
+            this.gbDadosDocumento.Controls.Add(this.tbCodigo);
+            this.gbDadosDocumento.Controls.Add(this.lbNumeroDocumento);
+            this.gbDadosDocumento.Location = new System.Drawing.Point(67, 10);
+            this.gbDadosDocumento.Name = "gbDadosDocumento";
+            this.gbDadosDocumento.Size = new System.Drawing.Size(1162, 181);
+            this.gbDadosDocumento.TabIndex = 0;
+            this.gbDadosDocumento.TabStop = false;
+            this.gbDadosDocumento.Text = "Dados do documento";
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Fornecedor";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 55);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 2;
+            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
+            // 
+            // dtpEntrada
+            // 
+            this.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEntrada.Location = new System.Drawing.Point(11, 152);
+            this.dtpEntrada.Name = "dtpEntrada";
+            this.dtpEntrada.Size = new System.Drawing.Size(99, 20);
+            this.dtpEntrada.TabIndex = 6;
+            this.dtpEntrada.ValueChanged += new System.EventHandler(this.DtpEntrada_ValueChanged);
+            // 
+            // dtpEmissao
+            // 
+            this.dtpEmissao.Checked = false;
+            this.dtpEmissao.CustomFormat = "";
+            this.dtpEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEmissao.Location = new System.Drawing.Point(10, 113);
+            this.dtpEmissao.Name = "dtpEmissao";
+            this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
+            this.dtpEmissao.TabIndex = 4;
+            this.dtpEmissao.ValueChanged += new System.EventHandler(this.DtpEmissao_ValueChanged);
+            // 
+            // lbEntrada
+            // 
+            this.lbEntrada.AutoSize = true;
+            this.lbEntrada.Location = new System.Drawing.Point(7, 136);
+            this.lbEntrada.Name = "lbEntrada";
+            this.lbEntrada.Size = new System.Drawing.Size(84, 13);
+            this.lbEntrada.TabIndex = 5;
+            this.lbEntrada.Text = "Data de entrada";
+            // 
+            // lbEmissao
+            // 
+            this.lbEmissao.AutoSize = true;
+            this.lbEmissao.Location = new System.Drawing.Point(7, 94);
+            this.lbEmissao.Name = "lbEmissao";
+            this.lbEmissao.Size = new System.Drawing.Size(86, 13);
+            this.lbEmissao.TabIndex = 3;
+            this.lbEmissao.Text = "Data da emissão";
+            // 
+            // tbCodigo
+            // 
+            this.tbCodigo.Location = new System.Drawing.Point(9, 32);
+            this.tbCodigo.Name = "tbCodigo";
+            this.tbCodigo.Size = new System.Drawing.Size(65, 20);
+            this.tbCodigo.TabIndex = 1;
+            // 
+            // lbNumeroDocumento
+            // 
+            this.lbNumeroDocumento.AutoSize = true;
+            this.lbNumeroDocumento.Location = new System.Drawing.Point(6, 16);
+            this.lbNumeroDocumento.Name = "lbNumeroDocumento";
+            this.lbNumeroDocumento.Size = new System.Drawing.Size(77, 13);
+            this.lbNumeroDocumento.TabIndex = 0;
+            this.lbNumeroDocumento.Text = "N° Documento";
+            // 
+            // menuVertical
+            // 
+            this.menuVertical.Location = new System.Drawing.Point(9, 15);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 3;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
             // fmEntEntradaNota
             // 

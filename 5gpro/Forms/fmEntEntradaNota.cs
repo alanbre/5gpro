@@ -12,6 +12,7 @@ namespace _5gpro.Forms
     {
         private readonly static ConexaoDAO connection = new ConexaoDAO();
         private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO(connection);
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         private NotaFiscalTerceiros notaFiscalTerceiros = new NotaFiscalTerceiros();
@@ -71,15 +72,24 @@ namespace _5gpro.Forms
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void BtInserirItem_Click(object sender, EventArgs e) => InserirItem();
         private void BtExcluirItem_Click(object sender, EventArgs e) => ExcluirItem();
-        private void DbQuantidade_Leave(object sender, EventArgs e) => CalculaTotalItem();
-        private void DbValorUnitItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
-        private void DbValorTotItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
+        private void DbQuantidade_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalItem();
+            CalculaDescontoItem();
+        }
+        private void DbValorTotItem_Leave(object sender, EventArgs e) => CalculaDescontoItem();
+        private void DbValorUnitItem_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalItem();
+            CalculaDescontoItem();
+        }
         private void DbDescontoItemPorc_Leave(object sender, EventArgs e)
         {
-            CalculaDescontoItem();
             CalculaTotalItem();
+            CalculaDescontoItem();
         }
         private void DbDescontoItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
+        private void DbDescontoDocumento_Leave(object sender, EventArgs e) => CalculaTotalDocumento();
         private void DgvItens_CurrentCellChanged(object sender, EventArgs e) => SelecionarItem();
         private void BuscaItem_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
 
@@ -107,6 +117,7 @@ namespace _5gpro.Forms
             if (buscaNotaFiscalTerceiros.notaFiscalTerceirosSelecionada != null)
             {
                 notaFiscalTerceiros = buscaNotaFiscalTerceiros.notaFiscalTerceirosSelecionada;
+                notaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(notaFiscalTerceiros.Pessoa.PessoaID);
                 PreencheCampos(notaFiscalTerceiros);
             }
         }
@@ -170,6 +181,7 @@ namespace _5gpro.Forms
             if (notaFiscalTerceiros != null)
             {
                 notaFiscalTerceiros = notaFiscalTerceirosDAO.BuscaByID(notaFiscalTerceiros.NotaFiscalTerceirosID);
+                notaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(notaFiscalTerceiros.Pessoa.PessoaID);
                 PreencheCampos(notaFiscalTerceiros);
                 if (editando)
                     Editando(false);
@@ -195,8 +207,10 @@ namespace _5gpro.Forms
             if (tbCodigo.Text.Length > 0)
             {
                 var newNotaFiscalTerceiros = notaFiscalTerceirosDAO.Proximo(int.Parse(tbCodigo.Text));
+
                 if (newNotaFiscalTerceiros != null)
                 {
+                    newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(newNotaFiscalTerceiros.Pessoa.PessoaID);
                     notaFiscalTerceiros = newNotaFiscalTerceiros;
                     itens = notaFiscalTerceiros.NotaFiscalTerceirosItem.ToList();
                     PreencheCampos(notaFiscalTerceiros);
@@ -221,6 +235,7 @@ namespace _5gpro.Forms
                 var newNotaFiscalTerceiros = notaFiscalTerceirosDAO.Anterior(int.Parse(tbCodigo.Text));
                 if (newNotaFiscalTerceiros != null)
                 {
+                    newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(newNotaFiscalTerceiros.Pessoa.PessoaID);
                     notaFiscalTerceiros = newNotaFiscalTerceiros;
                     itens = notaFiscalTerceiros.NotaFiscalTerceirosItem.ToList();
                     PreencheCampos(notaFiscalTerceiros);
@@ -329,7 +344,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                item = itens.Single(i => i.ItemID == buscaItem.item.ItemID);
+                item = itens.Find(i => i.Item.ItemID == buscaItem.item.ItemID);
                 btInserirItem.Text = "Alterar";
                 btExcluirItem.Enabled = true;
             }
@@ -396,6 +411,7 @@ namespace _5gpro.Forms
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
                 buscaItem.Focus();
+                return;
             }
 
             ignoracheckevent = true;

@@ -706,6 +706,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
   `valor_final` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NOT NULL,
   `desconto` DECIMAL(10,2) NULL,
+  `situacao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idconta_receber`),
   INDEX `fk_conta_receber_operacao1_idx` (`idoperacao` ASC) VISIBLE,
   INDEX `fk_conta_receber_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
@@ -738,6 +739,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `idconta_receber` INT NOT NULL,
   `idformapagamento` INT NULL,
   `desconto` DECIMAL(10,2) NULL,
+  `situacao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idparcela_conta_receber`),
   INDEX `fk_parcela_conta_receber_conta_receber1_idx` (`idconta_receber` ASC) VISIBLE,
   INDEX `fk_parcela_conta_receber_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
@@ -767,6 +769,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_pagar` (
   `idpessoa` INT(11) NOT NULL,
   `acrescimo` DECIMAL(10,2) NULL,
   `desconto` DECIMAL(10,2) NULL,
+  `situacao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idconta_pagar`),
   INDEX `fk_conta_pagar_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_conta_pagar_pessoa1`
@@ -793,6 +796,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
   `idformapagamento` INT NULL,
   `acrescimo` DECIMAL(10,2) NULL,
   `desconto` DECIMAL(10,2) NULL,
+  `situacao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idparcela_conta_pagar`),
   INDEX `fk_parcela_conta_pagar_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
   INDEX `fk_parcela_conta_pagar_conta_pagar1_idx` (`idconta_pagar` ASC) VISIBLE,
@@ -855,23 +859,23 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`nota_fiscal_terceiros_has_item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nota_fiscal_terceiros_has_item` (
-  `nota_fiscal_terceiros_idnota_fiscal_terceiros` INT NOT NULL,
-  `item_iditem` INT(11) NOT NULL,
+  `idnota_fiscal_terceiros` INT NOT NULL,
+  `iditem` INT(11) NOT NULL,
   `quantidade` DECIMAL(10,2) NOT NULL,
   `valor_unitario` DECIMAL(10,2) NOT NULL,
   `valor_total` DECIMAL(10,2) NOT NULL,
   `desconto_porc` DECIMAL(10,2) NOT NULL,
   `desconto` DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (`nota_fiscal_terceiros_idnota_fiscal_terceiros`, `item_iditem`),
-  INDEX `fk_nota_fiscal_terceiros_has_item_item1_idx` (`item_iditem` ASC) VISIBLE,
-  INDEX `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1_idx` (`nota_fiscal_terceiros_idnota_fiscal_terceiros` ASC) VISIBLE,
+  PRIMARY KEY (`idnota_fiscal_terceiros`, `iditem`),
+  INDEX `fk_nota_fiscal_terceiros_has_item_item1_idx` (`iditem` ASC) VISIBLE,
+  INDEX `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1_idx` (`idnota_fiscal_terceiros` ASC) VISIBLE,
   CONSTRAINT `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1`
-    FOREIGN KEY (`nota_fiscal_terceiros_idnota_fiscal_terceiros`)
+    FOREIGN KEY (`idnota_fiscal_terceiros`)
     REFERENCES `5gprodatabase`.`nota_fiscal_terceiros` (`idnota_fiscal_terceiros`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_nota_fiscal_terceiros_has_item_item1`
-    FOREIGN KEY (`item_iditem`)
+    FOREIGN KEY (`iditem`)
     REFERENCES `5gprodatabase`.`item` (`iditem`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
