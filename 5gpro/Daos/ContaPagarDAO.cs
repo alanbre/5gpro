@@ -91,12 +91,10 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+
         public ContaPagar BuscaById(int codigo)
         {
-            ContaPagar contaPagar = null;
-            ParcelaContaPagar parcela = null;
-            FormaPagamento formapagamento = null;
-            List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
+            var contaPagar = new ContaPagar();
 
             try
             {
@@ -112,91 +110,10 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idconta_pagar", codigo);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    contaPagar = new ContaPagar
-                    {
-                        ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
-                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                        ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                    };
-                    contaPagar.Pessoa = new Pessoa();
-                    contaPagar.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
-                    {
-                        if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
-                        {
-                            formapagamento = new FormaPagamento
-                            {
-                                FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                                Nome = reader.GetString(reader.GetOrdinal("nome"))
-                            };
-                        }
-
-                        parcela = new ParcelaContaPagar
-                        {
-                            ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                            DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                            DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                            Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                        };
-
-                        if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
-                        listaparcelas.Add(parcela);
-                    }
+                    contaPagar = LeDadosReader(reader);
                 }
-
-                while (reader.Read())
-                {
-                    if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
-                    {
-                        formapagamento = new FormaPagamento
-                        {
-                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
-                    }
-
-                    parcela = new ParcelaContaPagar
-                    {
-                        ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                        DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                        DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                        Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                        Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-
-                    };
-
-                    if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
-                    listaparcelas.Add(parcela);
-                }
-
-                if (listaparcelas.Count > 0)
-                {
-                    contaPagar.Parcelas = listaparcelas;
-                }
-
-
             }
             catch (MySqlException ex)
             {
@@ -209,7 +126,6 @@ namespace _5gpro.Daos
 
             return contaPagar;
         }
-
 
 
         public IEnumerable<ContaPagar> Busca(fmBuscaContaPagar.Filtros f)
@@ -279,7 +195,6 @@ namespace _5gpro.Daos
             }
             return contaPagars;
         }
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -314,11 +229,8 @@ namespace _5gpro.Daos
         }
         public ContaPagar BuscaProximo(int codigo)
         {
-            ContaPagar contaPagar = null;
-            ParcelaContaPagar parcela = null;
-            FormaPagamento formapagamento = null;
-            List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
-
+            var contaPagar = new ContaPagar();
+            var parcelas = new List<ParcelaContaPagar>();
             try
             {
                 Connect.AbrirConexao();
@@ -334,90 +246,9 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idconta_pagar", codigo);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    contaPagar = new ContaPagar
-                    {
-                        ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
-                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                        ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                    };
-                    contaPagar.Pessoa = new Pessoa();
-                    contaPagar.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
-                    {
-                        if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
-                        {
-                            formapagamento = new FormaPagamento
-                            {
-                                FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                                Nome = reader.GetString(reader.GetOrdinal("nome"))
-                            };
-                        }
-
-                        parcela = new ParcelaContaPagar
-                        {
-                            ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                            DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                            DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                            Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-
-                        };
-
-                        if(formapagamento != null) { parcela.FormaPagamento = formapagamento; }
-                        listaparcelas.Add(parcela);
-                    }
-                }
-
-                while (reader.Read())
-                {
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
-                    {
-                        formapagamento = new FormaPagamento
-                        {
-                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
-                    }
-
-                    parcela = new ParcelaContaPagar
-                    {
-                        ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                        DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                        DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                        Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                        Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-
-                    };
-
-                    if(formapagamento != null) { parcela.FormaPagamento = formapagamento; }
-                    listaparcelas.Add(parcela);
-                }
-
-                if (listaparcelas.Count > 0)
-                {
-                    contaPagar.Parcelas = listaparcelas;
+                    contaPagar = LeDadosReader(reader);
                 }
 
             }
@@ -429,17 +260,14 @@ namespace _5gpro.Daos
             {
                 Connect.FecharConexao();
             }
+
             return contaPagar;
         }
 
 
         public ContaPagar BuscaAnterior(int codigo)
         {
-            ContaPagar contaPagar = null;
-            ParcelaContaPagar parcela = null;
-            FormaPagamento formapagamento = null;
-            List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
-
+            var contaPagar = new ContaPagar();
             try
             {
                 Connect.AbrirConexao();
@@ -455,57 +283,50 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idconta_pagar", codigo);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    contaPagar = new ContaPagar
-                    {
-                        ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
-                        DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                        ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                    };
-                    contaPagar.Pessoa = new Pessoa();
-                    contaPagar.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
-                    {
-                        if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
-                        {
-                            formapagamento = new FormaPagamento
-                            {
-                                FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                                Nome = reader.GetString(reader.GetOrdinal("nome"))
-                            };
-                        }
-
-                        parcela = new ParcelaContaPagar
-                        {
-                            ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                            DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                            DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                            Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-
-                        };
-
-                        if(formapagamento != null) { parcela.FormaPagamento = formapagamento; }
-                        listaparcelas.Add(parcela);
-                    }
+                    contaPagar = LeDadosReader(reader);
                 }
 
-                while (reader.Read())
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+            return contaPagar;
+        }
+
+
+        private ContaPagar LeDadosReader(IDataReader reader)
+        {
+
+            ContaPagar contaPagar = null;
+            ParcelaContaPagar parcela = null;
+            FormaPagamento formapagamento = null;
+            List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
+
+            if (reader.Read())
+            {
+                contaPagar = new ContaPagar
+                {
+                    ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
+                    DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                    ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
+                    Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                    Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                    Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
+                    ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
+                    Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                };
+                contaPagar.Pessoa = new Pessoa();
+                contaPagar.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+
+                if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
                 {
                     if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
                     {
@@ -531,98 +352,49 @@ namespace _5gpro.Daos
 
                     };
 
-                    if(formapagamento != null) { parcela.FormaPagamento = formapagamento; }
+                    if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
                     listaparcelas.Add(parcela);
                 }
+            }
 
-                if (listaparcelas.Count > 0)
+            while (reader.Read())
+            {
+                if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
                 {
-                    contaPagar.Parcelas = listaparcelas;
+                    formapagamento = new FormaPagamento
+                    {
+                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
                 }
 
+                parcela = new ParcelaContaPagar
+                {
+                    ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
+                    DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
+                    DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
+                    Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
+                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                    Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
+                    Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                    Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
+                    Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
+                    Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+
+                };
+
+                if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
+                listaparcelas.Add(parcela);
             }
-            catch (MySqlException ex)
+
+            if (listaparcelas.Count > 0)
             {
-                Console.WriteLine("Error: {0}", ex.ToString());
+                contaPagar.Parcelas = listaparcelas;
             }
-            finally
-            {
-                Connect.FecharConexao();
-            }
+
             return contaPagar;
         }
 
-
-        //private ContaPagar LeDadosReader(IDataReader reader)
-        //{
-        //    var contaPagar = new ContaPagar();
-        //    if (reader.Read())
-        //    {
-        //        contaPagar = new ContaPagar
-        //        {
-        //            ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
-        //            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-        //            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-        //            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-        //            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-        //            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-        //            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-        //            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-        //            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-        //        };
-        //        contaPagar.Pessoa = new Pessoa();
-        //        contaPagar.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-        //    }
-        //    else
-        //    {
-        //        contaPagar = null;
-        //    }
-        //    return contaPagar;
-        //}
-        //private List<ParcelaContaPagar> BuscaParcelasDaConta(ContaPagar contaPagar)
-        //{
-        //    var parcelas = new List<ParcelaContaPagar>();
-        //    try
-        //    {
-        //        Connect.AbrirConexao();
-        //        Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela_conta_pagar p LEFT JOIN formapagamento fp
-        //                                             ON p.idformapagamento = fp.idformapagamento 
-        //                                             WHERE idconta_pagar = @idconta_pagar", Connect.Conexao);
-        //        Connect.Comando.Parameters.AddWithValue("@idconta_pagar", contaPagar.ContaPagarID);
-        //        using (var reader = Connect.Comando.ExecuteReader())
-        //        {
-        //            while (reader.Read())
-        //            {
-        //                ParcelaContaPagar parcela = new ParcelaContaPagar
-        //                {
-        //                    ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-        //                    DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-        //                    DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-        //                    Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-        //                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-        //                    Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-        //                    Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-        //                    Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-        //                    Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-        //                    Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-
-        //                };
-        //                parcelas.Add(parcela);
-        //                //forma de pagamento
-        //            }
-        //        }
-        //    }
-        //    catch (MySqlException ex)
-        //    {
-        //        Console.WriteLine("Error: {0}", ex.ToString());
-        //    }
-        //    finally
-        //    {
-        //        Connect.FecharConexao();
-        //    }
-
-        //    return parcelas;
-        //}
     }
 }
 

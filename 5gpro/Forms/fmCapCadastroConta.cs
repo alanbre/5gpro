@@ -95,7 +95,6 @@ namespace _5gpro.Forms
             if (editando)
                 return;
 
-
             ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigoConta.Text = contaPagarDAO.BuscaProxCodigoDisponivel().ToString();
@@ -308,7 +307,8 @@ namespace _5gpro.Forms
                                      parcela.Acrescimo,
                                      parcela.Desconto,
                                      parcela.ValorFinal,
-                                     parcela.DataQuitacao?.Date);
+                                     parcela.DataQuitacao?.Date,
+                                     parcela.Situacao);
             dgvParcelas.Refresh();
         }
         private void PreencheCamposParcelas(ParcelaContaPagar parcela)
@@ -321,7 +321,10 @@ namespace _5gpro.Forms
             dbAcrescimoParcela.Valor = parcela.Acrescimo;
             dbDescontoParcela.Valor = parcela.Desconto;
             dbValorFinalParcela.Valor = parcela.ValorFinal;
+            tbSituacaoParcela.Text = parcela.Situacao;
             tbDataQuitacao.Text = parcela.DataQuitacao != null ? parcela.DataQuitacao.Value.ToShortDateString() : "";
+            if(parcela.FormaPagamento.Nome != null)
+            tbFormaPagamentoParcela.Text = parcela.FormaPagamento.Nome;
         }
         private void InserirParcela()
         {
@@ -362,10 +365,14 @@ namespace _5gpro.Forms
                     Multa = dbMultaParcela.Valor,
                     Juros = dbJurosParcela.Valor,
                     Acrescimo = dbAcrescimoParcela.Valor,
-                    Desconto = dbDescontoParcela.Valor,
-                    Situacao = tbSituacaoParcela.Text
+                    Desconto = dbDescontoParcela.Valor
                     //FormaPagamento = formapagamento
                 };
+                if (tbSituacaoParcela.Text.Length > 0)
+                    parcela.Situacao = tbSituacaoParcela.Text;
+                else
+                    parcela.Situacao = "Aberto";
+
                 parcelas.Add(parcela);
                 dgvParcelas.Rows.Add(parcela.Sequencia,
                                      parcela.DataVencimento.ToShortDateString(),
