@@ -154,6 +154,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "fmCadastroCheque";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

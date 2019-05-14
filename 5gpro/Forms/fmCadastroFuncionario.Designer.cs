@@ -38,6 +38,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "fmCadastroFuncionario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
