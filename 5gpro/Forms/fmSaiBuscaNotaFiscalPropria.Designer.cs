@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmBuscaNotaFiscal
+    partial class fmSaiBuscaNotaFiscalPropria
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,7 @@
             this.gbGridDocumentos.Location = new System.Drawing.Point(12, 192);
             this.gbGridDocumentos.Name = "gbGridDocumentos";
             this.gbGridDocumentos.Size = new System.Drawing.Size(1069, 258);
-            this.gbGridDocumentos.TabIndex = 3;
+            this.gbGridDocumentos.TabIndex = 1;
             this.gbGridDocumentos.TabStop = false;
             this.gbGridDocumentos.Text = "Notas fiscais";
             // 
@@ -202,7 +202,7 @@
             this.gbFiltrosDocumento.Location = new System.Drawing.Point(12, 12);
             this.gbFiltrosDocumento.Name = "gbFiltrosDocumento";
             this.gbFiltrosDocumento.Size = new System.Drawing.Size(1068, 174);
-            this.gbFiltrosDocumento.TabIndex = 2;
+            this.gbFiltrosDocumento.TabIndex = 0;
             this.gbFiltrosDocumento.TabStop = false;
             this.gbFiltrosDocumento.Text = "Filtros do documento";
             // 
@@ -213,7 +213,7 @@
             this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
             this.buscaPessoa.Name = "buscaPessoa";
             this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 42;
+            this.buscaPessoa.TabIndex = 1;
             // 
             // buscaCidade
             // 
@@ -221,14 +221,14 @@
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
             this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 41;
+            this.buscaCidade.TabIndex = 0;
             // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(10, 143);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 40;
+            this.btPesquisar.TabIndex = 14;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             // 
@@ -238,7 +238,7 @@
             this.lbAValorTotalDocumento.Location = new System.Drawing.Point(75, 119);
             this.lbAValorTotalDocumento.Name = "lbAValorTotalDocumento";
             this.lbAValorTotalDocumento.Size = new System.Drawing.Size(13, 13);
-            this.lbAValorTotalDocumento.TabIndex = 10;
+            this.lbAValorTotalDocumento.TabIndex = 4;
             this.lbAValorTotalDocumento.Text = "a";
             // 
             // tbFiltroValorTotalDocumentoInicial
@@ -247,7 +247,7 @@
             this.tbFiltroValorTotalDocumentoInicial.MaxLength = 8;
             this.tbFiltroValorTotalDocumentoInicial.Name = "tbFiltroValorTotalDocumentoInicial";
             this.tbFiltroValorTotalDocumentoInicial.Size = new System.Drawing.Size(63, 20);
-            this.tbFiltroValorTotalDocumentoInicial.TabIndex = 9;
+            this.tbFiltroValorTotalDocumentoInicial.TabIndex = 3;
             this.tbFiltroValorTotalDocumentoInicial.Text = "0,00";
             // 
             // tbFiltroValorTotalDocumentoFinal
@@ -256,7 +256,7 @@
             this.tbFiltroValorTotalDocumentoFinal.MaxLength = 13;
             this.tbFiltroValorTotalDocumentoFinal.Name = "tbFiltroValorTotalDocumentoFinal";
             this.tbFiltroValorTotalDocumentoFinal.Size = new System.Drawing.Size(63, 20);
-            this.tbFiltroValorTotalDocumentoFinal.TabIndex = 11;
+            this.tbFiltroValorTotalDocumentoFinal.TabIndex = 5;
             this.tbFiltroValorTotalDocumentoFinal.Text = "999999,00";
             // 
             // lbFiltroValorTotalDocumento
@@ -265,7 +265,7 @@
             this.lbFiltroValorTotalDocumento.Location = new System.Drawing.Point(7, 96);
             this.lbFiltroValorTotalDocumento.Name = "lbFiltroValorTotalDocumento";
             this.lbFiltroValorTotalDocumento.Size = new System.Drawing.Size(125, 13);
-            this.lbFiltroValorTotalDocumento.TabIndex = 8;
+            this.lbFiltroValorTotalDocumento.TabIndex = 2;
             this.lbFiltroValorTotalDocumento.Text = "Valor total do documento";
             // 
             // lbFiltroDataEntradaSaida
@@ -274,7 +274,7 @@
             this.lbFiltroDataEntradaSaida.Location = new System.Drawing.Point(452, 56);
             this.lbFiltroDataEntradaSaida.Name = "lbFiltroDataEntradaSaida";
             this.lbFiltroDataEntradaSaida.Size = new System.Drawing.Size(122, 13);
-            this.lbFiltroDataEntradaSaida.TabIndex = 16;
+            this.lbFiltroDataEntradaSaida.TabIndex = 10;
             this.lbFiltroDataEntradaSaida.Text = "Data de entrada / saída";
             // 
             // lbAFiltroDataEntradaSaida
@@ -283,7 +283,7 @@
             this.lbAFiltroDataEntradaSaida.Location = new System.Drawing.Point(561, 77);
             this.lbAFiltroDataEntradaSaida.Name = "lbAFiltroDataEntradaSaida";
             this.lbAFiltroDataEntradaSaida.Size = new System.Drawing.Size(13, 13);
-            this.lbAFiltroDataEntradaSaida.TabIndex = 18;
+            this.lbAFiltroDataEntradaSaida.TabIndex = 12;
             this.lbAFiltroDataEntradaSaida.Text = "a";
             // 
             // dtpFiltroDataEntradaSaidaFinal
@@ -293,7 +293,7 @@
             this.dtpFiltroDataEntradaSaidaFinal.Location = new System.Drawing.Point(580, 73);
             this.dtpFiltroDataEntradaSaidaFinal.Name = "dtpFiltroDataEntradaSaidaFinal";
             this.dtpFiltroDataEntradaSaidaFinal.Size = new System.Drawing.Size(100, 20);
-            this.dtpFiltroDataEntradaSaidaFinal.TabIndex = 19;
+            this.dtpFiltroDataEntradaSaidaFinal.TabIndex = 13;
             this.dtpFiltroDataEntradaSaidaFinal.Value = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             // 
             // dtpFiltroDataEntradaSaidaInicial
@@ -303,7 +303,7 @@
             this.dtpFiltroDataEntradaSaidaInicial.Location = new System.Drawing.Point(455, 73);
             this.dtpFiltroDataEntradaSaidaInicial.Name = "dtpFiltroDataEntradaSaidaInicial";
             this.dtpFiltroDataEntradaSaidaInicial.Size = new System.Drawing.Size(100, 20);
-            this.dtpFiltroDataEntradaSaidaInicial.TabIndex = 17;
+            this.dtpFiltroDataEntradaSaidaInicial.TabIndex = 11;
             this.dtpFiltroDataEntradaSaidaInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
             // lbFiltroDataEmissao
@@ -312,7 +312,7 @@
             this.lbFiltroDataEmissao.Location = new System.Drawing.Point(452, 16);
             this.lbFiltroDataEmissao.Name = "lbFiltroDataEmissao";
             this.lbFiltroDataEmissao.Size = new System.Drawing.Size(89, 13);
-            this.lbFiltroDataEmissao.TabIndex = 12;
+            this.lbFiltroDataEmissao.TabIndex = 6;
             this.lbFiltroDataEmissao.Text = "Data de cadastro";
             // 
             // lbAFiltroDataEmissao
@@ -321,7 +321,7 @@
             this.lbAFiltroDataEmissao.Location = new System.Drawing.Point(561, 37);
             this.lbAFiltroDataEmissao.Name = "lbAFiltroDataEmissao";
             this.lbAFiltroDataEmissao.Size = new System.Drawing.Size(13, 13);
-            this.lbAFiltroDataEmissao.TabIndex = 14;
+            this.lbAFiltroDataEmissao.TabIndex = 8;
             this.lbAFiltroDataEmissao.Text = "a";
             // 
             // dtpFiltroDataEmissaoFinal
@@ -331,7 +331,7 @@
             this.dtpFiltroDataEmissaoFinal.Location = new System.Drawing.Point(580, 33);
             this.dtpFiltroDataEmissaoFinal.Name = "dtpFiltroDataEmissaoFinal";
             this.dtpFiltroDataEmissaoFinal.Size = new System.Drawing.Size(100, 20);
-            this.dtpFiltroDataEmissaoFinal.TabIndex = 15;
+            this.dtpFiltroDataEmissaoFinal.TabIndex = 9;
             this.dtpFiltroDataEmissaoFinal.Value = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             // 
             // dtpFiltroDataEmissaoInicial
@@ -341,10 +341,10 @@
             this.dtpFiltroDataEmissaoInicial.Location = new System.Drawing.Point(455, 33);
             this.dtpFiltroDataEmissaoInicial.Name = "dtpFiltroDataEmissaoInicial";
             this.dtpFiltroDataEmissaoInicial.Size = new System.Drawing.Size(100, 20);
-            this.dtpFiltroDataEmissaoInicial.TabIndex = 13;
+            this.dtpFiltroDataEmissaoInicial.TabIndex = 7;
             this.dtpFiltroDataEmissaoInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
-            // fmBuscaNotaFiscal
+            // fmSaiBuscaNotaFiscalPropria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -353,7 +353,7 @@
             this.Controls.Add(this.gbGridDocumentos);
             this.Controls.Add(this.gbFiltrosDocumento);
             this.MinimumSize = new System.Drawing.Size(1000, 500);
-            this.Name = "fmBuscaNotaFiscal";
+            this.Name = "fmSaiBuscaNotaFiscalPropria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca notas fiscais";
             this.gbGridDocumentos.ResumeLayout(false);

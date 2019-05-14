@@ -334,7 +334,7 @@ namespace _5gpro.Daos
 
         }
 
-        public List<Orcamento> BuscaOrcamentos(fmBuscaOrcamento.Filtros f)
+        public List<Orcamento> BuscaOrcamentos(fmOrcBuscaOrcamento.Filtros f)
         {
             List<Orcamento> orcamentos = new List<Orcamento>();
             Pessoa pessoa = null;

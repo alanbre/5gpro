@@ -671,7 +671,7 @@ namespace _5gpro.Forms
 
         private void AbreTelaBuscaOrcamento()
         {
-            var buscaOrcamento = new fmBuscaOrcamento();
+            var buscaOrcamento = new fmOrcBuscaOrcamento();
             buscaOrcamento.ShowDialog();
             if (buscaOrcamento.orcamentoSelecionado != null)
             {

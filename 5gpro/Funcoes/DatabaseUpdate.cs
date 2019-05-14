@@ -859,23 +859,23 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`nota_fiscal_terceiros_has_item`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nota_fiscal_terceiros_has_item` (
-  `nota_fiscal_terceiros_idnota_fiscal_terceiros` INT NOT NULL,
-  `item_iditem` INT(11) NOT NULL,
+  `idnota_fiscal_terceiros` INT NOT NULL,
+  `iditem` INT(11) NOT NULL,
   `quantidade` DECIMAL(10,2) NOT NULL,
   `valor_unitario` DECIMAL(10,2) NOT NULL,
   `valor_total` DECIMAL(10,2) NOT NULL,
   `desconto_porc` DECIMAL(10,2) NOT NULL,
   `desconto` DECIMAL(10,2) NOT NULL,
-  PRIMARY KEY (`nota_fiscal_terceiros_idnota_fiscal_terceiros`, `item_iditem`),
-  INDEX `fk_nota_fiscal_terceiros_has_item_item1_idx` (`item_iditem` ASC) VISIBLE,
-  INDEX `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1_idx` (`nota_fiscal_terceiros_idnota_fiscal_terceiros` ASC) VISIBLE,
+  PRIMARY KEY (`idnota_fiscal_terceiros`, `iditem`),
+  INDEX `fk_nota_fiscal_terceiros_has_item_item1_idx` (`iditem` ASC) VISIBLE,
+  INDEX `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1_idx` (`idnota_fiscal_terceiros` ASC) VISIBLE,
   CONSTRAINT `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1`
-    FOREIGN KEY (`nota_fiscal_terceiros_idnota_fiscal_terceiros`)
+    FOREIGN KEY (`idnota_fiscal_terceiros`)
     REFERENCES `5gprodatabase`.`nota_fiscal_terceiros` (`idnota_fiscal_terceiros`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_nota_fiscal_terceiros_has_item_item1`
-    FOREIGN KEY (`item_iditem`)
+    FOREIGN KEY (`iditem`)
     REFERENCES `5gprodatabase`.`item` (`iditem`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -885,8 +885,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
 ";
             return create;
         }

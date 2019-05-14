@@ -35,7 +35,7 @@ namespace _5gpro.Funcoes
                 nfi.ValorTotal = oi.ValorTotal;
                 nfi.DescontoPorc = oi.DescontoPorc;
                 nfi.Desconto = oi.Desconto;
-                notafiscal.NotaFiscalItem.Add(nfi);
+                notafiscal.NotaFiscalPropriaItem.Add(nfi);
             }
 
             int resultado = notaFiscalDAO.SalvarOuAtualizar(notafiscal);

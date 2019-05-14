@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace _5gpro.Entities
 {
-    public class NotaFiscalPropria
+    public class NotaFiscalTerceiros
     {
-        public NotaFiscalPropria()
+        public NotaFiscalTerceiros()
         {
-            NotaFiscalPropriaItem = new HashSet<NotaFiscalPropriaItem>();
+            NotaFiscalTerceirosItem = new HashSet<NotaFiscalTerceirosItem>();
         }
 
-        public int NotaFiscalPropriaID { get; set; }
+        public int NotaFiscalTerceirosID { get; set; }
         public Pessoa Pessoa { get; set; }
         public DateTime DataEmissao { get; set; }
         public DateTime DataEntradaSaida { get; set; }
@@ -20,6 +20,6 @@ namespace _5gpro.Entities
         public decimal DescontoTotalItens { get; set; }
         public decimal DescontoDocumento { get; set; }
 
-        public virtual ICollection<NotaFiscalPropriaItem> NotaFiscalPropriaItem { get; set; }
+        public virtual ICollection<NotaFiscalTerceirosItem> NotaFiscalTerceirosItem { get; set; }
     }
 }
