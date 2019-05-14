@@ -395,7 +395,7 @@ namespace _5gpro.Forms
         {
             if (editando)
                 return;
-            var buscaNotaFiscalPropria = new fmBuscaNotaFiscalPropria();
+            var buscaNotaFiscalPropria = new fmSaiBuscaNotaFiscalPropria();
             buscaNotaFiscalPropria.ShowDialog();
             if (buscaNotaFiscalPropria.notaFiscalPropriaSelecionada != null)
             {

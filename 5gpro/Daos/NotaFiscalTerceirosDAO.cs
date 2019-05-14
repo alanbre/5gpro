@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.Forms;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -92,6 +93,69 @@ namespace _5gpro.Daos
                 notafiscal.NotaFiscalTerceirosItem = BuscaItensDaNotaFiscal(notafiscal);
             }
             return notafiscal;
+        }
+        public IEnumerable<NotaFiscalTerceiros> Busca(fmEntBuscaNotaFiscalTerceiros.Filtros f)
+        {
+            var notasFiscais = new List<NotaFiscalTerceiros>();
+            var wherePessoa = f.Pessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            var whereCidade = f.Cidade != null ? "AND p.idcidade = @idcidade" : "";
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT nft.idnota_fiscal_terceiros, p.idpessoa, p.nome, nft.data_emissao, nft.data_entradasaida, nft.valor_documento
+                                                     FROM
+                                                     nota_fiscal_terceiros nft
+                                                     LEFT JOIN pessoa p ON nft.idpessoa = p.idpessoa
+                                                     WHERE 1=1 "
+                                                     + wherePessoa + " "
+                                                     + whereCidade + " "
+                                                 + @"AND nft.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final
+                                                     AND nft.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final
+                                                     AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final
+                                                     GROUP BY nft.idnota_fiscal_terceiros");
+                if (f.Pessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.Pessoa.PessoaID); }
+                if (f.Cidade != null) { Connect.Comando.Parameters.AddWithValue("@idcidade", f.Pessoa.PessoaID); }
+                Connect.Comando.Parameters.AddWithValue("@valor_documento_inicial", f.ValorInicial);
+                Connect.Comando.Parameters.AddWithValue("@valor_documento_final", f.ValorFinal);
+                Connect.Comando.Parameters.AddWithValue("@data_emissao_inicial", f.DataEmissaoInicial);
+                Connect.Comando.Parameters.AddWithValue("@data_emissao_final", f.DataEmissaoFinal);
+                Connect.Comando.Parameters.AddWithValue("@data_entradasaida_inicial", f.DataEntradaInicial);
+                Connect.Comando.Parameters.AddWithValue("@data_entradasaida_final", f.DataEntradaFinal);
+
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+
+                        var notaTerceiros = new NotaFiscalTerceiros
+                        {
+                            NotaFiscalTerceirosID = reader.GetInt32(reader.GetOrdinal("idnota_fiscal_terceiros")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento"))
+                        };
+
+                        notaTerceiros.Pessoa = pessoa;
+                        notasFiscais.Add(notaTerceiros);
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return notasFiscais;
         }
         public NotaFiscalTerceiros Proximo(int codAtual)
         {

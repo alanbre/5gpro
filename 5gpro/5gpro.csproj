@@ -321,17 +321,17 @@
     <Compile Include="Forms\fmBuscaItem.Designer.cs">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscalPropria.cs">
+    <Compile Include="Forms\fmSaiBuscaNotaFiscalPropria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscalPropria.Designer.cs">
-      <DependentUpon>fmBuscaNotaFiscalPropria.cs</DependentUpon>
+    <Compile Include="Forms\fmSaiBuscaNotaFiscalPropria.Designer.cs">
+      <DependentUpon>fmSaiBuscaNotaFiscalPropria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscalTerceiros.cs">
+    <Compile Include="Forms\fmEntBuscaNotaFiscalTerceiros.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscalTerceiros.Designer.cs">
-      <DependentUpon>fmBuscaNotaFiscalTerceiros.cs</DependentUpon>
+    <Compile Include="Forms\fmEntBuscaNotaFiscalTerceiros.Designer.cs">
+      <DependentUpon>fmEntBuscaNotaFiscalTerceiros.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaOperacao.cs">
       <SubType>Form</SubType>
@@ -339,11 +339,11 @@
     <Compile Include="Forms\fmBuscaOperacao.Designer.cs">
       <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaOrcamento.cs">
+    <Compile Include="Forms\fmOrcBuscaOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaOrcamento.Designer.cs">
-      <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>
+    <Compile Include="Forms\fmOrcBuscaOrcamento.Designer.cs">
+      <DependentUpon>fmOrcBuscaOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaSubGrupoItem.cs">
       <SubType>Form</SubType>
@@ -615,14 +615,14 @@
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaNotaFiscalPropria.resx">
-      <DependentUpon>fmBuscaNotaFiscalPropria.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmSaiBuscaNotaFiscalPropria.resx">
+      <DependentUpon>fmSaiBuscaNotaFiscalPropria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaOperacao.resx">
       <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaOrcamento.resx">
-      <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmOrcBuscaOrcamento.resx">
+      <DependentUpon>fmOrcBuscaOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaPessoa.resx">
       <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
@@ -686,6 +686,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCarQuitacaoConta.resx">
       <DependentUpon>fmCarQuitacaoConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmEntBuscaNotaFiscalTerceiros.resx">
+      <DependentUpon>fmEntBuscaNotaFiscalTerceiros.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmEntEntradaNota.resx">
       <DependentUpon>fmEntEntradaNota.cs</DependentUpon>

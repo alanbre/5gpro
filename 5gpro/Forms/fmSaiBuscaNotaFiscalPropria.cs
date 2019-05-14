@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaNotaFiscalPropria : Form
+    public partial class fmSaiBuscaNotaFiscalPropria : Form
     {
         public NotaFiscalPropria notaFiscalPropriaSelecionada = null;
-        public fmBuscaNotaFiscalPropria()
+        public fmSaiBuscaNotaFiscalPropria()
         {
             InitializeComponent();
         }

@@ -112,7 +112,7 @@ namespace _5gpro.Forms
         {
             if (editando)
                 return;
-            var buscaNotaFiscalTerceiros = new fmBuscaNotaFiscalTerceiros();
+            var buscaNotaFiscalTerceiros = new fmEntBuscaNotaFiscalTerceiros();
             buscaNotaFiscalTerceiros.ShowDialog();
             if (buscaNotaFiscalTerceiros.notaFiscalTerceirosSelecionada != null)
             {
