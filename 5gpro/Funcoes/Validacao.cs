@@ -116,7 +116,7 @@ namespace _5gpro.Funcoes
                             //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
-                        if (ctrlgb is Controls.BuscaCidade || ctrlgb is Controls.BuscaSubGrupoPessoa)
+                        if (ctrlgb is Controls.BuscaCidade || ctrlgb is Controls.BuscaSubGrupoPessoa || ctrlgb is Controls.BuscaPessoa)
                         {
                             //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlgb.BackColor = System.Drawing.Color.White;
