@@ -113,7 +113,7 @@ namespace _5gpro.Daos
                                                  + @"AND nft.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final
                                                      AND nft.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final
                                                      AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final
-                                                     GROUP BY nft.idnota_fiscal_terceiros");
+                                                     GROUP BY nft.idnota_fiscal_terceiros", Connect.Conexao);
                 if (f.Pessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.Pessoa.PessoaID); }
                 if (f.Cidade != null) { Connect.Comando.Parameters.AddWithValue("@idcidade", f.Pessoa.PessoaID); }
                 Connect.Comando.Parameters.AddWithValue("@valor_documento_inicial", f.ValorInicial);
