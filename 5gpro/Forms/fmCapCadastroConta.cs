@@ -3,12 +3,8 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -74,6 +70,9 @@ namespace _5gpro.Forms
         private void DbValorOriginalParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
         private void DbMultaParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
         private void DbJurosParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void DbAcrescimoParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void DbDescontoParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+
         private void DgvParcelas_CurrentCellChanged(object sender, EventArgs e)
         {
             if (dgvParcelas.SelectedRows.Count > 0)
@@ -91,16 +90,10 @@ namespace _5gpro.Forms
         private void BtExcluirParcela_Click(object sender, EventArgs e) => ExcluirParcela();
 
 
-
-
-
-
-
         private void Novo()
         {
             if (editando)
                 return;
-
 
             ignoracheckevent = true;
             LimpaCampos(false);
@@ -135,6 +128,8 @@ namespace _5gpro.Forms
                 ValorOriginal = dbValorOriginalConta.Valor,
                 Multa = dbMultaConta.Valor,
                 Juros = dbJurosConta.Valor,
+                Acrescimo = dbAcrescimoConta.Valor,
+                Desconto = dbDescontoConta.Valor,
                 ValorFinal = dbValorFinalConta.Valor,
 
                 Parcelas = parcelas,
@@ -294,6 +289,8 @@ namespace _5gpro.Forms
             dbValorFinalConta.Valor = contaPagar.ValorFinal;
             dbMultaConta.Valor = contaPagar.Multa;
             dbJurosConta.Valor = contaPagar.Juros;
+            dbAcrescimoConta.Valor = contaPagar.Acrescimo;
+            dbDescontoConta.Valor = contaPagar.Desconto;
             parcelas = contaPagar.Parcelas.ToList();
             buscaPessoa.PreencheCampos(contaPagar.Pessoa);
             PreencheGridParcelas(parcelas);
@@ -307,8 +304,11 @@ namespace _5gpro.Forms
                                      parcela.Valor,
                                      parcela.Multa,
                                      parcela.Juros,
+                                     parcela.Acrescimo,
+                                     parcela.Desconto,
                                      parcela.ValorFinal,
-                                     parcela.DataQuitacao?.Date);
+                                     parcela.DataQuitacao?.Date,
+                                     parcela.Situacao);
             dgvParcelas.Refresh();
         }
         private void PreencheCamposParcelas(ParcelaContaPagar parcela)
@@ -318,8 +318,13 @@ namespace _5gpro.Forms
             dbValorOriginalParcela.Valor = parcela.Valor;
             dbMultaParcela.Valor = parcela.Multa;
             dbJurosParcela.Valor = parcela.Juros;
+            dbAcrescimoParcela.Valor = parcela.Acrescimo;
+            dbDescontoParcela.Valor = parcela.Desconto;
             dbValorFinalParcela.Valor = parcela.ValorFinal;
+            tbSituacaoParcela.Text = parcela.Situacao;
             tbDataQuitacao.Text = parcela.DataQuitacao != null ? parcela.DataQuitacao.Value.ToShortDateString() : "";
+            if(parcela.FormaPagamento.Nome != null)
+            tbFormaPagamentoParcela.Text = parcela.FormaPagamento.Nome;
         }
         private void InserirParcela()
         {
@@ -343,7 +348,7 @@ namespace _5gpro.Forms
         }
         private void CalculaTotalParcela()
         {
-            dbValorFinalParcela.Valor = dbValorOriginalParcela.Valor + dbMultaParcela.Valor + dbJurosParcela.Valor;
+            dbValorFinalParcela.Valor = dbValorOriginalParcela.Valor + dbMultaParcela.Valor + dbJurosParcela.Valor + dbAcrescimoParcela.Valor - dbDescontoParcela.Valor;
         }
         private void SalvaParcela()
         {
@@ -359,16 +364,27 @@ namespace _5gpro.Forms
                     Valor = dbValorOriginalParcela.Valor,
                     Multa = dbMultaParcela.Valor,
                     Juros = dbJurosParcela.Valor,
-                    FormaPagamento = buscaFormaPagamento.formaPagamento
+                    Acrescimo = dbAcrescimoParcela.Valor,
+                    Desconto = dbDescontoParcela.Valor
+                    //FormaPagamento = formapagamento
                 };
+                if (tbSituacaoParcela.Text.Length > 0)
+                    parcela.Situacao = tbSituacaoParcela.Text;
+                else
+                    parcela.Situacao = "Aberto";
+
                 parcelas.Add(parcela);
                 dgvParcelas.Rows.Add(parcela.Sequencia,
                                      parcela.DataVencimento.ToShortDateString(),
                                      parcela.Valor,
                                      parcela.Multa,
                                      parcela.Juros,
+                                     parcela.Acrescimo,
+                                     parcela.Desconto,
                                      parcela.ValorFinal,
-                                     parcela.DataQuitacao?.Date);
+                                     parcela.DataQuitacao?.Date,
+                                     parcela.Situacao
+                                     );
                 dgvParcelas.Refresh();
                 btNovaParcela.Enabled = true;
                 btNovaParcela.PerformClick();
@@ -379,17 +395,27 @@ namespace _5gpro.Forms
                 ptemp.Valor = dbValorOriginalParcela.Valor;
                 ptemp.Multa = dbMultaParcela.Valor;
                 ptemp.Juros = dbJurosParcela.Valor;
+                ptemp.Acrescimo = dbAcrescimoParcela.Valor;
+                ptemp.Desconto = dbDescontoParcela.Valor;
                 ptemp.DataVencimento = dtpDataVencimentoParcela.Value;
-                ptemp.FormaPagamento = buscaFormaPagamento.formaPagamento;
+                ptemp.Situacao = tbSituacaoParcela.Text;
+                //ptemp.FormaPagamento = buscaFormaPagamento.formaPagamento;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Valor = ptemp.Valor;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().DataVencimento = ptemp.DataVencimento;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Multa = ptemp.Multa;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Juros = ptemp.Juros;
-                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().FormaPagamento = ptemp.FormaPagamento;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Acrescimo = ptemp.Acrescimo;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Desconto = ptemp.Desconto;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Situacao = ptemp.Situacao;
+                //parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().FormaPagamento = ptemp.FormaPagamento;
                 dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor;
                 dr.Cells[dgvtbcDataVencimento.Index].Value = ptemp.DataVencimento.ToShortDateString();
                 dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa;
                 dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros;
+                dr.Cells[dgvtbcAcrescimo.Index].Value = ptemp.Acrescimo;
+                dr.Cells[dgvtbcDesconto.Index].Value = ptemp.Desconto;
+                dr.Cells[dgvtbcValorFinal.Index].Value = ptemp.ValorFinal;
+                dr.Cells[dgvtbcSituacao.Index].Value = ptemp.Situacao;
                 dgvParcelas.Update();
                 dgvParcelas.Refresh();
             }
@@ -405,6 +431,8 @@ namespace _5gpro.Forms
                 dbValorOriginalConta.Valor = parcelas.Sum(p => p.Valor);
                 dbMultaConta.Valor = parcelas.Sum(p => p.Multa);
                 dbJurosConta.Valor = parcelas.Sum(p => p.Juros);
+                dbAcrescimoConta.Valor = parcelas.Sum(p => p.Acrescimo);
+                dbDescontoConta.Valor = parcelas.Sum(p => p.Desconto);
                 dbValorFinalConta.Valor = parcelas.Sum(p => p.ValorFinal);
             }
         }
@@ -419,6 +447,8 @@ namespace _5gpro.Forms
             dbValorFinalConta.Valor = 0.00m;
             dbMultaConta.Valor = 0.00m;
             dbJurosConta.Valor = 0.00m;
+            dbAcrescimoConta.Valor = 0.00m;
+            dbDescontoConta.Valor = 0.00m;
             tbAjuda.Clear();
             parcelas.Clear();
             dgvParcelas.Rows.Clear();
@@ -433,6 +463,8 @@ namespace _5gpro.Forms
             dbValorFinalParcela.Valor = 0.00m;
             dbMultaParcela.Valor = 0.00m;
             dbJurosParcela.Valor = 0.00m;
+            dbAcrescimoParcela.Valor = 0.00m;
+            dbDescontoParcela.Valor = 0.00m;
             tbDataQuitacao.Clear();
             this.parcelaSelecionada = null;
             btNovaParcela.Enabled = true;
@@ -454,6 +486,8 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
+
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
