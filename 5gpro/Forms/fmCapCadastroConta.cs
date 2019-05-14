@@ -131,6 +131,7 @@ namespace _5gpro.Forms
                 Acrescimo = dbAcrescimoConta.Valor,
                 Desconto = dbDescontoConta.Valor,
                 ValorFinal = dbValorFinalConta.Valor,
+                Situacao = "Aberto",
 
                 Parcelas = parcelas,
                 Pessoa = buscaPessoa.pessoa
@@ -323,8 +324,10 @@ namespace _5gpro.Forms
             dbValorFinalParcela.Valor = parcela.ValorFinal;
             tbSituacaoParcela.Text = parcela.Situacao;
             tbDataQuitacao.Text = parcela.DataQuitacao != null ? parcela.DataQuitacao.Value.ToShortDateString() : "";
-            if(parcela.FormaPagamento.Nome != null)
-            tbFormaPagamentoParcela.Text = parcela.FormaPagamento.Nome;
+            if (parcela.FormaPagamento != null)
+                tbFormaPagamentoParcela.Text = parcela.FormaPagamento.Nome;
+            else
+                tbFormaPagamentoParcela.Clear();
         }
         private void InserirParcela()
         {
@@ -366,7 +369,6 @@ namespace _5gpro.Forms
                     Juros = dbJurosParcela.Valor,
                     Acrescimo = dbAcrescimoParcela.Valor,
                     Desconto = dbDescontoParcela.Valor
-                    //FormaPagamento = formapagamento
                 };
                 if (tbSituacaoParcela.Text.Length > 0)
                     parcela.Situacao = tbSituacaoParcela.Text;
@@ -466,6 +468,8 @@ namespace _5gpro.Forms
             dbAcrescimoParcela.Valor = 0.00m;
             dbDescontoParcela.Valor = 0.00m;
             tbDataQuitacao.Clear();
+            tbSituacaoParcela.Clear();
+            tbFormaPagamentoParcela.Clear();
             this.parcelaSelecionada = null;
             btNovaParcela.Enabled = true;
             btExcluirParcela.Enabled = false;

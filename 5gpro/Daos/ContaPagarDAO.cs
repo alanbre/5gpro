@@ -99,7 +99,7 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento 
                                                     FROM conta_pagar AS c
                                                     LEFT JOIN parcela_conta_pagar AS p 
                                                     ON  c.idconta_pagar = p.idconta_pagar
@@ -234,7 +234,7 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento 
                                                     FROM conta_pagar AS c
                                                     LEFT JOIN parcela_conta_pagar AS p 
                                                     ON  c.idconta_pagar = p.idconta_pagar
@@ -271,7 +271,7 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento  
                                                     FROM conta_pagar AS c
                                                     LEFT JOIN parcela_conta_pagar AS p 
                                                     ON  c.idconta_pagar = p.idconta_pagar
@@ -328,11 +328,11 @@ namespace _5gpro.Daos
 
                 if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
                 {
-                    if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
+                    if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
                     {
                         formapagamento = new FormaPagamento
                         {
-                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
                             Nome = reader.GetString(reader.GetOrdinal("nome"))
                         };
                     }
@@ -348,7 +348,7 @@ namespace _5gpro.Daos
                         Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                         Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
                         Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                        Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
 
                     };
 
@@ -359,13 +359,17 @@ namespace _5gpro.Daos
 
             while (reader.Read())
             {
-                if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
+                if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
                 {
                     formapagamento = new FormaPagamento
                     {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
                         Nome = reader.GetString(reader.GetOrdinal("nome"))
                     };
+                }
+                else
+                {
+                    formapagamento = null;
                 }
 
                 parcela = new ParcelaContaPagar
@@ -379,7 +383,7 @@ namespace _5gpro.Daos
                     Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                     Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
                     Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                    Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                    Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
 
                 };
 
@@ -389,6 +393,7 @@ namespace _5gpro.Daos
 
             if (listaparcelas.Count > 0)
             {
+                contaPagar.Parcelas = new List<ParcelaContaPagar>();
                 contaPagar.Parcelas = listaparcelas;
             }
 
