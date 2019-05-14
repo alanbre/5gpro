@@ -31,11 +31,9 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
+        private void DgvDocumentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => Selecionar();
 
-        private void DgvDocumentos_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void Pesquisar()
         {
@@ -48,7 +46,7 @@ namespace _5gpro.Forms
                 DataEntradaInicial = dtpFiltroDataEntradaSaidaInicial.Value,
                 DataEntradaFinal = dtpFiltroDataEntradaSaidaFinal.Value,
                 ValorInicial = dbValorInicial.Valor,
-                ValorFinal = dbValorInicial.Valor
+                ValorFinal = dbValorFinal.Valor
             };
 
             notasFiscaisTerceiros = notaFiscalTerceirosDAO.Busca(f);
@@ -64,6 +62,16 @@ namespace _5gpro.Forms
                                        nf.ValorTotalDocumento);
             }
             dgvDocumentos.Refresh();
+        }
+        private void Selecionar()
+        {
+            if (dgvDocumentos.SelectedRows.Count <= 0)
+                return;
+
+            int selectedRowIndex = dgvDocumentos.SelectedCells[0].RowIndex;
+            var selectedRow = dgvDocumentos.Rows[selectedRowIndex];
+            notaFiscalTerceirosSelecionada = notaFiscalTerceirosDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
+            this.Close();
         }
 
     }
