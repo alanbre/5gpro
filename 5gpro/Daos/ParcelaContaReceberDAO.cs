@@ -114,6 +114,7 @@ namespace _5gpro.Daos
                 Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                 Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
                 Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
+                Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                 DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                 ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber"))
             };

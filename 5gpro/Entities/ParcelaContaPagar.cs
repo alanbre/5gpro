@@ -22,12 +22,13 @@ namespace _5gpro.Entities
         {
             get
             {
-                return this.Valor + this.Multa + this.Juros - this.Desconto;
+                return this.Valor + this.Multa + this.Juros + this.Acrescimo - this.Desconto;
             }
         }
 
         public DateTime? DataQuitacao { get; set; }
 
         public FormaPagamento FormaPagamento { get; set; }
+        public string Situacao { get; set; }
     }
 }
