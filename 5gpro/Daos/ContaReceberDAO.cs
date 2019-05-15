@@ -135,7 +135,9 @@ namespace _5gpro.Daos
             var contaRecebers = new List<ContaReceber>();
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             string whereOperacao = f.filtroOperacao != null ? "AND op.idoperacao = @idoperacao": "";
-
+            string whereValorFinal = f.usarvalorContaFiltro ? "AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
+            string whereDatCadastro = f.usardataCadastroFiltro ? "AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
 
             Operacao operacao = null;
             Pessoa pessoa = null;
@@ -145,19 +147,19 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
-                                                    cr.valor_final, cr.acrescimo, cr.desconto
-                                                    FROM 
-                                                    conta_receber cr 
+                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento
+                                                    FROM conta_receber cr 
                                                     LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
                                                     LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
                                                     LEFT JOIN parcela_conta_receber pa ON pa.idconta_receber = cr.idconta_receber
                                                     WHERE 1 = 1 "
+                                             + wherePessoa + " "
                                              + whereOperacao + " "
-                                             + wherePessoa + " " +
-                                          @" AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
-                                             AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                             AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
-                                             GROUP BY cr.idconta_receber", Connect.Conexao);
+                                             + whereValorFinal + " "
+                                             + whereDatCadastro + " "
+                                             + whereDataVencimento + " " 
+                                             +"GROUP BY cr.idconta_receber", Connect.Conexao);
+
                 if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
                 if (f.filtroOperacao != null) { Connect.Comando.Parameters.AddWithValue("@idoperacao", f.filtroOperacao.OperacaoID); }
 
