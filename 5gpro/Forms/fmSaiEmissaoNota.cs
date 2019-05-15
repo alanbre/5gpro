@@ -596,6 +596,10 @@ namespace _5gpro.Forms
             }
         }
 
+        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
+        {
+
+        }
 
         private void SetarNivel()
         {
