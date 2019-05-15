@@ -371,5 +371,77 @@ namespace _5gpro.Daos
             }
             return itensNotaFiscal;
         }
+        public void LimpaRegistrosEstoque(NotaFiscalTerceiros nota)
+        {
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"DELETE FROM registro_estoque 
+                                                WHERE documento = @documento
+                                                AND idpessoa = @idpessoa
+                                                AND tipomovimentacao = 'E'", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@documento", nota.NotaFiscalTerceirosID.ToString());
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", nota.Pessoa?.PessoaID ?? null);
+                Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+        }
+        public int MovimentaEstoque(NotaFiscalTerceiros nota)
+        {
+            int retorno = 0;
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = Connect.Conexao.CreateCommand();
+                Connect.tr = Connect.Conexao.BeginTransaction();
+                Connect.Comando.Connection = Connect.Conexao;
+                Connect.Comando.Transaction = Connect.tr;
+
+                foreach (var i in nota.NotaFiscalTerceirosItem)
+                {
+                    Connect.Comando.CommandText = @"INSERT INTO registro_estoque 
+                                                (tipomovimentacao, data, documento, iditem, quantidade, idpessoa)
+                                                VALUES
+                                                (@tipomovimentacao, @data, @documento, @iditem, @quantidade, @idpessoa)";
+                    Connect.Comando.Parameters.Clear();
+                    Connect.Comando.Parameters.AddWithValue("@tipomovimentacao", "E");
+                    Connect.Comando.Parameters.AddWithValue("@data", nota.DataEntradaSaida);
+                    Connect.Comando.Parameters.AddWithValue("@documento", nota.NotaFiscalTerceirosID.ToString());
+                    Connect.Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
+                    Connect.Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
+                    Connect.Comando.Parameters.AddWithValue("@idpessoa", nota.Pessoa?.PessoaID ?? null);
+                    retorno = Connect.Comando.ExecuteNonQuery();
+
+                    Connect.Comando.Parameters.Clear();
+                    Connect.Comando.CommandText = @"UPDATE item SET quantidade = 
+                                                    (SELECT COALESCE(SUM(quantidade), 0) FROM registro_estoque WHERE iditem = @iditem AND tipomovimentacao = 'E')
+                                                    -
+                                                    (SELECT COALESCE(SUM(quantidade), 0) FROM registro_estoque WHERE iditem = @iditem AND tipomovimentacao = 'S')
+                                                    WHERE iditem = @iditem";
+                    Connect.Comando.Parameters.AddWithValue("@quantidade_atualizada", i.Item.Quantidade - i.Quantidade);
+                    Connect.Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
+                    Connect.Comando.ExecuteNonQuery();
+                }
+                Connect.tr.Commit();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return retorno;
+        }
     }
 }

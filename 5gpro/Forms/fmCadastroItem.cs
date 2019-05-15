@@ -145,7 +145,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    Item newitem = itemDAO.BuscarItemById(int.Parse(tbCodigo.Text));
+                    Item newitem = itemDAO.BuscarById(int.Parse(tbCodigo.Text));
                     if (newitem != null)
                     {
                         item = newitem;
@@ -173,7 +173,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        Item newitem = itemDAO.BuscarItemById(int.Parse(tbCodigo.Text));
+                        Item newitem = itemDAO.BuscarById(int.Parse(tbCodigo.Text));
                         if (newitem != null)
                         {
                             item = newitem;
@@ -272,7 +272,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = itemDAO.ProxCodigoDisponivel();
                     item = null;
                     tbDescricao.Focus();
                     Editando(true);
@@ -281,7 +281,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = itemDAO.ProxCodigoDisponivel();
                 item = null;
                 tbDescricao.Focus();
                 Editando(true);
@@ -386,7 +386,7 @@ namespace _5gpro.Forms
                                      MessageBoxButtons.YesNo,
                                      MessageBoxIcon.Information) == DialogResult.Yes)
                 {
-                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
+                    tbCodigo.Text = itemDAO.ProxCodigoDisponivel().ToString();
                 }
                 ok = false;
             }
@@ -430,7 +430,7 @@ namespace _5gpro.Forms
                 {
                     if (item != null)
                     {
-                        item = itemDAO.BuscarItemById(item.ItemID);
+                        item = itemDAO.BuscarById(item.ItemID);
                         PreencheCampos(item);
                         Editando(false);
                     }
@@ -443,7 +443,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                item = itemDAO.BuscarItemById(item.ItemID);
+                item = itemDAO.BuscarById(item.ItemID);
                 PreencheCampos(item);
                 Editando(false);
             }
@@ -460,7 +460,7 @@ namespace _5gpro.Forms
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 validacao.despintarCampos(controls);
-                Item newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
+                Item newitem = itemDAO.Proximo(tbCodigo.Text);
                 if (newitem != null)
                 {
                     item = newitem;
@@ -475,7 +475,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Item newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
+                    Item newitem = itemDAO.Proximo(tbCodigo.Text);
                     if (newitem != null)
                     {
                         item = newitem;
@@ -484,7 +484,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
+                        newitem = itemDAO.Proximo(tbCodigo.Text);
                         if (newitem != null)
                         {
                             item = newitem;
@@ -506,7 +506,7 @@ namespace _5gpro.Forms
             if (!editando && tbCodigo.Text.Length > 0)
             {
                 validacao.despintarCampos(controls);
-                Item newitem = itemDAO.BuscarItemAnterior(tbCodigo.Text);
+                Item newitem = itemDAO.Anterior(tbCodigo.Text);
                 if (newitem != null)
                 {
                     item = newitem;
@@ -521,7 +521,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Item newitem = itemDAO.BuscarItemAnterior(tbCodigo.Text);
+                    Item newitem = itemDAO.Anterior(tbCodigo.Text);
                     if (newitem != null)
                     {
                         item = newitem;
@@ -530,7 +530,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
+                        newitem = itemDAO.Proximo(tbCodigo.Text);
                         if (newitem != null)
                         {
                             item = newitem;

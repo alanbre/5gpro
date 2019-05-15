@@ -68,7 +68,7 @@ namespace _5gpro.Forms
             if (dgvDocumentos.SelectedRows.Count <= 0)
                 return;
 
-            int selectedRowIndex = dgvDocumentos.SelectedCells[0].RowIndex;
+            var selectedRowIndex = dgvDocumentos.SelectedCells[0].RowIndex;
             var selectedRow = dgvDocumentos.Rows[selectedRowIndex];
             notaFiscalTerceirosSelecionada = notaFiscalTerceirosDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();

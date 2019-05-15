@@ -126,6 +126,7 @@
             0,
             0,
             131072});
+            this.dbValorTotalDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbValorTotalDocumento_Valor_Changed);
             // 
             // dbDescontoDocumento
             // 
@@ -138,6 +139,7 @@
             0,
             0,
             131072});
+            this.dbDescontoDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbDescontoDocumento_Valor_Changed);
             this.dbDescontoDocumento.Leave += new System.EventHandler(this.DbDescontoDocumento_Leave);
             // 
             // dbDescontoTotalItens
@@ -573,6 +575,7 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(65, 20);
             this.tbCodigo.TabIndex = 1;
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbNumeroDocumento
             // 

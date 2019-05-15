@@ -6,30 +6,33 @@ using System.Collections.Generic;
 
 namespace _5gpro.Daos
 {
-    class NotaFiscalPropriaDAO : ConexaoDAO
+    class NotaFiscalPropriaDAO
     {
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private static ConexaoDAO Connect;
+        public NotaFiscalPropriaDAO(ConexaoDAO c)
+        {
+            Connect = c;
+        }
 
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT nf1.idnotafiscal + 1 AS proximoid 
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT nf1.idnotafiscal + 1 AS proximoid 
                                              FROM notafiscal AS nf1 
                                              LEFT OUTER JOIN notafiscal AS nf2 ON nf1.idnotafiscal + 1 = nf2.idnotafiscal 
                                              WHERE nf2.idnotafiscal IS NULL 
                                              ORDER BY proximoid 
-                                             LIMIT 1;", Conexao);
+                                             LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    reader.Close();
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -38,41 +41,43 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             return proximoid;
         }
         public NotaFiscalPropria BuscaByID(int codigo)
         {
-            NotaFiscalPropria notafiscal = new NotaFiscalPropria();
-           
+            var notafiscal = new NotaFiscalPropria();
+            var pessoa = new Pessoa();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM notafiscal WHERE idnotafiscal = @idnotafiscal", Conexao);
-                Comando.Parameters.AddWithValue("@idnotafiscal", codigo);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM notafiscal WHERE idnotafiscal = @idnotafiscal", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", codigo);
 
-                IDataReader reader = Comando.ExecuteReader();
 
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    notafiscal = new NotaFiscalPropria
+                    if (reader.Read())
                     {
-                        NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                        DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                        DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
-                        ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
-                        DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    notafiscal = null;
+                        notafiscal = new NotaFiscalPropria
+                        {
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                            DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"))
+                        };
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        notafiscal.Pessoa = pessoa;
+                    }
+                    else
+                    {
+                        notafiscal = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -81,7 +86,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             if (notafiscal != null)
             {
@@ -92,33 +97,34 @@ namespace _5gpro.Daos
         public NotaFiscalPropria Proximo(int codAtual)
         {
             NotaFiscalPropria notafiscal = new NotaFiscalPropria();
-
+            var pessoa = new Pessoa();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM notafiscal WHERE idnotafiscal = (SELECT min(idnotafiscal) FROM notafiscal WHERE idnotafiscal > @idnotafiscal)", Conexao);
-                Comando.Parameters.AddWithValue("@idnotafiscal", codAtual);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM notafiscal WHERE idnotafiscal = (SELECT min(idnotafiscal) FROM notafiscal WHERE idnotafiscal > @idnotafiscal)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", codAtual);
 
-                IDataReader reader = Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    notafiscal = new NotaFiscalPropria
+                    if (reader.Read())
                     {
-                        NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                        DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                        DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
-                        ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
-                        DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    notafiscal = null;
+                        notafiscal = new NotaFiscalPropria
+                        {
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                            DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"))
+                        };
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        notafiscal.Pessoa = pessoa;
+                    }
+                    else
+                    {
+                        notafiscal = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -127,7 +133,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             if (notafiscal != null) { notafiscal.NotaFiscalPropriaItem = BuscaItensDaNotaFiscal(notafiscal); }
@@ -136,33 +142,35 @@ namespace _5gpro.Daos
         }
         public NotaFiscalPropria Anterior(int codAtual)
         {
-            NotaFiscalPropria notafiscal = new NotaFiscalPropria();
+            var notafiscal = new NotaFiscalPropria();
+            var pessoa = new Pessoa();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM notafiscal WHERE idnotafiscal = (SELECT max(idnotafiscal) FROM notafiscal WHERE idnotafiscal < @idnotafiscal)", Conexao);
-                Comando.Parameters.AddWithValue("@idnotafiscal", codAtual);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM notafiscal WHERE idnotafiscal = (SELECT max(idnotafiscal) FROM notafiscal WHERE idnotafiscal < @idnotafiscal)", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", codAtual);
 
-                IDataReader reader = Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    notafiscal = new NotaFiscalPropria
+                    if (reader.Read())
                     {
-                        NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                        DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                        DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                        ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
-                        ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                        DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
-                        DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                        Pessoa = pessoaDAO.BuscaById(reader.GetInt32(reader.GetOrdinal("idpessoa")))
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    notafiscal = null;
+                        notafiscal = new NotaFiscalPropria
+                        {
+                            NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
+                            DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
+                            DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
+                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valor_total_itens")),
+                            ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
+                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("desconto_total_itens")),
+                            DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento"))
+                        };
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        notafiscal.Pessoa = pessoa;
+                    }
+                    else
+                    {
+                        notafiscal = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -171,7 +179,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
 
             if (notafiscal != null) { notafiscal.NotaFiscalPropriaItem = BuscaItensDaNotaFiscal(notafiscal); }
@@ -183,14 +191,14 @@ namespace _5gpro.Daos
             int retorno = 0;
             try
             {
-                AbrirConexao();
-                Comando = Conexao.CreateCommand();
-                tr = Conexao.BeginTransaction();
-                Comando.Connection = Conexao;
-                Comando.Transaction = tr;
+                Connect.AbrirConexao();
+                Connect.Comando = Connect.Conexao.CreateCommand();
+                Connect.tr = Connect.Conexao.BeginTransaction();
+                Connect.Comando.Connection = Connect.Conexao;
+                Connect.Comando.Transaction = Connect.tr;
 
 
-                Comando.CommandText = @"INSERT INTO notafiscal
+                Connect.Comando.CommandText = @"INSERT INTO notafiscal
                          (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa)
                           VALUES
                          (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa)
@@ -200,41 +208,41 @@ namespace _5gpro.Daos
                           idpessoa = @idpessoa
                           ";
 
-                Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
-                Comando.Parameters.AddWithValue("@data_emissao", notafiscal.DataEmissao);
-                Comando.Parameters.AddWithValue("@data_entradasaida", notafiscal.DataEntradaSaida);
-                Comando.Parameters.AddWithValue("@tiponf", "S");
-                Comando.Parameters.AddWithValue("@valor_total_itens", notafiscal.ValorTotalItens);
-                Comando.Parameters.AddWithValue("@valor_documento", notafiscal.ValorTotalDocumento);
-                Comando.Parameters.AddWithValue("@desconto_total_itens", notafiscal.DescontoTotalItens);
-                Comando.Parameters.AddWithValue("@desconto_documento", notafiscal.DescontoDocumento);
-                if (notafiscal.Pessoa != null) { Comando.Parameters.AddWithValue("@idpessoa", notafiscal.Pessoa.PessoaID); }
+                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
+                Connect.Comando.Parameters.AddWithValue("@data_emissao", notafiscal.DataEmissao);
+                Connect.Comando.Parameters.AddWithValue("@data_entradasaida", notafiscal.DataEntradaSaida);
+                Connect.Comando.Parameters.AddWithValue("@tiponf", "S");
+                Connect.Comando.Parameters.AddWithValue("@valor_total_itens", notafiscal.ValorTotalItens);
+                Connect.Comando.Parameters.AddWithValue("@valor_documento", notafiscal.ValorTotalDocumento);
+                Connect.Comando.Parameters.AddWithValue("@desconto_total_itens", notafiscal.DescontoTotalItens);
+                Connect.Comando.Parameters.AddWithValue("@desconto_documento", notafiscal.DescontoDocumento);
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", notafiscal.Pessoa?.PessoaID ?? null);
 
-                retorno = Comando.ExecuteNonQuery();
+                retorno = Connect.Comando.ExecuteNonQuery();
 
 
                 if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
                 {
-                    Comando.CommandText = @"DELETE FROM notafiscal_has_item WHERE idnotafiscal = @idnotafiscal";
-                    Comando.ExecuteNonQuery();
+                    Connect.Comando.CommandText = @"DELETE FROM notafiscal_has_item WHERE idnotafiscal = @idnotafiscal";
+                    Connect.Comando.ExecuteNonQuery();
 
-                    Comando.CommandText = @"INSERT INTO notafiscal_has_item (idnotafiscal, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
+                    Connect.Comando.CommandText = @"INSERT INTO notafiscal_has_item (idnotafiscal, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
                                             VALUES
                                             (@idnotafiscal, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
-                    foreach (NotaFiscalPropriaItem i in notafiscal.NotaFiscalPropriaItem)
+                    foreach (var i in notafiscal.NotaFiscalPropriaItem)
                     {
-                        Comando.Parameters.Clear();
-                        Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
-                        Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
-                        Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
-                        Comando.Parameters.AddWithValue("@valor_unitario", i.ValorUnitario);
-                        Comando.Parameters.AddWithValue("@valor_total", i.ValorTotal);
-                        Comando.Parameters.AddWithValue("@desconto_porc", i.DescontoPorc);
-                        Comando.Parameters.AddWithValue("@desconto", i.Desconto);
-                        Comando.ExecuteNonQuery();
+                        Connect.Comando.Parameters.Clear();
+                        Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
+                        Connect.Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
+                        Connect.Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
+                        Connect.Comando.Parameters.AddWithValue("@valor_unitario", i.ValorUnitario);
+                        Connect.Comando.Parameters.AddWithValue("@valor_total", i.ValorTotal);
+                        Connect.Comando.Parameters.AddWithValue("@desconto_porc", i.DescontoPorc);
+                        Connect.Comando.Parameters.AddWithValue("@desconto", i.Desconto);
+                        Connect.Comando.ExecuteNonQuery();
                     }
                 }
-                tr.Commit();
+                Connect.tr.Commit();
             }
             catch (MySqlException ex)
             {
@@ -243,23 +251,23 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return retorno;
-        }        
+        }
         public List<NotaFiscalPropriaItem> BuscaItensDaNotaFiscal(NotaFiscalPropria notafiscal)
         {
             List<NotaFiscalPropriaItem> itensNotaFiscal = new List<NotaFiscalPropriaItem>();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT * 
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT * 
                                              FROM notafiscal_has_item ni INNER JOIN item i 
                                              ON ni.iditem = i.iditem 
-                                             WHERE idnotafiscal = @idnotafiscal", Conexao);
-                Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
+                                             WHERE idnotafiscal = @idnotafiscal", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -295,9 +303,83 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return itensNotaFiscal;
+        }
+
+        public void LimpaRegistrosEstoque(NotaFiscalPropria nota)
+        {
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"DELETE FROM registro_estoque 
+                                                WHERE documento = @documento
+                                                AND idpessoa = @idpessoa
+                                                AND tipomovimentacao = 'S'", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@documento", nota.NotaFiscalPropriaID.ToString());
+                Connect.Comando.Parameters.AddWithValue("@idpessoa", nota.Pessoa?.PessoaID ?? null);
+                Connect.Comando.ExecuteNonQuery();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+        }
+
+        public int MovimentaEstoque(NotaFiscalPropria nota)
+        {
+            int retorno = 0;
+
+            try
+            {
+                Connect.AbrirConexao();
+                Connect.Comando = Connect.Conexao.CreateCommand();
+                Connect.tr = Connect.Conexao.BeginTransaction();
+                Connect.Comando.Connection = Connect.Conexao;
+                Connect.Comando.Transaction = Connect.tr;
+
+                foreach (var i in nota.NotaFiscalPropriaItem)
+                {
+                    Connect.Comando.CommandText = @"INSERT INTO registro_estoque 
+                                                (tipomovimentacao, data, documento, iditem, quantidade, idpessoa)
+                                                VALUES
+                                                (@tipomovimentacao, @data, @documento, @iditem, @quantidade, @idpessoa)";
+                    Connect.Comando.Parameters.Clear();
+                    Connect.Comando.Parameters.AddWithValue("@tipomovimentacao", "S");
+                    Connect.Comando.Parameters.AddWithValue("@data", nota.DataEntradaSaida);
+                    Connect.Comando.Parameters.AddWithValue("@documento", nota.NotaFiscalPropriaID.ToString());
+                    Connect.Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
+                    Connect.Comando.Parameters.AddWithValue("@quantidade", i.Quantidade);
+                    Connect.Comando.Parameters.AddWithValue("@idpessoa", nota.Pessoa?.PessoaID ?? null);
+                    retorno = Connect.Comando.ExecuteNonQuery();
+
+                    Connect.Comando.Parameters.Clear();
+                    Connect.Comando.CommandText = @"UPDATE item SET quantidade = 
+                                                    (SELECT COALESCE(SUM(quantidade), 0) FROM registro_estoque WHERE iditem = @iditem AND tipomovimentacao = 'E')
+                                                    -
+                                                    (SELECT COALESCE(SUM(quantidade), 0) FROM registro_estoque WHERE iditem = @iditem AND tipomovimentacao = 'S')
+                                                    WHERE iditem = @iditem";
+                    Connect.Comando.Parameters.AddWithValue("@quantidade_atualizada", i.Item.Quantidade - i.Quantidade);
+                    Connect.Comando.Parameters.AddWithValue("@iditem", i.Item.ItemID);
+                    Connect.Comando.ExecuteNonQuery();
+                }
+                Connect.tr.Commit();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+            finally
+            {
+                Connect.FecharConexao();
+            }
+
+            return retorno;
         }
     }
 }

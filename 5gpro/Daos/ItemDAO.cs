@@ -58,7 +58,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public Item BuscarItemById(int cod)
+        public Item BuscarById(int cod)
         {
             Item item = null;
             SubGrupoItem subgrupoitem = null;
@@ -107,6 +107,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
                         Unimedida = unimedida,
                         SubGrupoItem = subgrupoitem
                     };
@@ -128,7 +129,7 @@ namespace _5gpro.Daos
             return item;
         }
 
-        public Item BuscarProximoItem(string codAtual)
+        public Item Proximo(string codAtual)
         {
             Item item = null;
             SubGrupoItem subgrupoitem = null;
@@ -178,6 +179,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
                         Unimedida = unimedida,
                         SubGrupoItem = subgrupoitem
                     };
@@ -200,7 +202,7 @@ namespace _5gpro.Daos
             return item;
         }
 
-        public Item BuscarItemAnterior(string codAtual)
+        public Item Anterior(string codAtual)
         {
             Item item = new Item();
             SubGrupoItem subgrupoitem = null;
@@ -250,6 +252,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
                         Unimedida = unimedida,
                         SubGrupoItem = subgrupoitem
                     };
@@ -272,7 +275,7 @@ namespace _5gpro.Daos
             return item;
         }
 
-        public List<Item> BuscaItem(string descItem, string denomItem, string tipoItem)
+        public List<Item> Busca(string descItem, string denomItem, string tipoItem)
         {
             SubGrupoItem subgrupoitem = null;
             GrupoItem grupoitem = null;
@@ -335,6 +338,7 @@ namespace _5gpro.Daos
                         ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
                         ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
                         Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
                         Unimedida = unimedida,
                         SubGrupoItem = subgrupoitem
                     };
@@ -352,7 +356,7 @@ namespace _5gpro.Daos
             return itens;
         }
 
-        public string BuscaProxCodigoDisponivel()
+        public string ProxCodigoDisponivel()
         {
             string proximoid = null;
             try

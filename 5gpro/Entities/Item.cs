@@ -35,5 +35,6 @@ namespace _5gpro.Entities
         [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoItem", AllowEmptyStrings = false)]
         public SubGrupoItem SubGrupoItem { get; set; }
 
+        public decimal Quantidade { get; set; }
     }
 }
