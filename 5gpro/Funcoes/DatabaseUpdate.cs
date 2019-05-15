@@ -650,7 +650,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL,
+  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,
