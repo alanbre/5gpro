@@ -11,8 +11,7 @@ namespace _5gpro.Forms
 
         public ContaPagar contaPagarSelecionada = null;
         private IEnumerable<ContaPagar> contasPagar;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO(connection);
+        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO();
         public struct Filtros
         {
             public Pessoa filtroPessoa;

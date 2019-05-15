@@ -9,13 +9,42 @@ namespace _5gpro.Daos
 {
     public class ConexaoDAO
     {
-        protected string Conecta = DatabaseUpdate.dataBaseString;
+        private static ConexaoDAO conexaoDAO;
+
+        public string database = "5gprodatabase";
+        public string server = "localhost";
+        public string uid = "5gprouser";
+        public string pwd = "5gproedualan";
+        public string Conecta
+        {
+            get
+            {
+                return "DATABASE=" + database + ";SERVER=" + server + ";UID=" + uid + ";PWD=" + pwd;
+            }
+        }
+        public string ConectaSemBase
+        {
+            get
+            {
+                return "SERVER=" +server + ";UID=" + uid + ";PWD=" + pwd;
+            }
+        }
 
         public MySqlConnection Conexao;
         public MySqlTransaction tr = null;
         public MySqlCommand Comando = null;
 
-        //MÉTODO PARA CONECTAR NO BANCO
+        private ConexaoDAO()
+        {
+
+        }
+
+        public static ConexaoDAO GetInstance()
+        {
+            if (conexaoDAO == null)
+                conexaoDAO = new ConexaoDAO();
+            return conexaoDAO;
+        }
         public void AbrirConexao()
         {
             try
@@ -28,9 +57,18 @@ namespace _5gpro.Daos
                 Console.WriteLine("Error: {0}", ex.ToString());
             }
         }
-
-        //METODO PARA FECHAR A CONEXAO COM O BANCO
-
+        public void AbrirConexaoSemBase()
+        {
+            try
+            {
+                Conexao = new MySqlConnection(ConectaSemBase);
+                Conexao.Open();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+        }
         public void FecharConexao()
         {
             try

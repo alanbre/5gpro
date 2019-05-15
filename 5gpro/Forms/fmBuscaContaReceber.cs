@@ -10,8 +10,7 @@ namespace _5gpro.Forms
     {
         public ContaReceber contaReceberSelecionada = null;
         private IEnumerable<ContaReceber> contasReceber;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;

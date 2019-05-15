@@ -11,9 +11,8 @@ namespace _5gpro.Forms
     public partial class fmOrcBuscaOrcamento : Form
     {
         public Orcamento orcamentoSelecionado = null;
-        List<Orcamento> orcamentos;
-        static ConexaoDAO connection = new ConexaoDAO();
-        OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
+        private List<Orcamento> orcamentos;
+        private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 

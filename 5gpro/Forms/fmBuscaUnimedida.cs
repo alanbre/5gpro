@@ -14,10 +14,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaUnimedida : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         public List<Unimedida> listaunimedida;
         public Unimedida Unimedida;
-        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
+        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
         public Unimedida unimedidaSelecionada;
 
 

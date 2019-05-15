@@ -12,8 +12,7 @@ namespace _5gpro.Controls
         public Pessoa pessoa = null;
         public int atuacao; //será utilizado para filtrar só fornecedor ou só cliente
 
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         [Description("Texto do Label"), Category("Appearance")]
         public string LabelText

@@ -10,20 +10,19 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroItem : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         public Unimedida unimedidadostestes = null;
 
         Item item;
         Unimedida unimedida = new Unimedida();
-        ItemDAO itemDAO = new ItemDAO(connection);
-        UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
+        ItemDAO itemDAO = new ItemDAO();
+        UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
         Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
-        GrupoItemDAO grupoitemdao = new GrupoItemDAO(connection);
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        GrupoItemDAO grupoitemdao = new GrupoItemDAO();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

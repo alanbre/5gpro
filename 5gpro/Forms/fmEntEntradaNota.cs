@@ -10,9 +10,10 @@ namespace _5gpro.Forms
 {
     public partial class fmEntEntradaNota : Form
     {
-        private readonly static ConexaoDAO connection = new ConexaoDAO();
-        private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO(connection);
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+
+
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         private NotaFiscalTerceiros notaFiscalTerceiros = new NotaFiscalTerceiros();
@@ -20,9 +21,9 @@ namespace _5gpro.Forms
         private List<NotaFiscalTerceirosItem> itens = new List<NotaFiscalTerceirosItem>();
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
@@ -56,6 +57,19 @@ namespace _5gpro.Forms
             }
 
             EnterTab(this.ActiveControl, e);
+        }
+        private void FmEntEntradaNota_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
@@ -495,6 +509,8 @@ namespace _5gpro.Forms
                 dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
             }
         }
+
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC

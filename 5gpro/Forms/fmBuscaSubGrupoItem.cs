@@ -17,8 +17,7 @@ namespace _5gpro.Forms
         GrupoItem grupoitem = null;
         List<SubGrupoItem> listasubgrupoitem;
         public SubGrupoItem subgrupoitemSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO(connection);
+        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
 
         public fmBuscaSubGrupoItem(int grupoitemID)
         {

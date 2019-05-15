@@ -10,8 +10,7 @@ namespace _5gpro.Forms
     {
         private IEnumerable<NotaFiscalTerceiros> notasFiscaisTerceiros;
         public NotaFiscalTerceiros notaFiscalTerceirosSelecionada = null;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO(connection);
+        private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
 
 
         public struct Filtros

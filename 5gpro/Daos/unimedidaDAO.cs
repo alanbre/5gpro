@@ -8,11 +8,8 @@ namespace _5gpro.Daos
 {
     class UnimedidaDAO
     {
-        public ConexaoDAO Connect { get; }
-        public UnimedidaDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+
 
         public int Salvar(Unimedida unimedida)
         {

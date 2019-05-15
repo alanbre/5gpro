@@ -10,8 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaOperacao : UserControl
     {
         public Operacao operacao;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
+        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO();
 
         public BuscaOperacao()
         {

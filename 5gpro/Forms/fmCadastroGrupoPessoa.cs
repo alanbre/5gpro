@@ -10,18 +10,17 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroGrupoPessoa : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         GrupoPessoa grupopessoa = null;
-        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO(connection);
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO(connection);
+        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO();
+        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
         Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
         List<SubGrupoPessoa> listadesubgrupopessoa = new List<SubGrupoPessoa>();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

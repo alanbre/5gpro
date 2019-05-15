@@ -12,8 +12,7 @@ namespace _5gpro.Controls
 
         public SubGrupoItem subgrupoItem = null;
         private GrupoItem gruporecebido = null;
-        private static readonly ConexaoDAO conexao = new ConexaoDAO();
-        private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO(conexao);
+        private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO();
 
         public BuscaSubGrupoItem()
         {

@@ -11,18 +11,17 @@ namespace _5gpro.Forms
     public partial class fmCadastroGrupoUsuario : Form
     {
         //CÓDIGO DA TELA CAD.GRUPO USUARIO = 010400
-        static ConexaoDAO connection = new ConexaoDAO();
 
         GrupoUsuario grupousuario;
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
         List<Permissao> listapermissoes = new List<Permissao>();
         Validacao validacao = new Validacao();
         int NivelTodas = 0;
 
         //Controle de permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

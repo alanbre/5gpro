@@ -12,11 +12,10 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
-
         private Permissao permissao = new Permissao();
-        private PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        private PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado = new Logado();
-        private LogadoDAO logadoDAO = new LogadoDAO(fmLogin.connection);
+        private LogadoDAO logadoDAO = new LogadoDAO();
         private NetworkAdapter adap = new NetworkAdapter();
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
@@ -46,8 +45,6 @@ namespace _5gpro
             t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
         }
-
-        static ConexaoDAO connection = new ConexaoDAO();
 
         public struct PermissaoNivelStruct
         {

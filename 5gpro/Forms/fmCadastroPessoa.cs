@@ -12,14 +12,13 @@ namespace _5gpro.Forms
     public partial class fmCadastroPessoa : Form
     {
         private Pessoa pessoa;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

@@ -51,7 +51,7 @@ namespace _5gpro.Forms
         {
             dgvCidades.Rows.Clear();
             int codEstado = buscaEstado.estado?.EstadoID ?? 0;
-            Cidades = cidadeDAO.BuscaCidades(codEstado, tbFiltroNomeCidade.Text);
+            Cidades = cidadeDAO.Busca(codEstado, tbFiltroNomeCidade.Text);
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
 
             foreach (Cidade c in Cidades)

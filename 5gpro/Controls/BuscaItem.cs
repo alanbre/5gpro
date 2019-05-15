@@ -9,9 +9,8 @@ namespace _5gpro.Controls
 {
     public partial class BuscaItem : UserControl
     {
-        private static readonly ConexaoDAO connection = new ConexaoDAO();
         public Item item = null;
-        private readonly ItemDAO itemDAO = new ItemDAO(connection);
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
         public BuscaItem()
         {

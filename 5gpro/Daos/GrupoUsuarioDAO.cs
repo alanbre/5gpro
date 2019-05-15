@@ -10,19 +10,13 @@ namespace _5gpro.Daos
 
     class GrupoUsuarioDAO
     {
+        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
-        public ConexaoDAO Connect { get; }
-        public GrupoUsuarioDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
-
-        
         public GrupoUsuario BuscarGrupoUsuarioById(int cod)
         {
 
             GrupoUsuario grupousuario = new GrupoUsuario();
-            PermissaoDAO permissaoDAO = new PermissaoDAO(Connect);
+            PermissaoDAO permissaoDAO = new PermissaoDAO();
 
             try
             {
@@ -104,7 +98,7 @@ namespace _5gpro.Daos
 
         public List<GrupoUsuario> BuscarTodosGrupoUsuarios()
         {
-            PermissaoDAO permissaoDAO = new PermissaoDAO(Connect);
+            PermissaoDAO permissaoDAO = new PermissaoDAO();
             List<GrupoUsuario> listagrupousuario = new List<GrupoUsuario>();
             try
             {
@@ -137,7 +131,7 @@ namespace _5gpro.Daos
 
         public int SalvarOuAtualizarGrupoUsuario(GrupoUsuario grupousuario, List<Permissao> listapermissoes)
         {
-            PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+            PermissaoDAO permissaoDAO = new PermissaoDAO();
             int retorno = 0;
             try
             {

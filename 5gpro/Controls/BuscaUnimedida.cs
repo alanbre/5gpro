@@ -10,8 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaUnimedida : UserControl
     {
         public Unimedida unimedida = null;
-        private static readonly ConexaoDAO conexao = new ConexaoDAO();
-        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO(conexao);
+        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
 
         public BuscaUnimedida()
         {

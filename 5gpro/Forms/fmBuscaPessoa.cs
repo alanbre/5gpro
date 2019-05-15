@@ -11,8 +11,7 @@ namespace _5gpro.Forms
     {
         public Pessoa pessoaSelecionada = null;
         private List<Pessoa> Pessoas;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         public fmBuscaPessoa()
         {

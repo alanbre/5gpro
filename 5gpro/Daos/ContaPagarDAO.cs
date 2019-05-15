@@ -9,11 +9,8 @@ namespace _5gpro.Daos
 {
     class ContaPagarDAO
     {
-        private static ConexaoDAO Connect;
-        public ContaPagarDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
+
         public int SalvaOuAtualiza(ContaPagar contaPagar)
         {
             int retorno = 0;

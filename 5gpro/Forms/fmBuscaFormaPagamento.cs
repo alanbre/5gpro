@@ -16,8 +16,7 @@ namespace _5gpro.Forms
     {
         List<FormaPagamento> listaformapagamento;
         public FormaPagamento formapagamentoSelecionada = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        FormaPagamentoDAO formapagamentoDAO = new FormaPagamentoDAO(connection);
+        FormaPagamentoDAO formapagamentoDAO = new FormaPagamentoDAO();
 
         public fmBuscaFormaPagamento()
         {

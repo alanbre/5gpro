@@ -6,21 +6,21 @@ using System.Data;
 
 namespace _5gpro.Daos
 {
-    class CidadeDAO: ConexaoDAO
+    class CidadeDAO
     {
-        public EstadoDAO estadoDAO = new EstadoDAO();
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
 
-        public Cidade BuscaCidadeByCod(int cod)
+        public Cidade BuscaByID(int cod)
         {
             Cidade cidade = new Cidade();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM cidade WHERE idcidade = @idcidade", Conexao);
-                Comando.Parameters.AddWithValue("@idcidade", cod);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM cidade WHERE idcidade = @idcidade", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idcidade", cod);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -41,12 +41,12 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return cidade;
         }
 
-        public List<Cidade> BuscaCidades(int codEstado, string nomeCidade)
+        public List<Cidade> Busca(int codEstado, string nomeCidade)
         {
             List<Cidade> cidades = new List<Cidade>();
             string conCodEstado = codEstado > 0 ? "AND e.idestado = @idestado" : "";
@@ -54,19 +54,19 @@ namespace _5gpro.Daos
 
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand(@"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado, e.uf
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand(@"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado, e.uf
                                              FROM cidade c INNER JOIN estado e 
                                              ON c.idestado = e.idestado
                                              WHERE 1=1
                                              " + conCodEstado + @"
                                              " + conNomeCidade + @"
-                                             ORDER BY c.idcidade;", Conexao);
+                                             ORDER BY c.idcidade;", Connect.Conexao);
 
-                if (codEstado > 0) { Comando.Parameters.AddWithValue("@idestado", codEstado); }
-                if (nomeCidade.Length > 0) { Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
+                if (codEstado > 0) { Connect.Comando.Parameters.AddWithValue("@idestado", codEstado); }
+                if (nomeCidade.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -92,7 +92,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return cidades;
         }
