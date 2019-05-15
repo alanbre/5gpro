@@ -67,9 +67,12 @@ namespace _5gpro.Forms
         {
 
         }
+        private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void DtpEmissao_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
+        private void DbDescontoDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
+        private void DbValorTotalDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
         private void BtInserirItem_Click(object sender, EventArgs e) => InserirItem();
         private void BtExcluirItem_Click(object sender, EventArgs e) => ExcluirItem();
         private void DbQuantidade_Leave(object sender, EventArgs e)
@@ -127,7 +130,7 @@ namespace _5gpro.Forms
                 return;
 
 
-            notaFiscalTerceiros = new NotaFiscalTerceiros
+            var notaFiscalTerceirosNova = new NotaFiscalTerceiros
             {
                 NotaFiscalTerceirosID = int.Parse(tbCodigo.Text),
                 Pessoa = buscaPessoa.pessoa,
@@ -142,7 +145,7 @@ namespace _5gpro.Forms
                 NotaFiscalTerceirosItem = itens
             };
 
-            int resultado = notaFiscalTerceirosDAO.SalvarOuAtualizar(notaFiscalTerceiros);
+            int resultado = notaFiscalTerceirosDAO.SalvarOuAtualizar(notaFiscalTerceirosNova);
 
             // resultado 0 = nada foi inserido (houve algum erro)
             // resultado 1 = foi inserido com sucesso
@@ -153,17 +156,24 @@ namespace _5gpro.Forms
                 "Problema ao salvar",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
+                return;
             }
             else if (resultado == 1)
             {
                 tbAjuda.Text = "Dados salvos com sucesso";
+                notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
                 Editando(false);
             }
             else if (resultado == 2)
             {
                 tbAjuda.Text = "Dados atualizados com sucesso";
+                notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
+                notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
                 Editando(false);
             }
+            notaFiscalTerceiros = notaFiscalTerceirosNova;
+
+
         }
         private void Recarrega()
         {
@@ -243,6 +253,43 @@ namespace _5gpro.Forms
                         Editando(false);
                 }
             }
+        }
+        private void CarregaDados()
+        {
+            int codigo = 0;
+            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
+            if (notaFiscalTerceiros?.NotaFiscalTerceirosID == codigo)
+                return;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            if (tbCodigo.Text.Length == 0)
+            {
+                Limpa(true);
+                Editando(false);
+                return;
+            }
+
+            var newNotaFiscalTerceiros = notaFiscalTerceirosDAO.BuscaByID(codigo);
+            if (newNotaFiscalTerceiros != null)
+            {
+                newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(newNotaFiscalTerceiros.Pessoa.PessoaID);
+                notaFiscalTerceiros = newNotaFiscalTerceiros;
+                PreencheCampos(notaFiscalTerceiros);
+                Editando(false);
+            }
+            else
+            {
+                Editando(true);
+                Limpa(false);
+            }
+
         }
         private void Editando(bool edit)
         {
@@ -448,8 +495,6 @@ namespace _5gpro.Forms
                 dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
             }
         }
-
-
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC

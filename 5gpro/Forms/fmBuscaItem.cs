@@ -50,7 +50,7 @@ namespace _5gpro.Forms
                 tipodoitem = "";
             }
 
-            itens = itemDAO.BuscaItem(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
+            itens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
 
             foreach (Item i in itens)
             {

@@ -650,7 +650,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL,
+  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,
@@ -822,11 +822,19 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`registro_estoque` (
   `data` DATE NOT NULL,
   `documento` VARCHAR(60) NOT NULL,
   `iditem` INT(11) NOT NULL,
+  `quantidade` DECIMAL(10,2) NOT NULL,
+  `idpessoa` INT(11) NULL,
   PRIMARY KEY (`idregistro_estoque`),
   INDEX `fk_registromovimentacao_item1_idx` (`iditem` ASC) VISIBLE,
+  INDEX `fk_registro_estoque_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_registromovimentacao_item1`
     FOREIGN KEY (`iditem`)
     REFERENCES `5gprodatabase`.`item` (`iditem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_registro_estoque_pessoa1`
+    FOREIGN KEY (`idpessoa`)
+    REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

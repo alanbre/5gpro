@@ -17,7 +17,7 @@ namespace _5gpro.Daos
 
         private static ConexaoDAO connection = new ConexaoDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
-        private readonly NotaFiscalPropriaDAO notafiscalDAO = new NotaFiscalPropriaDAO();
+        private readonly NotaFiscalPropriaDAO notafiscalDAO = new NotaFiscalPropriaDAO(connection);
 
         public Orcamento BuscaOrcamentoById(int cod)
         {

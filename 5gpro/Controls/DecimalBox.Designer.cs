@@ -42,6 +42,7 @@
             this.tbDecimal.Name = "tbDecimal";
             this.tbDecimal.Size = new System.Drawing.Size(100, 20);
             this.tbDecimal.TabIndex = 0;
+            this.tbDecimal.TextChanged += new System.EventHandler(this.TbDecimal_TextChanged);
             this.tbDecimal.Enter += new System.EventHandler(this.TbDecimal_Enter);
             this.tbDecimal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbDecimal_KeyPress);
             this.tbDecimal.Leave += new System.EventHandler(this.TbDecimal_Leave);

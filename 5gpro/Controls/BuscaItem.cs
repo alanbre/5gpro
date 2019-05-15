@@ -37,7 +37,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoItem.Text, out int codigo)) { tbCodigoItem.Clear(); }
             if (tbCodigoItem.Text.Length > 0)
             {
-                item = itemDAO.BuscarItemById(int.Parse(tbCodigoItem.Text));
+                item = itemDAO.BuscarById(int.Parse(tbCodigoItem.Text));
                 PreencheCamposItem(item);
             }
             else

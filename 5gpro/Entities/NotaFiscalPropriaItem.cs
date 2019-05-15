@@ -2,6 +2,7 @@
 {
     public class NotaFiscalPropriaItem
     {
+        
         public NotaFiscalPropriaItem()
         {
             this.Quantidade = 0;
