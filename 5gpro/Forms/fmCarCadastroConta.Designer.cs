@@ -28,17 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
             this.dbValorContaGerar = new _5gpro.Controls.DecimalBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.lbValorContaGerar = new System.Windows.Forms.Label();
             this.btGerarParcelas = new System.Windows.Forms.Button();
             this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
-            this.dtpDataCadatroConta = new System.Windows.Forms.DateTimePicker();
-            this.lbDataCadastroConta = new System.Windows.Forms.Label();
+            this.dtpDataConta = new System.Windows.Forms.DateTimePicker();
+            this.lbDataConta = new System.Windows.Forms.Label();
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
             this.lbCodigoConta = new System.Windows.Forms.Label();
             this.gbParcelas = new System.Windows.Forms.GroupBox();
@@ -106,8 +106,8 @@
             this.gbDadosConta.Controls.Add(this.lbValorContaGerar);
             this.gbDadosConta.Controls.Add(this.btGerarParcelas);
             this.gbDadosConta.Controls.Add(this.buscaOperacao);
-            this.gbDadosConta.Controls.Add(this.dtpDataCadatroConta);
-            this.gbDadosConta.Controls.Add(this.lbDataCadastroConta);
+            this.gbDadosConta.Controls.Add(this.dtpDataConta);
+            this.gbDadosConta.Controls.Add(this.lbDataConta);
             this.gbDadosConta.Controls.Add(this.tbCodigoConta);
             this.gbDadosConta.Controls.Add(this.lbCodigoConta);
             this.gbDadosConta.Location = new System.Drawing.Point(65, 12);
@@ -167,23 +167,23 @@
             this.buscaOperacao.TabIndex = 5;
             this.buscaOperacao.Text_Changed += new _5gpro.Controls.BuscaOperacao.text_changedEventHandler(this.BuscaOperacao_Text_Changed);
             // 
-            // dtpDataCadatroConta
+            // dtpDataConta
             // 
-            this.dtpDataCadatroConta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataCadatroConta.Location = new System.Drawing.Point(6, 75);
-            this.dtpDataCadatroConta.Name = "dtpDataCadatroConta";
-            this.dtpDataCadatroConta.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadatroConta.TabIndex = 3;
-            this.dtpDataCadatroConta.ValueChanged += new System.EventHandler(this.DtpDataCadatroConta_ValueChanged);
+            this.dtpDataConta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataConta.Location = new System.Drawing.Point(6, 75);
+            this.dtpDataConta.Name = "dtpDataConta";
+            this.dtpDataConta.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataConta.TabIndex = 3;
+            this.dtpDataConta.ValueChanged += new System.EventHandler(this.DtpDataCadatroConta_ValueChanged);
             // 
-            // lbDataCadastroConta
+            // lbDataConta
             // 
-            this.lbDataCadastroConta.AutoSize = true;
-            this.lbDataCadastroConta.Location = new System.Drawing.Point(3, 59);
-            this.lbDataCadastroConta.Name = "lbDataCadastroConta";
-            this.lbDataCadastroConta.Size = new System.Drawing.Size(89, 13);
-            this.lbDataCadastroConta.TabIndex = 2;
-            this.lbDataCadastroConta.Text = "Data de cadastro";
+            this.lbDataConta.AutoSize = true;
+            this.lbDataConta.Location = new System.Drawing.Point(3, 59);
+            this.lbDataConta.Name = "lbDataConta";
+            this.lbDataConta.Size = new System.Drawing.Size(75, 13);
+            this.lbDataConta.TabIndex = 2;
+            this.lbDataConta.Text = "Data da conta";
             // 
             // tbCodigoConta
             // 
@@ -483,8 +483,8 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvParcelas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -522,9 +522,9 @@
             // 
             // dgvtbcDataVencimento
             // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvtbcDataVencimento.HeaderText = "Data de vencimento";
             this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
             this.dgvtbcDataVencimento.ReadOnly = true;
@@ -573,9 +573,9 @@
             // 
             // dgvtbcDataQuitacao
             // 
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
             this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
             this.dgvtbcDataQuitacao.ReadOnly = true;
@@ -803,8 +803,8 @@
 
         private Controls.MenuVertical menuVertical;
         private System.Windows.Forms.GroupBox gbDadosConta;
-        private System.Windows.Forms.DateTimePicker dtpDataCadatroConta;
-        private System.Windows.Forms.Label lbDataCadastroConta;
+        private System.Windows.Forms.DateTimePicker dtpDataConta;
+        private System.Windows.Forms.Label lbDataConta;
         private System.Windows.Forms.TextBox tbCodigoConta;
         private System.Windows.Forms.Label lbCodigoConta;
         private Controls.BuscaOperacao buscaOperacao;

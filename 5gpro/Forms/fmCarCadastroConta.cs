@@ -101,7 +101,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
             contaReceber = null;
-            dtpDataCadatroConta.Focus();
+            dtpDataConta.Focus();
             ignoracheckevent = false;
             btGerarParcelas.Enabled = true;
             dbValorContaGerar.Enabled = true;
@@ -133,7 +133,8 @@ namespace _5gpro.Forms
                 contaReceber = new ContaReceber
                 {
                     ContaReceberID = int.Parse(tbCodigoConta.Text),
-                    DataCadastro = dtpDataCadatroConta.Value,
+                    DataCadastro = DateTime.Today,
+                    DataConta = dtpDataConta.Value,
                     Operacao = buscaOperacao.operacao,
 
                     ValorOriginal = dbValorOriginalConta.Valor,
@@ -328,7 +329,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigoConta.Text = contaReceber.ContaReceberID.ToString();
-            dtpDataCadatroConta.Value = contaReceber.DataCadastro;
+            dtpDataConta.Value = contaReceber.DataCadastro;
             buscaOperacao.operacao = contaReceber.Operacao;
             dbValorOriginalConta.Valor = contaReceber.ValorOriginal;
             dbValorFinalConta.Valor = contaReceber.ValorFinal;
@@ -398,14 +399,13 @@ namespace _5gpro.Forms
             var parcelasOperacao = buscaOperacao.operacao.Parcelas;
 
 
-
             int sequencia = 1;
             foreach (var parcela in parcelasOperacao)
             {
                 var par = new ParcelaContaReceber
                 {
                     Sequencia = sequencia,
-                    DataVencimento = DateTime.Today.AddDays(parcela.Dias),
+                    DataVencimento = dtpDataConta.Value.AddDays(parcela.Dias),
                     Multa = 0.00m,
                     Juros = 0.00m,
                     Valor = dbValorContaGerar.Valor / parcelasOperacao.Count,
@@ -484,7 +484,7 @@ namespace _5gpro.Forms
             if (limpaCod) { tbCodigoConta.Clear(); }
             buscaOperacao.Limpa();
             buscaPessoa.Limpa();
-            dtpDataCadatroConta.Value = DateTime.Now;
+            dtpDataConta.Value = DateTime.Now;
             dtpDataVencimentoParcela.Value = DateTime.Now;
             dbValorOriginalConta.Valor = 0.00m;
             dbValorFinalConta.Valor = 0.00m;

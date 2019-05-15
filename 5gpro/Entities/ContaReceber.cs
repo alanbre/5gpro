@@ -12,6 +12,7 @@ namespace _5gpro.Entities
 
         public int ContaReceberID { get; set; }
         public DateTime DataCadastro { get; set; }
+        public DateTime DataConta { get; set; }
         public Pessoa Pessoa { get; set; }
         public Operacao Operacao { get; set; }
         public decimal ValorOriginal { get; set; }
