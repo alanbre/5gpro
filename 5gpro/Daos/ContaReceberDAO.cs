@@ -27,12 +27,12 @@ namespace _5gpro.Daos
 
 
                 Connect.Comando.CommandText = @"INSERT INTO conta_receber
-                         (idconta_receber, data_cadastro, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa)
+                         (idconta_receber, data_cadastro, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
                           VALUES
-                         (@idconta_receber, @data_cadastro, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa)
+                         (@idconta_receber, @data_cadastro, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, idoperacao = @idoperacao, valor_original = @valor_original,
-                          multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa
+                          multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
                           ";
 
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", contaReceber.ContaReceberID);
@@ -45,6 +45,7 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@desconto", contaReceber.Desconto);
                 Connect.Comando.Parameters.AddWithValue("@valor_final", contaReceber.ValorFinal);
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", contaReceber.Pessoa.PessoaID);
+                Connect.Comando.Parameters.AddWithValue("@situacao", contaReceber.Situacao);
 
 
                 retorno = Connect.Comando.ExecuteNonQuery();
@@ -56,9 +57,10 @@ namespace _5gpro.Daos
                     Connect.Comando.ExecuteNonQuery();
 
                     Connect.Comando.CommandText = @"INSERT INTO parcela_conta_receber
-                                            (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_receber, idformapagamento)
+                                            (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_receber, idformapagamento, situacao)
                                             VALUES
-                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento)";
+                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento, @situacao)";
+
                     foreach (var parcela in contaReceber.Parcelas)
                     {
                         Connect.Comando.Parameters.Clear();
@@ -73,6 +75,7 @@ namespace _5gpro.Daos
                         Connect.Comando.Parameters.AddWithValue("@data_quitacao", parcela.DataQuitacao);
                         Connect.Comando.Parameters.AddWithValue("@idconta_receber", contaReceber.ContaReceberID);
                         Connect.Comando.Parameters.AddWithValue("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
+                        Connect.Comando.Parameters.AddWithValue("@situacao", contaReceber.Situacao);
                         Connect.Comando.ExecuteNonQuery();
                     }
                 }
@@ -89,6 +92,8 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
+
         public ContaReceber BuscaById(int codigo)
         {
             var contaReceber = new ContaReceber();
@@ -96,7 +101,17 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM conta_receber WHERE idconta_receber = @idconta_receber", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                                                    FROM conta_receber AS c
+                                                    LEFT JOIN parcela_conta_receber AS p 
+                                                    ON  c.idconta_receber = p.idconta_receber
+                                                    LEFT JOIN formapagamento f
+                                                    ON f.idformapagamento = p.idformapagamento
+                                                    WHERE c.idconta_receber = @idconta_receber"
+                                                    , Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", codigo);
 
                 using (var reader = Connect.Comando.ExecuteReader())
@@ -112,17 +127,17 @@ namespace _5gpro.Daos
             {
                 Connect.FecharConexao();
             }
-
-            if (contaReceber != null)
-                contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
         }
+
         public IEnumerable<ContaReceber> Busca(fmBuscaContaReceber.Filtros f )
         {
             var contaRecebers = new List<ContaReceber>();
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             string whereOperacao = f.filtroOperacao != null ? "AND op.idoperacao = @idoperacao": "";
-
+            string whereValorFinal = f.usarvalorContaFiltro ? "AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
+            string whereDatCadastro = f.usardataCadastroFiltro ? "AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
 
             Operacao operacao = null;
             Pessoa pessoa = null;
@@ -132,19 +147,19 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
-                                                    cr.valor_final, cr.acrescimo, cr.desconto
-                                                    FROM 
-                                                    conta_receber cr 
+                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento
+                                                    FROM conta_receber cr 
                                                     LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
                                                     LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
                                                     LEFT JOIN parcela_conta_receber pa ON pa.idconta_receber = cr.idconta_receber
                                                     WHERE 1 = 1 "
+                                             + wherePessoa + " "
                                              + whereOperacao + " "
-                                             + wherePessoa + " " +
-                                          @" AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
-                                             AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                             AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
-                                             GROUP BY cr.idconta_receber", Connect.Conexao);
+                                             + whereValorFinal + " "
+                                             + whereDatCadastro + " "
+                                             + whereDataVencimento + " " 
+                                             +"GROUP BY cr.idconta_receber", Connect.Conexao);
+
                 if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
                 if (f.filtroOperacao != null) { Connect.Comando.Parameters.AddWithValue("@idoperacao", f.filtroOperacao.OperacaoID); }
 
@@ -199,6 +214,7 @@ namespace _5gpro.Daos
             }
             return contaRecebers;
         }
+
         public IEnumerable<ContaReceber> Busca(fmCarQuitacaoConta.Filtros f)
         {
             var contaRecebers = new List<ContaReceber>();
@@ -277,6 +293,8 @@ namespace _5gpro.Daos
 
             return contaRecebers;
         }
+
+
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -309,13 +327,27 @@ namespace _5gpro.Daos
 
             return proximoid;
         }
+
+
         public ContaReceber BuscaProximo(int codigo)
         {
             var contaReceber = new ContaReceber();
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM conta_receber WHERE idconta_receber = (SELECT min(idconta_receber) FROM conta_receber WHERE idconta_receber > @idconta_receber)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                                                    FROM conta_receber AS c
+                                                    LEFT JOIN parcela_conta_receber AS p 
+                                                    ON  c.idconta_receber = p.idconta_receber
+                                                    LEFT JOIN formapagamento f
+                                                    ON f.idformapagamento = p.idformapagamento
+                                                    WHERE c.idconta_receber = (SELECT min(idconta_receber) 
+                                                    FROM conta_receber 
+                                                    WHERE idconta_receber > @idconta_receber)"
+                                                    , Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", codigo);
 
                 using (var reader = Connect.Comando.ExecuteReader())
@@ -331,17 +363,28 @@ namespace _5gpro.Daos
             {
                 Connect.FecharConexao();
             }
-            if (contaReceber != null)
-                contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
         }
+
         public ContaReceber BuscaAnterior(int codigo)
         {
             var contaReceber = new ContaReceber();
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM conta_receber WHERE idconta_receber = (SELECT max(idconta_receber) FROM conta_receber WHERE idconta_receber < @idconta_receber)", Connect.Conexao);
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                                                    FROM conta_receber AS c
+                                                    LEFT JOIN parcela_conta_receber AS p 
+                                                    ON  c.idconta_receber = p.idconta_receber
+                                                    LEFT JOIN formapagamento f
+                                                    ON f.idformapagamento = p.idformapagamento
+                                                    WHERE c.idconta_receber = (SELECT max(idconta_receber) 
+                                                    FROM conta_receber 
+                                                    WHERE idconta_receber < @idconta_receber)"
+                                                    , Connect.Conexao);
+
                 Connect.Comando.Parameters.AddWithValue("@idconta_receber", codigo);
 
                 using (var reader = Connect.Comando.ExecuteReader())
@@ -358,10 +401,10 @@ namespace _5gpro.Daos
                 Connect.FecharConexao();
             }
 
-            if (contaReceber != null)
-                contaReceber.Parcelas = BuscaParcelasDaConta(contaReceber);
             return contaReceber;
         }
+
+
         private List<ParcelaContaReceber> BuscaParcelasDaConta(ContaReceber contaReceber)
         {
             var parcelas = new List<ParcelaContaReceber>();
@@ -404,11 +447,17 @@ namespace _5gpro.Daos
 
             return parcelas;
         }
+
         private ContaReceber LeDadosReader(IDataReader reader)
         {
-            var contaReceber = new ContaReceber();
+            ContaReceber contaReceber = null;
+            ParcelaContaReceber parcela = null;
+            FormaPagamento formapagamento = null;
+            List<ParcelaContaReceber> listaparcelas = new List<ParcelaContaReceber>();
+
             if (reader.Read())
             {
+
                 contaReceber = new ContaReceber
                 {
                     ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
@@ -419,16 +468,84 @@ namespace _5gpro.Daos
                     Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
                     Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
                     ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
+                    Situacao = reader.GetString(reader.GetOrdinal("situacao")),
                 };
                 contaReceber.Operacao = new Operacao();
                 contaReceber.Operacao.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
                 contaReceber.Pessoa = new Pessoa();
                 contaReceber.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+
+                if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_receber")))
+                {
+                    if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
+                    {
+                        formapagamento = new FormaPagamento
+                        {
+                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                    }
+
+                    parcela = new ParcelaContaReceber
+                    {
+                        ParcelaContaReceberID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber")),
+                        DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
+                        DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
+                        Juros = reader.GetDecimal(reader.GetOrdinal("pjuros")),
+                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("pacrescimo")),
+                        Desconto = reader.GetDecimal(reader.GetOrdinal("pdesconto")),
+                        Multa = reader.GetDecimal(reader.GetOrdinal("pmulta")),
+                        Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
+                        Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
+                        Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
+
+                    };
+
+                    if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
+                    listaparcelas.Add(parcela);
+                }
             }
-            else
+
+            while (reader.Read())
             {
-                contaReceber = null;
+                if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
+                {
+                    formapagamento = new FormaPagamento
+                    {
+                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
+                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                    };
+                }
+                else
+                {
+                    formapagamento = null;
+                }
+
+                parcela = new ParcelaContaReceber
+                {
+                    ParcelaContaReceberID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber")),
+                    DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
+                    DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
+                    Juros = reader.GetDecimal(reader.GetOrdinal("pjuros")),
+                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("pacrescimo")),
+                    Desconto = reader.GetDecimal(reader.GetOrdinal("pdesconto")),
+                    Multa = reader.GetDecimal(reader.GetOrdinal("pmulta")),
+                    Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
+                    Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
+                    Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
+
+                };
+
+                if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
+                listaparcelas.Add(parcela);
             }
+
+            if (listaparcelas.Count > 0)
+            {
+                contaReceber.Parcelas = new List<ParcelaContaReceber>();
+                contaReceber.Parcelas = listaparcelas;
+            }
+
             return contaReceber;
         }
     }

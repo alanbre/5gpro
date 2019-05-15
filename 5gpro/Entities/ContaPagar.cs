@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
@@ -12,7 +13,10 @@ namespace _5gpro.Entities
 
         public int ContaPagarID { get; set; }
         public DateTime DataCadastro { get; set; }
+
+        [Required(ErrorMessage = "Fornecedor/Cliente é obrigatório.|buscaPessoa", AllowEmptyStrings = false)]
         public Pessoa Pessoa { get; set; }
+
         public decimal ValorOriginal { get; set; }
         public decimal Multa { get; set; }
         public decimal Juros { get; set; }

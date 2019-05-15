@@ -99,7 +99,9 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
                                                     FROM conta_pagar AS c
                                                     LEFT JOIN parcela_conta_pagar AS p 
                                                     ON  c.idconta_pagar = p.idconta_pagar
@@ -234,7 +236,9 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
                                                     FROM conta_pagar AS c
                                                     LEFT JOIN parcela_conta_pagar AS p 
                                                     ON  c.idconta_pagar = p.idconta_pagar
@@ -271,7 +275,9 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
+                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
                                                     FROM conta_pagar AS c
                                                     LEFT JOIN parcela_conta_pagar AS p 
                                                     ON  c.idconta_pagar = p.idconta_pagar
@@ -311,6 +317,7 @@ namespace _5gpro.Daos
 
             if (reader.Read())
             {
+
                 contaPagar = new ContaPagar
                 {
                     ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
@@ -328,11 +335,11 @@ namespace _5gpro.Daos
 
                 if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
                 {
-                    if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
+                    if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
                     {
                         formapagamento = new FormaPagamento
                         {
-                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
                             Nome = reader.GetString(reader.GetOrdinal("nome"))
                         };
                     }
@@ -342,13 +349,13 @@ namespace _5gpro.Daos
                         ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
                         DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                         DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                        Juros = reader.GetDecimal(reader.GetOrdinal("pjuros")),
+                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("pacrescimo")),
+                        Desconto = reader.GetDecimal(reader.GetOrdinal("pdesconto")),
+                        Multa = reader.GetDecimal(reader.GetOrdinal("pmulta")),
                         Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
                         Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                        Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
 
                     };
 
@@ -359,13 +366,17 @@ namespace _5gpro.Daos
 
             while (reader.Read())
             {
-                if (!reader.IsDBNull(reader.GetOrdinal("idformapagamento")))
+                if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
                 {
                     formapagamento = new FormaPagamento
                     {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
                         Nome = reader.GetString(reader.GetOrdinal("nome"))
                     };
+                }
+                else
+                {
+                    formapagamento = null;
                 }
 
                 parcela = new ParcelaContaPagar
@@ -373,13 +384,13 @@ namespace _5gpro.Daos
                     ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
                     DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
                     DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                    Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                    Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                    Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
+                    Juros = reader.GetDecimal(reader.GetOrdinal("pjuros")),
+                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("pacrescimo")),
+                    Desconto = reader.GetDecimal(reader.GetOrdinal("pdesconto")),
+                    Multa = reader.GetDecimal(reader.GetOrdinal("pmulta")),
                     Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
                     Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                    Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                    Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
 
                 };
 
@@ -389,6 +400,7 @@ namespace _5gpro.Daos
 
             if (listaparcelas.Count > 0)
             {
+                contaPagar.Parcelas = new List<ParcelaContaPagar>();
                 contaPagar.Parcelas = listaparcelas;
             }
 

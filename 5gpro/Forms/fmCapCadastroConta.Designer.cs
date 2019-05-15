@@ -288,6 +288,7 @@
             // btNovaParcela
             // 
             this.btNovaParcela.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNovaParcela.Enabled = false;
             this.btNovaParcela.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
             this.btNovaParcela.Location = new System.Drawing.Point(967, 16);
             this.btNovaParcela.Margin = new System.Windows.Forms.Padding(1, 3, 3, 3);
