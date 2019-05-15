@@ -9,10 +9,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaItem : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         public List<Item> itens;
         public Item itemSelecionado;
-        private readonly ItemDAO itemDAO = new ItemDAO(connection);
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
 
         public fmBuscaItem()

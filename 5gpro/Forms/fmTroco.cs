@@ -9,8 +9,7 @@ namespace _5gpro.Forms
 {
     public partial class fmTroco : Form
     {
-        private readonly static ConexaoDAO connection = new ConexaoDAO();
-        private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO(connection);
+        private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO();
         public List<Tuple<FormaPagamento, decimal>> formasPagamento = new List<Tuple<FormaPagamento, decimal>>();
         public bool pago = false;
 

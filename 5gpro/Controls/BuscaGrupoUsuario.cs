@@ -10,8 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaGrupoUsuario : UserControl
     {
         public GrupoUsuario grupoUsuario = new GrupoUsuario();
-        private static readonly ConexaoDAO connection = new ConexaoDAO();
-        private readonly GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO(connection);
+        private readonly GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
 
         public BuscaGrupoUsuario()
         {

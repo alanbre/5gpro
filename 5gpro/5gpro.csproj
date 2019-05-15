@@ -528,7 +528,6 @@
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
-    <Compile Include="Funcoes\FuncoesBanco.cs" />
     <Compile Include="Funcoes\Limpar.cs" />
     <Compile Include="Funcoes\NetworkAdapter.cs" />
     <Compile Include="Funcoes\NotaFiscalAux.cs" />

@@ -10,11 +10,8 @@ namespace _5gpro.Daos
 {
     public class UsuarioDAO
     {
-        public ConexaoDAO Connect { get; }
-        public UsuarioDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
+
 
         public List<GrupoUsuario> listagrupousuarios = new List<GrupoUsuario>();
 
@@ -332,7 +329,7 @@ namespace _5gpro.Daos
         {
 
             List<Usuario> usuarios = new List<Usuario>();
-            GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(Connect);
+            GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
 
             string conCodGrupoUsuario = codGrupoUsuario.Length > 0 ? "AND g.idgrupousuario = @idgrupousuario" : "";
             string conNomeUsuario = nomeUsuario.Length > 0 ? "AND u.nome LIKE @nomeusuario" : "";

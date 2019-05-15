@@ -17,7 +17,6 @@ namespace _5gpro.Forms
 
         List<Operacao> operacoes;
         public Operacao operacaoSelecionada = null;
-        static ConexaoDAO connection = new ConexaoDAO();
 
         public fmBuscaOperacao()
         {
@@ -26,7 +25,7 @@ namespace _5gpro.Forms
 
         private void BuscaOperacao()
         {
-            OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
+            OperacaoDAO operacaoDAO = new OperacaoDAO();
 
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));

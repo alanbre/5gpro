@@ -17,15 +17,14 @@ namespace _5gpro.Forms
     {
 
         private List<ParcelaContaReceber> parcelasContaReceber;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
-        private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO(connection);
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
+        private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO();
         private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
 
         //Controle de Permissões
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

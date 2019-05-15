@@ -12,8 +12,7 @@ namespace _5gpro.Forms
 {
     public partial class fmOrcCadastro : Form
     {
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
+        private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
         private NotaFiscalPropria notafiscal = null;
         private readonly NotaFiscalAux nfa = new NotaFiscalAux();
@@ -24,9 +23,9 @@ namespace _5gpro.Forms
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

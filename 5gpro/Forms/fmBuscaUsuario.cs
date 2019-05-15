@@ -16,7 +16,6 @@ namespace _5gpro.Forms
     {
         IEnumerable<Usuario> usuarios;
         public Usuario usuarioSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
 
 
         public fmBuscaUsuario()
@@ -26,7 +25,7 @@ namespace _5gpro.Forms
 
         private void BuscaUsuario()
         {
-            UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
 
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));

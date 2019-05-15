@@ -11,8 +11,7 @@ namespace _5gpro.Controls
     {
 
         public GrupoPessoa grupoPessoa = null;
-        private static readonly ConexaoDAO connection = new ConexaoDAO();
-        private readonly GrupoPessoaDAO grupoPessoaDAO = new GrupoPessoaDAO(connection);
+        private readonly GrupoPessoaDAO grupoPessoaDAO = new GrupoPessoaDAO();
 
         public BuscaGrupoPessoa()
         {

@@ -9,12 +9,8 @@ namespace _5gpro.Daos
 {
     class OperacaoDAO
     {
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
-        public ConexaoDAO Connect { get; }
-        public OperacaoDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
 
         public int SalvarOuAtualizarOperacao(Operacao operacao)
         {

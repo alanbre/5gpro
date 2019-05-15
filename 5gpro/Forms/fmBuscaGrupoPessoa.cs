@@ -13,8 +13,7 @@ namespace _5gpro.Forms
 
         List<GrupoPessoa> listagrupopessoa;
         public GrupoPessoa grupoPessoaSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        GrupoPessoaDAO grupoPessoaDAO = new GrupoPessoaDAO(connection);
+        GrupoPessoaDAO grupoPessoaDAO = new GrupoPessoaDAO();
 
         public fmBuscaGrupoPessoa()
         {

@@ -27,8 +27,6 @@ namespace _5gpro
             {
                 var formSelecionaBase = new fmSelecionarBase();
                 formSelecionaBase.ShowDialog();
-                if (!carregaSistema.Carrega(formSelecionaBase.baseSelecionada))
-                    Application.Exit();
             }
             else
             {

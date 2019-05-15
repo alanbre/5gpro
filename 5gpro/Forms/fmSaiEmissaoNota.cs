@@ -11,9 +11,8 @@ namespace _5gpro.Forms
 {
     public partial class fmSaiEmissaoNota : Form
     {
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly NotaFiscalPropriaDAO notaFiscalPropriaDAO = new NotaFiscalPropriaDAO(connection);
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly NotaFiscalPropriaDAO notaFiscalPropriaDAO = new NotaFiscalPropriaDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         private NotaFiscalPropria notaFiscalPropria = new NotaFiscalPropria();
@@ -21,9 +20,9 @@ namespace _5gpro.Forms
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO(new ConexaoDAO());
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(new ConexaoDAO());
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
@@ -59,23 +58,20 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
-        private void FmSaidaEmissaoNota_FormClosing(object sender, FormClosingEventArgs e)
+        private void FmSaiEmissaoNota_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
+            if (!editando)
+                return;
 
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            { 
+                e.Cancel = true;
             }
         }
+
 
 
 
@@ -595,8 +591,6 @@ namespace _5gpro.Forms
                 dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
             }
         }
-
-
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC

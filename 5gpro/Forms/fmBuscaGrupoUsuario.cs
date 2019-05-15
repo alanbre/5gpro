@@ -9,11 +9,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaGrupoUsuario : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
-
         public List<GrupoUsuario> Listagrupousuario;
         public GrupoUsuario GrupoUsuario;
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);       
+        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();       
         public GrupoUsuario grupoUsuarioSelecionado;
 
         public fmBuscaGrupoUsuario()

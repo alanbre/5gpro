@@ -1,17 +1,13 @@
-﻿using System;
+﻿using _5gpro.Daos;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
     public partial class fmSelecionarBase : Form
     {
+        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
         private struct Bases
         {
             public string Database;
@@ -50,9 +46,6 @@ namespace _5gpro.Forms
             Pwd = "5gproedualan"
         };
 
-        public string baseSelecionada = "";
-
-
 
         public fmSelecionarBase()
         {
@@ -77,19 +70,16 @@ namespace _5gpro.Forms
             }
             dgvBases.Refresh();
         }
-
         private void Sair()
         {
             Environment.Exit(0);
         }
-
         private void Entrar()
         {
-            string database = dgvBases.CurrentRow.Cells[0].Value.ToString();
-            string server = dgvBases.CurrentRow.Cells[1].Value.ToString();
-            string uid = dgvBases.CurrentRow.Cells[2].Value.ToString();
-            string pwd = dgvBases.CurrentRow.Cells[3].Value.ToString();
-            baseSelecionada = "DATABASE=" + database + "; SERVER=" + server + "; UID=" + uid + "; PWD=" + pwd;
+            Connect.database = dgvBases.CurrentRow.Cells[0].Value.ToString();
+            Connect.server = dgvBases.CurrentRow.Cells[1].Value.ToString();
+            Connect.uid = dgvBases.CurrentRow.Cells[2].Value.ToString();
+            Connect.pwd = dgvBases.CurrentRow.Cells[3].Value.ToString();
             this.Close();
         }
     }

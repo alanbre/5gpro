@@ -11,12 +11,7 @@ namespace _5gpro.Daos
 {
     class SubGrupoItemDAO
     {
-
-        public ConexaoDAO Connect { get; }
-        public SubGrupoItemDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
 
         public int SalvarOuAtualizar(SubGrupoItem subgrupoitem)

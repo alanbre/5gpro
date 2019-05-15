@@ -8,17 +8,13 @@ namespace _5gpro.Daos
 {
     public class LogadoDAO
     {
-        public ConexaoDAO Connect { get; }
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
-        public LogadoDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
 
         public Logado BuscaLogadoByUsuario(Usuario usuario)
         {
             Logado usulogado = null;
-            UsuarioDAO usuarioDAO = new UsuarioDAO(Connect);
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
             try
             {
                 Connect.AbrirConexao();
@@ -66,7 +62,7 @@ namespace _5gpro.Daos
             Usuario usuario = null;
             GrupoUsuario grupousuario = null;
 
-            UsuarioDAO usuarioDAO = new UsuarioDAO(Connect);
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
             try
             {
                 Connect.AbrirConexao();

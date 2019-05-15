@@ -17,15 +17,14 @@ namespace _5gpro.Forms
         Validacao validacao = new Validacao();
 
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
-        private readonly static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
-        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
+        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         //Controle de Permissões
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;

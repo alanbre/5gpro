@@ -9,13 +9,8 @@ namespace _5gpro.Daos
 {
     class PessoaDAO
     {
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
-        public ConexaoDAO Connect { get; }
-
-        public PessoaDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
 
         public int SalvaOuAtualiza(Pessoa pessoa)
         {

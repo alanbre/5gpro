@@ -13,8 +13,7 @@ namespace _5gpro.Forms
 
         List<GrupoItem> listagrupoitem;
         public GrupoItem grupoitemSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        GrupoItemDAO grupoitemDAO = new GrupoItemDAO(connection);
+        GrupoItemDAO grupoitemDAO = new GrupoItemDAO();
 
         public fmBuscaGrupoItem()
         {

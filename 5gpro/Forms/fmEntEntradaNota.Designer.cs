@@ -606,7 +606,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1239, 572);
+            this.ClientSize = new System.Drawing.Size(1239, 573);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);
@@ -621,6 +621,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de entradas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmEntEntradaNota_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEntEntradaNota_KeyDown);
             this.gbTotais.ResumeLayout(false);
             this.gbTotais.PerformLayout();

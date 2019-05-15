@@ -377,7 +377,6 @@
             this.buscaItem.Size = new System.Drawing.Size(442, 39);
             this.buscaItem.TabIndex = 1;
             this.buscaItem.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.BuscaItem_Codigo_Leave);
-            this.buscaItem.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.BuscaItem_Codigo_Changed);
             // 
             // btExcluirItem
             // 
@@ -617,7 +616,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emissão de notas";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmSaidaEmissaoNota_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmSaiEmissaoNota_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEstoqueEntradaDocumentos_KeyDown);
             this.gbDadosDocumento.ResumeLayout(false);
             this.gbDadosDocumento.PerformLayout();

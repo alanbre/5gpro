@@ -9,15 +9,8 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO
     {
-        public ConexaoDAO Connect { get; }
-        public OrcamentoDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
-        private readonly NotaFiscalPropriaDAO notafiscalDAO = new NotaFiscalPropriaDAO(connection);
 
         public Orcamento BuscaOrcamentoById(int cod)
         {

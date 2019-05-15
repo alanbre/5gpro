@@ -17,23 +17,22 @@ namespace _5gpro.Forms
 
 
         //CÓDIGO DA TELA CAD.OPERAÇÃO = 040100
-        static ConexaoDAO connection = new ConexaoDAO();
 
         ParcelaOperacao parcela = new ParcelaOperacao();
         public List<ParcelaOperacao> listaparcelasprincipal = new List<ParcelaOperacao>();
 
         Operacao operacao;
-        OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
+        OperacaoDAO operacaoDAO = new OperacaoDAO();
         Validacao validacao = new Validacao();
         public int variaveldias = 30;
 
         //Controle de permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        PermissaoDAO permissaoDAO = new PermissaoDAO();
 
         bool editando, ignoraCheckEvent = false;
 

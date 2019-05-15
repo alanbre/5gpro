@@ -14,10 +14,9 @@ namespace _5gpro.Forms
     {
         public Usuario usuariologado;
         public Logado logado;
-        public static ConexaoDAO connection = new ConexaoDAO();
 
-        public UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-        public LogadoDAO logadoDAO = new LogadoDAO(connection);
+        public UsuarioDAO usuarioDAO = new UsuarioDAO();
+        public LogadoDAO logadoDAO = new LogadoDAO();
 
         NetworkAdapter adap = new NetworkAdapter();
 

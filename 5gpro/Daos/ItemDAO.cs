@@ -8,12 +8,7 @@ namespace _5gpro.Daos
 {
     class ItemDAO
     {
-
-        public ConexaoDAO Connect { get; }
-        public ItemDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
 
         public int SalvarOuAtualizarItem(Item item)
         {

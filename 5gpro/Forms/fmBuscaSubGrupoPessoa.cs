@@ -17,8 +17,7 @@ namespace _5gpro.Forms
         GrupoPessoa grupopessoa = null;
         List<SubGrupoPessoa> listasubgrupopessoa;
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO(connection);
+        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
 
         public fmBuscaSubGrupoPessoa(int grupopessoaID)
         {

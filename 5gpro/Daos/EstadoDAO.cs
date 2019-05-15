@@ -6,18 +6,21 @@ using System.Data;
 
 namespace _5gpro.Daos
 {
-    class EstadoDAO : ConexaoDAO
+    class EstadoDAO
     {
+        private static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+
+
         public Estado BuscaEstadoByCod(int cod)
         {
             Estado estado = new Estado();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM estado WHERE idestado = @idestado", Conexao);
-                Comando.Parameters.AddWithValue("@idestado", cod);
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM estado WHERE idestado = @idestado", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@idestado", cod);
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -38,7 +41,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return estado;
         }
@@ -48,11 +51,11 @@ namespace _5gpro.Daos
             List<Estado> estados = new List<Estado>();
             try
             {
-                AbrirConexao();
-                Comando = new MySqlCommand("SELECT * FROM estado WHERE nome LIKE @nome", Conexao);
-                Comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
+                Connect.AbrirConexao();
+                Connect.Comando = new MySqlCommand("SELECT * FROM estado WHERE nome LIKE @nome", Connect.Conexao);
+                Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
 
-                IDataReader reader = Comando.ExecuteReader();
+                IDataReader reader = Connect.Comando.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -70,7 +73,7 @@ namespace _5gpro.Daos
             }
             finally
             {
-                FecharConexao();
+                Connect.FecharConexao();
             }
             return estados;
         }
