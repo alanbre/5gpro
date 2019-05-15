@@ -13,6 +13,7 @@ namespace _5gpro.Entities
 
         public int ContaPagarID { get; set; }
         public DateTime DataCadastro { get; set; }
+        public DateTime DataConta { get; set; }
 
         [Required(ErrorMessage = "Fornecedor/Cliente é obrigatório.|buscaPessoa", AllowEmptyStrings = false)]
         public Pessoa Pessoa { get; set; }

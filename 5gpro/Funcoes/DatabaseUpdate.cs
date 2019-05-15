@@ -650,7 +650,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
+  `idparcelaoperacao` INT NOT NULL,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,
@@ -707,6 +707,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
   `idpessoa` INT(11) NOT NULL,
   `desconto` DECIMAL(10,2) NULL,
   `situacao` VARCHAR(45) NOT NULL,
+  `data_conta` DATETIME NOT NULL,
   PRIMARY KEY (`idconta_receber`),
   INDEX `fk_conta_receber_operacao1_idx` (`idoperacao` ASC) VISIBLE,
   INDEX `fk_conta_receber_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
@@ -770,6 +771,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_pagar` (
   `acrescimo` DECIMAL(10,2) NULL,
   `desconto` DECIMAL(10,2) NULL,
   `situacao` VARCHAR(45) NOT NULL,
+  `data_conta` DATETIME NOT NULL,
   PRIMARY KEY (`idconta_pagar`),
   INDEX `fk_conta_pagar_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_conta_pagar_pessoa1`
@@ -885,6 +887,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 ";
             return create;
         }

@@ -27,11 +27,11 @@ namespace _5gpro.Daos
 
 
                 Connect.Comando.CommandText = @"INSERT INTO conta_receber
-                         (idconta_receber, data_cadastro, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
+                         (idconta_receber, data_cadastro, data_conta, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
                           VALUES
-                         (@idconta_receber, @data_cadastro, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
+                         (@idconta_receber, @data_cadastro, @data_conta, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
                           ON DUPLICATE KEY UPDATE
-                          data_cadastro = @data_cadastro, idoperacao = @idoperacao, valor_original = @valor_original,
+                          data_cadastro = @data_cadastro, data_conta = @data_conta, idoperacao = @idoperacao, valor_original = @valor_original,
                           multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
                           ";
 
@@ -46,6 +46,8 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@valor_final", contaReceber.ValorFinal);
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", contaReceber.Pessoa.PessoaID);
                 Connect.Comando.Parameters.AddWithValue("@situacao", contaReceber.Situacao);
+                Connect.Comando.Parameters.AddWithValue("@data_conta", contaReceber.DataConta);
+
 
 
                 retorno = Connect.Comando.ExecuteNonQuery();
@@ -145,7 +147,7 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro,
+                Connect.Comando = new MySqlCommand(@"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro, cr.data_conta,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
                                                     cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento
                                                     FROM conta_receber cr 
@@ -190,6 +192,7 @@ namespace _5gpro.Daos
                         {
                             ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
                             DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                            DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
                             ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
@@ -266,6 +269,7 @@ namespace _5gpro.Daos
                         {
                             ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
                             DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                            DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
                             ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
@@ -462,6 +466,7 @@ namespace _5gpro.Daos
                 {
                     ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
                     DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                    DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
                     ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                     Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                     Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
