@@ -35,7 +35,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Telefone", typeof(string));
 
 
-            usuarios = usuarioDAO.BuscaUsuarios(buscaGrupoUsuario.grupoUsuario?.GrupoUsuarioID.ToString() ?? "", tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
+            usuarios = usuarioDAO.Busca(buscaGrupoUsuario.grupoUsuario?.GrupoUsuarioID.ToString() ?? "", tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
            
             foreach (Usuario u in usuarios)
             {

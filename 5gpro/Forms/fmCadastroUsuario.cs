@@ -133,7 +133,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigoUsuario.Text.Length > 0)
                 {
-                    Usuario newusuario = usuarioDAO.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
+                    Usuario newusuario = usuarioDAO.BuscaByID(int.Parse(tbCodigoUsuario.Text));
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -161,7 +161,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigoUsuario.Text.Length > 0)
                     {
-                        Usuario newusuario = usuarioDAO.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
+                        Usuario newusuario = usuarioDAO.BuscaByID(int.Parse(tbCodigoUsuario.Text));
                         if (newusuario != null)
                         {
                             usuario = newusuario;
@@ -299,7 +299,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = usuarioDAO.SalvarOuAtualizarUsuario(usuario);
+                    int resultado = usuarioDAO.Salvar(usuario);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -353,7 +353,7 @@ namespace _5gpro.Forms
                 {
                     if (usuario != null)
                     {
-                        usuario = usuarioDAO.BuscarUsuarioById(usuario.UsuarioID);
+                        usuario = usuarioDAO.BuscaByID(usuario.UsuarioID);
                         PreencheCampos(usuario);
                         Editando(false);
                     }
@@ -368,7 +368,7 @@ namespace _5gpro.Forms
             {
                 if (usuario != null)
                 {
-                    usuario = usuarioDAO.BuscarUsuarioById(usuario.UsuarioID);
+                    usuario = usuarioDAO.BuscaByID(usuario.UsuarioID);
                     PreencheCampos(usuario);
                 }
                 else
@@ -392,7 +392,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                Usuario newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
+                Usuario newusuario = usuarioDAO.Proximo(tbCodigoUsuario.Text);
                 if (newusuario != null)
                 {
                     usuario = newusuario;
@@ -407,7 +407,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Usuario newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
+                    Usuario newusuario = usuarioDAO.Proximo(tbCodigoUsuario.Text);
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -416,7 +416,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
+                        newusuario = usuarioDAO.Anterior(tbCodigoUsuario.Text);
                         if (newusuario != null)
                         {
                             usuario = newusuario;
@@ -440,7 +440,7 @@ namespace _5gpro.Forms
 
 
                 validacao.despintarCampos(controls);
-                Usuario newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
+                Usuario newusuario = usuarioDAO.Anterior(tbCodigoUsuario.Text);
                 if (newusuario != null)
                 {
                     usuario = newusuario;
@@ -455,7 +455,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Usuario newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
+                    Usuario newusuario = usuarioDAO.Anterior(tbCodigoUsuario.Text);
                     if (newusuario != null)
                     {
                         usuario = newusuario;
@@ -464,7 +464,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
+                        newusuario = usuarioDAO.Proximo(tbCodigoUsuario.Text);
                         if (newusuario != null)
                         {
                             usuario = newusuario;

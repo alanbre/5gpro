@@ -117,7 +117,7 @@ namespace _5gpro.Forms
             if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (tbCodigo.Text.Length > 0)
             {
-                PreencheCamposCodUsuario(usuarioDAO.BuscarUsuarioByIdLogin(int.Parse(tbCodigo.Text)));
+                PreencheCamposCodUsuario(usuarioDAO.BuscaByIDLogin(int.Parse(tbCodigo.Text)));
             }
             else
             {
