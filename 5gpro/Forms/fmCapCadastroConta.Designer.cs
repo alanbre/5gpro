@@ -28,12 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.lbDescontoConta = new System.Windows.Forms.Label();
             this.lbAcrescimoConta = new System.Windows.Forms.Label();
+            this.dbDescontoConta = new _5gpro.Controls.DecimalBox();
+            this.dbAcrescimoConta = new _5gpro.Controls.DecimalBox();
+            this.dbValorFinalConta = new _5gpro.Controls.DecimalBox();
+            this.dbJurosConta = new _5gpro.Controls.DecimalBox();
+            this.dbMultaConta = new _5gpro.Controls.DecimalBox();
+            this.dbValorOriginalConta = new _5gpro.Controls.DecimalBox();
             this.lbValorTotalConta = new System.Windows.Forms.Label();
             this.lbJurosConta = new System.Windows.Forms.Label();
             this.lbMultaConta = new System.Windows.Forms.Label();
@@ -43,8 +49,14 @@
             this.tbFormaPagamentoParcela = new System.Windows.Forms.TextBox();
             this.lbSituacaoParcela = new System.Windows.Forms.Label();
             this.tbSituacaoParcela = new System.Windows.Forms.TextBox();
+            this.dbDescontoParcela = new _5gpro.Controls.DecimalBox();
+            this.dbAcrescimoParcela = new _5gpro.Controls.DecimalBox();
             this.lbDescontoParcela = new System.Windows.Forms.Label();
             this.lbAcrescimoParcela = new System.Windows.Forms.Label();
+            this.dbValorFinalParcela = new _5gpro.Controls.DecimalBox();
+            this.dbJurosParcela = new _5gpro.Controls.DecimalBox();
+            this.dbMultaParcela = new _5gpro.Controls.DecimalBox();
+            this.dbValorOriginalParcela = new _5gpro.Controls.DecimalBox();
             this.btExcluirParcela = new System.Windows.Forms.Button();
             this.btNovaParcela = new System.Windows.Forms.Button();
             this.tbDataQuitacao = new System.Windows.Forms.TextBox();
@@ -70,23 +82,11 @@
             this.dgvtbcDataQuitacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcSituacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
-            this.dtpDataCadatroConta = new System.Windows.Forms.DateTimePicker();
-            this.lbDataCadastroConta = new System.Windows.Forms.Label();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.dtpDataConta = new System.Windows.Forms.DateTimePicker();
+            this.lbDataConta = new System.Windows.Forms.Label();
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
             this.lbCodigoConta = new System.Windows.Forms.Label();
-            this.dbDescontoConta = new _5gpro.Controls.DecimalBox();
-            this.dbAcrescimoConta = new _5gpro.Controls.DecimalBox();
-            this.dbValorFinalConta = new _5gpro.Controls.DecimalBox();
-            this.dbJurosConta = new _5gpro.Controls.DecimalBox();
-            this.dbMultaConta = new _5gpro.Controls.DecimalBox();
-            this.dbValorOriginalConta = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoParcela = new _5gpro.Controls.DecimalBox();
-            this.dbAcrescimoParcela = new _5gpro.Controls.DecimalBox();
-            this.dbValorFinalParcela = new _5gpro.Controls.DecimalBox();
-            this.dbJurosParcela = new _5gpro.Controls.DecimalBox();
-            this.dbMultaParcela = new _5gpro.Controls.DecimalBox();
-            this.dbValorOriginalParcela = new _5gpro.Controls.DecimalBox();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbTotais.SuspendLayout();
             this.gbParcelas.SuspendLayout();
@@ -145,6 +145,84 @@
             this.lbAcrescimoConta.Size = new System.Drawing.Size(56, 13);
             this.lbAcrescimoConta.TabIndex = 10;
             this.lbAcrescimoConta.Text = "Acréscimo";
+            // 
+            // dbDescontoConta
+            // 
+            this.dbDescontoConta.Enabled = false;
+            this.dbDescontoConta.Location = new System.Drawing.Point(6, 188);
+            this.dbDescontoConta.Name = "dbDescontoConta";
+            this.dbDescontoConta.Size = new System.Drawing.Size(82, 22);
+            this.dbDescontoConta.TabIndex = 9;
+            this.dbDescontoConta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbAcrescimoConta
+            // 
+            this.dbAcrescimoConta.Enabled = false;
+            this.dbAcrescimoConta.Location = new System.Drawing.Point(6, 149);
+            this.dbAcrescimoConta.Name = "dbAcrescimoConta";
+            this.dbAcrescimoConta.Size = new System.Drawing.Size(82, 22);
+            this.dbAcrescimoConta.TabIndex = 8;
+            this.dbAcrescimoConta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorFinalConta
+            // 
+            this.dbValorFinalConta.Enabled = false;
+            this.dbValorFinalConta.Location = new System.Drawing.Point(6, 229);
+            this.dbValorFinalConta.Name = "dbValorFinalConta";
+            this.dbValorFinalConta.Size = new System.Drawing.Size(82, 20);
+            this.dbValorFinalConta.TabIndex = 7;
+            this.dbValorFinalConta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbJurosConta
+            // 
+            this.dbJurosConta.Enabled = false;
+            this.dbJurosConta.Location = new System.Drawing.Point(6, 110);
+            this.dbJurosConta.Name = "dbJurosConta";
+            this.dbJurosConta.Size = new System.Drawing.Size(82, 20);
+            this.dbJurosConta.TabIndex = 5;
+            this.dbJurosConta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbMultaConta
+            // 
+            this.dbMultaConta.Enabled = false;
+            this.dbMultaConta.Location = new System.Drawing.Point(6, 71);
+            this.dbMultaConta.Name = "dbMultaConta";
+            this.dbMultaConta.Size = new System.Drawing.Size(82, 20);
+            this.dbMultaConta.TabIndex = 3;
+            this.dbMultaConta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorOriginalConta
+            // 
+            this.dbValorOriginalConta.Enabled = false;
+            this.dbValorOriginalConta.Location = new System.Drawing.Point(6, 32);
+            this.dbValorOriginalConta.Name = "dbValorOriginalConta";
+            this.dbValorOriginalConta.Size = new System.Drawing.Size(82, 20);
+            this.dbValorOriginalConta.TabIndex = 1;
+            this.dbValorOriginalConta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbValorTotalConta
             // 
@@ -254,6 +332,32 @@
             this.tbSituacaoParcela.Size = new System.Drawing.Size(83, 20);
             this.tbSituacaoParcela.TabIndex = 19;
             // 
+            // dbDescontoParcela
+            // 
+            this.dbDescontoParcela.Location = new System.Drawing.Point(508, 296);
+            this.dbDescontoParcela.Name = "dbDescontoParcela";
+            this.dbDescontoParcela.Size = new System.Drawing.Size(82, 20);
+            this.dbDescontoParcela.TabIndex = 15;
+            this.dbDescontoParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoParcela.Leave += new System.EventHandler(this.DbDescontoParcela_Leave);
+            // 
+            // dbAcrescimoParcela
+            // 
+            this.dbAcrescimoParcela.Location = new System.Drawing.Point(420, 296);
+            this.dbAcrescimoParcela.Name = "dbAcrescimoParcela";
+            this.dbAcrescimoParcela.Size = new System.Drawing.Size(82, 20);
+            this.dbAcrescimoParcela.TabIndex = 13;
+            this.dbAcrescimoParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbAcrescimoParcela.Leave += new System.EventHandler(this.DbAcrescimoParcela_Leave);
+            // 
             // lbDescontoParcela
             // 
             this.lbDescontoParcela.AutoSize = true;
@@ -271,6 +375,58 @@
             this.lbAcrescimoParcela.Size = new System.Drawing.Size(56, 13);
             this.lbAcrescimoParcela.TabIndex = 12;
             this.lbAcrescimoParcela.Text = "Acréscimo";
+            // 
+            // dbValorFinalParcela
+            // 
+            this.dbValorFinalParcela.Enabled = false;
+            this.dbValorFinalParcela.Location = new System.Drawing.Point(596, 296);
+            this.dbValorFinalParcela.Name = "dbValorFinalParcela";
+            this.dbValorFinalParcela.Size = new System.Drawing.Size(82, 20);
+            this.dbValorFinalParcela.TabIndex = 13;
+            this.dbValorFinalParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbJurosParcela
+            // 
+            this.dbJurosParcela.Location = new System.Drawing.Point(332, 296);
+            this.dbJurosParcela.Name = "dbJurosParcela";
+            this.dbJurosParcela.Size = new System.Drawing.Size(82, 20);
+            this.dbJurosParcela.TabIndex = 11;
+            this.dbJurosParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbJurosParcela.Leave += new System.EventHandler(this.DbJurosParcela_Leave);
+            // 
+            // dbMultaParcela
+            // 
+            this.dbMultaParcela.Location = new System.Drawing.Point(244, 295);
+            this.dbMultaParcela.Name = "dbMultaParcela";
+            this.dbMultaParcela.Size = new System.Drawing.Size(82, 20);
+            this.dbMultaParcela.TabIndex = 9;
+            this.dbMultaParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbMultaParcela.Leave += new System.EventHandler(this.DbMultaParcela_Leave);
+            // 
+            // dbValorOriginalParcela
+            // 
+            this.dbValorOriginalParcela.Location = new System.Drawing.Point(156, 296);
+            this.dbValorOriginalParcela.Name = "dbValorOriginalParcela";
+            this.dbValorOriginalParcela.Size = new System.Drawing.Size(82, 20);
+            this.dbValorOriginalParcela.TabIndex = 7;
+            this.dbValorOriginalParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorOriginalParcela.Leave += new System.EventHandler(this.DbValorOriginalParcela_Leave);
             // 
             // btExcluirParcela
             // 
@@ -412,8 +568,8 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvParcelas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -499,9 +655,9 @@
             // 
             // dgvtbcDataQuitacao
             // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "d";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
             this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
             this.dgvtbcDataQuitacao.ReadOnly = true;
@@ -517,8 +673,8 @@
             this.gbDadosConta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbDadosConta.Controls.Add(this.buscaPessoa);
-            this.gbDadosConta.Controls.Add(this.dtpDataCadatroConta);
-            this.gbDadosConta.Controls.Add(this.lbDataCadastroConta);
+            this.gbDadosConta.Controls.Add(this.dtpDataConta);
+            this.gbDadosConta.Controls.Add(this.lbDataConta);
             this.gbDadosConta.Controls.Add(this.tbCodigoConta);
             this.gbDadosConta.Controls.Add(this.lbCodigoConta);
             this.gbDadosConta.Location = new System.Drawing.Point(67, 14);
@@ -528,23 +684,33 @@
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
             // 
-            // dtpDataCadatroConta
+            // buscaPessoa
             // 
-            this.dtpDataCadatroConta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataCadatroConta.Location = new System.Drawing.Point(8, 75);
-            this.dtpDataCadatroConta.Name = "dtpDataCadatroConta";
-            this.dtpDataCadatroConta.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadatroConta.TabIndex = 3;
-            this.dtpDataCadatroConta.ValueChanged += new System.EventHandler(this.DtpDataCadatroConta_ValueChanged);
+            this.buscaPessoa.LabelText = "Fornecedor";
+            this.buscaPessoa.Location = new System.Drawing.Point(1, 98);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 4;
+            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
-            // lbDataCadastroConta
+            // dtpDataConta
             // 
-            this.lbDataCadastroConta.AutoSize = true;
-            this.lbDataCadastroConta.Location = new System.Drawing.Point(5, 59);
-            this.lbDataCadastroConta.Name = "lbDataCadastroConta";
-            this.lbDataCadastroConta.Size = new System.Drawing.Size(89, 13);
-            this.lbDataCadastroConta.TabIndex = 2;
-            this.lbDataCadastroConta.Text = "Data de cadastro";
+            this.dtpDataConta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataConta.Location = new System.Drawing.Point(8, 75);
+            this.dtpDataConta.Name = "dtpDataConta";
+            this.dtpDataConta.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataConta.TabIndex = 3;
+            this.dtpDataConta.ValueChanged += new System.EventHandler(this.DtpDataCadatroConta_ValueChanged);
+            // 
+            // lbDataConta
+            // 
+            this.lbDataConta.AutoSize = true;
+            this.lbDataConta.Location = new System.Drawing.Point(5, 59);
+            this.lbDataConta.Name = "lbDataConta";
+            this.lbDataConta.Size = new System.Drawing.Size(76, 13);
+            this.lbDataConta.TabIndex = 2;
+            this.lbDataConta.Text = "Data da Conta";
             // 
             // tbCodigoConta
             // 
@@ -562,172 +728,6 @@
             this.lbCodigoConta.Size = new System.Drawing.Size(35, 13);
             this.lbCodigoConta.TabIndex = 0;
             this.lbCodigoConta.Text = "Conta";
-            // 
-            // dbDescontoConta
-            // 
-            this.dbDescontoConta.Enabled = false;
-            this.dbDescontoConta.Location = new System.Drawing.Point(6, 188);
-            this.dbDescontoConta.Name = "dbDescontoConta";
-            this.dbDescontoConta.Size = new System.Drawing.Size(82, 22);
-            this.dbDescontoConta.TabIndex = 9;
-            this.dbDescontoConta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbAcrescimoConta
-            // 
-            this.dbAcrescimoConta.Enabled = false;
-            this.dbAcrescimoConta.Location = new System.Drawing.Point(6, 149);
-            this.dbAcrescimoConta.Name = "dbAcrescimoConta";
-            this.dbAcrescimoConta.Size = new System.Drawing.Size(82, 22);
-            this.dbAcrescimoConta.TabIndex = 8;
-            this.dbAcrescimoConta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorFinalConta
-            // 
-            this.dbValorFinalConta.Enabled = false;
-            this.dbValorFinalConta.Location = new System.Drawing.Point(6, 229);
-            this.dbValorFinalConta.Name = "dbValorFinalConta";
-            this.dbValorFinalConta.Size = new System.Drawing.Size(82, 20);
-            this.dbValorFinalConta.TabIndex = 7;
-            this.dbValorFinalConta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbJurosConta
-            // 
-            this.dbJurosConta.Enabled = false;
-            this.dbJurosConta.Location = new System.Drawing.Point(6, 110);
-            this.dbJurosConta.Name = "dbJurosConta";
-            this.dbJurosConta.Size = new System.Drawing.Size(82, 20);
-            this.dbJurosConta.TabIndex = 5;
-            this.dbJurosConta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbMultaConta
-            // 
-            this.dbMultaConta.Enabled = false;
-            this.dbMultaConta.Location = new System.Drawing.Point(6, 71);
-            this.dbMultaConta.Name = "dbMultaConta";
-            this.dbMultaConta.Size = new System.Drawing.Size(82, 20);
-            this.dbMultaConta.TabIndex = 3;
-            this.dbMultaConta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorOriginalConta
-            // 
-            this.dbValorOriginalConta.Enabled = false;
-            this.dbValorOriginalConta.Location = new System.Drawing.Point(6, 32);
-            this.dbValorOriginalConta.Name = "dbValorOriginalConta";
-            this.dbValorOriginalConta.Size = new System.Drawing.Size(82, 20);
-            this.dbValorOriginalConta.TabIndex = 1;
-            this.dbValorOriginalConta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoParcela
-            // 
-            this.dbDescontoParcela.Location = new System.Drawing.Point(508, 296);
-            this.dbDescontoParcela.Name = "dbDescontoParcela";
-            this.dbDescontoParcela.Size = new System.Drawing.Size(82, 20);
-            this.dbDescontoParcela.TabIndex = 15;
-            this.dbDescontoParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbDescontoParcela.Leave += new System.EventHandler(this.DbDescontoParcela_Leave);
-            // 
-            // dbAcrescimoParcela
-            // 
-            this.dbAcrescimoParcela.Location = new System.Drawing.Point(420, 296);
-            this.dbAcrescimoParcela.Name = "dbAcrescimoParcela";
-            this.dbAcrescimoParcela.Size = new System.Drawing.Size(82, 20);
-            this.dbAcrescimoParcela.TabIndex = 13;
-            this.dbAcrescimoParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbAcrescimoParcela.Leave += new System.EventHandler(this.DbAcrescimoParcela_Leave);
-            // 
-            // dbValorFinalParcela
-            // 
-            this.dbValorFinalParcela.Enabled = false;
-            this.dbValorFinalParcela.Location = new System.Drawing.Point(596, 296);
-            this.dbValorFinalParcela.Name = "dbValorFinalParcela";
-            this.dbValorFinalParcela.Size = new System.Drawing.Size(82, 20);
-            this.dbValorFinalParcela.TabIndex = 13;
-            this.dbValorFinalParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbJurosParcela
-            // 
-            this.dbJurosParcela.Location = new System.Drawing.Point(332, 296);
-            this.dbJurosParcela.Name = "dbJurosParcela";
-            this.dbJurosParcela.Size = new System.Drawing.Size(82, 20);
-            this.dbJurosParcela.TabIndex = 11;
-            this.dbJurosParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbJurosParcela.Leave += new System.EventHandler(this.DbJurosParcela_Leave);
-            // 
-            // dbMultaParcela
-            // 
-            this.dbMultaParcela.Location = new System.Drawing.Point(244, 295);
-            this.dbMultaParcela.Name = "dbMultaParcela";
-            this.dbMultaParcela.Size = new System.Drawing.Size(82, 20);
-            this.dbMultaParcela.TabIndex = 9;
-            this.dbMultaParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbMultaParcela.Leave += new System.EventHandler(this.DbMultaParcela_Leave);
-            // 
-            // dbValorOriginalParcela
-            // 
-            this.dbValorOriginalParcela.Location = new System.Drawing.Point(156, 296);
-            this.dbValorOriginalParcela.Name = "dbValorOriginalParcela";
-            this.dbValorOriginalParcela.Size = new System.Drawing.Size(82, 20);
-            this.dbValorOriginalParcela.TabIndex = 7;
-            this.dbValorOriginalParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbValorOriginalParcela.Leave += new System.EventHandler(this.DbValorOriginalParcela_Leave);
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Fornecedor";
-            this.buscaPessoa.Location = new System.Drawing.Point(1, 98);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 4;
-            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
             // menuVertical
             // 
@@ -794,8 +794,8 @@
         private System.Windows.Forms.Label lbCodigoParcela;
         private System.Windows.Forms.DataGridView dgvParcelas;
         private System.Windows.Forms.GroupBox gbDadosConta;
-        private System.Windows.Forms.DateTimePicker dtpDataCadatroConta;
-        private System.Windows.Forms.Label lbDataCadastroConta;
+        private System.Windows.Forms.DateTimePicker dtpDataConta;
+        private System.Windows.Forms.Label lbDataConta;
         private System.Windows.Forms.TextBox tbCodigoConta;
         private System.Windows.Forms.Label lbCodigoConta;
         private Controls.MenuVertical menuVertical;

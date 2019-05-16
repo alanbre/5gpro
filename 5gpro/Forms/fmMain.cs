@@ -34,6 +34,7 @@ namespace _5gpro
         //Cadastro de Contas a Receber = 050100
         //Quitação de Contas a Receber = 050200
         //Cadastro de Contas a Pagar = 060100
+        //Quitação de Contas a Pagar = 060200
         //Cadastro de Grupo de Itens = 010500
         //Cadastro de Grupo de Pessoas = 010600
         //Entrada de notas = 070100
@@ -189,6 +190,10 @@ namespace _5gpro
             }
         }
 
-
+        private void QuitaçãoDeContasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var formCapQuitacaoConta = new fmCapQuitacaoConta();
+            formCapQuitacaoConta.Show(this);
+        }
     }
 }

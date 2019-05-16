@@ -244,6 +244,7 @@
     <Compile Include="Daos\NotaFiscalTerceirosDAO.cs" />
     <Compile Include="Daos\OperacaoDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
+    <Compile Include="Daos\ParcelaContaPagarDAO.cs" />
     <Compile Include="Daos\ParcelaContaReceberDAO.cs" />
     <Compile Include="Daos\ParcelaOperacaoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
@@ -321,6 +322,12 @@
     </Compile>
     <Compile Include="Forms\fmBuscaItem.Designer.cs">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCapQuitacaoConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCapQuitacaoConta.Designer.cs">
+      <DependentUpon>fmCapQuitacaoConta.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmRelatorio.cs">
       <SubType>Form</SubType>
@@ -620,6 +627,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCapQuitacaoConta.resx">
+      <DependentUpon>fmCapQuitacaoConta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmRelatorio.resx">
       <DependentUpon>fmRelatorio.cs</DependentUpon>

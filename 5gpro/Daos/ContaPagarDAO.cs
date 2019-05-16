@@ -24,11 +24,11 @@ namespace _5gpro.Daos
 
 
                 Connect.Comando.CommandText = @"INSERT INTO conta_pagar
-                         (idconta_pagar, data_cadastro, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
+                         (idconta_pagar, data_cadastro, data_conta, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
                           VALUES
-                         (@idconta_pagar, @data_cadastro, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
+                         (@idconta_pagar, @data_cadastro, @data_conta, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
                           ON DUPLICATE KEY UPDATE
-                          data_cadastro = @data_cadastro, valor_original = @valor_original, multa = @multa,
+                          data_cadastro = @data_cadastro, data_conta = @data_conta, valor_original = @valor_original, multa = @multa,
                           juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
                           ";
 
@@ -42,6 +42,7 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@valor_final", contaPagar.ValorFinal);
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", contaPagar.Pessoa.PessoaID);
                 Connect.Comando.Parameters.AddWithValue("@situacao", contaPagar.Situacao);
+                Connect.Comando.Parameters.AddWithValue("data_conta", contaPagar.DataConta);
 
 
                 retorno = Connect.Comando.ExecuteNonQuery();
@@ -135,7 +136,7 @@ namespace _5gpro.Daos
             try
             {
                 Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro,
+                Connect.Comando = new MySqlCommand(@"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
                                                     cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
                                                     FROM 
                                                     conta_pagar cp 
@@ -170,6 +171,7 @@ namespace _5gpro.Daos
                         {
                             ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
                             DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                            DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
                             ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                             Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                             Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
@@ -319,6 +321,7 @@ namespace _5gpro.Daos
                 {
                     ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
                     DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
+                    DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
                     ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
                     Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
                     Juros = reader.GetDecimal(reader.GetOrdinal("juros")),

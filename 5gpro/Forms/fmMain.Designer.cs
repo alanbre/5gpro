@@ -51,6 +51,7 @@
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRelTeste = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.quitaçãoDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -193,21 +194,22 @@
             // tsmiCarCadastroContaReceber
             // 
             this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarCadastroContaReceber.Text = "Cadastro de Contas";
             this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
             // 
             // tsmiCarQuitacaoConta
             // 
             this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
-            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
             this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
             // 
             // tsmiContasPagar
             // 
             this.tsmiContasPagar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCapCadastroConta});
+            this.tsmiCapCadastroConta,
+            this.quitaçãoDeContasToolStripMenuItem});
             this.tsmiContasPagar.Name = "tsmiContasPagar";
             this.tsmiContasPagar.Size = new System.Drawing.Size(98, 20);
             this.tsmiContasPagar.Text = "Contas a pagar";
@@ -215,7 +217,7 @@
             // tsmiCapCadastroConta
             // 
             this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(170, 22);
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
             // 
@@ -230,7 +232,7 @@
             // tsmiRelTeste
             // 
             this.tsmiRelTeste.Name = "tsmiRelTeste";
-            this.tsmiRelTeste.Size = new System.Drawing.Size(180, 22);
+            this.tsmiRelTeste.Size = new System.Drawing.Size(99, 22);
             this.tsmiRelTeste.Text = "teste";
             this.tsmiRelTeste.Click += new System.EventHandler(this.TsmiTeste_Click);
             // 
@@ -238,6 +240,13 @@
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
+            // 
+            // quitaçãoDeContasToolStripMenuItem
+            // 
+            this.quitaçãoDeContasToolStripMenuItem.Name = "quitaçãoDeContasToolStripMenuItem";
+            this.quitaçãoDeContasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitaçãoDeContasToolStripMenuItem.Text = "Quitação de contas";
+            this.quitaçãoDeContasToolStripMenuItem.Click += new System.EventHandler(this.QuitaçãoDeContasToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -283,6 +292,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiRelTeste;
         private System.Windows.Forms.ToolStripMenuItem tsmiEntrada;
         private System.Windows.Forms.ToolStripMenuItem tsmiEntradaNotas;
+        private System.Windows.Forms.ToolStripMenuItem quitaçãoDeContasToolStripMenuItem;
     }
 }
 

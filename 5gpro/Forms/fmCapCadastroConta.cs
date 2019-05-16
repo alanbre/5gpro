@@ -99,7 +99,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigoConta.Text = contaPagarDAO.BuscaProxCodigoDisponivel().ToString();
             contaPagar = null;
-            dtpDataCadatroConta.Focus();
+            dtpDataConta.Focus();
             ignoracheckevent = false;
             Editando(true);
         }
@@ -127,7 +127,8 @@ namespace _5gpro.Forms
                 contaPagar = new ContaPagar
                 {
                     ContaPagarID = int.Parse(tbCodigoConta.Text),
-                    DataCadastro = dtpDataCadatroConta.Value,
+                    DataCadastro = DateTime.Today,
+                    DataConta = dtpDataConta.Value,
 
                     ValorOriginal = dbValorOriginalConta.Valor,
                     Multa = dbMultaConta.Valor,
@@ -319,7 +320,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigoConta.Text = contaPagar.ContaPagarID.ToString();
-            dtpDataCadatroConta.Value = contaPagar.DataCadastro;
+            dtpDataConta.Value = contaPagar.DataCadastro;
             dbValorOriginalConta.Valor = contaPagar.ValorOriginal;
             dbValorFinalConta.Valor = contaPagar.ValorFinal;
             dbMultaConta.Valor = contaPagar.Multa;
@@ -483,7 +484,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigoConta.Clear(); }
             buscaPessoa.Limpa();
-            dtpDataCadatroConta.Value = DateTime.Now;
+            dtpDataConta.Value = DateTime.Now;
             tbCodigoParcela.Clear();
             dtpDataVencimentoParcela.Value = DateTime.Now;
             dbValorOriginalConta.Valor = 0.00m;

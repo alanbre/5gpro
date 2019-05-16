@@ -29,6 +29,9 @@ namespace _5gpro.Entities
         public DateTime? DataQuitacao { get; set; }
 
         public FormaPagamento FormaPagamento { get; set; }
+
+        public int ContaPagarID { get; set; }
+
         public string Situacao { get; set; }
     }
 }
