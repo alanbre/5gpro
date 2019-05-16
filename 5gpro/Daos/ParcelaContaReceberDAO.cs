@@ -70,11 +70,12 @@ namespace _5gpro.Daos
         public int QuitarParcelas(List<ParcelaContaReceber> parcelas)
         {
             int retorno = 0;
+            string pago = "Pago";
             try
             {
 
                 Connect.Comando = new MySqlCommand(@"UPDATE parcela_conta_receber 
-                                                     SET data_quitacao = @data_quitacao
+                                                     SET data_quitacao = @data_quitacao, situacao = @situacao
                                                      WHERE idparcela_conta_receber = @idparcela_conta_receber
                                                      AND idconta_receber = @idconta_receber");
                 Connect.AbrirConexao();
@@ -85,6 +86,7 @@ namespace _5gpro.Daos
                     Connect.Comando.Parameters.AddWithValue("@data_quitacao", DateTime.Now);
                     Connect.Comando.Parameters.AddWithValue("@idparcela_conta_receber", p.ParcelaContaReceberID);
                     Connect.Comando.Parameters.AddWithValue("@idconta_receber", p.ContaReceberID);
+                    Connect.Comando.Parameters.AddWithValue("@situacao", pago);
                     Connect.Comando.ExecuteNonQuery();
                 }
                 retorno = 1;
