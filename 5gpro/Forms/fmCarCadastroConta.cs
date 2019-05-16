@@ -224,8 +224,8 @@ namespace _5gpro.Forms
                 ignoracheckevent = true;
                 LimpaCampos(true);
                 ignoracheckevent = false;
+                Editando(false);
             }
-
         }
         private void Proximo()
         {
@@ -519,7 +519,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
 
         private void Editando(bool edit)
         {
