@@ -16,23 +16,25 @@ namespace _5gpro.Daos
         public IEnumerable<ParcelaContaReceber> Busca(fmCarQuitacaoConta.Filtros f)
         {
             var parcelas = new List<ParcelaContaReceber>();
-            string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            string wherePessoa = f.filtroPessoa != null ? "AND cr.idpessoa = @idpessoa" : "";
             string whereConta = f.filtroConta > 0 ? "AND cr.idconta_receber = @idconta_receber" : "";
-
+            string whereValorFinal = f.usarvalorContaFiltro ? "AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
+            string whereDatCadastro = f.usardataCadastroFiltro ? "AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pcr.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
 
             try
             {
                 Connect.Comando = new MySqlCommand(@"SELECT * FROM parcela_conta_receber pcr
                                                      LEFT JOIN conta_receber cr
-                                                         ON pcr.idconta_receber = cr.idconta_receber
+                                                     ON pcr.idconta_receber = cr.idconta_receber
                                                      WHERE 1 = 1 "
                                                     + wherePessoa + ""
-                                                    + whereConta + "" +
-                                                    @"AND pcr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
-                                                      AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                                      AND pcr.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
-                                                      AND pcr.data_quitacao IS NULL
-                                                      GROUP BY cr.idconta_receber");
+                                                    + whereConta + "" 
+                                                    + whereValorFinal +" "
+                                                    + whereDatCadastro +" "
+                                                    + whereDataVencimento +
+                                                    @" AND pcr.data_quitacao IS NULL
+                                                      ");
 
                 if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
                 if (f.filtroConta > 0) { Connect.Comando.Parameters.AddWithValue("@idconta_receber", f.filtroConta); }

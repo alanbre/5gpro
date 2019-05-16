@@ -20,6 +20,9 @@ namespace _5gpro.Forms
         private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
         private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO();
         private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
+        private bool valorContaFiltro = false;
+        private bool dataCadastroFiltro = false;
+        private bool dataVencimentoFiltro = false;
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
@@ -41,6 +44,9 @@ namespace _5gpro.Forms
             public DateTime filtroDataCadastroFinal;
             public DateTime filtroDataVencimentoInicial;
             public DateTime filtroDataVencimentoFinal;
+            public bool usarvalorContaFiltro;
+            public bool usardataCadastroFiltro;
+            public bool usardataVencimentoFiltro;
         }
 
         public fmCarQuitacaoConta()
@@ -72,7 +78,10 @@ namespace _5gpro.Forms
                 filtroDataCadastroInicial = dtpDataCadastroInicial.Value,
                 filtroDataCadastroFinal = dtpDataCadastroFinal.Value,
                 filtroDataVencimentoInicial = dtpDataVencimentoInicial.Value,
-                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value
+                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value,
+                usardataCadastroFiltro = dataCadastroFiltro,
+                usardataVencimentoFiltro = dataVencimentoFiltro,
+                usarvalorContaFiltro = valorContaFiltro
             };
 
             parcelasContaReceber = parcelaContaReceberDAO.Busca(f).ToList();
@@ -170,6 +179,55 @@ namespace _5gpro.Forms
         private void LbValorTotal_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpDataCadastroInicial.Enabled = true;
+                dtpDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpDataCadastroInicial.Enabled = false;
+                dtpDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+
+        }
+
+        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataVencimento.Checked)
+            {
+                dtpDataVencimentoInicial.Enabled = true;
+                dtpDataVencimentoFinal.Enabled = true;
+                dataVencimentoFiltro = true;
+            }
+            else
+            {
+                dtpDataVencimentoInicial.Enabled = false;
+                dtpDataVencimentoFinal.Enabled = false;
+                dataVencimentoFiltro = false;
+            }
+        }
+
+        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValor.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorContaFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false ;
+                dbValorFinal.Enabled = false;
+                valorContaFiltro = false;
+            }
         }
     }
 }
