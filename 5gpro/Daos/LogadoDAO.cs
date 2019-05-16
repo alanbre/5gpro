@@ -8,7 +8,7 @@ namespace _5gpro.Daos
 {
     public class LogadoDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public Logado BuscaLogadoByUsuario(Usuario usuario)

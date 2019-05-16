@@ -8,7 +8,7 @@ namespace _5gpro.Daos
 {
     class EstadoDAO
     {
-        private static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public Estado BuscaEstadoByCod(int cod)

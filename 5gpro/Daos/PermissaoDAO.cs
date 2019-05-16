@@ -12,7 +12,7 @@ namespace _5gpro.Daos
 {
     public class PermissaoDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         //TENTANDO MELHORAR

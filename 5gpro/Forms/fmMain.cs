@@ -120,6 +120,12 @@ namespace _5gpro
             formEntradaNotas.Show(this);
         }
 
+        private void TsmiTeste_Click(object sender, EventArgs e)
+        {
+            var formRelTeste = new fmRelatorio();
+            formRelTeste.Show(this);
+        }
+
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             t.Abort();
@@ -183,11 +189,6 @@ namespace _5gpro
             }
         }
 
-        private void PrimeiroToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //var formRlPrimeiro = new rlPrimeiro();
-            //formRlPrimeiro.Show(this);
-        }
 
     }
 }

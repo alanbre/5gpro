@@ -11,7 +11,7 @@ namespace _5gpro.Daos
 {
     class SubGrupoPessoaDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public int SalvarOuAtualizar(SubGrupoPessoa subgrupoipessoa)
