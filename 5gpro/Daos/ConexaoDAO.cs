@@ -4,17 +4,16 @@ using _5gpro.Funcoes;
 using System.ComponentModel;
 using System.Configuration;
 using System.IO;
+using _5gpro.Forms;
 
 namespace _5gpro.Daos
 {
     public class ConexaoDAO
     {
-        private static ConexaoDAO conexaoDAO;
-
-        public string database = "5gprodatabase";
-        public string server = "localhost";
-        public string uid = "5gprouser";
-        public string pwd = "5gproedualan";
+        public string database = fmSelecionarBase.database;
+        public string server = fmSelecionarBase.server;
+        public string uid = fmSelecionarBase.uid;
+        public string pwd = fmSelecionarBase.pwd;
         public string Conecta
         {
             get
@@ -34,17 +33,7 @@ namespace _5gpro.Daos
         public MySqlTransaction tr = null;
         public MySqlCommand Comando = null;
 
-        private ConexaoDAO()
-        {
-
-        }
-
-        public static ConexaoDAO GetInstance()
-        {
-            if (conexaoDAO == null)
-                conexaoDAO = new ConexaoDAO();
-            return conexaoDAO;
-        }
+        
         public void AbrirConexao()
         {
             try

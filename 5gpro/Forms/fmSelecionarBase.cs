@@ -7,7 +7,6 @@ namespace _5gpro.Forms
 {
     public partial class fmSelecionarBase : Form
     {
-        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
         private struct Bases
         {
             public string Database;
@@ -46,6 +45,11 @@ namespace _5gpro.Forms
             Pwd = "5gproedualan"
         };
 
+        public static string database = "";
+        public static string server = "";
+        public static string uid = "";
+        public static string pwd = "";
+
 
         public fmSelecionarBase()
         {
@@ -76,10 +80,10 @@ namespace _5gpro.Forms
         }
         private void Entrar()
         {
-            Connect.database = dgvBases.CurrentRow.Cells[0].Value.ToString();
-            Connect.server = dgvBases.CurrentRow.Cells[1].Value.ToString();
-            Connect.uid = dgvBases.CurrentRow.Cells[2].Value.ToString();
-            Connect.pwd = dgvBases.CurrentRow.Cells[3].Value.ToString();
+            database = dgvBases.CurrentRow.Cells[0].Value.ToString();
+            server = dgvBases.CurrentRow.Cells[1].Value.ToString();
+            uid = dgvBases.CurrentRow.Cells[2].Value.ToString();
+            pwd = dgvBases.CurrentRow.Cells[3].Value.ToString();
             this.Close();
         }
     }

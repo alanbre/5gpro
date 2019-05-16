@@ -10,7 +10,7 @@ namespace _5gpro.Daos
 {
     public class UsuarioDAO
     {
-        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public List<GrupoUsuario> listagrupousuarios = new List<GrupoUsuario>();

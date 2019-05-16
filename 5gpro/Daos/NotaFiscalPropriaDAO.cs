@@ -8,7 +8,7 @@ namespace _5gpro.Daos
 {
     class NotaFiscalPropriaDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public int BuscaProxCodigoDisponivel()

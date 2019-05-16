@@ -9,7 +9,7 @@ namespace _5gpro.Daos
 {
     class GrupoPessoaDAO
     {
-        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public int SalvarOuAtualizar(GrupoPessoa grupopessoa)

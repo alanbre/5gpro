@@ -49,7 +49,7 @@
             this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.primeiroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiRelTeste = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
@@ -222,17 +222,17 @@
             // relatóriosToolStripMenuItem
             // 
             this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.primeiroToolStripMenuItem});
+            this.tsmiRelTeste});
             this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
             this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.relatóriosToolStripMenuItem.Text = "Relatórios";
             // 
-            // primeiroToolStripMenuItem
+            // tsmiRelTeste
             // 
-            this.primeiroToolStripMenuItem.Name = "primeiroToolStripMenuItem";
-            this.primeiroToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.primeiroToolStripMenuItem.Text = "Primeiro";
-            this.primeiroToolStripMenuItem.Click += new System.EventHandler(this.PrimeiroToolStripMenuItem_Click);
+            this.tsmiRelTeste.Name = "tsmiRelTeste";
+            this.tsmiRelTeste.Size = new System.Drawing.Size(180, 22);
+            this.tsmiRelTeste.Text = "teste";
+            this.tsmiRelTeste.Click += new System.EventHandler(this.TsmiTeste_Click);
             // 
             // tsmiCadastroContaReceber
             // 
@@ -280,7 +280,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCarQuitacaoConta;
         private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDePessoasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem primeiroToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiRelTeste;
         private System.Windows.Forms.ToolStripMenuItem tsmiEntrada;
         private System.Windows.Forms.ToolStripMenuItem tsmiEntradaNotas;
     }

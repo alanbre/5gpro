@@ -9,7 +9,7 @@ namespace _5gpro.Daos
 {
     class FormaPagamentoDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public IEnumerable<FormaPagamento> BuscaTodos(string nome)

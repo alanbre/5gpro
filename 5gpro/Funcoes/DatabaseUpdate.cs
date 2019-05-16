@@ -7,7 +7,7 @@ namespace _5gpro.Funcoes
 {
     class DatabaseUpdate
     {
-        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
         public bool CriarTabelasSeNaoExistirem()
         {
             try

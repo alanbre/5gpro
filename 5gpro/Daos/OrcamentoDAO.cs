@@ -9,7 +9,7 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public Orcamento BuscaOrcamentoById(int cod)

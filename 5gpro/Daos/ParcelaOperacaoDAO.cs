@@ -11,7 +11,7 @@ namespace _5gpro.Daos
     class ParcelaOperacaoDAO
     {
 
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
 

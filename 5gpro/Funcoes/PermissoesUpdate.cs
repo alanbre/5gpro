@@ -9,7 +9,7 @@ namespace _5gpro.Funcoes
 {
     class PermissoesUpdate
     {
-        private static readonly ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
         private PermissaoDAO permissaoDAO = new PermissaoDAO();
         private GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
         private List<GrupoUsuario> listagrupos = new List<GrupoUsuario>();

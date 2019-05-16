@@ -10,7 +10,7 @@ namespace _5gpro.Daos
 {
     public class ParcelaContaReceberDAO
     {
-        private readonly static ConexaoDAO Connect = ConexaoDAO.GetInstance();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public IEnumerable<ParcelaContaReceber> Busca(fmCarQuitacaoConta.Filtros f)
