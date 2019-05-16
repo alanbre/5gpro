@@ -30,6 +30,7 @@ namespace MySQLConnection
 
         private bool _isDisposed = false;
         private MySqlConnection _connection = null;
+        private MySqlTransaction _transaction = null;
         private Dictionary<string, object> _parameters = new Dictionary<string, object>();
 
         /// <summary>The query string for querying the MySQL database</summary>
@@ -109,6 +110,17 @@ namespace MySQLConnection
             this._parameters.Clear();
         }
 
+        public void beginTransaction()
+        {
+            this._transaction = this._connection.BeginTransaction();
+        }
+
+        public void Commit()
+        {
+            this._transaction.Commit();
+        }
+
+
         /// <summary>This method allows you to run a query that expects a single value back (i.e. one column from one record)</summary>
         /// <returns>The string value result of the query, or <c>null</c> if there is no result</returns>
         public string selectQueryForSingleValue()
@@ -119,6 +131,10 @@ namespace MySQLConnection
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
+                if (this._transaction != null)
+                {
+                    command.Transaction = this._transaction;
+                }
                 AddParametersToCommand(command);
 
                 object dbValue = null;
@@ -156,6 +172,10 @@ namespace MySQLConnection
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
+                if (this._transaction != null)
+                {
+                    command.Transaction = this._transaction;
+                }
                 AddParametersToCommand(command);
 
                 try
@@ -176,11 +196,13 @@ namespace MySQLConnection
                                 // catch null and don't set as empty string
                                 if (reader[i] == DBNull.Value)
                                 {
-                                    record.Add(reader.GetName(i), null);
+                                    if (!record.ContainsKey(reader.GetName(i)))
+                                        record.Add(reader.GetName(i), null);
                                 }
                                 else
                                 {
-                                    record.Add(reader.GetName(i), reader[i].ToString());
+                                    if (!record.ContainsKey(reader.GetName(i)))
+                                        record.Add(reader.GetName(i), reader[i].ToString());
                                 }
                             }
 
@@ -188,9 +210,9 @@ namespace MySQLConnection
                     }
 
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    throw;
+                    Console.WriteLine(ex.ToString());
                 }
 
             }
@@ -202,6 +224,7 @@ namespace MySQLConnection
         /// <returns>A <c>List&lt;string&gt;</c> listing the values returned from the query, or an empty <c>List&lt;string&gt;</c> if there is no result</returns>
         public List<string> selectQueryForSingleColumn()
         {
+
             CheckIfInstanceIsReadyForQuery();
 
             // if the result set is empty, we'll return an empty list
@@ -209,6 +232,10 @@ namespace MySQLConnection
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
+                if (this._transaction != null)
+                {
+                    command.Transaction = this._transaction;
+                }
                 AddParametersToCommand(command);
 
                 try
@@ -253,6 +280,10 @@ namespace MySQLConnection
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
+                if (this._transaction != null)
+                {
+                    command.Transaction = this._transaction;
+                }
                 AddParametersToCommand(command);
 
                 try
@@ -275,11 +306,13 @@ namespace MySQLConnection
                                     // catch null values, don't return as empty string
                                     if (reader[i] == DBNull.Value)
                                     {
-                                        record.Add(reader.GetName(i), null);
+                                        if (!record.ContainsKey(reader.GetName(i)))
+                                            record.Add(reader.GetName(i), null);
                                     }
                                     else
                                     {
-                                        record.Add(reader.GetName(i), reader[i].ToString());
+                                        if (!record.ContainsKey(reader.GetName(i)))
+                                            record.Add(reader.GetName(i), reader[i].ToString());
                                     }
                                 }
 
@@ -308,6 +341,10 @@ namespace MySQLConnection
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
+                if (this._transaction != null)
+                {
+                    command.Transaction = this._transaction;
+                }
                 AddParametersToCommand(command);
 
                 try
@@ -420,6 +457,7 @@ namespace MySQLConnection
                 this._connection.Close();
                 this._connection = null;
                 this._isDisposed = true;
+                this._transaction = null;
             }
 
         }
