@@ -33,7 +33,7 @@ namespace _5gpro.Forms
 
             if (usuariologado != null)
             {
-                logado = logadoDAO.BuscaLogadoByUsuario(usuariologado);
+                logado = logadoDAO.BuscaByUsuario(usuariologado);
                 if (logado != null)
                 {                  
                     MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

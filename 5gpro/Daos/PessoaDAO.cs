@@ -2,8 +2,7 @@
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+using MySQLConnection;
 
 namespace _5gpro.Daos
 {
@@ -14,18 +13,10 @@ namespace _5gpro.Daos
 
         public int SalvaOuAtualiza(Pessoa pessoa)
         {
-
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = Connect.Conexao.CreateCommand();
-                Connect.tr = Connect.Conexao.BeginTransaction();
-                Connect.Comando.Connection = Connect.Conexao;
-                Connect.Comando.Transaction = Connect.tr;
-
-
-                Connect.Comando.CommandText = @"INSERT INTO pessoa
+                sql.Query = @"INSERT INTO pessoa
                          (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao)
                           VALUES
                          (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao)
@@ -34,46 +25,34 @@ namespace _5gpro.Daos
                           cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa, idsubgrupopessoa = @idsubgrupopessoa,
                           atuacao = @atuacao, situacao = @situacao
                           ";
-
-                Connect.Comando.Parameters.AddWithValue("@idpessoa", pessoa.PessoaID);
-                Connect.Comando.Parameters.AddWithValue("@nome", pessoa.Nome);
-                Connect.Comando.Parameters.AddWithValue("@fantasia", pessoa.Fantasia);
-                Connect.Comando.Parameters.AddWithValue("@rua", pessoa.Rua);
-                Connect.Comando.Parameters.AddWithValue("@numero", pessoa.Numero);
-                Connect.Comando.Parameters.AddWithValue("@bairro", pessoa.Bairro);
-                Connect.Comando.Parameters.AddWithValue("@complemento", pessoa.Complemento);
-                Connect.Comando.Parameters.AddWithValue("@atuacao", pessoa.Atuacao);
-                Connect.Comando.Parameters.AddWithValue("@situacao", pessoa.Situacao);
+                sql.addParam("@idpessoa", pessoa.PessoaID);
+                sql.addParam("@nome", pessoa.Nome);
+                sql.addParam("@fantasia", pessoa.Fantasia);
+                sql.addParam("@rua", pessoa.Rua);
+                sql.addParam("@numero", pessoa.Numero);
+                sql.addParam("@bairro", pessoa.Bairro);
+                sql.addParam("@complemento", pessoa.Complemento);
+                sql.addParam("@atuacao", pessoa.Atuacao);
+                sql.addParam("@situacao", pessoa.Situacao);
 
                 if (pessoa.TipoPessoa == "F")
                 {
-                    Connect.Comando.Parameters.AddWithValue("@cpf", pessoa.CpfCnpj);
-                    Connect.Comando.Parameters.AddWithValue("@cnpj", "");
+                    sql.addParam("@cpf", pessoa.CpfCnpj);
+                    sql.addParam("@cnpj", "");
                 }
                 else
                 {
-                    Connect.Comando.Parameters.AddWithValue("@cpf", "");
-                    Connect.Comando.Parameters.AddWithValue("@cnpj", pessoa.CpfCnpj);
+                    sql.addParam("@cpf", "");
+                    sql.addParam("@cnpj", pessoa.CpfCnpj);
                 }
-                Connect.Comando.Parameters.AddWithValue("@endereco", pessoa.Rua + ", " + pessoa.Numero + "-" + pessoa.Bairro);
-                Connect.Comando.Parameters.AddWithValue("@telefone", pessoa.Telefone);
-                Connect.Comando.Parameters.AddWithValue("@email", pessoa.Email);
-                Connect.Comando.Parameters.AddWithValue("@idcidade", pessoa.Cidade.CidadeID);
-                Connect.Comando.Parameters.AddWithValue("@tipoPessoa", pessoa.TipoPessoa);
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", pessoa.SubGrupoPessoa.SubGrupoPessoaID);
+                sql.addParam("@endereco", pessoa.Rua + ", " + pessoa.Numero + "-" + pessoa.Bairro);
+                sql.addParam("@telefone", pessoa.Telefone);
+                sql.addParam("@email", pessoa.Email);
+                sql.addParam("@idcidade", pessoa.Cidade.CidadeID);
+                sql.addParam("@tipoPessoa", pessoa.TipoPessoa);
+                sql.addParam("@idsubgrupopessoa", pessoa.SubGrupoPessoa.SubGrupoPessoaID);
 
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-                Connect.tr.Commit();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                retorno = sql.insertQuery();
             }
             return retorno;
         }
@@ -81,404 +60,215 @@ namespace _5gpro.Daos
         public Pessoa BuscaById(int cod)
         {
             Pessoa pessoa = new Pessoa();
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-            Estado estado = null;
-            Cidade cidade = null;
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
-                                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
-                                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                                             telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
-                                             FROM pessoa p
-                                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
-                                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
-                                             INNER JOIN cidade c ON p.idcidade = c.idcidade
-                                             INNER JOIN estado e ON e.idestado = c.idestado
-                                             WHERE p.idpessoa = @idpessoa", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idpessoa", cod);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                            e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
+                            p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                            FROM pessoa p
+                            INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
+                            INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
+                            INNER JOIN cidade c ON p.idcidade = c.idcidade
+                            INNER JOIN estado e ON e.idestado = c.idestado
+                            WHERE p.idpessoa = @idpessoa
+                            LIMIT 1";
+                sql.addParam("@idpessoa", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                        };
-
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                        };
-
-                        estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                            Uf = reader.GetString(reader.GetOrdinal("uf"))
-                        };
-
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                            Estado = estado
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email")),
-                            SubGrupoPessoa = subgrupopessoa,
-                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                        };
-                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-                    }
-                    else
-                    {
-                        pessoa = null;
-                    }
+                    return null;
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                var grupopessoa = new GrupoPessoa
+                {
+                    GrupoPessoaID = int.Parse(data["idgrupopessoa"]),
+                    Nome = data["nomegrupopessoa"]
+                };
+                var subgrupopessoa = new SubGrupoPessoa
+                {
+                    SubGrupoPessoaID = int.Parse(data["idsubgrupopessoa"]),
+                    Nome = data["nomesubgrupopessoa"]
+                };
+                var estado = new Estado
+                {
+                    EstadoID = int.Parse(data["idestado"]),
+                    Nome = data["nomeestado"],
+                    Uf = data["uf"]
+                };
+
+                var cidade = new Cidade
+                {
+                    CidadeID = int.Parse(data["idcidade"]),
+                    Nome = data["nomecidade"],
+                    Estado = estado
+                };
+
+                pessoa = new Pessoa
+                {
+                    PessoaID = int.Parse(data["idpessoa"]),
+                    Nome = data["nomepessoa"],
+                    Fantasia = data["fantasia"],
+                    TipoPessoa = data["tipo_pessoa"],
+                    Rua = data["rua"],
+                    Numero = data["numero"],
+                    Bairro = data["bairro"],
+                    Complemento = data["complemento"],
+                    Cidade = cidade,
+                    Telefone = data["telefone"],
+                    Email = data["email"],
+                    SubGrupoPessoa = subgrupopessoa,
+                    Atuacao = data["atuacao"],
+                    Situacao = data["situacao"]
+                };
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? data["cpf"] : data["cnpj"];
             }
             return pessoa;
         }
 
-        public Tuple<Pessoa, int> BuscaById(int cod, Logado logado)
+        public Pessoa Proximo(string cod)
         {
             Pessoa pessoa = new Pessoa();
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-            Estado estado = null;
-            Cidade cidade = null;
-            int dono = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
-                                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
-                                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                                             telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
-                                             FROM pessoa p
-                                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
-                                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
-                                             INNER JOIN cidade c ON p.idcidade = c.idcidade
-                                             INNER JOIN estado e ON e.idestado = c.idestado
-                                             WHERE p.idpessoa = @idpessoa", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idpessoa", cod);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                            e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
+                            p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                            FROM pessoa p
+                            INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
+                            INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
+                            INNER JOIN cidade c ON p.idcidade = c.idcidade
+                            INNER JOIN estado e ON e.idestado = c.idestado
+                            WHERE p.idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)";
+                sql.addParam("@idpessoa", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                        };
-
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                        };
-
-                        estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                            Uf = reader.GetString(reader.GetOrdinal("uf"))
-                        };
-
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                            Estado = estado
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email")),
-                            SubGrupoPessoa = subgrupopessoa,
-                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                        };
-                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-                    }
-                    else
-                    {
-                        pessoa = null;
-                    }
+                    return null;
                 }
-
-                if (pessoa != null)
+                var grupopessoa = new GrupoPessoa
                 {
-                    Connect.Comando.CommandText = "SELECT * FROM 5gprodatabase.lock WHERE tabela = 'pessoa' AND codigo_registro = @codigo_registro AND idusuario != @idusuario";
-                    Connect.Comando.Parameters.AddWithValue("@codigo_registro", cod);
-                    Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
-                    using (var reader = Connect.Comando.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            dono = reader.GetInt32(reader.GetOrdinal("idusuario"));
-                        }
-
-                    }
-                }
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return Tuple.Create<Pessoa, int>(pessoa, dono);
-        }
-
-
-        public Pessoa BuscaProximo(string codAtual)
-        {
-            Pessoa pessoa = new Pessoa();
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-            Estado estado = null;
-            Cidade cidade = null;
-
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
-                                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
-                                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                                             telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
-                                             FROM pessoa p
-                                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
-                                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
-                                             INNER JOIN cidade c ON p.idcidade = c.idcidade
-                                             INNER JOIN estado e ON e.idestado = c.idestado
-                                             WHERE p.idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idpessoa", codAtual);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                    GrupoPessoaID = int.Parse(data["idgrupopessoa"]),
+                    Nome = data["nomegrupopessoa"]
+                };
+                var subgrupopessoa = new SubGrupoPessoa
                 {
+                    SubGrupoPessoaID = int.Parse(data["idsubgrupopessoa"]),
+                    Nome = data["nomesubgrupopessoa"]
+                };
+                var estado = new Estado
+                {
+                    EstadoID = int.Parse(data["idestado"]),
+                    Nome = data["nomeestado"],
+                    Uf = data["uf"]
+                };
 
-                    if (reader.Read())
-                    {
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                        };
+                var cidade = new Cidade
+                {
+                    CidadeID = int.Parse(data["idcidade"]),
+                    Nome = data["nomecidade"],
+                    Estado = estado
+                };
 
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                        };
-
-                        estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                            Uf = reader.GetString(reader.GetOrdinal("uf"))
-                        };
-
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                            Estado = estado
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email")),
-                            SubGrupoPessoa = subgrupopessoa,
-                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                        };
-                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-                    }
-                    else
-                    {
-                        pessoa = null;
-                    }
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                pessoa = new Pessoa
+                {
+                    PessoaID = int.Parse(data["idpessoa"]),
+                    Nome = data["nomepessoa"],
+                    Fantasia = data["fantasia"],
+                    TipoPessoa = data["tipo_pessoa"],
+                    Rua = data["rua"],
+                    Numero = data["numero"],
+                    Bairro = data["bairro"],
+                    Complemento = data["complemento"],
+                    Cidade = cidade,
+                    Telefone = data["telefone"],
+                    Email = data["email"],
+                    SubGrupoPessoa = subgrupopessoa,
+                    Atuacao = data["atuacao"],
+                    Situacao = data["situacao"]
+                };
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? data["cpf"] : data["cnpj"];
             }
             return pessoa;
         }
 
-        public Pessoa BuscaAnterior(string codAtual)
+        public Pessoa Anterior(string cod)
         {
             Pessoa pessoa = new Pessoa();
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-            Estado estado = null;
-            Cidade cidade = null;
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
-                                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
-                                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                                             telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
-                                             FROM pessoa p
-                                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
-                                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
-                                             INNER JOIN cidade c ON p.idcidade = c.idcidade
-                                             INNER JOIN estado e ON e.idestado = c.idestado
-                                             WHERE p.idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idpessoa", codAtual);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                            e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
+                            p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                            FROM pessoa p
+                            INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
+                            INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
+                            INNER JOIN cidade c ON p.idcidade = c.idcidade
+                            INNER JOIN estado e ON e.idestado = c.idestado
+                            WHERE p.idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)";
+                sql.addParam("@idpessoa", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                        };
-
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                        };
-
-                        estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                            Uf = reader.GetString(reader.GetOrdinal("uf"))
-                        };
-
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                            Estado = estado
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email")),
-                            SubGrupoPessoa = subgrupopessoa,
-                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                        };
-                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-                    }
-                    else
-                    {
-                        pessoa = null;
-                    }
+                    return null;
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                var grupopessoa = new GrupoPessoa
+                {
+                    GrupoPessoaID = int.Parse(data["idgrupopessoa"]),
+                    Nome = data["nomegrupopessoa"]
+                };
+                var subgrupopessoa = new SubGrupoPessoa
+                {
+                    SubGrupoPessoaID = int.Parse(data["idsubgrupopessoa"]),
+                    Nome = data["nomesubgrupopessoa"]
+                };
+                var estado = new Estado
+                {
+                    EstadoID = int.Parse(data["idestado"]),
+                    Nome = data["nomeestado"],
+                    Uf = data["uf"]
+                };
+
+                var cidade = new Cidade
+                {
+                    CidadeID = int.Parse(data["idcidade"]),
+                    Nome = data["nomecidade"],
+                    Estado = estado
+                };
+
+                pessoa = new Pessoa
+                {
+                    PessoaID = int.Parse(data["idpessoa"]),
+                    Nome = data["nomepessoa"],
+                    Fantasia = data["fantasia"],
+                    TipoPessoa = data["tipo_pessoa"],
+                    Rua = data["rua"],
+                    Numero = data["numero"],
+                    Bairro = data["bairro"],
+                    Complemento = data["complemento"],
+                    Cidade = cidade,
+                    Telefone = data["telefone"],
+                    Email = data["email"],
+                    SubGrupoPessoa = subgrupopessoa,
+                    Atuacao = data["atuacao"],
+                    Situacao = data["situacao"]
+                };
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? data["cpf"] : data["cnpj"];
             }
             return pessoa;
         }
 
         public List<Pessoa> Busca(string nome, string cpfCnpj, int idcidade)
         {
-            Pessoa pessoa = null;
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-            Estado estado = null;
-            Cidade cidade = null;
-            List<Pessoa> listapessoas = new List<Pessoa>();
-            List<string> listaatuacoes = new List<string>();
-
+            List<Pessoa> pessoas = new List<Pessoa>();
             string conCodPessoa = nome.Length > 0 ? "AND p.nome LIKE @nome" : "";
             string conCpfCnpj = cpfCnpj.Length > 0 ? "AND (cpf LIKE @cpfcnpj OR cnpj LIKE @cpfcnpj)" : "";
             string conCidade = idcidade > 0 ? "AND idcidade = @idcidade" : "";
 
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                                              e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                                              p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
                                              telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
@@ -491,159 +281,80 @@ namespace _5gpro.Daos
                                              " + conCodPessoa + @"
                                              " + conCpfCnpj + @"
                                              " + conCidade + @"
-                                             ORDER BY idpessoa", Connect.Conexao);
-
-                if (conCodPessoa.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-                if (conCpfCnpj.Length > 0) { Connect.Comando.Parameters.AddWithValue("@cpfcnpj", "%" + cpfCnpj + "%"); }
-                if (conCidade.Length > 0) { Connect.Comando.Parameters.AddWithValue("@idcidade", idcidade); }
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                                             ORDER BY idpessoa";
+                if (conCodPessoa.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
+                if (conCpfCnpj.Length > 0) { sql.addParam("@cpfcnpj", "%" + cpfCnpj + "%"); }
+                if (conCidade.Length > 0) { sql.addParam("@idcidade", idcidade); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    while (reader.Read())
+                    var grupopessoa = new GrupoPessoa
                     {
+                        GrupoPessoaID = int.Parse(d["idgrupopessoa"]),
+                        Nome = d["nomegrupopessoa"]
+                    };
+                    var subgrupopessoa = new SubGrupoPessoa
+                    {
+                        SubGrupoPessoaID = int.Parse(d["idsubgrupopessoa"]),
+                        Nome = d["nomesubgrupopessoa"]
+                    };
+                    var estado = new Estado
+                    {
+                        EstadoID = int.Parse(d["idestado"]),
+                        Nome = d["nomeestado"],
+                        Uf = d["uf"]
+                    };
 
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                        };
+                    var cidade = new Cidade
+                    {
+                        CidadeID = int.Parse(d["idcidade"]),
+                        Nome = d["nomecidade"],
+                        Estado = estado
+                    };
 
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                        };
-
-                        estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                            Uf = reader.GetString(reader.GetOrdinal("uf"))
-                        };
-
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                            Estado = estado
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email")),
-                            SubGrupoPessoa = subgrupopessoa,
-                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-
-                        };
-                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-
-                        listapessoas.Add(pessoa);
-
-                    }
+                    var pessoa = new Pessoa
+                    {
+                        PessoaID = int.Parse(d["idpessoa"]),
+                        Nome = d["nomepessoa"],
+                        Fantasia = d["fantasia"],
+                        TipoPessoa = d["tipo_pessoa"],
+                        Rua = d["rua"],
+                        Numero = d["numero"],
+                        Bairro = d["bairro"],
+                        Complemento = d["complemento"],
+                        Cidade = cidade,
+                        Telefone = d["telefone"],
+                        Email = d["email"],
+                        SubGrupoPessoa = subgrupopessoa,
+                        Atuacao = d["atuacao"],
+                        Situacao = d["situacao"]
+                    };
+                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? d["cpf"] : d["cnpj"];
+                    pessoas.Add(pessoa);
                 }
+                return pessoas;
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return listapessoas;
         }
 
 
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT p1.idpessoa + 1 AS proximoid
-                                             FROM pessoa AS p1
-                                             LEFT OUTER JOIN pessoa AS p2 ON p1.idpessoa + 1 = p2.idpessoa
-                                             WHERE p2.idpessoa IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT p1.idpessoa + 1 AS proximoid
+                            FROM pessoa AS p1
+                            LEFT OUTER JOIN pessoa AS p2 ON p1.idpessoa + 1 = p2.idpessoa
+                            WHERE p2.idpessoa IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-
-                    if (reader.Read())
-                    {
-                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    }
+                    proximoid = int.Parse(data["proximoid"]);
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return proximoid;
-        }
-
-        public void Lock(int codigo, Logado logado)
-        {
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("INSERT INTO 5gprodatabase.lock (idusuario, tabela, codigo_registro) VALUES (@idusuario, @tabela, @codigo_registro)", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
-                Connect.Comando.Parameters.AddWithValue("@tabela", "pessoa");
-                Connect.Comando.Parameters.AddWithValue("@codigo_registro", codigo);
-
-                Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-        }
-
-        public void Unlock(int codigo, Logado logado)
-        {
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("DELETE FROM 5gprodatabase.lock WHERE tabela = @tabela AND codigo_registro = @codigo_registro AND idusuario = @idusuario", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
-                Connect.Comando.Parameters.AddWithValue("@tabela", "pessoa");
-                Connect.Comando.Parameters.AddWithValue("@codigo_registro", codigo);
-
-                Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
         }
     }
 }

@@ -36,7 +36,7 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010100").ToString();
 
@@ -398,8 +398,8 @@ namespace _5gpro.Forms
                 {
                     if (pessoa != null)
                     {
-                        var result = pessoaDAO.BuscaById(pessoa.PessoaID, logado);
-                        pessoa = result.Item1;
+                        pessoa = pessoaDAO.BuscaById(pessoa.PessoaID);
+                        
 
                         PreencheCampos(pessoa);
                         Editando(false);
@@ -415,8 +415,7 @@ namespace _5gpro.Forms
             {
                 if (pessoa != null)
                 {
-                    var result = pessoaDAO.BuscaById(pessoa.PessoaID, logado);
-                    pessoa = result.Item1;
+                    pessoa = pessoaDAO.BuscaById(pessoa.PessoaID);
                     PreencheCampos(pessoa);
                 }
                 else
@@ -442,7 +441,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                Pessoa newpessoa = pessoaDAO.BuscaProximo(tbCodigo.Text);
+                Pessoa newpessoa = pessoaDAO.Proximo(tbCodigo.Text);
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;
@@ -457,7 +456,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaDAO.BuscaProximo(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaDAO.Proximo(tbCodigo.Text);
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -466,7 +465,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newpessoa = pessoaDAO.BuscaAnterior(tbCodigo.Text);
+                        newpessoa = pessoaDAO.Anterior(tbCodigo.Text);
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;
@@ -491,7 +490,7 @@ namespace _5gpro.Forms
                 //la do inicio do arquivo.
 
                 validacao.despintarCampos(controls);
-                Pessoa newpessoa = pessoaDAO.BuscaAnterior(tbCodigo.Text);
+                Pessoa newpessoa = pessoaDAO.Anterior(tbCodigo.Text);
                 if (newpessoa != null)
                 {
                     pessoa = newpessoa;
@@ -506,7 +505,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaDAO.BuscaAnterior(tbCodigo.Text);
+                    Pessoa newpessoa = pessoaDAO.Anterior(tbCodigo.Text);
                     if (newpessoa != null)
                     {
                         pessoa = newpessoa;
@@ -515,7 +514,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newpessoa = pessoaDAO.BuscaProximo(tbCodigo.Text);
+                        newpessoa = pessoaDAO.Proximo(tbCodigo.Text);
                         if (newpessoa != null)
                         {
                             pessoa = newpessoa;

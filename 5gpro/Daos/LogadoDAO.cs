@@ -1,8 +1,7 @@
 ﻿using _5gpro.Entities;
 using System;
 using MySql.Data.MySqlClient;
-using System.Data;
-
+using MySQLConnection;
 
 namespace _5gpro.Daos
 {
@@ -11,135 +10,91 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public Logado BuscaLogadoByUsuario(Usuario usuario)
+        public Logado BuscaByUsuario(Usuario usuario)
         {
-            Logado usulogado = null;
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            try
+            Logado usuarioLogado = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM logado WHERE idusuario = @idusuario;", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT * FROM logado WHERE idusuario = @idusuario";
+                sql.addParam("@idusuario", usuario.UsuarioID);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        usuario = new Usuario
-                        {
-                            UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"))
-                        };
-
-                        usulogado = new Logado
-                        {
-                            Usuario = usuario,
-                            Mac = reader.GetString(reader.GetOrdinal("mac")),
-                            NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
-                            IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
-                        };
-                    }
+                    return null;
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
 
-            return usulogado;
+                usuario = new Usuario
+                {
+                    UsuarioID = int.Parse(data["idusuario"])
+                };
+
+                usuarioLogado = new Logado
+                {
+                    Usuario = usuario,
+                    Mac = data["mac"],
+                    NomePC = data["nomepc"],
+                    IPdoPC = data["ipdopc"]
+                };
+            }
+            return usuarioLogado;
         }
 
-        public Logado BuscaLogadoByMac(string mac)
+        public Logado BuscaByMac(string mac)
         {
-            Logado usulogado = null;
-            Usuario usuario = null;
+            Logado usuarioLogado = null;
             GrupoUsuario grupousuario = null;
-
-            UsuarioDAO usuarioDAO = new UsuarioDAO();
-            try
+            Usuario usuario = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM logado l INNER JOIN usuario u
-                                                    ON l.idusuario = u.idusuario
-                                                    WHERE mac = @mac;", Connect.Conexao);
+                sql.Query = @"SELECT * FROM logado l INNER JOIN usuario u
+                            ON l.idusuario = u.idusuario
+                            WHERE mac = @mac LIMIT 1";
 
-                Connect.Comando.Parameters.AddWithValue("@mac", mac);
+                sql.addParam("@mac", mac);
 
-                using (var reader = Connect.Comando.ExecuteReader())
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        grupousuario = new GrupoUsuario
-                        {
-                            GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"))
-                        };
-
-                        usuario = new Usuario
-                        {
-                            UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                            Grupousuario = grupousuario
-                        };
-
-                        usulogado = new Logado
-                        {
-                            Usuario = usuario,
-                            Mac = reader.GetString(reader.GetOrdinal("mac")),
-                            NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
-                            IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
-                        };
-                    }
+                    return null;
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
+                grupousuario = new GrupoUsuario
+                {
+                    GrupoUsuarioID = int.Parse(data["idgrupousuario"])
+                };
 
-            return usulogado;
+                usuario = new Usuario
+                {
+                    UsuarioID = int.Parse(data["idusuario"]),
+                    Grupousuario = grupousuario
+                };
+
+                usuarioLogado = new Logado
+                {
+                    Usuario = usuario,
+                    Mac = data["mac"],
+                    NomePC = data["nomepc"],
+                    IPdoPC = data["ipdopc"]
+                };
+            }
+            return usuarioLogado;
         }
 
         //Registra login na tabela Logado
         public int GravarLogado(Usuario usuario, string mac, string nomepc, string ipdopc)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"INSERT INTO logado
+                sql.Query = @"INSERT INTO logado
                          (idusuario, mac, nomepc, ipdopc, data_update)
                           VALUES
-                         (@idusuario, @mac, @nomepc, @ipdopc, @data_update)
-                         ;",
-                        Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Connect.Comando.Parameters.AddWithValue("@mac", mac);
-                Connect.Comando.Parameters.AddWithValue("@nomepc", nomepc);
-                Connect.Comando.Parameters.AddWithValue("@ipdopc", ipdopc);
-                Connect.Comando.Parameters.AddWithValue("@data_update", DateTime.Now);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                         (@idusuario, @mac, @nomepc, @ipdopc, @data_update)";
+                sql.addParam("@idusuario", usuario.UsuarioID);
+                sql.addParam("@mac", mac);
+                sql.addParam("@nomepc", nomepc);
+                sql.addParam("@ipdopc", ipdopc);
+                sql.addParam("@data_update", DateTime.Now);
+                retorno = sql.insertQuery();
             }
             return retorno;
         }
@@ -148,69 +103,32 @@ namespace _5gpro.Daos
         public int RemoverLogado(string mac)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"DELETE FROM logado WHERE mac = @mac", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@mac", mac);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = "DELETE FROM logado WHERE mac = @mac";
+                sql.addParam("@mac", mac);
+                retorno = sql.deleteQuery();
             }
             return retorno;
         }
 
         public void AtualizarLogado(string mac)
         {
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"UPDATE logado SET data_update = NOW() WHERE mac = @mac", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@mac", mac);
-
-                Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = @"UPDATE logado SET data_update = NOW() WHERE mac = @mac";
+                sql.addParam("@mac", mac);
+                sql.updateQuery();
             }
         }
 
         public void RemoveTodosLocks(Logado logado)
         {
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("DELETE FROM 5gprodatabase.lock WHERE idusuario = @idusuario", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", logado.Usuario.UsuarioID);
-
-                Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = "DELETE FROM 5gprodatabase.lock WHERE idusuario = @idusuario";
+                sql.addParam("@idusuario", logado.Usuario.UsuarioID);
+                sql.deleteQuery();
             }
         }
     }
