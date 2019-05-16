@@ -26,21 +26,21 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM grupo_usuario WHERE idgrupousuario = @idgrupousuario", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idgrupousuario", cod);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupousuario = new GrupoUsuario
+
+                    if (reader.Read())
                     {
-                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),                        
-                    };
-
-                    reader.Close();
-                }
-                else
-                {
-                    grupousuario = null;
+                        grupousuario = new GrupoUsuario
+                        {
+                            GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        };
+                    }
+                    else
+                    {
+                        grupousuario = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -70,19 +70,20 @@ namespace _5gpro.Daos
 
                 if (conNomeGrupoUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
 
-                    GrupoUsuario grupousuario = new GrupoUsuario
+                    while (reader.Read())
                     {
-                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                    gruposusuarios.Add(grupousuario);
+
+                        GrupoUsuario grupousuario = new GrupoUsuario
+                        {
+                            GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                        gruposusuarios.Add(grupousuario);
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -105,17 +106,19 @@ namespace _5gpro.Daos
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand("SELECT * FROM grupo_usuario", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    GrupoUsuario grupousuario = new GrupoUsuario
-                    {
-                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                    };
-                    listagrupousuario.Add(grupousuario);
 
+                    while (reader.Read())
+                    {
+                        GrupoUsuario grupousuario = new GrupoUsuario
+                        {
+                            GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                        };
+                        listagrupousuario.Add(grupousuario);
+
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -158,7 +161,7 @@ namespace _5gpro.Daos
                 {
                     fmCadastroGrupoUsuario.PermissoesStruct todaspermissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
                     todaspermissoes = permissaoDAO.BuscaTodasPermissoes();
-                    
+
 
                     Connect.Comando.CommandText = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
                                             VALUES
@@ -211,20 +214,21 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT min(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario > @idgrupousuario)", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    grupousuario = new GrupoUsuario
+                    if (reader.Read())
                     {
-                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    grupousuario = null;
+                        grupousuario = new GrupoUsuario
+                        {
+                            GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                    }
+                    else
+                    {
+                        grupousuario = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -248,20 +252,21 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT max(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario < @idgrupousuario)", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    grupousuario = new GrupoUsuario
+                    if (reader.Read())
                     {
-                        GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    grupousuario = null;
+                        grupousuario = new GrupoUsuario
+                        {
+                            GrupoUsuarioID = int.Parse(reader.GetString(reader.GetOrdinal("idgrupousuario"))),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                    }
+                    else
+                    {
+                        grupousuario = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -276,9 +281,9 @@ namespace _5gpro.Daos
             return grupousuario;
         }
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
@@ -289,12 +294,12 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -319,15 +324,16 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand(@"SELECT DISTINCT p.idgrupousuario 
                                              FROM permissao_has_grupo_usuario as p", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    int a = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
 
-                    idgrupousuariosNpraN.Add(a);
+                    while (reader.Read())
+                    {
+                        int a = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
+
+                        idgrupousuariosNpraN.Add(a);
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {

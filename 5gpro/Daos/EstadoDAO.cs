@@ -20,19 +20,21 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM estado WHERE idestado = @idestado", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idestado", cod);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    estado = new Estado
+                    if (reader.Read())
                     {
-                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                }
-                else
-                {
-                    estado = null;
+                        estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                    }
+                    else
+                    {
+                        estado = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -55,16 +57,18 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM estado WHERE nome LIKE @nome", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    Estado estado = new Estado
+
+                    while (reader.Read())
                     {
-                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                    estados.Add(estado);
+                        Estado estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                        estados.Add(estado);
+                    }
                 }
             }
             catch (MySqlException ex)

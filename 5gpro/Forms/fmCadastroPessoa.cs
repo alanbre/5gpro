@@ -264,7 +264,7 @@ namespace _5gpro.Forms
                     MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
                         LimpaCampos(false);
-                        tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
+                        tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
                         pessoa = null;
                         Editando(false);
                         tbNome.Focus();
@@ -274,7 +274,7 @@ namespace _5gpro.Forms
                 else
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
                     pessoa = null;
                     Editando(false);
                     tbNome.Focus();

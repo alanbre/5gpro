@@ -445,7 +445,7 @@ namespace _5gpro.Forms
                 {
                     ignoracheckevent = true;
                     LimpaCampos(false);
-                    tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel().ToString();
                     orcamento = null;
                     buscaPessoa.Focus();
                     ignoracheckevent = false;
@@ -456,7 +456,7 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel().ToString();
                 orcamento = null;
                 Editando(false);
                 buscaPessoa.Focus();

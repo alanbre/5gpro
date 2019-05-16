@@ -73,36 +73,37 @@ namespace _5gpro.Daos
 
                 if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
 
-                    grupopessoa = new GrupoPessoa
+                    while (reader.Read())
                     {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                    };
 
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
+                        grupopessoa = new GrupoPessoa
                         {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
                         };
-                        listasubgrupopessoa.Add(subgrupopessoa);
-                    }
 
-                    //O Any funciona como o IEnumerable
-                    //Para não adicionar repetidos
-                    if (!listagrupopessoa.Any(l => l.GrupoPessoaID == reader.GetInt32(reader.GetOrdinal("grupopessoaID"))))
-                    {
-                        listagrupopessoa.Add(grupopessoa);
+                        if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+                            listasubgrupopessoa.Add(subgrupopessoa);
+                        }
+
+                        //O Any funciona como o IEnumerable
+                        //Para não adicionar repetidos
+                        if (!listagrupopessoa.Any(l => l.GrupoPessoaID == reader.GetInt32(reader.GetOrdinal("grupopessoaID"))))
+                        {
+                            listagrupopessoa.Add(grupopessoa);
+                        }
                     }
                 }
-                reader.Close();
 
                 foreach (GrupoPessoa g in listagrupopessoa)
                 {
@@ -148,48 +149,49 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", Codigo);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
-                        SubGrupoPessoas = new List<SubGrupoPessoa>()
-                    };
 
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                    if (reader.Read())
                     {
-                        subgrupopessoa = new SubGrupoPessoa
+                        grupopessoa = new GrupoPessoa
                         {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                else
-                {
-                    grupopessoa = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
+                            SubGrupoPessoas = new List<SubGrupoPessoa>()
                         };
 
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+                            grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        }
+                    }
+                    else
+                    {
+                        grupopessoa = null;
+                    }
+
+                    while (reader.Read())
+                    {
+                        if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+
+                            grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        }
                     }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -223,48 +225,49 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
-                        SubGrupoPessoas = new List<SubGrupoPessoa>()
-                    };
 
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                    if (reader.Read())
                     {
-                        subgrupopessoa = new SubGrupoPessoa
+                        grupopessoa = new GrupoPessoa
                         {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                else
-                {
-                    grupopessoa = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
+                            SubGrupoPessoas = new List<SubGrupoPessoa>()
                         };
 
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+                            grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        }
+                    }
+                    else
+                    {
+                        grupopessoa = null;
+                    }
+
+                    while (reader.Read())
+                    {
+                        if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+
+                            grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        }
                     }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -296,48 +299,49 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
-                        SubGrupoPessoas = new List<SubGrupoPessoa>()
-                    };
 
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                    if (reader.Read())
                     {
-                        subgrupopessoa = new SubGrupoPessoa
+                        grupopessoa = new GrupoPessoa
                         {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                else
-                {
-                    grupopessoa = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
+                            SubGrupoPessoas = new List<SubGrupoPessoa>()
                         };
 
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+                            grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        }
+                    }
+                    else
+                    {
+                        grupopessoa = null;
+                    }
+
+                    while (reader.Read())
+                    {
+                        if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
+                        {
+                            subgrupopessoa = new SubGrupoPessoa
+                            {
+                                SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
+                                Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
+                                GrupoPessoa = grupopessoa
+                            };
+
+                            grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
+                        }
                     }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -350,9 +354,9 @@ namespace _5gpro.Daos
             return grupopessoa;
         }
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
@@ -363,16 +367,13 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
-                }
-                else
-                {
-                    proximoid = "1";
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)

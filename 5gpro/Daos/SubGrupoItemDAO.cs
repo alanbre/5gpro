@@ -71,27 +71,26 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitemID);
                 if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupoitem = new GrupoItem
-                    {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
-                    };
 
-                    subgrupoitem = new SubGrupoItem
+                    while (reader.Read())
                     {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoItem = grupoitem
-                    };
+                        grupoitem = new GrupoItem
+                        {
+                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                        };
 
-                    listasubgrupoitem.Add(subgrupoitem);
+                        subgrupoitem = new SubGrupoItem
+                        {
+                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoItem = grupoitem
+                        };
+
+                        listasubgrupoitem.Add(subgrupoitem);
+                    }
                 }
-
-                reader.Close();
-
             }
             catch (MySqlException ex)
             {
@@ -104,7 +103,7 @@ namespace _5gpro.Daos
             return listasubgrupoitem;
         }
 
-        public SubGrupoItem BuscarByID(int Codigo, int grupoitemID )
+        public SubGrupoItem BuscarByID(int Codigo, int grupoitemID)
         {
 
             SubGrupoItem subgrupoitem = null;
@@ -122,24 +121,24 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@idsubgrupoitem", Codigo);
                 Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitemID);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupoitem = new GrupoItem
-                    {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
-                    };
 
-                    subgrupoitem = new SubGrupoItem
+                    while (reader.Read())
                     {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoItem = grupoitem
-                    };
+                        grupoitem = new GrupoItem
+                        {
+                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
+                        };
+
+                        subgrupoitem = new SubGrupoItem
+                        {
+                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoItem = grupoitem
+                        };
+                    }
                 }
-
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -154,9 +153,9 @@ namespace _5gpro.Daos
         }
 
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
@@ -167,16 +166,13 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
-                }
-                else
-                {
-                    proximoid = "1";
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)

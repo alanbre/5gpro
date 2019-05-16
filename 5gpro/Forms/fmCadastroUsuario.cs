@@ -249,7 +249,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel();
+                    tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel().ToString();
                     usuario = null;
                     Editando(true);
                 }
@@ -257,7 +257,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel();
+                tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel().ToString();
                 usuario = null;
                 Editando(true);
             }

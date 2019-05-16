@@ -45,10 +45,10 @@ namespace _5gpro.Forms
             Pwd = "5gproedualan"
         };
 
-        public static string database = "";
-        public static string server = "";
-        public static string uid = "";
-        public static string pwd = "";
+        public static string database = "5gprodatabase";
+        public static string server = "localhost";
+        public static string uid = "5gprouser";
+        public static string pwd = "5gproedualan";
 
 
         public fmSelecionarBase()

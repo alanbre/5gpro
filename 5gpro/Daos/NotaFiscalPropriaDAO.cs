@@ -264,35 +264,36 @@ namespace _5gpro.Daos
                                              WHERE idnotafiscal = @idnotafiscal", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    Item i = new Item
-                    {
-                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
-                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
-                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
-                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
-                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
-                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
-                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        //Unimedida = new UnimedidaDAO().BuscaUnimedidaByID(reader.GetInt32(reader.GetOrdinal("idunimedida")))
-                    };
 
-                    NotaFiscalPropriaItem nfi = new NotaFiscalPropriaItem
+                    while (reader.Read())
                     {
-                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
-                        ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario")),
-                        ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total")),
-                        DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                        Item = i
-                    };
-                    itensNotaFiscal.Add(nfi);
+                        Item i = new Item
+                        {
+                            ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                            DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                            TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                            Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                            ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                            ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                            Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                            //Unimedida = new UnimedidaDAO().BuscaUnimedidaByID(reader.GetInt32(reader.GetOrdinal("idunimedida")))
+                        };
+
+                        NotaFiscalPropriaItem nfi = new NotaFiscalPropriaItem
+                        {
+                            Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                            ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario")),
+                            ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total")),
+                            DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc")),
+                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
+                            Item = i
+                        };
+                        itensNotaFiscal.Add(nfi);
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {

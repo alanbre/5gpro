@@ -152,8 +152,6 @@ namespace _5gpro.Daos
                             Situacao = reader.GetString(reader.GetOrdinal("situacao"))
                         };
                         pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-
-                        reader.Close();
                     }
                     else
                     {
@@ -305,60 +303,60 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                    };
 
-                    subgrupopessoa = new SubGrupoPessoa
+                    if (reader.Read())
                     {
-                        SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                    };
+                        grupopessoa = new GrupoPessoa
+                        {
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
+                        };
 
-                    estado = new Estado
+                        subgrupopessoa = new SubGrupoPessoa
+                        {
+                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
+                        };
+
+                        estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
+                            Uf = reader.GetString(reader.GetOrdinal("uf"))
+                        };
+
+                        cidade = new Cidade
+                        {
+                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
+                            Estado = estado
+                        };
+
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
+                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                            Rua = reader.GetString(reader.GetOrdinal("rua")),
+                            Numero = reader.GetString(reader.GetOrdinal("numero")),
+                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                            Cidade = cidade,
+                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                            Email = reader.GetString(reader.GetOrdinal("email")),
+                            SubGrupoPessoa = subgrupopessoa,
+                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
+                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                        };
+                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                    }
+                    else
                     {
-                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                        Uf = reader.GetString(reader.GetOrdinal("uf"))
-                    };
-
-                    cidade = new Cidade
-                    {
-                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                        Estado = estado
-                    };
-
-                    pessoa = new Pessoa
-                    {
-                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                        Rua = reader.GetString(reader.GetOrdinal("rua")),
-                        Numero = reader.GetString(reader.GetOrdinal("numero")),
-                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                        Cidade = cidade,
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        SubGrupoPessoa = subgrupopessoa,
-                        Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                    };
-                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-
-                    reader.Close();
-                }
-                else
-                {
-                    pessoa = null;
+                        pessoa = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -396,60 +394,60 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idpessoa", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                    };
 
-                    subgrupopessoa = new SubGrupoPessoa
+                    if (reader.Read())
                     {
-                        SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                    };
+                        grupopessoa = new GrupoPessoa
+                        {
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
+                        };
 
-                    estado = new Estado
+                        subgrupopessoa = new SubGrupoPessoa
+                        {
+                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
+                        };
+
+                        estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
+                            Uf = reader.GetString(reader.GetOrdinal("uf"))
+                        };
+
+                        cidade = new Cidade
+                        {
+                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
+                            Estado = estado
+                        };
+
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
+                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                            Rua = reader.GetString(reader.GetOrdinal("rua")),
+                            Numero = reader.GetString(reader.GetOrdinal("numero")),
+                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                            Cidade = cidade,
+                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                            Email = reader.GetString(reader.GetOrdinal("email")),
+                            SubGrupoPessoa = subgrupopessoa,
+                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
+                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                        };
+                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                    }
+                    else
                     {
-                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                        Uf = reader.GetString(reader.GetOrdinal("uf"))
-                    };
-
-                    cidade = new Cidade
-                    {
-                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                        Estado = estado
-                    };
-
-                    pessoa = new Pessoa
-                    {
-                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                        Rua = reader.GetString(reader.GetOrdinal("rua")),
-                        Numero = reader.GetString(reader.GetOrdinal("numero")),
-                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                        Cidade = cidade,
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        SubGrupoPessoa = subgrupopessoa,
-                        Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                    };
-                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
-
-                    reader.Close();
-                }
-                else
-                {
-                    pessoa = null;
+                        pessoa = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -499,61 +497,62 @@ namespace _5gpro.Daos
                 if (conCpfCnpj.Length > 0) { Connect.Comando.Parameters.AddWithValue("@cpfcnpj", "%" + cpfCnpj + "%"); }
                 if (conCidade.Length > 0) { Connect.Comando.Parameters.AddWithValue("@idcidade", idcidade); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
 
-                    grupopessoa = new GrupoPessoa
+                    while (reader.Read())
                     {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                    };
 
-                    subgrupopessoa = new SubGrupoPessoa
-                    {
-                        SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
-                    };
+                        grupopessoa = new GrupoPessoa
+                        {
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
+                        };
 
-                    estado = new Estado
-                    {
-                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                        Uf = reader.GetString(reader.GetOrdinal("uf"))
-                    };
+                        subgrupopessoa = new SubGrupoPessoa
+                        {
+                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomesubgrupopessoa"))
+                        };
 
-                    cidade = new Cidade
-                    {
-                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                        Estado = estado
-                    };
+                        estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
+                            Uf = reader.GetString(reader.GetOrdinal("uf"))
+                        };
 
-                    pessoa = new Pessoa
-                    {
-                        PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
-                        Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                        TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                        Rua = reader.GetString(reader.GetOrdinal("rua")),
-                        Numero = reader.GetString(reader.GetOrdinal("numero")),
-                        Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                        Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                        Cidade = cidade,
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        SubGrupoPessoa = subgrupopessoa,
-                        Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
-                        Situacao = reader.GetString(reader.GetOrdinal("situacao"))
+                        cidade = new Cidade
+                        {
+                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
+                            Estado = estado
+                        };
 
-                    };
-                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
+                        pessoa = new Pessoa
+                        {
+                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomepessoa")),
+                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
+                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
+                            Rua = reader.GetString(reader.GetOrdinal("rua")),
+                            Numero = reader.GetString(reader.GetOrdinal("numero")),
+                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
+                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
+                            Cidade = cidade,
+                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
+                            Email = reader.GetString(reader.GetOrdinal("email")),
+                            SubGrupoPessoa = subgrupopessoa,
+                            Atuacao = reader.GetString(reader.GetOrdinal("atuacao")),
+                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
 
-                    listapessoas.Add(pessoa);
+                        };
+                        pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? reader.GetString(reader.GetOrdinal("cpf")) : reader.GetString(reader.GetOrdinal("cnpj"));
 
+                        listapessoas.Add(pessoa);
+
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -567,9 +566,9 @@ namespace _5gpro.Daos
         }
 
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
@@ -580,17 +579,13 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
-                }
-                else
-                {
-                    //FIZ ESSE ELSE PARA CASO N TIVER NENHUM REGISTRO NA BASE... PODE DAR PROBLEMA EM ALGUM MOMENTO xD
-                    proximoid = "1";
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)
