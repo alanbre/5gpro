@@ -22,27 +22,25 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    usuario = new Usuario
+
+                    if (reader.Read())
                     {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"))
-                    };
+                        usuario = new Usuario
+                        {
+                            UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"))
+                        };
 
-                    usulogado = new Logado
-                    {
-                        Usuario = usuario,
-                        Mac = reader.GetString(reader.GetOrdinal("mac")),
-                        NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
-                        IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
-                    };
-
-
-                    reader.Close();
+                        usulogado = new Logado
+                        {
+                            Usuario = usuario,
+                            Mac = reader.GetString(reader.GetOrdinal("mac")),
+                            NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
+                            IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
+                        };
+                    }
                 }
-
             }
             catch (MySqlException ex)
             {
@@ -72,33 +70,31 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@mac", mac);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupousuario = new GrupoUsuario
+
+                    if (reader.Read())
                     {
-                        GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"))
-                    };
+                        grupousuario = new GrupoUsuario
+                        {
+                            GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"))
+                        };
 
-                    usuario = new Usuario
-                    {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Grupousuario = grupousuario
-                    };
+                        usuario = new Usuario
+                        {
+                            UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
+                            Grupousuario = grupousuario
+                        };
 
-                    usulogado = new Logado
-                    {
-                        Usuario = usuario,
-                        Mac = reader.GetString(reader.GetOrdinal("mac")),
-                        NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
-                        IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
-                    };
-
-                    reader.Close();
-
+                        usulogado = new Logado
+                        {
+                            Usuario = usuario,
+                            Mac = reader.GetString(reader.GetOrdinal("mac")),
+                            NomePC = reader.GetString(reader.GetOrdinal("nomepc")),
+                            IPdoPC = reader.GetString(reader.GetOrdinal("ipdopc"))
+                        };
+                    }
                 }
-
             }
             catch (MySqlException ex)
             {

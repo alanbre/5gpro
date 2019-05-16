@@ -432,7 +432,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = grupoitemDAO.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = grupoitemDAO.BuscaProxCodigoDisponivel().ToString();
                     grupoitem = null;
                     tbNomeGrupoItem.Focus();
                     Editando(true);
@@ -441,7 +441,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = grupoitemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = grupoitemDAO.BuscaProxCodigoDisponivel().ToString();
                 grupoitem = null;
                 tbNomeGrupoItem.Focus();
                 Editando(true);

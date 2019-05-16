@@ -70,27 +70,26 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", grupopessoaID);
                 if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa"))
-                    };
 
-                    subgrupopessoa = new SubGrupoPessoa
+                    while (reader.Read())
                     {
-                        SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoPessoa = grupopessoa
-                    };
+                        grupopessoa = new GrupoPessoa
+                        {
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa"))
+                        };
 
-                    listasubgrupopessoa.Add(subgrupopessoa);
+                        subgrupopessoa = new SubGrupoPessoa
+                        {
+                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoPessoa = grupopessoa
+                        };
+
+                        listasubgrupopessoa.Add(subgrupopessoa);
+                    }
                 }
-
-                reader.Close();
-
             }
             catch (MySqlException ex)
             {
@@ -121,24 +120,24 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", Codigo);
                 Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", grupopessoaID);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa"))
-                    };
 
-                    subgrupopessoa = new SubGrupoPessoa
+                    while (reader.Read())
                     {
-                        SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoPessoa = grupopessoa
-                    };
+                        grupopessoa = new GrupoPessoa
+                        {
+                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa"))
+                        };
+
+                        subgrupopessoa = new SubGrupoPessoa
+                        {
+                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoPessoa = grupopessoa
+                        };
+                    }
                 }
-
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -152,9 +151,9 @@ namespace _5gpro.Daos
             return subgrupopessoa;
         }
 
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
@@ -165,16 +164,13 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
-                }
-                else
-                {
-                    proximoid = "1";
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)

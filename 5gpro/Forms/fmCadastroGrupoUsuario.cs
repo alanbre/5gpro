@@ -384,7 +384,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel();
+                    tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel().ToString();
                     listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
                     popularPermissoes();
                     PopularModulos();
@@ -396,7 +396,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel();
+                tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel().ToString();
                 listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
                 popularPermissoes();
                 PopularModulos();

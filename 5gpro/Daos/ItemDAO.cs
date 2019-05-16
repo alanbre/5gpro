@@ -27,16 +27,16 @@ namespace _5gpro.Daos
                          ;",
                          Connect.Conexao);
 
-               Connect.Comando.Parameters.AddWithValue("@iditem", item.ItemID);
-               Connect.Comando.Parameters.AddWithValue("@descitem", item.Descricao);
-               Connect.Comando.Parameters.AddWithValue("@denominacaocompra", item.DescCompra);
-               Connect.Comando.Parameters.AddWithValue("@tipo", item.TipoItem);
-               Connect.Comando.Parameters.AddWithValue("@referencia", item.Referencia);
-               Connect.Comando.Parameters.AddWithValue("@valorentrada", item.ValorEntrada);
-               Connect.Comando.Parameters.AddWithValue("@valorsaida", item.ValorSaida);
-               Connect.Comando.Parameters.AddWithValue("@estoquenecessario", item.Estoquenecessario);
-               Connect.Comando.Parameters.AddWithValue("@idunimedida", item.Unimedida.UnimedidaID);
-               Connect.Comando.Parameters.AddWithValue("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
+                Connect.Comando.Parameters.AddWithValue("@iditem", item.ItemID);
+                Connect.Comando.Parameters.AddWithValue("@descitem", item.Descricao);
+                Connect.Comando.Parameters.AddWithValue("@denominacaocompra", item.DescCompra);
+                Connect.Comando.Parameters.AddWithValue("@tipo", item.TipoItem);
+                Connect.Comando.Parameters.AddWithValue("@referencia", item.Referencia);
+                Connect.Comando.Parameters.AddWithValue("@valorentrada", item.ValorEntrada);
+                Connect.Comando.Parameters.AddWithValue("@valorsaida", item.ValorSaida);
+                Connect.Comando.Parameters.AddWithValue("@estoquenecessario", item.Estoquenecessario);
+                Connect.Comando.Parameters.AddWithValue("@idunimedida", item.Unimedida.UnimedidaID);
+                Connect.Comando.Parameters.AddWithValue("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
 
 
                 retorno = Connect.Comando.ExecuteNonQuery();
@@ -70,47 +70,48 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@iditem", cod);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    unimedida = new Unimedida
-                    {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
-                    };
 
-                    grupoitem = new GrupoItem
+                    if (reader.Read())
                     {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
-                    };
+                        unimedida = new Unimedida
+                        {
+                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
+                        };
 
-                    subgrupoitem = new SubGrupoItem
-                    {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoItem = grupoitem
-                    };
+                        grupoitem = new GrupoItem
+                        {
+                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
+                        };
 
-                    item = new Item
+                        subgrupoitem = new SubGrupoItem
+                        {
+                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoItem = grupoitem
+                        };
+
+                        item = new Item
+                        {
+                            ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                            DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                            TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                            Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                            ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                            ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                            Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                            Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                            Unimedida = unimedida,
+                            SubGrupoItem = subgrupoitem
+                        };
+                    }
+                    else
                     {
-                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
-                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
-                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
-                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
-                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
-                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
-                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
-                        Unimedida = unimedida,
-                        SubGrupoItem = subgrupoitem
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    item = null;
+                        item = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -142,47 +143,48 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@iditem", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    unimedida = new Unimedida
-                    {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
-                    };
 
-                    grupoitem = new GrupoItem
+                    if (reader.Read())
                     {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
-                    };
+                        unimedida = new Unimedida
+                        {
+                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
+                        };
 
-                    subgrupoitem = new SubGrupoItem
-                    {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoItem = grupoitem
-                    };
+                        grupoitem = new GrupoItem
+                        {
+                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
+                        };
 
-                    item = new Item
+                        subgrupoitem = new SubGrupoItem
+                        {
+                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoItem = grupoitem
+                        };
+
+                        item = new Item
+                        {
+                            ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                            DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                            TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                            Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                            ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                            ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                            Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                            Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                            Unimedida = unimedida,
+                            SubGrupoItem = subgrupoitem
+                        };
+                    }
+                    else
                     {
-                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
-                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
-                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
-                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
-                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
-                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
-                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
-                        Unimedida = unimedida,
-                        SubGrupoItem = subgrupoitem
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    item = null;
+                        item = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -215,47 +217,48 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@iditem", codAtual);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    unimedida = new Unimedida
-                    {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
-                    };
 
-                    grupoitem = new GrupoItem
+                    if (reader.Read())
                     {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
-                    };
+                        unimedida = new Unimedida
+                        {
+                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida"))
+                        };
 
-                    subgrupoitem = new SubGrupoItem
-                    {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoItem = grupoitem
-                    };
+                        grupoitem = new GrupoItem
+                        {
+                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
+                        };
 
-                    item = new Item
+                        subgrupoitem = new SubGrupoItem
+                        {
+                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoItem = grupoitem
+                        };
+
+                        item = new Item
+                        {
+                            ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                            DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                            TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                            Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                            ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                            ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                            Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                            Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                            Unimedida = unimedida,
+                            SubGrupoItem = subgrupoitem
+                        };
+                    }
+                    else
                     {
-                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
-                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
-                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
-                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
-                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
-                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
-                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
-                        Unimedida = unimedida,
-                        SubGrupoItem = subgrupoitem
-                    };
-                    reader.Close();
-                }
-                else
-                {
-                    item = null;
+                        item = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -299,45 +302,47 @@ namespace _5gpro.Daos
                 if (descItem.Length > 0) { Connect.Comando.Parameters.AddWithValue("@descitem", "%" + descItem + "%"); }
                 if (tipoItem.Length > 0) { Connect.Comando.Parameters.AddWithValue("@tipo", "%" + tipoItem + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    unimedida = new Unimedida
-                    {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
-                        Sigla = reader.GetString(reader.GetOrdinal("sigla")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descricao"))
-                    };
 
-                    grupoitem = new GrupoItem
+                    while (reader.Read())
                     {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
-                    };
+                        unimedida = new Unimedida
+                        {
+                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                            Sigla = reader.GetString(reader.GetOrdinal("sigla")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descricao"))
+                        };
 
-                    subgrupoitem = new SubGrupoItem
-                    {
-                        SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        GrupoItem = grupoitem
-                    };
+                        grupoitem = new GrupoItem
+                        {
+                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("grupoitemnome"))
+                        };
 
-                    Item item = new Item
-                    {
-                        ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descitem")),
-                        DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
-                        TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
-                        Referencia = reader.GetString(reader.GetOrdinal("referencia")),
-                        ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
-                        ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
-                        Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                        Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
-                        Unimedida = unimedida,
-                        SubGrupoItem = subgrupoitem
-                    };
-                    itens.Add(item);
+                        subgrupoitem = new SubGrupoItem
+                        {
+                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            GrupoItem = grupoitem
+                        };
+
+                        Item item = new Item
+                        {
+                            ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descitem")),
+                            DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
+                            TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
+                            Referencia = reader.GetString(reader.GetOrdinal("referencia")),
+                            ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
+                            ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
+                            Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
+                            Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
+                            Unimedida = unimedida,
+                            SubGrupoItem = subgrupoitem
+                        };
+                        itens.Add(item);
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -351,9 +356,9 @@ namespace _5gpro.Daos
             return itens;
         }
 
-        public string ProxCodigoDisponivel()
+        public int ProxCodigoDisponivel()
         {
-            string proximoid = null;
+            int proximoid = 1;
             try
             {
                 Connect.AbrirConexao();
@@ -364,16 +369,13 @@ namespace _5gpro.Daos
                                              ORDER BY proximoid
                                              LIMIT 1;", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
-                }
-                else
-                {
-                    proximoid = "1";
+                    if (reader.Read())
+                    {
+                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
+                    }
                 }
             }
             catch (MySqlException ex)

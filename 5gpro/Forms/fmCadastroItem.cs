@@ -271,7 +271,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = itemDAO.ProxCodigoDisponivel();
+                    tbCodigo.Text = itemDAO.ProxCodigoDisponivel().ToString();
                     item = null;
                     tbDescricao.Focus();
                     Editando(true);
@@ -280,7 +280,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = itemDAO.ProxCodigoDisponivel();
+                tbCodigo.Text = itemDAO.ProxCodigoDisponivel().ToString();
                 item = null;
                 tbDescricao.Focus();
                 Editando(true);

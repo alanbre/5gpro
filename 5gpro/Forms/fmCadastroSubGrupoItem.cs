@@ -32,7 +32,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbCodigo.Text = subgrupoitemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = subgrupoitemDAO.BuscaProxCodigoDisponivel().ToString();
             }
         }
 

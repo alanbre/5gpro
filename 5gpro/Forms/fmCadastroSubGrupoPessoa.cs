@@ -39,7 +39,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbCodigo.Text = subgrupopessoaDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = subgrupopessoaDAO.BuscaProxCodigoDisponivel().ToString();
             }
         }
 

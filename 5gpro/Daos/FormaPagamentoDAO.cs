@@ -27,25 +27,24 @@ namespace _5gpro.Daos
                                              WHERE 1=1
                                              " + conNome + @"
                                              ORDER BY f.idformapagamento;", Connect.Conexao);
-                          
+
 
                 if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    formapagamento = new FormaPagamento
+
+                    while (reader.Read())
                     {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
+                        formapagamento = new FormaPagamento
+                        {
+                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
 
-                    formapagamentos.Add(formapagamento);
+                        formapagamentos.Add(formapagamento);
+                    }
                 }
-
-                reader.Close();
-
             }
             catch (MySqlException ex)
             {
@@ -73,18 +72,18 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idformapagamento", Codigo);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    formapagamento = new FormaPagamento
-                    {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                }
 
-                reader.Close();
+                    while (reader.Read())
+                    {
+                        formapagamento = new FormaPagamento
+                        {
+                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                    }
+                }
             }
             catch (MySqlException ex)
             {

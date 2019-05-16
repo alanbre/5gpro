@@ -20,7 +20,7 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnimedidaID);
                 Connect.Comando.Parameters.AddWithValue("@sigla", unimedida.Sigla);
                 Connect.Comando.Parameters.AddWithValue("@descricao", unimedida.Descricao);
-               
+
                 return Connect.Comando.ExecuteNonQuery();
             }
             catch (Exception erro)
@@ -37,7 +37,7 @@ namespace _5gpro.Daos
         public IEnumerable<Unimedida> BuscarUnimedida(string descricao)
         {
             List<Unimedida> listaunimedida = new List<Unimedida>();
-            string conDescUnimedida  = descricao.Length > 0 ? "AND descricao LIKE @descricao" : "";
+            string conDescUnimedida = descricao.Length > 0 ? "AND descricao LIKE @descricao" : "";
 
             try
             {
@@ -50,20 +50,21 @@ namespace _5gpro.Daos
 
                 if (conDescUnimedida.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + descricao + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
 
-                    Unimedida unimedida = new Unimedida
+                    while (reader.Read())
                     {
-                        UnimedidaID = int.Parse(reader.GetString(reader.GetOrdinal("idunimedida"))),
-                        Descricao = reader.GetString(reader.GetOrdinal("descricao")),
-                        Sigla = reader.GetString(reader.GetOrdinal("sigla"))
-                    };
-                    listaunimedida.Add(unimedida);
+
+                        Unimedida unimedida = new Unimedida
+                        {
+                            UnimedidaID = int.Parse(reader.GetString(reader.GetOrdinal("idunimedida"))),
+                            Descricao = reader.GetString(reader.GetOrdinal("descricao")),
+                            Sigla = reader.GetString(reader.GetOrdinal("sigla"))
+                        };
+                        listaunimedida.Add(unimedida);
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -79,25 +80,26 @@ namespace _5gpro.Daos
 
         public List<Unimedida> BuscarTodasUnimedidas()
         {
-            
+
             List<Unimedida> listaunimedida = new List<Unimedida>();
             try
             {
                 Connect.AbrirConexao();
                 Connect.Comando = new MySqlCommand("SELECT * FROM unimedida", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    Unimedida unimedida = new Unimedida
-                    {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
-                        Sigla = reader.GetString(reader.GetOrdinal("sigla")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descricao"))
-                    };
-                    listaunimedida.Add(unimedida);
 
+                    while (reader.Read())
+                    {
+                        Unimedida unimedida = new Unimedida
+                        {
+                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                            Sigla = reader.GetString(reader.GetOrdinal("sigla")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descricao"))
+                        };
+                        listaunimedida.Add(unimedida);
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -120,20 +122,22 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM unimedida WHERE idunimedida = @idunimedida", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idunimedida", cod);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    unimedida = new Unimedida
+                    if (reader.Read())
                     {
-                        UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
-                        Sigla = reader.GetString(reader.GetOrdinal("sigla")),
-                        Descricao = reader.GetString(reader.GetOrdinal("descricao"))
-                    };
-                }
-                else
-                {
-                    unimedida = null;
+                        unimedida = new Unimedida
+                        {
+                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
+                            Sigla = reader.GetString(reader.GetOrdinal("sigla")),
+                            Descricao = reader.GetString(reader.GetOrdinal("descricao"))
+                        };
+                    }
+                    else
+                    {
+                        unimedida = null;
+                    }
                 }
             }
             catch (MySqlException ex)

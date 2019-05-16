@@ -20,19 +20,21 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM cidade WHERE idcidade = @idcidade", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idcidade", cod);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
+                using (var reader = Connect.Comando.ExecuteReader())
+                {
 
-                if (reader.Read())
-                {
-                    cidade = new Cidade
+                    if (reader.Read())
                     {
-                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-                }
-                else
-                {
-                    cidade = null;
+                        cidade = new Cidade
+                        {
+                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        };
+                    }
+                    else
+                    {
+                        cidade = null;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -66,24 +68,26 @@ namespace _5gpro.Daos
                 if (codEstado > 0) { Connect.Comando.Parameters.AddWithValue("@idestado", codEstado); }
                 if (nomeCidade.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    Estado estado = new Estado
-                    {
-                        EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                        Uf = reader.GetString(reader.GetOrdinal("uf"))
-                    };
 
-                    Cidade cidade = new Cidade
+                    while (reader.Read())
                     {
-                        CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                        Estado = estado
-                    };
-                    cidades.Add(cidade);
+                        Estado estado = new Estado
+                        {
+                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
+                            Uf = reader.GetString(reader.GetOrdinal("uf"))
+                        };
+
+                        Cidade cidade = new Cidade
+                        {
+                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
+                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
+                            Estado = estado
+                        };
+                        cidades.Add(cidade);
+                    }
                 }
             }
             catch (MySqlException ex)

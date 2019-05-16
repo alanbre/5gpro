@@ -35,39 +35,40 @@ namespace _5gpro.Daos
                                              WHERE idgrupousuario = @idgrupousuario", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idgrupousuario", cod);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    
-                    string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
 
-                    Permissao p = new Permissao
+                    while (reader.Read())
                     {
-                        PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                        Nivel = reader.GetString(reader.GetOrdinal("nivel"))
-                    };
-                    permissoes.Todas.Add(p);
 
-                    if (codfiltro.Substring(2) == "0000")
-                    {
-                        permissoes.Modulos.Add(p);
+                        string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
+
+                        Permissao p = new Permissao
+                        {
+                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+                            Nivel = reader.GetString(reader.GetOrdinal("nivel"))
+                        };
+                        permissoes.Todas.Add(p);
+
+                        if (codfiltro.Substring(2) == "0000")
+                        {
+                            permissoes.Modulos.Add(p);
+                        }
+
+                        if (codfiltro.Substring(4) == "00")
+                        {
+                            permissoes.Telas.Add(p);
+                        }
+
+                        if (codfiltro.Substring(4) != "00")
+                        {
+                            permissoes.Funcoes.Add(p);
+                        }
+
                     }
-
-                    if (codfiltro.Substring(4) == "00")
-                    {
-                        permissoes.Telas.Add(p);
-                    }
-
-                    if (codfiltro.Substring(4) != "00")
-                    {
-                        permissoes.Funcoes.Add(p);
-                    }
-
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -84,7 +85,7 @@ namespace _5gpro.Daos
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaTodasPermissoes()
         {
             fmCadastroGrupoUsuario.PermissoesStruct permissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
-            
+
             permissoes.Todas = new List<Permissao>();
             permissoes.Modulos = new List<Permissao>();
             permissoes.Telas = new List<Permissao>();
@@ -97,37 +98,38 @@ namespace _5gpro.Daos
                                              FROM permissao", Connect.Conexao);
 
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
 
-                    Permissao p = new Permissao
+                    while (reader.Read())
                     {
-                        PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Codigo = reader.GetString(reader.GetOrdinal("codigo")),
-                        Nivel = "0"
-                    };
-                    permissoes.Todas.Add(p);
+                        string codfiltro = reader.GetString(reader.GetOrdinal("codigo"));
 
-                    if (codfiltro.Substring(2) == "0000")
-                    {
-                        permissoes.Modulos.Add(p);
-                    }
+                        Permissao p = new Permissao
+                        {
+                            PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao")),
+                            Nome = reader.GetString(reader.GetOrdinal("nome")),
+                            Codigo = reader.GetString(reader.GetOrdinal("codigo")),
+                            Nivel = "0"
+                        };
+                        permissoes.Todas.Add(p);
 
-                    if (codfiltro.Substring(4) == "00")
-                    {
-                        permissoes.Telas.Add(p);
-                    }
+                        if (codfiltro.Substring(2) == "0000")
+                        {
+                            permissoes.Modulos.Add(p);
+                        }
 
-                    if (codfiltro.Substring(4) != "00")
-                    {
-                        permissoes.Funcoes.Add(p);
+                        if (codfiltro.Substring(4) == "00")
+                        {
+                            permissoes.Telas.Add(p);
+                        }
+
+                        if (codfiltro.Substring(4) != "00")
+                        {
+                            permissoes.Funcoes.Add(p);
+                        }
                     }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -152,16 +154,17 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT * FROM permissao as p WHERE p.idpermissao = @idpermissao", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@idpermissao", idpermissao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    permissao = new Permissao();
-                    permissao.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
-                    permissao.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    permissao.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
-                    permissao.Nivel = "0";
-                    reader.Close();
+
+                    if (reader.Read())
+                    {
+                        permissao = new Permissao();
+                        permissao.PermissaoId = reader.GetInt32(reader.GetOrdinal("idpermissao"));
+                        permissao.Nome = reader.GetString(reader.GetOrdinal("nome"));
+                        permissao.Codigo = reader.GetString(reader.GetOrdinal("codigo"));
+                        permissao.Nivel = "0";
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -185,12 +188,12 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand("SELECT p.idpermissao FROM permissao as p WHERE p.codigo = @codigo", Connect.Conexao);
                 Connect.Comando.Parameters.AddWithValue("@codigo", codpermissao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    permissaoid = reader.GetInt32(reader.GetOrdinal("idpermissao"));
-                    reader.Close();
+                    if (reader.Read())
+                    {
+                        permissaoid = reader.GetInt32(reader.GetOrdinal("idpermissao"));
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -220,12 +223,13 @@ namespace _5gpro.Daos
                 Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
                 Connect.Comando.Parameters.AddWithValue("@idpermissao", codpermissao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    nivel = reader.GetInt32(reader.GetOrdinal("nivel"));
-                    reader.Close();
+
+                    if (reader.Read())
+                    {
+                        nivel = reader.GetInt32(reader.GetOrdinal("nivel"));
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -249,15 +253,16 @@ namespace _5gpro.Daos
                 Connect.Comando = new MySqlCommand(@"SELECT DISTINCT p.idpermissao 
                                              FROM permissao_has_grupo_usuario as p", Connect.Conexao);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    int a = reader.GetInt32(reader.GetOrdinal("idpermissao"));
 
-                    idpermissoesNpraN.Add(a);
+                    while (reader.Read())
+                    {
+                        int a = reader.GetInt32(reader.GetOrdinal("idpermissao"));
+
+                        idpermissoesNpraN.Add(a);
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
@@ -285,17 +290,18 @@ namespace _5gpro.Daos
 
                 Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codgrupousuario);
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                using (var reader = Connect.Comando.ExecuteReader())
                 {
-                    fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
-                    permissaonivel.permissao = BuscarPermissaoByID(reader.GetString(reader.GetOrdinal("idpermissao")));
-                    permissaonivel.Nivel = reader.GetInt32(reader.GetOrdinal("nivel"));
 
-                    listacomniveis.Add(permissaonivel);
+                    while (reader.Read())
+                    {
+                        fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
+                        permissaonivel.permissao = BuscarPermissaoByID(reader.GetString(reader.GetOrdinal("idpermissao")));
+                        permissaonivel.Nivel = reader.GetInt32(reader.GetOrdinal("nivel"));
+
+                        listacomniveis.Add(permissaonivel);
+                    }
                 }
-                reader.Close();
             }
             catch (MySqlException ex)
             {
