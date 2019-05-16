@@ -13,13 +13,12 @@ using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmCarQuitacaoConta : Form
+    public partial class fmCapQuitacaoConta : Form
     {
-
-        private List<ParcelaContaReceber> parcelasContaReceber;
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
-        private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO();
-        private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
+        private List<ParcelaContaPagar> parcelasContaPagar;
+        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO();
+        private readonly ParcelaContaPagarDAO parcelaContaPagarDAO = new ParcelaContaPagarDAO();
+        private List<ParcelaContaPagar> parcelasContaPagarSelecionadas = new List<ParcelaContaPagar>();
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
@@ -48,8 +47,7 @@ namespace _5gpro.Forms
             public bool usardataCadastroFiltro;
             public bool usardataVencimentoFiltro;
         }
-
-        public fmCarQuitacaoConta()
+        public fmCapQuitacaoConta()
         {
             InitializeComponent();
             SetarNivel();
@@ -57,14 +55,15 @@ namespace _5gpro.Forms
         }
 
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
-        private void DgvParcelas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) => SelecionaLinha();
+
+        private void DgvParcelas_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => SelecionaLinha();
+
         private void DgvParcelas_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Space)
                 return;
             SelecionaLinha();
         }
-
 
         private void Pesquisar()
         {
@@ -84,11 +83,11 @@ namespace _5gpro.Forms
                 usarvalorContaFiltro = valorContaFiltro
             };
 
-            parcelasContaReceber = parcelaContaReceberDAO.Busca(f).ToList();
+            parcelasContaPagar = parcelaContaPagarDAO.Busca(f).ToList();
             dgvParcelas.Rows.Clear();
-            foreach (var par in parcelasContaReceber)
+            foreach (var par in parcelasContaPagar)
             {
-                dgvParcelas.Rows.Add(par.ContaReceberID,
+                dgvParcelas.Rows.Add(par.ContaPagarID,
                                      par.Sequencia,
                                      par.DataVencimento,
                                      par.Valor,
@@ -102,6 +101,7 @@ namespace _5gpro.Forms
 
             dgvParcelas.Refresh();
         }
+
         private void DatasIniciais()
         {
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
@@ -109,17 +109,17 @@ namespace _5gpro.Forms
         }
         private void SelecionaLinha()
         {
-            var parcelaSelecionada = parcelasContaReceber.Single(p => p.ContaReceberID == (int) dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[1].Value);
-            if(parcelasContaReceberSelecionadas.Contains(parcelaSelecionada))
+            var parcelaSelecionada = parcelasContaPagar.Single(p => p.ContaPagarID == (int)dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[1].Value);
+            if (parcelasContaPagarSelecionadas.Contains(parcelaSelecionada))
             {
-                parcelasContaReceberSelecionadas.Remove(parcelaSelecionada);
+                parcelasContaPagarSelecionadas.Remove(parcelaSelecionada);
                 dgvParcelas.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
                 dgvParcelas.CurrentRow.DefaultCellStyle.BackColor = Color.White;
                 dgvParcelas.CurrentRow.DefaultCellStyle.ForeColor = Color.Black;
             }
             else
             {
-                parcelasContaReceberSelecionadas.Add(parcelaSelecionada);
+                parcelasContaPagarSelecionadas.Add(parcelaSelecionada);
                 dgvParcelas.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Blue;
                 dgvParcelas.CurrentRow.DefaultCellStyle.BackColor = Color.DarkBlue;
                 dgvParcelas.CurrentRow.DefaultCellStyle.ForeColor = Color.White;
@@ -129,13 +129,13 @@ namespace _5gpro.Forms
 
         private void CalculaTotais()
         {
-            tbCount.Text = parcelasContaReceberSelecionadas.Count.ToString();
-            dbValor.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Valor);
-            dbMulta.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Multa);
-            dbJuros.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Juros);
-            dbAcrescimo.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Acrescimo);
-            dbDesconto.Valor = parcelasContaReceberSelecionadas.Sum(p => p.Desconto);
-            dbValorTotal.Valor = parcelasContaReceberSelecionadas.Sum(p => p.ValorFinal);
+            tbCount.Text = parcelasContaPagarSelecionadas.Count.ToString();
+            dbValor.Valor = parcelasContaPagarSelecionadas.Sum(p => p.Valor);
+            dbMulta.Valor = parcelasContaPagarSelecionadas.Sum(p => p.Multa);
+            dbJuros.Valor = parcelasContaPagarSelecionadas.Sum(p => p.Juros);
+            dbAcrescimo.Valor = parcelasContaPagarSelecionadas.Sum(p => p.Acrescimo);
+            dbDesconto.Valor = parcelasContaPagarSelecionadas.Sum(p => p.Desconto);
+            dbValorTotal.Valor = parcelasContaPagarSelecionadas.Sum(p => p.ValorFinal);
             lbTotal.Text = dbValorTotal.Valor.ToString("TOTAL: R$ ########0.00");
         }
 
@@ -156,11 +156,11 @@ namespace _5gpro.Forms
             formTroco.ShowDialog();
             if (formTroco.pago)
             {
-                int retorno = parcelaContaReceberDAO.QuitarParcelas(parcelasContaReceberSelecionadas);
+                int retorno = parcelaContaPagarDAO.QuitarParcelas(parcelasContaPagarSelecionadas);
                 if (retorno == 1)
                 {
                     MessageBox.Show("Parcelas selecionadas quitadas!");
-                    parcelasContaReceberSelecionadas.Clear();
+                    parcelasContaPagarSelecionadas.Clear();
                     btPesquisar.PerformClick();
                 }
                 else
@@ -184,7 +184,6 @@ namespace _5gpro.Forms
                 dtpDataCadastroFinal.Enabled = false;
                 dataCadastroFiltro = false;
             }
-
         }
 
         private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
@@ -213,7 +212,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                dbValorInicial.Enabled = false ;
+                dbValorInicial.Enabled = false;
                 dbValorFinal.Enabled = false;
                 valorContaFiltro = false;
             }
