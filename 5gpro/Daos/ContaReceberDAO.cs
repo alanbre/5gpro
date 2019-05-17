@@ -187,9 +187,6 @@ namespace _5gpro.Daos
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             string whereConta = f.filtroConta > 0 ? "AND cr.idconta_receber = @idconta_receber" : "";
 
-
-            Pessoa pessoa = null;
-
             try
             {
                 Connect.AbrirConexao();
@@ -221,25 +218,21 @@ namespace _5gpro.Daos
                 {
                     while (reader.Read())
                     {
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
+                        var pessoa = new Pessoa();
+                        pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
+                        pessoa.Nome = reader.GetString(reader.GetOrdinal("nome"));
 
 
-                        var contaReceber = new ContaReceber
-                        {
-                            ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
-                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                        };
+                        var contaReceber = new ContaReceber();
+                        contaReceber.ContaReceberID = reader.GetInt32(reader.GetOrdinal("idconta_receber"));
+                        contaReceber.DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro"));
+                        contaReceber.DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta"));
+                        contaReceber.ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original"));
+                        contaReceber.Multa = reader.GetDecimal(reader.GetOrdinal("multa"));
+                        contaReceber.Juros = reader.GetDecimal(reader.GetOrdinal("juros"));
+                        contaReceber.Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo"));
+                        contaReceber.Desconto = reader.GetDecimal(reader.GetOrdinal("desconto"));
+                        contaReceber.ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final"));
 
                         contaReceber.Pessoa = pessoa;
                         contaRecebers.Add(contaReceber);
@@ -357,18 +350,17 @@ namespace _5gpro.Daos
                 {
                     while (reader.Read())
                     {
-                        ParcelaContaReceber parcela = new ParcelaContaReceber
-                        {
-                            ParcelaContaReceberID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber")),
-                            DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                            DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                            Valor = reader.GetDecimal(reader.GetOrdinal("valor"))
-                        };
+                        var parcela = new ParcelaContaReceber();
+                        parcela.ParcelaContaReceberID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_receber"));
+                        parcela.DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao"));
+                        parcela.DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento"));
+                        parcela.Juros = reader.GetDecimal(reader.GetOrdinal("juros"));
+                        parcela.Multa = reader.GetDecimal(reader.GetOrdinal("multa"));
+                        parcela.Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo"));
+                        parcela.Desconto = reader.GetDecimal(reader.GetOrdinal("desconto"));
+                        parcela.Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia"));
+                        parcela.Valor = reader.GetDecimal(reader.GetOrdinal("valor"));
+
                         parcelas.Add(parcela);
                         //forma de pagamento
                     }
@@ -392,22 +384,20 @@ namespace _5gpro.Daos
             {
                 return null;
             }
-            ContaReceber contaReceber = null;
-            List<ParcelaContaReceber> listaparcelas = new List<ParcelaContaReceber>();
+            var contaReceber = new ContaReceber();
+            var listaparcelas = new List<ParcelaContaReceber>();
 
-            contaReceber = new ContaReceber
-            {
-                ContaReceberID = Convert.ToInt32(data[0]["idconta_receber"]),
-                DataCadastro = (DateTime)data[0]["data_cadastro"],
-                DataConta = (DateTime)data[0]["data_conta"],
-                ValorOriginal = (decimal)data[0]["valor_original"],
-                Multa = (decimal)data[0]["multa"],
-                Juros = (decimal)data[0]["juros"],
-                Acrescimo = (decimal)data[0]["acrescimo"],
-                Desconto = (decimal)data[0]["desconto"],
-                ValorFinal = (decimal)data[0]["valor_final"],
-                Situacao = (string)data[0]["situacao"]
-            };
+
+            contaReceber.ContaReceberID = Convert.ToInt32(data[0]["idconta_receber"]);
+            contaReceber.DataCadastro = (DateTime)data[0]["data_cadastro"];
+            contaReceber.DataConta = (DateTime)data[0]["data_conta"];
+            contaReceber.ValorOriginal = (decimal)data[0]["valor_original"];
+            contaReceber.Multa = (decimal)data[0]["multa"];
+            contaReceber.Juros = (decimal)data[0]["juros"];
+            contaReceber.Acrescimo = (decimal)data[0]["acrescimo"];
+            contaReceber.Desconto = (decimal)data[0]["desconto"];
+            contaReceber.ValorFinal = (decimal)data[0]["valor_final"];
+            contaReceber.Situacao = (string)data[0]["situacao"];
             contaReceber.Operacao = new Operacao();
             contaReceber.Operacao.OperacaoID = Convert.ToInt32(data[0]["idoperacao"]);
             contaReceber.Pessoa = new Pessoa();
@@ -415,31 +405,32 @@ namespace _5gpro.Daos
 
             foreach (var d in data)
             {
-                ParcelaContaReceber parcela = null;
-                FormaPagamento formapagamento = null;
+                var parcela = new ParcelaContaReceber();
+                var formapagamento = new FormaPagamento();
 
                 if (d["pformapagamento"] != null)
                 {
-                    formapagamento = new FormaPagamento
-                    {
-                        FormaPagamentoID = (int)d["pformapagamento"],
-                        Nome = (string)d["nome"]
-                    };
+                    formapagamento.FormaPagamentoID = Convert.ToInt32(d["pformapagamento"]);
+                    formapagamento.Nome = (string)d["nome"];
+                }
+                else
+                {
+                    formapagamento = null;
                 }
 
-                parcela = new ParcelaContaReceber
-                {
-                    ParcelaContaReceberID = (int)d["idparcela_conta_receber"],
-                    DataQuitacao = (DateTime?)d["data_quitacao"],
-                    DataVencimento = (DateTime)d["data_vencimento"],
-                    Juros = (decimal)d["pjuros"],
-                    Acrescimo = (decimal)d["pacrescimo"],
-                    Desconto = (decimal)d["pdesconto"],
-                    Multa = (decimal)d["pmulta"],
-                    Sequencia = (int)d["sequencia"],
-                    Valor = (decimal)d["valor"],
-                    Situacao = (string)d["psituacao"]
-                };
+
+                parcela.ParcelaContaReceberID = (int)d["idparcela_conta_receber"];
+                parcela.DataQuitacao = (DateTime?)d["data_quitacao"];
+                parcela.DataVencimento = (DateTime)d["data_vencimento"];
+                parcela.Juros = (decimal)d["pjuros"];
+                parcela.Acrescimo = (decimal)d["pacrescimo"];
+                parcela.Desconto = (decimal)d["pdesconto"];
+                parcela.Multa = (decimal)d["pmulta"];
+                parcela.Sequencia = (int)d["sequencia"];
+                parcela.Valor = (decimal)d["valor"];
+                parcela.Situacao = (string)d["psituacao"];
+
+
                 parcela.FormaPagamento = formapagamento;
                 listaparcelas.Add(parcela);
             }
