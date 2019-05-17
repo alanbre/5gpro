@@ -131,8 +131,13 @@ namespace _5gpro.Daos
         public IEnumerable<ContaPagar> Busca(fmBuscaContaPagar.Filtros f)
         {
             var contaPagars = new List<ContaPagar>();
-            string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             Pessoa pessoa = null;
+            string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            string whereValorFinal = f.usarvalorContaFiltro ? "AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
+            string whereDatCadastro = f.usardataCadastroFiltro ? "AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
+
+
             try
             {
                 Connect.AbrirConexao();
@@ -143,11 +148,12 @@ namespace _5gpro.Daos
                                                     LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
                                                     LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
                                                     WHERE 1 = 1"
-                                             + wherePessoa + "" +
-                                          @" AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
-                                             AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                             AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
-                                             GROUP BY cp.idconta_pagar", Connect.Conexao);
+                                             + wherePessoa + " "
+                                             + whereValorFinal + " "
+                                             + whereDatCadastro + " "
+                                             + whereDataVencimento + " "
+                                             +"GROUP BY cp.idconta_pagar", Connect.Conexao);
+
                 if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
 
                 Connect.Comando.Parameters.AddWithValue("@valor_conta_inicial", f.filtroValorInicial);

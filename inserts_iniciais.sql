@@ -5635,7 +5635,7 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Cadastro de Contas a Receber', '050100'),
 ('Quitação de Contas a Receber', '050200'),
 ('Cadastro de Contas a Pagar', '060100'),
-('Quitação de Contas a Pagar'), '060200'),
+('Quitação de Contas a Pagar', '060200'),
 ('Entrada de notas', '070100');
 
 INSERT INTO formapagamento (idformapagamento, nome) VALUES
