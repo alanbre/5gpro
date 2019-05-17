@@ -254,6 +254,14 @@
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
+    <Compile Include="DataSetUnimedida.cs">
+      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSetUnimedida.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -559,6 +567,12 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="testesrelatorios\rvTeste.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="testesrelatorios\rvTeste.Designer.cs">
+      <DependentUpon>rvTeste.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -741,7 +755,22 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\Report1.rdlc" />
+    <EmbeddedResource Include="testesrelatorios\ReportUnimedida.rdlc" />
+    <EmbeddedResource Include="testesrelatorios\rvTeste.resx">
+      <DependentUpon>rvTeste.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="DataSetUnimedida.xsc">
+      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetUnimedida.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetUnimedida.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetUnimedida.xss">
+      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -979,6 +1008,9 @@
       <Project>{77328b26-a3fa-4bb0-9c57-61ebfb36837f}</Project>
       <Name>MySQLConnection</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
