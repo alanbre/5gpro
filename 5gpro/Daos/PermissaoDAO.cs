@@ -39,15 +39,15 @@ namespace _5gpro.Daos
 
                 foreach (var d in data)
                 {
-                    string codfiltro = d["pcodigo"];
+                    string codfiltro = (string)d["pcodigo"];
 
 
                     Permissao p = new Permissao
                     {
-                        PermissaoId = int.Parse(d["pid"]),
-                        Nome = d["pnome"],
-                        Codigo = d["pcodigo"],
-                        Nivel = d["pgnivel"]
+                        PermissaoId = (int) d["pid"],
+                        Nome = (string)d["pnome"],
+                        Codigo = (string)d["pcodigo"],
+                        Nivel = (string)d["pgnivel"]
 
                     };
                     permissoes.Todas.Add(p);
@@ -89,13 +89,13 @@ namespace _5gpro.Daos
 
                 foreach (var d in data)
                 {
-                    string codfiltro = d["codigo"];
+                    string codfiltro = (string)d["codigo"];
 
                     Permissao p = new Permissao
                     {
-                        PermissaoId = int.Parse(d["idpermissao"]),
-                        Nome = d["nome"],
-                        Codigo = d["codigo"],
+                        PermissaoId = (int)d["idpermissao"],
+                        Nome = (string)d["nome"],
+                        Codigo = (string)d["codigo"],
                         Nivel = "0"
                     };
                     permissoes.Todas.Add(p);
@@ -137,9 +137,9 @@ namespace _5gpro.Daos
                 foreach (var d in data)
                 {
                     permissao = new Permissao();
-                    permissao.PermissaoId = int.Parse(d["idpermissao"]);
-                    permissao.Nome = d["nome"];
-                    permissao.Codigo = d["codigo"];
+                    permissao.PermissaoId = (int)d["idpermissao"];
+                    permissao.Nome = (string)d["nome"];
+                    permissao.Codigo = (string)d["codigo"];
                     permissao.Nivel = "0";
 
                 }
@@ -162,7 +162,7 @@ namespace _5gpro.Daos
 
                 if (data != null)
                 {
-                    permissaoid = int.Parse(data["idpermissao"]);
+                    permissaoid = (int)data["idpermissao"];
                 }             
 
             }
@@ -188,7 +188,7 @@ namespace _5gpro.Daos
 
                 if (data != null)
                 {
-                    nivel = int.Parse(data["nivel"]);
+                    nivel = (int)data["nivel"];
                 }
             }
             return nivel;
@@ -207,7 +207,7 @@ namespace _5gpro.Daos
 
                 foreach (var d in data)
                 {
-                    int a = int.Parse(d["idpermissao"]);
+                    int a = (int)d["idpermissao"];
 
                     idpermissoesNpraN.Add(a);
                 }
@@ -232,8 +232,8 @@ namespace _5gpro.Daos
                 foreach (var d in data)
                 {
                     fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
-                    permissaonivel.permissao = BuscarPermissaoByID(d["idpermissao"]);
-                    permissaonivel.Nivel = int.Parse(d["nivel"]);
+                    permissaonivel.permissao = BuscarPermissaoByID((string)d["idpermissao"]);
+                    permissaonivel.Nivel = (int)d["nivel"];
 
                     listacomniveis.Add(permissaonivel);
                 }

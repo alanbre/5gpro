@@ -1,8 +1,6 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
-using System;
+using MySQLConnection;
 using System.Collections.Generic;
-using System.Data;
 
 namespace _5gpro.Daos
 {
@@ -13,37 +11,21 @@ namespace _5gpro.Daos
 
         public Cidade BuscaByID(int cod)
         {
-            Cidade cidade = new Cidade();
-            try
+            Cidade cidade = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM cidade WHERE idcidade = @idcidade", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idcidade", cod);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = "SELECT * FROM cidade WHERE idcidade = @idcidade LIMIT 1";
+                sql.addParam("@idcidade", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
-                    }
-                    else
-                    {
-                        cidade = null;
-                    }
+                    return null;
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                cidade = new Cidade
+                {
+                    CidadeID = (int) data["idcidade"],
+                    Nome = (string) data["nome"]
+                };
             }
             return cidade;
         }
@@ -54,49 +36,35 @@ namespace _5gpro.Daos
             string conCodEstado = codEstado > 0 ? "AND e.idestado = @idestado" : "";
             string conNomeCidade = nomeCidade.Length > 0 ? "AND c.nome LIKE @nomecidade" : "";
 
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado, e.uf
+                sql.Query = @"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado, e.uf
                                              FROM cidade c INNER JOIN estado e 
                                              ON c.idestado = e.idestado
                                              WHERE 1=1
                                              " + conCodEstado + @"
                                              " + conNomeCidade + @"
-                                             ORDER BY c.idcidade;", Connect.Conexao);
-
-                if (codEstado > 0) { Connect.Comando.Parameters.AddWithValue("@idestado", codEstado); }
-                if (nomeCidade.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomecidade", "%" + nomeCidade + "%"); }
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                                             ORDER BY c.idcidade";
+                if (codEstado > 0) { sql.addParam("@idestado", codEstado); }
+                if (nomeCidade.Length > 0) { sql.addParam("@nomecidade", "%" + nomeCidade + "%"); }
+                var data = sql.selectQuery();
+                foreach(var d in data)
                 {
-
-                    while (reader.Read())
+                    var estado = new Estado
                     {
-                        Estado estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomeestado")),
-                            Uf = reader.GetString(reader.GetOrdinal("uf"))
-                        };
+                        EstadoID = (int) d["idestado"],
+                        Nome = (string) d["nomeestado"],
+                        Uf = (string) d["uf"]
+                    };
 
-                        Cidade cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade")),
-                            Nome = reader.GetString(reader.GetOrdinal("nomecidade")),
-                            Estado = estado
-                        };
-                        cidades.Add(cidade);
-                    }
+                    var cidade = new Cidade
+                    {
+                        CidadeID = (int) d["idcidade"],
+                        Nome = (string) d["nomecidade"],
+                        Estado = estado
+                    };
+                    cidades.Add(cidade);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return cidades;
         }

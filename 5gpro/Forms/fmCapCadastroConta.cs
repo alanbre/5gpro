@@ -237,7 +237,7 @@ namespace _5gpro.Forms
             {
                 validacao.despintarCampos(controls);
 
-                var newcontaPagar = contaPagarDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
+                var newcontaPagar = contaPagarDAO.Proximo(int.Parse(tbCodigoConta.Text));
                 if (newcontaPagar != null)
                 {
                     newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
@@ -266,7 +266,7 @@ namespace _5gpro.Forms
             {
                 validacao.despintarCampos(controls);
 
-                var newcontaPagar = contaPagarDAO.BuscaAnterior(int.Parse(tbCodigoConta.Text));
+                var newcontaPagar = contaPagarDAO.Anterior(int.Parse(tbCodigoConta.Text));
                 if (newcontaPagar != null)
                 {
                     newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);

@@ -25,15 +25,15 @@ namespace _5gpro.Daos
 
                 usuario = new Usuario
                 {
-                    UsuarioID = int.Parse(data["idusuario"])
+                    UsuarioID = (int) data["idusuario"]
                 };
 
                 usuarioLogado = new Logado
                 {
                     Usuario = usuario,
-                    Mac = data["mac"],
-                    NomePC = data["nomepc"],
-                    IPdoPC = data["ipdopc"]
+                    Mac = (string) data["mac"],
+                    NomePC = (string) data["nomepc"],
+                    IPdoPC = (string) data["ipdopc"]
                 };
             }
             return usuarioLogado;
@@ -59,21 +59,21 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = int.Parse(data["idgrupousuario"])
+                    GrupoUsuarioID = (int) data["idgrupousuario"]
                 };
 
                 usuario = new Usuario
                 {
-                    UsuarioID = int.Parse(data["idusuario"]),
+                    UsuarioID = (int) data["idusuario"],
                     Grupousuario = grupousuario
                 };
 
                 usuarioLogado = new Logado
                 {
                     Usuario = usuario,
-                    Mac = data["mac"],
-                    NomePC = data["nomepc"],
-                    IPdoPC = data["ipdopc"]
+                    Mac = (string) data["mac"],
+                    NomePC = (string) data["nomepc"],
+                    IPdoPC = (string) data["ipdopc"]
                 };
             }
             return usuarioLogado;

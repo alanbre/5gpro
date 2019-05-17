@@ -81,46 +81,46 @@ namespace _5gpro.Daos
                 }
                 var grupopessoa = new GrupoPessoa
                 {
-                    GrupoPessoaID = int.Parse(data["idgrupopessoa"]),
-                    Nome = data["nomegrupopessoa"]
+                    GrupoPessoaID = (int) data["idgrupopessoa"],
+                    Nome = (string) data["nomegrupopessoa"]
                 };
                 var subgrupopessoa = new SubGrupoPessoa
                 {
-                    SubGrupoPessoaID = int.Parse(data["idsubgrupopessoa"]),
-                    Nome = data["nomesubgrupopessoa"]
+                    SubGrupoPessoaID = (int) data["idsubgrupopessoa"],
+                    Nome = (string) data["nomesubgrupopessoa"]
                 };
                 var estado = new Estado
                 {
-                    EstadoID = int.Parse(data["idestado"]),
-                    Nome = data["nomeestado"],
-                    Uf = data["uf"]
+                    EstadoID = (int) data["idestado"],
+                    Nome = (string) data["nomeestado"],
+                    Uf = (string) data["uf"]
                 };
 
                 var cidade = new Cidade
                 {
-                    CidadeID = int.Parse(data["idcidade"]),
-                    Nome = data["nomecidade"],
+                    CidadeID = (int) data["idcidade"],
+                    Nome = (string)data["nomecidade"],
                     Estado = estado
                 };
 
                 pessoa = new Pessoa
                 {
-                    PessoaID = int.Parse(data["idpessoa"]),
-                    Nome = data["nomepessoa"],
-                    Fantasia = data["fantasia"],
-                    TipoPessoa = data["tipo_pessoa"],
-                    Rua = data["rua"],
-                    Numero = data["numero"],
-                    Bairro = data["bairro"],
-                    Complemento = data["complemento"],
+                    PessoaID = (int)data["idpessoa"],
+                    Nome = (string)data["nomepessoa"],
+                    Fantasia = (string)data["fantasia"],
+                    TipoPessoa = (string)data["tipo_pessoa"],
+                    Rua = (string)data["rua"],
+                    Numero = (string)data["numero"],
+                    Bairro = (string)data["bairro"],
+                    Complemento = (string)data["complemento"],
                     Cidade = cidade,
-                    Telefone = data["telefone"],
-                    Email = data["email"],
+                    Telefone = (string)data["telefone"],
+                    Email = (string)data["email"],
                     SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = data["atuacao"],
-                    Situacao = data["situacao"]
+                    Atuacao = (string)data["atuacao"],
+                    Situacao = (string)data["situacao"]
                 };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? data["cpf"] : data["cnpj"];
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
             }
             return pessoa;
         }
@@ -148,46 +148,46 @@ namespace _5gpro.Daos
                 }
                 var grupopessoa = new GrupoPessoa
                 {
-                    GrupoPessoaID = int.Parse(data["idgrupopessoa"]),
-                    Nome = data["nomegrupopessoa"]
+                    GrupoPessoaID = (int)data["idgrupopessoa"],
+                    Nome = (string)data["nomegrupopessoa"]
                 };
                 var subgrupopessoa = new SubGrupoPessoa
                 {
-                    SubGrupoPessoaID = int.Parse(data["idsubgrupopessoa"]),
-                    Nome = data["nomesubgrupopessoa"]
+                    SubGrupoPessoaID = (int)data["idsubgrupopessoa"],
+                    Nome = (string)data["nomesubgrupopessoa"]
                 };
                 var estado = new Estado
                 {
-                    EstadoID = int.Parse(data["idestado"]),
-                    Nome = data["nomeestado"],
-                    Uf = data["uf"]
+                    EstadoID = (int)data["idestado"],
+                    Nome = (string)data["nomeestado"],
+                    Uf = (string)data["uf"]
                 };
 
                 var cidade = new Cidade
                 {
-                    CidadeID = int.Parse(data["idcidade"]),
-                    Nome = data["nomecidade"],
+                    CidadeID = (int)data["idcidade"],
+                    Nome = (string)data["nomecidade"],
                     Estado = estado
                 };
 
                 pessoa = new Pessoa
                 {
-                    PessoaID = int.Parse(data["idpessoa"]),
-                    Nome = data["nomepessoa"],
-                    Fantasia = data["fantasia"],
-                    TipoPessoa = data["tipo_pessoa"],
-                    Rua = data["rua"],
-                    Numero = data["numero"],
-                    Bairro = data["bairro"],
-                    Complemento = data["complemento"],
+                    PessoaID = (int)data["idpessoa"],
+                    Nome = (string)data["nomepessoa"],
+                    Fantasia = (string)data["fantasia"],
+                    TipoPessoa = (string)data["tipo_pessoa"],
+                    Rua = (string)data["rua"],
+                    Numero = (string)data["numero"],
+                    Bairro = (string)data["bairro"],
+                    Complemento = (string)data["complemento"],
                     Cidade = cidade,
-                    Telefone = data["telefone"],
-                    Email = data["email"],
+                    Telefone = (string)data["telefone"],
+                    Email = (string)data["email"],
                     SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = data["atuacao"],
-                    Situacao = data["situacao"]
+                    Atuacao = (string)data["atuacao"],
+                    Situacao = (string)data["situacao"]
                 };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? data["cpf"] : data["cnpj"];
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
             }
             return pessoa;
         }
@@ -215,46 +215,46 @@ namespace _5gpro.Daos
                 }
                 var grupopessoa = new GrupoPessoa
                 {
-                    GrupoPessoaID = int.Parse(data["idgrupopessoa"]),
-                    Nome = data["nomegrupopessoa"]
+                    GrupoPessoaID = (int)data["idgrupopessoa"],
+                    Nome = (string)data["nomegrupopessoa"]
                 };
                 var subgrupopessoa = new SubGrupoPessoa
                 {
-                    SubGrupoPessoaID = int.Parse(data["idsubgrupopessoa"]),
-                    Nome = data["nomesubgrupopessoa"]
+                    SubGrupoPessoaID = (int)data["idsubgrupopessoa"],
+                    Nome = (string)data["nomesubgrupopessoa"]
                 };
                 var estado = new Estado
                 {
-                    EstadoID = int.Parse(data["idestado"]),
-                    Nome = data["nomeestado"],
-                    Uf = data["uf"]
+                    EstadoID = (int)data["idestado"],
+                    Nome = (string)data["nomeestado"],
+                    Uf = (string)data["uf"]
                 };
 
                 var cidade = new Cidade
                 {
-                    CidadeID = int.Parse(data["idcidade"]),
-                    Nome = data["nomecidade"],
+                    CidadeID = (int)data["idcidade"],
+                    Nome = (string)data["nomecidade"],
                     Estado = estado
                 };
 
                 pessoa = new Pessoa
                 {
-                    PessoaID = int.Parse(data["idpessoa"]),
-                    Nome = data["nomepessoa"],
-                    Fantasia = data["fantasia"],
-                    TipoPessoa = data["tipo_pessoa"],
-                    Rua = data["rua"],
-                    Numero = data["numero"],
-                    Bairro = data["bairro"],
-                    Complemento = data["complemento"],
+                    PessoaID = (int)data["idpessoa"],
+                    Nome = (string)data["nomepessoa"],
+                    Fantasia = (string)data["fantasia"],
+                    TipoPessoa = (string)data["tipo_pessoa"],
+                    Rua = (string)data["rua"],
+                    Numero = (string)data["numero"],
+                    Bairro = (string)data["bairro"],
+                    Complemento = (string)data["complemento"],
                     Cidade = cidade,
-                    Telefone = data["telefone"],
-                    Email = data["email"],
+                    Telefone = (string)data["telefone"],
+                    Email = (string)data["email"],
                     SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = data["atuacao"],
-                    Situacao = data["situacao"]
+                    Atuacao = (string)data["atuacao"],
+                    Situacao = (string)data["situacao"]
                 };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? data["cpf"] : data["cnpj"];
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
             }
             return pessoa;
         }
@@ -290,46 +290,46 @@ namespace _5gpro.Daos
                 {
                     var grupopessoa = new GrupoPessoa
                     {
-                        GrupoPessoaID = int.Parse(d["idgrupopessoa"]),
-                        Nome = d["nomegrupopessoa"]
+                        GrupoPessoaID = (int) d["idgrupopessoa"],
+                        Nome = (string)d["nomegrupopessoa"]
                     };
                     var subgrupopessoa = new SubGrupoPessoa
                     {
-                        SubGrupoPessoaID = int.Parse(d["idsubgrupopessoa"]),
-                        Nome = d["nomesubgrupopessoa"]
+                        SubGrupoPessoaID = (int)d["idsubgrupopessoa"],
+                        Nome = (string)d["nomesubgrupopessoa"]
                     };
                     var estado = new Estado
                     {
-                        EstadoID = int.Parse(d["idestado"]),
-                        Nome = d["nomeestado"],
-                        Uf = d["uf"]
+                        EstadoID = (int)d["idestado"],
+                        Nome = (string)d["nomeestado"],
+                        Uf = (string)d["uf"]
                     };
 
                     var cidade = new Cidade
                     {
-                        CidadeID = int.Parse(d["idcidade"]),
-                        Nome = d["nomecidade"],
+                        CidadeID = (int)d["idcidade"],
+                        Nome = (string)d["nomecidade"],
                         Estado = estado
                     };
 
                     var pessoa = new Pessoa
                     {
-                        PessoaID = int.Parse(d["idpessoa"]),
-                        Nome = d["nomepessoa"],
-                        Fantasia = d["fantasia"],
-                        TipoPessoa = d["tipo_pessoa"],
-                        Rua = d["rua"],
-                        Numero = d["numero"],
-                        Bairro = d["bairro"],
-                        Complemento = d["complemento"],
+                        PessoaID = (int)d["idpessoa"],
+                        Nome = (string)d["nomepessoa"],
+                        Fantasia = (string)d["fantasia"],
+                        TipoPessoa = (string)d["tipo_pessoa"],
+                        Rua = (string)d["rua"],
+                        Numero = (string)d["numero"],
+                        Bairro = (string)d["bairro"],
+                        Complemento = (string)d["complemento"],
                         Cidade = cidade,
-                        Telefone = d["telefone"],
-                        Email = d["email"],
+                        Telefone = (string)d["telefone"],
+                        Email = (string)d["email"],
                         SubGrupoPessoa = subgrupopessoa,
-                        Atuacao = d["atuacao"],
-                        Situacao = d["situacao"]
+                        Atuacao = (string)d["atuacao"],
+                        Situacao = (string)d["situacao"]
                     };
-                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? d["cpf"] : d["cnpj"];
+                    pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)d["cpf"] : (string)d["cnpj"];
                     pessoas.Add(pessoa);
                 }
                 return pessoas;
@@ -351,7 +351,7 @@ namespace _5gpro.Daos
                 var data = sql.selectQueryForSingleRecord();
                 if (data != null)
                 {
-                    proximoid = int.Parse(data["proximoid"]);
+                    proximoid = (int)data["proximoid"];
                 }
             }
             return proximoid;
