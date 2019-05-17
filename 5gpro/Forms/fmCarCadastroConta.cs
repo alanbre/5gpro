@@ -241,7 +241,7 @@ namespace _5gpro.Forms
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaReceber = contaReceberDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
+                var newcontaReceber = contaReceberDAO.Proximo(int.Parse(tbCodigoConta.Text));
                 if (newcontaReceber != null)
                 {
                     newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
@@ -267,7 +267,7 @@ namespace _5gpro.Forms
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaRebeceber = contaReceberDAO.BuscaAnterior(int.Parse(tbCodigoConta.Text));
+                var newcontaRebeceber = contaReceberDAO.Anterior(int.Parse(tbCodigoConta.Text));
                 if (newcontaRebeceber != null)
                 {
                     newcontaRebeceber.Operacao = operacaoDAO.BuscaById(newcontaRebeceber.Operacao.OperacaoID);
