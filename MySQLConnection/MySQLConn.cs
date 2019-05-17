@@ -351,9 +351,9 @@ namespace MySQLConnection
                 {
                     affectedRecords = command.ExecuteNonQuery();
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    throw;
+                    Console.WriteLine(ex.ToString());
                 }
             }
 

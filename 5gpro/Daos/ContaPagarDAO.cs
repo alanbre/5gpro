@@ -95,21 +95,28 @@ namespace _5gpro.Daos
         public IEnumerable<ContaPagar> Busca(fmBuscaContaPagar.Filtros f)
         {
             var contaPagars = new List<ContaPagar>();
+            Pessoa pessoa = null;
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            string whereValorFinal = f.usarvalorContaFiltro ? "AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
+            string whereDatCadastro = f.usardataCadastroFiltro ? "AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
+
+
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
-                            cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
-                            FROM 
-                            conta_pagar cp 
-                            LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
-                            LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
-                            WHERE 1 = 1 "
-                            + wherePessoa + " " +
-                            @"AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
-                            AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                            AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
-                            GROUP BY cp.idconta_pagar";
+                                                    cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
+                                                    FROM 
+                                                    conta_pagar cp 
+                                                    LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
+                                                    LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
+                                                    WHERE 1 = 1 "
+                                             + wherePessoa + " "
+                                             + whereValorFinal + " "
+                                             + whereDatCadastro + " "
+                                             + whereDataVencimento + " "
+                                             + "GROUP BY cp.idconta_pagar";
+
                 if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
                 sql.addParam("@valor_conta_inicial", f.filtroValorInicial);
                 sql.addParam("@valor_conta_final", f.filtroValorFinal);
@@ -118,11 +125,11 @@ namespace _5gpro.Daos
                 sql.addParam("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
                 sql.addParam("@data_vencimento_final", f.filtroDataVencimentoFinal);
 
+
                 var data = sql.selectQuery();
 
                 foreach (var d in data)
                 {
-                    Pessoa pessoa = null;
                     pessoa = new Pessoa
                     {
                         PessoaID = Convert.ToInt32(d["idpessoa"]),
@@ -131,23 +138,37 @@ namespace _5gpro.Daos
 
                     var contaPagar = new ContaPagar
                     {
-                        ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]),
-                        DataCadastro = (DateTime)data[0]["data_cadastro"],
-                        DataConta = (DateTime)data[0]["data_conta"],
-                        ValorOriginal = (decimal)data[0]["valor_original"],
-                        Multa = (decimal)data[0]["multa"],
-                        Juros = (decimal)data[0]["juros"],
-                        Acrescimo = (decimal)data[0]["acrescimo"],
-                        Desconto = (decimal)data[0]["desconto"],
-                        ValorFinal = (decimal)data[0]["valor_final"],
-                        Situacao = (string)data[0]["situacao"]
+                        ContaPagarID = Convert.ToInt32(d["idconta_pagar"]),
+                        DataCadastro = (DateTime)d["data_cadastro"],
+                        DataConta = (DateTime)d["data_conta"],
+                        ValorOriginal = (decimal)d["valor_original"],
+                        Multa = (decimal)d["multa"],
+                        Juros = (decimal)d["juros"],
+                        Acrescimo = (decimal)d["acrescimo"],
+                        Desconto = (decimal)d["desconto"],
+                        ValorFinal = (decimal)d["valor_final"],
+                        Situacao = (string)d["situacao"]
                     };
+                    //var contaPagar = new ContaPagar
+                    //{
+                    //    ContaPagarID = (int)data[0]["idconta_pagar"],
+                    //    DataCadastro = (DateTime)data[0]["data_cadastro"],
+                    //    DataConta = (DateTime)data[0]["data_conta"],
+                    //    ValorOriginal = (decimal)data[0]["valor_original"],
+                    //    Multa = (decimal)data[0]["multa"],
+                    //    Juros = (decimal)data[0]["juros"],
+                    //    Acrescimo = (decimal)data[0]["acrescimo"],
+                    //    Desconto = (decimal)data[0]["desconto"],
+                    //    ValorFinal = (decimal)data[0]["valor_final"],
+                    //    Situacao = (string)data[0]["situacao"]
+                    //};
                     contaPagar.Pessoa = pessoa;
                     contaPagars.Add(contaPagar);
                 }
             }
             return contaPagars;
         }
+
 
         public int BuscaProxCodigoDisponivel()
         {
