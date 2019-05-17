@@ -95,7 +95,6 @@ namespace _5gpro.Daos
         public IEnumerable<ContaPagar> Busca(fmBuscaContaPagar.Filtros f)
         {
             var contaPagars = new List<ContaPagar>();
-            Pessoa pessoa = null;
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             string whereValorFinal = f.usarvalorContaFiltro ? "AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
             string whereDatCadastro = f.usardataCadastroFiltro ? "AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
@@ -130,25 +129,22 @@ namespace _5gpro.Daos
 
                 foreach (var d in data)
                 {
-                    pessoa = new Pessoa
-                    {
-                        PessoaID = Convert.ToInt32(d["idpessoa"]),
-                        Nome = (string)d["nome"]
-                    };
+                    var pessoa = new Pessoa();
+                    pessoa.PessoaID = Convert.ToInt32(d["idpessoa"]);
+                    pessoa.Nome = (string)d["nome"];
 
-                    var contaPagar = new ContaPagar
-                    {
-                        ContaPagarID = Convert.ToInt32(d["idconta_pagar"]),
-                        DataCadastro = (DateTime)d["data_cadastro"],
-                        DataConta = (DateTime)d["data_conta"],
-                        ValorOriginal = (decimal)d["valor_original"],
-                        Multa = (decimal)d["multa"],
-                        Juros = (decimal)d["juros"],
-                        Acrescimo = (decimal)d["acrescimo"],
-                        Desconto = (decimal)d["desconto"],
-                        ValorFinal = (decimal)d["valor_final"],
-                        Situacao = (string)d["situacao"]
-                    };
+                    var contaPagar = new ContaPagar();
+
+                    contaPagar.ContaPagarID = Convert.ToInt32(d["idconta_pagar"]);
+                    contaPagar.DataCadastro = (DateTime)d["data_cadastro"];
+                    contaPagar.DataConta = (DateTime)d["data_conta"];
+                    contaPagar.ValorOriginal = (decimal)d["valor_original"];
+                    contaPagar.Multa = (decimal)d["multa"];
+                    contaPagar.Juros = (decimal)d["juros"];
+                    contaPagar.Acrescimo = (decimal)d["acrescimo"];
+                    contaPagar.Desconto = (decimal)d["desconto"];
+                    contaPagar.ValorFinal = (decimal)d["valor_final"];
+                    contaPagar.Situacao = (string)d["situacao"];
 
                     contaPagar.Pessoa = pessoa;
                     contaPagars.Add(contaPagar);
@@ -244,24 +240,19 @@ namespace _5gpro.Daos
             {
                 return null;
             }
-            ContaPagar contaPagar = null;
             List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
 
-            contaPagar = new ContaPagar
-            {
-                ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]),
-                DataCadastro = (DateTime)data[0]["data_cadastro"],
-                DataConta = (DateTime)data[0]["data_conta"],
-                ValorOriginal = (decimal)data[0]["valor_original"],
-                Multa = (decimal)data[0]["multa"],
-                Juros = (decimal)data[0]["juros"],
-                Acrescimo = (decimal)data[0]["acrescimo"],
-                Desconto = (decimal)data[0]["desconto"],
-                ValorFinal = (decimal)data[0]["valor_final"],
-                Situacao = (string)data[0]["situacao"]
-            };
-
-
+            var contaPagar = new ContaPagar();
+            contaPagar.ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]);
+            contaPagar.DataCadastro = (DateTime)data[0]["data_cadastro"];
+            contaPagar.DataConta = (DateTime)data[0]["data_conta"];
+            contaPagar.ValorOriginal = (decimal)data[0]["valor_original"];
+            contaPagar.Multa = (decimal)data[0]["multa"];
+            contaPagar.Juros = (decimal)data[0]["juros"];
+            contaPagar.Acrescimo = (decimal)data[0]["acrescimo"];
+            contaPagar.Desconto = (decimal)data[0]["desconto"];
+            contaPagar.ValorFinal = (decimal)data[0]["valor_final"];
+            contaPagar.Situacao = (string)data[0]["situacao"];
             contaPagar.Pessoa = new Pessoa();
             contaPagar.Pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
 

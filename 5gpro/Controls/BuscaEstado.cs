@@ -31,7 +31,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoEstado.Text, out int codigo)) { tbCodigoEstado.Clear(); }
             if (tbCodigoEstado.Text.Length > 0)
             {
-                estado = estadoDAO.BuscaEstadoByCod(int.Parse(tbCodigoEstado.Text));
+                estado = estadoDAO.BuscaByID(int.Parse(tbCodigoEstado.Text));
                 PreencheCamposEstado(estado);
             }
             else
