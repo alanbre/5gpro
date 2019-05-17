@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using MySQLConnection;
+using System;
 using System.Collections.Generic;
 
 namespace _5gpro.Daos
@@ -11,7 +12,7 @@ namespace _5gpro.Daos
 
         public Cidade BuscaByID(int cod)
         {
-            Cidade cidade = null;
+            var cidade = new Cidade();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = "SELECT * FROM cidade WHERE idcidade = @idcidade LIMIT 1";
@@ -21,11 +22,8 @@ namespace _5gpro.Daos
                 {
                     return null;
                 }
-                cidade = new Cidade
-                {
-                    CidadeID = (int) data["idcidade"],
-                    Nome = (string) data["nome"]
-                };
+                cidade.CidadeID = Convert.ToInt32(data["idcidade"]);
+                cidade.Nome = (string)data["nome"];
             }
             return cidade;
         }
@@ -48,21 +46,18 @@ namespace _5gpro.Daos
                 if (codEstado > 0) { sql.addParam("@idestado", codEstado); }
                 if (nomeCidade.Length > 0) { sql.addParam("@nomecidade", "%" + nomeCidade + "%"); }
                 var data = sql.selectQuery();
-                foreach(var d in data)
+                foreach (var d in data)
                 {
-                    var estado = new Estado
-                    {
-                        EstadoID = (int) d["idestado"],
-                        Nome = (string) d["nomeestado"],
-                        Uf = (string) d["uf"]
-                    };
+                    var estado = new Estado();
+                    estado.EstadoID = Convert.ToInt32(d["idestado"]);
+                    estado.Nome = (string)d["nomeestado"];
+                    estado.Uf = (string)d["uf"];
 
-                    var cidade = new Cidade
-                    {
-                        CidadeID = (int) d["idcidade"],
-                        Nome = (string) d["nomecidade"],
-                        Estado = estado
-                    };
+
+                    var cidade = new Cidade();
+                    cidade.CidadeID = Convert.ToInt32(d["idcidade"]);
+                    cidade.Nome = (string)d["nomecidade"];
+                    cidade.Estado = estado;
                     cidades.Add(cidade);
                 }
             }

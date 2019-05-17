@@ -1,8 +1,7 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace _5gpro.Daos
 {
@@ -10,40 +9,20 @@ namespace _5gpro.Daos
     {
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
-
-        public Estado BuscaEstadoByCod(int cod)
+        public Estado BuscaByID(int cod)
         {
             Estado estado = new Estado();
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM estado WHERE idestado = @idestado", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idestado", cod);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = "SELECT * FROM estado WHERE idestado = @idestado LIMIT 1";
+                sql.addParam("@idestado", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
-                    }
-                    else
-                    {
-                        estado = null;
-                    }
+                    return null;
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                estado.EstadoID = Convert.ToInt32(data["idestado"]);
+                estado.Nome = (string)data["nome"];
             }
             return estado;
         }
@@ -51,33 +30,19 @@ namespace _5gpro.Daos
         public List<Estado> BuscaEstadoByNome(string nome)
         {
             List<Estado> estados = new List<Estado>();
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM estado WHERE nome LIKE @nome", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%");
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = "SELECT * FROM estado WHERE nome LIKE @nome";
+                sql.addParam("@nome", "%" + nome + "%");
+                var data = sql.selectQuery();
+                foreach(var d in data)
                 {
-
-                    while (reader.Read())
-                    {
-                        Estado estado = new Estado
-                        {
-                            EstadoID = reader.GetInt32(reader.GetOrdinal("idestado")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
-                        estados.Add(estado);
-                    }
+                    var estado = new Estado();
+                    estado.EstadoID = Convert.ToInt32(d["idestado"]);
+                    estado.Nome = (string)d["nomeestado"];
+                    estado.Uf = (string)d["uf"];
+                    estados.Add(estado);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return estados;
         }
