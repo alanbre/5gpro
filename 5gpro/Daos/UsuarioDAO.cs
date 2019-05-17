@@ -22,10 +22,10 @@ namespace _5gpro.Daos
                     return null;
                 }
                 usuario = new Usuario();
-                usuario.UsuarioID = int.Parse(data["idusuario"]);
-                usuario.Nome = data["nome"];
-                usuario.Sobrenome = data["sobrenome"];
-                usuario.Senha = data["senha"];
+                usuario.UsuarioID = (int)data["idusuario"];
+                usuario.Nome = (string)data["nome"];
+                usuario.Sobrenome = (string)data["sobrenome"];
+                usuario.Senha = (string)data["senha"];
             }
             return usuario;
         }
@@ -46,7 +46,7 @@ namespace _5gpro.Daos
                 var data = sql.selectQueryForSingleRecord();
                 if (data != null)
                 {
-                    proximoid = int.Parse(data["proximoid"]);
+                    proximoid = (int)data["proximoid"];
                 }
             }
             return proximoid;
@@ -96,8 +96,8 @@ namespace _5gpro.Daos
                 }
                 usuario = new Usuario
                 {
-                    UsuarioID = int.Parse(data["idusuario"]),
-                    Nome = data["nome"]
+                    UsuarioID = (int)data["idusuario"],
+                    Nome = (string)data["nome"]
                 };
             }
             return usuario;
@@ -119,17 +119,17 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = int.Parse(data["idgrupousuario"])
+                    GrupoUsuarioID = (int)data["idgrupousuario"]
                 };
                 usuario = new Usuario
                 {
-                    UsuarioID = int.Parse(data["idusuario"]),
-                    Senha = data["senha"],
+                    UsuarioID = (int)data["idusuario"],
+                    Senha = (string)data["senha"],
                     Grupousuario = grupousuario,
-                    Nome = data["nome"],
-                    Sobrenome = data["sobrenome"],
-                    Email = data["email"],
-                    Telefone = data["telefone"]
+                    Nome = (string)data["nome"],
+                    Sobrenome = (string)data["sobrenome"],
+                    Email = (string)data["email"],
+                    Telefone = (string)data["telefone"]
                 };
             }
             return usuario;
@@ -151,17 +151,17 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = int.Parse(data["idgrupousuario"])
+                    GrupoUsuarioID = (int)data["idgrupousuario"]
                 };
                 usuario = new Usuario
                 {
-                    UsuarioID = int.Parse(data["idusuario"]),
-                    Senha = data["senha"],
+                    UsuarioID = (int)data["idusuario"],
+                    Senha = (string)data["senha"],
                     Grupousuario = grupousuario,
-                    Nome = data["nome"],
-                    Sobrenome = data["sobrenome"],
-                    Email = data["email"],
-                    Telefone = data["telefone"]
+                    Nome = (string)data["nome"],
+                    Sobrenome = (string)data["sobrenome"],
+                    Email = (string)data["email"],
+                    Telefone = (string)data["telefone"]
                 };
             }
             return usuario;
@@ -182,17 +182,17 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = int.Parse(data["idgrupousuario"])
+                    GrupoUsuarioID = (int)data["idgrupousuario"]
                 };
                 usuario = new Usuario
                 {
-                    UsuarioID = int.Parse(data["idusuario"]),
-                    Senha = data["senha"],
+                    UsuarioID = (int)data["idusuario"],
+                    Senha = (string)data["senha"],
                     Grupousuario = grupousuario,
-                    Nome = data["nome"],
-                    Sobrenome = data["sobrenome"],
-                    Email = data["email"],
-                    Telefone = data["telefone"]
+                    Nome = (string)data["nome"],
+                    Sobrenome = (string)data["sobrenome"],
+                    Email = (string)data["email"],
+                    Telefone = (string)data["telefone"]
                 };
             }
             return usuario;
@@ -222,16 +222,16 @@ namespace _5gpro.Daos
                 foreach (var d in data)
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = int.Parse(d["idgrupousuario"]);
+                    grupousuario.GrupoUsuarioID = (int)d["idgrupousuario"];
                     Usuario usuario = new Usuario
                     {
-                        UsuarioID = int.Parse(d["idusuario"]),
-                        Senha = d["senha"],
+                        UsuarioID = (int)d["idusuario"],
+                        Senha = (string)d["senha"],
                         Grupousuario = grupousuario,
-                        Nome = d["nome"],
-                        Sobrenome = d["sobrenome"],
-                        Email = d["email"],
-                        Telefone = d["telefone"]
+                        Nome = (string)d["nome"],
+                        Sobrenome = (string)d["sobrenome"],
+                        Email = (string)d["email"],
+                        Telefone = (string)d["telefone"]
                     };
                     usuarios.Add(usuario);
                 }

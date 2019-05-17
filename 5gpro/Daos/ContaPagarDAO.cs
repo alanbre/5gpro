@@ -1,6 +1,7 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,16 +15,10 @@ namespace _5gpro.Daos
         public int SalvaOuAtualiza(ContaPagar contaPagar)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = Connect.Conexao.CreateCommand();
-                Connect.tr = Connect.Conexao.BeginTransaction();
-                Connect.Comando.Connection = Connect.Conexao;
-                Connect.Comando.Transaction = Connect.tr;
-
-
-                Connect.Comando.CommandText = @"INSERT INTO conta_pagar
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO conta_pagar
                          (idconta_pagar, data_cadastro, data_conta, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
                           VALUES
                          (@idconta_pagar, @data_cadastro, @data_conta, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
@@ -31,60 +26,45 @@ namespace _5gpro.Daos
                           data_cadastro = @data_cadastro, data_conta = @data_conta, valor_original = @valor_original, multa = @multa,
                           juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
                           ";
-
-                Connect.Comando.Parameters.AddWithValue("@idconta_pagar", contaPagar.ContaPagarID);
-                Connect.Comando.Parameters.AddWithValue("@data_cadastro", contaPagar.DataCadastro);
-                Connect.Comando.Parameters.AddWithValue("@valor_original", contaPagar.ValorOriginal);
-                Connect.Comando.Parameters.AddWithValue("@multa", contaPagar.Multa);
-                Connect.Comando.Parameters.AddWithValue("@juros", contaPagar.Juros);
-                Connect.Comando.Parameters.AddWithValue("@acrescimo", contaPagar.Acrescimo);
-                Connect.Comando.Parameters.AddWithValue("@desconto", contaPagar.Desconto);
-                Connect.Comando.Parameters.AddWithValue("@valor_final", contaPagar.ValorFinal);
-                Connect.Comando.Parameters.AddWithValue("@idpessoa", contaPagar.Pessoa.PessoaID);
-                Connect.Comando.Parameters.AddWithValue("@situacao", contaPagar.Situacao);
-                Connect.Comando.Parameters.AddWithValue("data_conta", contaPagar.DataConta);
-
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-
-                if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
+                sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
+                sql.addParam("@data_cadastro", contaPagar.DataCadastro);
+                sql.addParam("@valor_original", contaPagar.ValorOriginal);
+                sql.addParam("@multa", contaPagar.Multa);
+                sql.addParam("@juros", contaPagar.Juros);
+                sql.addParam("@acrescimo", contaPagar.Acrescimo);
+                sql.addParam("@desconto", contaPagar.Desconto);
+                sql.addParam("@valor_final", contaPagar.ValorFinal);
+                sql.addParam("@idpessoa", contaPagar.Pessoa.PessoaID);
+                sql.addParam("@situacao", contaPagar.Situacao);
+                sql.addParam("data_conta", contaPagar.DataConta);
+                retorno = sql.insertQuery();
+                if (retorno > 0)
                 {
-                    Connect.Comando.CommandText = @"DELETE FROM parcela_conta_pagar WHERE idconta_pagar = @idconta_pagar";
-                    Connect.Comando.ExecuteNonQuery();
-
-                    Connect.Comando.CommandText = @"INSERT INTO parcela_conta_pagar
-                                            (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_pagar, idformapagamento, situacao)
-                                            VALUES
-                                            (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento, @situacao)";
-                    foreach (ParcelaContaPagar parcela in contaPagar.Parcelas)
+                    sql.Query = @"DELETE FROM parcela_conta_pagar WHERE idconta_pagar = @idconta_pagar";
+                    sql.deleteQuery();
+                    sql.Query = @"INSERT INTO parcela_conta_pagar
+                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_pagar, idformapagamento, situacao)
+                                VALUES
+                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento, @situacao)";
+                    foreach (var parcela in contaPagar.Parcelas)
                     {
-                        Connect.Comando.Parameters.Clear();
-                        Connect.Comando.Parameters.AddWithValue("@sequencia", parcela.Sequencia);
-                        Connect.Comando.Parameters.AddWithValue("@data_vencimento", parcela.DataVencimento);
-                        Connect.Comando.Parameters.AddWithValue("@valor", parcela.Valor);
-                        Connect.Comando.Parameters.AddWithValue("@multa", parcela.Multa);
-                        Connect.Comando.Parameters.AddWithValue("@juros", parcela.Juros);
-                        Connect.Comando.Parameters.AddWithValue("@acrescimo", parcela.Acrescimo);
-                        Connect.Comando.Parameters.AddWithValue("@desconto", parcela.Desconto);
-                        Connect.Comando.Parameters.AddWithValue("@valor_final", parcela.ValorFinal);
-                        Connect.Comando.Parameters.AddWithValue("@data_quitacao", parcela.DataQuitacao);
-                        Connect.Comando.Parameters.AddWithValue("@idconta_pagar", contaPagar.ContaPagarID);
-                        Connect.Comando.Parameters.AddWithValue("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
-                        Connect.Comando.Parameters.AddWithValue("@situacao", parcela.Situacao);
-                        Connect.Comando.ExecuteNonQuery();
+                        sql.clearParams();
+                        sql.addParam("@sequencia", parcela.Sequencia);
+                        sql.addParam("@data_vencimento", parcela.DataVencimento);
+                        sql.addParam("@valor", parcela.Valor);
+                        sql.addParam("@multa", parcela.Multa);
+                        sql.addParam("@juros", parcela.Juros);
+                        sql.addParam("@acrescimo", parcela.Acrescimo);
+                        sql.addParam("@desconto", parcela.Desconto);
+                        sql.addParam("@valor_final", parcela.ValorFinal);
+                        sql.addParam("@data_quitacao", parcela.DataQuitacao);
+                        sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
+                        sql.addParam("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
+                        sql.addParam("@situacao", parcela.Situacao);
+                        sql.insertQuery();
                     }
                 }
-                Connect.tr.Commit();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Commit();
             }
             return retorno;
         }
@@ -92,38 +72,26 @@ namespace _5gpro.Daos
 
         public ContaPagar BuscaById(int codigo)
         {
-            var contaPagar = new ContaPagar();
-
-            try
+            ContaPagar contaPagar = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
-                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
-                                                    FROM conta_pagar AS c
-                                                    LEFT JOIN parcela_conta_pagar AS p 
-                                                    ON  c.idconta_pagar = p.idconta_pagar
-                                                    LEFT JOIN formapagamento f
-                                                    ON f.idformapagamento = p.idformapagamento
-                                                    WHERE c.idconta_pagar = @idconta_pagar"
-                                                    , Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idconta_pagar", codigo);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                            p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            FROM conta_pagar AS c
+                            LEFT JOIN parcela_conta_pagar AS p 
+                            ON  c.idconta_pagar = p.idconta_pagar
+                            LEFT JOIN formapagamento f
+                            ON f.idformapagamento = p.idformapagamento
+                            WHERE c.idconta_pagar = @idconta_pagar";
+                sql.addParam("@idconta_pagar", codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    contaPagar = LeDadosReader(reader);
+                    return null;
                 }
+                contaPagar = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return contaPagar;
         }
 
@@ -132,277 +100,193 @@ namespace _5gpro.Daos
         {
             var contaPagars = new List<ContaPagar>();
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
-            Pessoa pessoa = null;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
-                                                    cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
-                                                    FROM 
-                                                    conta_pagar cp 
-                                                    LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
-                                                    LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
-                                                    WHERE 1 = 1"
-                                             + wherePessoa + "" +
-                                          @" AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
-                                             AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                             AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
-                                             GROUP BY cp.idconta_pagar", Connect.Conexao);
-                if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
+                sql.Query = @"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
+                            cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
+                            FROM 
+                            conta_pagar cp 
+                            LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
+                            LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
+                            WHERE 1 = 1 "
+                            + wherePessoa + " " +
+                            @"AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final
+                            AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
+                            AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final
+                            GROUP BY cp.idconta_pagar";
+                if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
+                sql.addParam("@valor_conta_inicial", f.filtroValorInicial);
+                sql.addParam("@valor_conta_final", f.filtroValorFinal);
+                sql.addParam("@data_cadastro_inicial", f.filtroDataCadastroInicial);
+                sql.addParam("@data_cadastro_final", f.filtroDataCadastroFinal);
+                sql.addParam("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
+                sql.addParam("@data_vencimento_final", f.filtroDataVencimentoFinal);
 
-                Connect.Comando.Parameters.AddWithValue("@valor_conta_inicial", f.filtroValorInicial);
-                Connect.Comando.Parameters.AddWithValue("@valor_conta_final", f.filtroValorFinal);
-                Connect.Comando.Parameters.AddWithValue("@data_cadastro_inicial", f.filtroDataCadastroInicial);
-                Connect.Comando.Parameters.AddWithValue("@data_cadastro_final", f.filtroDataCadastroFinal);
-                Connect.Comando.Parameters.AddWithValue("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
-                Connect.Comando.Parameters.AddWithValue("@data_vencimento_final", f.filtroDataVencimentoFinal);
+                var data = sql.selectQuery();
 
-                using (var reader = Connect.Comando.ExecuteReader())
+                foreach(var d in data)
                 {
-                    while (reader.Read())
+                    Pessoa pessoa = null;
+                    pessoa = new Pessoa
                     {
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
+                        PessoaID = (int)d["idpessoa"],
+                        Nome = (string)d["nome"]
+                    };
 
-                        var contaPagar = new ContaPagar
-                        {
-                            ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
-                            ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                            Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                            Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                            Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                        };
-
-                        contaPagar.Pessoa = pessoa;
-                        contaPagars.Add(contaPagar);
-                    }
+                    var contaPagar = new ContaPagar
+                    {
+                        ContaPagarID = (int)data[0]["idconta_pagar"],
+                        DataCadastro = (DateTime)data[0]["data_cadastro"],
+                        DataConta = (DateTime)data[0]["data_conta"],
+                        ValorOriginal = (decimal)data[0]["valor_original"],
+                        Multa = (decimal)data[0]["multa"],
+                        Juros = (decimal)data[0]["juros"],
+                        Acrescimo = (decimal)data[0]["acrescimo"],
+                        Desconto = (decimal)data[0]["desconto"],
+                        ValorFinal = (decimal)data[0]["valor_final"],
+                        Situacao = (string)data[0]["situacao"]
+                    };
+                    contaPagar.Pessoa = pessoa;
+                    contaPagars.Add(contaPagar);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return contaPagars;
         }
+
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT cp1.idconta_pagar + 1 AS proximoid
-                                             FROM conta_pagar AS cp1
-                                             LEFT OUTER JOIN conta_pagar AS cp2 ON cp1.idconta_pagar + 1 = cp2.idconta_pagar
-                                             WHERE cp2.idconta_pagar IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT cp1.idconta_pagar + 1 AS proximoid
+                            FROM conta_pagar AS cp1
+                            LEFT OUTER JOIN conta_pagar AS cp2 ON cp1.idconta_pagar + 1 = cp2.idconta_pagar
+                            WHERE cp2.idconta_pagar IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-                    if (reader.Read())
-                    {
-                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    }
+                    proximoid = (int)data["proximoid"];
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return proximoid;
         }
-        public ContaPagar BuscaProximo(int codigo)
+
+        public ContaPagar Proximo(int codigo)
         {
-            var contaPagar = new ContaPagar();
-            var parcelas = new List<ParcelaContaPagar>();
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
-                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
-                                                    FROM conta_pagar AS c
-                                                    LEFT JOIN parcela_conta_pagar AS p 
-                                                    ON  c.idconta_pagar = p.idconta_pagar
-                                                    LEFT JOIN formapagamento f
-                                                    ON f.idformapagamento = p.idformapagamento
-                                                    WHERE c.idconta_pagar = (SELECT min(idconta_pagar) 
-                                                    FROM conta_pagar 
-                                                    WHERE idconta_pagar > @idconta_pagar)", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idconta_pagar", codigo);
-
-                using (var reader = Connect.Comando.ExecuteReader())
-                {
-                    contaPagar = LeDadosReader(reader);
-                }
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return contaPagar;
-        }
-
-
-        public ContaPagar BuscaAnterior(int codigo)
-        {
-            var contaPagar = new ContaPagar();
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
-                                                    p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                                                    p.desconto AS pdesconto, p.valor_final AS pvalor_final  
-                                                    FROM conta_pagar AS c
-                                                    LEFT JOIN parcela_conta_pagar AS p 
-                                                    ON  c.idconta_pagar = p.idconta_pagar
-                                                    LEFT JOIN formapagamento f
-                                                    ON f.idformapagamento = p.idformapagamento
-                                                    WHERE c.idconta_pagar = (SELECT max(idconta_pagar) 
-                                                    FROM conta_pagar 
-                                                    WHERE idconta_pagar < @idconta_pagar)", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idconta_pagar", codigo);
-
-                using (var reader = Connect.Comando.ExecuteReader())
-                {
-                    contaPagar = LeDadosReader(reader);
-                }
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return contaPagar;
-        }
-
-
-        private ContaPagar LeDadosReader(IDataReader reader)
-        {
-
             ContaPagar contaPagar = null;
-            ParcelaContaPagar parcela = null;
-            FormaPagamento formapagamento = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                            p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            FROM conta_pagar AS c
+                            LEFT JOIN parcela_conta_pagar AS p 
+                            ON  c.idconta_pagar = p.idconta_pagar
+                            LEFT JOIN formapagamento f
+                            ON f.idformapagamento = p.idformapagamento
+                            WHERE c.idconta_pagar = (SELECT min(idconta_pagar) 
+                            FROM conta_pagar 
+                            WHERE idconta_pagar > @idconta_pagar)";
+
+                sql.addParam("@idconta_pagar", codigo);
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return null;
+                }
+                contaPagar = LeDadosReader(data);
+            }
+            return contaPagar;
+        }
+
+
+        public ContaPagar Anterior(int codigo)
+        {
+            ContaPagar contaPagar = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
+                            p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            FROM conta_pagar AS c
+                            LEFT JOIN parcela_conta_pagar AS p 
+                            ON  c.idconta_pagar = p.idconta_pagar
+                            LEFT JOIN formapagamento f
+                            ON f.idformapagamento = p.idformapagamento
+                            WHERE c.idconta_pagar = (SELECT max(idconta_pagar) 
+                            FROM conta_pagar 
+                            WHERE idconta_pagar < @idconta_pagar)";
+
+                sql.addParam("@idconta_pagar", codigo);
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return null;
+                }
+                contaPagar = LeDadosReader(data);
+            }
+            return contaPagar;
+        }
+
+
+        private ContaPagar LeDadosReader(List<Dictionary<string, object>> data)
+        {
+            if (data.Count == 0)
+            {
+                return null;
+            }
+            ContaPagar contaPagar = null;
             List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
 
-            if (reader.Read())
+            contaPagar = new ContaPagar
             {
+                ContaPagarID = (int)data[0]["idconta_pagar"],
+                DataCadastro = (DateTime)data[0]["data_cadastro"],
+                DataConta = (DateTime)data[0]["data_conta"],
+                ValorOriginal = (decimal)data[0]["valor_original"],
+                Multa = (decimal)data[0]["multa"],
+                Juros = (decimal)data[0]["juros"],
+                Acrescimo = (decimal)data[0]["acrescimo"],
+                Desconto = (decimal)data[0]["desconto"],
+                ValorFinal = (decimal)data[0]["valor_final"],
+                Situacao = (string)data[0]["situacao"]
+            };
+            contaPagar.Pessoa = new Pessoa();
+            contaPagar.Pessoa.PessoaID = (int)data[0]["idpessoa"];
 
-                contaPagar = new ContaPagar
-                {
-                    ContaPagarID = reader.GetInt32(reader.GetOrdinal("idconta_pagar")),
-                    DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                    DataConta = reader.GetDateTime(reader.GetOrdinal("data_conta")),
-                    ValorOriginal = reader.GetDecimal(reader.GetOrdinal("valor_original")),
-                    Multa = reader.GetDecimal(reader.GetOrdinal("multa")),
-                    Juros = reader.GetDecimal(reader.GetOrdinal("juros")),
-                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                    Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                    ValorFinal = reader.GetDecimal(reader.GetOrdinal("valor_final")),
-                    Situacao = reader.GetString(reader.GetOrdinal("situacao"))
-                };
-                contaPagar.Pessoa = new Pessoa();
-                contaPagar.Pessoa.PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa"));
-
-                if (!reader.IsDBNull(reader.GetOrdinal("idparcela_conta_pagar")))
-                {
-                    if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
-                    {
-                        formapagamento = new FormaPagamento
-                        {
-                            FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome"))
-                        };
-                    }
-
-                    parcela = new ParcelaContaPagar
-                    {
-                        ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                        DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                        DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                        Juros = reader.GetDecimal(reader.GetOrdinal("pjuros")),
-                        Acrescimo = reader.GetDecimal(reader.GetOrdinal("pacrescimo")),
-                        Desconto = reader.GetDecimal(reader.GetOrdinal("pdesconto")),
-                        Multa = reader.GetDecimal(reader.GetOrdinal("pmulta")),
-                        Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                        Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                        Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
-
-                    };
-
-                    if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
-                    listaparcelas.Add(parcela);
-                }
-            }
-
-            while (reader.Read())
+            foreach (var d in data)
             {
-                if (!reader.IsDBNull(reader.GetOrdinal("pformapagamento")))
+                ParcelaContaPagar parcela = null;
+                FormaPagamento formapagamento = null;
+
+                if (d["pformapagamento"] != null)
                 {
                     formapagamento = new FormaPagamento
                     {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("pformapagamento")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
+                        FormaPagamentoID = (int)d["pformapagamento"],
+                        Nome = (string)d["nome"]
                     };
-                }
-                else
-                {
-                    formapagamento = null;
                 }
 
                 parcela = new ParcelaContaPagar
                 {
-                    ParcelaContaPagarID = reader.GetInt32(reader.GetOrdinal("idparcela_conta_pagar")),
-                    DataQuitacao = reader.IsDBNull(reader.GetOrdinal("data_quitacao")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("data_quitacao")),
-                    DataVencimento = reader.GetDateTime(reader.GetOrdinal("data_vencimento")),
-                    Juros = reader.GetDecimal(reader.GetOrdinal("pjuros")),
-                    Acrescimo = reader.GetDecimal(reader.GetOrdinal("pacrescimo")),
-                    Desconto = reader.GetDecimal(reader.GetOrdinal("pdesconto")),
-                    Multa = reader.GetDecimal(reader.GetOrdinal("pmulta")),
-                    Sequencia = reader.GetInt32(reader.GetOrdinal("sequencia")),
-                    Valor = reader.GetDecimal(reader.GetOrdinal("valor")),
-                    Situacao = reader.GetString(reader.GetOrdinal("psituacao"))
-
+                    ParcelaContaPagarID = (int)d["idparcela_conta_pagar"],
+                    DataQuitacao = (DateTime?)d["data_quitacao"],
+                    DataVencimento = (DateTime)d["data_vencimento"],
+                    Juros = (decimal)d["pjuros"],
+                    Acrescimo = (decimal)d["pacrescimo"],
+                    Desconto = (decimal)d["pdesconto"],
+                    Multa = (decimal)d["pmulta"],
+                    Sequencia = (int)d["sequencia"],
+                    Valor = (decimal)d["valor"],
+                    Situacao = (string)d["psituacao"],
+                    FormaPagamento = formapagamento
                 };
-
-                if (formapagamento != null) { parcela.FormaPagamento = formapagamento; }
                 listaparcelas.Add(parcela);
             }
-
-            if (listaparcelas.Count > 0)
-            {
-                contaPagar.Parcelas = new List<ParcelaContaPagar>();
-                contaPagar.Parcelas = listaparcelas;
-            }
+            contaPagar.Parcelas = listaparcelas;
 
             return contaPagar;
         }
