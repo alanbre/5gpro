@@ -32,7 +32,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoGrupoUsuario.Text, out int codigo)) { tbCodigoGrupoUsuario.Clear(); }
             if (tbCodigoGrupoUsuario.Text.Length > 0)
             {
-                grupoUsuario = grupoUsuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodigoGrupoUsuario.Text));
+                grupoUsuario = grupoUsuarioDAO.BuscaByID(int.Parse(tbCodigoGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupoUsuario);
             }
             else

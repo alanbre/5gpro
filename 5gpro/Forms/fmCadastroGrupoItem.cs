@@ -299,7 +299,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                GrupoItem newgrupoitem = grupoitemDAO.BuscarProximo(tbCodigo.Text);
+                GrupoItem newgrupoitem = grupoitemDAO.Proximo(tbCodigo.Text);
                 if (newgrupoitem != null)
                 {
                     grupoitem = newgrupoitem;
@@ -314,7 +314,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoItem newgrupoitem = grupoitemDAO.BuscarProximo(tbCodigo.Text);
+                    GrupoItem newgrupoitem = grupoitemDAO.Proximo(tbCodigo.Text);
                     if (newgrupoitem != null)
                     {
                         grupoitem = newgrupoitem;
@@ -369,7 +369,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupoitem = grupoitemDAO.BuscarProximo(tbCodigo.Text);
+                        newgrupoitem = grupoitemDAO.Proximo(tbCodigo.Text);
                         if (newgrupoitem != null)
                         {
                             grupoitem = newgrupoitem;

@@ -21,7 +21,7 @@ namespace _5gpro.Forms
 
         public void BuscaGrupousuario()
         {
-            Listagrupousuario = grupousuarioDAO.BuscarGrupoUsuario(tbFiltroNomeGrupoUsuario.Text).ToList();
+            Listagrupousuario = grupousuarioDAO.Busca(tbFiltroNomeGrupoUsuario.Text).ToList();
 
             dgvGrupoUsuario.Rows.Clear();
             foreach (GrupoUsuario gu in Listagrupousuario)

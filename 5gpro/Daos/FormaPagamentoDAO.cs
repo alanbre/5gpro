@@ -1,10 +1,7 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace _5gpro.Daos
 {
@@ -13,7 +10,7 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public IEnumerable<FormaPagamento> BuscaTodos(string nome)
+        public IEnumerable<FormaPagamento> Busca(string nome)
         {
             List<FormaPagamento> formapagamentos = new List<FormaPagamento>();
             string conNome = nome.Length > 0 ? "AND f.nome LIKE @nome" : "";

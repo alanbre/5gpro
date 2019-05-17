@@ -26,7 +26,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
 
-            listagrupopessoa = grupoPessoaDAO.BuscaTodos(tbNomeGrupoPessoa.Text).ToList();
+            listagrupopessoa = grupoPessoaDAO.Busca(tbNomeGrupoPessoa.Text).ToList();
 
             foreach (GrupoPessoa g in listagrupopessoa)
             {

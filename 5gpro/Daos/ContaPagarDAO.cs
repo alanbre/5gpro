@@ -66,9 +66,9 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-        public ContaPagar BuscaById(int codigo)
+        public ContaPagar BuscaByID(int codigo)
         {
-            ContaPagar contaPagar = null;
+            var contaPagar = new ContaPagar();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,

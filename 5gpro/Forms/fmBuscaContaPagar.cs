@@ -43,7 +43,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvContas.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvContas.Rows[selectedRowIndex];
-            contaPagarSelecionada = contaPagarDAO.BuscaById(Convert.ToInt32(selectedRow.Cells[0].Value));
+            contaPagarSelecionada = contaPagarDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
 
