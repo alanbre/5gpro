@@ -114,7 +114,7 @@ namespace _5gpro.Daos
                                                     conta_pagar cp 
                                                     LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
                                                     LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
-                                                    WHERE 1 = 1"
+                                                    WHERE 1 = 1 "
                                              + wherePessoa + " "
                                              + whereValorFinal + " "
                                              + whereDatCadastro + " "
