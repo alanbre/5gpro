@@ -1,10 +1,8 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
-using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace _5gpro.Daos
 {
@@ -68,8 +66,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
-
         public ContaPagar BuscaById(int codigo)
         {
             ContaPagar contaPagar = null;
@@ -124,18 +120,18 @@ namespace _5gpro.Daos
 
                 var data = sql.selectQuery();
 
-                foreach(var d in data)
+                foreach (var d in data)
                 {
                     Pessoa pessoa = null;
                     pessoa = new Pessoa
                     {
-                        PessoaID = (int)d["idpessoa"],
+                        PessoaID = Convert.ToInt32(d["idpessoa"]),
                         Nome = (string)d["nome"]
                     };
 
                     var contaPagar = new ContaPagar
                     {
-                        ContaPagarID = (int)data[0]["idconta_pagar"],
+                        ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]),
                         DataCadastro = (DateTime)data[0]["data_cadastro"],
                         DataConta = (DateTime)data[0]["data_conta"],
                         ValorOriginal = (decimal)data[0]["valor_original"],
@@ -167,7 +163,7 @@ namespace _5gpro.Daos
                 var data = sql.selectQueryForSingleRecord();
                 if (data != null)
                 {
-                    proximoid = (int)data["proximoid"];
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
             }
             return proximoid;
@@ -188,7 +184,8 @@ namespace _5gpro.Daos
                             ON f.idformapagamento = p.idformapagamento
                             WHERE c.idconta_pagar = (SELECT min(idconta_pagar) 
                             FROM conta_pagar 
-                            WHERE idconta_pagar > @idconta_pagar)";
+                            WHERE idconta_pagar > @idconta_pagar)
+                            LIMIT 1";
 
                 sql.addParam("@idconta_pagar", codigo);
                 var data = sql.selectQuery();
@@ -242,7 +239,7 @@ namespace _5gpro.Daos
 
             contaPagar = new ContaPagar
             {
-                ContaPagarID = (int)data[0]["idconta_pagar"],
+                ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]),
                 DataCadastro = (DateTime)data[0]["data_cadastro"],
                 DataConta = (DateTime)data[0]["data_conta"],
                 ValorOriginal = (decimal)data[0]["valor_original"],
@@ -254,36 +251,37 @@ namespace _5gpro.Daos
                 Situacao = (string)data[0]["situacao"]
             };
             contaPagar.Pessoa = new Pessoa();
-            contaPagar.Pessoa.PessoaID = (int)data[0]["idpessoa"];
+            contaPagar.Pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
 
             foreach (var d in data)
             {
-                ParcelaContaPagar parcela = null;
-                FormaPagamento formapagamento = null;
+                ParcelaContaPagar parcela = new ParcelaContaPagar();
+                FormaPagamento formapagamento = new FormaPagamento();
 
                 if (d["pformapagamento"] != null)
                 {
-                    formapagamento = new FormaPagamento
-                    {
-                        FormaPagamentoID = (int)d["pformapagamento"],
-                        Nome = (string)d["nome"]
-                    };
+                    formapagamento.FormaPagamentoID = Convert.ToInt32(d["pformapagamento"]);
+                    formapagamento.Nome = (string)d["nome"];
+                }
+                else
+                {
+                    formapagamento = null;
                 }
 
-                parcela = new ParcelaContaPagar
-                {
-                    ParcelaContaPagarID = (int)d["idparcela_conta_pagar"],
-                    DataQuitacao = (DateTime?)d["data_quitacao"],
-                    DataVencimento = (DateTime)d["data_vencimento"],
-                    Juros = (decimal)d["pjuros"],
-                    Acrescimo = (decimal)d["pacrescimo"],
-                    Desconto = (decimal)d["pdesconto"],
-                    Multa = (decimal)d["pmulta"],
-                    Sequencia = (int)d["sequencia"],
-                    Valor = (decimal)d["valor"],
-                    Situacao = (string)d["psituacao"],
-                    FormaPagamento = formapagamento
-                };
+
+
+                parcela.ParcelaContaPagarID = Convert.ToInt32(d["idparcela_conta_pagar"]);
+                parcela.DataQuitacao = (DateTime?)d["data_quitacao"];
+                parcela.DataVencimento = (DateTime)d["data_vencimento"];
+                parcela.Juros = (decimal)d["pjuros"];
+                parcela.Acrescimo = (decimal)d["pacrescimo"];
+                parcela.Desconto = (decimal)d["pdesconto"];
+                parcela.Multa = (decimal)d["pmulta"];
+                parcela.Sequencia = Convert.ToInt32(d["sequencia"]);
+                parcela.Valor = (decimal)d["valor"];
+                parcela.Situacao = (string)d["psituacao"];
+                parcela.FormaPagamento = formapagamento;
+
                 listaparcelas.Add(parcela);
             }
             contaPagar.Parcelas = listaparcelas;
