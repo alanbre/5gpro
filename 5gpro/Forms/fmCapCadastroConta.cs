@@ -204,7 +204,7 @@ namespace _5gpro.Forms
 
                 if (contaPagar != null)
                 {
-                    contaPagar = contaPagarDAO.BuscaById(contaPagar.ContaPagarID);
+                    contaPagar = contaPagarDAO.BuscaByID(contaPagar.ContaPagarID);
                     contaPagar.Pessoa = pessoaDAO.BuscaById(contaPagar.Pessoa.PessoaID);
                     PreencheCampos(contaPagar);
                     if (editando)
@@ -300,7 +300,7 @@ namespace _5gpro.Forms
                 return;
             }
 
-            var newcontaPagar = contaPagarDAO.BuscaById(codigo);
+            var newcontaPagar = contaPagarDAO.BuscaByID(codigo);
             if (newcontaPagar != null)
             {
                 newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);

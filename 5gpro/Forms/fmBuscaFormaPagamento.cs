@@ -29,7 +29,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
 
-            listaformapagamento = formapagamentoDAO.BuscaTodos(tbNomeFormaPagamento.Text).ToList();
+            listaformapagamento = formapagamentoDAO.Busca(tbNomeFormaPagamento.Text).ToList();
 
             foreach (FormaPagamento f in listaformapagamento)
             {

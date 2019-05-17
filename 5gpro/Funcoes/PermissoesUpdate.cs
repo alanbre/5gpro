@@ -24,11 +24,11 @@ namespace _5gpro.Funcoes
             idpermissoesNpraN = permissaoDAO.BuscarIDPermissoesNpraN();
 
             //Busca uma lista com todo os ID's dos grupos de usuário na tabela N para N
-            idgrupousuariosNpraN = grupousuarioDAO.BuscarIDGrupoUsuariosNpraN();
+            idgrupousuariosNpraN = grupousuarioDAO.BuscarIDNpraN();
 
             //Struct com todas as permissões e Lista com todos os grupos
             listapermissoes = permissaoDAO.BuscaTodasPermissoes();
-            listagrupos = grupousuarioDAO.BuscarTodosGrupoUsuarios();
+            listagrupos = grupousuarioDAO.BuscaTodos();
           
 
             //Percorre uma lista com todas as permissões e verifica se o ID da permissão

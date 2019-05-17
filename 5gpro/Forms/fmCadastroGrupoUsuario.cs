@@ -90,7 +90,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodGrupoUsuario.Text.Length > 0)
                 {
-                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
+                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscaByID(int.Parse(tbCodGrupoUsuario.Text));
 
                     if (newgrupousuario != null)
                     {
@@ -125,7 +125,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodGrupoUsuario.Text.Length > 0)
                     {
-                        GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
+                        GrupoUsuario newgrupousuario = grupousuarioDAO.BuscaByID(int.Parse(tbCodGrupoUsuario.Text));
                         if (newgrupousuario != null)
                         {
                             grupousuario = newgrupousuario;
@@ -354,7 +354,7 @@ namespace _5gpro.Forms
                 {
                     if (grupousuario != null)
                     {
-                        grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(grupousuario.GrupoUsuarioID);
+                        grupousuario = grupousuarioDAO.BuscaByID(grupousuario.GrupoUsuarioID);
                         PreencheCampos(grupousuario);
                         Editando(false);
                     }
@@ -367,7 +367,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(grupousuario.GrupoUsuarioID);
+                grupousuario = grupousuarioDAO.BuscaByID(grupousuario.GrupoUsuarioID);
                 PreencheCampos(grupousuario);
                 Editando(false);
             }
@@ -453,7 +453,7 @@ namespace _5gpro.Forms
                 if (ok)
                 {
 
-                    int resultado = grupousuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario, listapermissoes);
+                    int resultado = grupousuarioDAO.SalvarOuAtualizar(grupousuario, listapermissoes);
 
                     validacao.despintarCampos(controls);
                     //resultado 0 = nada foi inserido(houve algum erro)
@@ -492,7 +492,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
+                GrupoUsuario newgrupousuario = grupousuarioDAO.Proximo(tbCodGrupoUsuario.Text);
                 if (newgrupousuario != null)
                 {
                     grupousuario = newgrupousuario;
@@ -507,7 +507,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
+                    GrupoUsuario newgrupousuario = grupousuarioDAO.Proximo(tbCodGrupoUsuario.Text);
                     if (newgrupousuario != null)
                     {
                         grupousuario = newgrupousuario;
@@ -516,7 +516,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
+                        newgrupousuario = grupousuarioDAO.Anterior(tbCodGrupoUsuario.Text);
                         if (newgrupousuario != null)
                         {
                             grupousuario = newgrupousuario;
@@ -541,7 +541,7 @@ namespace _5gpro.Forms
                 //la do inicio do arquivo.
 
                 validacao.despintarCampos(controls);
-                GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
+                GrupoUsuario newgrupousuario = grupousuarioDAO.Anterior(tbCodGrupoUsuario.Text);
                 if (newgrupousuario != null)
                 {
                     grupousuario = newgrupousuario;
@@ -556,7 +556,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
+                    GrupoUsuario newgrupousuario = grupousuarioDAO.Anterior(tbCodGrupoUsuario.Text);
                     if (newgrupousuario != null)
                     {
                         grupousuario = newgrupousuario;
@@ -565,7 +565,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupousuario = grupousuarioDAO.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
+                        newgrupousuario = grupousuarioDAO.Proximo(tbCodGrupoUsuario.Text);
                         if (newgrupousuario != null)
                         {
                             grupousuario = newgrupousuario;

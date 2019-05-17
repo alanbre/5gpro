@@ -297,7 +297,7 @@ namespace _5gpro.Forms
 
                 validacao.despintarCampos(controls);
 
-                GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarProximo(tbCodigo.Text);
+                GrupoPessoa newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                 if (newgrupopessoa != null)
                 {
                     grupopessoa = newgrupopessoa;
@@ -312,7 +312,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarProximo(tbCodigo.Text);
+                    GrupoPessoa newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                     if (newgrupopessoa != null)
                     {
                         grupopessoa = newgrupopessoa;
@@ -321,7 +321,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupopessoa = grupopessoaDAO.BuscarAnterior(tbCodigo.Text);
+                        newgrupopessoa = grupopessoaDAO.Anterior(tbCodigo.Text);
                         if (newgrupopessoa != null)
                         {
                             grupopessoa = newgrupopessoa;
@@ -343,7 +343,7 @@ namespace _5gpro.Forms
             {
 
                 validacao.despintarCampos(controls);
-                GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarAnterior(tbCodigo.Text);
+                GrupoPessoa newgrupopessoa = grupopessoaDAO.Anterior(tbCodigo.Text);
                 if (newgrupopessoa != null)
                 {
                     grupopessoa = newgrupopessoa;
@@ -358,7 +358,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarAnterior(tbCodigo.Text);
+                    GrupoPessoa newgrupopessoa = grupopessoaDAO.Anterior(tbCodigo.Text);
                     if (newgrupopessoa != null)
                     {
                         grupopessoa = newgrupopessoa;
@@ -367,7 +367,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupopessoa = grupopessoaDAO.BuscarProximo(tbCodigo.Text);
+                        newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                         if (newgrupopessoa != null)
                         {
                             grupopessoa = newgrupopessoa;
