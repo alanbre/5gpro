@@ -123,11 +123,11 @@ namespace MySQLConnection
 
         /// <summary>This method allows you to run a query that expects a single value back (i.e. one column from one record)</summary>
         /// <returns>The string value result of the query, or <c>null</c> if there is no result</returns>
-        public string selectQueryForSingleValue()
+        public object selectQueryForSingleValue()
         {
             CheckIfInstanceIsReadyForQuery();
 
-            string single_value = null;
+            object single_value = null;
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
@@ -154,7 +154,7 @@ namespace MySQLConnection
                 }
                 else
                 {
-                    single_value = Convert.ToString(dbValue);
+                    single_value = dbValue;
                 }
             }
 
@@ -163,12 +163,12 @@ namespace MySQLConnection
 
         /// <summary>This method allows you to run a query that expects any number of columns, but one single record (e.g. <c>SELECT * FROM table_name LIMIT 1</c>)</summary>
         /// <returns>A <c>Dictionary&lt;string, string&gt;</c> representation of the record resulting from the query, or <c>null</c> if there is no result</returns>
-        public Dictionary<string, string> selectQueryForSingleRecord()
+        public Dictionary<string, object> selectQueryForSingleRecord()
         {
             CheckIfInstanceIsReadyForQuery();
 
             // we'll return null if there are no results, rather than an empty Dictionary
-            Dictionary<string, string> record = null;
+            Dictionary<string, object> record = null;
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
@@ -184,7 +184,7 @@ namespace MySQLConnection
                     {
                         if (reader.HasRows)
                         {
-                            record = new Dictionary<string, string>();
+                            record = new Dictionary<string, object>();
 
                             // read the first row only
                             reader.Read();
@@ -202,7 +202,7 @@ namespace MySQLConnection
                                 else
                                 {
                                     if (!record.ContainsKey(reader.GetName(i)))
-                                        record.Add(reader.GetName(i), reader[i].ToString());
+                                        record.Add(reader.GetName(i), reader[i]);
                                 }
                             }
 
@@ -222,13 +222,13 @@ namespace MySQLConnection
 
         /// <summary>This method allows you to run a query that expects any number of records, but one single column (e.g. <c>SELECT field FROM table_name</c>)</summary>
         /// <returns>A <c>List&lt;string&gt;</c> listing the values returned from the query, or an empty <c>List&lt;string&gt;</c> if there is no result</returns>
-        public List<string> selectQueryForSingleColumn()
+        public List<object> selectQueryForSingleColumn()
         {
 
             CheckIfInstanceIsReadyForQuery();
 
             // if the result set is empty, we'll return an empty list
-            List<string> allRecords = new List<string>();
+            List<object> allRecords = new List<object>();
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
@@ -254,7 +254,7 @@ namespace MySQLConnection
                                 }
                                 else
                                 {
-                                    allRecords.Add(reader[0].ToString());
+                                    allRecords.Add(reader[0]);
                                 }
                             }
 
@@ -272,11 +272,11 @@ namespace MySQLConnection
 
         /// <summary>This method allows you to run a query that expects any number of columns, and any number of records (e.g. <c>SELECT * FROM table_name</c>)</summary>
         /// <returns>A <c>List&lt;Dictionary&lt;string, string&gt;&gt;</c> representation of the records resulting from the query, or an empty <c>List&lt;Dictionary&lt;string, string&gt;&gt;</c> if there is no result</returns>
-        public List<Dictionary<string, string>> selectQuery()
+        public List<Dictionary<string, object>> selectQuery()
         {
             CheckIfInstanceIsReadyForQuery();
 
-            List<Dictionary<string, string>> allRecords = new List<Dictionary<string, string>>();
+            List<Dictionary<string, object>> allRecords = new List<Dictionary<string, object>>();
 
             using (MySqlCommand command = new MySqlCommand(this.Query, this._connection))
             {
@@ -291,7 +291,7 @@ namespace MySQLConnection
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
 
-                        Dictionary<string, string> record;
+                        Dictionary<string, object> record;
 
                         if (reader.HasRows)
                         {
@@ -299,7 +299,7 @@ namespace MySQLConnection
                             while (reader.Read())
                             {
                                 // create a new dictionary for the record, adding each column and value
-                                record = new Dictionary<string, string>();
+                                record = new Dictionary<string, object>();
 
                                 for (int i = 0; i <= (reader.FieldCount - 1); i++)
                                 {
@@ -312,7 +312,7 @@ namespace MySQLConnection
                                     else
                                     {
                                         if (!record.ContainsKey(reader.GetName(i)))
-                                            record.Add(reader.GetName(i), reader[i].ToString());
+                                            record.Add(reader.GetName(i), reader[i]);
                                     }
                                 }
 
