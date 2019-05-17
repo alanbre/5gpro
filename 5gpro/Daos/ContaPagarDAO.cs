@@ -153,19 +153,7 @@ namespace _5gpro.Daos
                         ValorFinal = (decimal)d["valor_final"],
                         Situacao = (string)d["situacao"]
                     };
-                    //var contaPagar = new ContaPagar
-                    //{
-                    //    ContaPagarID = (int)data[0]["idconta_pagar"],
-                    //    DataCadastro = (DateTime)data[0]["data_cadastro"],
-                    //    DataConta = (DateTime)data[0]["data_conta"],
-                    //    ValorOriginal = (decimal)data[0]["valor_original"],
-                    //    Multa = (decimal)data[0]["multa"],
-                    //    Juros = (decimal)data[0]["juros"],
-                    //    Acrescimo = (decimal)data[0]["acrescimo"],
-                    //    Desconto = (decimal)data[0]["desconto"],
-                    //    ValorFinal = (decimal)data[0]["valor_final"],
-                    //    Situacao = (string)data[0]["situacao"]
-                    //};
+
                     contaPagar.Pessoa = pessoa;
                     contaPagars.Add(contaPagar);
                 }
@@ -254,6 +242,7 @@ namespace _5gpro.Daos
 
         private ContaPagar LeDadosReader(List<Dictionary<string, object>> data)
         {
+
             if (data.Count == 0)
             {
                 return null;
@@ -274,6 +263,8 @@ namespace _5gpro.Daos
                 ValorFinal = (decimal)data[0]["valor_final"],
                 Situacao = (string)data[0]["situacao"]
             };
+
+
             contaPagar.Pessoa = new Pessoa();
             contaPagar.Pessoa.PessoaID = (int)data[0]["idpessoa"];
 
@@ -302,9 +293,9 @@ namespace _5gpro.Daos
                     Multa = (decimal)d["pmulta"],
                     Sequencia = (int)d["sequencia"],
                     Valor = (decimal)d["valor"],
-                    Situacao = (string)d["psituacao"],
-                    FormaPagamento = formapagamento
+                    Situacao = (string)d["psituacao"]
                 };
+                parcela.FormaPagamento = formapagamento;
                 listaparcelas.Add(parcela);
             }
             contaPagar.Parcelas = listaparcelas;
