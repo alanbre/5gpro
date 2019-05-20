@@ -90,8 +90,6 @@ namespace _5gpro.Daos
             }
             return contaPagar;
         }
-
-
         public IEnumerable<ContaPagar> Busca(fmBuscaContaPagar.Filtros f)
         {
             var contaPagars = new List<ContaPagar>();
@@ -152,8 +150,6 @@ namespace _5gpro.Daos
             }
             return contaPagars;
         }
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -173,7 +169,6 @@ namespace _5gpro.Daos
             }
             return proximoid;
         }
-
         public ContaPagar Proximo(int codigo)
         {
             ContaPagar contaPagar = null;
@@ -202,8 +197,6 @@ namespace _5gpro.Daos
             }
             return contaPagar;
         }
-
-
         public ContaPagar Anterior(int codigo)
         {
             ContaPagar contaPagar = null;
@@ -231,8 +224,6 @@ namespace _5gpro.Daos
             }
             return contaPagar;
         }
-
-
         private ContaPagar LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)
