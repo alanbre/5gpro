@@ -25,7 +25,7 @@ namespace _5gpro.Daos
 
                 usuario = new Usuario
                 {
-                    UsuarioID = (int) data["idusuario"]
+                    UsuarioID = Convert.ToInt32( data["idusuario"])
                 };
 
                 usuarioLogado = new Logado
@@ -59,12 +59,12 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = (int) data["idgrupousuario"]
+                    GrupoUsuarioID = Convert.ToInt32( data["idgrupousuario"])
                 };
 
                 usuario = new Usuario
                 {
-                    UsuarioID = (int) data["idusuario"],
+                    UsuarioID = Convert.ToInt32( data["idusuario"]),
                     Grupousuario = grupousuario
                 };
 

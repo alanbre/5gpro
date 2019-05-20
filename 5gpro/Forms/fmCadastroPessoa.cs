@@ -2,7 +2,6 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 //CÓDIGO TELA CADASTRO DE PESSOA : 010100
@@ -50,126 +49,45 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(pessoa);
+                Recarrega();
+                return;
             }
 
             if (e.KeyCode == Keys.F1)
             {
                 if (!editando)
-                    NovoCadastro();
+                    Novo();
+                return;
             }
 
             if (e.KeyCode == Keys.F2)
             {
-                SalvaCadastro();
+                Salva();
+                return;
             }
 
             EnterTab(this.ActiveControl, e);
         }
 
-
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
-
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-
-            if (!editando || Nivel == 1)
-            {
-                AbreTelaBuscaPessoa();
-            }
-        }
-
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
-
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-            RecarregaDados(pessoa);
-        }
-
-        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
-
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
         private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
         {
 
         }
-
-
-        //EVENTOS DE KEY PRESS
-        private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void TbNome_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbFantasia_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbRua_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbNumero_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbBairro_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbComplemento_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbCodCidade_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbEmail_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
+        private void TbNome_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbFantasia_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbRua_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbNumero_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbBairro_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbComplemento_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
+        private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
+        private void TbEmail_TextChanged(object sender, EventArgs e) => Editando(true);
         private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CPF
@@ -177,7 +95,6 @@ namespace _5gpro.Forms
             mtbCpfCnpj.Mask = "###.###.###-##";
             if (!ignoraCheckEvent) { Editando(true); }
         }
-
         private void RbPessoaJuridica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CNPJ
@@ -185,53 +102,18 @@ namespace _5gpro.Forms
             mtbCpfCnpj.Mask = "##.###.###/####-##";
             if (!ignoraCheckEvent) { Editando(true); }
         }
-
-        private void RbAtivo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void RbInativo_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-
-        //EVENTOS DE LEAVE
-        private void TbCodigo_Leave(object sender, EventArgs e)
-        {
-            int codigo = 0;
-            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
-            if (pessoa?.PessoaID == codigo)
-                return;
-
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                    return;
-            }
-
-            CarregaDados();
-        }
-
-
-        //EVENTOS DE KEY UP
+        private void RbAtivo_CheckedChanged(object sender, EventArgs e) => Editando(true);
+        private void RbInativo_CheckedChanged(object sender, EventArgs e) => Editando(true);
+        private void TbCodigo_Leave(object sender, EventArgs e) =>  CarregaDados();
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
             {
                 e.Handled = true;
-                AbreTelaBuscaPessoa();
+                Busca();
             }
         }
-
-        private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
+        private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e) => Editando(true);
         private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (editando)
@@ -239,116 +121,70 @@ namespace _5gpro.Forms
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-
-                }
-                else
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
                     e.Cancel = true;
                 }
             }
         }
-
-
-        //PADRÕES CRIADAS
-        private void NovoCadastro()
+        private void BuscaGrupoPessoa_Leave(object sender, EventArgs e)
         {
-            if (Nivel > 1 || CodGrupoUsuario == "999")
+            if (!ignoraCheckEvent) { Editando(true); }
+
+            if (buscaGrupoPessoa.grupoPessoa != null)
             {
-                if (editando)
-                {
-                    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                    "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-                        LimpaCampos(false);
-                        tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
-                        pessoa = null;
-                        Editando(false);
-                        tbNome.Focus();
-                        Editando(true);
-                    }
-                }
-                else
-                {
-                    LimpaCampos(false);
-                    tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
-                    pessoa = null;
-                    Editando(false);
-                    tbNome.Focus();
-                    Editando(true);
-                }
-            }
-        }
-
-        private void AbreTelaBuscaPessoa()
-        {
-            var buscaPessoa = new fmBuscaPessoa();
-            buscaPessoa.ShowDialog();
-            if (buscaPessoa.pessoaSelecionada != null)
-            {
-                pessoa = buscaPessoa.pessoaSelecionada;
-                PreencheCampos(pessoa);
-            }
-        }
-
-        private void SalvaCadastro()
-        {
-            bool ok = false;
-
-            if (tbCodigo.Text.Length > 0)
-            {
-                //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
-                if (editando)
-                {
-                    pessoa = new Pessoa
-                    {
-                        PessoaID = int.Parse(tbCodigo.Text),
-                        Nome = tbNome.Text,
-                        Fantasia = tbFantasia.Text,
-                        TipoPessoa = rbPessoaFisica.Checked ? "F" : "J",
-                        Rua = tbRua.Text,
-                        Numero = tbNumero.Text,
-                        Bairro = tbBairro.Text,
-                        Complemento = tbComplemento.Text,
-                        Cidade = buscaCidade.cidade,
-                        CpfCnpj = mtbCpfCnpj.TextNoMask(),
-                        Telefone = mtbTelefone.TextNoMask(),
-                        Email = tbEmail.Text
-                    };
-
-                    string atuacaostring = "";
-                    foreach (string s in cblAtuacao.CheckedItems)
-                    {
-                        switch (s)
-                        {
-                            case "Cliente":
-                                atuacaostring = atuacaostring + "C";
-                                break;
-                            case "Fornecedor":
-                                atuacaostring = atuacaostring + "F";
-                                break;
-                        }
-                    }
-                    pessoa.Atuacao = atuacaostring;
-
-                    if (rbAtivo.Checked)
-                        pessoa.Situacao = "A";
-                    else
-                        pessoa.Situacao = "I";
-
-                    pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
-
-                    ControlCollection controls = (ControlCollection)this.Controls;
-
-                    ok = validacao.ValidarEntidade(pessoa, controls);
-
-                    if (ok) { validacao.despintarCampos(controls); }
-                }
+                buscaSubGrupoPessoa.Limpa();
+                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
             }
             else
+            {
+                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+                buscaSubGrupoPessoa.Limpa();
+                buscaSubGrupoPessoa.EscolhaOGrupo();
+            }
+        }
+
+
+        private void Novo()
+        {
+            if (editando)
+            {
+                return;
+            }
+
+            if (Nivel > 1 || CodGrupoUsuario == "999")
+            {
+                ignoraCheckEvent = true;
+                LimpaCampos(false);
+                tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
+                pessoa = null;
+                tbNome.Focus();
+                ignoraCheckEvent = false;
+                Editando(true);
+            }
+        }
+        private void Busca()
+        {
+            if (!editando || Nivel == 1)
+            {
+                var buscaPessoa = new fmBuscaPessoa();
+                buscaPessoa.ShowDialog();
+                if (buscaPessoa.pessoaSelecionada != null)
+                {
+                    pessoa = buscaPessoa.pessoaSelecionada;
+                    PreencheCampos(pessoa);
+                }
+            }
+        }
+        private void Salva()
+        {
+            if (!editando)
+            {
+                return;
+            }
+            var ok = false;
+
+            if (tbCodigo.Text.Length <= 0)
             {
                 if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
                 "Aviso",
@@ -359,6 +195,52 @@ namespace _5gpro.Forms
                 }
                 ok = false;
             }
+
+            pessoa = new Pessoa();
+            pessoa.PessoaID = int.Parse(tbCodigo.Text);
+            pessoa.Nome = tbNome.Text;
+            pessoa.Fantasia = tbFantasia.Text;
+            pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+            pessoa.Rua = tbRua.Text;
+            pessoa.Numero = tbNumero.Text;
+            pessoa.Bairro = tbBairro.Text;
+            pessoa.Complemento = tbComplemento.Text;
+            pessoa.Cidade = buscaCidade.cidade;
+            pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+            pessoa.Telefone = mtbTelefone.TextNoMask();
+            pessoa.Email = tbEmail.Text;
+
+
+            var atuacaostring = "";
+            foreach (var s in cblAtuacao.CheckedItems)
+            {
+                switch (s)
+                {
+                    case "Cliente":
+                        atuacaostring += "C";
+                        break;
+                    case "Fornecedor":
+                        atuacaostring += "F";
+                        break;
+                }
+            }
+            pessoa.Atuacao = atuacaostring;
+
+            if (rbAtivo.Checked)
+                pessoa.Situacao = "A";
+            else
+                pessoa.Situacao = "I";
+
+            pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
+
+            var controls = (ControlCollection)this.Controls;
+
+            ok = validacao.ValidarEntidade(pessoa, controls);
+
+            if (ok) { validacao.despintarCampos(controls); }
+
+
+
             if (ok)
             {
                 int resultado = pessoaDAO.SalvaOuAtualiza(pessoa);
@@ -377,185 +259,157 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
+                    return;
                 }
                 else if (resultado == 2)
                 {
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
+                    return;
                 }
             }
-
         }
-
-        private void RecarregaDados(Pessoa pessoa)
+        private void Recarrega()
         {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (pessoa != null)
-                    {
-                        pessoa = pessoaDAO.BuscaById(pessoa.PessoaID);
-                        
+                    return;
+                }
+            }
 
-                        PreencheCampos(pessoa);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
+            if (pessoa != null)
+            {
+                pessoa = pessoaDAO.BuscaById(pessoa.PessoaID);
+                PreencheCampos(pessoa);
+                if (editando)
+                {
+                    Editando(false);
                 }
             }
             else
             {
-                if (pessoa != null)
-                {
-                    pessoa = pessoaDAO.BuscaById(pessoa.PessoaID);
-                    PreencheCampos(pessoa);
-                }
-                else
-                {
-                    LimpaCampos(true);
-                }
-                Editando(false);
+                ignoraCheckEvent = true;
+                LimpaCampos(true);
+                ignoraCheckEvent = false;
             }
-
         }
-
-        private void ProximoCadastro()
+        private void Proximo()
         {
-            //Busca a pessoa com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodigo.Text.Length > 0)
+            if (tbCodigo.Text.Length <= 0)
             {
-                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-                //la do inicio do arquivo.
-
-                validacao.despintarCampos(controls);
-
-                Pessoa newpessoa = pessoaDAO.Proximo(tbCodigo.Text);
-                if (newpessoa != null)
-                {
-                    pessoa = newpessoa;
-                    PreencheCampos(pessoa);
-                }
+                return;
             }
-            else if (editando && tbCodigo.Text.Length > 0)
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaDAO.Proximo(tbCodigo.Text);
-                    if (newpessoa != null)
-                    {
-                        pessoa = newpessoa;
-                        PreencheCampos(pessoa);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newpessoa = pessoaDAO.Anterior(tbCodigo.Text);
-                        if (newpessoa != null)
-                        {
-                            pessoa = newpessoa;
-                            PreencheCampos(pessoa);
-                            Editando(false);
-                        }
-                    }
-                }
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
             }
-        }
 
-        private void CadastroAnterior()
-        {
-            //Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
+            validacao.despintarCampos(controls);
 
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodigo.Text.Length > 0)
+            var newpessoa = pessoaDAO.Proximo(int.Parse(tbCodigo.Text));
+            if (newpessoa != null)
             {
-                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-                //la do inicio do arquivo.
-
-                validacao.despintarCampos(controls);
-                Pessoa newpessoa = pessoaDAO.Anterior(tbCodigo.Text);
-                if (newpessoa != null)
+                pessoa = newpessoa;
+                PreencheCampos(pessoa);
+                if (editando)
                 {
-                    pessoa = newpessoa;
-                    PreencheCampos(pessoa);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    validacao.despintarCampos(controls);
-                    Pessoa newpessoa = pessoaDAO.Anterior(tbCodigo.Text);
-                    if (newpessoa != null)
-                    {
-                        pessoa = newpessoa;
-                        PreencheCampos(pessoa);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newpessoa = pessoaDAO.Proximo(tbCodigo.Text);
-                        if (newpessoa != null)
-                        {
-                            pessoa = newpessoa;
-                            PreencheCampos(pessoa);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void CarregaDados()
-        {
-            if (tbCodigo.Text.Length > 0)
-            {
-                var newpessoa = pessoaDAO.BuscaById(int.Parse(tbCodigo.Text));
-                if (newpessoa != null)
-                {
-                    pessoa = newpessoa;
-                    PreencheCampos(pessoa);
                     Editando(false);
                 }
-                else
+            }
+        }
+        private void Anterior()
+        {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            validacao.despintarCampos(controls);
+
+            var newpessoa = pessoaDAO.Anterior(int.Parse(tbCodigo.Text));
+            if (newpessoa != null)
+            {
+                pessoa = newpessoa;
+                PreencheCampos(pessoa);
+                if (editando)
                 {
-                    Editando(true);
-                    LimpaCampos(false);
+                    Editando(false);
                 }
             }
-            else if (tbCodigo.Text.Length == 0)
+        }
+        private void CarregaDados()
+        {
+            int codigo = 0;
+            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
+            if (pessoa?.PessoaID == codigo)
+                return;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            if (tbCodigo.Text.Length == 0)
             {
                 LimpaCampos(true);
                 Editando(false);
+                return;
+            }
+
+
+
+            var newpessoa = pessoaDAO.BuscaById(int.Parse(tbCodigo.Text));
+            if (newpessoa != null)
+            {
+                pessoa = newpessoa;
+                PreencheCampos(pessoa);
+                Editando(false);
+            }
+            else
+            {
+                Editando(true);
+                LimpaCampos(false);
             }
         }
-
         private void Editando(bool edit)
         {
-            editando = edit;
-            menuVertical.Editando(edit, Nivel, CodGrupoUsuario, locked);
+            if (!ignoraCheckEvent)
+            {
+                editando = edit;
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario, locked);
+            }
         }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -564,7 +418,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
         private void LimpaCampos(bool limpaCodigo)
         {
             if (limpaCodigo) { tbCodigo.Clear(); }
@@ -621,7 +474,6 @@ namespace _5gpro.Forms
                 buscaSubGrupoPessoa.EscolhaOGrupo(false);
             }
         }
-
         private void PreencheCampos(Pessoa pessoa)
         {
             ignoraCheckEvent = true;

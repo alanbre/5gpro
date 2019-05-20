@@ -97,7 +97,7 @@
             this.gbSituacao.Location = new System.Drawing.Point(429, 6);
             this.gbSituacao.Name = "gbSituacao";
             this.gbSituacao.Size = new System.Drawing.Size(118, 35);
-            this.gbSituacao.TabIndex = 10;
+            this.gbSituacao.TabIndex = 8;
             this.gbSituacao.TabStop = false;
             this.gbSituacao.Text = "Situação";
             // 
@@ -130,16 +130,15 @@
             this.buscaGrupoPessoa.Location = new System.Drawing.Point(10, 134);
             this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
             this.buscaGrupoPessoa.Size = new System.Drawing.Size(465, 39);
-            this.buscaGrupoPessoa.TabIndex = 9;
-            this.buscaGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaGrupoPessoa.text_changedEventHandler(this.BuscaGrupoPessoa_Text_Changed);
-            this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave_1);
+            this.buscaGrupoPessoa.TabIndex = 6;
+            this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave);
             // 
             // buscaSubGrupoPessoa
             // 
             this.buscaSubGrupoPessoa.Location = new System.Drawing.Point(10, 179);
             this.buscaSubGrupoPessoa.Name = "buscaSubGrupoPessoa";
             this.buscaSubGrupoPessoa.Size = new System.Drawing.Size(442, 39);
-            this.buscaSubGrupoPessoa.TabIndex = 8;
+            this.buscaSubGrupoPessoa.TabIndex = 7;
             // 
             // gbAtuacao
             // 
@@ -147,7 +146,7 @@
             this.gbAtuacao.Location = new System.Drawing.Point(553, 6);
             this.gbAtuacao.Name = "gbAtuacao";
             this.gbAtuacao.Size = new System.Drawing.Size(135, 121);
-            this.gbAtuacao.TabIndex = 6;
+            this.gbAtuacao.TabIndex = 9;
             this.gbAtuacao.TabStop = false;
             this.gbAtuacao.Text = "Atuação";
             // 
@@ -162,7 +161,7 @@
             this.cblAtuacao.Location = new System.Drawing.Point(6, 19);
             this.cblAtuacao.Name = "cblAtuacao";
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
-            this.cblAtuacao.TabIndex = 7;
+            this.cblAtuacao.TabIndex = 0;
             this.cblAtuacao.TabStop = false;
             this.cblAtuacao.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CblAtuacao_ItemCheck);
             // 
@@ -209,7 +208,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCodigo_KeyPress);
             this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigo_KeyUp);
             this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
@@ -289,7 +287,7 @@
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
             this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 15;
+            this.buscaCidade.TabIndex = 8;
             // 
             // tbEmail
             // 

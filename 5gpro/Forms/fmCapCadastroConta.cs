@@ -93,7 +93,9 @@ namespace _5gpro.Forms
         private void Novo()
         {
             if (editando)
+            {
                 return;
+            }
 
             ignoracheckevent = true;
             LimpaCampos(false);
@@ -117,10 +119,12 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
-            bool ok = false;
-
             if (!editando)
+            {
                 return;
+            }
+
+            bool ok = false;
             if (tbCodigoConta.Text.Length > 0)
             {
 
@@ -185,42 +189,46 @@ namespace _5gpro.Forms
                 ok = false;
             }
         }
-
-
         private void Recarrega()
         {
-            if (tbCodigoConta.Text.Length > 0)
+            if (tbCodigoConta.Text.Length <= 0)
             {
-                if (editando)
-                {
-                    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                    "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                    {
-                        return;
-                    }
-                }
+                return;
+            }
 
-                if (contaPagar != null)
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                "Aviso de alteração",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    contaPagar = contaPagarDAO.BuscaByID(contaPagar.ContaPagarID);
-                    contaPagar.Pessoa = pessoaDAO.BuscaById(contaPagar.Pessoa.PessoaID);
-                    PreencheCampos(contaPagar);
-                    if (editando)
-                        Editando(false);
+                    return;
                 }
-                else
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(true);
-                    ignoracheckevent = false;
-                }
+            }
+
+            if (contaPagar != null)
+            {
+                contaPagar = contaPagarDAO.BuscaByID(contaPagar.ContaPagarID);
+                contaPagar.Pessoa = pessoaDAO.BuscaById(contaPagar.Pessoa.PessoaID);
+                PreencheCampos(contaPagar);
+                if (editando)
+                    Editando(false);
+            }
+            else
+            {
+                ignoracheckevent = true;
+                LimpaCampos(true);
+                ignoracheckevent = false;
             }
         }
         private void Proximo()
         {
-            ControlCollection controls = (ControlCollection)this.Controls;
+            if (tbCodigoConta.Text.Length <= 0)
+            {
+                return;
+            }
+            var controls = (ControlCollection)this.Controls;
 
             if (editando)
             {
@@ -230,28 +238,29 @@ namespace _5gpro.Forms
                     MessageBoxIcon.Warning) == DialogResult.No)
                     return;
             }
+            validacao.despintarCampos(controls);
 
-
-
-            if (tbCodigoConta.Text.Length > 0)
+            var newcontaPagar = contaPagarDAO.Proximo(int.Parse(tbCodigoConta.Text));
+            if (newcontaPagar != null)
             {
-                validacao.despintarCampos(controls);
-
-                var newcontaPagar = contaPagarDAO.Proximo(int.Parse(tbCodigoConta.Text));
-                if (newcontaPagar != null)
+                newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
+                contaPagar = newcontaPagar;
+                parcelas = contaPagar.Parcelas.ToList();
+                PreencheCampos(contaPagar);
+                if (editando)
                 {
-                    newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
-                    contaPagar = newcontaPagar;
-                    parcelas = contaPagar.Parcelas.ToList();
-                    PreencheCampos(contaPagar);
-                    if (editando)
-                        Editando(false);
+                    Editando(false);
                 }
             }
+
         }
         private void Anterior()
         {
-            ControlCollection controls = (ControlCollection)this.Controls;
+            if (tbCodigoConta.Text.Length <= 0)
+            {
+                return;
+            }
+            var controls = (ControlCollection)this.Controls;
 
             if (editando)
             {
@@ -262,20 +271,18 @@ namespace _5gpro.Forms
                     return;
             }
 
-            if (tbCodigoConta.Text.Length > 0)
-            {
-                validacao.despintarCampos(controls);
 
-                var newcontaPagar = contaPagarDAO.Anterior(int.Parse(tbCodigoConta.Text));
-                if (newcontaPagar != null)
-                {
-                    newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
-                    contaPagar = newcontaPagar;
-                    parcelas = contaPagar.Parcelas.ToList();
-                    PreencheCampos(contaPagar);
-                    if (editando)
-                        Editando(false);
-                }
+            validacao.despintarCampos(controls);
+
+            var newcontaPagar = contaPagarDAO.Anterior(int.Parse(tbCodigoConta.Text));
+            if (newcontaPagar != null)
+            {
+                newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
+                contaPagar = newcontaPagar;
+                parcelas = contaPagar.Parcelas.ToList();
+                PreencheCampos(contaPagar);
+                if (editando)
+                    Editando(false);
             }
         }
         private void CarregaDados()
@@ -366,7 +373,7 @@ namespace _5gpro.Forms
         }
         private void InserirParcela()
         {
-            if(tbCodigoConta.Text.Length > 0)
+            if (tbCodigoConta.Text.Length > 0)
             {
                 LimpaCamposParcela();
                 string codigo = "1";
@@ -378,7 +385,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                MessageBox.Show("Informe o código da conta","Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Informe o código da conta", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
         }
@@ -396,7 +403,7 @@ namespace _5gpro.Forms
         }
         private void SalvaParcela()
         {
-            
+
             if (tbCodigoParcela.Text.Length == 0)
                 return;
             var dr = dgvParcelas.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == parcelaSelecionada?.Sequencia).FirstOrDefault();

@@ -56,7 +56,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public Pessoa BuscaById(int cod)
         {
             Pessoa pessoa = new Pessoa();
@@ -81,32 +80,32 @@ namespace _5gpro.Daos
                 }
                 var grupopessoa = new GrupoPessoa
                 {
-                    GrupoPessoaID = (int) data["idgrupopessoa"],
-                    Nome = (string) data["nomegrupopessoa"]
+                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
+                    Nome = (string)data["nomegrupopessoa"]
                 };
                 var subgrupopessoa = new SubGrupoPessoa
                 {
-                    SubGrupoPessoaID = (int) data["idsubgrupopessoa"],
-                    Nome = (string) data["nomesubgrupopessoa"],
+                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
+                    Nome = (string)data["nomesubgrupopessoa"],
                     GrupoPessoa = grupopessoa
                 };
                 var estado = new Estado
                 {
-                    EstadoID = (int) data["idestado"],
-                    Nome = (string) data["nomeestado"],
-                    Uf = (string) data["uf"]
+                    EstadoID = Convert.ToInt32(data["idestado"]),
+                    Nome = (string)data["nomeestado"],
+                    Uf = (string)data["uf"]
                 };
 
                 var cidade = new Cidade
                 {
-                    CidadeID = (int) data["idcidade"],
+                    CidadeID = Convert.ToInt32(data["idcidade"]),
                     Nome = (string)data["nomecidade"],
                     Estado = estado
                 };
 
                 pessoa = new Pessoa
                 {
-                    PessoaID = (int)data["idpessoa"],
+                    PessoaID = Convert.ToInt32(data["idpessoa"]),
                     Nome = (string)data["nomepessoa"],
                     Fantasia = (string)data["fantasia"],
                     TipoPessoa = (string)data["tipo_pessoa"],
@@ -125,8 +124,7 @@ namespace _5gpro.Daos
             }
             return pessoa;
         }
-
-        public Pessoa Proximo(string cod)
+        public Pessoa Proximo(int cod)
         {
             Pessoa pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -149,32 +147,32 @@ namespace _5gpro.Daos
                 }
                 var grupopessoa = new GrupoPessoa
                 {
-                    GrupoPessoaID = (int)data["idgrupopessoa"],
+                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
                     Nome = (string)data["nomegrupopessoa"]
                 };
                 var subgrupopessoa = new SubGrupoPessoa
                 {
-                    SubGrupoPessoaID = (int)data["idsubgrupopessoa"],
+                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
                     Nome = (string)data["nomesubgrupopessoa"],
                     GrupoPessoa = grupopessoa
                 };
                 var estado = new Estado
                 {
-                    EstadoID = (int)data["idestado"],
+                    EstadoID = Convert.ToInt32(data["idestado"]),
                     Nome = (string)data["nomeestado"],
                     Uf = (string)data["uf"]
                 };
 
                 var cidade = new Cidade
                 {
-                    CidadeID = (int)data["idcidade"],
+                    CidadeID = Convert.ToInt32(data["idcidade"]),
                     Nome = (string)data["nomecidade"],
                     Estado = estado
                 };
 
                 pessoa = new Pessoa
                 {
-                    PessoaID = (int)data["idpessoa"],
+                    PessoaID = Convert.ToInt32(data["idpessoa"]),
                     Nome = (string)data["nomepessoa"],
                     Fantasia = (string)data["fantasia"],
                     TipoPessoa = (string)data["tipo_pessoa"],
@@ -193,8 +191,7 @@ namespace _5gpro.Daos
             }
             return pessoa;
         }
-
-        public Pessoa Anterior(string cod)
+        public Pessoa Anterior(int cod)
         {
             Pessoa pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -217,32 +214,32 @@ namespace _5gpro.Daos
                 }
                 var grupopessoa = new GrupoPessoa
                 {
-                    GrupoPessoaID = (int)data["idgrupopessoa"],
+                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
                     Nome = (string)data["nomegrupopessoa"]
                 };
                 var subgrupopessoa = new SubGrupoPessoa
                 {
-                    SubGrupoPessoaID = (int)data["idsubgrupopessoa"],
+                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
                     Nome = (string)data["nomesubgrupopessoa"],
                     GrupoPessoa = grupopessoa
                 };
                 var estado = new Estado
                 {
-                    EstadoID = (int)data["idestado"],
+                    EstadoID = Convert.ToInt32(data["idestado"]),
                     Nome = (string)data["nomeestado"],
                     Uf = (string)data["uf"]
                 };
 
                 var cidade = new Cidade
                 {
-                    CidadeID = (int)data["idcidade"],
+                    CidadeID = Convert.ToInt32(data["idcidade"]),
                     Nome = (string)data["nomecidade"],
                     Estado = estado
                 };
 
                 pessoa = new Pessoa
                 {
-                    PessoaID = (int)data["idpessoa"],
+                    PessoaID = Convert.ToInt32(data["idpessoa"]),
                     Nome = (string)data["nomepessoa"],
                     Fantasia = (string)data["fantasia"],
                     TipoPessoa = (string)data["tipo_pessoa"],
@@ -261,7 +258,6 @@ namespace _5gpro.Daos
             }
             return pessoa;
         }
-
         public List<Pessoa> Busca(string nome, string cpfCnpj, int idcidade)
         {
             List<Pessoa> pessoas = new List<Pessoa>();
@@ -293,32 +289,32 @@ namespace _5gpro.Daos
                 {
                     var grupopessoa = new GrupoPessoa
                     {
-                        GrupoPessoaID = (int) d["idgrupopessoa"],
+                        GrupoPessoaID = Convert.ToInt32(d["idgrupopessoa"]),
                         Nome = (string)d["nomegrupopessoa"]
                     };
                     var subgrupopessoa = new SubGrupoPessoa
                     {
-                        SubGrupoPessoaID = (int)d["idsubgrupopessoa"],
+                        SubGrupoPessoaID = Convert.ToInt32(d["idsubgrupopessoa"]),
                         Nome = (string)d["nomesubgrupopessoa"],
                         GrupoPessoa = grupopessoa
                     };
                     var estado = new Estado
                     {
-                        EstadoID = (int)d["idestado"],
+                        EstadoID = Convert.ToInt32(d["idestado"]),
                         Nome = (string)d["nomeestado"],
                         Uf = (string)d["uf"]
                     };
 
                     var cidade = new Cidade
                     {
-                        CidadeID = (int)d["idcidade"],
+                        CidadeID = Convert.ToInt32(d["idcidade"]),
                         Nome = (string)d["nomecidade"],
                         Estado = estado
                     };
 
                     var pessoa = new Pessoa
                     {
-                        PessoaID = (int)d["idpessoa"],
+                        PessoaID = Convert.ToInt32(d["idpessoa"]),
                         Nome = (string)d["nomepessoa"],
                         Fantasia = (string)d["fantasia"],
                         TipoPessoa = (string)d["tipo_pessoa"],
@@ -339,8 +335,6 @@ namespace _5gpro.Daos
                 return pessoas;
             }
         }
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
