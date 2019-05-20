@@ -18,12 +18,12 @@ namespace _5gpro.Forms
 
         //CÓDIGO DA TELA CAD.OPERAÇÃO = 040100
 
-        ParcelaOperacao parcela = new ParcelaOperacao();
-        public List<ParcelaOperacao> listaparcelasprincipal = new List<ParcelaOperacao>();
+        private ParcelaOperacao parcela = new ParcelaOperacao();
+        private List<ParcelaOperacao> listaparcelasprincipal = new List<ParcelaOperacao>();
 
-        Operacao operacao;
-        OperacaoDAO operacaoDAO = new OperacaoDAO();
-        Validacao validacao = new Validacao();
+        private Operacao operacao;
+        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO();
+        private readonly Validacao validacao = new Validacao();
         public int variaveldias = 30;
 
         //Controle de permissões
@@ -32,7 +32,7 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
 
         bool editando, ignoraCheckEvent = false;
 
@@ -41,6 +41,19 @@ namespace _5gpro.Forms
             InitializeComponent();
             SetarNivel();
             LimpaCampos(true);
+        }
+        private void FmCadastroOperacao_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void SetarNivel()
@@ -151,12 +164,6 @@ namespace _5gpro.Forms
                     }
                 }
             }
-        }
-
-
-        //MENU
-        private void MenuVertical1_Load(object sender, EventArgs e)
-        {
         }
 
         private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
@@ -643,6 +650,7 @@ namespace _5gpro.Forms
             else
                 pnAvista.Enabled = false;
         }
+
 
         private void HDaprazo(bool a)
         {

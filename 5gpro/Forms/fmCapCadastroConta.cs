@@ -15,9 +15,8 @@ namespace _5gpro.Forms
         private bool editando, ignoracheckevent = false;
         private ContaPagar contaPagar = null;
         private List<ParcelaContaPagar> parcelas = new List<ParcelaContaPagar>();
-        Validacao validacao = new Validacao();
+        private readonly Validacao validacao = new Validacao();
 
-        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
         private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
@@ -56,6 +55,19 @@ namespace _5gpro.Forms
             }
 
             EnterTab(this.ActiveControl, e);
+        }
+        private void FmCapCadastroConta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
@@ -210,7 +222,7 @@ namespace _5gpro.Forms
             if (contaPagar != null)
             {
                 contaPagar = contaPagarDAO.BuscaByID(contaPagar.ContaPagarID);
-                contaPagar.Pessoa = pessoaDAO.BuscaById(contaPagar.Pessoa.PessoaID);
+                contaPagar.Pessoa = pessoaDAO.BuscaByID(contaPagar.Pessoa.PessoaID);
                 PreencheCampos(contaPagar);
                 if (editando)
                     Editando(false);
@@ -243,7 +255,7 @@ namespace _5gpro.Forms
             var newcontaPagar = contaPagarDAO.Proximo(int.Parse(tbCodigoConta.Text));
             if (newcontaPagar != null)
             {
-                newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
+                newcontaPagar.Pessoa = pessoaDAO.BuscaByID(newcontaPagar.Pessoa.PessoaID);
                 contaPagar = newcontaPagar;
                 parcelas = contaPagar.Parcelas.ToList();
                 PreencheCampos(contaPagar);
@@ -277,7 +289,7 @@ namespace _5gpro.Forms
             var newcontaPagar = contaPagarDAO.Anterior(int.Parse(tbCodigoConta.Text));
             if (newcontaPagar != null)
             {
-                newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
+                newcontaPagar.Pessoa = pessoaDAO.BuscaByID(newcontaPagar.Pessoa.PessoaID);
                 contaPagar = newcontaPagar;
                 parcelas = contaPagar.Parcelas.ToList();
                 PreencheCampos(contaPagar);
@@ -310,7 +322,7 @@ namespace _5gpro.Forms
             var newcontaPagar = contaPagarDAO.BuscaByID(codigo);
             if (newcontaPagar != null)
             {
-                newcontaPagar.Pessoa = pessoaDAO.BuscaById(newcontaPagar.Pessoa.PessoaID);
+                newcontaPagar.Pessoa = pessoaDAO.BuscaByID(newcontaPagar.Pessoa.PessoaID);
                 contaPagar = newcontaPagar;
                 PreencheCampos(contaPagar);
                 Editando(false);

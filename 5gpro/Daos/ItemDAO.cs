@@ -59,7 +59,7 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public Item Proximo(string Codigo)
+        public Item Proximo(int Codigo)
         {
             var item = new Item();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -80,7 +80,7 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public Item Anterior(string Codigo)
+        public Item Anterior(int Codigo)
         {
             var item = new Item();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))

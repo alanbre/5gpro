@@ -23,7 +23,7 @@ namespace _5gpro.Forms
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
@@ -71,35 +71,24 @@ namespace _5gpro.Forms
 
             EnterTab(this.ActiveControl, e);
         }
-
         private void FmOrcamentoCadastroOrcamento_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
+            if (!editando)
+                return;
 
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
             }
         }
-
-
-
-
         private void CbVencimento_CheckedChanged(object sender, EventArgs e)
         {
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
             Editando(true);
         }
-
-
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
             if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
@@ -159,7 +148,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void BuscaItem_Codigo_Leave(object sender, EventArgs e)
         {
             if (buscaItem.item != null)
@@ -182,52 +170,42 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-
         private void TbQuantidade_Leave(object sender, EventArgs e)
         {
             tbQuantidade.Text = tbQuantidade.Text.Length > 0 ? Convert.ToDecimal(tbQuantidade.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbValorUnitItem_Leave(object sender, EventArgs e)
         {
             tbValorUnitItem.Text = tbValorUnitItem.Text.Length > 0 ? Convert.ToDecimal(tbValorUnitItem.Text).ToString("############0.00") : "0,00";
             tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbValorTotItem_Leave(object sender, EventArgs e)
         {
             tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ? Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbDescontoItemPorc_Leave(object sender, EventArgs e)
         {
             tbDescontoItemPorc.Text = tbDescontoItemPorc.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItemPorc.Text).ToString("##0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbDescontoItem_Leave(object sender, EventArgs e)
         {
             tbDescontoItem.Text = tbDescontoItem.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00") : "0,00";
             tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
         }
-
         private void TbDescontoOrcamento_Leave(object sender, EventArgs e)
         {
             tbDescontoOrcamento.Text = tbDescontoOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbDescontoOrcamento.Text).ToString("############0.00") : "0,00";
             CalculaTotalOrcamento();
         }
-
         private void TbValorTotalOrcamento_Leave(object sender, EventArgs e)
         {
             tbValorTotalOrcamento.Text = tbValorTotalOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00") : "0,00";
         }
-
-
-
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
@@ -236,52 +214,38 @@ namespace _5gpro.Forms
                 AbreTelaBuscaOrcamento();
             }
         }
-
-
-        //EVENTOS DE KEY PRESS
         private void TbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbValorUnitItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbValorTotItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbDescontoItemPorc_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbDescontoItem_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbDescontoOrcamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
         private void TbValorTotalOrcamento_KeyPress(object sender, KeyPressEventArgs e)
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-
-
-
-        //MENU
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
             NovoCadastro();
         }
-
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
             if (!editando)
@@ -289,34 +253,28 @@ namespace _5gpro.Forms
                 AbreTelaBuscaOrcamento();
             }
         }
-
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
             SalvaCadastro();
         }
-
         private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
             RecarregaDados(orcamento);
         }
-
         private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
-
         private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
             ProximoCadastro();
         }
-
         private void BtNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCamposItem(true);
             buscaItem.Focus();
             btInserirItem.Text = "Inserir";
         }
-
         private void BtInserirItem_Click(object sender, EventArgs e)
         {
             if (buscaItem.item != null)
@@ -334,12 +292,10 @@ namespace _5gpro.Forms
                 buscaItem.Focus();
             }
         }
-
         private void BtDeletarItem_Click(object sender, EventArgs e)
         {
             ExcluirItem();
         }
-
         private void DgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvItens.SelectedCells.Count > 0)
@@ -352,7 +308,6 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = true;
             }
         }
-
         private void BtNotaGerar_Click(object sender, EventArgs e)
         {
             if (orcamento.NotaFiscal == null)
@@ -361,61 +316,46 @@ namespace _5gpro.Forms
                 PreencheCamposNotaFiscal(notafiscal);
             }
         }
-
-
-
-
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void DtpCadastro_ValueChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void DtpVencimento_ValueChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbQuantidade_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbValorUnitItem_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbValorTotItem_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbDescontoItemPorc_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbDescontoItem_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbDescontoOrcamento_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
         private void TbValorTotalOrcamento_TextChanged(object sender, EventArgs e)
         {
             Editando(true);
         }
-
-
         private void DgvItens_CurrentCellChanged(object sender, EventArgs e)
         {
             if (dgvItens.SelectedCells.Count > 0)
@@ -433,7 +373,7 @@ namespace _5gpro.Forms
 
 
 
-        //PADRÕES CRIADAS
+
         private void NovoCadastro()
         {
             if (editando)
@@ -464,7 +404,6 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-
         private void SalvaCadastro()
         {
             if (editando)
@@ -508,7 +447,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void RecarregaDados(Orcamento orcamento)
         {
             if (editando)
@@ -548,7 +486,6 @@ namespace _5gpro.Forms
             }
 
         }
-
         private void ProximoCadastro()
         {
             //Busca o orcamento com ID maior que o atual preenchido. Só preenche se houver algum registro maior
@@ -592,7 +529,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void CadastroAnterior()
         {
             //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
@@ -636,7 +572,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void PreencheCampos(Orcamento orcamento)
         {
             ignoracheckevent = true;
@@ -667,7 +602,6 @@ namespace _5gpro.Forms
             }
             ignoracheckevent = false;
         }
-
         private void AbreTelaBuscaOrcamento()
         {
             var buscaOrcamento = new fmOrcBuscaOrcamento();
@@ -678,7 +612,6 @@ namespace _5gpro.Forms
                 PreencheCampos(orcamento);
             }
         }
-
         private void PreencheCamposItem(OrcamentoItem item)
         {
             if (item != null)
@@ -701,14 +634,12 @@ namespace _5gpro.Forms
                 buscaItem.Focus();
             }
         }
-
         private void PreencheCamposNotaFiscal(NotaFiscalPropria notafiscal)
         {
             tbNotaDataEmissao.Text = notafiscal.DataEmissao.ToShortDateString();
             tbNotaNumero.Text = notafiscal.NotaFiscalPropriaID.ToString();
             btNotaGerar.Enabled = false;
         }
-
         private void Editando(bool edit)
         {
             if (!ignoracheckevent && notafiscal == null)
@@ -718,7 +649,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
         private void InserirItem(OrcamentoItem orcamentoitem)
         {
             OrcamentoItem item = itemSelecionado ?? orcamentoitem;
@@ -764,7 +694,6 @@ namespace _5gpro.Forms
                 buscaItem.Focus();
             }
         }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -773,7 +702,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
         private void LimpaCampos(bool limpaCod)
         {
             if (limpaCod) { tbCodigo.Clear(); }
@@ -794,7 +722,6 @@ namespace _5gpro.Forms
             tbNotaDataEmissao.Clear();
             LimpaCamposItem(limpaCod);
         }
-
         private void LimpaCamposItem(bool focus)
         {
             buscaItem.Limpa();
@@ -808,7 +735,6 @@ namespace _5gpro.Forms
             btInserirItem.Text = "Inserir";
             if (focus) { buscaItem.Focus(); }
         }
-
         private void CalculaTotalOrcamento()
         {
             if (itens.Count > 0)
@@ -818,7 +744,6 @@ namespace _5gpro.Forms
                 tbValorTotalOrcamento.Text = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
             }
         }
-
         private void ExcluirItem()
         {
             if (itemSelecionado != null)
@@ -831,8 +756,6 @@ namespace _5gpro.Forms
                 CalculaTotalOrcamento();
             }
         }
-
-
         private void PreencheGridItens(List<OrcamentoItem> itens)
         {
             dgvItens.Rows.Clear();

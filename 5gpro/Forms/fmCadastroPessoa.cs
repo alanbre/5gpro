@@ -23,7 +23,7 @@ namespace _5gpro.Forms
         private string CodGrupoUsuario;
 
 
-        bool editando, locked = false;
+        bool editando = false;
         bool ignoraCheckEvent;
 
         public fmCadastroPessoa()
@@ -68,6 +68,19 @@ namespace _5gpro.Forms
 
             EnterTab(this.ActiveControl, e);
         }
+        private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
 
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
@@ -104,7 +117,7 @@ namespace _5gpro.Forms
         }
         private void RbAtivo_CheckedChanged(object sender, EventArgs e) => Editando(true);
         private void RbInativo_CheckedChanged(object sender, EventArgs e) => Editando(true);
-        private void TbCodigo_Leave(object sender, EventArgs e) =>  CarregaDados();
+        private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
@@ -114,19 +127,6 @@ namespace _5gpro.Forms
             }
         }
         private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e) => Editando(true);
-        private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
         private void BuscaGrupoPessoa_Leave(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
@@ -165,16 +165,19 @@ namespace _5gpro.Forms
         }
         private void Busca()
         {
-            if (!editando || Nivel == 1)
+            if (editando || Nivel <= 0)
             {
-                var buscaPessoa = new fmBuscaPessoa();
-                buscaPessoa.ShowDialog();
-                if (buscaPessoa.pessoaSelecionada != null)
-                {
-                    pessoa = buscaPessoa.pessoaSelecionada;
-                    PreencheCampos(pessoa);
-                }
+                return;
             }
+
+            var buscaPessoa = new fmBuscaPessoa();
+            buscaPessoa.ShowDialog();
+            if (buscaPessoa.pessoaSelecionada != null)
+            {
+                pessoa = buscaPessoa.pessoaSelecionada;
+                PreencheCampos(pessoa);
+            }
+
         }
         private void Salva()
         {
@@ -236,18 +239,10 @@ namespace _5gpro.Forms
             var controls = (ControlCollection)this.Controls;
 
             ok = validacao.ValidarEntidade(pessoa, controls);
-
-            if (ok) { validacao.despintarCampos(controls); }
-
-
-
             if (ok)
             {
+                validacao.despintarCampos(controls);
                 int resultado = pessoaDAO.SalvaOuAtualiza(pessoa);
-
-                // resultado 0 = nada foi inserido (houve algum erro)
-                // resultado 1 = foi inserido com sucesso
-                // resultado 2 = foi atualizado com sucesso
                 if (resultado == 0)
                 {
                     MessageBox.Show("Problema ao salvar o registro",
@@ -289,7 +284,7 @@ namespace _5gpro.Forms
 
             if (pessoa != null)
             {
-                pessoa = pessoaDAO.BuscaById(pessoa.PessoaID);
+                pessoa = pessoaDAO.BuscaByID(pessoa.PessoaID);
                 PreencheCampos(pessoa);
                 if (editando)
                 {
@@ -301,37 +296,6 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = true;
                 LimpaCampos(true);
                 ignoraCheckEvent = false;
-            }
-        }
-        private void Proximo()
-        {
-            if (tbCodigo.Text.Length <= 0)
-            {
-                return;
-            }
-
-            var controls = (ControlCollection)this.Controls;
-
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                    "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                    return;
-            }
-
-            validacao.despintarCampos(controls);
-
-            var newpessoa = pessoaDAO.Proximo(int.Parse(tbCodigo.Text));
-            if (newpessoa != null)
-            {
-                pessoa = newpessoa;
-                PreencheCampos(pessoa);
-                if (editando)
-                {
-                    Editando(false);
-                }
             }
         }
         private void Anterior()
@@ -365,19 +329,54 @@ namespace _5gpro.Forms
                 }
             }
         }
+        private void Proximo()
+        {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            validacao.despintarCampos(controls);
+
+            var newpessoa = pessoaDAO.Proximo(int.Parse(tbCodigo.Text));
+            if (newpessoa != null)
+            {
+                pessoa = newpessoa;
+                PreencheCampos(pessoa);
+                if (editando)
+                {
+                    Editando(false);
+                }
+            }
+        }
         private void CarregaDados()
         {
             int codigo = 0;
             if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
             if (pessoa?.PessoaID == codigo)
+            {
                 return;
+            }
 
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning) == DialogResult.No)
+                {
                     return;
+                }
             }
 
             if (tbCodigo.Text.Length == 0)
@@ -389,7 +388,7 @@ namespace _5gpro.Forms
 
 
 
-            var newpessoa = pessoaDAO.BuscaById(int.Parse(tbCodigo.Text));
+            var newpessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newpessoa != null)
             {
                 pessoa = newpessoa;
@@ -407,7 +406,7 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent)
             {
                 editando = edit;
-                menuVertical.Editando(edit, Nivel, CodGrupoUsuario, locked);
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
         private void EnterTab(object sender, KeyEventArgs e)

@@ -79,7 +79,7 @@
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
             this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(213, 20);
             this.tbNomeGrupoUsuario.TabIndex = 3;
-            this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.tbNomeGrupoUsuario_TextChanged);
+            this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.TbNomeGrupoUsuario_TextChanged);
             // 
             // tbCodGrupoUsuario
             // 
@@ -87,8 +87,8 @@
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(103, 20);
             this.tbCodGrupoUsuario.TabIndex = 2;
-            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.tbCodGrupoUsuario_TextChanged);
-            this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.tbCodGrupoUsuario_Leave);
+            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.TbCodGrupoUsuario_TextChanged);
+            this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.TbCodGrupoUsuario_Leave);
             // 
             // lbNomeGrupoUsuario
             // 
@@ -142,8 +142,8 @@
             this.dgvPermissoes.Size = new System.Drawing.Size(734, 211);
             this.dgvPermissoes.TabIndex = 0;
             this.dgvPermissoes.TabStop = false;
-            this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvPermissoes_CellDoubleClick);
-            this.dgvPermissoes.ColumnDividerDoubleClick += new System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventHandler(this.dgvPermissoes_ColumnDividerDoubleClick);
+            this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPermissoes_CellDoubleClick);
+            this.dgvPermissoes.ColumnDividerDoubleClick += new System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventHandler(this.DgvPermissoes_ColumnDividerDoubleClick);
             // 
             // dgvtbcCodigoPermissoes
             // 
@@ -247,12 +247,11 @@
             this.menuVertical.Name = "menuVertical";
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
             this.menuVertical.TabIndex = 8;
-            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical1_Novo_Clicked);
-            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical1_Buscar_Clicked);
-            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical1_Salvar_Clicked);
-            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical1_Anterior_Clicked);
-            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
-            this.menuVertical.Load += new System.EventHandler(this.MenuVertical1_Load);
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 
             // gbIndice
             // 
@@ -324,7 +323,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Grupos de Usuário";
-            this.Load += new System.EventHandler(this.fmCadastroGrupoUsuario_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCadastroGrupoUsuario_FormClosing);
+            this.Load += new System.EventHandler(this.FmCadastroGrupoUsuario_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroGrupoUsuario_KeyDown);
             this.gbGrupoDeUsuario.ResumeLayout(false);
             this.gbGrupoDeUsuario.PerformLayout();

@@ -9,12 +9,11 @@ namespace _5gpro.Forms
     public partial class fmCadastroSubGrupoItem : Form
     {
 
-        GrupoItem grupoitemreferencia = null;
-        fmCadastroGrupoItem telacadgrupoitem = null;
-        GrupoItemDAO grupoitemDAO = new GrupoItemDAO();
-        Validacao validacao = new Validacao();
-        SubGrupoItem subgrupoitem = null;
-        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
+        private GrupoItem grupoitemreferencia = null;
+        private fmCadastroGrupoItem telacadgrupoitem = null;
+        private readonly Validacao validacao = new Validacao();
+        private SubGrupoItem subgrupoitem = null;
+        private readonly SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
 
         bool editando = false;
         bool ignoraCheckEvent;
