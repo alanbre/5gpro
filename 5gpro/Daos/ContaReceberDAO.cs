@@ -71,8 +71,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
-
         public ContaReceber BuscaById(int codigo)
         {
             ContaReceber contaReceber = null;
@@ -97,7 +95,6 @@ namespace _5gpro.Daos
             }
             return contaReceber;
         }
-
         public IEnumerable<ContaReceber> Busca(fmBuscaContaReceber.Filtros f)
         {
             var contaRecebers = new List<ContaReceber>();
@@ -179,7 +176,6 @@ namespace _5gpro.Daos
             }
             return contaRecebers;
         }
-
         //ALTERAR A FORMA QUANDO FOR USAR (e mudar pra public) (e deletar esse comentário)
         private IEnumerable<ContaReceber> Busca(fmCarQuitacaoConta.Filtros f)
         {
@@ -253,8 +249,6 @@ namespace _5gpro.Daos
 
             return contaRecebers;
         }
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -274,8 +268,6 @@ namespace _5gpro.Daos
             }
             return proximoid;
         }
-
-
         public ContaReceber Proximo(int codigo)
         {
             ContaReceber contaReceber = null;
@@ -304,7 +296,6 @@ namespace _5gpro.Daos
             }
             return contaReceber;
         }
-
         public ContaReceber Anterior(int codigo)
         {
             ContaReceber contaReceber = null;
@@ -333,8 +324,6 @@ namespace _5gpro.Daos
             }
             return contaReceber;
         }
-
-
         //ALTERAR QUANDO UTILIZAR A FUNÇÃO DE BUSCA 
         private List<ParcelaContaReceber> BuscaParcelasDaConta(ContaReceber contaReceber)
         {
@@ -377,7 +366,6 @@ namespace _5gpro.Daos
 
             return parcelas;
         }
-
         private ContaReceber LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)

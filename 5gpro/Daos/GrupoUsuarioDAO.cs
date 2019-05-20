@@ -1,6 +1,5 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
-using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,6 @@ namespace _5gpro.Daos
 
             return grupoUsuario;
         }
-
         public IEnumerable<GrupoUsuario> Busca(string nome)
         {
             var grupoUsuarios = new List<GrupoUsuario>();
@@ -47,8 +45,6 @@ namespace _5gpro.Daos
             }
             return grupoUsuarios;
         }
-
-
         public List<GrupoUsuario> BuscaTodos()
         {
             var grupoUsuarios = new List<GrupoUsuario>();
@@ -64,8 +60,7 @@ namespace _5gpro.Daos
             }
             return grupoUsuarios;
         }
-
-        public int SalvarOuAtualizar(GrupoUsuario grupousuario, List<Permissao> listapermissoes)
+        public int SalvaOuAtualiza(GrupoUsuario grupousuario, List<Permissao> listapermissoes)
         {
             var permissaoDAO = new PermissaoDAO();
             int retorno = 0;
@@ -115,7 +110,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public GrupoUsuario Proximo(string Codigo)
         {
             var grupoUsuario = new GrupoUsuario();
@@ -129,7 +123,6 @@ namespace _5gpro.Daos
 
             return grupoUsuario;
         }
-
         public GrupoUsuario Anterior(string Codigo)
         {
             var grupoUsuario = new GrupoUsuario();
@@ -142,7 +135,6 @@ namespace _5gpro.Daos
             }
             return grupoUsuario;
         }
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -162,7 +154,6 @@ namespace _5gpro.Daos
             }
             return proximoid;
         }
-
         public List<int> BuscarIDNpraN()
         {
             var idgrupousuariosNpraN = new List<int>();
@@ -178,7 +169,6 @@ namespace _5gpro.Daos
             }
             return idgrupousuariosNpraN;
         }
-
         private GrupoUsuario LeDadosReader(Dictionary<string, object> data)
         {
             var grupoUsuario = new GrupoUsuario();
