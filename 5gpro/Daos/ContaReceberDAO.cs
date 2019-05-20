@@ -112,7 +112,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro, cr.data_conta,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
-                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento
+                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento, cr.situacao
                                                     FROM conta_receber cr 
                                                     LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
                                                     LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
