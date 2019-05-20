@@ -35,9 +35,9 @@ namespace _5gpro.Forms
             table.Columns.Add("Desconto", typeof(string));
             table.Columns.Add("Entrada", typeof(string));
 
-            operacoes = operacaoDAO.BuscaOperacoes(tbNomeOperacao.Text).ToList();
+            operacoes = operacaoDAO.Busca(tbNomeOperacao.Text).ToList();
 
-            foreach (Operacao o in operacoes)
+            foreach (var o in operacoes)
             {
                 table.Rows.Add(o.OperacaoID, o.Nome, o.Descricao, o.Condicao, o.Desconto, o.Entrada);
             }

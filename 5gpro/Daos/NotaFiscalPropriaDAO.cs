@@ -89,7 +89,7 @@ namespace _5gpro.Daos
             }
             return notaFiscalPropria;
         }
-        public int SalvarOuAtualizar(NotaFiscalPropria notafiscal)
+        public int SalvaOuAtualiza(NotaFiscalPropria notafiscal)
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))

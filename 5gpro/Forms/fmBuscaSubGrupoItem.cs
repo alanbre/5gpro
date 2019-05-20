@@ -38,7 +38,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
 
-            listasubgrupoitem = subgrupoitemDAO.BuscaTodos(tbNomeSubGrupo.Text, grupoitem.GrupoItemID).ToList();
+            listasubgrupoitem = subgrupoitemDAO.Busca(tbNomeSubGrupo.Text, grupoitem.GrupoItemID).ToList();
 
             foreach (SubGrupoItem g in listasubgrupoitem)
             {

@@ -102,7 +102,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodOperacao.Text.Length > 0)
                 {
-                    Operacao newoperacao = operacaoDAO.BuscaById(int.Parse(tbCodOperacao.Text));
+                    Operacao newoperacao = operacaoDAO.BuscaByID(int.Parse(tbCodOperacao.Text));
 
                     if (newoperacao != null)
                     {
@@ -131,7 +131,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodOperacao.Text.Length > 0)
                     {
-                        Operacao newoperacao = operacaoDAO.BuscaById(int.Parse(tbCodOperacao.Text));
+                        Operacao newoperacao = operacaoDAO.BuscaByID(int.Parse(tbCodOperacao.Text));
                         if (newoperacao != null)
                         {
                             operacao = newoperacao;
@@ -342,10 +342,7 @@ namespace _5gpro.Forms
 
             if (ok)
             {
-                if (operacaoDAO.OperacaoExist(operacao.OperacaoID))
-                    operacaoDAO.RemoverParcelasOperacao(tbCodOperacao.Text);
-
-                int resultado = operacaoDAO.SalvarOuAtualizarOperacao(operacao);
+                int resultado = operacaoDAO.SalvaOuAtualiza(operacao);
                 //resultado 0 = nada foi inserido(houve algum erro)
                 //resultado 1 = foi inserido com sucesso
                 //resultado 2 = foi atualizado com sucesso
@@ -493,7 +490,7 @@ namespace _5gpro.Forms
             {
                 validacao.despintarCampos(controls);
 
-                Operacao newoperacao = operacaoDAO.BuscarProximaOperacao(tbCodOperacao.Text);
+                Operacao newoperacao = operacaoDAO.Proxima(tbCodOperacao.Text);
                 if (newoperacao != null)
                 {
                     operacao = newoperacao;
@@ -508,7 +505,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Operacao newoperacao = operacaoDAO.BuscarProximaOperacao(tbCodOperacao.Text);
+                    Operacao newoperacao = operacaoDAO.Proxima(tbCodOperacao.Text);
                     if (newoperacao != null)
                     {
                         operacao = newoperacao;
@@ -517,7 +514,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newoperacao = operacaoDAO.BuscarOperacaoAnterior(tbCodOperacao.Text);
+                        newoperacao = operacaoDAO.Anterior(tbCodOperacao.Text);
                         if (newoperacao != null)
                         {
                             operacao = newoperacao;
@@ -538,7 +535,7 @@ namespace _5gpro.Forms
             {
 
                 validacao.despintarCampos(controls);
-                Operacao newoperacao = operacaoDAO.BuscarOperacaoAnterior(tbCodOperacao.Text);
+                Operacao newoperacao = operacaoDAO.Anterior(tbCodOperacao.Text);
                 if (newoperacao != null)
                 {
                     operacao = newoperacao;
@@ -553,7 +550,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    Operacao newoperacao = operacaoDAO.BuscarOperacaoAnterior(tbCodOperacao.Text);
+                    Operacao newoperacao = operacaoDAO.Anterior(tbCodOperacao.Text);
                     if (newoperacao != null)
                     {
                         operacao = newoperacao;
@@ -562,7 +559,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newoperacao = operacaoDAO.BuscarProximaOperacao(tbCodOperacao.Text);
+                        newoperacao = operacaoDAO.Proxima(tbCodOperacao.Text);
                         if (newoperacao != null)
                         {
                             operacao = newoperacao;

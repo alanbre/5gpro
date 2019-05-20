@@ -107,7 +107,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    Orcamento neworcamento = orcamentoDAO.BuscaOrcamentoById(int.Parse(tbCodigo.Text));
+                    Orcamento neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
@@ -136,7 +136,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        Orcamento neworcamento = orcamentoDAO.BuscaOrcamentoById(int.Parse(tbCodigo.Text));
+                        Orcamento neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;
@@ -484,7 +484,7 @@ namespace _5gpro.Forms
                     OrcamentoItem = itens
                 };
 
-                int resultado = orcamentoDAO.SalvarOuAtualizarOrcamento(orcamento);
+                int resultado = orcamentoDAO.SalvaOuAtualiza(orcamento);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso
@@ -520,7 +520,7 @@ namespace _5gpro.Forms
                 {
                     if (orcamento != null)
                     {
-                        orcamento = orcamentoDAO.BuscaOrcamentoById(orcamento.OrcamentoID);
+                        orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
                         PreencheCampos(orcamento);
                         Editando(false);
                     }
@@ -536,7 +536,7 @@ namespace _5gpro.Forms
             {
                 if (orcamento != null)
                 {
-                    orcamento = orcamentoDAO.BuscaOrcamentoById(orcamento.OrcamentoID);
+                    orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
                     PreencheCampos(orcamento);
                 }
                 else
@@ -555,7 +555,7 @@ namespace _5gpro.Forms
             //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
             {
-                Orcamento neworcamento = orcamentoDAO.BuscaProximoOrcamento(tbCodigo.Text);
+                Orcamento neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
                 if (neworcamento != null)
                 {
                     orcamento = neworcamento;
@@ -570,7 +570,7 @@ namespace _5gpro.Forms
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    Orcamento neworcamento = orcamentoDAO.BuscaProximoOrcamento(tbCodigo.Text);
+                    Orcamento neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
@@ -580,7 +580,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        neworcamento = orcamentoDAO.BuscaOrcamentoAnterior(tbCodigo.Text);
+                        neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;
@@ -599,7 +599,7 @@ namespace _5gpro.Forms
             //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
             if (!editando && tbCodigo.Text.Length > 0)
             {
-                Orcamento neworcamento = orcamentoDAO.BuscaOrcamentoAnterior(tbCodigo.Text);
+                Orcamento neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
                 if (neworcamento != null)
                 {
                     orcamento = neworcamento;
@@ -614,7 +614,7 @@ namespace _5gpro.Forms
                MessageBoxButtons.YesNo,
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    Orcamento neworcamento = orcamentoDAO.BuscaOrcamentoAnterior(tbCodigo.Text);
+                    Orcamento neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
                     if (neworcamento != null)
                     {
                         orcamento = neworcamento;
@@ -624,7 +624,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        neworcamento = orcamentoDAO.BuscaProximoOrcamento(tbCodigo.Text);
+                        neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
                         if (neworcamento != null)
                         {
                             orcamento = neworcamento;

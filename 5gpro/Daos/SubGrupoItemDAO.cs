@@ -1,11 +1,7 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -14,202 +10,109 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public int SalvarOuAtualizar(SubGrupoItem subgrupoitem)
+        public int SalvaOuAtualiza(SubGrupoItem subgrupoitem)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"INSERT INTO subgrupoitem 
-                          (idsubgrupoitem, nome, idgrupoitem) 
-                          VALUES
-                          (@idsubgrupoitem, @nome, @idgrupoitem)
-                          ON DUPLICATE KEY UPDATE
-                           nome = @nome, idgrupoitem = @idgrupoitem
-                         ;",
-                         Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupoitem", subgrupoitem.SubGrupoItemID);
-                Connect.Comando.Parameters.AddWithValue("@nome", subgrupoitem.Nome);
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", subgrupoitem.GrupoItem.GrupoItemID);
-
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = @"INSERT INTO subgrupoitem 
+                            (idsubgrupoitem, nome, idgrupoitem) 
+                            VALUES
+                            (@idsubgrupoitem, @nome, @idgrupoitem)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, idgrupoitem = @idgrupoitem";
+                sql.addParam("@idsubgrupoitem", subgrupoitem.SubGrupoItemID);
+                sql.addParam("@nome", subgrupoitem.Nome);
+                sql.addParam("@idgrupoitem", subgrupoitem.GrupoItem.GrupoItemID);
+                retorno = sql.insertQuery();
             }
             return retorno;
         }
-
-        public IEnumerable<SubGrupoItem> BuscaTodos(string nome, int grupoitemID)
+        public IEnumerable<SubGrupoItem> Busca(string nome, int grupoitemID)
         {
-            List<SubGrupoItem> listasubgrupoitem = new List<SubGrupoItem>();
-            SubGrupoItem subgrupoitem = null;
-            GrupoItem grupoitem = null;
+            var listaSubGrupoItem = new List<SubGrupoItem>();
+            var conNome = nome.Length > 0 ? "AND nome LIKE @nome" : "";
+            var conGrupoItem = "AND idgrupoitem = @idgrupoitem";
 
-            string conNome = nome.Length > 0 ? "AND g.nome LIKE @nome" : "";
-            string conGrupoItem = "AND g.idgrupoitem = @idgrupoitem";
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM subgrupoitem g 
-                                             WHERE 1=1
-                                             " + conGrupoItem + @"
-                                             " + conNome + @"
-                                             ORDER BY g.nome;", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitemID);
-                if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM subgrupoitem  
+                            WHERE 1=1 "
+                            + conGrupoItem + " "
+                            + conNome + " "
+                            + @" ORDER BY nome";
+                sql.addParam("@idgrupoitem", grupoitemID);
+                if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    while (reader.Read())
-                    {
-                        grupoitem = new GrupoItem
-                        {
-                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
-                        };
-
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            GrupoItem = grupoitem
-                        };
-
-                        listasubgrupoitem.Add(subgrupoitem);
-                    }
+                    listaSubGrupoItem.Add(LeDadosReader(d));
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return listasubgrupoitem;
+            return listaSubGrupoItem;
         }
-
-        public SubGrupoItem BuscarByID(int Codigo, int grupoitemID)
+        public SubGrupoItem BuscaByID(int Codigo, int grupoitemID)
         {
-
-            SubGrupoItem subgrupoitem = null;
-            GrupoItem grupoitem = null;
-
-            try
+            var subgrupoitem = new SubGrupoItem();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM subgrupoitem g 
-                                             WHERE g.idsubgrupoitem = @idsubgrupoitem
-                                             AND g.idgrupoitem = @idgrupoitem
-                                             ", Connect.Conexao);
+                sql.Query = @"SELECT *
+                            FROM subgrupoitem 
+                            WHERE idsubgrupoitem = @idsubgrupoitem
+                            AND idgrupoitem = @idgrupoitem";
+                sql.addParam("@idsubgrupoitem", Codigo);
+                sql.addParam("@idgrupoitem", grupoitemID);
 
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupoitem", Codigo);
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitemID);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    while (reader.Read())
-                    {
-                        grupoitem = new GrupoItem
-                        {
-                            GrupoItemID = reader.GetInt32(reader.GetOrdinal("idgrupoitem"))
-                        };
-
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("idsubgrupoitem")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            GrupoItem = grupoitem
-                        };
-                    }
+                    return null;
                 }
+                subgrupoitem = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return subgrupoitem;
         }
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT i1.idsubgrupoitem + 1 AS proximoid
-                                             FROM subgrupoitem AS i1
-                                             LEFT OUTER JOIN subgrupoitem AS i2 ON i1.idsubgrupoitem + 1 = i2.idsubgrupoitem
-                                             WHERE i2.idsubgrupoitem IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT i1.idsubgrupoitem + 1 AS proximoid
+                            FROM subgrupoitem AS i1
+                            LEFT OUTER JOIN subgrupoitem AS i2 ON i1.idsubgrupoitem + 1 = i2.idsubgrupoitem
+                            WHERE i2.idsubgrupoitem IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-
-                    if (reader.Read())
-                    {
-                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    }
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return proximoid;
         }
-
         public int Remover(string idsub)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"DELETE FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupoitem", idsub);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = @"DELETE FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem";
+                sql.addParam("@idsubgrupoitem", idsub);
+                retorno = sql.deleteQuery();
             }
             return retorno;
+        }
+        private SubGrupoItem LeDadosReader(Dictionary<string, object> data)
+        {
+            var grupoitem = new GrupoItem();
+            grupoitem.GrupoItemID = Convert.ToInt32(data["idgrupoitem"]);
+
+            var subgrupoitem = new SubGrupoItem();
+            subgrupoitem.SubGrupoItemID = Convert.ToInt32(data["idsubgrupoitem"]);
+            subgrupoitem.Nome = (string)data["nome"];
+            subgrupoitem.GrupoItem = grupoitem;
+            return subgrupoitem;
         }
 
     }

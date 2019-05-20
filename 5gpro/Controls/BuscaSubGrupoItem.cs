@@ -46,7 +46,7 @@ namespace _5gpro.Controls
             {
                 if (tbCodigoSubGrupoItem.Text.Length > 0)
                 {
-                    subgrupoItem = subgrupoItemDAO.BuscarByID(int.Parse(tbCodigoSubGrupoItem.Text), gruporecebido.GrupoItemID);
+                    subgrupoItem = subgrupoItemDAO.BuscaByID(int.Parse(tbCodigoSubGrupoItem.Text), gruporecebido.GrupoItemID);
                     PreencheCamposSubGrupoItem(subgrupoItem);
                 }
                 else

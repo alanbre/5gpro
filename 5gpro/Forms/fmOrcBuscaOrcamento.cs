@@ -37,30 +37,17 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void fmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e)
-        {
-            EnterTab(this.ActiveControl, e);
-        }
-
-        private void tbFiltroValorTotalOrcamentoInicial_Leave(object sender, EventArgs e)
+        private void FmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
+        private void TbFiltroValorTotalOrcamentoInicial_Leave(object sender, EventArgs e)
         {
             tbFiltroValorTotalOrcamentoInicial.Text = tbFiltroValorTotalOrcamentoInicial.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text).ToString("############0.00") : "0,00";
         }
-
-        private void tbFiltroValorTotalOrcamentoFinal_Leave(object sender, EventArgs e)
+        private void TbFiltroValorTotalOrcamentoFinal_Leave(object sender, EventArgs e)
         {
             tbFiltroValorTotalOrcamentoFinal.Text = tbFiltroValorTotalOrcamentoFinal.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text).ToString("############0.00") : "999999,00";
         }
-
-        private void tbFiltroValorTotalOrcamentoInicial_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-
-        private void tbFiltroValorTotalOrcamentoFinal_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
+        private void TbFiltroValorTotalOrcamentoInicial_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
+        private void tbFiltroValorTotalOrcamentoFinal_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
 
 
 
@@ -74,8 +61,7 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void BtPesquisar_Click(object sender, EventArgs e)
         {
             dgvOrcamentos.Rows.Clear();
             Filtros f = new Filtros();
@@ -92,27 +78,27 @@ namespace _5gpro.Forms
             f.filtroValorTotalInical = Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text);
             f.filtroValorTotalFinal = Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text);
 
-            orcamentos = orcamentoDAO.BuscaOrcamentos(f);
+            orcamentos = orcamentoDAO.Busca(f);
 
             foreach (var o in orcamentos)
             {
                 if (o.DataValidade.HasValue)
                 {
-                    dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade.Value.ToShortDateString(), o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+                    dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro, o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
                 }
                 else
                 {
-                    dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro.ToShortDateString(), o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
+                    dgvOrcamentos.Rows.Add(o.OrcamentoID, o.Pessoa.PessoaID, o.Pessoa.Nome, o.DataCadastro, o.DataValidade, o.ValorTotalItens, o.DescontoTotalItens, o.DescontoOrcamento, o.ValorTotalOrcamento);
                 }
             }
             dgvOrcamentos.Refresh();
         }
-
-        private void dgvOrcamentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvOrcamentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvOrcamentos.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvOrcamentos.Rows[selectedRowIndex];
             orcamentoSelecionado = orcamentos.Find(o => o.OrcamentoID == Convert.ToInt32(selectedRow.Cells[0].Value));
+            orcamentoSelecionado = orcamentoDAO.BuscaByID(orcamentoSelecionado.OrcamentoID);
             this.Close();
         }
     }
