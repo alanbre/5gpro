@@ -116,6 +116,11 @@ namespace _5gpro.Forms
                         LimpaCampos(false);
                     }
                 }
+                else if (tbCodOperacao.Text.Length == 0)
+                {
+                    LimpaCampos(true);
+                    Editando(false);
+                }
             }
             else
             {
@@ -637,7 +642,6 @@ namespace _5gpro.Forms
                 pnAvista.Enabled = true;
             else
                 pnAvista.Enabled = false;
-
         }
 
         private void HDaprazo(bool a)
@@ -647,6 +651,5 @@ namespace _5gpro.Forms
             else
                 pnAprazo.Enabled = false;
         }
-
     }
 }

@@ -86,7 +86,8 @@ namespace _5gpro.Daos
                 var subgrupopessoa = new SubGrupoPessoa
                 {
                     SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"]
+                    Nome = (string)data["nomesubgrupopessoa"],
+                    GrupoPessoa = grupopessoa
                 };
                 var estado = new Estado
                 {
@@ -152,7 +153,8 @@ namespace _5gpro.Daos
                 var subgrupopessoa = new SubGrupoPessoa
                 {
                     SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"]
+                    Nome = (string)data["nomesubgrupopessoa"],
+                    GrupoPessoa = grupopessoa
                 };
                 var estado = new Estado
                 {
@@ -218,7 +220,8 @@ namespace _5gpro.Daos
                 var subgrupopessoa = new SubGrupoPessoa
                 {
                     SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"]
+                    Nome = (string)data["nomesubgrupopessoa"],
+                    GrupoPessoa = grupopessoa
                 };
                 var estado = new Estado
                 {
@@ -292,7 +295,8 @@ namespace _5gpro.Daos
                     var subgrupopessoa = new SubGrupoPessoa
                     {
                         SubGrupoPessoaID = Convert.ToInt32(d["idsubgrupopessoa"]),
-                        Nome = (string)d["nomesubgrupopessoa"]
+                        Nome = (string)d["nomesubgrupopessoa"],
+                        GrupoPessoa = grupopessoa
                     };
                     var estado = new Estado
                     {

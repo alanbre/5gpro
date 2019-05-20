@@ -134,6 +134,16 @@ namespace _5gpro.Forms
             if (!ignoraCheckEvent) { Editando(true); }
         }
 
+        private void BuscaUnimedidaItem_Text_Changed(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
+        private void BuscaSubGrupoItem_Text_Changed_1(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+        }
+
 
         //FUNÇÕES DE LEAVE
 
@@ -259,6 +269,8 @@ namespace _5gpro.Forms
             rbServico.Checked = false;
             buscaGrupoItem.Limpa();
             buscaSubGrupoItem.Limpa();
+            buscaUnimedidaItem.Limpa();
+            dbQuantidade.Valor = 0;
         }
 
         private void NovoCadastro()
@@ -311,9 +323,11 @@ namespace _5gpro.Forms
             tbPrecoUltimaEntrada.Text = item.ValorEntrada.ToString();
             tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
             tbPrecoVenda.Text = item.ValorSaida.ToString();
+            dbQuantidade.Valor = item.Quantidade;
 
             buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
             buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
+            buscaUnimedidaItem.PreencheCampos(item.Unimedida);
 
 
             ignoraCheckEvent = false;
@@ -340,6 +354,7 @@ namespace _5gpro.Forms
                     item.DescCompra = tbDescricaoDeCompra.Text;
                     item.Referencia = tbReferencia.Text;
                     item.TipoItem = rbProduto.Checked ? "P" : "S";
+                    item.Quantidade = dbQuantidade.Valor;
 
                     if (tbPrecoUltimaEntrada.TextLength > 0)
                     {
@@ -568,5 +583,7 @@ namespace _5gpro.Forms
                 buscaSubGrupoItem.EscolhaOGrupo();
             }
         }
+
+
     }
 }

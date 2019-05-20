@@ -213,7 +213,7 @@
             // 
             this.gbDesconto.Controls.Add(this.tbDesconto);
             this.gbDesconto.Controls.Add(this.lbPorcentoDesconto);
-            this.gbDesconto.Location = new System.Drawing.Point(10, 47);
+            this.gbDesconto.Location = new System.Drawing.Point(3, 13);
             this.gbDesconto.Name = "gbDesconto";
             this.gbDesconto.Size = new System.Drawing.Size(113, 50);
             this.gbDesconto.TabIndex = 3;

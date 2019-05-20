@@ -44,6 +44,7 @@ namespace _5gpro.Daos
                                              WHERE u2.idusuario IS NULL
                                              ORDER BY proximoid
                                              LIMIT 1";
+
                 var data = sql.selectQueryForSingleRecord();
                 if (data != null)
                 {
@@ -65,6 +66,7 @@ namespace _5gpro.Daos
                           ON DUPLICATE KEY UPDATE
                            nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email,
                            telefone = @telefone, idgrupousuario = @idgrupousuario";
+
                 sql.addParam("@idusuario", usuario.UsuarioID);
                 sql.addParam("@nome", usuario.Nome);
                 sql.addParam("@sobrenome", usuario.Sobrenome);
@@ -111,7 +113,10 @@ namespace _5gpro.Daos
             GrupoUsuario grupousuario = new GrupoUsuario();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = "SELECT * FROM usuario WHERE idusuario = @idusuario LIMIT 1";
+                sql.Query = @"SELECT *, g.nome AS nomegrupo
+                              FROM usuario
+                              INNER JOIN grupo_usuario g
+                              WHERE idusuario = @idusuario LIMIT 1";
                 sql.addParam("@idusuario", cod);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
@@ -143,7 +148,13 @@ namespace _5gpro.Daos
             GrupoUsuario grupousuario = new GrupoUsuario();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * FROM usuario WHERE idusuario = (SELECT min(idusuario) FROM usuario WHERE idusuario > @idusuario) LIMIT 1";
+                sql.Query = @"SELECT *,  g.nome AS nomegrupo
+                              FROM usuario 
+                              INNER JOIN grupo_usuario g
+                              WHERE idusuario = (SELECT min(idusuario) 
+                              FROM usuario 
+                              WHERE idusuario > @idusuario) LIMIT 1";
+
                 sql.addParam("@idusuario", codAtual);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
@@ -152,7 +163,8 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"])
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"]),
+                    Nome = (string)data["nomegrupo"]
                 };
                 usuario = new Usuario
                 {
@@ -172,9 +184,16 @@ namespace _5gpro.Daos
         {
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
+
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * FROM usuario u WHERE u.idusuario = (SELECT max(idusuario) FROM usuario WHERE idusuario < @idusuario) LIMIT 1";
+                sql.Query = @"SELECT *, g.nome AS nomegrupo 
+                              FROM usuario u
+                              INNER JOIN grupo_usuario g
+                              WHERE u.idusuario = (SELECT max(idusuario) 
+                              FROM usuario 
+                              WHERE idusuario < @idusuario) LIMIT 1";
+
                 sql.addParam("@idusuario", codAtual);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
@@ -183,7 +202,8 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"])
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"]),
+                    Nome = (string)data["nomegrupo"]
                 };
                 usuario = new Usuario
                 {
@@ -209,8 +229,9 @@ namespace _5gpro.Daos
 
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT *
+                sql.Query = @"SELECT *, g.nome AS nomegrupo
                             FROM usuario u
+                            INNER JOIN grupo_usuario g
                             WHERE 1=1
                             " + conCodGrupoUsuario + @"
                             " + conNomeUsuario + @"
@@ -224,6 +245,7 @@ namespace _5gpro.Daos
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
                     grupousuario.GrupoUsuarioID = Convert.ToInt32(d["idgrupousuario"]);
+                    grupousuario.Nome = (string)d["nomegrupo"];
                     Usuario usuario = new Usuario
                     {
                         UsuarioID = Convert.ToInt32(d["idusuario"]),

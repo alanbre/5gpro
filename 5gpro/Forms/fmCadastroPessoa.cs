@@ -440,6 +440,8 @@ namespace _5gpro.Forms
             rbAtivo.Checked = true;
             rbInativo.Checked = false;
             tbAjuda.Clear();
+            buscaGrupoPessoa.Limpa();
+            buscaSubGrupoPessoa.Limpa();
         }
         private void PreencheCampos(Pessoa pessoa)
         {
