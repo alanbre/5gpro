@@ -40,7 +40,7 @@
             this.tbCodigoGrupoItem.Location = new System.Drawing.Point(6, 17);
             this.tbCodigoGrupoItem.Name = "tbCodigoGrupoItem";
             this.tbCodigoGrupoItem.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigoGrupoItem.TabIndex = 0;
+            this.tbCodigoGrupoItem.TabIndex = 1;
             this.tbCodigoGrupoItem.TextChanged += new System.EventHandler(this.TbCodigoGrupoItem_TextChanged);
             this.tbCodigoGrupoItem.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoGrupoItem_KeyUp);
             this.tbCodigoGrupoItem.Leave += new System.EventHandler(this.TbCodigoGrupoItem_Leave);
@@ -51,7 +51,7 @@
             this.btBuscaGrupoItem.Location = new System.Drawing.Point(70, 16);
             this.btBuscaGrupoItem.Name = "btBuscaGrupoItem";
             this.btBuscaGrupoItem.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaGrupoItem.TabIndex = 0;
+            this.btBuscaGrupoItem.TabIndex = 2;
             this.btBuscaGrupoItem.TabStop = false;
             this.btBuscaGrupoItem.UseVisualStyleBackColor = true;
             this.btBuscaGrupoItem.Click += new System.EventHandler(this.BtBuscaGrupoItem_Click);
@@ -62,7 +62,7 @@
             this.tbNomeGrupoItem.Name = "tbNomeGrupoItem";
             this.tbNomeGrupoItem.ReadOnly = true;
             this.tbNomeGrupoItem.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeGrupoItem.TabIndex = 0;
+            this.tbNomeGrupoItem.TabIndex = 3;
             this.tbNomeGrupoItem.TabStop = false;
             // 
             // lbGrupoItem
@@ -80,7 +80,7 @@
             this.btAdd.Location = new System.Drawing.Point(442, 16);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(22, 22);
-            this.btAdd.TabIndex = 1;
+            this.btAdd.TabIndex = 4;
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
             // 

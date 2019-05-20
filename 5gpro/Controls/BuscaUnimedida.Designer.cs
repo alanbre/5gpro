@@ -40,7 +40,7 @@
             this.tbCodigoUnimedida.Location = new System.Drawing.Point(6, 17);
             this.tbCodigoUnimedida.Name = "tbCodigoUnimedida";
             this.tbCodigoUnimedida.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigoUnimedida.TabIndex = 0;
+            this.tbCodigoUnimedida.TabIndex = 1;
             this.tbCodigoUnimedida.TextChanged += new System.EventHandler(this.TbCodigoUnimedida_TextChanged);
             this.tbCodigoUnimedida.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoUnimedida_KeyUp);
             this.tbCodigoUnimedida.Leave += new System.EventHandler(this.TbCodigoUnimedida_Leave);
@@ -51,7 +51,7 @@
             this.tbSiglaUnimedida.Name = "tbSiglaUnimedida";
             this.tbSiglaUnimedida.ReadOnly = true;
             this.tbSiglaUnimedida.Size = new System.Drawing.Size(44, 20);
-            this.tbSiglaUnimedida.TabIndex = 0;
+            this.tbSiglaUnimedida.TabIndex = 3;
             // 
             // lbUnimedida
             // 
@@ -68,7 +68,7 @@
             this.btBuscaUnimedida.Location = new System.Drawing.Point(70, 16);
             this.btBuscaUnimedida.Name = "btBuscaUnimedida";
             this.btBuscaUnimedida.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaUnimedida.TabIndex = 0;
+            this.btBuscaUnimedida.TabIndex = 2;
             this.btBuscaUnimedida.UseVisualStyleBackColor = true;
             this.btBuscaUnimedida.Click += new System.EventHandler(this.BtBuscaUnimedida_Click);
             // 
@@ -78,7 +78,7 @@
             this.tbDescricaoUnimedida.Name = "tbDescricaoUnimedida";
             this.tbDescricaoUnimedida.ReadOnly = true;
             this.tbDescricaoUnimedida.Size = new System.Drawing.Size(171, 20);
-            this.tbDescricaoUnimedida.TabIndex = 0;
+            this.tbDescricaoUnimedida.TabIndex = 4;
             // 
             // BuscaUnimedida
             // 

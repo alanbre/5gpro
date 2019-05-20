@@ -41,7 +41,7 @@
             this.btBuscaGrupoUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.btBuscaGrupoUsuario.Name = "btBuscaGrupoUsuario";
             this.btBuscaGrupoUsuario.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaGrupoUsuario.TabIndex = 10;
+            this.btBuscaGrupoUsuario.TabIndex = 2;
             this.btBuscaGrupoUsuario.TabStop = false;
             this.btBuscaGrupoUsuario.UseVisualStyleBackColor = true;
             this.btBuscaGrupoUsuario.Click += new System.EventHandler(this.BtBuscaGrupoUsuario_Click);
@@ -53,7 +53,7 @@
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
             this.tbNomeGrupoUsuario.ReadOnly = true;
             this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeGrupoUsuario.TabIndex = 11;
+            this.tbNomeGrupoUsuario.TabIndex = 3;
             this.tbNomeGrupoUsuario.TabStop = false;
             // 
             // tbCodigoGrupoUsuario
@@ -63,7 +63,7 @@
             this.tbCodigoGrupoUsuario.MaxLength = 5;
             this.tbCodigoGrupoUsuario.Name = "tbCodigoGrupoUsuario";
             this.tbCodigoGrupoUsuario.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigoGrupoUsuario.TabIndex = 9;
+            this.tbCodigoGrupoUsuario.TabIndex = 1;
             this.tbCodigoGrupoUsuario.TextChanged += new System.EventHandler(this.TbCodigoGrupoUsuario_TextChanged);
             this.tbCodigoGrupoUsuario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoGrupoUsuario_KeyUp);
             this.tbCodigoGrupoUsuario.Leave += new System.EventHandler(this.TbCodigoGrupoUsuario_Leave);
@@ -75,7 +75,7 @@
             this.lbGrupoUsuario.Margin = new System.Windows.Forms.Padding(2);
             this.lbGrupoUsuario.Name = "lbGrupoUsuario";
             this.lbGrupoUsuario.Size = new System.Drawing.Size(93, 13);
-            this.lbGrupoUsuario.TabIndex = 8;
+            this.lbGrupoUsuario.TabIndex = 0;
             this.lbGrupoUsuario.Text = "Grupo de usuários";
             // 
             // BuscaGrupoUsuario

@@ -147,18 +147,18 @@ namespace _5gpro.Daos
 
                     pessoa = new Pessoa
                     {
-                        PessoaID = (int)d["idpessoa"],
+                        PessoaID = Convert.ToInt32(d["idpessoa"]),
                         Nome = (string)d["nome"]
                     };
                     operacao = new Operacao
                     {
-                        OperacaoID = (int)d["idoperacao"],
+                        OperacaoID = Convert.ToInt32(d["idoperacao"]),
                         Nome = (string)d["nomeoperacao"]
                     };
 
                     var contaReceber = new ContaReceber
                     {
-                        ContaReceberID = (int)d["idconta_receber"],
+                        ContaReceberID = Convert.ToInt32(d["idconta_receber"]),
                         DataCadastro = (DateTime)d["data_cadastro"],
                         DataConta = (DateTime)d["data_conta"],
                         ValorOriginal = (decimal)d["valor_original"],
@@ -407,14 +407,14 @@ namespace _5gpro.Daos
                 }
 
 
-                parcela.ParcelaContaReceberID = (int)d["idparcela_conta_receber"];
+                parcela.ParcelaContaReceberID = Convert.ToInt32(d["idparcela_conta_receber"]);
                 parcela.DataQuitacao = (DateTime?)d["data_quitacao"];
                 parcela.DataVencimento = (DateTime)d["data_vencimento"];
                 parcela.Juros = (decimal)d["pjuros"];
                 parcela.Acrescimo = (decimal)d["pacrescimo"];
                 parcela.Desconto = (decimal)d["pdesconto"];
                 parcela.Multa = (decimal)d["pmulta"];
-                parcela.Sequencia = (int)d["sequencia"];
+                parcela.Sequencia = Convert.ToInt32(d["sequencia"]);
                 parcela.Valor = (decimal)d["valor"];
                 parcela.Situacao = (string)d["psituacao"];
 

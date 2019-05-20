@@ -41,7 +41,7 @@
             this.tbNomeCidade.Name = "tbNomeCidade";
             this.tbNomeCidade.ReadOnly = true;
             this.tbNomeCidade.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeCidade.TabIndex = 7;
+            this.tbNomeCidade.TabIndex = 3;
             this.tbNomeCidade.TabStop = false;
             // 
             // tbCodigoCidade
@@ -51,7 +51,7 @@
             this.tbCodigoCidade.MaxLength = 5;
             this.tbCodigoCidade.Name = "tbCodigoCidade";
             this.tbCodigoCidade.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigoCidade.TabIndex = 5;
+            this.tbCodigoCidade.TabIndex = 1;
             this.tbCodigoCidade.TextChanged += new System.EventHandler(this.TbCodigoCidade_TextChanged);
             this.tbCodigoCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbFiltroCodigoCidade_KeyUp);
             this.tbCodigoCidade.Leave += new System.EventHandler(this.TbFiltroCodigoCidade_Leave);
@@ -63,7 +63,7 @@
             this.lbFiltroCidade.Margin = new System.Windows.Forms.Padding(2);
             this.lbFiltroCidade.Name = "lbFiltroCidade";
             this.lbFiltroCidade.Size = new System.Drawing.Size(40, 13);
-            this.lbFiltroCidade.TabIndex = 4;
+            this.lbFiltroCidade.TabIndex = 0;
             this.lbFiltroCidade.Text = "Cidade";
             // 
             // btBuscaCidade
@@ -73,12 +73,12 @@
             this.btBuscaCidade.Margin = new System.Windows.Forms.Padding(2);
             this.btBuscaCidade.Name = "btBuscaCidade";
             this.btBuscaCidade.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaCidade.TabIndex = 6;
+            this.btBuscaCidade.TabIndex = 2;
             this.btBuscaCidade.TabStop = false;
             this.btBuscaCidade.UseVisualStyleBackColor = true;
             this.btBuscaCidade.Click += new System.EventHandler(this.BtBuscaCidade_Click);
             // 
-            // buscaCidade
+            // BuscaCidade
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -87,7 +87,7 @@
             this.Controls.Add(this.tbCodigoCidade);
             this.Controls.Add(this.lbFiltroCidade);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "buscaCidade";
+            this.Name = "BuscaCidade";
             this.Size = new System.Drawing.Size(442, 39);
             this.ResumeLayout(false);
             this.PerformLayout();

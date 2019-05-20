@@ -1,6 +1,7 @@
 ﻿using _5gpro.Entities;
 using System.Collections.Generic;
 using MySQLConnection;
+using System;
 
 namespace _5gpro.Daos
 {
@@ -22,7 +23,7 @@ namespace _5gpro.Daos
                     return null;
                 }
                 usuario = new Usuario();
-                usuario.UsuarioID = (int)data["idusuario"];
+                usuario.UsuarioID = Convert.ToInt32(data["idusuario"]);
                 usuario.Nome = (string)data["nome"];
                 usuario.Sobrenome = (string)data["sobrenome"];
                 usuario.Senha = (string)data["senha"];
@@ -46,7 +47,7 @@ namespace _5gpro.Daos
                 var data = sql.selectQueryForSingleRecord();
                 if (data != null)
                 {
-                    proximoid = (int)data["proximoid"];
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
             }
             return proximoid;
@@ -96,7 +97,7 @@ namespace _5gpro.Daos
                 }
                 usuario = new Usuario
                 {
-                    UsuarioID = (int)data["idusuario"],
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
                     Nome = (string)data["nome"]
                 };
             }
@@ -119,11 +120,11 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = (int)data["idgrupousuario"]
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"])
                 };
                 usuario = new Usuario
                 {
-                    UsuarioID = (int)data["idusuario"],
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
                     Senha = (string)data["senha"],
                     Grupousuario = grupousuario,
                     Nome = (string)data["nome"],
@@ -151,11 +152,11 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = (int)data["idgrupousuario"]
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"])
                 };
                 usuario = new Usuario
                 {
-                    UsuarioID = (int)data["idusuario"],
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
                     Senha = (string)data["senha"],
                     Grupousuario = grupousuario,
                     Nome = (string)data["nome"],
@@ -182,11 +183,11 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = (int)data["idgrupousuario"]
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"])
                 };
                 usuario = new Usuario
                 {
-                    UsuarioID = (int)data["idusuario"],
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
                     Senha = (string)data["senha"],
                     Grupousuario = grupousuario,
                     Nome = (string)data["nome"],
@@ -222,10 +223,10 @@ namespace _5gpro.Daos
                 foreach (var d in data)
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = (int)d["idgrupousuario"];
+                    grupousuario.GrupoUsuarioID = Convert.ToInt32(d["idgrupousuario"]);
                     Usuario usuario = new Usuario
                     {
-                        UsuarioID = (int)d["idusuario"],
+                        UsuarioID = Convert.ToInt32(d["idusuario"]),
                         Senha = (string)d["senha"],
                         Grupousuario = grupousuario,
                         Nome = (string)d["nome"],
