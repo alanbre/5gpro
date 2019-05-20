@@ -31,11 +31,12 @@ namespace _5gpro.Daos
         public IEnumerable<GrupoItem> Busca(string nome)
         {
             List<GrupoItem> listagrupoitem = new List<GrupoItem>();
-            string conNome = nome.Length > 0 ? "AND nome LIKE @nome" : "";
+            string conNome = nome.Length > 0 ? " AND nome LIKE @nome" : "";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT *
-                            FROM grupoitem "
+                            FROM grupoitem 
+                            WHERE 1=1"
                              + conNome +
                             @" ORDER BY nome";
                 if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
@@ -155,19 +156,21 @@ namespace _5gpro.Daos
             grupoItem.GrupoItemID = Convert.ToInt32(data[0]["grupoitemID"]);
             grupoItem.Nome = (string)data[0]["nomegrupoitem"];
 
-            var listaSubGrupoItem = new List<SubGrupoItem>();
-
-            foreach (var d in data)
+            if (data[0]["subgrupoitemID"] != null)
             {
-                var subGrupoItem = new SubGrupoItem();
-                subGrupoItem.SubGrupoItemID = Convert.ToInt32(d["subgrupoitemID"]);
-                subGrupoItem.Nome = (string)d["subgrupoitemnome"];
-                subGrupoItem.GrupoItem = grupoItem;
-                
-                listaSubGrupoItem.Add(subGrupoItem);
-            }
-            grupoItem.SubGrupoItens = listaSubGrupoItem;
+                var listaSubGrupoItem = new List<SubGrupoItem>();
 
+                foreach (var d in data)
+                {
+                    var subGrupoItem = new SubGrupoItem();
+                    subGrupoItem.SubGrupoItemID = Convert.ToInt32(d["subgrupoitemID"]);
+                    subGrupoItem.Nome = (string)d["subgrupoitemnome"];
+                    subGrupoItem.GrupoItem = grupoItem;
+
+                    listaSubGrupoItem.Add(subGrupoItem);
+                }
+                grupoItem.SubGrupoItens = listaSubGrupoItem;
+            }
             return grupoItem;
         }
 

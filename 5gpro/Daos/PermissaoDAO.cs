@@ -41,13 +41,13 @@ namespace _5gpro.Daos
                 {
                     string codfiltro = (string)d["pcodigo"];
 
-
+                    
                     Permissao p = new Permissao
                     {
-                        PermissaoId = (int) d["pid"],
+                        PermissaoId = (int)d["pid"],
                         Nome = (string)d["pnome"],
                         Codigo = (string)d["pcodigo"],
-                        Nivel = (string)d["pgnivel"]
+                        Nivel = Convert.ToString(d["pgnivel"])
 
                     };
                     permissoes.Todas.Add(p);

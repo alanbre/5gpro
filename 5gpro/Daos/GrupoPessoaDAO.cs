@@ -21,6 +21,7 @@ namespace _5gpro.Daos
                             (@idgrupopessoa, @nome)
                             ON DUPLICATE KEY UPDATE
                             nome = @nome";
+
                 sql.addParam("@idgrupopessoa", grupopessoa.GrupoPessoaID);
                 sql.addParam("@nome", grupopessoa.Nome);
                 retorno = sql.insertQuery();
@@ -32,18 +33,18 @@ namespace _5gpro.Daos
         public IEnumerable<GrupoPessoa> Busca(string nome)
         {
             List<GrupoPessoa> listaGrupoPessoa = new List<GrupoPessoa>();
-            string conNome = nome.Length > 0 ? "AND g.nome LIKE @nome" : "";
+            string conNome = nome.Length > 0 ? " AND g.nome LIKE @nome" : "";
 
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT *
-                            FROM grupopessoa
+                            FROM grupopessoa g
                             WHERE 1=1"
                             + conNome +
-                            @" ORDER BY nome";
+                            " ORDER BY g.nome";
                 if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
                 var data = sql.selectQuery();
-                foreach(var d in data)
+                foreach (var d in data)
                 {
                     var grupoPessoa = new GrupoPessoa();
                     grupoPessoa.GrupoPessoaID = Convert.ToInt32(d["idgrupopessoa"]);
@@ -61,12 +62,13 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
                             FROM grupopessoa g 
                             LEFT JOIN subgrupopessoa s 
                             ON g.idgrupopessoa = s.idgrupopessoa 
                             WHERE g.idgrupopessoa = @idgrupopessoa";
-                sql.addParam("@idgrupoitem", Codigo);
+
+                sql.addParam("@idgrupopessoa", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
                 {
@@ -84,13 +86,13 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
                             FROM grupopessoa g 
                             LEFT JOIN subgrupopessoa s 
                             ON g.idgrupopessoa = s.idgrupopessoa 
                             WHERE g.idgrupopessoa = (SELECT MIN(idgrupopessoa) 
                             FROM grupopessoa WHERE idgrupopessoa > @idgrupopessoa)";
-                sql.addParam("@idgrupoitem", Codigo);
+                sql.addParam("@idgrupopessoa", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
                 {
@@ -107,13 +109,13 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
                             FROM grupopessoa g 
                             LEFT JOIN subgrupopessoa s 
                             ON g.idgrupopessoa = s.idgrupopessoa 
                             WHERE g.idgrupopessoa = (SELECT MAX(idgrupopessoa) 
                             FROM grupopessoa WHERE idgrupopessoa < @idgrupopessoa)";
-                sql.addParam("@idgrupoitem", Codigo);
+                sql.addParam("@idgrupopessoa", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
                 {
@@ -154,19 +156,23 @@ namespace _5gpro.Daos
             var grupoPessoa = new GrupoPessoa();
             grupoPessoa.GrupoPessoaID = Convert.ToInt32(data[0]["grupopessoaID"]);
             grupoPessoa.Nome = (string)data[0]["nomegrupopessoa"];
-
             var listaSubGrupoPessoa = new List<SubGrupoPessoa>();
 
-            foreach (var d in data)
-            {
-                var subGrupoPessoa = new SubGrupoPessoa();
-                subGrupoPessoa.SubGrupoPessoaID = Convert.ToInt32(d["subgrupopessoaID"]);
-                subGrupoPessoa.Nome = (string)d["subgrupopessoanome"];
-                subGrupoPessoa.GrupoPessoa = grupoPessoa;
 
-                listaSubGrupoPessoa.Add(subGrupoPessoa);
+            if (data[0]["subgrupopessoaID"] != null)
+            {
+
+                foreach (var d in data)
+                {
+                    var subGrupoPessoa = new SubGrupoPessoa();
+                    subGrupoPessoa.SubGrupoPessoaID = Convert.ToInt32(d["subgrupopessoaID"]);
+                    subGrupoPessoa.Nome = (string)d["subgrupopessoanome"];
+                    subGrupoPessoa.GrupoPessoa = grupoPessoa;
+
+                    listaSubGrupoPessoa.Add(subGrupoPessoa);
+                }
+                grupoPessoa.SubGrupoPessoas = listaSubGrupoPessoa;
             }
-            grupoPessoa.SubGrupoPessoas = listaSubGrupoPessoa;
 
             return grupoPessoa;
         }

@@ -387,16 +387,13 @@ namespace _5gpro.Forms
             if (grupoitem != null)
             {
                 btAddSub.Enabled = true;
+                btRemoverSub.Enabled = false;
 
                 if (grupoitem.SubGrupoItens != null)
                 {
                     if (grupoitem.SubGrupoItens.Count > 0)
                     {
                         btRemoverSub.Enabled = true;
-                    }
-                    else
-                    {
-                        btRemoverSub.Enabled = false;
                     }
                 }
             }
@@ -456,6 +453,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigo.Text = grupoitem.GrupoItemID.ToString();
             tbNomeGrupoItem.Text = grupoitem.Nome;
+            dgvSubGruposItens.Rows.Clear();
 
             if (grupoitem.SubGrupoItens != null)
             {
@@ -472,12 +470,13 @@ namespace _5gpro.Forms
 
         public void AtualizarDgvSub()
         {
-
             ignoraCheckEvent = true;
 
             if (grupoitem != null)
             {
+                //Busca novamente para atualizar a lista de subgrupos.
                 grupoitem = grupoitemDAO.BuscarByID(grupoitem.GrupoItemID);
+
                 if (grupoitem.SubGrupoItens != null)
                 {
                     if (grupoitem.SubGrupoItens.Count > 0)
@@ -565,15 +564,18 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
+                    AlterarBotoesSubAdd();
+                    AtualizarDgvSub();
                 }
                 else if (resultado == 2)
                 {
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
+                    AlterarBotoesSubAdd();
+                    AtualizarDgvSub();
                 }
             }
-            AlterarBotoesSubAdd();
-            AtualizarDgvSub();
+
         }
 
         private void AbreTelaBuscaGrupoItem()
