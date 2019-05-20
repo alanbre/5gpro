@@ -16,12 +16,13 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"INSERT INTO item 
-                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem) 
+                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade) 
                             VALUES
-                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem)
+                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade)
                             ON DUPLICATE KEY UPDATE
                             descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
-                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem";
+                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade";
+
                 sql.addParam("@iditem", item.ItemID);
                 sql.addParam("@descitem", item.Descricao);
                 sql.addParam("@denominacaocompra", item.DescCompra);
@@ -32,6 +33,7 @@ namespace _5gpro.Daos
                 sql.addParam("@estoquenecessario", item.Estoquenecessario);
                 sql.addParam("@idunimedida", item.Unimedida.UnimedidaID);
                 sql.addParam("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
+                sql.addParam("@quantidade", item.Quantidade);
                 retorno = sql.insertQuery();
             }
             return retorno;
@@ -44,6 +46,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
+                            INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
                             WHERE iditem = @iditem";
                 sql.addParam("@iditem", Codigo);
 
@@ -64,6 +67,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
+                            INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
                             WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)";
                 sql.addParam("@iditem", Codigo);
 
@@ -84,6 +88,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i 
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
+                            INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
                             WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)";
                 sql.addParam("@iditem", Codigo);
 
@@ -148,6 +153,8 @@ namespace _5gpro.Daos
         {
             var unidadeMedida = new Unimedida();
             unidadeMedida.UnimedidaID = Convert.ToInt32(data["idunimedida"]);
+            unidadeMedida.Sigla = (string)data["sigla"];
+            unidadeMedida.Descricao = (string)data["descricao"];
 
             var grupoItem = new GrupoItem();
             grupoItem.GrupoItemID = Convert.ToInt32(data["idgrupoitem"]);

@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
-            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
-            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
-            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
@@ -54,7 +51,12 @@
             this.tpVendas = new System.Windows.Forms.TabPage();
             this.tbPrecoVenda = new System.Windows.Forms.TextBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
+            this.lbQuantidade = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
+            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
             this.pnDadosGerais.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
             this.tcItens.SuspendLayout();
@@ -67,6 +69,8 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.dbQuantidade);
+            this.pnDadosGerais.Controls.Add(this.lbQuantidade);
             this.pnDadosGerais.Controls.Add(this.buscaSubGrupoItem);
             this.pnDadosGerais.Controls.Add(this.buscaGrupoItem);
             this.pnDadosGerais.Controls.Add(this.buscaUnimedidaItem);
@@ -81,30 +85,8 @@
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
             this.pnDadosGerais.Location = new System.Drawing.Point(74, 12);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 345);
+            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 364);
             this.pnDadosGerais.TabIndex = 0;
-            // 
-            // buscaSubGrupoItem
-            // 
-            this.buscaSubGrupoItem.Location = new System.Drawing.Point(12, 257);
-            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
-            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaSubGrupoItem.TabIndex = 13;
-            // 
-            // buscaGrupoItem
-            // 
-            this.buscaGrupoItem.Location = new System.Drawing.Point(12, 212);
-            this.buscaGrupoItem.Name = "buscaGrupoItem";
-            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaGrupoItem.TabIndex = 12;
-            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
-            // 
-            // buscaUnimedidaItem
-            // 
-            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 128);
-            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
-            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
-            this.buscaUnimedidaItem.TabIndex = 6;
             // 
             // gbTipoDeItem
             // 
@@ -143,7 +125,7 @@
             // 
             // tbReferencia
             // 
-            this.tbReferencia.Location = new System.Drawing.Point(16, 186);
+            this.tbReferencia.Location = new System.Drawing.Point(15, 232);
             this.tbReferencia.Name = "tbReferencia";
             this.tbReferencia.Size = new System.Drawing.Size(308, 20);
             this.tbReferencia.TabIndex = 7;
@@ -152,7 +134,7 @@
             // lbReferencia
             // 
             this.lbReferencia.AutoSize = true;
-            this.lbReferencia.Location = new System.Drawing.Point(13, 170);
+            this.lbReferencia.Location = new System.Drawing.Point(12, 216);
             this.lbReferencia.Name = "lbReferencia";
             this.lbReferencia.Size = new System.Drawing.Size(59, 13);
             this.lbReferencia.TabIndex = 11;
@@ -219,7 +201,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.Enabled = false;
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(74, 540);
+            this.tbAjuda.Location = new System.Drawing.Point(74, 556);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
             this.tbAjuda.TabIndex = 0;
@@ -229,7 +211,7 @@
             // 
             this.tcItens.Controls.Add(this.tpEstoque);
             this.tcItens.Controls.Add(this.tpVendas);
-            this.tcItens.Location = new System.Drawing.Point(74, 363);
+            this.tcItens.Location = new System.Drawing.Point(74, 379);
             this.tcItens.Name = "tcItens";
             this.tcItens.SelectedIndex = 0;
             this.tcItens.Size = new System.Drawing.Size(1108, 171);
@@ -325,6 +307,15 @@
             this.lbPrecoVenda.TabIndex = 0;
             this.lbPrecoVenda.Text = "Preço de venda";
             // 
+            // lbQuantidade
+            // 
+            this.lbQuantidade.AutoSize = true;
+            this.lbQuantidade.Location = new System.Drawing.Point(13, 170);
+            this.lbQuantidade.Name = "lbQuantidade";
+            this.lbQuantidade.Size = new System.Drawing.Size(62, 13);
+            this.lbQuantidade.TabIndex = 14;
+            this.lbQuantidade.Text = "Quantidade";
+            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(9, 12);
@@ -340,12 +331,48 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical1_Excluir_Clicked);
             // 
+            // dbQuantidade
+            // 
+            this.dbQuantidade.Location = new System.Drawing.Point(16, 186);
+            this.dbQuantidade.Name = "dbQuantidade";
+            this.dbQuantidade.Size = new System.Drawing.Size(100, 22);
+            this.dbQuantidade.TabIndex = 15;
+            this.dbQuantidade.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // buscaSubGrupoItem
+            // 
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(11, 303);
+            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
+            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaSubGrupoItem.TabIndex = 13;
+            this.buscaSubGrupoItem.Text_Changed += new _5gpro.Controls.BuscaSubGrupoItem.text_changedEventHandler(this.BuscaSubGrupoItem_Text_Changed_1);
+            // 
+            // buscaGrupoItem
+            // 
+            this.buscaGrupoItem.Location = new System.Drawing.Point(11, 258);
+            this.buscaGrupoItem.Name = "buscaGrupoItem";
+            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaGrupoItem.TabIndex = 12;
+            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
+            // 
+            // buscaUnimedidaItem
+            // 
+            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 128);
+            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
+            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
+            this.buscaUnimedidaItem.TabIndex = 6;
+            this.buscaUnimedidaItem.Text_Changed += new _5gpro.Controls.BuscaUnimedida.text_changedEventHandler(this.BuscaUnimedidaItem_Text_Changed);
+            // 
             // fmCadastroItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1194, 562);
+            this.ClientSize = new System.Drawing.Size(1194, 578);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tcItens);
             this.Controls.Add(this.tbAjuda);
@@ -402,5 +429,7 @@
         private Controls.BuscaUnimedida buscaUnimedidaItem;
         private Controls.BuscaGrupoItem buscaGrupoItem;
         private Controls.BuscaSubGrupoItem buscaSubGrupoItem;
+        private Controls.DecimalBox dbQuantidade;
+        private System.Windows.Forms.Label lbQuantidade;
     }
 }
