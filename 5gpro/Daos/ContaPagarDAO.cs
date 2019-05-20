@@ -226,6 +226,7 @@ namespace _5gpro.Daos
         }
         private ContaPagar LeDadosReader(List<Dictionary<string, object>> data)
         {
+
             if (data.Count == 0)
             {
                 return null;

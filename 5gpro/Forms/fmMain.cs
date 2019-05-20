@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
+using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -194,6 +195,12 @@ namespace _5gpro
         {
             var formCapQuitacaoConta = new fmCapQuitacaoConta();
             formCapQuitacaoConta.Show(this);
+        }
+
+        private void TesteeduardoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var RelatUnimedida = new rvTeste();
+            RelatUnimedida.Show(this);
         }
     }
 }
