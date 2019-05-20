@@ -33,7 +33,7 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT *
-                            FROM grupopessoa
+                            FROM grupo_usuario
                             WHERE 1=1"
                             + conNome +
                             @" ORDER BY nome";

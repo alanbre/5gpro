@@ -294,14 +294,13 @@ namespace _5gpro.Forms
 
             if (!editando && tbCodigo.Text.Length > 0)
             {
-
                 validacao.despintarCampos(controls);
 
                 GrupoPessoa newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                 if (newgrupopessoa != null)
                 {
                     grupopessoa = newgrupopessoa;
-                    PreencheCampos(grupopessoa);
+                    PreencheCampos(grupopessoa);                  
                 }
             }
             else if (editando && tbCodigo.Text.Length > 0)
@@ -385,16 +384,13 @@ namespace _5gpro.Forms
             if (grupopessoa != null)
             {
                 btAddSub.Enabled = true;
+                btRemoverSub.Enabled = false;
 
                 if (grupopessoa.SubGrupoPessoas != null)
                 {
                     if (grupopessoa.SubGrupoPessoas.Count > 0)
                     {
                         btRemoverSub.Enabled = true;
-                    }
-                    else
-                    {
-                        btRemoverSub.Enabled = false;
                     }
                 }
             }
@@ -454,6 +450,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigo.Text = grupopessoa.GrupoPessoaID.ToString();
             tbNomeGrupoPessoa.Text = grupopessoa.Nome;
+            dgvSubGruposPessoas.Rows.Clear();
 
             if (grupopessoa.SubGrupoPessoas != null)
             {
@@ -474,7 +471,9 @@ namespace _5gpro.Forms
 
             if (grupopessoa != null)
             {
+                //Busca novamente para atualizar a lista de subgrupos.
                 grupopessoa = grupopessoaDAO.BuscarByID(grupopessoa.GrupoPessoaID);
+
                 if (grupopessoa.SubGrupoPessoas != null)
                 {
                     if (grupopessoa.SubGrupoPessoas.Count > 0)
@@ -527,6 +526,7 @@ namespace _5gpro.Forms
 
                     grupopessoa.GrupoPessoaID = int.Parse(tbCodigo.Text);
                     grupopessoa.Nome = tbNomeGrupoPessoa.Text;
+                    grupopessoa.SubGrupoPessoas = new List<SubGrupoPessoa>();
 
                     ControlCollection controls = (ControlCollection)this.Controls;
 
@@ -563,15 +563,17 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
+                    AlterarBotoesSubAdd();
+                    AtualizarDgvSub();
                 }
                 else if (resultado == 2)
                 {
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
+                    AlterarBotoesSubAdd();
+                    AtualizarDgvSub();
                 }
             }
-            AlterarBotoesSubAdd();
-            AtualizarDgvSub();
         }
 
         private void AbreTelaBuscaGrupoPessoa()
