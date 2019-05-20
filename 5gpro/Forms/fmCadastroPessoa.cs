@@ -140,7 +140,7 @@ namespace _5gpro.Forms
             {
                 buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
                 buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EscolhaOGrupo();
+                buscaSubGrupoPessoa.EscolhaOGrupo(false);
             }
         }
 
