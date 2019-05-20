@@ -72,7 +72,7 @@ namespace _5gpro.testesrelatorios
             //DataSetUnimedida datuni = new DataSetUnimedida();
             //DataTable colab = new DataTable();
 
-            listaunimedida = unimedidaDAO.BuscarUnimedida("").ToList();
+            listaunimedida = unimedidaDAO.Busca("").ToList();
 
             foreach (Unimedida u in listaunimedida)
             {

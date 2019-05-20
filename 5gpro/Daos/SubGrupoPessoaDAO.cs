@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,200 +15,108 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public int SalvarOuAtualizar(SubGrupoPessoa subgrupoipessoa)
+        public int SalvaOuAtualiza(SubGrupoPessoa subgrupoipessoa)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"INSERT INTO subgrupopessoa 
-                          (idsubgrupopessoa, nome, idgrupopessoa) 
-                          VALUES
-                          (@idsubgrupopessoa, @nome, @idgrupopessoa)
-                          ON DUPLICATE KEY UPDATE
-                           nome = @nome, idgrupopessoa = @idgrupopessoa
-                         ;",
-                         Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", subgrupoipessoa.SubGrupoPessoaID);
-                Connect.Comando.Parameters.AddWithValue("@nome", subgrupoipessoa.Nome);
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", subgrupoipessoa.GrupoPessoa.GrupoPessoaID);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = @"INSERT INTO subgrupopessoa 
+                            (idsubgrupopessoa, nome, idgrupopessoa) 
+                            VALUES
+                            (@idsubgrupopessoa, @nome, @idgrupopessoa)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, idgrupopessoa = @idgrupopessoa";
+                sql.addParam("@idsubgrupopessoa", subgrupoipessoa.SubGrupoPessoaID);
+                sql.addParam("@nome", subgrupoipessoa.Nome);
+                sql.addParam("@idgrupopessoa", subgrupoipessoa.GrupoPessoa.GrupoPessoaID);
+                retorno = sql.insertQuery();
             }
             return retorno;
         }
-
-        public IEnumerable<SubGrupoPessoa> BuscaTodos(string nome, int grupopessoaID)
+        public IEnumerable<SubGrupoPessoa> Busca(string nome, int grupopessoaID)
         {
-            List<SubGrupoPessoa> listasubgrupopessoa = new List<SubGrupoPessoa>();
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-
-            string conNome = nome.Length > 0 ? "AND g.nome LIKE @nome" : "";
-            string conGrupoPessoa = "AND g.idgrupopessoa = @idgrupopessoa";
-
-            try
+            var listaSubGrupoPessoa = new List<SubGrupoPessoa>();
+            string conNome = nome.Length > 0 ? "AND nome LIKE @nome" : "";
+            string conGrupoPessoa = "AND idgrupopessoa = @idgrupopessoa";
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM subgrupopessoa g 
-                                             WHERE 1=1
-                                             " + conGrupoPessoa + @"
-                                             " + conNome + @"
-                                             ORDER BY g.nome;", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", grupopessoaID);
-                if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM subgrupopessoa 
+                            WHERE 1=1 "
+                            + conGrupoPessoa + " "
+                            + conNome + " "
+                            +@"ORDER BY nome";
+                sql.addParam("@idgrupopessoa", grupopessoaID);
+                if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    while (reader.Read())
-                    {
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa"))
-                        };
-
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            GrupoPessoa = grupopessoa
-                        };
-
-                        listasubgrupopessoa.Add(subgrupopessoa);
-                    }
+                    listaSubGrupoPessoa.Add(LeDadosReader(d));
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return listasubgrupopessoa;
+            return listaSubGrupoPessoa;
         }
-
         public SubGrupoPessoa BuscarByID(int Codigo, int grupopessoaID)
         {
-
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = null;
-
-            try
+            var subGrupoPessoa = new SubGrupoPessoa();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM subgrupopessoa g 
-                                             WHERE g.idsubgrupopessoa = @idsubgrupopessoa
-                                             AND g.idgrupopessoa = @idgrupopessoa
-                                             ", Connect.Conexao);
+                sql.Query = @"SELECT *
+                            FROM subgrupopessoa 
+                            WHERE idsubgrupopessoa = @idsubgrupopessoa
+                            AND idgrupopessoa = @idgrupopessoa";
+                sql.addParam("@idsubgrupopessoa", Codigo);
+                sql.addParam("@idgrupopessoa", grupopessoaID);
 
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", Codigo);
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", grupopessoaID);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    while (reader.Read())
-                    {
-                        grupopessoa = new GrupoPessoa
-                        {
-                            GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idgrupopessoa"))
-                        };
-
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("idsubgrupopessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                    }
+                    return null;
                 }
+                subGrupoPessoa = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return subgrupopessoa;
+            return subGrupoPessoa;
         }
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT i1.idsubgrupopessoa + 1 AS proximoid
-                                             FROM subgrupopessoa AS i1
-                                             LEFT OUTER JOIN subgrupopessoa AS i2 ON i1.idsubgrupopessoa + 1 = i2.idsubgrupopessoa
-                                             WHERE i2.idsubgrupopessoa IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT i1.idsubgrupopessoa + 1 AS proximoid
+                            FROM subgrupopessoa AS i1
+                            LEFT OUTER JOIN subgrupopessoa AS i2 ON i1.idsubgrupopessoa + 1 = i2.idsubgrupopessoa
+                            WHERE i2.idsubgrupopessoa IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-
-                    if (reader.Read())
-                    {
-                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    }
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return proximoid;
         }
-
         public int Remover(string idsub)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"DELETE FROM subgrupopessoa WHERE idsubgrupopessoa = @idsubgrupopessoa", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idsubgrupopessoa", idsub);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = @"DELETE FROM subgrupopessoa WHERE idsubgrupopessoa = @idsubgrupopessoa";
+                sql.addParam("@idsubgrupopessoa", idsub);
+                retorno = sql.deleteQuery();
             }
             return retorno;
+        }
+        private SubGrupoPessoa LeDadosReader(Dictionary<string, object> data)
+        {
+            var grupoPessoa = new GrupoPessoa();
+            grupoPessoa.GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]);
+
+            var subGrupoPessoa = new SubGrupoPessoa();
+            subGrupoPessoa.SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]);
+            subGrupoPessoa.Nome = (string)data["nome"];
+            subGrupoPessoa.GrupoPessoa = grupoPessoa;
+            return subGrupoPessoa;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,488 +13,186 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public int SalvarOuAtualizarOperacao(Operacao operacao)
+        public int SalvaOuAtualiza(Operacao operacao)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = Connect.Conexao.CreateCommand();
-                Connect.tr = Connect.Conexao.BeginTransaction();
-                Connect.Comando.Connection = Connect.Conexao;
-                Connect.Comando.Transaction = Connect.tr;
-
-                Connect.Comando.CommandText = @"INSERT INTO operacao 
-                          (idoperacao, nome, descricao, condicao, desconto, entrada, acrescimo) 
-                          VALUES
-                          (@idoperacao, @nome, @descricao, @condicao, @desconto, @entrada, @acrescimo)
-                          ON DUPLICATE KEY UPDATE
-                           nome = @nome, descricao = @descricao, condicao = @condicao, desconto = @desconto, entrada = @entrada, acrescimo = @acrescimo
-                         ";
-
-                Connect.Comando.Parameters.AddWithValue("@idoperacao", operacao.OperacaoID);
-                Connect.Comando.Parameters.AddWithValue("@nome", operacao.Nome);
-                Connect.Comando.Parameters.AddWithValue("@descricao", operacao.Descricao);
-                Connect.Comando.Parameters.AddWithValue("@condicao", operacao.Condicao);
-                Connect.Comando.Parameters.AddWithValue("@desconto", operacao.Desconto);
-                Connect.Comando.Parameters.AddWithValue("@entrada", operacao.Entrada);
-                Connect.Comando.Parameters.AddWithValue("@acrescimo", operacao.Acrescimo);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-                if (retorno > 0 && operacao.Condicao.Equals("AP"))
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO operacao 
+                            (idoperacao, nome, descricao, condicao, desconto, entrada, acrescimo) 
+                            VALUES
+                            (@idoperacao, @nome, @descricao, @condicao, @desconto, @entrada, @acrescimo)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, descricao = @descricao, condicao = @condicao, desconto = @desconto, entrada = @entrada, acrescimo = @acrescimo";
+                sql.addParam("@idoperacao", operacao.OperacaoID);
+                sql.addParam("@nome", operacao.Nome);
+                sql.addParam("@descricao", operacao.Descricao);
+                sql.addParam("@condicao", operacao.Condicao);
+                sql.addParam("@desconto", operacao.Desconto);
+                sql.addParam("@entrada", operacao.Entrada);
+                sql.addParam("@acrescimo", operacao.Acrescimo);
+                retorno = sql.insertQuery();
+                if (retorno > 0)
                 {
+                    sql.Query = @"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao";
+                    sql.deleteQuery();
 
-                    Connect.Comando.CommandText = @"INSERT INTO parcelaoperacao 
-                                            (idparcelaoperacao, numero, dias, idoperacao)
-                                            VALUES
-                                            (@idparcelaoperacao, @numero, @dias, @idoperacao)
-                                            ON DUPLICATE KEY UPDATE
-                                             numero = @numero, dias = @dias, idoperacao = @idoperacao 
-                                             ";
-
-                    foreach (ParcelaOperacao p in operacao.Parcelas)
+                    sql.Query = @"INSERT INTO parcelaoperacao 
+                                (idparcelaoperacao, numero, dias, idoperacao)
+                                VALUES
+                                (@idparcelaoperacao, @numero, @dias, @idoperacao)
+                                ON DUPLICATE KEY UPDATE
+                                numero = @numero, dias = @dias, idoperacao = @idoperacao ";
+                    foreach (var p in operacao.Parcelas)
                     {
-                        Connect.Comando.Parameters.Clear();
-                        Connect.Comando.Parameters.AddWithValue("@idparcelaoperacao", p.ParcelaOperacaoID);
-                        Connect.Comando.Parameters.AddWithValue("@numero", p.Numero);
-                        Connect.Comando.Parameters.AddWithValue("@dias", p.Dias);
-                        Connect.Comando.Parameters.AddWithValue("@idoperacao", operacao.OperacaoID);
-                        Connect.Comando.ExecuteNonQuery();
+                        sql.clearParams();
+                        sql.addParam("@idparcelaoperacao", p.ParcelaOperacaoID);
+                        sql.addParam("@numero", p.Numero);
+                        sql.addParam("@dias", p.Dias);
+                        sql.addParam("@idoperacao", operacao.OperacaoID);
+                        sql.insertQuery();
                     }
-
                 }
-                Connect.tr.Commit();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Commit();
             }
             return retorno;
         }
-
-        public Operacao BuscaById(int CodOperacao)
+        public Operacao BuscaByID(int Codigo)
         {
-
-            Operacao operacao = null;
-            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
-
-            try
+            var operacao = new Operacao();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM operacao o 
-                                             LEFT JOIN parcelaoperacao p 
-                                             ON o.idoperacao = p.idoperacao
-                                             WHERE o.idoperacao = @idoperacao", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idoperacao", CodOperacao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM operacao o 
+                            LEFT JOIN parcelaoperacao p 
+                            ON o.idoperacao = p.idoperacao
+                            WHERE o.idoperacao = @idoperacao";
+                sql.addParam("@idoperacao", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        operacao = new Operacao
-                        {
-                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao")),
-                            Condicao = reader.GetString(reader.GetOrdinal("condicao")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        };
-
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacao
-                            };
-
-                            parcelas.Add(parcela);
-                        }
-                    }
-
-                    while (reader.Read())
-                    {
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacao
-                            };
-
-                            parcelas.Add(parcela);
-                        }
-                    }
-
+                    return null;
                 }
-
-                if (operacao != null) { operacao.Parcelas = parcelas; }
-
-
+                operacao = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return operacao;
         }
-
-
-        public IEnumerable<Operacao> BuscaOperacoes(string nomeOperacao)
+        public IEnumerable<Operacao> Busca(string nomeOperacao)
         {
-            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
             List<Operacao> operacoes = new List<Operacao>();
-
             string conNomeOperacao = nomeOperacao.Length > 0 ? "AND o.nome LIKE @nomeoperacao" : "";
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM operacao o 
-                                             LEFT JOIN parcelaoperacao p 
-                                             ON o.idoperacao = p.idoperacao
-                                             WHERE 1=1
-                                             " + conNomeOperacao + @"
-                                             ORDER BY o.nome;", Connect.Conexao);
-
-                if (nomeOperacao.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomeoperacao", "%" + nomeOperacao + "%"); }
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM operacao o 
+                            LEFT JOIN parcelaoperacao p 
+                            ON o.idoperacao = p.idoperacao
+                            WHERE 1=1 "
+                            + conNomeOperacao + " "
+                            + @"ORDER BY o.nome";
+                if (nomeOperacao.Length > 0) { sql.addParam("@nomeoperacao", "%" + nomeOperacao + "%"); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    while (reader.Read())
-                    {
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-                            Operacao operacaoparcela = new Operacao();
-                            operacaoparcela.OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao"));
-
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacaoparcela
-                            };
-
-                            parcelas.Add(parcela);
-                        }
-
-                        Operacao operacao = new Operacao
-                        {
-                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao")),
-                            Condicao = reader.GetString(reader.GetOrdinal("condicao")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        };
-
-                        //O Any funciona como o IEnumerable
-                        //Para não adicionar repetidos
-                        if (!operacoes.Any(l => l.OperacaoID == reader.GetInt32(reader.GetOrdinal("idoperacao"))))
-                        {
-                            operacoes.Add(operacao);
-                        }
-
-                    }
-
+                    var operacao = new Operacao();
+                    operacao.OperacaoID = Convert.ToInt32(d["idoperacao"]);
+                    operacao.Nome = (string)d["nome"];
+                    operacao.Descricao = (string)d["descricao"];
+                    operacao.Condicao = (string)d["condicao"];
+                    operacao.Desconto = (decimal)d["desconto"];
+                    operacao.Entrada = (decimal)d["entrada"];
+                    operacao.Acrescimo = (decimal)d["acrescimo"];
+                    operacoes.Add(operacao);
                 }
-
-                foreach (Operacao o in operacoes)
-                {
-                    o.Parcelas = new List<ParcelaOperacao>();
-                    foreach (ParcelaOperacao p in parcelas)
-                    {
-                        if (p.Operacao.OperacaoID == o.OperacaoID)
-                        {
-                            o.Parcelas.Add(p);
-                        }
-                    }
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return operacoes;
         }
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"SELECT o1.idoperacao + 1 AS proximoid
-                                             FROM operacao AS o1
-                                             LEFT OUTER JOIN operacao AS o2 ON o1.idoperacao + 1 = o2.idoperacao
-                                             WHERE o2.idoperacao IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT o1.idoperacao + 1 AS proximoid
+                            FROM operacao AS o1
+                            LEFT OUTER JOIN operacao AS o2 ON o1.idoperacao + 1 = o2.idoperacao
+                            WHERE o2.idoperacao IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-                    if (reader.Read())
-                    {
-                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    }
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return proximoid;
         }
-
-
-        public Operacao BuscarProximaOperacao(string codAtual)
+        public Operacao Proxima(string Codigo)
         {
-            Operacao operacao = null;
-            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
-
-            try
+            var operacao = new Operacao();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM operacao o 
-                                                    LEFT JOIN parcelaoperacao p ON o.idoperacao = p.idoperacao
-                                                    WHERE o.idoperacao = (SELECT min(idoperacao) 
-                                                    FROM operacao 
-                                                    WHERE idoperacao > @idoperacao)", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idoperacao", codAtual);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM operacao o 
+                            LEFT JOIN parcelaoperacao p 
+                            ON o.idoperacao = p.idoperacao
+                            WHERE o.idoperacao = (SELECT min(idoperacao) FROM operacao WHERE idoperacao > @idoperacao)";
+                sql.addParam("@idoperacao", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        operacao = new Operacao
-                        {
-                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao")),
-                            Condicao = reader.GetString(reader.GetOrdinal("condicao")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        };
-
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacao
-                            };
-
-                            parcelas.Add(parcela);
-                        }
-                    }
-
-                    while (reader.Read())
-                    {
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacao
-                            };
-
-                            parcelas.Add(parcela);
-                        }
-                    }
-
+                    return null;
                 }
-
-                if (operacao != null) { operacao.Parcelas = parcelas; }
+                operacao = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return operacao;
         }
-
-        public Operacao BuscarOperacaoAnterior(string codAtual)
+        public Operacao Anterior(string Codigo)
         {
-            Operacao operacao = null;
-            List<ParcelaOperacao> parcelas = new List<ParcelaOperacao>();
-
-            try
+            var operacao = new Operacao();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM operacao o 
-                                                    LEFT JOIN parcelaoperacao p ON o.idoperacao = p.idoperacao
-                                                    WHERE o.idoperacao = (SELECT max(idoperacao) 
-                                                    FROM operacao 
-                                                    WHERE idoperacao < @idoperacao)", Connect.Conexao);
-
-
-                Connect.Comando.Parameters.AddWithValue("@idoperacao", codAtual);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM operacao o 
+                            LEFT JOIN parcelaoperacao p 
+                            ON o.idoperacao = p.idoperacao
+                            WHERE o.idoperacao = (SELECT max(idoperacao) FROM operacao WHERE idoperacao < @idoperacao)";
+                sql.addParam("@idoperacao", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        operacao = new Operacao
-                        {
-                            OperacaoID = reader.GetInt32(reader.GetOrdinal("idoperacao")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao")),
-                            Condicao = reader.GetString(reader.GetOrdinal("condicao")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Entrada = reader.GetDecimal(reader.GetOrdinal("entrada")),
-                            Acrescimo = reader.GetDecimal(reader.GetOrdinal("acrescimo")),
-                        };
-
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacao
-                            };
-                            parcelas.Add(parcela);
-                        }
-                    }
-                    while (reader.Read())
-                    {
-                        if (reader.GetString(reader.GetOrdinal("condicao")).Equals("AP"))
-                        {
-                            ParcelaOperacao parcela = new ParcelaOperacao
-                            {
-                                ParcelaOperacaoID = reader.GetInt32(reader.GetOrdinal("idparcelaoperacao")),
-                                Numero = reader.GetInt32(reader.GetOrdinal("numero")),
-                                Dias = reader.GetInt32(reader.GetOrdinal("dias")),
-                                Operacao = operacao
-                            };
-                            parcelas.Add(parcela);
-                        }
-                    }
+                    return null;
                 }
-                if (operacao != null) { operacao.Parcelas = parcelas; }
+                operacao = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return operacao;
         }
-
-        public int RemoverParcelasOperacao(string codoperacao)
+        private Operacao LeDadosReader(List<Dictionary<string, object>> data)
         {
-            int retorno = 0;
-            try
+            if (data.Count == 0)
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idoperacao", codoperacao);
-                retorno = Connect.Comando.ExecuteNonQuery();
+                return null;
             }
-            catch (MySqlException ex)
+            var parcelas = new List<ParcelaOperacao>();
+            var operacao = new Operacao();
+            operacao.OperacaoID = Convert.ToInt32(data[0]["idoperacao"]);
+            operacao.Nome = (string)data[0]["nome"];
+            operacao.Descricao = (string)data[0]["descricao"];
+            operacao.Condicao = (string)data[0]["condicao"];
+            operacao.Desconto = (decimal)data[0]["desconto"];
+            operacao.Entrada = (decimal)data[0]["entrada"];
+            operacao.Acrescimo = (decimal)data[0]["acrescimo"];
+
+            foreach (var d in data)
             {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
+                var parcela = new ParcelaOperacao();
+                parcela.ParcelaOperacaoID = Convert.ToInt32(data[0]["idparcelaoperacao"]);
+                parcela.Numero = Convert.ToInt32(data[0]["numero"]);
+                parcela.Dias = Convert.ToInt32(data[0]["dias"]);
+                parcela.Operacao = operacao;
+                parcelas.Add(parcela);
             }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return retorno;
-        }
-
-        public bool OperacaoExist(int CodOperacao)
-        {
-
-            bool existe = false;
-
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM operacao o 
-                                             WHERE o.idoperacao = @idoperacao", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idoperacao", CodOperacao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
-                {
-
-                    if (reader.Read())
-                    {
-                        existe = true;
-                    }
-
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return existe;
+            return operacao;
         }
     }
 }

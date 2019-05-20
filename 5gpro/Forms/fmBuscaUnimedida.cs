@@ -32,7 +32,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Sigla", typeof(string));
             table.Columns.Add("Descrição", typeof(string));
 
-            listaunimedida = unimedidaDAO.BuscarUnimedida(tbFiltroDescUnimedida.Text).ToList();
+            listaunimedida = unimedidaDAO.Busca(tbFiltroDescUnimedida.Text).ToList();
 
             dgvUnimedida.Rows.Clear();
             foreach (Unimedida u in listaunimedida)

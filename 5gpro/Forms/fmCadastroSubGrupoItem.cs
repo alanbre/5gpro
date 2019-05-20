@@ -76,7 +76,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscarByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
+                    SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscaByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
                     if (newsubgrupoitem != null)
                     {
                         subgrupoitem = newsubgrupoitem;
@@ -104,7 +104,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscarByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
+                        SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscaByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
                         if (newsubgrupoitem != null)
                         {
                             subgrupoitem = newsubgrupoitem;
@@ -150,7 +150,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = subgrupoitemDAO.SalvarOuAtualizar(subgrupoitem);
+                    int resultado = subgrupoitemDAO.SalvaOuAtualiza(subgrupoitem);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso

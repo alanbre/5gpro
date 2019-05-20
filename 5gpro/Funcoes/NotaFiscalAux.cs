@@ -37,7 +37,7 @@ namespace _5gpro.Funcoes
                 notafiscal.NotaFiscalPropriaItem.Add(nfi);
             }
 
-            int resultado = notaFiscalDAO.SalvarOuAtualizar(notafiscal);
+            int resultado = notaFiscalDAO.SalvaOuAtualiza(notafiscal);
             if (resultado > 0) { resultado = orcamentoDAO.VincularNotaAoOrcamento(orcamento, notafiscal); }
             return resultado > 0 ? notafiscal : null;
         }

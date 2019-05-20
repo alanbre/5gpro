@@ -196,7 +196,7 @@ namespace _5gpro.Forms
             if (grupopessoa != null)
             {
                 dgvSubGruposPessoas.Rows.Clear();
-                listadesubgrupopessoa = subgrupopessoaDAO.BuscaTodos(tbBuscaNomeSub.Text, grupopessoa.GrupoPessoaID).ToList();
+                listadesubgrupopessoa = subgrupopessoaDAO.Busca(tbBuscaNomeSub.Text, grupopessoa.GrupoPessoaID).ToList();
                 foreach (SubGrupoPessoa s in listadesubgrupopessoa)
                 {
                     dgvSubGruposPessoas.Rows.Add(s.SubGrupoPessoaID, s.Nome);

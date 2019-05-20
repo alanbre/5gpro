@@ -31,7 +31,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoOperacao.Text, out int codigo)) { tbCodigoOperacao.Clear(); }
             if (tbCodigoOperacao.Text.Length > 0)
             {
-                operacao = operacaoDAO.BuscaById(int.Parse(tbCodigoOperacao.Text));
+                operacao = operacaoDAO.BuscaByID(int.Parse(tbCodigoOperacao.Text));
                 PreencheCamposOperacao(operacao);
             }
             else

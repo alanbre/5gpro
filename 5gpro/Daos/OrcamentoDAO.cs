@@ -1,9 +1,8 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
-using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
 
 namespace _5gpro.Daos
 {
@@ -12,616 +11,324 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public Orcamento BuscaOrcamentoById(int cod)
+        public Orcamento BuscaByID(int Codigo)
         {
-            Orcamento orcamento = new Orcamento();
-            Pessoa pessoa = null;
-            NotaFiscalPropria notafiscal = null;
-            Cidade cidade = null;
-
-            try
+            var orcamento = new Orcamento();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                                                    p.complemento, p.idcidade, p.telefone, p.email,
-                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
-                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
-                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
-                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
-                                                    FROM orcamento o 
-                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
-                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
-                                                    WHERE o.idorcamento = @idorcamento", Connect.Conexao);
+                sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                            p.complemento, p.idcidade, p.telefone, p.email,
+                            n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
+                            n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
+                            o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                            o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
+                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario
+                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
+                            FROM orcamento o 
+                            INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
+                            LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
+                            LEFT JOIN item i ON oi.iditem = i.iditem
+                            WHERE o.idorcamento = @idorcamento";
+                sql.addParam("@idorcamento", Codigo);
 
-                Connect.Comando.Parameters.AddWithValue("@idorcamento", cod);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email"))
-                        };
-
-                        try
-                        {
-                            notafiscal = new NotaFiscalPropria
-                            {
-                                NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                                DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                                DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                                ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
-                                ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                                DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
-                                DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                                Pessoa = pessoa
-                            };
-                        }
-                        catch (Exception)
-                        {
-                            notafiscal = null;
-                        }
-
-                        orcamento = new Orcamento
-                        {
-                            OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
-                            ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
-                            DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
-                        };
-                        orcamento.Pessoa = pessoa;
-                        if (notafiscal != null)
-                        {
-                            orcamento.NotaFiscal = notafiscal;
-                        }
-                    }
-                    else
-                    {
-                        orcamento = null;
-                    }
+                    return null;
                 }
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            if (orcamento != null)
-            {
-                orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
+                orcamento = LeDadosReader(data);
             }
             return orcamento;
         }
-
-
-
-        public Orcamento BuscaProximoOrcamento(string codAtual)
+        public Orcamento Proximo(int Codigo)
         {
-            Orcamento orcamento = new Orcamento();
-            Pessoa pessoa = null;
-            NotaFiscalPropria notafiscal = null;
-            Cidade cidade = null;
-
-            try
+            var orcamento = new Orcamento();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                                                    p.complemento, p.idcidade, p.telefone, p.email,
-                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
-                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
-                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
-                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
-                                                    FROM orcamento o 
-                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
-                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
-                                                    WHERE o.idorcamento = (SELECT min(idorcamento) FROM orcamento WHERE idorcamento > @idorcamento)", Connect.Conexao);
+                sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                            p.complemento, p.idcidade, p.telefone, p.email,
+                            n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
+                            n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
+                            o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                            o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
+                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario
+                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
+                            FROM orcamento o 
+                            INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
+                            LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
+                            LEFT JOIN item i ON oi.iditem = i.iditem
+                            WHERE o.idorcamento = (SELECT min(idorcamento) FROM orcamento WHERE idorcamento > @idorcamento)";
+                sql.addParam("@idorcamento", Codigo);
 
-                Connect.Comando.Parameters.AddWithValue("@idorcamento", codAtual);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email"))
-                        };
-
-                        try
-                        {
-                            notafiscal = new NotaFiscalPropria
-                            {
-                                NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                                DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                                DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                                ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
-                                ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                                DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
-                                DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                                Pessoa = pessoa
-                            };
-                        }
-                        catch (Exception)
-                        {
-                            notafiscal = null;
-                        }
-
-                        orcamento = new Orcamento
-                        {
-                            OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
-                            ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
-                            DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
-                        };
-                        orcamento.Pessoa = pessoa;
-                        if (notafiscal != null)
-                        {
-                            orcamento.NotaFiscal = notafiscal;
-                        }
-                    }
-                    else
-                    {
-                        orcamento = null;
-                    }
+                    return null;
                 }
+                orcamento = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            if (orcamento != null) { orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento); }
-
             return orcamento;
         }
-
-        public Orcamento BuscaOrcamentoAnterior(string codAtual)
+        public Orcamento Anterior(int Codigo)
         {
-
-            Orcamento orcamento = new Orcamento();
-            Pessoa pessoa = null;
-            NotaFiscalPropria notafiscal = null;
-            Cidade cidade = null;
-
-            try
+            var orcamento = new Orcamento();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                                                    p.complemento, p.idcidade, p.telefone, p.email,
-                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
-                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
-                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
-                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
-                                                    FROM orcamento o 
-                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
-                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
-                                                    WHERE o.idorcamento = (SELECT max(idorcamento) FROM orcamento WHERE idorcamento < @idorcamento)", Connect.Conexao);
+                sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                            p.complemento, p.idcidade, p.telefone, p.email,
+                            n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
+                            n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
+                            o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                            o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
+                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario
+                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
+                            FROM orcamento o 
+                            INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
+                            LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
+                            LEFT JOIN item i ON oi.iditem = i.iditem
+                            WHERE o.idorcamento = (SELECT max(idorcamento) FROM orcamento WHERE idorcamento < @idorcamento)";
+                sql.addParam("@idorcamento", Codigo);
 
-                Connect.Comando.Parameters.AddWithValue("@idorcamento", codAtual);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-
-                    if (reader.Read())
-                    {
-
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
-                        };
-
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email"))
-                        };
-
-                        try
-                        {
-                            notafiscal = new NotaFiscalPropria
-                            {
-                                NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                                DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                                DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                                ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
-                                ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                                DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
-                                DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                                Pessoa = pessoa
-                            };
-                        }
-                        catch (Exception)
-                        {
-                            notafiscal = null;
-                        }
-
-                        orcamento = new Orcamento
-                        {
-                            OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
-                            ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
-                            DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento"))
-                        };
-                        orcamento.Pessoa = pessoa;
-                        if (notafiscal != null)
-                        {
-                            orcamento.NotaFiscal = notafiscal;
-                        }
-                    }
-                    else
-                    {
-                        orcamento = null;
-                    }
+                    return null;
                 }
+                orcamento = LeDadosReader(data);
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            if (orcamento != null) { orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento); }
-
             return orcamento;
-
         }
-
-        public List<Orcamento> BuscaOrcamentos(fmOrcBuscaOrcamento.Filtros f)
+        public List<Orcamento> Busca(fmOrcBuscaOrcamento.Filtros f)
         {
             List<Orcamento> orcamentos = new List<Orcamento>();
-            Pessoa pessoa = null;
-            NotaFiscalPropria notafiscal = null;
-            Cidade cidade = null;
-
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             string whereCidade = f.filtroCidade != null ? "AND p.idcidade = @idcidade" : "";
             string contemValidade = f.contemValidade ? "NOT" : "";
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                //TODO: Adicionar aos filtros a data de efetivação.
-                Connect.Comando = new MySqlCommand(@"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                                                    p.complemento, p.idcidade, p.telefone, p.email,
-                                                    n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
-                                                    n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
-                                                    o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
-                                                    o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
-                                                    FROM orcamento o 
-                                                    INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
-                                                    LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal 
-                                             WHERE 1 = 1 "
-                                             + whereCidade + ""
-                                             + wherePessoa + "" +
-                                          @" AND valor_orcamento BETWEEN @valor_total_inicial AND @valor_total_final
-                                             AND data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                                             AND (data_validade BETWEEN @data_validade_inicial AND @data_validade_final OR data_validade IS " + contemValidade + @" NULL)
-                                             ORDER BY idorcamento", Connect.Conexao);
-                if (f.filtroCidade != null) { Connect.Comando.Parameters.AddWithValue("@idcidade", f.filtroCidade.CidadeID); }
-                if (f.filtroPessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", f.filtroPessoa.PessoaID); }
-                Connect.Comando.Parameters.AddWithValue("@valor_total_inicial", f.filtroValorTotalInical);
-                Connect.Comando.Parameters.AddWithValue("@valor_total_final", f.filtroValorTotalFinal);
-                Connect.Comando.Parameters.AddWithValue("@data_cadastro_inicial", f.filtroDataCadastroInicial);
-                Connect.Comando.Parameters.AddWithValue("@data_cadastro_final", f.filtroDataCadastroFinal);
-                Connect.Comando.Parameters.AddWithValue("@data_validade_inicial", f.filtroDataValidadeInicial);
-                Connect.Comando.Parameters.AddWithValue("@data_validade_final", f.filtroDataValidadeFinal);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                            p.complemento, p.idcidade, p.telefone, p.email,
+                            o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
+                            o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
+                            FROM orcamento o 
+                            INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            WHERE 1 = 1 "
+                            + whereCidade + " "
+                            + wherePessoa + " " +
+                        @" AND o.valor_orcamento BETWEEN @valor_total_inicial AND @valor_total_final
+                            AND o.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
+                            AND (o.data_validade BETWEEN @data_validade_inicial AND @data_validade_final OR data_validade IS " + contemValidade + @" NULL)
+                            ORDER BY o.idorcamento";
+                if (f.filtroCidade != null) { sql.addParam("@idcidade", f.filtroCidade.CidadeID); }
+                if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
+                sql.addParam("@valor_total_inicial", f.filtroValorTotalInical);
+                sql.addParam("@valor_total_final", f.filtroValorTotalFinal);
+                sql.addParam("@data_cadastro_inicial", f.filtroDataCadastroInicial);
+                sql.addParam("@data_cadastro_final", f.filtroDataCadastroFinal);
+                sql.addParam("@data_validade_inicial", f.filtroDataValidadeInicial);
+                sql.addParam("@data_validade_final", f.filtroDataValidadeFinal);
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    while (reader.Read())
+                    Pessoa pessoa = null;
+                    if (data[0]["idpessoa"] != null)
                     {
-                        cidade = new Cidade
-                        {
-                            CidadeID = reader.GetInt32(reader.GetOrdinal("idcidade"))
-                        };
+                        var cidade = new Cidade();
+                        cidade.CidadeID = Convert.ToInt32(data[0]["idcidade"]);
 
-                        pessoa = new Pessoa
-                        {
-                            PessoaID = reader.GetInt32(reader.GetOrdinal("idpessoa")),
-                            Nome = reader.GetString(reader.GetOrdinal("nome")),
-                            Fantasia = reader.GetString(reader.GetOrdinal("fantasia")),
-                            TipoPessoa = reader.GetString(reader.GetOrdinal("tipo_pessoa")),
-                            Rua = reader.GetString(reader.GetOrdinal("rua")),
-                            Numero = reader.GetString(reader.GetOrdinal("numero")),
-                            Bairro = reader.GetString(reader.GetOrdinal("bairro")),
-                            Complemento = reader.GetString(reader.GetOrdinal("complemento")),
-                            Cidade = cidade,
-                            Telefone = reader.GetString(reader.GetOrdinal("telefone")),
-                            Email = reader.GetString(reader.GetOrdinal("email"))
-                        };
-
-                        try
-                        {
-                            notafiscal = new NotaFiscalPropria
-                            {
-                                NotaFiscalPropriaID = reader.GetInt32(reader.GetOrdinal("idnotafiscal")),
-                                DataEmissao = reader.GetDateTime(reader.GetOrdinal("data_emissao")),
-                                DataEntradaSaida = reader.GetDateTime(reader.GetOrdinal("data_entradasaida")),
-                                ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensnota")),
-                                ValorTotalDocumento = reader.GetDecimal(reader.GetOrdinal("valor_documento")),
-                                DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensnota")),
-                                DescontoDocumento = reader.GetDecimal(reader.GetOrdinal("desconto_documento")),
-                                Pessoa = pessoa
-                            };
-                        }
-                        catch (Exception)
-                        {
-                            notafiscal = null;
-                        }
-
-                        Orcamento orcamento = new Orcamento
-                        {
-                            OrcamentoID = reader.GetInt32(reader.GetOrdinal("idorcamento")),
-                            DataCadastro = reader.GetDateTime(reader.GetOrdinal("data_cadastro")),
-                            DataValidade = reader.IsDBNull(reader.GetOrdinal("data_validade")) ? null : (DateTime?)reader.GetDateTime(reader.GetOrdinal("data_validade")),
-                            ValorTotalItens = reader.GetDecimal(reader.GetOrdinal("valortotalitensorcamento")),
-                            ValorTotalOrcamento = reader.GetDecimal(reader.GetOrdinal("valor_orcamento")),
-                            DescontoTotalItens = reader.GetDecimal(reader.GetOrdinal("descontototalitensorcamento")),
-                            DescontoOrcamento = reader.GetDecimal(reader.GetOrdinal("desconto_orcamento")),
-                            Pessoa = pessoa,
-                            NotaFiscal = notafiscal
-                        };
-                        orcamento.OrcamentoItem = BuscaItensDoOrcamento(orcamento);
-                        orcamentos.Add(orcamento);
+                        pessoa = new Pessoa();
+                        pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
+                        pessoa.Nome = (string)data[0]["nome"];
+                        pessoa.Fantasia = (string)data[0]["fantasia"];
+                        pessoa.TipoPessoa = (string)data[0]["tipo_pessoa"];
+                        pessoa.Rua = (string)data[0]["rua"];
+                        pessoa.Numero = (string)data[0]["numero"];
+                        pessoa.Bairro = (string)data[0]["bairro"];
+                        pessoa.Complemento = (string)data[0]["complemento"];
+                        pessoa.Cidade = cidade;
+                        pessoa.Telefone = (string)data[0]["telefone"];
+                        pessoa.Email = (string)data[0]["email"];
                     }
+
+                    var orcamento = new Orcamento();
+                    orcamento.OrcamentoID = Convert.ToInt32(data[0]["idorcamento"]);
+                    orcamento.DataCadastro = (DateTime)data[0]["data_cadastro"];
+                    orcamento.DataValidade = (DateTime?)data[0]["data_validade"];
+                    orcamento.ValorTotalItens = (decimal)data[0]["valortotalitensorcamento"];
+                    orcamento.ValorTotalOrcamento = (decimal)data[0]["valor_orcamento"];
+                    orcamento.DescontoTotalItens = (decimal)data[0]["descontototalitensorcamento"];
+                    orcamento.DescontoOrcamento = (decimal)data[0]["desconto_orcamento"];
+                    orcamento.Pessoa = pessoa;
+                    orcamentos.Add(orcamento);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return orcamentos;
         }
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT o1.idorcamento + 1 AS proximoid
-                                             FROM orcamento AS o1
-                                             LEFT OUTER JOIN orcamento AS o2 ON o1.idorcamento + 1 = o2.idorcamento
-                                             WHERE o2.idorcamento IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT o1.idorcamento + 1 AS proximoid
+                            FROM orcamento AS o1
+                            LEFT OUTER JOIN orcamento AS o2 ON o1.idorcamento + 1 = o2.idorcamento
+                            WHERE o2.idorcamento IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-
-                    if (reader.Read())
-                    {
-                        proximoid = reader.GetInt32(reader.GetOrdinal("proximoid"));
-                    }
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return proximoid;
         }
-
-        public List<OrcamentoItem> BuscaItensDoOrcamento(Orcamento orcamento)
-        {
-            List<OrcamentoItem> itensOrcamento = new List<OrcamentoItem>();
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * 
-                                             FROM orcamento_has_item oi INNER JOIN item i 
-                                             ON oi.iditem = i.iditem 
-                                             WHERE idorcamento = @idorcamento", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-
-                using (var reader = Connect.Comando.ExecuteReader())
-                {
-
-                    while (reader.Read())
-                    {
-                        Unimedida u = new Unimedida
-                        {
-                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
-                        };
-
-                        Item i = new Item
-                        {
-                            ItemID = reader.GetInt32(reader.GetOrdinal("iditem")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descitem")),
-                            DescCompra = reader.GetString(reader.GetOrdinal("denominacaocompra")),
-                            TipoItem = reader.GetString(reader.GetOrdinal("tipo")),
-                            Referencia = reader.GetString(reader.GetOrdinal("referencia")),
-                            ValorEntrada = reader.GetDecimal(reader.GetOrdinal("valorentrada")),
-                            ValorSaida = reader.GetDecimal(reader.GetOrdinal("valorsaida")),
-                            Estoquenecessario = reader.GetDecimal(reader.GetOrdinal("estoquenecessario")),
-                            Unimedida = u
-                        };
-
-                        OrcamentoItem oi = new OrcamentoItem
-                        {
-                            Quantidade = reader.GetDecimal(reader.GetOrdinal("quantidade")),
-                            ValorUnitario = reader.GetDecimal(reader.GetOrdinal("valor_unitario")),
-                            ValorTotal = reader.GetDecimal(reader.GetOrdinal("valor_total")),
-                            DescontoPorc = reader.GetDecimal(reader.GetOrdinal("desconto_porc")),
-                            Desconto = reader.GetDecimal(reader.GetOrdinal("desconto")),
-                            Item = i
-                        };
-
-                        itensOrcamento.Add(oi);
-                    }
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return itensOrcamento;
-        }
-
-        public int SalvarOuAtualizarOrcamento(Orcamento orcamento)
+        public int SalvaOuAtualiza(Orcamento orcamento)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-
-                Connect.AbrirConexao();
-                Connect.Comando = Connect.Conexao.CreateCommand();
-                Connect.tr = Connect.Conexao.BeginTransaction();
-                Connect.Comando.Connection = Connect.Conexao;
-                Connect.Comando.Transaction = Connect.tr;
-
-                Connect.Comando.CommandText = @"INSERT INTO orcamento
-                         (idorcamento, data_cadastro, data_validade, valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento, idpessoa)
-                          VALUES
-                         (@idorcamento, @data_cadastro, @data_validade, @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento, @idpessoa)
-                          ON DUPLICATE KEY UPDATE
-                          data_cadastro = @data_cadastro, data_validade = @data_validade, valor_total_itens = @valor_total_itens,
-                          valor_orcamento = @valor_orcamento, desconto_total_itens = @desconto_total_itens, desconto_orcamento = @desconto_orcamento,
-                          idpessoa = @idpessoa
-                          ";
-
-                Connect.Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-                Connect.Comando.Parameters.AddWithValue("@data_cadastro", orcamento.DataCadastro);
-                Connect.Comando.Parameters.AddWithValue("@data_validade", orcamento.DataValidade);
-                Connect.Comando.Parameters.AddWithValue("@valor_total_itens", orcamento.ValorTotalItens);
-                Connect.Comando.Parameters.AddWithValue("@valor_orcamento", orcamento.ValorTotalOrcamento);
-                Connect.Comando.Parameters.AddWithValue("@desconto_total_itens", orcamento.DescontoTotalItens);
-                Connect.Comando.Parameters.AddWithValue("@desconto_orcamento", orcamento.DescontoOrcamento);
-                if (orcamento.Pessoa != null) { Connect.Comando.Parameters.AddWithValue("@idpessoa", orcamento.Pessoa.PessoaID); }
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-
-
-                if (retorno > 0) //Checa se conseguiu inserir ou atualizar pelo menos 1 registro
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO orcamento
+                            (idorcamento, data_cadastro, data_validade, valor_total_itens, valor_orcamento, desconto_total_itens, desconto_orcamento, idpessoa)
+                            VALUES
+                            (@idorcamento, @data_cadastro, @data_validade, @valor_total_itens, @valor_orcamento, @desconto_total_itens, @desconto_orcamento, @idpessoa)
+                            ON DUPLICATE KEY UPDATE
+                            data_cadastro = @data_cadastro, data_validade = @data_validade, valor_total_itens = @valor_total_itens,
+                            valor_orcamento = @valor_orcamento, desconto_total_itens = @desconto_total_itens, desconto_orcamento = @desconto_orcamento,
+                            idpessoa = @idpessoa";
+                sql.addParam("@idorcamento", orcamento.OrcamentoID);
+                sql.addParam("@data_cadastro", orcamento.DataCadastro);
+                sql.addParam("@data_validade", orcamento.DataValidade);
+                sql.addParam("@valor_total_itens", orcamento.ValorTotalItens);
+                sql.addParam("@valor_orcamento", orcamento.ValorTotalOrcamento);
+                sql.addParam("@desconto_total_itens", orcamento.DescontoTotalItens);
+                sql.addParam("@desconto_orcamento", orcamento.DescontoOrcamento);
+                if (orcamento.Pessoa != null) { sql.addParam("@idpessoa", orcamento.Pessoa.PessoaID); }
+                retorno = sql.insertQuery();
+                if (retorno > 0)
                 {
-                    Connect.Comando.CommandText = @"DELETE FROM orcamento_has_item WHERE idorcamento = @idorcamento";
-                    Connect.Comando.ExecuteNonQuery();
-
-                    Connect.Comando.CommandText = @"INSERT INTO orcamento_has_item (idorcamento, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
-                                            VALUES
-                                            (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
-                    foreach (OrcamentoItem oi in orcamento.OrcamentoItem)
+                    sql.Query = @"DELETE FROM orcamento_has_item WHERE idorcamento = @idorcamento";
+                    sql.deleteQuery();
+                    sql.Query = @"INSERT INTO orcamento_has_item (idorcamento, iditem, quantidade, valor_unitario, valor_total, desconto_porc, desconto)
+                                VALUES
+                                (@idorcamento, @iditem, @quantidade, @valor_unitario, @valor_total, @desconto_porc, @desconto)";
+                    foreach (var oi in orcamento.OrcamentoItem)
                     {
-                        Connect.Comando.Parameters.Clear();
-                        Connect.Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-                        Connect.Comando.Parameters.AddWithValue("@iditem", oi.Item.ItemID);
-                        Connect.Comando.Parameters.AddWithValue("@quantidade", oi.Quantidade);
-                        Connect.Comando.Parameters.AddWithValue("@valor_unitario", oi.ValorUnitario);
-                        Connect.Comando.Parameters.AddWithValue("@valor_total", oi.ValorTotal);
-                        Connect.Comando.Parameters.AddWithValue("@desconto_porc", oi.DescontoPorc);
-                        Connect.Comando.Parameters.AddWithValue("@desconto", oi.Desconto);
-                        Connect.Comando.ExecuteNonQuery();
+                        sql.clearParams();
+                        sql.addParam("@idorcamento", orcamento.OrcamentoID);
+                        sql.addParam("@iditem", oi.Item.ItemID);
+                        sql.addParam("@quantidade", oi.Quantidade);
+                        sql.addParam("@valor_unitario", oi.ValorUnitario);
+                        sql.addParam("@valor_total", oi.ValorTotal);
+                        sql.addParam("@desconto_porc", oi.DescontoPorc);
+                        sql.addParam("@desconto", oi.Desconto);
+                        sql.insertQuery();
                     }
                 }
-                Connect.tr.Commit();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Commit();
             }
             return retorno;
         }
-
         public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscalPropria notafiscal)
         {
             int retorno = 0;
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"UPDATE orcamento SET idnotafiscal = @idnotafiscal WHERE idorcamento = @idorcamento", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idorcamento", orcamento.OrcamentoID);
-                Connect.Comando.Parameters.AddWithValue("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine(ex);
+                sql.Query = @"UPDATE orcamento SET idnotafiscal = @idnotafiscal WHERE idorcamento = @idorcamento";
+                sql.addParam("@idorcamento", orcamento.OrcamentoID);
+                sql.addParam("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
+                retorno = sql.updateQuery();
             }
             return retorno;
         }
+        private Orcamento LeDadosReader(List<Dictionary<string, object>> data)
+        {
+            if (data.Count == 0)
+            {
+                return null;
+            }
+
+            var orcamentoItens = new List<OrcamentoItem>();
+
+            Pessoa pessoa = null;
+            if (data[0]["idpessoa"] != null)
+            {
+                var cidade = new Cidade();
+                cidade.CidadeID = Convert.ToInt32(data[0]["idcidade"]);
+
+                pessoa = new Pessoa();
+                pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
+                pessoa.Nome = (string)data[0]["nome"];
+                pessoa.Fantasia = (string)data[0]["fantasia"];
+                pessoa.TipoPessoa = (string)data[0]["tipo_pessoa"];
+                pessoa.Rua = (string)data[0]["rua"];
+                pessoa.Numero = (string)data[0]["numero"];
+                pessoa.Bairro = (string)data[0]["bairro"];
+                pessoa.Complemento = (string)data[0]["complemento"];
+                pessoa.Cidade = cidade;
+                pessoa.Telefone = (string)data[0]["telefone"];
+                pessoa.Email = (string)data[0]["email"];
+            }
+
+
+            NotaFiscalPropria notafiscal = null;
+            if (data[0]["idnotafiscal"] != null)
+            {
+                notafiscal = new NotaFiscalPropria();
+                notafiscal.NotaFiscalPropriaID = Convert.ToInt32(data[0]["idnotafiscal"]);
+                notafiscal.DataEmissao = (DateTime)data[0]["data_emissao"];
+                notafiscal.DataEntradaSaida = (DateTime)data[0]["data_entradasaida"];
+                notafiscal.ValorTotalItens = (decimal)data[0]["valortotalitensnota"];
+                notafiscal.ValorTotalDocumento = (decimal)data[0]["valor_documento"];
+                notafiscal.DescontoTotalItens = (decimal)data[0]["descontototalitensnota"];
+                notafiscal.DescontoDocumento = (decimal)data[0]["desconto_documento"];
+                notafiscal.Pessoa = pessoa;
+            }
+
+            var orcamento = new Orcamento();
+            orcamento.OrcamentoID = Convert.ToInt32(data[0]["idorcamento"]);
+            orcamento.DataCadastro = (DateTime)data[0]["data_cadastro"];
+            orcamento.DataValidade = (DateTime?)data[0]["data_validade"];
+            orcamento.ValorTotalItens = (decimal)data[0]["valortotalitensorcamento"];
+            orcamento.ValorTotalOrcamento = (decimal)data[0]["valor_orcamento"];
+            orcamento.DescontoTotalItens = (decimal)data[0]["descontototalitensorcamento"];
+            orcamento.DescontoOrcamento = (decimal)data[0]["desconto_orcamento"];
+            orcamento.Pessoa = pessoa;
+            orcamento.NotaFiscal = notafiscal;
+
+            foreach (var d in data)
+            {
+                var u = new Unimedida();
+                u.UnimedidaID = Convert.ToInt32(d["idunimedida"]);
+
+                var i = new Item();
+                i.ItemID = Convert.ToInt32(d["iditem"]);
+                i.Descricao = (string)d["descitem"];
+                i.DescCompra = (string)d["denominacaocompra"];
+                i.TipoItem = (string)d["tipo"];
+                i.Referencia = (string)d["referencia"];
+                i.ValorEntrada = (decimal)d["valorentrada"];
+                i.ValorSaida = (decimal)d["valorsaida"];
+                i.Estoquenecessario = (decimal)d["estoquenecessario"];
+                i.Unimedida = u;
+
+
+                var oi = new OrcamentoItem();
+                oi.Quantidade = (decimal)d["quantidade"];
+                oi.ValorUnitario = (decimal)d["valor_unitario"];
+                oi.ValorTotal = (decimal)d["valor_total"];
+                oi.DescontoPorc = (decimal)d["desconto_porc"];
+                oi.Desconto = (decimal)d["desconto"];
+                oi.Item = i;
+
+                orcamentoItens.Add(oi);
+            }
+            return orcamento;
+        }
+
     }
 }

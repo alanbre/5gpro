@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,143 +14,79 @@ namespace _5gpro.Daos
 
         public int Salvar(Unimedida unimedida)
         {
-            try
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES(@idunimedida, @sigla, @descricao)", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idunimedida", unimedida.UnimedidaID);
-                Connect.Comando.Parameters.AddWithValue("@sigla", unimedida.Sigla);
-                Connect.Comando.Parameters.AddWithValue("@descricao", unimedida.Descricao);
-
-                return Connect.Comando.ExecuteNonQuery();
+                sql.Query = @"INSERT INTO unimedida
+                            (idunimedida, sigla, descricao)
+                            VALUES
+                            (@idunimedida, @sigla, @descricao)
+                            ON DUPLICATE KEY UPDATE
+                            sigla = @sigla, descricao = @descricao";
+                sql.addParam("@idunimedida", unimedida.UnimedidaID);
+                sql.addParam("@sigla", unimedida.Sigla);
+                sql.addParam("@descricao", unimedida.Descricao);
+                retorno = sql.insertQuery();
             }
-            catch (Exception erro)
-            {
-
-                throw erro;
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
+            return retorno;
         }
-
-        public IEnumerable<Unimedida> BuscarUnimedida(string descricao)
+        public IEnumerable<Unimedida> Busca(string descricao)
         {
-            List<Unimedida> listaunimedida = new List<Unimedida>();
+            var listaUnimedida = new List<Unimedida>();
             string conDescUnimedida = descricao.Length > 0 ? "AND descricao LIKE @descricao" : "";
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM unimedida 
-                                             WHERE 1=1
-                                             " + conDescUnimedida + @"
-                                             ORDER BY idunimedida", Connect.Conexao);
-
-                if (conDescUnimedida.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + descricao + "%"); }
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = @"SELECT *
+                            FROM unimedida 
+                            WHERE 1=1 "
+                            + conDescUnimedida +
+                            @" ORDER BY idunimedida";
+                if (conDescUnimedida.Length > 0) { sql.addParam("@nome", "%" + descricao + "%"); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
+                    var unimedida = LeDadosReader(d);
 
-                    while (reader.Read())
-                    {
-
-                        Unimedida unimedida = new Unimedida
-                        {
-                            UnimedidaID = int.Parse(reader.GetString(reader.GetOrdinal("idunimedida"))),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao")),
-                            Sigla = reader.GetString(reader.GetOrdinal("sigla"))
-                        };
-                        listaunimedida.Add(unimedida);
-                    }
+                    listaUnimedida.Add(unimedida);
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return listaunimedida;
+            return listaUnimedida;
         }
-
-
-        public List<Unimedida> BuscarTodasUnimedidas()
+        public List<Unimedida> BuscaTodas()
         {
 
-            List<Unimedida> listaunimedida = new List<Unimedida>();
-            try
+            var listaUnimedida = new List<Unimedida>();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM unimedida", Connect.Conexao);
-
-                using (var reader = Connect.Comando.ExecuteReader())
+                sql.Query = "SELECT * FROM unimedida";
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
+                    var unimedida = LeDadosReader(d);
 
-                    while (reader.Read())
-                    {
-                        Unimedida unimedida = new Unimedida
-                        {
-                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
-                            Sigla = reader.GetString(reader.GetOrdinal("sigla")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao"))
-                        };
-                        listaunimedida.Add(unimedida);
-                    }
+                    listaUnimedida.Add(unimedida);
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return listaunimedida;
+            return listaUnimedida;
         }
-
-        public Unimedida BuscaUnimedidaByID(int cod)
+        public Unimedida BuscaByID(int cod)
         {
-            Unimedida unimedida = new Unimedida();
-            try
+            var unimedida = new Unimedida();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM unimedida WHERE idunimedida = @idunimedida", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idunimedida", cod);
-
-                using (var reader = Connect.Comando.ExecuteReader())
-                {
-
-                    if (reader.Read())
-                    {
-                        unimedida = new Unimedida
-                        {
-                            UnimedidaID = reader.GetInt32(reader.GetOrdinal("idunimedida")),
-                            Sigla = reader.GetString(reader.GetOrdinal("sigla")),
-                            Descricao = reader.GetString(reader.GetOrdinal("descricao"))
-                        };
-                    }
-                    else
-                    {
-                        unimedida = null;
-                    }
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.Query = "SELECT * FROM unimedida WHERE idunimedida = @idunimedida";
+                var data = sql.selectQueryForSingleRecord();
+                unimedida = LeDadosReader(data);
             }
             return unimedida;
         }
-
+        private Unimedida LeDadosReader(Dictionary<string, object> data)
+        {
+            var unimedida = new Unimedida();
+            unimedida.UnimedidaID = Convert.ToInt32(data["idunimedida"]);
+            unimedida.Descricao = (string)data["descricao"];
+            unimedida.Sigla = (string)data["sigla"];
+            return unimedida;
+        }
     }
 }

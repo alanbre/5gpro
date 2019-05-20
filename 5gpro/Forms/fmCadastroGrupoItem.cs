@@ -198,7 +198,7 @@ namespace _5gpro.Forms
             if (grupoitem != null)
             {
                 dgvSubGruposItens.Rows.Clear();
-                listadesubgrupo = subgrupoitemDAO.BuscaTodos(tbBuscaNomeSub.Text, grupoitem.GrupoItemID).ToList();
+                listadesubgrupo = subgrupoitemDAO.Busca(tbBuscaNomeSub.Text, grupoitem.GrupoItemID).ToList();
                 foreach (SubGrupoItem s in listadesubgrupo)
                 {
                     dgvSubGruposItens.Rows.Add(s.SubGrupoItemID, s.Nome);

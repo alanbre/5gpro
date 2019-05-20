@@ -220,7 +220,7 @@ namespace _5gpro.Forms
                     NotaFiscalPropriaItem = itens
                 };
 
-                int resultado = notaFiscalPropriaDAO.SalvarOuAtualizar(notaFiscalPropriaNova);
+                int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
 
                 // resultado 0 = nada foi inserido (houve algum erro)
                 // resultado 1 = foi inserido com sucesso

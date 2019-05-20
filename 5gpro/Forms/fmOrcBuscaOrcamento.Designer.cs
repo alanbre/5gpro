@@ -129,7 +129,7 @@
             this.btPesquisar.TabIndex = 19;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
             // label1
             // 
@@ -148,8 +148,8 @@
             this.tbFiltroValorTotalOrcamentoInicial.Size = new System.Drawing.Size(63, 20);
             this.tbFiltroValorTotalOrcamentoInicial.TabIndex = 3;
             this.tbFiltroValorTotalOrcamentoInicial.Text = "0,00";
-            this.tbFiltroValorTotalOrcamentoInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFiltroValorTotalOrcamentoInicial_KeyPress);
-            this.tbFiltroValorTotalOrcamentoInicial.Leave += new System.EventHandler(this.tbFiltroValorTotalOrcamentoInicial_Leave);
+            this.tbFiltroValorTotalOrcamentoInicial.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbFiltroValorTotalOrcamentoInicial_KeyPress);
+            this.tbFiltroValorTotalOrcamentoInicial.Leave += new System.EventHandler(this.TbFiltroValorTotalOrcamentoInicial_Leave);
             // 
             // tbFiltroValorTotalOrcamentoFinal
             // 
@@ -160,7 +160,7 @@
             this.tbFiltroValorTotalOrcamentoFinal.TabIndex = 5;
             this.tbFiltroValorTotalOrcamentoFinal.Text = "999999,00";
             this.tbFiltroValorTotalOrcamentoFinal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFiltroValorTotalOrcamentoFinal_KeyPress);
-            this.tbFiltroValorTotalOrcamentoFinal.Leave += new System.EventHandler(this.tbFiltroValorTotalOrcamentoFinal_Leave);
+            this.tbFiltroValorTotalOrcamentoFinal.Leave += new System.EventHandler(this.TbFiltroValorTotalOrcamentoFinal_Leave);
             // 
             // lbFiltroValorTotalOrcamento
             // 
@@ -348,7 +348,7 @@
             this.dgvOrcamentos.Size = new System.Drawing.Size(1033, 232);
             this.dgvOrcamentos.TabIndex = 0;
             this.dgvOrcamentos.TabStop = false;
-            this.dgvOrcamentos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrcamentos_CellDoubleClick);
+            this.dgvOrcamentos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvOrcamentos_CellDoubleClick);
             // 
             // dgvtbcOrcamento
             // 
@@ -439,7 +439,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de orçamento";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmBuscaOrcamento_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaOrcamento_KeyDown);
             this.gbFiltrosOrcamento.ResumeLayout(false);
             this.gbFiltrosOrcamento.PerformLayout();
             this.gbFiltros.ResumeLayout(false);

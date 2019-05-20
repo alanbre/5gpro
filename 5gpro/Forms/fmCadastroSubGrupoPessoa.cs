@@ -156,7 +156,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = subgrupopessoaDAO.SalvarOuAtualizar(subgrupopessoa);
+                    int resultado = subgrupopessoaDAO.SalvaOuAtualiza(subgrupopessoa);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso

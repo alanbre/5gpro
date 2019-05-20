@@ -213,7 +213,7 @@ namespace _5gpro.Forms
             if (contaReceber != null)
             {
                 contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
-                contaReceber.Operacao = operacaoDAO.BuscaById(contaReceber.Operacao.OperacaoID);
+                contaReceber.Operacao = operacaoDAO.BuscaByID(contaReceber.Operacao.OperacaoID);
                 contaReceber.Pessoa = pessoaDAO.BuscaById(contaReceber.Pessoa.PessoaID);
                 PreencheCampos(contaReceber);
                 if (editando)
@@ -244,7 +244,7 @@ namespace _5gpro.Forms
                 var newcontaReceber = contaReceberDAO.Proximo(int.Parse(tbCodigoConta.Text));
                 if (newcontaReceber != null)
                 {
-                    newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
+                    newcontaReceber.Operacao = operacaoDAO.BuscaByID(newcontaReceber.Operacao.OperacaoID);
                     newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
                     contaReceber = newcontaReceber;
                     parcelas = contaReceber.Parcelas.ToList();
@@ -270,7 +270,7 @@ namespace _5gpro.Forms
                 var newcontaRebeceber = contaReceberDAO.Anterior(int.Parse(tbCodigoConta.Text));
                 if (newcontaRebeceber != null)
                 {
-                    newcontaRebeceber.Operacao = operacaoDAO.BuscaById(newcontaRebeceber.Operacao.OperacaoID);
+                    newcontaRebeceber.Operacao = operacaoDAO.BuscaByID(newcontaRebeceber.Operacao.OperacaoID);
                     newcontaRebeceber.Pessoa = pessoaDAO.BuscaById(newcontaRebeceber.Pessoa.PessoaID);
                     contaReceber = newcontaRebeceber;
                     parcelas = contaReceber.Parcelas.ToList();
@@ -307,7 +307,7 @@ namespace _5gpro.Forms
             var newcontaReceber = contaReceberDAO.BuscaById(codigo);
             if (newcontaReceber != null)
             {
-                newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
+                newcontaReceber.Operacao = operacaoDAO.BuscaByID(newcontaReceber.Operacao.OperacaoID);
                 newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
                 contaReceber = newcontaReceber;
                 btGerarParcelas.Enabled = false;
