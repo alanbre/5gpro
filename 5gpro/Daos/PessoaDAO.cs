@@ -355,7 +355,7 @@ namespace _5gpro.Daos
                 var data = sql.selectQueryForSingleRecord();
                 if (data != null)
                 {
-                    proximoid = (int)data["proximoid"];
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
             }
             return proximoid;

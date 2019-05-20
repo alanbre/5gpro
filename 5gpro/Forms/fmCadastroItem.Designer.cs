@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
+            this.lbQuantidade = new System.Windows.Forms.Label();
+            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
@@ -51,12 +56,7 @@
             this.tpVendas = new System.Windows.Forms.TabPage();
             this.tbPrecoVenda = new System.Windows.Forms.TextBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
-            this.lbQuantidade = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
-            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
-            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
-            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
             this.pnDadosGerais.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
             this.tcItens.SuspendLayout();
@@ -87,6 +87,52 @@
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 364);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // dbQuantidade
+            // 
+            this.dbQuantidade.Location = new System.Drawing.Point(16, 186);
+            this.dbQuantidade.Name = "dbQuantidade";
+            this.dbQuantidade.Size = new System.Drawing.Size(100, 22);
+            this.dbQuantidade.TabIndex = 15;
+            this.dbQuantidade.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // lbQuantidade
+            // 
+            this.lbQuantidade.AutoSize = true;
+            this.lbQuantidade.Location = new System.Drawing.Point(13, 170);
+            this.lbQuantidade.Name = "lbQuantidade";
+            this.lbQuantidade.Size = new System.Drawing.Size(62, 13);
+            this.lbQuantidade.TabIndex = 14;
+            this.lbQuantidade.Text = "Quantidade";
+            // 
+            // buscaSubGrupoItem
+            // 
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(11, 303);
+            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
+            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaSubGrupoItem.TabIndex = 13;
+            this.buscaSubGrupoItem.Text_Changed += new _5gpro.Controls.BuscaSubGrupoItem.text_changedEventHandler(this.BuscaSubGrupoItem_Text_Changed_1);
+            // 
+            // buscaGrupoItem
+            // 
+            this.buscaGrupoItem.Location = new System.Drawing.Point(11, 258);
+            this.buscaGrupoItem.Name = "buscaGrupoItem";
+            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaGrupoItem.TabIndex = 12;
+            this.buscaGrupoItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItem_Text_Changed);
+            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
+            // 
+            // buscaUnimedidaItem
+            // 
+            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 128);
+            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
+            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
+            this.buscaUnimedidaItem.TabIndex = 6;
+            this.buscaUnimedidaItem.Text_Changed += new _5gpro.Controls.BuscaUnimedida.text_changedEventHandler(this.BuscaUnimedidaItem_Text_Changed);
             // 
             // gbTipoDeItem
             // 
@@ -307,15 +353,6 @@
             this.lbPrecoVenda.TabIndex = 0;
             this.lbPrecoVenda.Text = "Preço de venda";
             // 
-            // lbQuantidade
-            // 
-            this.lbQuantidade.AutoSize = true;
-            this.lbQuantidade.Location = new System.Drawing.Point(13, 170);
-            this.lbQuantidade.Name = "lbQuantidade";
-            this.lbQuantidade.Size = new System.Drawing.Size(62, 13);
-            this.lbQuantidade.TabIndex = 14;
-            this.lbQuantidade.Text = "Quantidade";
-            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(9, 12);
@@ -330,42 +367,6 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical1_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical1_Excluir_Clicked);
-            // 
-            // dbQuantidade
-            // 
-            this.dbQuantidade.Location = new System.Drawing.Point(16, 186);
-            this.dbQuantidade.Name = "dbQuantidade";
-            this.dbQuantidade.Size = new System.Drawing.Size(100, 22);
-            this.dbQuantidade.TabIndex = 15;
-            this.dbQuantidade.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaSubGrupoItem
-            // 
-            this.buscaSubGrupoItem.Location = new System.Drawing.Point(11, 303);
-            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
-            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaSubGrupoItem.TabIndex = 13;
-            this.buscaSubGrupoItem.Text_Changed += new _5gpro.Controls.BuscaSubGrupoItem.text_changedEventHandler(this.BuscaSubGrupoItem_Text_Changed_1);
-            // 
-            // buscaGrupoItem
-            // 
-            this.buscaGrupoItem.Location = new System.Drawing.Point(11, 258);
-            this.buscaGrupoItem.Name = "buscaGrupoItem";
-            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaGrupoItem.TabIndex = 12;
-            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
-            // 
-            // buscaUnimedidaItem
-            // 
-            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 128);
-            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
-            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
-            this.buscaUnimedidaItem.TabIndex = 6;
-            this.buscaUnimedidaItem.Text_Changed += new _5gpro.Controls.BuscaUnimedida.text_changedEventHandler(this.BuscaUnimedidaItem_Text_Changed);
             // 
             // fmCadastroItem
             // 

@@ -593,6 +593,20 @@ namespace _5gpro.Forms
 
         private void BuscaGrupoPessoa_Leave_1(object sender, EventArgs e)
         {
+            buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+            if (buscaGrupoPessoa.grupoPessoa == null)
+            {
+                buscaSubGrupoPessoa.Limpa();
+                buscaSubGrupoPessoa.EscolhaOGrupo(false);
+            }
+            else
+            {
+                buscaSubGrupoPessoa.EscolhaOGrupo(true);
+            }
+        }
+
+        private void BuscaGrupoPessoa_Text_Changed(object sender, EventArgs e)
+        {
             if (!ignoraCheckEvent) { Editando(true); }
 
             if (buscaGrupoPessoa.grupoPessoa != null)
@@ -604,7 +618,7 @@ namespace _5gpro.Forms
             {
                 buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
                 buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EscolhaOGrupo();
+                buscaSubGrupoPessoa.EscolhaOGrupo(false);
             }
         }
 

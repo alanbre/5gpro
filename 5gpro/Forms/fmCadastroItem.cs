@@ -569,6 +569,21 @@ namespace _5gpro.Forms
 
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
         {
+            buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
+            if (buscaGrupoItem.grupoItem == null)
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EscolhaOGrupo(false);
+            }
+            else
+            {
+                buscaSubGrupoItem.EscolhaOGrupo(true);
+            }
+
+        }
+
+        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
             if (!ignoraCheckEvent) { Editando(true); }
 
             if (buscaGrupoItem.grupoItem != null)
@@ -580,10 +595,8 @@ namespace _5gpro.Forms
             {
                 buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
                 buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EscolhaOGrupo();
+                buscaSubGrupoItem.EscolhaOGrupo(false);
             }
         }
-
-
     }
 }
