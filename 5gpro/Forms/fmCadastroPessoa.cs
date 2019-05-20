@@ -129,17 +129,19 @@ namespace _5gpro.Forms
         }
         private void BuscaGrupoPessoa_Leave(object sender, EventArgs e)
         {
-            buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+            if (!ignoraCheckEvent) { Editando(true); }
+
             if (buscaGrupoPessoa.grupoPessoa != null)
             {
                 buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EscolhaOGrupo(false);
+                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
             }
             else
             {
-                buscaSubGrupoPessoa.EscolhaOGrupo(true);
+                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+                buscaSubGrupoPessoa.Limpa();
+                buscaSubGrupoPessoa.EscolhaOGrupo();
             }
-
         }
 
 
@@ -472,24 +474,6 @@ namespace _5gpro.Forms
                 buscaSubGrupoPessoa.EscolhaOGrupo(false);
             }
         }
-
-        private void BuscaGrupoPessoa_Text_Changed_1(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-
-            if (buscaGrupoPessoa.grupoPessoa != null)
-            {
-                buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
-            }
-            else
-            {
-                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
-                buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EscolhaOGrupo(false);
-            }
-        }
-
         private void PreencheCampos(Pessoa pessoa)
         {
             ignoraCheckEvent = true;
