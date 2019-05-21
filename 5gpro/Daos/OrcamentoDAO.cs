@@ -106,7 +106,10 @@ namespace _5gpro.Daos
             List<Orcamento> orcamentos = new List<Orcamento>();
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             string whereCidade = f.filtroCidade != null ? "AND p.idcidade = @idcidade" : "";
-            string contemValidade = f.contemValidade ? "NOT" : "";
+            string whereDataCadastro = f.usardataCadastroFiltro ? "AND o.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataValidade = f.usardataValidadeFiltro ? "AND o.data_validade BETWEEN @data_validade_inicial AND @data_validade_final" : "";
+            string whereValorTotal = f.usarvalorTotalFiltro ? "AND o.valor_orcamento BETWEEN @valor_total_inicial AND @valor_total_final" : "";
+
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
@@ -117,11 +120,12 @@ namespace _5gpro.Daos
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
                             WHERE 1 = 1 "
                             + whereCidade + " "
-                            + wherePessoa + " " +
-                        @" AND o.valor_orcamento BETWEEN @valor_total_inicial AND @valor_total_final
-                            AND o.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final
-                            AND (o.data_validade BETWEEN @data_validade_inicial AND @data_validade_final OR data_validade IS " + contemValidade + @" NULL)
-                            ORDER BY o.idorcamento";
+                            + whereDataCadastro + " "
+                            + whereDataValidade + " "
+                            + whereValorTotal + " "
+                            + wherePessoa + " " +                         
+                            "ORDER BY o.idorcamento";
+
                 if (f.filtroCidade != null) { sql.addParam("@idcidade", f.filtroCidade.CidadeID); }
                 if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
                 sql.addParam("@valor_total_inicial", f.filtroValorTotalInical);
