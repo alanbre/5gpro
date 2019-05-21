@@ -219,7 +219,8 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, g.nome AS nomegrupo
                             FROM usuario u
-                            INNER JOIN grupo_usuario g
+                            LEFT JOIN grupo_usuario g
+                            ON u.idgrupousuario = g.idgrupousuario
                             WHERE 1=1
                             " + conCodGrupoUsuario + @"
                             " + conNomeUsuario + @"
@@ -228,7 +229,9 @@ namespace _5gpro.Daos
                 if (codGrupoUsuario.Length > 0) { sql.addParam("@idgrupousuario", codGrupoUsuario); }
                 if (nomeUsuario.Length > 0) { sql.addParam("@nomeusuario", "%" + nomeUsuario + "%"); }
                 if (sobrenomeUsuario.Length > 0) { sql.addParam("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
+
                 var data = sql.selectQuery();
+
                 foreach (var d in data)
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
