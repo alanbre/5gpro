@@ -27,7 +27,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public IEnumerable<GrupoItem> Busca(string nome)
         {
             List<GrupoItem> listagrupoitem = new List<GrupoItem>();
@@ -52,9 +51,7 @@ namespace _5gpro.Daos
 
             return listagrupoitem;
         }
-
-
-        public GrupoItem BuscarByID(int Codigo)
+        public GrupoItem BuscaByID(int Codigo)
         {
             var grupoitem = new GrupoItem();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -76,8 +73,7 @@ namespace _5gpro.Daos
             }
             return grupoitem;
         }
-
-        public GrupoItem Proximo(string Codigo)
+        public GrupoItem Proximo(int Codigo)
         {
             var grupoitem = new GrupoItem();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -100,8 +96,7 @@ namespace _5gpro.Daos
             }
             return grupoitem;
         }
-
-        public GrupoItem BuscarAnterior(string Codigo)
+        public GrupoItem Anterior(int Codigo)
         {
             var grupoitem = new GrupoItem();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -124,7 +119,50 @@ namespace _5gpro.Daos
             }
             return grupoitem;
         }
-
+        public int InserirSubGrupo(SubGrupoItem subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"INSERT INTO subgrupoitem (idsubgrupoitem, nome, idgrupoitem)
+                            VALUES
+                            (@idsubgrupoitem, @nome, @idgrupoitem)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, idgrupoitem = @idgrupoitem";
+                sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
+                sql.addParam("@nome", subGrupo.Nome);
+                sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
+                retorno = sql.insertQuery();
+            }
+            return retorno;
+        }
+        public bool SubGrupoUsado(SubGrupoItem subGrupo)
+        {
+            var usado = false;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = "SELECT SUM(*) FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem AND idgrupoitem = @idgrupoitem";
+                sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
+                sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
+                {
+                    usado = true;
+                }
+            }
+            return usado;
+        }
+        public int RemoverSubGrupo(SubGrupoItem subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"DELETE FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem";
+                sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
+                retorno = sql.deleteQuery();
+            }
+            return retorno;
+        }
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -144,7 +182,6 @@ namespace _5gpro.Daos
             }
             return proximoid;
         }
-
         private GrupoItem LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)
@@ -156,11 +193,12 @@ namespace _5gpro.Daos
             grupoItem.GrupoItemID = Convert.ToInt32(data[0]["grupoitemID"]);
             grupoItem.Nome = (string)data[0]["nomegrupoitem"];
 
-            if (data[0]["subgrupoitemID"] != null)
-            {
-                var listaSubGrupoItem = new List<SubGrupoItem>();
 
-                foreach (var d in data)
+            var listaSubGrupoItem = new List<SubGrupoItem>();
+
+            foreach (var d in data)
+            {
+                if (d["subgrupoitemID"] != null)
                 {
                     var subGrupoItem = new SubGrupoItem();
                     subGrupoItem.SubGrupoItemID = Convert.ToInt32(d["subgrupoitemID"]);
@@ -169,8 +207,9 @@ namespace _5gpro.Daos
 
                     listaSubGrupoItem.Add(subGrupoItem);
                 }
-                grupoItem.SubGrupoItens = listaSubGrupoItem;
             }
+            grupoItem.SubGrupoItens = listaSubGrupoItem;
+
             return grupoItem;
         }
 
