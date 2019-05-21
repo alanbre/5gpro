@@ -52,8 +52,9 @@
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRelTeste = new System.Windows.Forms.ToolStripMenuItem();
             this.exemplorelatorioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.relatorioDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.relatorioDeItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -235,7 +236,8 @@
             this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiRelTeste,
             this.exemplorelatorioToolStripMenuItem,
-            this.relatorioDeUsuarioToolStripMenuItem});
+            this.relatorioDeUsuarioToolStripMenuItem,
+            this.relatorioDeItemToolStripMenuItem});
             this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
             this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.relatóriosToolStripMenuItem.Text = "Relatórios";
@@ -254,17 +256,24 @@
             this.exemplorelatorioToolStripMenuItem.Text = "exemplorelatorio";
             this.exemplorelatorioToolStripMenuItem.Click += new System.EventHandler(this.ExemplorelatorioToolStripMenuItem_Click);
             // 
-            // tsmiCadastroContaReceber
-            // 
-            this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
-            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
-            // 
             // relatorioDeUsuarioToolStripMenuItem
             // 
             this.relatorioDeUsuarioToolStripMenuItem.Name = "relatorioDeUsuarioToolStripMenuItem";
             this.relatorioDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.relatorioDeUsuarioToolStripMenuItem.Text = "Relatorio de Usuario";
             this.relatorioDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.RelatorioDeUsuarioToolStripMenuItem_Click);
+            // 
+            // tsmiCadastroContaReceber
+            // 
+            this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
+            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
+            // 
+            // relatorioDeItemToolStripMenuItem
+            // 
+            this.relatorioDeItemToolStripMenuItem.Name = "relatorioDeItemToolStripMenuItem";
+            this.relatorioDeItemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.relatorioDeItemToolStripMenuItem.Text = "Relatorio de Item";
+            this.relatorioDeItemToolStripMenuItem.Click += new System.EventHandler(this.RelatorioDeItemToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -313,6 +322,7 @@
         private System.Windows.Forms.ToolStripMenuItem quitaçãoDeContasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exemplorelatorioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatorioDeUsuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem relatorioDeItemToolStripMenuItem;
     }
 }
 

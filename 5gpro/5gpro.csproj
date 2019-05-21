@@ -281,10 +281,27 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
-    <Compile Include="Forms\exemplorelatorio.cs">
+    <Compile Include="Forms\fmItemReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\exemplorelatorio.Designer.cs">
+    <Compile Include="Forms\fmItemReport.Designer.cs">
+      <DependentUpon>fmItemReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsItem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsItem.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltItem.Designer.cs">
+      <DependentUpon>fmRltItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="testesrelatorios\exemplorelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="testesrelatorios\exemplorelatorio.Designer.cs">
       <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.cs">
@@ -334,12 +351,6 @@
     </Compile>
     <Compile Include="Forms\fmCapQuitacaoConta.Designer.cs">
       <DependentUpon>fmCapQuitacaoConta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\fmRelatorio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmRelatorio.Designer.cs">
-      <DependentUpon>fmRelatorio.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmSaiBuscaNotaFiscalPropria.cs">
       <SubType>Form</SubType>
@@ -569,14 +580,6 @@
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\DataSet1.cs">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
@@ -623,7 +626,15 @@
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\exemplorelatorio.resx">
+    <EmbeddedResource Include="Forms\fmItemReport.resx">
+      <DependentUpon>fmItemReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltItem.resx">
+      <DependentUpon>fmRltItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rltItem.rdlc" />
+    <EmbeddedResource Include="Reports\rltItemSemDS.rdlc" />
+    <EmbeddedResource Include="testesrelatorios\exemplorelatorio.resx">
       <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
@@ -652,9 +663,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCapQuitacaoConta.resx">
       <DependentUpon>fmCapQuitacaoConta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmRelatorio.resx">
-      <DependentUpon>fmRelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSaiBuscaNotaFiscalPropria.resx">
       <DependentUpon>fmSaiBuscaNotaFiscalPropria.cs</DependentUpon>
@@ -766,9 +774,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reports\Report1.rdlc" />
     <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
+    <None Include="Reports\dsItem.xsc">
+      <DependentUpon>dsItem.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsItem.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsItem.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsItem.xss">
+      <DependentUpon>dsItem.xsd</DependentUpon>
+    </None>
     <None Include="testesrelatorios\SetUsuario.xsc">
       <DependentUpon>SetUsuario.xsd</DependentUpon>
     </None>
@@ -806,17 +825,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Reports\DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="Resources\plus_32_blue.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1005,9 +1013,7 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">

@@ -124,8 +124,8 @@ namespace _5gpro
 
         private void TsmiTeste_Click(object sender, EventArgs e)
         {
-            var formRelTeste = new fmRelatorio();
-            formRelTeste.Show(this);
+            //var formRelTeste = new fmRelatorio();
+            //formRelTeste.Show(this);
         }
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -211,6 +211,12 @@ namespace _5gpro
         {
             var RelatorioUsuario = new FormRelatUsu();
             RelatorioUsuario.Show(this);
+        }
+
+        private void RelatorioDeItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var FiltroRltItem = new fmItemReport();
+            FiltroRltItem.Show(this);
         }
     }
 }

@@ -101,12 +101,13 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public List<Item> Busca(string descItem, string denomItem, string tipoItem)
+        public List<Item> Busca(string descItem, string denomItem, string tipoItem, SubGrupoItem subgrupoitem)
         {
             List<Item> itens = new List<Item>();
             string conDescItem = descItem.Length > 0 ? "AND i.descitem LIKE @descitem" : "";
             string conDenomItem = denomItem.Length > 0 ? "AND i.denominacaocompra LIKE @denominacaocompra" : "";
             string conTipoItem = tipoItem.Length > 0 ? "AND i.tipo LIKE @tipo" : "";
+            string conSubgrupoItem = subgrupoitem != null ? "AND i.idsubgrupoitem = @idsubgrupoitem" : "";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
@@ -117,10 +118,13 @@ namespace _5gpro.Daos
                             + conDescItem
                             + conDenomItem
                             + conTipoItem
+                            + conSubgrupoItem
                             + @" ORDER BY i.iditem";
                 if (denomItem.Length > 0) { sql.addParam("@denominacaocompra", "%" + denomItem + "%"); }
                 if (descItem.Length > 0) { sql.addParam("@descitem", "%" + descItem + "%"); }
                 if (tipoItem.Length > 0) { sql.addParam("@tipo", "%" + tipoItem + "%"); }
+                if (subgrupoitem != null) { sql.addParam("@idsubgrupoitem", subgrupoitem.SubGrupoItemID); }
+
                 var data = sql.selectQuery();
                 foreach(var d in data)
                 {
