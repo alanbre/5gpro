@@ -46,14 +46,6 @@ namespace _5gpro.Forms
 
         private void FmCadastroItens_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void fmCadastroItens_KeyDown(object sender, KeyEventArgs e)
-        {
             if (e.KeyCode == Keys.F5)
             {
                 Recarrega();
@@ -421,23 +413,8 @@ namespace _5gpro.Forms
 
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
         {
-            buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
-            if (buscaGrupoItem.grupoItem == null)
-            {
-                buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EscolhaOGrupo(false);
-            }
-            else
-            {
-                buscaSubGrupoItem.EscolhaOGrupo(true);
-            }
-
-        }
-
-        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
-        {
             if (!ignoraCheckEvent) { Editando(true); }
-        }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
