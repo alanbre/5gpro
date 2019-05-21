@@ -539,6 +539,17 @@
     <Compile Include="Forms\fmSelecionarBase.Designer.cs">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </Compile>
+    <Compile Include="testesrelatorios\FormRelatUsu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="testesrelatorios\FormRelatUsu.Designer.cs">
+      <DependentUpon>FormRelatUsu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="testesrelatorios\SetUsuario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SetUsuario.xsd</DependentUpon>
+    </Compile>
     <Compile Include="testesrelatorios\Teste.cs">
       <DependentUpon>Teste.xsd</DependentUpon>
     </Compile>
@@ -741,6 +752,9 @@
     <EmbeddedResource Include="Forms\fmSelecionarBase.resx">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="testesrelatorios\FormRelatUsu.resx">
+      <DependentUpon>FormRelatUsu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="testesrelatorios\Report2.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -753,7 +767,19 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\Report1.rdlc" />
+    <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="testesrelatorios\SetUsuario.xsc">
+      <DependentUpon>SetUsuario.xsd</DependentUpon>
+    </None>
+    <None Include="testesrelatorios\SetUsuario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SetUsuario.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="testesrelatorios\SetUsuario.xss">
+      <DependentUpon>SetUsuario.xsd</DependentUpon>
+    </None>
     <None Include="testesrelatorios\Teste.xsc">
       <DependentUpon>Teste.xsd</DependentUpon>
     </None>

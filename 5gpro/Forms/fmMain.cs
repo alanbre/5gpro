@@ -206,5 +206,11 @@ namespace _5gpro
             var ExemploRelatorio = new exemplorelatorio();
             ExemploRelatorio.Show(this);
         }
+
+        private void RelatorioDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var RelatorioUsuario = new FormRelatUsu();
+            RelatorioUsuario.Show(this);
+        }
     }
 }

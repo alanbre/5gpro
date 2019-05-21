@@ -12,7 +12,7 @@
   <xs:element name="Teste" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="Teste" msprop:Generator_UserDSName="Teste">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Teste" msprop:Generator_TableClassName="TesteDataTable" msprop:Generator_TableVarName="tableTeste" msprop:Generator_TablePropName="_Teste" msprop:Generator_RowDeletingName="TesteRowDeleting" msprop:Generator_RowChangingName="TesteRowChanging" msprop:Generator_RowEvHandlerName="TesteRowChangeEventHandler" msprop:Generator_RowDeletedName="TesteRowDeleted" msprop:Generator_UserTableName="Teste" msprop:Generator_RowChangedName="TesteRowChanged" msprop:Generator_RowEvArgName="TesteRowChangeEvent" msprop:Generator_RowClassName="TesteRow">
+        <xs:element name="Teste" msprop:Generator_TableClassName="TesteDataTable" msprop:Generator_TableVarName="tableTeste" msprop:Generator_RowChangedName="TesteRowChanged" msprop:Generator_TablePropName="_Teste" msprop:Generator_RowDeletingName="TesteRowDeleting" msprop:Generator_RowChangingName="TesteRowChanging" msprop:Generator_RowEvHandlerName="TesteRowChangeEventHandler" msprop:Generator_RowDeletedName="TesteRowDeleted" msprop:Generator_RowClassName="TesteRow" msprop:Generator_UserTableName="Teste" msprop:Generator_RowEvArgName="TesteRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
