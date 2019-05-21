@@ -292,6 +292,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsItem.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\fmRltContaReceber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltContaReceber.Designer.cs">
+      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\fmRltItem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -629,9 +635,13 @@
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltContaReceber.resx">
+      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltItem.resx">
       <DependentUpon>fmRltItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rltContaPagar.rdlc" />
     <EmbeddedResource Include="Reports\rltItem.rdlc" />
     <EmbeddedResource Include="Reports\rltItemSemDS.rdlc" />
     <EmbeddedResource Include="testesrelatorios\exemplorelatorio.resx">
@@ -776,6 +786,8 @@
     </Compile>
     <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\_5gpro.Entities.ContaPagar.datasource" />
+    <None Include="Properties\DataSources\_5gpro.Entities.ContaReceber.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
     <None Include="Reports\dsItem.xsc">
       <DependentUpon>dsItem.xsd</DependentUpon>

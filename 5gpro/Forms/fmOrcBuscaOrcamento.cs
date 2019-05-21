@@ -14,6 +14,11 @@ namespace _5gpro.Forms
         private List<Orcamento> orcamentos;
         private readonly OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
+        private bool dataCadastroFiltro = false;
+        private bool dataValidadeFiltro = false;
+        private bool dataEfetivaçãoFiltro = false;
+        private bool valorTotalFiltro = false;
+
         FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         public struct Filtros
@@ -30,6 +35,12 @@ namespace _5gpro.Forms
             public decimal filtroValorTotalFinal;
             public bool contemValidade;
             public bool contemEfetivacao;
+            public bool usardataCadastroFiltro;
+            public bool usardataValidadeFiltro;
+            public bool usarvalorTotalFiltro;
+
+
+
         }
 
         public fmOrcBuscaOrcamento()
@@ -38,20 +49,6 @@ namespace _5gpro.Forms
         }
 
         private void FmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
-        private void TbFiltroValorTotalOrcamentoInicial_Leave(object sender, EventArgs e)
-        {
-            tbFiltroValorTotalOrcamentoInicial.Text = tbFiltroValorTotalOrcamentoInicial.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text).ToString("############0.00") : "0,00";
-        }
-        private void TbFiltroValorTotalOrcamentoFinal_Leave(object sender, EventArgs e)
-        {
-            tbFiltroValorTotalOrcamentoFinal.Text = tbFiltroValorTotalOrcamentoFinal.Text.Length > 0 ? Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text).ToString("############0.00") : "999999,00";
-        }
-        private void TbFiltroValorTotalOrcamentoInicial_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-        private void tbFiltroValorTotalOrcamentoFinal_KeyPress(object sender, KeyPressEventArgs e) => f.ValidaTeclaDigitadaDecimal(e);
-
-
-
-
 
         private void EnterTab(object sender, KeyEventArgs e)
         {
@@ -71,12 +68,12 @@ namespace _5gpro.Forms
             f.filtroDataCadastroFinal = dtpFiltroDataCadastroFinal.Value;
             f.filtroDataValidadeInicial = dtpFiltroDataValidadeInicial.Value;
             f.filtroDataValidadeFinal = dtpFiltroDataValidadeFinal.Value;
-            f.filtroDataEfetivacaoInicial = dtpFiltroDataEfetivacaoInicial.Value;
-            f.filtroDataEfetivacaoFinal = dtpFiltroDataEfetivacaoFinal.Value;
-            f.contemValidade = cblFiltros.GetItemChecked(0);
-            f.contemEfetivacao = cblFiltros.GetItemChecked(1);
-            f.filtroValorTotalInical = Convert.ToDecimal(tbFiltroValorTotalOrcamentoInicial.Text);
-            f.filtroValorTotalFinal = Convert.ToDecimal(tbFiltroValorTotalOrcamentoFinal.Text);
+            f.filtroValorTotalInical = dbValorTotalIni.Valor;
+            f.filtroValorTotalFinal = dbValorTotalFinal.Valor;
+            f.usardataCadastroFiltro = dataCadastroFiltro;
+            f.usardataValidadeFiltro = dataValidadeFiltro;
+            f.usarvalorTotalFiltro = valorTotalFiltro;
+
 
             orcamentos = orcamentoDAO.Busca(f);
 
@@ -101,5 +98,55 @@ namespace _5gpro.Forms
             orcamentoSelecionado = orcamentoDAO.BuscaByID(orcamentoSelecionado.OrcamentoID);
             this.Close();
         }
+
+        private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValorTotal.Checked)
+            {
+                dbValorTotalIni.Enabled = true;
+                dbValorTotalFinal.Enabled = true;
+                valorTotalFiltro = true;
+            }
+            else
+            {
+                dbValorTotalIni.Enabled = false;
+                dbValorTotalFinal.Enabled = false;
+                valorTotalFiltro = false;
+            }
+        }
+
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpFiltroDataCadastroInicial.Enabled = true;
+                dtpFiltroDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpFiltroDataCadastroInicial.Enabled = false;
+                dtpFiltroDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+        }
+
+        private void CbDataValidade_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (cbDataValidade.Checked)
+            {
+                dtpFiltroDataValidadeInicial.Enabled = true;
+                dtpFiltroDataValidadeFinal.Enabled = true;
+                dataValidadeFiltro = true;
+            }
+            else
+            {
+                dtpFiltroDataValidadeInicial.Enabled = false;
+                dtpFiltroDataValidadeFinal.Enabled = false;
+                dataValidadeFiltro = false;
+            }
+        }
+
     }
 }

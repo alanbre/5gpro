@@ -35,11 +35,13 @@ namespace _5gpro.Daos
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * 
+                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
                             FROM nota_fiscal_terceiros nft
-                            LEFT JOIN nota_fiscal_terceiros_has_item i
-                            ON nft.idnota_fiscal_terceiros = i.idnota_fiscal_terceiros
-                            WHERE idnota_fiscal_terceiros = @idnota_fiscal_terceiros";
+                            LEFT JOIN nota_fiscal_terceiros_has_item nftitem
+                            ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
+                            INNER JOIN item i ON i.iditem = nftitem.iditem
+                            WHERE nft.idnota_fiscal_terceiros = @idnota_fiscal_terceiros";
+
                 sql.addParam("@idnota_fiscal_terceiros", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
@@ -68,6 +70,7 @@ namespace _5gpro.Daos
                             AND nft.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final
                             AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final
                             GROUP BY nft.idnota_fiscal_terceiros";
+
                 if (f.Pessoa != null) { sql.addParam("@idpessoa", f.Pessoa.PessoaID); }
                 if (f.Cidade != null) { sql.addParam("@idcidade", f.Pessoa.PessoaID); }
                 sql.addParam("@valor_documento_inicial", f.ValorInicial);
@@ -99,11 +102,13 @@ namespace _5gpro.Daos
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * 
+                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
                             FROM nota_fiscal_terceiros nft
-                            LEFT JOIN nota_fiscal_terceiros_has_item i
-                            ON nft.idnota_fiscal_terceiros = i.idnota_fiscal_terceiros
-                            WHERE idnota_fiscal_terceiros = (SELECT min(idnota_fiscal_terceiros) FROM nota_fiscal_terceiros WHERE idnota_fiscal_terceiros > @idnota_fiscal_terceiros)";
+                            LEFT JOIN nota_fiscal_terceiros_has_item nftitem
+                            ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
+                            INNER JOIN item i ON i.iditem = nftitem.iditem
+                            WHERE nft.idnota_fiscal_terceiros = (SELECT min(idnota_fiscal_terceiros) FROM nota_fiscal_terceiros WHERE idnota_fiscal_terceiros > @idnota_fiscal_terceiros)";
+
                 sql.addParam("@idnota_fiscal_terceiros", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
@@ -119,11 +124,13 @@ namespace _5gpro.Daos
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * 
+                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
                             FROM nota_fiscal_terceiros nft
-                            LEFT JOIN nota_fiscal_terceiros_has_item i
-                            ON nft.idnota_fiscal_terceiros = i.idnota_fiscal_terceiros
-                            WHERE idnota_fiscal_terceiros = (SELECT max(idnota_fiscal_terceiros) FROM nota_fiscal_terceiros WHERE idnota_fiscal_terceiros < @idnota_fiscal_terceiros)";
+                            LEFT JOIN nota_fiscal_terceiros_has_item nftitem
+                            ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
+                            INNER JOIN item i ON i.iditem = nftitem.iditem
+                            WHERE nft.idnota_fiscal_terceiros = (SELECT max(idnota_fiscal_terceiros) FROM nota_fiscal_terceiros WHERE idnota_fiscal_terceiros < @idnota_fiscal_terceiros)";
+
                 sql.addParam("@idnota_fiscal_terceiros", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
@@ -264,7 +271,7 @@ namespace _5gpro.Daos
                 i.Estoquenecessario = (decimal)d["estoquenecessario"];
 
                 var nfi = new NotaFiscalTerceirosItem();
-                nfi.Quantidade = (decimal)d["quantidade"];
+                nfi.Quantidade = (decimal)d["quantidadenfti"];
                 nfi.ValorUnitario = (decimal)d["valor_unitario"];
                 nfi.ValorTotal = (decimal)d["valor_total"];
                 nfi.DescontoPorc = (decimal)d["desconto_porc"];
