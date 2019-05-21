@@ -93,7 +93,7 @@ namespace _5gpro.Forms
         }
         private void TbNomeGrupo_TextChanged(object sender, System.EventArgs e) => Editando(true);
         private void TbCodigo_Leave(object sender, System.EventArgs e) => CarregaDados();
-        private void BtAddSub_Click(object sender, EventArgs e) => InserirSubGrupoItem();
+        private void BtNovoSubGrupo_Click(object sender, EventArgs e) => InserirSubGrupoItem();
         private void BtRemoverSub_Click(object sender, EventArgs e) => RemoverSubGrupoItem();
         private void DgvSubGruposItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -108,10 +108,10 @@ namespace _5gpro.Forms
             {
                 int selectedRowIndex = dgvSubGruposItens.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dgvSubGruposItens.Rows[selectedRowIndex];
-                subgrupoitemSelecionado = listaSubGrupos.Find(p => p.SubGrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+                subgrupoitemSelecionado = listaSubGrupos.Find(p => p.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value));
                 PreencheCamposSubGrupo(subgrupoitemSelecionado);
                 btSalvar.Enabled = true;
-                btAddSub.Enabled = false;
+                btNovoSubGrupo.Enabled = false;
                 btRemoverSub.Enabled = true;
             }
         }
@@ -195,6 +195,7 @@ namespace _5gpro.Forms
                 else if (resultado == 1)
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
+                    btNovoSubGrupo.Enabled = true;
                     Editando(false);
                     return;
                 }
@@ -378,12 +379,13 @@ namespace _5gpro.Forms
             tbNomeGrupoItem.Text = grupoitem.Nome;
             listaSubGrupos = grupoitem.SubGrupoItens;
             grupoItem = grupoitem;
+            btNovoSubGrupo.Enabled = true;
             PreencheGridParcelas();
             ignoraCheckEvent = false;
         }
         private void PreencheCamposSubGrupo(SubGrupoItem subGrupoItem)
         {
-            tbCodigoSubGrupo.Text = subGrupoItem.SubGrupoItemID.ToString();
+            tbCodigoSubGrupo.Text = subGrupoItem.Codigo.ToString();
             tbNomeSubGrupo.Text = subGrupoItem.Nome;
         }
         private void Editando(bool edit)
@@ -397,8 +399,9 @@ namespace _5gpro.Forms
         private void InserirSubGrupoItem()
         {
             LimpaCamposSubItens();
-            tbCodigoSubGrupo.Focus();
-            btAddSub.Enabled = false;
+            tbCodigoSubGrupo.Text = (grupoItem.SubGrupoItens.Max(sg => sg.Codigo) + 1).ToString();
+            tbNomeSubGrupo.Focus();
+            btNovoSubGrupo.Enabled = false;
         }
         private void RemoverSubGrupoItem()
         {
@@ -406,8 +409,11 @@ namespace _5gpro.Forms
             {
                 MessageBox.Show("Este sub-grupo está sendo utilizado e não pode ser deletado.",
                 "Aviso",
-                 MessageBoxButtons.YesNo,
+                 MessageBoxButtons.OK,
                  MessageBoxIcon.Warning);
+                btNovoSubGrupo.Enabled = true;
+                btRemoverSub.Enabled = false;
+                LimpaCamposSubItens();
                 return;
             }
 
@@ -417,6 +423,9 @@ namespace _5gpro.Forms
                 listaSubGrupos.Remove(subgrupoitemSelecionado);
                 dgvSubGruposItens.Rows.Clear();
                 PreencheGridParcelas();
+                btNovoSubGrupo.Enabled = true;
+                btRemoverSub.Enabled = false;
+                LimpaCamposSubItens();
                 tbAjuda.Text = "Sub-grupo removido com sucesso";
             }
         }
@@ -427,12 +436,21 @@ namespace _5gpro.Forms
                 return;
             }
 
-            var subGrupo = new SubGrupoItem();
-            subGrupo.SubGrupoItemID = int.Parse(tbCodigoSubGrupo.Text);
-            subGrupo.Nome = tbNomeGrupoItem.Text;
-            subGrupo.GrupoItem = grupoItem;
+            SubGrupoItem subGrupo = null;
+            if(subgrupoitemSelecionado == null)
+            {
+                subGrupo = new SubGrupoItem();
+                subGrupo.Nome = tbNomeSubGrupo.Text;
+                subGrupo.Codigo = int.Parse(tbCodigoSubGrupo.Text);
+                subGrupo.GrupoItem = grupoItem;
+            }
+            else
+            {
+                subGrupo = subgrupoitemSelecionado;
+            }
+            
 
-            int resultado = grupoItemDAO.InserirSubGrupo(subgrupoitemSelecionado ?? subGrupo);
+            int resultado = grupoItemDAO.InserirSubGrupo(subGrupo);
             if (resultado == 0)
             {
                 MessageBox.Show("Problema ao salvar o registro",
@@ -444,25 +462,32 @@ namespace _5gpro.Forms
             else if (resultado == 1)
             {
                 tbAjuda.Text = "Sub-grupo salvo com sucesso";
-                LimpaCamposSubItens();
-                return;
+
+                grupoItem.SubGrupoItens.Add(subGrupo);
+                btNovoSubGrupo.Enabled = true;
+                
             }
             else if (resultado == 2)
             {
-                tbAjuda.Text = "Sub-grupo atualizado com sucesso";
-                LimpaCamposSubItens();
+                tbAjuda.Text = "Sub-grupo atualizado com sucesso";         
+                grupoItem.SubGrupoItens.Add(subGrupo);
+                btNovoSubGrupo.Enabled = true;
                 return;
             }
-            btAddSub.Enabled = true;
+
+            LimpaCamposSubItens();
+            PreencheGridParcelas();
+            
         }
         private void PreencheGridParcelas()
         {
-            foreach(var sub in listaSubGrupos)
+            dgvSubGruposItens.Rows.Clear();
+            foreach(var sub in grupoItem.SubGrupoItens)
             {
-                dgvSubGruposItens.Rows.Add(sub.SubGrupoItemID,
+                dgvSubGruposItens.Rows.Add(sub.Codigo,
                                            sub.Nome);
-                dgvSubGruposItens.Refresh();
             }
+            dgvSubGruposItens.Refresh();
         }
 
     }

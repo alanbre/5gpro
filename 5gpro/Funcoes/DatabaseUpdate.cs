@@ -126,7 +126,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `5gprodatabase`.`unimedida`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`unimedida` (
-  `idunimedida` INT(11) NOT NULL AUTO_INCREMENT,
+  `idunimedida` INT(11) NOT NULL,
   `sigla` VARCHAR(45) NULL DEFAULT NULL,
   `descricao` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idunimedida`))
@@ -149,7 +149,8 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`subgrupoitem`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupoitem` (
-  `idsubgrupoitem` INT NOT NULL,
+  `idsubgrupoitem` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupoitem` INT NOT NULL,
   PRIMARY KEY (`idsubgrupoitem`),
@@ -455,7 +456,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`parcelaoperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
-  `idparcelaoperacao` INT NOT NULL AUTO_INCREMENT,
+  `idparcelaoperacao` INT NOT NULL,
   `numero` INT NULL,
   `dias` INT NULL,
   `idoperacao` INT NOT NULL,
@@ -692,8 +693,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
 ";
             return create;
         }

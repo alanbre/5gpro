@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbGrupoItem = new System.Windows.Forms.GroupBox();
             this.tbNomeGrupoItem = new System.Windows.Forms.TextBox();
@@ -38,7 +38,7 @@
             this.dgvtbcCodigoSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNomeSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btRemoverSub = new System.Windows.Forms.Button();
-            this.btAddSub = new System.Windows.Forms.Button();
+            this.btNovoSubGrupo = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbSubGrupos = new System.Windows.Forms.GroupBox();
             this.btSalvar = new System.Windows.Forms.Button();
@@ -108,8 +108,8 @@
             this.dgvSubGruposItens.AllowUserToAddRows = false;
             this.dgvSubGruposItens.AllowUserToDeleteRows = false;
             this.dgvSubGruposItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvSubGruposItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvSubGruposItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvSubGruposItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -155,16 +155,17 @@
             this.btRemoverSub.UseVisualStyleBackColor = true;
             this.btRemoverSub.Click += new System.EventHandler(this.BtRemoverSub_Click);
             // 
-            // btAddSub
+            // btNovoSubGrupo
             // 
-            this.btAddSub.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btAddSub.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
-            this.btAddSub.Location = new System.Drawing.Point(499, 19);
-            this.btAddSub.Name = "btAddSub";
-            this.btAddSub.Size = new System.Drawing.Size(22, 22);
-            this.btAddSub.TabIndex = 6;
-            this.btAddSub.UseVisualStyleBackColor = true;
-            this.btAddSub.Click += new System.EventHandler(this.BtAddSub_Click);
+            this.btNovoSubGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btNovoSubGrupo.Enabled = false;
+            this.btNovoSubGrupo.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
+            this.btNovoSubGrupo.Location = new System.Drawing.Point(499, 19);
+            this.btNovoSubGrupo.Name = "btNovoSubGrupo";
+            this.btNovoSubGrupo.Size = new System.Drawing.Size(22, 22);
+            this.btNovoSubGrupo.TabIndex = 6;
+            this.btNovoSubGrupo.UseVisualStyleBackColor = true;
+            this.btNovoSubGrupo.Click += new System.EventHandler(this.BtNovoSubGrupo_Click);
             // 
             // tbAjuda
             // 
@@ -185,7 +186,7 @@
             this.gbSubGrupos.Controls.Add(this.tbCodigoSubGrupo);
             this.gbSubGrupos.Controls.Add(this.lbCodigoSubGrupo);
             this.gbSubGrupos.Controls.Add(this.dgvSubGruposItens);
-            this.gbSubGrupos.Controls.Add(this.btAddSub);
+            this.gbSubGrupos.Controls.Add(this.btNovoSubGrupo);
             this.gbSubGrupos.Controls.Add(this.btRemoverSub);
             this.gbSubGrupos.Location = new System.Drawing.Point(71, 120);
             this.gbSubGrupos.Name = "gbSubGrupos";
@@ -227,6 +228,7 @@
             // tbCodigoSubGrupo
             // 
             this.tbCodigoSubGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbCodigoSubGrupo.Enabled = false;
             this.tbCodigoSubGrupo.Location = new System.Drawing.Point(7, 209);
             this.tbCodigoSubGrupo.Name = "tbCodigoSubGrupo";
             this.tbCodigoSubGrupo.Size = new System.Drawing.Size(58, 20);
@@ -295,7 +297,7 @@
         private System.Windows.Forms.Label lbNome;
         private System.Windows.Forms.TextBox tbCodigo;
         private System.Windows.Forms.DataGridView dgvSubGruposItens;
-        private System.Windows.Forms.Button btAddSub;
+        private System.Windows.Forms.Button btNovoSubGrupo;
         private System.Windows.Forms.Button btRemoverSub;
         private Controls.MenuVertical menuVertical;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoSub;

@@ -55,9 +55,9 @@ namespace MySQLConnection
                 this._connection = new MySqlConnection(connectionString);
                 this._connection.Open();
             }
-            catch
+            catch (MySqlException ex)
             {
-                throw;
+                Console.WriteLine(ex.ToString());
             }
 
         }
@@ -143,9 +143,9 @@ namespace MySQLConnection
                 {
                     dbValue = command.ExecuteScalar();
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    throw;
+                    Console.WriteLine(ex.ToString());
                 }
 
                 if (dbValue == DBNull.Value)
@@ -261,9 +261,9 @@ namespace MySQLConnection
                         }
                     }
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    throw;
+                    Console.WriteLine(ex.ToString());
                 }
             }
 
@@ -322,9 +322,9 @@ namespace MySQLConnection
                         }
                     }
                 }
-                catch
+                catch (MySqlException ex)
                 {
-                    throw;
+                    Console.WriteLine(ex.ToString());
                 }
             }
 

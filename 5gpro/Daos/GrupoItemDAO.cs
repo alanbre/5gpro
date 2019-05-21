@@ -58,7 +58,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                                                    s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                                                   s.idgrupoitem AS idgrupoitemsub 
+                                                   s.idgrupoitem AS idgrupoitemsub, s.codigo
                                                    FROM grupoitem g 
                                                    LEFT JOIN subgrupoitem s 
                                                    ON g.idgrupoitem = s.idgrupoitem 
@@ -80,7 +80,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                             s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                            s.idgrupoitem AS idgrupoitemsub 
+                            s.idgrupoitem AS idgrupoitemsub , s.codigo
                             FROM grupoitem g 
                             LEFT JOIN subgrupoitem s 
                             ON g.idgrupoitem = s.idgrupoitem 
@@ -103,7 +103,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                             s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                            s.idgrupoitem AS idgrupoitemsub 
+                            s.idgrupoitem AS idgrupoitemsub , s.codigo
                             FROM grupoitem g 
                             LEFT JOIN subgrupoitem s 
                             ON g.idgrupoitem = s.idgrupoitem 
@@ -124,30 +124,31 @@ namespace _5gpro.Daos
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"INSERT INTO subgrupoitem (idsubgrupoitem, nome, idgrupoitem)
+                sql.Query = @"INSERT INTO subgrupoitem (idsubgrupoitem, nome, idgrupoitem, codigo)
                             VALUES
-                            (@idsubgrupoitem, @nome, @idgrupoitem)
+                            (@idsubgrupoitem, @nome, @idgrupoitem, @codigo)
                             ON DUPLICATE KEY UPDATE
-                            nome = @nome, idgrupoitem = @idgrupoitem";
+                            nome = @nome, idgrupoitem = @idgrupoitem, codigo = @codigo";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
                 sql.addParam("@nome", subGrupo.Nome);
                 sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
+                sql.addParam("@codigo", subGrupo.Codigo);
                 retorno = sql.insertQuery();
             }
             return retorno;
         }
         public bool SubGrupoUsado(SubGrupoItem subGrupo)
         {
-            var usado = false;
+            var usado = true;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = "SELECT SUM(*) FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem AND idgrupoitem = @idgrupoitem";
+                sql.Query = "SELECT * FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem AND idgrupoitem = @idgrupoitem LIMIT 1";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
                 sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
                 var data = sql.selectQueryForSingleRecord();
-                if (data != null)
+                if (data == null)
                 {
-                    usado = true;
+                    usado = false;
                 }
             }
             return usado;
@@ -202,6 +203,7 @@ namespace _5gpro.Daos
                 {
                     var subGrupoItem = new SubGrupoItem();
                     subGrupoItem.SubGrupoItemID = Convert.ToInt32(d["subgrupoitemID"]);
+                    subGrupoItem.Codigo = Convert.ToInt32(d["codigo"]);
                     subGrupoItem.Nome = (string)d["subgrupoitemnome"];
                     subGrupoItem.GrupoItem = grupoItem;
 
