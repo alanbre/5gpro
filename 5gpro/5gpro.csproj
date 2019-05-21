@@ -633,6 +633,7 @@
       <DependentUpon>fmRltItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rltItem.rdlc" />
+    <EmbeddedResource Include="Reports\rltItemSemDS.rdlc" />
     <EmbeddedResource Include="testesrelatorios\exemplorelatorio.resx">
       <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </EmbeddedResource>
@@ -775,6 +776,7 @@
     </Compile>
     <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
     <None Include="Reports\dsItem.xsc">
       <DependentUpon>dsItem.xsd</DependentUpon>
     </None>
@@ -1011,9 +1013,7 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
