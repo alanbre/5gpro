@@ -165,14 +165,12 @@ namespace _5gpro.Forms
                     {
                         MessageBox.Show("Salvo", "Aviso de alteração", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
-                        telacadgrupoitem.AtualizarDgvSub();
                         Editando(false);
                     }
                     else if (resultado == 2)
                     {
                         MessageBox.Show("Atualizado", "Aviso de alteração", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
-                        telacadgrupoitem.AtualizarDgvSub();
                         Editando(false);
                     }
                 }
@@ -221,7 +219,6 @@ namespace _5gpro.Forms
 
         private void FmCadastroSubGrupoItem_FormClosing(object sender, FormClosingEventArgs e)
         {
-            telacadgrupoitem.AtualizarDgvSub();
             telacadgrupoitem.subgrupoitemSelecionado = null;
         }
 

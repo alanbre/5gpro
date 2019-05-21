@@ -47,16 +47,9 @@ namespace _5gpro.Forms
 
         private void FmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F5)
-            {
-                Recarrega();
-                return;
-            }
-
             if (e.KeyCode == Keys.F1)
             {
-                if (!editando)
-                    Novo();
+                Novo();
                 return;
             }
 
@@ -66,6 +59,11 @@ namespace _5gpro.Forms
                 return;
             }
 
+            if (e.KeyCode == Keys.F5)
+            {
+                Recarrega();
+                return;
+            }
             EnterTab(this.ActiveControl, e);
         }
         private void FmCadastroPessoa_FormClosing(object sender, FormClosingEventArgs e)
@@ -212,8 +210,6 @@ namespace _5gpro.Forms
             pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
             pessoa.Telefone = mtbTelefone.TextNoMask();
             pessoa.Email = tbEmail.Text;
-
-
             var atuacaostring = "";
             foreach (var s in cblAtuacao.CheckedItems)
             {
