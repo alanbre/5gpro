@@ -115,9 +115,16 @@ namespace _5gpro.Controls
         public void EscolhaOGrupo(bool ok)
         {
             if (ok)
-                tbNomeSubGrupoItem.Text = "";
+            {
+                if (subgrupoItem != null)
+                    tbNomeSubGrupoItem.Text = subgrupoItem.Nome;
+                else
+                    tbNomeSubGrupoItem.Text = "";
+            }
             else
+            {
                 tbNomeSubGrupoItem.Text = "Escolha o Grupo";
+            }
         }
 
         public void Limpa()
