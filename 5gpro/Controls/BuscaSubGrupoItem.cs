@@ -112,14 +112,25 @@ namespace _5gpro.Controls
             }
         }
 
-        public void EscolhaOGrupo()
+        public void EscolhaOGrupo(bool ok)
         {
-            tbNomeSubGrupoItem.Text = "Escolha o Grupo";
+            if (ok)
+            {
+                if (subgrupoItem != null)
+                    tbNomeSubGrupoItem.Text = subgrupoItem.Nome;
+                else
+                    tbNomeSubGrupoItem.Text = "";
+            }
+            else
+            {
+                tbNomeSubGrupoItem.Text = "Escolha o Grupo";
+            }
         }
 
         public void Limpa()
         {
             this.subgrupoItem = null;
+            this.gruporecebido = null;
             tbCodigoSubGrupoItem.Clear();
             tbNomeSubGrupoItem.Clear();
         }

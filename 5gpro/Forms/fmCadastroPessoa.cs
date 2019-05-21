@@ -99,6 +99,11 @@ namespace _5gpro.Forms
         private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void TbEmail_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void BuscaGrupoPessoa_Text_Changed_1(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+            buscaSubGrupoPessoa.Limpa();
+        }
         private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
         {
             //ALTERA A MASCARA DO CAMPO PARA CPF
@@ -125,20 +130,18 @@ namespace _5gpro.Forms
             }
         }
         private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e) => Editando(true);
+
         private void BuscaGrupoPessoa_Leave(object sender, EventArgs e)
         {
-            if (!ignoraCheckEvent) { Editando(true); }
-
-            if (buscaGrupoPessoa.grupoPessoa != null)
+            buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+            if (buscaGrupoPessoa.grupoPessoa == null)
             {
                 buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
+                buscaSubGrupoPessoa.EscolhaOGrupo(false);
             }
             else
             {
-                buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
-                buscaSubGrupoPessoa.Limpa();
-                buscaSubGrupoPessoa.EscolhaOGrupo();
+                buscaSubGrupoPessoa.EscolhaOGrupo(true);
             }
         }
 
@@ -438,6 +441,8 @@ namespace _5gpro.Forms
             buscaGrupoPessoa.Limpa();
             buscaSubGrupoPessoa.Limpa();
         }
+
+
         private void PreencheCampos(Pessoa pessoa)
         {
             ignoraCheckEvent = true;
@@ -495,5 +500,6 @@ namespace _5gpro.Forms
 
             ignoraCheckEvent = false;
         }
+
     }
 }

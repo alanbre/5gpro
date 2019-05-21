@@ -51,8 +51,8 @@
             this.quitaçãoDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiRelTeste = new System.Windows.Forms.ToolStripMenuItem();
+            this.exemplorelatorioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
-            this.testeeduardoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -233,7 +233,7 @@
             // 
             this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiRelTeste,
-            this.testeeduardoToolStripMenuItem});
+            this.exemplorelatorioToolStripMenuItem});
             this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
             this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.relatóriosToolStripMenuItem.Text = "Relatórios";
@@ -245,17 +245,17 @@
             this.tsmiRelTeste.Text = "teste";
             this.tsmiRelTeste.Click += new System.EventHandler(this.TsmiTeste_Click);
             // 
+            // exemplorelatorioToolStripMenuItem
+            // 
+            this.exemplorelatorioToolStripMenuItem.Name = "exemplorelatorioToolStripMenuItem";
+            this.exemplorelatorioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exemplorelatorioToolStripMenuItem.Text = "exemplorelatorio";
+            this.exemplorelatorioToolStripMenuItem.Click += new System.EventHandler(this.ExemplorelatorioToolStripMenuItem_Click);
+            // 
             // tsmiCadastroContaReceber
             // 
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
-            // 
-            // testeeduardoToolStripMenuItem
-            // 
-            this.testeeduardoToolStripMenuItem.Name = "testeeduardoToolStripMenuItem";
-            this.testeeduardoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.testeeduardoToolStripMenuItem.Text = "testeeduardo";
-            this.testeeduardoToolStripMenuItem.Click += new System.EventHandler(this.TesteeduardoToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -302,7 +302,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiEntrada;
         private System.Windows.Forms.ToolStripMenuItem tsmiEntradaNotas;
         private System.Windows.Forms.ToolStripMenuItem quitaçãoDeContasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem testeeduardoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exemplorelatorioToolStripMenuItem;
     }
 }
 

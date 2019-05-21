@@ -254,14 +254,6 @@
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
-    <Compile Include="DataSetUnimedida.cs">
-      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSetUnimedida.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -289,6 +281,12 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\exemplorelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\exemplorelatorio.Designer.cs">
+      <DependentUpon>exemplorelatorio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -541,11 +539,13 @@
     <Compile Include="Forms\fmSelecionarBase.Designer.cs">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TentandoRelat.cs">
-      <SubType>Form</SubType>
+    <Compile Include="testesrelatorios\Teste.cs">
+      <DependentUpon>Teste.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TentandoRelat.Designer.cs">
-      <DependentUpon>TentandoRelat.cs</DependentUpon>
+    <Compile Include="testesrelatorios\Teste.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Teste.xsd</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
@@ -567,12 +567,6 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="testesrelatorios\rvTeste.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testesrelatorios\rvTeste.Designer.cs">
-      <DependentUpon>rvTeste.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -617,6 +611,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\exemplorelatorio.resx">
+      <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
@@ -744,6 +741,7 @@
     <EmbeddedResource Include="Forms\fmSelecionarBase.resx">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="testesrelatorios\Report2.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -755,21 +753,17 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\Report1.rdlc" />
-    <EmbeddedResource Include="testesrelatorios\ReportUnimedida.rdlc" />
-    <EmbeddedResource Include="testesrelatorios\rvTeste.resx">
-      <DependentUpon>rvTeste.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="5gpro_TemporaryKey.pfx" />
-    <None Include="DataSetUnimedida.xsc">
-      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
+    <None Include="testesrelatorios\Teste.xsc">
+      <DependentUpon>Teste.xsd</DependentUpon>
     </None>
-    <None Include="DataSetUnimedida.xsd">
+    <None Include="testesrelatorios\Teste.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetUnimedida.Designer.cs</LastGenOutput>
+      <LastGenOutput>Teste.Designer.cs</LastGenOutput>
     </None>
-    <None Include="DataSetUnimedida.xss">
-      <DependentUpon>DataSetUnimedida.xsd</DependentUpon>
+    <None Include="testesrelatorios\Teste.xss">
+      <DependentUpon>Teste.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

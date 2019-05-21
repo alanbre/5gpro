@@ -104,18 +104,15 @@ namespace _5gpro.Forms
         }
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
         {
-            if (!ignoraCheckEvent) { Editando(true); }
-
-            if (buscaGrupoItem.grupoItem != null)
+            buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
+            if (buscaGrupoItem.grupoItem == null)
             {
                 buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
+                buscaSubGrupoItem.EscolhaOGrupo(false);
             }
             else
             {
-                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
-                buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EscolhaOGrupo();
+                buscaSubGrupoItem.EscolhaOGrupo(true);
             }
         }
 
@@ -411,6 +408,11 @@ namespace _5gpro.Forms
             }
         }
 
+        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
+            if (!ignoraCheckEvent) { Editando(true); }
+            buscaSubGrupoItem.Limpa();
+        }
 
         private void EnterTab(object sender, KeyEventArgs e)
         {

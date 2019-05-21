@@ -124,6 +124,7 @@
             this.buscaGrupoItem.Name = "buscaGrupoItem";
             this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
             this.buscaGrupoItem.TabIndex = 12;
+            this.buscaGrupoItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItem_Text_Changed);
             this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
             // 
             // buscaUnimedidaItem

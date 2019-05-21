@@ -199,8 +199,12 @@ namespace _5gpro
 
         private void TesteeduardoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var RelatUnimedida = new rvTeste();
-            RelatUnimedida.Show(this);
+        }
+
+        private void ExemplorelatorioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var ExemploRelatorio = new exemplorelatorio();
+            ExemploRelatorio.Show(this);
         }
     }
 }
