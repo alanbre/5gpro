@@ -56,7 +56,7 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-        public Pessoa BuscaById(int cod)
+        public Pessoa BuscaByID(int cod)
         {
             Pessoa pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))

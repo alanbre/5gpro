@@ -13,14 +13,13 @@ namespace _5gpro.Forms
     {
         private readonly NotaFiscalPropriaDAO notaFiscalPropriaDAO = new NotaFiscalPropriaDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
-        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         private NotaFiscalPropria notaFiscalPropria = new NotaFiscalPropria();
         private NotaFiscalPropriaItem itemSelecionado;
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
@@ -57,7 +56,6 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-
         private void FmSaiEmissaoNota_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!editando)
@@ -71,10 +69,6 @@ namespace _5gpro.Forms
                 e.Cancel = true;
             }
         }
-
-
-
-
         private void BtNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCamposItem(true);
@@ -84,9 +78,6 @@ namespace _5gpro.Forms
         }
         private void BtInserirItem_Click(object sender, EventArgs e) => InserirItem();
         private void BtExcluirItem_Click(object sender, EventArgs e) => ExcluirItem();
-
-
-
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
@@ -265,7 +256,7 @@ namespace _5gpro.Forms
             if (notaFiscalPropria != null)
             {
                 notaFiscalPropria = notaFiscalPropriaDAO.BuscaByID(notaFiscalPropria.NotaFiscalPropriaID);
-                notaFiscalPropria.Pessoa = pessoaDAO.BuscaById(notaFiscalPropria.Pessoa.PessoaID);
+                notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
                 PreencheCampos(notaFiscalPropria);
                 if (editando)
                     Editando(false);
@@ -389,7 +380,7 @@ namespace _5gpro.Forms
             var newNotaFiscalPropria = notaFiscalPropriaDAO.BuscaByID(codigo);
             if (newNotaFiscalPropria != null)
             {
-                newNotaFiscalPropria.Pessoa = pessoaDAO.BuscaById(newNotaFiscalPropria.Pessoa.PessoaID);
+                newNotaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalPropria.Pessoa.PessoaID);
                 notaFiscalPropria = newNotaFiscalPropria;
                 PreencheCampos(notaFiscalPropria);
                 Editando(false);

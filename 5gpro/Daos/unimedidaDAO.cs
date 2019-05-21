@@ -69,13 +69,18 @@ namespace _5gpro.Daos
             }
             return listaUnimedida;
         }
-        public Unimedida BuscaByID(int cod)
+        public Unimedida BuscaByID(int Codigo)
         {
             var unimedida = new Unimedida();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = "SELECT * FROM unimedida WHERE idunimedida = @idunimedida";
+                sql.addParam("@idunimedida", Codigo);
                 var data = sql.selectQueryForSingleRecord();
+                if(data == null)
+                {
+                    return null;
+                }
                 unimedida = LeDadosReader(data);
             }
             return unimedida;

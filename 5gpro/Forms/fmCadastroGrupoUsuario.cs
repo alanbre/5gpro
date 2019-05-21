@@ -12,11 +12,11 @@ namespace _5gpro.Forms
     {
         //CÓDIGO DA TELA CAD.GRUPO USUARIO = 010400
 
-        GrupoUsuario grupousuario;
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
-        List<Permissao> listapermissoes = new List<Permissao>();
-        Validacao validacao = new Validacao();
+        private GrupoUsuario grupousuario;
+        private readonly GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private List<Permissao> listapermissoes = new List<Permissao>();
+        private readonly Validacao validacao = new Validacao();
         int NivelTodas = 0;
 
         //Controle de permissões
@@ -61,29 +61,34 @@ namespace _5gpro.Forms
         {
             EnterTab(this.ActiveControl, e);
         }
+        private void FmCadastroGrupoUsuario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
 
-        private void fmCadastroGrupoUsuario_Load(object sender, EventArgs e)
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+        private void FmCadastroGrupoUsuario_Load(object sender, EventArgs e)
         {
             PopularModulos();
-            popularPermissoes();
+            PopularPermissoes();
 
         }
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
+        private void TbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
-
-        private void tbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
+        private void TbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
         {
 
         }
-
-
-        //EVENTOS DE LEAVE
-        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
+        private void TbCodGrupoUsuario_Leave(object sender, EventArgs e)
         {
             if (!int.TryParse(tbCodGrupoUsuario.Text, out int codigo)) { tbCodGrupoUsuario.Clear(); }
             if (!editando)
@@ -97,13 +102,13 @@ namespace _5gpro.Forms
                         grupousuario = newgrupousuario;
                         PreencheCampos(grupousuario);
                         listapermissoes = permissaoDAO.BuscaPermissoesByIdGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
-                        popularPermissoes();
+                        PopularPermissoes();
                         Editando(false);
                     }
                     else
                     {
                         listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                        popularPermissoes();
+                        PopularPermissoes();
                         Editando(true);
                         LimpaCampos(false);
                     }
@@ -111,7 +116,7 @@ namespace _5gpro.Forms
                 else if (tbCodGrupoUsuario.Text.Length == 0)
                 {
                     listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                    popularPermissoes();
+                    PopularPermissoes();
                     LimpaCampos(true);
                     Editando(false);
                 }
@@ -147,44 +152,29 @@ namespace _5gpro.Forms
             }
 
         }
-
-
-        //MENU
-        private void MenuVertical1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
             NovoCadastro();
         }
-
-        private void MenuVertical1_Buscar_Clicked(object sender, EventArgs e)
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
             if (!editando)
             {
                 AbreTelaBuscaGrupoUsuario();
             }
         }
-
-        private void MenuVertical1_Salvar_Clicked(object sender, EventArgs e)
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
             SalvaCadastro();
         }
-
-        private void MenuVertical1_Proximo_Clicked(object sender, EventArgs e)
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
             ProximoCadastro();
         }
-
-        private void MenuVertical1_Anterior_Clicked(object sender, EventArgs e)
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             CadastroAnterior();
         }
-
-
-        //EVENTOS DE CLICK
-
         private void DgvModulos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //AO CLICKAR UMA FILTRA AS PERMISSOES POR MÓDULO, COMPARANDO
@@ -193,15 +183,14 @@ namespace _5gpro.Forms
 
             if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
             {
-                popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
             }
             else
             {
-                popularPermissoes();
+                PopularPermissoes();
             }
 
         }
-
         private void DgvModulos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
@@ -231,7 +220,7 @@ namespace _5gpro.Forms
                             p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
                         }
                     }
-                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                    PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
                     PopularModulos();
                     Editando(true);
                 }
@@ -261,7 +250,7 @@ namespace _5gpro.Forms
                             p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
                         }
                         NivelTodas = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString());
-                        popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                        PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
                         PopularModulos();
                         Editando(true);
 
@@ -270,13 +259,11 @@ namespace _5gpro.Forms
                 }
             }
         }
-
-        private void dgvPermissoes_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
+        private void DgvPermissoes_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
         {
 
         }
-
-        private void dgvPermissoes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPermissoes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
             if (tbCodGrupoUsuario.Text.Length > 0)
@@ -296,7 +283,6 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-
         private void DgvModulos_CurrentCellChanged(object sender, EventArgs e)
         {
             //MUDAR MODULO NAS SETAS
@@ -304,18 +290,17 @@ namespace _5gpro.Forms
             {
                 if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
                 {
-                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                    PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
                 }
                 else
                 {
-                    popularPermissoes();
+                    PopularPermissoes();
                 }
             }
 
         }
 
 
-        //PADRÕES CRIADAS
 
         public void PopularListapermissoes()
         {
@@ -329,7 +314,7 @@ namespace _5gpro.Forms
             tbCodGrupoUsuario.Text = grupousuario.GrupoUsuarioID.ToString();
             tbNomeGrupoUsuario.Text = grupousuario.Nome;
             listapermissoes = permissaoDAO.BuscaPermissoesByIdGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
-            popularPermissoes();
+            PopularPermissoes();
             PopularModulos();
 
 
@@ -386,7 +371,7 @@ namespace _5gpro.Forms
                     LimpaCampos(false);
                     tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel().ToString();
                     listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                    popularPermissoes();
+                    PopularPermissoes();
                     PopularModulos();
                     grupousuario = null;
                     tbNomeGrupoUsuario.Focus();
@@ -398,7 +383,7 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
                 tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel().ToString();
                 listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                popularPermissoes();
+                PopularPermissoes();
                 PopularModulos();
                 grupousuario = null;
                 tbNomeGrupoUsuario.Focus();
@@ -406,7 +391,7 @@ namespace _5gpro.Forms
             }
         }
 
-        public void popularPermissoes()
+        public void PopularPermissoes()
         {
 
             dgvPermissoes.Rows.Clear();
@@ -577,7 +562,7 @@ namespace _5gpro.Forms
             }
         }
 
-        private void popularPermissoesByCodModulo(string codmodulo)
+        private void PopularPermissoesByCodModulo(string codmodulo)
         {
             dgvPermissoes.Rows.Clear();
 
@@ -618,6 +603,7 @@ namespace _5gpro.Forms
             editando = edit;
             menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
+
 
         private void EnterTab(object sender, KeyEventArgs e)
         {

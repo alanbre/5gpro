@@ -30,9 +30,6 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
-
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
@@ -53,7 +50,6 @@ namespace _5gpro.Daos
             }
             return proximoid;
         }
-
         public int Salvar(Usuario usuario)
         {
             int retorno = 0;
@@ -79,7 +75,6 @@ namespace _5gpro.Daos
 
             return retorno;
         }
-
         /// <summary>
         /// Retorna apenas o ID e o nome do usuário. Feito para tela de Login
         /// </summary>
@@ -105,8 +100,6 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
-
-
         public Usuario BuscaByID(int cod)
         {
             Usuario usuario = new Usuario();
@@ -140,9 +133,7 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
-
-
-        public Usuario Proximo(string codAtual)
+        public Usuario Proximo(int Codigo)
         {
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
@@ -155,7 +146,7 @@ namespace _5gpro.Daos
                               FROM usuario 
                               WHERE idusuario > @idusuario) LIMIT 1";
 
-                sql.addParam("@idusuario", codAtual);
+                sql.addParam("@idusuario", Codigo);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {
@@ -179,8 +170,7 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
-
-        public Usuario Anterior(string codAtual)
+        public Usuario Anterior(int Codigo)
         {
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
@@ -194,7 +184,7 @@ namespace _5gpro.Daos
                               FROM usuario 
                               WHERE idusuario < @idusuario) LIMIT 1";
 
-                sql.addParam("@idusuario", codAtual);
+                sql.addParam("@idusuario", Codigo);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {
@@ -218,8 +208,6 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
-
-
         public IEnumerable<Usuario> Busca(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
         {
             List<Usuario> usuarios = new List<Usuario>();

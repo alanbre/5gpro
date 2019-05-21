@@ -204,7 +204,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(610, 449);
+            this.ClientSize = new System.Drawing.Size(610, 450);
             this.Controls.Add(this.gbBuscaSubgrupo);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.gbNovoGrupoItem);
@@ -217,6 +217,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro Grupo de Itens";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCadastroGrupoItem_FormClosing);
             this.Load += new System.EventHandler(this.FmCadastroGrupoItem_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroGrupoItem_KeyDown);
             this.gbNovoGrupoItem.ResumeLayout(false);

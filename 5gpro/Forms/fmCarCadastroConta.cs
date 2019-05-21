@@ -14,9 +14,8 @@ namespace _5gpro.Forms
         private bool editando, ignoracheckevent, novo = false;
         private ContaReceber contaReceber = null;
         private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
-        Validacao validacao = new Validacao();
+        private readonly Validacao validacao = new Validacao();
 
-        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
         private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
         private readonly OperacaoDAO operacaoDAO = new OperacaoDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
@@ -57,9 +56,21 @@ namespace _5gpro.Forms
 
             EnterTab(this.ActiveControl, e);
         }
+        private void FmCarCadastroConta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
 
 
-        //MENU
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
@@ -214,7 +225,7 @@ namespace _5gpro.Forms
             {
                 contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
                 contaReceber.Operacao = operacaoDAO.BuscaByID(contaReceber.Operacao.OperacaoID);
-                contaReceber.Pessoa = pessoaDAO.BuscaById(contaReceber.Pessoa.PessoaID);
+                contaReceber.Pessoa = pessoaDAO.BuscaByID(contaReceber.Pessoa.PessoaID);
                 PreencheCampos(contaReceber);
                 if (editando)
                     Editando(false);
@@ -245,7 +256,7 @@ namespace _5gpro.Forms
                 if (newcontaReceber != null)
                 {
                     newcontaReceber.Operacao = operacaoDAO.BuscaByID(newcontaReceber.Operacao.OperacaoID);
-                    newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
+                    newcontaReceber.Pessoa = pessoaDAO.BuscaByID(newcontaReceber.Pessoa.PessoaID);
                     contaReceber = newcontaReceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
@@ -271,7 +282,7 @@ namespace _5gpro.Forms
                 if (newcontaRebeceber != null)
                 {
                     newcontaRebeceber.Operacao = operacaoDAO.BuscaByID(newcontaRebeceber.Operacao.OperacaoID);
-                    newcontaRebeceber.Pessoa = pessoaDAO.BuscaById(newcontaRebeceber.Pessoa.PessoaID);
+                    newcontaRebeceber.Pessoa = pessoaDAO.BuscaByID(newcontaRebeceber.Pessoa.PessoaID);
                     contaReceber = newcontaRebeceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
@@ -308,7 +319,7 @@ namespace _5gpro.Forms
             if (newcontaReceber != null)
             {
                 newcontaReceber.Operacao = operacaoDAO.BuscaByID(newcontaReceber.Operacao.OperacaoID);
-                newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
+                newcontaReceber.Pessoa = pessoaDAO.BuscaByID(newcontaReceber.Pessoa.PessoaID);
                 contaReceber = newcontaReceber;
                 btGerarParcelas.Enabled = false;
                 dbValorContaGerar.Enabled = false;
@@ -497,9 +508,9 @@ namespace _5gpro.Forms
             dbValorContaGerar.Valor = 0.00m;
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
-            LimpaCamposParcela(limpaCod);
+            LimpaCamposParcela();
         }
-        private void LimpaCamposParcela(bool focus)
+        private void LimpaCamposParcela()
         {
             dbValorOriginalParcela.Valor = 0.00m;
             dbValorFinalParcela.Valor = 0.00m;
@@ -519,6 +530,7 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
 
         private void Editando(bool edit)
         {

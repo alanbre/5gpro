@@ -16,15 +16,13 @@ namespace _5gpro.Forms
     public partial class fmCadastroSubGrupoPessoa : Form
     {
 
-        GrupoPessoa grupopessoareferencia = null;
-        fmCadastroGrupoPessoa telacadgrupopessoa = null;
-        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO();
-        Validacao validacao = new Validacao();
-        SubGrupoPessoa subgrupopessoa = null;
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
+        private GrupoPessoa grupopessoareferencia = null;
+        private fmCadastroGrupoPessoa telacadgrupopessoa = null;
+        private readonly Validacao validacao = new Validacao();
+        private SubGrupoPessoa subgrupopessoa = null;
+        private readonly SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
 
-        bool editando = false;
-        bool ignoraCheckEvent;
+        bool editando, ignoraCheckEvent = false;
 
         public fmCadastroSubGrupoPessoa(GrupoPessoa grupopessoarecebido, fmCadastroGrupoPessoa cadgrupopessoa)
         {

@@ -16,7 +16,6 @@ namespace _5gpro.Forms
     public partial class fmCapQuitacaoConta : Form
     {
         private List<ParcelaContaPagar> parcelasContaPagar;
-        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO();
         private readonly ParcelaContaPagarDAO parcelaContaPagarDAO = new ParcelaContaPagarDAO();
         private List<ParcelaContaPagar> parcelasContaPagarSelecionadas = new List<ParcelaContaPagar>();
         private bool valorContaFiltro = false;
@@ -28,9 +27,9 @@ namespace _5gpro.Forms
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
-        private int Nivel;
         private string CodGrupoUsuario;
 
+        private int Nivel;
         int codigo = 0;
 
         public struct Filtros

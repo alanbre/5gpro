@@ -10,13 +10,13 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroGrupoPessoa : Form
     {
-        GrupoPessoa grupopessoa = null;
-        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO();
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
-        Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private GrupoPessoa grupopessoa = null;
+        private readonly GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO();
+        private readonly SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
+        private readonly Validacao validacao = new Validacao();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
-        List<SubGrupoPessoa> listadesubgrupopessoa = new List<SubGrupoPessoa>();
+        private List<SubGrupoPessoa> listadesubgrupopessoa = new List<SubGrupoPessoa>();
 
         //Controle de Permissões
         private Logado logado;
@@ -59,6 +59,19 @@ namespace _5gpro.Forms
             }
 
             EnterTab(this.ActiveControl, e);
+        }
+        private void FmCadastroGrupoPessoa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -593,5 +606,6 @@ namespace _5gpro.Forms
             var cadSubGrupoPessoa = new fmCadastroSubGrupoPessoa(grupopessoa, this);
             cadSubGrupoPessoa.ShowDialog();
         }
+
     }
 }

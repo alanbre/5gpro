@@ -14,14 +14,13 @@ namespace _5gpro.Forms
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
 
-        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         private NotaFiscalTerceiros notaFiscalTerceiros = new NotaFiscalTerceiros();
         private NotaFiscalTerceirosItem itemSelecionado = null;
         private List<NotaFiscalTerceirosItem> itens = new List<NotaFiscalTerceirosItem>();
 
         //Controle de Permissões
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
@@ -134,7 +133,7 @@ namespace _5gpro.Forms
             if (buscaNotaFiscalTerceiros.notaFiscalTerceirosSelecionada != null)
             {
                 notaFiscalTerceiros = buscaNotaFiscalTerceiros.notaFiscalTerceirosSelecionada;
-                notaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(notaFiscalTerceiros.Pessoa.PessoaID);
+                notaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(notaFiscalTerceiros.Pessoa.PessoaID);
                 PreencheCampos(notaFiscalTerceiros);
             }
         }
@@ -205,7 +204,7 @@ namespace _5gpro.Forms
             if (notaFiscalTerceiros != null)
             {
                 notaFiscalTerceiros = notaFiscalTerceirosDAO.BuscaByID(notaFiscalTerceiros.NotaFiscalTerceirosID);
-                notaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(notaFiscalTerceiros.Pessoa.PessoaID);
+                notaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(notaFiscalTerceiros.Pessoa.PessoaID);
                 PreencheCampos(notaFiscalTerceiros);
                 if (editando)
                     Editando(false);
@@ -234,7 +233,7 @@ namespace _5gpro.Forms
 
                 if (newNotaFiscalTerceiros != null)
                 {
-                    newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(newNotaFiscalTerceiros.Pessoa.PessoaID);
+                    newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalTerceiros.Pessoa.PessoaID);
                     notaFiscalTerceiros = newNotaFiscalTerceiros;
                     itens = notaFiscalTerceiros.NotaFiscalTerceirosItem.ToList();
                     PreencheCampos(notaFiscalTerceiros);
@@ -259,7 +258,7 @@ namespace _5gpro.Forms
                 var newNotaFiscalTerceiros = notaFiscalTerceirosDAO.Anterior(int.Parse(tbCodigo.Text));
                 if (newNotaFiscalTerceiros != null)
                 {
-                    newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(newNotaFiscalTerceiros.Pessoa.PessoaID);
+                    newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalTerceiros.Pessoa.PessoaID);
                     notaFiscalTerceiros = newNotaFiscalTerceiros;
                     itens = notaFiscalTerceiros.NotaFiscalTerceirosItem.ToList();
                     PreencheCampos(notaFiscalTerceiros);
@@ -293,7 +292,7 @@ namespace _5gpro.Forms
             var newNotaFiscalTerceiros = notaFiscalTerceirosDAO.BuscaByID(codigo);
             if (newNotaFiscalTerceiros != null)
             {
-                newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaById(newNotaFiscalTerceiros.Pessoa.PessoaID);
+                newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalTerceiros.Pessoa.PessoaID);
                 notaFiscalTerceiros = newNotaFiscalTerceiros;
                 PreencheCampos(notaFiscalTerceiros);
                 Editando(false);

@@ -11,13 +11,13 @@ namespace _5gpro.Forms
     public partial class fmCadastroGrupoItem : Form
     {
 
-        GrupoItem grupoitem = null;
-        GrupoItemDAO grupoitemDAO = new GrupoItemDAO();
-        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
-        Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private GrupoItem grupoitem = null;
+        private readonly GrupoItemDAO grupoitemDAO = new GrupoItemDAO();
+        private readonly SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
+        private readonly Validacao validacao = new Validacao();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         public SubGrupoItem subgrupoitemSelecionado = null;
-        List<SubGrupoItem> listadesubgrupo = new List<SubGrupoItem>();
+        private List<SubGrupoItem> listadesubgrupo = new List<SubGrupoItem>();
 
         //Controle de Permissões
         private Logado logado;
@@ -60,6 +60,19 @@ namespace _5gpro.Forms
             }
 
             EnterTab(this.ActiveControl, e);
+        }
+        private void FmCadastroGrupoItem_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -595,5 +608,6 @@ namespace _5gpro.Forms
             var cadSubGrupoItem = new fmCadastroSubGrupoItem(grupoitem, this);
             cadSubGrupoItem.ShowDialog();
         }
+
     }
 }
