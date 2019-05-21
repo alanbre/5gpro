@@ -115,7 +115,7 @@ namespace _5gpro.Forms
             {
                 buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
                 buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EscolhaOGrupo();
+                buscaSubGrupoItem.EscolhaOGrupo(false);
             }
         }
 
@@ -410,10 +410,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
-        private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
 
         private void EnterTab(object sender, KeyEventArgs e)
         {
