@@ -18,5 +18,25 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
         }
+
+        private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CbDataEntrada_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtPesquisar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
