@@ -30,6 +30,7 @@ namespace _5gpro.Daos
                             LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
                             LEFT JOIN item i ON oi.iditem = i.iditem
                             WHERE o.idorcamento = @idorcamento";
+
                 sql.addParam("@idorcamento", Codigo);
 
                 var data = sql.selectQuery();
