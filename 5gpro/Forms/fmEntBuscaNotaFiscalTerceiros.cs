@@ -11,6 +11,9 @@ namespace _5gpro.Forms
         private IEnumerable<NotaFiscalTerceiros> notasFiscaisTerceiros;
         public NotaFiscalTerceiros notaFiscalTerceirosSelecionada = null;
         private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
+        private bool valorTotalFiltro = false;
+        private bool dataEntradaFiltro = false;
+        private bool dataEmissaoFiltro = false;
 
 
         public struct Filtros
@@ -23,6 +26,9 @@ namespace _5gpro.Forms
             public DateTime DataEntradaFinal;
             public decimal ValorInicial;
             public decimal ValorFinal;
+            public bool usarvalorTotalFiltro;
+            public bool usardataEntradaFiltro;
+            public bool usardataEmissaoFiltro;
         }
 
         public fmEntBuscaNotaFiscalTerceiros()
@@ -45,7 +51,10 @@ namespace _5gpro.Forms
                 DataEntradaInicial = dtpFiltroDataEntradaSaidaInicial.Value,
                 DataEntradaFinal = dtpFiltroDataEntradaSaidaFinal.Value,
                 ValorInicial = dbValorInicial.Valor,
-                ValorFinal = dbValorFinal.Valor
+                ValorFinal = dbValorFinal.Valor,
+                usarvalorTotalFiltro = valorTotalFiltro,
+                usardataEntradaFiltro = dataEntradaFiltro,
+                usardataEmissaoFiltro = dataEmissaoFiltro
             };
 
             notasFiscaisTerceiros = notaFiscalTerceirosDAO.Busca(f);
@@ -73,5 +82,52 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValorTotal.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorTotalFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false;
+                dbValorFinal.Enabled = false;
+                valorTotalFiltro = false;
+            }
+        }
+
+        private void CbDataEmissao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataEmissao.Checked)
+            {
+                dtpFiltroDataEmissaoInicial.Enabled = true;
+                dtpFiltroDataEmissaoFinal.Enabled = true;
+                dataEmissaoFiltro = true;
+            }
+            else
+            {
+                dtpFiltroDataEmissaoInicial.Enabled = false;
+                dtpFiltroDataEmissaoFinal.Enabled = false;
+                dataEmissaoFiltro = false;
+            }
+        }
+
+        private void CbDataEntrada_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataEntrada.Checked)
+            {
+                dtpFiltroDataEntradaSaidaInicial.Enabled = true;
+                dtpFiltroDataEntradaSaidaFinal.Enabled = true;
+                dataEntradaFiltro = true;
+            }
+            else
+            {
+                dtpFiltroDataEntradaSaidaInicial.Enabled = false;
+                dtpFiltroDataEntradaSaidaFinal.Enabled = false;
+                dataEntradaFiltro = false;
+            }
+        }
     }
 }

@@ -295,10 +295,20 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\AdicioneiAgora1044.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\dsItem.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsItem.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DSVazio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSVazio.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\fmRltContaReceber.cs">
       <SubType>Form</SubType>
@@ -317,6 +327,11 @@
     </Compile>
     <Compile Include="Reports\fmRltItem.Designer.cs">
       <DependentUpon>fmRltItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\gugugugu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gugugugu.xsd</DependentUpon>
     </Compile>
     <Compile Include="testesrelatorios\exemplorelatorio.cs">
       <SubType>Form</SubType>
@@ -814,6 +829,19 @@
     </None>
     <None Include="Reports\dsGenerico.xss">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
+    <None Include="Properties\DataSources\_5gpro.Entities.ContaPagar.datasource" />
+    <None Include="Properties\DataSources\_5gpro.Entities.ContaReceber.datasource" />
+    <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
+    <None Include="Reports\AdicioneiAgora1044.xsc">
+      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\AdicioneiAgora1044.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AdicioneiAgora1044.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\AdicioneiAgora1044.xss">
+      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
     </None>
     <None Include="Reports\dsItem.xsc">
       <DependentUpon>dsItem.xsd</DependentUpon>
@@ -825,6 +853,28 @@
     </None>
     <None Include="Reports\dsItem.xss">
       <DependentUpon>dsItem.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DSVazio.xsc">
+      <DependentUpon>DSVazio.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DSVazio.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSVazio.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\DSVazio.xss">
+      <DependentUpon>DSVazio.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\gugugugu.xsc">
+      <DependentUpon>gugugugu.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\gugugugu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gugugugu.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\gugugugu.xss">
+      <DependentUpon>gugugugu.xsd</DependentUpon>
     </None>
     <None Include="testesrelatorios\SetUsuario.xsc">
       <DependentUpon>SetUsuario.xsd</DependentUpon>

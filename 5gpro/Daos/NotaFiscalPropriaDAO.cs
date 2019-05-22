@@ -34,10 +34,11 @@ namespace _5gpro.Daos
             var notaFiscalPropria = new NotaFiscalPropria();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * 
+                sql.Query = @"SELECT *, nfhi.quantidade AS quantidadenfhi
                             FROM notafiscal nf
-                            LEFT JOIN notafiscal_has_item i
-                            ON nf.idnotafiscal = i.idnotafiscal
+                            LEFT JOIN notafiscal_has_item nfhi
+                            ON nf.idnotafiscal = nfhi.idnotafiscal
+                            INNER JOIN item i ON i.iditem = nfhi.iditem
                             WHERE nf.idnotafiscal = @idnotafiscal";
                 sql.addParam("@idnotafiscal", Codigo);
                 var data = sql.selectQuery();
@@ -54,10 +55,11 @@ namespace _5gpro.Daos
             var notaFiscalPropria = new NotaFiscalPropria();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * 
+                sql.Query = @"SELECT *, nfhi.quantidade AS quantidadenfhi
                             FROM notafiscal nf
-                            LEFT JOIN notafiscal_has_item i
-                            ON nf.idnotafiscal = i.idnotafiscal
+                            LEFT JOIN notafiscal_has_item nfhi
+                            ON nf.idnotafiscal = nfhi.idnotafiscal
+                            INNER JOIN item i ON i.iditem = nfhi.iditem
                             WHERE nf.idnotafiscal = (SELECT min(idnotafiscal) FROM notafiscal WHERE idnotafiscal > @idnotafiscal)";
                 sql.addParam("@idnotafiscal", Codigo);
                 var data = sql.selectQuery();
@@ -74,10 +76,11 @@ namespace _5gpro.Daos
             var notaFiscalPropria = new NotaFiscalPropria();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * 
+                sql.Query = @"SELECT *, nfhi.quantidade AS quantidadenfhi
                             FROM notafiscal nf
-                            LEFT JOIN notafiscal_has_item i
-                            ON nf.idnotafiscal = i.idnotafiscal
+                            LEFT JOIN notafiscal_has_item nfhi
+                            ON nf.idnotafiscal = nfhi.idnotafiscal
+                            INNER JOIN item i ON i.iditem = nfhi.iditem
                             WHERE nf.idnotafiscal = (SELECT max(idnotafiscal) FROM notafiscal WHERE idnotafiscal < @idnotafiscal)";
                 sql.addParam("@idnotafiscal", Codigo);
                 var data = sql.selectQuery();
@@ -103,6 +106,7 @@ namespace _5gpro.Daos
                           data_emissao = @data_emissao, data_entradasaida = @data_entradasaida, valor_total_itens = @valor_total_itens,
                           valor_documento = @valor_documento, desconto_total_itens = @desconto_total_itens, desconto_documento = @desconto_documento,
                           idpessoa = @idpessoa";
+
                 sql.addParam("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
                 sql.addParam("@data_emissao", notafiscal.DataEmissao);
                 sql.addParam("@data_entradasaida", notafiscal.DataEntradaSaida);
@@ -219,7 +223,7 @@ namespace _5gpro.Daos
                 i.Estoquenecessario = (decimal)d["estoquenecessario"];
 
                 var nfi = new NotaFiscalPropriaItem();
-                nfi.Quantidade = (decimal)d["quantidade"];
+                nfi.Quantidade = (decimal)d["quantidadenfhi"];
                 nfi.ValorUnitario = (decimal)d["valor_unitario"];
                 nfi.ValorTotal = (decimal)d["valor_total"];
                 nfi.DescontoPorc = (decimal)d["desconto_porc"];

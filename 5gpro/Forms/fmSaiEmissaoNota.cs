@@ -159,6 +159,7 @@ namespace _5gpro.Forms
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
+                    itens.Clear();
                     ignoracheckevent = true;
                     Limpa(false);
                     tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
@@ -170,6 +171,7 @@ namespace _5gpro.Forms
             }
             else
             {
+                itens.Clear();
                 ignoracheckevent = true;
                 Limpa(false);
                 tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();

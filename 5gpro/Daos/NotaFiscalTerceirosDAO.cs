@@ -57,6 +57,11 @@ namespace _5gpro.Daos
             var notasFiscais = new List<NotaFiscalTerceiros>();
             var wherePessoa = f.Pessoa != null ? "AND p.idpessoa = @idpessoa" : "";
             var whereCidade = f.Cidade != null ? "AND p.idcidade = @idcidade" : "";
+            string whereValorTotal = f.usarvalorTotalFiltro ? "AND nft.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final" : "";
+            string whereDataEmissao = f.usardataEmissaoFiltro ? "AND nft.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final" : "";
+            string whereDataEntrada = f.usardataEntradaFiltro ? "AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final" : "";
+
+
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT nft.idnota_fiscal_terceiros, p.idpessoa, p.nome, nft.data_emissao, nft.data_entradasaida, nft.valor_documento
@@ -66,13 +71,14 @@ namespace _5gpro.Daos
                             WHERE 1=1 "
                             + wherePessoa + " "
                             + whereCidade + " "
-                        + @"AND nft.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final
-                            AND nft.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final
-                            AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final
-                            GROUP BY nft.idnota_fiscal_terceiros";
+                            + whereValorTotal + " "
+                            + whereDataEmissao + " "
+                            + whereDataEntrada + " "
+                            + "GROUP BY nft.idnota_fiscal_terceiros";
 
                 if (f.Pessoa != null) { sql.addParam("@idpessoa", f.Pessoa.PessoaID); }
-                if (f.Cidade != null) { sql.addParam("@idcidade", f.Pessoa.PessoaID); }
+                if (f.Cidade != null) { sql.addParam("@idcidade", f.Cidade.CidadeID); }
+
                 sql.addParam("@valor_documento_inicial", f.ValorInicial);
                 sql.addParam("@valor_documento_final", f.ValorFinal);
                 sql.addParam("@data_emissao_inicial", f.DataEmissaoInicial);
