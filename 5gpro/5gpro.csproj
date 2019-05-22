@@ -254,6 +254,11 @@
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
+    <Compile Include="DataSets\dsContas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsContas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -286,6 +291,18 @@
     </Compile>
     <Compile Include="Forms\fmItemReport.Designer.cs">
       <DependentUpon>fmItemReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\fmRelatorioContas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\fmRelatorioContas.Designer.cs">
+      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\fmReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\fmReportViewer.Designer.cs">
+      <DependentUpon>fmReportViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
@@ -664,6 +681,13 @@
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\fmRelatorioContas.resx">
+      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\fmReportViewer.resx">
+      <DependentUpon>fmReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rltContas.rdlc" />
     <EmbeddedResource Include="Reports\fmRltContaReceber.resx">
       <DependentUpon>fmRltContaReceber.cs</DependentUpon>
     </EmbeddedResource>
@@ -673,6 +697,7 @@
     <EmbeddedResource Include="Reports\fmRltItem.resx">
       <DependentUpon>fmRltItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rltContas.rdlc" />
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
     <EmbeddedResource Include="Reports\rltContaPagar.rdlc" />
     <EmbeddedResource Include="Reports\rltItem.rdlc" />
@@ -819,6 +844,17 @@
     </Compile>
     <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="DataSets\dsContas.xsc">
+      <DependentUpon>dsContas.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsContas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsContas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsContas.xss">
+      <DependentUpon>dsContas.xsd</DependentUpon>
+    </None>
     <None Include="Reports\dsGenerico.xsc">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </None>
@@ -1102,9 +1138,7 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
