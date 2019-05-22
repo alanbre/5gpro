@@ -150,9 +150,5 @@ namespace _5gpro.Controls
         {
             this.Text_Changed?.Invoke(this, e);
         }
-
-        private void BtAdd_Click(object sender, EventArgs e)
-        {
-        }
     }
 }
