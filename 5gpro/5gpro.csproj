@@ -829,6 +829,7 @@
     </None>
     <None Include="Reports\dsGenerico.xss">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
+    </None>
     <None Include="Properties\DataSources\_5gpro.Entities.ContaPagar.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.ContaReceber.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />

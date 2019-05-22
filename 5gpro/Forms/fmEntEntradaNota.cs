@@ -142,6 +142,14 @@ namespace _5gpro.Forms
             if (!editando)
                 return;
 
+            if (itens.Count <= 0)
+            {
+                MessageBox.Show("Uma nota não pode ser salva sem itens!",
+               "Problema ao salvar",
+               MessageBoxButtons.OK,
+               MessageBoxIcon.Warning);
+                return;
+            }
 
             var notaFiscalTerceirosNova = new NotaFiscalTerceiros
             {

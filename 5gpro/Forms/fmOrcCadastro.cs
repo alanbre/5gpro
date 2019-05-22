@@ -56,17 +56,17 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(orcamento);
+                Recarrega(orcamento);
             }
 
             if (e.KeyCode == Keys.F1)
             {
-                NovoCadastro();
+                Novo();
             }
 
             if (e.KeyCode == Keys.F2)
             {
-                SalvaCadastro();
+                Salva();
             }
 
             EnterTab(this.ActiveControl, e);
@@ -105,7 +105,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        Editando(true); 
+                        Editando(true);
                         LimpaCampos(false);
                     }
                 }
@@ -244,7 +244,7 @@ namespace _5gpro.Forms
         }
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
         {
-            NovoCadastro();
+            Novo();
         }
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
         {
@@ -255,19 +255,19 @@ namespace _5gpro.Forms
         }
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
         {
-            SalvaCadastro();
+            Salva();
         }
         private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
-            RecarregaDados(orcamento);
+            Recarrega(orcamento);
         }
         private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
-            CadastroAnterior();
+            Anterior();
         }
         private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
         {
-            ProximoCadastro();
+            Proximo();
         }
         private void BtNovoItem_Click(object sender, EventArgs e)
         {
@@ -374,7 +374,7 @@ namespace _5gpro.Forms
 
 
 
-        private void NovoCadastro()
+        private void Novo()
         {
             if (editando)
             {
@@ -404,50 +404,62 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-        private void SalvaCadastro()
+        private void Salva()
         {
-            if (editando)
+            if (!editando)
             {
-                orcamento = new Orcamento
-                {
-                    OrcamentoID = int.Parse(tbCodigo.Text),
-                    Pessoa = buscaPessoa.pessoa,
-                    DataCadastro = dtpCadastro.Value,
-                    DataValidade = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null,
-
-                    ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text),
-                    DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text),
-                    DescontoOrcamento = Convert.ToDecimal(tbDescontoOrcamento.Text),
-                    ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalOrcamento.Text),
-
-                    OrcamentoItem = itens
-                };
-
-                int resultado = orcamentoDAO.SalvaOuAtualiza(orcamento);
-
-                // resultado 0 = nada foi inserido (houve algum erro)
-                // resultado 1 = foi inserido com sucesso
-                // resultado 2 = foi atualizado com sucesso
-                if (resultado == 0)
-                {
-                    MessageBox.Show("Problema ao salvar o registro",
-                    "Problema ao salvar",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                }
-                else if (resultado == 1)
-                {
-                    tbAjuda.Text = "Dados salvos com sucesso";
-                    Editando(false);
-                }
-                else if (resultado == 2)
-                {
-                    tbAjuda.Text = "Dados atualizados com sucesso";
-                    Editando(false);
-                }
+                return;
             }
+
+            if (itens.Count <= 0)
+            {
+                MessageBox.Show("Um orçamento não pode ser salvo sem itens!",
+               "Problema ao salvar",
+               MessageBoxButtons.OK,
+               MessageBoxIcon.Warning);
+                return;
+            }
+
+            orcamento = new Orcamento
+            {
+                OrcamentoID = int.Parse(tbCodigo.Text),
+                Pessoa = buscaPessoa.pessoa,
+                DataCadastro = dtpCadastro.Value,
+                DataValidade = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null,
+
+                ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text),
+                DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text),
+                DescontoOrcamento = Convert.ToDecimal(tbDescontoOrcamento.Text),
+                ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalOrcamento.Text),
+
+                OrcamentoItem = itens
+            };
+
+            int resultado = orcamentoDAO.SalvaOuAtualiza(orcamento);
+
+            // resultado 0 = nada foi inserido (houve algum erro)
+            // resultado 1 = foi inserido com sucesso
+            // resultado 2 = foi atualizado com sucesso
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                Editando(false);
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+            }
+
         }
-        private void RecarregaDados(Orcamento orcamento)
+        private void Recarrega(Orcamento orcamento)
         {
             if (editando)
             {
@@ -486,7 +498,7 @@ namespace _5gpro.Forms
             }
 
         }
-        private void ProximoCadastro()
+        private void Proximo()
         {
             //Busca o orcamento com ID maior que o atual preenchido. Só preenche se houver algum registro maior
             //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
@@ -529,7 +541,7 @@ namespace _5gpro.Forms
                 }
             }
         }
-        private void CadastroAnterior()
+        private void Anterior()
         {
             //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
             //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
