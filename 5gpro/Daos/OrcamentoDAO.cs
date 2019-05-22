@@ -139,33 +139,33 @@ namespace _5gpro.Daos
                 foreach (var d in data)
                 {
                     Pessoa pessoa = null;
-                    if (data[0]["idpessoa"] != null)
+                    if (d["idpessoa"] != null)
                     {
                         var cidade = new Cidade();
-                        cidade.CidadeID = Convert.ToInt32(data[0]["idcidade"]);
+                        cidade.CidadeID = Convert.ToInt32(d["idcidade"]);
 
                         pessoa = new Pessoa();
-                        pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
-                        pessoa.Nome = (string)data[0]["nome"];
-                        pessoa.Fantasia = (string)data[0]["fantasia"];
-                        pessoa.TipoPessoa = (string)data[0]["tipo_pessoa"];
-                        pessoa.Rua = (string)data[0]["rua"];
-                        pessoa.Numero = (string)data[0]["numero"];
-                        pessoa.Bairro = (string)data[0]["bairro"];
-                        pessoa.Complemento = (string)data[0]["complemento"];
+                        pessoa.PessoaID = Convert.ToInt32(d["idpessoa"]);
+                        pessoa.Nome = (string)d["nome"];
+                        pessoa.Fantasia = (string)d["fantasia"];
+                        pessoa.TipoPessoa = (string)d["tipo_pessoa"];
+                        pessoa.Rua = (string)d["rua"];
+                        pessoa.Numero = (string)d["numero"];
+                        pessoa.Bairro = (string)d["bairro"];
+                        pessoa.Complemento = (string)d["complemento"];
                         pessoa.Cidade = cidade;
-                        pessoa.Telefone = (string)data[0]["telefone"];
-                        pessoa.Email = (string)data[0]["email"];
+                        pessoa.Telefone = (string)d["telefone"];
+                        pessoa.Email = (string)d["email"];
                     }
 
                     var orcamento = new Orcamento();
-                    orcamento.OrcamentoID = Convert.ToInt32(data[0]["idorcamento"]);
-                    orcamento.DataCadastro = (DateTime)data[0]["data_cadastro"];
-                    orcamento.DataValidade = (DateTime?)data[0]["data_validade"];
-                    orcamento.ValorTotalItens = (decimal)data[0]["valortotalitensorcamento"];
-                    orcamento.ValorTotalOrcamento = (decimal)data[0]["valor_orcamento"];
-                    orcamento.DescontoTotalItens = (decimal)data[0]["descontototalitensorcamento"];
-                    orcamento.DescontoOrcamento = (decimal)data[0]["desconto_orcamento"];
+                    orcamento.OrcamentoID = Convert.ToInt32(d["idorcamento"]);
+                    orcamento.DataCadastro = (DateTime)d["data_cadastro"];
+                    orcamento.DataValidade = (DateTime?)d["data_validade"];
+                    orcamento.ValorTotalItens = (decimal)d["valortotalitensorcamento"];
+                    orcamento.ValorTotalOrcamento = (decimal)d["valor_orcamento"];
+                    orcamento.DescontoTotalItens = (decimal)d["descontototalitensorcamento"];
+                    orcamento.DescontoOrcamento = (decimal)d["desconto_orcamento"];
                     orcamento.Pessoa = pessoa;
                     orcamentos.Add(orcamento);
                 }
