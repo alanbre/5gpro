@@ -65,7 +65,7 @@ namespace _5gpro.Forms
             "Aviso de alteração",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning) == DialogResult.No)
-            { 
+            {
                 e.Cancel = true;
             }
         }
@@ -83,7 +83,7 @@ namespace _5gpro.Forms
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
         private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
         private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => ProximoCadastro();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
         private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
         {
 
@@ -153,34 +153,15 @@ namespace _5gpro.Forms
         private void Novo()
         {
             if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    itens.Clear();
-                    ignoracheckevent = true;
-                    Limpa(false);
-                    tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
-                    notaFiscalPropria = null;
-                    buscaPessoa.Focus();
-                    ignoracheckevent = false;
-                    Editando(true);
-                }
-            }
-            else
-            {
-                itens.Clear();
-                ignoracheckevent = true;
-                Limpa(false);
-                tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
-                notaFiscalPropria = null;
-                Editando(false);
-                buscaPessoa.Focus();
-                ignoracheckevent = false;
-                Editando(true);
-            }
+                return;
+
+            ignoracheckevent = true;
+            Limpa(false);
+            tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
+            notaFiscalPropria = null;
+            buscaPessoa.Focus();
+            ignoracheckevent = false;
+            Editando(true);
         }
         private void Busca()
         {
@@ -191,56 +172,68 @@ namespace _5gpro.Forms
             if (buscaNotaFiscalPropria.notaFiscalPropriaSelecionada != null)
             {
                 notaFiscalPropria = buscaNotaFiscalPropria.notaFiscalPropriaSelecionada;
+                notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
                 PreencheCampos(notaFiscalPropria);
             }
         }
         private void Salva()
         {
-            if (editando)
+            if (!editando)
             {
-                var notaFiscalPropriaNova = new NotaFiscalPropria
-                {
-                    NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
-                    Pessoa = buscaPessoa.pessoa,
-                    DataEmissao = dtpEmissao.Value,
-                    DataEntradaSaida = dtpSaida.Value,
-
-                    ValorTotalItens = dbValorTotalItens.Valor,
-                    DescontoTotalItens = dbDescontoTotalItens.Valor,
-                    DescontoDocumento = dbDescontoDocumento.Valor,
-                    ValorTotalDocumento = dbValorTotalDocumento.Valor,
-
-                    NotaFiscalPropriaItem = itens
-                };
-
-                int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
-
-                // resultado 0 = nada foi inserido (houve algum erro)
-                // resultado 1 = foi inserido com sucesso
-                // resultado 2 = foi atualizado com sucesso
-                if (resultado == 0)
-                {
-                    MessageBox.Show("Problema ao salvar o registro",
-                    "Problema ao salvar",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                    return;
-                }
-                else if (resultado == 1)
-                {
-                    tbAjuda.Text = "Dados salvos com sucesso";
-                    notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                    Editando(false);
-                }
-                else if (resultado == 2)
-                {
-                    notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropria);
-                    notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                    tbAjuda.Text = "Dados atualizados com sucesso";
-                    Editando(false);
-                }
-                notaFiscalPropria = notaFiscalPropriaNova;
+                return;
             }
+
+            if (itens.Count <= 0)
+            {
+                MessageBox.Show("Uma nota não pode ser salva sem itens!",
+               "Problema ao salvar",
+               MessageBoxButtons.OK,
+               MessageBoxIcon.Warning);
+                return;
+            }
+
+            var notaFiscalPropriaNova = new NotaFiscalPropria
+            {
+                NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
+                Pessoa = buscaPessoa.pessoa,
+                DataEmissao = dtpEmissao.Value,
+                DataEntradaSaida = dtpSaida.Value,
+
+                ValorTotalItens = dbValorTotalItens.Valor,
+                DescontoTotalItens = dbDescontoTotalItens.Valor,
+                DescontoDocumento = dbDescontoDocumento.Valor,
+                ValorTotalDocumento = dbValorTotalDocumento.Valor,
+
+                NotaFiscalPropriaItem = itens
+            };
+
+            int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
+
+            // resultado 0 = nada foi inserido (houve algum erro)
+            // resultado 1 = foi inserido com sucesso
+            // resultado 2 = foi atualizado com sucesso
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                Editando(false);
+            }
+            else if (resultado == 2)
+            {
+                notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropria);
+                notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+            }
+            notaFiscalPropria = notaFiscalPropriaNova;
         }
         private void Recarrega()
         {
@@ -271,88 +264,58 @@ namespace _5gpro.Forms
             }
 
         }
-        private void ProximoCadastro()
-        {
-            //Busca o registro com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
-            {
-                NotaFiscalPropria newnotafiscal = notaFiscalPropriaDAO.Proximo(int.Parse(tbCodigo.Text));
-                if (newnotafiscal != null)
-                {
-                    notaFiscalPropria = newnotafiscal;
-                    itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
-                    PreencheCampos(notaFiscalPropria);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    NotaFiscalPropria newnotafiscal = notaFiscalPropriaDAO.Proximo(int.Parse(tbCodigo.Text));
-                    if (newnotafiscal != null)
-                    {
-                        notaFiscalPropria = newnotafiscal;
-                        itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
-                        PreencheCampos(notaFiscalPropria);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newnotafiscal = notaFiscalPropriaDAO.Anterior(int.Parse(tbCodigo.Text));
-                        if (newnotafiscal != null)
-                        {
-                            notaFiscalPropria = newnotafiscal;
-                            itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
-                            PreencheCampos(notaFiscalPropria);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
-        }
         private void Anterior()
         {
-            //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
+            if (editando)
             {
-                NotaFiscalPropria newnotafiscal = notaFiscalPropriaDAO.Anterior(int.Parse(tbCodigo.Text));
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+
+            if (tbCodigo.Text.Length > 0)
+            {
+                var newnotafiscal = notaFiscalPropriaDAO.Anterior(int.Parse(tbCodigo.Text));
                 if (newnotafiscal != null)
                 {
                     notaFiscalPropria = newnotafiscal;
+                    notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
                     itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
                     PreencheCampos(notaFiscalPropria);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    NotaFiscalPropria newnotafiscal = notaFiscalPropriaDAO.Anterior(int.Parse(tbCodigo.Text));
-                    if (newnotafiscal != null)
+                    if (editando)
                     {
-                        notaFiscalPropria = newnotafiscal;
-                        itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
-                        PreencheCampos(notaFiscalPropria);
                         Editando(false);
                     }
-                    else
+                }
+            }            
+        }
+        private void Proximo()
+        {
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+
+            if (tbCodigo.Text.Length > 0)
+            {
+                var newnotafiscal = notaFiscalPropriaDAO.Proximo(int.Parse(tbCodigo.Text));
+                if (newnotafiscal != null)
+                {
+                    notaFiscalPropria = newnotafiscal;
+                    notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
+                    itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
+                    PreencheCampos(notaFiscalPropria);
+                    if (editando)
                     {
-                        newnotafiscal = notaFiscalPropriaDAO.Proximo(int.Parse(tbCodigo.Text));
-                        if (newnotafiscal != null)
-                        {
-                            notaFiscalPropria = newnotafiscal;
-                            itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
-                            PreencheCampos(notaFiscalPropria);
-                            Editando(false);
-                        }
+                        Editando(false);
                     }
                 }
             }
@@ -412,6 +375,7 @@ namespace _5gpro.Forms
             dbDescontoTotalItens.Valor = 0.00m;
             dbDescontoDocumento.Valor = 0.00m;
             dbValorTotalDocumento.Valor = 0.00m;
+            itens.Clear();
             tbAjuda.Text = "";
             dgvItens.Rows.Clear();
             dgvItens.Refresh();
@@ -510,6 +474,7 @@ namespace _5gpro.Forms
                 CalculaTotalDocumento();
                 itemSelecionado = null;
                 btExcluirItem.Enabled = false;
+                Editando(true);
             }
         }
         private void PreencheCampos(NotaFiscalPropria notafiscal)

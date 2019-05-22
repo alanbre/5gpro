@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsGenerico" targetNamespace="http://tempuri.org/dsGenerico.xsd" xmlns:mstns="http://tempuri.org/dsGenerico.xsd" xmlns="http://tempuri.org/dsGenerico.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsGenerico" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsGenerico" msprop:Generator_UserDSName="dsGenerico">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Generico" msprop:Generator_TableClassName="GenericoDataTable" msprop:Generator_TableVarName="tableGenerico" msprop:Generator_TablePropName="Generico" msprop:Generator_RowDeletingName="GenericoRowDeleting" msprop:Generator_RowChangingName="GenericoRowChanging" msprop:Generator_RowEvHandlerName="GenericoRowChangeEventHandler" msprop:Generator_RowDeletedName="GenericoRowDeleted" msprop:Generator_UserTableName="Generico" msprop:Generator_RowChangedName="GenericoRowChanged" msprop:Generator_RowEvArgName="GenericoRowChangeEvent" msprop:Generator_RowClassName="GenericoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="coluna1" msprop:Generator_ColumnVarNameInTable="columncoluna1" msprop:Generator_ColumnPropNameInRow="coluna1" msprop:Generator_ColumnPropNameInTable="coluna1Column" msprop:Generator_UserColumnName="coluna1" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
