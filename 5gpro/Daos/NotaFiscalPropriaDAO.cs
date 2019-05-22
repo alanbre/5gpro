@@ -38,7 +38,7 @@ namespace _5gpro.Daos
                             FROM notafiscal nf
                             LEFT JOIN notafiscal_has_item i
                             ON nf.idnotafiscal = i.idnotafiscal
-                            WHERE idnotafiscal = @idnotafiscal";
+                            WHERE nf.idnotafiscal = @idnotafiscal";
                 sql.addParam("@idnotafiscal", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
@@ -58,7 +58,7 @@ namespace _5gpro.Daos
                             FROM notafiscal nf
                             LEFT JOIN notafiscal_has_item i
                             ON nf.idnotafiscal = i.idnotafiscal
-                            WHERE idnotafiscal = (SELECT min(idnotafiscal) FROM notafiscal WHERE idnotafiscal > @idnotafiscal)";
+                            WHERE nf.idnotafiscal = (SELECT min(idnotafiscal) FROM notafiscal WHERE idnotafiscal > @idnotafiscal)";
                 sql.addParam("@idnotafiscal", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)
@@ -78,7 +78,7 @@ namespace _5gpro.Daos
                             FROM notafiscal nf
                             LEFT JOIN notafiscal_has_item i
                             ON nf.idnotafiscal = i.idnotafiscal
-                            WHERE idnotafiscal = (SELECT max(idnotafiscal) FROM notafiscal WHERE idnotafiscal < @idnotafiscal)";
+                            WHERE nf.idnotafiscal = (SELECT max(idnotafiscal) FROM notafiscal WHERE idnotafiscal < @idnotafiscal)";
                 sql.addParam("@idnotafiscal", Codigo);
                 var data = sql.selectQuery();
                 if (data == null)

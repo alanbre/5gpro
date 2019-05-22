@@ -410,6 +410,7 @@ namespace _5gpro.Forms
             dbDescontoTotalItens.Valor = 0.00m;
             dbDescontoDocumento.Valor = 0.00m;
             dbValorTotalDocumento.Valor = 0.00m;
+            itens.Clear();
             tbAjuda.Text = "";
             dgvItens.Rows.Clear();
             dgvItens.Refresh();
