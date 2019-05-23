@@ -20,6 +20,7 @@ namespace _5gpro.Relatorios
         private bool dataCadastroFiltro = false;
         private bool dataContaFiltro = false;
 
+
         public struct Filtros
         {
             public decimal filtroValorInicial;
@@ -31,12 +32,17 @@ namespace _5gpro.Relatorios
             public bool usarvalorContaFiltro;
             public bool usardataCadastroFiltro;
             public bool usardataContaFiltro;
+            public bool usarAberto;
+            public bool usarPago;
         }
 
 
         public fmRelatorioContas()
         {
             InitializeComponent();
+
+            for (int i = 0; i < clContas.Items.Count; i++)
+                clContas.SetItemChecked(i, true);
         }
 
 
@@ -54,6 +60,8 @@ namespace _5gpro.Relatorios
                 dtpCadfim.Enabled = false;
                 dataCadastroFiltro = false;
             }
+
+
         }
 
         private void CbDataConta_CheckedChanged(object sender, EventArgs e)
@@ -90,6 +98,8 @@ namespace _5gpro.Relatorios
 
         private void BtListar_Click(object sender, EventArgs e)
         {
+            contasPagar = new List<ContaPagar>();
+            contasReceber = new List<ContaReceber>();
 
             Filtros f = new Filtros
             {
@@ -102,34 +112,51 @@ namespace _5gpro.Relatorios
                 usardataCadastroFiltro = dataCadastroFiltro,
                 usardataContaFiltro = dataContaFiltro,
                 usarvalorContaFiltro = valorContaFiltro
-            };
 
-            contasPagar = contaPagarDAO.BuscaParaRelatorio(f);
-            contasReceber = contaReceberDAO.BuscaParaRelatorio(f);
+            };
 
             dgvRelatorioFiltro.Rows.Clear();
 
-            foreach (var cp in contasPagar)
-                dgvRelatorioFiltro.Rows.Add(cp.ContaPagarID,
-                                            cp.Pessoa.PessoaID, cp.Pessoa.Nome,
-                                            cp.DataCadastro.ToShortDateString(),
-                                            cp.ValorOriginal,
-                                            cp.Multa,
-                                            cp.Juros,
-                                            cp.Acrescimo,
-                                            cp.Desconto,
-                                            cp.ValorFinal);
+            foreach (var s in clContas.CheckedItems)
+            {
+                switch (s)
+                {
+                    case "Aberto":
+                        f.usarAberto = true;
+                        break;
+                    case "Pago":
+                        f.usarPago = true;
+                        break;
+                    case "A Pagar":
+                        contasPagar = contaPagarDAO.BuscaParaRelatorio(f);
+                        foreach (var cp in contasPagar)
+                            dgvRelatorioFiltro.Rows.Add(cp.ContaPagarID,
+                                                        cp.Pessoa.PessoaID, cp.Pessoa.Nome,
+                                                        cp.DataCadastro.ToShortDateString(),
+                                                        cp.ValorOriginal,
+                                                        cp.Multa,
+                                                        cp.Juros,
+                                                        cp.Acrescimo,
+                                                        cp.Desconto,
+                                                        cp.ValorFinal);
+                        break;
+                    case "A Receber":
+                        contasReceber = contaReceberDAO.BuscaParaRelatorio(f);
+                        foreach (var cr in contasReceber)
+                            dgvRelatorioFiltro.Rows.Add(cr.ContaReceberID,
+                                                        cr.Pessoa.PessoaID, cr.Pessoa.Nome,
+                                                        cr.DataCadastro.ToShortDateString(),
+                                                        cr.ValorOriginal,
+                                                        cr.Multa,
+                                                        cr.Juros,
+                                                        cr.Acrescimo,
+                                                        cr.Desconto,
+                                                        cr.ValorFinal);
+                        break;
 
-            foreach (var cr in contasReceber)
-                dgvRelatorioFiltro.Rows.Add(cr.ContaReceberID,
-                                            cr.Pessoa.PessoaID, cr.Pessoa.Nome,
-                                            cr.DataCadastro.ToShortDateString(),
-                                            cr.ValorOriginal,
-                                            cr.Multa,
-                                            cr.Juros,
-                                            cr.Acrescimo,
-                                            cr.Desconto,
-                                            cr.ValorFinal);
+                }
+            }
+
 
             dgvRelatorioFiltro.Refresh();
 
@@ -180,6 +207,11 @@ namespace _5gpro.Relatorios
 
             var frv = new fmReportViewer(dataTable);
             frv.Show(this);
+        }
+
+        private void ClContas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

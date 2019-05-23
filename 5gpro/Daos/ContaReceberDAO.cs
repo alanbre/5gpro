@@ -435,7 +435,18 @@ namespace _5gpro.Daos
             string whereValorFinal = f.usarvalorContaFiltro ? "AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
             string whereDatCadastro = f.usardataCadastroFiltro ? "AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
             string whereDataConta = f.usardataContaFiltro ? "AND cr.data_conta BETWEEN @data_conta_inicial AND @data_conta_final" : "";
-
+            string whereAberto;
+            string wherePago;
+            if (f.usarPago && f.usarAberto)
+            {
+                whereAberto = "";
+                wherePago = "";
+            }
+            else
+            {
+                whereAberto = f.usarAberto ? "AND cr.situacao = @aberto" : "";
+                wherePago = f.usarPago ? "AND cr.situacao = @pago" : "";
+            }
 
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
@@ -449,6 +460,8 @@ namespace _5gpro.Daos
                                                     WHERE 1 = 1 "
                                                     //+ wherePessoa + " "
                                                     //+ whereOperacao + " "
+                                                    + whereAberto + " "
+                                                    + wherePago + " "
                                                     + whereValorFinal + " "
                                                     + whereDatCadastro + " "
                                                     + whereDataConta + " "
@@ -470,6 +483,9 @@ namespace _5gpro.Daos
                     sql.addParam("@data_vencimento_inicial", f.filtroDataContaInicial);
                     sql.addParam("@data_vencimento_final", f.filtroDataContaFinal);
                 }
+                sql.addParam("@aberto", "Aberto");
+                sql.addParam("@pago", "Pago");
+
                 var data = sql.selectQuery();
 
                 foreach (var d in data)

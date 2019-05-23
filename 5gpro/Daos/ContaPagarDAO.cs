@@ -291,6 +291,18 @@ namespace _5gpro.Daos
             string whereValorFinal = f.usarvalorContaFiltro ? "AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
             string whereDatCadastro = f.usardataCadastroFiltro ? "AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
             string whereDataConta = f.usardataContaFiltro ? "AND cp.data_conta BETWEEN @data_conta_inicial AND @data_conta_final" : "";
+            string whereAberto;
+            string wherePago;
+            if (f.usarPago && f.usarAberto)
+            {
+                whereAberto = "";
+                wherePago = "";
+            }
+            else
+            {
+                whereAberto = f.usarAberto ? "AND cp.situacao = @aberto" : "";
+                wherePago = f.usarPago ? "AND cp.situacao = @pago" : "";
+            }
 
 
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -303,6 +315,8 @@ namespace _5gpro.Daos
                                                     LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
                                                     WHERE 1 = 1 "
                                              //+ wherePessoa + " "
+                                             + whereAberto + " "
+                                             + wherePago + " "
                                              + whereValorFinal + " "
                                              + whereDatCadastro + " "
                                              + whereDataConta + " "
@@ -315,6 +329,8 @@ namespace _5gpro.Daos
                 sql.addParam("@data_cadastro_final", f.filtroDataCadastroFinal);
                 sql.addParam("@data_conta_inicial", f.filtroDataContaInicial);
                 sql.addParam("@data_conta_final", f.filtroDataContaFinal);
+                sql.addParam("@aberto", "Aberto");
+                sql.addParam("@pago", "Pago");
 
 
                 var data = sql.selectQuery();
