@@ -3,6 +3,7 @@ using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using _5gpro.Reports;
+using _5gpro.Relatorios;
 using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
@@ -234,6 +235,12 @@ namespace _5gpro
         {
             var fmcontaReceber = new fmRltContaReceber();
             fmcontaReceber.Show(this);
+        }
+
+        private void RelatórioDeContasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var fmconta = new fmRelatorioContas();
+            fmconta.Show(this);
         }
     }
 }

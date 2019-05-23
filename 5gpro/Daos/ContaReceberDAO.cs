@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.Relatorios;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
@@ -424,6 +425,88 @@ namespace _5gpro.Daos
             }
             contaReceber.Parcelas = listaparcelas;
             return contaReceber;
+        }
+
+        public IEnumerable<ContaReceber> BuscaParaRelatorio(fmRelatorioContas.Filtros f)
+        {
+            var contaRecebers = new List<ContaReceber>();
+            //string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            //string whereOperacao = f.filtroOperacao != null ? "AND op.idoperacao = @idoperacao" : "";
+            string whereValorFinal = f.usarvalorContaFiltro ? "AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
+            string whereDatCadastro = f.usardataCadastroFiltro ? "AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
+            string whereDataConta = f.usardataContaFiltro ? "AND cr.data_conta BETWEEN @data_conta_inicial AND @data_conta_final" : "";
+
+
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro, cr.data_conta,
+                                                    op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
+                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento, cr.situacao
+                                                    FROM conta_receber cr 
+                                                    LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
+                                                    LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
+                                                    LEFT JOIN parcela_conta_receber pa ON pa.idconta_receber = cr.idconta_receber
+                                                    WHERE 1 = 1 "
+                                                    //+ wherePessoa + " "
+                                                    //+ whereOperacao + " "
+                                                    + whereValorFinal + " "
+                                                    + whereDatCadastro + " "
+                                                    + whereDataConta + " "
+                                                    + "GROUP BY cr.idconta_receber";
+                //if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
+                //if (f.filtroOperacao != null) { sql.addParam("@idoperacao", f.filtroOperacao.OperacaoID); }
+                if (f.usarvalorContaFiltro)
+                {
+                    sql.addParam("@valor_conta_inicial", f.filtroValorInicial);
+                    sql.addParam("@valor_conta_final", f.filtroValorFinal);
+                }
+                if (f.usardataCadastroFiltro)
+                {
+                    sql.addParam("@data_cadastro_inicial", f.filtroDataCadastroInicial);
+                    sql.addParam("@data_cadastro_final", f.filtroDataCadastroFinal);
+                }
+                if (f.usardataContaFiltro)
+                {
+                    sql.addParam("@data_vencimento_inicial", f.filtroDataContaInicial);
+                    sql.addParam("@data_vencimento_final", f.filtroDataContaFinal);
+                }
+                var data = sql.selectQuery();
+
+                foreach (var d in data)
+                {
+                    Operacao operacao = null;
+                    Pessoa pessoa = null;
+
+                    pessoa = new Pessoa
+                    {
+                        PessoaID = Convert.ToInt32(d["idpessoa"]),
+                        Nome = (string)d["nome"]
+                    };
+                    operacao = new Operacao
+                    {
+                        OperacaoID = Convert.ToInt32(d["idoperacao"]),
+                        Nome = (string)d["nomeoperacao"]
+                    };
+
+                    var contaReceber = new ContaReceber
+                    {
+                        ContaReceberID = Convert.ToInt32(d["idconta_receber"]),
+                        DataCadastro = (DateTime)d["data_cadastro"],
+                        DataConta = (DateTime)d["data_conta"],
+                        ValorOriginal = (decimal)d["valor_original"],
+                        Multa = (decimal)d["multa"],
+                        Juros = (decimal)d["juros"],
+                        Acrescimo = (decimal)d["acrescimo"],
+                        Desconto = (decimal)d["desconto"],
+                        ValorFinal = (decimal)d["valor_final"],
+                        Situacao = (string)d["situacao"]
+                    };
+                    contaReceber.Pessoa = pessoa;
+                    contaReceber.Operacao = operacao;
+                    contaRecebers.Add(contaReceber);
+                }
+            }
+            return contaRecebers;
         }
     }
 }
