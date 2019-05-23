@@ -20,11 +20,13 @@ namespace _5gpro.Reports
             foreach (var c in _dados.Columns)
             {
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", c.ToString(), true));
+                _dados.Columns[c.ToString()].ColumnName = $"coluna{i}";
                 i++;
             }
             while(i <= 7)
             {
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", "", false));
+                _dados.Columns[i].ColumnName = $"coluna{i}";
                 i++;
             }
 
