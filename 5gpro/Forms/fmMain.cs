@@ -7,6 +7,7 @@ using _5gpro.Relatorios;
 using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -126,8 +127,17 @@ namespace _5gpro
 
         private void TsmiTeste_Click(object sender, EventArgs e)
         {
-            //var formRelTeste = new fmRelatorio();
-            //formRelTeste.Show(this);
+            var dados = new DataTable();
+            dados.Columns.Add("coluna1", typeof(int));
+            dados.Columns.Add("coluna2");
+            dados.Columns.Add("coluna3");
+            dados.Columns.Add("coluna4");
+            dados.Columns.Add("coluna5");
+            dados.Columns.Add("coluna6");
+            dados.Columns.Add("coluna7");
+            dados.Rows.Add(1, "teste descricao", "teste quantidade", "teste unidademedida", "teste valor", "teste", "teste");
+            var formRelTeste = new fmRltGenerico(dados);
+            formRelTeste.Show(this);
         }
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
