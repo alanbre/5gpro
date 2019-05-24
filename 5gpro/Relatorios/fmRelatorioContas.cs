@@ -138,8 +138,6 @@ namespace _5gpro.Relatorios
                 dtpCadfim.Enabled = false;
                 dataCadastroFiltro = false;
             }
-
-
         }
 
         private void CbDataConta_CheckedChanged(object sender, EventArgs e)
@@ -183,50 +181,6 @@ namespace _5gpro.Relatorios
         {
             var frv = new fmRltGenerico(datatableprincipal);
             frv.Show(this);
-
-            //var dataTable = new DataTable();
-            //dataTable.Columns.Add("Conta", typeof(int));
-            //dataTable.Columns.Add("Clientefornecedor");
-            //dataTable.Columns.Add("Nome");
-            //dataTable.Columns.Add("Datacadastro");
-            //dataTable.Columns.Add("Valororiginal");
-            //dataTable.Columns.Add("Multa");
-            //dataTable.Columns.Add("Juros");
-            //dataTable.Columns.Add("Acrescimo");
-            //dataTable.Columns.Add("Desconto");
-            //dataTable.Columns.Add("Valorfinal");
-
-            //foreach (ContaReceber c in contasReceber)
-            //{
-            //    dataTable.Rows.Add(c.ContaReceberID,
-            //        c.Pessoa.PessoaID,
-            //        c.Pessoa.Nome,
-            //        c.DataCadastro,
-            //        c.ValorOriginal,
-            //        c.Multa,
-            //        c.Juros,
-            //        c.Acrescimo,
-            //        c.Desconto,
-            //        c.ValorFinal
-            //        );
-            //}
-            //foreach (ContaPagar c in contasPagar)
-            //{
-            //    dataTable.Rows.Add(c.ContaPagarID,
-            //        c.Pessoa.PessoaID,
-            //        c.Pessoa.Nome,
-            //        c.DataCadastro,
-            //        c.ValorOriginal,
-            //        c.Multa,
-            //        c.Juros,
-            //        c.Acrescimo,
-            //        c.Desconto,
-            //        c.ValorFinal
-            //        );
-            //}
-
-            //var frv = new fmReportViewer(dataTable);
-            //frv.Show(this);
         }
 
 
@@ -252,6 +206,8 @@ namespace _5gpro.Relatorios
         {
             contasPagar = new List<ContaPagar>();
             contasReceber = new List<ContaReceber>();
+            datatableprincipal.Clear();
+            
 
             Filtros f = new Filtros
             {
@@ -378,6 +334,7 @@ namespace _5gpro.Relatorios
                 listaobjetos = ValorColunas();
                 AdicionaLinha(listaobjetos);
             }
+            dgvRelatorioFiltro.Refresh();
         }
 
         private void AdicionaLinha(List<object> campos)
@@ -453,6 +410,11 @@ namespace _5gpro.Relatorios
                 Valores.Add(colunasativas.colunavalorfinal);
 
             return Valores;
+        }
+
+        private void ClContas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

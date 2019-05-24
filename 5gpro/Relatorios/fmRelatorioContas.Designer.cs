@@ -28,23 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvRelatorioFiltro = new System.Windows.Forms.DataGridView();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.cbDataConta = new System.Windows.Forms.CheckBox();
             this.cbDataCadastro = new System.Windows.Forms.CheckBox();
             this.cbValor = new System.Windows.Forms.CheckBox();
             this.lbAte = new System.Windows.Forms.Label();
+            this.dbValorfinal = new _5gpro.Controls.DecimalBox();
+            this.dbValorinicial = new _5gpro.Controls.DecimalBox();
             this.lbValor = new System.Windows.Forms.Label();
             this.lbSituacao = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lbDataCadastro = new System.Windows.Forms.Label();
             this.dtpContafim = new System.Windows.Forms.DateTimePicker();
             this.dtpContainicio = new System.Windows.Forms.DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rbDesmarcados = new System.Windows.Forms.RadioButton();
-            this.rbMarcados = new System.Windows.Forms.RadioButton();
-            this.btRemover = new System.Windows.Forms.Button();
             this.dtpCadfim = new System.Windows.Forms.DateTimePicker();
             this.dtpCadinicio = new System.Windows.Forms.DateTimePicker();
             this.clContas = new System.Windows.Forms.CheckedListBox();
@@ -52,11 +50,8 @@
             this.btListar = new System.Windows.Forms.Button();
             this.clColunas = new System.Windows.Forms.CheckedListBox();
             this.cbTodos = new System.Windows.Forms.CheckBox();
-            this.dbValorfinal = new _5gpro.Controls.DecimalBox();
-            this.dbValorinicial = new _5gpro.Controls.DecimalBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRelatorioFiltro)).BeginInit();
             this.gbFiltros.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvRelatorioFiltro
@@ -65,8 +60,8 @@
             this.dgvRelatorioFiltro.AllowUserToDeleteRows = false;
             this.dgvRelatorioFiltro.AllowUserToOrderColumns = true;
             this.dgvRelatorioFiltro.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvRelatorioFiltro.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvRelatorioFiltro.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvRelatorioFiltro.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvRelatorioFiltro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRelatorioFiltro.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -94,13 +89,12 @@
             this.gbFiltros.Controls.Add(this.lbDataCadastro);
             this.gbFiltros.Controls.Add(this.dtpContafim);
             this.gbFiltros.Controls.Add(this.dtpContainicio);
-            this.gbFiltros.Controls.Add(this.groupBox1);
             this.gbFiltros.Controls.Add(this.dtpCadfim);
             this.gbFiltros.Controls.Add(this.dtpCadinicio);
             this.gbFiltros.Controls.Add(this.clContas);
-            this.gbFiltros.Location = new System.Drawing.Point(12, 380);
+            this.gbFiltros.Location = new System.Drawing.Point(138, 367);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(790, 122);
+            this.gbFiltros.Size = new System.Drawing.Size(548, 122);
             this.gbFiltros.TabIndex = 1;
             this.gbFiltros.TabStop = false;
             // 
@@ -142,6 +136,32 @@
             this.lbAte.Size = new System.Drawing.Size(23, 13);
             this.lbAte.TabIndex = 15;
             this.lbAte.Text = "Até";
+            // 
+            // dbValorfinal
+            // 
+            this.dbValorfinal.Enabled = false;
+            this.dbValorfinal.Location = new System.Drawing.Point(395, 82);
+            this.dbValorfinal.Name = "dbValorfinal";
+            this.dbValorfinal.Size = new System.Drawing.Size(100, 22);
+            this.dbValorfinal.TabIndex = 14;
+            this.dbValorfinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorinicial
+            // 
+            this.dbValorinicial.Enabled = false;
+            this.dbValorinicial.Location = new System.Drawing.Point(394, 40);
+            this.dbValorinicial.Name = "dbValorinicial";
+            this.dbValorinicial.Size = new System.Drawing.Size(100, 22);
+            this.dbValorinicial.TabIndex = 13;
+            this.dbValorinicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbValor
             // 
@@ -197,48 +217,6 @@
             this.dtpContainicio.Size = new System.Drawing.Size(100, 20);
             this.dtpContainicio.TabIndex = 7;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rbDesmarcados);
-            this.groupBox1.Controls.Add(this.rbMarcados);
-            this.groupBox1.Controls.Add(this.btRemover);
-            this.groupBox1.Location = new System.Drawing.Point(653, 9);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(131, 107);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            // 
-            // rbDesmarcados
-            // 
-            this.rbDesmarcados.AutoSize = true;
-            this.rbDesmarcados.Location = new System.Drawing.Point(6, 36);
-            this.rbDesmarcados.Name = "rbDesmarcados";
-            this.rbDesmarcados.Size = new System.Drawing.Size(90, 17);
-            this.rbDesmarcados.TabIndex = 1;
-            this.rbDesmarcados.Text = "Desmarcados";
-            this.rbDesmarcados.UseVisualStyleBackColor = true;
-            // 
-            // rbMarcados
-            // 
-            this.rbMarcados.AutoSize = true;
-            this.rbMarcados.Checked = true;
-            this.rbMarcados.Location = new System.Drawing.Point(6, 10);
-            this.rbMarcados.Name = "rbMarcados";
-            this.rbMarcados.Size = new System.Drawing.Size(72, 17);
-            this.rbMarcados.TabIndex = 0;
-            this.rbMarcados.TabStop = true;
-            this.rbMarcados.Text = "Marcados";
-            this.rbMarcados.UseVisualStyleBackColor = true;
-            // 
-            // btRemover
-            // 
-            this.btRemover.Location = new System.Drawing.Point(6, 68);
-            this.btRemover.Name = "btRemover";
-            this.btRemover.Size = new System.Drawing.Size(75, 23);
-            this.btRemover.TabIndex = 1;
-            this.btRemover.Text = "Remover";
-            this.btRemover.UseVisualStyleBackColor = true;
-            // 
             // dtpCadfim
             // 
             this.dtpCadfim.Enabled = false;
@@ -271,12 +249,13 @@
             this.clContas.Size = new System.Drawing.Size(120, 64);
             this.clContas.TabIndex = 4;
             this.clContas.Tag = "";
+            this.clContas.SelectedIndexChanged += new System.EventHandler(this.ClContas_SelectedIndexChanged);
             // 
             // btGerar
             // 
-            this.btGerar.Location = new System.Drawing.Point(953, 394);
+            this.btGerar.Location = new System.Drawing.Point(760, 377);
             this.btGerar.Name = "btGerar";
-            this.btGerar.Size = new System.Drawing.Size(92, 69);
+            this.btGerar.Size = new System.Drawing.Size(62, 26);
             this.btGerar.TabIndex = 0;
             this.btGerar.Text = "Gerar";
             this.btGerar.UseVisualStyleBackColor = true;
@@ -284,9 +263,10 @@
             // 
             // btListar
             // 
-            this.btListar.Location = new System.Drawing.Point(855, 394);
+            this.btListar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.btListar.Location = new System.Drawing.Point(692, 377);
             this.btListar.Name = "btListar";
-            this.btListar.Size = new System.Drawing.Size(92, 69);
+            this.btListar.Size = new System.Drawing.Size(62, 26);
             this.btListar.TabIndex = 2;
             this.btListar.Text = "Listar";
             this.btListar.UseVisualStyleBackColor = true;
@@ -326,32 +306,6 @@
             this.cbTodos.UseVisualStyleBackColor = true;
             this.cbTodos.CheckedChanged += new System.EventHandler(this.CbTodos_CheckedChanged);
             // 
-            // dbValorfinal
-            // 
-            this.dbValorfinal.Enabled = false;
-            this.dbValorfinal.Location = new System.Drawing.Point(395, 82);
-            this.dbValorfinal.Name = "dbValorfinal";
-            this.dbValorfinal.Size = new System.Drawing.Size(100, 22);
-            this.dbValorfinal.TabIndex = 14;
-            this.dbValorfinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorinicial
-            // 
-            this.dbValorinicial.Enabled = false;
-            this.dbValorinicial.Location = new System.Drawing.Point(394, 40);
-            this.dbValorinicial.Name = "dbValorinicial";
-            this.dbValorinicial.Size = new System.Drawing.Size(100, 22);
-            this.dbValorinicial.TabIndex = 13;
-            this.dbValorinicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // fmRelatorioContas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -375,8 +329,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvRelatorioFiltro)).EndInit();
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,10 +339,6 @@
         private System.Windows.Forms.DataGridView dgvRelatorioFiltro;
         private System.Windows.Forms.GroupBox gbFiltros;
         private System.Windows.Forms.CheckedListBox clContas;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbDesmarcados;
-        private System.Windows.Forms.RadioButton rbMarcados;
-        private System.Windows.Forms.Button btRemover;
         private System.Windows.Forms.Button btGerar;
         private System.Windows.Forms.Button btListar;
         private System.Windows.Forms.DateTimePicker dtpCadinicio;

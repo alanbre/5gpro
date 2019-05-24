@@ -8,13 +8,11 @@ namespace _5gpro.Reports
 {
     public partial class fmRltGenerico : Form
     {
-        private DataTable _dados;
-        List<bool> _soma;
-        public fmRltGenerico(DataTable dados, List<bool> soma)
+        private DataTable _dados = new DataTable();
+        public fmRltGenerico(DataTable dados)
         {
             InitializeComponent();
             _dados = dados;
-            _soma = soma;
         }
 
         private void FmRltGenerico_Load(object sender, EventArgs e)
@@ -23,7 +21,6 @@ namespace _5gpro.Reports
             foreach (var c in _dados.Columns)
             {
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", c.ToString(), true));
-                this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"sumColuna{i}", _soma[i].ToString()));
                 _dados.Columns[c.ToString()].ColumnName = $"coluna{i}";
                 i++;
             }
@@ -31,7 +28,6 @@ namespace _5gpro.Reports
             {
                 _dados.Columns.Add($"coluna{i}");
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", "N", false));
-                this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"sumColuna{i}", "False"));
                 _dados.Columns[i].ColumnName = $"coluna{i}";
                 i++;
             }
