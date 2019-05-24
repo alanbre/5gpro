@@ -1,9 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using _5gpro.Funcoes;
-using System.ComponentModel;
-using System.Configuration;
-using System.IO;
 using _5gpro.Forms;
 
 namespace _5gpro.Daos
