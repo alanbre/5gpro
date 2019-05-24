@@ -28,19 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvRelatorioFiltro = new System.Windows.Forms.DataGridView();
-            this.dgvtbcIDconta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcClienteFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDatacad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorfinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.cbDataConta = new System.Windows.Forms.CheckBox();
             this.cbDataCadastro = new System.Windows.Forms.CheckBox();
@@ -61,6 +50,8 @@
             this.clContas = new System.Windows.Forms.CheckedListBox();
             this.btGerar = new System.Windows.Forms.Button();
             this.btListar = new System.Windows.Forms.Button();
+            this.clColunas = new System.Windows.Forms.CheckedListBox();
+            this.cbTodos = new System.Windows.Forms.CheckBox();
             this.dbValorfinal = new _5gpro.Controls.DecimalBox();
             this.dbValorinicial = new _5gpro.Controls.DecimalBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRelatorioFiltro)).BeginInit();
@@ -74,95 +65,20 @@
             this.dgvRelatorioFiltro.AllowUserToDeleteRows = false;
             this.dgvRelatorioFiltro.AllowUserToOrderColumns = true;
             this.dgvRelatorioFiltro.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            this.dgvRelatorioFiltro.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvRelatorioFiltro.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvRelatorioFiltro.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvRelatorioFiltro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRelatorioFiltro.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvtbcIDconta,
-            this.dgvtbcClienteFornecedor,
-            this.dgvtbcNome,
-            this.dgvtbcDatacad,
-            this.dgvtbcValorOriginal,
-            this.dgvtbcMulta,
-            this.dgvtbcJuros,
-            this.dgvtbcAcrescimo,
-            this.dgvtbcDesconto,
-            this.dgvtbcValorfinal});
             this.dgvRelatorioFiltro.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvRelatorioFiltro.Location = new System.Drawing.Point(12, 12);
+            this.dgvRelatorioFiltro.Location = new System.Drawing.Point(138, 12);
             this.dgvRelatorioFiltro.MultiSelect = false;
             this.dgvRelatorioFiltro.Name = "dgvRelatorioFiltro";
             this.dgvRelatorioFiltro.ReadOnly = true;
             this.dgvRelatorioFiltro.RowHeadersVisible = false;
             this.dgvRelatorioFiltro.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvRelatorioFiltro.Size = new System.Drawing.Size(1008, 352);
+            this.dgvRelatorioFiltro.Size = new System.Drawing.Size(1008, 349);
             this.dgvRelatorioFiltro.TabIndex = 0;
             this.dgvRelatorioFiltro.TabStop = false;
-            // 
-            // dgvtbcIDconta
-            // 
-            this.dgvtbcIDconta.HeaderText = "Conta";
-            this.dgvtbcIDconta.Name = "dgvtbcIDconta";
-            this.dgvtbcIDconta.ReadOnly = true;
-            this.dgvtbcIDconta.Width = 70;
-            // 
-            // dgvtbcClienteFornecedor
-            // 
-            this.dgvtbcClienteFornecedor.HeaderText = "ClienteFornecedor";
-            this.dgvtbcClienteFornecedor.Name = "dgvtbcClienteFornecedor";
-            this.dgvtbcClienteFornecedor.ReadOnly = true;
-            // 
-            // dgvtbcNome
-            // 
-            this.dgvtbcNome.HeaderText = "Nome";
-            this.dgvtbcNome.Name = "dgvtbcNome";
-            this.dgvtbcNome.ReadOnly = true;
-            // 
-            // dgvtbcDatacad
-            // 
-            dataGridViewCellStyle4.Format = "d";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dgvtbcDatacad.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvtbcDatacad.HeaderText = "Data cad.";
-            this.dgvtbcDatacad.Name = "dgvtbcDatacad";
-            this.dgvtbcDatacad.ReadOnly = true;
-            // 
-            // dgvtbcValorOriginal
-            // 
-            this.dgvtbcValorOriginal.HeaderText = "Valor original";
-            this.dgvtbcValorOriginal.Name = "dgvtbcValorOriginal";
-            this.dgvtbcValorOriginal.ReadOnly = true;
-            // 
-            // dgvtbcMulta
-            // 
-            this.dgvtbcMulta.HeaderText = "Multa";
-            this.dgvtbcMulta.Name = "dgvtbcMulta";
-            this.dgvtbcMulta.ReadOnly = true;
-            // 
-            // dgvtbcJuros
-            // 
-            this.dgvtbcJuros.HeaderText = "Juros";
-            this.dgvtbcJuros.Name = "dgvtbcJuros";
-            this.dgvtbcJuros.ReadOnly = true;
-            // 
-            // dgvtbcAcrescimo
-            // 
-            this.dgvtbcAcrescimo.HeaderText = "Acréscimo";
-            this.dgvtbcAcrescimo.Name = "dgvtbcAcrescimo";
-            this.dgvtbcAcrescimo.ReadOnly = true;
-            // 
-            // dgvtbcDesconto
-            // 
-            this.dgvtbcDesconto.HeaderText = "Desconto";
-            this.dgvtbcDesconto.Name = "dgvtbcDesconto";
-            this.dgvtbcDesconto.ReadOnly = true;
-            // 
-            // dgvtbcValorfinal
-            // 
-            this.dgvtbcValorfinal.HeaderText = "Valor final";
-            this.dgvtbcValorfinal.Name = "dgvtbcValorfinal";
-            this.dgvtbcValorfinal.ReadOnly = true;
             // 
             // gbFiltros
             // 
@@ -182,9 +98,9 @@
             this.gbFiltros.Controls.Add(this.dtpCadfim);
             this.gbFiltros.Controls.Add(this.dtpCadinicio);
             this.gbFiltros.Controls.Add(this.clContas);
-            this.gbFiltros.Location = new System.Drawing.Point(56, 381);
+            this.gbFiltros.Location = new System.Drawing.Point(12, 380);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(677, 122);
+            this.gbFiltros.Size = new System.Drawing.Size(790, 122);
             this.gbFiltros.TabIndex = 1;
             this.gbFiltros.TabStop = false;
             // 
@@ -286,7 +202,7 @@
             this.groupBox1.Controls.Add(this.rbDesmarcados);
             this.groupBox1.Controls.Add(this.rbMarcados);
             this.groupBox1.Controls.Add(this.btRemover);
-            this.groupBox1.Location = new System.Drawing.Point(540, 9);
+            this.groupBox1.Location = new System.Drawing.Point(653, 9);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(131, 107);
             this.groupBox1.TabIndex = 3;
@@ -355,11 +271,10 @@
             this.clContas.Size = new System.Drawing.Size(120, 64);
             this.clContas.TabIndex = 4;
             this.clContas.Tag = "";
-            this.clContas.SelectedIndexChanged += new System.EventHandler(this.ClContas_SelectedIndexChanged);
             // 
             // btGerar
             // 
-            this.btGerar.Location = new System.Drawing.Point(906, 404);
+            this.btGerar.Location = new System.Drawing.Point(953, 394);
             this.btGerar.Name = "btGerar";
             this.btGerar.Size = new System.Drawing.Size(92, 69);
             this.btGerar.TabIndex = 0;
@@ -369,13 +284,47 @@
             // 
             // btListar
             // 
-            this.btListar.Location = new System.Drawing.Point(808, 404);
+            this.btListar.Location = new System.Drawing.Point(855, 394);
             this.btListar.Name = "btListar";
             this.btListar.Size = new System.Drawing.Size(92, 69);
             this.btListar.TabIndex = 2;
             this.btListar.Text = "Listar";
             this.btListar.UseVisualStyleBackColor = true;
             this.btListar.Click += new System.EventHandler(this.BtListar_Click);
+            // 
+            // clColunas
+            // 
+            this.clColunas.CheckOnClick = true;
+            this.clColunas.FormattingEnabled = true;
+            this.clColunas.Items.AddRange(new object[] {
+            "Conta",
+            "ClienteFornecedor",
+            "Nome",
+            "Data cad.",
+            "Valor original",
+            "Multa",
+            "Juros",
+            "Acréscimo",
+            "Desconto",
+            "Valor final"});
+            this.clColunas.Location = new System.Drawing.Point(12, 57);
+            this.clColunas.Name = "clColunas";
+            this.clColunas.Size = new System.Drawing.Size(120, 184);
+            this.clColunas.TabIndex = 19;
+            this.clColunas.SelectedIndexChanged += new System.EventHandler(this.ClColunas_SelectedIndexChanged);
+            // 
+            // cbTodos
+            // 
+            this.cbTodos.AutoSize = true;
+            this.cbTodos.Checked = true;
+            this.cbTodos.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbTodos.Location = new System.Drawing.Point(15, 38);
+            this.cbTodos.Name = "cbTodos";
+            this.cbTodos.Size = new System.Drawing.Size(56, 17);
+            this.cbTodos.TabIndex = 20;
+            this.cbTodos.Text = "Todos";
+            this.cbTodos.UseVisualStyleBackColor = true;
+            this.cbTodos.CheckedChanged += new System.EventHandler(this.CbTodos_CheckedChanged);
             // 
             // dbValorfinal
             // 
@@ -408,7 +357,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1049, 524);
+            this.ClientSize = new System.Drawing.Size(1175, 524);
+            this.Controls.Add(this.cbTodos);
+            this.Controls.Add(this.clColunas);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvRelatorioFiltro);
             this.Controls.Add(this.btListar);
@@ -427,6 +378,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -452,18 +404,10 @@
         private Controls.DecimalBox dbValorinicial;
         private System.Windows.Forms.Label lbValor;
         private System.Windows.Forms.Label lbSituacao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcIDconta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcClienteFornecedor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDatacad;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcMulta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcJuros;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDesconto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorfinal;
         private System.Windows.Forms.CheckBox cbDataConta;
         private System.Windows.Forms.CheckBox cbDataCadastro;
         private System.Windows.Forms.CheckBox cbValor;
+        private System.Windows.Forms.CheckedListBox clColunas;
+        private System.Windows.Forms.CheckBox cbTodos;
     }
 }

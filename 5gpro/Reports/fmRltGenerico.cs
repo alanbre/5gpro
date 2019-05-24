@@ -23,7 +23,7 @@ namespace _5gpro.Reports
                 _dados.Columns[c.ToString()].ColumnName = $"coluna{i}";
                 i++;
             }
-            while(i <= 7)
+            while(i <= 10)
             {
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", "", false));
                 _dados.Columns[i].ColumnName = $"coluna{i}";
