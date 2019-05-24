@@ -42,6 +42,9 @@
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorfinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.cbDataConta = new System.Windows.Forms.CheckBox();
+            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
+            this.cbValor = new System.Windows.Forms.CheckBox();
             this.lbAte = new System.Windows.Forms.Label();
             this.lbValor = new System.Windows.Forms.Label();
             this.lbSituacao = new System.Windows.Forms.Label();
@@ -58,9 +61,6 @@
             this.clContas = new System.Windows.Forms.CheckedListBox();
             this.btGerar = new System.Windows.Forms.Button();
             this.btListar = new System.Windows.Forms.Button();
-            this.cbValor = new System.Windows.Forms.CheckBox();
-            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
-            this.cbDataConta = new System.Windows.Forms.CheckBox();
             this.dbValorfinal = new _5gpro.Controls.DecimalBox();
             this.dbValorinicial = new _5gpro.Controls.DecimalBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRelatorioFiltro)).BeginInit();
@@ -187,6 +187,36 @@
             this.gbFiltros.Size = new System.Drawing.Size(677, 122);
             this.gbFiltros.TabIndex = 1;
             this.gbFiltros.TabStop = false;
+            // 
+            // cbDataConta
+            // 
+            this.cbDataConta.AutoSize = true;
+            this.cbDataConta.Location = new System.Drawing.Point(220, 87);
+            this.cbDataConta.Name = "cbDataConta";
+            this.cbDataConta.Size = new System.Drawing.Size(15, 14);
+            this.cbDataConta.TabIndex = 18;
+            this.cbDataConta.UseVisualStyleBackColor = true;
+            this.cbDataConta.CheckedChanged += new System.EventHandler(this.CbDataConta_CheckedChanged);
+            // 
+            // cbDataCadastro
+            // 
+            this.cbDataCadastro.AutoSize = true;
+            this.cbDataCadastro.Location = new System.Drawing.Point(220, 42);
+            this.cbDataCadastro.Name = "cbDataCadastro";
+            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
+            this.cbDataCadastro.TabIndex = 17;
+            this.cbDataCadastro.UseVisualStyleBackColor = true;
+            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
+            // 
+            // cbValor
+            // 
+            this.cbValor.AutoSize = true;
+            this.cbValor.Location = new System.Drawing.Point(501, 61);
+            this.cbValor.Name = "cbValor";
+            this.cbValor.Size = new System.Drawing.Size(15, 14);
+            this.cbValor.TabIndex = 16;
+            this.cbValor.UseVisualStyleBackColor = true;
+            this.cbValor.CheckedChanged += new System.EventHandler(this.CbValor_CheckedChanged);
             // 
             // lbAte
             // 
@@ -316,15 +346,16 @@
             this.clContas.CheckOnClick = true;
             this.clContas.FormattingEnabled = true;
             this.clContas.Items.AddRange(new object[] {
-            "A Pagar",
-            "A Receber",
             "Aberto",
-            "Pago"});
+            "Pago",
+            "A Pagar",
+            "A Receber"});
             this.clContas.Location = new System.Drawing.Point(259, 40);
             this.clContas.Name = "clContas";
             this.clContas.Size = new System.Drawing.Size(120, 64);
             this.clContas.TabIndex = 4;
             this.clContas.Tag = "";
+            this.clContas.SelectedIndexChanged += new System.EventHandler(this.ClContas_SelectedIndexChanged);
             // 
             // btGerar
             // 
@@ -345,36 +376,6 @@
             this.btListar.Text = "Listar";
             this.btListar.UseVisualStyleBackColor = true;
             this.btListar.Click += new System.EventHandler(this.BtListar_Click);
-            // 
-            // cbValor
-            // 
-            this.cbValor.AutoSize = true;
-            this.cbValor.Location = new System.Drawing.Point(501, 61);
-            this.cbValor.Name = "cbValor";
-            this.cbValor.Size = new System.Drawing.Size(15, 14);
-            this.cbValor.TabIndex = 16;
-            this.cbValor.UseVisualStyleBackColor = true;
-            this.cbValor.CheckedChanged += new System.EventHandler(this.CbValor_CheckedChanged);
-            // 
-            // cbDataCadastro
-            // 
-            this.cbDataCadastro.AutoSize = true;
-            this.cbDataCadastro.Location = new System.Drawing.Point(220, 42);
-            this.cbDataCadastro.Name = "cbDataCadastro";
-            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
-            this.cbDataCadastro.TabIndex = 17;
-            this.cbDataCadastro.UseVisualStyleBackColor = true;
-            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
-            // 
-            // cbDataConta
-            // 
-            this.cbDataConta.AutoSize = true;
-            this.cbDataConta.Location = new System.Drawing.Point(220, 87);
-            this.cbDataConta.Name = "cbDataConta";
-            this.cbDataConta.Size = new System.Drawing.Size(15, 14);
-            this.cbDataConta.TabIndex = 18;
-            this.cbDataConta.UseVisualStyleBackColor = true;
-            this.cbDataConta.CheckedChanged += new System.EventHandler(this.CbDataConta_CheckedChanged);
             // 
             // dbValorfinal
             // 
