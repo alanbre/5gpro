@@ -55,8 +55,8 @@
             this.relatorioDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatorioDeItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatorioContaReceberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.relatórioDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.msMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -281,17 +281,17 @@
             this.relatorioContaReceberToolStripMenuItem.Text = "Relatorio Conta Receber";
             this.relatorioContaReceberToolStripMenuItem.Click += new System.EventHandler(this.RelatorioContaReceberToolStripMenuItem_Click);
             // 
-            // tsmiCadastroContaReceber
-            // 
-            this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
-            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
-            // 
             // relatórioDeContasToolStripMenuItem
             // 
             this.relatórioDeContasToolStripMenuItem.Name = "relatórioDeContasToolStripMenuItem";
             this.relatórioDeContasToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.relatórioDeContasToolStripMenuItem.Text = "Relatório de Contas";
             this.relatórioDeContasToolStripMenuItem.Click += new System.EventHandler(this.RelatórioDeContasToolStripMenuItem_Click);
+            // 
+            // tsmiCadastroContaReceber
+            // 
+            this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
+            this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
             // 
             // fmMain
             // 

@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,6 +21,11 @@ namespace _5gpro.Relatorios
         private bool dataCadastroFiltro = false;
         private bool dataContaFiltro = false;
 
+        private DataTable datatableprincipal;
+        private Colunas colunasativas;
+        List<object> listaobjetos;
+
+
 
         public struct Filtros
         {
@@ -36,6 +42,31 @@ namespace _5gpro.Relatorios
             public bool usarPago;
         }
 
+        public struct Colunas
+        {
+            public string colunaconta;
+            public string colunaclientefornecedor;
+            public string colunanome;
+            public string colunadatacad;
+            public decimal colunavalororiginal;
+            public decimal colunamulta;
+            public decimal colunajuros;
+            public decimal colunaacrescimo;
+            public decimal colunadesconto;
+            public decimal colunavalorfinal;
+
+            public bool usarcolunaconta;
+            public bool usarcolunaclientefornecedor;
+            public bool usarcolunanome;
+            public bool usarcolunadatacad;
+            public bool usarcolunavalororiginal;
+            public bool usarcolunamulta;
+            public bool usarcolunajuros;
+            public bool usarcolunaacrescimo;
+            public bool usarcolunadesconto;
+            public bool usarcolunavalorfinal;
+        }
+
 
         public fmRelatorioContas()
         {
@@ -43,8 +74,55 @@ namespace _5gpro.Relatorios
 
             for (int i = 0; i < clContas.Items.Count; i++)
                 clContas.SetItemChecked(i, true);
+
+            for (int i = 0; i < clColunas.Items.Count; i++)
+                clColunas.SetItemChecked(i, true);
+
+            CriaDataTable();
         }
 
+        private void CriaDataTable()
+        {
+            datatableprincipal = new DataTable();
+
+            foreach (var s in clColunas.CheckedItems)
+            {
+                switch (s)
+                {
+                    case "Conta":
+                        datatableprincipal.Columns.Add("Conta", typeof(string));
+                        break;
+                    case "ClienteFornecedor":
+                        datatableprincipal.Columns.Add("ClienteFornecedor", typeof(string));
+                        break;
+                    case "Nome":
+                        datatableprincipal.Columns.Add("Nome", typeof(string));
+                        break;
+                    case "Data cad.":
+                        datatableprincipal.Columns.Add("Data cad.", typeof(string));
+                        break;
+                    case "Valor original":
+                        datatableprincipal.Columns.Add("Valor original", typeof(decimal));
+                        break;
+                    case "Multa":
+                        datatableprincipal.Columns.Add("Multa", typeof(decimal));
+                        break;
+                    case "Juros":
+                        datatableprincipal.Columns.Add("Juros", typeof(decimal));
+                        break;
+                    case "Acréscimo":
+                        datatableprincipal.Columns.Add("Acréscimo", typeof(decimal));
+                        break;
+                    case "Desconto":
+                        datatableprincipal.Columns.Add("Desconto", typeof(decimal));
+                        break;
+                    case "Valor final":
+                        datatableprincipal.Columns.Add("Valor final", typeof(decimal));
+                        break;
+                }
+                dgvRelatorioFiltro.DataSource = datatableprincipal;
+            }
+        }
 
         private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
         {
@@ -60,8 +138,6 @@ namespace _5gpro.Relatorios
                 dtpCadfim.Enabled = false;
                 dataCadastroFiltro = false;
             }
-
-
         }
 
         private void CbDataConta_CheckedChanged(object sender, EventArgs e)
@@ -98,8 +174,40 @@ namespace _5gpro.Relatorios
 
         private void BtListar_Click(object sender, EventArgs e)
         {
+            PopularDGV();
+        }
+
+        private void BtGerar_Click(object sender, EventArgs e)
+        {
+            var frv = new fmRltGenerico(datatableprincipal);
+            frv.Show(this);
+        }
+
+
+        private void CbTodos_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbTodos.Checked)
+                for (int i = 0; i < clColunas.Items.Count; i++)
+                    clColunas.SetItemChecked(i, true);
+            else
+                for (int i = 0; i < clColunas.Items.Count; i++)
+                    clColunas.SetItemChecked(i, false);
+
+            CriaDataTable();
+        }
+
+        private void ClColunas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Evento de seleção das colunas
+            CriaDataTable();
+        }
+
+        private void PopularDGV()
+        {
             contasPagar = new List<ContaPagar>();
             contasReceber = new List<ContaReceber>();
+            datatableprincipal.Clear();
+            
 
             Filtros f = new Filtros
             {
@@ -112,101 +220,196 @@ namespace _5gpro.Relatorios
                 usardataCadastroFiltro = dataCadastroFiltro,
                 usardataContaFiltro = dataContaFiltro,
                 usarvalorContaFiltro = valorContaFiltro
-
             };
 
-            dgvRelatorioFiltro.Rows.Clear();
+            contasPagar = contaPagarDAO.BuscaParaRelatorio(f);
+            contasReceber = contaReceberDAO.BuscaParaRelatorio(f);
 
-            foreach (var s in clContas.CheckedItems)
+            colunasativas = new Colunas();
+
+            foreach (ContaReceber cr in contasReceber)
             {
-                switch (s)
+                foreach (var c in datatableprincipal.Columns)
                 {
-                    case "Aberto":
-                        f.usarAberto = true;
-                        break;
-                    case "Pago":
-                        f.usarPago = true;
-                        break;
-                    case "A Pagar":
-                        contasPagar = contaPagarDAO.BuscaParaRelatorio(f);
-                        foreach (var cp in contasPagar)
-                            dgvRelatorioFiltro.Rows.Add(cp.ContaPagarID,
-                                                        cp.Pessoa.PessoaID, cp.Pessoa.Nome,
-                                                        cp.DataCadastro.ToShortDateString(),
-                                                        cp.ValorOriginal,
-                                                        cp.Multa,
-                                                        cp.Juros,
-                                                        cp.Acrescimo,
-                                                        cp.Desconto,
-                                                        cp.ValorFinal);
-                        break;
-                    case "A Receber":
-                        contasReceber = contaReceberDAO.BuscaParaRelatorio(f);
-                        foreach (var cr in contasReceber)
-                            dgvRelatorioFiltro.Rows.Add(cr.ContaReceberID,
-                                                        cr.Pessoa.PessoaID, cr.Pessoa.Nome,
-                                                        cr.DataCadastro.ToShortDateString(),
-                                                        cr.ValorOriginal,
-                                                        cr.Multa,
-                                                        cr.Juros,
-                                                        cr.Acrescimo,
-                                                        cr.Desconto,
-                                                        cr.ValorFinal);
-                        break;
-
+                    switch (c.ToString())
+                    {
+                        case "Conta":
+                            colunasativas.colunaconta = cr.ContaReceberID.ToString();
+                            colunasativas.usarcolunaconta = true;
+                            break;
+                        case "ClienteFornecedor":
+                            colunasativas.colunaclientefornecedor = cr.Pessoa.PessoaID.ToString();
+                            colunasativas.usarcolunaclientefornecedor = true;
+                            break;
+                        case "Nome":
+                            colunasativas.colunanome = cr.Pessoa.Nome.ToString();
+                            colunasativas.usarcolunanome = true;
+                            break;
+                        case "Data cad.":
+                            colunasativas.colunadatacad = cr.DataCadastro.ToShortDateString();
+                            colunasativas.usarcolunadatacad = true;
+                            break;
+                        case "Valor original":
+                            colunasativas.colunavalororiginal = cr.ValorOriginal;
+                            colunasativas.usarcolunavalororiginal = true;
+                            break;
+                        case "Multa":
+                            colunasativas.colunamulta = cr.Multa;
+                            colunasativas.usarcolunamulta = true;
+                            break;
+                        case "Juros":
+                            colunasativas.colunajuros = cr.Juros;
+                            colunasativas.usarcolunajuros = true;
+                            break;
+                        case "Acréscimo":
+                            colunasativas.colunaacrescimo = cr.Acrescimo;
+                            colunasativas.usarcolunaacrescimo = true;
+                            break;
+                        case "Desconto":
+                            colunasativas.colunadesconto = cr.Desconto;
+                            colunasativas.usarcolunadesconto = true;
+                            break;
+                        case "Valor final":
+                            colunasativas.colunavalorfinal = cr.ValorFinal;
+                            colunasativas.usarcolunavalorfinal = true;
+                            break;
+                    }
                 }
+                listaobjetos = new List<object>();
+                listaobjetos = ValorColunas();
+                AdicionaLinha(listaobjetos);
             }
 
+            colunasativas = new Colunas();
 
+            foreach (ContaPagar cp in contasPagar)
+            {
+                foreach (var c in datatableprincipal.Columns)
+                {
+                    switch (c.ToString())
+                    {
+                        case "Conta":
+                            colunasativas.colunaconta = cp.ContaPagarID.ToString();
+                            colunasativas.usarcolunaconta = true;
+                            break;
+                        case "ClienteFornecedor":
+                            colunasativas.colunaclientefornecedor = cp.Pessoa.PessoaID.ToString();
+                            colunasativas.usarcolunaclientefornecedor = true;
+                            break;
+                        case "Nome":
+                            colunasativas.colunanome = cp.Pessoa.Nome.ToString();
+                            colunasativas.usarcolunanome = true;
+                            break;
+                        case "Data cad.":
+                            colunasativas.colunadatacad = cp.DataCadastro.ToShortDateString();
+                            colunasativas.usarcolunadatacad = true;
+                            break;
+                        case "Valor original":
+                            colunasativas.colunavalororiginal = cp.ValorOriginal;
+                            colunasativas.usarcolunavalororiginal = true;
+                            break;
+                        case "Multa":
+                            colunasativas.colunamulta = cp.Multa;
+                            colunasativas.usarcolunamulta = true;
+                            break;
+                        case "Juros":
+                            colunasativas.colunajuros = cp.Juros;
+                            colunasativas.usarcolunajuros = true;
+                            break;
+                        case "Acréscimo":
+                            colunasativas.colunaacrescimo = cp.Acrescimo;
+                            colunasativas.usarcolunaacrescimo = true;
+                            break;
+                        case "Desconto":
+                            colunasativas.colunadesconto = cp.Desconto;
+                            colunasativas.usarcolunadesconto = true;
+                            break;
+                        case "Valor final":
+                            colunasativas.colunavalorfinal = cp.ValorFinal;
+                            colunasativas.usarcolunavalorfinal = true;
+                            break;
+                    }
+                }
+                listaobjetos = new List<object>();
+                listaobjetos = ValorColunas();
+                AdicionaLinha(listaobjetos);
+            }
             dgvRelatorioFiltro.Refresh();
-
         }
 
-        private void BtGerar_Click(object sender, EventArgs e)
+        private void AdicionaLinha(List<object> campos)
         {
-            var dataTable = new DataTable();
-            dataTable.Columns.Add("Conta", typeof(int));
-            dataTable.Columns.Add("Clientefornecedor");
-            dataTable.Columns.Add("Nome");
-            dataTable.Columns.Add("Datacadastro");
-            dataTable.Columns.Add("Valororiginal");
-            dataTable.Columns.Add("Multa");
-            dataTable.Columns.Add("Juros");
-            dataTable.Columns.Add("Acrescimo");
-            dataTable.Columns.Add("Desconto");
-            dataTable.Columns.Add("Valorfinal");
-
-            foreach (ContaReceber c in contasReceber)
+            switch (datatableprincipal.Columns.Count)
             {
-                dataTable.Rows.Add(c.ContaReceberID,
-                    c.Pessoa.PessoaID,
-                    c.Pessoa.Nome,
-                    c.DataCadastro,
-                    c.ValorOriginal,
-                    c.Multa,
-                    c.Juros,
-                    c.Acrescimo,
-                    c.Desconto,
-                    c.ValorFinal
-                    );
+                case 1:
+                    datatableprincipal.Rows.Add(listaobjetos[0]);
+                    break;
+                case 2:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1]);
+                    break;
+                case 3:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2]);
+                    break;
+                case 4:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3]);
+                    break;
+                case 5:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3], listaobjetos[4]);
+                    break;
+                case 6:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3], listaobjetos[4], listaobjetos[5]);
+                    break;
+                case 7:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3], listaobjetos[4], listaobjetos[5], listaobjetos[6]);
+                    break;
+                case 8:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3], listaobjetos[4], listaobjetos[5], listaobjetos[6], listaobjetos[7]);
+                    break;
+                case 9:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3], listaobjetos[4], listaobjetos[5], listaobjetos[6], listaobjetos[7], listaobjetos[8]);
+                    break;
+                case 10:
+                    datatableprincipal.Rows.Add(listaobjetos[0], listaobjetos[1], listaobjetos[2], listaobjetos[3], listaobjetos[4], listaobjetos[5], listaobjetos[6], listaobjetos[7], listaobjetos[8], listaobjetos[9]);
+                    break;
             }
-            foreach (ContaPagar c in contasPagar)
-            {
-                dataTable.Rows.Add(c.ContaPagarID,
-                    c.Pessoa.PessoaID,
-                    c.Pessoa.Nome,
-                    c.DataCadastro,
-                    c.ValorOriginal,
-                    c.Multa,
-                    c.Juros,
-                    c.Acrescimo,
-                    c.Desconto,
-                    c.ValorFinal
-                    );
-            }
+        }
 
-            var frv = new fmReportViewer(dataTable);
-            frv.Show(this);
+
+        private List<object> ValorColunas()
+        {
+            List<object> Valores = new List<object>();
+
+            if (colunasativas.usarcolunaconta)
+                Valores.Add(colunasativas.colunaconta);
+
+            if (colunasativas.usarcolunaclientefornecedor)
+                Valores.Add(colunasativas.colunaclientefornecedor);
+
+            if (colunasativas.usarcolunanome)
+                Valores.Add(colunasativas.colunanome);
+
+            if (colunasativas.usarcolunadatacad)
+                Valores.Add(colunasativas.colunadatacad);
+
+            if (colunasativas.usarcolunavalororiginal)
+                Valores.Add(colunasativas.colunavalororiginal);
+
+            if (colunasativas.usarcolunamulta)
+                Valores.Add(colunasativas.colunamulta);
+
+            if (colunasativas.usarcolunajuros)
+                Valores.Add(colunasativas.colunajuros);
+
+            if (colunasativas.usarcolunaacrescimo)
+                Valores.Add(colunasativas.colunaacrescimo);
+
+            if (colunasativas.usarcolunadesconto)
+                Valores.Add(colunasativas.colunadesconto);
+
+            if (colunasativas.usarcolunavalorfinal)
+                Valores.Add(colunasativas.colunavalorfinal);
+
+            return Valores;
         }
 
         private void ClContas_SelectedIndexChanged(object sender, EventArgs e)
