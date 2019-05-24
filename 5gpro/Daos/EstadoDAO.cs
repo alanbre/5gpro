@@ -39,7 +39,7 @@ namespace _5gpro.Daos
                 {
                     var estado = new Estado();
                     estado.EstadoID = Convert.ToInt32(d["idestado"]);
-                    estado.Nome = (string)d["nomeestado"];
+                    estado.Nome = (string)d["nome"];
                     estado.Uf = (string)d["uf"];
                     estados.Add(estado);
                 }

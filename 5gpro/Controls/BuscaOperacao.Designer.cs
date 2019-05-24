@@ -48,6 +48,8 @@
             // 
             // tbNomeOperacao
             // 
+            this.tbNomeOperacao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeOperacao.Location = new System.Drawing.Point(93, 18);
             this.tbNomeOperacao.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeOperacao.Name = "tbNomeOperacao";

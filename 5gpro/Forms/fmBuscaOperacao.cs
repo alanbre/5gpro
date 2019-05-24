@@ -17,6 +17,7 @@ namespace _5gpro.Forms
 
         List<Operacao> operacoes;
         public Operacao operacaoSelecionada = null;
+        OperacaoDAO operacaoDAO = new OperacaoDAO();
 
         public fmBuscaOperacao()
         {
@@ -25,7 +26,7 @@ namespace _5gpro.Forms
 
         private void BuscaOperacao()
         {
-            OperacaoDAO operacaoDAO = new OperacaoDAO();
+            
 
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
@@ -48,7 +49,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvOperacao.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvOperacao.Rows[selectedRowIndex];
-            operacaoSelecionada = operacoes.Find(o => o.OperacaoID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            operacaoSelecionada = operacaoDAO.BuscaByID((int) selectedRow.Cells[0].Value);
             this.Close();
         }
 

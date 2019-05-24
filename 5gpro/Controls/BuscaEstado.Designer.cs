@@ -48,6 +48,8 @@
             // 
             // tbNomeEstado
             // 
+            this.tbNomeEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeEstado.Location = new System.Drawing.Point(94, 17);
             this.tbNomeEstado.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeEstado.Name = "tbNomeEstado";

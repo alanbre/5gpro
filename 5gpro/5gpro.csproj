@@ -13,6 +13,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -212,6 +214,12 @@
     </Compile>
     <Compile Include="Controls\BuscaUnimedida.Designer.cs">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CheckedGroupBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CheckedGroupBox.Designer.cs">
+      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\DecimalBox.cs">
       <SubType>UserControl</SubType>
@@ -675,6 +683,9 @@
     <EmbeddedResource Include="Controls\BuscaUnimedida.resx">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CheckedGroupBox.resx">
+      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DecimalBox.resx">
       <DependentUpon>DecimalBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -702,6 +713,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltItem.resx">
       <DependentUpon>fmRltItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
+      <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rltContas.rdlc" />
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />

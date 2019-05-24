@@ -55,6 +55,8 @@
             // 
             // tbDescricaoItem
             // 
+            this.tbDescricaoItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbDescricaoItem.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tbDescricaoItem.Location = new System.Drawing.Point(94, 17);
             this.tbDescricaoItem.Name = "tbDescricaoItem";

@@ -36,6 +36,8 @@
             // 
             // tbNomeCidade
             // 
+            this.tbNomeCidade.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeCidade.Location = new System.Drawing.Point(94, 17);
             this.tbNomeCidade.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeCidade.Name = "tbNomeCidade";

@@ -186,12 +186,13 @@ namespace _5gpro.Daos
             foreach (var d in data)
             {
                 var parcela = new ParcelaOperacao();
-                parcela.ParcelaOperacaoID = Convert.ToInt32(data[0]["idparcelaoperacao"]);
-                parcela.Numero = Convert.ToInt32(data[0]["numero"]);
-                parcela.Dias = Convert.ToInt32(data[0]["dias"]);
+                parcela.ParcelaOperacaoID = Convert.ToInt32(d["idparcelaoperacao"]);
+                parcela.Numero = Convert.ToInt32(d["numero"]);
+                parcela.Dias = Convert.ToInt32(d["dias"]);
                 parcela.Operacao = operacao;
                 parcelas.Add(parcela);
             }
+            operacao.Parcelas = parcelas;
             return operacao;
         }
     }
