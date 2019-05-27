@@ -48,6 +48,8 @@
             // 
             // tbNomeFormaPagamento
             // 
+            this.tbNomeFormaPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeFormaPagamento.Location = new System.Drawing.Point(94, 17);
             this.tbNomeFormaPagamento.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeFormaPagamento.Name = "tbNomeFormaPagamento";

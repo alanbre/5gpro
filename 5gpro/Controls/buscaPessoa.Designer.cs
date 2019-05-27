@@ -36,6 +36,8 @@
             // 
             // tbNomePessoa
             // 
+            this.tbNomePessoa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomePessoa.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tbNomePessoa.Location = new System.Drawing.Point(94, 17);
             this.tbNomePessoa.Margin = new System.Windows.Forms.Padding(2);

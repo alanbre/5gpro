@@ -10,6 +10,19 @@ namespace _5gpro.Controls
 {
     public partial class BuscaCidade : UserControl
     {
+        [Description("Texto do Label"), Category("Appearance")]
+        public string LabelText
+        {
+            get
+            {
+                // Insert code here.
+                return lbFiltroCidade.Text;
+            }
+            set
+            {
+                lbFiltroCidade.Text = value;
+            }
+        }
         public BuscaCidade()
         {
             InitializeComponent();
