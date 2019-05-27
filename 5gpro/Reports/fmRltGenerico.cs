@@ -1,18 +1,22 @@
-﻿using Microsoft.Reporting.WinForms;
+﻿using _5gpro.Funcoes;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 
 namespace _5gpro.Reports
 {
     public partial class fmRltGenerico : Form
     {
+        FuncoesAuxiliares fa = new FuncoesAuxiliares();
         private DataTable _dados = new DataTable();
         public fmRltGenerico(DataTable dados)
         {
             InitializeComponent();
-            _dados = dados;
+            _dados = fa.DeepCopy(dados);
         }
 
         private void FmRltGenerico_Load(object sender, EventArgs e)
