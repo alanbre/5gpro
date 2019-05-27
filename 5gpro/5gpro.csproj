@@ -300,6 +300,12 @@
     <Compile Include="Forms\fmItemReport.Designer.cs">
       <DependentUpon>fmItemReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmQuebrarItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmQuebrarItem.Designer.cs">
+      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Relatorios\fmRelatorioContas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -697,6 +703,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmQuebrarItem.resx">
+      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\fmRelatorioContas.resx">
       <DependentUpon>fmRelatorioContas.cs</DependentUpon>

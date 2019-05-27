@@ -168,7 +168,7 @@
             // tsmiEntradaNotas
             // 
             this.tsmiEntradaNotas.Name = "tsmiEntradaNotas";
-            this.tsmiEntradaNotas.Size = new System.Drawing.Size(162, 22);
+            this.tsmiEntradaNotas.Size = new System.Drawing.Size(180, 22);
             this.tsmiEntradaNotas.Text = "Entrada de notas";
             this.tsmiEntradaNotas.Click += new System.EventHandler(this.TsmiEntradaNotas_Click);
             // 
@@ -199,14 +199,14 @@
             // tsmiCarCadastroContaReceber
             // 
             this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarCadastroContaReceber.Text = "Cadastro de Contas";
             this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
             // 
             // tsmiCarQuitacaoConta
             // 
             this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
-            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
             this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
             // 
@@ -222,14 +222,14 @@
             // tsmiCapCadastroConta
             // 
             this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(176, 22);
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
             // 
             // quitaçãoDeContasToolStripMenuItem
             // 
             this.quitaçãoDeContasToolStripMenuItem.Name = "quitaçãoDeContasToolStripMenuItem";
-            this.quitaçãoDeContasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.quitaçãoDeContasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.quitaçãoDeContasToolStripMenuItem.Text = "Quitação de contas";
             this.quitaçãoDeContasToolStripMenuItem.Click += new System.EventHandler(this.QuitaçãoDeContasToolStripMenuItem_Click);
             // 
