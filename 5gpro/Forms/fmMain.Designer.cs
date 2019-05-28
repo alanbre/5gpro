@@ -66,7 +66,6 @@
             this.btCPagar = new System.Windows.Forms.Button();
             this.btCReceber = new System.Windows.Forms.Button();
             this.btCadastrosmenu = new System.Windows.Forms.Button();
-            this.TimerMain = new System.Windows.Forms.Timer(this.components);
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
@@ -454,12 +453,7 @@
             this.btCadastrosmenu.TabIndex = 1;
             this.btCadastrosmenu.Text = "Cadastros";
             this.btCadastrosmenu.UseVisualStyleBackColor = false;
-            this.btCadastrosmenu.Click += new System.EventHandler(this.BtExpandeRetrai_Click);
-            // 
-            // TimerMain
-            // 
-            this.TimerMain.Interval = 1;
-            this.TimerMain.Tick += new System.EventHandler(this.TimerMain_Tick);
+            this.btCadastrosmenu.Click += new System.EventHandler(this.BtCadastrosesquerda_Click);
             // 
             // panelSuperior
             // 
@@ -481,7 +475,7 @@
             this.btExpandeRetrai.Size = new System.Drawing.Size(42, 37);
             this.btExpandeRetrai.TabIndex = 0;
             this.btExpandeRetrai.UseVisualStyleBackColor = false;
-            this.btExpandeRetrai.Click += new System.EventHandler(this.BtCadastros_Click);
+            this.btExpandeRetrai.Click += new System.EventHandler(this.BtExpandiretrai_Click);
             // 
             // panelCentral
             // 
@@ -560,7 +554,7 @@
             this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 200);
             this.paneldropCadastros.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCadastros.Name = "paneldropCadastros";
-            this.paneldropCadastros.Size = new System.Drawing.Size(200, 200);
+            this.paneldropCadastros.Size = new System.Drawing.Size(200, 10);
             this.paneldropCadastros.TabIndex = 0;
             // 
             // btiGrupopessoa
@@ -726,7 +720,6 @@
         private System.Windows.Forms.ToolStripMenuItem relatórioDeContasToolStripMenuItem;
         private System.Windows.Forms.Panel panelEsquerdo;
         private System.Windows.Forms.Button btExpandeRetrai;
-        private System.Windows.Forms.Timer TimerMain;
         private System.Windows.Forms.Button btCadastrosmenu;
         private System.Windows.Forms.Panel panelSuperior;
         private System.Windows.Forms.Panel panelCentral;
