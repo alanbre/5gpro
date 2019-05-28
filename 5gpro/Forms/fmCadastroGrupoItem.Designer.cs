@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbGrupoItem = new System.Windows.Forms.GroupBox();
             this.tbNomeGrupoItem = new System.Windows.Forms.TextBox();
@@ -108,8 +108,8 @@
             this.dgvSubGruposItens.AllowUserToAddRows = false;
             this.dgvSubGruposItens.AllowUserToDeleteRows = false;
             this.dgvSubGruposItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvSubGruposItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvSubGruposItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvSubGruposItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

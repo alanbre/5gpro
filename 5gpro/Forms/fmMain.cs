@@ -24,6 +24,9 @@ namespace _5gpro
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
+        int panelWidth;
+        bool Hidden;
+
 
         Thread t;
 
@@ -46,6 +49,9 @@ namespace _5gpro
         public fmMain()
         {
             InitializeComponent();
+            panelWidth = panelEsquerdo.Width;
+            Hidden = false;
+            TimerMain.Start();
             FiltroDePermissoes();
             t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
@@ -234,6 +240,41 @@ namespace _5gpro
         {
             var fmconta = new fmRelatorioContas();
             fmconta.Show(this);
+        }
+
+        private void BtCadastros_Click(object sender, EventArgs e)
+        {
+            TimerMain.Start();
+        }
+
+        private void TimerMain_Tick(object sender, EventArgs e)
+        {
+            if (Hidden)
+            {
+                panelEsquerdo.Width = panelEsquerdo.Width + 50;
+                if (panelEsquerdo.Width >= panelWidth)
+                {
+                    TimerMain.Stop();
+                    Hidden = false;
+                    this.Refresh();
+                }
+            }
+            else
+            {
+                panelEsquerdo.Width = panelEsquerdo.Width - 50;
+                if (panelEsquerdo.Width <= 70)
+                {
+                    TimerMain.Stop();
+                    Hidden = true;
+                    this.Refresh();
+                }
+            }
+        }
+
+        private void BtEntradas_Click(object sender, EventArgs e)
+        {
+            var formEntradaNotas = new fmEntEntradaNota();
+            formEntradaNotas.Show(this);
         }
     }
 }

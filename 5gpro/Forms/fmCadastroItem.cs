@@ -419,6 +419,16 @@ namespace _5gpro.Forms
             buscaSubGrupoItem.Limpa();
         }
 
+        private void RbSimquebra_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSimquebra.Checked) { gbQuebradgv.Enabled = true; }
+        }
+
+        private void RbNao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNaoquebra.Checked) { gbQuebradgv.Enabled = false; }
+        }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
