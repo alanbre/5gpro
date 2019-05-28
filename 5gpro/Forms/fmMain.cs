@@ -127,17 +127,10 @@ namespace _5gpro
 
         private void TsmiTeste_Click(object sender, EventArgs e)
         {
-            //var dados = new DataTable();
-            //dados.Columns.Add("texto maior do que a coluna", typeof(int));
-            //dados.Columns.Add("desc", typeof(string));
-            //dados.Columns.Add("qtd");
-            //dados.Columns.Add("uni");
-            //dados.Columns.Add("val");
-            //dados.Rows.Add(1, "teste descricao", "teste quantidade", "teste unidademedida", "teste valor");
-            //dados.Rows.Add(2, "teste descricao2", "teste quantidade2", "teste unidademedida2", "teste valor2");
-            //var bools = new List<bool> { true, false, false, false, false};
-            //var formRelTeste = new fmRltGenerico(dados, bools);
-            //formRelTeste.Show(this);
+            
+            
+            var formRelTeste = new fmRltNotasSaida();
+            formRelTeste.Show(this);
         }
 
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)

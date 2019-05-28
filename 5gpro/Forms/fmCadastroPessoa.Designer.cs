@@ -94,9 +94,9 @@
             // 
             this.gbSituacao.Controls.Add(this.rbInativo);
             this.gbSituacao.Controls.Add(this.rbAtivo);
-            this.gbSituacao.Location = new System.Drawing.Point(429, 6);
+            this.gbSituacao.Location = new System.Drawing.Point(413, 6);
             this.gbSituacao.Name = "gbSituacao";
-            this.gbSituacao.Size = new System.Drawing.Size(118, 35);
+            this.gbSituacao.Size = new System.Drawing.Size(130, 35);
             this.gbSituacao.TabIndex = 8;
             this.gbSituacao.TabStop = false;
             this.gbSituacao.Text = "Situação";
@@ -144,7 +144,7 @@
             // gbAtuacao
             // 
             this.gbAtuacao.Controls.Add(this.cblAtuacao);
-            this.gbAtuacao.Location = new System.Drawing.Point(553, 6);
+            this.gbAtuacao.Location = new System.Drawing.Point(555, 6);
             this.gbAtuacao.Name = "gbAtuacao";
             this.gbAtuacao.Size = new System.Drawing.Size(135, 121);
             this.gbAtuacao.TabIndex = 9;
@@ -284,6 +284,7 @@
             // 
             // buscaCidade
             // 
+            this.buscaCidade.LabelText = "Cidade";
             this.buscaCidade.Location = new System.Drawing.Point(10, 127);
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
