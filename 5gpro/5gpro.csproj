@@ -93,6 +93,12 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
@@ -1169,6 +1175,24 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\addMenu_80px.png" />
+    <None Include="Resources\addMenu_64px.png" />
+    <None Include="Resources\menu_filled_30px.png" />
+    <None Include="Resources\menu_filled_30pxBLACK.png" />
+    <None Include="Resources\add_30WHITEpx.png" />
+    <None Include="Resources\add_40WHITEpx.png" />
+    <None Include="Resources\receive_change_40px.png" />
+    <None Include="Resources\Pay_40px.png" />
+    <None Include="Resources\card_in_use_40px.png" />
+    <None Include="Resources\multiple_inputs_40px.png" />
+    <None Include="Resources\Output_40px.png" />
+    <None Include="Resources\orcamento_40px.png" />
+    <None Include="Resources\orcamento_livro_40px.png" />
+    <None Include="Resources\relatorio_40px.png" />
+    <None Include="Resources\cadastros_rule_40px.png" />
+    <None Include="Resources\HAJEL 5G LOGO.png" />
+    <None Include="Resources\CELO 5G.png" />
+    <None Include="Resources\bola5gblue.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

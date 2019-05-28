@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiCadastros = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroPessoas = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,21 @@
             this.relatorioContaReceberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.relatórioDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
+            this.panelEsquerdo = new System.Windows.Forms.Panel();
+            this.TimerMain = new System.Windows.Forms.Timer(this.components);
+            this.panelSuperior = new System.Windows.Forms.Panel();
+            this.panelCentral = new System.Windows.Forms.Panel();
+            this.btCadastros = new System.Windows.Forms.Button();
+            this.btRelatorios = new System.Windows.Forms.Button();
+            this.btOrcamentos = new System.Windows.Forms.Button();
+            this.btSaidas = new System.Windows.Forms.Button();
+            this.btEntradas = new System.Windows.Forms.Button();
+            this.btCPagar = new System.Windows.Forms.Button();
+            this.btCReceber = new System.Windows.Forms.Button();
+            this.btCadastrosmenu = new System.Windows.Forms.Button();
             this.msMain.SuspendLayout();
+            this.panelEsquerdo.SuspendLayout();
+            this.panelSuperior.SuspendLayout();
             this.SuspendLayout();
             // 
             // msMain
@@ -168,7 +183,7 @@
             // tsmiEntradaNotas
             // 
             this.tsmiEntradaNotas.Name = "tsmiEntradaNotas";
-            this.tsmiEntradaNotas.Size = new System.Drawing.Size(180, 22);
+            this.tsmiEntradaNotas.Size = new System.Drawing.Size(162, 22);
             this.tsmiEntradaNotas.Text = "Entrada de notas";
             this.tsmiEntradaNotas.Click += new System.EventHandler(this.TsmiEntradaNotas_Click);
             // 
@@ -192,6 +207,7 @@
             this.tsmiContasReceber.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCarCadastroContaReceber,
             this.tsmiCarQuitacaoConta});
+            this.tsmiContasReceber.Enabled = false;
             this.tsmiContasReceber.Name = "tsmiContasReceber";
             this.tsmiContasReceber.Size = new System.Drawing.Size(107, 20);
             this.tsmiContasReceber.Text = "Contas a receber";
@@ -199,14 +215,14 @@
             // tsmiCarCadastroContaReceber
             // 
             this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(178, 22);
             this.tsmiCarCadastroContaReceber.Text = "Cadastro de Contas";
             this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
             // 
             // tsmiCarQuitacaoConta
             // 
             this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
-            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(178, 22);
             this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
             this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
             // 
@@ -222,14 +238,14 @@
             // tsmiCapCadastroConta
             // 
             this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(176, 22);
             this.tsmiCapCadastroConta.Text = "Cadastro de conta";
             this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
             // 
             // quitaçãoDeContasToolStripMenuItem
             // 
             this.quitaçãoDeContasToolStripMenuItem.Name = "quitaçãoDeContasToolStripMenuItem";
-            this.quitaçãoDeContasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quitaçãoDeContasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.quitaçãoDeContasToolStripMenuItem.Text = "Quitação de contas";
             this.quitaçãoDeContasToolStripMenuItem.Click += new System.EventHandler(this.QuitaçãoDeContasToolStripMenuItem_Click);
             // 
@@ -293,12 +309,179 @@
             this.tsmiCadastroContaReceber.Name = "tsmiCadastroContaReceber";
             this.tsmiCadastroContaReceber.Size = new System.Drawing.Size(32, 19);
             // 
+            // panelEsquerdo
+            // 
+            this.panelEsquerdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panelEsquerdo.Controls.Add(this.btRelatorios);
+            this.panelEsquerdo.Controls.Add(this.btOrcamentos);
+            this.panelEsquerdo.Controls.Add(this.btSaidas);
+            this.panelEsquerdo.Controls.Add(this.btEntradas);
+            this.panelEsquerdo.Controls.Add(this.btCPagar);
+            this.panelEsquerdo.Controls.Add(this.btCReceber);
+            this.panelEsquerdo.Controls.Add(this.btCadastrosmenu);
+            this.panelEsquerdo.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelEsquerdo.Location = new System.Drawing.Point(0, 24);
+            this.panelEsquerdo.Name = "panelEsquerdo";
+            this.panelEsquerdo.Size = new System.Drawing.Size(250, 561);
+            this.panelEsquerdo.TabIndex = 1;
+            // 
+            // TimerMain
+            // 
+            this.TimerMain.Interval = 1;
+            this.TimerMain.Tick += new System.EventHandler(this.TimerMain_Tick);
+            // 
+            // panelSuperior
+            // 
+            this.panelSuperior.Controls.Add(this.btCadastros);
+            this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSuperior.Location = new System.Drawing.Point(250, 24);
+            this.panelSuperior.Name = "panelSuperior";
+            this.panelSuperior.Size = new System.Drawing.Size(912, 50);
+            this.panelSuperior.TabIndex = 2;
+            // 
+            // panelCentral
+            // 
+            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCentral.Location = new System.Drawing.Point(250, 74);
+            this.panelCentral.Name = "panelCentral";
+            this.panelCentral.Size = new System.Drawing.Size(912, 511);
+            this.panelCentral.TabIndex = 3;
+            // 
+            // btCadastros
+            // 
+            this.btCadastros.BackColor = System.Drawing.Color.White;
+            this.btCadastros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCadastros.ForeColor = System.Drawing.Color.White;
+            this.btCadastros.Image = global::_5gpro.Properties.Resources.menu_filled_30pxBLACK;
+            this.btCadastros.Location = new System.Drawing.Point(3, 3);
+            this.btCadastros.Name = "btCadastros";
+            this.btCadastros.Size = new System.Drawing.Size(42, 37);
+            this.btCadastros.TabIndex = 0;
+            this.btCadastros.UseVisualStyleBackColor = false;
+            this.btCadastros.Click += new System.EventHandler(this.BtCadastros_Click);
+            // 
+            // btRelatorios
+            // 
+            this.btRelatorios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btRelatorios.FlatAppearance.BorderSize = 0;
+            this.btRelatorios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btRelatorios.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btRelatorios.ForeColor = System.Drawing.Color.White;
+            this.btRelatorios.Image = global::_5gpro.Properties.Resources.relatorio_40px;
+            this.btRelatorios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btRelatorios.Location = new System.Drawing.Point(0, 325);
+            this.btRelatorios.Name = "btRelatorios";
+            this.btRelatorios.Size = new System.Drawing.Size(247, 40);
+            this.btRelatorios.TabIndex = 6;
+            this.btRelatorios.Text = "Relatórios";
+            this.btRelatorios.UseVisualStyleBackColor = false;
+            // 
+            // btOrcamentos
+            // 
+            this.btOrcamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btOrcamentos.FlatAppearance.BorderSize = 0;
+            this.btOrcamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btOrcamentos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btOrcamentos.ForeColor = System.Drawing.Color.White;
+            this.btOrcamentos.Image = global::_5gpro.Properties.Resources.orcamento_livro_40px;
+            this.btOrcamentos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btOrcamentos.Location = new System.Drawing.Point(0, 279);
+            this.btOrcamentos.Name = "btOrcamentos";
+            this.btOrcamentos.Size = new System.Drawing.Size(247, 40);
+            this.btOrcamentos.TabIndex = 5;
+            this.btOrcamentos.Text = "Orçamentos";
+            this.btOrcamentos.UseVisualStyleBackColor = false;
+            // 
+            // btSaidas
+            // 
+            this.btSaidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btSaidas.FlatAppearance.BorderSize = 0;
+            this.btSaidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btSaidas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSaidas.ForeColor = System.Drawing.Color.White;
+            this.btSaidas.Image = global::_5gpro.Properties.Resources.Output_40px;
+            this.btSaidas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSaidas.Location = new System.Drawing.Point(0, 233);
+            this.btSaidas.Name = "btSaidas";
+            this.btSaidas.Size = new System.Drawing.Size(247, 40);
+            this.btSaidas.TabIndex = 4;
+            this.btSaidas.Text = "Saídas";
+            this.btSaidas.UseVisualStyleBackColor = false;
+            // 
+            // btEntradas
+            // 
+            this.btEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btEntradas.FlatAppearance.BorderSize = 0;
+            this.btEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btEntradas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btEntradas.ForeColor = System.Drawing.Color.White;
+            this.btEntradas.Image = global::_5gpro.Properties.Resources.multiple_inputs_40px;
+            this.btEntradas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btEntradas.Location = new System.Drawing.Point(0, 189);
+            this.btEntradas.Name = "btEntradas";
+            this.btEntradas.Size = new System.Drawing.Size(247, 40);
+            this.btEntradas.TabIndex = 3;
+            this.btEntradas.Text = "Entradas";
+            this.btEntradas.UseVisualStyleBackColor = false;
+            this.btEntradas.Click += new System.EventHandler(this.BtEntradas_Click);
+            // 
+            // btCPagar
+            // 
+            this.btCPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCPagar.FlatAppearance.BorderSize = 0;
+            this.btCPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCPagar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCPagar.ForeColor = System.Drawing.Color.White;
+            this.btCPagar.Image = global::_5gpro.Properties.Resources.card_in_use_40px;
+            this.btCPagar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCPagar.Location = new System.Drawing.Point(0, 143);
+            this.btCPagar.Name = "btCPagar";
+            this.btCPagar.Size = new System.Drawing.Size(247, 40);
+            this.btCPagar.TabIndex = 2;
+            this.btCPagar.Text = "A Pagar";
+            this.btCPagar.UseVisualStyleBackColor = false;
+            // 
+            // btCReceber
+            // 
+            this.btCReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCReceber.FlatAppearance.BorderSize = 0;
+            this.btCReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCReceber.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCReceber.ForeColor = System.Drawing.Color.White;
+            this.btCReceber.Image = global::_5gpro.Properties.Resources.receive_change_40px;
+            this.btCReceber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCReceber.Location = new System.Drawing.Point(0, 97);
+            this.btCReceber.Name = "btCReceber";
+            this.btCReceber.Size = new System.Drawing.Size(247, 40);
+            this.btCReceber.TabIndex = 2;
+            this.btCReceber.Text = "A Receber";
+            this.btCReceber.UseVisualStyleBackColor = false;
+            // 
+            // btCadastrosmenu
+            // 
+            this.btCadastrosmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCadastrosmenu.FlatAppearance.BorderSize = 0;
+            this.btCadastrosmenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCadastrosmenu.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCadastrosmenu.ForeColor = System.Drawing.Color.White;
+            this.btCadastrosmenu.Image = global::_5gpro.Properties.Resources.cadastros_rule_40px;
+            this.btCadastrosmenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCadastrosmenu.Location = new System.Drawing.Point(0, 51);
+            this.btCadastrosmenu.Name = "btCadastrosmenu";
+            this.btCadastrosmenu.Size = new System.Drawing.Size(247, 40);
+            this.btCadastrosmenu.TabIndex = 1;
+            this.btCadastrosmenu.Text = "Cadastros";
+            this.btCadastrosmenu.UseVisualStyleBackColor = false;
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1162, 585);
+            this.Controls.Add(this.panelCentral);
+            this.Controls.Add(this.panelSuperior);
+            this.Controls.Add(this.panelEsquerdo);
             this.Controls.Add(this.msMain);
             this.Name = "fmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -307,6 +490,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmMain_FormClosing);
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
+            this.panelEsquerdo.ResumeLayout(false);
+            this.panelSuperior.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,6 +528,18 @@
         private System.Windows.Forms.ToolStripMenuItem relatorioDeItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatorioContaReceberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatórioDeContasToolStripMenuItem;
+        private System.Windows.Forms.Panel panelEsquerdo;
+        private System.Windows.Forms.Button btCadastros;
+        private System.Windows.Forms.Timer TimerMain;
+        private System.Windows.Forms.Button btCadastrosmenu;
+        private System.Windows.Forms.Panel panelSuperior;
+        private System.Windows.Forms.Panel panelCentral;
+        private System.Windows.Forms.Button btOrcamentos;
+        private System.Windows.Forms.Button btSaidas;
+        private System.Windows.Forms.Button btEntradas;
+        private System.Windows.Forms.Button btCPagar;
+        private System.Windows.Forms.Button btCReceber;
+        private System.Windows.Forms.Button btRelatorios;
     }
 }
 
