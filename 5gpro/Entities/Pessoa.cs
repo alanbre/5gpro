@@ -43,7 +43,7 @@ namespace _5gpro.Entities
             {
                 //PEGA O VALOR PASSADO PELA VARIÁVEL DO C# CHAMADA value 
                 //(EXEMPLO pessoa.Endereco = "abc, 123 - Centro") e separa pra passar certinho pros campos
-                //É ÚTIL PROS GRIDS (OU LUGAR COM MESMA CONDIÇÃO) ONDE NÃO PRECISA SEPARA RUA, NUMERO, BAIRRO
+                //É ÚTIL PROS GRIDS (OU LUGAR COM MESMA CONDIÇÃO) ONDE NÃO PRECISA SEPARAR RUA, NUMERO, BAIRRO
                 string[] dados = Regex.Split(value, ",|-");
                 this.Rua = dados[0];
                 this.Numero = dados[1];
