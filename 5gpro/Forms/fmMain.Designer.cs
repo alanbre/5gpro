@@ -59,10 +59,6 @@
             this.relatórioDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEsquerdo = new System.Windows.Forms.Panel();
-            this.TimerMain = new System.Windows.Forms.Timer(this.components);
-            this.panelSuperior = new System.Windows.Forms.Panel();
-            this.panelCentral = new System.Windows.Forms.Panel();
-            this.btCadastros = new System.Windows.Forms.Button();
             this.btRelatorios = new System.Windows.Forms.Button();
             this.btOrcamentos = new System.Windows.Forms.Button();
             this.btSaidas = new System.Windows.Forms.Button();
@@ -70,9 +66,30 @@
             this.btCPagar = new System.Windows.Forms.Button();
             this.btCReceber = new System.Windows.Forms.Button();
             this.btCadastrosmenu = new System.Windows.Forms.Button();
+            this.TimerMain = new System.Windows.Forms.Timer(this.components);
+            this.panelSuperior = new System.Windows.Forms.Panel();
+            this.btExpandeRetrai = new System.Windows.Forms.Button();
+            this.panelCentral = new System.Windows.Forms.Panel();
+            this.paneldropAreceber = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.paneldropCadastros = new System.Windows.Forms.Panel();
+            this.btiGrupopessoa = new System.Windows.Forms.Button();
+            this.btiGrupoitens = new System.Windows.Forms.Button();
+            this.btiOperacoes = new System.Windows.Forms.Button();
+            this.btiGruposusuarios = new System.Windows.Forms.Button();
+            this.btiUsuários = new System.Windows.Forms.Button();
+            this.btiItens = new System.Windows.Forms.Button();
+            this.btiCadPessoa = new System.Windows.Forms.Button();
+            this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.msMain.SuspendLayout();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
+            this.panelCentral.SuspendLayout();
+            this.paneldropAreceber.SuspendLayout();
+            this.paneldropCadastros.SuspendLayout();
             this.SuspendLayout();
             // 
             // msMain
@@ -325,41 +342,6 @@
             this.panelEsquerdo.Size = new System.Drawing.Size(250, 561);
             this.panelEsquerdo.TabIndex = 1;
             // 
-            // TimerMain
-            // 
-            this.TimerMain.Interval = 1;
-            this.TimerMain.Tick += new System.EventHandler(this.TimerMain_Tick);
-            // 
-            // panelSuperior
-            // 
-            this.panelSuperior.Controls.Add(this.btCadastros);
-            this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSuperior.Location = new System.Drawing.Point(250, 24);
-            this.panelSuperior.Name = "panelSuperior";
-            this.panelSuperior.Size = new System.Drawing.Size(912, 50);
-            this.panelSuperior.TabIndex = 2;
-            // 
-            // panelCentral
-            // 
-            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentral.Location = new System.Drawing.Point(250, 74);
-            this.panelCentral.Name = "panelCentral";
-            this.panelCentral.Size = new System.Drawing.Size(912, 511);
-            this.panelCentral.TabIndex = 3;
-            // 
-            // btCadastros
-            // 
-            this.btCadastros.BackColor = System.Drawing.Color.White;
-            this.btCadastros.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCadastros.ForeColor = System.Drawing.Color.White;
-            this.btCadastros.Image = global::_5gpro.Properties.Resources.menu_filled_30pxBLACK;
-            this.btCadastros.Location = new System.Drawing.Point(3, 3);
-            this.btCadastros.Name = "btCadastros";
-            this.btCadastros.Size = new System.Drawing.Size(42, 37);
-            this.btCadastros.TabIndex = 0;
-            this.btCadastros.UseVisualStyleBackColor = false;
-            this.btCadastros.Click += new System.EventHandler(this.BtCadastros_Click);
-            // 
             // btRelatorios
             // 
             this.btRelatorios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
@@ -472,6 +454,217 @@
             this.btCadastrosmenu.TabIndex = 1;
             this.btCadastrosmenu.Text = "Cadastros";
             this.btCadastrosmenu.UseVisualStyleBackColor = false;
+            this.btCadastrosmenu.Click += new System.EventHandler(this.BtExpandeRetrai_Click);
+            // 
+            // TimerMain
+            // 
+            this.TimerMain.Interval = 1;
+            this.TimerMain.Tick += new System.EventHandler(this.TimerMain_Tick);
+            // 
+            // panelSuperior
+            // 
+            this.panelSuperior.Controls.Add(this.btExpandeRetrai);
+            this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSuperior.Location = new System.Drawing.Point(250, 24);
+            this.panelSuperior.Name = "panelSuperior";
+            this.panelSuperior.Size = new System.Drawing.Size(912, 50);
+            this.panelSuperior.TabIndex = 2;
+            // 
+            // btExpandeRetrai
+            // 
+            this.btExpandeRetrai.BackColor = System.Drawing.Color.White;
+            this.btExpandeRetrai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btExpandeRetrai.ForeColor = System.Drawing.Color.White;
+            this.btExpandeRetrai.Image = global::_5gpro.Properties.Resources.menu_filled_30pxBLACK;
+            this.btExpandeRetrai.Location = new System.Drawing.Point(3, 3);
+            this.btExpandeRetrai.Name = "btExpandeRetrai";
+            this.btExpandeRetrai.Size = new System.Drawing.Size(42, 37);
+            this.btExpandeRetrai.TabIndex = 0;
+            this.btExpandeRetrai.UseVisualStyleBackColor = false;
+            this.btExpandeRetrai.Click += new System.EventHandler(this.BtCadastros_Click);
+            // 
+            // panelCentral
+            // 
+            this.panelCentral.Controls.Add(this.paneldropAreceber);
+            this.panelCentral.Controls.Add(this.paneldropCadastros);
+            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelCentral.Location = new System.Drawing.Point(250, 74);
+            this.panelCentral.Name = "panelCentral";
+            this.panelCentral.Size = new System.Drawing.Size(912, 511);
+            this.panelCentral.TabIndex = 3;
+            // 
+            // paneldropAreceber
+            // 
+            this.paneldropAreceber.Controls.Add(this.button8);
+            this.paneldropAreceber.Controls.Add(this.button7);
+            this.paneldropAreceber.Controls.Add(this.button6);
+            this.paneldropAreceber.Controls.Add(this.button5);
+            this.paneldropAreceber.Location = new System.Drawing.Point(6, 107);
+            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 97);
+            this.paneldropAreceber.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropAreceber.Name = "paneldropAreceber";
+            this.paneldropAreceber.Size = new System.Drawing.Size(200, 0);
+            this.paneldropAreceber.TabIndex = 1;
+            // 
+            // button8
+            // 
+            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button8.Location = new System.Drawing.Point(0, 69);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(200, 23);
+            this.button8.TabIndex = 3;
+            this.button8.Text = "button8";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button7.Location = new System.Drawing.Point(0, 46);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(200, 23);
+            this.button7.TabIndex = 2;
+            this.button7.Text = "button7";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button6.Location = new System.Drawing.Point(0, 23);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(200, 23);
+            this.button6.TabIndex = 1;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button5.Location = new System.Drawing.Point(0, 0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(200, 23);
+            this.button5.TabIndex = 0;
+            this.button5.Text = "button5";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // paneldropCadastros
+            // 
+            this.paneldropCadastros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.paneldropCadastros.Controls.Add(this.btiGrupopessoa);
+            this.paneldropCadastros.Controls.Add(this.btiGrupoitens);
+            this.paneldropCadastros.Controls.Add(this.btiOperacoes);
+            this.paneldropCadastros.Controls.Add(this.btiGruposusuarios);
+            this.paneldropCadastros.Controls.Add(this.btiUsuários);
+            this.paneldropCadastros.Controls.Add(this.btiItens);
+            this.paneldropCadastros.Controls.Add(this.btiCadPessoa);
+            this.paneldropCadastros.Location = new System.Drawing.Point(0, 1);
+            this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 200);
+            this.paneldropCadastros.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropCadastros.Name = "paneldropCadastros";
+            this.paneldropCadastros.Size = new System.Drawing.Size(200, 200);
+            this.paneldropCadastros.TabIndex = 0;
+            // 
+            // btiGrupopessoa
+            // 
+            this.btiGrupopessoa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiGrupopessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiGrupopessoa.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGrupopessoa.ForeColor = System.Drawing.Color.White;
+            this.btiGrupopessoa.Location = new System.Drawing.Point(0, 168);
+            this.btiGrupopessoa.Name = "btiGrupopessoa";
+            this.btiGrupopessoa.Size = new System.Drawing.Size(200, 28);
+            this.btiGrupopessoa.TabIndex = 6;
+            this.btiGrupopessoa.Text = "Grupo de Pessoas";
+            this.btiGrupopessoa.UseVisualStyleBackColor = false;
+            this.btiGrupopessoa.Click += new System.EventHandler(this.BtiGrupopessoa_Click);
+            // 
+            // btiGrupoitens
+            // 
+            this.btiGrupoitens.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiGrupoitens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiGrupoitens.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGrupoitens.ForeColor = System.Drawing.Color.White;
+            this.btiGrupoitens.Location = new System.Drawing.Point(0, 140);
+            this.btiGrupoitens.Name = "btiGrupoitens";
+            this.btiGrupoitens.Size = new System.Drawing.Size(200, 28);
+            this.btiGrupoitens.TabIndex = 5;
+            this.btiGrupoitens.Text = "Grupo de Itens";
+            this.btiGrupoitens.UseVisualStyleBackColor = false;
+            this.btiGrupoitens.Click += new System.EventHandler(this.BtiGrupoitens_Click);
+            // 
+            // btiOperacoes
+            // 
+            this.btiOperacoes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiOperacoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiOperacoes.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiOperacoes.ForeColor = System.Drawing.Color.White;
+            this.btiOperacoes.Location = new System.Drawing.Point(0, 112);
+            this.btiOperacoes.Name = "btiOperacoes";
+            this.btiOperacoes.Size = new System.Drawing.Size(200, 28);
+            this.btiOperacoes.TabIndex = 4;
+            this.btiOperacoes.Text = "Operações";
+            this.btiOperacoes.UseVisualStyleBackColor = false;
+            this.btiOperacoes.Click += new System.EventHandler(this.BtiOperacoes_Click);
+            // 
+            // btiGruposusuarios
+            // 
+            this.btiGruposusuarios.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiGruposusuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiGruposusuarios.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGruposusuarios.ForeColor = System.Drawing.Color.White;
+            this.btiGruposusuarios.Location = new System.Drawing.Point(0, 84);
+            this.btiGruposusuarios.Name = "btiGruposusuarios";
+            this.btiGruposusuarios.Size = new System.Drawing.Size(200, 28);
+            this.btiGruposusuarios.TabIndex = 3;
+            this.btiGruposusuarios.Text = "Grupos Usuários";
+            this.btiGruposusuarios.UseVisualStyleBackColor = false;
+            this.btiGruposusuarios.Click += new System.EventHandler(this.BtiGruposusuarios_Click);
+            // 
+            // btiUsuários
+            // 
+            this.btiUsuários.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiUsuários.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiUsuários.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiUsuários.ForeColor = System.Drawing.Color.White;
+            this.btiUsuários.Location = new System.Drawing.Point(0, 56);
+            this.btiUsuários.Name = "btiUsuários";
+            this.btiUsuários.Size = new System.Drawing.Size(200, 28);
+            this.btiUsuários.TabIndex = 2;
+            this.btiUsuários.Text = "Usuários";
+            this.btiUsuários.UseVisualStyleBackColor = false;
+            this.btiUsuários.Click += new System.EventHandler(this.BtiUsuários_Click);
+            // 
+            // btiItens
+            // 
+            this.btiItens.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiItens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiItens.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiItens.ForeColor = System.Drawing.Color.White;
+            this.btiItens.Location = new System.Drawing.Point(0, 28);
+            this.btiItens.Name = "btiItens";
+            this.btiItens.Size = new System.Drawing.Size(200, 28);
+            this.btiItens.TabIndex = 1;
+            this.btiItens.Text = "Itens";
+            this.btiItens.UseVisualStyleBackColor = false;
+            this.btiItens.Click += new System.EventHandler(this.BtiItens_Click);
+            // 
+            // btiCadPessoa
+            // 
+            this.btiCadPessoa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadPessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadPessoa.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadPessoa.ForeColor = System.Drawing.Color.White;
+            this.btiCadPessoa.Location = new System.Drawing.Point(0, 0);
+            this.btiCadPessoa.Name = "btiCadPessoa";
+            this.btiCadPessoa.Size = new System.Drawing.Size(200, 28);
+            this.btiCadPessoa.TabIndex = 0;
+            this.btiCadPessoa.Text = "Cliente/Fornecedor";
+            this.btiCadPessoa.UseVisualStyleBackColor = false;
+            this.btiCadPessoa.Click += new System.EventHandler(this.BtiCadPessoa_Click);
+            // 
+            // timerDropLateral
+            // 
+            this.timerDropLateral.Interval = 1;
+            this.timerDropLateral.Tick += new System.EventHandler(this.TimerDropLateral_Tick);
             // 
             // fmMain
             // 
@@ -492,6 +685,9 @@
             this.msMain.PerformLayout();
             this.panelEsquerdo.ResumeLayout(false);
             this.panelSuperior.ResumeLayout(false);
+            this.panelCentral.ResumeLayout(false);
+            this.paneldropAreceber.ResumeLayout(false);
+            this.paneldropCadastros.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -529,7 +725,7 @@
         private System.Windows.Forms.ToolStripMenuItem relatorioContaReceberToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem relatórioDeContasToolStripMenuItem;
         private System.Windows.Forms.Panel panelEsquerdo;
-        private System.Windows.Forms.Button btCadastros;
+        private System.Windows.Forms.Button btExpandeRetrai;
         private System.Windows.Forms.Timer TimerMain;
         private System.Windows.Forms.Button btCadastrosmenu;
         private System.Windows.Forms.Panel panelSuperior;
@@ -540,6 +736,20 @@
         private System.Windows.Forms.Button btCPagar;
         private System.Windows.Forms.Button btCReceber;
         private System.Windows.Forms.Button btRelatorios;
+        private System.Windows.Forms.Panel paneldropAreceber;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Panel paneldropCadastros;
+        private System.Windows.Forms.Button btiGruposusuarios;
+        private System.Windows.Forms.Button btiUsuários;
+        private System.Windows.Forms.Button btiItens;
+        private System.Windows.Forms.Button btiCadPessoa;
+        private System.Windows.Forms.Timer timerDropLateral;
+        private System.Windows.Forms.Button btiGrupopessoa;
+        private System.Windows.Forms.Button btiGrupoitens;
+        private System.Windows.Forms.Button btiOperacoes;
     }
 }
 
