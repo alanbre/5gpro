@@ -24,8 +24,12 @@ namespace _5gpro
         private string Codgrupousuario;
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
+        private string botaoPressionado = "";
+        private bool CadastrosHidden;
+        private bool MenuHidden;
+
+
         int panelWidth;
-        bool Hidden;
 
 
         Thread t;
@@ -50,8 +54,7 @@ namespace _5gpro
         {
             InitializeComponent();
             panelWidth = panelEsquerdo.Width;
-            Hidden = false;
-            TimerMain.Start();
+            timerDropLateral.Start();
             FiltroDePermissoes();
             t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
@@ -133,8 +136,6 @@ namespace _5gpro
 
         private void TsmiTeste_Click(object sender, EventArgs e)
         {
-            
-            
             var formRelTeste = new fmRltNotasSaida();
             formRelTeste.Show(this);
         }
@@ -242,39 +243,129 @@ namespace _5gpro
             fmconta.Show(this);
         }
 
-        private void BtCadastros_Click(object sender, EventArgs e)
-        {
-            TimerMain.Start();
-        }
-
-        private void TimerMain_Tick(object sender, EventArgs e)
-        {
-            if (Hidden)
-            {
-                panelEsquerdo.Width = panelEsquerdo.Width + 50;
-                if (panelEsquerdo.Width >= panelWidth)
-                {
-                    TimerMain.Stop();
-                    Hidden = false;
-                    this.Refresh();
-                }
-            }
-            else
-            {
-                panelEsquerdo.Width = panelEsquerdo.Width - 50;
-                if (panelEsquerdo.Width <= 70)
-                {
-                    TimerMain.Stop();
-                    Hidden = true;
-                    this.Refresh();
-                }
-            }
-        }
 
         private void BtEntradas_Click(object sender, EventArgs e)
         {
             var formEntradaNotas = new fmEntEntradaNota();
             formEntradaNotas.Show(this);
         }
+
+        private void BtExpandiretrai_Click(object sender, EventArgs e)
+        {
+            timerDropLateral.Start();
+            botaoPressionado = "botaoexpandiretrai";
+        }
+
+        private void BtCadastrosesquerda_Click(object sender, EventArgs e)
+        {
+            timerDropLateral.Start();
+            botaoPressionado = "botaocadastro";
+        }
+
+        private void TimerDropLateral_Tick(object sender, EventArgs e)
+        {
+            switch (botaoPressionado)
+            {
+                case "":
+                    paneldropCadastros.Height -= 100;
+                    if (paneldropCadastros.Size == paneldropCadastros.MinimumSize)
+                    {
+                        timerDropLateral.Stop();
+                        CadastrosHidden = true;
+                    }
+                    panelEsquerdo.Width = 60;
+                    MenuHidden = true;
+                    break;
+
+                case "botaocadastro":
+                    if (CadastrosHidden)
+                    {
+                        paneldropCadastros.Height += 100;
+                        if (paneldropCadastros.Size == paneldropCadastros.MaximumSize)
+                        {
+                            timerDropLateral.Stop();
+                            CadastrosHidden = false;
+                        }
+                    }
+                    else
+                    {
+                        paneldropCadastros.Height -= 100;
+                        if (paneldropCadastros.Size == paneldropCadastros.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            CadastrosHidden = true;
+                        }
+                    }
+                    break;
+
+                case "botaoexpandiretrai":
+                    if (MenuHidden)
+                    {
+                        panelEsquerdo.Width = panelEsquerdo.Width + 50;
+                        if (panelEsquerdo.Width >= panelWidth)
+                        {
+                            timerDropLateral.Stop();
+                            MenuHidden = false;
+                            this.Refresh();
+                        }
+                    }
+                    else
+                    {
+                        panelEsquerdo.Width = panelEsquerdo.Width - 50;
+                        if (panelEsquerdo.Width <= 70)
+                        {
+                            timerDropLateral.Stop();
+                            MenuHidden = true;
+                            this.Refresh();
+                        }
+                    }
+                    break;
+            }
+
+        }
+
+        private void BtiCadPessoa_Click(object sender, EventArgs e)
+        {
+            var formCadPessoas = new fmCadastroPessoa();
+            formCadPessoas.Show(this);
+        }
+
+        private void BtiItens_Click(object sender, EventArgs e)
+        {
+            var formCadItens = new fmCadastroItem();
+            formCadItens.Show(this);
+        }
+
+        private void BtiUsuários_Click(object sender, EventArgs e)
+        {
+            var formCadUsuarios = new fmCadastroUsuario();
+            formCadUsuarios.Show(this);
+        }
+
+        private void BtiGruposusuarios_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
+            formCadGrupoUsuarios.Show(this);
+        }
+
+        private void BtiOperacoes_Click(object sender, EventArgs e)
+        {
+            var formCadOperacao = new fmCadastroOperacao();
+            formCadOperacao.Show(this);
+        }
+
+        private void BtiGrupoitens_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoItem = new fmCadastroGrupoItem();
+            formCadGrupoItem.Show(this);
+        }
+
+        private void BtiGrupopessoa_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
+            formCadGrupoPessoa.Show(this);
+        }
+
+
     }
 }
