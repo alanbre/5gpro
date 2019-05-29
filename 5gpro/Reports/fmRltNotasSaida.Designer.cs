@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -49,9 +49,7 @@
             this.cbFiltroValor = new System.Windows.Forms.CheckBox();
             this.gbFiltrosValor = new System.Windows.Forms.GroupBox();
             this.lbValorFinal = new System.Windows.Forms.Label();
-            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
-            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.cbFiltroDataSaida = new System.Windows.Forms.CheckBox();
             this.gbFiltrosDataSaida = new System.Windows.Forms.GroupBox();
             this.lbDataSaidaFinal = new System.Windows.Forms.Label();
@@ -60,16 +58,12 @@
             this.dtpDataSaidaFinal = new System.Windows.Forms.DateTimePicker();
             this.cbFiltrosCidades = new System.Windows.Forms.CheckBox();
             this.gbFiltrosCidades = new System.Windows.Forms.GroupBox();
-            this.bcInicial = new _5gpro.Controls.BuscaCidade();
-            this.bcFinal = new _5gpro.Controls.BuscaCidade();
             this.cbFiltroDataEmissao = new System.Windows.Forms.CheckBox();
             this.gbFiltrosDataEmissao = new System.Windows.Forms.GroupBox();
             this.lbDataEmissaoFinal = new System.Windows.Forms.Label();
             this.lbDataEmissaoInicial = new System.Windows.Forms.Label();
             this.cbFiltrosClientes = new System.Windows.Forms.CheckBox();
             this.gbFiltrosClientes = new System.Windows.Forms.GroupBox();
-            this.bpFinal = new _5gpro.Controls.BuscaPessoa();
-            this.bpInicial = new _5gpro.Controls.BuscaPessoa();
             this.tpDados = new System.Windows.Forms.TabPage();
             this.dgvDados = new System.Windows.Forms.DataGridView();
             this.gbRelatorio = new System.Windows.Forms.GroupBox();
@@ -78,6 +72,12 @@
             this.btSalvarRelatorio = new System.Windows.Forms.Button();
             this.btCarregarRelatorio = new System.Windows.Forms.Button();
             this.cbRelatorios = new System.Windows.Forms.ComboBox();
+            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
+            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
+            this.bcInicial = new _5gpro.Controls.BuscaCidade();
+            this.bcFinal = new _5gpro.Controls.BuscaCidade();
+            this.bpFinal = new _5gpro.Controls.BuscaPessoa();
+            this.bpInicial = new _5gpro.Controls.BuscaPessoa();
             this.tcPaginas.SuspendLayout();
             this.tpCampos.SuspendLayout();
             this.gbCamposCliente.SuspendLayout();
@@ -96,28 +96,26 @@
             // 
             // dtpDataEmissaoFinal
             // 
-            this.dtpDataEmissaoFinal.Enabled = false;
             this.dtpDataEmissaoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDataEmissaoFinal.Location = new System.Drawing.Point(112, 31);
             this.dtpDataEmissaoFinal.Name = "dtpDataEmissaoFinal";
             this.dtpDataEmissaoFinal.Size = new System.Drawing.Size(97, 20);
-            this.dtpDataEmissaoFinal.TabIndex = 1;
+            this.dtpDataEmissaoFinal.TabIndex = 3;
             // 
             // dtpDataEmissaoInicial
             // 
-            this.dtpDataEmissaoInicial.Enabled = false;
             this.dtpDataEmissaoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDataEmissaoInicial.Location = new System.Drawing.Point(6, 32);
             this.dtpDataEmissaoInicial.Name = "dtpDataEmissaoInicial";
             this.dtpDataEmissaoInicial.Size = new System.Drawing.Size(100, 20);
-            this.dtpDataEmissaoInicial.TabIndex = 0;
+            this.dtpDataEmissaoInicial.TabIndex = 1;
             // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(1053, 89);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btPesquisar.TabIndex = 2;
+            this.btPesquisar.TabIndex = 1;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
@@ -127,7 +125,7 @@
             this.btGerar.Location = new System.Drawing.Point(1134, 89);
             this.btGerar.Name = "btGerar";
             this.btGerar.Size = new System.Drawing.Size(75, 23);
-            this.btGerar.TabIndex = 3;
+            this.btGerar.TabIndex = 2;
             this.btGerar.Text = "Gerar";
             this.btGerar.UseVisualStyleBackColor = true;
             this.btGerar.Click += new System.EventHandler(this.BtGerar_Click);
@@ -200,7 +198,7 @@
             this.gbCamposItens.Location = new System.Drawing.Point(380, 6);
             this.gbCamposItens.Name = "gbCamposItens";
             this.gbCamposItens.Size = new System.Drawing.Size(180, 221);
-            this.gbCamposItens.TabIndex = 3;
+            this.gbCamposItens.TabIndex = 2;
             this.gbCamposItens.TabStop = false;
             this.gbCamposItens.Text = "Campos dos itens";
             // 
@@ -214,7 +212,7 @@
             this.cblCamposItens.Location = new System.Drawing.Point(6, 46);
             this.cblCamposItens.Name = "cblCamposItens";
             this.cblCamposItens.Size = new System.Drawing.Size(168, 169);
-            this.cblCamposItens.TabIndex = 2;
+            this.cblCamposItens.TabIndex = 1;
             // 
             // cbTodosCamposItens
             // 
@@ -222,7 +220,7 @@
             this.cbTodosCamposItens.Location = new System.Drawing.Point(6, 19);
             this.cbTodosCamposItens.Name = "cbTodosCamposItens";
             this.cbTodosCamposItens.Size = new System.Drawing.Size(56, 17);
-            this.cbTodosCamposItens.TabIndex = 2;
+            this.cbTodosCamposItens.TabIndex = 0;
             this.cbTodosCamposItens.Text = "Todos";
             this.cbTodosCamposItens.UseVisualStyleBackColor = true;
             this.cbTodosCamposItens.CheckedChanged += new System.EventHandler(this.CbTodosCamposItens_CheckedChanged);
@@ -248,7 +246,7 @@
             this.cblCamposNota.Location = new System.Drawing.Point(6, 46);
             this.cblCamposNota.Name = "cblCamposNota";
             this.cblCamposNota.Size = new System.Drawing.Size(168, 169);
-            this.cblCamposNota.TabIndex = 2;
+            this.cblCamposNota.TabIndex = 1;
             // 
             // cbTodosCamposNota
             // 
@@ -256,7 +254,7 @@
             this.cbTodosCamposNota.Location = new System.Drawing.Point(6, 19);
             this.cbTodosCamposNota.Name = "cbTodosCamposNota";
             this.cbTodosCamposNota.Size = new System.Drawing.Size(56, 17);
-            this.cbTodosCamposNota.TabIndex = 2;
+            this.cbTodosCamposNota.TabIndex = 0;
             this.cbTodosCamposNota.Text = "Todos";
             this.cbTodosCamposNota.UseVisualStyleBackColor = true;
             this.cbTodosCamposNota.CheckedChanged += new System.EventHandler(this.CbTodosCamposNota_CheckedChanged);
@@ -291,6 +289,7 @@
             this.cbFiltroValor.TabIndex = 8;
             this.cbFiltroValor.Text = "Filtro de valor";
             this.cbFiltroValor.UseVisualStyleBackColor = true;
+            this.cbFiltroValor.CheckedChanged += new System.EventHandler(this.CbFiltroValor_CheckedChanged);
             // 
             // gbFiltrosValor
             // 
@@ -311,21 +310,8 @@
             this.lbValorFinal.Location = new System.Drawing.Point(74, 13);
             this.lbValorFinal.Name = "lbValorFinal";
             this.lbValorFinal.Size = new System.Drawing.Size(53, 13);
-            this.lbValorFinal.TabIndex = 5;
+            this.lbValorFinal.TabIndex = 2;
             this.lbValorFinal.Text = "Valor final";
-            // 
-            // dbValorInicial
-            // 
-            this.dbValorInicial.Enabled = false;
-            this.dbValorInicial.Location = new System.Drawing.Point(7, 29);
-            this.dbValorInicial.Name = "dbValorInicial";
-            this.dbValorInicial.Size = new System.Drawing.Size(64, 22);
-            this.dbValorInicial.TabIndex = 0;
-            this.dbValorInicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
             // 
             // lbValorInicial
             // 
@@ -333,21 +319,8 @@
             this.lbValorInicial.Location = new System.Drawing.Point(6, 13);
             this.lbValorInicial.Name = "lbValorInicial";
             this.lbValorInicial.Size = new System.Drawing.Size(60, 13);
-            this.lbValorInicial.TabIndex = 4;
+            this.lbValorInicial.TabIndex = 0;
             this.lbValorInicial.Text = "Valor inicial";
-            // 
-            // dbValorFinal
-            // 
-            this.dbValorFinal.Enabled = false;
-            this.dbValorFinal.Location = new System.Drawing.Point(77, 29);
-            this.dbValorFinal.Name = "dbValorFinal";
-            this.dbValorFinal.Size = new System.Drawing.Size(63, 22);
-            this.dbValorFinal.TabIndex = 1;
-            this.dbValorFinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
             // 
             // cbFiltroDataSaida
             // 
@@ -358,6 +331,7 @@
             this.cbFiltroDataSaida.TabIndex = 6;
             this.cbFiltroDataSaida.Text = "Filtro de data de saída";
             this.cbFiltroDataSaida.UseVisualStyleBackColor = true;
+            this.cbFiltroDataSaida.CheckedChanged += new System.EventHandler(this.CbFiltroDataSaida_CheckedChanged);
             // 
             // gbFiltrosDataSaida
             // 
@@ -378,17 +352,16 @@
             this.lbDataSaidaFinal.Location = new System.Drawing.Point(108, 15);
             this.lbDataSaidaFinal.Name = "lbDataSaidaFinal";
             this.lbDataSaidaFinal.Size = new System.Drawing.Size(52, 13);
-            this.lbDataSaidaFinal.TabIndex = 5;
+            this.lbDataSaidaFinal.TabIndex = 2;
             this.lbDataSaidaFinal.Text = "Data final";
             // 
             // dtpDataSaidaInicial
             // 
-            this.dtpDataSaidaInicial.Enabled = false;
             this.dtpDataSaidaInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDataSaidaInicial.Location = new System.Drawing.Point(6, 32);
             this.dtpDataSaidaInicial.Name = "dtpDataSaidaInicial";
             this.dtpDataSaidaInicial.Size = new System.Drawing.Size(100, 20);
-            this.dtpDataSaidaInicial.TabIndex = 0;
+            this.dtpDataSaidaInicial.TabIndex = 1;
             // 
             // lbDataSaidaInicial
             // 
@@ -396,17 +369,16 @@
             this.lbDataSaidaInicial.Location = new System.Drawing.Point(5, 16);
             this.lbDataSaidaInicial.Name = "lbDataSaidaInicial";
             this.lbDataSaidaInicial.Size = new System.Drawing.Size(59, 13);
-            this.lbDataSaidaInicial.TabIndex = 4;
+            this.lbDataSaidaInicial.TabIndex = 0;
             this.lbDataSaidaInicial.Text = "Data inicial";
             // 
             // dtpDataSaidaFinal
             // 
-            this.dtpDataSaidaFinal.Enabled = false;
             this.dtpDataSaidaFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpDataSaidaFinal.Location = new System.Drawing.Point(112, 32);
             this.dtpDataSaidaFinal.Name = "dtpDataSaidaFinal";
             this.dtpDataSaidaFinal.Size = new System.Drawing.Size(97, 20);
-            this.dtpDataSaidaFinal.TabIndex = 1;
+            this.dtpDataSaidaFinal.TabIndex = 3;
             // 
             // cbFiltrosCidades
             // 
@@ -417,6 +389,7 @@
             this.cbFiltrosCidades.TabIndex = 2;
             this.cbFiltrosCidades.Text = "Filtros de cidades\r\n";
             this.cbFiltrosCidades.UseVisualStyleBackColor = true;
+            this.cbFiltrosCidades.CheckedChanged += new System.EventHandler(this.CbFiltrosCidades_CheckedChanged);
             // 
             // gbFiltrosCidades
             // 
@@ -429,24 +402,6 @@
             this.gbFiltrosCidades.TabIndex = 3;
             this.gbFiltrosCidades.TabStop = false;
             // 
-            // bcInicial
-            // 
-            this.bcInicial.LabelText = "Cidade inicial";
-            this.bcInicial.Location = new System.Drawing.Point(3, 13);
-            this.bcInicial.Margin = new System.Windows.Forms.Padding(0);
-            this.bcInicial.Name = "bcInicial";
-            this.bcInicial.Size = new System.Drawing.Size(302, 39);
-            this.bcInicial.TabIndex = 0;
-            // 
-            // bcFinal
-            // 
-            this.bcFinal.LabelText = "Cidade final";
-            this.bcFinal.Location = new System.Drawing.Point(3, 53);
-            this.bcFinal.Margin = new System.Windows.Forms.Padding(0);
-            this.bcFinal.Name = "bcFinal";
-            this.bcFinal.Size = new System.Drawing.Size(302, 39);
-            this.bcFinal.TabIndex = 1;
-            // 
             // cbFiltroDataEmissao
             // 
             this.cbFiltroDataEmissao.AutoSize = true;
@@ -456,6 +411,7 @@
             this.cbFiltroDataEmissao.TabIndex = 4;
             this.cbFiltroDataEmissao.Text = "Filtro de data de emissão";
             this.cbFiltroDataEmissao.UseVisualStyleBackColor = true;
+            this.cbFiltroDataEmissao.CheckedChanged += new System.EventHandler(this.CbFiltroDataEmissao_CheckedChanged);
             // 
             // gbFiltrosDataEmissao
             // 
@@ -476,7 +432,7 @@
             this.lbDataEmissaoFinal.Location = new System.Drawing.Point(109, 15);
             this.lbDataEmissaoFinal.Name = "lbDataEmissaoFinal";
             this.lbDataEmissaoFinal.Size = new System.Drawing.Size(52, 13);
-            this.lbDataEmissaoFinal.TabIndex = 3;
+            this.lbDataEmissaoFinal.TabIndex = 2;
             this.lbDataEmissaoFinal.Text = "Data final";
             // 
             // lbDataEmissaoInicial
@@ -485,7 +441,7 @@
             this.lbDataEmissaoInicial.Location = new System.Drawing.Point(6, 16);
             this.lbDataEmissaoInicial.Name = "lbDataEmissaoInicial";
             this.lbDataEmissaoInicial.Size = new System.Drawing.Size(59, 13);
-            this.lbDataEmissaoInicial.TabIndex = 2;
+            this.lbDataEmissaoInicial.TabIndex = 0;
             this.lbDataEmissaoInicial.Text = "Data inicial";
             // 
             // cbFiltrosClientes
@@ -497,6 +453,7 @@
             this.cbFiltrosClientes.TabIndex = 0;
             this.cbFiltrosClientes.Text = "Filtros de clientes";
             this.cbFiltrosClientes.UseVisualStyleBackColor = true;
+            this.cbFiltrosClientes.CheckedChanged += new System.EventHandler(this.CbFiltrosClientes_CheckedChanged);
             // 
             // gbFiltrosClientes
             // 
@@ -508,24 +465,6 @@
             this.gbFiltrosClientes.Size = new System.Drawing.Size(314, 99);
             this.gbFiltrosClientes.TabIndex = 1;
             this.gbFiltrosClientes.TabStop = false;
-            // 
-            // bpFinal
-            // 
-            this.bpFinal.LabelText = "Cliente final";
-            this.bpFinal.Location = new System.Drawing.Point(3, 52);
-            this.bpFinal.Margin = new System.Windows.Forms.Padding(0);
-            this.bpFinal.Name = "bpFinal";
-            this.bpFinal.Size = new System.Drawing.Size(310, 39);
-            this.bpFinal.TabIndex = 1;
-            // 
-            // bpInicial
-            // 
-            this.bpInicial.LabelText = "Cliente inicial";
-            this.bpInicial.Location = new System.Drawing.Point(3, 13);
-            this.bpInicial.Margin = new System.Windows.Forms.Padding(0);
-            this.bpInicial.Name = "bpInicial";
-            this.bpInicial.Size = new System.Drawing.Size(310, 39);
-            this.bpInicial.TabIndex = 0;
             // 
             // tpDados
             // 
@@ -544,17 +483,17 @@
             this.dgvDados.AllowUserToDeleteRows = false;
             this.dgvDados.AllowUserToOrderColumns = true;
             this.dgvDados.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDados.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -625,6 +564,66 @@
             this.cbRelatorios.Name = "cbRelatorios";
             this.cbRelatorios.Size = new System.Drawing.Size(1023, 21);
             this.cbRelatorios.TabIndex = 0;
+            // 
+            // dbValorInicial
+            // 
+            this.dbValorInicial.Location = new System.Drawing.Point(7, 29);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(64, 22);
+            this.dbValorInicial.TabIndex = 1;
+            this.dbValorInicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorFinal
+            // 
+            this.dbValorFinal.Location = new System.Drawing.Point(77, 29);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(63, 22);
+            this.dbValorFinal.TabIndex = 3;
+            this.dbValorFinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
+            // 
+            // bcInicial
+            // 
+            this.bcInicial.LabelText = "Cidade inicial";
+            this.bcInicial.Location = new System.Drawing.Point(3, 13);
+            this.bcInicial.Margin = new System.Windows.Forms.Padding(0);
+            this.bcInicial.Name = "bcInicial";
+            this.bcInicial.Size = new System.Drawing.Size(302, 39);
+            this.bcInicial.TabIndex = 0;
+            // 
+            // bcFinal
+            // 
+            this.bcFinal.LabelText = "Cidade final";
+            this.bcFinal.Location = new System.Drawing.Point(3, 53);
+            this.bcFinal.Margin = new System.Windows.Forms.Padding(0);
+            this.bcFinal.Name = "bcFinal";
+            this.bcFinal.Size = new System.Drawing.Size(302, 39);
+            this.bcFinal.TabIndex = 1;
+            // 
+            // bpFinal
+            // 
+            this.bpFinal.LabelText = "Cliente final";
+            this.bpFinal.Location = new System.Drawing.Point(3, 52);
+            this.bpFinal.Margin = new System.Windows.Forms.Padding(0);
+            this.bpFinal.Name = "bpFinal";
+            this.bpFinal.Size = new System.Drawing.Size(310, 39);
+            this.bpFinal.TabIndex = 1;
+            // 
+            // bpInicial
+            // 
+            this.bpInicial.LabelText = "Cliente inicial";
+            this.bpInicial.Location = new System.Drawing.Point(3, 13);
+            this.bpInicial.Margin = new System.Windows.Forms.Padding(0);
+            this.bpInicial.Name = "bpInicial";
+            this.bpInicial.Size = new System.Drawing.Size(310, 39);
+            this.bpInicial.TabIndex = 0;
             // 
             // fmRltNotasSaida
             // 

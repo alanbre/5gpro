@@ -71,6 +71,26 @@ namespace _5gpro.Reports
         }
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void BtGerar_Click(object sender, EventArgs e) => Gerar();
+        private void CbFiltrosClientes_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFiltrosClientes.Enabled = cbFiltrosClientes.Checked;
+        }
+        private void CbFiltrosCidades_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFiltrosCidades.Enabled = cbFiltrosCidades.Checked;
+        }
+        private void CbFiltroDataEmissao_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFiltrosDataEmissao.Enabled = cbFiltroDataEmissao.Checked;
+        }
+        private void CbFiltroDataSaida_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFiltrosDataSaida.Enabled = cbFiltroDataSaida.Checked;
+        }
+        private void CbFiltroValor_CheckedChanged(object sender, EventArgs e)
+        {
+            gbFiltrosValor.Enabled = cbFiltroValor.Checked;
+        }
 
 
 
@@ -193,6 +213,21 @@ namespace _5gpro.Reports
         }
         private void Pesquisar()
         {
+            if ((cblCamposClientes.CheckedItems.Count + cblCamposItens.CheckedItems.Count + cblCamposNota.CheckedItems.Count) <= 0)
+            {
+                MessageBox.Show(
+                "Não é possível pesquisar sem campos selecionados!",
+                "Erro ao pesquisar dados",
+                MessageBoxButtons.OK);
+                tcPaginas.SelectTab(0);
+                return;
+            }
+
+            if (!ChecaFiltros())
+            {
+                return;
+            }
+
             var f = new Filtros
             {
                 usaFiltroClientes = cbFiltrosClientes.Checked,
@@ -220,7 +255,7 @@ namespace _5gpro.Reports
             if (!ExisteDados())
             {
                 MessageBox.Show(
-                "Não há dados para ser gerado relatório",
+                "Não é possível gerar relatório sem dados!",
                 "Erro ao gerar relatório",
                 MessageBoxButtons.OK);
                 return;
@@ -510,6 +545,46 @@ namespace _5gpro.Reports
             }
 
             return dt;
+        }
+        private bool ChecaFiltros()
+        {
+            var valido = true;
+            var mensagem = "";
+            if (bpInicial.pessoa?.PessoaID > bpFinal.pessoa?.PessoaID && cbFiltrosClientes.Checked)
+            {
+                mensagem += "Cliente final maior que cliente inicial\n";
+                valido = false;
+            }
+            if (bcInicial.cidade?.CidadeID > bcFinal.cidade?.CidadeID && cbFiltrosCidades.Checked)
+            {
+                mensagem += "Cidade final maior que cidade inicial\n";
+                valido = false;
+            }
+            if (dtpDataEmissaoInicial.Value > dtpDataEmissaoFinal.Value && cbFiltroDataEmissao.Checked)
+            {
+                mensagem += "Data de emissão final maior que data de emissão inicial\n";
+                valido = false;
+            }
+            if (dtpDataSaidaInicial.Value > dtpDataSaidaFinal.Value && cbFiltroDataSaida.Checked)
+            {
+                mensagem += "Data de saida final maior que data de saida inicial\n";
+                valido = false;
+            }
+
+            if (dbValorInicial.Valor > dbValorFinal.Valor && cbFiltroValor.Checked)
+            {
+                mensagem += "Valor final maior que valor inicial\n";
+                valido = false;
+            }
+            if (!valido)
+            {
+                MessageBox.Show(
+                mensagem,
+                "Filtros incorretos",
+                MessageBoxButtons.OK);
+            }
+            tcPaginas.SelectTab(1);
+            return valido;
         }
 
     }
