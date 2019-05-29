@@ -640,6 +640,7 @@
             this.Name = "fmRltNotasSaida";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Relatório de notas de saída";
             this.tcPaginas.ResumeLayout(false);
             this.tpCampos.ResumeLayout(false);

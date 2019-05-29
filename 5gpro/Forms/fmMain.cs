@@ -7,8 +7,6 @@ using _5gpro.Relatorios;
 using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -25,9 +23,8 @@ namespace _5gpro
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
         private string botaoPressionado = "";
-        private bool CadastrosHidden;
-        private bool ContareceberHidden;
-        private bool MenuHidden;
+        private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden, 
+            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden;
 
 
         int panelWidth;
@@ -68,79 +65,6 @@ namespace _5gpro
 
         }
 
-
-        private void TsmiCadastroPessoas_Click(object sender, EventArgs e)
-        {
-            var formCadPessoas = new fmCadastroPessoa();
-            formCadPessoas.Show(this);
-        }
-        private void TsmiCadastroItens_Click(object sender, EventArgs e)
-        {
-            var formCadItens = new fmCadastroItem();
-            formCadItens.Show(this);
-        }
-        private void TsmiCadastroOrcamentos_Click(object sender, EventArgs e)
-        {
-            var formOrcamentoCadOrcamentos = new fmOrcCadastro();
-            formOrcamentoCadOrcamentos.Show(this);
-        }
-        private void TsmiCadastroUsuarios_Click(object sender, EventArgs e)
-        {
-            var formCadUsuarios = new fmCadastroUsuario();
-            formCadUsuarios.Show(this);
-        }
-        private void TsmiEmissaoNF_Click(object sender, EventArgs e)
-        {
-            var formSaidaEmissaoNota = new fmSaiEmissaoNota();
-            formSaidaEmissaoNota.Show(this);
-        }
-        private void TsmiCadastroDeGrupoDeUsuários_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
-            formCadGrupoUsuarios.Show(this);
-        }
-        private void TsmiCadastroDeOperações_Click(object sender, EventArgs e)
-        {
-            var formCadOperacao = new fmCadastroOperacao();
-            formCadOperacao.Show(this);
-        }
-        private void TsmiCarCadastroContaReceber_Click(object sender, EventArgs e)
-        {
-            var formCarCadContaReceber = new fmCarCadastroConta();
-            formCarCadContaReceber.Show(this);
-        }
-        private void TsmiCarQuitacaoConta_Click(object sender, EventArgs e)
-        {
-            var formCarQuitacaoConta = new fmCarQuitacaoConta();
-            formCarQuitacaoConta.Show(this);
-        }
-        private void TsmiCapCadastroContaReceber_Click(object sender, EventArgs e)
-        {
-            var formCapCadContaPagar = new fmCapCadastroConta();
-            formCapCadContaPagar.Show(this);
-        }
-        private void CadastroDeGrupoDeItensToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoItem = new fmCadastroGrupoItem();
-            formCadGrupoItem.Show(this);
-        }
-        private void CadastroDeGrupoDePessoasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
-            formCadGrupoPessoa.Show(this);
-        }
-        private void TsmiEntradaNotas_Click(object sender, EventArgs e)
-        {
-            var formEntradaNotas = new fmEntEntradaNota();
-            formEntradaNotas.Show(this);
-        }
-
-        private void TsmiTeste_Click(object sender, EventArgs e)
-        {
-            var formRelTeste = new fmRltNotasSaida();
-            formRelTeste.Show(this);
-        }
-
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             t.Abort();
@@ -176,27 +100,27 @@ namespace _5gpro
                     {
 
                         case "010100":
-                            tsmiCadastroPessoas.Visible = p.Nivel == 0 ? false : true;
+                            //tsmiCadastroPessoas.Visible = p.Nivel == 0 ? false : true;
                             break;
 
                         case "010200":
-                            tsmiCadastroUsuarios.Visible = p.Nivel == 0 ? false : true;
+                           // tsmiCadastroUsuarios.Visible = p.Nivel == 0 ? false : true;
                             break;
 
                         case "010300":
-                            tsmiCadastroItens.Visible = p.Nivel == 0 ? false : true;
+                           // tsmiCadastroItens.Visible = p.Nivel == 0 ? false : true;
                             break;
 
                         case "010400":
-                            tsmiCadastroGrupoUsuario.Visible = p.Nivel == 0 ? false : true;
+                            //tsmiCadastroGrupoUsuario.Visible = p.Nivel == 0 ? false : true;
                             break;
 
                         case "020100":
-                            tsmiCadastroOrcamentos.Visible = p.Nivel == 0 ? false : true;
+                           //tsmiCadastroOrcamentos.Visible = p.Nivel == 0 ? false : true;
                             break;
 
                         case "030100":
-                            tsmiEmissaoNF.Visible = p.Nivel == 0 ? false : true;
+                            //tsmiEmissaoNF.Visible = p.Nivel == 0 ? false : true;
                             break;
 
                     }
@@ -204,53 +128,8 @@ namespace _5gpro
             }
         }
 
-        private void QuitaçãoDeContasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var formCapQuitacaoConta = new fmCapQuitacaoConta();
-            formCapQuitacaoConta.Show(this);
-        }
 
-        private void TesteeduardoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void ExemplorelatorioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var ExemploRelatorio = new exemplorelatorio();
-            ExemploRelatorio.Show(this);
-        }
-
-        private void RelatorioDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var RelatorioUsuario = new FormRelatUsu();
-            RelatorioUsuario.Show(this);
-        }
-
-        private void RelatorioDeItemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var FiltroRltItem = new fmItemReport();
-            FiltroRltItem.Show(this);
-        }
-
-        private void RelatorioContaReceberToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var fmcontaReceber = new fmRltContaReceber();
-            fmcontaReceber.Show(this);
-        }
-
-        private void RelatórioDeContasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var fmconta = new fmRelatorioContas();
-            fmconta.Show(this);
-        }
-
-
-        private void BtEntradas_Click(object sender, EventArgs e)
-        {
-            var formEntradaNotas = new fmEntEntradaNota();
-            formEntradaNotas.Show(this);
-        }
-
+       //MENU LATERAL
         private void BtExpandiretrai_Click(object sender, EventArgs e)
         {
             timerDropLateral.Start();
@@ -259,8 +138,263 @@ namespace _5gpro
 
         private void BtCadastrosesquerda_Click(object sender, EventArgs e)
         {
+            DesmarcarBotoes();
+            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
             timerDropLateral.Start();
             botaoPressionado = "botaocadastro";
+        }
+
+        private void BtCReceber_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaocontareceber";
+        }
+
+        private void BtCPagar_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaocontapagar";
+        }
+
+        private void BtEntradas_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaoentrada";
+        }
+
+        private void BtSaidas_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaosaida";
+        }
+
+        private void BtOrcamentos_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaoorcamento";
+        }
+
+
+
+
+
+
+        //BOTÕES DO MENU CADASTROS
+        private void BtiCadPessoa_Click(object sender, EventArgs e)
+        {
+            var formCadPessoas = new fmCadastroPessoa();
+            formCadPessoas.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiItens_Click(object sender, EventArgs e)
+        {
+            var formCadItens = new fmCadastroItem();
+            formCadItens.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiUsuários_Click(object sender, EventArgs e)
+        {
+            var formCadUsuarios = new fmCadastroUsuario();
+            formCadUsuarios.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiGruposusuarios_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
+            formCadGrupoUsuarios.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiOperacoes_Click(object sender, EventArgs e)
+        {
+            var formCadOperacao = new fmCadastroOperacao();
+            formCadOperacao.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiGrupoitens_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoItem = new fmCadastroGrupoItem();
+            formCadGrupoItem.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiGrupopessoa_Click(object sender, EventArgs e)
+        {
+            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
+            formCadGrupoPessoa.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        //BOTÕES DO MENU A RECEBER
+        private void BtiCadContaReceber_Click(object sender, EventArgs e)
+        {
+            var formCarCadContaReceber = new fmCarCadastroConta();
+            formCarCadContaReceber.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiQuitacaoConta_Click(object sender, EventArgs e)
+        {
+            var formCarQuitacaoConta = new fmCarQuitacaoConta();
+            formCarQuitacaoConta.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        //BOTÕES DO MENU A PAGAR
+        private void BtiCadContaPagar_Click(object sender, EventArgs e)
+        {
+            var formCapCadContaPagar = new fmCapCadastroConta();
+            formCapCadContaPagar.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiQuitacaoAPagar_Click(object sender, EventArgs e)
+        {
+            var formCapQuitacaoConta = new fmCapQuitacaoConta();
+            formCapQuitacaoConta.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        //BOTÕES DO MENU ENTRADAS
+        private void BtiEntrada_Click(object sender, EventArgs e)
+        {
+            var formEntradaNotas = new fmEntEntradaNota();
+            formEntradaNotas.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        //BOTÕES DO MENU SAIDAS
+        private void BtiSaida_Click(object sender, EventArgs e)
+        {
+            var formSaidaEmissaoNota = new fmSaiEmissaoNota();
+            formSaidaEmissaoNota.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        //COM SUB MENU
+        private void BtiRltNotaSaida_Click(object sender, EventArgs e)
+        {
+            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "subrelatoriosaida";
+        }
+
+        //SUBMENU RELATORIOS SAIDA
+        private void BtsRelatorionotas_Click(object sender, EventArgs e)
+        {
+            var formRelTeste = new fmRltNotasSaida();
+            formRelTeste.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        //BOTÕES DO MENU ORCAMENTOS
+        private void BtiCadOrcamento_Click(object sender, EventArgs e)
+        {
+            var formOrcamentoCadOrcamentos = new fmOrcCadastro();
+            formOrcamentoCadOrcamentos.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+
+
+        //FUNÇÕES DO MENU LATERAL
+        private void DesmarcarBotoes()
+        {
+            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+        }
+
+        private void RecolherMenus()
+        {
+            if (botaoPressionado != "botaocadastro")
+            {
+                paneldropCadastros.Height = 0;
+                CadastrosHidden = true;
+            }
+
+            if (botaoPressionado != "botaocontareceber")
+            {
+                paneldropAreceber.Height = 0;
+                ContareceberHidden = true;
+            }
+
+            if (botaoPressionado != "botaocontapagar")
+            {
+                paneldropApagar.Height = 0;
+                ContapagarHidden = true;
+            }
+
+            if (botaoPressionado != "botaoentrada")
+            {
+                paneldropEntrada.Height = 0;
+                EntradaHidden = true;
+            }
+
+            if (botaoPressionado != "botaosaida")
+            {
+                paneldropSaida.Height = 0;
+                SaidaHidden = true;
+            }
+
+            if (botaoPressionado != "botaoorcamento")
+            {
+                paneldropOrcamento.Height = 0;
+                OrcamentoHidden = true;
+            }
+
+            if(botaoPressionado != "subrelatoriosaida")
+            {
+                paneldentroRltSaida.Height = 0;
+                RelatorioSaidaHidden = true;
+            }
         }
 
         private void TimerDropLateral_Tick(object sender, EventArgs e)
@@ -268,20 +402,34 @@ namespace _5gpro
             switch (botaoPressionado)
             {
                 case "":
-                    paneldropCadastros.Height -= 100;
-                    if (paneldropCadastros.Size == paneldropCadastros.MinimumSize)
-                    {
-                        timerDropLateral.Stop();
-                        CadastrosHidden = true;
-                    }
-                    paneldropAreceber.Height -= 100;
-                    if (paneldropAreceber.Size == paneldropAreceber.MinimumSize)
-                    {
-                        timerDropLateral.Stop();
-                        ContareceberHidden = true;
-                    }
+
+                    paneldropCadastros.Height = 0;
+                    CadastrosHidden = true;
+
+                    paneldropAreceber.Height = 0;
+                    ContareceberHidden = true;
+
+                    paneldropApagar.Height = 0;
+                    ContapagarHidden = true;
+
+                    paneldropEntrada.Height = 0;
+                    EntradaHidden = true;
+
+                    paneldropSaida.Height = 0;
+                    SaidaHidden = true;
+
+                    paneldropOrcamento.Height = 0;
+                    OrcamentoHidden = true;
+
+                    paneldentroRltSaida.Height = 0;
+                    RelatorioSaidaHidden = true;
+
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
+
+                    
+
+
                     break;
 
                 case "botaoexpandiretrai":
@@ -324,8 +472,10 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             CadastrosHidden = true;
+                            DesmarcarBotoes();
                         }
                     }
+                    RecolherMenus();
                     break;
 
                 case "botaocontareceber":
@@ -345,6 +495,121 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             ContareceberHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
+                case "botaocontapagar":
+                    if (ContapagarHidden)
+                    {
+                        paneldropApagar.Height += 100;
+                        if (paneldropApagar.Size == paneldropApagar.MaximumSize)
+                        {
+                            timerDropLateral.Stop();
+                            ContapagarHidden = false;
+                        }
+                    }
+                    else
+                    {
+                        paneldropApagar.Height -= 100;
+                        if (paneldropApagar.Size == paneldropApagar.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            ContapagarHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
+                case "botaoentrada":
+                    if (EntradaHidden)
+                    {
+                        paneldropEntrada.Height += 100;
+                        if (paneldropEntrada.Size == paneldropEntrada.MaximumSize)
+                        {
+                            timerDropLateral.Stop();
+                            EntradaHidden = false;
+                        }
+                    }
+                    else
+                    {
+                        paneldropEntrada.Height -= 100;
+                        if (paneldropEntrada.Size == paneldropEntrada.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            EntradaHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
+                case "botaosaida":
+                    if (SaidaHidden)
+                    {
+                        paneldropSaida.Height += 100;
+                        if (paneldropSaida.Size == paneldropSaida.MaximumSize)
+                        {
+                            timerDropLateral.Stop();
+                            SaidaHidden = false;
+                        }
+                    }
+                    else
+                    {
+                        paneldropSaida.Height -= 100;
+                        if (paneldropSaida.Size == paneldropSaida.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            SaidaHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
+                case "botaoorcamento":
+                    if (OrcamentoHidden)
+                    {
+                        paneldropOrcamento.Height += 100;
+                        if (paneldropOrcamento.Size == paneldropOrcamento.MaximumSize)
+                        {
+                            timerDropLateral.Stop();
+                            OrcamentoHidden = false;
+                        }
+                    }
+                    else
+                    {
+                        paneldropOrcamento.Height -= 100;
+                        if (paneldropOrcamento.Size == paneldropOrcamento.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            OrcamentoHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
+                case "subrelatoriosaida":
+                    if (RelatorioSaidaHidden)
+                    {
+                        paneldentroRltSaida.Height += 100;
+                        if (paneldentroRltSaida.Size == paneldentroRltSaida.MaximumSize)
+                        {
+                            timerDropLateral.Stop();
+                            RelatorioSaidaHidden = false;
+                        }
+                    }
+                    else
+                    {
+                        paneldentroRltSaida.Height -= 100;
+                        if (paneldentroRltSaida.Size == paneldentroRltSaida.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            RelatorioSaidaHidden = true;
                         }
                     }
                     break;
@@ -352,52 +617,5 @@ namespace _5gpro
 
         }
 
-        private void BtiCadPessoa_Click(object sender, EventArgs e)
-        {
-            var formCadPessoas = new fmCadastroPessoa();
-            formCadPessoas.Show(this);
-        }
-
-        private void BtiItens_Click(object sender, EventArgs e)
-        {
-            var formCadItens = new fmCadastroItem();
-            formCadItens.Show(this);
-        }
-
-        private void BtiUsuários_Click(object sender, EventArgs e)
-        {
-            var formCadUsuarios = new fmCadastroUsuario();
-            formCadUsuarios.Show(this);
-        }
-
-        private void BtiGruposusuarios_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoUsuarios = new fmCadastroGrupoUsuario();
-            formCadGrupoUsuarios.Show(this);
-        }
-
-        private void BtiOperacoes_Click(object sender, EventArgs e)
-        {
-            var formCadOperacao = new fmCadastroOperacao();
-            formCadOperacao.Show(this);
-        }
-
-        private void BtiGrupoitens_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoItem = new fmCadastroGrupoItem();
-            formCadGrupoItem.Show(this);
-        }
-
-        private void BtiGrupopessoa_Click(object sender, EventArgs e)
-        {
-            var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
-            formCadGrupoPessoa.Show(this);
-        }
-
-        private void BtCReceber_Click(object sender, EventArgs e)
-        {
-            timerDropLateral.Start();
-            botaoPressionado = "botaocontareceber";
-        }
     }
 }
