@@ -26,9 +26,17 @@ namespace _5gpro
         private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden, 
             EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden;
 
-
+        private int cadastrosOn = 7,
+                    areceberOn = 2,
+                    apagarOn = 2,
+                    entradasOn = 1,
+                    saidasOn = 2,
+                    orcamentosOn = 1,
+                    relatoriosOn = 1,
+                    tamanhopanel
+            ;
+       
         int panelWidth;
-
 
         Thread t;
 
@@ -37,16 +45,17 @@ namespace _5gpro
         //Cadastro de Usuário = 010200
         //Cadastro de Item = 010300
         //Cadastro de Grupo de Usuário = 010400
-        //Cadastro de Orçamento = 020100
-        //Cadastro de Nota Fiscal = 030100
+        //Cadastro de Grupo de Itens = 010500
+        //Cadastro de Grupo de Pessoas = 010600
         //Cadastro de Operações = 040100
         //Cadastro de Contas a Receber = 050100
         //Quitação de Contas a Receber = 050200
         //Cadastro de Contas a Pagar = 060100
         //Quitação de Contas a Pagar = 060200
-        //Cadastro de Grupo de Itens = 010500
-        //Cadastro de Grupo de Pessoas = 010600
         //Entrada de notas = 070100
+        //Cadastro de Nota Fiscal = 030100
+        //Cadastro de Orçamento = 020100
+
 
         public fmMain()
         {
@@ -100,33 +109,126 @@ namespace _5gpro
                     {
 
                         case "010100":
-                            //tsmiCadastroPessoas.Visible = p.Nivel == 0 ? false : true;
-                            break;
-
-                        case "010200":
-                           // tsmiCadastroUsuarios.Visible = p.Nivel == 0 ? false : true;
+                            //Cadastro Pessoa
+                            if(p.Nivel == 0) { btiCadPessoa.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiCadPessoa.Visible = true; }
                             break;
 
                         case "010300":
-                           // tsmiCadastroItens.Visible = p.Nivel == 0 ? false : true;
+                            //Cadastro Itens
+                            if (p.Nivel == 0) { btiItens.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiItens.Visible = true; }
+                            break;
+
+                        case "010200":
+                            //Cadastro Usuário
+                            if (p.Nivel == 0) { btiUsuarios.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiUsuarios.Visible = true; }
                             break;
 
                         case "010400":
-                            //tsmiCadastroGrupoUsuario.Visible = p.Nivel == 0 ? false : true;
+                            //Cadastro Grupo de usuários
+                            if(p.Nivel == 0) { btiGruposusuarios.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiGruposusuarios.Visible = true; }
+                            break;
+
+                        case "040100":
+                            //Cadastro de Operações
+                            if(p.Nivel == 0) { btiOperacoes.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiOperacoes.Visible = true; }
+                            break;
+
+                        case "010500":
+                            //Cadastro de Grupo de Itens
+                            if(p.Nivel == 0) { btiGrupoitens.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiGrupoitens.Visible = true; }
+                            break;
+
+                        case "010600":
+                            //Cadastro de Grupo de Pessoas
+                            if (p.Nivel == 0) { btiGrupopessoa.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            else
+                            { btiGrupopessoa.Visible = true; }
+                            break;
+
+                        case "050100":
+                            //Cadastro de Conta a Receber
+                            if(p.Nivel == 0) { btiCadContaReceber.Visible = false; areceberOn = areceberOn - 1; }
+                            else
+                            { btiCadContaReceber.Visible = true; }
+                            break;
+
+                        case "050200":
+                            //Quitação de Conta a Receber
+                            if(p.Nivel == 0) { btiQuitacaoAReceber.Visible = false; areceberOn = areceberOn - 1; }
+                            else
+                            { btiQuitacaoAReceber.Visible = true; }
+                            break;
+
+                        case "060100":
+                            //Cadastro de Conta a Pagar
+                            if(p.Nivel == 0) { btiCadContaPagar.Visible = false; apagarOn = apagarOn - 1; }
+                            else
+                            { btiCadContaPagar.Visible = true; }
+                            break;
+
+                            //Quitação de Conta a Pagar
+                        case "060200":
+                            if(p.Nivel == 0) { btiQuitacaoAPagar.Visible = false; apagarOn = apagarOn - 1; }
+                            else
+                            { btiQuitacaoAPagar.Visible = true; }
+                            break;
+
+
+                            //Entrada
+                        case "070100":
+                            if(p.Nivel == 0) { btiEntrada.Visible = false; entradasOn = entradasOn - 1; }
+                            else
+                            { btiEntrada.Visible = true; }
+                            break;
+
+                            //Saida
+                        case "030100":
+                            if(p.Nivel == 0) { btiSaida.Visible = false; saidasOn = saidasOn - 1; }
+                            else
+                            { btiSaida.Visible = true; }
+                            break;
+
+                        case "030200":
+                            //Relatório de Notas
+                            if (p.Nivel == 0) { btiRltNotaSaida.Visible = false; relatoriosOn = relatoriosOn - 1; }
+                            else
+                            { btiRltNotaSaida.Visible = true; }
+                            if(relatoriosOn == 0) { saidasOn = saidasOn - 1; }
                             break;
 
                         case "020100":
-                           //tsmiCadastroOrcamentos.Visible = p.Nivel == 0 ? false : true;
-                            break;
-
-                        case "030100":
-                            //tsmiEmissaoNF.Visible = p.Nivel == 0 ? false : true;
+                            //Cadastro de Orçamentos
+                            if(p.Nivel == 0) { btiCadOrcamento.Visible = false; orcamentosOn = orcamentosOn - 1; }
+                            else
+                            { btiCadOrcamento.Visible = true; }
                             break;
 
                     }
                 }
+
+                btCadastrosmenu.Enabled = cadastrosOn == 0 ? false : true;
+                btCReceber.Enabled = areceberOn == 0 ? false : true;
+                btCPagar.Enabled = apagarOn == 0 ? false : true;
+                btEntradas.Enabled = entradasOn == 0 ? false : true;
+                btSaidas.Enabled = saidasOn == 0 ? false : true;
+                btOrcamentos.Enabled = orcamentosOn == 0 ? false : true;
+                btiRltNotaSaida.Enabled = relatoriosOn == 0 ? false : true;
+
             }
         }
+
 
 
        //MENU LATERAL
@@ -183,9 +285,6 @@ namespace _5gpro
             timerDropLateral.Start();
             botaoPressionado = "botaoorcamento";
         }
-
-
-
 
 
 
@@ -253,6 +352,8 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+
+
         //BOTÕES DO MENU A RECEBER
         private void BtiCadContaReceber_Click(object sender, EventArgs e)
         {
@@ -272,6 +373,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        
         //BOTÕES DO MENU A PAGAR
         private void BtiCadContaPagar_Click(object sender, EventArgs e)
         {
@@ -291,6 +393,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        
         //BOTÕES DO MENU ENTRADAS
         private void BtiEntrada_Click(object sender, EventArgs e)
         {
@@ -301,6 +404,12 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        private void PanelCentral_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        
         //BOTÕES DO MENU SAIDAS
         private void BtiSaida_Click(object sender, EventArgs e)
         {
@@ -311,6 +420,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        
         //COM SUB MENU
         private void BtiRltNotaSaida_Click(object sender, EventArgs e)
         {
@@ -319,6 +429,7 @@ namespace _5gpro
             botaoPressionado = "subrelatoriosaida";
         }
 
+        
         //SUBMENU RELATORIOS SAIDA
         private void BtsRelatorionotas_Click(object sender, EventArgs e)
         {
@@ -338,7 +449,6 @@ namespace _5gpro
             RecolherMenus();
             DesmarcarBotoes();
         }
-
 
 
         //FUNÇÕES DO MENU LATERAL
@@ -456,16 +566,19 @@ namespace _5gpro
                 case "botaocadastro":
                     if (CadastrosHidden)
                     {
-                        paneldropCadastros.Height += 100;
-                        if (paneldropCadastros.Size == paneldropCadastros.MaximumSize)
+                        tamanhopanel = cadastrosOn * 28;                    
+                        paneldropCadastros.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropCadastros.Size.Height == tamanhopanel)
                         {
                             timerDropLateral.Stop();
                             CadastrosHidden = false;
+                            paneldropCadastros.BringToFront();
                         }
                     }
                     else
                     {
-                        paneldropCadastros.Height -= 100;
+                        paneldropCadastros.Height -= 28;
                         if (paneldropCadastros.Size == paneldropCadastros.MinimumSize)
                         {
                             timerDropLateral.Stop();
@@ -479,16 +592,19 @@ namespace _5gpro
                 case "botaocontareceber":
                     if (ContareceberHidden)
                     {
-                        paneldropAreceber.Height += 100;
-                        if (paneldropAreceber.Size == paneldropAreceber.MaximumSize)
+                        tamanhopanel = areceberOn * 28;
+                        paneldropAreceber.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropAreceber.Size.Height == tamanhopanel)
                         {
                             timerDropLateral.Stop();
                             ContareceberHidden = false;
+                            paneldropAreceber.BringToFront();
                         }
                     }
                     else
                     {
-                        paneldropAreceber.Height -= 100;
+                        paneldropAreceber.Height -= 28;
                         if (paneldropAreceber.Size == paneldropAreceber.MinimumSize)
                         {
                             timerDropLateral.Stop();
@@ -502,16 +618,19 @@ namespace _5gpro
                 case "botaocontapagar":
                     if (ContapagarHidden)
                     {
-                        paneldropApagar.Height += 100;
-                        if (paneldropApagar.Size == paneldropApagar.MaximumSize)
+                        tamanhopanel = apagarOn * 28;
+                        paneldropApagar.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropApagar.Size.Height == tamanhopanel)
                         {
                             timerDropLateral.Stop();
                             ContapagarHidden = false;
+                            paneldropApagar.BringToFront();
                         }
                     }
                     else
                     {
-                        paneldropApagar.Height -= 100;
+                        paneldropApagar.Height -= 28;
                         if (paneldropApagar.Size == paneldropApagar.MinimumSize)
                         {
                             timerDropLateral.Stop();
@@ -525,16 +644,19 @@ namespace _5gpro
                 case "botaoentrada":
                     if (EntradaHidden)
                     {
-                        paneldropEntrada.Height += 100;
-                        if (paneldropEntrada.Size == paneldropEntrada.MaximumSize)
+                        tamanhopanel = entradasOn * 28;
+                        paneldropEntrada.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropEntrada.Size.Height == tamanhopanel)
                         {
                             timerDropLateral.Stop();
                             EntradaHidden = false;
+                            paneldropEntrada.BringToFront();
                         }
                     }
                     else
                     {
-                        paneldropEntrada.Height -= 100;
+                        paneldropEntrada.Height -= 28;
                         if (paneldropEntrada.Size == paneldropEntrada.MinimumSize)
                         {
                             timerDropLateral.Stop();
@@ -548,16 +670,19 @@ namespace _5gpro
                 case "botaosaida":
                     if (SaidaHidden)
                     {
-                        paneldropSaida.Height += 100;
-                        if (paneldropSaida.Size == paneldropSaida.MaximumSize)
+                        tamanhopanel = saidasOn * 28;
+                        paneldropSaida.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropSaida.Size.Height == tamanhopanel)
                         {
                             timerDropLateral.Stop();
                             SaidaHidden = false;
+                            paneldropSaida.BringToFront();
                         }
                     }
                     else
                     {
-                        paneldropSaida.Height -= 100;
+                        paneldropSaida.Height -= 28;
                         if (paneldropSaida.Size == paneldropSaida.MinimumSize)
                         {
                             timerDropLateral.Stop();
@@ -571,16 +696,19 @@ namespace _5gpro
                 case "botaoorcamento":
                     if (OrcamentoHidden)
                     {
-                        paneldropOrcamento.Height += 100;
-                        if (paneldropOrcamento.Size == paneldropOrcamento.MaximumSize)
+                        tamanhopanel = orcamentosOn * 28;
+                        paneldropOrcamento.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropOrcamento.Size.Height == tamanhopanel)
                         {
                             timerDropLateral.Stop();
                             OrcamentoHidden = false;
+                            paneldropOrcamento.BringToFront();
                         }
                     }
                     else
                     {
-                        paneldropOrcamento.Height -= 100;
+                        paneldropOrcamento.Height -= 28;
                         if (paneldropOrcamento.Size == paneldropOrcamento.MinimumSize)
                         {
                             timerDropLateral.Stop();
@@ -599,6 +727,7 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             RelatorioSaidaHidden = false;
+                            paneldentroRltSaida.BringToFront();
                         }
                     }
                     else

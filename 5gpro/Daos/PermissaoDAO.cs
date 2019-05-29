@@ -219,7 +219,6 @@ namespace _5gpro.Daos
         {
             List<fmMain.PermissaoNivelStruct> listacomniveis = new List<fmMain.PermissaoNivelStruct>();
 
-
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT * 
@@ -227,12 +226,14 @@ namespace _5gpro.Daos
                 WHERE p.idgrupousuario = @idgrupousuario
                 ";
 
+                sql.addParam("@idgrupousuario", codgrupousuario);
+
                 var data = sql.selectQuery();
 
                 foreach (var d in data)
                 {
                     fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
-                    permissaonivel.permissao = BuscarPermissaoByID((string)d["idpermissao"]);
+                    permissaonivel.permissao = BuscarPermissaoByID((d["idpermissao"]).ToString());
                     permissaonivel.Nivel = Convert.ToInt32(d["nivel"]);
 
                     listacomniveis.Add(permissaonivel);
