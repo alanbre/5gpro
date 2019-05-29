@@ -11,7 +11,7 @@ namespace _5gpro.Reports
 {
     public partial class fmRltGenerico : Form
     {
-        FuncoesAuxiliares fa = new FuncoesAuxiliares();
+        private FuncoesAuxiliares fa = new FuncoesAuxiliares();
         private DataTable _dados = new DataTable();
         public fmRltGenerico(DataTable dados)
         {
@@ -28,7 +28,7 @@ namespace _5gpro.Reports
                 _dados.Columns[c.ToString()].ColumnName = $"coluna{i}";
                 i++;
             }
-            while (i <= 9)
+            while (i <= 45)
             {
                 _dados.Columns.Add($"coluna{i}");
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", "N", false));

@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -48,11 +48,15 @@
             this.tpFiltros = new System.Windows.Forms.TabPage();
             this.cbFiltroValor = new System.Windows.Forms.CheckBox();
             this.gbFiltrosValor = new System.Windows.Forms.GroupBox();
+            this.lbValorFinal = new System.Windows.Forms.Label();
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
+            this.lbValorInicial = new System.Windows.Forms.Label();
             this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.cbFiltroDataSaida = new System.Windows.Forms.CheckBox();
             this.gbFiltrosDataSaida = new System.Windows.Forms.GroupBox();
+            this.lbDataSaidaFinal = new System.Windows.Forms.Label();
             this.dtpDataSaidaInicial = new System.Windows.Forms.DateTimePicker();
+            this.lbDataSaidaInicial = new System.Windows.Forms.Label();
             this.dtpDataSaidaFinal = new System.Windows.Forms.DateTimePicker();
             this.cbFiltrosCidades = new System.Windows.Forms.CheckBox();
             this.gbFiltrosCidades = new System.Windows.Forms.GroupBox();
@@ -60,6 +64,8 @@
             this.bcFinal = new _5gpro.Controls.BuscaCidade();
             this.cbFiltroDataEmissao = new System.Windows.Forms.CheckBox();
             this.gbFiltrosDataEmissao = new System.Windows.Forms.GroupBox();
+            this.lbDataEmissaoFinal = new System.Windows.Forms.Label();
+            this.lbDataEmissaoInicial = new System.Windows.Forms.Label();
             this.cbFiltrosClientes = new System.Windows.Forms.CheckBox();
             this.gbFiltrosClientes = new System.Windows.Forms.GroupBox();
             this.bpFinal = new _5gpro.Controls.BuscaPessoa();
@@ -72,12 +78,6 @@
             this.btSalvarRelatorio = new System.Windows.Forms.Button();
             this.btCarregarRelatorio = new System.Windows.Forms.Button();
             this.cbRelatorios = new System.Windows.Forms.ComboBox();
-            this.lbDataEmissaoInicial = new System.Windows.Forms.Label();
-            this.lbDataEmissaoFinal = new System.Windows.Forms.Label();
-            this.lbDataSaidaFinal = new System.Windows.Forms.Label();
-            this.lbDataSaidaInicial = new System.Windows.Forms.Label();
-            this.lbValorFinal = new System.Windows.Forms.Label();
-            this.lbValorInicial = new System.Windows.Forms.Label();
             this.tcPaginas.SuspendLayout();
             this.tpCampos.SuspendLayout();
             this.gbCamposCliente.SuspendLayout();
@@ -130,6 +130,7 @@
             this.btGerar.TabIndex = 3;
             this.btGerar.Text = "Gerar";
             this.btGerar.UseVisualStyleBackColor = true;
+            this.btGerar.Click += new System.EventHandler(this.BtGerar_Click);
             // 
             // tcPaginas
             // 
@@ -174,6 +175,7 @@
             this.cblCamposClientes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cblCamposClientes.CheckOnClick = true;
             this.cblCamposClientes.FormattingEnabled = true;
             this.cblCamposClientes.Location = new System.Drawing.Point(6, 46);
             this.cblCamposClientes.Name = "cblCamposClientes";
@@ -207,6 +209,7 @@
             this.cblCamposItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cblCamposItens.CheckOnClick = true;
             this.cblCamposItens.FormattingEnabled = true;
             this.cblCamposItens.Location = new System.Drawing.Point(6, 46);
             this.cblCamposItens.Name = "cblCamposItens";
@@ -240,6 +243,7 @@
             this.cblCamposNota.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.cblCamposNota.CheckOnClick = true;
             this.cblCamposNota.FormattingEnabled = true;
             this.cblCamposNota.Location = new System.Drawing.Point(6, 46);
             this.cblCamposNota.Name = "cblCamposNota";
@@ -301,6 +305,15 @@
             this.gbFiltrosValor.TabIndex = 9;
             this.gbFiltrosValor.TabStop = false;
             // 
+            // lbValorFinal
+            // 
+            this.lbValorFinal.AutoSize = true;
+            this.lbValorFinal.Location = new System.Drawing.Point(74, 13);
+            this.lbValorFinal.Name = "lbValorFinal";
+            this.lbValorFinal.Size = new System.Drawing.Size(53, 13);
+            this.lbValorFinal.TabIndex = 5;
+            this.lbValorFinal.Text = "Valor final";
+            // 
             // dbValorInicial
             // 
             this.dbValorInicial.Enabled = false;
@@ -313,6 +326,15 @@
             0,
             0,
             131072});
+            // 
+            // lbValorInicial
+            // 
+            this.lbValorInicial.AutoSize = true;
+            this.lbValorInicial.Location = new System.Drawing.Point(6, 13);
+            this.lbValorInicial.Name = "lbValorInicial";
+            this.lbValorInicial.Size = new System.Drawing.Size(60, 13);
+            this.lbValorInicial.TabIndex = 4;
+            this.lbValorInicial.Text = "Valor inicial";
             // 
             // dbValorFinal
             // 
@@ -350,6 +372,15 @@
             this.gbFiltrosDataSaida.TabIndex = 7;
             this.gbFiltrosDataSaida.TabStop = false;
             // 
+            // lbDataSaidaFinal
+            // 
+            this.lbDataSaidaFinal.AutoSize = true;
+            this.lbDataSaidaFinal.Location = new System.Drawing.Point(108, 15);
+            this.lbDataSaidaFinal.Name = "lbDataSaidaFinal";
+            this.lbDataSaidaFinal.Size = new System.Drawing.Size(52, 13);
+            this.lbDataSaidaFinal.TabIndex = 5;
+            this.lbDataSaidaFinal.Text = "Data final";
+            // 
             // dtpDataSaidaInicial
             // 
             this.dtpDataSaidaInicial.Enabled = false;
@@ -358,6 +389,15 @@
             this.dtpDataSaidaInicial.Name = "dtpDataSaidaInicial";
             this.dtpDataSaidaInicial.Size = new System.Drawing.Size(100, 20);
             this.dtpDataSaidaInicial.TabIndex = 0;
+            // 
+            // lbDataSaidaInicial
+            // 
+            this.lbDataSaidaInicial.AutoSize = true;
+            this.lbDataSaidaInicial.Location = new System.Drawing.Point(5, 16);
+            this.lbDataSaidaInicial.Name = "lbDataSaidaInicial";
+            this.lbDataSaidaInicial.Size = new System.Drawing.Size(59, 13);
+            this.lbDataSaidaInicial.TabIndex = 4;
+            this.lbDataSaidaInicial.Text = "Data inicial";
             // 
             // dtpDataSaidaFinal
             // 
@@ -430,6 +470,24 @@
             this.gbFiltrosDataEmissao.TabIndex = 5;
             this.gbFiltrosDataEmissao.TabStop = false;
             // 
+            // lbDataEmissaoFinal
+            // 
+            this.lbDataEmissaoFinal.AutoSize = true;
+            this.lbDataEmissaoFinal.Location = new System.Drawing.Point(109, 15);
+            this.lbDataEmissaoFinal.Name = "lbDataEmissaoFinal";
+            this.lbDataEmissaoFinal.Size = new System.Drawing.Size(52, 13);
+            this.lbDataEmissaoFinal.TabIndex = 3;
+            this.lbDataEmissaoFinal.Text = "Data final";
+            // 
+            // lbDataEmissaoInicial
+            // 
+            this.lbDataEmissaoInicial.AutoSize = true;
+            this.lbDataEmissaoInicial.Location = new System.Drawing.Point(6, 16);
+            this.lbDataEmissaoInicial.Name = "lbDataEmissaoInicial";
+            this.lbDataEmissaoInicial.Size = new System.Drawing.Size(59, 13);
+            this.lbDataEmissaoInicial.TabIndex = 2;
+            this.lbDataEmissaoInicial.Text = "Data inicial";
+            // 
             // cbFiltrosClientes
             // 
             this.cbFiltrosClientes.AutoSize = true;
@@ -486,17 +544,17 @@
             this.dgvDados.AllowUserToDeleteRows = false;
             this.dgvDados.AllowUserToOrderColumns = true;
             this.dgvDados.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDados.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -567,60 +625,6 @@
             this.cbRelatorios.Name = "cbRelatorios";
             this.cbRelatorios.Size = new System.Drawing.Size(1023, 21);
             this.cbRelatorios.TabIndex = 0;
-            // 
-            // lbDataEmissaoInicial
-            // 
-            this.lbDataEmissaoInicial.AutoSize = true;
-            this.lbDataEmissaoInicial.Location = new System.Drawing.Point(6, 16);
-            this.lbDataEmissaoInicial.Name = "lbDataEmissaoInicial";
-            this.lbDataEmissaoInicial.Size = new System.Drawing.Size(59, 13);
-            this.lbDataEmissaoInicial.TabIndex = 2;
-            this.lbDataEmissaoInicial.Text = "Data inicial";
-            // 
-            // lbDataEmissaoFinal
-            // 
-            this.lbDataEmissaoFinal.AutoSize = true;
-            this.lbDataEmissaoFinal.Location = new System.Drawing.Point(109, 15);
-            this.lbDataEmissaoFinal.Name = "lbDataEmissaoFinal";
-            this.lbDataEmissaoFinal.Size = new System.Drawing.Size(52, 13);
-            this.lbDataEmissaoFinal.TabIndex = 3;
-            this.lbDataEmissaoFinal.Text = "Data final";
-            // 
-            // lbDataSaidaFinal
-            // 
-            this.lbDataSaidaFinal.AutoSize = true;
-            this.lbDataSaidaFinal.Location = new System.Drawing.Point(108, 15);
-            this.lbDataSaidaFinal.Name = "lbDataSaidaFinal";
-            this.lbDataSaidaFinal.Size = new System.Drawing.Size(52, 13);
-            this.lbDataSaidaFinal.TabIndex = 5;
-            this.lbDataSaidaFinal.Text = "Data final";
-            // 
-            // lbDataSaidaInicial
-            // 
-            this.lbDataSaidaInicial.AutoSize = true;
-            this.lbDataSaidaInicial.Location = new System.Drawing.Point(5, 16);
-            this.lbDataSaidaInicial.Name = "lbDataSaidaInicial";
-            this.lbDataSaidaInicial.Size = new System.Drawing.Size(59, 13);
-            this.lbDataSaidaInicial.TabIndex = 4;
-            this.lbDataSaidaInicial.Text = "Data inicial";
-            // 
-            // lbValorFinal
-            // 
-            this.lbValorFinal.AutoSize = true;
-            this.lbValorFinal.Location = new System.Drawing.Point(74, 13);
-            this.lbValorFinal.Name = "lbValorFinal";
-            this.lbValorFinal.Size = new System.Drawing.Size(53, 13);
-            this.lbValorFinal.TabIndex = 5;
-            this.lbValorFinal.Text = "Valor final";
-            // 
-            // lbValorInicial
-            // 
-            this.lbValorInicial.AutoSize = true;
-            this.lbValorInicial.Location = new System.Drawing.Point(6, 13);
-            this.lbValorInicial.Name = "lbValorInicial";
-            this.lbValorInicial.Size = new System.Drawing.Size(60, 13);
-            this.lbValorInicial.TabIndex = 4;
-            this.lbValorInicial.Text = "Valor inicial";
             // 
             // fmRltNotasSaida
             // 
