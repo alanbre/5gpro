@@ -350,6 +350,7 @@ namespace _5gpro
             btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
             btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
             btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
         }
 
         private void RecolherMenus()
@@ -426,10 +427,7 @@ namespace _5gpro
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
-
-                    
-
-
+               
                     break;
 
                 case "botaoexpandiretrai":
@@ -610,6 +608,7 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             RelatorioSaidaHidden = true;
+                            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
                         }
                     }
                     break;

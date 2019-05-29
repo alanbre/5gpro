@@ -40,6 +40,18 @@
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
+            this.paneldentroRltSaida = new System.Windows.Forms.Panel();
+            this.btsRelatorionotas = new System.Windows.Forms.Button();
+            this.paneldropOrcamento = new System.Windows.Forms.Panel();
+            this.btiCadOrcamento = new System.Windows.Forms.Button();
+            this.paneldropSaida = new System.Windows.Forms.Panel();
+            this.btiRltNotaSaida = new System.Windows.Forms.Button();
+            this.btiSaida = new System.Windows.Forms.Button();
+            this.paneldropEntrada = new System.Windows.Forms.Panel();
+            this.btiEntrada = new System.Windows.Forms.Button();
+            this.paneldropApagar = new System.Windows.Forms.Panel();
+            this.btiQuitacaoAPagar = new System.Windows.Forms.Button();
+            this.btiCadContaPagar = new System.Windows.Forms.Button();
             this.paneldropAreceber = new System.Windows.Forms.Panel();
             this.btiQuitacaoConta = new System.Windows.Forms.Button();
             this.btiCadContaReceber = new System.Windows.Forms.Button();
@@ -52,28 +64,16 @@
             this.btiItens = new System.Windows.Forms.Button();
             this.btiCadPessoa = new System.Windows.Forms.Button();
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
-            this.paneldropApagar = new System.Windows.Forms.Panel();
-            this.btiCadContaPagar = new System.Windows.Forms.Button();
-            this.btiQuitacaoAPagar = new System.Windows.Forms.Button();
-            this.paneldropEntrada = new System.Windows.Forms.Panel();
-            this.btiEntrada = new System.Windows.Forms.Button();
-            this.paneldropSaida = new System.Windows.Forms.Panel();
-            this.btiSaida = new System.Windows.Forms.Button();
-            this.paneldropOrcamento = new System.Windows.Forms.Panel();
-            this.btiCadOrcamento = new System.Windows.Forms.Button();
-            this.btiRltNotaSaida = new System.Windows.Forms.Button();
-            this.paneldentroRltSaida = new System.Windows.Forms.Panel();
-            this.btsRelatorionotas = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
+            this.paneldentroRltSaida.SuspendLayout();
+            this.paneldropOrcamento.SuspendLayout();
+            this.paneldropSaida.SuspendLayout();
+            this.paneldropEntrada.SuspendLayout();
+            this.paneldropApagar.SuspendLayout();
             this.paneldropAreceber.SuspendLayout();
             this.paneldropCadastros.SuspendLayout();
-            this.paneldropApagar.SuspendLayout();
-            this.paneldropEntrada.SuspendLayout();
-            this.paneldropSaida.SuspendLayout();
-            this.paneldropOrcamento.SuspendLayout();
-            this.paneldentroRltSaida.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -234,6 +234,163 @@
             this.panelCentral.Name = "panelCentral";
             this.panelCentral.Size = new System.Drawing.Size(912, 535);
             this.panelCentral.TabIndex = 3;
+            // 
+            // paneldentroRltSaida
+            // 
+            this.paneldentroRltSaida.Controls.Add(this.btsRelatorionotas);
+            this.paneldentroRltSaida.Location = new System.Drawing.Point(209, 211);
+            this.paneldentroRltSaida.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldentroRltSaida.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldentroRltSaida.Name = "paneldentroRltSaida";
+            this.paneldentroRltSaida.Size = new System.Drawing.Size(200, 10);
+            this.paneldentroRltSaida.TabIndex = 6;
+            // 
+            // btsRelatorionotas
+            // 
+            this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btsRelatorionotas.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
+            this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
+            this.btsRelatorionotas.Name = "btsRelatorionotas";
+            this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
+            this.btsRelatorionotas.TabIndex = 0;
+            this.btsRelatorionotas.Text = "Relatório de notas";
+            this.btsRelatorionotas.UseVisualStyleBackColor = false;
+            this.btsRelatorionotas.Click += new System.EventHandler(this.BtsRelatorionotas_Click);
+            // 
+            // paneldropOrcamento
+            // 
+            this.paneldropOrcamento.Controls.Add(this.btiCadOrcamento);
+            this.paneldropOrcamento.Location = new System.Drawing.Point(3, 229);
+            this.paneldropOrcamento.MaximumSize = new System.Drawing.Size(200, 27);
+            this.paneldropOrcamento.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropOrcamento.Name = "paneldropOrcamento";
+            this.paneldropOrcamento.Size = new System.Drawing.Size(200, 10);
+            this.paneldropOrcamento.TabIndex = 5;
+            // 
+            // btiCadOrcamento
+            // 
+            this.btiCadOrcamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadOrcamento.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
+            this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
+            this.btiCadOrcamento.Name = "btiCadOrcamento";
+            this.btiCadOrcamento.Size = new System.Drawing.Size(200, 28);
+            this.btiCadOrcamento.TabIndex = 0;
+            this.btiCadOrcamento.Text = "Cadastro Orçamentos";
+            this.btiCadOrcamento.UseVisualStyleBackColor = false;
+            this.btiCadOrcamento.Click += new System.EventHandler(this.BtiCadOrcamento_Click);
+            // 
+            // paneldropSaida
+            // 
+            this.paneldropSaida.Controls.Add(this.btiRltNotaSaida);
+            this.paneldropSaida.Controls.Add(this.btiSaida);
+            this.paneldropSaida.Location = new System.Drawing.Point(3, 183);
+            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 56);
+            this.paneldropSaida.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropSaida.Name = "paneldropSaida";
+            this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
+            this.paneldropSaida.TabIndex = 4;
+            // 
+            // btiRltNotaSaida
+            // 
+            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
+            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
+            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
+            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiRltNotaSaida.TabIndex = 1;
+            this.btiRltNotaSaida.Text = "Relatórios";
+            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
+            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
+            // 
+            // btiSaida
+            // 
+            this.btiSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiSaida.ForeColor = System.Drawing.Color.White;
+            this.btiSaida.Location = new System.Drawing.Point(0, 0);
+            this.btiSaida.Name = "btiSaida";
+            this.btiSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiSaida.TabIndex = 0;
+            this.btiSaida.Text = "Emissão de nota fiscal";
+            this.btiSaida.UseVisualStyleBackColor = false;
+            this.btiSaida.Click += new System.EventHandler(this.BtiSaida_Click);
+            // 
+            // paneldropEntrada
+            // 
+            this.paneldropEntrada.Controls.Add(this.btiEntrada);
+            this.paneldropEntrada.Location = new System.Drawing.Point(3, 139);
+            this.paneldropEntrada.MaximumSize = new System.Drawing.Size(200, 30);
+            this.paneldropEntrada.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropEntrada.Name = "paneldropEntrada";
+            this.paneldropEntrada.Size = new System.Drawing.Size(200, 10);
+            this.paneldropEntrada.TabIndex = 3;
+            // 
+            // btiEntrada
+            // 
+            this.btiEntrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiEntrada.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiEntrada.ForeColor = System.Drawing.Color.White;
+            this.btiEntrada.Location = new System.Drawing.Point(0, 0);
+            this.btiEntrada.Name = "btiEntrada";
+            this.btiEntrada.Size = new System.Drawing.Size(200, 28);
+            this.btiEntrada.TabIndex = 0;
+            this.btiEntrada.Text = "Entrada de notas";
+            this.btiEntrada.UseVisualStyleBackColor = false;
+            this.btiEntrada.Click += new System.EventHandler(this.BtiEntrada_Click);
+            // 
+            // paneldropApagar
+            // 
+            this.paneldropApagar.Controls.Add(this.btiQuitacaoAPagar);
+            this.paneldropApagar.Controls.Add(this.btiCadContaPagar);
+            this.paneldropApagar.Location = new System.Drawing.Point(3, 93);
+            this.paneldropApagar.MaximumSize = new System.Drawing.Size(200, 58);
+            this.paneldropApagar.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropApagar.Name = "paneldropApagar";
+            this.paneldropApagar.Size = new System.Drawing.Size(200, 10);
+            this.paneldropApagar.TabIndex = 2;
+            // 
+            // btiQuitacaoAPagar
+            // 
+            this.btiQuitacaoAPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiQuitacaoAPagar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiQuitacaoAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoAPagar.ForeColor = System.Drawing.Color.White;
+            this.btiQuitacaoAPagar.Location = new System.Drawing.Point(0, 28);
+            this.btiQuitacaoAPagar.Name = "btiQuitacaoAPagar";
+            this.btiQuitacaoAPagar.Size = new System.Drawing.Size(200, 28);
+            this.btiQuitacaoAPagar.TabIndex = 1;
+            this.btiQuitacaoAPagar.Text = "Quitação";
+            this.btiQuitacaoAPagar.UseVisualStyleBackColor = false;
+            this.btiQuitacaoAPagar.Click += new System.EventHandler(this.BtiQuitacaoAPagar_Click);
+            // 
+            // btiCadContaPagar
+            // 
+            this.btiCadContaPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadContaPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
+            this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
+            this.btiCadContaPagar.Name = "btiCadContaPagar";
+            this.btiCadContaPagar.Size = new System.Drawing.Size(200, 28);
+            this.btiCadContaPagar.TabIndex = 0;
+            this.btiCadContaPagar.Text = "Cadastro de Conta";
+            this.btiCadContaPagar.UseVisualStyleBackColor = false;
+            this.btiCadContaPagar.Click += new System.EventHandler(this.BtiCadContaPagar_Click);
             // 
             // paneldropAreceber
             // 
@@ -397,163 +554,6 @@
             this.timerDropLateral.Interval = 1;
             this.timerDropLateral.Tick += new System.EventHandler(this.TimerDropLateral_Tick);
             // 
-            // paneldropApagar
-            // 
-            this.paneldropApagar.Controls.Add(this.btiQuitacaoAPagar);
-            this.paneldropApagar.Controls.Add(this.btiCadContaPagar);
-            this.paneldropApagar.Location = new System.Drawing.Point(3, 93);
-            this.paneldropApagar.MaximumSize = new System.Drawing.Size(200, 58);
-            this.paneldropApagar.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropApagar.Name = "paneldropApagar";
-            this.paneldropApagar.Size = new System.Drawing.Size(200, 10);
-            this.paneldropApagar.TabIndex = 2;
-            // 
-            // btiCadContaPagar
-            // 
-            this.btiCadContaPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadContaPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
-            this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
-            this.btiCadContaPagar.Name = "btiCadContaPagar";
-            this.btiCadContaPagar.Size = new System.Drawing.Size(200, 28);
-            this.btiCadContaPagar.TabIndex = 0;
-            this.btiCadContaPagar.Text = "Cadastro de Conta";
-            this.btiCadContaPagar.UseVisualStyleBackColor = false;
-            this.btiCadContaPagar.Click += new System.EventHandler(this.BtiCadContaPagar_Click);
-            // 
-            // btiQuitacaoAPagar
-            // 
-            this.btiQuitacaoAPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiQuitacaoAPagar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiQuitacaoAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiQuitacaoAPagar.ForeColor = System.Drawing.Color.White;
-            this.btiQuitacaoAPagar.Location = new System.Drawing.Point(0, 28);
-            this.btiQuitacaoAPagar.Name = "btiQuitacaoAPagar";
-            this.btiQuitacaoAPagar.Size = new System.Drawing.Size(200, 28);
-            this.btiQuitacaoAPagar.TabIndex = 1;
-            this.btiQuitacaoAPagar.Text = "Quitação";
-            this.btiQuitacaoAPagar.UseVisualStyleBackColor = false;
-            this.btiQuitacaoAPagar.Click += new System.EventHandler(this.BtiQuitacaoAPagar_Click);
-            // 
-            // paneldropEntrada
-            // 
-            this.paneldropEntrada.Controls.Add(this.btiEntrada);
-            this.paneldropEntrada.Location = new System.Drawing.Point(3, 139);
-            this.paneldropEntrada.MaximumSize = new System.Drawing.Size(200, 30);
-            this.paneldropEntrada.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropEntrada.Name = "paneldropEntrada";
-            this.paneldropEntrada.Size = new System.Drawing.Size(200, 10);
-            this.paneldropEntrada.TabIndex = 3;
-            // 
-            // btiEntrada
-            // 
-            this.btiEntrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiEntrada.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiEntrada.ForeColor = System.Drawing.Color.White;
-            this.btiEntrada.Location = new System.Drawing.Point(0, 0);
-            this.btiEntrada.Name = "btiEntrada";
-            this.btiEntrada.Size = new System.Drawing.Size(200, 28);
-            this.btiEntrada.TabIndex = 0;
-            this.btiEntrada.Text = "Entrada de notas";
-            this.btiEntrada.UseVisualStyleBackColor = false;
-            this.btiEntrada.Click += new System.EventHandler(this.BtiEntrada_Click);
-            // 
-            // paneldropSaida
-            // 
-            this.paneldropSaida.Controls.Add(this.btiRltNotaSaida);
-            this.paneldropSaida.Controls.Add(this.btiSaida);
-            this.paneldropSaida.Location = new System.Drawing.Point(3, 183);
-            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 56);
-            this.paneldropSaida.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropSaida.Name = "paneldropSaida";
-            this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
-            this.paneldropSaida.TabIndex = 4;
-            // 
-            // btiSaida
-            // 
-            this.btiSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiSaida.ForeColor = System.Drawing.Color.White;
-            this.btiSaida.Location = new System.Drawing.Point(0, 0);
-            this.btiSaida.Name = "btiSaida";
-            this.btiSaida.Size = new System.Drawing.Size(200, 28);
-            this.btiSaida.TabIndex = 0;
-            this.btiSaida.Text = "Emissão de nota fiscal";
-            this.btiSaida.UseVisualStyleBackColor = false;
-            this.btiSaida.Click += new System.EventHandler(this.BtiSaida_Click);
-            // 
-            // paneldropOrcamento
-            // 
-            this.paneldropOrcamento.Controls.Add(this.btiCadOrcamento);
-            this.paneldropOrcamento.Location = new System.Drawing.Point(3, 229);
-            this.paneldropOrcamento.MaximumSize = new System.Drawing.Size(200, 27);
-            this.paneldropOrcamento.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropOrcamento.Name = "paneldropOrcamento";
-            this.paneldropOrcamento.Size = new System.Drawing.Size(200, 10);
-            this.paneldropOrcamento.TabIndex = 5;
-            // 
-            // btiCadOrcamento
-            // 
-            this.btiCadOrcamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadOrcamento.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
-            this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
-            this.btiCadOrcamento.Name = "btiCadOrcamento";
-            this.btiCadOrcamento.Size = new System.Drawing.Size(200, 28);
-            this.btiCadOrcamento.TabIndex = 0;
-            this.btiCadOrcamento.Text = "Cadastro Orçamentos";
-            this.btiCadOrcamento.UseVisualStyleBackColor = false;
-            this.btiCadOrcamento.Click += new System.EventHandler(this.BtiCadOrcamento_Click);
-            // 
-            // btiRltNotaSaida
-            // 
-            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
-            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
-            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
-            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
-            this.btiRltNotaSaida.TabIndex = 1;
-            this.btiRltNotaSaida.Text = "Relatórios";
-            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
-            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
-            // 
-            // paneldentroRltSaida
-            // 
-            this.paneldentroRltSaida.Controls.Add(this.btsRelatorionotas);
-            this.paneldentroRltSaida.Location = new System.Drawing.Point(209, 211);
-            this.paneldentroRltSaida.MaximumSize = new System.Drawing.Size(200, 28);
-            this.paneldentroRltSaida.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldentroRltSaida.Name = "paneldentroRltSaida";
-            this.paneldentroRltSaida.Size = new System.Drawing.Size(200, 10);
-            this.paneldentroRltSaida.TabIndex = 6;
-            // 
-            // btsRelatorionotas
-            // 
-            this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btsRelatorionotas.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
-            this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
-            this.btsRelatorionotas.Name = "btsRelatorionotas";
-            this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
-            this.btsRelatorionotas.TabIndex = 0;
-            this.btsRelatorionotas.Text = "Relatório de notas";
-            this.btsRelatorionotas.UseVisualStyleBackColor = false;
-            this.btsRelatorionotas.Click += new System.EventHandler(this.BtsRelatorionotas_Click);
-            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,13 +571,13 @@
             this.panelEsquerdo.ResumeLayout(false);
             this.panelSuperior.ResumeLayout(false);
             this.panelCentral.ResumeLayout(false);
+            this.paneldentroRltSaida.ResumeLayout(false);
+            this.paneldropOrcamento.ResumeLayout(false);
+            this.paneldropSaida.ResumeLayout(false);
+            this.paneldropEntrada.ResumeLayout(false);
+            this.paneldropApagar.ResumeLayout(false);
             this.paneldropAreceber.ResumeLayout(false);
             this.paneldropCadastros.ResumeLayout(false);
-            this.paneldropApagar.ResumeLayout(false);
-            this.paneldropEntrada.ResumeLayout(false);
-            this.paneldropSaida.ResumeLayout(false);
-            this.paneldropOrcamento.ResumeLayout(false);
-            this.paneldentroRltSaida.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
