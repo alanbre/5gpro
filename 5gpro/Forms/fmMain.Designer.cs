@@ -70,10 +70,8 @@
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldropAreceber = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btiQuitacaoConta = new System.Windows.Forms.Button();
+            this.btiCadContaReceber = new System.Windows.Forms.Button();
             this.paneldropCadastros = new System.Windows.Forms.Panel();
             this.btiGrupopessoa = new System.Windows.Forms.Button();
             this.btiGrupoitens = new System.Windows.Forms.Button();
@@ -231,14 +229,14 @@
             // tsmiCarCadastroContaReceber
             // 
             this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarCadastroContaReceber.Text = "Cadastro de Contas";
             this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
             // 
             // tsmiCarQuitacaoConta
             // 
             this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
-            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
             this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
             // 
@@ -437,6 +435,7 @@
             this.btCReceber.TabIndex = 2;
             this.btCReceber.Text = "A Receber";
             this.btCReceber.UseVisualStyleBackColor = false;
+            this.btCReceber.Click += new System.EventHandler(this.BtCReceber_Click);
             // 
             // btCadastrosmenu
             // 
@@ -489,56 +488,43 @@
             // 
             // paneldropAreceber
             // 
-            this.paneldropAreceber.Controls.Add(this.button8);
-            this.paneldropAreceber.Controls.Add(this.button7);
-            this.paneldropAreceber.Controls.Add(this.button6);
-            this.paneldropAreceber.Controls.Add(this.button5);
-            this.paneldropAreceber.Location = new System.Drawing.Point(6, 107);
-            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 97);
+            this.paneldropAreceber.BackColor = System.Drawing.Color.White;
+            this.paneldropAreceber.Controls.Add(this.btiQuitacaoConta);
+            this.paneldropAreceber.Controls.Add(this.btiCadContaReceber);
+            this.paneldropAreceber.Location = new System.Drawing.Point(0, 47);
+            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 60);
             this.paneldropAreceber.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropAreceber.Name = "paneldropAreceber";
-            this.paneldropAreceber.Size = new System.Drawing.Size(200, 0);
+            this.paneldropAreceber.Size = new System.Drawing.Size(200, 60);
             this.paneldropAreceber.TabIndex = 1;
             // 
-            // button8
+            // btiQuitacaoConta
             // 
-            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button8.Location = new System.Drawing.Point(0, 69);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(200, 23);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "button8";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btiQuitacaoConta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiQuitacaoConta.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiQuitacaoConta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiQuitacaoConta.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoConta.ForeColor = System.Drawing.Color.White;
+            this.btiQuitacaoConta.Location = new System.Drawing.Point(0, 28);
+            this.btiQuitacaoConta.Name = "btiQuitacaoConta";
+            this.btiQuitacaoConta.Size = new System.Drawing.Size(200, 28);
+            this.btiQuitacaoConta.TabIndex = 1;
+            this.btiQuitacaoConta.Text = "Quitação";
+            this.btiQuitacaoConta.UseVisualStyleBackColor = false;
             // 
-            // button7
+            // btiCadContaReceber
             // 
-            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button7.Location = new System.Drawing.Point(0, 46);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(200, 23);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button6.Location = new System.Drawing.Point(0, 23);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(200, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button5.Location = new System.Drawing.Point(0, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(200, 23);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btiCadContaReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadContaReceber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadContaReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadContaReceber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaReceber.ForeColor = System.Drawing.Color.White;
+            this.btiCadContaReceber.Location = new System.Drawing.Point(0, 0);
+            this.btiCadContaReceber.Name = "btiCadContaReceber";
+            this.btiCadContaReceber.Size = new System.Drawing.Size(200, 28);
+            this.btiCadContaReceber.TabIndex = 0;
+            this.btiCadContaReceber.Text = "Cadastro de Conta";
+            this.btiCadContaReceber.UseVisualStyleBackColor = false;
             // 
             // paneldropCadastros
             // 
@@ -554,7 +540,7 @@
             this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 200);
             this.paneldropCadastros.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCadastros.Name = "paneldropCadastros";
-            this.paneldropCadastros.Size = new System.Drawing.Size(200, 10);
+            this.paneldropCadastros.Size = new System.Drawing.Size(200, 31);
             this.paneldropCadastros.TabIndex = 0;
             // 
             // btiGrupopessoa
@@ -730,10 +716,8 @@
         private System.Windows.Forms.Button btCReceber;
         private System.Windows.Forms.Button btRelatorios;
         private System.Windows.Forms.Panel paneldropAreceber;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btiQuitacaoConta;
+        private System.Windows.Forms.Button btiCadContaReceber;
         private System.Windows.Forms.Panel paneldropCadastros;
         private System.Windows.Forms.Button btiGruposusuarios;
         private System.Windows.Forms.Button btiUsuários;

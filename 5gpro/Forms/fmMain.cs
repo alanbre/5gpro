@@ -26,6 +26,7 @@ namespace _5gpro
 
         private string botaoPressionado = "";
         private bool CadastrosHidden;
+        private bool ContareceberHidden;
         private bool MenuHidden;
 
 
@@ -273,8 +274,37 @@ namespace _5gpro
                         timerDropLateral.Stop();
                         CadastrosHidden = true;
                     }
+                    paneldropAreceber.Height -= 100;
+                    if (paneldropAreceber.Size == paneldropAreceber.MinimumSize)
+                    {
+                        timerDropLateral.Stop();
+                        ContareceberHidden = true;
+                    }
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
+                    break;
+
+                case "botaoexpandiretrai":
+                    if (MenuHidden)
+                    {
+                        panelEsquerdo.Width = panelEsquerdo.Width + 50;
+                        if (panelEsquerdo.Width >= panelWidth)
+                        {
+                            timerDropLateral.Stop();
+                            MenuHidden = false;
+                            this.Refresh();
+                        }
+                    }
+                    else
+                    {
+                        panelEsquerdo.Width = panelEsquerdo.Width - 50;
+                        if (panelEsquerdo.Width <= 70)
+                        {
+                            timerDropLateral.Stop();
+                            MenuHidden = true;
+                            this.Refresh();
+                        }
+                    }
                     break;
 
                 case "botaocadastro":
@@ -298,25 +328,23 @@ namespace _5gpro
                     }
                     break;
 
-                case "botaoexpandiretrai":
-                    if (MenuHidden)
+                case "botaocontareceber":
+                    if (ContareceberHidden)
                     {
-                        panelEsquerdo.Width = panelEsquerdo.Width + 50;
-                        if (panelEsquerdo.Width >= panelWidth)
+                        paneldropAreceber.Height += 100;
+                        if (paneldropAreceber.Size == paneldropAreceber.MaximumSize)
                         {
                             timerDropLateral.Stop();
-                            MenuHidden = false;
-                            this.Refresh();
+                            ContareceberHidden = false;
                         }
                     }
                     else
                     {
-                        panelEsquerdo.Width = panelEsquerdo.Width - 50;
-                        if (panelEsquerdo.Width <= 70)
+                        paneldropAreceber.Height -= 100;
+                        if (paneldropAreceber.Size == paneldropAreceber.MinimumSize)
                         {
                             timerDropLateral.Stop();
-                            MenuHidden = true;
-                            this.Refresh();
+                            ContareceberHidden = true;
                         }
                     }
                     break;
@@ -366,6 +394,10 @@ namespace _5gpro
             formCadGrupoPessoa.Show(this);
         }
 
-
+        private void BtCReceber_Click(object sender, EventArgs e)
+        {
+            timerDropLateral.Start();
+            botaoPressionado = "botaocontareceber";
+        }
     }
 }
