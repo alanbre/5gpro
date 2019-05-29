@@ -29,37 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.msMain = new System.Windows.Forms.MenuStrip();
-            this.tsmiCadastros = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroPessoas = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroItens = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroUsuarios = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroGrupoUsuario = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroDeOperações = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeGrupoDeItensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cadastroDeGrupoDePessoasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiOrcamento = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCadastroOrcamentos = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEntrada = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEntradaNotas = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSaida = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiEmissaoNF = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiContasReceber = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCarCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCarQuitacaoConta = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiContasPagar = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCapCadastroConta = new System.Windows.Forms.ToolStripMenuItem();
-            this.quitaçãoDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatóriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiRelTeste = new System.Windows.Forms.ToolStripMenuItem();
-            this.exemplorelatorioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatorioDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatorioDeItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatorioContaReceberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.relatórioDeContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEsquerdo = new System.Windows.Forms.Panel();
-            this.btRelatorios = new System.Windows.Forms.Button();
             this.btOrcamentos = new System.Windows.Forms.Button();
             this.btSaidas = new System.Windows.Forms.Button();
             this.btEntradas = new System.Windows.Forms.Button();
@@ -69,11 +40,21 @@
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
+            this.paneldentroRltSaida = new System.Windows.Forms.Panel();
+            this.btsRelatorionotas = new System.Windows.Forms.Button();
+            this.paneldropOrcamento = new System.Windows.Forms.Panel();
+            this.btiCadOrcamento = new System.Windows.Forms.Button();
+            this.paneldropSaida = new System.Windows.Forms.Panel();
+            this.btiRltNotaSaida = new System.Windows.Forms.Button();
+            this.btiSaida = new System.Windows.Forms.Button();
+            this.paneldropEntrada = new System.Windows.Forms.Panel();
+            this.btiEntrada = new System.Windows.Forms.Button();
+            this.paneldropApagar = new System.Windows.Forms.Panel();
+            this.btiQuitacaoAPagar = new System.Windows.Forms.Button();
+            this.btiCadContaPagar = new System.Windows.Forms.Button();
             this.paneldropAreceber = new System.Windows.Forms.Panel();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btiQuitacaoConta = new System.Windows.Forms.Button();
+            this.btiCadContaReceber = new System.Windows.Forms.Button();
             this.paneldropCadastros = new System.Windows.Forms.Panel();
             this.btiGrupopessoa = new System.Windows.Forms.Button();
             this.btiGrupoitens = new System.Windows.Forms.Button();
@@ -83,242 +64,17 @@
             this.btiItens = new System.Windows.Forms.Button();
             this.btiCadPessoa = new System.Windows.Forms.Button();
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
-            this.msMain.SuspendLayout();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
+            this.paneldentroRltSaida.SuspendLayout();
+            this.paneldropOrcamento.SuspendLayout();
+            this.paneldropSaida.SuspendLayout();
+            this.paneldropEntrada.SuspendLayout();
+            this.paneldropApagar.SuspendLayout();
             this.paneldropAreceber.SuspendLayout();
             this.paneldropCadastros.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // msMain
-            // 
-            this.msMain.BackColor = System.Drawing.Color.Transparent;
-            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCadastros,
-            this.tsmiOrcamento,
-            this.tsmiEntrada,
-            this.tsmiSaida,
-            this.tsmiContasReceber,
-            this.tsmiContasPagar,
-            this.relatóriosToolStripMenuItem});
-            this.msMain.Location = new System.Drawing.Point(0, 0);
-            this.msMain.Name = "msMain";
-            this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.msMain.Size = new System.Drawing.Size(1162, 24);
-            this.msMain.TabIndex = 0;
-            this.msMain.Text = "msMenu";
-            // 
-            // tsmiCadastros
-            // 
-            this.tsmiCadastros.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCadastroPessoas,
-            this.tsmiCadastroItens,
-            this.tsmiCadastroUsuarios,
-            this.tsmiCadastroGrupoUsuario,
-            this.tsmiCadastroDeOperações,
-            this.cadastroDeGrupoDeItensToolStripMenuItem,
-            this.cadastroDeGrupoDePessoasToolStripMenuItem});
-            this.tsmiCadastros.Name = "tsmiCadastros";
-            this.tsmiCadastros.Size = new System.Drawing.Size(66, 20);
-            this.tsmiCadastros.Text = "Cadastro";
-            // 
-            // tsmiCadastroPessoas
-            // 
-            this.tsmiCadastroPessoas.Name = "tsmiCadastroPessoas";
-            this.tsmiCadastroPessoas.Size = new System.Drawing.Size(237, 22);
-            this.tsmiCadastroPessoas.Text = "Cadastro de Pessoas";
-            this.tsmiCadastroPessoas.Click += new System.EventHandler(this.TsmiCadastroPessoas_Click);
-            // 
-            // tsmiCadastroItens
-            // 
-            this.tsmiCadastroItens.Name = "tsmiCadastroItens";
-            this.tsmiCadastroItens.Size = new System.Drawing.Size(237, 22);
-            this.tsmiCadastroItens.Text = "Cadastro de Itens";
-            this.tsmiCadastroItens.Click += new System.EventHandler(this.TsmiCadastroItens_Click);
-            // 
-            // tsmiCadastroUsuarios
-            // 
-            this.tsmiCadastroUsuarios.Name = "tsmiCadastroUsuarios";
-            this.tsmiCadastroUsuarios.Size = new System.Drawing.Size(237, 22);
-            this.tsmiCadastroUsuarios.Text = "Cadastro de Usuários";
-            this.tsmiCadastroUsuarios.Click += new System.EventHandler(this.TsmiCadastroUsuarios_Click);
-            // 
-            // tsmiCadastroGrupoUsuario
-            // 
-            this.tsmiCadastroGrupoUsuario.Name = "tsmiCadastroGrupoUsuario";
-            this.tsmiCadastroGrupoUsuario.Size = new System.Drawing.Size(237, 22);
-            this.tsmiCadastroGrupoUsuario.Text = "Cadastro de Grupo de Usuários";
-            this.tsmiCadastroGrupoUsuario.Click += new System.EventHandler(this.TsmiCadastroDeGrupoDeUsuários_Click);
-            // 
-            // tsmiCadastroDeOperações
-            // 
-            this.tsmiCadastroDeOperações.Name = "tsmiCadastroDeOperações";
-            this.tsmiCadastroDeOperações.Size = new System.Drawing.Size(237, 22);
-            this.tsmiCadastroDeOperações.Text = "Cadastro de Operações";
-            this.tsmiCadastroDeOperações.Click += new System.EventHandler(this.TsmiCadastroDeOperações_Click);
-            // 
-            // cadastroDeGrupoDeItensToolStripMenuItem
-            // 
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Name = "cadastroDeGrupoDeItensToolStripMenuItem";
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Text = "Cadastro de Grupo de Itens";
-            this.cadastroDeGrupoDeItensToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeGrupoDeItensToolStripMenuItem_Click);
-            // 
-            // cadastroDeGrupoDePessoasToolStripMenuItem
-            // 
-            this.cadastroDeGrupoDePessoasToolStripMenuItem.Name = "cadastroDeGrupoDePessoasToolStripMenuItem";
-            this.cadastroDeGrupoDePessoasToolStripMenuItem.Size = new System.Drawing.Size(237, 22);
-            this.cadastroDeGrupoDePessoasToolStripMenuItem.Text = "Cadastro de Grupo de Pessoas";
-            this.cadastroDeGrupoDePessoasToolStripMenuItem.Click += new System.EventHandler(this.CadastroDeGrupoDePessoasToolStripMenuItem_Click);
-            // 
-            // tsmiOrcamento
-            // 
-            this.tsmiOrcamento.BackColor = System.Drawing.Color.Transparent;
-            this.tsmiOrcamento.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCadastroOrcamentos});
-            this.tsmiOrcamento.Name = "tsmiOrcamento";
-            this.tsmiOrcamento.Size = new System.Drawing.Size(79, 20);
-            this.tsmiOrcamento.Text = "Orçamento";
-            // 
-            // tsmiCadastroOrcamentos
-            // 
-            this.tsmiCadastroOrcamentos.Name = "tsmiCadastroOrcamentos";
-            this.tsmiCadastroOrcamentos.Size = new System.Drawing.Size(208, 22);
-            this.tsmiCadastroOrcamentos.Text = "Cadastros de orçamentos";
-            this.tsmiCadastroOrcamentos.Click += new System.EventHandler(this.TsmiCadastroOrcamentos_Click);
-            // 
-            // tsmiEntrada
-            // 
-            this.tsmiEntrada.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEntradaNotas});
-            this.tsmiEntrada.Name = "tsmiEntrada";
-            this.tsmiEntrada.Size = new System.Drawing.Size(59, 20);
-            this.tsmiEntrada.Text = "Entrada";
-            // 
-            // tsmiEntradaNotas
-            // 
-            this.tsmiEntradaNotas.Name = "tsmiEntradaNotas";
-            this.tsmiEntradaNotas.Size = new System.Drawing.Size(162, 22);
-            this.tsmiEntradaNotas.Text = "Entrada de notas";
-            this.tsmiEntradaNotas.Click += new System.EventHandler(this.TsmiEntradaNotas_Click);
-            // 
-            // tsmiSaida
-            // 
-            this.tsmiSaida.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiEmissaoNF});
-            this.tsmiSaida.Name = "tsmiSaida";
-            this.tsmiSaida.Size = new System.Drawing.Size(47, 20);
-            this.tsmiSaida.Text = "Saída";
-            // 
-            // tsmiEmissaoNF
-            // 
-            this.tsmiEmissaoNF.Name = "tsmiEmissaoNF";
-            this.tsmiEmissaoNF.Size = new System.Drawing.Size(190, 22);
-            this.tsmiEmissaoNF.Text = "Emissão de nota fiscal";
-            this.tsmiEmissaoNF.Click += new System.EventHandler(this.TsmiEmissaoNF_Click);
-            // 
-            // tsmiContasReceber
-            // 
-            this.tsmiContasReceber.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCarCadastroContaReceber,
-            this.tsmiCarQuitacaoConta});
-            this.tsmiContasReceber.Enabled = false;
-            this.tsmiContasReceber.Name = "tsmiContasReceber";
-            this.tsmiContasReceber.Size = new System.Drawing.Size(107, 20);
-            this.tsmiContasReceber.Text = "Contas a receber";
-            // 
-            // tsmiCarCadastroContaReceber
-            // 
-            this.tsmiCarCadastroContaReceber.Name = "tsmiCarCadastroContaReceber";
-            this.tsmiCarCadastroContaReceber.Size = new System.Drawing.Size(178, 22);
-            this.tsmiCarCadastroContaReceber.Text = "Cadastro de Contas";
-            this.tsmiCarCadastroContaReceber.Click += new System.EventHandler(this.TsmiCarCadastroContaReceber_Click);
-            // 
-            // tsmiCarQuitacaoConta
-            // 
-            this.tsmiCarQuitacaoConta.Name = "tsmiCarQuitacaoConta";
-            this.tsmiCarQuitacaoConta.Size = new System.Drawing.Size(178, 22);
-            this.tsmiCarQuitacaoConta.Text = "Quitação de Contas";
-            this.tsmiCarQuitacaoConta.Click += new System.EventHandler(this.TsmiCarQuitacaoConta_Click);
-            // 
-            // tsmiContasPagar
-            // 
-            this.tsmiContasPagar.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiCapCadastroConta,
-            this.quitaçãoDeContasToolStripMenuItem});
-            this.tsmiContasPagar.Name = "tsmiContasPagar";
-            this.tsmiContasPagar.Size = new System.Drawing.Size(98, 20);
-            this.tsmiContasPagar.Text = "Contas a pagar";
-            // 
-            // tsmiCapCadastroConta
-            // 
-            this.tsmiCapCadastroConta.Name = "tsmiCapCadastroConta";
-            this.tsmiCapCadastroConta.Size = new System.Drawing.Size(176, 22);
-            this.tsmiCapCadastroConta.Text = "Cadastro de conta";
-            this.tsmiCapCadastroConta.Click += new System.EventHandler(this.TsmiCapCadastroContaReceber_Click);
-            // 
-            // quitaçãoDeContasToolStripMenuItem
-            // 
-            this.quitaçãoDeContasToolStripMenuItem.Name = "quitaçãoDeContasToolStripMenuItem";
-            this.quitaçãoDeContasToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.quitaçãoDeContasToolStripMenuItem.Text = "Quitação de contas";
-            this.quitaçãoDeContasToolStripMenuItem.Click += new System.EventHandler(this.QuitaçãoDeContasToolStripMenuItem_Click);
-            // 
-            // relatóriosToolStripMenuItem
-            // 
-            this.relatóriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiRelTeste,
-            this.exemplorelatorioToolStripMenuItem,
-            this.relatorioDeUsuarioToolStripMenuItem,
-            this.relatorioDeItemToolStripMenuItem,
-            this.relatorioContaReceberToolStripMenuItem,
-            this.relatórioDeContasToolStripMenuItem});
-            this.relatóriosToolStripMenuItem.Name = "relatóriosToolStripMenuItem";
-            this.relatóriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.relatóriosToolStripMenuItem.Text = "Relatórios";
-            // 
-            // tsmiRelTeste
-            // 
-            this.tsmiRelTeste.Name = "tsmiRelTeste";
-            this.tsmiRelTeste.Size = new System.Drawing.Size(201, 22);
-            this.tsmiRelTeste.Text = "teste";
-            this.tsmiRelTeste.Click += new System.EventHandler(this.TsmiTeste_Click);
-            // 
-            // exemplorelatorioToolStripMenuItem
-            // 
-            this.exemplorelatorioToolStripMenuItem.Name = "exemplorelatorioToolStripMenuItem";
-            this.exemplorelatorioToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.exemplorelatorioToolStripMenuItem.Text = "exemplorelatorio";
-            this.exemplorelatorioToolStripMenuItem.Click += new System.EventHandler(this.ExemplorelatorioToolStripMenuItem_Click);
-            // 
-            // relatorioDeUsuarioToolStripMenuItem
-            // 
-            this.relatorioDeUsuarioToolStripMenuItem.Name = "relatorioDeUsuarioToolStripMenuItem";
-            this.relatorioDeUsuarioToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.relatorioDeUsuarioToolStripMenuItem.Text = "Relatorio de Usuario";
-            this.relatorioDeUsuarioToolStripMenuItem.Click += new System.EventHandler(this.RelatorioDeUsuarioToolStripMenuItem_Click);
-            // 
-            // relatorioDeItemToolStripMenuItem
-            // 
-            this.relatorioDeItemToolStripMenuItem.Name = "relatorioDeItemToolStripMenuItem";
-            this.relatorioDeItemToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.relatorioDeItemToolStripMenuItem.Text = "Relatorio de Item";
-            this.relatorioDeItemToolStripMenuItem.Click += new System.EventHandler(this.RelatorioDeItemToolStripMenuItem_Click);
-            // 
-            // relatorioContaReceberToolStripMenuItem
-            // 
-            this.relatorioContaReceberToolStripMenuItem.Name = "relatorioContaReceberToolStripMenuItem";
-            this.relatorioContaReceberToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.relatorioContaReceberToolStripMenuItem.Text = "Relatorio Conta Receber";
-            this.relatorioContaReceberToolStripMenuItem.Click += new System.EventHandler(this.RelatorioContaReceberToolStripMenuItem_Click);
-            // 
-            // relatórioDeContasToolStripMenuItem
-            // 
-            this.relatórioDeContasToolStripMenuItem.Name = "relatórioDeContasToolStripMenuItem";
-            this.relatórioDeContasToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.relatórioDeContasToolStripMenuItem.Text = "Relatório de Contas";
-            this.relatórioDeContasToolStripMenuItem.Click += new System.EventHandler(this.RelatórioDeContasToolStripMenuItem_Click);
             // 
             // tsmiCadastroContaReceber
             // 
@@ -328,7 +84,6 @@
             // panelEsquerdo
             // 
             this.panelEsquerdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.panelEsquerdo.Controls.Add(this.btRelatorios);
             this.panelEsquerdo.Controls.Add(this.btOrcamentos);
             this.panelEsquerdo.Controls.Add(this.btSaidas);
             this.panelEsquerdo.Controls.Add(this.btEntradas);
@@ -336,26 +91,10 @@
             this.panelEsquerdo.Controls.Add(this.btCReceber);
             this.panelEsquerdo.Controls.Add(this.btCadastrosmenu);
             this.panelEsquerdo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelEsquerdo.Location = new System.Drawing.Point(0, 24);
+            this.panelEsquerdo.Location = new System.Drawing.Point(0, 0);
             this.panelEsquerdo.Name = "panelEsquerdo";
-            this.panelEsquerdo.Size = new System.Drawing.Size(250, 561);
+            this.panelEsquerdo.Size = new System.Drawing.Size(250, 585);
             this.panelEsquerdo.TabIndex = 1;
-            // 
-            // btRelatorios
-            // 
-            this.btRelatorios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btRelatorios.FlatAppearance.BorderSize = 0;
-            this.btRelatorios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btRelatorios.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btRelatorios.ForeColor = System.Drawing.Color.White;
-            this.btRelatorios.Image = global::_5gpro.Properties.Resources.relatorio_40px;
-            this.btRelatorios.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btRelatorios.Location = new System.Drawing.Point(0, 325);
-            this.btRelatorios.Name = "btRelatorios";
-            this.btRelatorios.Size = new System.Drawing.Size(247, 40);
-            this.btRelatorios.TabIndex = 6;
-            this.btRelatorios.Text = "Relatórios";
-            this.btRelatorios.UseVisualStyleBackColor = false;
             // 
             // btOrcamentos
             // 
@@ -372,6 +111,7 @@
             this.btOrcamentos.TabIndex = 5;
             this.btOrcamentos.Text = "Orçamentos";
             this.btOrcamentos.UseVisualStyleBackColor = false;
+            this.btOrcamentos.Click += new System.EventHandler(this.BtOrcamentos_Click);
             // 
             // btSaidas
             // 
@@ -388,6 +128,7 @@
             this.btSaidas.TabIndex = 4;
             this.btSaidas.Text = "Saídas";
             this.btSaidas.UseVisualStyleBackColor = false;
+            this.btSaidas.Click += new System.EventHandler(this.BtSaidas_Click);
             // 
             // btEntradas
             // 
@@ -421,6 +162,7 @@
             this.btCPagar.TabIndex = 2;
             this.btCPagar.Text = "A Pagar";
             this.btCPagar.UseVisualStyleBackColor = false;
+            this.btCPagar.Click += new System.EventHandler(this.BtCPagar_Click);
             // 
             // btCReceber
             // 
@@ -437,6 +179,7 @@
             this.btCReceber.TabIndex = 2;
             this.btCReceber.Text = "A Receber";
             this.btCReceber.UseVisualStyleBackColor = false;
+            this.btCReceber.Click += new System.EventHandler(this.BtCReceber_Click);
             // 
             // btCadastrosmenu
             // 
@@ -459,7 +202,7 @@
             // 
             this.panelSuperior.Controls.Add(this.btExpandeRetrai);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelSuperior.Location = new System.Drawing.Point(250, 24);
+            this.panelSuperior.Location = new System.Drawing.Point(250, 0);
             this.panelSuperior.Name = "panelSuperior";
             this.panelSuperior.Size = new System.Drawing.Size(912, 50);
             this.panelSuperior.TabIndex = 2;
@@ -479,66 +222,217 @@
             // 
             // panelCentral
             // 
+            this.panelCentral.Controls.Add(this.paneldentroRltSaida);
+            this.panelCentral.Controls.Add(this.paneldropOrcamento);
+            this.panelCentral.Controls.Add(this.paneldropSaida);
+            this.panelCentral.Controls.Add(this.paneldropEntrada);
+            this.panelCentral.Controls.Add(this.paneldropApagar);
             this.panelCentral.Controls.Add(this.paneldropAreceber);
             this.panelCentral.Controls.Add(this.paneldropCadastros);
             this.panelCentral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCentral.Location = new System.Drawing.Point(250, 74);
+            this.panelCentral.Location = new System.Drawing.Point(250, 50);
             this.panelCentral.Name = "panelCentral";
-            this.panelCentral.Size = new System.Drawing.Size(912, 511);
+            this.panelCentral.Size = new System.Drawing.Size(912, 535);
             this.panelCentral.TabIndex = 3;
+            // 
+            // paneldentroRltSaida
+            // 
+            this.paneldentroRltSaida.Controls.Add(this.btsRelatorionotas);
+            this.paneldentroRltSaida.Location = new System.Drawing.Point(209, 211);
+            this.paneldentroRltSaida.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldentroRltSaida.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldentroRltSaida.Name = "paneldentroRltSaida";
+            this.paneldentroRltSaida.Size = new System.Drawing.Size(200, 10);
+            this.paneldentroRltSaida.TabIndex = 6;
+            // 
+            // btsRelatorionotas
+            // 
+            this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btsRelatorionotas.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
+            this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
+            this.btsRelatorionotas.Name = "btsRelatorionotas";
+            this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
+            this.btsRelatorionotas.TabIndex = 0;
+            this.btsRelatorionotas.Text = "Relatório de notas";
+            this.btsRelatorionotas.UseVisualStyleBackColor = false;
+            this.btsRelatorionotas.Click += new System.EventHandler(this.BtsRelatorionotas_Click);
+            // 
+            // paneldropOrcamento
+            // 
+            this.paneldropOrcamento.Controls.Add(this.btiCadOrcamento);
+            this.paneldropOrcamento.Location = new System.Drawing.Point(3, 229);
+            this.paneldropOrcamento.MaximumSize = new System.Drawing.Size(200, 27);
+            this.paneldropOrcamento.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropOrcamento.Name = "paneldropOrcamento";
+            this.paneldropOrcamento.Size = new System.Drawing.Size(200, 10);
+            this.paneldropOrcamento.TabIndex = 5;
+            // 
+            // btiCadOrcamento
+            // 
+            this.btiCadOrcamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadOrcamento.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
+            this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
+            this.btiCadOrcamento.Name = "btiCadOrcamento";
+            this.btiCadOrcamento.Size = new System.Drawing.Size(200, 28);
+            this.btiCadOrcamento.TabIndex = 0;
+            this.btiCadOrcamento.Text = "Cadastro Orçamentos";
+            this.btiCadOrcamento.UseVisualStyleBackColor = false;
+            this.btiCadOrcamento.Click += new System.EventHandler(this.BtiCadOrcamento_Click);
+            // 
+            // paneldropSaida
+            // 
+            this.paneldropSaida.Controls.Add(this.btiRltNotaSaida);
+            this.paneldropSaida.Controls.Add(this.btiSaida);
+            this.paneldropSaida.Location = new System.Drawing.Point(3, 183);
+            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 56);
+            this.paneldropSaida.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropSaida.Name = "paneldropSaida";
+            this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
+            this.paneldropSaida.TabIndex = 4;
+            // 
+            // btiRltNotaSaida
+            // 
+            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
+            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
+            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
+            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiRltNotaSaida.TabIndex = 1;
+            this.btiRltNotaSaida.Text = "Relatórios";
+            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
+            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
+            // 
+            // btiSaida
+            // 
+            this.btiSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiSaida.ForeColor = System.Drawing.Color.White;
+            this.btiSaida.Location = new System.Drawing.Point(0, 0);
+            this.btiSaida.Name = "btiSaida";
+            this.btiSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiSaida.TabIndex = 0;
+            this.btiSaida.Text = "Emissão de nota fiscal";
+            this.btiSaida.UseVisualStyleBackColor = false;
+            this.btiSaida.Click += new System.EventHandler(this.BtiSaida_Click);
+            // 
+            // paneldropEntrada
+            // 
+            this.paneldropEntrada.Controls.Add(this.btiEntrada);
+            this.paneldropEntrada.Location = new System.Drawing.Point(3, 139);
+            this.paneldropEntrada.MaximumSize = new System.Drawing.Size(200, 30);
+            this.paneldropEntrada.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropEntrada.Name = "paneldropEntrada";
+            this.paneldropEntrada.Size = new System.Drawing.Size(200, 10);
+            this.paneldropEntrada.TabIndex = 3;
+            // 
+            // btiEntrada
+            // 
+            this.btiEntrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiEntrada.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiEntrada.ForeColor = System.Drawing.Color.White;
+            this.btiEntrada.Location = new System.Drawing.Point(0, 0);
+            this.btiEntrada.Name = "btiEntrada";
+            this.btiEntrada.Size = new System.Drawing.Size(200, 28);
+            this.btiEntrada.TabIndex = 0;
+            this.btiEntrada.Text = "Entrada de notas";
+            this.btiEntrada.UseVisualStyleBackColor = false;
+            this.btiEntrada.Click += new System.EventHandler(this.BtiEntrada_Click);
+            // 
+            // paneldropApagar
+            // 
+            this.paneldropApagar.Controls.Add(this.btiQuitacaoAPagar);
+            this.paneldropApagar.Controls.Add(this.btiCadContaPagar);
+            this.paneldropApagar.Location = new System.Drawing.Point(3, 93);
+            this.paneldropApagar.MaximumSize = new System.Drawing.Size(200, 58);
+            this.paneldropApagar.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropApagar.Name = "paneldropApagar";
+            this.paneldropApagar.Size = new System.Drawing.Size(200, 10);
+            this.paneldropApagar.TabIndex = 2;
+            // 
+            // btiQuitacaoAPagar
+            // 
+            this.btiQuitacaoAPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiQuitacaoAPagar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiQuitacaoAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoAPagar.ForeColor = System.Drawing.Color.White;
+            this.btiQuitacaoAPagar.Location = new System.Drawing.Point(0, 28);
+            this.btiQuitacaoAPagar.Name = "btiQuitacaoAPagar";
+            this.btiQuitacaoAPagar.Size = new System.Drawing.Size(200, 28);
+            this.btiQuitacaoAPagar.TabIndex = 1;
+            this.btiQuitacaoAPagar.Text = "Quitação";
+            this.btiQuitacaoAPagar.UseVisualStyleBackColor = false;
+            this.btiQuitacaoAPagar.Click += new System.EventHandler(this.BtiQuitacaoAPagar_Click);
+            // 
+            // btiCadContaPagar
+            // 
+            this.btiCadContaPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadContaPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
+            this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
+            this.btiCadContaPagar.Name = "btiCadContaPagar";
+            this.btiCadContaPagar.Size = new System.Drawing.Size(200, 28);
+            this.btiCadContaPagar.TabIndex = 0;
+            this.btiCadContaPagar.Text = "Cadastro de Conta";
+            this.btiCadContaPagar.UseVisualStyleBackColor = false;
+            this.btiCadContaPagar.Click += new System.EventHandler(this.BtiCadContaPagar_Click);
             // 
             // paneldropAreceber
             // 
-            this.paneldropAreceber.Controls.Add(this.button8);
-            this.paneldropAreceber.Controls.Add(this.button7);
-            this.paneldropAreceber.Controls.Add(this.button6);
-            this.paneldropAreceber.Controls.Add(this.button5);
-            this.paneldropAreceber.Location = new System.Drawing.Point(6, 107);
-            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 97);
+            this.paneldropAreceber.BackColor = System.Drawing.Color.White;
+            this.paneldropAreceber.Controls.Add(this.btiQuitacaoConta);
+            this.paneldropAreceber.Controls.Add(this.btiCadContaReceber);
+            this.paneldropAreceber.Location = new System.Drawing.Point(0, 47);
+            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 60);
             this.paneldropAreceber.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropAreceber.Name = "paneldropAreceber";
-            this.paneldropAreceber.Size = new System.Drawing.Size(200, 0);
+            this.paneldropAreceber.Size = new System.Drawing.Size(200, 10);
             this.paneldropAreceber.TabIndex = 1;
             // 
-            // button8
+            // btiQuitacaoConta
             // 
-            this.button8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button8.Location = new System.Drawing.Point(0, 69);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(200, 23);
-            this.button8.TabIndex = 3;
-            this.button8.Text = "button8";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btiQuitacaoConta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiQuitacaoConta.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiQuitacaoConta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiQuitacaoConta.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoConta.ForeColor = System.Drawing.Color.White;
+            this.btiQuitacaoConta.Location = new System.Drawing.Point(0, 28);
+            this.btiQuitacaoConta.Name = "btiQuitacaoConta";
+            this.btiQuitacaoConta.Size = new System.Drawing.Size(200, 28);
+            this.btiQuitacaoConta.TabIndex = 1;
+            this.btiQuitacaoConta.Text = "Quitação";
+            this.btiQuitacaoConta.UseVisualStyleBackColor = false;
+            this.btiQuitacaoConta.Click += new System.EventHandler(this.BtiQuitacaoConta_Click);
             // 
-            // button7
+            // btiCadContaReceber
             // 
-            this.button7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button7.Location = new System.Drawing.Point(0, 46);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(200, 23);
-            this.button7.TabIndex = 2;
-            this.button7.Text = "button7";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button6.Location = new System.Drawing.Point(0, 23);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(200, 23);
-            this.button6.TabIndex = 1;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button5.Location = new System.Drawing.Point(0, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(200, 23);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btiCadContaReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadContaReceber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadContaReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadContaReceber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaReceber.ForeColor = System.Drawing.Color.White;
+            this.btiCadContaReceber.Location = new System.Drawing.Point(0, 0);
+            this.btiCadContaReceber.Name = "btiCadContaReceber";
+            this.btiCadContaReceber.Size = new System.Drawing.Size(200, 28);
+            this.btiCadContaReceber.TabIndex = 0;
+            this.btiCadContaReceber.Text = "Cadastro de Conta";
+            this.btiCadContaReceber.UseVisualStyleBackColor = false;
+            this.btiCadContaReceber.Click += new System.EventHandler(this.BtiCadContaReceber_Click);
             // 
             // paneldropCadastros
             // 
@@ -669,55 +563,27 @@
             this.Controls.Add(this.panelCentral);
             this.Controls.Add(this.panelSuperior);
             this.Controls.Add(this.panelEsquerdo);
-            this.Controls.Add(this.msMain);
             this.Name = "fmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "5GPro";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmMain_FormClosing);
-            this.msMain.ResumeLayout(false);
-            this.msMain.PerformLayout();
             this.panelEsquerdo.ResumeLayout(false);
             this.panelSuperior.ResumeLayout(false);
             this.panelCentral.ResumeLayout(false);
+            this.paneldentroRltSaida.ResumeLayout(false);
+            this.paneldropOrcamento.ResumeLayout(false);
+            this.paneldropSaida.ResumeLayout(false);
+            this.paneldropEntrada.ResumeLayout(false);
+            this.paneldropApagar.ResumeLayout(false);
             this.paneldropAreceber.ResumeLayout(false);
             this.paneldropCadastros.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.MenuStrip msMain;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastros;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroPessoas;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroItens;
-        private System.Windows.Forms.ToolStripMenuItem tsmiOrcamento;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroOrcamentos;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroUsuarios;
-        private System.Windows.Forms.ToolStripMenuItem tsmiSaida;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEmissaoNF;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroGrupoUsuario;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCadastroDeOperações;
-        private System.Windows.Forms.ToolStripMenuItem tsmiContasReceber;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastroContaReceber;
-        private System.Windows.Forms.ToolStripMenuItem tsmiContasPagar;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCapCadastroConta;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastroContaReceber;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDeItensToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmiCarQuitacaoConta;
-        private System.Windows.Forms.ToolStripMenuItem cadastroDeGrupoDePessoasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem relatóriosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmiRelTeste;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEntrada;
-        private System.Windows.Forms.ToolStripMenuItem tsmiEntradaNotas;
-        private System.Windows.Forms.ToolStripMenuItem quitaçãoDeContasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exemplorelatorioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem relatorioDeUsuarioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem relatorioDeItemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem relatorioContaReceberToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem relatórioDeContasToolStripMenuItem;
         private System.Windows.Forms.Panel panelEsquerdo;
         private System.Windows.Forms.Button btExpandeRetrai;
         private System.Windows.Forms.Button btCadastrosmenu;
@@ -728,12 +594,9 @@
         private System.Windows.Forms.Button btEntradas;
         private System.Windows.Forms.Button btCPagar;
         private System.Windows.Forms.Button btCReceber;
-        private System.Windows.Forms.Button btRelatorios;
         private System.Windows.Forms.Panel paneldropAreceber;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btiQuitacaoConta;
+        private System.Windows.Forms.Button btiCadContaReceber;
         private System.Windows.Forms.Panel paneldropCadastros;
         private System.Windows.Forms.Button btiGruposusuarios;
         private System.Windows.Forms.Button btiUsuários;
@@ -743,6 +606,18 @@
         private System.Windows.Forms.Button btiGrupopessoa;
         private System.Windows.Forms.Button btiGrupoitens;
         private System.Windows.Forms.Button btiOperacoes;
+        private System.Windows.Forms.Panel paneldropApagar;
+        private System.Windows.Forms.Button btiQuitacaoAPagar;
+        private System.Windows.Forms.Button btiCadContaPagar;
+        private System.Windows.Forms.Panel paneldropEntrada;
+        private System.Windows.Forms.Button btiEntrada;
+        private System.Windows.Forms.Panel paneldropSaida;
+        private System.Windows.Forms.Button btiSaida;
+        private System.Windows.Forms.Panel paneldropOrcamento;
+        private System.Windows.Forms.Button btiCadOrcamento;
+        private System.Windows.Forms.Button btiRltNotaSaida;
+        private System.Windows.Forms.Panel paneldentroRltSaida;
+        private System.Windows.Forms.Button btsRelatorionotas;
     }
 }
 
