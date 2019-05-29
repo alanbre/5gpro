@@ -253,7 +253,7 @@
             this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
             this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btsRelatorionotas.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btsRelatorionotas.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
             this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
             this.btsRelatorionotas.Name = "btsRelatorionotas";
             this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
@@ -278,7 +278,7 @@
             this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiCadOrcamento.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadOrcamento.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
             this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
             this.btiCadOrcamento.Name = "btiCadOrcamento";
             this.btiCadOrcamento.Size = new System.Drawing.Size(200, 28);
@@ -319,7 +319,7 @@
             this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiSaida.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btiSaida.ForeColor = System.Drawing.Color.White;
             this.btiSaida.Location = new System.Drawing.Point(0, 0);
             this.btiSaida.Name = "btiSaida";
             this.btiSaida.Size = new System.Drawing.Size(200, 28);
@@ -344,7 +344,7 @@
             this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiEntrada.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiEntrada.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btiEntrada.ForeColor = System.Drawing.Color.White;
             this.btiEntrada.Location = new System.Drawing.Point(0, 0);
             this.btiEntrada.Name = "btiEntrada";
             this.btiEntrada.Size = new System.Drawing.Size(200, 28);
@@ -385,7 +385,7 @@
             this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiCadContaPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadContaPagar.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
             this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
             this.btiCadContaPagar.Name = "btiCadContaPagar";
             this.btiCadContaPagar.Size = new System.Drawing.Size(200, 28);
@@ -427,7 +427,7 @@
             this.btiCadContaReceber.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadContaReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiCadContaReceber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadContaReceber.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btiCadContaReceber.ForeColor = System.Drawing.Color.White;
             this.btiCadContaReceber.Location = new System.Drawing.Point(0, 0);
             this.btiCadContaReceber.Name = "btiCadContaReceber";
             this.btiCadContaReceber.Size = new System.Drawing.Size(200, 28);
@@ -542,7 +542,7 @@
             this.btiCadPessoa.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadPessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiCadPessoa.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadPessoa.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btiCadPessoa.ForeColor = System.Drawing.Color.White;
             this.btiCadPessoa.Location = new System.Drawing.Point(0, 0);
             this.btiCadPessoa.Name = "btiCadPessoa";
             this.btiCadPessoa.Size = new System.Drawing.Size(200, 28);
