@@ -37,9 +37,11 @@
             this.btSair = new System.Windows.Forms.Button();
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +51,7 @@
             this.tbSenha.BackColor = System.Drawing.Color.White;
             this.tbSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbSenha.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSenha.Location = new System.Drawing.Point(146, 172);
+            this.tbSenha.Location = new System.Drawing.Point(152, 144);
             this.tbSenha.Name = "tbSenha";
             this.tbSenha.PasswordChar = '*';
             this.tbSenha.Size = new System.Drawing.Size(140, 20);
@@ -64,7 +66,7 @@
             this.tbNomeUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbNomeUsuario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeUsuario.ForeColor = System.Drawing.Color.White;
-            this.tbNomeUsuario.Location = new System.Drawing.Point(21, 77);
+            this.tbNomeUsuario.Location = new System.Drawing.Point(12, 44);
             this.tbNomeUsuario.Name = "tbNomeUsuario";
             this.tbNomeUsuario.ReadOnly = true;
             this.tbNomeUsuario.Size = new System.Drawing.Size(140, 20);
@@ -78,7 +80,7 @@
             this.btEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btEntrar.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btEntrar.ForeColor = System.Drawing.Color.Black;
-            this.btEntrar.Location = new System.Drawing.Point(146, 201);
+            this.btEntrar.Location = new System.Drawing.Point(152, 170);
             this.btEntrar.Name = "btEntrar";
             this.btEntrar.Size = new System.Drawing.Size(75, 23);
             this.btEntrar.TabIndex = 4;
@@ -92,7 +94,7 @@
             this.lbCodigo.BackColor = System.Drawing.Color.Transparent;
             this.lbCodigo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCodigo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.lbCodigo.Location = new System.Drawing.Point(73, 157);
+            this.lbCodigo.Location = new System.Drawing.Point(79, 118);
             this.lbCodigo.Name = "lbCodigo";
             this.lbCodigo.Size = new System.Drawing.Size(67, 19);
             this.lbCodigo.TabIndex = 0;
@@ -104,7 +106,7 @@
             this.lbSenha.BackColor = System.Drawing.Color.Transparent;
             this.lbSenha.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbSenha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.lbSenha.Location = new System.Drawing.Point(82, 179);
+            this.lbSenha.Location = new System.Drawing.Point(88, 148);
             this.lbSenha.Name = "lbSenha";
             this.lbSenha.Size = new System.Drawing.Size(58, 19);
             this.lbSenha.TabIndex = 2;
@@ -117,7 +119,7 @@
             this.btProcuraUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btProcuraUsuario.ForeColor = System.Drawing.Color.Black;
             this.btProcuraUsuario.Image = global::_5gpro.Properties.Resources.iosSearch_18px_black;
-            this.btProcuraUsuario.Location = new System.Drawing.Point(292, 148);
+            this.btProcuraUsuario.Location = new System.Drawing.Point(298, 109);
             this.btProcuraUsuario.Name = "btProcuraUsuario";
             this.btProcuraUsuario.Size = new System.Drawing.Size(22, 22);
             this.btProcuraUsuario.TabIndex = 6;
@@ -132,7 +134,7 @@
             this.btSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSair.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSair.ForeColor = System.Drawing.Color.Black;
-            this.btSair.Location = new System.Drawing.Point(221, 201);
+            this.btSair.Location = new System.Drawing.Point(227, 170);
             this.btSair.Name = "btSair";
             this.btSair.Size = new System.Drawing.Size(75, 23);
             this.btSair.TabIndex = 5;
@@ -145,7 +147,7 @@
             this.tbCodigo.BackColor = System.Drawing.Color.White;
             this.tbCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbCodigo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbCodigo.Location = new System.Drawing.Point(146, 150);
+            this.tbCodigo.Location = new System.Drawing.Point(152, 111);
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(140, 20);
             this.tbCodigo.TabIndex = 1;
@@ -156,6 +158,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.panel6);
+            this.panel2.Controls.Add(this.panel5);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.btSair);
@@ -168,24 +172,24 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(395, 293);
+            this.panel2.Size = new System.Drawing.Size(395, 254);
             this.panel2.TabIndex = 9;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(146, 193);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(150, 2);
-            this.panel3.TabIndex = 8;
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Black;
-            this.panel4.Location = new System.Drawing.Point(146, 171);
+            this.panel4.Location = new System.Drawing.Point(152, 132);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(150, 2);
             this.panel4.TabIndex = 9;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Location = new System.Drawing.Point(152, 162);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(150, 2);
+            this.panel3.TabIndex = 8;
             // 
             // panel1
             // 
@@ -194,15 +198,31 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(395, 100);
+            this.panel1.Size = new System.Drawing.Size(395, 67);
             this.panel1.TabIndex = 10;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panel5.Location = new System.Drawing.Point(0, 103);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(54, 145);
+            this.panel5.TabIndex = 10;
+            // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panel6.Location = new System.Drawing.Point(63, 238);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(332, 10);
+            this.panel6.TabIndex = 11;
             // 
             // fmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(395, 293);
+            this.ClientSize = new System.Drawing.Size(395, 254);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -234,5 +254,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel5;
     }
 }
