@@ -10,6 +10,6 @@ namespace _5gpro.Entities
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNomeGrupoItem", AllowEmptyStrings = false)]
         public string Nome { get; set; }
 
-        public List<SubGrupoItem> SubGrupoItens { get; set; }
+        public List<SubGrupoItem> SubGrupoItens { get; set; } = new List<SubGrupoItem>();
     }
 }
