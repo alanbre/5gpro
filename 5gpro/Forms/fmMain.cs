@@ -66,7 +66,10 @@ namespace _5gpro
             FiltroDePermissoes();
             t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
+            timerRelogio.Start();
         }
+
+
 
         public struct PermissaoNivelStruct
         {
@@ -342,6 +345,16 @@ namespace _5gpro
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();
+        }
+
+        private void TimerRelogio_Tick(object sender, EventArgs e)
+        {
+            lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void LbData_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void BtiGrupopessoa_Click(object sender, EventArgs e)

@@ -1195,6 +1195,7 @@
     <None Include="Resources\bola5gblue.png" />
     <None Include="Resources\right_18px.png" />
     <None Include="Resources\left_18px.png" />
+    <None Include="Resources\HAJELLL.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
