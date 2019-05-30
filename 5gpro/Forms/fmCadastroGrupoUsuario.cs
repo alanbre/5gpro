@@ -11,23 +11,23 @@ namespace _5gpro.Forms
     public partial class fmCadastroGrupoUsuario : Form
     {
         //CÓDIGO DA TELA CAD.GRUPO USUARIO = 010400
-        static ConexaoDAO connection = new ConexaoDAO();
 
-        GrupoUsuario grupousuario;
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
-        List<Permissao> listapermissoes = new List<Permissao>();
-        Validacao validacao = new Validacao();
+        private GrupoUsuario grupousuario;
+        private readonly GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
+        private List<Permissao> listapermissoes = new List<Permissao>();
+        private readonly Validacao validacao = new Validacao();
         int NivelTodas = 0;
 
         //Controle de permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
 
         bool editando, ignoraCheckEvent = false;
+        int codigo = 0;
 
         public struct PermissoesStruct
         {
@@ -48,7 +48,7 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010400").ToString();
 
@@ -62,130 +62,33 @@ namespace _5gpro.Forms
         {
             EnterTab(this.ActiveControl, e);
         }
+        private void FmCadastroGrupoUsuario_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
 
-        private void fmCadastroGrupoUsuario_Load(object sender, EventArgs e)
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+        private void FmCadastroGrupoUsuario_Load(object sender, EventArgs e)
         {
             PopularModulos();
-            popularPermissoes();
+            PopularPermissoes();
 
         }
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void tbNomeGrupoUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-
-        //EVENTOS DE LEAVE
-        private void tbCodGrupoUsuario_Leave(object sender, EventArgs e)
-        {
-            if (!int.TryParse(tbCodGrupoUsuario.Text, out int codigo)) { tbCodGrupoUsuario.Clear(); }
-            if (!editando)
-            {
-                if (tbCodGrupoUsuario.Text.Length > 0)
-                {
-                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
-
-                    if (newgrupousuario != null)
-                    {
-                        grupousuario = newgrupousuario;
-                        PreencheCampos(grupousuario);
-                        listapermissoes = permissaoDAO.BuscaPermissoesByIdGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
-                        popularPermissoes();
-                        Editando(false);
-                    }
-                    else
-                    {
-                        listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                        popularPermissoes();
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodGrupoUsuario.Text.Length == 0)
-                {
-                    listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                    popularPermissoes();
-                    LimpaCampos(true);
-                    Editando(false);
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (tbCodGrupoUsuario.Text.Length > 0)
-                    {
-                        GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodGrupoUsuario.Text));
-                        if (newgrupousuario != null)
-                        {
-                            grupousuario = newgrupousuario;
-                            PreencheCampos(grupousuario);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodGrupoUsuario.Text.Length == 0)
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
-                }
-            }
-
-        }
-
-
-        //MENU
-        private void MenuVertical1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
-
-        private void MenuVertical1_Buscar_Clicked(object sender, EventArgs e)
-        {
-            if (!editando)
-            {
-                AbreTelaBuscaGrupoUsuario();
-            }
-        }
-
-        private void MenuVertical1_Salvar_Clicked(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
-
-        private void MenuVertical1_Proximo_Clicked(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
-        private void MenuVertical1_Anterior_Clicked(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
-
-
-        //EVENTOS DE CLICK
-
+        private void TbNomeGrupoUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbCodGrupoUsuario_Leave(object sender, EventArgs e) => CarregaDados();
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
         private void DgvModulos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //AO CLICKAR UMA FILTRA AS PERMISSOES POR MÓDULO, COMPARANDO
@@ -194,135 +97,322 @@ namespace _5gpro.Forms
 
             if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
             {
-                popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+                PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
             }
             else
             {
-                popularPermissoes();
+                PopularPermissoes();
             }
 
         }
-
         private void DgvModulos_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
+            if (tbCodGrupoUsuario.Text.Length <= 0)
+            {
+                return;
+            }
 
-            if (tbCodGrupoUsuario.Text.Length > 0 && dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
+
+            if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
             {
 
                 if (MessageBox.Show("Deseja alterar TODAS as permissões do Módulo " + dgvModulos.CurrentRow.Cells[1].Value.ToString() + " ?",
-                                        "Aviso de alteração",
-                                        MessageBoxButtons.YesNo,
-                                        MessageBoxIcon.Warning) == DialogResult.Yes)
+                                    "Aviso de alteração",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Warning) == DialogResult.No)
                 {
-
-                    if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
-                    {
-                        dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
-                    }
-                    else
-                    {
-                        dgvModulos.CurrentRow.Cells[2].Value = 0;
-                    }
-
-                    foreach (Permissao p in listapermissoes)
-                    {
-                        if (p.Codigo.Substring(0, 2) == dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2))
-                        {
-                            p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
-                        }
-                    }
-                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
-                    PopularModulos();
-                    Editando(true);
+                    return;
                 }
 
+                if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
+                {
+                    dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
+                }
+                else
+                {
+                    dgvModulos.CurrentRow.Cells[2].Value = 0;
+                }
+
+                foreach (Permissao p in listapermissoes)
+                {
+                    if (p.Codigo.Substring(0, 2) == dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2))
+                    {
+                        p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
+                    }
+                }
             }
             else
             {
-                if (tbCodGrupoUsuario.Text.Length > 0 && dgvModulos.CurrentRow.Cells[0].Value.ToString() == "000000")
+                if (MessageBox.Show("Deseja alterar TODAS as permissões de TODOS os MÓDULOS" + " ?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (MessageBox.Show("Deseja alterar TODAS as permissões de TODOS os MÓDULOS" + " ?",
-                        "Aviso de alteração",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning) == DialogResult.Yes)
-                    {
-
-                        if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
-                        {
-                            dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
-                        }
-                        else
-                        {
-                            dgvModulos.CurrentRow.Cells[2].Value = 0;
-                        }
-
-                        foreach (Permissao p in listapermissoes)
-                        {
-                            p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
-                        }
-                        NivelTodas = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString());
-                        popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
-                        PopularModulos();
-                        Editando(true);
-
-
-                    }
+                    return;
                 }
+
+                if (int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) < 3)
+                {
+                    dgvModulos.CurrentRow.Cells[2].Value = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString()) + 1;
+                }
+                else
+                {
+                    dgvModulos.CurrentRow.Cells[2].Value = 0;
+                }
+
+                foreach (Permissao p in listapermissoes)
+                {
+                    p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
+                }
+                NivelTodas = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString());
+
+
             }
+            PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+            PopularModulos();
+            Editando(true);
         }
-
-        private void dgvPermissoes_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
-        {
-
-        }
-
-        private void dgvPermissoes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvPermissoes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
-            if (tbCodGrupoUsuario.Text.Length > 0)
+            if (tbCodGrupoUsuario.Text.Length <= 0)
             {
-
-                if (int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) < 3)
-                {
-                    dgvPermissoes.CurrentRow.Cells[2].Value = int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) + 1;
-                }
-                else
-                {
-                    dgvPermissoes.CurrentRow.Cells[2].Value = 0;
-                }
-
-                //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
-                listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
-                Editando(true);
+                return;
             }
-        }
 
+            if (int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) < 3)
+            {
+                dgvPermissoes.CurrentRow.Cells[2].Value = int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) + 1;
+            }
+            else
+            {
+                dgvPermissoes.CurrentRow.Cells[2].Value = 0;
+            }
+
+            listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+            Editando(true);
+        }
         private void DgvModulos_CurrentCellChanged(object sender, EventArgs e)
         {
-            //MUDAR MODULO NAS SETAS
-            if (dgvModulos.SelectedRows.Count > 0)
+            if (dgvModulos.SelectedRows.Count <= 0)
             {
-                if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
-                {
-                    popularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
-                }
-                else
-                {
-                    popularPermissoes();
-                }
+                return;
+            }
+
+            if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
+            {
+                PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+            }
+            else
+            {
+                PopularPermissoes();
             }
 
         }
 
 
-        //PADRÕES CRIADAS
 
-        public void PopularListapermissoes()
+        private void Novo()
         {
-            listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-        }
+            if (editando)
+            {
+                return;
+            }
+            if (Nivel > 1 || CodGrupoUsuario == "999")
+            {
+                ignoraCheckEvent = true;
+                LimpaCampos(false);
+                codigo = grupousuarioDAO.BuscaProxCodigoDisponivel();
+                tbCodGrupoUsuario.Text = codigo.ToString();
+                PopularPermissoes();
+                PopularModulos();
+                grupousuario = null;
+                tbNomeGrupoUsuario.Focus();
+                ignoraCheckEvent = false;
+                Editando(true);
 
+            }
+        }
+        private void Busca()
+        {
+            if (editando)
+            {
+                return;
+            }
+
+            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
+            buscaGrupoUsuario.ShowDialog();
+            if (buscaGrupoUsuario.grupoUsuarioSelecionado != null)
+            {
+                grupousuario = buscaGrupoUsuario.grupoUsuarioSelecionado;
+                PreencheCampos(grupousuario);
+            }
+        }
+        private void Salva()
+        {
+            if (!editando)
+            {
+                return;
+            }
+
+            if (tbCodGrupoUsuario.Text.Length <= 0)
+            {
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.No)
+                {
+                    return;
+                }
+                tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel().ToString();
+            }
+            grupousuario = new GrupoUsuario();
+            grupousuario.GrupoUsuarioID = int.Parse(tbCodGrupoUsuario.Text);
+            grupousuario.Nome = tbNomeGrupoUsuario.Text;
+
+            var controls = (ControlCollection)this.Controls;
+            bool ok = validacao.ValidarEntidade(grupousuario, controls);
+
+            if (!ok)
+            {
+                return;
+            }
+
+            int resultado = grupousuarioDAO.SalvaOuAtualiza(grupousuario, listapermissoes);
+
+            validacao.despintarCampos(controls);
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                Editando(false);
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+            }
+
+
+        }
+        private void Anterior()
+        {
+            if (tbCodGrupoUsuario.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+            validacao.despintarCampos(controls);
+
+            var newgrupousuario = grupousuarioDAO.Anterior(tbCodGrupoUsuario.Text);
+            if (newgrupousuario != null)
+            {
+                grupousuario = newgrupousuario;
+                codigo = grupousuario.GrupoUsuarioID;
+                PreencheCampos(grupousuario);
+                if (editando)
+                {
+                    Editando(false);
+                }
+            }
+        }
+        private void Proximo()
+        {
+            if (tbCodGrupoUsuario.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+            validacao.despintarCampos(controls);
+
+            var newgrupousuario = grupousuarioDAO.Proximo(tbCodGrupoUsuario.Text);
+            if (newgrupousuario != null)
+            {
+                grupousuario = newgrupousuario;
+                codigo = grupousuario.GrupoUsuarioID;
+                PreencheCampos(grupousuario);
+                if (editando)
+                {
+                    Editando(false);
+                }
+            }
+        }
+        private void CarregaDados()
+        {
+            int c;
+            if (!int.TryParse(tbCodGrupoUsuario.Text, out c))
+            {
+                tbCodGrupoUsuario.Clear();
+            }
+            else
+            {
+                if (c == codigo)
+                {
+                    return;
+                }
+
+                if (editando)
+                {
+                    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+                codigo = c;
+            }
+
+            if (tbCodGrupoUsuario.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+            var newGrupoUsuario = grupousuarioDAO.BuscaByID(int.Parse(tbCodGrupoUsuario.Text));
+            if (newGrupoUsuario != null)
+            {
+                grupousuario = newGrupoUsuario;
+                PreencheCampos(grupousuario);
+                listapermissoes = permissaoDAO.BuscaPermissoesByIdGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
+                PopularPermissoes();
+                Editando(false);
+            }
+            else
+            {
+                listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
+                PopularPermissoes();
+                Editando(true);
+                LimpaCampos(false);
+            }
+        }
         private void PreencheCampos(GrupoUsuario grupousuario)
         {
             ignoraCheckEvent = true;
@@ -330,101 +420,70 @@ namespace _5gpro.Forms
             tbCodGrupoUsuario.Text = grupousuario.GrupoUsuarioID.ToString();
             tbNomeGrupoUsuario.Text = grupousuario.Nome;
             listapermissoes = permissaoDAO.BuscaPermissoesByIdGrupo(grupousuario.GrupoUsuarioID.ToString()).Todas;
-            popularPermissoes();
+            PopularPermissoes();
             PopularModulos();
 
 
             ignoraCheckEvent = false;
         }
-
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodGrupoUsuario.Clear(); }
             tbNomeGrupoUsuario.Clear();
             tbAjuda.Clear();
+            listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
         }
-
-        private void RecarregaDados(GrupoUsuario grupousuario)
+        private void Recarrega()
         {
+            if (tbCodGrupoUsuario.Text.Length <= 0)
+            {
+                return;
+            }
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (grupousuario != null)
-                    {
-                        grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(grupousuario.GrupoUsuarioID);
-                        PreencheCampos(grupousuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
+                    return;
+                }
+            }
+
+            if (grupousuario != null)
+            {
+                grupousuario = grupousuarioDAO.BuscaByID(grupousuario.GrupoUsuarioID);
+                PreencheCampos(grupousuario);
+                if (editando)
+                {
+                    Editando(false);
                 }
             }
             else
             {
-                grupousuario = grupousuarioDAO.BuscarGrupoUsuarioById(grupousuario.GrupoUsuarioID);
-                PreencheCampos(grupousuario);
+                ignoraCheckEvent = true;
+                LimpaCampos(true);
+                ignoraCheckEvent = false;
                 Editando(false);
             }
-
         }
-
-        private void NovoCadastro()
-        {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    LimpaCampos(false);
-                    tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel();
-                    listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                    popularPermissoes();
-                    PopularModulos();
-                    grupousuario = null;
-                    tbNomeGrupoUsuario.Focus();
-                    Editando(true);
-                }
-            }
-            else
-            {
-                LimpaCampos(false);
-                tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel();
-                listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
-                popularPermissoes();
-                PopularModulos();
-                grupousuario = null;
-                tbNomeGrupoUsuario.Focus();
-                Editando(true);
-            }
-        }
-
-        public void popularPermissoes()
+        private void PopularPermissoes()
         {
 
             dgvPermissoes.Rows.Clear();
             foreach (Permissao p in listapermissoes)
             {
-                //VERFICIA SE NÃO É MODULO, E ENTÃO ADICIONA
                 if (p.Codigo.Substring(2) != "0000")
                 {
                     dgvPermissoes.Rows.Add(p.Codigo, p.Nome, p.Nivel);
                 }
             }
-            dgvPermissoes.Sort(dgvPermissoes.Columns[1], ListSortDirection.Ascending); //Ordena pela coluna 1
+            dgvPermissoes.Sort(dgvPermissoes.Columns[0], ListSortDirection.Ascending);
             dgvPermissoes.Refresh();
 
         }
-
-        public void PopularModulos()
+        private void PopularModulos()
         {
             dgvModulos.Rows.Clear();
             dgvModulos.Rows.Add("000000", "Todos", NivelTodas);
@@ -438,147 +497,11 @@ namespace _5gpro.Forms
             }
             dgvModulos.Refresh();
         }
-
-        private void SalvaCadastro()
+        private void PopularListapermissoes()
         {
-
-            if (editando)
-            {
-                grupousuario = new GrupoUsuario();
-                grupousuario.GrupoUsuarioID = int.Parse(tbCodGrupoUsuario.Text);
-                grupousuario.Nome = tbNomeGrupoUsuario.Text;
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(grupousuario, controls);
-
-                if (ok)
-                {
-
-                    int resultado = grupousuarioDAO.SalvarOuAtualizarGrupoUsuario(grupousuario, listapermissoes);
-
-                    validacao.despintarCampos(controls);
-                    //resultado 0 = nada foi inserido(houve algum erro)
-                    //resultado 1 = foi inserido com sucesso
-                    //resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                    }
-                    else if (resultado == 1)
-                    {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
-                    }
-                }
-            }
+            listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
         }
-
-        private void ProximoCadastro()
-        {
-            //Busca o grupo_usuario com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodGrupoUsuario.Text.Length > 0)
-            {
-
-                validacao.despintarCampos(controls);
-
-                GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
-                if (newgrupousuario != null)
-                {
-                    grupousuario = newgrupousuario;
-                    PreencheCampos(grupousuario);
-                }
-            }
-            else if (editando && tbCodGrupoUsuario.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    validacao.despintarCampos(controls);
-                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
-                    if (newgrupousuario != null)
-                    {
-                        grupousuario = newgrupousuario;
-                        PreencheCampos(grupousuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
-                        if (newgrupousuario != null)
-                        {
-                            grupousuario = newgrupousuario;
-                            PreencheCampos(grupousuario);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void CadastroAnterior()
-        {
-            //Busca a pessoa com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodGrupoUsuario.Text.Length > 0)
-            {
-                //Os registros com newpessoa é só para garantir que não vai dar confusão com a variável "global"
-                //la do inicio do arquivo.
-
-                validacao.despintarCampos(controls);
-                GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
-                if (newgrupousuario != null)
-                {
-                    grupousuario = newgrupousuario;
-                    PreencheCampos(grupousuario);
-                }
-            }
-            else if (editando && tbCodGrupoUsuario.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    validacao.despintarCampos(controls);
-                    GrupoUsuario newgrupousuario = grupousuarioDAO.BuscarGrupoUsuarioAnterior(tbCodGrupoUsuario.Text);
-                    if (newgrupousuario != null)
-                    {
-                        grupousuario = newgrupousuario;
-                        PreencheCampos(grupousuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newgrupousuario = grupousuarioDAO.BuscarProximoGrupoUsuario(tbCodGrupoUsuario.Text);
-                        if (newgrupousuario != null)
-                        {
-                            grupousuario = newgrupousuario;
-                            PreencheCampos(grupousuario);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void popularPermissoesByCodModulo(string codmodulo)
+        private void PopularPermissoesByCodModulo(string codmodulo)
         {
             dgvPermissoes.Rows.Clear();
 
@@ -602,24 +525,14 @@ namespace _5gpro.Forms
 
             dgvPermissoes.Refresh();
         }
-
-        private void AbreTelaBuscaGrupoUsuario()
-        {
-            var buscaGrupoUsuario = new fmBuscaGrupoUsuario();
-            buscaGrupoUsuario.ShowDialog();
-            if (buscaGrupoUsuario.grupoUsuarioSelecionado != null)
-            {
-                grupousuario = buscaGrupoUsuario.grupoUsuarioSelecionado;
-                PreencheCampos(grupousuario);
-            }
-        }
-
         private void Editando(bool edit)
         {
-            editando = edit;
-            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            if (!ignoraCheckEvent)
+            {
+                editando = edit;
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            }
         }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -628,7 +541,5 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
-
     }
 }

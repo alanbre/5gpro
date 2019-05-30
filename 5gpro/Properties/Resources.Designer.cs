@@ -63,6 +63,86 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap add_30WHITEpx {
+            get {
+                object obj = ResourceManager.GetObject("add_30WHITEpx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add_40WHITEpx {
+            get {
+                object obj = ResourceManager.GetObject("add_40WHITEpx", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap addMenu_64px {
+            get {
+                object obj = ResourceManager.GetObject("addMenu_64px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap addMenu_80px {
+            get {
+                object obj = ResourceManager.GetObject("addMenu_80px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap bola5gblue {
+            get {
+                object obj = ResourceManager.GetObject("bola5gblue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cadastros_rule_40px {
+            get {
+                object obj = ResourceManager.GetObject("cadastros_rule_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap card_in_use_40px {
+            get {
+                object obj = ResourceManager.GetObject("card_in_use_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CELO_5G {
+            get {
+                object obj = ResourceManager.GetObject("CELO 5G", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_32_black {
             get {
                 object obj = ResourceManager.GetObject("delete_32_black", resourceCulture);
@@ -86,6 +166,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap fileadd_32_white {
             get {
                 object obj = ResourceManager.GetObject("fileadd_32_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HAJEL_5G_LOGO {
+            get {
+                object obj = ResourceManager.GetObject("HAJEL 5G LOGO", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -503,6 +593,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap left_18px {
+            get {
+                object obj = ResourceManager.GetObject("left_18px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap left_32_black {
             get {
                 object obj = ResourceManager.GetObject("left_32_black", resourceCulture);
@@ -516,6 +616,46 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap left_32_blue {
             get {
                 object obj = ResourceManager.GetObject("left_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_filled_30px {
+            get {
+                object obj = ResourceManager.GetObject("menu_filled_30px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_filled_30pxBLACK {
+            get {
+                object obj = ResourceManager.GetObject("menu_filled_30pxBLACK", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap menu_filled_50px {
+            get {
+                object obj = ResourceManager.GetObject("menu_filled_50px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap multiple_inputs_40px {
+            get {
+                object obj = ResourceManager.GetObject("multiple_inputs_40px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -543,6 +683,46 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap orcamento_40px {
+            get {
+                object obj = ResourceManager.GetObject("orcamento_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap orcamento_livro_40px {
+            get {
+                object obj = ResourceManager.GetObject("orcamento_livro_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Output_40px {
+            get {
+                object obj = ResourceManager.GetObject("Output_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Pay_40px {
+            get {
+                object obj = ResourceManager.GetObject("Pay_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap plus_32_black {
             get {
                 object obj = ResourceManager.GetObject("plus_32_black", resourceCulture);
@@ -563,9 +743,29 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap receive_change_40px {
+            get {
+                object obj = ResourceManager.GetObject("receive_change_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap refresh_22px {
             get {
                 object obj = ResourceManager.GetObject("refresh_22px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap relatorio_40px {
+            get {
+                object obj = ResourceManager.GetObject("relatorio_40px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -586,6 +786,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap reload_32_blue {
             get {
                 object obj = ResourceManager.GetObject("reload_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap right_18px {
+            get {
+                object obj = ResourceManager.GetObject("right_18px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

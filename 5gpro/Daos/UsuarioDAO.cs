@@ -1,387 +1,255 @@
 ﻿using _5gpro.Entities;
-using _5gpro.Forms;
-using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Threading;
+using MySQLConnection;
+using System;
 
 namespace _5gpro.Daos
 {
     public class UsuarioDAO
     {
-        public ConexaoDAO Connect { get; }
-        public UsuarioDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
-
-        public List<GrupoUsuario> listagrupousuarios = new List<GrupoUsuario>();
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
         public Usuario Logar(string idusuario, string senha)
         {
             Usuario usuario = new Usuario();
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario AND senha = @senha", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", idusuario);
-                Connect.Comando.Parameters.AddWithValue("@senha", senha);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.Query = "SELECT * FROM usuario WHERE idusuario = @idusuario AND BINARY senha = @senha LIMIT 1";
+                sql.addParam("@idusuario", idusuario);
+                sql.addParam("@senha", senha);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-                    usuario = new Usuario();
-                    usuario.UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario"));
-                    usuario.Nome = reader.GetString(reader.GetOrdinal("nome"));
-                    usuario.Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome"));
-                    usuario.Senha = reader.GetString(reader.GetOrdinal("senha"));
+                    return null;
                 }
-                else
-                {
-                    usuario = null;
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                usuario = new Usuario();
+                usuario.UsuarioID = Convert.ToInt32(data["idusuario"]);
+                usuario.Nome = (string)data["nome"];
+                usuario.Sobrenome = (string)data["sobrenome"];
+                usuario.Senha = (string)data["senha"];
             }
             return usuario;
         }
-
-
-
-        public string BuscaProxCodigoDisponivel()
+        public int BuscaProxCodigoDisponivel()
         {
-            string proximoid = null;
-            try
+            int proximoid = 1;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT u1.idusuario + 1 AS proximoid
+                sql.Query = @"SELECT u1.idusuario + 1 AS proximoid
                                              FROM usuario AS u1
                                              LEFT OUTER JOIN usuario AS u2 ON u1.idusuario + 1 = u2.idusuario
                                              WHERE u2.idusuario IS NULL
                                              ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
+                                             LIMIT 1";
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
-                }
-                else
-                {
-                    //FIZ ESSE ELSE PARA CASO N TIVER NENHUM REGISTRO NA BASE... PODE DAR PROBLEMA EM ALGUM MOMENTO xD
-                    proximoid = "1";
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return proximoid;
         }
-
-        public int SalvarOuAtualizarUsuario(Usuario usuario)
+        public int Salvar(Usuario usuario)
         {
-
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"INSERT INTO usuario 
+                sql.Query = @"INSERT INTO usuario 
                           (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
                           VALUES
                           (@idusuario, @nome, @sobrenome, @senha, @email, @telefone, @idgrupousuario)
                           ON DUPLICATE KEY UPDATE
                            nome = @nome, sobrenome = @sobrenome, senha = @senha, email = @email,
-                           telefone = @telefone, idgrupousuario = @idgrupousuario
-                         ;",
-                         Connect.Conexao);
+                           telefone = @telefone, idgrupousuario = @idgrupousuario";
 
-                Connect.Comando.Parameters.AddWithValue("@idusuario", usuario.UsuarioID);
-                Connect.Comando.Parameters.AddWithValue("@nome", usuario.Nome);
-                Connect.Comando.Parameters.AddWithValue("@sobrenome", usuario.Sobrenome);
-                Connect.Comando.Parameters.AddWithValue("@senha", usuario.Senha);
-                Connect.Comando.Parameters.AddWithValue("@email", usuario.Email);
-                Connect.Comando.Parameters.AddWithValue("@telefone", usuario.Telefone);
-                Connect.Comando.Parameters.AddWithValue("@idgrupousuario", usuario.Grupousuario.GrupoUsuarioID);
+                sql.addParam("@idusuario", usuario.UsuarioID);
+                sql.addParam("@nome", usuario.Nome);
+                sql.addParam("@sobrenome", usuario.Sobrenome);
+                sql.addParam("@senha", usuario.Senha);
+                sql.addParam("@email", usuario.Email);
+                sql.addParam("@telefone", usuario.Telefone);
+                sql.addParam("@idgrupousuario", usuario.Grupousuario.GrupoUsuarioID);
+                retorno = sql.insertQuery();
+            }
 
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
             return retorno;
         }
-
         /// <summary>
         /// Retorna apenas o ID e o nome do usuário. Feito para tela de Login
         /// </summary>
         /// <param name="cod"></param>
         /// <returns></returns>
-        public Usuario BuscarUsuarioByIdLogin(int cod)
+        public Usuario BuscaByIDLogin(int cod)
         {
             Usuario usuario = new Usuario();
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT u.idusuario, u.nome FROM usuario AS u WHERE idusuario = @idusuario", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", cod);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.Query = "SELECT u.idusuario, u.nome FROM usuario AS u WHERE idusuario = @idusuario LIMIT 1";
+                sql.addParam("@idusuario", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-
-                    usuario = new Usuario
-                    {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                    };
-                    reader.Close();
+                    return null;
                 }
-                else
+                usuario = new Usuario
                 {
-                    usuario = null;
-                }
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
+                    Nome = (string)data["nome"]
+                };
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return usuario;
         }
+        public Usuario BuscaByID(int cod)
+        {
+            Usuario usuario = new Usuario();
+            GrupoUsuario grupousuario = new GrupoUsuario();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *, g.nome AS nomegrupo
+                              FROM usuario
+                              INNER JOIN grupo_usuario g
+                              WHERE idusuario = @idusuario LIMIT 1";
+                sql.addParam("@idusuario", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                grupousuario = new GrupoUsuario
+                {
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"]),
+                    Nome = (string) data["nomegrupo"]
+                };
+                usuario = new Usuario
+                {
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
+                    Senha = (string)data["senha"],
+                    Grupousuario = grupousuario,
+                    Nome = (string)data["nome"],
+                    Sobrenome = (string)data["sobrenome"],
+                    Email = (string)data["email"],
+                    Telefone = (string)data["telefone"]
+                };
+            }
+            return usuario;
+        }
+        public Usuario Proximo(int Codigo)
+        {
+            Usuario usuario = new Usuario();
+            GrupoUsuario grupousuario = new GrupoUsuario();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *,  g.nome AS nomegrupo
+                              FROM usuario 
+                              INNER JOIN grupo_usuario g
+                              WHERE idusuario = (SELECT min(idusuario) 
+                              FROM usuario 
+                              WHERE idusuario > @idusuario) LIMIT 1";
 
-
-        public Usuario BuscarUsuarioById(int cod)
+                sql.addParam("@idusuario", Codigo);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                grupousuario = new GrupoUsuario
+                {
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"]),
+                    Nome = (string)data["nomegrupo"]
+                };
+                usuario = new Usuario
+                {
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
+                    Senha = (string)data["senha"],
+                    Grupousuario = grupousuario,
+                    Nome = (string)data["nome"],
+                    Sobrenome = (string)data["sobrenome"],
+                    Email = (string)data["email"],
+                    Telefone = (string)data["telefone"]
+                };
+            }
+            return usuario;
+        }
+        public Usuario Anterior(int Codigo)
         {
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
 
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand("SELECT * FROM usuario WHERE idusuario = @idusuario", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", cod);
+                sql.Query = @"SELECT *, g.nome AS nomegrupo 
+                              FROM usuario u
+                              INNER JOIN grupo_usuario g
+                              WHERE u.idusuario = (SELECT max(idusuario) 
+                              FROM usuario 
+                              WHERE idusuario < @idusuario) LIMIT 1";
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.addParam("@idusuario", Codigo);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-                    grupousuario = new GrupoUsuario
-                    {
-                        GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"))
-                    };
-
-                    usuario = new Usuario
-                    {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuario,
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
-                    };
-
-                    reader.Close();
+                    return null;
                 }
-                else
+                grupousuario = new GrupoUsuario
                 {
-                    usuario = null;
-                }
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"]),
+                    Nome = (string)data["nomegrupo"]
+                };
+                usuario = new Usuario
+                {
+                    UsuarioID = Convert.ToInt32(data["idusuario"]),
+                    Senha = (string)data["senha"],
+                    Grupousuario = grupousuario,
+                    Nome = (string)data["nome"],
+                    Sobrenome = (string)data["sobrenome"],
+                    Email = (string)data["email"],
+                    Telefone = (string)data["telefone"]
+                };
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return usuario;
         }
-
-
-        public Usuario BuscarProximoUsuario(string codAtual)
+        public IEnumerable<Usuario> Busca(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
         {
-            Usuario usuario = new Usuario();
-            GrupoUsuario grupousuario = new GrupoUsuario();
-
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM usuario WHERE idusuario = (SELECT min(idusuario) FROM usuario WHERE idusuario > @idusuario)", Connect.Conexao);
-                Connect.Comando.Parameters.AddWithValue("@idusuario", codAtual);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    grupousuario.GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
-
-                    usuario = new Usuario
-                    {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuario,
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
-                    };
-
-                    reader.Close();
-                }
-                else
-                {
-                    usuario = null;
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return usuario;
-        }
-
-        public Usuario BuscarUsuarioAnterior(string codAtual)
-        {
-            Usuario usuario = new Usuario();
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT * FROM usuario u WHERE u.idusuario = (SELECT max(idusuario) FROM usuario WHERE idusuario < @idusuario)", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idusuario", codAtual);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
-                {
-
-                    GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
-
-                    usuario = new Usuario
-                    {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Senha = reader.GetString(reader.GetOrdinal("senha")),
-                        Grupousuario = grupousuario,
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
-                    };
-
-                    reader.Close();
-                }
-                else
-                {
-                    usuario = null;
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return usuario;
-        }
-
-
-        public IEnumerable<Usuario> BuscaUsuarios(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
-        {
-
             List<Usuario> usuarios = new List<Usuario>();
-            GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(Connect);
-
             string conCodGrupoUsuario = codGrupoUsuario.Length > 0 ? "AND g.idgrupousuario = @idgrupousuario" : "";
             string conNomeUsuario = nomeUsuario.Length > 0 ? "AND u.nome LIKE @nomeusuario" : "";
             string conSobrenomeUsuario = sobrenomeUsuario.Length > 0 ? "AND u.sobrenome LIKE @sobrenomeusuario" : "";
 
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM usuario u
-                                             WHERE 1=1
-                                             " + conCodGrupoUsuario + @"
-                                             " + conNomeUsuario + @"
-                                             " + conSobrenomeUsuario + @"
-                                             ORDER BY u.idusuario;", Connect.Conexao);
+                sql.Query = @"SELECT *, g.nome AS nomegrupo
+                            FROM usuario u
+                            LEFT JOIN grupo_usuario g
+                            ON u.idgrupousuario = g.idgrupousuario
+                            WHERE 1=1
+                            " + conCodGrupoUsuario + @"
+                            " + conNomeUsuario + @"
+                            " + conSobrenomeUsuario + @"
+                            ORDER BY u.idusuario";
+                if (codGrupoUsuario.Length > 0) { sql.addParam("@idgrupousuario", codGrupoUsuario); }
+                if (nomeUsuario.Length > 0) { sql.addParam("@nomeusuario", "%" + nomeUsuario + "%"); }
+                if (sobrenomeUsuario.Length > 0) { sql.addParam("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
 
-                if (codGrupoUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@idgrupousuario", codGrupoUsuario); }
-                if (nomeUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nomeusuario", "%" + nomeUsuario + "%"); }
-                if (sobrenomeUsuario.Length > 0) { Connect.Comando.Parameters.AddWithValue("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
+                var data = sql.selectQuery();
 
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                foreach (var d in data)
                 {
                     GrupoUsuario grupousuario = new GrupoUsuario();
-                    grupousuario.GrupoUsuarioID = reader.GetInt32(reader.GetOrdinal("idgrupousuario"));
-
+                    grupousuario.GrupoUsuarioID = Convert.ToInt32(d["idgrupousuario"]);
+                    grupousuario.Nome = (string)d["nomegrupo"];
                     Usuario usuario = new Usuario
                     {
-                        UsuarioID = reader.GetInt32(reader.GetOrdinal("idusuario")),
-                        Senha = reader.GetString(reader.GetOrdinal("senha")),
+                        UsuarioID = Convert.ToInt32(d["idusuario"]),
+                        Senha = (string)d["senha"],
                         Grupousuario = grupousuario,
-                        Nome = reader.GetString(reader.GetOrdinal("nome")),
-                        Sobrenome = reader.GetString(reader.GetOrdinal("sobrenome")),
-                        Email = reader.GetString(reader.GetOrdinal("email")),
-                        Telefone = reader.GetString(reader.GetOrdinal("telefone"))
-                        
+                        Nome = (string)d["nome"],
+                        Sobrenome = (string)d["sobrenome"],
+                        Email = (string)d["email"],
+                        Telefone = (string)d["telefone"]
                     };
-
                     usuarios.Add(usuario);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return usuarios;
         }

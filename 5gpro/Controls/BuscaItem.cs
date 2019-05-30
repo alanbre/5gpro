@@ -9,9 +9,8 @@ namespace _5gpro.Controls
 {
     public partial class BuscaItem : UserControl
     {
-        private static readonly ConexaoDAO connection = new ConexaoDAO();
         public Item item = null;
-        private readonly ItemDAO itemDAO = new ItemDAO(connection);
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
         public BuscaItem()
         {
@@ -37,7 +36,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoItem.Text, out int codigo)) { tbCodigoItem.Clear(); }
             if (tbCodigoItem.Text.Length > 0)
             {
-                item = itemDAO.BuscarItemById(int.Parse(tbCodigoItem.Text));
+                item = itemDAO.BuscaByID(int.Parse(tbCodigoItem.Text));
                 PreencheCamposItem(item);
             }
             else

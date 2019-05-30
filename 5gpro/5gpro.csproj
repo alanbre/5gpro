@@ -8,11 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>_5gpro</RootNamespace>
     <AssemblyName>5gpro</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,6 +29,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -90,6 +93,12 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.900.148\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
@@ -212,6 +221,12 @@
     <Compile Include="Controls\BuscaUnimedida.Designer.cs">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CheckedGroupBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\CheckedGroupBox.Designer.cs">
+      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\DecimalBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -240,8 +255,10 @@
     <Compile Include="Daos\GrupoUsuarioDAO.cs" />
     <Compile Include="Daos\LogadoDAO.cs" />
     <Compile Include="Daos\NotaFiscalPropriaDAO.cs" />
+    <Compile Include="Daos\NotaFiscalTerceirosDAO.cs" />
     <Compile Include="Daos\OperacaoDAO.cs" />
     <Compile Include="Daos\OrcamentoDAO.cs" />
+    <Compile Include="Daos\ParcelaContaPagarDAO.cs" />
     <Compile Include="Daos\ParcelaContaReceberDAO.cs" />
     <Compile Include="Daos\ParcelaOperacaoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
@@ -251,6 +268,11 @@
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
+    <Compile Include="DataSets\dsContas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsContas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -262,6 +284,8 @@
     <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscalPropria.cs" />
     <Compile Include="Entities\NotaFiscalPropriaItem.cs" />
+    <Compile Include="Entities\NotaFiscalTerceiros.cs" />
+    <Compile Include="Entities\NotaFiscalTerceirosItem.cs" />
     <Compile Include="Entities\Operacao.cs" />
     <Compile Include="Entities\Orcamento.cs" />
     <Compile Include="Entities\OrcamentoItem.cs" />
@@ -276,6 +300,88 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmItemReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmItemReport.Designer.cs">
+      <DependentUpon>fmItemReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmQuebrarItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmQuebrarItem.Designer.cs">
+      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\fmRelatorioContas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\fmRelatorioContas.Designer.cs">
+      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Relatorios\fmReportViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Relatorios\fmReportViewer.Designer.cs">
+      <DependentUpon>fmReportViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsGenerico.cs">
+      <DependentUpon>dsGenerico.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsGenerico.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsGenerico.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\AdicioneiAgora1044.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsItem.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsItem.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\DSVazio.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DSVazio.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltContaReceber.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltContaReceber.Designer.cs">
+      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltGenerico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltGenerico.Designer.cs">
+      <DependentUpon>fmRltGenerico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltItem.Designer.cs">
+      <DependentUpon>fmRltItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasSaida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasSaida.Designer.cs">
+      <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\gugugugu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gugugugu.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="testesrelatorios\exemplorelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="testesrelatorios\exemplorelatorio.Designer.cs">
+      <DependentUpon>exemplorelatorio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -318,11 +424,23 @@
     <Compile Include="Forms\fmBuscaItem.Designer.cs">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscal.cs">
+    <Compile Include="Forms\fmCapQuitacaoConta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaNotaFiscal.Designer.cs">
-      <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
+    <Compile Include="Forms\fmCapQuitacaoConta.Designer.cs">
+      <DependentUpon>fmCapQuitacaoConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmSaiBuscaNotaFiscalPropria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSaiBuscaNotaFiscalPropria.Designer.cs">
+      <DependentUpon>fmSaiBuscaNotaFiscalPropria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmEntBuscaNotaFiscalTerceiros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmEntBuscaNotaFiscalTerceiros.Designer.cs">
+      <DependentUpon>fmEntBuscaNotaFiscalTerceiros.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaOperacao.cs">
       <SubType>Form</SubType>
@@ -330,11 +448,11 @@
     <Compile Include="Forms\fmBuscaOperacao.Designer.cs">
       <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaOrcamento.cs">
+    <Compile Include="Forms\fmOrcBuscaOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaOrcamento.Designer.cs">
-      <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>
+    <Compile Include="Forms\fmOrcBuscaOrcamento.Designer.cs">
+      <DependentUpon>fmOrcBuscaOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaSubGrupoItem.cs">
       <SubType>Form</SubType>
@@ -510,33 +628,37 @@
     <Compile Include="Forms\fmSelecionarBase.Designer.cs">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TentandoRelat.cs">
+    <Compile Include="testesrelatorios\FormRelatUsu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TentandoRelat.Designer.cs">
-      <DependentUpon>TentandoRelat.cs</DependentUpon>
+    <Compile Include="testesrelatorios\FormRelatUsu.Designer.cs">
+      <DependentUpon>FormRelatUsu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="testesrelatorios\SetUsuario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SetUsuario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="testesrelatorios\Teste.cs">
+      <DependentUpon>Teste.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="testesrelatorios\Teste.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Teste.xsd</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
-    <Compile Include="Funcoes\FuncoesBanco.cs" />
     <Compile Include="Funcoes\Limpar.cs" />
     <Compile Include="Funcoes\NetworkAdapter.cs" />
     <Compile Include="Funcoes\NotaFiscalAux.cs" />
     <Compile Include="Funcoes\PermissoesUpdate.cs" />
     <Compile Include="Funcoes\Validacao.cs" />
-    <Compile Include="GradientPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
-    <Compile Include="_5gprodatabaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>_5gprodatabaseDataSet.xsd</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -573,6 +695,9 @@
     <EmbeddedResource Include="Controls\BuscaUnimedida.resx">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\CheckedGroupBox.resx">
+      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\DecimalBox.resx">
       <DependentUpon>DecimalBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -581,6 +706,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmItemReport.resx">
+      <DependentUpon>fmItemReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmQuebrarItem.resx">
+      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\fmRelatorioContas.resx">
+      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\fmReportViewer.resx">
+      <DependentUpon>fmReportViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Relatorios\rltContas.rdlc" />
+    <EmbeddedResource Include="Reports\fmRltContaReceber.resx">
+      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltGenerico.resx">
+      <DependentUpon>fmRltGenerico.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltItem.resx">
+      <DependentUpon>fmRltItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
+      <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rltContas.rdlc" />
+    <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
+    <EmbeddedResource Include="Reports\rltContaPagar.rdlc" />
+    <EmbeddedResource Include="Reports\rltItem.rdlc" />
+    <EmbeddedResource Include="Reports\rltItemSemDS.rdlc" />
+    <EmbeddedResource Include="testesrelatorios\exemplorelatorio.resx">
+      <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
@@ -606,14 +764,17 @@
     <EmbeddedResource Include="Forms\fmBuscaItem.resx">
       <DependentUpon>fmBuscaItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaNotaFiscal.resx">
-      <DependentUpon>fmBuscaNotaFiscal.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCapQuitacaoConta.resx">
+      <DependentUpon>fmCapQuitacaoConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSaiBuscaNotaFiscalPropria.resx">
+      <DependentUpon>fmSaiBuscaNotaFiscalPropria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaOperacao.resx">
       <DependentUpon>fmBuscaOperacao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaOrcamento.resx">
-      <DependentUpon>fmBuscaOrcamento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmOrcBuscaOrcamento.resx">
+      <DependentUpon>fmOrcBuscaOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaPessoa.resx">
       <DependentUpon>fmBuscaPessoa.cs</DependentUpon>
@@ -678,6 +839,9 @@
     <EmbeddedResource Include="Forms\fmCarQuitacaoConta.resx">
       <DependentUpon>fmCarQuitacaoConta.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmEntBuscaNotaFiscalTerceiros.resx">
+      <DependentUpon>fmEntBuscaNotaFiscalTerceiros.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmEntEntradaNota.resx">
       <DependentUpon>fmEntEntradaNota.cs</DependentUpon>
     </EmbeddedResource>
@@ -699,6 +863,10 @@
     <EmbeddedResource Include="Forms\fmSelecionarBase.resx">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="testesrelatorios\FormRelatUsu.resx">
+      <DependentUpon>FormRelatUsu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="testesrelatorios\Report2.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -709,7 +877,99 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
+    <None Include="DataSets\dsContas.xsc">
+      <DependentUpon>dsContas.xsd</DependentUpon>
+    </None>
+    <None Include="DataSets\dsContas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsContas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSets\dsContas.xss">
+      <DependentUpon>dsContas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsGenerico.xsc">
+      <DependentUpon>dsGenerico.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsGenerico.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsGenerico.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsGenerico.xss">
+      <DependentUpon>dsGenerico.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\DataSources\_5gpro.Entities.ContaPagar.datasource" />
+    <None Include="Properties\DataSources\_5gpro.Entities.ContaReceber.datasource" />
+    <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
+    <None Include="Reports\AdicioneiAgora1044.xsc">
+      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\AdicioneiAgora1044.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>AdicioneiAgora1044.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\AdicioneiAgora1044.xss">
+      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsItem.xsc">
+      <DependentUpon>dsItem.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsItem.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsItem.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsItem.xss">
+      <DependentUpon>dsItem.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DSVazio.xsc">
+      <DependentUpon>DSVazio.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DSVazio.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DSVazio.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\DSVazio.xss">
+      <DependentUpon>DSVazio.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\gugugugu.xsc">
+      <DependentUpon>gugugugu.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\gugugugu.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gugugugu.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\gugugugu.xss">
+      <DependentUpon>gugugugu.xsd</DependentUpon>
+    </None>
+    <None Include="testesrelatorios\SetUsuario.xsc">
+      <DependentUpon>SetUsuario.xsd</DependentUpon>
+    </None>
+    <None Include="testesrelatorios\SetUsuario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SetUsuario.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="testesrelatorios\SetUsuario.xss">
+      <DependentUpon>SetUsuario.xsd</DependentUpon>
+    </None>
+    <None Include="testesrelatorios\Teste.xsc">
+      <DependentUpon>Teste.xsd</DependentUpon>
+    </None>
+    <None Include="testesrelatorios\Teste.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Teste.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="testesrelatorios\Teste.xss">
+      <DependentUpon>Teste.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -720,17 +980,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="_5gprodatabaseDataSet.xsc">
-      <DependentUpon>_5gprodatabaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="_5gprodatabaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>_5gprodatabaseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="_5gprodatabaseDataSet.xss">
-      <DependentUpon>_5gprodatabaseDataSet.xsd</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -924,10 +1173,28 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Resources\addMenu_80px.png" />
+    <None Include="Resources\addMenu_64px.png" />
+    <None Include="Resources\menu_filled_30px.png" />
+    <None Include="Resources\menu_filled_30pxBLACK.png" />
+    <None Include="Resources\add_30WHITEpx.png" />
+    <None Include="Resources\add_40WHITEpx.png" />
+    <None Include="Resources\receive_change_40px.png" />
+    <None Include="Resources\Pay_40px.png" />
+    <None Include="Resources\card_in_use_40px.png" />
+    <None Include="Resources\multiple_inputs_40px.png" />
+    <None Include="Resources\Output_40px.png" />
+    <None Include="Resources\orcamento_40px.png" />
+    <None Include="Resources\orcamento_livro_40px.png" />
+    <None Include="Resources\relatorio_40px.png" />
+    <None Include="Resources\cadastros_rule_40px.png" />
+    <None Include="Resources\HAJEL 5G LOGO.png" />
+    <None Include="Resources\CELO 5G.png" />
+    <None Include="Resources\bola5gblue.png" />
+    <None Include="Resources\right_18px.png" />
+    <None Include="Resources\left_18px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -941,6 +1208,15 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MySQLConnection\MySQLConnection.csproj">
+      <Project>{77328b26-a3fa-4bb0-9c57-61ebfb36837f}</Project>
+      <Name>MySQLConnection</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

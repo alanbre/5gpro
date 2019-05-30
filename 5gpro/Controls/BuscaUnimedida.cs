@@ -10,8 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaUnimedida : UserControl
     {
         public Unimedida unimedida = null;
-        private static readonly ConexaoDAO conexao = new ConexaoDAO();
-        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO(conexao);
+        private readonly UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
 
         public BuscaUnimedida()
         {
@@ -32,7 +31,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoUnimedida.Text, out int codigo)) { tbCodigoUnimedida.Clear(); }
             if (tbCodigoUnimedida.Text.Length > 0)
             {
-                unimedida = unimedidaDAO.BuscaUnimedidaByID(int.Parse(tbCodigoUnimedida.Text));
+                unimedida = unimedidaDAO.BuscaByID(int.Parse(tbCodigoUnimedida.Text));
                 PreencheCamposUnimedida(unimedida);
             }
             else

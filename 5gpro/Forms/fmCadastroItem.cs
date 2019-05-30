@@ -10,26 +10,22 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroItem : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         public Unimedida unimedidadostestes = null;
 
-        Item item;
-        Unimedida unimedida = new Unimedida();
-        ItemDAO itemDAO = new ItemDAO(connection);
-        UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
-        Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
-        GrupoItemDAO grupoitemdao = new GrupoItemDAO(connection);
+        private Item item = null;
+        private readonly ItemDAO itemDAO = new ItemDAO();
+        private readonly Validacao validacao = new Validacao();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
 
-        bool editando = false;
-        bool ignoraCheckEvent;
+        bool editando, ignoraCheckEvent = false;
+        int codigo = 0;
 
         public fmCadastroItem()
         {
@@ -40,7 +36,7 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010300").ToString();
 
@@ -49,524 +45,424 @@ namespace _5gpro.Forms
             Editando(editando);
         }
 
-
-        private void tbCodigo_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void fmCadastroItens_KeyDown(object sender, KeyEventArgs e)
+        private void FmCadastroItens_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
             {
-                RecarregaDados(item);
+                Recarrega();
+                return;
             }
 
             if (e.KeyCode == Keys.F1 && Nivel > 1 || e.KeyCode == Keys.F1 && CodGrupoUsuario == "999")
             {
-                NovoCadastro();
+                Novo();
+                return;
             }
 
             if (e.KeyCode == Keys.F2 && Nivel > 1 || e.KeyCode == Keys.F2 && CodGrupoUsuario == "999")
             {
-                SalvaCadastro();
+                Salva();
+                return;
             }
 
             EnterTab(this.ActiveControl, e);
         }
-
-        private void fmCadastroItens_Load(object sender, EventArgs e)
+        private void FmCadastroItem_FormClosing(object sender, FormClosingEventArgs e)
         {
-            tbCodigo.Focus();
-        }
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void tbDescricao_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbDescricaoDeCompra_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbReferencia_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbPrecoUltimaEntrada_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbEstoqueNecessario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbPrecoVenda_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbCodUnimedida_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void rbProduto_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void rbServico_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-
-        //FUNÇÕES DE LEAVE
-
-        private void tbCodigo_Leave(object sender, EventArgs e)
-        {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
             {
-                if (tbCodigo.Text.Length > 0)
-                {
-                    Item newitem = itemDAO.BuscarItemById(int.Parse(tbCodigo.Text));
-                    if (newitem != null)
-                    {
-                        item = newitem;
-                        PreencheCampos(item);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodigo.Text.Length == 0)
-                {
-                    LimpaCampos(true);
-                    Editando(false);
-                }
+                e.Cancel = true;
+            }
+
+        }
+        private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);
+        private void RbServico_CheckedChanged(object sender, EventArgs e) => Editando(true);
+        private void BuscaUnimedidaItem_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
+        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
+        {
+
+        }
+        private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
+        {
+            buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
+            if (buscaGrupoItem.grupoItem == null)
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EscolhaOGrupo(false);
             }
             else
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (tbCodigo.Text.Length > 0)
-                    {
-                        Item newitem = itemDAO.BuscarItemById(int.Parse(tbCodigo.Text));
-                        if (newitem != null)
-                        {
-                            item = newitem;
-                            PreencheCampos(item);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodigo.Text.Length == 0)
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
-                }
-            }
-
-        }
-
-        //MENU
-        private void MenuVertical1_Novo_Clicked(object sender, EventArgs e)
-        {
-            NovoCadastro();
-
-        }
-
-        private void MenuVertical1_Proximo_Clicked(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
-        private void MenuVertical1_Recarregar_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuVertical1_Salvar_Clicked(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
-
-        private void MenuVertical1_Anterior_Clicked(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
-
-        private void MenuVertical1_Buscar_Clicked(object sender, EventArgs e)
-        {
-            if (!editando || Nivel == 1)
-            {
-                AbreTelaBuscaItem();
+                buscaSubGrupoItem.EscolhaOGrupo(true);
             }
         }
-
-        private void MenuVertical1_Excluir_Clicked(object sender, EventArgs e)
+        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
         {
-
-        }
-
-
-        //PADRÕES CRIADAS
-        private void EnterTab(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
-        private void LimpaCampos(bool cod)
-        {
-            if (cod) { tbCodigo.Clear(); }
-            tbDescricao.Clear();
-            tbDescricaoDeCompra.Clear();
-            tbReferencia.Clear();
-            tbPrecoUltimaEntrada.Clear();
-            tbEstoqueNecessario.Clear();
-            tbPrecoVenda.Clear();
-            rbProduto.Checked = true;
-            rbServico.Checked = false;
-            buscaGrupoItem.Limpa();
+            Editando(true);
             buscaSubGrupoItem.Limpa();
         }
+        private void RbSimquebra_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSimquebra.Checked) { gbQuebradgv.Enabled = true; }
+        }
+        private void RbNao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNaoquebra.Checked) { gbQuebradgv.Enabled = false; }
+        }
 
-        private void NovoCadastro()
+
+
+        private void Novo()
         {
             if (editando)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    LimpaCampos(false);
-                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel();
-                    item = null;
-                    tbDescricao.Focus();
-                    Editando(true);
-                }
+                return;
             }
-            else
+
+            if (Nivel > 1 || CodGrupoUsuario == "999")
             {
+                ignoraCheckEvent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel();
+                codigo = itemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = codigo.ToString();
                 item = null;
                 tbDescricao.Focus();
+                ignoraCheckEvent = false;
                 Editando(true);
             }
         }
-
-        private void PreencheCampos(Item item)
+        private void Busca()
         {
-            ignoraCheckEvent = true;
-            LimpaCampos(false);
-            tbCodigo.Text = item.ItemID.ToString();
-            tbDescricao.Text = item.Descricao;
-            tbDescricaoDeCompra.Text = item.DescCompra;
-          
-
-            if (item.TipoItem == "P")
+            if (CodGrupoUsuario != "999" && Nivel <= 0)
             {
-                rbProduto.Checked = true;
-                rbServico.Checked = false;
-            }
-            else
-            {
-                rbProduto.Checked = false;
-                rbServico.Checked = true;
+                return;
             }
 
-            tbReferencia.Text = item.Referencia;
-            tbPrecoUltimaEntrada.Text = item.ValorEntrada.ToString();
-            tbEstoqueNecessario.Text = item.Estoquenecessario.ToString();
-            tbPrecoVenda.Text = item.ValorSaida.ToString();
+            if (editando)
+            {
+                return;
+            }
 
-            buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
-            buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
-
-
-            ignoraCheckEvent = false;
+            var buscaItem = new fmBuscaItem();
+            buscaItem.ShowDialog();
+            if (buscaItem.itemSelecionado != null)
+            {
+                item = buscaItem.itemSelecionado;
+                codigo = item.ItemID;
+                PreencheCampos(item);
+            }
         }
-
-        private void Editando(bool edit)
+        private void Salva()
         {
-            editando = edit;
-            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
-        }
-
-        private void SalvaCadastro()
-        {
+            if (!editando)
+            {
+                return;
+            }
             bool ok = false;
 
-            if (tbCodigo.Text.Length > 0)
-            {
-                if (editando)
-                {
-                    item = new Item();
-
-                    item.ItemID = int.Parse(tbCodigo.Text);
-                    item.Descricao = tbDescricao.Text;
-                    item.DescCompra = tbDescricaoDeCompra.Text;
-                    item.Referencia = tbReferencia.Text;
-                    item.TipoItem = rbProduto.Checked ? "P" : "S";
-
-                    if (tbPrecoUltimaEntrada.TextLength > 0)
-                    {
-                        item.ValorEntrada = decimal.Parse(tbPrecoUltimaEntrada.Text);
-                    }
-                    else
-                    {
-                        item.ValorEntrada = 0;
-                    }
-
-                    if (tbPrecoVenda.TextLength > 0)
-                    {
-                        item.ValorSaida = decimal.Parse(tbPrecoVenda.Text);
-                    }
-                    else
-                    {
-                        item.ValorSaida = 0;
-                    }
-
-                    if (tbEstoqueNecessario.TextLength > 0)
-                    {
-                        item.Estoquenecessario = decimal.Parse(tbEstoqueNecessario.Text);
-                    }
-                    else
-                    {
-                        item.Estoquenecessario = 0;
-                    }
-
-                    item.Unimedida = buscaUnimedidaItem.unimedida;
-
-                    item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
-
-                    ControlCollection controls = (ControlCollection)this.Controls;
-
-                    ok = validacao.ValidarEntidade(item, controls);
-                    if (ok) { validacao.despintarCampos(controls); }
-                }
-            }
-            else
+            if (tbCodigo.Text.Length <= 0)
             {
                 if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
-                                    "Aviso",
-                                     MessageBoxButtons.YesNo,
-                                     MessageBoxIcon.Information) == DialogResult.Yes)
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.No)
                 {
-                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
+                    return;
                 }
+                tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
                 ok = false;
             }
+
+
+            item = new Item();
+            item.ItemID = int.Parse(tbCodigo.Text);
+            item.Descricao = tbDescricao.Text;
+            item.DescCompra = tbDescricaoDeCompra.Text;
+            item.Referencia = tbReferencia.Text;
+            item.TipoItem = rbProduto.Checked ? "P" : "S";
+            item.Quantidade = dbQuantidade.Valor;
+            item.ValorEntrada = dbPrecoUltimaEntrada.Valor;
+            item.ValorSaida = dbPrecoVenda.Valor;
+            item.Estoquenecessario = dbEstoqueNecessario.Valor;
+            item.Unimedida = buscaUnimedidaItem.unimedida;
+            item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
+
+            var controls = (ControlCollection)this.Controls;
+
+            ok = validacao.ValidarEntidade(item, controls);
             if (ok)
             {
-                int resultado = itemDAO.SalvarOuAtualizarItem(item);
-
-                // resultado 0 = nada foi inserido (houve algum erro)
-                // resultado 1 = foi inserido com sucesso
-                // resultado 2 = foi atualizado com sucesso
+                validacao.despintarCampos(controls);
+                int resultado = itemDAO.SalvaOuAtualiza(item);
                 if (resultado == 0)
                 {
                     MessageBox.Show("Problema ao salvar o registro",
                     "Problema ao salvar",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
+                    return;
                 }
                 else if (resultado == 1)
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
+                    return;
                 }
                 else if (resultado == 2)
                 {
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
+                    return;
                 }
             }
         }
-
-
-
-        private void RecarregaDados(Item item)
+        private void Recarrega()
         {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (item != null)
-                    {
-                        item = itemDAO.BuscarItemById(item.ItemID);
-                        PreencheCampos(item);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
+                    return;
+                }
+            }
+
+            var controls = (ControlCollection)this.Controls;
+            validacao.despintarCampos(controls);
+
+            if (item != null)
+            {
+                item = itemDAO.BuscaByID(item.ItemID);
+                PreencheCampos(item);
+                if (editando)
+                {
+                    Editando(false);
                 }
             }
             else
             {
-                item = itemDAO.BuscarItemById(item.ItemID);
+                ignoraCheckEvent = true;
+                LimpaCampos(true);
+                ignoraCheckEvent = false;
+            }
+        }
+        private void Anterior()
+        {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+
+            var newitem = itemDAO.Anterior(int.Parse(tbCodigo.Text));
+            if (newitem != null)
+            {
+                validacao.despintarCampos(controls);
+                item = newitem;
+                codigo = item.ItemID;
+                PreencheCampos(item);
+                if (editando)
+                {
+                    Editando(false);
+                }
+            }
+        }
+        private void Proximo()
+        {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+
+            var newitem = itemDAO.Proximo(int.Parse(tbCodigo.Text));
+            if (newitem != null)
+            {
+                validacao.despintarCampos(controls);
+                item = newitem;
+                codigo = item.ItemID;
+                PreencheCampos(item);
+                if (editando)
+                {
+                    Editando(false);
+                }
+            }
+        }
+        private void CarregaDados()
+        {
+            var controls = (ControlCollection)this.Controls;
+            int c;
+            if (!int.TryParse(tbCodigo.Text, out c)) {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
+
+            if (item?.ItemID == codigo)
+            {
+                return;
+            }
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            if (tbCodigo.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+
+
+            var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
+            if (newItem != null)
+            {
+                validacao.despintarCampos(controls);
+                item = newItem;
                 PreencheCampos(item);
                 Editando(false);
             }
-
-        }
-
-        private void ProximoCadastro()
-        {
-            //Busca o item com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se item existe. Se não existir busca o maior anterior ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodigo.Text.Length > 0)
-            {
-                validacao.despintarCampos(controls);
-                Item newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
-                if (newitem != null)
-                {
-                    item = newitem;
-                    PreencheCampos(item);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    validacao.despintarCampos(controls);
-                    Item newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
-                    if (newitem != null)
-                    {
-                        item = newitem;
-                        PreencheCampos(item);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
-                        if (newitem != null)
-                        {
-                            item = newitem;
-                            PreencheCampos(item);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void CadastroAnterior()
-        {
-            //Busca o item com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se item existe. Se não existir busca o proximo ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodigo.Text.Length > 0)
-            {
-                validacao.despintarCampos(controls);
-                Item newitem = itemDAO.BuscarItemAnterior(tbCodigo.Text);
-                if (newitem != null)
-                {
-                    item = newitem;
-                    PreencheCampos(item);
-                }
-            }
-            else if (editando && tbCodigo.Text.Length > 0)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    validacao.despintarCampos(controls);
-                    Item newitem = itemDAO.BuscarItemAnterior(tbCodigo.Text);
-                    if (newitem != null)
-                    {
-                        item = newitem;
-                        PreencheCampos(item);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newitem = itemDAO.BuscarProximoItem(tbCodigo.Text);
-                        if (newitem != null)
-                        {
-                            item = newitem;
-                            PreencheCampos(item);
-                            Editando(false);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void AbreTelaBuscaItem()
-        {
-            var buscaItem = new fmBuscaItem();
-            buscaItem.ShowDialog();
-            if (buscaItem.itemSelecionado != null)
-            {
-                item = buscaItem.itemSelecionado;
-                PreencheCampos(item);
-            }
-        }
-
-        private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-
-            if (buscaGrupoItem.grupoItem != null)
-            {
-                buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
-            }
             else
             {
-                buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
-                buscaSubGrupoItem.Limpa();
-                buscaSubGrupoItem.EscolhaOGrupo();
+                validacao.despintarCampos(controls);
+                Editando(true);
+                LimpaCampos(false);
+            }
+        }
+        private void LimpaCampos(bool cod)
+        {
+            if (cod) { tbCodigo.Clear(); }
+            tbDescricao.Clear();
+            tbDescricaoDeCompra.Clear();
+            tbReferencia.Clear();
+            dbPrecoUltimaEntrada.Valor = 0.00m;
+            dbEstoqueNecessario.Valor = 0.00m;
+            dbPrecoVenda.Valor = 0.00m;
+            rbProduto.Checked = true;
+            rbServico.Checked = false;
+            buscaGrupoItem.Limpa();
+            buscaSubGrupoItem.Limpa();
+            buscaUnimedidaItem.Limpa();
+            tbAjuda.Clear();
+            dbQuantidade.Valor = 0.00m;
+        }
+        private void PreencheCampos(Item item)
+        {
+            if (item != null)
+            {
+                ignoraCheckEvent = true;
+                LimpaCampos(false);
+                tbCodigo.Text = item.ItemID.ToString();
+                tbDescricao.Text = item.Descricao;
+                tbDescricaoDeCompra.Text = item.DescCompra;
+
+
+                if (item.TipoItem == "P")
+                {
+                    rbProduto.Checked = true;
+                    rbServico.Checked = false;
+                }
+                else
+                {
+                    rbProduto.Checked = false;
+                    rbServico.Checked = true;
+                }
+
+                tbReferencia.Text = item.Referencia;
+                dbPrecoUltimaEntrada.Valor = item.ValorEntrada;
+                dbEstoqueNecessario.Valor = item.Estoquenecessario;
+                dbPrecoVenda.Valor = item.ValorSaida;
+                dbQuantidade.Valor = item.Quantidade;
+
+                buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
+                buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
+                buscaUnimedidaItem.PreencheCampos(item.Unimedida);
+
+
+                ignoraCheckEvent = false;
+            }
+        }
+        private void Editando(bool edit)
+        {
+            if (!ignoraCheckEvent)
+            {
+                editando = edit;
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            }
+        }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

@@ -1,62 +1,35 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace _5gpro.Daos
 {
     class FormaPagamentoDAO
     {
-        public ConexaoDAO Connect { get; }
-        public FormaPagamentoDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
-        public IEnumerable<FormaPagamento> BuscaTodos(string nome)
+
+        public IEnumerable<FormaPagamento> Busca(string nome)
         {
             List<FormaPagamento> formapagamentos = new List<FormaPagamento>();
-            FormaPagamento formapagamento = null;
-
             string conNome = nome.Length > 0 ? "AND f.nome LIKE @nome" : "";
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM formapagamento f 
-                                             WHERE 1=1
-                                             " + conNome + @"
-                                             ORDER BY f.idformapagamento;", Connect.Conexao);
-                          
-
-                if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                sql.Query = @"SELECT *
+                            FROM formapagamento f 
+                            WHERE 1=1
+                            " + conNome + @"
+                            ORDER BY f.idformapagamento";
+                if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
+                var data = sql.selectQuery();
+                foreach(var d in data)
                 {
-                    formapagamento = new FormaPagamento
-                    {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
-
+                    var formapagamento = new FormaPagamento();
+                    formapagamento.FormaPagamentoID = Convert.ToInt32(d["idformapagamento"]);
+                    formapagamento.Nome = (string)d["nome"];
                     formapagamentos.Add(formapagamento);
                 }
-
-                reader.Close();
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return formapagamentos;
         }
@@ -64,40 +37,22 @@ namespace _5gpro.Daos
         public FormaPagamento BuscarByID(int Codigo)
         {
 
-            FormaPagamento formapagamento = null;
-            List<FormaPagamento> listaformapagamento = new List<FormaPagamento>();
-
-            try
+            var formapagamento = new FormaPagamento();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT *
-                                             FROM formapagamento f 
-                                             WHERE f.idformapagamento = @idformapagamento", Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idformapagamento", Codigo);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                sql.Query = @"SELECT *
+                            FROM formapagamento f 
+                            WHERE f.idformapagamento = @idformapagamento LIMIT 1";
+                sql.addParam("@idformapagamento", Codigo);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
                 {
-                    formapagamento = new FormaPagamento
-                    {
-                        FormaPagamentoID = reader.GetInt32(reader.GetOrdinal("idformapagamento")),
-                        Nome = reader.GetString(reader.GetOrdinal("nome"))
-                    };
+                    return null;
                 }
 
-                reader.Close();
+                formapagamento.FormaPagamentoID = Convert.ToInt32(data["idformapagamento"]);
+                formapagamento.Nome = (string)data["nome"];
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
             return formapagamento;
         }
     }

@@ -10,8 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaGrupoUsuario : UserControl
     {
         public GrupoUsuario grupoUsuario = new GrupoUsuario();
-        private static readonly ConexaoDAO connection = new ConexaoDAO();
-        private readonly GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO(connection);
+        private readonly GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
 
         public BuscaGrupoUsuario()
         {
@@ -33,7 +32,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoGrupoUsuario.Text, out int codigo)) { tbCodigoGrupoUsuario.Clear(); }
             if (tbCodigoGrupoUsuario.Text.Length > 0)
             {
-                grupoUsuario = grupoUsuarioDAO.BuscarGrupoUsuarioById(int.Parse(tbCodigoGrupoUsuario.Text));
+                grupoUsuario = grupoUsuarioDAO.BuscaByID(int.Parse(tbCodigoGrupoUsuario.Text));
                 PreencheCamposGrupoUsuario(grupoUsuario);
             }
             else

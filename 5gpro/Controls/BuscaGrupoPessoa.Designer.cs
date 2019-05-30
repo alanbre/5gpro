@@ -40,7 +40,7 @@
             this.tbCodigoGrupoPessoa.Location = new System.Drawing.Point(6, 17);
             this.tbCodigoGrupoPessoa.Name = "tbCodigoGrupoPessoa";
             this.tbCodigoGrupoPessoa.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigoGrupoPessoa.TabIndex = 0;
+            this.tbCodigoGrupoPessoa.TabIndex = 1;
             this.tbCodigoGrupoPessoa.TextChanged += new System.EventHandler(this.TbCodigoGrupoPessoa_TextChanged);
             this.tbCodigoGrupoPessoa.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoGrupoPessoa_KeyUp);
             this.tbCodigoGrupoPessoa.Leave += new System.EventHandler(this.TbCodigoGrupoPessoa_Leave);
@@ -51,7 +51,8 @@
             this.tbNomeGrupoPessoa.Name = "tbNomeGrupoPessoa";
             this.tbNomeGrupoPessoa.ReadOnly = true;
             this.tbNomeGrupoPessoa.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeGrupoPessoa.TabIndex = 0;
+            this.tbNomeGrupoPessoa.TabIndex = 3;
+            this.tbNomeGrupoPessoa.TabStop = false;
             // 
             // btBuscaGrupoPessoa
             // 
@@ -59,7 +60,8 @@
             this.btBuscaGrupoPessoa.Location = new System.Drawing.Point(70, 16);
             this.btBuscaGrupoPessoa.Name = "btBuscaGrupoPessoa";
             this.btBuscaGrupoPessoa.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaGrupoPessoa.TabIndex = 0;
+            this.btBuscaGrupoPessoa.TabIndex = 2;
+            this.btBuscaGrupoPessoa.TabStop = false;
             this.btBuscaGrupoPessoa.UseVisualStyleBackColor = true;
             this.btBuscaGrupoPessoa.Click += new System.EventHandler(this.BtBuscaGrupoPessoa_Click);
             // 
@@ -78,7 +80,8 @@
             this.btAdd.Location = new System.Drawing.Point(442, 16);
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(22, 22);
-            this.btAdd.TabIndex = 1;
+            this.btAdd.TabIndex = 4;
+            this.btAdd.TabStop = false;
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
             // 

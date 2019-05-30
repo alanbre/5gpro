@@ -38,11 +38,21 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
+            this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotalItens = new _5gpro.Controls.DecimalBox();
             this.lbDescontoDocumento = new System.Windows.Forms.Label();
             this.lbDescontoTotalItens = new System.Windows.Forms.Label();
             this.lbValorTotalDocumento = new System.Windows.Forms.Label();
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
+            this.dbValorUnitItem = new _5gpro.Controls.DecimalBox();
+            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
+            this.buscaItem = new _5gpro.Controls.BuscaItem();
             this.btExcluirItem = new System.Windows.Forms.Button();
             this.lbDescItem = new System.Windows.Forms.Label();
             this.lbDescontoPorc = new System.Windows.Forms.Label();
@@ -60,6 +70,7 @@
             this.lbQuantidade = new System.Windows.Forms.Label();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.dtpEntrada = new System.Windows.Forms.DateTimePicker();
             this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
             this.lbEntrada = new System.Windows.Forms.Label();
@@ -67,17 +78,6 @@
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNumeroDocumento = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotalItens = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
-            this.dbValorUnitItem = new _5gpro.Controls.DecimalBox();
-            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
-            this.buscaItem = new _5gpro.Controls.BuscaItem();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
@@ -114,6 +114,59 @@
             this.gbTotais.TabIndex = 2;
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
+            // 
+            // dbValorTotalDocumento
+            // 
+            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 152);
+            this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
+            this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 20);
+            this.dbValorTotalDocumento.TabIndex = 7;
+            this.dbValorTotalDocumento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorTotalDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbValorTotalDocumento_Valor_Changed);
+            // 
+            // dbDescontoDocumento
+            // 
+            this.dbDescontoDocumento.Location = new System.Drawing.Point(9, 113);
+            this.dbDescontoDocumento.Name = "dbDescontoDocumento";
+            this.dbDescontoDocumento.Size = new System.Drawing.Size(85, 20);
+            this.dbDescontoDocumento.TabIndex = 5;
+            this.dbDescontoDocumento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbDescontoDocumento_Valor_Changed);
+            this.dbDescontoDocumento.Leave += new System.EventHandler(this.DbDescontoDocumento_Leave);
+            // 
+            // dbDescontoTotalItens
+            // 
+            this.dbDescontoTotalItens.Enabled = false;
+            this.dbDescontoTotalItens.Location = new System.Drawing.Point(9, 74);
+            this.dbDescontoTotalItens.Name = "dbDescontoTotalItens";
+            this.dbDescontoTotalItens.Size = new System.Drawing.Size(85, 20);
+            this.dbDescontoTotalItens.TabIndex = 3;
+            this.dbDescontoTotalItens.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorTotalItens
+            // 
+            this.dbValorTotalItens.Enabled = false;
+            this.dbValorTotalItens.Location = new System.Drawing.Point(9, 35);
+            this.dbValorTotalItens.Name = "dbValorTotalItens";
+            this.dbValorTotalItens.Size = new System.Drawing.Size(85, 20);
+            this.dbValorTotalItens.TabIndex = 1;
+            this.dbValorTotalItens.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbDescontoDocumento
             // 
@@ -182,6 +235,80 @@
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
             // 
+            // dbDescontoItem
+            // 
+            this.dbDescontoItem.Location = new System.Drawing.Point(76, 308);
+            this.dbDescontoItem.Name = "dbDescontoItem";
+            this.dbDescontoItem.Size = new System.Drawing.Size(63, 20);
+            this.dbDescontoItem.TabIndex = 11;
+            this.dbDescontoItem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoItem.Leave += new System.EventHandler(this.DbDescontoItem_Leave);
+            // 
+            // dbDescontoItemPorc
+            // 
+            this.dbDescontoItemPorc.Location = new System.Drawing.Point(6, 308);
+            this.dbDescontoItemPorc.Name = "dbDescontoItemPorc";
+            this.dbDescontoItemPorc.Size = new System.Drawing.Size(63, 20);
+            this.dbDescontoItemPorc.TabIndex = 9;
+            this.dbDescontoItemPorc.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoItemPorc.Leave += new System.EventHandler(this.DbDescontoItemPorc_Leave);
+            // 
+            // dbValorTotItem
+            // 
+            this.dbValorTotItem.Location = new System.Drawing.Point(144, 271);
+            this.dbValorTotItem.Name = "dbValorTotItem";
+            this.dbValorTotItem.Size = new System.Drawing.Size(63, 20);
+            this.dbValorTotItem.TabIndex = 7;
+            this.dbValorTotItem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorTotItem.Leave += new System.EventHandler(this.DbValorTotItem_Leave);
+            // 
+            // dbValorUnitItem
+            // 
+            this.dbValorUnitItem.Location = new System.Drawing.Point(75, 271);
+            this.dbValorUnitItem.Name = "dbValorUnitItem";
+            this.dbValorUnitItem.Size = new System.Drawing.Size(63, 20);
+            this.dbValorUnitItem.TabIndex = 5;
+            this.dbValorUnitItem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorUnitItem.Leave += new System.EventHandler(this.DbValorUnitItem_Leave);
+            // 
+            // dbQuantidade
+            // 
+            this.dbQuantidade.Location = new System.Drawing.Point(6, 271);
+            this.dbQuantidade.Name = "dbQuantidade";
+            this.dbQuantidade.Size = new System.Drawing.Size(63, 20);
+            this.dbQuantidade.TabIndex = 3;
+            this.dbQuantidade.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbQuantidade.Leave += new System.EventHandler(this.DbQuantidade_Leave);
+            // 
+            // buscaItem
+            // 
+            this.buscaItem.Location = new System.Drawing.Point(1, 208);
+            this.buscaItem.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaItem.Name = "buscaItem";
+            this.buscaItem.Size = new System.Drawing.Size(442, 39);
+            this.buscaItem.TabIndex = 1;
+            this.buscaItem.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.BuscaItem_Codigo_Leave);
+            // 
             // btExcluirItem
             // 
             this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -193,6 +320,7 @@
             this.btExcluirItem.Size = new System.Drawing.Size(24, 24);
             this.btExcluirItem.TabIndex = 14;
             this.btExcluirItem.UseVisualStyleBackColor = true;
+            this.btExcluirItem.Click += new System.EventHandler(this.BtExcluirItem_Click);
             // 
             // lbDescItem
             // 
@@ -257,6 +385,7 @@
             this.dgvItens.Size = new System.Drawing.Size(955, 186);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
+            this.dgvItens.CurrentCellChanged += new System.EventHandler(this.DgvItens_CurrentCellChanged);
             // 
             // dgvtbcCodigo
             // 
@@ -314,7 +443,6 @@
             // 
             // dgvtbcDescontoPorc
             // 
-            dataGridViewCellStyle6.Format = "% #";
             dataGridViewCellStyle6.NullValue = null;
             this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDescontoPorc.HeaderText = "% Desc";
@@ -343,6 +471,7 @@
             this.btInserirItem.TabIndex = 12;
             this.btInserirItem.Text = "Inserir";
             this.btInserirItem.UseVisualStyleBackColor = true;
+            this.btInserirItem.Click += new System.EventHandler(this.BtInserirItem_Click);
             // 
             // lbValorUnit
             // 
@@ -392,6 +521,16 @@
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
             // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Fornecedor";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 55);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 2;
+            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
+            // 
             // dtpEntrada
             // 
             this.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
@@ -399,6 +538,7 @@
             this.dtpEntrada.Name = "dtpEntrada";
             this.dtpEntrada.Size = new System.Drawing.Size(99, 20);
             this.dtpEntrada.TabIndex = 6;
+            this.dtpEntrada.ValueChanged += new System.EventHandler(this.DtpEntrada_ValueChanged);
             // 
             // dtpEmissao
             // 
@@ -409,6 +549,7 @@
             this.dtpEmissao.Name = "dtpEmissao";
             this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
             this.dtpEmissao.TabIndex = 4;
+            this.dtpEmissao.ValueChanged += new System.EventHandler(this.DtpEmissao_ValueChanged);
             // 
             // lbEntrada
             // 
@@ -434,6 +575,7 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(65, 20);
             this.tbCodigo.TabIndex = 1;
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbNumeroDocumento
             // 
@@ -451,140 +593,20 @@
             this.menuVertical.Name = "menuVertical";
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
             this.menuVertical.TabIndex = 3;
-            // 
-            // dbValorTotalDocumento
-            // 
-            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 152);
-            this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
-            this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 20);
-            this.dbValorTotalDocumento.TabIndex = 23;
-            this.dbValorTotalDocumento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoDocumento
-            // 
-            this.dbDescontoDocumento.Location = new System.Drawing.Point(9, 113);
-            this.dbDescontoDocumento.Name = "dbDescontoDocumento";
-            this.dbDescontoDocumento.Size = new System.Drawing.Size(85, 20);
-            this.dbDescontoDocumento.TabIndex = 22;
-            this.dbDescontoDocumento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoTotalItens
-            // 
-            this.dbDescontoTotalItens.Enabled = false;
-            this.dbDescontoTotalItens.Location = new System.Drawing.Point(9, 74);
-            this.dbDescontoTotalItens.Name = "dbDescontoTotalItens";
-            this.dbDescontoTotalItens.Size = new System.Drawing.Size(85, 20);
-            this.dbDescontoTotalItens.TabIndex = 21;
-            this.dbDescontoTotalItens.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorTotalItens
-            // 
-            this.dbValorTotalItens.Enabled = false;
-            this.dbValorTotalItens.Location = new System.Drawing.Point(9, 35);
-            this.dbValorTotalItens.Name = "dbValorTotalItens";
-            this.dbValorTotalItens.Size = new System.Drawing.Size(85, 20);
-            this.dbValorTotalItens.TabIndex = 20;
-            this.dbValorTotalItens.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoItem
-            // 
-            this.dbDescontoItem.Location = new System.Drawing.Point(76, 308);
-            this.dbDescontoItem.Name = "dbDescontoItem";
-            this.dbDescontoItem.Size = new System.Drawing.Size(63, 20);
-            this.dbDescontoItem.TabIndex = 19;
-            this.dbDescontoItem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbDescontoItemPorc
-            // 
-            this.dbDescontoItemPorc.Location = new System.Drawing.Point(6, 308);
-            this.dbDescontoItemPorc.Name = "dbDescontoItemPorc";
-            this.dbDescontoItemPorc.Size = new System.Drawing.Size(63, 20);
-            this.dbDescontoItemPorc.TabIndex = 18;
-            this.dbDescontoItemPorc.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorTotItem
-            // 
-            this.dbValorTotItem.Location = new System.Drawing.Point(144, 271);
-            this.dbValorTotItem.Name = "dbValorTotItem";
-            this.dbValorTotItem.Size = new System.Drawing.Size(63, 20);
-            this.dbValorTotItem.TabIndex = 17;
-            this.dbValorTotItem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorUnitItem
-            // 
-            this.dbValorUnitItem.Location = new System.Drawing.Point(75, 271);
-            this.dbValorUnitItem.Name = "dbValorUnitItem";
-            this.dbValorUnitItem.Size = new System.Drawing.Size(63, 20);
-            this.dbValorUnitItem.TabIndex = 16;
-            this.dbValorUnitItem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbQuantidade
-            // 
-            this.dbQuantidade.Location = new System.Drawing.Point(6, 271);
-            this.dbQuantidade.Name = "dbQuantidade";
-            this.dbQuantidade.Size = new System.Drawing.Size(63, 20);
-            this.dbQuantidade.TabIndex = 15;
-            this.dbQuantidade.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaItem
-            // 
-            this.buscaItem.Location = new System.Drawing.Point(1, 208);
-            this.buscaItem.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaItem.Name = "buscaItem";
-            this.buscaItem.Size = new System.Drawing.Size(442, 39);
-            this.buscaItem.TabIndex = 1;
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Fornecedor";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 55);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 2;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
             // fmEntEntradaNota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1239, 572);
+            this.ClientSize = new System.Drawing.Size(1239, 573);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);
@@ -593,10 +615,14 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1255, 611);
             this.Name = "fmEntEntradaNota";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registro de entradas";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmEntEntradaNota_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEntEntradaNota_KeyDown);
             this.gbTotais.ResumeLayout(false);
             this.gbTotais.PerformLayout();
             this.gbItens.ResumeLayout(false);
@@ -625,13 +651,6 @@
         private System.Windows.Forms.Label lbDescontoPorc;
         private System.Windows.Forms.Button btNovoItem;
         private System.Windows.Forms.DataGridView dgvItens;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescricao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcQuantidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorUnitario;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoPorc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoItem;
         private System.Windows.Forms.Button btInserirItem;
         private System.Windows.Forms.Label lbValorUnit;
         private System.Windows.Forms.Label lbQuantidade;
@@ -653,5 +672,12 @@
         private Controls.DecimalBox dbValorUnitItem;
         private Controls.DecimalBox dbValorTotalDocumento;
         private Controls.DecimalBox dbDescontoDocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescricao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcQuantidade;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorUnitario;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoPorc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoItem;
     }
 }

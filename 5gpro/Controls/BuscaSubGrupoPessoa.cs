@@ -12,8 +12,7 @@ namespace _5gpro.Controls
 
         public SubGrupoPessoa subgrupoPessoa = null;
         private GrupoPessoa gruporecebido = null;
-        private static readonly ConexaoDAO conexao = new ConexaoDAO();
-        private readonly SubGrupoPessoaDAO subgrupoPessoaDAO = new SubGrupoPessoaDAO(conexao);
+        private readonly SubGrupoPessoaDAO subgrupoPessoaDAO = new SubGrupoPessoaDAO();
 
         public BuscaSubGrupoPessoa()
         {
@@ -113,14 +112,25 @@ namespace _5gpro.Controls
             }
         }
 
-        public void EscolhaOGrupo()
+        public void EscolhaOGrupo(bool ok)
         {
-            tbNomeSubGrupoPessoa.Text = "Escolha o Grupo";
+            if (ok)
+            {
+                if (subgrupoPessoa != null)
+                    tbNomeSubGrupoPessoa.Text = subgrupoPessoa.Nome;
+                else
+                    tbNomeSubGrupoPessoa.Text = "";
+            }
+            else
+            {
+                tbNomeSubGrupoPessoa.Text = "Escolha o Grupo";
+            }
         }
 
         public void Limpa()
         {
             this.subgrupoPessoa = null;
+            this.gruporecebido = null;
             tbCodigoSubGrupoPessoa.Clear();
             tbNomeSubGrupoPessoa.Clear();
         }

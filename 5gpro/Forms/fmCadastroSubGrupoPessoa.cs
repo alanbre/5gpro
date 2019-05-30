@@ -16,16 +16,13 @@ namespace _5gpro.Forms
     public partial class fmCadastroSubGrupoPessoa : Form
     {
 
-        static ConexaoDAO connection = new ConexaoDAO();
-        GrupoPessoa grupopessoareferencia = null;
-        fmCadastroGrupoPessoa telacadgrupopessoa = null;
-        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO(connection);
-        Validacao validacao = new Validacao();
-        SubGrupoPessoa subgrupopessoa = null;
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO(connection);
+        private GrupoPessoa grupopessoareferencia = null;
+        private fmCadastroGrupoPessoa telacadgrupopessoa = null;
+        private readonly Validacao validacao = new Validacao();
+        private SubGrupoPessoa subgrupopessoa = null;
+        private readonly SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
 
-        bool editando = false;
-        bool ignoraCheckEvent;
+        bool editando, ignoraCheckEvent = false;
 
         public fmCadastroSubGrupoPessoa(GrupoPessoa grupopessoarecebido, fmCadastroGrupoPessoa cadgrupopessoa)
         {
@@ -40,7 +37,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbCodigo.Text = subgrupopessoaDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = subgrupopessoaDAO.BuscaProxCodigoDisponivel().ToString();
             }
         }
 
@@ -157,7 +154,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = subgrupopessoaDAO.SalvarOuAtualizar(subgrupopessoa);
+                    int resultado = subgrupopessoaDAO.SalvaOuAtualiza(subgrupopessoa);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso

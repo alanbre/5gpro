@@ -11,8 +11,11 @@ namespace _5gpro.Forms
 
         public ContaPagar contaPagarSelecionada = null;
         private IEnumerable<ContaPagar> contasPagar;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO(connection);
+        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO();
+        private bool valorContaFiltro = false;
+        private bool dataCadastroFiltro = false;
+        private bool dataVencimentoFiltro = false;
+
         public struct Filtros
         {
             public Pessoa filtroPessoa;
@@ -22,6 +25,9 @@ namespace _5gpro.Forms
             public DateTime filtroDataCadastroFinal;
             public DateTime filtroDataVencimentoInicial;
             public DateTime filtroDataVencimentoFinal;
+            public bool usarvalorContaFiltro;
+            public bool usardataCadastroFiltro;
+            public bool usardataVencimentoFiltro;
         }
 
         public fmBuscaContaPagar()
@@ -37,7 +43,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvContas.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvContas.Rows[selectedRowIndex];
-            contaPagarSelecionada = contaPagarDAO.BuscaById(Convert.ToInt32(selectedRow.Cells[0].Value));
+            contaPagarSelecionada = contaPagarDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
 
@@ -52,7 +58,10 @@ namespace _5gpro.Forms
                 filtroDataCadastroInicial = dtpDataCadastroInicial.Value,
                 filtroDataCadastroFinal = dtpDataCadastroFinal.Value,
                 filtroDataVencimentoInicial = dtpDataVencimentoInicial.Value,
-                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value
+                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value,
+                usardataCadastroFiltro = dataCadastroFiltro,
+                usardataVencimentoFiltro = dataVencimentoFiltro,
+                usarvalorContaFiltro = valorContaFiltro
             };
 
             contasPagar = contaPagarDAO.Busca(f);
@@ -75,6 +84,54 @@ namespace _5gpro.Forms
         {
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
             dtpDataVencimentoInicial.Value = DateTime.Today.AddDays(-30);
+        }
+
+        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValorConta.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorContaFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false;
+                dbValorFinal.Enabled = false;
+                valorContaFiltro = false;
+            }
+        }
+
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpDataCadastroInicial.Enabled = true;
+                dtpDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpDataCadastroInicial.Enabled = false;
+                dtpDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+        }
+
+        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataVencimentoParcela.Checked)
+            {
+                dtpDataVencimentoInicial.Enabled = true;
+                dtpDataVencimentoFinal.Enabled = true;
+                dataVencimentoFiltro = true;
+            }
+            else
+            {
+                dtpDataVencimentoInicial.Enabled = false;
+                dtpDataVencimentoFinal.Enabled = false;
+                dataVencimentoFiltro = false;
+            }
         }
     }
 }

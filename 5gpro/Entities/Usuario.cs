@@ -22,7 +22,7 @@ namespace _5gpro.Entities
         public string Email { get; set; }
         public string Telefone { get; set; }
 
-        [Required(ErrorMessage = "Informe o grupo de acesso do usuário.|tbCodGrupoUsuario", AllowEmptyStrings = false)]
+        [Required(ErrorMessage = "Informe o grupo de acesso do usuário.|buscaGrupoUsuario", AllowEmptyStrings = false)]
         public GrupoUsuario Grupousuario { get; set; }
 
 

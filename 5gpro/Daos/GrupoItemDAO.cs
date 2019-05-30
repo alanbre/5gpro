@@ -1,389 +1,226 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace _5gpro.Daos
 {
     class GrupoItemDAO
     {
-        public ConexaoDAO Connect { get; }
-        public GrupoItemDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
+
 
         public int SalvarOuAtualizar(GrupoItem grupoitem)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-
-                Connect.Comando = new MySqlCommand(@"INSERT INTO grupoitem 
+                sql.Query = @"INSERT INTO grupoitem 
                           (idgrupoitem, nome) 
                           VALUES
                           (@idgrupoitem, @nome)
                           ON DUPLICATE KEY UPDATE
-                           nome = @nome
-                         ;",
-                         Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", grupoitem.GrupoItemID);
-                Connect.Comando.Parameters.AddWithValue("@nome", grupoitem.Nome);
-
-
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                           nome = @nome";
+                sql.addParam("@idgrupoitem", grupoitem.GrupoItemID);
+                sql.addParam("@nome", grupoitem.Nome);
+                retorno = sql.insertQuery();
             }
             return retorno;
         }
-
-        public IEnumerable<GrupoItem> BuscaTodos(string nome)
+        public IEnumerable<GrupoItem> Busca(string nome)
         {
-            SubGrupoItem subgrupoitem = null;
-            GrupoItem grupoitem = null;
             List<GrupoItem> listagrupoitem = new List<GrupoItem>();
-            List<SubGrupoItem> listasubgrupoitem = new List<SubGrupoItem>();
-
-            string conNome = nome.Length > 0 ? "AND g.nome LIKE @nome" : "";
-
-            try
+            string conNome = nome.Length > 0 ? " AND nome LIKE @nome" : "";
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
-                                                   s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                                                   s.idgrupoitem AS idgrupoitemsub 
-                                                   FROM grupoitem g 
-                                                   LEFT JOIN subgrupoitem s 
-                                                   ON g.idgrupoitem = s.idgrupoitem 
-                                                   WHERE 1=1
-                                                   " + conNome + @"
-                                                   ORDER BY g.nome;", Connect.Conexao);
-
-
-                if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                sql.Query = @"SELECT *
+                            FROM grupoitem 
+                            WHERE 1=1"
+                             + conNome +
+                            @" ORDER BY nome";
+                if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    grupoitem = new GrupoItem
-                    {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("grupoitemID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupoitem"))
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupoitemID")))
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-                        listasubgrupoitem.Add(subgrupoitem);
-                    }
-
-                    //O Any funciona como o IEnumerable
-                    //Para não adicionar repetidos
-                    if (!listagrupoitem.Any(l => l.GrupoItemID == reader.GetInt32(reader.GetOrdinal("grupoitemID"))))
-                    {
-                        listagrupoitem.Add(grupoitem);
-                    }                 
+                    var grupoItem = new GrupoItem();
+                    grupoItem.GrupoItemID = Convert.ToInt32(d["idgrupoitem"]);
+                    grupoItem.Nome = (string)d["nome"];
+                    listagrupoitem.Add(grupoItem);
                 }
-                reader.Close();
+            }
 
-                foreach (GrupoItem g in listagrupoitem)
-                {
-                    g.SubGrupoItens = new List<SubGrupoItem>();
-                    foreach (SubGrupoItem s in listasubgrupoitem)
-                    {
-                        if (s.GrupoItem.GrupoItemID == g.GrupoItemID)
-                        {
-                            g.SubGrupoItens.Add(s);
-                        }
-                    }
-                }
-
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
             return listagrupoitem;
         }
-
-
-        public GrupoItem BuscarByID(int Codigo)
+        public GrupoItem BuscaByID(int Codigo)
         {
-            SubGrupoItem subgrupoitem = null;
-            GrupoItem grupoitem = null;
-
-            try
+            var grupoitem = new GrupoItem();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
+                sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                                                    s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                                                   s.idgrupoitem AS idgrupoitemsub 
+                                                   s.idgrupoitem AS idgrupoitemsub, s.codigo
                                                    FROM grupoitem g 
                                                    LEFT JOIN subgrupoitem s 
                                                    ON g.idgrupoitem = s.idgrupoitem 
-                                                   WHERE g.idgrupoitem = @idgrupoitem"
-                                   , Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", Codigo);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-                if (reader.Read())
+                                                   WHERE g.idgrupoitem = @idgrupoitem";
+                sql.addParam("@idgrupoitem", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    grupoitem = new GrupoItem
-                    {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("grupoitemID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupoitem")),
-                        SubGrupoItens = new List<SubGrupoItem>()
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupoitemID")))
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-                        grupoitem.SubGrupoItens.Add(subgrupoitem);
-                    }
+                    return null;
                 }
-                else
-                {
-                    grupoitem = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupoitemID")) != null)
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-
-                        grupoitem.SubGrupoItens.Add(subgrupoitem);
-                    }
-                }
-                reader.Close();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return grupoitem;
-        }
-
-        public GrupoItem BuscarProximo(string codAtual)
-        {
-            SubGrupoItem subgrupoitem = null;
-            GrupoItem grupoitem = new GrupoItem();
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
-                                                   s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                                                   s.idgrupoitem AS idgrupoitemsub 
-                                                   FROM grupoitem g 
-                                                   LEFT JOIN subgrupoitem s 
-                                                   ON g.idgrupoitem = s.idgrupoitem 
-                                                   WHERE g.idgrupoitem = (SELECT MIN(idgrupoitem) 
-                                                   FROM grupoitem WHERE idgrupoitem > @idgrupoitem)"
-                                                   , Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", codAtual);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    grupoitem = new GrupoItem
-                    {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("grupoitemID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupoitem")),
-                        SubGrupoItens = new List<SubGrupoItem>()
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupoitemID")))
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-                        grupoitem.SubGrupoItens.Add(subgrupoitem);
-                    }
-                }
-                else
-                {
-                    grupoitem = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupoitemID")) != null)
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-
-                        grupoitem.SubGrupoItens.Add(subgrupoitem);
-                    }
-                }
-                reader.Close();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                grupoitem = LeDadosReader(data);
             }
             return grupoitem;
         }
-
-        public GrupoItem BuscarAnterior(string codAtual)
+        public GrupoItem Proximo(int Codigo)
         {
-            SubGrupoItem subgrupoitem = null;
-            GrupoItem grupoitem = new GrupoItem();
-            try
+            var grupoitem = new GrupoItem();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
-                                                   s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                                                   s.idgrupoitem AS idgrupoitemsub 
-                                                   FROM grupoitem g 
-                                                   LEFT JOIN subgrupoitem s 
-                                                   ON g.idgrupoitem = s.idgrupoitem 
-                                                   WHERE g.idgrupoitem = (SELECT MAX(idgrupoitem) 
-                                                   FROM grupoitem WHERE idgrupoitem < @idgrupoitem)"
-                                                   , Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupoitem", codAtual);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
+                            s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
+                            s.idgrupoitem AS idgrupoitemsub , s.codigo
+                            FROM grupoitem g 
+                            LEFT JOIN subgrupoitem s 
+                            ON g.idgrupoitem = s.idgrupoitem 
+                            WHERE g.idgrupoitem = (SELECT MIN(idgrupoitem) 
+                            FROM grupoitem WHERE idgrupoitem > @idgrupoitem)";
+                sql.addParam("@idgrupoitem", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    grupoitem = new GrupoItem
-                    {
-                        GrupoItemID = reader.GetInt32(reader.GetOrdinal("grupoitemID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupoitem")),
-                        SubGrupoItens = new List<SubGrupoItem>()
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupoitemID")))
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-                        grupoitem.SubGrupoItens.Add(subgrupoitem);
-                    }
+                    return null;
                 }
-                else
-                {
-                    grupoitem = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupoitemID")) != null)
-                    {
-                        subgrupoitem = new SubGrupoItem
-                        {
-                            SubGrupoItemID = reader.GetInt32(reader.GetOrdinal("subgrupoitemID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupoitemnome")),
-                            GrupoItem = grupoitem
-                        };
-
-                        grupoitem.SubGrupoItens.Add(subgrupoitem);
-                    }
-                }
-                reader.Close();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                grupoitem = LeDadosReader(data);
             }
             return grupoitem;
         }
-
-        public string BuscaProxCodigoDisponivel()
+        public GrupoItem Anterior(int Codigo)
         {
-            string proximoid = null;
-            try
+            var grupoitem = new GrupoItem();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT i1.idgrupoitem + 1 AS proximoid
-                                             FROM grupoitem AS i1
-                                             LEFT OUTER JOIN grupoitem AS i2 ON i1.idgrupoitem + 1 = i2.idgrupoitem
-                                             WHERE i2.idgrupoitem IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
+                            s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
+                            s.idgrupoitem AS idgrupoitemsub , s.codigo
+                            FROM grupoitem g 
+                            LEFT JOIN subgrupoitem s 
+                            ON g.idgrupoitem = s.idgrupoitem 
+                            WHERE g.idgrupoitem = (SELECT MAX(idgrupoitem) 
+                            FROM grupoitem WHERE idgrupoitem < @idgrupoitem)";
+                sql.addParam("@idgrupoitem", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
+                    return null;
                 }
-                else
+                grupoitem = LeDadosReader(data);
+            }
+            return grupoitem;
+        }
+        public int InserirSubGrupo(SubGrupoItem subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO subgrupoitem (nome, idgrupoitem, codigo)
+                            VALUES
+                            (@nome, @idgrupoitem, @codigo)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, idgrupoitem = @idgrupoitem, codigo = @codigo";
+                sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
+                sql.addParam("@nome", subGrupo.Nome);
+                sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
+                sql.addParam("@codigo", subGrupo.Codigo);
+                retorno = sql.insertQuery();
+
+                if( retorno > 0)
                 {
-                    proximoid = "1";
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupoitem;";
+                    var data = sql.selectQueryForSingleRecord();
+                    subGrupo.SubGrupoItemID = Convert.ToInt32(data["idsubgrupoitem"]);
+                }
+                sql.Commit();
+            }
+            return retorno;
+        }
+        public bool SubGrupoUsado(SubGrupoItem subGrupo)
+        {
+            var usado = true;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = "SELECT * FROM item WHERE idsubgrupoitem = @idsubgrupoitem LIMIT 1;";
+                sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    usado = false;
                 }
             }
-            catch (MySqlException ex)
+            return usado;
+        }
+        public int RemoverSubGrupo(SubGrupoItem subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Console.WriteLine("Error: {0}", ex.ToString());
+                sql.Query = @"DELETE FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem";
+                sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
+                retorno = sql.deleteQuery();
             }
-            finally
+            return retorno;
+        }
+        public int BuscaProxCodigoDisponivel()
+        {
+            int proximoid = 1;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.FecharConexao();
+                sql.Query = @"SELECT i1.idgrupoitem + 1 AS proximoid
+                            FROM grupoitem AS i1
+                            LEFT OUTER JOIN grupoitem AS i2 ON i1.idgrupoitem + 1 = i2.idgrupoitem
+                            WHERE i2.idgrupoitem IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
+                {
+                    proximoid = Convert.ToInt32(data["proximoid"]);
+                }
             }
             return proximoid;
+        }
+        private GrupoItem LeDadosReader(List<Dictionary<string, object>> data)
+        {
+            if (data.Count == 0)
+            {
+                return null;
+            }
+
+            var grupoItem = new GrupoItem();
+            grupoItem.GrupoItemID = Convert.ToInt32(data[0]["grupoitemID"]);
+            grupoItem.Nome = (string)data[0]["nomegrupoitem"];
+
+
+            var listaSubGrupoItem = new List<SubGrupoItem>();
+
+            foreach (var d in data)
+            {
+                if (d["subgrupoitemID"] != null)
+                {
+                    var subGrupoItem = new SubGrupoItem();
+                    subGrupoItem.SubGrupoItemID = Convert.ToInt32(d["subgrupoitemID"]);
+                    subGrupoItem.Codigo = Convert.ToInt32(d["codigo"]);
+                    subGrupoItem.Nome = (string)d["subgrupoitemnome"];
+                    subGrupoItem.GrupoItem = grupoItem;
+
+                    listaSubGrupoItem.Add(subGrupoItem);
+                }
+            }
+            grupoItem.SubGrupoItens = listaSubGrupoItem;
+
+            return grupoItem;
         }
 
     }

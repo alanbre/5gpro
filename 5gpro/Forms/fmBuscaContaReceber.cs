@@ -10,8 +10,11 @@ namespace _5gpro.Forms
     {
         public ContaReceber contaReceberSelecionada = null;
         private IEnumerable<ContaReceber> contasReceber;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
+        private bool valorContaFiltro = false;
+        private bool dataCadastroFiltro = false;
+        private bool dataVencimentoFiltro = false;
+
 
         public struct Filtros
         {
@@ -23,6 +26,9 @@ namespace _5gpro.Forms
             public DateTime filtroDataCadastroFinal;
             public DateTime filtroDataVencimentoInicial;
             public DateTime filtroDataVencimentoFinal;
+            public bool usarvalorContaFiltro;
+            public bool usardataCadastroFiltro;
+            public bool usardataVencimentoFiltro;
         }
 
 
@@ -55,8 +61,12 @@ namespace _5gpro.Forms
                 filtroDataCadastroInicial = dtpDataCadastroInicial.Value,
                 filtroDataCadastroFinal = dtpDataCadastroFinal.Value,
                 filtroDataVencimentoInicial = dtpDataVencimentoInicial.Value,
-                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value
+                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value,
+                usardataCadastroFiltro = dataCadastroFiltro,
+                usardataVencimentoFiltro = dataVencimentoFiltro,
+                usarvalorContaFiltro = valorContaFiltro
             };
+
 
             contasReceber = contaReceberDAO.Busca(f);
             dgvContas.Rows.Clear();
@@ -90,7 +100,52 @@ namespace _5gpro.Forms
             }
         }
 
+        private void CbValorConta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValorConta.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorContaFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false;
+                dbValorFinal.Enabled = false;
+                valorContaFiltro = false;
+            }
+        }
 
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpDataCadastroInicial.Enabled = true;
+                dtpDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpDataCadastroInicial.Enabled = false;
+                dtpDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+        }
 
+        private void CbDataVencimentoParcela_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataVencimentoParcela.Checked)
+            {
+                dtpDataVencimentoInicial.Enabled = true;
+                dtpDataVencimentoFinal.Enabled = true;
+                dataVencimentoFiltro = true;
+            }
+            else
+            {
+                dtpDataVencimentoInicial.Enabled = false;
+                dtpDataVencimentoFinal.Enabled = false;
+                dataVencimentoFiltro = false;
+            }
+        }
     }
 }

@@ -10,11 +10,11 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNome", AllowEmptyStrings = false)]
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "O Nome fantasia é obrigatório.|tbFantasia", AllowEmptyStrings = false)]
         public string Fantasia { get; set; }
 
-        public List<string> Atuacao { get; set; }
+        [Required(ErrorMessage = "Atuação obrigatória.|cblAtuacao", AllowEmptyStrings = false)]
+        public string Atuacao { get; set; }
+        public string Situacao { get; set; }
         public string TipoPessoa { get; set; }
         public string Rua { get; set; }
         public string Numero { get; set; }
@@ -41,7 +41,7 @@ namespace _5gpro.Entities
             {
                 //PEGA O VALOR PASSADO PELA VARIÁVEL DO C# CHAMADA value 
                 //(EXEMPLO pessoa.Endereco = "abc, 123 - Centro") e separa pra passar certinho pros campos
-                //É ÚTIL PROS GRIDS (OU LUGAR COM MESMA CONDIÇÃO) ONDE NÃO PRECISA SEPARA RUA, NUMERO, BAIRRO
+                //É ÚTIL PROS GRIDS (OU LUGAR COM MESMA CONDIÇÃO) ONDE NÃO PRECISA SEPARAR RUA, NUMERO, BAIRRO
                 string[] dados = Regex.Split(value, ",|-");
                 this.Rua = dados[0];
                 this.Numero = dados[1];

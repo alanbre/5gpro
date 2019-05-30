@@ -10,18 +10,17 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroGrupoPessoa : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
-        GrupoPessoa grupopessoa = null;
-        GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO(connection);
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO(connection);
-        Validacao validacao = new Validacao();
-        PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private GrupoPessoa grupopessoa = null;
+        private readonly GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO();
+        private readonly SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
+        private readonly Validacao validacao = new Validacao();
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
-        List<SubGrupoPessoa> listadesubgrupopessoa = new List<SubGrupoPessoa>();
+        private List<SubGrupoPessoa> listadesubgrupopessoa = new List<SubGrupoPessoa>();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
@@ -38,7 +37,7 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010600").ToString();
 
@@ -60,6 +59,19 @@ namespace _5gpro.Forms
             }
 
             EnterTab(this.ActiveControl, e);
+        }
+        private void FmCadastroGrupoPessoa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
 
         private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
@@ -197,7 +209,7 @@ namespace _5gpro.Forms
             if (grupopessoa != null)
             {
                 dgvSubGruposPessoas.Rows.Clear();
-                listadesubgrupopessoa = subgrupopessoaDAO.BuscaTodos(tbBuscaNomeSub.Text, grupopessoa.GrupoPessoaID).ToList();
+                listadesubgrupopessoa = subgrupopessoaDAO.Busca(tbBuscaNomeSub.Text, grupopessoa.GrupoPessoaID).ToList();
                 foreach (SubGrupoPessoa s in listadesubgrupopessoa)
                 {
                     dgvSubGruposPessoas.Rows.Add(s.SubGrupoPessoaID, s.Nome);
@@ -295,14 +307,13 @@ namespace _5gpro.Forms
 
             if (!editando && tbCodigo.Text.Length > 0)
             {
-
                 validacao.despintarCampos(controls);
 
-                GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarProximo(tbCodigo.Text);
+                GrupoPessoa newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                 if (newgrupopessoa != null)
                 {
                     grupopessoa = newgrupopessoa;
-                    PreencheCampos(grupopessoa);
+                    PreencheCampos(grupopessoa);                  
                 }
             }
             else if (editando && tbCodigo.Text.Length > 0)
@@ -313,7 +324,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarProximo(tbCodigo.Text);
+                    GrupoPessoa newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                     if (newgrupopessoa != null)
                     {
                         grupopessoa = newgrupopessoa;
@@ -322,7 +333,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupopessoa = grupopessoaDAO.BuscarAnterior(tbCodigo.Text);
+                        newgrupopessoa = grupopessoaDAO.Anterior(tbCodigo.Text);
                         if (newgrupopessoa != null)
                         {
                             grupopessoa = newgrupopessoa;
@@ -344,7 +355,7 @@ namespace _5gpro.Forms
             {
 
                 validacao.despintarCampos(controls);
-                GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarAnterior(tbCodigo.Text);
+                GrupoPessoa newgrupopessoa = grupopessoaDAO.Anterior(tbCodigo.Text);
                 if (newgrupopessoa != null)
                 {
                     grupopessoa = newgrupopessoa;
@@ -359,7 +370,7 @@ namespace _5gpro.Forms
                MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     validacao.despintarCampos(controls);
-                    GrupoPessoa newgrupopessoa = grupopessoaDAO.BuscarAnterior(tbCodigo.Text);
+                    GrupoPessoa newgrupopessoa = grupopessoaDAO.Anterior(tbCodigo.Text);
                     if (newgrupopessoa != null)
                     {
                         grupopessoa = newgrupopessoa;
@@ -368,7 +379,7 @@ namespace _5gpro.Forms
                     }
                     else
                     {
-                        newgrupopessoa = grupopessoaDAO.BuscarProximo(tbCodigo.Text);
+                        newgrupopessoa = grupopessoaDAO.Proximo(tbCodigo.Text);
                         if (newgrupopessoa != null)
                         {
                             grupopessoa = newgrupopessoa;
@@ -386,16 +397,13 @@ namespace _5gpro.Forms
             if (grupopessoa != null)
             {
                 btAddSub.Enabled = true;
+                btRemoverSub.Enabled = false;
 
                 if (grupopessoa.SubGrupoPessoas != null)
                 {
                     if (grupopessoa.SubGrupoPessoas.Count > 0)
                     {
                         btRemoverSub.Enabled = true;
-                    }
-                    else
-                    {
-                        btRemoverSub.Enabled = false;
                     }
                 }
             }
@@ -431,7 +439,7 @@ namespace _5gpro.Forms
                 MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     LimpaCampos(false);
-                    tbCodigo.Text = grupopessoaDAO.BuscaProxCodigoDisponivel();
+                    tbCodigo.Text = grupopessoaDAO.BuscaProxCodigoDisponivel().ToString();
                     grupopessoa = null;
                     tbNomeGrupoPessoa.Focus();
                     Editando(true);
@@ -440,7 +448,7 @@ namespace _5gpro.Forms
             else
             {
                 LimpaCampos(false);
-                tbCodigo.Text = grupopessoaDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = grupopessoaDAO.BuscaProxCodigoDisponivel().ToString();
                 grupopessoa = null;
                 tbNomeGrupoPessoa.Focus();
                 Editando(true);
@@ -455,6 +463,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigo.Text = grupopessoa.GrupoPessoaID.ToString();
             tbNomeGrupoPessoa.Text = grupopessoa.Nome;
+            dgvSubGruposPessoas.Rows.Clear();
 
             if (grupopessoa.SubGrupoPessoas != null)
             {
@@ -475,7 +484,9 @@ namespace _5gpro.Forms
 
             if (grupopessoa != null)
             {
+                //Busca novamente para atualizar a lista de subgrupos.
                 grupopessoa = grupopessoaDAO.BuscarByID(grupopessoa.GrupoPessoaID);
+
                 if (grupopessoa.SubGrupoPessoas != null)
                 {
                     if (grupopessoa.SubGrupoPessoas.Count > 0)
@@ -528,6 +539,7 @@ namespace _5gpro.Forms
 
                     grupopessoa.GrupoPessoaID = int.Parse(tbCodigo.Text);
                     grupopessoa.Nome = tbNomeGrupoPessoa.Text;
+                    grupopessoa.SubGrupoPessoas = new List<SubGrupoPessoa>();
 
                     ControlCollection controls = (ControlCollection)this.Controls;
 
@@ -564,15 +576,17 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
+                    AlterarBotoesSubAdd();
+                    AtualizarDgvSub();
                 }
                 else if (resultado == 2)
                 {
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
+                    AlterarBotoesSubAdd();
+                    AtualizarDgvSub();
                 }
             }
-            AlterarBotoesSubAdd();
-            AtualizarDgvSub();
         }
 
         private void AbreTelaBuscaGrupoPessoa()
@@ -592,5 +606,6 @@ namespace _5gpro.Forms
             var cadSubGrupoPessoa = new fmCadastroSubGrupoPessoa(grupopessoa, this);
             cadSubGrupoPessoa.ShowDialog();
         }
+
     }
 }

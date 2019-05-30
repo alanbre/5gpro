@@ -5604,8 +5604,6 @@ INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES
 (4, 'L', 'Litro'),
 (5, 'm²', 'Metro');
 
-INSERT INTO atuacao (`idatuacao`, `descricao`) VALUES (1, 'Cliente'), (2, 'Fornecedor');
-
 INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
 
 INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
@@ -5616,7 +5614,7 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Módulo de Orçamentos', '020000'),
 ('Módulo de Saidas', '030000'),
 ('Módulo de Contas a Receber', '050000'),
-('Módulo de Contas a Receber', '060000'),
+('Módulo de Contas a Pagar', '060000'),
 ('Módulo de Entradas', '070000'),
 
 ('Cadastro de Pessoa', '010100'),
@@ -5637,6 +5635,7 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Cadastro de Contas a Receber', '050100'),
 ('Quitação de Contas a Receber', '050200'),
 ('Cadastro de Contas a Pagar', '060100'),
+('Quitação de Contas a Pagar', '060200'),
 ('Entrada de notas', '070100');
 
 INSERT INTO formapagamento (idformapagamento, nome) VALUES

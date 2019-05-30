@@ -9,13 +9,11 @@ namespace _5gpro.Forms
     public partial class fmCadastroSubGrupoItem : Form
     {
 
-        static ConexaoDAO connection = new ConexaoDAO();
-        GrupoItem grupoitemreferencia = null;
-        fmCadastroGrupoItem telacadgrupoitem = null;
-        GrupoItemDAO grupoitemDAO = new GrupoItemDAO(connection);
-        Validacao validacao = new Validacao();
-        SubGrupoItem subgrupoitem = null;
-        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO(connection);
+        private GrupoItem grupoitemreferencia = null;
+        private fmCadastroGrupoItem telacadgrupoitem = null;
+        private readonly Validacao validacao = new Validacao();
+        private SubGrupoItem subgrupoitem = null;
+        private readonly SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
 
         bool editando = false;
         bool ignoraCheckEvent;
@@ -33,7 +31,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbCodigo.Text = subgrupoitemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = subgrupoitemDAO.BuscaProxCodigoDisponivel().ToString();
             }
         }
 
@@ -77,7 +75,7 @@ namespace _5gpro.Forms
             {
                 if (tbCodigo.Text.Length > 0)
                 {
-                    SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscarByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
+                    SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscaByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
                     if (newsubgrupoitem != null)
                     {
                         subgrupoitem = newsubgrupoitem;
@@ -105,7 +103,7 @@ namespace _5gpro.Forms
                 {
                     if (tbCodigo.Text.Length > 0)
                     {
-                        SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscarByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
+                        SubGrupoItem newsubgrupoitem = subgrupoitemDAO.BuscaByID(int.Parse(tbCodigo.Text), grupoitemreferencia.GrupoItemID);
                         if (newsubgrupoitem != null)
                         {
                             subgrupoitem = newsubgrupoitem;
@@ -151,7 +149,7 @@ namespace _5gpro.Forms
 
                 if (ok)
                 {
-                    int resultado = subgrupoitemDAO.SalvarOuAtualizar(subgrupoitem);
+                    int resultado = subgrupoitemDAO.SalvaOuAtualiza(subgrupoitem);
                     validacao.despintarCampos(controls);
                     // resultado 0 = nada foi inserido (houve algum erro)
                     // resultado 1 = foi inserido com sucesso
@@ -167,14 +165,12 @@ namespace _5gpro.Forms
                     {
                         MessageBox.Show("Salvo", "Aviso de alteração", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
-                        telacadgrupoitem.AtualizarDgvSub();
                         Editando(false);
                     }
                     else if (resultado == 2)
                     {
                         MessageBox.Show("Atualizado", "Aviso de alteração", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
-                        telacadgrupoitem.AtualizarDgvSub();
                         Editando(false);
                     }
                 }
@@ -223,7 +219,6 @@ namespace _5gpro.Forms
 
         private void FmCadastroSubGrupoItem_FormClosing(object sender, FormClosingEventArgs e)
         {
-            telacadgrupoitem.AtualizarDgvSub();
             telacadgrupoitem.subgrupoitemSelecionado = null;
         }
 

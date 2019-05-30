@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="gugugugu" targetNamespace="http://tempuri.org/gugugugu.xsd" xmlns:mstns="http://tempuri.org/gugugugu.xsd" xmlns="http://tempuri.org/gugugugu.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="gugugugu" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="gugugugu" msprop:Generator_UserDSName="gugugugu">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DataTahuhuh1" msprop:Generator_TableClassName="DataTahuhuh1DataTable" msprop:Generator_TableVarName="tableDataTahuhuh1" msprop:Generator_TablePropName="DataTahuhuh1" msprop:Generator_RowDeletingName="DataTahuhuh1RowDeleting" msprop:Generator_RowChangingName="DataTahuhuh1RowChanging" msprop:Generator_RowEvHandlerName="DataTahuhuh1RowChangeEventHandler" msprop:Generator_RowDeletedName="DataTahuhuh1RowDeleted" msprop:Generator_UserTableName="DataTahuhuh1" msprop:Generator_RowChangedName="DataTahuhuh1RowChanged" msprop:Generator_RowEvArgName="DataTahuhuh1RowChangeEvent" msprop:Generator_RowClassName="DataTahuhuh1Row">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="gygyuhin" msprop:Generator_ColumnVarNameInTable="columngygyuhin" msprop:Generator_ColumnPropNameInRow="gygyuhin" msprop:Generator_ColumnPropNameInTable="gygyuhinColumn" msprop:Generator_UserColumnName="gygyuhin" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

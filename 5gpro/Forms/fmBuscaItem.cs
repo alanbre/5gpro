@@ -9,10 +9,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaItem : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         public List<Item> itens;
         public Item itemSelecionado;
-        private readonly ItemDAO itemDAO = new ItemDAO(connection);
+        private readonly ItemDAO itemDAO = new ItemDAO();
 
 
         public fmBuscaItem()
@@ -50,7 +49,7 @@ namespace _5gpro.Forms
                 tipodoitem = "";
             }
 
-            itens = itemDAO.BuscaItem(tbDescricao.Text, tbDenomCompra.Text, tipodoitem);
+            itens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tipodoitem, buscaSubGrupoItem.subgrupoItem);
 
             foreach (Item i in itens)
             {
@@ -120,6 +119,25 @@ namespace _5gpro.Forms
             DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
             itemSelecionado = itens.Find(p => p.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
+        }
+
+        private void BuscaGrupoItem_Leave(object sender, EventArgs e)
+        {
+            buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
+            if (buscaGrupoItem.grupoItem == null)
+            {
+                buscaSubGrupoItem.Limpa();
+                buscaSubGrupoItem.EscolhaOGrupo(false);
+            }
+            else
+            {
+                buscaSubGrupoItem.EscolhaOGrupo(true);
+            }
+        }
+
+        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
+            buscaSubGrupoItem.Limpa();
         }
     }
 }

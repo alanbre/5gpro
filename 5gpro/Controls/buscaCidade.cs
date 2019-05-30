@@ -10,6 +10,19 @@ namespace _5gpro.Controls
 {
     public partial class BuscaCidade : UserControl
     {
+        [Description("Texto do Label"), Category("Appearance")]
+        public string LabelText
+        {
+            get
+            {
+                // Insert code here.
+                return lbFiltroCidade.Text;
+            }
+            set
+            {
+                lbFiltroCidade.Text = value;
+            }
+        }
         public BuscaCidade()
         {
             InitializeComponent();
@@ -40,7 +53,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoCidade.Text, out int codigo)) { tbCodigoCidade.Clear(); }
             if (tbCodigoCidade.Text.Length > 0)
             {
-                cidade = cidadeDAO.BuscaCidadeByCod(int.Parse(tbCodigoCidade.Text));
+                cidade = cidadeDAO.BuscaByID(int.Parse(tbCodigoCidade.Text));
                 PreencheCamposCidade(cidade);
             }
             else

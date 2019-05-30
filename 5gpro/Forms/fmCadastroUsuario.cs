@@ -8,18 +8,15 @@ namespace _5gpro.Forms
 {
     public partial class fmCadastroUsuario : Form
     {
-        Usuario usuario;
-        static ConexaoDAO connection = new ConexaoDAO();
-        GrupoUsuario grupousuario = new GrupoUsuario();
-        GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO(connection);
+        private Usuario usuario;
 
-        UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-        LogadoDAO logadoDAO = new LogadoDAO(connection);
-        Validacao validacao = new Validacao();
+        private readonly UsuarioDAO usuarioDAO = new UsuarioDAO();
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
+        private readonly Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private Logado logado;
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
@@ -36,7 +33,7 @@ namespace _5gpro.Forms
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010200").ToString();
 
@@ -49,189 +46,61 @@ namespace _5gpro.Forms
 
         private void FmCadastroUsuario_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.F5)
+            {
+                Recarrega();
+                return;
+            }
+
+            if (e.KeyCode == Keys.F1)
+            {
+                if (!editando)
+                {
+                    Novo();
+                }
+                return;
+            }
+
+            if (e.KeyCode == Keys.F2)
+            {
+                if (editando)
+                {
+                    Salva();
+                }
+                return;
+            }
+
             EnterTab(this.ActiveControl, e);
         }
-
-
-        private void fmCadastroUsuario_FormClosing(object sender, FormClosingEventArgs e)
+        private void FmCadastroUsuario_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-
-                }
-                else
-                {
-                    e.Cancel = true;
-                }
-            }
-        }
-
-
-        //Mostrar e ocultar campo senha
-        private void cbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbMostrarSenhaUsuario.Checked)
-            {
-                tbSenhaUsuario.PasswordChar = '\0';
-                tbConfirmaSenhaUsuario.PasswordChar = '\0';
-            }
-            else
-            {
-                tbSenhaUsuario.PasswordChar = '*';
-                tbConfirmaSenhaUsuario.PasswordChar = '*';
-            }
-
-        }
-
-
-        //EVENTOS DE TEXTCHANGED
-        private void tbSenhaUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbConfirmaSenhaUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void TbCodGrupoUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbNomeUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbSobrenomeUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void tbEmailUsuario_TextChanged(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-        private void mtbTelefoneUsuario_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-        }
-
-
-        //EVENTOS DE LEAVE
-        private void tbCodigoUsuario_Leave(object sender, EventArgs e)
-        {
-            if (!int.TryParse(tbCodigoUsuario.Text, out int codigo)) { tbCodigoUsuario.Clear(); }
             if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
             {
-                if (tbCodigoUsuario.Text.Length > 0)
-                {
-                    Usuario newusuario = usuarioDAO.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
-                    if (newusuario != null)
-                    {
-                        usuario = newusuario;
-                        PreencheCampos(usuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodigoUsuario.Text.Length == 0)
-                {
-                    LimpaCampos(true);
-                    Editando(false);
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (tbCodigoUsuario.Text.Length > 0)
-                    {
-                        Usuario newusuario = usuarioDAO.BuscarUsuarioById(int.Parse(tbCodigoUsuario.Text));
-                        if (newusuario != null)
-                        {
-                            usuario = newusuario;
-                            PreencheCampos(usuario);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodigoUsuario.Text.Length == 0)
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
-                }
+                e.Cancel = true;
             }
         }
-
-        private void tbSenhaUsuario_Leave(object sender, EventArgs e)
-        {
-            if (tbConfirmaSenhaUsuario.TextLength > 0)
-            {
-                ConfirmaSenhas();
-            }
-        }
-
-        private void tbConfirmaSenhaUsuario_Leave(object sender, EventArgs e)
-        {
-            ConfirmaSenhas();
-        }
-
-
-        //MENU
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-            NovoCadastro();
-        }
-
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-            if (!editando || Nivel == 1)
-            {
-                AbreTelaBuscaUsuario();
-            }
-        }
-
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-            SalvaCadastro();
-        }
-
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-            RecarregaDados(usuario);
-        }
-
-        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
-        {
-            CadastroAnterior();
-        }
-
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
-        {
-            ProximoCadastro();
-        }
-
+        private void CbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e) => MostraSenhaUsuario();
+        private void TbSenhaUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbConfirmaSenhaUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbNomeUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbSobrenomeUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbEmailUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void MtbTelefoneUsuario_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
+        private void TbCodigoUsuario_Leave(object sender, EventArgs e) => CarregaDados();
+        private void TbSenhaUsuario_Leave(object sender, EventArgs e) => ConfirmaSenhas();
+        private void TbConfirmaSenhaUsuario_Leave(object sender, EventArgs e) => ConfirmaSenhas();
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
         private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
         {
 
@@ -239,95 +108,36 @@ namespace _5gpro.Forms
 
 
 
-        //PADRÕES CRIADAS
-        private void NovoCadastro()
+        private void Novo()
         {
             if (editando)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    LimpaCampos(false);
-                    tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel();
-                    usuario = null;
-                    Editando(true);
-                }
+                return;
             }
-            else
+            if (Nivel > 1 || CodGrupoUsuario == "999")
             {
+                ignoraCheckEvent = true;
                 LimpaCampos(false);
-                tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel();
+                tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel().ToString();
                 usuario = null;
+                tbSenhaUsuario.Focus();
+                ignoraCheckEvent = false;
                 Editando(true);
             }
-        }
 
-        private void SalvaCadastro()
+        }
+        private void Busca()
         {
-            //Cria uma nova instancia de pessoa, seta as informações e tenta salvar.
+            if (CodGrupoUsuario != "999" && Nivel <= 0)
+            {
+                return;
+            }
 
             if (editando)
             {
-                usuario = new Usuario();
-
-                if (ConfirmaSenhas() == true)
-                {
-                    usuario.Senha = tbSenhaUsuario.Text;
-                }
-                else
-                {
-                    MessageBox.Show("As senhas devem ser iguais",
-                        "Senhas não conferem",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                    tbConfirmaSenhaUsuario.Focus();
-                    tbConfirmaSenhaUsuario.SelectAll();
-                    return;
-                }
-
-                usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-                usuario.Grupousuario = buscaGrupoUsuario.grupoUsuario;
-                usuario.Nome = tbNomeUsuario.Text;
-                usuario.Sobrenome = tbSobrenomeUsuario.Text;
-                usuario.Email = tbEmailUsuario.Text;
-                usuario.Telefone = mtbTelefoneUsuario.Text;
-
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                bool ok = validacao.ValidarEntidade(usuario, controls);
-
-                if (ok)
-                {
-                    int resultado = usuarioDAO.SalvarOuAtualizarUsuario(usuario);
-                    validacao.despintarCampos(controls);
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                    }
-                    else if (resultado == 1)
-                    {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
-                    }
-                }
+                return;
             }
-        }
 
-        private void AbreTelaBuscaUsuario()
-        {
             var buscaUsuario = new fmBuscaUsuario();
             buscaUsuario.ShowDialog();
             if (buscaUsuario.usuarioSelecionado != null)
@@ -336,147 +146,226 @@ namespace _5gpro.Forms
                 PreencheCampos(usuario);
             }
         }
-
-        private void Editando(bool edit)
+        private void Salva()
         {
-            editando = edit;
-            menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            var controls = (ControlCollection)this.Controls;
+            if (!editando)
+            {
+                return;
+            }
+            var ok = false;
+
+            if (!ConfirmaSenhas())
+            {
+                MessageBox.Show("As senhas devem ser iguais",
+                    "Senhas não conferem",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                tbConfirmaSenhaUsuario.Focus();
+                tbConfirmaSenhaUsuario.SelectAll();
+                return;
+            }
+
+            if (tbCodigoUsuario.Text.Length <= 0)
+            {
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigoUsuario.Text = usuarioDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
+            }
+            else
+            {
+                usuario = new Usuario();
+                usuario.Senha = tbSenhaUsuario.Text;
+                usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
+                usuario.Grupousuario = buscaGrupoUsuario.grupoUsuario;
+                usuario.Nome = tbNomeUsuario.Text;
+                usuario.Sobrenome = tbSobrenomeUsuario.Text;
+                usuario.Email = tbEmailUsuario.Text;
+                usuario.Telefone = mtbTelefoneUsuario.Text;
+
+
+                ok = validacao.ValidarEntidade(usuario, controls);
+            }
+
+            if (ok)
+            {
+                validacao.despintarCampos(controls);
+                int resultado = usuarioDAO.Salvar(usuario);
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    Editando(false);
+                    return;
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                    return;
+                }
+            }
         }
-
-        private void RecarregaDados(Usuario usuario)
+        private void Recarrega()
         {
+            if (tbCodigoUsuario.Text.Length <= 0)
+            {
+                return;
+            }
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (usuario != null)
-                    {
-                        usuario = usuarioDAO.BuscarUsuarioById(usuario.UsuarioID);
-                        PreencheCampos(usuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        LimpaCampos(true);
-                        Editando(false);
-                    }
+                    return;
+                }
+            }
+
+            if (usuario != null)
+            {
+                usuario = usuarioDAO.BuscaByID(usuario.UsuarioID);
+                PreencheCampos(usuario);
+                if (editando)
+                {
+                    Editando(false);
                 }
             }
             else
             {
-                if (usuario != null)
-                {
-                    usuario = usuarioDAO.BuscarUsuarioById(usuario.UsuarioID);
-                    PreencheCampos(usuario);
-                }
-                else
-                {
-                    LimpaCampos(true);
-                }
+                ignoraCheckEvent = true;
+                LimpaCampos(true);
+                ignoraCheckEvent = false;
                 Editando(false);
             }
 
         }
-
-        private void ProximoCadastro()
+        private void Anterior()
         {
-            //Busca o usuario com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodigoUsuario.Text.Length > 0)
+            if (tbCodigoUsuario.Text.Length <= 0)
             {
-
-                validacao.despintarCampos(controls);
-
-                Usuario newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
-                if (newusuario != null)
-                {
-                    usuario = newusuario;
-                    PreencheCampos(usuario);
-                }
+                return;
             }
-            else if (editando && tbCodigoUsuario.Text.Length > 0)
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            validacao.despintarCampos(controls);
+
+            var newusuario = usuarioDAO.Anterior(int.Parse(tbCodigoUsuario.Text));
+            if (newusuario != null)
+            {
+                usuario = newusuario;
+                PreencheCampos(usuario);
+                if (editando)
                 {
-                    validacao.despintarCampos(controls);
-                    Usuario newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
-                    if (newusuario != null)
-                    {
-                        usuario = newusuario;
-                        PreencheCampos(usuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
-                        if (newusuario != null)
-                        {
-                            usuario = newusuario;
-                            PreencheCampos(usuario);
-                            Editando(false);
-                        }
-                    }
+                    Editando(false);
                 }
             }
         }
-
-        private void CadastroAnterior()
+        private void Proximo()
         {
-            //Busca o usuário com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-
-            ControlCollection controls = (ControlCollection)this.Controls;
-
-            if (!editando && tbCodigoUsuario.Text.Length > 0)
+            if (tbCodigoUsuario.Text.Length <= 0)
             {
-
-
-                validacao.despintarCampos(controls);
-                Usuario newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
-                if (newusuario != null)
-                {
-                    usuario = newusuario;
-                    PreencheCampos(usuario);
-                }
+                return;
             }
-            else if (editando && tbCodigoUsuario.Text.Length > 0)
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            validacao.despintarCampos(controls);
+
+            var newusuario = usuarioDAO.Proximo(int.Parse(tbCodigoUsuario.Text));
+            if (newusuario != null)
+            {
+                usuario = newusuario;
+                PreencheCampos(usuario);
+                if (editando)
                 {
-                    validacao.despintarCampos(controls);
-                    Usuario newusuario = usuarioDAO.BuscarUsuarioAnterior(tbCodigoUsuario.Text);
-                    if (newusuario != null)
-                    {
-                        usuario = newusuario;
-                        PreencheCampos(usuario);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        newusuario = usuarioDAO.BuscarProximoUsuario(tbCodigoUsuario.Text);
-                        if (newusuario != null)
-                        {
-                            usuario = newusuario;
-                            PreencheCampos(usuario);
-                            Editando(false);
-                        }
-                    }
+                    Editando(false);
                 }
             }
         }
+        private void CarregaDados()
+        {
+            var controls = (ControlCollection)this.Controls;
+            int codigo = 0;
+            if (!int.TryParse(tbCodigoUsuario.Text, out codigo)) { tbCodigoUsuario.Clear(); }
+            if (usuario?.UsuarioID == codigo)
+            {
+                return;
+            }
 
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
+            if (tbCodigoUsuario.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+            validacao.despintarCampos(controls);
+
+            var newUsuario = usuarioDAO.BuscaByID(int.Parse(tbCodigoUsuario.Text));
+            if (newUsuario != null)
+            {
+                usuario = newUsuario;
+                PreencheCampos(usuario);
+                Editando(false);
+            }
+            else
+            {
+                Editando(true);
+                LimpaCampos(false);
+            }
+        }
+        private void Editando(bool edit)
+        {
+            if (!ignoraCheckEvent)
+            {
+                editando = edit;
+                menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+            }
+        }
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -485,7 +374,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
         private void LimpaCampos(bool limpaCodigo)
         {
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
@@ -497,14 +385,14 @@ namespace _5gpro.Forms
             tbEmailUsuario.Clear();
             mtbTelefoneUsuario.Clear();
             tbAjuda.Clear();
+            cbMostrarSenhaUsuario.Checked = false;
+            MostraSenhaUsuario();
         }
-
         private bool ConfirmaSenhas()
         {
             lbConfirmaSenha.Visible = !tbSenhaUsuario.Text.Equals(tbConfirmaSenhaUsuario.Text);
             return tbSenhaUsuario.Text.Equals(tbConfirmaSenhaUsuario.Text);
         }
-
         private void PreencheCampos(Usuario usuario)
         {
             ignoraCheckEvent = true;
@@ -521,6 +409,18 @@ namespace _5gpro.Forms
 
             ignoraCheckEvent = false;
         }
-
+        private void MostraSenhaUsuario()
+        {
+            if (cbMostrarSenhaUsuario.Checked)
+            {
+                tbSenhaUsuario.PasswordChar = '\0';
+                tbConfirmaSenhaUsuario.PasswordChar = '\0';
+            }
+            else
+            {
+                tbSenhaUsuario.PasswordChar = '*';
+                tbConfirmaSenhaUsuario.PasswordChar = '*';
+            }
+        }
     }
 }

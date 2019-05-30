@@ -6,9 +6,8 @@ namespace _5gpro.Funcoes
 {
     class NotaFiscalAux
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         NotaFiscalPropriaDAO notaFiscalDAO = new NotaFiscalPropriaDAO();
-        OrcamentoDAO orcamentoDAO = new OrcamentoDAO(connection);
+        OrcamentoDAO orcamentoDAO = new OrcamentoDAO();
 
 
         public NotaFiscalPropria GerarNotaFiscal(Orcamento orcamento)
@@ -35,10 +34,10 @@ namespace _5gpro.Funcoes
                 nfi.ValorTotal = oi.ValorTotal;
                 nfi.DescontoPorc = oi.DescontoPorc;
                 nfi.Desconto = oi.Desconto;
-                notafiscal.NotaFiscalItem.Add(nfi);
+                notafiscal.NotaFiscalPropriaItem.Add(nfi);
             }
 
-            int resultado = notaFiscalDAO.SalvarOuAtualizar(notafiscal);
+            int resultado = notaFiscalDAO.SalvaOuAtualiza(notafiscal);
             if (resultado > 0) { resultado = orcamentoDAO.VincularNotaAoOrcamento(orcamento, notafiscal); }
             return resultado > 0 ? notafiscal : null;
         }

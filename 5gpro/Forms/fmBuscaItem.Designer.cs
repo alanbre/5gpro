@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItens = new System.Windows.Forms.DataGridView();
             this.tbDenomCompra = new System.Windows.Forms.TextBox();
             this.tbDescricao = new System.Windows.Forms.TextBox();
@@ -38,6 +38,8 @@
             this.cbServico = new System.Windows.Forms.CheckBox();
             this.cbProduto = new System.Windows.Forms.CheckBox();
             this.btBuscarItens = new System.Windows.Forms.Button();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.gbTipoItem.SuspendLayout();
             this.SuspendLayout();
@@ -48,8 +50,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -143,12 +145,30 @@
             this.btBuscarItens.UseVisualStyleBackColor = true;
             this.btBuscarItens.Click += new System.EventHandler(this.btBuscarItens_Click);
             // 
+            // buscaGrupoItem
+            // 
+            this.buscaGrupoItem.Location = new System.Drawing.Point(450, 17);
+            this.buscaGrupoItem.Name = "buscaGrupoItem";
+            this.buscaGrupoItem.Size = new System.Drawing.Size(442, 39);
+            this.buscaGrupoItem.TabIndex = 10;
+            this.buscaGrupoItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItem_Text_Changed);
+            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItem_Leave);
+            // 
+            // buscaSubGrupoItem
+            // 
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(450, 62);
+            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
+            this.buscaSubGrupoItem.Size = new System.Drawing.Size(442, 39);
+            this.buscaSubGrupoItem.TabIndex = 11;
+            // 
             // fmBuscaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(916, 507);
+            this.Controls.Add(this.buscaSubGrupoItem);
+            this.Controls.Add(this.buscaGrupoItem);
             this.Controls.Add(this.btBuscarItens);
             this.Controls.Add(this.gbTipoItem);
             this.Controls.Add(this.lbDenomCompra);
@@ -184,5 +204,7 @@
         private System.Windows.Forms.CheckBox cbServico;
         private System.Windows.Forms.CheckBox cbProduto;
         private System.Windows.Forms.Button btBuscarItens;
+        private Controls.BuscaGrupoItem buscaGrupoItem;
+        private Controls.BuscaSubGrupoItem buscaSubGrupoItem;
     }
 }

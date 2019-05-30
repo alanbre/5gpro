@@ -17,8 +17,7 @@ namespace _5gpro.Forms
         GrupoPessoa grupopessoa = null;
         List<SubGrupoPessoa> listasubgrupopessoa;
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO(connection);
+        SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
 
         public fmBuscaSubGrupoPessoa(int grupopessoaID)
         {
@@ -38,7 +37,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
 
-            listasubgrupopessoa = subgrupopessoaDAO.BuscaTodos(tbNomeSubGrupo.Text, grupopessoa.GrupoPessoaID).ToList();
+            listasubgrupopessoa = subgrupopessoaDAO.Busca(tbNomeSubGrupo.Text, grupopessoa.GrupoPessoaID).ToList();
 
             foreach (SubGrupoPessoa g in listasubgrupopessoa)
             {

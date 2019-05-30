@@ -16,8 +16,7 @@ namespace _5gpro.Forms
     {
         List<FormaPagamento> listaformapagamento;
         public FormaPagamento formapagamentoSelecionada = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        FormaPagamentoDAO formapagamentoDAO = new FormaPagamentoDAO(connection);
+        FormaPagamentoDAO formapagamentoDAO = new FormaPagamentoDAO();
 
         public fmBuscaFormaPagamento()
         {
@@ -30,7 +29,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
 
-            listaformapagamento = formapagamentoDAO.BuscaTodos(tbNomeFormaPagamento.Text).ToList();
+            listaformapagamento = formapagamentoDAO.Busca(tbNomeFormaPagamento.Text).ToList();
 
             foreach (FormaPagamento f in listaformapagamento)
             {

@@ -1,21 +1,35 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using _5gpro.Funcoes;
-using System.ComponentModel;
-using System.Configuration;
-using System.IO;
+using _5gpro.Forms;
 
 namespace _5gpro.Daos
 {
     public class ConexaoDAO
     {
-        protected string Conecta = DatabaseUpdate.dataBaseString;
+        public string database = fmSelecionarBase.database;
+        public string server = fmSelecionarBase.server;
+        public string uid = fmSelecionarBase.uid;
+        public string pwd = fmSelecionarBase.pwd;
+        public string Conecta
+        {
+            get
+            {
+                return "DATABASE=" + database + ";SERVER=" + server + ";UID=" + uid + ";PWD=" + pwd;
+            }
+        }
+        public string ConectaSemBase
+        {
+            get
+            {
+                return "SERVER=" +server + ";UID=" + uid + ";PWD=" + pwd;
+            }
+        }
 
         public MySqlConnection Conexao;
         public MySqlTransaction tr = null;
         public MySqlCommand Comando = null;
 
-        //MÉTODO PARA CONECTAR NO BANCO
+        
         public void AbrirConexao()
         {
             try
@@ -28,9 +42,18 @@ namespace _5gpro.Daos
                 Console.WriteLine("Error: {0}", ex.ToString());
             }
         }
-
-        //METODO PARA FECHAR A CONEXAO COM O BANCO
-
+        public void AbrirConexaoSemBase()
+        {
+            try
+            {
+                Conexao = new MySqlConnection(ConectaSemBase);
+                Conexao.Open();
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+            }
+        }
         public void FecharConexao()
         {
             try

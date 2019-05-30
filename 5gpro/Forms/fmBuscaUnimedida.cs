@@ -14,10 +14,9 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaUnimedida : Form
     {
-        static ConexaoDAO connection = new ConexaoDAO();
         public List<Unimedida> listaunimedida;
         public Unimedida Unimedida;
-        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO(connection);
+        private UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
         public Unimedida unimedidaSelecionada;
 
 
@@ -33,7 +32,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Sigla", typeof(string));
             table.Columns.Add("Descrição", typeof(string));
 
-            listaunimedida = unimedidaDAO.BuscarUnimedida(tbFiltroDescUnimedida.Text).ToList();
+            listaunimedida = unimedidaDAO.Busca(tbFiltroDescUnimedida.Text).ToList();
 
             dgvUnimedida.Rows.Clear();
             foreach (Unimedida u in listaunimedida)

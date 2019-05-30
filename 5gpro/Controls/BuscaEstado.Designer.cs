@@ -41,19 +41,21 @@
             this.btBuscaEstado.Margin = new System.Windows.Forms.Padding(2);
             this.btBuscaEstado.Name = "btBuscaEstado";
             this.btBuscaEstado.Size = new System.Drawing.Size(22, 22);
-            this.btBuscaEstado.TabIndex = 10;
+            this.btBuscaEstado.TabIndex = 2;
             this.btBuscaEstado.TabStop = false;
             this.btBuscaEstado.UseVisualStyleBackColor = true;
             this.btBuscaEstado.Click += new System.EventHandler(this.BtBuscaEstado_Click);
             // 
             // tbNomeEstado
             // 
+            this.tbNomeEstado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeEstado.Location = new System.Drawing.Point(94, 17);
             this.tbNomeEstado.Margin = new System.Windows.Forms.Padding(2);
             this.tbNomeEstado.Name = "tbNomeEstado";
             this.tbNomeEstado.ReadOnly = true;
             this.tbNomeEstado.Size = new System.Drawing.Size(346, 20);
-            this.tbNomeEstado.TabIndex = 11;
+            this.tbNomeEstado.TabIndex = 3;
             this.tbNomeEstado.TabStop = false;
             // 
             // tbCodigoEstado
@@ -63,7 +65,7 @@
             this.tbCodigoEstado.MaxLength = 5;
             this.tbCodigoEstado.Name = "tbCodigoEstado";
             this.tbCodigoEstado.Size = new System.Drawing.Size(65, 20);
-            this.tbCodigoEstado.TabIndex = 9;
+            this.tbCodigoEstado.TabIndex = 1;
             this.tbCodigoEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoEstado_KeyUp);
             this.tbCodigoEstado.Leave += new System.EventHandler(this.TbCodigoEstado_Leave);
             // 
@@ -74,7 +76,7 @@
             this.lbFiltroEstado.Margin = new System.Windows.Forms.Padding(2);
             this.lbFiltroEstado.Name = "lbFiltroEstado";
             this.lbFiltroEstado.Size = new System.Drawing.Size(40, 13);
-            this.lbFiltroEstado.TabIndex = 8;
+            this.lbFiltroEstado.TabIndex = 0;
             this.lbFiltroEstado.Text = "Estado";
             // 
             // BuscaEstado

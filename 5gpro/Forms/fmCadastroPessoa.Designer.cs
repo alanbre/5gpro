@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.gbSituacao = new System.Windows.Forms.GroupBox();
+            this.rbInativo = new System.Windows.Forms.RadioButton();
+            this.rbAtivo = new System.Windows.Forms.RadioButton();
+            this.buscaGrupoPessoa = new _5gpro.Controls.BuscaGrupoPessoa();
+            this.buscaSubGrupoPessoa = new _5gpro.Controls.BuscaSubGrupoPessoa();
             this.gbAtuacao = new System.Windows.Forms.GroupBox();
             this.cblAtuacao = new System.Windows.Forms.CheckedListBox();
             this.tbFantasia = new System.Windows.Forms.TextBox();
@@ -41,6 +46,7 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
+            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
             this.mtbTelefone = new System.Windows.Forms.MaskedTextBox();
@@ -57,10 +63,8 @@
             this.lbRua = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.buscaCidade = new _5gpro.Controls.BuscaCidade();
-            this.buscaGrupoPessoa = new _5gpro.Controls.BuscaGrupoPessoa();
-            this.buscaSubGrupoPessoa = new _5gpro.Controls.BuscaSubGrupoPessoa();
             this.pnDadosGerais.SuspendLayout();
+            this.gbSituacao.SuspendLayout();
             this.gbAtuacao.SuspendLayout();
             this.gbTipoDePessoa.SuspendLayout();
             this.pnDados.SuspendLayout();
@@ -71,6 +75,7 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.gbSituacao);
             this.pnDadosGerais.Controls.Add(this.buscaGrupoPessoa);
             this.pnDadosGerais.Controls.Add(this.buscaSubGrupoPessoa);
             this.pnDadosGerais.Controls.Add(this.gbAtuacao);
@@ -85,13 +90,63 @@
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 237);
             this.pnDadosGerais.TabIndex = 0;
             // 
+            // gbSituacao
+            // 
+            this.gbSituacao.Controls.Add(this.rbInativo);
+            this.gbSituacao.Controls.Add(this.rbAtivo);
+            this.gbSituacao.Location = new System.Drawing.Point(413, 6);
+            this.gbSituacao.Name = "gbSituacao";
+            this.gbSituacao.Size = new System.Drawing.Size(130, 35);
+            this.gbSituacao.TabIndex = 8;
+            this.gbSituacao.TabStop = false;
+            this.gbSituacao.Text = "Situação";
+            // 
+            // rbInativo
+            // 
+            this.rbInativo.AutoSize = true;
+            this.rbInativo.Location = new System.Drawing.Point(62, 15);
+            this.rbInativo.Name = "rbInativo";
+            this.rbInativo.Size = new System.Drawing.Size(57, 17);
+            this.rbInativo.TabIndex = 1;
+            this.rbInativo.Text = "Inativo";
+            this.rbInativo.UseVisualStyleBackColor = true;
+            this.rbInativo.CheckedChanged += new System.EventHandler(this.RbInativo_CheckedChanged);
+            // 
+            // rbAtivo
+            // 
+            this.rbAtivo.AutoSize = true;
+            this.rbAtivo.Checked = true;
+            this.rbAtivo.Location = new System.Drawing.Point(7, 15);
+            this.rbAtivo.Name = "rbAtivo";
+            this.rbAtivo.Size = new System.Drawing.Size(49, 17);
+            this.rbAtivo.TabIndex = 0;
+            this.rbAtivo.Text = "Ativo";
+            this.rbAtivo.UseVisualStyleBackColor = true;
+            this.rbAtivo.CheckedChanged += new System.EventHandler(this.RbAtivo_CheckedChanged);
+            // 
+            // buscaGrupoPessoa
+            // 
+            this.buscaGrupoPessoa.Location = new System.Drawing.Point(10, 134);
+            this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
+            this.buscaGrupoPessoa.Size = new System.Drawing.Size(465, 39);
+            this.buscaGrupoPessoa.TabIndex = 6;
+            this.buscaGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaGrupoPessoa.text_changedEventHandler(this.BuscaGrupoPessoa_Text_Changed_1);
+            this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave);
+            // 
+            // buscaSubGrupoPessoa
+            // 
+            this.buscaSubGrupoPessoa.Location = new System.Drawing.Point(10, 179);
+            this.buscaSubGrupoPessoa.Name = "buscaSubGrupoPessoa";
+            this.buscaSubGrupoPessoa.Size = new System.Drawing.Size(442, 39);
+            this.buscaSubGrupoPessoa.TabIndex = 7;
+            // 
             // gbAtuacao
             // 
             this.gbAtuacao.Controls.Add(this.cblAtuacao);
-            this.gbAtuacao.Location = new System.Drawing.Point(553, 6);
+            this.gbAtuacao.Location = new System.Drawing.Point(555, 6);
             this.gbAtuacao.Name = "gbAtuacao";
             this.gbAtuacao.Size = new System.Drawing.Size(135, 121);
-            this.gbAtuacao.TabIndex = 6;
+            this.gbAtuacao.TabIndex = 9;
             this.gbAtuacao.TabStop = false;
             this.gbAtuacao.Text = "Atuação";
             // 
@@ -99,6 +154,7 @@
             // 
             this.cblAtuacao.BackColor = System.Drawing.Color.White;
             this.cblAtuacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cblAtuacao.CheckOnClick = true;
             this.cblAtuacao.FormattingEnabled = true;
             this.cblAtuacao.Items.AddRange(new object[] {
             "Cliente",
@@ -106,7 +162,7 @@
             this.cblAtuacao.Location = new System.Drawing.Point(6, 19);
             this.cblAtuacao.Name = "cblAtuacao";
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);
-            this.cblAtuacao.TabIndex = 7;
+            this.cblAtuacao.TabIndex = 0;
             this.cblAtuacao.TabStop = false;
             this.cblAtuacao.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.CblAtuacao_ItemCheck);
             // 
@@ -153,7 +209,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TbCodigo_KeyPress);
             this.tbCodigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigo_KeyUp);
             this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
@@ -196,7 +251,6 @@
             this.rbPessoaFisica.Name = "rbPessoaFisica";
             this.rbPessoaFisica.Size = new System.Drawing.Size(92, 17);
             this.rbPessoaFisica.TabIndex = 0;
-            this.rbPessoaFisica.TabStop = true;
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
             this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.RbPessoaFisica_CheckedChanged);
@@ -226,6 +280,15 @@
             this.pnDados.Name = "pnDados";
             this.pnDados.Size = new System.Drawing.Size(1110, 299);
             this.pnDados.TabIndex = 2;
+            // 
+            // buscaCidade
+            // 
+            this.buscaCidade.LabelText = "Cidade";
+            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
+            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCidade.Name = "buscaCidade";
+            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.TabIndex = 8;
             // 
             // tbEmail
             // 
@@ -380,29 +443,6 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
-            // buscaCidade
-            // 
-            this.buscaCidade.Location = new System.Drawing.Point(10, 127);
-            this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCidade.Name = "buscaCidade";
-            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 15;
-            // 
-            // buscaGrupoPessoa
-            // 
-            this.buscaGrupoPessoa.Location = new System.Drawing.Point(10, 134);
-            this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
-            this.buscaGrupoPessoa.Size = new System.Drawing.Size(465, 39);
-            this.buscaGrupoPessoa.TabIndex = 9;
-            this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave_1);
-            // 
-            // buscaSubGrupoPessoa
-            // 
-            this.buscaSubGrupoPessoa.Location = new System.Drawing.Point(10, 179);
-            this.buscaSubGrupoPessoa.Name = "buscaSubGrupoPessoa";
-            this.buscaSubGrupoPessoa.Size = new System.Drawing.Size(442, 39);
-            this.buscaSubGrupoPessoa.TabIndex = 8;
-            // 
             // fmCadastroPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,6 +467,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroPessoa_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
+            this.gbSituacao.ResumeLayout(false);
+            this.gbSituacao.PerformLayout();
             this.gbAtuacao.ResumeLayout(false);
             this.gbTipoDePessoa.ResumeLayout(false);
             this.gbTipoDePessoa.PerformLayout();
@@ -471,5 +513,8 @@
         private Controls.BuscaCidade buscaCidade;
         private Controls.BuscaSubGrupoPessoa buscaSubGrupoPessoa;
         private Controls.BuscaGrupoPessoa buscaGrupoPessoa;
+        private System.Windows.Forms.GroupBox gbSituacao;
+        private System.Windows.Forms.RadioButton rbInativo;
+        private System.Windows.Forms.RadioButton rbAtivo;
     }
 }

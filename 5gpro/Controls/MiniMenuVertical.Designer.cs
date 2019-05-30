@@ -45,7 +45,7 @@
             this.btSalvar.MinimumSize = new System.Drawing.Size(48, 48);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(48, 48);
-            this.btSalvar.TabIndex = 7;
+            this.btSalvar.TabIndex = 0;
             this.btSalvar.UseVisualStyleBackColor = true;
             this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
             // 
@@ -60,7 +60,7 @@
             this.btExcluir.MinimumSize = new System.Drawing.Size(48, 48);
             this.btExcluir.Name = "btExcluir";
             this.btExcluir.Size = new System.Drawing.Size(48, 48);
-            this.btExcluir.TabIndex = 10;
+            this.btExcluir.TabIndex = 3;
             this.btExcluir.UseVisualStyleBackColor = true;
             this.btExcluir.Click += new System.EventHandler(this.BtExcluir_Click);
             // 
@@ -74,7 +74,7 @@
             this.btNovo.MinimumSize = new System.Drawing.Size(48, 48);
             this.btNovo.Name = "btNovo";
             this.btNovo.Size = new System.Drawing.Size(48, 48);
-            this.btNovo.TabIndex = 8;
+            this.btNovo.TabIndex = 1;
             this.btNovo.UseVisualStyleBackColor = true;
             this.btNovo.Click += new System.EventHandler(this.BtNovo_Click);
             // 
@@ -88,7 +88,7 @@
             this.btBuscar.MinimumSize = new System.Drawing.Size(48, 48);
             this.btBuscar.Name = "btBuscar";
             this.btBuscar.Size = new System.Drawing.Size(48, 48);
-            this.btBuscar.TabIndex = 9;
+            this.btBuscar.TabIndex = 2;
             this.btBuscar.UseVisualStyleBackColor = true;
             this.btBuscar.Click += new System.EventHandler(this.BtBuscar_Click);
             // 

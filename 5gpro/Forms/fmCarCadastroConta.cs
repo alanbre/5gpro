@@ -14,17 +14,16 @@ namespace _5gpro.Forms
         private bool editando, ignoracheckevent, novo = false;
         private ContaReceber contaReceber = null;
         private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
+        private readonly Validacao validacao = new Validacao();
 
-        private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
-        private readonly static ConexaoDAO connection = new ConexaoDAO();
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO(connection);
-        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO(connection);
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
+        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
         //Controle de Permissões
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO(connection);
+        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO(connection);
+        private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
@@ -57,9 +56,21 @@ namespace _5gpro.Forms
 
             EnterTab(this.ActiveControl, e);
         }
+        private void FmCarCadastroConta_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!editando)
+                return;
+
+            if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            "Aviso de alteração",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Warning) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
 
 
-        //MENU
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
@@ -91,10 +102,6 @@ namespace _5gpro.Forms
         }
 
 
-
-
-
-
         private void Novo()
         {
             if (editando)
@@ -105,7 +112,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
             contaReceber = null;
-            dtpDataCadatroConta.Focus();
+            dtpDataConta.Focus();
             ignoracheckevent = false;
             btGerarParcelas.Enabled = true;
             dbValorContaGerar.Enabled = true;
@@ -126,53 +133,79 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
+
+            bool ok = false;
+
             if (!editando)
                 return;
 
-            contaReceber = new ContaReceber
+            if (tbCodigoConta.Text.Length > 0)
             {
-                ContaReceberID = int.Parse(tbCodigoConta.Text),
-                DataCadastro = dtpDataCadatroConta.Value,
-                Operacao = buscaOperacao.operacao,
+                contaReceber = new ContaReceber
+                {
+                    ContaReceberID = int.Parse(tbCodigoConta.Text),
+                    DataCadastro = DateTime.Today,
+                    DataConta = dtpDataConta.Value,
+                    Operacao = buscaOperacao.operacao,
 
-                ValorOriginal = dbValorOriginalConta.Valor,
-                Multa = dbMultaConta.Valor,
-                Juros = dbJurosConta.Valor,
-                Acrescimo = dbAcrescimoConta.Valor,
-                Desconto = dbDesconto.Valor,
-                ValorFinal = dbValorFinalConta.Valor,
+                    ValorOriginal = dbValorOriginalConta.Valor,
+                    Multa = dbMultaConta.Valor,
+                    Juros = dbJurosConta.Valor,
+                    Acrescimo = dbAcrescimoConta.Valor,
+                    Desconto = dbDescontoConta.Valor,
+                    ValorFinal = dbValorFinalConta.Valor,
+                    Situacao = "Aberto",
 
-                Parcelas = parcelas,
+                    Parcelas = parcelas,
 
-                Pessoa = buscaPessoa.pessoa
-            };
+                    Pessoa = buscaPessoa.pessoa
+                };
 
-            int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
+                ControlCollection controls = (ControlCollection)this.Controls;
+                ok = validacao.ValidarEntidade(contaReceber, controls);
+                if (ok) { validacao.despintarCampos(controls); }
 
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                if (ok)
+                {
+                    int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
+
+                    // resultado 0 = nada foi inserido (houve algum erro)
+                    // resultado 1 = foi inserido com sucesso
+                    // resultado 2 = foi atualizado com sucesso
+                    if (resultado == 0)
+                    {
+                        MessageBox.Show("Problema ao salvar o registro",
+                        "Problema ao salvar",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                        return;
+                    }
+                    else if (resultado == 1)
+                    {
+                        tbAjuda.Text = "Dados salvos com sucesso";
+                        Editando(false);
+                    }
+                    else if (resultado == 2)
+                    {
+                        tbAjuda.Text = "Dados atualizados com sucesso";
+                        Editando(false);
+                    }
+                    btGerarParcelas.Enabled = false;
+                    dbValorContaGerar.Enabled = false;
+                    dbValorContaGerar.Valor = 0.00m;
+                }
             }
-            else if (resultado == 1)
+            else
             {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                Editando(false);
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                                    "Aviso",
+                                     MessageBoxButtons.YesNo,
+                                     MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
             }
-            else if (resultado == 2)
-            {
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                Editando(false);
-            }
-            btGerarParcelas.Enabled = false;
-            dbValorContaGerar.Enabled = false;
-            dbValorContaGerar.Valor = 0.00m;
 
         }
         private void Recarrega()
@@ -191,8 +224,8 @@ namespace _5gpro.Forms
             if (contaReceber != null)
             {
                 contaReceber = contaReceberDAO.BuscaById(contaReceber.ContaReceberID);
-                contaReceber.Operacao = operacaoDAO.BuscaById(contaReceber.Operacao.OperacaoID);
-                contaReceber.Pessoa = pessoaDAO.BuscaById(contaReceber.Pessoa.PessoaID);
+                contaReceber.Operacao = operacaoDAO.BuscaByID(contaReceber.Operacao.OperacaoID);
+                contaReceber.Pessoa = pessoaDAO.BuscaByID(contaReceber.Pessoa.PessoaID);
                 PreencheCampos(contaReceber);
                 if (editando)
                     Editando(false);
@@ -202,8 +235,8 @@ namespace _5gpro.Forms
                 ignoracheckevent = true;
                 LimpaCampos(true);
                 ignoracheckevent = false;
+                Editando(false);
             }
-
         }
         private void Proximo()
         {
@@ -219,11 +252,11 @@ namespace _5gpro.Forms
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaReceber = contaReceberDAO.BuscaProximo(int.Parse(tbCodigoConta.Text));
+                var newcontaReceber = contaReceberDAO.Proximo(int.Parse(tbCodigoConta.Text));
                 if (newcontaReceber != null)
                 {
-                    newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
-                    newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
+                    newcontaReceber.Operacao = operacaoDAO.BuscaByID(newcontaReceber.Operacao.OperacaoID);
+                    newcontaReceber.Pessoa = pessoaDAO.BuscaByID(newcontaReceber.Pessoa.PessoaID);
                     contaReceber = newcontaReceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
@@ -245,11 +278,11 @@ namespace _5gpro.Forms
 
             if (tbCodigoConta.Text.Length > 0)
             {
-                var newcontaRebeceber = contaReceberDAO.BuscaAnterior(int.Parse(tbCodigoConta.Text));
+                var newcontaRebeceber = contaReceberDAO.Anterior(int.Parse(tbCodigoConta.Text));
                 if (newcontaRebeceber != null)
                 {
-                    newcontaRebeceber.Operacao = operacaoDAO.BuscaById(newcontaRebeceber.Operacao.OperacaoID);
-                    newcontaRebeceber.Pessoa = pessoaDAO.BuscaById(newcontaRebeceber.Pessoa.PessoaID);
+                    newcontaRebeceber.Operacao = operacaoDAO.BuscaByID(newcontaRebeceber.Operacao.OperacaoID);
+                    newcontaRebeceber.Pessoa = pessoaDAO.BuscaByID(newcontaRebeceber.Pessoa.PessoaID);
                     contaReceber = newcontaRebeceber;
                     parcelas = contaReceber.Parcelas.ToList();
                     PreencheCampos(contaReceber);
@@ -285,8 +318,8 @@ namespace _5gpro.Forms
             var newcontaReceber = contaReceberDAO.BuscaById(codigo);
             if (newcontaReceber != null)
             {
-                newcontaReceber.Operacao = operacaoDAO.BuscaById(newcontaReceber.Operacao.OperacaoID);
-                newcontaReceber.Pessoa = pessoaDAO.BuscaById(newcontaReceber.Pessoa.PessoaID);
+                newcontaReceber.Operacao = operacaoDAO.BuscaByID(newcontaReceber.Operacao.OperacaoID);
+                newcontaReceber.Pessoa = pessoaDAO.BuscaByID(newcontaReceber.Pessoa.PessoaID);
                 contaReceber = newcontaReceber;
                 btGerarParcelas.Enabled = false;
                 dbValorContaGerar.Enabled = false;
@@ -307,14 +340,14 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             LimpaCampos(false);
             tbCodigoConta.Text = contaReceber.ContaReceberID.ToString();
-            dtpDataCadatroConta.Value = contaReceber.DataCadastro;
+            dtpDataConta.Value = contaReceber.DataCadastro;
             buscaOperacao.operacao = contaReceber.Operacao;
             dbValorOriginalConta.Valor = contaReceber.ValorOriginal;
             dbValorFinalConta.Valor = contaReceber.ValorFinal;
             dbMultaConta.Valor = contaReceber.Multa;
             dbJurosConta.Valor = contaReceber.Juros;
             dbAcrescimoConta.Valor = contaReceber.Acrescimo;
-            dbDesconto.Valor = contaReceber.Desconto;
+            dbDescontoConta.Valor = contaReceber.Desconto;
             parcelas = contaReceber.Parcelas.ToList();
             buscaOperacao.PreencheCampos(contaReceber.Operacao);
             buscaPessoa.PreencheCampos(contaReceber.Pessoa);
@@ -330,8 +363,12 @@ namespace _5gpro.Forms
                                      parcela.Multa,
                                      parcela.Juros,
                                      parcela.Acrescimo,
+                                     parcela.Desconto,
                                      parcela.ValorFinal,
-                                     parcela.DataQuitacao?.Date);
+                                     parcela.DataQuitacao?.Date,
+                                     parcela.Situacao,
+                                     parcela.FormaPagamento
+                                     );
             dgvParcelas.Refresh();
         }
         private void PreencheCamposParcelas(ParcelaContaReceber parcela)
@@ -342,9 +379,14 @@ namespace _5gpro.Forms
             dbMultaParcela.Valor = parcela.Multa;
             dbJurosParcela.Valor = parcela.Juros;
             dbAcrescimoParcela.Valor = parcela.Acrescimo;
-            dbDesconto.Valor = parcela.Desconto;
+            dbDescontoParcela.Valor = parcela.Desconto;
             dbValorFinalParcela.Valor = parcela.ValorFinal;
+            tbSituacaoParcela.Text = parcela.Situacao;
             tbDataQuitacao.Text = parcela.DataQuitacao != null ? parcela.DataQuitacao.Value.ToShortDateString() : "";
+            if (parcela.FormaPagamento != null)
+                tbFormaPagamentoParcela.Text = parcela.FormaPagamento.Nome;
+            else
+                tbFormaPagamentoParcela.Clear();
         }
         private void GerarParcelas()
         {
@@ -362,11 +404,10 @@ namespace _5gpro.Forms
             dbMultaConta.Valor = 0.00m;
             dbJurosConta.Valor = 0.00m;
             dbAcrescimoParcela.Valor = 0.00m;
-            dbDesconto.Valor = 0.00m;
+            dbDescontoParcela.Valor = 0.00m;
             dbValorOriginalConta.Valor = 0.00m;
             dbValorFinalConta.Valor = 0.00m;
             var parcelasOperacao = buscaOperacao.operacao.Parcelas;
-
 
 
             int sequencia = 1;
@@ -375,24 +416,25 @@ namespace _5gpro.Forms
                 var par = new ParcelaContaReceber
                 {
                     Sequencia = sequencia,
-                    DataVencimento = DateTime.Today.AddDays(parcela.Dias),
+                    DataVencimento = dtpDataConta.Value.AddDays(parcela.Dias),
                     Multa = 0.00m,
                     Juros = 0.00m,
                     Valor = dbValorContaGerar.Valor / parcelasOperacao.Count,
-                    Acrescimo = dbValorContaGerar.Valor  * buscaOperacao.operacao.Acrescimo / 100 / parcelasOperacao.Count
+                    Acrescimo = dbValorContaGerar.Valor * buscaOperacao.operacao.Acrescimo / 100 / parcelasOperacao.Count,
+                    Situacao = "Aberto"
                 };
                 sequencia++;
                 this.parcelas.Add(par);
                 dbValorOriginalConta.Valor += par.Valor;
                 dbAcrescimoConta.Valor += par.Acrescimo;
-                dbDesconto.Valor += par.Desconto;
+                dbDescontoParcela.Valor += par.Desconto;
                 dbValorFinalConta.Valor += par.Valor + par.Acrescimo - par.Desconto;
             }
             PreencheGridParcelas(parcelas);
         }
         private void CalculaTotalParcela()
         {
-            dbValorFinalParcela.Valor = dbValorOriginalParcela.Valor + dbMultaParcela.Valor + dbJurosParcela.Valor + dbAcrescimoParcela.Valor - dbDesconto.Valor;
+            dbValorFinalParcela.Valor = dbValorOriginalParcela.Valor + dbMultaParcela.Valor + dbJurosParcela.Valor + dbAcrescimoParcela.Valor - dbDescontoParcela.Valor;
         }
         private void SalvaParcela()
         {
@@ -414,21 +456,22 @@ namespace _5gpro.Forms
                 ptemp.Multa = dbMultaParcela.Valor;
                 ptemp.Juros = dbJurosParcela.Valor;
                 ptemp.Acrescimo = dbAcrescimoParcela.Valor;
-                ptemp.Desconto = dbDesconto.Valor;
+                ptemp.Desconto = dbDescontoParcela.Valor;
                 ptemp.DataVencimento = dtpDataVencimentoParcela.Value;
-                ptemp.FormaPagamento = buscaFormaPagamento.formaPagamento;
+                ptemp.Situacao = tbSituacaoParcela.Text;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Valor = ptemp.Valor;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().DataVencimento = ptemp.DataVencimento;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Multa = ptemp.Multa;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Juros = ptemp.Juros;
                 parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Acrescimo = ptemp.Acrescimo;
-                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().FormaPagamento = ptemp.FormaPagamento;
+                parcelas.Where(p => p.Sequencia == int.Parse(dr.Cells[0].Value.ToString())).First().Situacao = ptemp.Situacao;
                 dr.Cells[dgvtbcValorOriginal.Index].Value = ptemp.Valor;
                 dr.Cells[dgvtbcDataVencimento.Index].Value = ptemp.DataVencimento.ToShortDateString();
                 dr.Cells[dgvtbcMulta.Index].Value = ptemp.Multa;
                 dr.Cells[dgvtbcJuros.Index].Value = ptemp.Juros;
                 dr.Cells[dgvtbcAcrescimo.Index].Value = ptemp.Acrescimo;
                 dr.Cells[dgvtbcValorFinal.Index].Value = ptemp.ValorFinal;
+                dr.Cells[dgvtbcSituacao.Index].Value = ptemp.Situacao;
                 dgvParcelas.Update();
                 dgvParcelas.Refresh();
             }
@@ -443,7 +486,7 @@ namespace _5gpro.Forms
                 dbMultaConta.Valor = parcelas.Sum(p => p.Multa);
                 dbJurosConta.Valor = parcelas.Sum(p => p.Juros);
                 dbAcrescimoConta.Valor = parcelas.Sum(p => p.Acrescimo);
-                dbDesconto.Valor = parcelas.Sum(p => p.Desconto);
+                dbDescontoParcela.Valor = parcelas.Sum(p => p.Desconto);
                 dbValorFinalConta.Valor = parcelas.Sum(p => p.ValorFinal);
             }
         }
@@ -452,29 +495,31 @@ namespace _5gpro.Forms
             if (limpaCod) { tbCodigoConta.Clear(); }
             buscaOperacao.Limpa();
             buscaPessoa.Limpa();
-            dtpDataCadatroConta.Value = DateTime.Now;
+            dtpDataConta.Value = DateTime.Now;
             dtpDataVencimentoParcela.Value = DateTime.Now;
             dbValorOriginalConta.Valor = 0.00m;
             dbValorFinalConta.Valor = 0.00m;
             dbMultaConta.Valor = 0.00m;
             dbJurosConta.Valor = 0.00m;
             dbAcrescimoConta.Valor = 0.00m;
-            dbDesconto.Valor = 0.00m;
+            dbDescontoParcela.Valor = 0.00m;
             tbAjuda.Clear();
             parcelas.Clear();
             dbValorContaGerar.Valor = 0.00m;
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
-            LimpaCamposParcela(limpaCod);
+            LimpaCamposParcela();
         }
-        private void LimpaCamposParcela(bool focus)
+        private void LimpaCamposParcela()
         {
             dbValorOriginalParcela.Valor = 0.00m;
             dbValorFinalParcela.Valor = 0.00m;
             dbMultaParcela.Valor = 0.00m;
             dbJurosParcela.Valor = 0.00m;
             dbAcrescimoParcela.Valor = 0.00m;
-            dbDesconto.Valor = 0.00m;
+            dbDescontoParcela.Valor = 0.00m;
+            tbFormaPagamentoParcela.Clear();
+            tbSituacaoParcela.Clear();
             this.parcelaSelecionada = null;
         }
         private void EnterTab(object sender, KeyEventArgs e)
@@ -495,10 +540,11 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaLogadoByMac(adap.Mac);
+            logado = logadoDAO.BuscaByMac(adap.Mac);
             CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
             string Codpermissao = permissaoDAO.BuscarIDbyCodigo("050100").ToString();
 

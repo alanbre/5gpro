@@ -17,7 +17,7 @@ namespace _5gpro.Forms
 
         List<Operacao> operacoes;
         public Operacao operacaoSelecionada = null;
-        static ConexaoDAO connection = new ConexaoDAO();
+        OperacaoDAO operacaoDAO = new OperacaoDAO();
 
         public fmBuscaOperacao()
         {
@@ -26,7 +26,7 @@ namespace _5gpro.Forms
 
         private void BuscaOperacao()
         {
-            OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
+            
 
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
@@ -36,9 +36,9 @@ namespace _5gpro.Forms
             table.Columns.Add("Desconto", typeof(string));
             table.Columns.Add("Entrada", typeof(string));
 
-            operacoes = operacaoDAO.BuscaOperacoes(tbNomeOperacao.Text).ToList();
+            operacoes = operacaoDAO.Busca(tbNomeOperacao.Text).ToList();
 
-            foreach (Operacao o in operacoes)
+            foreach (var o in operacoes)
             {
                 table.Rows.Add(o.OperacaoID, o.Nome, o.Descricao, o.Condicao, o.Desconto, o.Entrada);
             }
@@ -49,7 +49,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvOperacao.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvOperacao.Rows[selectedRowIndex];
-            operacaoSelecionada = operacoes.Find(o => o.OperacaoID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            operacaoSelecionada = operacaoDAO.BuscaByID(int.Parse(selectedRow.Cells[0].Value.ToString()));
             this.Close();
         }
 

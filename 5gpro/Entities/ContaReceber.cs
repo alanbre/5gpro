@@ -12,6 +12,7 @@ namespace _5gpro.Entities
 
         public int ContaReceberID { get; set; }
         public DateTime DataCadastro { get; set; }
+        public DateTime DataConta { get; set; }
         public Pessoa Pessoa { get; set; }
         public Operacao Operacao { get; set; }
         public decimal ValorOriginal { get; set; }
@@ -20,6 +21,7 @@ namespace _5gpro.Entities
         public decimal ValorFinal { get; set; }
         public decimal Acrescimo { get; set; }
         public decimal Desconto { get; set; }
+        public string Situacao { get; set; }
         public virtual ICollection<ParcelaContaReceber> Parcelas { get; set; }
     }
 }

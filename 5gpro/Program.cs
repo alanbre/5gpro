@@ -27,16 +27,12 @@ namespace _5gpro
             {
                 var formSelecionaBase = new fmSelecionarBase();
                 formSelecionaBase.ShowDialog();
-                if (!carregaSistema.Carrega(formSelecionaBase.baseSelecionada))
-                    Application.Exit();
-            }
-            else
-            {
-                if (!carregaSistema.Carrega())
-                    Application.Exit();
             }
 
-            
+            if (!carregaSistema.Carrega())
+                Application.Exit();
+
+
 
             var formLogin = new fmLogin();
             formLogin.ShowDialog();

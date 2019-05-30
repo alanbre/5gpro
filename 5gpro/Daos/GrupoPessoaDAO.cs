@@ -1,392 +1,180 @@
 ﻿using _5gpro.Entities;
-using MySql.Data.MySqlClient;
+using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace _5gpro.Daos
 {
     class GrupoPessoaDAO
     {
-        public ConexaoDAO Connect { get; }
-        public GrupoPessoaDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
+
 
         public int SalvarOuAtualizar(GrupoPessoa grupopessoa)
         {
             int retorno = 0;
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
+                sql.Query = @"INSERT INTO grupopessoa 
+                            (idgrupopessoa, nome) 
+                            VALUES
+                            (@idgrupopessoa, @nome)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome";
 
-                Connect.Comando = new MySqlCommand(@"INSERT INTO grupopessoa 
-                          (idgrupopessoa, nome) 
-                          VALUES
-                          (@idgrupopessoa, @nome)
-                          ON DUPLICATE KEY UPDATE
-                           nome = @nome
-                         ;",
-                         Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", grupopessoa.GrupoPessoaID);
-                Connect.Comando.Parameters.AddWithValue("@nome", grupopessoa.Nome);
-
-
-
-                retorno = Connect.Comando.ExecuteNonQuery();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-                retorno = 0;
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                sql.addParam("@idgrupopessoa", grupopessoa.GrupoPessoaID);
+                sql.addParam("@nome", grupopessoa.Nome);
+                retorno = sql.insertQuery();
             }
             return retorno;
         }
 
 
-        public IEnumerable<GrupoPessoa> BuscaTodos(string nome)
+        public IEnumerable<GrupoPessoa> Busca(string nome)
         {
-            List<GrupoPessoa> listagrupopessoa = new List<GrupoPessoa>();
-            List<SubGrupoPessoa> listasubgrupopessoa = new List<SubGrupoPessoa>();
-            GrupoPessoa grupopessoa = null;
-            SubGrupoPessoa subgrupopessoa = null;
+            List<GrupoPessoa> listaGrupoPessoa = new List<GrupoPessoa>();
+            string conNome = nome.Length > 0 ? " AND g.nome LIKE @nome" : "";
 
-            string conNome = nome.Length > 0 ? "AND g.nome LIKE @nome" : "";
-
-            try
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                                                   s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
-                                                   s.idgrupopessoa AS idgrupopessoasub 
-                                                   FROM grupopessoa g 
-                                                   LEFT JOIN subgrupopessoa s 
-                                                   ON g.idgrupopessoa = s.idgrupopessoa 
-                                                   WHERE 1=1
-                                                   " + conNome + @"
-                                                   ORDER BY g.nome;", Connect.Conexao);
-
-
-                if (nome.Length > 0) { Connect.Comando.Parameters.AddWithValue("@nome", "%" + nome + "%"); }
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                while (reader.Read())
+                sql.Query = @"SELECT *
+                            FROM grupopessoa g
+                            WHERE 1=1"
+                            + conNome +
+                            " ORDER BY g.nome";
+                if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
+                var data = sql.selectQuery();
+                foreach (var d in data)
                 {
-
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa"))
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        listasubgrupopessoa.Add(subgrupopessoa);
-                    }
-
-                    //O Any funciona como o IEnumerable
-                    //Para não adicionar repetidos
-                    if (!listagrupopessoa.Any(l => l.GrupoPessoaID == reader.GetInt32(reader.GetOrdinal("grupopessoaID"))))
-                    {
-                        listagrupopessoa.Add(grupopessoa);
-                    }
+                    var grupoPessoa = new GrupoPessoa();
+                    grupoPessoa.GrupoPessoaID = Convert.ToInt32(d["idgrupopessoa"]);
+                    grupoPessoa.Nome = (string)d["nome"];
+                    listaGrupoPessoa.Add(grupoPessoa);
                 }
-                reader.Close();
-
-                foreach (GrupoPessoa g in listagrupopessoa)
-                {
-                    g.SubGrupoPessoas = new List<SubGrupoPessoa>();
-                    foreach (SubGrupoPessoa s in listasubgrupopessoa)
-                    {
-                        if (s.GrupoPessoa.GrupoPessoaID == g.GrupoPessoaID)
-                        {
-                            g.SubGrupoPessoas.Add(s);
-                        }
-                    }
-                }
-
             }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-            return listagrupopessoa;
+            return listaGrupoPessoa;
         }
 
 
         public GrupoPessoa BuscarByID(int Codigo)
         {
-            GrupoPessoa grupopessoa = null;
-            SubGrupoPessoa subgrupopessoa = null;
-
-            try
+            var grupopessoa = new GrupoPessoa();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                                                   s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
-                                                   s.idgrupopessoa AS idgrupopessoasub 
-                                                   FROM grupopessoa g 
-                                                   LEFT JOIN subgrupopessoa s 
-                                                   ON g.idgrupopessoa = s.idgrupopessoa 
-                                                   WHERE g.idgrupopessoa = @idgrupopessoa"
-                                                   , Connect.Conexao);
+                sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
+                            FROM grupopessoa g 
+                            LEFT JOIN subgrupopessoa s 
+                            ON g.idgrupopessoa = s.idgrupopessoa 
+                            WHERE g.idgrupopessoa = @idgrupopessoa";
 
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", Codigo);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.addParam("@idgrupopessoa", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
-                        SubGrupoPessoas = new List<SubGrupoPessoa>()
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
+                    return null;
                 }
-                else
-                {
-                    grupopessoa = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                reader.Close();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
-            }
-
-            return grupopessoa;
-        }
-
-
-        public GrupoPessoa BuscarProximo(string codAtual)
-        {
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = new GrupoPessoa();
-            try
-            {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                                                   s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
-                                                   s.idgrupopessoa AS idgrupopessoasub 
-                                                   FROM grupopessoa g 
-                                                   LEFT JOIN subgrupopessoa s 
-                                                   ON g.idgrupopessoa = s.idgrupopessoa 
-                                                   WHERE g.idgrupopessoa = (SELECT MIN(idgrupopessoa) 
-                                                   FROM grupopessoa WHERE idgrupopessoa > @idgrupopessoa)"
-                                                   , Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", codAtual);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
-                {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
-                        SubGrupoPessoas = new List<SubGrupoPessoa>()
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                else
-                {
-                    grupopessoa = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                reader.Close();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                grupopessoa = LeDadosReader(data);
             }
             return grupopessoa;
         }
 
-        public GrupoPessoa BuscarAnterior(string codAtual)
+
+        public GrupoPessoa Proximo(string Codigo)
         {
-            SubGrupoPessoa subgrupopessoa = null;
-            GrupoPessoa grupopessoa = new GrupoPessoa();
-            try
+            var grupopessoa = new GrupoPessoa();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                                                   s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome,
-                                                   s.idgrupopessoa AS idgrupopessoasub 
-                                                   FROM grupopessoa g 
-                                                   LEFT JOIN subgrupopessoa s 
-                                                   ON g.idgrupopessoa = s.idgrupopessoa 
-                                                   WHERE g.idgrupopessoa = (SELECT MAX(idgrupopessoa) 
-                                                   FROM grupopessoa WHERE idgrupopessoa < @idgrupopessoa)"
-                                                   , Connect.Conexao);
-
-                Connect.Comando.Parameters.AddWithValue("@idgrupopessoa", codAtual);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
+                            FROM grupopessoa g 
+                            LEFT JOIN subgrupopessoa s 
+                            ON g.idgrupopessoa = s.idgrupopessoa 
+                            WHERE g.idgrupopessoa = (SELECT MIN(idgrupopessoa) 
+                            FROM grupopessoa WHERE idgrupopessoa > @idgrupopessoa)";
+                sql.addParam("@idgrupopessoa", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    grupopessoa = new GrupoPessoa
-                    {
-                        GrupoPessoaID = reader.GetInt32(reader.GetOrdinal("grupopessoaID")),
-                        Nome = reader.GetString(reader.GetOrdinal("nomegrupopessoa")),
-                        SubGrupoPessoas = new List<SubGrupoPessoa>()
-                    };
-
-                    if (!reader.IsDBNull(reader.GetOrdinal("subgrupopessoaID")))
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
+                    return null;
                 }
-                else
-                {
-                    grupopessoa = null;
-                }
-
-                while (reader.Read())
-                {
-                    if (reader.GetString(reader.GetOrdinal("subgrupopessoaID")) != null)
-                    {
-                        subgrupopessoa = new SubGrupoPessoa
-                        {
-                            SubGrupoPessoaID = reader.GetInt32(reader.GetOrdinal("subgrupopessoaID")),
-                            Nome = reader.GetString(reader.GetOrdinal("subgrupopessoanome")),
-                            GrupoPessoa = grupopessoa
-                        };
-
-                        grupopessoa.SubGrupoPessoas.Add(subgrupopessoa);
-                    }
-                }
-                reader.Close();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
+                grupopessoa = LeDadosReader(data);
             }
             return grupopessoa;
         }
 
-        public string BuscaProxCodigoDisponivel()
+        public GrupoPessoa Anterior(string Codigo)
         {
-            string proximoid = null;
-            try
+            var grupopessoa = new GrupoPessoa();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                Connect.AbrirConexao();
-                Connect.Comando = new MySqlCommand(@"SELECT i1.idgrupopessoa + 1 AS proximoid
-                                             FROM grupopessoa AS i1
-                                             LEFT OUTER JOIN grupopessoa AS i2 ON i1.idgrupopessoa + 1 = i2.idgrupopessoa
-                                             WHERE i2.idgrupopessoa IS NULL
-                                             ORDER BY proximoid
-                                             LIMIT 1;", Connect.Conexao);
-
-                IDataReader reader = Connect.Comando.ExecuteReader();
-
-                if (reader.Read())
+                sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
+                            FROM grupopessoa g 
+                            LEFT JOIN subgrupopessoa s 
+                            ON g.idgrupopessoa = s.idgrupopessoa 
+                            WHERE g.idgrupopessoa = (SELECT MAX(idgrupopessoa) 
+                            FROM grupopessoa WHERE idgrupopessoa < @idgrupopessoa)";
+                sql.addParam("@idgrupopessoa", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
                 {
-                    proximoid = reader.GetString(reader.GetOrdinal("proximoid"));
-                    reader.Close();
+                    return null;
                 }
-                else
+                grupopessoa = LeDadosReader(data);
+            }
+            return grupopessoa;
+        }
+
+        public int BuscaProxCodigoDisponivel()
+        {
+            int proximoid = 1;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT i1.idgrupopessoa + 1 AS proximoid
+                            FROM grupopessoa AS i1
+                            LEFT OUTER JOIN grupopessoa AS i2 ON i1.idgrupopessoa + 1 = i2.idgrupopessoa
+                            WHERE i2.idgrupopessoa IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
                 {
-                    proximoid = "1";
+                    proximoid = Convert.ToInt32(data["proximoid"]);
                 }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-            finally
-            {
-                Connect.FecharConexao();
             }
             return proximoid;
+        }
+
+        private GrupoPessoa LeDadosReader(List<Dictionary<string, object>> data)
+        {
+            if (data.Count == 0)
+            {
+                return null;
+            }
+
+            var grupoPessoa = new GrupoPessoa();
+            grupoPessoa.GrupoPessoaID = Convert.ToInt32(data[0]["grupopessoaID"]);
+            grupoPessoa.Nome = (string)data[0]["nomegrupopessoa"];
+            var listaSubGrupoPessoa = new List<SubGrupoPessoa>();
+
+
+            if (data[0]["subgrupopessoaID"] != null)
+            {
+
+                foreach (var d in data)
+                {
+                    var subGrupoPessoa = new SubGrupoPessoa();
+                    subGrupoPessoa.SubGrupoPessoaID = Convert.ToInt32(d["subgrupopessoaID"]);
+                    subGrupoPessoa.Nome = (string)d["subgrupopessoanome"];
+                    subGrupoPessoa.GrupoPessoa = grupoPessoa;
+
+                    listaSubGrupoPessoa.Add(subGrupoPessoa);
+                }
+                grupoPessoa.SubGrupoPessoas = listaSubGrupoPessoa;
+            }
+
+            return grupoPessoa;
         }
     }
 }

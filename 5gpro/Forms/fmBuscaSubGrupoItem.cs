@@ -17,8 +17,7 @@ namespace _5gpro.Forms
         GrupoItem grupoitem = null;
         List<SubGrupoItem> listasubgrupoitem;
         public SubGrupoItem subgrupoitemSelecionado = null;
-        static ConexaoDAO connection = new ConexaoDAO();
-        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO(connection);
+        SubGrupoItemDAO subgrupoitemDAO = new SubGrupoItemDAO();
 
         public fmBuscaSubGrupoItem(int grupoitemID)
         {
@@ -39,7 +38,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
 
-            listasubgrupoitem = subgrupoitemDAO.BuscaTodos(tbNomeSubGrupo.Text, grupoitem.GrupoItemID).ToList();
+            listasubgrupoitem = subgrupoitemDAO.Busca(tbNomeSubGrupo.Text, grupoitem.GrupoItemID).ToList();
 
             foreach (SubGrupoItem g in listasubgrupoitem)
             {

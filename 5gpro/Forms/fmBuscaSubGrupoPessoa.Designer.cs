@@ -87,6 +87,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(338, 397);
             this.Name = "fmBuscaSubGrupoPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

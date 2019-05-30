@@ -14,10 +14,9 @@ namespace _5gpro.Forms
     {
         public Usuario usuariologado;
         public Logado logado;
-        public static ConexaoDAO connection = new ConexaoDAO();
 
-        public UsuarioDAO usuarioDAO = new UsuarioDAO(connection);
-        public LogadoDAO logadoDAO = new LogadoDAO(connection);
+        public UsuarioDAO usuarioDAO = new UsuarioDAO();
+        public LogadoDAO logadoDAO = new LogadoDAO();
 
         NetworkAdapter adap = new NetworkAdapter();
 
@@ -34,7 +33,7 @@ namespace _5gpro.Forms
 
             if (usuariologado != null)
             {
-                logado = logadoDAO.BuscaLogadoByUsuario(usuariologado);
+                logado = logadoDAO.BuscaByUsuario(usuariologado);
                 if (logado != null)
                 {                  
                     MessageBox.Show("Usuário "+usuariologado.Nome+" logado no computador "+logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -99,7 +98,8 @@ namespace _5gpro.Forms
             }
             else
             {
-                new Limpar().limparTudo(this.Controls);
+                tbCodigo.Clear();
+                tbNomeUsuario.Clear();
             }
         }
 
@@ -118,12 +118,17 @@ namespace _5gpro.Forms
             if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (tbCodigo.Text.Length > 0)
             {
-                PreencheCamposCodUsuario(usuarioDAO.BuscarUsuarioByIdLogin(int.Parse(tbCodigo.Text)));
+                PreencheCamposCodUsuario(usuarioDAO.BuscaByIDLogin(int.Parse(tbCodigo.Text)));
             }
             else
             {
-                tbNomeUsuario.Text = "";
+                tbNomeUsuario.Clear();
             }
+        }
+
+        private void TbSenha_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

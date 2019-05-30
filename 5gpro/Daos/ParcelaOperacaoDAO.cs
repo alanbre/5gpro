@@ -11,12 +11,7 @@ namespace _5gpro.Daos
     class ParcelaOperacaoDAO
     {
 
-        public ConexaoDAO Connect { get; }
-        public ParcelaOperacaoDAO(ConexaoDAO c)
-        {
-            Connect = c;
-        }
-
+        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
     }
 }

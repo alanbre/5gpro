@@ -10,8 +10,7 @@ namespace _5gpro.Controls
     public partial class BuscaOperacao : UserControl
     {
         public Operacao operacao;
-        private static ConexaoDAO connection = new ConexaoDAO();
-        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO(connection);
+        private readonly OperacaoDAO operacaoDAO = new OperacaoDAO();
 
         public BuscaOperacao()
         {
@@ -32,7 +31,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoOperacao.Text, out int codigo)) { tbCodigoOperacao.Clear(); }
             if (tbCodigoOperacao.Text.Length > 0)
             {
-                operacao = operacaoDAO.BuscaById(int.Parse(tbCodigoOperacao.Text));
+                operacao = operacaoDAO.BuscaByID(int.Parse(tbCodigoOperacao.Text));
                 PreencheCamposOperacao(operacao);
             }
             else

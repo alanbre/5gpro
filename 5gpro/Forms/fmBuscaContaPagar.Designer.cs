@@ -32,6 +32,16 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbResultados = new System.Windows.Forms.GroupBox();
             this.dgvContas = new System.Windows.Forms.DataGridView();
+            this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorConta = new System.Windows.Forms.Label();
@@ -47,16 +57,9 @@
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
-            this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcFornecedor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorOriginal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcMulta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcJuros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
+            this.cbDataVencimentoParcela = new System.Windows.Forms.CheckBox();
+            this.cbValorConta = new System.Windows.Forms.CheckBox();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
             this.gbFiltros.SuspendLayout();
@@ -105,163 +108,6 @@
             this.dgvContas.TabIndex = 0;
             this.dgvContas.TabStop = false;
             this.dgvContas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvContas_CellDoubleClick);
-            // 
-            // gbFiltros
-            // 
-            this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltros.Controls.Add(this.btPesquisar);
-            this.gbFiltros.Controls.Add(this.lbAValorConta);
-            this.gbFiltros.Controls.Add(this.dbValorFinal);
-            this.gbFiltros.Controls.Add(this.lbADataVencimentoParcela);
-            this.gbFiltros.Controls.Add(this.dtpDataVencimentoFinal);
-            this.gbFiltros.Controls.Add(this.dtpDataVencimentoInicial);
-            this.gbFiltros.Controls.Add(this.lbDataVencimento);
-            this.gbFiltros.Controls.Add(this.lbADataCadastro);
-            this.gbFiltros.Controls.Add(this.dtpDataCadastroFinal);
-            this.gbFiltros.Controls.Add(this.dtpDataCadastroInicial);
-            this.gbFiltros.Controls.Add(this.lbDataCadastro);
-            this.gbFiltros.Controls.Add(this.dbValorInicial);
-            this.gbFiltros.Controls.Add(this.lbValorInicial);
-            this.gbFiltros.Controls.Add(this.buscaPessoa);
-            this.gbFiltros.Location = new System.Drawing.Point(12, 12);
-            this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(967, 134);
-            this.gbFiltros.TabIndex = 2;
-            this.gbFiltros.TabStop = false;
-            this.gbFiltros.Text = "Filtros";
-            // 
-            // btPesquisar
-            // 
-            this.btPesquisar.Location = new System.Drawing.Point(9, 102);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btPesquisar.TabIndex = 13;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
-            // 
-            // lbAValorConta
-            // 
-            this.lbAValorConta.AutoSize = true;
-            this.lbAValorConta.Location = new System.Drawing.Point(80, 77);
-            this.lbAValorConta.Margin = new System.Windows.Forms.Padding(0);
-            this.lbAValorConta.Name = "lbAValorConta";
-            this.lbAValorConta.Size = new System.Drawing.Size(13, 13);
-            this.lbAValorConta.TabIndex = 12;
-            this.lbAValorConta.Text = "a";
-            // 
-            // dbValorFinal
-            // 
-            this.dbValorFinal.Location = new System.Drawing.Point(94, 74);
-            this.dbValorFinal.Name = "dbValorFinal";
-            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
-            this.dbValorFinal.TabIndex = 5;
-            this.dbValorFinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
-            // 
-            // lbADataVencimentoParcela
-            // 
-            this.lbADataVencimentoParcela.AutoSize = true;
-            this.lbADataVencimentoParcela.Location = new System.Drawing.Point(557, 74);
-            this.lbADataVencimentoParcela.Margin = new System.Windows.Forms.Padding(0);
-            this.lbADataVencimentoParcela.Name = "lbADataVencimentoParcela";
-            this.lbADataVencimentoParcela.Size = new System.Drawing.Size(13, 13);
-            this.lbADataVencimentoParcela.TabIndex = 8;
-            this.lbADataVencimentoParcela.Text = "a";
-            // 
-            // dtpDataVencimentoFinal
-            // 
-            this.dtpDataVencimentoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataVencimentoFinal.Location = new System.Drawing.Point(571, 71);
-            this.dtpDataVencimentoFinal.Name = "dtpDataVencimentoFinal";
-            this.dtpDataVencimentoFinal.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataVencimentoFinal.TabIndex = 11;
-            // 
-            // dtpDataVencimentoInicial
-            // 
-            this.dtpDataVencimentoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataVencimentoInicial.Location = new System.Drawing.Point(460, 71);
-            this.dtpDataVencimentoInicial.Name = "dtpDataVencimentoInicial";
-            this.dtpDataVencimentoInicial.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataVencimentoInicial.TabIndex = 9;
-            // 
-            // lbDataVencimento
-            // 
-            this.lbDataVencimento.AutoSize = true;
-            this.lbDataVencimento.Location = new System.Drawing.Point(496, 55);
-            this.lbDataVencimento.Name = "lbDataVencimento";
-            this.lbDataVencimento.Size = new System.Drawing.Size(126, 13);
-            this.lbDataVencimento.TabIndex = 10;
-            this.lbDataVencimento.Text = "Data vencimento parcela";
-            // 
-            // lbADataCadastro
-            // 
-            this.lbADataCadastro.AutoSize = true;
-            this.lbADataCadastro.Location = new System.Drawing.Point(556, 35);
-            this.lbADataCadastro.Margin = new System.Windows.Forms.Padding(0);
-            this.lbADataCadastro.Name = "lbADataCadastro";
-            this.lbADataCadastro.Size = new System.Drawing.Size(13, 13);
-            this.lbADataCadastro.TabIndex = 1;
-            this.lbADataCadastro.Text = "a";
-            // 
-            // dtpDataCadastroFinal
-            // 
-            this.dtpDataCadastroFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataCadastroFinal.Location = new System.Drawing.Point(570, 32);
-            this.dtpDataCadastroFinal.Name = "dtpDataCadastroFinal";
-            this.dtpDataCadastroFinal.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadastroFinal.TabIndex = 7;
-            // 
-            // dtpDataCadastroInicial
-            // 
-            this.dtpDataCadastroInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataCadastroInicial.Location = new System.Drawing.Point(459, 32);
-            this.dtpDataCadastroInicial.Name = "dtpDataCadastroInicial";
-            this.dtpDataCadastroInicial.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadastroInicial.TabIndex = 1;
-            // 
-            // lbDataCadastro
-            // 
-            this.lbDataCadastro.AutoSize = true;
-            this.lbDataCadastro.Location = new System.Drawing.Point(526, 16);
-            this.lbDataCadastro.Name = "lbDataCadastro";
-            this.lbDataCadastro.Size = new System.Drawing.Size(74, 13);
-            this.lbDataCadastro.TabIndex = 6;
-            this.lbDataCadastro.Text = "Data cadastro";
-            // 
-            // dbValorInicial
-            // 
-            this.dbValorInicial.Location = new System.Drawing.Point(9, 74);
-            this.dbValorInicial.Name = "dbValorInicial";
-            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
-            this.dbValorInicial.TabIndex = 3;
-            this.dbValorInicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbValorInicial
-            // 
-            this.lbValorInicial.AutoSize = true;
-            this.lbValorInicial.Location = new System.Drawing.Point(6, 55);
-            this.lbValorInicial.Name = "lbValorInicial";
-            this.lbValorInicial.Size = new System.Drawing.Size(76, 13);
-            this.lbValorInicial.TabIndex = 2;
-            this.lbValorInicial.Text = "Valor da conta";
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Fornecedor";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 16);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 0;
             // 
             // dgvtbcConta
             // 
@@ -328,6 +174,202 @@
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
+            // gbFiltros
+            // 
+            this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltros.Controls.Add(this.cbValorConta);
+            this.gbFiltros.Controls.Add(this.cbDataVencimentoParcela);
+            this.gbFiltros.Controls.Add(this.cbDataCadastro);
+            this.gbFiltros.Controls.Add(this.btPesquisar);
+            this.gbFiltros.Controls.Add(this.lbAValorConta);
+            this.gbFiltros.Controls.Add(this.dbValorFinal);
+            this.gbFiltros.Controls.Add(this.lbADataVencimentoParcela);
+            this.gbFiltros.Controls.Add(this.dtpDataVencimentoFinal);
+            this.gbFiltros.Controls.Add(this.dtpDataVencimentoInicial);
+            this.gbFiltros.Controls.Add(this.lbDataVencimento);
+            this.gbFiltros.Controls.Add(this.lbADataCadastro);
+            this.gbFiltros.Controls.Add(this.dtpDataCadastroFinal);
+            this.gbFiltros.Controls.Add(this.dtpDataCadastroInicial);
+            this.gbFiltros.Controls.Add(this.lbDataCadastro);
+            this.gbFiltros.Controls.Add(this.dbValorInicial);
+            this.gbFiltros.Controls.Add(this.lbValorInicial);
+            this.gbFiltros.Controls.Add(this.buscaPessoa);
+            this.gbFiltros.Location = new System.Drawing.Point(12, 12);
+            this.gbFiltros.Name = "gbFiltros";
+            this.gbFiltros.Size = new System.Drawing.Size(967, 134);
+            this.gbFiltros.TabIndex = 2;
+            this.gbFiltros.TabStop = false;
+            this.gbFiltros.Text = "Filtros";
+            // 
+            // btPesquisar
+            // 
+            this.btPesquisar.Location = new System.Drawing.Point(191, 104);
+            this.btPesquisar.Name = "btPesquisar";
+            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
+            this.btPesquisar.TabIndex = 13;
+            this.btPesquisar.Text = "Pesquisar";
+            this.btPesquisar.UseVisualStyleBackColor = true;
+            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
+            // 
+            // lbAValorConta
+            // 
+            this.lbAValorConta.AutoSize = true;
+            this.lbAValorConta.Location = new System.Drawing.Point(80, 108);
+            this.lbAValorConta.Margin = new System.Windows.Forms.Padding(0);
+            this.lbAValorConta.Name = "lbAValorConta";
+            this.lbAValorConta.Size = new System.Drawing.Size(13, 13);
+            this.lbAValorConta.TabIndex = 12;
+            this.lbAValorConta.Text = "a";
+            // 
+            // dbValorFinal
+            // 
+            this.dbValorFinal.Enabled = false;
+            this.dbValorFinal.Location = new System.Drawing.Point(94, 105);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
+            this.dbValorFinal.TabIndex = 5;
+            this.dbValorFinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
+            // 
+            // lbADataVencimentoParcela
+            // 
+            this.lbADataVencimentoParcela.AutoSize = true;
+            this.lbADataVencimentoParcela.Location = new System.Drawing.Point(557, 74);
+            this.lbADataVencimentoParcela.Margin = new System.Windows.Forms.Padding(0);
+            this.lbADataVencimentoParcela.Name = "lbADataVencimentoParcela";
+            this.lbADataVencimentoParcela.Size = new System.Drawing.Size(13, 13);
+            this.lbADataVencimentoParcela.TabIndex = 8;
+            this.lbADataVencimentoParcela.Text = "a";
+            // 
+            // dtpDataVencimentoFinal
+            // 
+            this.dtpDataVencimentoFinal.Enabled = false;
+            this.dtpDataVencimentoFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataVencimentoFinal.Location = new System.Drawing.Point(571, 71);
+            this.dtpDataVencimentoFinal.Name = "dtpDataVencimentoFinal";
+            this.dtpDataVencimentoFinal.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataVencimentoFinal.TabIndex = 11;
+            // 
+            // dtpDataVencimentoInicial
+            // 
+            this.dtpDataVencimentoInicial.Enabled = false;
+            this.dtpDataVencimentoInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataVencimentoInicial.Location = new System.Drawing.Point(460, 71);
+            this.dtpDataVencimentoInicial.Name = "dtpDataVencimentoInicial";
+            this.dtpDataVencimentoInicial.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataVencimentoInicial.TabIndex = 9;
+            // 
+            // lbDataVencimento
+            // 
+            this.lbDataVencimento.AutoSize = true;
+            this.lbDataVencimento.Location = new System.Drawing.Point(496, 55);
+            this.lbDataVencimento.Name = "lbDataVencimento";
+            this.lbDataVencimento.Size = new System.Drawing.Size(126, 13);
+            this.lbDataVencimento.TabIndex = 10;
+            this.lbDataVencimento.Text = "Data vencimento parcela";
+            // 
+            // lbADataCadastro
+            // 
+            this.lbADataCadastro.AutoSize = true;
+            this.lbADataCadastro.Location = new System.Drawing.Point(556, 35);
+            this.lbADataCadastro.Margin = new System.Windows.Forms.Padding(0);
+            this.lbADataCadastro.Name = "lbADataCadastro";
+            this.lbADataCadastro.Size = new System.Drawing.Size(13, 13);
+            this.lbADataCadastro.TabIndex = 1;
+            this.lbADataCadastro.Text = "a";
+            // 
+            // dtpDataCadastroFinal
+            // 
+            this.dtpDataCadastroFinal.Enabled = false;
+            this.dtpDataCadastroFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataCadastroFinal.Location = new System.Drawing.Point(570, 32);
+            this.dtpDataCadastroFinal.Name = "dtpDataCadastroFinal";
+            this.dtpDataCadastroFinal.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataCadastroFinal.TabIndex = 7;
+            // 
+            // dtpDataCadastroInicial
+            // 
+            this.dtpDataCadastroInicial.Enabled = false;
+            this.dtpDataCadastroInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataCadastroInicial.Location = new System.Drawing.Point(459, 32);
+            this.dtpDataCadastroInicial.Name = "dtpDataCadastroInicial";
+            this.dtpDataCadastroInicial.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataCadastroInicial.TabIndex = 1;
+            // 
+            // lbDataCadastro
+            // 
+            this.lbDataCadastro.AutoSize = true;
+            this.lbDataCadastro.Location = new System.Drawing.Point(526, 16);
+            this.lbDataCadastro.Name = "lbDataCadastro";
+            this.lbDataCadastro.Size = new System.Drawing.Size(74, 13);
+            this.lbDataCadastro.TabIndex = 6;
+            this.lbDataCadastro.Text = "Data cadastro";
+            // 
+            // dbValorInicial
+            // 
+            this.dbValorInicial.Enabled = false;
+            this.dbValorInicial.Location = new System.Drawing.Point(9, 105);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
+            this.dbValorInicial.TabIndex = 3;
+            this.dbValorInicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // lbValorInicial
+            // 
+            this.lbValorInicial.AutoSize = true;
+            this.lbValorInicial.Location = new System.Drawing.Point(6, 86);
+            this.lbValorInicial.Name = "lbValorInicial";
+            this.lbValorInicial.Size = new System.Drawing.Size(76, 13);
+            this.lbValorInicial.TabIndex = 2;
+            this.lbValorInicial.Text = "Valor da conta";
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Fornecedor";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 16);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 0;
+            // 
+            // cbDataCadastro
+            // 
+            this.cbDataCadastro.AutoSize = true;
+            this.cbDataCadastro.Location = new System.Drawing.Point(672, 35);
+            this.cbDataCadastro.Name = "cbDataCadastro";
+            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
+            this.cbDataCadastro.TabIndex = 14;
+            this.cbDataCadastro.UseVisualStyleBackColor = true;
+            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
+            // 
+            // cbDataVencimentoParcela
+            // 
+            this.cbDataVencimentoParcela.AutoSize = true;
+            this.cbDataVencimentoParcela.Location = new System.Drawing.Point(673, 74);
+            this.cbDataVencimentoParcela.Name = "cbDataVencimentoParcela";
+            this.cbDataVencimentoParcela.Size = new System.Drawing.Size(15, 14);
+            this.cbDataVencimentoParcela.TabIndex = 15;
+            this.cbDataVencimentoParcela.UseVisualStyleBackColor = true;
+            this.cbDataVencimentoParcela.CheckedChanged += new System.EventHandler(this.CbDataVencimento_CheckedChanged);
+            // 
+            // cbValorConta
+            // 
+            this.cbValorConta.AutoSize = true;
+            this.cbValorConta.Location = new System.Drawing.Point(170, 109);
+            this.cbValorConta.Name = "cbValorConta";
+            this.cbValorConta.Size = new System.Drawing.Size(15, 14);
+            this.cbValorConta.TabIndex = 16;
+            this.cbValorConta.UseVisualStyleBackColor = true;
+            this.cbValorConta.CheckedChanged += new System.EventHandler(this.CbValor_CheckedChanged);
+            // 
             // fmBuscaContaPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -339,6 +381,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1007, 613);
             this.Name = "fmBuscaContaPagar";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -381,5 +424,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
+        private System.Windows.Forms.CheckBox cbDataVencimentoParcela;
+        private System.Windows.Forms.CheckBox cbDataCadastro;
+        private System.Windows.Forms.CheckBox cbValorConta;
     }
 }

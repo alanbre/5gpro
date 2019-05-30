@@ -98,7 +98,7 @@
             this.cbMostrarSenhaUsuario.TabStop = false;
             this.cbMostrarSenhaUsuario.Text = "Mostrar";
             this.cbMostrarSenhaUsuario.UseVisualStyleBackColor = true;
-            this.cbMostrarSenhaUsuario.CheckedChanged += new System.EventHandler(this.cbMostrarSenhaUsuario_CheckedChanged);
+            this.cbMostrarSenhaUsuario.CheckedChanged += new System.EventHandler(this.CbMostrarSenhaUsuario_CheckedChanged);
             // 
             // tbConfirmaSenhaUsuario
             // 
@@ -107,8 +107,8 @@
             this.tbConfirmaSenhaUsuario.PasswordChar = '*';
             this.tbConfirmaSenhaUsuario.Size = new System.Drawing.Size(250, 20);
             this.tbConfirmaSenhaUsuario.TabIndex = 6;
-            this.tbConfirmaSenhaUsuario.TextChanged += new System.EventHandler(this.tbConfirmaSenhaUsuario_TextChanged);
-            this.tbConfirmaSenhaUsuario.Leave += new System.EventHandler(this.tbConfirmaSenhaUsuario_Leave);
+            this.tbConfirmaSenhaUsuario.TextChanged += new System.EventHandler(this.TbConfirmaSenhaUsuario_TextChanged);
+            this.tbConfirmaSenhaUsuario.Leave += new System.EventHandler(this.TbConfirmaSenhaUsuario_Leave);
             // 
             // lbConfirmaSenhaUsuario
             // 
@@ -126,8 +126,8 @@
             this.tbSenhaUsuario.PasswordChar = '*';
             this.tbSenhaUsuario.Size = new System.Drawing.Size(250, 20);
             this.tbSenhaUsuario.TabIndex = 3;
-            this.tbSenhaUsuario.TextChanged += new System.EventHandler(this.tbSenhaUsuario_TextChanged);
-            this.tbSenhaUsuario.Leave += new System.EventHandler(this.tbSenhaUsuario_Leave);
+            this.tbSenhaUsuario.TextChanged += new System.EventHandler(this.TbSenhaUsuario_TextChanged);
+            this.tbSenhaUsuario.Leave += new System.EventHandler(this.TbSenhaUsuario_Leave);
             // 
             // lbSenhaUsuario
             // 
@@ -153,7 +153,7 @@
             this.tbCodigoUsuario.Name = "tbCodigoUsuario";
             this.tbCodigoUsuario.Size = new System.Drawing.Size(100, 20);
             this.tbCodigoUsuario.TabIndex = 1;
-            this.tbCodigoUsuario.Leave += new System.EventHandler(this.tbCodigoUsuario_Leave);
+            this.tbCodigoUsuario.Leave += new System.EventHandler(this.TbCodigoUsuario_Leave);
             // 
             // tbNomeUsuario
             // 
@@ -161,7 +161,7 @@
             this.tbNomeUsuario.Name = "tbNomeUsuario";
             this.tbNomeUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbNomeUsuario.TabIndex = 1;
-            this.tbNomeUsuario.TextChanged += new System.EventHandler(this.tbNomeUsuario_TextChanged);
+            this.tbNomeUsuario.TextChanged += new System.EventHandler(this.TbNomeUsuario_TextChanged);
             // 
             // lbNomeUsuario
             // 
@@ -187,7 +187,7 @@
             this.tbSobrenomeUsuario.Name = "tbSobrenomeUsuario";
             this.tbSobrenomeUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbSobrenomeUsuario.TabIndex = 3;
-            this.tbSobrenomeUsuario.TextChanged += new System.EventHandler(this.tbSobrenomeUsuario_TextChanged);
+            this.tbSobrenomeUsuario.TextChanged += new System.EventHandler(this.TbSobrenomeUsuario_TextChanged);
             // 
             // panel2
             // 
@@ -212,7 +212,7 @@
             this.mtbTelefoneUsuario.Name = "mtbTelefoneUsuario";
             this.mtbTelefoneUsuario.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefoneUsuario.TabIndex = 7;
-            this.mtbTelefoneUsuario.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbTelefoneUsuario_MaskInputRejected);
+            this.mtbTelefoneUsuario.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MtbTelefoneUsuario_MaskInputRejected);
             // 
             // lbTelefoneUsuario
             // 
@@ -229,7 +229,7 @@
             this.tbEmailUsuario.Name = "tbEmailUsuario";
             this.tbEmailUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbEmailUsuario.TabIndex = 5;
-            this.tbEmailUsuario.TextChanged += new System.EventHandler(this.tbEmailUsuario_TextChanged);
+            this.tbEmailUsuario.TextChanged += new System.EventHandler(this.TbEmailUsuario_TextChanged);
             // 
             // lbEmailUsuario
             // 
@@ -287,7 +287,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de Usuário";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fmCadastroUsuario_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCadastroUsuario_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroUsuario_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();

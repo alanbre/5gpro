@@ -12,8 +12,7 @@ namespace _5gpro.Controls
 
         public SubGrupoItem subgrupoItem = null;
         private GrupoItem gruporecebido = null;
-        private static readonly ConexaoDAO conexao = new ConexaoDAO();
-        private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO(conexao);
+        private readonly SubGrupoItemDAO subgrupoItemDAO = new SubGrupoItemDAO();
 
         public BuscaSubGrupoItem()
         {
@@ -47,7 +46,7 @@ namespace _5gpro.Controls
             {
                 if (tbCodigoSubGrupoItem.Text.Length > 0)
                 {
-                    subgrupoItem = subgrupoItemDAO.BuscarByID(int.Parse(tbCodigoSubGrupoItem.Text), gruporecebido.GrupoItemID);
+                    subgrupoItem = subgrupoItemDAO.BuscaByID(int.Parse(tbCodigoSubGrupoItem.Text), gruporecebido.GrupoItemID);
                     PreencheCamposSubGrupoItem(subgrupoItem);
                 }
                 else
@@ -113,14 +112,25 @@ namespace _5gpro.Controls
             }
         }
 
-        public void EscolhaOGrupo()
+        public void EscolhaOGrupo(bool ok)
         {
-            tbNomeSubGrupoItem.Text = "Escolha o Grupo";
+            if (ok)
+            {
+                if (subgrupoItem != null)
+                    tbNomeSubGrupoItem.Text = subgrupoItem.Nome;
+                else
+                    tbNomeSubGrupoItem.Text = "";
+            }
+            else
+            {
+                tbNomeSubGrupoItem.Text = "Escolha o Grupo";
+            }
         }
 
         public void Limpa()
         {
             this.subgrupoItem = null;
+            this.gruporecebido = null;
             tbCodigoSubGrupoItem.Clear();
             tbNomeSubGrupoItem.Clear();
         }
@@ -139,10 +149,6 @@ namespace _5gpro.Controls
         private void TbCodigoSubGrupoItem_TextChanged(object sender, EventArgs e)
         {
             this.Text_Changed?.Invoke(this, e);
-        }
-
-        private void BtAdd_Click(object sender, EventArgs e)
-        {
         }
     }
 }
