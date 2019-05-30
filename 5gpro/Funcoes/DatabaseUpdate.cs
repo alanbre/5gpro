@@ -45,7 +45,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema 5gprodatabase
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8 ;
 USE `5gprodatabase` ;
 
 -- -----------------------------------------------------
@@ -152,6 +152,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupoitem` (
   `idsubgrupoitem` INT NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupoitem` INT NOT NULL,
+  `codigo` INT(11) NOT NULL,
   PRIMARY KEY (`idsubgrupoitem`),
   INDEX `fk_subgrupoitem_GrupoItem1_idx` (`idgrupoitem` ASC) VISIBLE,
   CONSTRAINT `fk_subgrupoitem_GrupoItem1`
