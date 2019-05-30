@@ -11,15 +11,24 @@ namespace _5gpro.Forms
     public partial class fmBuscaGrupoItem : Form
     {
 
-        List<GrupoItem> listagrupoitem;
+        private List<GrupoItem> listagrupoitem;
         public GrupoItem grupoitemSelecionado = null;
-        GrupoItemDAO grupoitemDAO = new GrupoItemDAO();
+        private GrupoItemDAO grupoitemDAO = new GrupoItemDAO();
 
         public fmBuscaGrupoItem()
         {
             InitializeComponent();
         }
 
+        private void FmBuscaGrupoItem_Load(object sender, EventArgs e) => BuscaGrupoItem();
+        private void TbNomeGrupoIten_TextChanged(object sender, EventArgs e) => BuscaGrupoItem();
+        private void DgvGrupoItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvGrupoItens.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvGrupoItens.Rows[selectedRowIndex];
+            grupoitemSelecionado = listagrupoitem.Find(g => g.GrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            this.Close();
+        }
         private void BuscaGrupoItem()
         {
             DataTable table = new DataTable();
@@ -33,29 +42,6 @@ namespace _5gpro.Forms
                 table.Rows.Add(g.GrupoItemID, g.Nome);
             }
             dgvGrupoItens.DataSource = table;
-        }
-
-        private void FmBuscaGrupoItem_Load(object sender, EventArgs e)
-        {
-            BuscaGrupoItem();
-        }
-
-        private void TbNomeGrupoIten_TextChanged(object sender, EventArgs e)
-        {
-            BuscaGrupoItem();
-        }
-
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
-            BuscaGrupoItem();
-        }
-
-        private void DgvGrupoItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvGrupoItens.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvGrupoItens.Rows[selectedRowIndex];
-            grupoitemSelecionado = listagrupoitem.Find(g => g.GrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
-            this.Close();
         }
 
     }
