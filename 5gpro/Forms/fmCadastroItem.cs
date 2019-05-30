@@ -169,10 +169,11 @@ namespace _5gpro.Forms
                 if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
                 "Aviso",
                  MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Information) == DialogResult.Yes)
+                 MessageBoxIcon.Information) == DialogResult.No)
                 {
-                    tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
+                    return;
                 }
+                tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
                 ok = false;
             }
 
