@@ -33,21 +33,22 @@ namespace _5gpro.Daos
                 sql.addParam("@entrada", operacao.Entrada);
                 sql.addParam("@acrescimo", operacao.Acrescimo);
                 retorno = sql.insertQuery();
-                if (retorno > 0)
+
+                sql.Query = @"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao";
+                sql.deleteQuery();
+
+                if (retorno > 0 && operacao.Condicao.Equals("AP"))
                 {
-                    sql.Query = @"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao";
-                    sql.deleteQuery();
 
                     sql.Query = @"INSERT INTO parcelaoperacao 
-                                (idparcelaoperacao, numero, dias, idoperacao)
+                                (numero, dias, idoperacao)
                                 VALUES
-                                (@idparcelaoperacao, @numero, @dias, @idoperacao)
+                                (@numero, @dias, @idoperacao)
                                 ON DUPLICATE KEY UPDATE
                                 numero = @numero, dias = @dias, idoperacao = @idoperacao ";
                     foreach (var p in operacao.Parcelas)
                     {
                         sql.clearParams();
-                        sql.addParam("@idparcelaoperacao", p.ParcelaOperacaoID);
                         sql.addParam("@numero", p.Numero);
                         sql.addParam("@dias", p.Dias);
                         sql.addParam("@idoperacao", operacao.OperacaoID);
@@ -86,13 +87,12 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *
                             FROM operacao o 
-                            LEFT JOIN parcelaoperacao p 
-                            ON o.idoperacao = p.idoperacao
                             WHERE 1=1 "
                             + conNomeOperacao + " "
                             + @"ORDER BY o.nome";
                 if (nomeOperacao.Length > 0) { sql.addParam("@nomeoperacao", "%" + nomeOperacao + "%"); }
                 var data = sql.selectQuery();
+
                 foreach (var d in data)
                 {
                     var operacao = new Operacao();
