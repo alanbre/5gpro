@@ -98,6 +98,7 @@
             // 
             // panelSuperior
             // 
+            this.panelSuperior.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.panelSuperior.Controls.Add(this.btExpandeRetrai);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(250, 0);
@@ -107,6 +108,7 @@
             // 
             // panelCentral
             // 
+            this.panelCentral.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.panelCentral.Controls.Add(this.paneldentroRltSaida);
             this.panelCentral.Controls.Add(this.paneldropOrcamento);
             this.panelCentral.Controls.Add(this.paneldropSaida);
