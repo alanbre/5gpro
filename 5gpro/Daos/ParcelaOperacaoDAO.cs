@@ -13,8 +13,5 @@ namespace _5gpro.Daos
 
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
-
-
-
     }
 }

@@ -98,7 +98,8 @@ namespace _5gpro.Forms
             }
             else
             {
-                new Limpar().limparTudo(this.Controls);
+                tbCodigo.Clear();
+                tbNomeUsuario.Clear();
             }
         }
 
@@ -121,7 +122,7 @@ namespace _5gpro.Forms
             }
             else
             {
-                tbNomeUsuario.Text = "";
+                tbNomeUsuario.Clear();
             }
         }
 

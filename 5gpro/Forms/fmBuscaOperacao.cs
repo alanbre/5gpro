@@ -49,7 +49,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvOperacao.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvOperacao.Rows[selectedRowIndex];
-            operacaoSelecionada = operacaoDAO.BuscaByID((int) selectedRow.Cells[0].Value);
+            operacaoSelecionada = operacaoDAO.BuscaByID(int.Parse(selectedRow.Cells[0].Value.ToString()));
             this.Close();
         }
 

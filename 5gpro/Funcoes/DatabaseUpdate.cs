@@ -45,7 +45,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema 5gprodatabase
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `5gprodatabase` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
 USE `5gprodatabase` ;
 
 -- -----------------------------------------------------
@@ -57,7 +57,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pais` (
   `sigla` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idpais`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -74,7 +75,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`estado` (
     FOREIGN KEY (`idpais`)
     REFERENCES `5gprodatabase`.`pais` (`idpais`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -90,7 +92,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`cidade` (
     FOREIGN KEY (`idestado`)
     REFERENCES `5gprodatabase`.`estado` (`idestado`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -115,19 +118,21 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupo_usuario` (
   `nome` VARCHAR(60) NULL DEFAULT NULL,
   PRIMARY KEY (`idgrupousuario`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`unimedida`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`unimedida` (
-  `idunimedida` INT(11) NOT NULL,
+  `idunimedida` INT(11) NOT NULL AUTO_INCREMENT,
   `sigla` VARCHAR(45) NULL DEFAULT NULL,
   `descricao` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`idunimedida`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -135,19 +140,16 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupoitem` (
   `idgrupoitem` INT NOT NULL,
-  `nome` VARCHAR(150) NOT NULL,
+  `Nome` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idgrupoitem`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8
-COLLATE = utf8_czech_ci;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`subgrupoitem`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupoitem` (
-  `idsubgrupoitem` INT NOT NULL AUTO_INCREMENT,
-  `codigo` INT NOT NULL,
+  `idsubgrupoitem` INT NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupoitem` INT NOT NULL,
   PRIMARY KEY (`idsubgrupoitem`),
@@ -157,8 +159,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupoitem` (
     REFERENCES `5gprodatabase`.`grupoitem` (`idgrupoitem`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -188,7 +189,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -198,8 +200,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupopessoa` (
   `idgrupopessoa` INT NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idgrupopessoa`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -216,8 +217,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
     REFERENCES `5gprodatabase`.`grupopessoa` (`idgrupopessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -253,7 +253,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`pessoa` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -275,7 +276,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
     FOREIGN KEY (`idpessoa`)
     REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -299,7 +301,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal_has_item` (
     FOREIGN KEY (`idnotafiscal`)
     REFERENCES `5gprodatabase`.`notafiscal` (`idnotafiscal`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -354,7 +357,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`orcamento_has_item` (
     FOREIGN KEY (`idorcamento`)
     REFERENCES `5gprodatabase`.`orcamento` (`idorcamento`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -367,7 +371,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao` (
   PRIMARY KEY (`idpermissao`),
   UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -387,7 +392,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`permissao_has_grupo_usuario` (
     FOREIGN KEY (`idpermissao`)
     REFERENCES `5gprodatabase`.`permissao` (`idpermissao`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -407,7 +413,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`usuario` (
     FOREIGN KEY (`idgrupousuario`)
     REFERENCES `5gprodatabase`.`grupo_usuario` (`idgrupousuario`))
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+DEFAULT CHARACTER SET = utf8mb4
+COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -426,8 +433,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`logado` (
     REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -438,12 +444,11 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`operacao` (
   `nome` VARCHAR(45) NOT NULL,
   `descricao` VARCHAR(100) NULL,
   `condicao` VARCHAR(45) NULL,
-  `desconto` DECIMAL NULL,
-  `entrada` DECIMAL NULL,
-  `acrescimo` DECIMAL NULL,
+  `desconto` DECIMAL(10,2) NULL,
+  `entrada` DECIMAL(10,2) NULL,
+  `acrescimo` DECIMAL(10,2) NULL,
   PRIMARY KEY (`idoperacao`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -461,8 +466,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcelaoperacao` (
     REFERENCES `5gprodatabase`.`operacao` (`idoperacao`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -480,8 +484,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lock` (
     REFERENCES `5gprodatabase`.`logado` (`idusuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -491,8 +494,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`formapagamento` (
   `idformapagamento` INT NOT NULL,
   `nome` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`idformapagamento`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -524,8 +526,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
     REFERENCES `5gprodatabase`.`pessoa` (`idpessoa`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -558,8 +559,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
     REFERENCES `5gprodatabase`.`formapagamento` (`idformapagamento`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -636,8 +636,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`registro_estoque` (
     REFERENCES `5gprodatabase`.`item` (`iditem`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -692,7 +691,8 @@ ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;";
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+";
             return create;
         }
     }
