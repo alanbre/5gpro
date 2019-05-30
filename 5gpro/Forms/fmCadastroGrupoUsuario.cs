@@ -430,6 +430,7 @@ namespace _5gpro.Forms
             if (cod) { tbCodGrupoUsuario.Clear(); }
             tbNomeGrupoUsuario.Clear();
             tbAjuda.Clear();
+            listapermissoes = permissaoDAO.BuscaTodasPermissoes().Todas;
         }
         private void Recarrega()
         {

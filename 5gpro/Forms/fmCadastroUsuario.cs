@@ -161,6 +161,7 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
+            var controls = (ControlCollection)this.Controls;
             if (!editando)
             {
                 return;
@@ -189,19 +190,20 @@ namespace _5gpro.Forms
                 }
                 ok = false;
             }
+            else
+            {
+                usuario = new Usuario();
+                usuario.Senha = tbSenhaUsuario.Text;
+                usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
+                usuario.Grupousuario = buscaGrupoUsuario.grupoUsuario;
+                usuario.Nome = tbNomeUsuario.Text;
+                usuario.Sobrenome = tbSobrenomeUsuario.Text;
+                usuario.Email = tbEmailUsuario.Text;
+                usuario.Telefone = mtbTelefoneUsuario.Text;
 
-            usuario = new Usuario();
-            usuario.Senha = tbSenhaUsuario.Text;
-            usuario.UsuarioID = int.Parse(tbCodigoUsuario.Text);
-            usuario.Grupousuario = buscaGrupoUsuario.grupoUsuario;
-            usuario.Nome = tbNomeUsuario.Text;
-            usuario.Sobrenome = tbSobrenomeUsuario.Text;
-            usuario.Email = tbEmailUsuario.Text;
-            usuario.Telefone = mtbTelefoneUsuario.Text;
 
-
-            var controls = (ControlCollection)this.Controls;
-            ok = validacao.ValidarEntidade(usuario, controls);
+                ok = validacao.ValidarEntidade(usuario, controls);
+            }
 
             if (ok)
             {
@@ -328,6 +330,7 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
             int codigo = 0;
             if (!int.TryParse(tbCodigoUsuario.Text, out codigo)) { tbCodigoUsuario.Clear(); }
             if (usuario?.UsuarioID == codigo)
@@ -352,7 +355,7 @@ namespace _5gpro.Forms
                 return;
             }
 
-
+            validacao.despintarCampos(controls);
 
             var newUsuario = usuarioDAO.BuscaByID(int.Parse(tbCodigoUsuario.Text));
             if (newUsuario != null)

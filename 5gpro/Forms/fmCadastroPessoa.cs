@@ -374,6 +374,8 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
+
             int c;
             if (!int.TryParse(tbCodigo.Text, out c))
             {

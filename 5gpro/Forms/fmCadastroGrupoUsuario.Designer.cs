@@ -110,9 +110,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dgvPermissoes);
-            this.groupBox2.Location = new System.Drawing.Point(74, 309);
+            this.groupBox2.Location = new System.Drawing.Point(326, 122);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(747, 235);
+            this.groupBox2.Size = new System.Drawing.Size(505, 422);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Permissões";
@@ -132,13 +132,13 @@
             this.dgvtbcNomePermissoes,
             this.dgvtbcNivelPermissoes});
             this.dgvPermissoes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvPermissoes.Location = new System.Drawing.Point(7, 18);
+            this.dgvPermissoes.Location = new System.Drawing.Point(6, 28);
             this.dgvPermissoes.MultiSelect = false;
             this.dgvPermissoes.Name = "dgvPermissoes";
             this.dgvPermissoes.ReadOnly = true;
             this.dgvPermissoes.RowHeadersVisible = false;
             this.dgvPermissoes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPermissoes.Size = new System.Drawing.Size(734, 211);
+            this.dgvPermissoes.Size = new System.Drawing.Size(489, 388);
             this.dgvPermissoes.TabIndex = 0;
             this.dgvPermissoes.TabStop = false;
             this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPermissoes_CellDoubleClick);
@@ -181,13 +181,13 @@
             this.dgvtbcNomeModulos,
             this.dgvtbcNivelModulos});
             this.dgvModulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvModulos.Location = new System.Drawing.Point(6, 19);
+            this.dgvModulos.Location = new System.Drawing.Point(7, 28);
             this.dgvModulos.MultiSelect = false;
             this.dgvModulos.Name = "dgvModulos";
             this.dgvModulos.ReadOnly = true;
             this.dgvModulos.RowHeadersVisible = false;
             this.dgvModulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvModulos.Size = new System.Drawing.Size(736, 173);
+            this.dgvModulos.Size = new System.Drawing.Size(233, 388);
             this.dgvModulos.TabIndex = 0;
             this.dgvModulos.TabStop = false;
             this.dgvModulos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellClick);
@@ -223,9 +223,9 @@
             // gbModulos
             // 
             this.gbModulos.Controls.Add(this.dgvModulos);
-            this.gbModulos.Location = new System.Drawing.Point(74, 111);
+            this.gbModulos.Location = new System.Drawing.Point(74, 122);
             this.gbModulos.Name = "gbModulos";
-            this.gbModulos.Size = new System.Drawing.Size(747, 198);
+            this.gbModulos.Size = new System.Drawing.Size(246, 422);
             this.gbModulos.TabIndex = 6;
             this.gbModulos.TabStop = false;
             this.gbModulos.Text = "Módulos";
@@ -259,7 +259,7 @@
             this.gbIndice.Controls.Add(this.label3);
             this.gbIndice.Controls.Add(this.label2);
             this.gbIndice.Controls.Add(this.label1);
-            this.gbIndice.Location = new System.Drawing.Point(478, 12);
+            this.gbIndice.Location = new System.Drawing.Point(478, 9);
             this.gbIndice.Name = "gbIndice";
             this.gbIndice.Size = new System.Drawing.Size(253, 104);
             this.gbIndice.TabIndex = 9;
@@ -316,6 +316,7 @@
             this.Controls.Add(this.gbGrupoDeUsuario);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(850, 618);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "fmCadastroGrupoUsuario";

@@ -111,7 +111,7 @@ namespace _5gpro.Funcoes
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
 
-                        if (ctrlgb is Controls.BuscaSubGrupoItem || ctrlgb is Controls.BuscaUnimedida)
+                        if (ctrlgb is Controls.BuscaSubGrupoItem || ctrlgb is Controls.BuscaUnimedida || ctrlgb is Controls.BuscaGrupoUsuario)
                         {
                             //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlgb.BackColor = System.Drawing.Color.White;
@@ -142,7 +142,7 @@ namespace _5gpro.Funcoes
                             //ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlp.BackColor = System.Drawing.Color.White;
                         }
-                        if (ctrlp is Controls.BuscaCidade || ctrlp is Controls.BuscaSubGrupoPessoa)
+                        if (ctrlp is Controls.BuscaCidade || ctrlp is Controls.BuscaSubGrupoPessoa || ctrlp is Controls.BuscaGrupoUsuario)
                         {
                             //ctrlp.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlp.BackColor = System.Drawing.Color.White;
