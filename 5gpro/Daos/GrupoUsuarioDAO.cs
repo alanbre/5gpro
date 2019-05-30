@@ -19,6 +19,10 @@ namespace _5gpro.Daos
                 sql.Query = "SELECT * FROM grupo_usuario WHERE idgrupousuario = @idgrupousuario LIMIT 1";
                 sql.addParam("@idgrupousuario", Codigo);
                 var data = sql.selectQueryForSingleRecord();
+                if(data == null)
+                {
+                    return null;
+                }
                 grupoUsuario = LeDadosReader(data);
             }
 
@@ -30,11 +34,11 @@ namespace _5gpro.Daos
             string conNome = nome.Length > 0 ? "AND nome LIKE @nome" : "";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT *
+                sql.Query = $@"SELECT *
                             FROM grupo_usuario
-                            WHERE 1=1"
-                            + conNome +
-                            @" ORDER BY nome";
+                            WHERE 1=1
+                            {conNome}
+                            ORDER BY nome";
                 if (conNome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
                 var data = sql.selectQuery();
                 foreach (var d in data)
@@ -118,6 +122,10 @@ namespace _5gpro.Daos
                 sql.Query = "SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT min(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario > @idgrupousuario) LIMIT 1";
                 sql.addParam("@idgrupousuario", Codigo);
                 var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
                 grupoUsuario = LeDadosReader(data);
             }
 
@@ -131,6 +139,10 @@ namespace _5gpro.Daos
                 sql.Query = "SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT max(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario < @idgrupousuario) LIMIT 1";
                 sql.addParam("@idgrupousuario", Codigo);
                 var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
                 grupoUsuario = LeDadosReader(data);
             }
             return grupoUsuario;

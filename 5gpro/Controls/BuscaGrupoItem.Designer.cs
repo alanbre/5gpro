@@ -81,6 +81,7 @@
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(22, 22);
             this.btAdd.TabIndex = 4;
+            this.btAdd.TabStop = false;
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
             // 

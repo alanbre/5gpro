@@ -25,6 +25,7 @@ namespace _5gpro.Forms
 
         bool editando = false;
         bool ignoraCheckEvent;
+        int codigo = 0;
 
         public fmCadastroPessoa()
         {
@@ -130,7 +131,6 @@ namespace _5gpro.Forms
             }
         }
         private void CblAtuacao_ItemCheck(object sender, ItemCheckEventArgs e) => Editando(true);
-
         private void BuscaGrupoPessoa_Leave(object sender, EventArgs e)
         {
             buscaSubGrupoPessoa.EnviarGrupo(buscaGrupoPessoa.grupoPessoa);
@@ -157,7 +157,8 @@ namespace _5gpro.Forms
             {
                 ignoraCheckEvent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
+                codigo = pessoaDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = codigo.ToString();
                 pessoa = null;
                 tbNome.Focus();
                 ignoraCheckEvent = false;
@@ -304,6 +305,7 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = true;
                 LimpaCampos(true);
                 ignoraCheckEvent = false;
+                Editando(false);
             }
         }
         private void Anterior()
@@ -330,6 +332,7 @@ namespace _5gpro.Forms
             if (newpessoa != null)
             {
                 pessoa = newpessoa;
+                codigo = pessoa.PessoaID;
                 PreencheCampos(pessoa);
                 if (editando)
                 {
@@ -361,6 +364,7 @@ namespace _5gpro.Forms
             if (newpessoa != null)
             {
                 pessoa = newpessoa;
+                codigo = pessoa.PessoaID;
                 PreencheCampos(pessoa);
                 if (editando)
                 {
@@ -370,23 +374,33 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
-            var controls = (ControlCollection)this.Controls;
-            int codigo = 0;
-            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
+            int c;
+            if (!int.TryParse(tbCodigo.Text, out c))
+            {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
             if (pessoa?.PessoaID == codigo)
             {
                 return;
             }
 
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    return;
-                }
-            }
+
 
             if (tbCodigo.Text.Length == 0)
             {
@@ -453,8 +467,6 @@ namespace _5gpro.Forms
             buscaGrupoPessoa.Limpa();
             buscaSubGrupoPessoa.Limpa();
         }
-
-
         private void PreencheCampos(Pessoa pessoa)
         {
             if (pessoa != null)

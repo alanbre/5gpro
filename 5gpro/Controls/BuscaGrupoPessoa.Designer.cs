@@ -52,6 +52,7 @@
             this.tbNomeGrupoPessoa.ReadOnly = true;
             this.tbNomeGrupoPessoa.Size = new System.Drawing.Size(346, 20);
             this.tbNomeGrupoPessoa.TabIndex = 3;
+            this.tbNomeGrupoPessoa.TabStop = false;
             // 
             // btBuscaGrupoPessoa
             // 
@@ -60,6 +61,7 @@
             this.btBuscaGrupoPessoa.Name = "btBuscaGrupoPessoa";
             this.btBuscaGrupoPessoa.Size = new System.Drawing.Size(22, 22);
             this.btBuscaGrupoPessoa.TabIndex = 2;
+            this.btBuscaGrupoPessoa.TabStop = false;
             this.btBuscaGrupoPessoa.UseVisualStyleBackColor = true;
             this.btBuscaGrupoPessoa.Click += new System.EventHandler(this.BtBuscaGrupoPessoa_Click);
             // 
@@ -79,6 +81,7 @@
             this.btAdd.Name = "btAdd";
             this.btAdd.Size = new System.Drawing.Size(22, 22);
             this.btAdd.TabIndex = 4;
+            this.btAdd.TabStop = false;
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.BtAdd_Click);
             // 

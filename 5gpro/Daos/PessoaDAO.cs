@@ -263,7 +263,7 @@ namespace _5gpro.Daos
             List<Pessoa> pessoas = new List<Pessoa>();
             string conCodPessoa = nome.Length > 0 ? "AND p.nome LIKE @nome" : "";
             string conCpfCnpj = cpfCnpj.Length > 0 ? "AND (cpf LIKE @cpfcnpj OR cnpj LIKE @cpfcnpj)" : "";
-            string conCidade = idcidade > 0 ? "AND idcidade = @idcidade" : "";
+            string conCidade = idcidade > 0 ? "AND c.idcidade = @idcidade" : "";
 
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
@@ -280,7 +280,7 @@ namespace _5gpro.Daos
                                              " + conCodPessoa + @"
                                              " + conCpfCnpj + @"
                                              " + conCidade + @"
-                                             ORDER BY idpessoa";
+                                             ORDER BY p.idpessoa";
                 if (conCodPessoa.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
                 if (conCpfCnpj.Length > 0) { sql.addParam("@cpfcnpj", "%" + cpfCnpj + "%"); }
                 if (conCidade.Length > 0) { sql.addParam("@idcidade", idcidade); }

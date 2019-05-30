@@ -87,7 +87,6 @@
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
             this.tbCodGrupoUsuario.Size = new System.Drawing.Size(103, 20);
             this.tbCodGrupoUsuario.TabIndex = 2;
-            this.tbCodGrupoUsuario.TextChanged += new System.EventHandler(this.TbCodGrupoUsuario_TextChanged);
             this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.TbCodGrupoUsuario_Leave);
             // 
             // lbNomeGrupoUsuario
@@ -250,6 +249,7 @@
             this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
             this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
             this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 

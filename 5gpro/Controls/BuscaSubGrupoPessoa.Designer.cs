@@ -60,6 +60,7 @@
             this.tbNomeSubGrupoPessoa.ReadOnly = true;
             this.tbNomeSubGrupoPessoa.Size = new System.Drawing.Size(346, 20);
             this.tbNomeSubGrupoPessoa.TabIndex = 3;
+            this.tbNomeSubGrupoPessoa.TabStop = false;
             this.tbNomeSubGrupoPessoa.Text = "Escolha o Grupo";
             // 
             // btBuscaSubGrupoPessoa
@@ -69,6 +70,7 @@
             this.btBuscaSubGrupoPessoa.Name = "btBuscaSubGrupoPessoa";
             this.btBuscaSubGrupoPessoa.Size = new System.Drawing.Size(22, 22);
             this.btBuscaSubGrupoPessoa.TabIndex = 2;
+            this.btBuscaSubGrupoPessoa.TabStop = false;
             this.btBuscaSubGrupoPessoa.UseVisualStyleBackColor = true;
             this.btBuscaSubGrupoPessoa.Click += new System.EventHandler(this.BtBuscaSubGrupoPessoa_Click);
             // 

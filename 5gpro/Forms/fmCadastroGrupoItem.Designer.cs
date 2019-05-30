@@ -202,7 +202,7 @@
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(75, 23);
             this.btSalvar.TabIndex = 5;
-            this.btSalvar.Text = "Salvar";
+            this.btSalvar.Text = "Inserir";
             this.btSalvar.UseVisualStyleBackColor = true;
             this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
             // 
