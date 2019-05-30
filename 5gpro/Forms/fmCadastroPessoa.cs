@@ -206,73 +206,72 @@ namespace _5gpro.Forms
                 tbCodigo.Text = pessoaDAO.BuscaProxCodigoDisponivel().ToString();
                 ok = false;
             }
+
+            pessoa = new Pessoa();
+            pessoa.PessoaID = int.Parse(tbCodigo.Text);
+            pessoa.Nome = tbNome.Text;
+            pessoa.Fantasia = tbFantasia.Text;
+            pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+            pessoa.Rua = tbRua.Text;
+            pessoa.Numero = tbNumero.Text;
+            pessoa.Bairro = tbBairro.Text;
+            pessoa.Complemento = tbComplemento.Text;
+            pessoa.Cidade = buscaCidade.cidade;
+            pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+            pessoa.Telefone = mtbTelefone.TextNoMask();
+            pessoa.Email = tbEmail.Text;
+            var atuacaostring = "";
+            foreach (var s in cblAtuacao.CheckedItems)
+            {
+                switch (s)
+                {
+                    case "Cliente":
+                        atuacaostring += "C";
+                        break;
+                    case "Fornecedor":
+                        atuacaostring += "F";
+                        break;
+                }
+            }
+            pessoa.Atuacao = atuacaostring;
+
+            if (rbAtivo.Checked)
+                pessoa.Situacao = "A";
             else
+                pessoa.Situacao = "I";
+
+            pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
+
+            var controls = (ControlCollection)this.Controls;
+
+            ok = validacao.ValidarEntidade(pessoa, controls);
+            if (!ok)
             {
-
-                pessoa = new Pessoa();
-                pessoa.PessoaID = int.Parse(tbCodigo.Text);
-                pessoa.Nome = tbNome.Text;
-                pessoa.Fantasia = tbFantasia.Text;
-                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-                pessoa.Rua = tbRua.Text;
-                pessoa.Numero = tbNumero.Text;
-                pessoa.Bairro = tbBairro.Text;
-                pessoa.Complemento = tbComplemento.Text;
-                pessoa.Cidade = buscaCidade.cidade;
-                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-                pessoa.Telefone = mtbTelefone.TextNoMask();
-                pessoa.Email = tbEmail.Text;
-                var atuacaostring = "";
-                foreach (var s in cblAtuacao.CheckedItems)
-                {
-                    switch (s)
-                    {
-                        case "Cliente":
-                            atuacaostring += "C";
-                            break;
-                        case "Fornecedor":
-                            atuacaostring += "F";
-                            break;
-                    }
-                }
-                pessoa.Atuacao = atuacaostring;
-
-                if (rbAtivo.Checked)
-                    pessoa.Situacao = "A";
-                else
-                    pessoa.Situacao = "I";
-
-                pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
-
-                var controls = (ControlCollection)this.Controls;
-
-                ok = validacao.ValidarEntidade(pessoa, controls);
+                return;
             }
-            if (ok)
+
+            validacao.despintarCampos(controls);
+            int resultado = pessoaDAO.SalvaOuAtualiza(pessoa);
+            if (resultado == 0)
             {
-                var controls = (ControlCollection)this.Controls;
-                validacao.despintarCampos(controls);
-                int resultado = pessoaDAO.SalvaOuAtualiza(pessoa);
-                if (resultado == 0)
-                {
-                    MessageBox.Show("Problema ao salvar o registro",
-                    "Problema ao salvar",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                }
-                else if (resultado == 1)
-                {
-                    tbAjuda.Text = "Dados salvos com sucesso";
-                    Editando(false);
-                    return;
-                }
-                else if (resultado == 2)
-                {
-                    tbAjuda.Text = "Dados atualizados com sucesso";
-                    Editando(false);
-                    return;
-                }
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
             }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                Editando(false);
+                return;
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+                return;
+            }
+
         }
         private void Recarrega()
         {
