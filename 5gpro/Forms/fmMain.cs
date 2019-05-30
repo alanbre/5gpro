@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace _5gpro
 {
@@ -727,6 +728,8 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             RelatorioSaidaHidden = false;
+                            Image imgleft = Properties.Resources.left_18px;
+                            btiRltNotaSaida.Image = imgleft;
                             paneldentroRltSaida.BringToFront();
                         }
                     }
@@ -737,6 +740,8 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             RelatorioSaidaHidden = true;
+                            Image imgright = Properties.Resources.right_18px;
+                            btiRltNotaSaida.Image = imgright;
                             btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
                         }
                     }

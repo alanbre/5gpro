@@ -306,6 +306,8 @@
             this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
+            this.btiRltNotaSaida.Image = global::_5gpro.Properties.Resources.right_18px;
+            this.btiRltNotaSaida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
             this.btiRltNotaSaida.Name = "btiRltNotaSaida";
             this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);

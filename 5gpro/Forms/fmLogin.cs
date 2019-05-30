@@ -124,5 +124,10 @@ namespace _5gpro.Forms
                 tbNomeUsuario.Text = "";
             }
         }
+
+        private void TbSenha_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
