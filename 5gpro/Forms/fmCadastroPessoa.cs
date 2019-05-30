@@ -166,7 +166,7 @@ namespace _5gpro.Forms
         }
         private void Busca()
         {
-            if(CodGrupoUsuario != "999" && Nivel <= 0)
+            if (CodGrupoUsuario != "999" && Nivel <= 0)
             {
                 return;
             }
@@ -204,47 +204,51 @@ namespace _5gpro.Forms
                 }
                 ok = false;
             }
-
-            pessoa = new Pessoa();
-            pessoa.PessoaID = int.Parse(tbCodigo.Text);
-            pessoa.Nome = tbNome.Text;
-            pessoa.Fantasia = tbFantasia.Text;
-            pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
-            pessoa.Rua = tbRua.Text;
-            pessoa.Numero = tbNumero.Text;
-            pessoa.Bairro = tbBairro.Text;
-            pessoa.Complemento = tbComplemento.Text;
-            pessoa.Cidade = buscaCidade.cidade;
-            pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
-            pessoa.Telefone = mtbTelefone.TextNoMask();
-            pessoa.Email = tbEmail.Text;
-            var atuacaostring = "";
-            foreach (var s in cblAtuacao.CheckedItems)
-            {
-                switch (s)
-                {
-                    case "Cliente":
-                        atuacaostring += "C";
-                        break;
-                    case "Fornecedor":
-                        atuacaostring += "F";
-                        break;
-                }
-            }
-            pessoa.Atuacao = atuacaostring;
-
-            if (rbAtivo.Checked)
-                pessoa.Situacao = "A";
             else
-                pessoa.Situacao = "I";
+            {
 
-            pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
+                pessoa = new Pessoa();
+                pessoa.PessoaID = int.Parse(tbCodigo.Text);
+                pessoa.Nome = tbNome.Text;
+                pessoa.Fantasia = tbFantasia.Text;
+                pessoa.TipoPessoa = rbPessoaFisica.Checked ? "F" : "J";
+                pessoa.Rua = tbRua.Text;
+                pessoa.Numero = tbNumero.Text;
+                pessoa.Bairro = tbBairro.Text;
+                pessoa.Complemento = tbComplemento.Text;
+                pessoa.Cidade = buscaCidade.cidade;
+                pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
+                pessoa.Telefone = mtbTelefone.TextNoMask();
+                pessoa.Email = tbEmail.Text;
+                var atuacaostring = "";
+                foreach (var s in cblAtuacao.CheckedItems)
+                {
+                    switch (s)
+                    {
+                        case "Cliente":
+                            atuacaostring += "C";
+                            break;
+                        case "Fornecedor":
+                            atuacaostring += "F";
+                            break;
+                    }
+                }
+                pessoa.Atuacao = atuacaostring;
 
-            var controls = (ControlCollection)this.Controls;
+                if (rbAtivo.Checked)
+                    pessoa.Situacao = "A";
+                else
+                    pessoa.Situacao = "I";
 
-            ok = validacao.ValidarEntidade(pessoa, controls);
+                pessoa.SubGrupoPessoa = buscaSubGrupoPessoa.subgrupoPessoa;
+
+                var controls = (ControlCollection)this.Controls;
+
+                ok = validacao.ValidarEntidade(pessoa, controls);
+            }
             if (ok)
             {
+                var controls = (ControlCollection)this.Controls;
                 validacao.despintarCampos(controls);
                 int resultado = pessoaDAO.SalvaOuAtualiza(pessoa);
                 if (resultado == 0)
@@ -366,6 +370,7 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
             int codigo = 0;
             if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
             if (pessoa?.PessoaID == codigo)
@@ -395,12 +400,14 @@ namespace _5gpro.Forms
             var newpessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newpessoa != null)
             {
+                validacao.despintarCampos(controls);
                 pessoa = newpessoa;
                 PreencheCampos(pessoa);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
@@ -450,61 +457,63 @@ namespace _5gpro.Forms
 
         private void PreencheCampos(Pessoa pessoa)
         {
-            ignoraCheckEvent = true;
-            LimpaCampos(false);
-            tbCodigo.Text = pessoa.PessoaID.ToString();
-            tbNome.Text = pessoa.Nome;
-            tbFantasia.Text = pessoa.Fantasia;
-            if (pessoa.TipoPessoa == "F")
+            if (pessoa != null)
             {
-                rbPessoaFisica.Checked = true;
-                rbPessoaJuridica.Checked = false;
-            }
-            else
-            {
-                rbPessoaFisica.Checked = false;
-                rbPessoaJuridica.Checked = true;
-            }
-            tbRua.Text = pessoa.Rua;
-            tbNumero.Text = pessoa.Numero;
-            tbBairro.Text = pessoa.Bairro;
-            tbComplemento.Text = pessoa.Complemento;
-            mtbCpfCnpj.Text = pessoa.CpfCnpj;
-            mtbTelefone.Text = pessoa.Telefone;
-            tbEmail.Text = pessoa.Email;
+                ignoraCheckEvent = true;
+                LimpaCampos(false);
+                tbCodigo.Text = pessoa.PessoaID.ToString();
+                tbNome.Text = pessoa.Nome;
+                tbFantasia.Text = pessoa.Fantasia;
+                if (pessoa.TipoPessoa == "F")
+                {
+                    rbPessoaFisica.Checked = true;
+                    rbPessoaJuridica.Checked = false;
+                }
+                else
+                {
+                    rbPessoaFisica.Checked = false;
+                    rbPessoaJuridica.Checked = true;
+                }
+                tbRua.Text = pessoa.Rua;
+                tbNumero.Text = pessoa.Numero;
+                tbBairro.Text = pessoa.Bairro;
+                tbComplemento.Text = pessoa.Complemento;
+                mtbCpfCnpj.Text = pessoa.CpfCnpj;
+                mtbTelefone.Text = pessoa.Telefone;
+                tbEmail.Text = pessoa.Email;
 
-            buscaCidade.PreencheCampos(pessoa.Cidade);
+                buscaCidade.PreencheCampos(pessoa.Cidade);
 
 
-            switch (pessoa.Atuacao)
-            {
-                case "CF":
-                    cblAtuacao.SetItemChecked(0, true);
-                    cblAtuacao.SetItemChecked(1, true);
-                    break;
-                case "C":
-                    cblAtuacao.SetItemChecked(0, true);
-                    break;
-                case "F":
-                    cblAtuacao.SetItemChecked(1, true);
-                    break;
+                switch (pessoa.Atuacao)
+                {
+                    case "CF":
+                        cblAtuacao.SetItemChecked(0, true);
+                        cblAtuacao.SetItemChecked(1, true);
+                        break;
+                    case "C":
+                        cblAtuacao.SetItemChecked(0, true);
+                        break;
+                    case "F":
+                        cblAtuacao.SetItemChecked(1, true);
+                        break;
+                }
+                switch (pessoa.Situacao)
+                {
+                    case "A":
+                        rbAtivo.Checked = true;
+                        rbInativo.Checked = false;
+                        break;
+                    case "I":
+                        rbAtivo.Checked = false;
+                        rbInativo.Checked = true;
+                        break;
+                }
+                buscaGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa.GrupoPessoa);
+                buscaSubGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa);
+
+                ignoraCheckEvent = false;
             }
-            switch (pessoa.Situacao)
-            {
-                case "A":
-                    rbAtivo.Checked = true;
-                    rbInativo.Checked = false;
-                    break;
-                case "I":
-                    rbAtivo.Checked = false;
-                    rbInativo.Checked = true;
-                    break;
-            }
-            buscaGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa.GrupoPessoa);
-            buscaSubGrupoPessoa.PreencheCampos(pessoa.SubGrupoPessoa);
-
-            ignoraCheckEvent = false;
         }
-
     }
 }
