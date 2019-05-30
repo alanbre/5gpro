@@ -37,11 +37,11 @@
             this.btSair = new System.Windows.Forms.Button();
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,7 +64,7 @@
             // 
             this.tbNomeUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.tbNomeUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbNomeUsuario.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbNomeUsuario.Font = new System.Drawing.Font("Century Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeUsuario.ForeColor = System.Drawing.Color.White;
             this.tbNomeUsuario.Location = new System.Drawing.Point(12, 44);
             this.tbNomeUsuario.Name = "tbNomeUsuario";
@@ -175,6 +175,22 @@
             this.panel2.Size = new System.Drawing.Size(395, 254);
             this.panel2.TabIndex = 9;
             // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panel6.Location = new System.Drawing.Point(63, 238);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(332, 10);
+            this.panel6.TabIndex = 11;
+            // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panel5.Location = new System.Drawing.Point(0, 103);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(54, 145);
+            this.panel5.TabIndex = 10;
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Black;
@@ -200,22 +216,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(395, 67);
             this.panel1.TabIndex = 10;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.panel5.Location = new System.Drawing.Point(0, 103);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(54, 145);
-            this.panel5.TabIndex = 10;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.panel6.Location = new System.Drawing.Point(63, 238);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(332, 10);
-            this.panel6.TabIndex = 11;
             // 
             // fmLogin
             // 

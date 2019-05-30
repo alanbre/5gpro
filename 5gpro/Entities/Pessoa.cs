@@ -10,8 +10,6 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNome", AllowEmptyStrings = false)]
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "O Nome fantasia é obrigatório.|tbFantasia", AllowEmptyStrings = false)]
         public string Fantasia { get; set; }
 
         [Required(ErrorMessage = "Atuação obrigatória.|cblAtuacao", AllowEmptyStrings = false)]

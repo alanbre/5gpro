@@ -31,7 +31,9 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT p.idpermissao AS pid, p.nome AS pnome, p.codigo AS pcodigo, pg.nivel AS pgnivel
                             FROM permissao_has_grupo_usuario pg INNER JOIN permissao p 
                             ON pg.idpermissao = p.idpermissao 
-                            WHERE idgrupousuario = @idgrupousuario";
+                            WHERE idgrupousuario = @idgrupousuario
+                            ORDER BY codigo                            
+                            ";
 
                 sql.addParam("@idgrupousuario", cod);
 

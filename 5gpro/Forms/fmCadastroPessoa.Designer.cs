@@ -154,6 +154,7 @@
             // 
             this.cblAtuacao.BackColor = System.Drawing.Color.White;
             this.cblAtuacao.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cblAtuacao.CheckOnClick = true;
             this.cblAtuacao.FormattingEnabled = true;
             this.cblAtuacao.Items.AddRange(new object[] {
             "Cliente",

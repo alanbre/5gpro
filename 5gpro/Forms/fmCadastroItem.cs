@@ -222,6 +222,7 @@ namespace _5gpro.Forms
         }
         private void Recarrega()
         {
+            var controls = (ControlCollection)this.Controls;
             if (tbCodigo.Text.Length <= 0)
             {
                 return;
@@ -237,6 +238,8 @@ namespace _5gpro.Forms
                     return;
                 }
             }
+
+            validacao.despintarCampos(controls);
 
             if (item != null)
             {
@@ -316,6 +319,7 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
             int codigo = 0;
             if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
             if (item?.ItemID == codigo)
@@ -345,12 +349,14 @@ namespace _5gpro.Forms
             var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newItem != null)
             {
+                validacao.despintarCampos(controls);
                 item = newItem;
                 PreencheCampos(item);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
@@ -374,36 +380,39 @@ namespace _5gpro.Forms
         }
         private void PreencheCampos(Item item)
         {
-            ignoraCheckEvent = true;
-            LimpaCampos(false);
-            tbCodigo.Text = item.ItemID.ToString();
-            tbDescricao.Text = item.Descricao;
-            tbDescricaoDeCompra.Text = item.DescCompra;
-
-
-            if (item.TipoItem == "P")
+            if (item != null)
             {
-                rbProduto.Checked = true;
-                rbServico.Checked = false;
+                ignoraCheckEvent = true;
+                LimpaCampos(false);
+                tbCodigo.Text = item.ItemID.ToString();
+                tbDescricao.Text = item.Descricao;
+                tbDescricaoDeCompra.Text = item.DescCompra;
+
+
+                if (item.TipoItem == "P")
+                {
+                    rbProduto.Checked = true;
+                    rbServico.Checked = false;
+                }
+                else
+                {
+                    rbProduto.Checked = false;
+                    rbServico.Checked = true;
+                }
+
+                tbReferencia.Text = item.Referencia;
+                dbPrecoUltimaEntrada.Valor = item.ValorEntrada;
+                dbEstoqueNecessario.Valor = item.Estoquenecessario;
+                dbPrecoVenda.Valor = item.ValorSaida;
+                dbQuantidade.Valor = item.Quantidade;
+
+                buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
+                buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
+                buscaUnimedidaItem.PreencheCampos(item.Unimedida);
+
+
+                ignoraCheckEvent = false;
             }
-            else
-            {
-                rbProduto.Checked = false;
-                rbServico.Checked = true;
-            }
-
-            tbReferencia.Text = item.Referencia;
-            dbPrecoUltimaEntrada.Valor = item.ValorEntrada;
-            dbEstoqueNecessario.Valor = item.Estoquenecessario;
-            dbPrecoVenda.Valor = item.ValorSaida;
-            dbQuantidade.Valor = item.Quantidade;
-
-            buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
-            buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
-            buscaUnimedidaItem.PreencheCampos(item.Unimedida);
-
-
-            ignoraCheckEvent = false;
         }
         private void Editando(bool edit)
         {

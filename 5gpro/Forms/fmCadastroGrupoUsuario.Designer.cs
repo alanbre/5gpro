@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGrupoDeUsuario = new System.Windows.Forms.GroupBox();
             this.tbNomeGrupoUsuario = new System.Windows.Forms.TextBox();
             this.tbCodGrupoUsuario = new System.Windows.Forms.TextBox();
@@ -51,7 +51,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbNaoVisualiza = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.gbGrupoDeUsuario.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPermissoes)).BeginInit();
@@ -109,14 +109,10 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.dgvPermissoes);
-            this.groupBox2.Location = new System.Drawing.Point(74, 309);
-            this.groupBox2.MinimumSize = new System.Drawing.Size(747, 235);
+            this.groupBox2.Location = new System.Drawing.Point(326, 122);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(747, 235);
+            this.groupBox2.Size = new System.Drawing.Size(505, 422);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Permissões";
@@ -127,23 +123,22 @@
             this.dgvPermissoes.AllowUserToDeleteRows = false;
             this.dgvPermissoes.AllowUserToResizeColumns = false;
             this.dgvPermissoes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPermissoes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPermissoes.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvPermissoes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPermissoes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigoPermissoes,
             this.dgvtbcNomePermissoes,
             this.dgvtbcNivelPermissoes});
-            this.dgvPermissoes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPermissoes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvPermissoes.Location = new System.Drawing.Point(3, 16);
+            this.dgvPermissoes.Location = new System.Drawing.Point(6, 28);
             this.dgvPermissoes.MultiSelect = false;
             this.dgvPermissoes.Name = "dgvPermissoes";
             this.dgvPermissoes.ReadOnly = true;
             this.dgvPermissoes.RowHeadersVisible = false;
             this.dgvPermissoes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPermissoes.Size = new System.Drawing.Size(741, 216);
+            this.dgvPermissoes.Size = new System.Drawing.Size(489, 388);
             this.dgvPermissoes.TabIndex = 0;
             this.dgvPermissoes.TabStop = false;
             this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPermissoes_CellDoubleClick);
@@ -177,23 +172,22 @@
             this.dgvModulos.AllowUserToAddRows = false;
             this.dgvModulos.AllowUserToDeleteRows = false;
             this.dgvModulos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
-            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvModulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvModulos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvModulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvModulos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigoModulos,
             this.dgvtbcNomeModulos,
             this.dgvtbcNivelModulos});
-            this.dgvModulos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvModulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvModulos.Location = new System.Drawing.Point(3, 16);
+            this.dgvModulos.Location = new System.Drawing.Point(7, 28);
             this.dgvModulos.MultiSelect = false;
             this.dgvModulos.Name = "dgvModulos";
             this.dgvModulos.ReadOnly = true;
             this.dgvModulos.RowHeadersVisible = false;
             this.dgvModulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvModulos.Size = new System.Drawing.Size(741, 179);
+            this.dgvModulos.Size = new System.Drawing.Size(233, 388);
             this.dgvModulos.TabIndex = 0;
             this.dgvModulos.TabStop = false;
             this.dgvModulos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvModulos_CellClick);
@@ -228,25 +222,21 @@
             // 
             // gbModulos
             // 
-            this.gbModulos.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbModulos.Controls.Add(this.dgvModulos);
-            this.gbModulos.Location = new System.Drawing.Point(74, 111);
+            this.gbModulos.Location = new System.Drawing.Point(74, 122);
             this.gbModulos.Name = "gbModulos";
-            this.gbModulos.Size = new System.Drawing.Size(747, 198);
+            this.gbModulos.Size = new System.Drawing.Size(246, 422);
             this.gbModulos.TabIndex = 6;
             this.gbModulos.TabStop = false;
             this.gbModulos.Text = "Módulos";
             // 
             // tbAjuda
             // 
-            this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.Enabled = false;
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(74, 550);
+            this.tbAjuda.Location = new System.Drawing.Point(81, 550);
             this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(747, 20);
+            this.tbAjuda.Size = new System.Drawing.Size(741, 20);
             this.tbAjuda.TabIndex = 7;
             // 
             // menuVertical
@@ -268,10 +258,10 @@
             this.gbIndice.Controls.Add(this.label4);
             this.gbIndice.Controls.Add(this.label3);
             this.gbIndice.Controls.Add(this.label2);
-            this.gbIndice.Controls.Add(this.lbNaoVisualiza);
-            this.gbIndice.Location = new System.Drawing.Point(390, 12);
+            this.gbIndice.Controls.Add(this.label1);
+            this.gbIndice.Location = new System.Drawing.Point(478, 9);
             this.gbIndice.Name = "gbIndice";
-            this.gbIndice.Size = new System.Drawing.Size(182, 93);
+            this.gbIndice.Size = new System.Drawing.Size(253, 104);
             this.gbIndice.TabIndex = 9;
             this.gbIndice.TabStop = false;
             this.gbIndice.Text = "Índice";
@@ -279,7 +269,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 77);
+            this.label4.Location = new System.Drawing.Point(41, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(170, 13);
             this.label4.TabIndex = 3;
@@ -288,7 +278,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 55);
+            this.label3.Location = new System.Drawing.Point(41, 58);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 13);
             this.label3.TabIndex = 2;
@@ -297,20 +287,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 34);
+            this.label2.Location = new System.Drawing.Point(41, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "1 - Visualiza e busca";
             // 
-            // lbNaoVisualiza
+            // label1
             // 
-            this.lbNaoVisualiza.AutoSize = true;
-            this.lbNaoVisualiza.Location = new System.Drawing.Point(6, 13);
-            this.lbNaoVisualiza.Name = "lbNaoVisualiza";
-            this.lbNaoVisualiza.Size = new System.Drawing.Size(85, 13);
-            this.lbNaoVisualiza.TabIndex = 0;
-            this.lbNaoVisualiza.Text = "0 - Não visualiza";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(41, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "0 - Não visualiza";
             // 
             // fmCadastroGrupoUsuario
             // 
@@ -326,8 +316,9 @@
             this.Controls.Add(this.gbGrupoDeUsuario);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(850, 618);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 600);
+            this.MinimumSize = new System.Drawing.Size(850, 618);
             this.Name = "fmCadastroGrupoUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -371,6 +362,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbNaoVisualiza;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -84,29 +84,29 @@ namespace _5gpro.Daos
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
-                    var todaspermissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
-                    todaspermissoes = permissaoDAO.BuscaTodasPermissoes();
+                    //var todaspermissoes = new fmCadastroGrupoUsuario.PermissoesStruct();
+                    //todaspermissoes = permissaoDAO.BuscaTodasPermissoes();
 
                     sql.Query = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)
                                 VALUES
                                 (@idgrupousuario, @idpermissao, @nivel)
                                 ON DUPLICATE KEY UPDATE
                                 nivel = @nivel";
-                    foreach (Permissao p in todaspermissoes.Todas)
-                    {
-                        sql.clearParams();
-                        sql.addParam("@idgrupousuario", grupousuario.GrupoUsuarioID);
-                        sql.addParam("@idpermissao", p.PermissaoId);
-                        sql.addParam("@nivel", 0);
-                        sql.insertQuery();
-                    }
+                    //foreach (Permissao p in todaspermissoes.Todas)
+                    //{
+                    //    sql.clearParams();
+                    //    sql.addParam("@idgrupousuario", grupousuario.GrupoUsuarioID);
+                    //    sql.addParam("@idpermissao", p.PermissaoId);
+                    //    sql.addParam("@nivel", 0);
+                    //    sql.insertQuery();
+                    //}
 
                     foreach (Permissao p in listapermissoes)
                     {
                         sql.clearParams();
                         sql.addParam("@idgrupousuario", grupousuario.GrupoUsuarioID);
                         sql.addParam("@idpermissao", p.PermissaoId);
-                        sql.addParam("@nivel", 0);
+                        sql.addParam("@nivel", p.Nivel);
                         sql.insertQuery();
                     }
                 }
