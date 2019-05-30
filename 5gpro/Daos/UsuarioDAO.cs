@@ -118,7 +118,8 @@ namespace _5gpro.Daos
                 }
                 grupousuario = new GrupoUsuario
                 {
-                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"])
+                    GrupoUsuarioID = Convert.ToInt32(data["idgrupousuario"]),
+                    Nome = (string) data["nomegrupo"]
                 };
                 usuario = new Usuario
                 {

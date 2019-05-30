@@ -172,43 +172,40 @@ namespace _5gpro.Forms
             PopularModulos();
             Editando(true);
         }
-        private void DgvPermissoes_ColumnDividerDoubleClick(object sender, DataGridViewColumnDividerDoubleClickEventArgs e)
-        {
-
-        }
         private void DgvPermissoes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             //Dois Clicks na linha para somar 1 no nivel, quando chegar a 3 o próximo valor será 0
-            if (tbCodGrupoUsuario.Text.Length > 0)
+            if (tbCodGrupoUsuario.Text.Length <= 0)
             {
-
-                if (int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) < 3)
-                {
-                    dgvPermissoes.CurrentRow.Cells[2].Value = int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) + 1;
-                }
-                else
-                {
-                    dgvPermissoes.CurrentRow.Cells[2].Value = 0;
-                }
-
-                //ATUALIZA O NIVEL DA LISTA DE PERMISSÕES A CADA DOUBLECLICK
-                listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
-                Editando(true);
+                return;
             }
+
+            if (int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) < 3)
+            {
+                dgvPermissoes.CurrentRow.Cells[2].Value = int.Parse(dgvPermissoes.CurrentRow.Cells[2].Value.ToString()) + 1;
+            }
+            else
+            {
+                dgvPermissoes.CurrentRow.Cells[2].Value = 0;
+            }
+
+            listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+            Editando(true);
         }
         private void DgvModulos_CurrentCellChanged(object sender, EventArgs e)
         {
-            //MUDAR MODULO NAS SETAS
-            if (dgvModulos.SelectedRows.Count > 0)
+            if (dgvModulos.SelectedRows.Count <= 0)
             {
-                if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
-                {
-                    PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
-                }
-                else
-                {
-                    PopularPermissoes();
-                }
+                return;
+            }
+
+            if (dgvModulos.CurrentRow.Cells[0].Value.ToString() != "000000")
+            {
+                PopularPermissoesByCodModulo(dgvModulos.CurrentRow.Cells[0].Value.ToString());
+            }
+            else
+            {
+                PopularPermissoes();
             }
 
         }
@@ -258,11 +255,22 @@ namespace _5gpro.Forms
                 return;
             }
 
+            if (tbCodGrupoUsuario.Text.Length <= 0)
+            {
+                if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.No)
+                {
+                    return;
+                }
+                tbCodGrupoUsuario.Text = grupousuarioDAO.BuscaProxCodigoDisponivel().ToString();
+            }
             grupousuario = new GrupoUsuario();
             grupousuario.GrupoUsuarioID = int.Parse(tbCodGrupoUsuario.Text);
             grupousuario.Nome = tbNomeGrupoUsuario.Text;
 
-            ControlCollection controls = (ControlCollection)this.Controls;
+            var controls = (ControlCollection)this.Controls;
             bool ok = validacao.ValidarEntidade(grupousuario, controls);
 
             if (!ok)
@@ -525,8 +533,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

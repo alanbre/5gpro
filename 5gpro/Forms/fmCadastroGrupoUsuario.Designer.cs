@@ -68,7 +68,7 @@
             this.gbGrupoDeUsuario.Controls.Add(this.lbCodGrupoUsuario);
             this.gbGrupoDeUsuario.Location = new System.Drawing.Point(74, 12);
             this.gbGrupoDeUsuario.Name = "gbGrupoDeUsuario";
-            this.gbGrupoDeUsuario.Size = new System.Drawing.Size(310, 93);
+            this.gbGrupoDeUsuario.Size = new System.Drawing.Size(398, 104);
             this.gbGrupoDeUsuario.TabIndex = 4;
             this.gbGrupoDeUsuario.TabStop = false;
             this.gbGrupoDeUsuario.Text = "Grupo de Usuários";
@@ -77,7 +77,7 @@
             // 
             this.tbNomeGrupoUsuario.Location = new System.Drawing.Point(55, 58);
             this.tbNomeGrupoUsuario.Name = "tbNomeGrupoUsuario";
-            this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(213, 20);
+            this.tbNomeGrupoUsuario.Size = new System.Drawing.Size(337, 20);
             this.tbNomeGrupoUsuario.TabIndex = 3;
             this.tbNomeGrupoUsuario.TextChanged += new System.EventHandler(this.TbNomeGrupoUsuario_TextChanged);
             // 
@@ -85,7 +85,7 @@
             // 
             this.tbCodGrupoUsuario.Location = new System.Drawing.Point(55, 30);
             this.tbCodGrupoUsuario.Name = "tbCodGrupoUsuario";
-            this.tbCodGrupoUsuario.Size = new System.Drawing.Size(103, 20);
+            this.tbCodGrupoUsuario.Size = new System.Drawing.Size(64, 20);
             this.tbCodGrupoUsuario.TabIndex = 2;
             this.tbCodGrupoUsuario.Leave += new System.EventHandler(this.TbCodGrupoUsuario_Leave);
             // 
@@ -142,7 +142,6 @@
             this.dgvPermissoes.TabIndex = 0;
             this.dgvPermissoes.TabStop = false;
             this.dgvPermissoes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPermissoes_CellDoubleClick);
-            this.dgvPermissoes.ColumnDividerDoubleClick += new System.Windows.Forms.DataGridViewColumnDividerDoubleClickEventHandler(this.DgvPermissoes_ColumnDividerDoubleClick);
             // 
             // dgvtbcCodigoPermissoes
             // 
@@ -259,9 +258,9 @@
             this.gbIndice.Controls.Add(this.label3);
             this.gbIndice.Controls.Add(this.label2);
             this.gbIndice.Controls.Add(this.label1);
-            this.gbIndice.Location = new System.Drawing.Point(478, 9);
+            this.gbIndice.Location = new System.Drawing.Point(478, 12);
             this.gbIndice.Name = "gbIndice";
-            this.gbIndice.Size = new System.Drawing.Size(253, 104);
+            this.gbIndice.Size = new System.Drawing.Size(344, 104);
             this.gbIndice.TabIndex = 9;
             this.gbIndice.TabStop = false;
             this.gbIndice.Text = "Índice";
@@ -269,7 +268,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 80);
+            this.label4.Location = new System.Drawing.Point(6, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(170, 13);
             this.label4.TabIndex = 3;
@@ -278,7 +277,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(41, 58);
+            this.label3.Location = new System.Drawing.Point(6, 58);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(137, 13);
             this.label3.TabIndex = 2;
@@ -287,7 +286,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(41, 37);
+            this.label2.Location = new System.Drawing.Point(6, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 1;
@@ -296,7 +295,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 16);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 0;
@@ -307,7 +306,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(834, 579);
+            this.ClientSize = new System.Drawing.Size(834, 580);
             this.Controls.Add(this.gbIndice);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);

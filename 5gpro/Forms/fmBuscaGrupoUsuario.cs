@@ -10,7 +10,6 @@ namespace _5gpro.Forms
     public partial class fmBuscaGrupoUsuario : Form
     {
         private List<GrupoUsuario> Listagrupousuario;
-        private GrupoUsuario GrupoUsuario;
         private readonly GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();       
         public GrupoUsuario grupoUsuarioSelecionado;
 

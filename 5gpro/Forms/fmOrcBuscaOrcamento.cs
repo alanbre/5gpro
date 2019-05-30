@@ -16,10 +16,9 @@ namespace _5gpro.Forms
 
         private bool dataCadastroFiltro = false;
         private bool dataValidadeFiltro = false;
-        private bool dataEfetivaçãoFiltro = false;
         private bool valorTotalFiltro = false;
 
-        FuncoesAuxiliares f = new FuncoesAuxiliares();
+        private FuncoesAuxiliares f = new FuncoesAuxiliares();
 
         public struct Filtros
         {

@@ -85,20 +85,7 @@ namespace _5gpro.Forms
                 e.Cancel = true;
             }
         }
-        private void CbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbMostrarSenhaUsuario.Checked)
-            {
-                tbSenhaUsuario.PasswordChar = '\0';
-                tbConfirmaSenhaUsuario.PasswordChar = '\0';
-            }
-            else
-            {
-                tbSenhaUsuario.PasswordChar = '*';
-                tbConfirmaSenhaUsuario.PasswordChar = '*';
-            }
-
-        }
+        private void CbMostrarSenhaUsuario_CheckedChanged(object sender, EventArgs e) => MostraSenhaUsuario();
         private void TbSenhaUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbConfirmaSenhaUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbNomeUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
@@ -263,6 +250,7 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = true;
                 LimpaCampos(true);
                 ignoraCheckEvent = false;
+                Editando(false);
             }
 
         }
@@ -397,6 +385,8 @@ namespace _5gpro.Forms
             tbEmailUsuario.Clear();
             mtbTelefoneUsuario.Clear();
             tbAjuda.Clear();
+            cbMostrarSenhaUsuario.Checked = false;
+            MostraSenhaUsuario();
         }
         private bool ConfirmaSenhas()
         {
@@ -418,6 +408,19 @@ namespace _5gpro.Forms
             mtbTelefoneUsuario.Text = usuario.Telefone;
 
             ignoraCheckEvent = false;
+        }
+        private void MostraSenhaUsuario()
+        {
+            if (cbMostrarSenhaUsuario.Checked)
+            {
+                tbSenhaUsuario.PasswordChar = '\0';
+                tbConfirmaSenhaUsuario.PasswordChar = '\0';
+            }
+            else
+            {
+                tbSenhaUsuario.PasswordChar = '*';
+                tbConfirmaSenhaUsuario.PasswordChar = '*';
+            }
         }
     }
 }

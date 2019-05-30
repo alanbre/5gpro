@@ -25,6 +25,7 @@ namespace _5gpro.Forms
         private string CodGrupoUsuario;
 
         bool editando, ignoraCheckEvent = false;
+        int codigo = 0;
 
         public fmCadastroItem()
         {
@@ -80,13 +81,9 @@ namespace _5gpro.Forms
             }
 
         }
-
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void TbPrecoUltimaEntrada_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void TbEstoqueNecessario_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void TbPrecoVenda_TextChanged(object sender, EventArgs e) => Editando(true);
         private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);
         private void RbServico_CheckedChanged(object sender, EventArgs e) => Editando(true);
         private void BuscaUnimedidaItem_Text_Changed(object sender, EventArgs e) => Editando(true);
@@ -115,6 +112,19 @@ namespace _5gpro.Forms
                 buscaSubGrupoItem.EscolhaOGrupo(true);
             }
         }
+        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
+        {
+            Editando(true);
+            buscaSubGrupoItem.Limpa();
+        }
+        private void RbSimquebra_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSimquebra.Checked) { gbQuebradgv.Enabled = true; }
+        }
+        private void RbNao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbNaoquebra.Checked) { gbQuebradgv.Enabled = false; }
+        }
 
 
 
@@ -129,7 +139,8 @@ namespace _5gpro.Forms
             {
                 ignoraCheckEvent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
+                codigo = itemDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = codigo.ToString();
                 item = null;
                 tbDescricao.Focus();
                 ignoraCheckEvent = false;
@@ -153,6 +164,7 @@ namespace _5gpro.Forms
             if (buscaItem.itemSelecionado != null)
             {
                 item = buscaItem.itemSelecionado;
+                codigo = item.ItemID;
                 PreencheCampos(item);
             }
         }
@@ -222,7 +234,6 @@ namespace _5gpro.Forms
         }
         private void Recarrega()
         {
-            var controls = (ControlCollection)this.Controls;
             if (tbCodigo.Text.Length <= 0)
             {
                 return;
@@ -239,6 +250,7 @@ namespace _5gpro.Forms
                 }
             }
 
+            var controls = (ControlCollection)this.Controls;
             validacao.despintarCampos(controls);
 
             if (item != null)
@@ -275,11 +287,13 @@ namespace _5gpro.Forms
                     return;
             }
 
-            validacao.despintarCampos(controls);
+
             var newitem = itemDAO.Anterior(int.Parse(tbCodigo.Text));
             if (newitem != null)
             {
+                validacao.despintarCampos(controls);
                 item = newitem;
+                codigo = item.ItemID;
                 PreencheCampos(item);
                 if (editando)
                 {
@@ -305,11 +319,13 @@ namespace _5gpro.Forms
                     return;
             }
 
-            validacao.despintarCampos(controls);
+
             var newitem = itemDAO.Proximo(int.Parse(tbCodigo.Text));
             if (newitem != null)
             {
+                validacao.despintarCampos(controls);
                 item = newitem;
+                codigo = item.ItemID;
                 PreencheCampos(item);
                 if (editando)
                 {
@@ -320,8 +336,27 @@ namespace _5gpro.Forms
         private void CarregaDados()
         {
             var controls = (ControlCollection)this.Controls;
-            int codigo = 0;
-            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
+            int c;
+            if (!int.TryParse(tbCodigo.Text, out c)) {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
+
             if (item?.ItemID == codigo)
             {
                 return;
@@ -422,23 +457,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
-        private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
-        {
-            if (!ignoraCheckEvent) { Editando(true); }
-            buscaSubGrupoItem.Limpa();
-        }
-
-        private void RbSimquebra_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbSimquebra.Checked) { gbQuebradgv.Enabled = true; }
-        }
-
-        private void RbNao_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbNaoquebra.Checked) { gbQuebradgv.Enabled = false; }
-        }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
