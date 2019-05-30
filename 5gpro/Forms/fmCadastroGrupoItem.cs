@@ -138,7 +138,12 @@ namespace _5gpro.Forms
         }
         private void Busca()
         {
-            if (editando || Nivel <= 0)
+            if (CodGrupoUsuario != "999" && Nivel <= 0)
+            {
+                return;
+            }
+
+            if (editando)
             {
                 return;
             }
