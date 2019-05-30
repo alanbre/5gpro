@@ -83,7 +83,7 @@ namespace _5gpro.Daos
 
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * FROM permissao";
+                sql.Query = @"SELECT * FROM permissao ORDER BY codigo";
 
                 var data = sql.selectQuery();
 

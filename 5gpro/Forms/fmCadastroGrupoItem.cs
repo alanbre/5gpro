@@ -399,7 +399,7 @@ namespace _5gpro.Forms
         private void InserirSubGrupoItem()
         {
             LimpaCamposSubItens();
-            tbCodigoSubGrupo.Text = (grupoItem.SubGrupoItens.Max(sg => sg.Codigo) + 1).ToString();
+            tbCodigoSubGrupo.Text = grupoItem.SubGrupoItens.Count > 0 ? (grupoItem.SubGrupoItens.Max(sg => sg.Codigo) + 1).ToString() : "1";
             tbNomeSubGrupo.Focus();
             btNovoSubGrupo.Enabled = false;
         }

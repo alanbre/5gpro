@@ -14,7 +14,7 @@ namespace _5gpro.Daos
             Usuario usuario = new Usuario();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = "SELECT * FROM usuario WHERE idusuario = @idusuario AND senha = @senha LIMIT 1";
+                sql.Query = "SELECT * FROM usuario WHERE idusuario = @idusuario AND BINARY senha = @senha LIMIT 1";
                 sql.addParam("@idusuario", idusuario);
                 sql.addParam("@senha", senha);
                 var data = sql.selectQueryForSingleRecord();

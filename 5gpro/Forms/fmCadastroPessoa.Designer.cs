@@ -120,7 +120,6 @@
             this.rbAtivo.Name = "rbAtivo";
             this.rbAtivo.Size = new System.Drawing.Size(49, 17);
             this.rbAtivo.TabIndex = 0;
-            this.rbAtivo.TabStop = true;
             this.rbAtivo.Text = "Ativo";
             this.rbAtivo.UseVisualStyleBackColor = true;
             this.rbAtivo.CheckedChanged += new System.EventHandler(this.RbAtivo_CheckedChanged);
@@ -251,7 +250,6 @@
             this.rbPessoaFisica.Name = "rbPessoaFisica";
             this.rbPessoaFisica.Size = new System.Drawing.Size(92, 17);
             this.rbPessoaFisica.TabIndex = 0;
-            this.rbPessoaFisica.TabStop = true;
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
             this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.RbPessoaFisica_CheckedChanged);
