@@ -31,21 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEsquerdo = new System.Windows.Forms.Panel();
-            this.btOrcamentos = new System.Windows.Forms.Button();
-            this.btSaidas = new System.Windows.Forms.Button();
-            this.btEntradas = new System.Windows.Forms.Button();
-            this.btCPagar = new System.Windows.Forms.Button();
-            this.btCReceber = new System.Windows.Forms.Button();
-            this.btCadastrosmenu = new System.Windows.Forms.Button();
             this.panelSuperior = new System.Windows.Forms.Panel();
-            this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldentroRltSaida = new System.Windows.Forms.Panel();
             this.btsRelatorionotas = new System.Windows.Forms.Button();
             this.paneldropOrcamento = new System.Windows.Forms.Panel();
             this.btiCadOrcamento = new System.Windows.Forms.Button();
             this.paneldropSaida = new System.Windows.Forms.Panel();
-            this.btiRltNotaSaida = new System.Windows.Forms.Button();
             this.btiSaida = new System.Windows.Forms.Button();
             this.paneldropEntrada = new System.Windows.Forms.Panel();
             this.btiEntrada = new System.Windows.Forms.Button();
@@ -64,6 +56,14 @@
             this.btiItens = new System.Windows.Forms.Button();
             this.btiCadPessoa = new System.Windows.Forms.Button();
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
+            this.btiRltNotaSaida = new System.Windows.Forms.Button();
+            this.btExpandeRetrai = new System.Windows.Forms.Button();
+            this.btOrcamentos = new System.Windows.Forms.Button();
+            this.btSaidas = new System.Windows.Forms.Button();
+            this.btEntradas = new System.Windows.Forms.Button();
+            this.btCPagar = new System.Windows.Forms.Button();
+            this.btCReceber = new System.Windows.Forms.Button();
+            this.btCadastrosmenu = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -96,108 +96,6 @@
             this.panelEsquerdo.Size = new System.Drawing.Size(250, 585);
             this.panelEsquerdo.TabIndex = 1;
             // 
-            // btOrcamentos
-            // 
-            this.btOrcamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btOrcamentos.FlatAppearance.BorderSize = 0;
-            this.btOrcamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOrcamentos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btOrcamentos.ForeColor = System.Drawing.Color.White;
-            this.btOrcamentos.Image = global::_5gpro.Properties.Resources.orcamento_livro_40px;
-            this.btOrcamentos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btOrcamentos.Location = new System.Drawing.Point(0, 279);
-            this.btOrcamentos.Name = "btOrcamentos";
-            this.btOrcamentos.Size = new System.Drawing.Size(247, 40);
-            this.btOrcamentos.TabIndex = 5;
-            this.btOrcamentos.Text = "Orçamentos";
-            this.btOrcamentos.UseVisualStyleBackColor = false;
-            this.btOrcamentos.Click += new System.EventHandler(this.BtOrcamentos_Click);
-            // 
-            // btSaidas
-            // 
-            this.btSaidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btSaidas.FlatAppearance.BorderSize = 0;
-            this.btSaidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btSaidas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btSaidas.ForeColor = System.Drawing.Color.White;
-            this.btSaidas.Image = global::_5gpro.Properties.Resources.Output_40px;
-            this.btSaidas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btSaidas.Location = new System.Drawing.Point(0, 233);
-            this.btSaidas.Name = "btSaidas";
-            this.btSaidas.Size = new System.Drawing.Size(247, 40);
-            this.btSaidas.TabIndex = 4;
-            this.btSaidas.Text = "Saídas";
-            this.btSaidas.UseVisualStyleBackColor = false;
-            this.btSaidas.Click += new System.EventHandler(this.BtSaidas_Click);
-            // 
-            // btEntradas
-            // 
-            this.btEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btEntradas.FlatAppearance.BorderSize = 0;
-            this.btEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btEntradas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btEntradas.ForeColor = System.Drawing.Color.White;
-            this.btEntradas.Image = global::_5gpro.Properties.Resources.multiple_inputs_40px;
-            this.btEntradas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btEntradas.Location = new System.Drawing.Point(0, 189);
-            this.btEntradas.Name = "btEntradas";
-            this.btEntradas.Size = new System.Drawing.Size(247, 40);
-            this.btEntradas.TabIndex = 3;
-            this.btEntradas.Text = "Entradas";
-            this.btEntradas.UseVisualStyleBackColor = false;
-            this.btEntradas.Click += new System.EventHandler(this.BtEntradas_Click);
-            // 
-            // btCPagar
-            // 
-            this.btCPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btCPagar.FlatAppearance.BorderSize = 0;
-            this.btCPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCPagar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btCPagar.ForeColor = System.Drawing.Color.White;
-            this.btCPagar.Image = global::_5gpro.Properties.Resources.card_in_use_40px;
-            this.btCPagar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btCPagar.Location = new System.Drawing.Point(0, 143);
-            this.btCPagar.Name = "btCPagar";
-            this.btCPagar.Size = new System.Drawing.Size(247, 40);
-            this.btCPagar.TabIndex = 2;
-            this.btCPagar.Text = "A Pagar";
-            this.btCPagar.UseVisualStyleBackColor = false;
-            this.btCPagar.Click += new System.EventHandler(this.BtCPagar_Click);
-            // 
-            // btCReceber
-            // 
-            this.btCReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btCReceber.FlatAppearance.BorderSize = 0;
-            this.btCReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCReceber.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btCReceber.ForeColor = System.Drawing.Color.White;
-            this.btCReceber.Image = global::_5gpro.Properties.Resources.receive_change_40px;
-            this.btCReceber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btCReceber.Location = new System.Drawing.Point(0, 97);
-            this.btCReceber.Name = "btCReceber";
-            this.btCReceber.Size = new System.Drawing.Size(247, 40);
-            this.btCReceber.TabIndex = 2;
-            this.btCReceber.Text = "A Receber";
-            this.btCReceber.UseVisualStyleBackColor = false;
-            this.btCReceber.Click += new System.EventHandler(this.BtCReceber_Click);
-            // 
-            // btCadastrosmenu
-            // 
-            this.btCadastrosmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btCadastrosmenu.FlatAppearance.BorderSize = 0;
-            this.btCadastrosmenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCadastrosmenu.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btCadastrosmenu.ForeColor = System.Drawing.Color.White;
-            this.btCadastrosmenu.Image = global::_5gpro.Properties.Resources.cadastros_rule_40px;
-            this.btCadastrosmenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btCadastrosmenu.Location = new System.Drawing.Point(0, 51);
-            this.btCadastrosmenu.Name = "btCadastrosmenu";
-            this.btCadastrosmenu.Size = new System.Drawing.Size(247, 41);
-            this.btCadastrosmenu.TabIndex = 1;
-            this.btCadastrosmenu.Text = "Cadastros";
-            this.btCadastrosmenu.UseVisualStyleBackColor = false;
-            this.btCadastrosmenu.Click += new System.EventHandler(this.BtCadastrosesquerda_Click);
-            // 
             // panelSuperior
             // 
             this.panelSuperior.Controls.Add(this.btExpandeRetrai);
@@ -206,19 +104,6 @@
             this.panelSuperior.Name = "panelSuperior";
             this.panelSuperior.Size = new System.Drawing.Size(912, 50);
             this.panelSuperior.TabIndex = 2;
-            // 
-            // btExpandeRetrai
-            // 
-            this.btExpandeRetrai.BackColor = System.Drawing.Color.White;
-            this.btExpandeRetrai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btExpandeRetrai.ForeColor = System.Drawing.Color.White;
-            this.btExpandeRetrai.Image = global::_5gpro.Properties.Resources.menu_filled_30pxBLACK;
-            this.btExpandeRetrai.Location = new System.Drawing.Point(3, 3);
-            this.btExpandeRetrai.Name = "btExpandeRetrai";
-            this.btExpandeRetrai.Size = new System.Drawing.Size(42, 37);
-            this.btExpandeRetrai.TabIndex = 0;
-            this.btExpandeRetrai.UseVisualStyleBackColor = false;
-            this.btExpandeRetrai.Click += new System.EventHandler(this.BtExpandiretrai_Click);
             // 
             // panelCentral
             // 
@@ -296,21 +181,6 @@
             this.paneldropSaida.Name = "paneldropSaida";
             this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
             this.paneldropSaida.TabIndex = 4;
-            // 
-            // btiRltNotaSaida
-            // 
-            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
-            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
-            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
-            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
-            this.btiRltNotaSaida.TabIndex = 1;
-            this.btiRltNotaSaida.Text = "Relatórios";
-            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
-            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
             // 
             // btiSaida
             // 
@@ -561,6 +431,138 @@
             // 
             this.timerDropLateral.Interval = 1;
             this.timerDropLateral.Tick += new System.EventHandler(this.TimerDropLateral_Tick);
+            // 
+            // btiRltNotaSaida
+            // 
+            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
+            this.btiRltNotaSaida.Image = global::_5gpro.Properties.Resources.right_18px;
+            this.btiRltNotaSaida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
+            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
+            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiRltNotaSaida.TabIndex = 1;
+            this.btiRltNotaSaida.Text = "Relatórios";
+            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
+            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
+            // 
+            // btExpandeRetrai
+            // 
+            this.btExpandeRetrai.BackColor = System.Drawing.Color.White;
+            this.btExpandeRetrai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btExpandeRetrai.ForeColor = System.Drawing.Color.White;
+            this.btExpandeRetrai.Image = global::_5gpro.Properties.Resources.menu_filled_30pxBLACK;
+            this.btExpandeRetrai.Location = new System.Drawing.Point(3, 3);
+            this.btExpandeRetrai.Name = "btExpandeRetrai";
+            this.btExpandeRetrai.Size = new System.Drawing.Size(42, 37);
+            this.btExpandeRetrai.TabIndex = 0;
+            this.btExpandeRetrai.UseVisualStyleBackColor = false;
+            this.btExpandeRetrai.Click += new System.EventHandler(this.BtExpandiretrai_Click);
+            // 
+            // btOrcamentos
+            // 
+            this.btOrcamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btOrcamentos.FlatAppearance.BorderSize = 0;
+            this.btOrcamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btOrcamentos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btOrcamentos.ForeColor = System.Drawing.Color.White;
+            this.btOrcamentos.Image = global::_5gpro.Properties.Resources.orcamento_livro_40px;
+            this.btOrcamentos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btOrcamentos.Location = new System.Drawing.Point(0, 279);
+            this.btOrcamentos.Name = "btOrcamentos";
+            this.btOrcamentos.Size = new System.Drawing.Size(247, 40);
+            this.btOrcamentos.TabIndex = 5;
+            this.btOrcamentos.Text = "Orçamentos";
+            this.btOrcamentos.UseVisualStyleBackColor = false;
+            this.btOrcamentos.Click += new System.EventHandler(this.BtOrcamentos_Click);
+            // 
+            // btSaidas
+            // 
+            this.btSaidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btSaidas.FlatAppearance.BorderSize = 0;
+            this.btSaidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btSaidas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSaidas.ForeColor = System.Drawing.Color.White;
+            this.btSaidas.Image = global::_5gpro.Properties.Resources.Output_40px;
+            this.btSaidas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btSaidas.Location = new System.Drawing.Point(0, 233);
+            this.btSaidas.Name = "btSaidas";
+            this.btSaidas.Size = new System.Drawing.Size(247, 40);
+            this.btSaidas.TabIndex = 4;
+            this.btSaidas.Text = "Saídas";
+            this.btSaidas.UseVisualStyleBackColor = false;
+            this.btSaidas.Click += new System.EventHandler(this.BtSaidas_Click);
+            // 
+            // btEntradas
+            // 
+            this.btEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btEntradas.FlatAppearance.BorderSize = 0;
+            this.btEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btEntradas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btEntradas.ForeColor = System.Drawing.Color.White;
+            this.btEntradas.Image = global::_5gpro.Properties.Resources.multiple_inputs_40px;
+            this.btEntradas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btEntradas.Location = new System.Drawing.Point(0, 189);
+            this.btEntradas.Name = "btEntradas";
+            this.btEntradas.Size = new System.Drawing.Size(247, 40);
+            this.btEntradas.TabIndex = 3;
+            this.btEntradas.Text = "Entradas";
+            this.btEntradas.UseVisualStyleBackColor = false;
+            this.btEntradas.Click += new System.EventHandler(this.BtEntradas_Click);
+            // 
+            // btCPagar
+            // 
+            this.btCPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCPagar.FlatAppearance.BorderSize = 0;
+            this.btCPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCPagar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCPagar.ForeColor = System.Drawing.Color.White;
+            this.btCPagar.Image = global::_5gpro.Properties.Resources.card_in_use_40px;
+            this.btCPagar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCPagar.Location = new System.Drawing.Point(0, 143);
+            this.btCPagar.Name = "btCPagar";
+            this.btCPagar.Size = new System.Drawing.Size(247, 40);
+            this.btCPagar.TabIndex = 2;
+            this.btCPagar.Text = "A Pagar";
+            this.btCPagar.UseVisualStyleBackColor = false;
+            this.btCPagar.Click += new System.EventHandler(this.BtCPagar_Click);
+            // 
+            // btCReceber
+            // 
+            this.btCReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCReceber.FlatAppearance.BorderSize = 0;
+            this.btCReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCReceber.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCReceber.ForeColor = System.Drawing.Color.White;
+            this.btCReceber.Image = global::_5gpro.Properties.Resources.receive_change_40px;
+            this.btCReceber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCReceber.Location = new System.Drawing.Point(0, 97);
+            this.btCReceber.Name = "btCReceber";
+            this.btCReceber.Size = new System.Drawing.Size(247, 40);
+            this.btCReceber.TabIndex = 2;
+            this.btCReceber.Text = "A Receber";
+            this.btCReceber.UseVisualStyleBackColor = false;
+            this.btCReceber.Click += new System.EventHandler(this.BtCReceber_Click);
+            // 
+            // btCadastrosmenu
+            // 
+            this.btCadastrosmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCadastrosmenu.FlatAppearance.BorderSize = 0;
+            this.btCadastrosmenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCadastrosmenu.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCadastrosmenu.ForeColor = System.Drawing.Color.White;
+            this.btCadastrosmenu.Image = global::_5gpro.Properties.Resources.cadastros_rule_40px;
+            this.btCadastrosmenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCadastrosmenu.Location = new System.Drawing.Point(0, 51);
+            this.btCadastrosmenu.Name = "btCadastrosmenu";
+            this.btCadastrosmenu.Size = new System.Drawing.Size(247, 41);
+            this.btCadastrosmenu.TabIndex = 1;
+            this.btCadastrosmenu.Text = "Cadastros";
+            this.btCadastrosmenu.UseVisualStyleBackColor = false;
+            this.btCadastrosmenu.Click += new System.EventHandler(this.BtCadastrosesquerda_Click);
             // 
             // fmMain
             // 

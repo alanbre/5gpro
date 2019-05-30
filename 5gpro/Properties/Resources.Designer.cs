@@ -593,6 +593,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap left_18px {
+            get {
+                object obj = ResourceManager.GetObject("left_18px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap left_32_black {
             get {
                 object obj = ResourceManager.GetObject("left_32_black", resourceCulture);
@@ -776,6 +786,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap reload_32_blue {
             get {
                 object obj = ResourceManager.GetObject("reload_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap right_18px {
+            get {
+                object obj = ResourceManager.GetObject("right_18px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
