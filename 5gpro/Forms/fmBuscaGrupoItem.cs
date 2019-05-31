@@ -26,7 +26,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvGrupoItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvGrupoItens.Rows[selectedRowIndex];
-            grupoitemSelecionado = listagrupoitem.Find(g => g.GrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            grupoitemSelecionado = grupoitemDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));            
             this.Close();
         }
         private void BuscaGrupoItem()

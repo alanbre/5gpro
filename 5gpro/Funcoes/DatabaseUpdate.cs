@@ -140,7 +140,7 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`grupoitem` (
   `idgrupoitem` INT NOT NULL,
-  `Nome` VARCHAR(150) NOT NULL,
+  `nome` VARCHAR(150) NOT NULL,
   PRIMARY KEY (`idgrupoitem`))
 ENGINE = InnoDB;
 
@@ -149,7 +149,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`subgrupoitem`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupoitem` (
-  `idsubgrupoitem` INT NOT NULL,
+  `idsubgrupoitem` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupoitem` INT NOT NULL,
   `codigo` INT(11) NOT NULL,

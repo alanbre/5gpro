@@ -124,9 +124,10 @@ namespace _5gpro.Daos
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"INSERT INTO subgrupoitem (idsubgrupoitem, nome, idgrupoitem, codigo)
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO subgrupoitem (nome, idgrupoitem, codigo)
                             VALUES
-                            (@idsubgrupoitem, @nome, @idgrupoitem, @codigo)
+                            (@nome, @idgrupoitem, @codigo)
                             ON DUPLICATE KEY UPDATE
                             nome = @nome, idgrupoitem = @idgrupoitem, codigo = @codigo";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
@@ -134,6 +135,14 @@ namespace _5gpro.Daos
                 sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
                 sql.addParam("@codigo", subGrupo.Codigo);
                 retorno = sql.insertQuery();
+
+                if( retorno > 0)
+                {
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupoitem;";
+                    var data = sql.selectQueryForSingleRecord();
+                    subGrupo.SubGrupoItemID = Convert.ToInt32(data["idsubgrupoitem"]);
+                }
+                sql.Commit();
             }
             return retorno;
         }
@@ -142,9 +151,8 @@ namespace _5gpro.Daos
             var usado = true;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = "SELECT * FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem AND idgrupoitem = @idgrupoitem LIMIT 1";
+                sql.Query = "SELECT * FROM item WHERE idsubgrupoitem = @idsubgrupoitem LIMIT 1;";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
-                sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {

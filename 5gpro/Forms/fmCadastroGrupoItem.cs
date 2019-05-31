@@ -17,7 +17,6 @@ namespace _5gpro.Forms
         private readonly Validacao validacao = new Validacao();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         public SubGrupoItem subgrupoitemSelecionado = null;
-        private List<SubGrupoItem> listaSubGrupos = new List<SubGrupoItem>();
 
         //Controle de Permissões
         private Logado logado;
@@ -108,7 +107,7 @@ namespace _5gpro.Forms
             {
                 int selectedRowIndex = dgvSubGruposItens.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = dgvSubGruposItens.Rows[selectedRowIndex];
-                subgrupoitemSelecionado = listaSubGrupos.Find(p => p.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value));
+                subgrupoitemSelecionado = grupoItem.SubGrupoItens.Find(p => p.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value));
                 PreencheCamposSubGrupo(subgrupoitemSelecionado);
                 btSalvar.Enabled = true;
                 btNovoSubGrupo.Enabled = false;
@@ -368,6 +367,7 @@ namespace _5gpro.Forms
             tbNomeGrupoItem.Clear();
             dgvSubGruposItens.Rows.Clear();
             dgvSubGruposItens.Refresh();
+            btNovoSubGrupo.Enabled = false;
             LimpaCamposSubItens();
         }
         private void LimpaCamposSubItens()
@@ -382,10 +382,9 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigo.Text = grupoitem.GrupoItemID.ToString();
             tbNomeGrupoItem.Text = grupoitem.Nome;
-            listaSubGrupos = grupoitem.SubGrupoItens;
             grupoItem = grupoitem;
             btNovoSubGrupo.Enabled = true;
-            PreencheGridParcelas();
+            PreencheGridSubGrupoItens();
             ignoraCheckEvent = false;
         }
         private void PreencheCamposSubGrupo(SubGrupoItem subGrupoItem)
@@ -404,7 +403,7 @@ namespace _5gpro.Forms
         private void InserirSubGrupoItem()
         {
             LimpaCamposSubItens();
-            tbCodigoSubGrupo.Text = grupoItem.SubGrupoItens.Count > 0 ? (grupoItem.SubGrupoItens.Max(sg => sg.Codigo) + 1).ToString() : "1";
+            tbCodigoSubGrupo.Text = grupoItem.SubGrupoItens?.Count > 0 ? (grupoItem.SubGrupoItens?.Max(sg => sg.Codigo) + 1).ToString() : "1";
             tbNomeSubGrupo.Focus();
             btNovoSubGrupo.Enabled = false;
         }
@@ -425,9 +424,9 @@ namespace _5gpro.Forms
             int retorno = grupoItemDAO.RemoverSubGrupo(subgrupoitemSelecionado);
             if(retorno > 0)
             {
-                listaSubGrupos.Remove(subgrupoitemSelecionado);
+                grupoItem.SubGrupoItens.Remove(subgrupoitemSelecionado);
                 dgvSubGruposItens.Rows.Clear();
-                PreencheGridParcelas();
+                PreencheGridSubGrupoItens();
                 btNovoSubGrupo.Enabled = true;
                 btRemoverSub.Enabled = false;
                 LimpaCamposSubItens();
@@ -477,14 +476,13 @@ namespace _5gpro.Forms
                 tbAjuda.Text = "Sub-grupo atualizado com sucesso";         
                 grupoItem.SubGrupoItens.Add(subGrupo);
                 btNovoSubGrupo.Enabled = true;
-                return;
             }
 
             LimpaCamposSubItens();
-            PreencheGridParcelas();
+            PreencheGridSubGrupoItens();
             
         }
-        private void PreencheGridParcelas()
+        private void PreencheGridSubGrupoItens()
         {
             dgvSubGruposItens.Rows.Clear();
             foreach(var sub in grupoItem.SubGrupoItens)
