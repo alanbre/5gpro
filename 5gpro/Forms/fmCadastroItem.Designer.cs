@@ -568,7 +568,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 600);
+            this.MinimumSize = new System.Drawing.Size(1210, 616);
             this.Name = "fmCadastroItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

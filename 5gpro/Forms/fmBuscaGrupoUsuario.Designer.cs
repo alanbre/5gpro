@@ -104,6 +104,7 @@
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbFiltroNomeGrupoUsuario);
             this.Controls.Add(this.dgvGrupoUsuario);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(600, 500);

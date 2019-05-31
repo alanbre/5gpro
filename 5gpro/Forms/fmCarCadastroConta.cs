@@ -137,75 +137,86 @@ namespace _5gpro.Forms
             bool ok = false;
 
             if (!editando)
-                return;
-
-            if (tbCodigoConta.Text.Length > 0)
             {
-                contaReceber = new ContaReceber
-                {
-                    ContaReceberID = int.Parse(tbCodigoConta.Text),
-                    DataCadastro = DateTime.Today,
-                    DataConta = dtpDataConta.Value,
-                    Operacao = buscaOperacao.operacao,
-
-                    ValorOriginal = dbValorOriginalConta.Valor,
-                    Multa = dbMultaConta.Valor,
-                    Juros = dbJurosConta.Valor,
-                    Acrescimo = dbAcrescimoConta.Valor,
-                    Desconto = dbDescontoConta.Valor,
-                    ValorFinal = dbValorFinalConta.Valor,
-                    Situacao = "Aberto",
-
-                    Parcelas = parcelas,
-
-                    Pessoa = buscaPessoa.pessoa
-                };
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                ok = validacao.ValidarEntidade(contaReceber, controls);
-                if (ok) { validacao.despintarCampos(controls); }
-
-                if (ok)
-                {
-                    int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
-
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else if (resultado == 1)
-                    {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
-                    }
-                    btGerarParcelas.Enabled = false;
-                    dbValorContaGerar.Enabled = false;
-                    dbValorContaGerar.Valor = 0.00m;
-                }
+                return;
             }
-            else
+
+            if (parcelas.Count <= 0)
+            {
+                MessageBox.Show("Deve haver pelo menos uma parcela para salvar a conta!",
+                                "Aviso",
+                                MessageBoxButtons.OK);
+                return;
+            }
+
+            if (tbCodigoConta.Text.Length <= 0)
             {
                 if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
                                     "Aviso",
                                      MessageBoxButtons.YesNo,
-                                     MessageBoxIcon.Information) == DialogResult.Yes)
+                                     MessageBoxIcon.Information) == DialogResult.No)
                 {
-                    tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
+                    return;
                 }
-                ok = false;
+                tbCodigoConta.Text = contaReceberDAO.BuscaProxCodigoDisponivel().ToString();
             }
+
+            contaReceber = new ContaReceber
+            {
+                ContaReceberID = int.Parse(tbCodigoConta.Text),
+                DataCadastro = DateTime.Today,
+                DataConta = dtpDataConta.Value,
+                Operacao = buscaOperacao.operacao,
+
+                ValorOriginal = dbValorOriginalConta.Valor,
+                Multa = dbMultaConta.Valor,
+                Juros = dbJurosConta.Valor,
+                Acrescimo = dbAcrescimoConta.Valor,
+                Desconto = dbDescontoConta.Valor,
+                ValorFinal = dbValorFinalConta.Valor,
+                Situacao = "Aberto",
+
+                Parcelas = parcelas,
+
+                Pessoa = buscaPessoa.pessoa
+            };
+
+            var controls = (ControlCollection)this.Controls;
+            if (!validacao.ValidarEntidade(contaReceber, controls))
+            {
+                return;
+            }
+
+
+            validacao.despintarCampos(controls);
+            int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
+
+            // resultado 0 = nada foi inserido (houve algum erro)
+            // resultado 1 = foi inserido com sucesso
+            // resultado 2 = foi atualizado com sucesso
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                Editando(false);
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+            }
+            btGerarParcelas.Enabled = false;
+            dbValorContaGerar.Enabled = false;
+            dbValorContaGerar.Valor = 0.00m;
+
+
 
         }
         private void Recarrega()

@@ -221,7 +221,7 @@ namespace _5gpro.Daos
                                 VALUES
                                 (@tipomovimentacao, @data, @documento, @iditem, @quantidade, @idpessoa)";
                     sql.clearParams();
-                    sql.addParam("@tipomovimentacao", "S");
+                    sql.addParam("@tipomovimentacao", "E");
                     sql.addParam("@data", nota.DataEntradaSaida);
                     sql.addParam("@documento", nota.NotaFiscalTerceirosID.ToString());
                     sql.addParam("@iditem", i.Item.ItemID);

@@ -227,13 +227,12 @@ namespace _5gpro.Daos
         }
         private ContaPagar LeDadosReader(List<Dictionary<string, object>> data)
         {
-
             if (data.Count == 0)
             {
                 return null;
             }
-            List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
 
+            List<ParcelaContaPagar> listaparcelas = new List<ParcelaContaPagar>();
             var contaPagar = new ContaPagar();
             contaPagar.ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]);
             contaPagar.DataCadastro = (DateTime)data[0]["data_cadastro"];

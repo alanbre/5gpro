@@ -136,70 +136,77 @@ namespace _5gpro.Forms
                 return;
             }
 
-            bool ok = false;
-            if (tbCodigoConta.Text.Length > 0)
+            if (parcelas.Count <= 0)
             {
-
-                contaPagar = new ContaPagar
-                {
-                    ContaPagarID = int.Parse(tbCodigoConta.Text),
-                    DataCadastro = DateTime.Today,
-                    DataConta = dtpDataConta.Value,
-
-                    ValorOriginal = dbValorOriginalConta.Valor,
-                    Multa = dbMultaConta.Valor,
-                    Juros = dbJurosConta.Valor,
-                    Acrescimo = dbAcrescimoConta.Valor,
-                    Desconto = dbDescontoConta.Valor,
-                    ValorFinal = dbValorFinalConta.Valor,
-                    Situacao = "Aberto",
-
-                    Parcelas = parcelas,
-                    Pessoa = buscaPessoa.pessoa
-                };
-
-                ControlCollection controls = (ControlCollection)this.Controls;
-                ok = validacao.ValidarEntidade(contaPagar, controls);
-                if (ok) { validacao.despintarCampos(controls); }
-
-                if (ok)
-                {
-                    int resultado = contaPagarDAO.SalvaOuAtualiza(contaPagar);
-
-                    // resultado 0 = nada foi inserido (houve algum erro)
-                    // resultado 1 = foi inserido com sucesso
-                    // resultado 2 = foi atualizado com sucesso
-                    if (resultado == 0)
-                    {
-                        MessageBox.Show("Problema ao salvar o registro",
-                        "Problema ao salvar",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
-                        return;
-                    }
-                    else if (resultado == 1)
-                    {
-                        tbAjuda.Text = "Dados salvos com sucesso";
-                        Editando(false);
-                    }
-                    else if (resultado == 2)
-                    {
-                        tbAjuda.Text = "Dados atualizados com sucesso";
-                        Editando(false);
-                    }
-                }
+                MessageBox.Show("Deve haver pelo menos uma parcela para salvar a conta!",
+                                "Aviso",
+                                MessageBoxButtons.OK);
+                return;
             }
-            else
+
+            if (tbCodigoConta.Text.Length <= 0)
             {
                 if (MessageBox.Show("Código em branco, deseja gerar um código automaticamente?",
                                     "Aviso",
                                      MessageBoxButtons.YesNo,
-                                     MessageBoxIcon.Information) == DialogResult.Yes)
+                                     MessageBoxIcon.Information) == DialogResult.No)
                 {
-                    tbCodigoConta.Text = contaPagarDAO.BuscaProxCodigoDisponivel().ToString();
+                    return;
                 }
-                ok = false;
+                tbCodigoConta.Text = contaPagarDAO.BuscaProxCodigoDisponivel().ToString();
             }
+
+
+            contaPagar = new ContaPagar
+            {
+                ContaPagarID = int.Parse(tbCodigoConta.Text),
+                DataCadastro = DateTime.Today,
+                DataConta = dtpDataConta.Value,
+
+                ValorOriginal = dbValorOriginalConta.Valor,
+                Multa = dbMultaConta.Valor,
+                Juros = dbJurosConta.Valor,
+                Acrescimo = dbAcrescimoConta.Valor,
+                Desconto = dbDescontoConta.Valor,
+                ValorFinal = dbValorFinalConta.Valor,
+                Situacao = "Aberto",
+
+                Parcelas = parcelas,
+                Pessoa = buscaPessoa.pessoa
+            };
+
+            var controls = (ControlCollection)this.Controls;
+            if (!validacao.ValidarEntidade(contaPagar, controls))
+            {
+                return;
+            }
+
+            validacao.despintarCampos(controls);
+
+
+            int resultado = contaPagarDAO.SalvaOuAtualiza(contaPagar);
+
+
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+                Editando(false);
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+                Editando(false);
+            }
+
+
         }
         private void Recarrega()
         {
