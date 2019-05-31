@@ -22,7 +22,7 @@ namespace _5gpro.Daos
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
-                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario
+                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario,
                             i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
                             FROM orcamento o 
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
@@ -53,7 +53,7 @@ namespace _5gpro.Daos
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
-                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario
+                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario,
                             i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
                             FROM orcamento o 
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
@@ -83,7 +83,7 @@ namespace _5gpro.Daos
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
-                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario
+                            i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario,
                             i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
                             FROM orcamento o 
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
@@ -332,6 +332,7 @@ namespace _5gpro.Daos
 
                 orcamentoItens.Add(oi);
             }
+            orcamento.OrcamentoItem = orcamentoItens;
             return orcamento;
         }
 

@@ -31,6 +31,7 @@ namespace _5gpro.Forms
         private string CodGrupoUsuario;
 
         private bool editando, ignoracheckevent = false;
+        private int codigo = 0;
 
 
 
@@ -56,17 +57,20 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                Recarrega(orcamento);
+                Recarrega();
+                return;
             }
 
             if (e.KeyCode == Keys.F1)
             {
                 Novo();
+                return;
             }
 
             if (e.KeyCode == Keys.F2)
             {
                 Salva();
+                return;
             }
 
             EnterTab(this.ActiveControl, e);
@@ -89,65 +93,7 @@ namespace _5gpro.Forms
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
             Editando(true);
         }
-        private void TbCodigo_Leave(object sender, EventArgs e)
-        {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
-            if (!editando)
-            {
-                if (tbCodigo.Text.Length > 0)
-                {
-                    Orcamento neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
-                    if (neworcamento != null)
-                    {
-                        orcamento = neworcamento;
-                        notafiscal = orcamento.NotaFiscal;
-                        PreencheCampos(orcamento);
-                    }
-                    else
-                    {
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodigo.Text.Length == 0)
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(false);
-                    ignoracheckevent = false;
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (tbCodigo.Text.Length > 0)
-                    {
-                        Orcamento neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
-                        if (neworcamento != null)
-                        {
-                            orcamento = neworcamento;
-                            notafiscal = orcamento.NotaFiscal;
-                            PreencheCampos(neworcamento);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodigo.Text.Length == 0)
-                    {
-                        ignoracheckevent = true;
-                        LimpaCampos(true);
-                        ignoracheckevent = false;
-                    }
-                }
-            }
-        }
+        private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
         private void BuscaItem_Codigo_Leave(object sender, EventArgs e)
         {
             if (buscaItem.item != null)
@@ -208,10 +154,10 @@ namespace _5gpro.Forms
         }
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3 && !editando)
+            if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
-                AbreTelaBuscaOrcamento();
+                Busca();
             }
         }
         private void TbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
@@ -242,25 +188,10 @@ namespace _5gpro.Forms
         {
             f.ValidaTeclaDigitadaDecimal(e);
         }
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-            Novo();
-        }
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-            if (!editando)
-            {
-                AbreTelaBuscaOrcamento();
-            }
-        }
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-            Salva();
-        }
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-            Recarrega(orcamento);
-        }
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
         private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
         {
             Anterior();
@@ -378,30 +309,39 @@ namespace _5gpro.Forms
         {
             if (editando)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(false);
-                    tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel().ToString();
-                    orcamento = null;
-                    buscaPessoa.Focus();
-                    ignoracheckevent = false;
-                    Editando(true);
-                }
+                return;
             }
-            else
+            if (Nivel > 1 || CodGrupoUsuario == "999")
             {
                 ignoracheckevent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel().ToString();
+                codigo = orcamentoDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = codigo.ToString();
                 orcamento = null;
-                Editando(false);
                 buscaPessoa.Focus();
                 ignoracheckevent = false;
                 Editando(true);
+            }
+        }
+        private void Busca()
+        {
+            if (CodGrupoUsuario != "999" && Nivel <= 0)
+            {
+                return;
+            }
+
+            if (editando)
+            {
+                return;
+            }
+
+            var buscaOrcamento = new fmOrcBuscaOrcamento();
+            buscaOrcamento.ShowDialog();
+            if (buscaOrcamento.orcamentoSelecionado != null)
+            {
+                orcamento = buscaOrcamento.orcamentoSelecionado;
+                codigo = orcamento.OrcamentoID;
+                PreencheCampos(orcamento);
             }
         }
         private void Salva()
@@ -437,9 +377,6 @@ namespace _5gpro.Forms
 
             int resultado = orcamentoDAO.SalvaOuAtualiza(orcamento);
 
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
             if (resultado == 0)
             {
                 MessageBox.Show("Problema ao salvar o registro",
@@ -459,130 +396,152 @@ namespace _5gpro.Forms
             }
 
         }
-        private void Recarrega(Orcamento orcamento)
+        private void Recarrega()
         {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (orcamento != null)
-                    {
-                        orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
-                        PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        ignoracheckevent = true;
-                        LimpaCampos(true);
-                        ignoracheckevent = false;
-                    }
-                }
-            }
-            else
-            {
-                if (orcamento != null)
-                {
-                    orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
-                    PreencheCampos(orcamento);
-                }
-                else
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(true);
-                    ignoracheckevent = false;
+                    return;
                 }
             }
 
-        }
-        private void Proximo()
-        {
-            //Busca o orcamento com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
+
+            if (orcamento != null)
             {
-                Orcamento neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
-                if (neworcamento != null)
-                {
-                    orcamento = neworcamento;
-                    itens = orcamento.OrcamentoItem.ToList();
-                    PreencheCampos(orcamento);
-                }
+                orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
+                PreencheCampos(orcamento);
             }
-            else if (editando && tbCodigo.Text.Length > 0)
+            else
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    Orcamento neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
-                    if (neworcamento != null)
-                    {
-                        orcamento = neworcamento;
-                        itens = orcamento.OrcamentoItem.ToList();
-                        PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
-                        if (neworcamento != null)
-                        {
-                            orcamento = neworcamento;
-                            itens = orcamento.OrcamentoItem.ToList();
-                            PreencheCampos(orcamento);
-                            Editando(false);
-                        }
-                    }
-                }
+                ignoracheckevent = true;
+                LimpaCampos(true);
+                ignoracheckevent = false;
             }
+            Editando(false);
         }
         private void Anterior()
         {
-            //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
+            if (tbCodigo.Text.Length <= 0)
             {
-                Orcamento neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
-                if (neworcamento != null)
-                {
-                    orcamento = neworcamento;
-                    itens = orcamento.OrcamentoItem.ToList();
-                    PreencheCampos(orcamento);
-                }
+                return;
             }
-            else if (editando && tbCodigo.Text.Length > 0)
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            //validacao.despintarCampos(controls);
+
+            var neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
+            if (neworcamento != null)
+            {
+                orcamento = neworcamento;
+                codigo = orcamento.OrcamentoID;
+                itens = orcamento.OrcamentoItem.ToList();
+                PreencheCampos(orcamento);
+                Editando(false);
+            }
+        }
+        private void Proximo()
+        {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            //validacao.despintarCampos(controls);
+
+            var neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
+            if (neworcamento != null)
+            {
+                orcamento = neworcamento;
+                codigo = orcamento.OrcamentoID;
+                itens = orcamento.OrcamentoItem.ToList();
+                PreencheCampos(orcamento);
+                Editando(false);
+            }
+        }
+        private void CarregaDados()
+        {
+            var controls = (ControlCollection)this.Controls;
+            int c;
+            if (!int.TryParse(tbCodigo.Text, out c))
+            {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
                 {
-                    Orcamento neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
-                    if (neworcamento != null)
+                    if (editando)
                     {
-                        orcamento = neworcamento;
-                        itens = orcamento.OrcamentoItem.ToList();
-                        PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
-                        if (neworcamento != null)
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
                         {
-                            orcamento = neworcamento;
-                            itens = orcamento.OrcamentoItem.ToList();
-                            PreencheCampos(neworcamento);
-                            Editando(false);
+                            return;
                         }
                     }
+                    codigo = c;
                 }
             }
+
+            if (orcamento?.OrcamentoID == codigo)
+            {
+                return;
+            }
+
+            if (tbCodigo.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+
+            var neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
+            if (neworcamento != null)
+            {
+                orcamento = neworcamento;
+                notafiscal = orcamento.NotaFiscal;
+                PreencheCampos(orcamento);
+                Editando(false);
+            }
+            else
+            {
+                Editando(true);
+                LimpaCampos(false);
+            }
+
+            //validacao.despintarCampos(controls);
+
         }
         private void PreencheCampos(Orcamento orcamento)
         {
@@ -613,16 +572,6 @@ namespace _5gpro.Forms
                 tbNotaDataEmissao.Clear();
             }
             ignoracheckevent = false;
-        }
-        private void AbreTelaBuscaOrcamento()
-        {
-            var buscaOrcamento = new fmOrcBuscaOrcamento();
-            buscaOrcamento.ShowDialog();
-            if (buscaOrcamento.orcamentoSelecionado != null)
-            {
-                orcamento = buscaOrcamento.orcamentoSelecionado;
-                PreencheCampos(orcamento);
-            }
         }
         private void PreencheCamposItem(OrcamentoItem item)
         {
