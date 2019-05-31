@@ -418,11 +418,6 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        private void PanelCentral_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         
         //BOTÕES DO MENU SAIDAS
         private void BtiSaida_Click(object sender, EventArgs e)
