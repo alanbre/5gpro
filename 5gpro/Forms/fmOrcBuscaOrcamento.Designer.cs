@@ -270,6 +270,7 @@
             // 
             // buscaCidade
             // 
+            this.buscaCidade.LabelText = "Cidade";
             this.buscaCidade.Location = new System.Drawing.Point(1, 14);
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
@@ -411,9 +412,8 @@
             this.Controls.Add(this.gbGridOrcamentos);
             this.Controls.Add(this.gbFiltrosOrcamento);
             this.KeyPreview = true;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1000, 500);
+            this.MinimumSize = new System.Drawing.Size(1089, 571);
             this.Name = "fmOrcBuscaOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

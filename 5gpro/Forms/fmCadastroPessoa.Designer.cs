@@ -87,7 +87,7 @@
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
             this.pnDadosGerais.Location = new System.Drawing.Point(69, 12);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 237);
+            this.pnDadosGerais.Size = new System.Drawing.Size(750, 237);
             this.pnDadosGerais.TabIndex = 0;
             // 
             // gbSituacao
@@ -120,6 +120,7 @@
             this.rbAtivo.Name = "rbAtivo";
             this.rbAtivo.Size = new System.Drawing.Size(49, 17);
             this.rbAtivo.TabIndex = 0;
+            this.rbAtivo.TabStop = true;
             this.rbAtivo.Text = "Ativo";
             this.rbAtivo.UseVisualStyleBackColor = true;
             this.rbAtivo.CheckedChanged += new System.EventHandler(this.RbAtivo_CheckedChanged);
@@ -251,6 +252,7 @@
             this.rbPessoaFisica.Name = "rbPessoaFisica";
             this.rbPessoaFisica.Size = new System.Drawing.Size(92, 17);
             this.rbPessoaFisica.TabIndex = 0;
+            this.rbPessoaFisica.TabStop = true;
             this.rbPessoaFisica.Text = "Pessoa Física";
             this.rbPessoaFisica.UseVisualStyleBackColor = true;
             this.rbPessoaFisica.CheckedChanged += new System.EventHandler(this.RbPessoaFisica_CheckedChanged);
@@ -278,7 +280,7 @@
             this.pnDados.Controls.Add(this.lbRua);
             this.pnDados.Location = new System.Drawing.Point(69, 306);
             this.pnDados.Name = "pnDados";
-            this.pnDados.Size = new System.Drawing.Size(1110, 299);
+            this.pnDados.Size = new System.Drawing.Size(750, 309);
             this.pnDados.TabIndex = 2;
             // 
             // buscaCidade
@@ -422,10 +424,10 @@
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(72, 623);
+            this.tbAjuda.Location = new System.Drawing.Point(72, 633);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
-            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.Size = new System.Drawing.Size(750, 20);
             this.tbAjuda.TabIndex = 4;
             // 
             // menuVertical
@@ -448,7 +450,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1194, 655);
+            this.ClientSize = new System.Drawing.Size(834, 665);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.pnDados);
@@ -457,7 +459,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 600);
+            this.MinimumSize = new System.Drawing.Size(850, 703);
             this.Name = "fmCadastroPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

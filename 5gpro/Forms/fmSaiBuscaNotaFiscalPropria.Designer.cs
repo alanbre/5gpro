@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGridDocumentos = new System.Windows.Forms.GroupBox();
             this.dgvOrcamentos = new System.Windows.Forms.DataGridView();
             this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,6 +41,11 @@
             this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
+            this.dbValorTotalfinal = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotalinicial = new _5gpro.Controls.DecimalBox();
+            this.cbValorTotal = new System.Windows.Forms.CheckBox();
+            this.cbDataEntrada = new System.Windows.Forms.CheckBox();
+            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -54,11 +59,6 @@
             this.lbAFiltroDataEmissao = new System.Windows.Forms.Label();
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
-            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
-            this.cbDataEntrada = new System.Windows.Forms.CheckBox();
-            this.cbValorTotal = new System.Windows.Forms.CheckBox();
-            this.dbValorTotalinicial = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotalfinal = new _5gpro.Controls.DecimalBox();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -72,7 +72,7 @@
             this.gbGridDocumentos.Controls.Add(this.dgvOrcamentos);
             this.gbGridDocumentos.Location = new System.Drawing.Point(12, 161);
             this.gbGridDocumentos.Name = "gbGridDocumentos";
-            this.gbGridDocumentos.Size = new System.Drawing.Size(1069, 289);
+            this.gbGridDocumentos.Size = new System.Drawing.Size(1068, 289);
             this.gbGridDocumentos.TabIndex = 1;
             this.gbGridDocumentos.TabStop = false;
             this.gbGridDocumentos.Text = "Notas fiscais";
@@ -83,8 +83,8 @@
             this.dgvOrcamentos.AllowUserToDeleteRows = false;
             this.dgvOrcamentos.AllowUserToOrderColumns = true;
             this.dgvOrcamentos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightGray;
-            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvOrcamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -107,7 +107,7 @@
             this.dgvOrcamentos.ReadOnly = true;
             this.dgvOrcamentos.RowHeadersVisible = false;
             this.dgvOrcamentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrcamentos.Size = new System.Drawing.Size(1053, 264);
+            this.dgvOrcamentos.Size = new System.Drawing.Size(1052, 264);
             this.dgvOrcamentos.TabIndex = 0;
             this.dgvOrcamentos.TabStop = false;
             // 
@@ -207,10 +207,64 @@
             this.gbFiltrosDocumento.Controls.Add(this.dtpFiltroDataEmissaoInicial);
             this.gbFiltrosDocumento.Location = new System.Drawing.Point(12, 12);
             this.gbFiltrosDocumento.Name = "gbFiltrosDocumento";
-            this.gbFiltrosDocumento.Size = new System.Drawing.Size(1069, 143);
+            this.gbFiltrosDocumento.Size = new System.Drawing.Size(1068, 143);
             this.gbFiltrosDocumento.TabIndex = 0;
             this.gbFiltrosDocumento.TabStop = false;
             this.gbFiltrosDocumento.Text = "Filtros do documento";
+            // 
+            // dbValorTotalfinal
+            // 
+            this.dbValorTotalfinal.Location = new System.Drawing.Point(94, 115);
+            this.dbValorTotalfinal.Name = "dbValorTotalfinal";
+            this.dbValorTotalfinal.Size = new System.Drawing.Size(70, 22);
+            this.dbValorTotalfinal.TabIndex = 19;
+            this.dbValorTotalfinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorTotalinicial
+            // 
+            this.dbValorTotalinicial.Location = new System.Drawing.Point(9, 115);
+            this.dbValorTotalinicial.Name = "dbValorTotalinicial";
+            this.dbValorTotalinicial.Size = new System.Drawing.Size(70, 22);
+            this.dbValorTotalinicial.TabIndex = 18;
+            this.dbValorTotalinicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // cbValorTotal
+            // 
+            this.cbValorTotal.AutoSize = true;
+            this.cbValorTotal.Location = new System.Drawing.Point(171, 118);
+            this.cbValorTotal.Name = "cbValorTotal";
+            this.cbValorTotal.Size = new System.Drawing.Size(15, 14);
+            this.cbValorTotal.TabIndex = 17;
+            this.cbValorTotal.UseVisualStyleBackColor = true;
+            this.cbValorTotal.CheckedChanged += new System.EventHandler(this.CbValorTotal_CheckedChanged);
+            // 
+            // cbDataEntrada
+            // 
+            this.cbDataEntrada.AutoSize = true;
+            this.cbDataEntrada.Location = new System.Drawing.Point(686, 76);
+            this.cbDataEntrada.Name = "cbDataEntrada";
+            this.cbDataEntrada.Size = new System.Drawing.Size(15, 14);
+            this.cbDataEntrada.TabIndex = 16;
+            this.cbDataEntrada.UseVisualStyleBackColor = true;
+            this.cbDataEntrada.CheckedChanged += new System.EventHandler(this.CbDataEntrada_CheckedChanged);
+            // 
+            // cbDataCadastro
+            // 
+            this.cbDataCadastro.AutoSize = true;
+            this.cbDataCadastro.Location = new System.Drawing.Point(686, 37);
+            this.cbDataCadastro.Name = "cbDataCadastro";
+            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
+            this.cbDataCadastro.TabIndex = 15;
+            this.cbDataCadastro.UseVisualStyleBackColor = true;
+            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
             // 
             // buscaPessoa
             // 
@@ -223,6 +277,7 @@
             // 
             // buscaCidade
             // 
+            this.buscaCidade.LabelText = "Cidade";
             this.buscaCidade.Location = new System.Drawing.Point(3, 16);
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
@@ -337,70 +392,20 @@
             this.dtpFiltroDataEmissaoInicial.TabIndex = 7;
             this.dtpFiltroDataEmissaoInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
-            // cbDataCadastro
-            // 
-            this.cbDataCadastro.AutoSize = true;
-            this.cbDataCadastro.Location = new System.Drawing.Point(686, 37);
-            this.cbDataCadastro.Name = "cbDataCadastro";
-            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
-            this.cbDataCadastro.TabIndex = 15;
-            this.cbDataCadastro.UseVisualStyleBackColor = true;
-            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
-            // 
-            // cbDataEntrada
-            // 
-            this.cbDataEntrada.AutoSize = true;
-            this.cbDataEntrada.Location = new System.Drawing.Point(686, 76);
-            this.cbDataEntrada.Name = "cbDataEntrada";
-            this.cbDataEntrada.Size = new System.Drawing.Size(15, 14);
-            this.cbDataEntrada.TabIndex = 16;
-            this.cbDataEntrada.UseVisualStyleBackColor = true;
-            this.cbDataEntrada.CheckedChanged += new System.EventHandler(this.CbDataEntrada_CheckedChanged);
-            // 
-            // cbValorTotal
-            // 
-            this.cbValorTotal.AutoSize = true;
-            this.cbValorTotal.Location = new System.Drawing.Point(171, 118);
-            this.cbValorTotal.Name = "cbValorTotal";
-            this.cbValorTotal.Size = new System.Drawing.Size(15, 14);
-            this.cbValorTotal.TabIndex = 17;
-            this.cbValorTotal.UseVisualStyleBackColor = true;
-            this.cbValorTotal.CheckedChanged += new System.EventHandler(this.CbValorTotal_CheckedChanged);
-            // 
-            // dbValorTotalinicial
-            // 
-            this.dbValorTotalinicial.Location = new System.Drawing.Point(9, 115);
-            this.dbValorTotalinicial.Name = "dbValorTotalinicial";
-            this.dbValorTotalinicial.Size = new System.Drawing.Size(70, 22);
-            this.dbValorTotalinicial.TabIndex = 18;
-            this.dbValorTotalinicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorTotalfinal
-            // 
-            this.dbValorTotalfinal.Location = new System.Drawing.Point(94, 115);
-            this.dbValorTotalfinal.Name = "dbValorTotalfinal";
-            this.dbValorTotalfinal.Size = new System.Drawing.Size(70, 22);
-            this.dbValorTotalfinal.TabIndex = 19;
-            this.dbValorTotalfinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
-            // 
             // fmSaiBuscaNotaFiscalPropria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1093, 462);
+            this.ClientSize = new System.Drawing.Size(1092, 462);
             this.Controls.Add(this.gbGridDocumentos);
             this.Controls.Add(this.gbFiltrosDocumento);
-            this.MinimumSize = new System.Drawing.Size(1000, 500);
+            this.KeyPreview = true;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1108, 500);
             this.Name = "fmSaiBuscaNotaFiscalPropria";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca notas fiscais";
             this.gbGridDocumentos.ResumeLayout(false);

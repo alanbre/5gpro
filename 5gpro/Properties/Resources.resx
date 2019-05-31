@@ -355,4 +355,7 @@
   <data name="HAJELLL" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\HAJELLL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CELO_5G" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CELO-5G.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

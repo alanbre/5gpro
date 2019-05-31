@@ -778,9 +778,8 @@
             this.Controls.Add(this.gbDadosConta);
             this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1052, 628);
+            this.MinimumSize = new System.Drawing.Size(1275, 684);
             this.Name = "fmCarCadastroConta";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

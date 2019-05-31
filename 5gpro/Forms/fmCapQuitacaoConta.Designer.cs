@@ -601,12 +601,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(952, 613);
+            this.ClientSize = new System.Drawing.Size(952, 614);
             this.Controls.Add(this.gbParcelas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbPesquisa);
             this.KeyPreview = true;
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(968, 652);
             this.Name = "fmCapQuitacaoConta";
