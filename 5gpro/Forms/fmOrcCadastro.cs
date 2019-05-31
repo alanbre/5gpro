@@ -311,6 +311,7 @@ namespace _5gpro.Forms
             {
                 return;
             }
+
             if (Nivel > 1 || CodGrupoUsuario == "999")
             {
                 ignoracheckevent = true;
@@ -681,6 +682,7 @@ namespace _5gpro.Forms
             btNotaGerar.Enabled = false;
             tbNotaNumero.Clear();
             tbNotaDataEmissao.Clear();
+            notafiscal = null;
             LimpaCamposItem(limpaCod);
         }
         private void LimpaCamposItem(bool focus)
