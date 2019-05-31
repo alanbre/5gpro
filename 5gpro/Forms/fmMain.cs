@@ -66,7 +66,10 @@ namespace _5gpro
             FiltroDePermissoes();
             t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
+            timerRelogio.Start();
         }
+
+
 
         public struct PermissaoNivelStruct
         {
@@ -344,6 +347,16 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        private void TimerRelogio_Tick(object sender, EventArgs e)
+        {
+            lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void LbData_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void BtiGrupopessoa_Click(object sender, EventArgs e)
         {
             var formCadGrupoPessoa = new fmCadastroGrupoPessoa();
@@ -466,6 +479,9 @@ namespace _5gpro
 
         private void RecolherMenus()
         {
+            Image imgdefault = Properties.Resources.right_18px;
+            btiRltNotaSaida.Image = imgdefault;
+
             if (botaoPressionado != "botaocadastro")
             {
                 paneldropCadastros.Height = 0;
@@ -538,7 +554,10 @@ namespace _5gpro
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
-               
+
+                    Image imgdefault = Properties.Resources.right_18px;
+                    btiRltNotaSaida.Image = imgdefault;
+
                     break;
 
                 case "botaoexpandiretrai":

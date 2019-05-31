@@ -127,9 +127,6 @@
   <data name="ok_32_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ok_32_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="orcamento_livro_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\orcamento_livro_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="search_32_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_32_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -175,14 +172,17 @@
   <data name="iosLeft_64px_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Left_64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="delete_32_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete_32_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="iosSearch_64px_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Search_64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iosRight_48px_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Right_48px_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iosOk_64px_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8_Checkmark_64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="left_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\left_18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iosSearch_48px_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Search_48px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,6 +217,9 @@
   <data name="iosDelete_22px_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_delete_sign_filled_22px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="iosDelete_48px_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8_Delete_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="add_30WHITEpx" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\add_30WHITEpx.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -229,14 +232,14 @@
   <data name="iosPlus_64px_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Plus_Math_64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="iosPlus_48px_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8_Plus_Math_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Left_22px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Left_22px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="iosLeft_48px_Blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Left_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iosRight_64px_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8_Right_64px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="orcamento_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\relatorio_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -316,8 +319,8 @@
   <data name="plus_32_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus_32_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iosDelete_48px_Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8_Delete_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iosRight_64px_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8_Right_64px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="search_32_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\search_32_blue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -328,14 +331,14 @@
   <data name="iosOk_22px_Green" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Checkmark_22px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="delete_32_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\delete_32_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="orcamento_livro_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\orcamento_livro_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="multiple_inputs_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\multiple_inputs_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="iosPlus_48px_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8_Plus_Math_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="iosOk_64px_green" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icons8_Checkmark_64px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="bola5gblue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bola5gblue.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -349,8 +352,8 @@
   <data name="iosPlus_22px_blue" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8_Plus_Math_22px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="left_18px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\left_18px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HAJELLL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HAJELLL.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CELO_5G" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CELO-5G.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

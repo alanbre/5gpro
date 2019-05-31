@@ -70,7 +70,7 @@
             this.tbNomeUsuario.Location = new System.Drawing.Point(12, 44);
             this.tbNomeUsuario.Name = "tbNomeUsuario";
             this.tbNomeUsuario.ReadOnly = true;
-            this.tbNomeUsuario.Size = new System.Drawing.Size(140, 20);
+            this.tbNomeUsuario.Size = new System.Drawing.Size(260, 20);
             this.tbNomeUsuario.TabIndex = 7;
             this.tbNomeUsuario.TabStop = false;
             // 

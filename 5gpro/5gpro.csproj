@@ -1196,6 +1196,7 @@
     <None Include="Resources\right_18px.png" />
     <None Include="Resources\left_18px.png" />
     <None Include="Resources\CELO-5G.ico" />
+    <None Include="Resources\HAJELLL.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
