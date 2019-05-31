@@ -182,6 +182,7 @@ namespace _5gpro.Forms
             if (buscaPessoa.pessoaSelecionada != null)
             {
                 pessoa = buscaPessoa.pessoaSelecionada;
+                codigo = pessoa.PessoaID;
                 PreencheCampos(pessoa);
             }
 
@@ -416,17 +417,17 @@ namespace _5gpro.Forms
             var newpessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newpessoa != null)
             {
-                validacao.despintarCampos(controls);
+                
                 pessoa = newpessoa;
                 PreencheCampos(pessoa);
                 Editando(false);
             }
             else
             {
-                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
+            validacao.despintarCampos(controls);
         }
         private void Editando(bool edit)
         {
