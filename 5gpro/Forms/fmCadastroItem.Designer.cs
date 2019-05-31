@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnDadosGerais = new System.Windows.Forms.Panel();
             this.gbQuebradgv = new System.Windows.Forms.GroupBox();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
@@ -72,6 +72,7 @@
             this.dbPrecoVenda = new _5gpro.Controls.DecimalBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.btAddUnimedida = new System.Windows.Forms.Button();
             this.pnDadosGerais.SuspendLayout();
             this.gbQuebradgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
@@ -87,6 +88,7 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.btAddUnimedida);
             this.pnDadosGerais.Controls.Add(this.gbQuebradgv);
             this.pnDadosGerais.Controls.Add(this.gbQuebra);
             this.pnDadosGerais.Controls.Add(this.dbQuantidade);
@@ -134,8 +136,8 @@
             this.dgvPartes.AllowUserToDeleteRows = false;
             this.dgvPartes.AllowUserToOrderColumns = true;
             this.dgvPartes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPartes.BackgroundColor = System.Drawing.Color.White;
             this.dgvPartes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPartes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -314,7 +316,7 @@
             // 
             this.gbTipoDeItem.Controls.Add(this.rbServico);
             this.gbTipoDeItem.Controls.Add(this.rbProduto);
-            this.gbTipoDeItem.Location = new System.Drawing.Point(334, 138);
+            this.gbTipoDeItem.Location = new System.Drawing.Point(412, 144);
             this.gbTipoDeItem.Name = "gbTipoDeItem";
             this.gbTipoDeItem.Size = new System.Drawing.Size(131, 45);
             this.gbTipoDeItem.TabIndex = 7;
@@ -555,6 +557,15 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
+            // btAddUnimedida
+            // 
+            this.btAddUnimedida.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
+            this.btAddUnimedida.Location = new System.Drawing.Point(327, 151);
+            this.btAddUnimedida.Name = "btAddUnimedida";
+            this.btAddUnimedida.Size = new System.Drawing.Size(22, 22);
+            this.btAddUnimedida.TabIndex = 26;
+            this.btAddUnimedida.UseVisualStyleBackColor = true;
+            // 
             // fmCadastroItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -639,5 +650,6 @@
         private System.Windows.Forms.Label lbPorcentagemparte;
         private System.Windows.Forms.Label lbNomeparte;
         private Controls.DecimalBox decimalBox1;
+        private System.Windows.Forms.Button btAddUnimedida;
     }
 }

@@ -300,6 +300,12 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmCadastroUnimedida.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadastroUnimedida.Designer.cs">
+      <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmItemReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -706,6 +712,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadastroUnimedida.resx">
+      <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>

@@ -58,9 +58,9 @@
             this.lbUnimedida.AutoSize = true;
             this.lbUnimedida.Location = new System.Drawing.Point(3, 1);
             this.lbUnimedida.Name = "lbUnimedida";
-            this.lbUnimedida.Size = new System.Drawing.Size(57, 13);
+            this.lbUnimedida.Size = new System.Drawing.Size(100, 13);
             this.lbUnimedida.TabIndex = 0;
-            this.lbUnimedida.Text = "Unimedida";
+            this.lbUnimedida.Text = "Unidade de Medida";
             // 
             // btBuscaUnimedida
             // 
