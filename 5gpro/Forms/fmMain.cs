@@ -479,6 +479,9 @@ namespace _5gpro
 
         private void RecolherMenus()
         {
+            Image imgdefault = Properties.Resources.right_18px;
+            btiRltNotaSaida.Image = imgdefault;
+
             if (botaoPressionado != "botaocadastro")
             {
                 paneldropCadastros.Height = 0;
@@ -551,7 +554,10 @@ namespace _5gpro
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
-               
+
+                    Image imgdefault = Properties.Resources.right_18px;
+                    btiRltNotaSaida.Image = imgdefault;
+
                     break;
 
                 case "botaoexpandiretrai":
