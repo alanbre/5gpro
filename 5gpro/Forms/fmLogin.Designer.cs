@@ -93,7 +93,7 @@
             this.lbCodigo.AutoSize = true;
             this.lbCodigo.BackColor = System.Drawing.Color.Transparent;
             this.lbCodigo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCodigo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lbCodigo.ForeColor = System.Drawing.Color.Black;
             this.lbCodigo.Location = new System.Drawing.Point(79, 118);
             this.lbCodigo.Name = "lbCodigo";
             this.lbCodigo.Size = new System.Drawing.Size(67, 19);
@@ -105,7 +105,7 @@
             this.lbSenha.AutoSize = true;
             this.lbSenha.BackColor = System.Drawing.Color.Transparent;
             this.lbSenha.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSenha.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.lbSenha.ForeColor = System.Drawing.Color.Black;
             this.lbSenha.Location = new System.Drawing.Point(88, 148);
             this.lbSenha.Name = "lbSenha";
             this.lbSenha.Size = new System.Drawing.Size(58, 19);
