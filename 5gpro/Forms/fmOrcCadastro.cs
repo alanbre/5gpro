@@ -31,6 +31,7 @@ namespace _5gpro.Forms
         private string CodGrupoUsuario;
 
         private bool editando, ignoracheckevent = false;
+        private int codigo = 0;
 
 
 
@@ -56,17 +57,20 @@ namespace _5gpro.Forms
         {
             if (e.KeyCode == Keys.F5)
             {
-                Recarrega(orcamento);
+                Recarrega();
+                return;
             }
 
             if (e.KeyCode == Keys.F1)
             {
                 Novo();
+                return;
             }
 
             if (e.KeyCode == Keys.F2)
             {
                 Salva();
+                return;
             }
 
             EnterTab(this.ActiveControl, e);
@@ -89,65 +93,7 @@ namespace _5gpro.Forms
             dtpVencimento.Enabled = cbVencimento.Checked ? true : false;
             Editando(true);
         }
-        private void TbCodigo_Leave(object sender, EventArgs e)
-        {
-            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
-            if (!editando)
-            {
-                if (tbCodigo.Text.Length > 0)
-                {
-                    Orcamento neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
-                    if (neworcamento != null)
-                    {
-                        orcamento = neworcamento;
-                        notafiscal = orcamento.NotaFiscal;
-                        PreencheCampos(orcamento);
-                    }
-                    else
-                    {
-                        Editando(true);
-                        LimpaCampos(false);
-                    }
-                }
-                else if (tbCodigo.Text.Length == 0)
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(false);
-                    ignoracheckevent = false;
-                }
-            }
-            else
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (tbCodigo.Text.Length > 0)
-                    {
-                        Orcamento neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
-                        if (neworcamento != null)
-                        {
-                            orcamento = neworcamento;
-                            notafiscal = orcamento.NotaFiscal;
-                            PreencheCampos(neworcamento);
-                            Editando(false);
-                        }
-                        else
-                        {
-                            Editando(true);
-                            LimpaCampos(false);
-                        }
-                    }
-                    else if (tbCodigo.Text.Length == 0)
-                    {
-                        ignoracheckevent = true;
-                        LimpaCampos(true);
-                        ignoracheckevent = false;
-                    }
-                }
-            }
-        }
+        private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
         private void BuscaItem_Codigo_Leave(object sender, EventArgs e)
         {
             if (buscaItem.item != null)
@@ -170,132 +116,23 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-        private void TbQuantidade_Leave(object sender, EventArgs e)
-        {
-            tbQuantidade.Text = tbQuantidade.Text.Length > 0 ? Convert.ToDecimal(tbQuantidade.Text).ToString("############0.00") : "0,00";
-            tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
-            tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
-        }
-        private void TbValorUnitItem_Leave(object sender, EventArgs e)
-        {
-            tbValorUnitItem.Text = tbValorUnitItem.Text.Length > 0 ? Convert.ToDecimal(tbValorUnitItem.Text).ToString("############0.00") : "0,00";
-            tbValorTotItem.Text = (Convert.ToDecimal(tbQuantidade.Text) * Convert.ToDecimal(tbValorUnitItem.Text)).ToString("############0.00");
-            tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
-        }
-        private void TbValorTotItem_Leave(object sender, EventArgs e)
-        {
-            tbValorTotItem.Text = tbValorTotItem.Text.Length > 0 ? Convert.ToDecimal(tbValorTotItem.Text).ToString("############0.00") : "0,00";
-            tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
-        }
-        private void TbDescontoItemPorc_Leave(object sender, EventArgs e)
-        {
-            tbDescontoItemPorc.Text = tbDescontoItemPorc.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItemPorc.Text).ToString("##0.00") : "0,00";
-            tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
-        }
-        private void TbDescontoItem_Leave(object sender, EventArgs e)
-        {
-            tbDescontoItem.Text = tbDescontoItem.Text.Length > 0 ? Convert.ToDecimal(tbDescontoItem.Text).ToString("############0.00") : "0,00";
-            tbDescontoItem.Text = (Convert.ToDecimal(tbValorTotItem.Text) * Convert.ToDecimal(tbDescontoItemPorc.Text) / 100).ToString("############0.00");
-        }
-        private void TbDescontoOrcamento_Leave(object sender, EventArgs e)
-        {
-            tbDescontoOrcamento.Text = tbDescontoOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbDescontoOrcamento.Text).ToString("############0.00") : "0,00";
-            CalculaTotalOrcamento();
-        }
-        private void TbValorTotalOrcamento_Leave(object sender, EventArgs e)
-        {
-            tbValorTotalOrcamento.Text = tbValorTotalOrcamento.Text.Length > 0 ? Convert.ToDecimal(tbValorTotalOrcamento.Text).ToString("############0.00") : "0,00";
-        }
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F3 && !editando)
+            if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
-                AbreTelaBuscaOrcamento();
+                Busca();
             }
         }
-        private void TbQuantidade_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void TbValorUnitItem_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void TbValorTotItem_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void TbDescontoItemPorc_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void TbDescontoItem_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void TbDescontoOrcamento_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void TbValorTotalOrcamento_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            f.ValidaTeclaDigitadaDecimal(e);
-        }
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-            Novo();
-        }
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-            if (!editando)
-            {
-                AbreTelaBuscaOrcamento();
-            }
-        }
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-            Salva();
-        }
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-            Recarrega(orcamento);
-        }
-        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
-        {
-            Anterior();
-        }
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
-        {
-            Proximo();
-        }
-        private void BtNovoItem_Click(object sender, EventArgs e)
-        {
-            LimpaCamposItem(true);
-            buscaItem.Focus();
-            btInserirItem.Text = "Inserir";
-        }
-        private void BtInserirItem_Click(object sender, EventArgs e)
-        {
-            if (buscaItem.item != null)
-            {
-                OrcamentoItem oi = new OrcamentoItem();
-                oi.Item = buscaItem.item;
-                InserirItem(itemSelecionado ?? oi);
-            }
-            else
-            {
-                MessageBox.Show("Deve ser selecionado um item para ser inserido",
-                "Item não selecionado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                buscaItem.Focus();
-            }
-        }
-        private void BtDeletarItem_Click(object sender, EventArgs e)
-        {
-            ExcluirItem();
-        }
+        private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
+        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e) => Recarrega();
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
+        private void BtNovoItem_Click(object sender, EventArgs e) => NovoItem();
+        private void BtInserirItem_Click(object sender, EventArgs e) => InserirItem();
+        private void BtDeletarItem_Click(object sender, EventArgs e) => ExcluirItem();
         private void DgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvItens.SelectedCells.Count > 0)
@@ -316,46 +153,15 @@ namespace _5gpro.Forms
                 PreencheCamposNotaFiscal(notafiscal);
             }
         }
-        private void BuscaPessoa_Text_Changed(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void DtpCadastro_ValueChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void DtpVencimento_ValueChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbQuantidade_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbValorUnitItem_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbValorTotItem_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbDescontoItemPorc_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbDescontoItem_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbDescontoOrcamento_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
-        private void TbValorTotalOrcamento_TextChanged(object sender, EventArgs e)
-        {
-            Editando(true);
-        }
+        private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void DtpCadastro_ValueChanged(object sender, EventArgs e) => Editando(true);
+        private void DtpVencimento_ValueChanged(object sender, EventArgs e) => Editando(true);
+        private void DbQuantidade_Leave(object sender, EventArgs e) => CalculaTotaisItem();
+        private void DbValorUnitItem_Leave(object sender, EventArgs e) => CalculaTotaisItem();
+        private void DbValorTotItem_Leave(object sender, EventArgs e) => CalculaTotaisItem();
+        private void DbDescontoItemPorc_Leave(object sender, EventArgs e) => CalculaTotaisItem();
+        private void DbDescontoItem_Leave(object sender, EventArgs e) => CalculaTotaisItem();
+        private void DbDescontoOrcamento_Leave(object sender, EventArgs e) => CalculaTotalOrcamento();
         private void DgvItens_CurrentCellChanged(object sender, EventArgs e)
         {
             if (dgvItens.SelectedCells.Count > 0)
@@ -378,30 +184,40 @@ namespace _5gpro.Forms
         {
             if (editando)
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-                "Aviso de alteração",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(false);
-                    tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel().ToString();
-                    orcamento = null;
-                    buscaPessoa.Focus();
-                    ignoracheckevent = false;
-                    Editando(true);
-                }
+                return;
             }
-            else
+
+            if (Nivel > 1 || CodGrupoUsuario == "999")
             {
                 ignoracheckevent = true;
                 LimpaCampos(false);
-                tbCodigo.Text = orcamentoDAO.BuscaProxCodigoDisponivel().ToString();
+                codigo = orcamentoDAO.BuscaProxCodigoDisponivel();
+                tbCodigo.Text = codigo.ToString();
                 orcamento = null;
-                Editando(false);
                 buscaPessoa.Focus();
                 ignoracheckevent = false;
                 Editando(true);
+            }
+        }
+        private void Busca()
+        {
+            if (CodGrupoUsuario != "999" && Nivel <= 0)
+            {
+                return;
+            }
+
+            if (editando)
+            {
+                return;
+            }
+
+            var buscaOrcamento = new fmOrcBuscaOrcamento();
+            buscaOrcamento.ShowDialog();
+            if (buscaOrcamento.orcamentoSelecionado != null)
+            {
+                orcamento = buscaOrcamento.orcamentoSelecionado;
+                codigo = orcamento.OrcamentoID;
+                PreencheCampos(orcamento);
             }
         }
         private void Salva()
@@ -427,19 +243,16 @@ namespace _5gpro.Forms
                 DataCadastro = dtpCadastro.Value,
                 DataValidade = cbVencimento.Checked ? dtpVencimento.Value : (DateTime?)null,
 
-                ValorTotalItens = Convert.ToDecimal(tbValorTotalItens.Text),
-                DescontoTotalItens = Convert.ToDecimal(tbDescontoTotalItens.Text),
-                DescontoOrcamento = Convert.ToDecimal(tbDescontoOrcamento.Text),
-                ValorTotalOrcamento = Convert.ToDecimal(tbValorTotalOrcamento.Text),
+                ValorTotalItens = dbValorTotalItens.Valor,
+                DescontoTotalItens = dbDescontoTotalItens.Valor,
+                DescontoOrcamento = dbDescontoOrcamento.Valor,
+                ValorTotalOrcamento = dbValorTotalOrcamento.Valor,
 
                 OrcamentoItem = itens
             };
 
             int resultado = orcamentoDAO.SalvaOuAtualiza(orcamento);
 
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
             if (resultado == 0)
             {
                 MessageBox.Show("Problema ao salvar o registro",
@@ -459,130 +272,151 @@ namespace _5gpro.Forms
             }
 
         }
-        private void Recarrega(Orcamento orcamento)
+        private void Recarrega()
         {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
                 "Aviso de alteração",
                 MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning) == DialogResult.Yes)
+                MessageBoxIcon.Warning) == DialogResult.No)
                 {
-                    if (orcamento != null)
-                    {
-                        orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
-                        PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        ignoracheckevent = true;
-                        LimpaCampos(true);
-                        ignoracheckevent = false;
-                    }
-                }
-            }
-            else
-            {
-                if (orcamento != null)
-                {
-                    orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
-                    PreencheCampos(orcamento);
-                }
-                else
-                {
-                    ignoracheckevent = true;
-                    LimpaCampos(true);
-                    ignoracheckevent = false;
+                    return;
                 }
             }
 
-        }
-        private void Proximo()
-        {
-            //Busca o orcamento com ID maior que o atual preenchido. Só preenche se houver algum registro maior
-            //Caso não houver registro com ID maior, verifica se pessoa existe. Se não existir busca o maior anterior ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
+
+            if (orcamento != null)
             {
-                Orcamento neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
-                if (neworcamento != null)
-                {
-                    orcamento = neworcamento;
-                    itens = orcamento.OrcamentoItem.ToList();
-                    PreencheCampos(orcamento);
-                }
+                orcamento = orcamentoDAO.BuscaByID(orcamento.OrcamentoID);
+                PreencheCampos(orcamento);
             }
-            else if (editando && tbCodigo.Text.Length > 0)
+            else
             {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    Orcamento neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
-                    if (neworcamento != null)
-                    {
-                        orcamento = neworcamento;
-                        itens = orcamento.OrcamentoItem.ToList();
-                        PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
-                        if (neworcamento != null)
-                        {
-                            orcamento = neworcamento;
-                            itens = orcamento.OrcamentoItem.ToList();
-                            PreencheCampos(orcamento);
-                            Editando(false);
-                        }
-                    }
-                }
+                ignoracheckevent = true;
+                LimpaCampos(true);
+                ignoracheckevent = false;
             }
+            Editando(false);
         }
         private void Anterior()
         {
-            //Busca a orcamento com ID menor que o atual preenchido. Só preenche se houver algum registro menor
-            //Caso não houver registro com ID menor, verifica se pessoa existe. Se não existir busca o proximo ao digitado
-            if (!editando && tbCodigo.Text.Length > 0)
+            if (tbCodigo.Text.Length <= 0)
             {
-                Orcamento neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
-                if (neworcamento != null)
-                {
-                    orcamento = neworcamento;
-                    itens = orcamento.OrcamentoItem.ToList();
-                    PreencheCampos(orcamento);
-                }
+                return;
             }
-            else if (editando && tbCodigo.Text.Length > 0)
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-               "Aviso de alteração",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Warning) == DialogResult.Yes)
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            //validacao.despintarCampos(controls);
+
+            var neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
+            if (neworcamento != null)
+            {
+                orcamento = neworcamento;
+                codigo = orcamento.OrcamentoID;
+                itens = orcamento.OrcamentoItem.ToList();
+                PreencheCampos(orcamento);
+                Editando(false);
+            }
+        }
+        private void Proximo()
+        {
+            if (tbCodigo.Text.Length <= 0)
+            {
+                return;
+            }
+
+            var controls = (ControlCollection)this.Controls;
+
+            if (editando)
+            {
+                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+                    "Aviso de alteração",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) == DialogResult.No)
+                    return;
+            }
+
+            //validacao.despintarCampos(controls);
+
+            var neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
+            if (neworcamento != null)
+            {
+                orcamento = neworcamento;
+                codigo = orcamento.OrcamentoID;
+                itens = orcamento.OrcamentoItem.ToList();
+                PreencheCampos(orcamento);
+                Editando(false);
+            }
+        }
+        private void CarregaDados()
+        {
+            var controls = (ControlCollection)this.Controls;
+            int c;
+            if (!int.TryParse(tbCodigo.Text, out c))
+            {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
                 {
-                    Orcamento neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
-                    if (neworcamento != null)
+                    if (editando)
                     {
-                        orcamento = neworcamento;
-                        itens = orcamento.OrcamentoItem.ToList();
-                        PreencheCampos(orcamento);
-                        Editando(false);
-                    }
-                    else
-                    {
-                        neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
-                        if (neworcamento != null)
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
                         {
-                            orcamento = neworcamento;
-                            itens = orcamento.OrcamentoItem.ToList();
-                            PreencheCampos(neworcamento);
-                            Editando(false);
+                            return;
                         }
                     }
+                    codigo = c;
                 }
             }
+
+            if (orcamento?.OrcamentoID == codigo)
+            {
+                return;
+            }
+
+            if (tbCodigo.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+
+            var neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
+            if (neworcamento != null)
+            {
+                orcamento = neworcamento;
+                PreencheCampos(orcamento);
+                Editando(false);
+            }
+            else
+            {
+                Editando(true);
+                LimpaCampos(false);
+            }
+
+            //validacao.despintarCampos(controls);
+
         }
         private void PreencheCampos(Orcamento orcamento)
         {
@@ -593,10 +427,10 @@ namespace _5gpro.Forms
             dtpCadastro.Value = orcamento.DataCadastro;
             dtpVencimento.Value = orcamento.DataValidade.HasValue ? (DateTime)orcamento.DataValidade : DateTime.Now;
             cbVencimento.Checked = orcamento.DataValidade.HasValue ? true : false;
-            tbValorTotalItens.Text = orcamento.ValorTotalItens.ToString("############0.00");
-            tbDescontoTotalItens.Text = orcamento.DescontoTotalItens.ToString("############0.00");
-            tbDescontoOrcamento.Text = orcamento.DescontoOrcamento.ToString("############0.00");
-            tbValorTotalOrcamento.Text = orcamento.ValorTotalOrcamento.ToString("############0.00");
+            dbValorTotalItens.Valor = orcamento.ValorTotalItens;
+            dbDescontoTotalItens.Valor = orcamento.DescontoTotalItens;
+            dbDescontoOrcamento.Valor = orcamento.DescontoOrcamento;
+            dbValorTotalOrcamento.Valor = orcamento.ValorTotalOrcamento;
             itens = orcamento.OrcamentoItem.ToList();
             PreencheGridItens(orcamento.OrcamentoItem.ToList());
             btInserirItem.Text = "Inserir";
@@ -612,17 +446,8 @@ namespace _5gpro.Forms
                 tbNotaNumero.Clear();
                 tbNotaDataEmissao.Clear();
             }
+            notafiscal = orcamento.NotaFiscal;
             ignoracheckevent = false;
-        }
-        private void AbreTelaBuscaOrcamento()
-        {
-            var buscaOrcamento = new fmOrcBuscaOrcamento();
-            buscaOrcamento.ShowDialog();
-            if (buscaOrcamento.orcamentoSelecionado != null)
-            {
-                orcamento = buscaOrcamento.orcamentoSelecionado;
-                PreencheCampos(orcamento);
-            }
         }
         private void PreencheCamposItem(OrcamentoItem item)
         {
@@ -630,11 +455,11 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 buscaItem.PreencheCampos(item.Item);
-                tbQuantidade.Text = item.Quantidade.ToString("############0.00");
-                tbValorUnitItem.Text = item.ValorUnitario.ToString("############0.00");
-                tbValorTotItem.Text = item.ValorTotal.ToString("############0.00");
-                tbDescontoItemPorc.Text = item.DescontoPorc.ToString("##0.00");
-                tbDescontoItem.Text = item.Desconto.ToString("############0.00");
+                dbQuantidade.Valor = item.Quantidade;
+                dbValorUnitItem.Valor = item.ValorUnitario;
+                dbValorTotItem.Valor = item.ValorTotal;
+                dbDescontoItemPorc.Valor = item.DescontoPorc;
+                dbDescontoItem.Valor = item.Desconto;
                 ignoracheckevent = false;
             }
             else
@@ -663,48 +488,47 @@ namespace _5gpro.Forms
         }
         private void InserirItem(OrcamentoItem orcamentoitem)
         {
-            OrcamentoItem item = itemSelecionado ?? orcamentoitem;
-            if (item != null)
-            {
-                item.Quantidade = Convert.ToDecimal(tbQuantidade.Text);
-                item.ValorUnitario = Convert.ToDecimal(tbValorUnitItem.Text);
-                item.ValorTotal = Convert.ToDecimal(tbValorTotItem.Text);
-                item.DescontoPorc = Convert.ToDecimal(tbDescontoItemPorc.Text);
-                item.Desconto = Convert.ToDecimal(tbDescontoItem.Text);
-                DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
-                if (dr == null)
-                {
-                    itens.Add(item);
-                    dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
-                    btNovoItem.PerformClick();
-                }
-                else
-                {
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-                    dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-                    dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
-                    dgvItens.Update();
-                    dgvItens.Refresh();
-                }
-                CalculaTotalOrcamento();
-                btExcluirItem.Enabled = false;
-                LimpaCamposItem(true);
-            }
-            else
+            var item = itemSelecionado ?? orcamentoitem;
+            if (item == null)
             {
                 MessageBox.Show("Item não encontrado no banco de dados",
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
                 buscaItem.Focus();
+                return;
             }
+            item.Quantidade = dbQuantidade.Valor;
+            item.ValorUnitario = dbValorUnitItem.Valor;
+            item.ValorTotal = dbValorTotItem.Valor;
+            item.DescontoPorc = dbDescontoItemPorc.Valor;
+            item.Desconto = dbDescontoItem.Valor;
+            DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
+            if (dr == null)
+            {
+                itens.Add(item);
+                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                btNovoItem.PerformClick();
+            }
+            else
+            {
+                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
+                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
+                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
+                dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
+                dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
+                dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                dgvItens.Update();
+                dgvItens.Refresh();
+            }
+            CalculaTotalOrcamento();
+            btExcluirItem.Enabled = false;
+            LimpaCamposItem(true);
+            Editando(true);
         }
         private void EnterTab(object sender, KeyEventArgs e)
         {
@@ -722,26 +546,27 @@ namespace _5gpro.Forms
             dtpVencimento.Value = DateTime.Now;
             dtpVencimento.Enabled = false;
             cbVencimento.Checked = false;
-            tbValorTotItem.Text = "0,00";
-            tbDescontoTotalItens.Text = "0,00";
-            tbDescontoOrcamento.Text = "0,00";
-            tbValorTotalOrcamento.Text = "0,00";
+            dbValorTotItem.Valor = 0.00m;
+            dbDescontoTotalItens.Valor = 0.00m;
+            dbDescontoOrcamento.Valor = 0.00m;
+            dbValorTotalOrcamento.Valor = 0.00m;
             tbAjuda.Text = "";
             dgvItens.Rows.Clear();
             dgvItens.Refresh();
             btNotaGerar.Enabled = false;
             tbNotaNumero.Clear();
             tbNotaDataEmissao.Clear();
+            notafiscal = null;
             LimpaCamposItem(limpaCod);
         }
         private void LimpaCamposItem(bool focus)
         {
             buscaItem.Limpa();
-            tbQuantidade.Text = "0,00";
-            tbValorUnitItem.Text = "0,00";
-            tbValorTotItem.Text = "0,00";
-            tbDescontoItemPorc.Text = "0,00";
-            tbDescontoItem.Text = "0,00";
+            dbQuantidade.Valor = 0.00m;
+            dbValorUnitItem.Valor = 0.00m;
+            dbValorTotItem.Valor = 0.00m;
+            dbDescontoItemPorc.Valor = 0.00m;
+            dbDescontoItem.Valor = 0.00m;
             itemSelecionado = null;
             btExcluirItem.Enabled = false;
             btInserirItem.Text = "Inserir";
@@ -751,10 +576,16 @@ namespace _5gpro.Forms
         {
             if (itens.Count > 0)
             {
-                tbValorTotalItens.Text = itens.Sum(i => i.ValorTotal).ToString("############0.00");
-                tbDescontoTotalItens.Text = itens.Sum(i => i.Desconto).ToString("############0.00");
-                tbValorTotalOrcamento.Text = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - Convert.ToDecimal(tbDescontoOrcamento.Text)).ToString("############0.00");
+                dbValorTotalItens.Valor = itens.Sum(i => i.ValorTotal);
+                dbDescontoTotalItens.Valor = itens.Sum(i => i.Desconto);
+                dbValorTotalOrcamento.Valor = dbValorTotalItens.Valor - dbDescontoTotalItens.Valor - dbDescontoOrcamento.Valor;
             }
+        }
+        private void CalculaTotaisItem()
+        {
+            dbValorTotItem.Valor = dbQuantidade.Valor * dbValorUnitItem.Valor;
+            dbDescontoItem.Valor = dbValorTotItem.Valor * dbDescontoItemPorc.Valor / 100;
+            CalculaTotalOrcamento();
         }
         private void ExcluirItem()
         {
@@ -767,6 +598,30 @@ namespace _5gpro.Forms
                 PreencheGridItens(itens);
                 CalculaTotalOrcamento();
             }
+        }
+        private void InserirItem()
+        {
+            if (buscaItem.item == null)
+            {
+                MessageBox.Show("Deve ser selecionado um item para ser inserido",
+                "Item não selecionado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                buscaItem.Focus();
+                return;
+            }
+
+
+            var oi = new OrcamentoItem();
+            oi.Item = buscaItem.item;
+            InserirItem(itemSelecionado ?? oi);
+
+        }
+        private void NovoItem()
+        {
+            LimpaCamposItem(true);
+            buscaItem.Focus();
+            btInserirItem.Text = "Inserir";
         }
         private void PreencheGridItens(List<OrcamentoItem> itens)
         {

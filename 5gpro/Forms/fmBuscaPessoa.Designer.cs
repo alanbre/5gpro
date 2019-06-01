@@ -52,6 +52,8 @@
             // 
             // tbFiltroNome
             // 
+            this.tbFiltroNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbFiltroNome.Location = new System.Drawing.Point(9, 74);
             this.tbFiltroNome.Name = "tbFiltroNome";
             this.tbFiltroNome.Size = new System.Drawing.Size(530, 20);
@@ -86,7 +88,7 @@
             this.dgvPessoas.ReadOnly = true;
             this.dgvPessoas.RowHeadersVisible = false;
             this.dgvPessoas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPessoas.Size = new System.Drawing.Size(960, 346);
+            this.dgvPessoas.Size = new System.Drawing.Size(550, 346);
             this.dgvPessoas.TabIndex = 1;
             this.dgvPessoas.TabStop = false;
             this.dgvPessoas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPessoas_CellDoubleClick);
@@ -122,17 +124,20 @@
             this.gbFiltros.Controls.Add(this.label1);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
-            this.gbFiltros.Size = new System.Drawing.Size(960, 140);
+            this.gbFiltros.Size = new System.Drawing.Size(550, 140);
             this.gbFiltros.TabIndex = 0;
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros da pessoa";
             // 
             // buscaCidade
             // 
+            this.buscaCidade.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buscaCidade.LabelText = "Cidade";
             this.buscaCidade.Location = new System.Drawing.Point(3, 16);
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
-            this.buscaCidade.Size = new System.Drawing.Size(442, 39);
+            this.buscaCidade.Size = new System.Drawing.Size(536, 39);
             this.buscaCidade.TabIndex = 0;
             // 
             // fmBuscaPessoa
@@ -140,7 +145,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(984, 517);
+            this.ClientSize = new System.Drawing.Size(574, 517);
             this.Controls.Add(this.gbFiltros);
             this.Controls.Add(this.dgvPessoas);
             this.KeyPreview = true;

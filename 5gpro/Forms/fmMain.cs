@@ -418,11 +418,6 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        private void PanelCentral_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         
         //BOTÕES DO MENU SAIDAS
         private void BtiSaida_Click(object sender, EventArgs e)
@@ -479,6 +474,9 @@ namespace _5gpro
 
         private void RecolherMenus()
         {
+            Image imgdefault = Properties.Resources.right_18px;
+            btiRltNotaSaida.Image = imgdefault;
+
             if (botaoPressionado != "botaocadastro")
             {
                 paneldropCadastros.Height = 0;
@@ -551,7 +549,10 @@ namespace _5gpro
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
-               
+
+                    Image imgdefault = Properties.Resources.right_18px;
+                    btiRltNotaSaida.Image = imgdefault;
+
                     break;
 
                 case "botaoexpandiretrai":

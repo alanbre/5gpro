@@ -42,6 +42,7 @@
             this.tpAvista = new System.Windows.Forms.TabPage();
             this.pnAvista = new System.Windows.Forms.Panel();
             this.gbDesconto = new System.Windows.Forms.GroupBox();
+            this.dbDesconto = new _5gpro.Controls.DecimalBox();
             this.lbPorcentoDesconto = new System.Windows.Forms.Label();
             this.tpAprazo = new System.Windows.Forms.TabPage();
             this.pnAprazo = new System.Windows.Forms.Panel();
@@ -50,18 +51,17 @@
             this.btEditar = new System.Windows.Forms.Button();
             this.btRemover = new System.Windows.Forms.Button();
             this.gbEntrada = new System.Windows.Forms.GroupBox();
+            this.dbEntrada = new _5gpro.Controls.DecimalBox();
             this.rbNao = new System.Windows.Forms.RadioButton();
             this.lbPorcentoEntrada = new System.Windows.Forms.Label();
             this.rbSim = new System.Windows.Forms.RadioButton();
             this.gbAcrescimo = new System.Windows.Forms.GroupBox();
+            this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
             this.lbPorcentoAcrescimo = new System.Windows.Forms.Label();
             this.gbParcelas = new System.Windows.Forms.GroupBox();
             this.tbNparcelas = new System.Windows.Forms.TextBox();
             this.btGerar = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.dbDesconto = new _5gpro.Controls.DecimalBox();
-            this.dbEntrada = new _5gpro.Controls.DecimalBox();
-            this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbDadosOperacao.SuspendLayout();
             this.gbCondicaoOperacao.SuspendLayout();
@@ -220,6 +220,19 @@
             this.gbDesconto.TabStop = false;
             this.gbDesconto.Text = "Desconto";
             // 
+            // dbDesconto
+            // 
+            this.dbDesconto.Location = new System.Drawing.Point(6, 19);
+            this.dbDesconto.Name = "dbDesconto";
+            this.dbDesconto.Size = new System.Drawing.Size(76, 20);
+            this.dbDesconto.TabIndex = 4;
+            this.dbDesconto.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDesconto.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbDesconto_Valor_Changed);
+            // 
             // lbPorcentoDesconto
             // 
             this.lbPorcentoDesconto.AutoSize = true;
@@ -309,6 +322,20 @@
             this.gbEntrada.TabStop = false;
             this.gbEntrada.Text = "Entrada";
             // 
+            // dbEntrada
+            // 
+            this.dbEntrada.Enabled = false;
+            this.dbEntrada.Location = new System.Drawing.Point(11, 44);
+            this.dbEntrada.Name = "dbEntrada";
+            this.dbEntrada.Size = new System.Drawing.Size(72, 22);
+            this.dbEntrada.TabIndex = 18;
+            this.dbEntrada.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbEntrada.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbEntrada_Valor_Changed);
+            // 
             // rbNao
             // 
             this.rbNao.AutoSize = true;
@@ -353,6 +380,19 @@
             this.gbAcrescimo.TabIndex = 17;
             this.gbAcrescimo.TabStop = false;
             this.gbAcrescimo.Text = "Acréscimo";
+            // 
+            // dbAcrescimo
+            // 
+            this.dbAcrescimo.Location = new System.Drawing.Point(10, 15);
+            this.dbAcrescimo.Name = "dbAcrescimo";
+            this.dbAcrescimo.Size = new System.Drawing.Size(76, 20);
+            this.dbAcrescimo.TabIndex = 18;
+            this.dbAcrescimo.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbAcrescimo.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbAcrescimo_Valor_Changed);
             // 
             // lbPorcentoAcrescimo
             // 
@@ -402,46 +442,6 @@
             this.tbAjuda.Size = new System.Drawing.Size(752, 20);
             this.tbAjuda.TabIndex = 8;
             // 
-            // dbDesconto
-            // 
-            this.dbDesconto.Location = new System.Drawing.Point(6, 19);
-            this.dbDesconto.Name = "dbDesconto";
-            this.dbDesconto.Size = new System.Drawing.Size(76, 20);
-            this.dbDesconto.TabIndex = 4;
-            this.dbDesconto.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbDesconto.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbDesconto_Valor_Changed);
-            // 
-            // dbEntrada
-            // 
-            this.dbEntrada.Enabled = false;
-            this.dbEntrada.Location = new System.Drawing.Point(11, 44);
-            this.dbEntrada.Name = "dbEntrada";
-            this.dbEntrada.Size = new System.Drawing.Size(72, 22);
-            this.dbEntrada.TabIndex = 18;
-            this.dbEntrada.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbEntrada.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbEntrada_Valor_Changed);
-            // 
-            // dbAcrescimo
-            // 
-            this.dbAcrescimo.Location = new System.Drawing.Point(10, 15);
-            this.dbAcrescimo.Name = "dbAcrescimo";
-            this.dbAcrescimo.Size = new System.Drawing.Size(76, 20);
-            this.dbAcrescimo.TabIndex = 18;
-            this.dbAcrescimo.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbAcrescimo.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbAcrescimo_Valor_Changed);
-            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(9, 9);
@@ -461,7 +461,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(834, 561);
+            this.ClientSize = new System.Drawing.Size(834, 562);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.tcOpcoes);
             this.Controls.Add(this.gbCondicaoOperacao);
@@ -469,8 +469,8 @@
             this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(850, 600);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(850, 600);
             this.Name = "fmCadastroOperacao";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
