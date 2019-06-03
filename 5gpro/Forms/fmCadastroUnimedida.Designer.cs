@@ -51,6 +51,7 @@
             // tbDescricao
             // 
             this.tbDescricao.Location = new System.Drawing.Point(6, 118);
+            this.tbDescricao.MaxLength = 45;
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(368, 20);
             this.tbDescricao.TabIndex = 5;
@@ -59,6 +60,7 @@
             // tbSigla
             // 
             this.tbSigla.Location = new System.Drawing.Point(6, 77);
+            this.tbSigla.MaxLength = 10;
             this.tbSigla.Name = "tbSigla";
             this.tbSigla.Size = new System.Drawing.Size(68, 20);
             this.tbSigla.TabIndex = 3;

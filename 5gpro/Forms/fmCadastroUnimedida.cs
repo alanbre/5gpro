@@ -10,6 +10,7 @@ namespace _5gpro.Forms
     {
         private Unimedida unimedida = null;
         private UnimedidaDAO unimedidaDAO = new UnimedidaDAO();
+        private readonly Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private Logado logado;
@@ -134,11 +135,22 @@ namespace _5gpro.Forms
                 codigo = unimedidaDAO.BuscaProxCodigoDisponivel();
                 tbCodigo.Text = codigo.ToString();
             }
+            var ok = false;
 
             unimedida = new Unimedida();
             unimedida.UnimedidaID = int.Parse(tbCodigo.Text);
             unimedida.Sigla = tbSigla.Text;
             unimedida.Descricao = tbDescricao.Text;
+
+            var controls = (ControlCollection)this.Controls;
+
+            ok = validacao.ValidarEntidade(unimedida, controls);
+            if (!ok)
+            {
+                return;
+            }
+
+            validacao.despintarCampos(controls);
 
             int resultado = unimedidaDAO.SalvaOuAtualiza(unimedida);
             if (resultado == 0)
@@ -178,6 +190,9 @@ namespace _5gpro.Forms
                     return;
                 }
             }
+
+            var controls = (ControlCollection)this.Controls;
+            validacao.despintarCampos(controls);
 
             if (unimedida != null)
             {
@@ -221,10 +236,14 @@ namespace _5gpro.Forms
             unimedida = newUnidadeMedida;
             codigo = unimedida.UnimedidaID;
             PreencheCampos(unimedida);
+
             if (editando)
             {
                 Editando(false);
             }
+
+            var controls = (ControlCollection)this.Controls;
+            validacao.despintarCampos(controls);
         }
         private void Proximo()
         {
@@ -255,6 +274,9 @@ namespace _5gpro.Forms
             {
                 Editando(false);
             }
+
+            var controls = (ControlCollection)this.Controls;
+            validacao.despintarCampos(controls);
         }
         private void CarregaDados()
         {
@@ -305,6 +327,8 @@ namespace _5gpro.Forms
                 Editando(true);
                 LimpaCampos(false);
             }
+            var controls = (ControlCollection)this.Controls;
+            validacao.despintarCampos(controls);
         }
         private void PreencheCampos(Unimedida unimedida)
         {
@@ -313,6 +337,7 @@ namespace _5gpro.Forms
             tbCodigo.Text = unimedida.UnimedidaID.ToString();
             tbSigla.Text = unimedida.Sigla;
             tbDescricao.Text = unimedida.Descricao;
+            this.unimedida = unimedida;
             ignoraCheckEvent = false;
         }
         private void LimpaCampos(bool limpaCodigo)
@@ -346,6 +371,5 @@ namespace _5gpro.Forms
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
         }
-
     }
 }
