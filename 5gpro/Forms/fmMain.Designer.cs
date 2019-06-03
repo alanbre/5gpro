@@ -58,6 +58,7 @@
             this.btiQuitacaoAReceber = new System.Windows.Forms.Button();
             this.btiCadContaReceber = new System.Windows.Forms.Button();
             this.paneldropCadastros = new System.Windows.Forms.Panel();
+            this.btiUnimedida = new System.Windows.Forms.Button();
             this.btiGrupopessoa = new System.Windows.Forms.Button();
             this.btiGrupoitens = new System.Windows.Forms.Button();
             this.btiOperacoes = new System.Windows.Forms.Button();
@@ -68,7 +69,6 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.btiUnimedida = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -469,11 +469,26 @@
             this.paneldropCadastros.Controls.Add(this.btiItens);
             this.paneldropCadastros.Controls.Add(this.btiCadPessoa);
             this.paneldropCadastros.Location = new System.Drawing.Point(3, 1);
-            this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 222);
+            this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 224);
             this.paneldropCadastros.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCadastros.Name = "paneldropCadastros";
             this.paneldropCadastros.Size = new System.Drawing.Size(200, 10);
             this.paneldropCadastros.TabIndex = 0;
+            // 
+            // btiUnimedida
+            // 
+            this.btiUnimedida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiUnimedida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiUnimedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiUnimedida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiUnimedida.ForeColor = System.Drawing.Color.White;
+            this.btiUnimedida.Location = new System.Drawing.Point(0, 196);
+            this.btiUnimedida.Name = "btiUnimedida";
+            this.btiUnimedida.Size = new System.Drawing.Size(200, 28);
+            this.btiUnimedida.TabIndex = 7;
+            this.btiUnimedida.Text = "Unidade de medida";
+            this.btiUnimedida.UseVisualStyleBackColor = false;
+            this.btiUnimedida.Click += new System.EventHandler(this.BtiUnimedida_Click);
             // 
             // btiGrupopessoa
             // 
@@ -599,21 +614,6 @@
             // timerRelogio
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
-            // 
-            // btiUnimedida
-            // 
-            this.btiUnimedida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiUnimedida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiUnimedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiUnimedida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiUnimedida.ForeColor = System.Drawing.Color.White;
-            this.btiUnimedida.Location = new System.Drawing.Point(0, 196);
-            this.btiUnimedida.Name = "btiUnimedida";
-            this.btiUnimedida.Size = new System.Drawing.Size(200, 28);
-            this.btiUnimedida.TabIndex = 7;
-            this.btiUnimedida.Text = "Unidade de medida";
-            this.btiUnimedida.UseVisualStyleBackColor = false;
-            this.btiUnimedida.Click += new System.EventHandler(this.BtiUnimedida_Click);
             // 
             // fmMain
             // 

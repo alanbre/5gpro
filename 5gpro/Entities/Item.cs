@@ -36,5 +36,7 @@ namespace _5gpro.Entities
         public SubGrupoItem SubGrupoItem { get; set; }
 
         public decimal Quantidade { get; set; }
+
+
     }
 }

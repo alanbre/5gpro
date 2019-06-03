@@ -56,7 +56,7 @@ namespace _5gpro.Controls
             buscaItem.ShowDialog();
             if (buscaItem.itemSelecionado != null)
             {
-                Item item = buscaItem.itemSelecionado;
+                item = buscaItem.itemSelecionado;
                 PreencheCamposItem(item);
             }
         }

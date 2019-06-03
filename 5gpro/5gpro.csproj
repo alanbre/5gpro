@@ -292,6 +292,7 @@
     <Compile Include="Entities\ParcelaContaPagar.cs" />
     <Compile Include="Entities\ParcelaContaReceber.cs" />
     <Compile Include="Entities\ParcelaOperacao.cs" />
+    <Compile Include="Entities\Desintegracao.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\SubGrupoItem.cs" />
     <Compile Include="Entities\SubGrupoPessoa.cs" />
