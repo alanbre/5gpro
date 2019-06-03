@@ -39,6 +39,7 @@
             this.btCReceber = new System.Windows.Forms.Button();
             this.btCadastrosmenu = new System.Windows.Forms.Button();
             this.panelSuperior = new System.Windows.Forms.Panel();
+            this.lbRelogio = new System.Windows.Forms.Label();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldentroRltSaida = new System.Windows.Forms.Panel();
@@ -66,7 +67,6 @@
             this.btiCadPessoa = new System.Windows.Forms.Button();
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbRelogio = new System.Windows.Forms.Label();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
@@ -213,6 +213,18 @@
             this.panelSuperior.Name = "panelSuperior";
             this.panelSuperior.Size = new System.Drawing.Size(1045, 50);
             this.panelSuperior.TabIndex = 2;
+            // 
+            // lbRelogio
+            // 
+            this.lbRelogio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbRelogio.AutoSize = true;
+            this.lbRelogio.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRelogio.ForeColor = System.Drawing.Color.White;
+            this.lbRelogio.Location = new System.Drawing.Point(924, 3);
+            this.lbRelogio.Name = "lbRelogio";
+            this.lbRelogio.Size = new System.Drawing.Size(121, 32);
+            this.lbRelogio.TabIndex = 8;
+            this.lbRelogio.Text = "00:00:00";
             // 
             // btExpandeRetrai
             // 
@@ -581,18 +593,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
-            // 
-            // lbRelogio
-            // 
-            this.lbRelogio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbRelogio.AutoSize = true;
-            this.lbRelogio.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRelogio.ForeColor = System.Drawing.Color.White;
-            this.lbRelogio.Location = new System.Drawing.Point(924, 3);
-            this.lbRelogio.Name = "lbRelogio";
-            this.lbRelogio.Size = new System.Drawing.Size(121, 32);
-            this.lbRelogio.TabIndex = 8;
-            this.lbRelogio.Text = "00:00:00";
             // 
             // timerRelogio
             // 
