@@ -59,16 +59,16 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public Item Proximo(int Codigo)
+        public Item Anterior(int Codigo)
         {
             var item = new Item();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
+                sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i 
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
                             INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
-                            WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)";
+                            WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)";
                 sql.addParam("@iditem", Codigo);
 
                 var data = sql.selectQueryForSingleRecord();
@@ -80,16 +80,16 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public Item Anterior(int Codigo)
+        public Item Proximo(int Codigo)
         {
             var item = new Item();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i 
+                sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
                             INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
-                            WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)";
+                            WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)";
                 sql.addParam("@iditem", Codigo);
 
                 var data = sql.selectQueryForSingleRecord();

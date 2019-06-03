@@ -12,7 +12,7 @@ namespace _5gpro.Daos
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
-        public int Salvar(Unimedida unimedida)
+        public int SalvaOuAtualiza(Unimedida unimedida)
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -29,6 +29,79 @@ namespace _5gpro.Daos
                 retorno = sql.insertQuery();
             }
             return retorno;
+        }
+        public Unimedida BuscaByID(int Codigo)
+        {
+            var unimedida = new Unimedida();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = "SELECT * FROM unimedida WHERE idunimedida = @idunimedida";
+                sql.addParam("@idunimedida", Codigo);
+                var data = sql.selectQueryForSingleRecord();
+                if(data == null)
+                {
+                    return null;
+                }
+                unimedida = LeDadosReader(data);
+            }
+            return unimedida;
+        }
+        public Unimedida Anterior(int Codigo)
+        {
+            var unidadeMedida = new Unimedida();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *
+                            FROM unimedida
+                            WHERE idunimedida = (SELECT max(idunimedida) FROM unimedida WHERE idunimedida < @idunimedida)";
+                sql.addParam("@idunimedida", Codigo);
+
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                unidadeMedida = LeDadosReader(data);
+            }
+            return unidadeMedida;
+        }
+        public Unimedida Proximo(int Codigo)
+        {
+            var unidadeMedida = new Unimedida();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *
+                            FROM unimedida
+                            WHERE idunimedida = (SELECT min(idunimedida) FROM unimedida WHERE idunimedida > @idunimedida)";
+                sql.addParam("@idunimedida", Codigo);
+
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                unidadeMedida = LeDadosReader(data);
+            }
+            return unidadeMedida;
+        }
+        public int BuscaProxCodigoDisponivel()
+        {
+            int proximoid = 1;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT u1.idunimedida + 1 AS proximoid
+                            FROM unimedida AS u1
+                            LEFT OUTER JOIN unimedida AS u2 ON u1.idunimedida + 1 = u2.idunimedida
+                            WHERE u2.idunimedida IS NULL
+                            ORDER BY proximoid
+                            LIMIT 1";
+                var data = sql.selectQueryForSingleRecord();
+                if (data != null)
+                {
+                    proximoid = Convert.ToInt32(data["proximoid"]);
+                }
+            }
+            return proximoid;
         }
         public IEnumerable<Unimedida> Busca(string descricao)
         {
@@ -68,22 +141,6 @@ namespace _5gpro.Daos
                 }
             }
             return listaUnimedida;
-        }
-        public Unimedida BuscaByID(int Codigo)
-        {
-            var unimedida = new Unimedida();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
-            {
-                sql.Query = "SELECT * FROM unimedida WHERE idunimedida = @idunimedida";
-                sql.addParam("@idunimedida", Codigo);
-                var data = sql.selectQueryForSingleRecord();
-                if(data == null)
-                {
-                    return null;
-                }
-                unimedida = LeDadosReader(data);
-            }
-            return unimedida;
         }
         private Unimedida LeDadosReader(Dictionary<string, object> data)
         {

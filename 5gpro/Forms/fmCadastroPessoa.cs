@@ -43,7 +43,6 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
-
         }
 
         private void FmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
@@ -100,9 +99,9 @@ namespace _5gpro.Forms
         private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void TbEmail_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void BuscaGrupoPessoa_Text_Changed_1(object sender, EventArgs e)
+        private void BuscaGrupoPessoa_Text_Changed(object sender, EventArgs e)
         {
-            if (!ignoraCheckEvent) { Editando(true); }
+            Editando(true);
             buscaSubGrupoPessoa.Limpa();
         }
         private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
@@ -419,6 +418,7 @@ namespace _5gpro.Forms
             {
                 
                 pessoa = newpessoa;
+                codigo = pessoa.PessoaID;
                 PreencheCampos(pessoa);
                 Editando(false);
             }

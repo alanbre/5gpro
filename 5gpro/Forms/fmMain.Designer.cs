@@ -39,6 +39,7 @@
             this.btCReceber = new System.Windows.Forms.Button();
             this.btCadastrosmenu = new System.Windows.Forms.Button();
             this.panelSuperior = new System.Windows.Forms.Panel();
+            this.lbRelogio = new System.Windows.Forms.Label();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldentroRltSaida = new System.Windows.Forms.Panel();
@@ -66,8 +67,8 @@
             this.btiCadPessoa = new System.Windows.Forms.Button();
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbRelogio = new System.Windows.Forms.Label();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.btiUnimedida = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -106,7 +107,7 @@
             this.btOrcamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btOrcamentos.FlatAppearance.BorderSize = 0;
             this.btOrcamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btOrcamentos.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btOrcamentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btOrcamentos.ForeColor = System.Drawing.Color.White;
             this.btOrcamentos.Image = global::_5gpro.Properties.Resources.orcamento_livro_40px;
             this.btOrcamentos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -123,7 +124,7 @@
             this.btSaidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btSaidas.FlatAppearance.BorderSize = 0;
             this.btSaidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btSaidas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSaidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSaidas.ForeColor = System.Drawing.Color.White;
             this.btSaidas.Image = global::_5gpro.Properties.Resources.Output_40px;
             this.btSaidas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -140,7 +141,7 @@
             this.btEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btEntradas.FlatAppearance.BorderSize = 0;
             this.btEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btEntradas.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btEntradas.ForeColor = System.Drawing.Color.White;
             this.btEntradas.Image = global::_5gpro.Properties.Resources.multiple_inputs_40px;
             this.btEntradas.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -157,7 +158,7 @@
             this.btCPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btCPagar.FlatAppearance.BorderSize = 0;
             this.btCPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCPagar.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCPagar.ForeColor = System.Drawing.Color.White;
             this.btCPagar.Image = global::_5gpro.Properties.Resources.card_in_use_40px;
             this.btCPagar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -174,7 +175,7 @@
             this.btCReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btCReceber.FlatAppearance.BorderSize = 0;
             this.btCReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCReceber.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCReceber.ForeColor = System.Drawing.Color.White;
             this.btCReceber.Image = global::_5gpro.Properties.Resources.receive_change_40px;
             this.btCReceber.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -191,7 +192,7 @@
             this.btCadastrosmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btCadastrosmenu.FlatAppearance.BorderSize = 0;
             this.btCadastrosmenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btCadastrosmenu.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btCadastrosmenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btCadastrosmenu.ForeColor = System.Drawing.Color.White;
             this.btCadastrosmenu.Image = global::_5gpro.Properties.Resources.cadastros_rule_40px;
             this.btCadastrosmenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -213,6 +214,18 @@
             this.panelSuperior.Name = "panelSuperior";
             this.panelSuperior.Size = new System.Drawing.Size(1045, 50);
             this.panelSuperior.TabIndex = 2;
+            // 
+            // lbRelogio
+            // 
+            this.lbRelogio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbRelogio.AutoSize = true;
+            this.lbRelogio.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbRelogio.ForeColor = System.Drawing.Color.White;
+            this.lbRelogio.Location = new System.Drawing.Point(924, 3);
+            this.lbRelogio.Name = "lbRelogio";
+            this.lbRelogio.Size = new System.Drawing.Size(128, 31);
+            this.lbRelogio.TabIndex = 8;
+            this.lbRelogio.Text = "00:00:00";
             // 
             // btExpandeRetrai
             // 
@@ -258,7 +271,7 @@
             this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
             this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btsRelatorionotas.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btsRelatorionotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
             this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
             this.btsRelatorionotas.Name = "btsRelatorionotas";
@@ -283,7 +296,7 @@
             this.btiCadOrcamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadOrcamento.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
             this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
             this.btiCadOrcamento.Name = "btiCadOrcamento";
@@ -309,7 +322,7 @@
             this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiRltNotaSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiRltNotaSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
             this.btiRltNotaSaida.Image = global::_5gpro.Properties.Resources.right_18px;
             this.btiRltNotaSaida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -326,7 +339,7 @@
             this.btiSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiSaida.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiSaida.ForeColor = System.Drawing.Color.White;
             this.btiSaida.Location = new System.Drawing.Point(0, 0);
             this.btiSaida.Name = "btiSaida";
@@ -351,7 +364,7 @@
             this.btiEntrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiEntrada.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiEntrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiEntrada.ForeColor = System.Drawing.Color.White;
             this.btiEntrada.Location = new System.Drawing.Point(0, 0);
             this.btiEntrada.Name = "btiEntrada";
@@ -377,7 +390,7 @@
             this.btiQuitacaoAPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiQuitacaoAPagar.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiQuitacaoAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiQuitacaoAPagar.ForeColor = System.Drawing.Color.White;
             this.btiQuitacaoAPagar.Location = new System.Drawing.Point(0, 28);
             this.btiQuitacaoAPagar.Name = "btiQuitacaoAPagar";
@@ -392,7 +405,7 @@
             this.btiCadContaPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadContaPagar.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
             this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
             this.btiCadContaPagar.Name = "btiCadContaPagar";
@@ -419,7 +432,7 @@
             this.btiQuitacaoAReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiQuitacaoAReceber.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiQuitacaoAReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiQuitacaoAReceber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoAReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiQuitacaoAReceber.ForeColor = System.Drawing.Color.White;
             this.btiQuitacaoAReceber.Location = new System.Drawing.Point(0, 28);
             this.btiQuitacaoAReceber.Name = "btiQuitacaoAReceber";
@@ -434,7 +447,7 @@
             this.btiCadContaReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiCadContaReceber.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadContaReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadContaReceber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiCadContaReceber.ForeColor = System.Drawing.Color.White;
             this.btiCadContaReceber.Location = new System.Drawing.Point(0, 0);
             this.btiCadContaReceber.Name = "btiCadContaReceber";
@@ -447,6 +460,7 @@
             // paneldropCadastros
             // 
             this.paneldropCadastros.BackColor = System.Drawing.Color.White;
+            this.paneldropCadastros.Controls.Add(this.btiUnimedida);
             this.paneldropCadastros.Controls.Add(this.btiGrupopessoa);
             this.paneldropCadastros.Controls.Add(this.btiGrupoitens);
             this.paneldropCadastros.Controls.Add(this.btiOperacoes);
@@ -455,7 +469,7 @@
             this.paneldropCadastros.Controls.Add(this.btiItens);
             this.paneldropCadastros.Controls.Add(this.btiCadPessoa);
             this.paneldropCadastros.Location = new System.Drawing.Point(3, 1);
-            this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 196);
+            this.paneldropCadastros.MaximumSize = new System.Drawing.Size(200, 222);
             this.paneldropCadastros.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCadastros.Name = "paneldropCadastros";
             this.paneldropCadastros.Size = new System.Drawing.Size(200, 10);
@@ -466,7 +480,7 @@
             this.btiGrupopessoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiGrupopessoa.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiGrupopessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiGrupopessoa.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGrupopessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiGrupopessoa.ForeColor = System.Drawing.Color.White;
             this.btiGrupopessoa.Location = new System.Drawing.Point(0, 168);
             this.btiGrupopessoa.Name = "btiGrupopessoa";
@@ -481,7 +495,7 @@
             this.btiGrupoitens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiGrupoitens.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiGrupoitens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiGrupoitens.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGrupoitens.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiGrupoitens.ForeColor = System.Drawing.Color.White;
             this.btiGrupoitens.Location = new System.Drawing.Point(0, 140);
             this.btiGrupoitens.Name = "btiGrupoitens";
@@ -496,7 +510,7 @@
             this.btiOperacoes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiOperacoes.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiOperacoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiOperacoes.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiOperacoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiOperacoes.ForeColor = System.Drawing.Color.White;
             this.btiOperacoes.Location = new System.Drawing.Point(0, 112);
             this.btiOperacoes.Name = "btiOperacoes";
@@ -511,7 +525,7 @@
             this.btiGruposusuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiGruposusuarios.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiGruposusuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiGruposusuarios.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGruposusuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiGruposusuarios.ForeColor = System.Drawing.Color.White;
             this.btiGruposusuarios.Location = new System.Drawing.Point(0, 84);
             this.btiGruposusuarios.Name = "btiGruposusuarios";
@@ -526,7 +540,7 @@
             this.btiUsuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiUsuarios.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiUsuarios.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiUsuarios.ForeColor = System.Drawing.Color.White;
             this.btiUsuarios.Location = new System.Drawing.Point(0, 56);
             this.btiUsuarios.Name = "btiUsuarios";
@@ -541,7 +555,7 @@
             this.btiItens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiItens.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiItens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiItens.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiItens.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiItens.ForeColor = System.Drawing.Color.White;
             this.btiItens.Location = new System.Drawing.Point(0, 28);
             this.btiItens.Name = "btiItens";
@@ -556,7 +570,7 @@
             this.btiCadPessoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
             this.btiCadPessoa.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadPessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadPessoa.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btiCadPessoa.ForeColor = System.Drawing.Color.White;
             this.btiCadPessoa.Location = new System.Drawing.Point(0, 0);
             this.btiCadPessoa.Name = "btiCadPessoa";
@@ -582,21 +596,24 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
-            // lbRelogio
-            // 
-            this.lbRelogio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbRelogio.AutoSize = true;
-            this.lbRelogio.Font = new System.Drawing.Font("Century Gothic", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRelogio.ForeColor = System.Drawing.Color.White;
-            this.lbRelogio.Location = new System.Drawing.Point(924, 3);
-            this.lbRelogio.Name = "lbRelogio";
-            this.lbRelogio.Size = new System.Drawing.Size(121, 32);
-            this.lbRelogio.TabIndex = 8;
-            this.lbRelogio.Text = "00:00:00";
-            // 
             // timerRelogio
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
+            // 
+            // btiUnimedida
+            // 
+            this.btiUnimedida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiUnimedida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiUnimedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiUnimedida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiUnimedida.ForeColor = System.Drawing.Color.White;
+            this.btiUnimedida.Location = new System.Drawing.Point(0, 196);
+            this.btiUnimedida.Name = "btiUnimedida";
+            this.btiUnimedida.Size = new System.Drawing.Size(200, 28);
+            this.btiUnimedida.TabIndex = 7;
+            this.btiUnimedida.Text = "Unidade de medida";
+            this.btiUnimedida.UseVisualStyleBackColor = false;
+            this.btiUnimedida.Click += new System.EventHandler(this.BtiUnimedida_Click);
             // 
             // fmMain
             // 
@@ -670,6 +687,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbRelogio;
         private System.Windows.Forms.Timer timerRelogio;
+        private System.Windows.Forms.Button btiUnimedida;
     }
 }
 
