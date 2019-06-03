@@ -698,9 +698,50 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nota_fiscal_terceiros_has_item` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`desintegracao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`desintegracao` (
+  `iddesintegracao` INT NOT NULL AUTO_INCREMENT,
+  `iditem` INT(11) NOT NULL,
+  PRIMARY KEY (`iddesintegracao`),
+  INDEX `fk_desintegracao_item1_idx` (`iditem` ASC) VISIBLE,
+  CONSTRAINT `fk_desintegracao_item1`
+    FOREIGN KEY (`iditem`)
+    REFERENCES `5gprodatabase`.`item` (`iditem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`resultado_desintegracao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`resultado_desintegracao` (
+  `idresultado_desintegracao` INT NOT NULL AUTO_INCREMENT,
+  `iddesintegracao` INT NOT NULL,
+  `iditem` INT(11) NOT NULL,
+  `porcentagem` DECIMAL(10,2) NOT NULL,
+  PRIMARY KEY (`idresultado_desintegracao`),
+  INDEX `fk_resultado_desintegracao_desintegracao1_idx` (`iddesintegracao` ASC) VISIBLE,
+  INDEX `fk_resultado_desintegracao_item1_idx` (`iditem` ASC) VISIBLE,
+  CONSTRAINT `fk_resultado_desintegracao_desintegracao1`
+    FOREIGN KEY (`iddesintegracao`)
+    REFERENCES `5gprodatabase`.`desintegracao` (`iddesintegracao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_resultado_desintegracao_item1`
+    FOREIGN KEY (`iditem`)
+    REFERENCES `5gprodatabase`.`item` (`iditem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 ";
             return create;
         }
