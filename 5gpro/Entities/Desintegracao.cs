@@ -10,7 +10,7 @@ namespace _5gpro.Entities
     {
         public int DesintegracaoID { get; set; }
         public Item Parteitem { get; set; }
-        public int IteminteiroID { get; set; }
+        public Item Iteminteiro { get; set; }
         public decimal Porcentagem { get; set; }
     }
 }

@@ -101,7 +101,7 @@
             this.Controls.Add(this.btNovo);
             this.Controls.Add(this.btBuscar);
             this.Name = "MiniMenuVertical";
-            this.Size = new System.Drawing.Size(53, 210);
+            this.Size = new System.Drawing.Size(53, 334);
             this.ResumeLayout(false);
 
         }

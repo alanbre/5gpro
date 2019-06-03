@@ -239,6 +239,12 @@
     <Compile Include="Controls\MenuVertical.Designer.cs">
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MenuVerticalSemNovo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuVerticalSemNovo.Designer.cs">
+      <DependentUpon>MenuVerticalSemNovo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MiniMenuVertical.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -248,6 +254,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
+    <Compile Include="Daos\DesitengracaoDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\FormaPagamentoDAO.cs" />
     <Compile Include="Daos\GrupoItemDAO.cs" />
@@ -307,17 +314,17 @@
     <Compile Include="Forms\fmCadastroUnimedida.Designer.cs">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmDefinirPartesItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmDefinirPartesItem.Designer.cs">
+      <DependentUpon>fmDefinirPartesItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmItemReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmItemReport.Designer.cs">
       <DependentUpon>fmItemReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\fmQuebrarItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmQuebrarItem.Designer.cs">
-      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
     </Compile>
     <Compile Include="Relatorios\fmRelatorioContas.cs">
       <SubType>Form</SubType>
@@ -711,17 +718,20 @@
     <EmbeddedResource Include="Controls\MenuVertical.resx">
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MenuVerticalSemNovo.resx">
+      <DependentUpon>MenuVerticalSemNovo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUnimedida.resx">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmDefinirPartesItem.resx">
+      <DependentUpon>fmDefinirPartesItem.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmQuebrarItem.resx">
-      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorios\fmRelatorioContas.resx">
       <DependentUpon>fmRelatorioContas.cs</DependentUpon>
@@ -1207,6 +1217,7 @@
     <None Include="Resources\left_18px.png" />
     <None Include="Resources\CELO-5G.ico" />
     <None Include="Resources\HAJELLL.png" />
+    <None Include="Resources\desintegracao_chart_40px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -36,6 +36,7 @@ namespace _5gpro.Daos
                 sql.addParam("@quantidade", item.Quantidade);
                 retorno = sql.insertQuery();
             }
+
             return retorno;
         }
         public Item BuscaByID(int Codigo)

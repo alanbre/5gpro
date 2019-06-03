@@ -120,22 +120,6 @@ namespace _5gpro.Forms
             Editando(true);
             buscaSubGrupoItem.Limpa();
         }
-        private void RbSimquebra_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbSimquebra.Checked) { gbQuebradgv.Enabled = true; }
-        }
-        private void RbNao_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbNaoquebra.Checked)
-            {
-                buscaItemParte.Limpa();
-                gbQuebradgv.Enabled = false;
-                listadesintegracoes.Clear();
-                dgvPartes.Rows.Clear();
-                dgvPartes.Refresh();
-                dbPorcentagem.Valor = 0;
-            }
-        }
 
 
 
@@ -371,7 +355,6 @@ namespace _5gpro.Forms
 
             if (item?.ItemID == codigo)
             {
-                DesintegracaoEnable();
                 return;
             }
 
@@ -408,7 +391,6 @@ namespace _5gpro.Forms
                 Editando(true);
                 LimpaCampos(false);
             }
-            DesintegracaoEnable();
         }
         private void LimpaCampos(bool cod)
         {
@@ -472,63 +454,12 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BtInserir_Click(object sender, EventArgs e)
-        {
-            if (buscaItemParte.item == null) { MessageBox.Show("Escolha o Item a ser inserido", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-            else
-            {
-                desintegracao = new Desintegracao();
-                desintegracao.IteminteiroID = int.Parse(tbCodigo.Text);
-                desintegracao.Parteitem = buscaItemParte.item;
-                desintegracao.Porcentagem = dbPorcentagem.Valor;
-                listadesintegracoes.Add(desintegracao);
-
-                dgvPartes.Rows.Add(desintegracao.Parteitem.ItemID, desintegracao.Parteitem.Descricao, desintegracao.Porcentagem);
-                dgvPartes.Refresh();
-            }
-        }
-
-        private void DesintegracaoEnable()
-        {
-            if (tbCodigo.Text.Length <= 0)
-            {
-                gbDesintegracao.Enabled = false;
-                gbQuebradgv.Enabled = false;
-                rbSimquebra.Checked = false;
-                rbNaoquebra.Checked = true;
-                listadesintegracoes.Clear();
-                dbPorcentagem.Valor = 0;
-            }
-            else
-            {
-                gbDesintegracao.Enabled = true;
-            }
-        }
-
-        private void BtRemoverparte_Click(object sender, EventArgs e)
-        {
-            listadesintegracoes.Remove(listadesintegracoes.Find(d => d.Parteitem.ItemID == int.Parse(dgvPartes.CurrentRow.Cells[0].Value.ToString())));
-            dgvPartes.Rows.Remove(dgvPartes.CurrentRow);
-            RemoverparteEnable();
-        }
 
         private void TbCodigo_TextChanged(object sender, EventArgs e)
         {
-            DesintegracaoEnable();
         }
 
-        private void RemoverparteEnable()
-        {
-            if (dgvPartes.SelectedRows.Count > 0)
-                btRemoverparte.Enabled = true;
-            else
-                btRemoverparte.Enabled = false;
-        }
 
-        private void DgvPartes_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            RemoverparteEnable();
-        }
 
         private void EnterTab(object sender, KeyEventArgs e)
         {
