@@ -5623,7 +5623,7 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Cadastro de Grupo de usuários', '010400'),
 ('Cadastro de Grupo de Itens', '010500'),
 ('Cadastro de Grupo de Pessoas', '010600'),
-
+('Cadastro de Unidades de medida', '010700'),
 
 ('Cadastro de Orçamentos', '020100'),
 

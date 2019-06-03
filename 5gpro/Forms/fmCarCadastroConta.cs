@@ -132,9 +132,7 @@ namespace _5gpro.Forms
             }
         }
         private void Salva()
-        {
-
-            bool ok = false;
+        { 
 
             if (!editando)
             {

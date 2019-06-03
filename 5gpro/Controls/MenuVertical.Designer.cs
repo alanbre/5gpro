@@ -39,7 +39,8 @@
             // 
             // btRecarregar
             // 
-            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btRecarregar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btRecarregar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btRecarregar.Image = global::_5gpro.Properties.Resources.iosReload_43px_blue;
@@ -54,7 +55,8 @@
             // 
             // btSalvar
             // 
-            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btSalvar.Enabled = false;
             this.btSalvar.Image = global::_5gpro.Properties.Resources.iosOk_48px_Green;
@@ -69,7 +71,8 @@
             // 
             // btExcluir
             // 
-            this.btExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btExcluir.Enabled = false;
             this.btExcluir.Image = global::_5gpro.Properties.Resources.iosDelete_48px_Red;
@@ -84,7 +87,8 @@
             // 
             // btNovo
             // 
-            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btNovo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btNovo.Image = global::_5gpro.Properties.Resources.iosPlus_48px_blue;
             this.btNovo.Location = new System.Drawing.Point(2, 2);
@@ -98,7 +102,8 @@
             // 
             // btAnterior
             // 
-            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btAnterior.Image = global::_5gpro.Properties.Resources.iosLeft_48px_Blue;
             this.btAnterior.Location = new System.Drawing.Point(2, 210);
@@ -112,7 +117,8 @@
             // 
             // btBuscar
             // 
-            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btBuscar.Image = global::_5gpro.Properties.Resources.iosSearch_45px_Blue;
             this.btBuscar.Location = new System.Drawing.Point(2, 54);
@@ -126,7 +132,8 @@
             // 
             // btProximo
             // 
-            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.btProximo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btProximo.Image = global::_5gpro.Properties.Resources.iosRight_48px_Blue;
             this.btProximo.Location = new System.Drawing.Point(2, 262);

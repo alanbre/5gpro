@@ -27,7 +27,7 @@ namespace _5gpro
         private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden, 
             EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden;
 
-        private int cadastrosOn = 7,
+        private int cadastrosOn = 8,
                     areceberOn = 2,
                     apagarOn = 2,
                     entradasOn = 1,
@@ -48,14 +48,15 @@ namespace _5gpro
         //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Grupo de Itens = 010500
         //Cadastro de Grupo de Pessoas = 010600
+        //Cadastro de Unidade de medida = 010700
+        //Cadastro de Orçamento = 020100
+        //Cadastro de Nota Fiscal = 030100
         //Cadastro de Operações = 040100
         //Cadastro de Contas a Receber = 050100
         //Quitação de Contas a Receber = 050200
         //Cadastro de Contas a Pagar = 060100
         //Quitação de Contas a Pagar = 060200
         //Entrada de notas = 070100
-        //Cadastro de Nota Fiscal = 030100
-        //Cadastro de Orçamento = 020100
 
 
         public fmMain()
@@ -350,6 +351,15 @@ namespace _5gpro
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
             lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void BtiUnimedida_Click(object sender, EventArgs e)
+        {
+            var formCadUnidadeMedida = new fmCadastroUnimedida();
+            formCadUnidadeMedida.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
         }
 
         private void LbData_Click(object sender, EventArgs e)

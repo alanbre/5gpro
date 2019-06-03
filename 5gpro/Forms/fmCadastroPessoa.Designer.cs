@@ -131,7 +131,7 @@
             this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
             this.buscaGrupoPessoa.Size = new System.Drawing.Size(465, 39);
             this.buscaGrupoPessoa.TabIndex = 6;
-            this.buscaGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaGrupoPessoa.text_changedEventHandler(this.BuscaGrupoPessoa_Text_Changed_1);
+            this.buscaGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaGrupoPessoa.text_changedEventHandler(this.BuscaGrupoPessoa_Text_Changed);
             this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave);
             // 
             // buscaSubGrupoPessoa
