@@ -9,8 +9,6 @@ namespace _5gpro.Entities
     class Desintegracao
     {
         public int DesintegracaoID { get; set; }
-        public Item Parteitem { get; set; }
-        public Item Iteminteiro { get; set; }
-        public decimal Porcentagem { get; set; }
+        public Item Itemdesintegrado { get; set; }
     }
 }

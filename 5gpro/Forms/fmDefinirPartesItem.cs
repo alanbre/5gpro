@@ -14,7 +14,12 @@ namespace _5gpro.Forms
     public partial class fmDefinirPartesItem : Form
     {
         private List<Desintegracao> listadesintegracoes = new List<Desintegracao>();
+        private List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
+
         private Desintegracao desintegracao;
+        private DesintegracaoResultado resultado;
+
+        bool editando, ignoraCheckEvent = false;
 
         public fmDefinirPartesItem()
         {
@@ -30,19 +35,23 @@ namespace _5gpro.Forms
             else
             {
                 desintegracao = new Desintegracao();
-                desintegracao.Iteminteiro = buscaItemInteiro.item;
-                desintegracao.Parteitem = buscaItemParte.item;
-                desintegracao.Porcentagem = dbPorcentagem.Valor;
+                resultado = new DesintegracaoResultado();
+
+                desintegracao.DesintegracaoID = buscaItemInteiro.item.ItemID;
+                desintegracao.Itemdesintegrado = buscaItemInteiro.item;
+
+                resultado.Item = buscaItemParte.item;
+                resultado.Porcentagem = dbPorcentagem.Valor;
                 listadesintegracoes.Add(desintegracao);
 
-                dgvPartes.Rows.Add(desintegracao.Parteitem.ItemID, desintegracao.Parteitem.Descricao, desintegracao.Porcentagem);
+                //dgvPartes.Rows.Add(desintegracao.Parteitem.ItemID, desintegracao.Parteitem.Descricao, desintegracao.Porcentagem);
                 dgvPartes.Refresh();
             }
         }
 
         private void BtRemoverparte_Click(object sender, EventArgs e)
         {
-            listadesintegracoes.Remove(listadesintegracoes.Find(d => d.Parteitem.ItemID == int.Parse(dgvPartes.CurrentRow.Cells[0].Value.ToString())));
+            //listadesintegracoes.Remove(listadesintegracoes.Find(d => d.Parteitem.ItemID == int.Parse(dgvPartes.CurrentRow.Cells[0].Value.ToString())));
             dgvPartes.Rows.Remove(dgvPartes.CurrentRow);
             RemoverparteEnable();
         }
@@ -96,50 +105,36 @@ namespace _5gpro.Forms
 
 
 
-            item = new Item();
-            item.ItemID = int.Parse(tbCodigo.Text);
-            item.Descricao = tbDescricao.Text;
-            item.DescCompra = tbDescricaoDeCompra.Text;
-            item.Referencia = tbReferencia.Text;
-            item.TipoItem = rbProduto.Checked ? "P" : "S";
-            item.Quantidade = dbQuantidade.Valor;
-            item.ValorEntrada = dbPrecoUltimaEntrada.Valor;
-            item.ValorSaida = dbPrecoVenda.Valor;
-            item.Estoquenecessario = dbEstoqueNecessario.Valor;
-            item.Unimedida = buscaUnimedidaItem.unimedida;
-            item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
-
             var controls = (ControlCollection)this.Controls;
 
-            ok = validacao.ValidarEntidade(item, controls);
-            if (ok)
-            {
-                validacao.despintarCampos(controls);
-                int resultado = itemDAO.SalvaOuAtualiza(item);
-                if (resultado == 0)
-                {
-                    MessageBox.Show("Problema ao salvar o registro",
-                    "Problema ao salvar",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                    return;
-                }
-                else if (resultado == 1)
-                {
-                    tbAjuda.Text = "Dados salvos com sucesso";
-                    Editando(false);
-                    return;
-                }
-                else if (resultado == 2)
-                {
-                    tbAjuda.Text = "Dados atualizados com sucesso";
-                    Editando(false);
-                    return;
-                }
+            //ok = validacao.ValidarEntidade(item, controls);
+            //if (ok)
+            //{
+            //    validacao.despintarCampos(controls);
+            //    int resultado = itemDAO.SalvaOuAtualiza(item);
+            //    if (resultado == 0)
+            //    {
+            //        MessageBox.Show("Problema ao salvar o registro",
+            //        "Problema ao salvar",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Warning);
+            //        return;
+            //    }
+            //    else if (resultado == 1)
+            //    {
+            //        tbAjuda.Text = "Dados salvos com sucesso";
+            //        Editando(false);
+            //        return;
+            //    }
+            //    else if (resultado == 2)
+            //    {
+            //        tbAjuda.Text = "Dados atualizados com sucesso";
+            //        Editando(false);
+            //        return;
+            //    }
 
 
-
-            }
         }
     }
 }
+    

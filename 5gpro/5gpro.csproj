@@ -301,6 +301,7 @@
     <Compile Include="Entities\ParcelaOperacao.cs" />
     <Compile Include="Entities\Desintegracao.cs" />
     <Compile Include="Entities\Permissao.cs" />
+    <Compile Include="Entities\DesintegracaoResultado.cs" />
     <Compile Include="Entities\SubGrupoItem.cs" />
     <Compile Include="Entities\SubGrupoPessoa.cs" />
     <Compile Include="Entities\Unimedida.cs" />
