@@ -1,5 +1,5 @@
 ﻿namespace _5gpro
-{
+{ 
     partial class fmMain
     {
         /// <summary>
@@ -308,7 +308,7 @@
             this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 28);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
-            this.paneldropCaixa.Size = new System.Drawing.Size(200, 28);
+            this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
             this.paneldropCaixa.TabIndex = 8;
             // 
             // btiCadastroCaixa
@@ -320,7 +320,7 @@
             this.btiCadastroCaixa.ForeColor = System.Drawing.Color.White;
             this.btiCadastroCaixa.Location = new System.Drawing.Point(0, 0);
             this.btiCadastroCaixa.Name = "btiCadastroCaixa";
-            this.btiCadastroCaixa.Size = new System.Drawing.Size(200, 40);
+            this.btiCadastroCaixa.Size = new System.Drawing.Size(200, 28);
             this.btiCadastroCaixa.TabIndex = 0;
             this.btiCadastroCaixa.Text = "Cadastro caixa";
             this.btiCadastroCaixa.UseVisualStyleBackColor = false;

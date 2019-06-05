@@ -322,7 +322,7 @@ namespace _5gpro
         private void BtCaixa_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCaixa.BackColor = ColorTranslator.FromHtml("#0092F4");
+            btCaixa.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
             timerDropLateral.Start();
             botaoPressionado = "botaocaixa";
         }
@@ -398,7 +398,6 @@ namespace _5gpro
             RecolherMenus();
             DesmarcarBotoes();
         }
-
 
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
@@ -631,6 +630,9 @@ namespace _5gpro
                     paneldropDesintegracao.Height = 0;
                     DesintegracaoHidden = true;
 
+                    paneldropCaixa.Height = 0;
+                    CaixaHidden = true;
+
                     Image imgdefault = Properties.Resources.right_18px;
                     btiRltNotaSaida.Image = imgdefault;
 
@@ -840,11 +842,12 @@ namespace _5gpro
                     }
                     RecolherMenus();
                     break;
+
                 case "botaocaixa":
                     if (CaixaHidden)
                     {
                         tamanhopanel = caixaOn * 28;
-                        paneldropDesintegracao.Height += tamanhopanel > 0 ? 28 : 0;
+                        paneldropCaixa.Height += tamanhopanel > 0 ? 28 : 0;
 
                         if (paneldropCaixa.Size.Height == tamanhopanel)
                         {
@@ -865,6 +868,7 @@ namespace _5gpro
                     }
                     RecolherMenus();
                     break;
+
                 case "subrelatoriosaida":
                     if (RelatorioSaidaHidden)
                     {
