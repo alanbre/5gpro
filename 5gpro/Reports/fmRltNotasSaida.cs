@@ -586,7 +586,6 @@ namespace _5gpro.Reports
             tcPaginas.SelectTab(1);
             return valido;
         }
-
     }
 }
 

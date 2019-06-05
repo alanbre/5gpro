@@ -245,6 +245,7 @@
     <Compile Include="Controls\MiniMenuVertical.Designer.cs">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Daos\CaixaDAO.cs" />
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
@@ -273,6 +274,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsContas.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Caixa.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -301,6 +303,12 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmCaiCadastroCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiCadastroCaixa.Designer.cs">
+      <DependentUpon>fmCaiCadastroCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCadastroUnimedida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -377,11 +385,6 @@
     </Compile>
     <Compile Include="Reports\fmRltNotasSaida.Designer.cs">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\gugugugu.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>gugugugu.xsd</DependentUpon>
     </Compile>
     <Compile Include="testesrelatorios\exemplorelatorio.cs">
       <SubType>Form</SubType>
@@ -714,6 +717,9 @@
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiCadastroCaixa.resx">
+      <DependentUpon>fmCaiCadastroCaixa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUnimedida.resx">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </EmbeddedResource>
@@ -946,17 +952,6 @@
     </None>
     <None Include="Reports\DSVazio.xss">
       <DependentUpon>DSVazio.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\gugugugu.xsc">
-      <DependentUpon>gugugugu.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\gugugugu.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>gugugugu.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\gugugugu.xss">
-      <DependentUpon>gugugugu.xsd</DependentUpon>
     </None>
     <None Include="testesrelatorios\SetUsuario.xsc">
       <DependentUpon>SetUsuario.xsd</DependentUpon>
