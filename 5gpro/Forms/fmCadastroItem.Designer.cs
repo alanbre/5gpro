@@ -28,18 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnDadosGerais = new System.Windows.Forms.Panel();
-            this.btAddUnimedida = new System.Windows.Forms.Button();
-            this.gbQuebradgv = new System.Windows.Forms.GroupBox();
-            this.lbPorcentagem = new System.Windows.Forms.Label();
-            this.btInserir = new System.Windows.Forms.Button();
-            this.dgvPartes = new System.Windows.Forms.DataGridView();
-            this.btRemoverparte = new System.Windows.Forms.Button();
             this.gbDesintegracao = new System.Windows.Forms.GroupBox();
-            this.rbSimquebra = new System.Windows.Forms.RadioButton();
-            this.rbNaoquebra = new System.Windows.Forms.RadioButton();
+            this.btConfigDesintegracao = new System.Windows.Forms.Button();
+            this.rbDesiNao = new System.Windows.Forms.RadioButton();
+            this.rbDesiSim = new System.Windows.Forms.RadioButton();
+            this.btAddUnimedida = new System.Windows.Forms.Button();
+            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
             this.lbQuantidade = new System.Windows.Forms.Label();
+            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
             this.gbTipoDeItem = new System.Windows.Forms.GroupBox();
             this.rbServico = new System.Windows.Forms.RadioButton();
             this.rbProduto = new System.Windows.Forms.RadioButton();
@@ -54,27 +53,16 @@
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.tcItens = new System.Windows.Forms.TabControl();
             this.tpEstoque = new System.Windows.Forms.TabPage();
+            this.dbEstoqueNecessario = new _5gpro.Controls.DecimalBox();
+            this.dbPrecoUltimaEntrada = new _5gpro.Controls.DecimalBox();
             this.lbEstoqueNecessario = new System.Windows.Forms.Label();
             this.btHistEntradas = new System.Windows.Forms.Button();
             this.lbPrecoUltimaEntrada = new System.Windows.Forms.Label();
             this.tpVendas = new System.Windows.Forms.TabPage();
-            this.lbPrecoVenda = new System.Windows.Forms.Label();
-            this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcPorcentagem = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.dbEstoqueNecessario = new _5gpro.Controls.DecimalBox();
-            this.dbPrecoUltimaEntrada = new _5gpro.Controls.DecimalBox();
             this.dbPrecoVenda = new _5gpro.Controls.DecimalBox();
-            this.dbPorcentagem = new _5gpro.Controls.DecimalBox();
-            this.buscaItemParte = new _5gpro.Controls.BuscaItem();
-            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
-            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
-            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
-            this.buscaUnimedidaItem = new _5gpro.Controls.BuscaUnimedida();
+            this.lbPrecoVenda = new System.Windows.Forms.Label();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.pnDadosGerais.SuspendLayout();
-            this.gbQuebradgv.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             this.gbDesintegracao.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
             this.tcItens.SuspendLayout();
@@ -87,9 +75,8 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnDadosGerais.Controls.Add(this.btAddUnimedida);
-            this.pnDadosGerais.Controls.Add(this.gbQuebradgv);
             this.pnDadosGerais.Controls.Add(this.gbDesintegracao);
+            this.pnDadosGerais.Controls.Add(this.btAddUnimedida);
             this.pnDadosGerais.Controls.Add(this.dbQuantidade);
             this.pnDadosGerais.Controls.Add(this.lbQuantidade);
             this.pnDadosGerais.Controls.Add(this.buscaSubGrupoItem);
@@ -109,6 +96,54 @@
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 364);
             this.pnDadosGerais.TabIndex = 0;
             // 
+            // gbDesintegracao
+            // 
+            this.gbDesintegracao.Controls.Add(this.btConfigDesintegracao);
+            this.gbDesintegracao.Controls.Add(this.rbDesiNao);
+            this.gbDesintegracao.Controls.Add(this.rbDesiSim);
+            this.gbDesintegracao.Enabled = false;
+            this.gbDesintegracao.Location = new System.Drawing.Point(372, 186);
+            this.gbDesintegracao.Name = "gbDesintegracao";
+            this.gbDesintegracao.Size = new System.Drawing.Size(105, 72);
+            this.gbDesintegracao.TabIndex = 27;
+            this.gbDesintegracao.TabStop = false;
+            this.gbDesintegracao.Text = "Desintegração";
+            // 
+            // btConfigDesintegracao
+            // 
+            this.btConfigDesintegracao.Enabled = false;
+            this.btConfigDesintegracao.Location = new System.Drawing.Point(6, 43);
+            this.btConfigDesintegracao.Name = "btConfigDesintegracao";
+            this.btConfigDesintegracao.Size = new System.Drawing.Size(93, 23);
+            this.btConfigDesintegracao.TabIndex = 28;
+            this.btConfigDesintegracao.Text = "Configurar";
+            this.btConfigDesintegracao.UseVisualStyleBackColor = true;
+            this.btConfigDesintegracao.Click += new System.EventHandler(this.BtConfigDesintegracao_Click);
+            // 
+            // rbDesiNao
+            // 
+            this.rbDesiNao.AutoSize = true;
+            this.rbDesiNao.Checked = true;
+            this.rbDesiNao.Location = new System.Drawing.Point(54, 22);
+            this.rbDesiNao.Name = "rbDesiNao";
+            this.rbDesiNao.Size = new System.Drawing.Size(45, 17);
+            this.rbDesiNao.TabIndex = 1;
+            this.rbDesiNao.TabStop = true;
+            this.rbDesiNao.Text = "Não";
+            this.rbDesiNao.UseVisualStyleBackColor = true;
+            this.rbDesiNao.CheckedChanged += new System.EventHandler(this.RbDesiNao_CheckedChanged);
+            // 
+            // rbDesiSim
+            // 
+            this.rbDesiSim.AutoSize = true;
+            this.rbDesiSim.Location = new System.Drawing.Point(6, 22);
+            this.rbDesiSim.Name = "rbDesiSim";
+            this.rbDesiSim.Size = new System.Drawing.Size(42, 17);
+            this.rbDesiSim.TabIndex = 0;
+            this.rbDesiSim.Text = "Sim";
+            this.rbDesiSim.UseVisualStyleBackColor = true;
+            this.rbDesiSim.CheckedChanged += new System.EventHandler(this.RbDesiSim_CheckedChanged);
+            // 
             // btAddUnimedida
             // 
             this.btAddUnimedida.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
@@ -118,112 +153,18 @@
             this.btAddUnimedida.TabIndex = 26;
             this.btAddUnimedida.UseVisualStyleBackColor = true;
             // 
-            // gbQuebradgv
+            // dbQuantidade
             // 
-            this.gbQuebradgv.Controls.Add(this.dbPorcentagem);
-            this.gbQuebradgv.Controls.Add(this.lbPorcentagem);
-            this.gbQuebradgv.Controls.Add(this.btInserir);
-            this.gbQuebradgv.Controls.Add(this.buscaItemParte);
-            this.gbQuebradgv.Controls.Add(this.dgvPartes);
-            this.gbQuebradgv.Controls.Add(this.btRemoverparte);
-            this.gbQuebradgv.Enabled = false;
-            this.gbQuebradgv.Location = new System.Drawing.Point(569, 65);
-            this.gbQuebradgv.Name = "gbQuebradgv";
-            this.gbQuebradgv.Size = new System.Drawing.Size(496, 259);
-            this.gbQuebradgv.TabIndex = 25;
-            this.gbQuebradgv.TabStop = false;
-            this.gbQuebradgv.Text = "Partes";
-            // 
-            // lbPorcentagem
-            // 
-            this.lbPorcentagem.AutoSize = true;
-            this.lbPorcentagem.Location = new System.Drawing.Point(357, 34);
-            this.lbPorcentagem.Name = "lbPorcentagem";
-            this.lbPorcentagem.Size = new System.Drawing.Size(70, 13);
-            this.lbPorcentagem.TabIndex = 27;
-            this.lbPorcentagem.Text = "Porcentagem";
-            // 
-            // btInserir
-            // 
-            this.btInserir.Location = new System.Drawing.Point(435, 49);
-            this.btInserir.Name = "btInserir";
-            this.btInserir.Size = new System.Drawing.Size(52, 23);
-            this.btInserir.TabIndex = 26;
-            this.btInserir.Text = "Inserir";
-            this.btInserir.UseVisualStyleBackColor = true;
-            this.btInserir.Click += new System.EventHandler(this.BtInserir_Click);
-            // 
-            // dgvPartes
-            // 
-            this.dgvPartes.AllowUserToAddRows = false;
-            this.dgvPartes.AllowUserToDeleteRows = false;
-            this.dgvPartes.AllowUserToOrderColumns = true;
-            this.dgvPartes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvPartes.BackgroundColor = System.Drawing.Color.White;
-            this.dgvPartes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPartes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvtbcCodigo,
-            this.dgvtbcDescricao,
-            this.dgvtbcPorcentagem});
-            this.dgvPartes.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvPartes.Location = new System.Drawing.Point(12, 79);
-            this.dgvPartes.MultiSelect = false;
-            this.dgvPartes.Name = "dgvPartes";
-            this.dgvPartes.ReadOnly = true;
-            this.dgvPartes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPartes.Size = new System.Drawing.Size(447, 172);
-            this.dgvPartes.TabIndex = 15;
-            this.dgvPartes.TabStop = false;
-            this.dgvPartes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPartes_CellClick);
-            // 
-            // btRemoverparte
-            // 
-            this.btRemoverparte.Enabled = false;
-            this.btRemoverparte.Image = global::_5gpro.Properties.Resources.icons8_Delete_Subtra_22px;
-            this.btRemoverparte.Location = new System.Drawing.Point(465, 78);
-            this.btRemoverparte.Name = "btRemoverparte";
-            this.btRemoverparte.Size = new System.Drawing.Size(22, 22);
-            this.btRemoverparte.TabIndex = 24;
-            this.btRemoverparte.UseVisualStyleBackColor = true;
-            this.btRemoverparte.Click += new System.EventHandler(this.BtRemoverparte_Click);
-            // 
-            // gbDesintegracao
-            // 
-            this.gbDesintegracao.Controls.Add(this.rbSimquebra);
-            this.gbDesintegracao.Controls.Add(this.rbNaoquebra);
-            this.gbDesintegracao.Enabled = false;
-            this.gbDesintegracao.Location = new System.Drawing.Point(574, 19);
-            this.gbDesintegracao.Name = "gbDesintegracao";
-            this.gbDesintegracao.Size = new System.Drawing.Size(101, 40);
-            this.gbDesintegracao.TabIndex = 14;
-            this.gbDesintegracao.TabStop = false;
-            this.gbDesintegracao.Text = "Desintegração";
-            // 
-            // rbSimquebra
-            // 
-            this.rbSimquebra.AutoSize = true;
-            this.rbSimquebra.Location = new System.Drawing.Point(7, 17);
-            this.rbSimquebra.Name = "rbSimquebra";
-            this.rbSimquebra.Size = new System.Drawing.Size(42, 17);
-            this.rbSimquebra.TabIndex = 1;
-            this.rbSimquebra.Text = "Sim";
-            this.rbSimquebra.UseVisualStyleBackColor = true;
-            this.rbSimquebra.CheckedChanged += new System.EventHandler(this.RbSimquebra_CheckedChanged);
-            // 
-            // rbNaoquebra
-            // 
-            this.rbNaoquebra.AutoSize = true;
-            this.rbNaoquebra.Checked = true;
-            this.rbNaoquebra.Location = new System.Drawing.Point(55, 17);
-            this.rbNaoquebra.Name = "rbNaoquebra";
-            this.rbNaoquebra.Size = new System.Drawing.Size(45, 17);
-            this.rbNaoquebra.TabIndex = 0;
-            this.rbNaoquebra.TabStop = true;
-            this.rbNaoquebra.Text = "Não";
-            this.rbNaoquebra.UseVisualStyleBackColor = true;
-            this.rbNaoquebra.CheckedChanged += new System.EventHandler(this.RbNao_CheckedChanged);
+            this.dbQuantidade.Enabled = false;
+            this.dbQuantidade.Location = new System.Drawing.Point(16, 197);
+            this.dbQuantidade.Name = "dbQuantidade";
+            this.dbQuantidade.Size = new System.Drawing.Size(79, 22);
+            this.dbQuantidade.TabIndex = 9;
+            this.dbQuantidade.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbQuantidade
             // 
@@ -234,11 +175,36 @@
             this.lbQuantidade.TabIndex = 8;
             this.lbQuantidade.Text = "Quantidade";
             // 
+            // buscaSubGrupoItem
+            // 
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(12, 309);
+            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
+            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaSubGrupoItem.TabIndex = 13;
+            this.buscaSubGrupoItem.Text_Changed += new _5gpro.Controls.BuscaSubGrupoItem.text_changedEventHandler(this.BuscaSubGrupoItem_Text_Changed);
+            // 
+            // buscaGrupoItem
+            // 
+            this.buscaGrupoItem.Location = new System.Drawing.Point(12, 264);
+            this.buscaGrupoItem.Name = "buscaGrupoItem";
+            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
+            this.buscaGrupoItem.TabIndex = 12;
+            this.buscaGrupoItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItem_Text_Changed);
+            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
+            // 
+            // buscaUnimedidaItem
+            // 
+            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 135);
+            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
+            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
+            this.buscaUnimedidaItem.TabIndex = 6;
+            this.buscaUnimedidaItem.Text_Changed += new _5gpro.Controls.BuscaUnimedida.text_changedEventHandler(this.BuscaUnimedidaItem_Text_Changed);
+            // 
             // gbTipoDeItem
             // 
             this.gbTipoDeItem.Controls.Add(this.rbServico);
             this.gbTipoDeItem.Controls.Add(this.rbProduto);
-            this.gbTipoDeItem.Location = new System.Drawing.Point(412, 144);
+            this.gbTipoDeItem.Location = new System.Drawing.Point(372, 135);
             this.gbTipoDeItem.Name = "gbTipoDeItem";
             this.gbTipoDeItem.Size = new System.Drawing.Size(131, 45);
             this.gbTipoDeItem.TabIndex = 7;
@@ -329,7 +295,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.TextChanged += new System.EventHandler(this.TbCodigo_TextChanged);
             this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbCodigo
@@ -379,6 +344,30 @@
             this.tpEstoque.TabIndex = 0;
             this.tpEstoque.Text = "Estoque";
             // 
+            // dbEstoqueNecessario
+            // 
+            this.dbEstoqueNecessario.Location = new System.Drawing.Point(6, 58);
+            this.dbEstoqueNecessario.Name = "dbEstoqueNecessario";
+            this.dbEstoqueNecessario.Size = new System.Drawing.Size(86, 22);
+            this.dbEstoqueNecessario.TabIndex = 4;
+            this.dbEstoqueNecessario.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbPrecoUltimaEntrada
+            // 
+            this.dbPrecoUltimaEntrada.Location = new System.Drawing.Point(6, 19);
+            this.dbPrecoUltimaEntrada.Name = "dbPrecoUltimaEntrada";
+            this.dbPrecoUltimaEntrada.Size = new System.Drawing.Size(86, 22);
+            this.dbPrecoUltimaEntrada.TabIndex = 1;
+            this.dbPrecoUltimaEntrada.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
             // lbEstoqueNecessario
             // 
             this.lbEstoqueNecessario.AutoSize = true;
@@ -420,6 +409,18 @@
             this.tpVendas.TabIndex = 1;
             this.tpVendas.Text = "Vendas";
             // 
+            // dbPrecoVenda
+            // 
+            this.dbPrecoVenda.Location = new System.Drawing.Point(6, 19);
+            this.dbPrecoVenda.Name = "dbPrecoVenda";
+            this.dbPrecoVenda.Size = new System.Drawing.Size(86, 22);
+            this.dbPrecoVenda.TabIndex = 1;
+            this.dbPrecoVenda.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
             // lbPrecoVenda
             // 
             this.lbPrecoVenda.AutoSize = true;
@@ -428,24 +429,6 @@
             this.lbPrecoVenda.Size = new System.Drawing.Size(83, 13);
             this.lbPrecoVenda.TabIndex = 0;
             this.lbPrecoVenda.Text = "Preço de venda";
-            // 
-            // dgvtbcCodigo
-            // 
-            this.dgvtbcCodigo.HeaderText = "Código";
-            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
-            this.dgvtbcCodigo.ReadOnly = true;
-            // 
-            // dgvtbcDescricao
-            // 
-            this.dgvtbcDescricao.HeaderText = "Descrição";
-            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
-            this.dgvtbcDescricao.ReadOnly = true;
-            // 
-            // dgvtbcPorcentagem
-            // 
-            this.dgvtbcPorcentagem.HeaderText = "Porcentagem";
-            this.dgvtbcPorcentagem.Name = "dgvtbcPorcentagem";
-            this.dgvtbcPorcentagem.ReadOnly = true;
             // 
             // menuVertical
             // 
@@ -461,99 +444,6 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
-            // dbEstoqueNecessario
-            // 
-            this.dbEstoqueNecessario.Location = new System.Drawing.Point(6, 58);
-            this.dbEstoqueNecessario.Name = "dbEstoqueNecessario";
-            this.dbEstoqueNecessario.Size = new System.Drawing.Size(86, 22);
-            this.dbEstoqueNecessario.TabIndex = 4;
-            this.dbEstoqueNecessario.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbPrecoUltimaEntrada
-            // 
-            this.dbPrecoUltimaEntrada.Location = new System.Drawing.Point(6, 19);
-            this.dbPrecoUltimaEntrada.Name = "dbPrecoUltimaEntrada";
-            this.dbPrecoUltimaEntrada.Size = new System.Drawing.Size(86, 22);
-            this.dbPrecoUltimaEntrada.TabIndex = 1;
-            this.dbPrecoUltimaEntrada.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbPrecoVenda
-            // 
-            this.dbPrecoVenda.Location = new System.Drawing.Point(6, 19);
-            this.dbPrecoVenda.Name = "dbPrecoVenda";
-            this.dbPrecoVenda.Size = new System.Drawing.Size(86, 22);
-            this.dbPrecoVenda.TabIndex = 1;
-            this.dbPrecoVenda.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbPorcentagem
-            // 
-            this.dbPorcentagem.Location = new System.Drawing.Point(360, 51);
-            this.dbPorcentagem.Name = "dbPorcentagem";
-            this.dbPorcentagem.Size = new System.Drawing.Size(69, 22);
-            this.dbPorcentagem.TabIndex = 28;
-            this.dbPorcentagem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaItemParte
-            // 
-            this.buscaItemParte.Location = new System.Drawing.Point(6, 34);
-            this.buscaItemParte.Name = "buscaItemParte";
-            this.buscaItemParte.Size = new System.Drawing.Size(350, 39);
-            this.buscaItemParte.TabIndex = 25;
-            // 
-            // dbQuantidade
-            // 
-            this.dbQuantidade.Enabled = false;
-            this.dbQuantidade.Location = new System.Drawing.Point(16, 197);
-            this.dbQuantidade.Name = "dbQuantidade";
-            this.dbQuantidade.Size = new System.Drawing.Size(79, 22);
-            this.dbQuantidade.TabIndex = 9;
-            this.dbQuantidade.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaSubGrupoItem
-            // 
-            this.buscaSubGrupoItem.Location = new System.Drawing.Point(12, 309);
-            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
-            this.buscaSubGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaSubGrupoItem.TabIndex = 13;
-            this.buscaSubGrupoItem.Text_Changed += new _5gpro.Controls.BuscaSubGrupoItem.text_changedEventHandler(this.BuscaSubGrupoItem_Text_Changed);
-            // 
-            // buscaGrupoItem
-            // 
-            this.buscaGrupoItem.Location = new System.Drawing.Point(12, 264);
-            this.buscaGrupoItem.Name = "buscaGrupoItem";
-            this.buscaGrupoItem.Size = new System.Drawing.Size(465, 39);
-            this.buscaGrupoItem.TabIndex = 12;
-            this.buscaGrupoItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItem_Text_Changed);
-            this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItemTelaCadItem_Leave);
-            // 
-            // buscaUnimedidaItem
-            // 
-            this.buscaUnimedidaItem.Location = new System.Drawing.Point(9, 135);
-            this.buscaUnimedidaItem.Name = "buscaUnimedidaItem";
-            this.buscaUnimedidaItem.Size = new System.Drawing.Size(319, 39);
-            this.buscaUnimedidaItem.TabIndex = 6;
-            this.buscaUnimedidaItem.Text_Changed += new _5gpro.Controls.BuscaUnimedida.text_changedEventHandler(this.BuscaUnimedidaItem_Text_Changed);
             // 
             // fmCadastroItem
             // 
@@ -578,9 +468,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroItens_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
-            this.gbQuebradgv.ResumeLayout(false);
-            this.gbQuebradgv.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).EndInit();
             this.gbDesintegracao.ResumeLayout(false);
             this.gbDesintegracao.PerformLayout();
             this.gbTipoDeItem.ResumeLayout(false);
@@ -625,19 +512,10 @@
         private Controls.DecimalBox dbEstoqueNecessario;
         private Controls.DecimalBox dbPrecoUltimaEntrada;
         private Controls.DecimalBox dbPrecoVenda;
-        private System.Windows.Forms.GroupBox gbDesintegracao;
-        private System.Windows.Forms.RadioButton rbSimquebra;
-        private System.Windows.Forms.RadioButton rbNaoquebra;
-        private System.Windows.Forms.GroupBox gbQuebradgv;
-        private System.Windows.Forms.DataGridView dgvPartes;
-        private System.Windows.Forms.Button btRemoverparte;
         private System.Windows.Forms.Button btAddUnimedida;
-        private System.Windows.Forms.Button btInserir;
-        private Controls.BuscaItem buscaItemParte;
-        private Controls.DecimalBox dbPorcentagem;
-        private System.Windows.Forms.Label lbPorcentagem;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescricao;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcPorcentagem;
+        private System.Windows.Forms.GroupBox gbDesintegracao;
+        private System.Windows.Forms.RadioButton rbDesiNao;
+        private System.Windows.Forms.RadioButton rbDesiSim;
+        private System.Windows.Forms.Button btConfigDesintegracao;
     }
 }

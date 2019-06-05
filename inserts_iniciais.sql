@@ -5617,6 +5617,9 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Módulo de Contas a Pagar', '060000'),
 ('Módulo de Entradas', '070000'),
 
+('Módulo de Estoque', '080000'),
+('Definir Partes', '080100'),
+
 ('Cadastro de Pessoa', '010100'),
 ('Cadastro de Usuario', '010200'),
 ('Cadastro de Item', '010300'),

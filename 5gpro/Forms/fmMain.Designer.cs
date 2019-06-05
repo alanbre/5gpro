@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmMain));
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEsquerdo = new System.Windows.Forms.Panel();
+            this.btDesintegracao = new System.Windows.Forms.Button();
             this.btOrcamentos = new System.Windows.Forms.Button();
             this.btSaidas = new System.Windows.Forms.Button();
             this.btEntradas = new System.Windows.Forms.Button();
@@ -69,6 +70,8 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.paneldropDesintegracao = new System.Windows.Forms.Panel();
+            this.btiDefPartes = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -80,6 +83,7 @@
             this.paneldropAreceber.SuspendLayout();
             this.paneldropCadastros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.paneldropDesintegracao.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -90,6 +94,7 @@
             // panelEsquerdo
             // 
             this.panelEsquerdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panelEsquerdo.Controls.Add(this.btDesintegracao);
             this.panelEsquerdo.Controls.Add(this.btOrcamentos);
             this.panelEsquerdo.Controls.Add(this.btSaidas);
             this.panelEsquerdo.Controls.Add(this.btEntradas);
@@ -101,6 +106,22 @@
             this.panelEsquerdo.Name = "panelEsquerdo";
             this.panelEsquerdo.Size = new System.Drawing.Size(250, 585);
             this.panelEsquerdo.TabIndex = 1;
+            // 
+            // btDesintegracao
+            // 
+            this.btDesintegracao.FlatAppearance.BorderSize = 0;
+            this.btDesintegracao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btDesintegracao.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btDesintegracao.ForeColor = System.Drawing.Color.White;
+            this.btDesintegracao.Image = global::_5gpro.Properties.Resources.desintegracao_chart_40px;
+            this.btDesintegracao.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btDesintegracao.Location = new System.Drawing.Point(3, 325);
+            this.btDesintegracao.Name = "btDesintegracao";
+            this.btDesintegracao.Size = new System.Drawing.Size(247, 40);
+            this.btDesintegracao.TabIndex = 6;
+            this.btDesintegracao.Text = "  Desintegração";
+            this.btDesintegracao.UseVisualStyleBackColor = false;
+            this.btDesintegracao.Click += new System.EventHandler(this.BtDesintegracao_Click);
             // 
             // btOrcamentos
             // 
@@ -243,6 +264,7 @@
             // panelCentral
             // 
             this.panelCentral.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panelCentral.Controls.Add(this.paneldropDesintegracao);
             this.panelCentral.Controls.Add(this.paneldentroRltSaida);
             this.panelCentral.Controls.Add(this.paneldropOrcamento);
             this.panelCentral.Controls.Add(this.paneldropSaida);
@@ -615,6 +637,31 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
+            // paneldropDesintegracao
+            // 
+            this.paneldropDesintegracao.Controls.Add(this.btiDefPartes);
+            this.paneldropDesintegracao.Location = new System.Drawing.Point(3, 275);
+            this.paneldropDesintegracao.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldropDesintegracao.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropDesintegracao.Name = "paneldropDesintegracao";
+            this.paneldropDesintegracao.Size = new System.Drawing.Size(200, 10);
+            this.paneldropDesintegracao.TabIndex = 7;
+            // 
+            // btiDefPartes
+            // 
+            this.btiDefPartes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiDefPartes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiDefPartes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiDefPartes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiDefPartes.ForeColor = System.Drawing.Color.White;
+            this.btiDefPartes.Location = new System.Drawing.Point(0, 0);
+            this.btiDefPartes.Name = "btiDefPartes";
+            this.btiDefPartes.Size = new System.Drawing.Size(200, 28);
+            this.btiDefPartes.TabIndex = 0;
+            this.btiDefPartes.Text = "Definir Partes";
+            this.btiDefPartes.UseVisualStyleBackColor = false;
+            this.btiDefPartes.Click += new System.EventHandler(this.BtiDefPartes_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -643,6 +690,7 @@
             this.paneldropAreceber.ResumeLayout(false);
             this.paneldropCadastros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.paneldropDesintegracao.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -688,6 +736,9 @@
         private System.Windows.Forms.Label lbRelogio;
         private System.Windows.Forms.Timer timerRelogio;
         private System.Windows.Forms.Button btiUnimedida;
+        private System.Windows.Forms.Button btDesintegracao;
+        private System.Windows.Forms.Panel paneldropDesintegracao;
+        private System.Windows.Forms.Button btiDefPartes;
     }
 }
 

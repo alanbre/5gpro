@@ -25,7 +25,7 @@ namespace _5gpro
 
         private string botaoPressionado = "";
         private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden, 
-            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden;
+            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden, DesintegracaoHidden;
 
         private int cadastrosOn = 8,
                     areceberOn = 2,
@@ -34,6 +34,7 @@ namespace _5gpro
                     saidasOn = 2,
                     orcamentosOn = 1,
                     relatoriosOn = 1,
+                    desintegracaoOn = 1,
                     tamanhopanel
             ;
        
@@ -57,6 +58,7 @@ namespace _5gpro
         //Cadastro de Contas a Pagar = 060100
         //Quitação de Contas a Pagar = 060200
         //Entrada de notas = 070100
+        //Definir Partes = 080100
 
 
         public fmMain()
@@ -225,6 +227,13 @@ namespace _5gpro
                             { btiCadOrcamento.Visible = true; }
                             break;
 
+                        case "080100":
+                            //Definir Partes
+                            if(p.Nivel == 0) { btiDefPartes.Visible = false; desintegracaoOn = desintegracaoOn - 1; }
+                            else
+                            { btiDefPartes.Visible = true; }
+                            break;
+
                     }
                 }
 
@@ -235,6 +244,7 @@ namespace _5gpro
                 btSaidas.Enabled = saidasOn == 0 ? false : true;
                 btOrcamentos.Enabled = orcamentosOn == 0 ? false : true;
                 btiRltNotaSaida.Enabled = relatoriosOn == 0 ? false : true;
+                btDesintegracao.Enabled = desintegracaoOn == 0 ? false : true;
 
             }
         }
@@ -296,6 +306,13 @@ namespace _5gpro
             botaoPressionado = "botaoorcamento";
         }
 
+        private void BtDesintegracao_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btDesintegracao.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaodesintegracao";
+        }
 
 
         //BOTÕES DO MENU CADASTROS
@@ -353,15 +370,28 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+
+
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
             lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
+
+
         private void BtiUnimedida_Click(object sender, EventArgs e)
         {
             var formCadUnidadeMedida = new fmCadastroUnimedida();
             formCadUnidadeMedida.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiDefPartes_Click(object sender, EventArgs e)
+        {
+            var formDefPartes = new fmDefinirPartesItem();
+            formDefPartes.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();
@@ -480,6 +510,7 @@ namespace _5gpro
             btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
             btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
             btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btDesintegracao.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
         }
 
         private void RecolherMenus()
@@ -528,6 +559,11 @@ namespace _5gpro
                 paneldentroRltSaida.Height = 0;
                 RelatorioSaidaHidden = true;
             }
+            if (botaoPressionado != "botaodesintegracao")
+            {
+                paneldropDesintegracao.Height = 0;
+                DesintegracaoHidden = true;
+            }
         }
 
         private void TimerDropLateral_Tick(object sender, EventArgs e)
@@ -559,6 +595,9 @@ namespace _5gpro
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
+
+                    paneldropDesintegracao.Height = 0;
+                    DesintegracaoHidden = true;
 
                     Image imgdefault = Properties.Resources.right_18px;
                     btiRltNotaSaida.Image = imgdefault;
@@ -738,6 +777,32 @@ namespace _5gpro
                         {
                             timerDropLateral.Stop();
                             OrcamentoHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
+                case "botaodesintegracao":
+                    if (DesintegracaoHidden)
+                    {
+                        tamanhopanel = desintegracaoOn * 28;
+                        paneldropDesintegracao.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropDesintegracao.Size.Height == tamanhopanel)
+                        {
+                            timerDropLateral.Stop();
+                            DesintegracaoHidden = false;
+                            paneldropDesintegracao.BringToFront();
+                        }
+                    }
+                    else
+                    {
+                        paneldropDesintegracao.Height -= 28;
+                        if (paneldropDesintegracao.Size == paneldropDesintegracao.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            DesintegracaoHidden = true;
                             DesmarcarBotoes();
                         }
                     }
