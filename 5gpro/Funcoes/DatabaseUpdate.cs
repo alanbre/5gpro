@@ -737,6 +737,48 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`resultado_desintegracao` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
+  `idcaixa` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `descricao` VARCHAR(500) NULL,
+  `dataabertura` DATE NULL,
+  `datafechamento` DATE NULL,
+  `valorabertura` DECIMAL(10,2) NULL,
+  `valorfechamento` DECIMAL(10,2) NULL,
+  `idusuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idcaixa`),
+  INDEX `fk_caixa_usuario1_idx` (`idusuario` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_usuario1`
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_entrada`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_entrada` (
+  `idregistro_caixa` INT NOT NULL AUTO_INCREMENT,
+  `data` DATE NOT NULL,
+  `valor` DECIMAL(10,2) NOT NULL,
+  `valorpago` DECIMAL(10,2) NOT NULL,
+  `troco` DECIMAL(10,2) NOT NULL,
+  `idcaixa` INT NOT NULL,
+  PRIMARY KEY (`idregistro_caixa`),
+  INDEX `fk_caixa_entrada_caixa1_idx` (`idcaixa` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_entrada_caixa1`
+    FOREIGN KEY (`idcaixa`)
+    REFERENCES `5gprodatabase`.`caixa` (`idcaixa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

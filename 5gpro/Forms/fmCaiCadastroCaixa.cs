@@ -143,9 +143,10 @@ namespace _5gpro.Forms
             var ok = false;
 
             caixa = new Caixa();
-            caixa.CaixaID = int.Parse(tbCodigo.Text);
+            caixa.Codigo = int.Parse(tbCodigo.Text);
             caixa.Nome = tbNome.Text;
             caixa.Descricao = tbDescricao.Text;
+            caixa.Usuario = logado.Usuario;
 
             var controls = (ControlCollection)this.Controls;
 
@@ -201,7 +202,7 @@ namespace _5gpro.Forms
 
             if (caixa != null)
             {
-                caixa = caixaDAO.Busca(caixa.CaixaID);
+                caixa = caixaDAO.Busca(caixa.Codigo);
                 PreencheCampos(caixa);
                 if (editando)
                 {

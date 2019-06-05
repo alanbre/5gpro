@@ -14,16 +14,26 @@ namespace _5gpro.Daos
             var retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
+                sql.beginTransaction();
                 sql.Query = @"INSERT INTO caixa 
-                            (codigo, nome, descricao) 
+                            (codigo, nome, descricao, dataabertura, datafechamento, valorabertura, valorfechamento, idusuario) 
                             VALUES
-                            (@codigo, nome, descricao)
+                            (@codigo, @nome, @descricao, @dataabertura, @datafechamento, @valorabertura, @valorfechamento, @idusuario)
                             ON DUPLICATE KEY UPDATE
-                            nome = @nome, descricao = @descricao";
+                            nome = @nome, descricao = @descricao, dataabertura = @dataabertura, datafechamento, @datafechamento,
+                            valorabertura = @valorabertura, valorfechamento = @valorfechamento, idusuario = @idusuario";
                 sql.addParam("@codigo", caixa.Codigo);
                 sql.addParam("@nome", caixa.Nome);
                 sql.addParam("@descricao", caixa.Descricao);
+                sql.addParam("@idusuario", caixa.Usuario.UsuarioID);
                 retorno = sql.insertQuery();
+                if (retorno > 0)
+                {
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupoitem;";
+                    var data = sql.selectQueryForSingleRecord();
+                    caixa.CaixaID = Convert.ToInt32(data["idsubgrupoitem"]);
+                }
+                sql.Commit();
             }
             return retorno;
         }
