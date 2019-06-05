@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbQuebradgv = new System.Windows.Forms.GroupBox();
             this.lbPorcentagem = new System.Windows.Forms.Label();
             this.btInserir = new System.Windows.Forms.Button();
@@ -37,9 +37,9 @@
             this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcPorcentagem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btRemoverparte = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbInteiro = new System.Windows.Forms.GroupBox();
-            this.menuVerticalSemNovo1 = new _5gpro.Controls.MenuVerticalSemNovo();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.buscaItemInteiro = new _5gpro.Controls.BuscaItem();
             this.dbPorcentagem = new _5gpro.Controls.DecimalBox();
             this.buscaItemParte = new _5gpro.Controls.BuscaItem();
@@ -88,8 +88,8 @@
             this.dgvPartes.AllowUserToDeleteRows = false;
             this.dgvPartes.AllowUserToOrderColumns = true;
             this.dgvPartes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPartes.BackgroundColor = System.Drawing.Color.White;
             this.dgvPartes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPartes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -136,12 +136,12 @@
             this.btRemoverparte.UseVisualStyleBackColor = true;
             this.btRemoverparte.Click += new System.EventHandler(this.BtRemoverparte_Click);
             // 
-            // textBox1
+            // tbAjuda
             // 
-            this.textBox1.Location = new System.Drawing.Point(65, 380);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(508, 20);
-            this.textBox1.TabIndex = 28;
+            this.tbAjuda.Location = new System.Drawing.Point(65, 380);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.Size = new System.Drawing.Size(508, 20);
+            this.tbAjuda.TabIndex = 28;
             // 
             // gbInteiro
             // 
@@ -153,18 +153,20 @@
             this.gbInteiro.TabStop = false;
             this.gbInteiro.Text = "Item a ser desintegrado";
             // 
-            // menuVerticalSemNovo1
+            // menuVertical
             // 
-            this.menuVerticalSemNovo1.Location = new System.Drawing.Point(9, 12);
-            this.menuVerticalSemNovo1.Margin = new System.Windows.Forms.Padding(0);
-            this.menuVerticalSemNovo1.Name = "menuVerticalSemNovo1";
-            this.menuVerticalSemNovo1.Size = new System.Drawing.Size(53, 312);
-            this.menuVerticalSemNovo1.TabIndex = 32;
-            this.menuVerticalSemNovo1.Buscar_Clicked += new _5gpro.Controls.MenuVerticalSemNovo.buscarEventHandler(this.MenuVerticalSemNovo1_Buscar_Clicked);
-            this.menuVerticalSemNovo1.Salvar_Clicked += new _5gpro.Controls.MenuVerticalSemNovo.salvarEventHandler(this.MenuVerticalSemNovo1_Salvar_Clicked);
-            this.menuVerticalSemNovo1.Recarregar_Clicked += new _5gpro.Controls.MenuVerticalSemNovo.recarregarEventHandler(this.MenuVerticalSemNovo1_Recarregar_Clicked);
-            this.menuVerticalSemNovo1.Anterior_Clicked += new _5gpro.Controls.MenuVerticalSemNovo.anteriorEventHandler(this.MenuVerticalSemNovo1_Anterior_Clicked);
-            this.menuVerticalSemNovo1.Proximo_Clicked += new _5gpro.Controls.MenuVerticalSemNovo.proximoEventHandler(this.MenuVerticalSemNovo1_Proximo_Clicked);
+            this.menuVertical.Location = new System.Drawing.Point(9, 9);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(0);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 35;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
             // buscaItemInteiro
             // 
@@ -172,6 +174,7 @@
             this.buscaItemInteiro.Name = "buscaItemInteiro";
             this.buscaItemInteiro.Size = new System.Drawing.Size(442, 39);
             this.buscaItemInteiro.TabIndex = 0;
+            this.buscaItemInteiro.Leave += new System.EventHandler(this.BuscaItemInteiro_Leave);
             // 
             // dbPorcentagem
             // 
@@ -198,9 +201,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(592, 419);
-            this.Controls.Add(this.menuVerticalSemNovo1);
+            this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.gbInteiro);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbQuebradgv);
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -233,9 +236,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescricao;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcPorcentagem;
         private System.Windows.Forms.Button btRemoverparte;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.GroupBox gbInteiro;
         private Controls.BuscaItem buscaItemInteiro;
-        private Controls.MenuVerticalSemNovo menuVerticalSemNovo1;
+        private Controls.MenuVertical menuVertical;
     }
 }

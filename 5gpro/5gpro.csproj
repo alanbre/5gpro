@@ -254,7 +254,7 @@
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
-    <Compile Include="Daos\DesitengracaoDAO.cs" />
+    <Compile Include="Daos\DesintegracaoDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\FormaPagamentoDAO.cs" />
     <Compile Include="Daos\GrupoItemDAO.cs" />

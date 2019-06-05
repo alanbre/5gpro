@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.gbDesintegracao = new System.Windows.Forms.GroupBox();
+            this.btConfigDesintegracao = new System.Windows.Forms.Button();
+            this.rbDesiNao = new System.Windows.Forms.RadioButton();
+            this.rbDesiSim = new System.Windows.Forms.RadioButton();
             this.btAddUnimedida = new System.Windows.Forms.Button();
             this.dbQuantidade = new _5gpro.Controls.DecimalBox();
             this.lbQuantidade = new System.Windows.Forms.Label();
@@ -59,6 +63,7 @@
             this.lbPrecoVenda = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.pnDadosGerais.SuspendLayout();
+            this.gbDesintegracao.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
             this.tcItens.SuspendLayout();
             this.tpEstoque.SuspendLayout();
@@ -70,6 +75,7 @@
             this.pnDadosGerais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDadosGerais.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDadosGerais.Controls.Add(this.gbDesintegracao);
             this.pnDadosGerais.Controls.Add(this.btAddUnimedida);
             this.pnDadosGerais.Controls.Add(this.dbQuantidade);
             this.pnDadosGerais.Controls.Add(this.lbQuantidade);
@@ -89,6 +95,54 @@
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 364);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // gbDesintegracao
+            // 
+            this.gbDesintegracao.Controls.Add(this.btConfigDesintegracao);
+            this.gbDesintegracao.Controls.Add(this.rbDesiNao);
+            this.gbDesintegracao.Controls.Add(this.rbDesiSim);
+            this.gbDesintegracao.Enabled = false;
+            this.gbDesintegracao.Location = new System.Drawing.Point(372, 186);
+            this.gbDesintegracao.Name = "gbDesintegracao";
+            this.gbDesintegracao.Size = new System.Drawing.Size(105, 72);
+            this.gbDesintegracao.TabIndex = 27;
+            this.gbDesintegracao.TabStop = false;
+            this.gbDesintegracao.Text = "Desintegração";
+            // 
+            // btConfigDesintegracao
+            // 
+            this.btConfigDesintegracao.Enabled = false;
+            this.btConfigDesintegracao.Location = new System.Drawing.Point(6, 43);
+            this.btConfigDesintegracao.Name = "btConfigDesintegracao";
+            this.btConfigDesintegracao.Size = new System.Drawing.Size(93, 23);
+            this.btConfigDesintegracao.TabIndex = 28;
+            this.btConfigDesintegracao.Text = "Configurar";
+            this.btConfigDesintegracao.UseVisualStyleBackColor = true;
+            this.btConfigDesintegracao.Click += new System.EventHandler(this.BtConfigDesintegracao_Click);
+            // 
+            // rbDesiNao
+            // 
+            this.rbDesiNao.AutoSize = true;
+            this.rbDesiNao.Checked = true;
+            this.rbDesiNao.Location = new System.Drawing.Point(54, 22);
+            this.rbDesiNao.Name = "rbDesiNao";
+            this.rbDesiNao.Size = new System.Drawing.Size(45, 17);
+            this.rbDesiNao.TabIndex = 1;
+            this.rbDesiNao.TabStop = true;
+            this.rbDesiNao.Text = "Não";
+            this.rbDesiNao.UseVisualStyleBackColor = true;
+            this.rbDesiNao.CheckedChanged += new System.EventHandler(this.RbDesiNao_CheckedChanged);
+            // 
+            // rbDesiSim
+            // 
+            this.rbDesiSim.AutoSize = true;
+            this.rbDesiSim.Location = new System.Drawing.Point(6, 22);
+            this.rbDesiSim.Name = "rbDesiSim";
+            this.rbDesiSim.Size = new System.Drawing.Size(42, 17);
+            this.rbDesiSim.TabIndex = 0;
+            this.rbDesiSim.Text = "Sim";
+            this.rbDesiSim.UseVisualStyleBackColor = true;
+            this.rbDesiSim.CheckedChanged += new System.EventHandler(this.RbDesiSim_CheckedChanged);
             // 
             // btAddUnimedida
             // 
@@ -241,7 +295,6 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(79, 20);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.TextChanged += new System.EventHandler(this.TbCodigo_TextChanged);
             this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbCodigo
@@ -352,7 +405,7 @@
             this.tpVendas.Location = new System.Drawing.Point(4, 22);
             this.tpVendas.Name = "tpVendas";
             this.tpVendas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVendas.Size = new System.Drawing.Size(763, 145);
+            this.tpVendas.Size = new System.Drawing.Size(1100, 145);
             this.tpVendas.TabIndex = 1;
             this.tpVendas.Text = "Vendas";
             // 
@@ -415,6 +468,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCadastroItens_KeyDown);
             this.pnDadosGerais.ResumeLayout(false);
             this.pnDadosGerais.PerformLayout();
+            this.gbDesintegracao.ResumeLayout(false);
+            this.gbDesintegracao.PerformLayout();
             this.gbTipoDeItem.ResumeLayout(false);
             this.gbTipoDeItem.PerformLayout();
             this.tcItens.ResumeLayout(false);
@@ -458,5 +513,9 @@
         private Controls.DecimalBox dbPrecoUltimaEntrada;
         private Controls.DecimalBox dbPrecoVenda;
         private System.Windows.Forms.Button btAddUnimedida;
+        private System.Windows.Forms.GroupBox gbDesintegracao;
+        private System.Windows.Forms.RadioButton rbDesiNao;
+        private System.Windows.Forms.RadioButton rbDesiSim;
+        private System.Windows.Forms.Button btConfigDesintegracao;
     }
 }

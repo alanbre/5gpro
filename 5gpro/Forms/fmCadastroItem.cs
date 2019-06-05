@@ -17,8 +17,11 @@ namespace _5gpro.Forms
         private readonly Validacao validacao = new Validacao();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
 
-        private List<Desintegracao> listadesintegracoes = new List<Desintegracao>();
-        private Desintegracao desintegracao;
+        //Desintegração
+        DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
+        private Desintegracao desintegracao = null;
+        private DesintegracaoResultado resultado;
+        private List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
 
         //Controle de Permissões
         private Logado logado;
@@ -87,8 +90,16 @@ namespace _5gpro.Forms
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);
-        private void RbServico_CheckedChanged(object sender, EventArgs e) => Editando(true);
+        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);     
+        private void RbServico_CheckedChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+            if (rbServico.Checked)
+                gbDesintegracao.Enabled = false;
+            else
+                if(item != null)
+                gbDesintegracao.Enabled = true;
+        }
         private void BuscaUnimedidaItem_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
@@ -121,7 +132,14 @@ namespace _5gpro.Forms
             buscaSubGrupoItem.Limpa();
         }
 
-
+        private void DesintegracaoConfig()
+        {
+            if (rbServico.Checked)
+                gbDesintegracao.Enabled = false;
+            else
+                if (item != null)
+                gbDesintegracao.Enabled = true;
+        }
 
         private void Novo()
         {
@@ -215,6 +233,10 @@ namespace _5gpro.Forms
                 }
                 else if (resultado == 1)
                 {
+                    if (rbDesiSim.Checked)
+                    {
+                        desintegracao.Partes = listaresultados;
+                    }
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
                     return;
@@ -351,21 +373,7 @@ namespace _5gpro.Forms
                     }
                     codigo = c;
                 }
-            }
-
-            if (item?.ItemID == codigo)
-            {
-                return;
-            }
-
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    return;
-                }
+              
             }
 
             if (tbCodigo.Text.Length == 0)
@@ -375,11 +383,15 @@ namespace _5gpro.Forms
                 return;
             }
 
-
+            if (item?.ItemID == codigo)
+            {
+                return;
+            }
 
             var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newItem != null)
             {
+                gbDesintegracao.Enabled = true;
                 validacao.despintarCampos(controls);
                 item = newItem;
                 PreencheCampos(item);
@@ -387,6 +399,7 @@ namespace _5gpro.Forms
             }
             else
             {
+                gbDesintegracao.Enabled = false;
                 validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
@@ -408,6 +421,8 @@ namespace _5gpro.Forms
             buscaUnimedidaItem.Limpa();
             tbAjuda.Clear();
             dbQuantidade.Valor = 0.00m;
+            item = null;
+            codigo = 0;
         }
         private void PreencheCampos(Item item)
         {
@@ -454,12 +469,30 @@ namespace _5gpro.Forms
             }
         }
 
-
-        private void TbCodigo_TextChanged(object sender, EventArgs e)
+        private void RbDesiSim_CheckedChanged(object sender, EventArgs e)
         {
+            if (!rbServico.Checked)
+                btConfigDesintegracao.Enabled = true;
+            else
+            {
+                MessageBox.Show("Serviço não pode ser desintegrado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rbDesiSim.Checked = false;
+                btConfigDesintegracao.Enabled = false;
+            }
+
         }
 
+        private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
+        {
+            btConfigDesintegracao.Enabled = false;
+        }
 
+        private void BtConfigDesintegracao_Click(object sender, EventArgs e)
+        {
+           // if()
+            var formDefPartes = new fmDefinirPartesItem();
+            formDefPartes.Show(this);
+        }
 
         private void EnterTab(object sender, KeyEventArgs e)
         {

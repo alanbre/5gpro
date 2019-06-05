@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    class DesintegracaoResultado
+    public class DesintegracaoResultado
     {
         public int DesintegracaoResultadoID { get; set; }
         public Desintegracao Desintegracao { get; set; }

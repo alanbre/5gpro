@@ -177,9 +177,6 @@ namespace _5gpro.Forms
 
 
 
-
-
-
         private void Novo()
         {
             if (editando)
