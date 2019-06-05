@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbQuebradgv = new System.Windows.Forms.GroupBox();
             this.lbPorcentagem = new System.Windows.Forms.Label();
             this.btInserir = new System.Windows.Forms.Button();
@@ -88,8 +88,8 @@
             this.dgvPartes.AllowUserToDeleteRows = false;
             this.dgvPartes.AllowUserToOrderColumns = true;
             this.dgvPartes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPartes.BackgroundColor = System.Drawing.Color.White;
             this.dgvPartes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPartes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

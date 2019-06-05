@@ -14,6 +14,7 @@ namespace _5gpro.Forms
 
         public Desintegracao desintegracaoconfigurada = new Desintegracao();
         private DesintegracaoResultado resultadodesi;
+        private DesintegracaoResultado resultadodesiSelecionado;
         public List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
 
         public Item itemrecebido = null;
@@ -57,7 +58,9 @@ namespace _5gpro.Forms
                 resultadodesi.Desintegracao = desintegracaoconfigurada;
                 resultadodesi.Item = buscaItemParte.item;
                 resultadodesi.Porcentagem = dbPorcentagem.Valor;
+                listaresultados.Remove(resultadodesi);
                 listaresultados.Add(resultadodesi);
+
 
                 dgvPartes.Rows.Add(resultadodesi.Item.ItemID, resultadodesi.Item.Descricao, resultadodesi.Porcentagem);
                 dgvPartes.Refresh();

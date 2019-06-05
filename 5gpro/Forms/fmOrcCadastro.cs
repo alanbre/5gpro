@@ -175,8 +175,6 @@ namespace _5gpro.Forms
             }
         }
 
-
-
         private void Novo()
         {
             if (editando)
@@ -611,7 +609,8 @@ namespace _5gpro.Forms
 
             var oi = new OrcamentoItem();
             oi.Item = buscaItem.item;
-            InserirItem(itemSelecionado ?? oi);
+            InserirItem(itemSelecionado ?? oi); //verifica se itemSeleciona é nulo, se não for manda ele mesmo
+                                                //e se for nulo manda o oi
 
         }
         private void NovoItem()
