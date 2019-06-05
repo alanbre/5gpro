@@ -213,6 +213,26 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_report_card_40px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_report_card_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_report_card_40px_6 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_report_card_40px_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Right_22px_ {
             get {
                 object obj = ResourceManager.GetObject("icons8_Right_22px_", resourceCulture);
@@ -796,6 +816,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap reload_32_blue {
             get {
                 object obj = ResourceManager.GetObject("reload_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap report_card_40px {
+            get {
+                object obj = ResourceManager.GetObject("report_card_40px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

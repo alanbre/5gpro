@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
-    class Caixa
+    public class Caixa
     {
-        public int CaixaID { get; }
+        public int CaixaID { get; set; }
         public int Codigo { get; set; }
         [Required(ErrorMessage = "O nome do caixa é obrigatório.|tbNome", AllowEmptyStrings = false)]
         [StringLength(50, MinimumLength =2)]
