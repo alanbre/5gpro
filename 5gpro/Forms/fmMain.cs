@@ -163,7 +163,12 @@ namespace _5gpro
                             else
                             { btiGrupopessoa.Visible = true; }
                             break;
-
+                        case "010700":
+                            //Cadastro de unidades de medida
+                            if (p.Nivel == 0) { btiUnimedida.Visible = false; cadastrosOn -= 1; }
+                            else
+                            { btiUnimedida.Visible = true; }
+                            break;
                         case "050100":
                             //Cadastro de Conta a Receber
                             if(p.Nivel == 0) { btiCadContaReceber.Visible = false; areceberOn = areceberOn - 1; }

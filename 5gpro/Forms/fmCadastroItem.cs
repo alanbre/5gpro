@@ -341,8 +341,15 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            if (tbCodigo.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
             var controls = (ControlCollection)this.Controls;
-            int c;
+            int c = 0;
             if (!int.TryParse(tbCodigo.Text, out c))
             {
                 tbCodigo.Clear();
@@ -362,12 +369,10 @@ namespace _5gpro.Forms
                     }
                     codigo = c;
                 }
-              
             }
 
-            if (tbCodigo.Text.Length == 0)
+            if (codigo == 0)
             {
-                gbDesintegracao.Enabled = false;
                 LimpaCampos(true);
                 Editando(false);
                 return;
@@ -375,8 +380,10 @@ namespace _5gpro.Forms
 
             if (item?.ItemID == codigo)
             {
+                //DesintegracaoEnable();
                 return;
-            }
+            }             
+            
 
             var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newItem != null)
@@ -411,8 +418,8 @@ namespace _5gpro.Forms
             buscaUnimedidaItem.Limpa();
             tbAjuda.Clear();
             dbQuantidade.Valor = 0.00m;
-            item = null;
             codigo = 0;
+            item = null;
         }
         private void PreencheCampos(Item item)
         {
