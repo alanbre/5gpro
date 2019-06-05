@@ -132,14 +132,6 @@ namespace _5gpro.Forms
             buscaSubGrupoItem.Limpa();
         }
 
-        private void DesintegracaoConfig()
-        {
-            if (rbServico.Checked)
-                gbDesintegracao.Enabled = false;
-            else
-                if (item != null)
-                gbDesintegracao.Enabled = true;
-        }
 
         private void Novo()
         {
@@ -158,6 +150,7 @@ namespace _5gpro.Forms
                 tbDescricao.Focus();
                 ignoraCheckEvent = false;
                 Editando(true);
+                gbDesintegracao.Enabled = false;
             }
         }
         private void Busca()
@@ -378,6 +371,7 @@ namespace _5gpro.Forms
 
             if (tbCodigo.Text.Length == 0)
             {
+                gbDesintegracao.Enabled = false;
                 LimpaCampos(true);
                 Editando(false);
                 return;
@@ -489,7 +483,6 @@ namespace _5gpro.Forms
 
         private void BtConfigDesintegracao_Click(object sender, EventArgs e)
         {
-           // if()
             var formDefPartes = new fmDefinirPartesItem();
             formDefPartes.Show(this);
         }
