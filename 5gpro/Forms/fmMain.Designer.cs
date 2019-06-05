@@ -43,6 +43,8 @@
             this.lbRelogio = new System.Windows.Forms.Label();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
+            this.paneldropDesintegracao = new System.Windows.Forms.Panel();
+            this.btiDefPartes = new System.Windows.Forms.Button();
             this.paneldentroRltSaida = new System.Windows.Forms.Panel();
             this.btsRelatorionotas = new System.Windows.Forms.Button();
             this.paneldropOrcamento = new System.Windows.Forms.Panel();
@@ -70,11 +72,10 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.paneldropDesintegracao = new System.Windows.Forms.Panel();
-            this.btiDefPartes = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
+            this.paneldropDesintegracao.SuspendLayout();
             this.paneldentroRltSaida.SuspendLayout();
             this.paneldropOrcamento.SuspendLayout();
             this.paneldropSaida.SuspendLayout();
@@ -83,7 +84,6 @@
             this.paneldropAreceber.SuspendLayout();
             this.paneldropCadastros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.paneldropDesintegracao.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -277,6 +277,31 @@
             this.panelCentral.Name = "panelCentral";
             this.panelCentral.Size = new System.Drawing.Size(476, 535);
             this.panelCentral.TabIndex = 3;
+            // 
+            // paneldropDesintegracao
+            // 
+            this.paneldropDesintegracao.Controls.Add(this.btiDefPartes);
+            this.paneldropDesintegracao.Location = new System.Drawing.Point(3, 275);
+            this.paneldropDesintegracao.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldropDesintegracao.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropDesintegracao.Name = "paneldropDesintegracao";
+            this.paneldropDesintegracao.Size = new System.Drawing.Size(200, 10);
+            this.paneldropDesintegracao.TabIndex = 7;
+            // 
+            // btiDefPartes
+            // 
+            this.btiDefPartes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiDefPartes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiDefPartes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiDefPartes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiDefPartes.ForeColor = System.Drawing.Color.White;
+            this.btiDefPartes.Location = new System.Drawing.Point(0, 0);
+            this.btiDefPartes.Name = "btiDefPartes";
+            this.btiDefPartes.Size = new System.Drawing.Size(200, 28);
+            this.btiDefPartes.TabIndex = 0;
+            this.btiDefPartes.Text = "Definir Partes";
+            this.btiDefPartes.UseVisualStyleBackColor = false;
+            this.btiDefPartes.Click += new System.EventHandler(this.BtiDefPartes_Click);
             // 
             // paneldentroRltSaida
             // 
@@ -637,31 +662,6 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
-            // paneldropDesintegracao
-            // 
-            this.paneldropDesintegracao.Controls.Add(this.btiDefPartes);
-            this.paneldropDesintegracao.Location = new System.Drawing.Point(3, 275);
-            this.paneldropDesintegracao.MaximumSize = new System.Drawing.Size(200, 28);
-            this.paneldropDesintegracao.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropDesintegracao.Name = "paneldropDesintegracao";
-            this.paneldropDesintegracao.Size = new System.Drawing.Size(200, 10);
-            this.paneldropDesintegracao.TabIndex = 7;
-            // 
-            // btiDefPartes
-            // 
-            this.btiDefPartes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiDefPartes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiDefPartes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiDefPartes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiDefPartes.ForeColor = System.Drawing.Color.White;
-            this.btiDefPartes.Location = new System.Drawing.Point(0, 0);
-            this.btiDefPartes.Name = "btiDefPartes";
-            this.btiDefPartes.Size = new System.Drawing.Size(200, 28);
-            this.btiDefPartes.TabIndex = 0;
-            this.btiDefPartes.Text = "Definir Partes";
-            this.btiDefPartes.UseVisualStyleBackColor = false;
-            this.btiDefPartes.Click += new System.EventHandler(this.BtiDefPartes_Click);
-            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -682,6 +682,7 @@
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
             this.panelCentral.ResumeLayout(false);
+            this.paneldropDesintegracao.ResumeLayout(false);
             this.paneldentroRltSaida.ResumeLayout(false);
             this.paneldropOrcamento.ResumeLayout(false);
             this.paneldropSaida.ResumeLayout(false);
@@ -690,7 +691,6 @@
             this.paneldropAreceber.ResumeLayout(false);
             this.paneldropCadastros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.paneldropDesintegracao.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

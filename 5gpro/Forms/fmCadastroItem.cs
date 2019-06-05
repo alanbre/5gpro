@@ -19,6 +19,7 @@ namespace _5gpro.Forms
 
         //Desintegração
         DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
+        private Item itemdesintegrar = null;
         private Desintegracao desintegracao = null;
         private DesintegracaoResultado resultado;
         private List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
@@ -226,6 +227,7 @@ namespace _5gpro.Forms
                 else if (resultado == 1)
                 {
                     gbDesintegracao.Enabled = true;
+                    itemdesintegrar = item;
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
                     return;
@@ -297,6 +299,7 @@ namespace _5gpro.Forms
             var newitem = itemDAO.Anterior(int.Parse(tbCodigo.Text));
             if (newitem != null)
             {
+                DesintegracaoSimNao(newitem);
                 validacao.despintarCampos(controls);
                 item = newitem;
                 codigo = item.ItemID;
@@ -329,6 +332,7 @@ namespace _5gpro.Forms
             var newitem = itemDAO.Proximo(int.Parse(tbCodigo.Text));
             if (newitem != null)
             {
+                DesintegracaoSimNao(newitem);
                 validacao.despintarCampos(controls);
                 item = newitem;
                 codigo = item.ItemID;
@@ -345,6 +349,7 @@ namespace _5gpro.Forms
             {
                 LimpaCampos(true);
                 Editando(false);
+                gbDesintegracao.Enabled = false;
                 return;
             }
 
@@ -375,12 +380,12 @@ namespace _5gpro.Forms
             {
                 LimpaCampos(true);
                 Editando(false);
+                gbDesintegracao.Enabled = false;
                 return;
             }
 
             if (item?.ItemID == codigo)
             {
-                //DesintegracaoEnable();
                 return;
             }             
             
@@ -388,9 +393,12 @@ namespace _5gpro.Forms
             var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newItem != null)
             {
+                DesintegracaoSimNao(newItem);
                 gbDesintegracao.Enabled = true;
                 validacao.despintarCampos(controls);
                 item = newItem;
+                itemdesintegrar = new Item();
+                itemdesintegrar = item;
                 PreencheCampos(item);
                 Editando(false);
             }
@@ -402,6 +410,9 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
             }
         }
+
+
+
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodigo.Clear(); }
@@ -487,10 +498,7 @@ namespace _5gpro.Forms
         private void BtConfigDesintegracao_Click(object sender, EventArgs e)
         {
             var formDefPartes = new fmDefinirPartesItem();
-            Item itm = new Item();
-            itm.ItemID = 222;
-            itm.Descricao = "itemdeteste";
-            formDefPartes.itemrecebido = itm;
+            formDefPartes.itemrecebido = itemdesintegrar;
             formDefPartes.Show(this);
         }
 
@@ -500,6 +508,20 @@ namespace _5gpro.Forms
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void DesintegracaoSimNao(Item d)
+        {
+            if (desintegracaoDAO.BuscaByID(d.ItemID) == null)
+            {
+                rbDesiSim.Checked = false;
+                rbDesiNao.Checked = true;
+            }
+            else
+            {
+                rbDesiSim.Checked = true;
+                rbDesiNao.Checked = false;
             }
         }
     }

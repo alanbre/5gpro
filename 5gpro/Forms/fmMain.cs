@@ -371,7 +371,6 @@ namespace _5gpro
         }
 
 
-
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
             lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");

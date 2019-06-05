@@ -12,10 +12,41 @@ namespace _5gpro.Daos
     {
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
-        //public int SalvaOuAtualiza(Item item)
-        //{
+        public int SalvaOuAtualiza(Desintegracao desintegracao)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO desintegracao
+                            (iddesintegracao, iditemdesintegrado)
+                            VALUES
+                            (@iddesintegracao, @iditemdesintegrado)";
 
-        //}
+                sql.addParam("@iddesintegracao", desintegracao.DesintegracaoID);
+                sql.addParam("@iditemdesintegrado", desintegracao.Itemdesintegrado.ItemID);
+
+                retorno = sql.insertQuery();
+                if (retorno > 0)
+                {
+                    sql.Query = @"DELETE FROM resultado_desintegracao WHERE iddesintegracao = @iddesintegracao";
+                    sql.deleteQuery();
+                    sql.Query = @"INSERT INTO resultado_desintegracao (iddesintegracao, iditemparte, porcentagem)
+                                VALUES
+                                (@iddesintegracao, @iditemparte, @porcentagem)";
+                    foreach (var p in desintegracao.Partes)
+                    {
+                        sql.clearParams();
+                        sql.addParam("@iddesintegracao", p.Desintegracao.DesintegracaoID);
+                        sql.addParam("@iditemparte", p.Item.ItemID);
+                        sql.addParam("@porcentagem", p.Porcentagem);
+                        sql.insertQuery();
+                    }
+                }
+                sql.Commit();
+            }
+            return retorno;
+        }
 
         public Desintegracao BuscaByID(int Codigo)
         {

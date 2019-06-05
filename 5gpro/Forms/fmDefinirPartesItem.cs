@@ -12,11 +12,11 @@ namespace _5gpro.Forms
         Validacao validacao = new Validacao();
         DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
 
-        public Desintegracao desintegracaoconfigurada = null;
-        private DesintegracaoResultado resultado;
+        public Desintegracao desintegracaoconfigurada = new Desintegracao();
+        private DesintegracaoResultado resultadodesi;
         public List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
 
-        public Item itemrecebido = new Item();
+        public Item itemrecebido = null;
 
         //Controle de permissões
         private Logado logado;
@@ -34,21 +34,32 @@ namespace _5gpro.Forms
             SetarNivel();
         }
 
+        private void PreencherItemRecebido()
+        {
+            if (itemrecebido != null)
+            {
+                buscaItemInteiro.item = itemrecebido;
+                buscaItemInteiro.PreencheCampos(itemrecebido);
+            }
+            CarregaDados();
+        }
+
+
         private void BtInserir_Click(object sender, EventArgs e)
         {
             if (buscaItemParte.item == null)
-                MessageBox.Show("Escolha a Parte a ser inserido", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Escolha a Parte a ser inserida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else if (buscaItemInteiro.item == null)
                 MessageBox.Show("Escolha o Item a ser Desintegrado", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
             {
-                resultado = new DesintegracaoResultado();
-                resultado.Desintegracao = desintegracaoconfigurada;
-                resultado.Item = buscaItemParte.item;
-                resultado.Porcentagem = dbPorcentagem.Valor;
-                listaresultados.Add(resultado);
+                resultadodesi = new DesintegracaoResultado();
+                resultadodesi.Desintegracao = desintegracaoconfigurada;
+                resultadodesi.Item = buscaItemParte.item;
+                resultadodesi.Porcentagem = dbPorcentagem.Valor;
+                listaresultados.Add(resultadodesi);
 
-                dgvPartes.Rows.Add(resultado.Item.ItemID, resultado.Item.Descricao, resultado.Porcentagem);
+                dgvPartes.Rows.Add(resultadodesi.Item.ItemID, resultadodesi.Item.Descricao, resultadodesi.Porcentagem);
                 dgvPartes.Refresh();
             }
         }
@@ -84,40 +95,39 @@ namespace _5gpro.Forms
             }
             bool ok = false;
 
-            desintegracaoconfigurada.Partes = new List<DesintegracaoResultado>();
+            desintegracaoconfigurada.DesintegracaoID = buscaItemInteiro.item.ItemID;
+            desintegracaoconfigurada.Itemdesintegrado = buscaItemInteiro.item;
             desintegracaoconfigurada.Partes = listaresultados;
 
 
             var controls = (ControlCollection)this.Controls;
 
-            //ok = validacao.ValidarEntidade(item, controls);
-            //if (ok)
-            //{
-            //    validacao.despintarCampos(controls);
-            //    //int resultado = itemDAO.SalvaOuAtualiza(item);
-            //    if (resultado == 0)
-            //    {
-            //        MessageBox.Show("Problema ao salvar o registro",
-            //        "Problema ao salvar",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Warning);
-            //        return;
-            //    }
-            //    else if (resultado == 1)
-            //    {
-            //        tbAjuda.Text = "Dados salvos com sucesso";
-            //        Editando(false);
-            //        return;
-            //    }
-            //    else if (resultado == 2)
-            //    {
-            //        tbAjuda.Text = "Dados atualizados com sucesso";
-            //        Editando(false);
-            //        return;
-            //    }
-
-
-            //}
+            ok = validacao.ValidarEntidade(desintegracaoconfigurada, controls);
+            if (ok)
+            {
+                validacao.despintarCampos(controls);
+                int resultado = desintegracaoDAO.SalvaOuAtualiza(desintegracaoconfigurada);
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    Editando(false);
+                    return;
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                    return;
+                }
+            }
         }
 
         //MENU PRINCIPAL
@@ -131,10 +141,7 @@ namespace _5gpro.Forms
 
         }
 
-        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e)
-        {
-
-        }
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salvar();
 
         private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
         {
@@ -214,11 +221,9 @@ namespace _5gpro.Forms
 
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void FmDefinirPartesItem_Load(object sender, EventArgs e)
         {
-            Console.WriteLine(itemrecebido);
-            Console.WriteLine(itemrecebido.Descricao);
-
+            PreencherItemRecebido();
         }
 
         private void PreencheCampos(Desintegracao desintegracao)
