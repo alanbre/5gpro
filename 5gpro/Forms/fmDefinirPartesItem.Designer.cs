@@ -30,8 +30,10 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbQuebradgv = new System.Windows.Forms.GroupBox();
+            this.dbPorcentagem = new _5gpro.Controls.DecimalBox();
             this.lbPorcentagem = new System.Windows.Forms.Label();
             this.btInserir = new System.Windows.Forms.Button();
+            this.buscaItemParte = new _5gpro.Controls.BuscaItem();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,10 +41,9 @@
             this.btRemoverparte = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbInteiro = new System.Windows.Forms.GroupBox();
-            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.buscaItemInteiro = new _5gpro.Controls.BuscaItem();
-            this.dbPorcentagem = new _5gpro.Controls.DecimalBox();
-            this.buscaItemParte = new _5gpro.Controls.BuscaItem();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.button1 = new System.Windows.Forms.Button();
             this.gbQuebradgv.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartes)).BeginInit();
             this.gbInteiro.SuspendLayout();
@@ -50,6 +51,7 @@
             // 
             // gbQuebradgv
             // 
+            this.gbQuebradgv.Controls.Add(this.button1);
             this.gbQuebradgv.Controls.Add(this.dbPorcentagem);
             this.gbQuebradgv.Controls.Add(this.lbPorcentagem);
             this.gbQuebradgv.Controls.Add(this.btInserir);
@@ -62,6 +64,18 @@
             this.gbQuebradgv.TabIndex = 26;
             this.gbQuebradgv.TabStop = false;
             this.gbQuebradgv.Text = "Partes";
+            // 
+            // dbPorcentagem
+            // 
+            this.dbPorcentagem.Location = new System.Drawing.Point(360, 51);
+            this.dbPorcentagem.Name = "dbPorcentagem";
+            this.dbPorcentagem.Size = new System.Drawing.Size(69, 22);
+            this.dbPorcentagem.TabIndex = 28;
+            this.dbPorcentagem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbPorcentagem
             // 
@@ -81,6 +95,13 @@
             this.btInserir.Text = "Inserir";
             this.btInserir.UseVisualStyleBackColor = true;
             this.btInserir.Click += new System.EventHandler(this.BtInserir_Click);
+            // 
+            // buscaItemParte
+            // 
+            this.buscaItemParte.Location = new System.Drawing.Point(6, 34);
+            this.buscaItemParte.Name = "buscaItemParte";
+            this.buscaItemParte.Size = new System.Drawing.Size(350, 39);
+            this.buscaItemParte.TabIndex = 25;
             // 
             // dgvPartes
             // 
@@ -153,6 +174,14 @@
             this.gbInteiro.TabStop = false;
             this.gbInteiro.Text = "Item a ser desintegrado";
             // 
+            // buscaItemInteiro
+            // 
+            this.buscaItemInteiro.Location = new System.Drawing.Point(6, 29);
+            this.buscaItemInteiro.Name = "buscaItemInteiro";
+            this.buscaItemInteiro.Size = new System.Drawing.Size(442, 39);
+            this.buscaItemInteiro.TabIndex = 0;
+            this.buscaItemInteiro.Leave += new System.EventHandler(this.BuscaItemInteiro_Leave);
+            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(9, 9);
@@ -168,32 +197,15 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
-            // buscaItemInteiro
+            // button1
             // 
-            this.buscaItemInteiro.Location = new System.Drawing.Point(6, 29);
-            this.buscaItemInteiro.Name = "buscaItemInteiro";
-            this.buscaItemInteiro.Size = new System.Drawing.Size(442, 39);
-            this.buscaItemInteiro.TabIndex = 0;
-            this.buscaItemInteiro.Leave += new System.EventHandler(this.BuscaItemInteiro_Leave);
-            // 
-            // dbPorcentagem
-            // 
-            this.dbPorcentagem.Location = new System.Drawing.Point(360, 51);
-            this.dbPorcentagem.Name = "dbPorcentagem";
-            this.dbPorcentagem.Size = new System.Drawing.Size(69, 22);
-            this.dbPorcentagem.TabIndex = 28;
-            this.dbPorcentagem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaItemParte
-            // 
-            this.buscaItemParte.Location = new System.Drawing.Point(6, 34);
-            this.buscaItemParte.Name = "buscaItemParte";
-            this.buscaItemParte.Size = new System.Drawing.Size(350, 39);
-            this.buscaItemParte.TabIndex = 25;
+            this.button1.Location = new System.Drawing.Point(140, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // fmDefinirPartesItem
             // 
@@ -240,5 +252,6 @@
         private System.Windows.Forms.GroupBox gbInteiro;
         private Controls.BuscaItem buscaItemInteiro;
         private Controls.MenuVertical menuVertical;
+        private System.Windows.Forms.Button button1;
     }
 }

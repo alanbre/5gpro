@@ -132,7 +132,6 @@ namespace _5gpro.Forms
             buscaSubGrupoItem.Limpa();
         }
 
-
         private void Novo()
         {
             if (editando)
@@ -226,10 +225,7 @@ namespace _5gpro.Forms
                 }
                 else if (resultado == 1)
                 {
-                    if (rbDesiSim.Checked)
-                    {
-                        desintegracao.Partes = listaresultados;
-                    }
+                    gbDesintegracao.Enabled = true;
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
                     return;
@@ -491,6 +487,10 @@ namespace _5gpro.Forms
         private void BtConfigDesintegracao_Click(object sender, EventArgs e)
         {
             var formDefPartes = new fmDefinirPartesItem();
+            Item itm = new Item();
+            itm.ItemID = 222;
+            itm.Descricao = "itemdeteste";
+            formDefPartes.itemrecebido = itm;
             formDefPartes.Show(this);
         }
 

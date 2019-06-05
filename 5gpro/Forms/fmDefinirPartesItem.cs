@@ -16,6 +16,8 @@ namespace _5gpro.Forms
         private DesintegracaoResultado resultado;
         public List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
 
+        public Item itemrecebido = new Item();
+
         //Controle de permissões
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
@@ -209,6 +211,13 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
+
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(itemrecebido);
+            Console.WriteLine(itemrecebido.Descricao);
 
         }
 
