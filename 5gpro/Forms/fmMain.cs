@@ -25,7 +25,7 @@ namespace _5gpro
 
         private string botaoPressionado = "";
         private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden, 
-            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden, DesintegracaoHidden;
+            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden, DesintegracaoHidden, CaixaHidden;
 
         private int cadastrosOn = 8,
                     areceberOn = 2,
@@ -35,6 +35,7 @@ namespace _5gpro
                     orcamentosOn = 1,
                     relatoriosOn = 1,
                     desintegracaoOn = 1,
+                    caixaOn = 1,
                     tamanhopanel
             ;
        
@@ -233,7 +234,11 @@ namespace _5gpro
                             else
                             { btiDefPartes.Visible = true; }
                             break;
-
+                        case "090100":
+                            //Cadastro de caixas
+                            if(p.Nivel == 0) { btiCadastroCaixa.Visible = false; caixaOn -= 1; }
+                            else { btiCadastroCaixa.Visible = true; }
+                            break;
                     }
                 }
 
@@ -245,6 +250,7 @@ namespace _5gpro
                 btOrcamentos.Enabled = orcamentosOn == 0 ? false : true;
                 btiRltNotaSaida.Enabled = relatoriosOn == 0 ? false : true;
                 btDesintegracao.Enabled = desintegracaoOn == 0 ? false : true;
+                btiCadastroCaixa.Enabled = caixaOn == 0 ? false : true;
 
             }
         }
@@ -313,6 +319,14 @@ namespace _5gpro
             timerDropLateral.Start();
             botaoPressionado = "botaodesintegracao";
         }
+        private void BtCaixa_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btCaixa.BackColor = ColorTranslator.FromHtml("#0092F4");
+            timerDropLateral.Start();
+            botaoPressionado = "botaocaixa";
+        }
+
 
 
         //BOTÕES DO MENU CADASTROS
@@ -370,6 +384,14 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        private void BtiCadastroCaixa_Click(object sender, EventArgs e)
+        {
+            var formCadCaixa = new fmCaiCadastroCaixa();
+            formCadCaixa.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
 
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
@@ -502,16 +524,16 @@ namespace _5gpro
         //FUNÇÕES DO MENU LATERAL
         private void DesmarcarBotoes()
         {
-            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btDesintegracao.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btCadastrosmenu.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btCReceber.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btCPagar.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btEntradas.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btSaidas.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btOrcamentos.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btiRltNotaSaida.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btDesintegracao.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btCaixa.BackColor = ColorTranslator.FromHtml("#007ACC");
         }
-
         private void RecolherMenus()
         {
             Image imgdefault = Properties.Resources.right_18px;
@@ -563,8 +585,12 @@ namespace _5gpro
                 paneldropDesintegracao.Height = 0;
                 DesintegracaoHidden = true;
             }
+            if (botaoPressionado != "botaocaixa")
+            {
+                paneldropCaixa.Height = 0;
+                CaixaHidden = true;
+            }
         }
-
         private void TimerDropLateral_Tick(object sender, EventArgs e)
         {
             switch (botaoPressionado)
@@ -807,7 +833,31 @@ namespace _5gpro
                     }
                     RecolherMenus();
                     break;
+                case "botaocaixa":
+                    if (CaixaHidden)
+                    {
+                        tamanhopanel = caixaOn * 28;
+                        paneldropDesintegracao.Height += tamanhopanel > 0 ? 28 : 0;
 
+                        if (paneldropCaixa.Size.Height == tamanhopanel)
+                        {
+                            timerDropLateral.Stop();
+                            CaixaHidden = false;
+                            paneldropCaixa.BringToFront();
+                        }
+                    }
+                    else
+                    {
+                        paneldropCaixa.Height -= 28;
+                        if (paneldropCaixa.Size == paneldropCaixa.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            CaixaHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
                 case "subrelatoriosaida":
                     if (RelatorioSaidaHidden)
                     {
@@ -837,6 +887,5 @@ namespace _5gpro
             }
 
         }
-
     }
 }

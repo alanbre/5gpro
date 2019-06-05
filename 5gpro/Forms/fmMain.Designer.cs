@@ -1,5 +1,5 @@
 ﻿namespace _5gpro
-{
+{ 
     partial class fmMain
     {
         /// <summary>
@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmMain));
             this.tsmiCadastroContaReceber = new System.Windows.Forms.ToolStripMenuItem();
             this.panelEsquerdo = new System.Windows.Forms.Panel();
+            this.btCaixa = new System.Windows.Forms.Button();
             this.btDesintegracao = new System.Windows.Forms.Button();
             this.btOrcamentos = new System.Windows.Forms.Button();
             this.btSaidas = new System.Windows.Forms.Button();
@@ -72,6 +73,8 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.paneldropCaixa = new System.Windows.Forms.Panel();
+            this.btiCadastroCaixa = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -84,6 +87,7 @@
             this.paneldropAreceber.SuspendLayout();
             this.paneldropCadastros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.paneldropCaixa.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -94,6 +98,7 @@
             // panelEsquerdo
             // 
             this.panelEsquerdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panelEsquerdo.Controls.Add(this.btCaixa);
             this.panelEsquerdo.Controls.Add(this.btDesintegracao);
             this.panelEsquerdo.Controls.Add(this.btOrcamentos);
             this.panelEsquerdo.Controls.Add(this.btSaidas);
@@ -106,6 +111,22 @@
             this.panelEsquerdo.Name = "panelEsquerdo";
             this.panelEsquerdo.Size = new System.Drawing.Size(250, 585);
             this.panelEsquerdo.TabIndex = 1;
+            // 
+            // btCaixa
+            // 
+            this.btCaixa.FlatAppearance.BorderSize = 0;
+            this.btCaixa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btCaixa.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
+            this.btCaixa.ForeColor = System.Drawing.Color.White;
+            this.btCaixa.Image = global::_5gpro.Properties.Resources.report_card_40px;
+            this.btCaixa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btCaixa.Location = new System.Drawing.Point(3, 371);
+            this.btCaixa.Name = "btCaixa";
+            this.btCaixa.Size = new System.Drawing.Size(247, 40);
+            this.btCaixa.TabIndex = 7;
+            this.btCaixa.Text = "Caixa";
+            this.btCaixa.UseVisualStyleBackColor = false;
+            this.btCaixa.Click += new System.EventHandler(this.BtCaixa_Click);
             // 
             // btDesintegracao
             // 
@@ -264,6 +285,7 @@
             // panelCentral
             // 
             this.panelCentral.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panelCentral.Controls.Add(this.paneldropCaixa);
             this.panelCentral.Controls.Add(this.paneldropDesintegracao);
             this.panelCentral.Controls.Add(this.paneldentroRltSaida);
             this.panelCentral.Controls.Add(this.paneldropOrcamento);
@@ -662,6 +684,31 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
+            // paneldropCaixa
+            // 
+            this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
+            this.paneldropCaixa.Location = new System.Drawing.Point(3, 321);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropCaixa.Name = "paneldropCaixa";
+            this.paneldropCaixa.Size = new System.Drawing.Size(200, 28);
+            this.paneldropCaixa.TabIndex = 8;
+            // 
+            // btiCadastroCaixa
+            // 
+            this.btiCadastroCaixa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadastroCaixa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadastroCaixa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadastroCaixa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiCadastroCaixa.ForeColor = System.Drawing.Color.White;
+            this.btiCadastroCaixa.Location = new System.Drawing.Point(0, 0);
+            this.btiCadastroCaixa.Name = "btiCadastroCaixa";
+            this.btiCadastroCaixa.Size = new System.Drawing.Size(200, 10);
+            this.btiCadastroCaixa.TabIndex = 0;
+            this.btiCadastroCaixa.Text = "Cadastro caixa";
+            this.btiCadastroCaixa.UseVisualStyleBackColor = false;
+            this.btiCadastroCaixa.Click += new System.EventHandler(this.BtiCadastroCaixa_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -691,6 +738,7 @@
             this.paneldropAreceber.ResumeLayout(false);
             this.paneldropCadastros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.paneldropCaixa.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -739,6 +787,9 @@
         private System.Windows.Forms.Button btDesintegracao;
         private System.Windows.Forms.Panel paneldropDesintegracao;
         private System.Windows.Forms.Button btiDefPartes;
+        private System.Windows.Forms.Button btCaixa;
+        private System.Windows.Forms.Panel paneldropCaixa;
+        private System.Windows.Forms.Button btiCadastroCaixa;
     }
 }
 

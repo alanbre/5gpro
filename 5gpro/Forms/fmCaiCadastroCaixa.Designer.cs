@@ -47,6 +47,12 @@
             this.menuVertical.Name = "menuVertical";
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
             this.menuVertical.TabIndex = 1;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 
             // gbDadosCaixa
             // 
@@ -73,6 +79,7 @@
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(367, 116);
             this.tbDescricao.TabIndex = 5;
+            this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
             // 
             // lbDescricao
             // 
@@ -89,6 +96,7 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.Size = new System.Drawing.Size(367, 20);
             this.tbNome.TabIndex = 3;
+            this.tbNome.TextChanged += new System.EventHandler(this.TbNome_TextChanged);
             // 
             // lbNome
             // 
@@ -105,6 +113,7 @@
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(71, 20);
             this.tbCodigo.TabIndex = 1;
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // lbCodigo
             // 
@@ -143,6 +152,9 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Cadastro de caixa";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCaiCadastroCaixa_FormClosing);
+            this.Load += new System.EventHandler(this.FmCaiCadastroCaixa_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCaiCadastroCaixa_KeyDown);
             this.gbDadosCaixa.ResumeLayout(false);
             this.gbDadosCaixa.PerformLayout();
             this.ResumeLayout(false);

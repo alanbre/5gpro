@@ -311,6 +311,12 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmCaiBuscaCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiBuscaCaixa.Designer.cs">
+      <DependentUpon>fmCaiBuscaCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCaiCadastroCaixa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1214,6 +1220,13 @@
     <None Include="Resources\CELO-5G.ico" />
     <None Include="Resources\HAJELLL.png" />
     <None Include="Resources\desintegracao_chart_40px.png" />
+    <None Include="Resources\icons8_report_card_40px.png" />
+    <None Include="Resources\icons8_report_card_40px_1.png" />
+    <None Include="Resources\icons8_report_card_40px_2.png" />
+    <None Include="Resources\icons8_report_card_40px_4.png" />
+    <None Include="Resources\icons8_report_card_40px_5.png" />
+    <None Include="Resources\icons8_report_card_40px_6.png" />
+    <None Include="Resources\report_card_40px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
