@@ -5,10 +5,16 @@ namespace _5gpro.Entities
 {
     public class Caixa
     {
+        public Caixa()
+        {
+            ValorAbertura = 0;
+            ValorFechamento = 0;
+        }
+
         public int CaixaID { get; set; }
         public int Codigo { get; set; }
         [Required(ErrorMessage = "O nome do caixa é obrigatório.|tbNome", AllowEmptyStrings = false)]
-        [StringLength(50, MinimumLength =2)]
+        [StringLength(50, MinimumLength = 2)]
         public string Nome { get; set; }
         [MaxLength(500)]
         public string Descricao { get; set; }
