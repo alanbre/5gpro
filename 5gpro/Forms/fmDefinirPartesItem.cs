@@ -224,6 +224,7 @@ namespace _5gpro.Forms
         private void FmDefinirPartesItem_Load(object sender, EventArgs e)
         {
             PreencherItemRecebido();
+            //teste de git prompt
         }
 
         private void PreencheCampos(Desintegracao desintegracao)
