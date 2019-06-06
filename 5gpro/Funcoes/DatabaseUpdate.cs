@@ -29,7 +29,7 @@ namespace _5gpro.Funcoes
         }
         private string CreateTableSQL()
         {
-            string create = @"-- MySQL Workbench Forward Engineering
+            string create = @"-- -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -704,6 +704,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`desintegracao` (
   `iddesintegracao` INT NOT NULL,
   `iditemdesintegrado` INT(11) NOT NULL,
+  `tipo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`iddesintegracao`),
   INDEX `fk_desintegracao_item1_idx` (`iditemdesintegrado` ASC) VISIBLE,
   CONSTRAINT `fk_desintegracao_item1`
@@ -721,7 +722,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`resultado_desintegracao` (
   `idresultado_desintegracao` INT NOT NULL AUTO_INCREMENT,
   `iddesintegracao` INT NOT NULL,
   `iditemparte` INT(11) NOT NULL,
-  `porcentagem` DECIMAL(10,2) NOT NULL,
+  `porcentagem` DECIMAL(10,2) NULL,
+  `quantidade` DECIMAL NULL,
   PRIMARY KEY (`idresultado_desintegracao`),
   INDEX `fk_resultado_desintegracao_desintegracao1_idx` (`iddesintegracao` ASC) VISIBLE,
   INDEX `fk_resultado_desintegracao_item1_idx` (`iditemparte` ASC) VISIBLE,
@@ -737,6 +739,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`resultado_desintegracao` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa`
 -- -----------------------------------------------------
@@ -744,6 +747,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
   `idcaixa` INT NOT NULL AUTO_INCREMENT,
   `codigo` INT NOT NULL,
   `nome` VARCHAR(50) NOT NULL,
+  `aberto` TINYINT NOT NULL,
   `descricao` VARCHAR(500) NULL,
   `dataabertura` DATE NULL,
   `datafechamento` DATE NULL,
@@ -752,6 +756,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
   `idusuario` INT(11) NOT NULL,
   PRIMARY KEY (`idcaixa`),
   INDEX `fk_caixa_usuario1_idx` (`idusuario` ASC) VISIBLE,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE,
   CONSTRAINT `fk_caixa_usuario1`
     FOREIGN KEY (`idusuario`)
     REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
@@ -783,7 +788,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
 
 ";
             return create;
