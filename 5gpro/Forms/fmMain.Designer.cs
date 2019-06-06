@@ -75,7 +75,6 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -710,23 +709,12 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(994, 254);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(1295, 585);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelCentral);
             this.Controls.Add(this.panelSuperior);
@@ -802,7 +790,6 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
-        private System.Windows.Forms.Button button1;
     }
 }
 
