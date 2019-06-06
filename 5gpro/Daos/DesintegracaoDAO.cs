@@ -2,9 +2,6 @@
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -19,27 +16,47 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO desintegracao
-                            (iddesintegracao, iditemdesintegrado)
+                            (iddesintegracao, iditemdesintegrado, tipo)
                             VALUES
-                            (@iddesintegracao, @iditemdesintegrado)";
+                            (@iddesintegracao, @iditemdesintegrado, @tipo)
+                            ON DUPLICATE KEY UPDATE
+                            tipo = @tipo";
 
                 sql.addParam("@iddesintegracao", desintegracao.DesintegracaoID);
                 sql.addParam("@iditemdesintegrado", desintegracao.Itemdesintegrado.ItemID);
+                sql.addParam("@tipo", desintegracao.Tipo);
 
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
                     sql.Query = @"DELETE FROM resultado_desintegracao WHERE iddesintegracao = @iddesintegracao";
                     sql.deleteQuery();
-                    sql.Query = @"INSERT INTO resultado_desintegracao (iddesintegracao, iditemparte, porcentagem)
+                    switch (desintegracao.Tipo)
+                    {
+                        case "P":
+                            sql.Query = @"INSERT INTO resultado_desintegracao (iddesintegracao, iditemparte, porcentagem)
                                 VALUES
                                 (@iddesintegracao, @iditemparte, @porcentagem)";
+                            break;
+
+                        case "Q":
+                            sql.Query = @"INSERT INTO resultado_desintegracao (iddesintegracao, iditemparte, quantidade)
+                                VALUES
+                                (@iddesintegracao, @iditemparte, @quantidade)";
+                            break;
+                    }
+
                     foreach (var p in desintegracao.Partes)
                     {
                         sql.clearParams();
                         sql.addParam("@iddesintegracao", p.Desintegracao.DesintegracaoID);
                         sql.addParam("@iditemparte", p.Item.ItemID);
-                        sql.addParam("@porcentagem", p.Porcentagem);
+
+                        if (desintegracao.Tipo == "P")
+                            sql.addParam("@porcentagem", p.Porcentagem);
+                        else
+                            sql.addParam("@quantidade", p.Quantidade);
+
                         sql.insertQuery();
                     }
                 }
@@ -96,6 +113,7 @@ namespace _5gpro.Daos
 
             desintegracao.DesintegracaoID = Convert.ToInt32(data[0]["iddesintegracao"]);
             desintegracao.Itemdesintegrado = item;
+            desintegracao.Tipo = (string)(data[0]["tipo"]);
 
             foreach (var p in data)
             {
@@ -105,7 +123,12 @@ namespace _5gpro.Daos
                 item.Descricao = (string)p["descitem"];
                 parte.Desintegracao = desintegracao;
                 parte.Item = item;
-                parte.Porcentagem = (decimal)p["porcentagem"];
+
+                if (desintegracao.Tipo == "P")
+                    parte.Porcentagem = (decimal)p["porcentagem"];
+                else
+                    parte.Quantidade = (decimal)p["quantidade"];
+
                 listapartes.Add(parte);
             }
 

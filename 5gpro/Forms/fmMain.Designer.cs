@@ -75,7 +75,10 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
+<<<<<<< HEAD
             this.btiAberturaFechamento = new System.Windows.Forms.Button();
+=======
+>>>>>>> ede4fd9d66ec36798eecf1a2792969ac31c656ab
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -711,21 +714,6 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
-            // btiAberturaFechamento
-            // 
-            this.btiAberturaFechamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiAberturaFechamento.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiAberturaFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiAberturaFechamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiAberturaFechamento.ForeColor = System.Drawing.Color.White;
-            this.btiAberturaFechamento.Location = new System.Drawing.Point(0, 28);
-            this.btiAberturaFechamento.Name = "btiAberturaFechamento";
-            this.btiAberturaFechamento.Size = new System.Drawing.Size(200, 28);
-            this.btiAberturaFechamento.TabIndex = 1;
-            this.btiAberturaFechamento.Text = "Abertura e fechamento";
-            this.btiAberturaFechamento.UseVisualStyleBackColor = false;
-            this.btiAberturaFechamento.Click += new System.EventHandler(this.BtiAberturaFechamento_Click);
-            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -807,7 +795,10 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
+<<<<<<< HEAD
         private System.Windows.Forms.Button btiAberturaFechamento;
+=======
+>>>>>>> ede4fd9d66ec36798eecf1a2792969ac31c656ab
     }
 }
 

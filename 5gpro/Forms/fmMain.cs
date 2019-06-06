@@ -375,11 +375,6 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            var formCadCaixa = new fmCaiCadastroCaixa();
-            formCadCaixa.Show(this);
-        }
 
 
         private void BtiGrupoitens_Click(object sender, EventArgs e)
@@ -426,7 +421,7 @@ namespace _5gpro
 
         private void BtiDefPartes_Click(object sender, EventArgs e)
         {
-            var formDefPartes = new fmDefinirPartesItem();
+            var formDefPartes = new fmCadastroDesintegracao();
             formDefPartes.Show(this);
             botaoPressionado = "";
             RecolherMenus();

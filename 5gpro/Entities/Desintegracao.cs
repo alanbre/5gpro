@@ -10,6 +10,7 @@ namespace _5gpro.Entities
     {
         public int DesintegracaoID { get; set; }
         public Item Itemdesintegrado { get; set; }
+        public string Tipo { get; set; }
         public List<DesintegracaoResultado> Partes { get; set; }
     }
 }

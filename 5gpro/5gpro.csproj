@@ -347,11 +347,11 @@
     <Compile Include="Forms\fmCadastroUnimedida.Designer.cs">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmDefinirPartesItem.cs">
+    <Compile Include="Forms\fmCadastroDesintegracao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmDefinirPartesItem.Designer.cs">
-      <DependentUpon>fmDefinirPartesItem.cs</DependentUpon>
+    <Compile Include="Forms\fmCadastroDesintegracao.Designer.cs">
+      <DependentUpon>fmCadastroDesintegracao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmItemReport.cs">
       <SubType>Form</SubType>
@@ -767,8 +767,8 @@
     <EmbeddedResource Include="Forms\fmCadastroUnimedida.resx">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmDefinirPartesItem.resx">
-      <DependentUpon>fmDefinirPartesItem.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCadastroDesintegracao.resx">
+      <DependentUpon>fmCadastroDesintegracao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>

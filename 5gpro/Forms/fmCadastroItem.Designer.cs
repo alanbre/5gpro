@@ -91,7 +91,7 @@
             this.pnDadosGerais.Controls.Add(this.lbDescricao);
             this.pnDadosGerais.Controls.Add(this.tbCodigo);
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
-            this.pnDadosGerais.Location = new System.Drawing.Point(74, 12);
+            this.pnDadosGerais.Location = new System.Drawing.Point(74, 13);
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(1110, 364);
             this.pnDadosGerais.TabIndex = 0;

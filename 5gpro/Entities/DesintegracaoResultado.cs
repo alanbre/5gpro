@@ -12,5 +12,6 @@ namespace _5gpro.Entities
         public Desintegracao Desintegracao { get; set; }
         public Item Item { get; set; }
         public decimal Porcentagem { get; set; }
+        public decimal Quantidade { get; set; }
     }
 }

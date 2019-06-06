@@ -497,7 +497,7 @@ namespace _5gpro.Forms
 
         private void BtConfigDesintegracao_Click(object sender, EventArgs e)
         {
-            var formDefPartes = new fmDefinirPartesItem();
+            var formDefPartes = new fmCadastroDesintegracao();
             formDefPartes.itemrecebido = itemdesintegrar;
             formDefPartes.Show(this);
         }
