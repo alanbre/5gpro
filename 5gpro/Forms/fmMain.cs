@@ -412,7 +412,7 @@ namespace _5gpro
 
         private void BtiDefPartes_Click(object sender, EventArgs e)
         {
-            var formDefPartes = new fmDefinirPartesItem();
+            var formDefPartes = new fmCadastroDesintegracao();
             formDefPartes.Show(this);
             botaoPressionado = "";
             RecolherMenus();
