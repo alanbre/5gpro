@@ -35,7 +35,7 @@ namespace _5gpro
                     orcamentosOn = 1,
                     relatoriosOn = 1,
                     desintegracaoOn = 1,
-                    caixaOn = 1,
+                    caixaOn = 2,
                     tamanhopanel
             ;
        
@@ -381,6 +381,7 @@ namespace _5gpro
             formCadCaixa.Show(this);
         }
 
+
         private void BtiGrupoitens_Click(object sender, EventArgs e)
         {
             var formCadGrupoItem = new fmCadastroGrupoItem();
@@ -394,6 +395,14 @@ namespace _5gpro
         {
             var formCadCaixa = new fmCaiCadastroCaixa();
             formCadCaixa.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+        private void BtiAberturaFechamento_Click(object sender, EventArgs e)
+        {
+            var formAberturaFechamento = new fmCaiAberturaFechamento();
+            formAberturaFechamento.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();

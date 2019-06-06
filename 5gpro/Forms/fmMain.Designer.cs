@@ -75,7 +75,7 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.btiAberturaFechamento = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -303,9 +303,10 @@
             // 
             // paneldropCaixa
             // 
+            this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
             this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
             this.paneldropCaixa.Location = new System.Drawing.Point(3, 321);
-            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 56);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
@@ -710,15 +711,20 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
-            // button1
+            // btiAberturaFechamento
             // 
-            this.button1.Location = new System.Drawing.Point(994, 254);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            this.btiAberturaFechamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiAberturaFechamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiAberturaFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiAberturaFechamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiAberturaFechamento.ForeColor = System.Drawing.Color.White;
+            this.btiAberturaFechamento.Location = new System.Drawing.Point(0, 28);
+            this.btiAberturaFechamento.Name = "btiAberturaFechamento";
+            this.btiAberturaFechamento.Size = new System.Drawing.Size(200, 28);
+            this.btiAberturaFechamento.TabIndex = 1;
+            this.btiAberturaFechamento.Text = "Abertura e fechamento";
+            this.btiAberturaFechamento.UseVisualStyleBackColor = false;
+            this.btiAberturaFechamento.Click += new System.EventHandler(this.BtiAberturaFechamento_Click);
             // 
             // fmMain
             // 
@@ -726,7 +732,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.ClientSize = new System.Drawing.Size(1295, 585);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelCentral);
             this.Controls.Add(this.panelSuperior);
@@ -802,7 +807,7 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btiAberturaFechamento;
     }
 }
 

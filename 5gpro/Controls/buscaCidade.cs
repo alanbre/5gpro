@@ -34,20 +34,15 @@ namespace _5gpro.Controls
         private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
 
-        private void BtBuscaCidade_Click(object sender, System.EventArgs e)
-        {
-            AbreTelaBuscaCidade();
-        }
-
+        private void BtBuscaCidade_Click(object sender, System.EventArgs e) => Busca();
         private void TbFiltroCodigoCidade_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3)
             {
                 e.Handled = true;
-                AbreTelaBuscaCidade();
+                Busca();
             }
         }
-
         private void TbFiltroCodigoCidade_Leave(object sender, System.EventArgs e)
         {
             if (!int.TryParse(tbCodigoCidade.Text, out int codigo)) { tbCodigoCidade.Clear(); }
@@ -64,7 +59,7 @@ namespace _5gpro.Controls
         }
 
 
-        private void AbreTelaBuscaCidade()
+        private void Busca()
         {
             var buscaCidade = new fmBuscaCidade();
             buscaCidade.ShowDialog();
@@ -74,7 +69,6 @@ namespace _5gpro.Controls
                 PreencheCamposCidade(cidade);
             }
         }
-
         private void PreencheCamposCidade(Cidade cidade)
         {
             if (cidade != null)
@@ -93,14 +87,12 @@ namespace _5gpro.Controls
                 tbCodigoCidade.SelectAll();
             }
         }
-
         public void PreencheCampos(Cidade cidade)
         {
             this.cidade = cidade;
             tbCodigoCidade.Text = this.cidade != null ? this.cidade.CidadeID.ToString() : "";
             tbNomeCidade.Text = this.cidade != null ? this.cidade.Nome : "";
         }
-
         public void Limpa()
         {
             tbCodigoCidade.Clear();

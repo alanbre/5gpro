@@ -142,8 +142,11 @@ namespace _5gpro.Forms
             }
             var ok = false;
 
-            caixa = new Caixa();
-            caixa.Codigo = int.Parse(tbCodigo.Text);
+            if (caixa == null)
+            {
+                caixa = new Caixa();
+                caixa.Codigo = int.Parse(tbCodigo.Text);
+            }
             caixa.Nome = tbNome.Text;
             caixa.Descricao = tbDescricao.Text;
             caixa.Usuario = logado.Usuario;
@@ -345,7 +348,7 @@ namespace _5gpro.Forms
         {
             ignoraCheckEvent = true;
             LimpaCampos(false);
-            tbCodigo.Text = caixa.CaixaID.ToString();
+            tbCodigo.Text = caixa.Codigo.ToString();
             tbNome.Text = caixa.Nome;
             tbDescricao.Text = caixa.Descricao;
             this.caixa = caixa;

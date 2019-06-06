@@ -744,6 +744,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
   `idcaixa` INT NOT NULL AUTO_INCREMENT,
   `codigo` INT NOT NULL,
   `nome` VARCHAR(50) NOT NULL,
+  `aberto` TINYINT NOT NULL,
   `descricao` VARCHAR(500) NULL,
   `dataabertura` DATE NULL,
   `datafechamento` DATE NULL,
@@ -752,6 +753,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
   `idusuario` INT(11) NOT NULL,
   PRIMARY KEY (`idcaixa`),
   INDEX `fk_caixa_usuario1_idx` (`idusuario` ASC) VISIBLE,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE,
   CONSTRAINT `fk_caixa_usuario1`
     FOREIGN KEY (`idusuario`)
     REFERENCES `5gprodatabase`.`usuario` (`idusuario`)

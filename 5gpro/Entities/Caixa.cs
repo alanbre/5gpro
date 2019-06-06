@@ -9,6 +9,7 @@ namespace _5gpro.Entities
         {
             ValorAbertura = 0;
             ValorFechamento = 0;
+            Aberto = false;
         }
 
         public int CaixaID { get; set; }
@@ -16,6 +17,7 @@ namespace _5gpro.Entities
         [Required(ErrorMessage = "O nome do caixa é obrigatório.|tbNome", AllowEmptyStrings = false)]
         [StringLength(50, MinimumLength = 2)]
         public string Nome { get; set; }
+        public bool Aberto { get; set; }
         [MaxLength(500)]
         public string Descricao { get; set; }
         public DateTime? DataAbertura { get; set; }

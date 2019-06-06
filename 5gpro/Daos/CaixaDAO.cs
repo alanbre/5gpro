@@ -16,22 +16,27 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO caixa 
-                            (codigo, nome, descricao, dataabertura, datafechamento, valorabertura, valorfechamento, idusuario) 
+                            (codigo, nome, descricao, aberto, dataabertura, datafechamento, valorabertura, valorfechamento, idusuario) 
                             VALUES
-                            (@codigo, @nome, @descricao, @dataabertura, @datafechamento, @valorabertura, @valorfechamento, @idusuario)
+                            (@codigo, @nome, @descricao, @aberto, @dataabertura, @datafechamento, @valorabertura, @valorfechamento, @idusuario)
                             ON DUPLICATE KEY UPDATE
-                            nome = @nome, descricao = @descricao, dataabertura = @dataabertura, datafechamento, @datafechamento,
+                            nome = @nome, descricao = @descricao, dataabertura = @dataabertura, datafechamento = @datafechamento,
                             valorabertura = @valorabertura, valorfechamento = @valorfechamento, idusuario = @idusuario";
                 sql.addParam("@codigo", caixa.Codigo);
                 sql.addParam("@nome", caixa.Nome);
                 sql.addParam("@descricao", caixa.Descricao);
+                sql.addParam("@aberto", caixa.Aberto);
+                sql.addParam("@dataabertura", caixa.DataAbertura);
+                sql.addParam("@datafechamento", caixa.DataFechamento);
+                sql.addParam("@valorabertura", caixa.ValorAbertura);
+                sql.addParam("@valorfechamento", caixa.ValorFechamento);
                 sql.addParam("@idusuario", caixa.Usuario.UsuarioID);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
-                    sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupoitem;";
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idcaixa;";
                     var data = sql.selectQueryForSingleRecord();
-                    caixa.CaixaID = Convert.ToInt32(data["idsubgrupoitem"]);
+                    caixa.CaixaID = Convert.ToInt32(data["idcaixa"]);
                 }
                 sql.Commit();
             }
@@ -101,6 +106,30 @@ namespace _5gpro.Daos
             }
             return proximoid;
         }
+        public bool AbreOuFecha(Caixa caixa)
+        {
+            var retorno = false;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"UPDATE caixa
+                            SET 
+                            aberto = @aberto, dataabertura = @dataabertura, datafechamento = @datafechamento,
+                            valorabertura = @valorabertura, valorfechamento = @valorfechamento, idusuario = @idusuario
+                            WHERE codigo = @codigo";
+                sql.addParam("@aberto", caixa.Aberto);
+                sql.addParam("@dataabertura", caixa.DataAbertura);
+                sql.addParam("@datafechamento", caixa.DataFechamento);
+                sql.addParam("@valorabertura", caixa.ValorAbertura);
+                sql.addParam("@valorfechamento", caixa.ValorFechamento);
+                sql.addParam("@idusuario", caixa.Usuario.UsuarioID);
+                sql.addParam("@codigo", caixa.Codigo);
+                if (sql.updateQuery() > 0)
+                {
+                    retorno = true;
+                }
+            }
+            return retorno;
+        }
         private Caixa LeDadosReader(Dictionary<string, object> data)
         {
             var caixa = new Caixa();
@@ -108,6 +137,7 @@ namespace _5gpro.Daos
             caixa.Codigo = Convert.ToInt32(data["codigo"]);
             caixa.Nome = (string)data["nome"];
             caixa.Descricao = (string)data["descricao"];
+            caixa.Aberto = Convert.ToBoolean(data["aberto"]);
             caixa.DataAbertura = (DateTime?)data["dataabertura"];
             caixa.DataFechamento = (DateTime?)data["datafechamento"];
             caixa.ValorAbertura = (decimal)data["valorabertura"];
