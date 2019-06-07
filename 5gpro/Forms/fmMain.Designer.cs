@@ -75,10 +75,6 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-<<<<<<< HEAD
-            this.btiAberturaFechamento = new System.Windows.Forms.Button();
-=======
->>>>>>> ede4fd9d66ec36798eecf1a2792969ac31c656ab
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -306,10 +302,9 @@
             // 
             // paneldropCaixa
             // 
-            this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
             this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
             this.paneldropCaixa.Location = new System.Drawing.Point(3, 321);
-            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 56);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 60);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
@@ -795,10 +790,6 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
-<<<<<<< HEAD
-        private System.Windows.Forms.Button btiAberturaFechamento;
-=======
->>>>>>> ede4fd9d66ec36798eecf1a2792969ac31c656ab
     }
 }
 

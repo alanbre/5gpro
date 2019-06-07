@@ -386,6 +386,11 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        private void BtiAberturaFechamento_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void BtiCadastroCaixa_Click(object sender, EventArgs e)
         {
             var formCadCaixa = new fmCaiCadastroCaixa();
