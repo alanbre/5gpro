@@ -3,6 +3,7 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -11,10 +12,8 @@ namespace _5gpro.Forms
     {
         Validacao validacao = new Validacao();
         DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
-
         public Desintegracao desintegracaoconfigurada = new Desintegracao();
         private DesintegracaoResultado resultadodesi;
-
         public List<DesintegracaoResultado> listaresultadospercentual = new List<DesintegracaoResultado>();
         public List<DesintegracaoResultado> listaresultadosquantitativo = new List<DesintegracaoResultado>();
 
@@ -45,10 +44,6 @@ namespace _5gpro.Forms
 
         private void DgvPartes_CellClick(object sender, DataGridViewCellEventArgs e) => RemoverparteEnable();
 
-        private void RbQuantitativa_Click(object sender, EventArgs e)
-        {
-
-        }
         private void RbQuantitativa_CheckedChanged(object sender, EventArgs e)
         {
             AlterarTipoRB();
@@ -78,7 +73,7 @@ namespace _5gpro.Forms
         }
 
         private void PreencherDGV()
-       {
+        {
             if (rbQuantitativa.Checked)
             {
                 dgvPartes.Rows.Clear();
@@ -99,8 +94,8 @@ namespace _5gpro.Forms
                 }
                 dgvPartes.Refresh();
             }
-
         }
+
 
         //MENU PRINCIPAL
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
@@ -146,7 +141,6 @@ namespace _5gpro.Forms
 
 
         //FUNÇÕES
-
         private void Salvar()
         {
             if (!editando)
@@ -240,17 +234,41 @@ namespace _5gpro.Forms
                 resultadodesi.Desintegracao = desintegracaoconfigurada;
                 resultadodesi.Item = buscaItemParte.item;
 
-                if (rbPercentual.Checked)
+                DataGridViewRow dr = dgvPartes.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == resultadodesi.Item.ItemID).FirstOrDefault();
+
+                if (dr == null)
                 {
-                    resultadodesi.Porcentagem = dbValorTipo.Valor;
-                    dgvPartes.Rows.Add(resultadodesi.Item.ItemID, resultadodesi.Item.Descricao, resultadodesi.Porcentagem);
-                    listaresultadospercentual.Add(resultadodesi);
+                    if (rbPercentual.Checked)
+                    {
+                        resultadodesi.Porcentagem = dbValorTipo.Valor;
+                        listaresultadospercentual.Add(resultadodesi);
+                        dgvPartes.Rows.Add(resultadodesi.Item.ItemID, resultadodesi.Item.Descricao, resultadodesi.Porcentagem);
+                    }
+                    else
+                    {
+                        resultadodesi.Quantidade = dbValorTipo.Valor;
+                        listaresultadosquantitativo.Add(resultadodesi);
+                        dgvPartes.Rows.Add(resultadodesi.Item.ItemID, resultadodesi.Item.Descricao, resultadodesi.Quantidade);
+                    }
                 }
                 else
                 {
-                    resultadodesi.Quantidade = dbValorTipo.Valor;
-                    dgvPartes.Rows.Add(resultadodesi.Item.ItemID, resultadodesi.Item.Descricao, resultadodesi.Quantidade);
-                    listaresultadosquantitativo.Add(resultadodesi);
+                    if (rbPercentual.Checked)
+                    {
+                        resultadodesi.Porcentagem = dbValorTipo.Valor;
+                        listaresultadospercentual.Where(i => i.Item.ItemID == resultadodesi.Item.ItemID).First().Porcentagem = resultadodesi.Porcentagem;
+                        dr.Cells[dgvtbcPorcentagem.Index].Value = resultadodesi.Porcentagem;
+                        dgvPartes.Update();
+                        dgvPartes.Refresh();
+                    }
+                    else
+                    {
+                        resultadodesi.Quantidade = dbValorTipo.Valor;
+                        listaresultadosquantitativo.Where(i => i.Item.ItemID == resultadodesi.Item.ItemID).First().Quantidade = resultadodesi.Quantidade;
+                        dr.Cells[dgvtbcPorcentagem.Index].Value = resultadodesi.Porcentagem;
+                        dgvPartes.Update();
+                        dgvPartes.Refresh();
+                    }
                 }
                 dgvPartes.Refresh();
             }
@@ -307,12 +325,8 @@ namespace _5gpro.Forms
             }
             else
             {
-                //validacao.despintarCampos(controls);
-                //desintegracao.DesintegracaoID = buscaItemInteiro.item.ItemID;
-                //desintegracao.Itemdesintegrado = buscaItemInteiro.item;
-                //desintegracao.Partes = new List<DesintegracaoResultado>();
+                dgvPartes.Rows.Clear();
                 Editando(true);
-                //LimpaCampos(false);
             }
         }
 
@@ -326,18 +340,22 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
-
         }
 
-
+        private void BuscaItemInteiro_Codigo_Changed(object sender, EventArgs e)
+        {
+            listaresultadosquantitativo.Clear();
+            listaresultadospercentual.Clear();
+        }
 
         private void PreencheCampos(Desintegracao desintegracao)
         {
             ignoraCheckEvent = true;
 
-            dgvPartes.Rows.Clear();
             if (desintegracao.Tipo == "P")
             {
+                rbPercentual.Checked = true;
+                dgvPartes.Rows.Clear();
                 foreach (var p in desintegracao.Partes)
                 {
                     dgvPartes.Rows.Add(p.Item.ItemID, p.Item.Descricao, p.Porcentagem);
@@ -345,6 +363,8 @@ namespace _5gpro.Forms
             }
             else
             {
+                rbQuantitativa.Checked = true;
+                dgvPartes.Rows.Clear();
                 foreach (var p in desintegracao.Partes)
                 {
                     dgvPartes.Rows.Add(p.Item.ItemID, p.Item.Descricao, p.Quantidade);
