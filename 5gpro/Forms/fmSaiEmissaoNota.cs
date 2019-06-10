@@ -26,6 +26,8 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
+        int codigo = 0;
+
         bool editando, ignoracheckevent = false;
 
         public fmSaiEmissaoNota()
@@ -322,18 +324,30 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
-            int codigo = 0;
-            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
+            int c = 0;
+            if (!int.TryParse(tbCodigo.Text, out c))
+            {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
             if (notaFiscalPropria?.NotaFiscalPropriaID == codigo)
                 return;
 
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                    return;
-            }
 
             if (tbCodigo.Text.Length == 0)
             {
@@ -380,6 +394,8 @@ namespace _5gpro.Forms
             dgvItens.Rows.Clear();
             dgvItens.Refresh();
             LimpaCamposItem(limpaCod);
+            notaFiscalPropria = null;
+            codigo = 0;
         }
         private void LimpaCamposItem(bool focus)
         {

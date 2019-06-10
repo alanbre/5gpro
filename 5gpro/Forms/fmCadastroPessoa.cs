@@ -372,11 +372,18 @@ namespace _5gpro.Forms
                 }
             }
         }
+
         private void CarregaDados()
         {
-            var controls = (ControlCollection)this.Controls;
+            if (tbCodigo.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
 
-            int c;
+            var controls = (ControlCollection)this.Controls;
+            int c = 0;
             if (!int.TryParse(tbCodigo.Text, out c))
             {
                 tbCodigo.Clear();
@@ -397,37 +404,35 @@ namespace _5gpro.Forms
                     codigo = c;
                 }
             }
-            if (pessoa?.PessoaID == codigo)
-            {
-                return;
-            }
 
-
-
-            if (tbCodigo.Text.Length == 0)
+            if (codigo == 0)
             {
                 LimpaCampos(true);
                 Editando(false);
                 return;
             }
 
-
-
-            var newpessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
-            if (newpessoa != null)
+            if (pessoa?.PessoaID == codigo)
             {
-                
-                pessoa = newpessoa;
-                codigo = pessoa.PessoaID;
+                return;
+            }
+
+
+            var newPessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
+            if (newPessoa != null)
+            {
+                validacao.despintarCampos(controls);
+                pessoa = newPessoa;
                 PreencheCampos(pessoa);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
-            validacao.despintarCampos(controls);
+
         }
         private void Editando(bool edit)
         {
@@ -469,6 +474,8 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             buscaGrupoPessoa.Limpa();
             buscaSubGrupoPessoa.Limpa();
+            codigo = 0;
+            pessoa = null;
         }
         private void PreencheCampos(Pessoa pessoa)
         {
