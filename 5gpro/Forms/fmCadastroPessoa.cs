@@ -381,23 +381,22 @@ namespace _5gpro.Forms
             {
                 tbCodigo.Clear();
             }
-            else
+
+            if (codigo != c)
             {
-                if (c != codigo)
+                if (editando)
                 {
-                    if (editando)
+                    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.No)
                     {
-                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Warning) == DialogResult.No)
-                        {
-                            return;
-                        }
+                        return;
                     }
-                    codigo = c;
                 }
             }
-            if (pessoa?.PessoaID == codigo)
+
+
+            if (pessoa?.PessoaID == c)
             {
                 return;
             }
@@ -416,7 +415,7 @@ namespace _5gpro.Forms
             var newpessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newpessoa != null)
             {
-                
+
                 pessoa = newpessoa;
                 codigo = pessoa.PessoaID;
                 PreencheCampos(pessoa);

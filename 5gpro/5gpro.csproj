@@ -264,6 +264,7 @@
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </Compile>
     <Compile Include="Daos\CaixaDAO.cs" />
+    <Compile Include="Daos\CaixaLancamentoDAO.cs" />
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
@@ -294,6 +295,7 @@
       <DependentUpon>dsContas.xsd</DependentUpon>
     </Compile>
     <Compile Include="Entities\Caixa.cs" />
+    <Compile Include="Entities\CaixaLancamento.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -352,6 +354,18 @@
     </Compile>
     <Compile Include="Forms\fmCadastroDesintegracao.Designer.cs">
       <DependentUpon>fmCadastroDesintegracao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCaiLancamentoManual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiLancamentoManual.Designer.cs">
+      <DependentUpon>fmCaiLancamentoManual.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCaiSangria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiSangria.Designer.cs">
+      <DependentUpon>fmCaiSangria.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmItemReport.cs">
       <SubType>Form</SubType>
@@ -769,6 +783,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroDesintegracao.resx">
       <DependentUpon>fmCadastroDesintegracao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiLancamentoManual.resx">
+      <DependentUpon>fmCaiLancamentoManual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiSangria.resx">
+      <DependentUpon>fmCaiSangria.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmItemReport.resx">
       <DependentUpon>fmItemReport.cs</DependentUpon>
