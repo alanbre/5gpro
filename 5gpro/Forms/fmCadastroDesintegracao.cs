@@ -376,6 +376,73 @@ namespace _5gpro.Forms
             ignoraCheckEvent = false;
         }
 
+        private void Anterior()
+        {
+            if (buscaItemInteiro.item == null)
+            {
+                return;
+            }
+
+            //var controls = (ControlCollection)this.Controls;
+
+            //if (editando)
+            //{
+            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            //        "Aviso de alteração",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Warning) == DialogResult.No)
+            //        return;
+            //}
+
+
+            //var newitem = itemDAO.Anterior(int.Parse(tbCodigo.Text));
+            //if (newitem != null)
+            //{
+            //    DesintegracaoSimNao(newitem);
+            //    validacao.despintarCampos(controls);
+            //    item = newitem;
+            //    codigo = item.ItemID;
+            //    PreencheCampos(item);
+            //    if (editando)
+            //    {
+            //        Editando(false);
+            //    }
+            //}
+        }
+        private void Proximo()
+        {
+            //if (tbCodigo.Text.Length <= 0)
+            //{
+            //    return;
+            //}
+
+            //var controls = (ControlCollection)this.Controls;
+
+            //if (editando)
+            //{
+            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
+            //        "Aviso de alteração",
+            //        MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Warning) == DialogResult.No)
+            //        return;
+            //}
+
+
+            //var newitem = itemDAO.Proximo(int.Parse(tbCodigo.Text));
+            //if (newitem != null)
+            //{
+            //    DesintegracaoSimNao(newitem);
+            //    validacao.despintarCampos(controls);
+            //    item = newitem;
+            //    codigo = item.ItemID;
+            //    PreencheCampos(item);
+            //    if (editando)
+            //    {
+            //        Editando(false);
+            //    }
+            //}
+        }
+
     }
 }
 

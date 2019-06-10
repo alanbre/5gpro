@@ -67,7 +67,6 @@ namespace _5gpro.Daos
 
         public Desintegracao BuscaByID(int Codigo)
         {
-
             var desintegracao = new Desintegracao();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
@@ -92,10 +91,47 @@ namespace _5gpro.Daos
         }
 
         //public Item Anterior(int Codigo)
-        //{ }
+        //{
+        //    var item = new Item();
+        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+        //    {
+        //        sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i 
+        //                    INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
+        //                    INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
+        //                    INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
+        //                    WHERE iditem = (SELECT max(iditem) FROM item WHERE iditem < @iditem)";
+        //        sql.addParam("@iditem", Codigo);
 
+        //        var data = sql.selectQueryForSingleRecord();
+        //        if (data == null)
+        //        {
+        //            return null;
+        //        }
+        //        item = LeDadosReader(data);
+        //    }
+        //    return item;
+        //}
         //public Item Proximo(int Codigo)
-        //{ }
+        //{
+            //var item = new Item();
+            //using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            //{
+            //    sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
+            //                INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
+            //                INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
+            //                INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
+            //                WHERE iditem = (SELECT min(iditem) FROM item WHERE iditem > @iditem)";
+            //    sql.addParam("@iditem", Codigo);
+
+            //    var data = sql.selectQueryForSingleRecord();
+            //    if (data == null)
+            //    {
+            //        return null;
+            //    }
+            //    item = LeDadosReader(data);
+            //}
+            //return item;
+        //}
 
 
         private Desintegracao LeDadosReader(List<Dictionary<string, object>> data)
@@ -131,11 +167,9 @@ namespace _5gpro.Daos
 
                 listapartes.Add(parte);
             }
-
             desintegracao.Partes = listapartes;
             return desintegracao;
 
         }
-
     }
 }
