@@ -134,7 +134,7 @@ namespace _5gpro.Reports
         {
             camposNota = new Dictionary<string, string>()
             {
-                {"NotaFiscalPropriaID", "Número" },
+                {"NotaFiscalPropriaID", "Número Nota" },
                 {"DataEmissao", "Data emissão" },
                 {"DataEntradaSaida", "Data da saída" },
                 {"ValorTotalItens", "Valor total dos itens" },

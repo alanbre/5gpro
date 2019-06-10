@@ -3,8 +3,6 @@ using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using _5gpro.Reports;
-using _5gpro.Relatorios;
-using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
 using System.Threading;

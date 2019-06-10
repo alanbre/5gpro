@@ -371,6 +371,8 @@ namespace _5gpro.Reports {
             
             private global::System.Data.DataColumn columncoluna45;
             
+            private global::System.Data.DataColumn columncoluna46;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public GenericoDataTable() {
@@ -774,6 +776,14 @@ namespace _5gpro.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn coluna46Column {
+                get {
+                    return this.columncoluna46;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -855,7 +865,8 @@ namespace _5gpro.Reports {
                         string coluna42, 
                         string coluna43, 
                         string coluna44, 
-                        string coluna45) {
+                        string coluna45, 
+                        string coluna46) {
                 GenericoRow rowGenericoRow = ((GenericoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         coluna0,
@@ -903,7 +914,8 @@ namespace _5gpro.Reports {
                         coluna42,
                         coluna43,
                         coluna44,
-                        coluna45};
+                        coluna45,
+                        coluna46};
                 rowGenericoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowGenericoRow);
                 return rowGenericoRow;
@@ -972,6 +984,7 @@ namespace _5gpro.Reports {
                 this.columncoluna43 = base.Columns["coluna43"];
                 this.columncoluna44 = base.Columns["coluna44"];
                 this.columncoluna45 = base.Columns["coluna45"];
+                this.columncoluna46 = base.Columns["coluna46"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1069,6 +1082,8 @@ namespace _5gpro.Reports {
                 base.Columns.Add(this.columncoluna44);
                 this.columncoluna45 = new global::System.Data.DataColumn("coluna45", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columncoluna45);
+                this.columncoluna46 = new global::System.Data.DataColumn("coluna46", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columncoluna46);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1947,6 +1962,22 @@ namespace _5gpro.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string coluna46 {
+                get {
+                    try {
+                        return ((string)(this[this.tableGenerico.coluna46Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("O valor da coluna \'coluna46\' na tabela \'Generico\' é DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableGenerico.coluna46Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool Iscoluna0Null() {
                 return this.IsNull(this.tableGenerico.coluna0Column);
             }
@@ -2495,6 +2526,18 @@ namespace _5gpro.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setcoluna45Null() {
                 this[this.tableGenerico.coluna45Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool Iscoluna46Null() {
+                return this.IsNull(this.tableGenerico.coluna46Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void Setcoluna46Null() {
+                this[this.tableGenerico.coluna46Column] = global::System.Convert.DBNull;
             }
         }
         
