@@ -400,11 +400,12 @@ namespace _5gpro
 
         private void BtiCadastroCaixa_Click(object sender, EventArgs e)
         {
-            var formCaiSangria = new fmCaiSangria();
-            formCaiSangria.Show(this);
+            var formCadCaixa = new fmCaiCadastroCaixa();
+            formCadCaixa.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();
+            
         }
 
         private void BtiLancamentoManual_Click(object sender, EventArgs e)
@@ -416,19 +417,19 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        private void BtiAberturaFechamento_Click(object sender, EventArgs e)
+        private void BtiSangria_Click(object sender, EventArgs e)
         {
-            var formAberturaFechamento = new fmCaiAberturaFechamento();
-            formAberturaFechamento.Show(this);
+            var formCaiSangria = new fmCaiSangria();
+            formCaiSangria.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();
         }
 
-        private void BtiCadastroCaixa_Click(object sender, EventArgs e)
+        private void BtiAberturaFechamento_Click(object sender, EventArgs e)
         {
-            var formCadCaixa = new fmCaiCadastroCaixa();
-            formCadCaixa.Show(this);
+            var formAberturaFechamento = new fmCaiAberturaFechamento();
+            formAberturaFechamento.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();

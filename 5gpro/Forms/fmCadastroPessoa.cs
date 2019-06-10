@@ -424,8 +424,7 @@ namespace _5gpro.Forms
             var newPessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newPessoa != null)
             {
-
-                pessoa = newpessoa;
+                pessoa = newPessoa;
                 codigo = pessoa.PessoaID;
                 validacao.despintarCampos(controls);
                 PreencheCampos(pessoa);

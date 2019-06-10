@@ -45,6 +45,7 @@
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldropCaixa = new System.Windows.Forms.Panel();
+            this.btiLancamentoManual = new System.Windows.Forms.Button();
             this.btiSangria = new System.Windows.Forms.Button();
             this.btiAberturaFechamento = new System.Windows.Forms.Button();
             this.btiCadastroCaixa = new System.Windows.Forms.Button();
@@ -77,7 +78,6 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.btiLancamentoManual = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -315,6 +315,21 @@
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
             this.paneldropCaixa.TabIndex = 8;
+            // 
+            // btiLancamentoManual
+            // 
+            this.btiLancamentoManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiLancamentoManual.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiLancamentoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiLancamentoManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiLancamentoManual.ForeColor = System.Drawing.Color.White;
+            this.btiLancamentoManual.Location = new System.Drawing.Point(0, 84);
+            this.btiLancamentoManual.Name = "btiLancamentoManual";
+            this.btiLancamentoManual.Size = new System.Drawing.Size(200, 28);
+            this.btiLancamentoManual.TabIndex = 2;
+            this.btiLancamentoManual.Text = "Lançamento manual";
+            this.btiLancamentoManual.UseVisualStyleBackColor = false;
+            this.btiLancamentoManual.Click += new System.EventHandler(this.BtiLancamentoManual_Click);
             // 
             // btiSangria
             // 
@@ -745,21 +760,6 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
-            // btiLancamentoManual
-            // 
-            this.btiLancamentoManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiLancamentoManual.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiLancamentoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiLancamentoManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiLancamentoManual.ForeColor = System.Drawing.Color.White;
-            this.btiLancamentoManual.Location = new System.Drawing.Point(0, 84);
-            this.btiLancamentoManual.Name = "btiLancamentoManual";
-            this.btiLancamentoManual.Size = new System.Drawing.Size(200, 28);
-            this.btiLancamentoManual.TabIndex = 2;
-            this.btiLancamentoManual.Text = "Lançamento manual";
-            this.btiLancamentoManual.UseVisualStyleBackColor = false;
-            this.btiLancamentoManual.Click += new System.EventHandler(this.BtiLancamentoManual_Click);
-            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -841,12 +841,9 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
-<<<<<<< HEAD
         private System.Windows.Forms.Button btiAberturaFechamento;
         private System.Windows.Forms.Button btiSangria;
         private System.Windows.Forms.Button btiLancamentoManual;
-=======
->>>>>>> dfb908d77e501c44233e780496aee0b960b27522
     }
 }
 

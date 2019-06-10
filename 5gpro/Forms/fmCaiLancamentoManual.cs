@@ -18,7 +18,7 @@ namespace _5gpro.Forms
 
         private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
 
-        private bool editando, ignoracheckevent = false;
+        private bool editando = false;
 
         public fmCaiLancamentoManual()
         {
@@ -87,6 +87,7 @@ namespace _5gpro.Forms
                 MessageBox.Show("Conta inserida com sucesso!",
                     "Sucesso",
                     MessageBoxButtons.OK);
+                tbDocumento.Focus();
             }
             LimparDados();
         }

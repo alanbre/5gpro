@@ -263,8 +263,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
   `idnotafiscal` INT(11) NOT NULL,
-  `data_emissao` DATE NOT NULL,
-  `data_entradasaida` DATE NOT NULL,
+  `data_emissao` DATETIME NOT NULL,
+  `data_entradasaida` DATETIME NOT NULL,
   `tiponf` CHAR(1) NOT NULL,
   `valor_total_itens` DECIMAL(10,2) NULL DEFAULT NULL,
   `valor_documento` DECIMAL(10,2) NULL DEFAULT NULL,
@@ -536,7 +536,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `idparcela_conta_receber` INT NOT NULL AUTO_INCREMENT,
   `sequencia` INT NOT NULL,
-  `data_vencimento` DATETIME NOT NULL,
+  `data_vencimento` DATE NOT NULL,
   `valor` DECIMAL(10,2) NOT NULL,
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
@@ -594,7 +594,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
   `idparcela_conta_pagar` INT NOT NULL AUTO_INCREMENT,
   `sequencia` INT NULL,
-  `data_vencimento` DATETIME NULL,
+  `data_vencimento` DATE NULL,
   `valor` DECIMAL(10,2) NULL,
   `multa` DECIMAL(10,2) NULL,
   `juros` DECIMAL(10,2) NULL,
@@ -627,7 +627,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`registro_estoque` (
   `idregistro_estoque` INT NOT NULL AUTO_INCREMENT,
   `tipomovimentacao` CHAR(1) NOT NULL,
-  `data` DATE NOT NULL,
+  `data` DATETIME NOT NULL,
   `documento` VARCHAR(60) NOT NULL,
   `iditem` INT(11) NOT NULL,
   `quantidade` DECIMAL(10,2) NOT NULL,
@@ -749,8 +749,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
   `nome` VARCHAR(50) NOT NULL,
   `aberto` TINYINT NOT NULL,
   `descricao` VARCHAR(500) NULL,
-  `dataabertura` DATE NULL,
-  `datafechamento` DATE NULL,
+  `dataabertura` DATETIME NULL,
+  `datafechamento` DATETIME NULL,
   `valorabertura` DECIMAL(10,2) NULL,
   `valorfechamento` DECIMAL(10,2) NULL,
   `idusuario` INT(11) NOT NULL,
@@ -766,16 +766,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `5gprodatabase`.`caixa_entrada`
+-- Table `5gprodatabase`.`caixa_lancamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_entrada` (
-  `idregistro_caixa` INT NOT NULL AUTO_INCREMENT,
-  `data` DATE NOT NULL,
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
+  `idcaixa_lancamento` INT NOT NULL AUTO_INCREMENT,
+  `data` DATETIME NOT NULL,
   `valor` DECIMAL(10,2) NOT NULL,
   `valorpago` DECIMAL(10,2) NOT NULL,
   `troco` DECIMAL(10,2) NOT NULL,
+  `tipo` TINYINT(1) UNSIGNED NOT NULL,
+  `lancamento` TINYINT(1) NOT NULL,
+  `documento` VARCHAR(15) NULL,
   `idcaixa` INT NOT NULL,
-  PRIMARY KEY (`idregistro_caixa`),
+  PRIMARY KEY (`idcaixa_lancamento`),
   INDEX `fk_caixa_entrada_caixa1_idx` (`idcaixa` ASC) VISIBLE,
   CONSTRAINT `fk_caixa_entrada_caixa1`
     FOREIGN KEY (`idcaixa`)
@@ -785,11 +788,43 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_entrada` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_sangria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_sangria` (
+  `idcaixa_sangria` INT NOT NULL AUTO_INCREMENT,
+  `data` DATETIME NOT NULL,
+  `dinheiro` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`idcaixa_sangria`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_sangria_lancamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_sangria_lancamento` (
+  `idcaixa_sangria_lancamentos` INT NOT NULL AUTO_INCREMENT,
+  `idcaixa_lancamento` INT NOT NULL,
+  `idcaixa_sangria` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_sangria_lancamentos`),
+  INDEX `fk_caixa_sangria_lancamentos_caixa_lancamentos1_idx` (`idcaixa_lancamento` ASC) VISIBLE,
+  INDEX `fk_caixa_sangria_lancamentos_caixa_sangria1_idx` (`idcaixa_sangria` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_sangria_lancamentos_caixa_lancamentos1`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_sangria_lancamentos_caixa_sangria1`
+    FOREIGN KEY (`idcaixa_sangria`)
+    REFERENCES `5gprodatabase`.`caixa_sangria` (`idcaixa_sangria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
 ";
             return create;
         }
