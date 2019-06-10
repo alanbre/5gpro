@@ -289,11 +289,6 @@
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
-    <Compile Include="DataSets\dsContas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsContas.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Caixa.cs" />
     <Compile Include="Entities\CaixaLancamento.cs" />
     <Compile Include="Entities\Cidade.cs" />
@@ -367,24 +362,6 @@
     <Compile Include="Forms\fmCaiSangria.Designer.cs">
       <DependentUpon>fmCaiSangria.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmItemReport.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmItemReport.Designer.cs">
-      <DependentUpon>fmItemReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Relatorios\fmRelatorioContas.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Relatorios\fmRelatorioContas.Designer.cs">
-      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Relatorios\fmReportViewer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Relatorios\fmReportViewer.Designer.cs">
-      <DependentUpon>fmReportViewer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
@@ -393,50 +370,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reports\AdicioneiAgora1044.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\dsItem.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsItem.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\DSVazio.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DSVazio.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\fmRltContaReceber.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\fmRltContaReceber.Designer.cs">
-      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
-    </Compile>
     <Compile Include="Reports\fmRltGenerico.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\fmRltGenerico.Designer.cs">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\fmRltItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\fmRltItem.Designer.cs">
-      <DependentUpon>fmRltItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Reports\fmRltNotasSaida.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\fmRltNotasSaida.Designer.cs">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\exemplorelatorio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testesrelatorios\exemplorelatorio.Designer.cs">
-      <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
@@ -684,25 +628,6 @@
     <Compile Include="Forms\fmSelecionarBase.Designer.cs">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="testesrelatorios\FormRelatUsu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testesrelatorios\FormRelatUsu.Designer.cs">
-      <DependentUpon>FormRelatUsu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\SetUsuario.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SetUsuario.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\Teste.cs">
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\Teste.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
@@ -790,36 +715,13 @@
     <EmbeddedResource Include="Forms\fmCaiSangria.resx">
       <DependentUpon>fmCaiSangria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmItemReport.resx">
-      <DependentUpon>fmItemReport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\fmRelatorioContas.resx">
-      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\fmReportViewer.resx">
-      <DependentUpon>fmReportViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\rltContas.rdlc" />
-    <EmbeddedResource Include="Reports\fmRltContaReceber.resx">
-      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\fmRltItem.resx">
-      <DependentUpon>fmRltItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rltContas.rdlc" />
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
-    <EmbeddedResource Include="Reports\rltContaPagar.rdlc" />
-    <EmbeddedResource Include="Reports\rltItem.rdlc" />
-    <EmbeddedResource Include="Reports\rltItemSemDS.rdlc" />
-    <EmbeddedResource Include="testesrelatorios\exemplorelatorio.resx">
-      <DependentUpon>exemplorelatorio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -943,10 +845,6 @@
     <EmbeddedResource Include="Forms\fmSelecionarBase.resx">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="testesrelatorios\FormRelatUsu.resx">
-      <DependentUpon>FormRelatUsu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="testesrelatorios\Report2.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -957,19 +855,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
-    <None Include="DataSets\dsContas.xsc">
-      <DependentUpon>dsContas.xsd</DependentUpon>
-    </None>
-    <None Include="DataSets\dsContas.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsContas.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSets\dsContas.xss">
-      <DependentUpon>dsContas.xsd</DependentUpon>
-    </None>
     <None Include="Reports\dsGenerico.xsc">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </None>
@@ -984,61 +870,6 @@
     <None Include="Properties\DataSources\_5gpro.Entities.ContaPagar.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.ContaReceber.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
-    <None Include="Reports\AdicioneiAgora1044.xsc">
-      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\AdicioneiAgora1044.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AdicioneiAgora1044.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\AdicioneiAgora1044.xss">
-      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\dsItem.xsc">
-      <DependentUpon>dsItem.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\dsItem.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsItem.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\dsItem.xss">
-      <DependentUpon>dsItem.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\DSVazio.xsc">
-      <DependentUpon>DSVazio.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\DSVazio.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DSVazio.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\DSVazio.xss">
-      <DependentUpon>DSVazio.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\SetUsuario.xsc">
-      <DependentUpon>SetUsuario.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\SetUsuario.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SetUsuario.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="testesrelatorios\SetUsuario.xss">
-      <DependentUpon>SetUsuario.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\Teste.xsc">
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\Teste.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Teste.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="testesrelatorios\Teste.xss">
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

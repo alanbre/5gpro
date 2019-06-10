@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbQuebradgv = new System.Windows.Forms.GroupBox();
             this.lbTipoDesi = new System.Windows.Forms.Label();
             this.btInserir = new System.Windows.Forms.Button();
             this.dgvPartes = new System.Windows.Forms.DataGridView();
+            this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcPorcentagem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btRemoverparte = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbInteiro = new System.Windows.Forms.GroupBox();
             this.gpTipoDesi = new System.Windows.Forms.GroupBox();
             this.rbPercentual = new System.Windows.Forms.RadioButton();
             this.rbQuantitativa = new System.Windows.Forms.RadioButton();
-            this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcPorcentagem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.buscaItemInteiro = new _5gpro.Controls.BuscaItem();
             this.dbValorTipo = new _5gpro.Controls.DecimalBox();
@@ -92,8 +92,8 @@
             this.dgvPartes.AllowUserToDeleteRows = false;
             this.dgvPartes.AllowUserToOrderColumns = true;
             this.dgvPartes.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvPartes.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPartes.BackgroundColor = System.Drawing.Color.White;
             this.dgvPartes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPartes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -110,6 +110,26 @@
             this.dgvPartes.TabIndex = 15;
             this.dgvPartes.TabStop = false;
             this.dgvPartes.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPartes_CellClick);
+            // 
+            // dgvtbcCodigo
+            // 
+            this.dgvtbcCodigo.HeaderText = "Código";
+            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
+            this.dgvtbcCodigo.ReadOnly = true;
+            this.dgvtbcCodigo.Width = 65;
+            // 
+            // dgvtbcDescricao
+            // 
+            this.dgvtbcDescricao.HeaderText = "Descrição";
+            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
+            this.dgvtbcDescricao.ReadOnly = true;
+            this.dgvtbcDescricao.Width = 200;
+            // 
+            // dgvtbcPorcentagem
+            // 
+            this.dgvtbcPorcentagem.HeaderText = "Porcentagem";
+            this.dgvtbcPorcentagem.Name = "dgvtbcPorcentagem";
+            this.dgvtbcPorcentagem.ReadOnly = true;
             // 
             // btRemoverparte
             // 
@@ -174,26 +194,6 @@
             this.rbQuantitativa.UseVisualStyleBackColor = true;
             this.rbQuantitativa.CheckedChanged += new System.EventHandler(this.RbQuantitativa_CheckedChanged);
             // 
-            // dgvtbcCodigo
-            // 
-            this.dgvtbcCodigo.HeaderText = "Código";
-            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
-            this.dgvtbcCodigo.ReadOnly = true;
-            this.dgvtbcCodigo.Width = 65;
-            // 
-            // dgvtbcDescricao
-            // 
-            this.dgvtbcDescricao.HeaderText = "Descrição";
-            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
-            this.dgvtbcDescricao.ReadOnly = true;
-            this.dgvtbcDescricao.Width = 200;
-            // 
-            // dgvtbcPorcentagem
-            // 
-            this.dgvtbcPorcentagem.HeaderText = "Porcentagem";
-            this.dgvtbcPorcentagem.Name = "dgvtbcPorcentagem";
-            this.dgvtbcPorcentagem.ReadOnly = true;
-            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(9, 9);
@@ -215,6 +215,7 @@
             this.buscaItemInteiro.Name = "buscaItemInteiro";
             this.buscaItemInteiro.Size = new System.Drawing.Size(442, 39);
             this.buscaItemInteiro.TabIndex = 0;
+            this.buscaItemInteiro.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.BuscaItemInteiro_Codigo_Changed);
             this.buscaItemInteiro.Leave += new System.EventHandler(this.BuscaItemInteiro_Leave);
             // 
             // dbValorTipo

@@ -48,8 +48,6 @@ namespace _5gpro.Controls
         }
 
 
-
-
         private void AbreTelaBuscaItem()
         {
             var buscaItem = new fmBuscaItem();

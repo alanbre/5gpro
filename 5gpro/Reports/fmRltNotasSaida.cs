@@ -134,7 +134,7 @@ namespace _5gpro.Reports
         {
             camposNota = new Dictionary<string, string>()
             {
-                {"NotaFiscalPropriaID", "Número" },
+                {"NotaFiscalPropriaID", "Número Nota" },
                 {"DataEmissao", "Data emissão" },
                 {"DataEntradaSaida", "Data da saída" },
                 {"ValorTotalItens", "Valor total dos itens" },
@@ -557,7 +557,7 @@ namespace _5gpro.Reports
             }
             if (bcInicial.cidade?.CidadeID > bcFinal.cidade?.CidadeID && cbFiltrosCidades.Checked)
             {
-                mensagem += "Cidade final maior que cidade inicial\n";
+                mensagem += "Código da Cidade inicial maior que código da cidade final\n";
                 valido = false;
             }
             if (dtpDataEmissaoInicial.Value > dtpDataEmissaoFinal.Value && cbFiltroDataEmissao.Checked)

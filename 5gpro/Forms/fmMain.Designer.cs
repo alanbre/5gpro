@@ -841,9 +841,12 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
+<<<<<<< HEAD
         private System.Windows.Forms.Button btiAberturaFechamento;
         private System.Windows.Forms.Button btiSangria;
         private System.Windows.Forms.Button btiLancamentoManual;
+=======
+>>>>>>> dfb908d77e501c44233e780496aee0b960b27522
     }
 }
 

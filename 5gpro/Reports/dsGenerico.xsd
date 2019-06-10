@@ -12,7 +12,7 @@
   <xs:element name="dsGenerico" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsGenerico" msprop:Generator_UserDSName="dsGenerico">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Generico" msprop:Generator_TableClassName="GenericoDataTable" msprop:Generator_TableVarName="tableGenerico" msprop:Generator_RowChangedName="GenericoRowChanged" msprop:Generator_TablePropName="Generico" msprop:Generator_RowDeletingName="GenericoRowDeleting" msprop:Generator_RowChangingName="GenericoRowChanging" msprop:Generator_RowEvHandlerName="GenericoRowChangeEventHandler" msprop:Generator_RowDeletedName="GenericoRowDeleted" msprop:Generator_RowClassName="GenericoRow" msprop:Generator_UserTableName="Generico" msprop:Generator_RowEvArgName="GenericoRowChangeEvent">
+        <xs:element name="Generico" msprop:Generator_TableClassName="GenericoDataTable" msprop:Generator_TableVarName="tableGenerico" msprop:Generator_TablePropName="Generico" msprop:Generator_RowDeletingName="GenericoRowDeleting" msprop:Generator_RowChangingName="GenericoRowChanging" msprop:Generator_RowEvHandlerName="GenericoRowChangeEventHandler" msprop:Generator_RowDeletedName="GenericoRowDeleted" msprop:Generator_UserTableName="Generico" msprop:Generator_RowChangedName="GenericoRowChanged" msprop:Generator_RowEvArgName="GenericoRowChangeEvent" msprop:Generator_RowClassName="GenericoRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="coluna0" msprop:Generator_ColumnVarNameInTable="columncoluna0" msprop:Generator_ColumnPropNameInRow="coluna0" msprop:Generator_ColumnPropNameInTable="coluna0Column" msprop:Generator_UserColumnName="coluna0" type="xs:string" minOccurs="0" />
@@ -61,6 +61,7 @@
               <xs:element name="coluna43" msprop:Generator_ColumnVarNameInTable="columncoluna43" msprop:Generator_ColumnPropNameInRow="coluna43" msprop:Generator_ColumnPropNameInTable="coluna43Column" msprop:Generator_UserColumnName="coluna43" type="xs:string" minOccurs="0" />
               <xs:element name="coluna44" msprop:Generator_ColumnVarNameInTable="columncoluna44" msprop:Generator_ColumnPropNameInRow="coluna44" msprop:Generator_ColumnPropNameInTable="coluna44Column" msprop:Generator_UserColumnName="coluna44" type="xs:string" minOccurs="0" />
               <xs:element name="coluna45" msprop:Generator_ColumnVarNameInTable="columncoluna45" msprop:Generator_ColumnPropNameInRow="coluna45" msprop:Generator_ColumnPropNameInTable="coluna45Column" msprop:Generator_UserColumnName="coluna45" type="xs:string" minOccurs="0" />
+              <xs:element name="coluna46" msprop:Generator_ColumnVarNameInTable="columncoluna46" msprop:Generator_ColumnPropNameInRow="coluna46" msprop:Generator_ColumnPropNameInTable="coluna46Column" msprop:Generator_UserColumnName="coluna46" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

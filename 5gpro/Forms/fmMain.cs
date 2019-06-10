@@ -3,8 +3,6 @@ using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using _5gpro.Reports;
-using _5gpro.Relatorios;
-using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -399,7 +397,8 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        private void BtiSangria_Click(object sender, EventArgs e)
+
+        private void BtiCadastroCaixa_Click(object sender, EventArgs e)
         {
             var formCaiSangria = new fmCaiSangria();
             formCaiSangria.Show(this);
