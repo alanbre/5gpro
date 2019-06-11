@@ -36,14 +36,16 @@
             this.gbSangria = new System.Windows.Forms.GroupBox();
             this.tcSangria = new System.Windows.Forms.TabControl();
             this.tpGeral = new System.Windows.Forms.TabPage();
-            this.dbSangria = new _5gpro.Controls.DecimalBox();
-            this.lbSangrias = new System.Windows.Forms.Label();
-            this.dbFaturamento = new _5gpro.Controls.DecimalBox();
+            this.gbDemonstrativoCaixa = new System.Windows.Forms.GroupBox();
+            this.lbDemonstrativoCartaoDebito = new System.Windows.Forms.Label();
+            this.lbDemonstrativoCartaoCredito = new System.Windows.Forms.Label();
+            this.lbDemonstrativoCheque = new System.Windows.Forms.Label();
+            this.lbDemonstrativoDinheiro = new System.Windows.Forms.Label();
+            this.gbTotaisConta = new System.Windows.Forms.GroupBox();
             this.lbFaturamento = new System.Windows.Forms.Label();
-            this.dbAberturaCaixa = new _5gpro.Controls.DecimalBox();
-            this.lbAbertura = new System.Windows.Forms.Label();
-            this.dbDinheiroCaixa = new _5gpro.Controls.DecimalBox();
             this.lbTotalCaixa = new System.Windows.Forms.Label();
+            this.lbSangrias = new System.Windows.Forms.Label();
+            this.lbAbertura = new System.Windows.Forms.Label();
             this.tpCheque = new System.Windows.Forms.TabPage();
             this.cbTodosCheques = new System.Windows.Forms.CheckBox();
             this.dgvCheque = new System.Windows.Forms.DataGridView();
@@ -53,40 +55,38 @@
             this.tpCartaoDebito = new System.Windows.Forms.TabPage();
             this.cbTodosCartaoDebito = new System.Windows.Forms.CheckBox();
             this.dgvCartaoDebito = new System.Windows.Forms.DataGridView();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
-            this.gbTotaisConta = new System.Windows.Forms.GroupBox();
-            this.gbDemonstrativoCaixa = new System.Windows.Forms.GroupBox();
-            this.lbDemonstrativoDinheiro = new System.Windows.Forms.Label();
-            this.dbDemonstrativoDinheiro = new _5gpro.Controls.DecimalBox();
-            this.lbDemonstrativoCheque = new System.Windows.Forms.Label();
-            this.dbDemonstrativoCheque = new _5gpro.Controls.DecimalBox();
-            this.lbDemonstrativoCartaoCredito = new System.Windows.Forms.Label();
-            this.dbDemonstrativoCartaoCredito = new _5gpro.Controls.DecimalBox();
-            this.lbDemonstrativoCartaoDebito = new System.Windows.Forms.Label();
-            this.dbDemonstrativoCartaoDebito = new _5gpro.Controls.DecimalBox();
             this.gbTotaisSangria = new System.Windows.Forms.GroupBox();
-            this.lbSangriaDinheiro = new System.Windows.Forms.Label();
-            this.dbSangriaDinheiro = new _5gpro.Controls.DecimalBox();
-            this.dbSangriaCheque = new _5gpro.Controls.DecimalBox();
-            this.lbSangriaCheque = new System.Windows.Forms.Label();
-            this.dbSangriaCartaoCredito = new _5gpro.Controls.DecimalBox();
-            this.lbSangriaCartaoCredito = new System.Windows.Forms.Label();
-            this.dbSangriaCartaoDebito = new _5gpro.Controls.DecimalBox();
-            this.lbSangriaCartaoDebito = new System.Windows.Forms.Label();
-            this.btRealizarSangria = new System.Windows.Forms.Button();
-            this.dbSangriaTotal = new _5gpro.Controls.DecimalBox();
             this.lbSangriaTotal = new System.Windows.Forms.Label();
+            this.btRealizarSangria = new System.Windows.Forms.Button();
+            this.lbSangriaCartaoDebito = new System.Windows.Forms.Label();
+            this.lbSangriaCartaoCredito = new System.Windows.Forms.Label();
+            this.lbSangriaCheque = new System.Windows.Forms.Label();
+            this.lbSangriaDinheiro = new System.Windows.Forms.Label();
+            this.dbSangriaTotal = new _5gpro.Controls.DecimalBox();
+            this.dbSangriaCartaoDebitoTotal = new _5gpro.Controls.DecimalBox();
+            this.dbSangriaCartaoCreditoTotal = new _5gpro.Controls.DecimalBox();
+            this.dbSangriaChequeTotal = new _5gpro.Controls.DecimalBox();
+            this.dbSangriaDinheiroTotal = new _5gpro.Controls.DecimalBox();
+            this.dbDemonstrativoCartaoDebito = new _5gpro.Controls.DecimalBox();
+            this.dbDemonstrativoCartaoCredito = new _5gpro.Controls.DecimalBox();
+            this.dbDemonstrativoCheque = new _5gpro.Controls.DecimalBox();
+            this.dbDemonstrativoDinheiro = new _5gpro.Controls.DecimalBox();
+            this.dbCaixaSangria = new _5gpro.Controls.DecimalBox();
+            this.dbCaixaTotal = new _5gpro.Controls.DecimalBox();
+            this.dbCaixaFaturamento = new _5gpro.Controls.DecimalBox();
+            this.dbCaixaAbertura = new _5gpro.Controls.DecimalBox();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.gbSangria.SuspendLayout();
             this.tcSangria.SuspendLayout();
             this.tpGeral.SuspendLayout();
+            this.gbDemonstrativoCaixa.SuspendLayout();
+            this.gbTotaisConta.SuspendLayout();
             this.tpCheque.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheque)).BeginInit();
             this.tpCartaoCredito.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartaoCredito)).BeginInit();
             this.tpCartaoDebito.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartaoDebito)).BeginInit();
-            this.gbTotaisConta.SuspendLayout();
-            this.gbDemonstrativoCaixa.SuspendLayout();
             this.gbTotaisSangria.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,40 +142,75 @@
             this.tpGeral.Text = "Geral";
             this.tpGeral.UseVisualStyleBackColor = true;
             // 
-            // dbSangria
+            // gbDemonstrativoCaixa
             // 
-            this.dbSangria.ForeColor = System.Drawing.Color.Red;
-            this.dbSangria.Location = new System.Drawing.Point(9, 117);
-            this.dbSangria.Name = "dbSangria";
-            this.dbSangria.Size = new System.Drawing.Size(100, 22);
-            this.dbSangria.TabIndex = 5;
-            this.dbSangria.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
+            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoCartaoDebito);
+            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoCartaoDebito);
+            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoCartaoCredito);
+            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoCartaoCredito);
+            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoCheque);
+            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoCheque);
+            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoDinheiro);
+            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoDinheiro);
+            this.gbDemonstrativoCaixa.Location = new System.Drawing.Point(136, 3);
+            this.gbDemonstrativoCaixa.Name = "gbDemonstrativoCaixa";
+            this.gbDemonstrativoCaixa.Size = new System.Drawing.Size(124, 194);
+            this.gbDemonstrativoCaixa.TabIndex = 9;
+            this.gbDemonstrativoCaixa.TabStop = false;
+            this.gbDemonstrativoCaixa.Text = "Demonstrativo";
             // 
-            // lbSangrias
+            // lbDemonstrativoCartaoDebito
             // 
-            this.lbSangrias.AutoSize = true;
-            this.lbSangrias.Location = new System.Drawing.Point(6, 101);
-            this.lbSangrias.Name = "lbSangrias";
-            this.lbSangrias.Size = new System.Drawing.Size(48, 13);
-            this.lbSangrias.TabIndex = 4;
-            this.lbSangrias.Text = "Sangrias";
+            this.lbDemonstrativoCartaoDebito.AutoSize = true;
+            this.lbDemonstrativoCartaoDebito.Location = new System.Drawing.Point(6, 139);
+            this.lbDemonstrativoCartaoDebito.Name = "lbDemonstrativoCartaoDebito";
+            this.lbDemonstrativoCartaoDebito.Size = new System.Drawing.Size(85, 13);
+            this.lbDemonstrativoCartaoDebito.TabIndex = 6;
+            this.lbDemonstrativoCartaoDebito.Text = "Cartão de débito";
             // 
-            // dbFaturamento
+            // lbDemonstrativoCartaoCredito
             // 
-            this.dbFaturamento.ForeColor = System.Drawing.Color.Lime;
-            this.dbFaturamento.Location = new System.Drawing.Point(9, 76);
-            this.dbFaturamento.Name = "dbFaturamento";
-            this.dbFaturamento.Size = new System.Drawing.Size(100, 22);
-            this.dbFaturamento.TabIndex = 3;
-            this.dbFaturamento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
+            this.lbDemonstrativoCartaoCredito.AutoSize = true;
+            this.lbDemonstrativoCartaoCredito.Location = new System.Drawing.Point(6, 98);
+            this.lbDemonstrativoCartaoCredito.Name = "lbDemonstrativoCartaoCredito";
+            this.lbDemonstrativoCartaoCredito.Size = new System.Drawing.Size(88, 13);
+            this.lbDemonstrativoCartaoCredito.TabIndex = 4;
+            this.lbDemonstrativoCartaoCredito.Text = "Cartão de crédito";
+            // 
+            // lbDemonstrativoCheque
+            // 
+            this.lbDemonstrativoCheque.AutoSize = true;
+            this.lbDemonstrativoCheque.Location = new System.Drawing.Point(3, 57);
+            this.lbDemonstrativoCheque.Name = "lbDemonstrativoCheque";
+            this.lbDemonstrativoCheque.Size = new System.Drawing.Size(44, 13);
+            this.lbDemonstrativoCheque.TabIndex = 2;
+            this.lbDemonstrativoCheque.Text = "Cheque";
+            // 
+            // lbDemonstrativoDinheiro
+            // 
+            this.lbDemonstrativoDinheiro.AutoSize = true;
+            this.lbDemonstrativoDinheiro.Location = new System.Drawing.Point(3, 16);
+            this.lbDemonstrativoDinheiro.Name = "lbDemonstrativoDinheiro";
+            this.lbDemonstrativoDinheiro.Size = new System.Drawing.Size(46, 13);
+            this.lbDemonstrativoDinheiro.TabIndex = 0;
+            this.lbDemonstrativoDinheiro.Text = "Dinheiro";
+            // 
+            // gbTotaisConta
+            // 
+            this.gbTotaisConta.Controls.Add(this.lbFaturamento);
+            this.gbTotaisConta.Controls.Add(this.dbCaixaSangria);
+            this.gbTotaisConta.Controls.Add(this.lbTotalCaixa);
+            this.gbTotaisConta.Controls.Add(this.lbSangrias);
+            this.gbTotaisConta.Controls.Add(this.dbCaixaTotal);
+            this.gbTotaisConta.Controls.Add(this.dbCaixaFaturamento);
+            this.gbTotaisConta.Controls.Add(this.lbAbertura);
+            this.gbTotaisConta.Controls.Add(this.dbCaixaAbertura);
+            this.gbTotaisConta.Location = new System.Drawing.Point(6, 3);
+            this.gbTotaisConta.Name = "gbTotaisConta";
+            this.gbTotaisConta.Size = new System.Drawing.Size(124, 194);
+            this.gbTotaisConta.TabIndex = 8;
+            this.gbTotaisConta.TabStop = false;
+            this.gbTotaisConta.Text = "Totais da conta";
             // 
             // lbFaturamento
             // 
@@ -186,17 +221,23 @@
             this.lbFaturamento.TabIndex = 2;
             this.lbFaturamento.Text = "Faturamento";
             // 
-            // dbAberturaCaixa
+            // lbTotalCaixa
             // 
-            this.dbAberturaCaixa.Location = new System.Drawing.Point(9, 35);
-            this.dbAberturaCaixa.Name = "dbAberturaCaixa";
-            this.dbAberturaCaixa.Size = new System.Drawing.Size(100, 22);
-            this.dbAberturaCaixa.TabIndex = 1;
-            this.dbAberturaCaixa.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
+            this.lbTotalCaixa.AutoSize = true;
+            this.lbTotalCaixa.Location = new System.Drawing.Point(6, 142);
+            this.lbTotalCaixa.Name = "lbTotalCaixa";
+            this.lbTotalCaixa.Size = new System.Drawing.Size(76, 13);
+            this.lbTotalCaixa.TabIndex = 6;
+            this.lbTotalCaixa.Text = "Total em caixa";
+            // 
+            // lbSangrias
+            // 
+            this.lbSangrias.AutoSize = true;
+            this.lbSangrias.Location = new System.Drawing.Point(6, 101);
+            this.lbSangrias.Name = "lbSangrias";
+            this.lbSangrias.Size = new System.Drawing.Size(48, 13);
+            this.lbSangrias.TabIndex = 4;
+            this.lbSangrias.Text = "Sangrias";
             // 
             // lbAbertura
             // 
@@ -206,27 +247,6 @@
             this.lbAbertura.Size = new System.Drawing.Size(90, 13);
             this.lbAbertura.TabIndex = 0;
             this.lbAbertura.Text = "Abertura de caixa";
-            // 
-            // dbDinheiroCaixa
-            // 
-            this.dbDinheiroCaixa.Location = new System.Drawing.Point(9, 158);
-            this.dbDinheiroCaixa.Name = "dbDinheiroCaixa";
-            this.dbDinheiroCaixa.Size = new System.Drawing.Size(100, 22);
-            this.dbDinheiroCaixa.TabIndex = 7;
-            this.dbDinheiroCaixa.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbTotalCaixa
-            // 
-            this.lbTotalCaixa.AutoSize = true;
-            this.lbTotalCaixa.Location = new System.Drawing.Point(6, 142);
-            this.lbTotalCaixa.Name = "lbTotalCaixa";
-            this.lbTotalCaixa.Size = new System.Drawing.Size(76, 13);
-            this.lbTotalCaixa.TabIndex = 6;
-            this.lbTotalCaixa.Text = "Total em caixa";
             // 
             // tpCheque
             // 
@@ -341,145 +361,18 @@
             this.dgvCartaoDebito.Size = new System.Drawing.Size(756, 310);
             this.dgvCartaoDebito.TabIndex = 0;
             // 
-            // buscaCaixa
-            // 
-            this.buscaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaCaixa.Location = new System.Drawing.Point(9, 9);
-            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCaixa.Name = "buscaCaixa";
-            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaCaixa.TabIndex = 0;
-            // 
-            // gbTotaisConta
-            // 
-            this.gbTotaisConta.Controls.Add(this.lbFaturamento);
-            this.gbTotaisConta.Controls.Add(this.dbSangria);
-            this.gbTotaisConta.Controls.Add(this.lbTotalCaixa);
-            this.gbTotaisConta.Controls.Add(this.lbSangrias);
-            this.gbTotaisConta.Controls.Add(this.dbDinheiroCaixa);
-            this.gbTotaisConta.Controls.Add(this.dbFaturamento);
-            this.gbTotaisConta.Controls.Add(this.lbAbertura);
-            this.gbTotaisConta.Controls.Add(this.dbAberturaCaixa);
-            this.gbTotaisConta.Location = new System.Drawing.Point(6, 3);
-            this.gbTotaisConta.Name = "gbTotaisConta";
-            this.gbTotaisConta.Size = new System.Drawing.Size(124, 194);
-            this.gbTotaisConta.TabIndex = 8;
-            this.gbTotaisConta.TabStop = false;
-            this.gbTotaisConta.Text = "Totais da conta";
-            // 
-            // gbDemonstrativoCaixa
-            // 
-            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoCartaoDebito);
-            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoCartaoDebito);
-            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoCartaoCredito);
-            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoCartaoCredito);
-            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoCheque);
-            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoCheque);
-            this.gbDemonstrativoCaixa.Controls.Add(this.dbDemonstrativoDinheiro);
-            this.gbDemonstrativoCaixa.Controls.Add(this.lbDemonstrativoDinheiro);
-            this.gbDemonstrativoCaixa.Location = new System.Drawing.Point(136, 3);
-            this.gbDemonstrativoCaixa.Name = "gbDemonstrativoCaixa";
-            this.gbDemonstrativoCaixa.Size = new System.Drawing.Size(124, 194);
-            this.gbDemonstrativoCaixa.TabIndex = 9;
-            this.gbDemonstrativoCaixa.TabStop = false;
-            this.gbDemonstrativoCaixa.Text = "Demonstrativo";
-            // 
-            // lbDemonstrativoDinheiro
-            // 
-            this.lbDemonstrativoDinheiro.AutoSize = true;
-            this.lbDemonstrativoDinheiro.Location = new System.Drawing.Point(3, 16);
-            this.lbDemonstrativoDinheiro.Name = "lbDemonstrativoDinheiro";
-            this.lbDemonstrativoDinheiro.Size = new System.Drawing.Size(46, 13);
-            this.lbDemonstrativoDinheiro.TabIndex = 0;
-            this.lbDemonstrativoDinheiro.Text = "Dinheiro";
-            // 
-            // dbDemonstrativoDinheiro
-            // 
-            this.dbDemonstrativoDinheiro.Location = new System.Drawing.Point(6, 32);
-            this.dbDemonstrativoDinheiro.Name = "dbDemonstrativoDinheiro";
-            this.dbDemonstrativoDinheiro.Size = new System.Drawing.Size(100, 22);
-            this.dbDemonstrativoDinheiro.TabIndex = 1;
-            this.dbDemonstrativoDinheiro.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbDemonstrativoCheque
-            // 
-            this.lbDemonstrativoCheque.AutoSize = true;
-            this.lbDemonstrativoCheque.Location = new System.Drawing.Point(3, 57);
-            this.lbDemonstrativoCheque.Name = "lbDemonstrativoCheque";
-            this.lbDemonstrativoCheque.Size = new System.Drawing.Size(44, 13);
-            this.lbDemonstrativoCheque.TabIndex = 2;
-            this.lbDemonstrativoCheque.Text = "Cheque";
-            // 
-            // dbDemonstrativoCheque
-            // 
-            this.dbDemonstrativoCheque.Location = new System.Drawing.Point(6, 73);
-            this.dbDemonstrativoCheque.Name = "dbDemonstrativoCheque";
-            this.dbDemonstrativoCheque.Size = new System.Drawing.Size(100, 22);
-            this.dbDemonstrativoCheque.TabIndex = 3;
-            this.dbDemonstrativoCheque.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbDemonstrativoCartaoCredito
-            // 
-            this.lbDemonstrativoCartaoCredito.AutoSize = true;
-            this.lbDemonstrativoCartaoCredito.Location = new System.Drawing.Point(6, 98);
-            this.lbDemonstrativoCartaoCredito.Name = "lbDemonstrativoCartaoCredito";
-            this.lbDemonstrativoCartaoCredito.Size = new System.Drawing.Size(88, 13);
-            this.lbDemonstrativoCartaoCredito.TabIndex = 4;
-            this.lbDemonstrativoCartaoCredito.Text = "Cartão de crédito";
-            // 
-            // dbDemonstrativoCartaoCredito
-            // 
-            this.dbDemonstrativoCartaoCredito.Location = new System.Drawing.Point(6, 114);
-            this.dbDemonstrativoCartaoCredito.Name = "dbDemonstrativoCartaoCredito";
-            this.dbDemonstrativoCartaoCredito.Size = new System.Drawing.Size(100, 22);
-            this.dbDemonstrativoCartaoCredito.TabIndex = 5;
-            this.dbDemonstrativoCartaoCredito.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbDemonstrativoCartaoDebito
-            // 
-            this.lbDemonstrativoCartaoDebito.AutoSize = true;
-            this.lbDemonstrativoCartaoDebito.Location = new System.Drawing.Point(6, 139);
-            this.lbDemonstrativoCartaoDebito.Name = "lbDemonstrativoCartaoDebito";
-            this.lbDemonstrativoCartaoDebito.Size = new System.Drawing.Size(85, 13);
-            this.lbDemonstrativoCartaoDebito.TabIndex = 6;
-            this.lbDemonstrativoCartaoDebito.Text = "Cartão de débito";
-            // 
-            // dbDemonstrativoCartaoDebito
-            // 
-            this.dbDemonstrativoCartaoDebito.Location = new System.Drawing.Point(6, 155);
-            this.dbDemonstrativoCartaoDebito.Name = "dbDemonstrativoCartaoDebito";
-            this.dbDemonstrativoCartaoDebito.Size = new System.Drawing.Size(100, 22);
-            this.dbDemonstrativoCartaoDebito.TabIndex = 7;
-            this.dbDemonstrativoCartaoDebito.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // gbTotaisSangria
             // 
             this.gbTotaisSangria.Controls.Add(this.dbSangriaTotal);
             this.gbTotaisSangria.Controls.Add(this.lbSangriaTotal);
             this.gbTotaisSangria.Controls.Add(this.btRealizarSangria);
-            this.gbTotaisSangria.Controls.Add(this.dbSangriaCartaoDebito);
+            this.gbTotaisSangria.Controls.Add(this.dbSangriaCartaoDebitoTotal);
             this.gbTotaisSangria.Controls.Add(this.lbSangriaCartaoDebito);
-            this.gbTotaisSangria.Controls.Add(this.dbSangriaCartaoCredito);
+            this.gbTotaisSangria.Controls.Add(this.dbSangriaCartaoCreditoTotal);
             this.gbTotaisSangria.Controls.Add(this.lbSangriaCartaoCredito);
-            this.gbTotaisSangria.Controls.Add(this.dbSangriaCheque);
+            this.gbTotaisSangria.Controls.Add(this.dbSangriaChequeTotal);
             this.gbTotaisSangria.Controls.Add(this.lbSangriaCheque);
-            this.gbTotaisSangria.Controls.Add(this.dbSangriaDinheiro);
+            this.gbTotaisSangria.Controls.Add(this.dbSangriaDinheiroTotal);
             this.gbTotaisSangria.Controls.Add(this.lbSangriaDinheiro);
             this.gbTotaisSangria.Location = new System.Drawing.Point(12, 444);
             this.gbTotaisSangria.Name = "gbTotaisSangria";
@@ -488,83 +381,23 @@
             this.gbTotaisSangria.TabStop = false;
             this.gbTotaisSangria.Text = "Totais da sangria";
             // 
-            // lbSangriaDinheiro
+            // lbSangriaTotal
             // 
-            this.lbSangriaDinheiro.AutoSize = true;
-            this.lbSangriaDinheiro.Location = new System.Drawing.Point(6, 16);
-            this.lbSangriaDinheiro.Name = "lbSangriaDinheiro";
-            this.lbSangriaDinheiro.Size = new System.Drawing.Size(46, 13);
-            this.lbSangriaDinheiro.TabIndex = 0;
-            this.lbSangriaDinheiro.Text = "Dinheiro";
+            this.lbSangriaTotal.AutoSize = true;
+            this.lbSangriaTotal.Location = new System.Drawing.Point(443, 16);
+            this.lbSangriaTotal.Name = "lbSangriaTotal";
+            this.lbSangriaTotal.Size = new System.Drawing.Size(83, 13);
+            this.lbSangriaTotal.TabIndex = 8;
+            this.lbSangriaTotal.Text = "Total da sangria";
             // 
-            // dbSangriaDinheiro
+            // btRealizarSangria
             // 
-            this.dbSangriaDinheiro.Location = new System.Drawing.Point(9, 32);
-            this.dbSangriaDinheiro.Name = "dbSangriaDinheiro";
-            this.dbSangriaDinheiro.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaDinheiro.TabIndex = 1;
-            this.dbSangriaDinheiro.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbSangriaCheque
-            // 
-            this.dbSangriaCheque.Enabled = false;
-            this.dbSangriaCheque.Location = new System.Drawing.Point(119, 32);
-            this.dbSangriaCheque.Name = "dbSangriaCheque";
-            this.dbSangriaCheque.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaCheque.TabIndex = 3;
-            this.dbSangriaCheque.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbSangriaCheque
-            // 
-            this.lbSangriaCheque.AutoSize = true;
-            this.lbSangriaCheque.Location = new System.Drawing.Point(116, 16);
-            this.lbSangriaCheque.Name = "lbSangriaCheque";
-            this.lbSangriaCheque.Size = new System.Drawing.Size(49, 13);
-            this.lbSangriaCheque.TabIndex = 2;
-            this.lbSangriaCheque.Text = "Cheques";
-            // 
-            // dbSangriaCartaoCredito
-            // 
-            this.dbSangriaCartaoCredito.Enabled = false;
-            this.dbSangriaCartaoCredito.Location = new System.Drawing.Point(231, 32);
-            this.dbSangriaCartaoCredito.Name = "dbSangriaCartaoCredito";
-            this.dbSangriaCartaoCredito.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaCartaoCredito.TabIndex = 5;
-            this.dbSangriaCartaoCredito.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // lbSangriaCartaoCredito
-            // 
-            this.lbSangriaCartaoCredito.AutoSize = true;
-            this.lbSangriaCartaoCredito.Location = new System.Drawing.Point(228, 16);
-            this.lbSangriaCartaoCredito.Name = "lbSangriaCartaoCredito";
-            this.lbSangriaCartaoCredito.Size = new System.Drawing.Size(88, 13);
-            this.lbSangriaCartaoCredito.TabIndex = 4;
-            this.lbSangriaCartaoCredito.Text = "Cartão de crédito";
-            // 
-            // dbSangriaCartaoDebito
-            // 
-            this.dbSangriaCartaoDebito.Enabled = false;
-            this.dbSangriaCartaoDebito.Location = new System.Drawing.Point(337, 32);
-            this.dbSangriaCartaoDebito.Name = "dbSangriaCartaoDebito";
-            this.dbSangriaCartaoDebito.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaCartaoDebito.TabIndex = 7;
-            this.dbSangriaCartaoDebito.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
+            this.btRealizarSangria.Location = new System.Drawing.Point(552, 32);
+            this.btRealizarSangria.Name = "btRealizarSangria";
+            this.btRealizarSangria.Size = new System.Drawing.Size(75, 23);
+            this.btRealizarSangria.TabIndex = 10;
+            this.btRealizarSangria.Text = "Finalizar";
+            this.btRealizarSangria.UseVisualStyleBackColor = true;
             // 
             // lbSangriaCartaoDebito
             // 
@@ -575,14 +408,32 @@
             this.lbSangriaCartaoDebito.TabIndex = 6;
             this.lbSangriaCartaoDebito.Text = "Cartão de débito";
             // 
-            // btRealizarSangria
+            // lbSangriaCartaoCredito
             // 
-            this.btRealizarSangria.Location = new System.Drawing.Point(552, 32);
-            this.btRealizarSangria.Name = "btRealizarSangria";
-            this.btRealizarSangria.Size = new System.Drawing.Size(75, 23);
-            this.btRealizarSangria.TabIndex = 8;
-            this.btRealizarSangria.Text = "Finalizar";
-            this.btRealizarSangria.UseVisualStyleBackColor = true;
+            this.lbSangriaCartaoCredito.AutoSize = true;
+            this.lbSangriaCartaoCredito.Location = new System.Drawing.Point(228, 16);
+            this.lbSangriaCartaoCredito.Name = "lbSangriaCartaoCredito";
+            this.lbSangriaCartaoCredito.Size = new System.Drawing.Size(88, 13);
+            this.lbSangriaCartaoCredito.TabIndex = 4;
+            this.lbSangriaCartaoCredito.Text = "Cartão de crédito";
+            // 
+            // lbSangriaCheque
+            // 
+            this.lbSangriaCheque.AutoSize = true;
+            this.lbSangriaCheque.Location = new System.Drawing.Point(116, 16);
+            this.lbSangriaCheque.Name = "lbSangriaCheque";
+            this.lbSangriaCheque.Size = new System.Drawing.Size(49, 13);
+            this.lbSangriaCheque.TabIndex = 2;
+            this.lbSangriaCheque.Text = "Cheques";
+            // 
+            // lbSangriaDinheiro
+            // 
+            this.lbSangriaDinheiro.AutoSize = true;
+            this.lbSangriaDinheiro.Location = new System.Drawing.Point(6, 16);
+            this.lbSangriaDinheiro.Name = "lbSangriaDinheiro";
+            this.lbSangriaDinheiro.Size = new System.Drawing.Size(46, 13);
+            this.lbSangriaDinheiro.TabIndex = 0;
+            this.lbSangriaDinheiro.Text = "Dinheiro";
             // 
             // dbSangriaTotal
             // 
@@ -590,21 +441,179 @@
             this.dbSangriaTotal.Location = new System.Drawing.Point(446, 32);
             this.dbSangriaTotal.Name = "dbSangriaTotal";
             this.dbSangriaTotal.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaTotal.TabIndex = 10;
+            this.dbSangriaTotal.TabIndex = 9;
             this.dbSangriaTotal.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
             // 
-            // lbSangriaTotal
+            // dbSangriaCartaoDebitoTotal
             // 
-            this.lbSangriaTotal.AutoSize = true;
-            this.lbSangriaTotal.Location = new System.Drawing.Point(443, 16);
-            this.lbSangriaTotal.Name = "lbSangriaTotal";
-            this.lbSangriaTotal.Size = new System.Drawing.Size(83, 13);
-            this.lbSangriaTotal.TabIndex = 9;
-            this.lbSangriaTotal.Text = "Total da sangria";
+            this.dbSangriaCartaoDebitoTotal.Enabled = false;
+            this.dbSangriaCartaoDebitoTotal.Location = new System.Drawing.Point(337, 32);
+            this.dbSangriaCartaoDebitoTotal.Name = "dbSangriaCartaoDebitoTotal";
+            this.dbSangriaCartaoDebitoTotal.Size = new System.Drawing.Size(100, 22);
+            this.dbSangriaCartaoDebitoTotal.TabIndex = 7;
+            this.dbSangriaCartaoDebitoTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbSangriaCartaoCreditoTotal
+            // 
+            this.dbSangriaCartaoCreditoTotal.Enabled = false;
+            this.dbSangriaCartaoCreditoTotal.Location = new System.Drawing.Point(231, 32);
+            this.dbSangriaCartaoCreditoTotal.Name = "dbSangriaCartaoCreditoTotal";
+            this.dbSangriaCartaoCreditoTotal.Size = new System.Drawing.Size(100, 22);
+            this.dbSangriaCartaoCreditoTotal.TabIndex = 5;
+            this.dbSangriaCartaoCreditoTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbSangriaChequeTotal
+            // 
+            this.dbSangriaChequeTotal.Enabled = false;
+            this.dbSangriaChequeTotal.Location = new System.Drawing.Point(119, 32);
+            this.dbSangriaChequeTotal.Name = "dbSangriaChequeTotal";
+            this.dbSangriaChequeTotal.Size = new System.Drawing.Size(100, 22);
+            this.dbSangriaChequeTotal.TabIndex = 3;
+            this.dbSangriaChequeTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbSangriaDinheiroTotal
+            // 
+            this.dbSangriaDinheiroTotal.Location = new System.Drawing.Point(9, 32);
+            this.dbSangriaDinheiroTotal.Name = "dbSangriaDinheiroTotal";
+            this.dbSangriaDinheiroTotal.Size = new System.Drawing.Size(100, 22);
+            this.dbSangriaDinheiroTotal.TabIndex = 1;
+            this.dbSangriaDinheiroTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbDemonstrativoCartaoDebito
+            // 
+            this.dbDemonstrativoCartaoDebito.Enabled = false;
+            this.dbDemonstrativoCartaoDebito.Location = new System.Drawing.Point(6, 155);
+            this.dbDemonstrativoCartaoDebito.Name = "dbDemonstrativoCartaoDebito";
+            this.dbDemonstrativoCartaoDebito.Size = new System.Drawing.Size(100, 22);
+            this.dbDemonstrativoCartaoDebito.TabIndex = 7;
+            this.dbDemonstrativoCartaoDebito.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbDemonstrativoCartaoCredito
+            // 
+            this.dbDemonstrativoCartaoCredito.Enabled = false;
+            this.dbDemonstrativoCartaoCredito.Location = new System.Drawing.Point(6, 114);
+            this.dbDemonstrativoCartaoCredito.Name = "dbDemonstrativoCartaoCredito";
+            this.dbDemonstrativoCartaoCredito.Size = new System.Drawing.Size(100, 22);
+            this.dbDemonstrativoCartaoCredito.TabIndex = 5;
+            this.dbDemonstrativoCartaoCredito.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbDemonstrativoCheque
+            // 
+            this.dbDemonstrativoCheque.Enabled = false;
+            this.dbDemonstrativoCheque.Location = new System.Drawing.Point(6, 73);
+            this.dbDemonstrativoCheque.Name = "dbDemonstrativoCheque";
+            this.dbDemonstrativoCheque.Size = new System.Drawing.Size(100, 22);
+            this.dbDemonstrativoCheque.TabIndex = 3;
+            this.dbDemonstrativoCheque.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbDemonstrativoDinheiro
+            // 
+            this.dbDemonstrativoDinheiro.Enabled = false;
+            this.dbDemonstrativoDinheiro.Location = new System.Drawing.Point(6, 32);
+            this.dbDemonstrativoDinheiro.Name = "dbDemonstrativoDinheiro";
+            this.dbDemonstrativoDinheiro.Size = new System.Drawing.Size(100, 22);
+            this.dbDemonstrativoDinheiro.TabIndex = 1;
+            this.dbDemonstrativoDinheiro.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbCaixaSangria
+            // 
+            this.dbCaixaSangria.Enabled = false;
+            this.dbCaixaSangria.ForeColor = System.Drawing.Color.Red;
+            this.dbCaixaSangria.Location = new System.Drawing.Point(9, 117);
+            this.dbCaixaSangria.Name = "dbCaixaSangria";
+            this.dbCaixaSangria.Size = new System.Drawing.Size(100, 22);
+            this.dbCaixaSangria.TabIndex = 5;
+            this.dbCaixaSangria.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbCaixaTotal
+            // 
+            this.dbCaixaTotal.Enabled = false;
+            this.dbCaixaTotal.Location = new System.Drawing.Point(9, 158);
+            this.dbCaixaTotal.Name = "dbCaixaTotal";
+            this.dbCaixaTotal.Size = new System.Drawing.Size(100, 22);
+            this.dbCaixaTotal.TabIndex = 7;
+            this.dbCaixaTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbCaixaFaturamento
+            // 
+            this.dbCaixaFaturamento.Enabled = false;
+            this.dbCaixaFaturamento.ForeColor = System.Drawing.Color.Lime;
+            this.dbCaixaFaturamento.Location = new System.Drawing.Point(9, 76);
+            this.dbCaixaFaturamento.Name = "dbCaixaFaturamento";
+            this.dbCaixaFaturamento.Size = new System.Drawing.Size(100, 22);
+            this.dbCaixaFaturamento.TabIndex = 3;
+            this.dbCaixaFaturamento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbCaixaAbertura
+            // 
+            this.dbCaixaAbertura.Enabled = false;
+            this.dbCaixaAbertura.Location = new System.Drawing.Point(9, 35);
+            this.dbCaixaAbertura.Name = "dbCaixaAbertura";
+            this.dbCaixaAbertura.Size = new System.Drawing.Size(100, 22);
+            this.dbCaixaAbertura.TabIndex = 1;
+            this.dbCaixaAbertura.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(9, 9);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaCaixa.TabIndex = 0;
+            this.buscaCaixa.Leave += new System.EventHandler(this.BuscaCaixa_Leave);
             // 
             // fmCaiSangria
             // 
@@ -628,6 +637,10 @@
             this.gbSangria.ResumeLayout(false);
             this.tcSangria.ResumeLayout(false);
             this.tpGeral.ResumeLayout(false);
+            this.gbDemonstrativoCaixa.ResumeLayout(false);
+            this.gbDemonstrativoCaixa.PerformLayout();
+            this.gbTotaisConta.ResumeLayout(false);
+            this.gbTotaisConta.PerformLayout();
             this.tpCheque.ResumeLayout(false);
             this.tpCheque.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCheque)).EndInit();
@@ -637,10 +650,6 @@
             this.tpCartaoDebito.ResumeLayout(false);
             this.tpCartaoDebito.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCartaoDebito)).EndInit();
-            this.gbTotaisConta.ResumeLayout(false);
-            this.gbTotaisConta.PerformLayout();
-            this.gbDemonstrativoCaixa.ResumeLayout(false);
-            this.gbDemonstrativoCaixa.PerformLayout();
             this.gbTotaisSangria.ResumeLayout(false);
             this.gbTotaisSangria.PerformLayout();
             this.ResumeLayout(false);
@@ -665,13 +674,13 @@
         private System.Windows.Forms.TabPage tpCartaoDebito;
         private System.Windows.Forms.CheckBox cbTodosCartaoDebito;
         private System.Windows.Forms.DataGridView dgvCartaoDebito;
-        private Controls.DecimalBox dbDinheiroCaixa;
+        private Controls.DecimalBox dbCaixaTotal;
         private System.Windows.Forms.Label lbTotalCaixa;
-        private Controls.DecimalBox dbSangria;
+        private Controls.DecimalBox dbCaixaSangria;
         private System.Windows.Forms.Label lbSangrias;
-        private Controls.DecimalBox dbFaturamento;
+        private Controls.DecimalBox dbCaixaFaturamento;
         private System.Windows.Forms.Label lbFaturamento;
-        private Controls.DecimalBox dbAberturaCaixa;
+        private Controls.DecimalBox dbCaixaAbertura;
         private System.Windows.Forms.Label lbAbertura;
         private System.Windows.Forms.GroupBox gbDemonstrativoCaixa;
         private Controls.DecimalBox dbDemonstrativoCheque;
@@ -687,13 +696,13 @@
         private Controls.DecimalBox dbSangriaTotal;
         private System.Windows.Forms.Label lbSangriaTotal;
         private System.Windows.Forms.Button btRealizarSangria;
-        private Controls.DecimalBox dbSangriaCartaoDebito;
+        private Controls.DecimalBox dbSangriaCartaoDebitoTotal;
         private System.Windows.Forms.Label lbSangriaCartaoDebito;
-        private Controls.DecimalBox dbSangriaCartaoCredito;
+        private Controls.DecimalBox dbSangriaCartaoCreditoTotal;
         private System.Windows.Forms.Label lbSangriaCartaoCredito;
-        private Controls.DecimalBox dbSangriaCheque;
+        private Controls.DecimalBox dbSangriaChequeTotal;
         private System.Windows.Forms.Label lbSangriaCheque;
-        private Controls.DecimalBox dbSangriaDinheiro;
+        private Controls.DecimalBox dbSangriaDinheiroTotal;
         private System.Windows.Forms.Label lbSangriaDinheiro;
     }
 }
