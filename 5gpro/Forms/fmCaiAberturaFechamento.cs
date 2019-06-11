@@ -25,6 +25,7 @@ namespace _5gpro.Forms
         }
 
         private void FmCaiAberturaFechamento_Load(object sender, EventArgs e) => SetarNivel();
+        private void FmCaiAberturaFechamento_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
         private void BuscaCaixa_Leave(object sender, EventArgs e) => CarregaDados();
         private void BtAbriFechar_Click(object sender, EventArgs e) => AbreOuFecha();
 
@@ -128,6 +129,14 @@ namespace _5gpro.Forms
                 }
             }
         }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
         private void SetarNivel()
         {
             logado = logadoDAO.BuscaByMac(adap.Mac);
@@ -135,5 +144,6 @@ namespace _5gpro.Forms
             var Codpermissao = permissaoDAO.BuscarIDbyCodigo("090200").ToString();
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
         }
+
     }
 }

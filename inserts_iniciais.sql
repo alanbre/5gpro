@@ -5645,7 +5645,9 @@ INSERT INTO permissao ( nome, codigo) VALUES
 
 ('Definir Partes', '080100'),
 
-('Cadastro de Caixa', '090100');
+('Cadastro de Caixa', '090100'),
+('Abertura e fechamento de caixa', '090200'),
+('Sangria de caixa', '090300');
 
 
 

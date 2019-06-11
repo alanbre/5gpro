@@ -33,7 +33,7 @@ namespace _5gpro
                     orcamentosOn = 1,
                     relatoriosOn = 1,
                     desintegracaoOn = 1,
-                    caixaOn = 2,
+                    caixaOn = 4,
                     tamanhopanel
             ;
        
@@ -58,6 +58,9 @@ namespace _5gpro
         //Quitação de Contas a Pagar = 060200
         //Entrada de notas = 070100
         //Definir Partes = 080100
+        //Cadastro de Caixa = 090100
+        //Abertura e fechamento de caixa = 090200
+        //Sangria de caixa = 090300
 
 
         public fmMain()
@@ -237,6 +240,16 @@ namespace _5gpro
                             if(p.Nivel == 0) { btiCadastroCaixa.Visible = false; caixaOn -= 1; }
                             else { btiCadastroCaixa.Visible = true; }
                             break;
+                        case "090200":
+                            //Abertura e fechamento de caixa
+                            if (p.Nivel == 0) { btiAberturaFechamento.Visible = false; caixaOn -= 1; }
+                            else { btiAberturaFechamento.Visible = true; }
+                            break;
+                        case "090300":
+                            //Sangria de caixa
+                            if (p.Nivel == 0) { btiSangria.Visible = false; caixaOn -= 1; }
+                            else { btiSangria.Visible = true; }
+                            break;
                     }
                 }
 
@@ -384,10 +397,6 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        private void BtiAberturaFechamento_Click_1(object sender, EventArgs e)
-        {
-
-        }
 
         private void BtiCadastroCaixa_Click(object sender, EventArgs e)
         {
@@ -396,7 +405,27 @@ namespace _5gpro
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();
+            
         }
+
+        private void BtiLancamentoManual_Click(object sender, EventArgs e)
+        {
+            var formCaiLancamentoManual = new fmCaiLancamentoManual();
+            formCaiLancamentoManual.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiSangria_Click(object sender, EventArgs e)
+        {
+            var formCaiSangria = new fmCaiSangria();
+            formCaiSangria.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
         private void BtiAberturaFechamento_Click(object sender, EventArgs e)
         {
             var formAberturaFechamento = new fmCaiAberturaFechamento();
@@ -405,6 +434,7 @@ namespace _5gpro
             RecolherMenus();
             DesmarcarBotoes();
         }
+       
 
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {

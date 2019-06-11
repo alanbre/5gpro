@@ -45,6 +45,9 @@
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldropCaixa = new System.Windows.Forms.Panel();
+            this.btiLancamentoManual = new System.Windows.Forms.Button();
+            this.btiSangria = new System.Windows.Forms.Button();
+            this.btiAberturaFechamento = new System.Windows.Forms.Button();
             this.btiCadastroCaixa = new System.Windows.Forms.Button();
             this.paneldropDesintegracao = new System.Windows.Forms.Panel();
             this.btiDefPartes = new System.Windows.Forms.Button();
@@ -302,13 +305,61 @@
             // 
             // paneldropCaixa
             // 
+            this.paneldropCaixa.Controls.Add(this.btiLancamentoManual);
+            this.paneldropCaixa.Controls.Add(this.btiSangria);
+            this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
             this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
             this.paneldropCaixa.Location = new System.Drawing.Point(3, 321);
-            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 60);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 112);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
             this.paneldropCaixa.TabIndex = 8;
+            // 
+            // btiLancamentoManual
+            // 
+            this.btiLancamentoManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiLancamentoManual.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiLancamentoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiLancamentoManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiLancamentoManual.ForeColor = System.Drawing.Color.White;
+            this.btiLancamentoManual.Location = new System.Drawing.Point(0, 84);
+            this.btiLancamentoManual.Name = "btiLancamentoManual";
+            this.btiLancamentoManual.Size = new System.Drawing.Size(200, 28);
+            this.btiLancamentoManual.TabIndex = 2;
+            this.btiLancamentoManual.Text = "Lançamento manual";
+            this.btiLancamentoManual.UseVisualStyleBackColor = false;
+            this.btiLancamentoManual.Click += new System.EventHandler(this.BtiLancamentoManual_Click);
+            // 
+            // btiSangria
+            // 
+            this.btiSangria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiSangria.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiSangria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiSangria.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiSangria.ForeColor = System.Drawing.Color.White;
+            this.btiSangria.Location = new System.Drawing.Point(0, 56);
+            this.btiSangria.Name = "btiSangria";
+            this.btiSangria.Size = new System.Drawing.Size(200, 28);
+            this.btiSangria.TabIndex = 1;
+            this.btiSangria.Text = "Sangria";
+            this.btiSangria.UseVisualStyleBackColor = false;
+            this.btiSangria.Click += new System.EventHandler(this.BtiSangria_Click);
+            // 
+            // btiAberturaFechamento
+            // 
+            this.btiAberturaFechamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiAberturaFechamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiAberturaFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiAberturaFechamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiAberturaFechamento.ForeColor = System.Drawing.Color.White;
+            this.btiAberturaFechamento.Location = new System.Drawing.Point(0, 28);
+            this.btiAberturaFechamento.Name = "btiAberturaFechamento";
+            this.btiAberturaFechamento.Size = new System.Drawing.Size(200, 28);
+            this.btiAberturaFechamento.TabIndex = 0;
+            this.btiAberturaFechamento.Text = "Abertura e fechamento";
+            this.btiAberturaFechamento.UseVisualStyleBackColor = false;
+            this.btiAberturaFechamento.Click += new System.EventHandler(this.BtiAberturaFechamento_Click);
             // 
             // btiCadastroCaixa
             // 
@@ -790,6 +841,9 @@
         private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiCadastroCaixa;
+        private System.Windows.Forms.Button btiAberturaFechamento;
+        private System.Windows.Forms.Button btiSangria;
+        private System.Windows.Forms.Button btiLancamentoManual;
     }
 }
 

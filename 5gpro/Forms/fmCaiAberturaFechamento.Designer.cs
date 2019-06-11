@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbInfo = new System.Windows.Forms.GroupBox();
+            this.dbValorAbertura = new _5gpro.Controls.DecimalBox();
+            this.lbValorAbertura = new System.Windows.Forms.Label();
             this.tbStatusCaixa = new System.Windows.Forms.TextBox();
             this.lbStatusCaixa = new System.Windows.Forms.Label();
             this.dbValorFechamento = new _5gpro.Controls.DecimalBox();
@@ -37,8 +39,6 @@
             this.lbValorAberturaFechamento = new System.Windows.Forms.Label();
             this.btAbrirFechar = new System.Windows.Forms.Button();
             this.dbValorAberturaFechamento = new _5gpro.Controls.DecimalBox();
-            this.lbValorAbertura = new System.Windows.Forms.Label();
-            this.dbValorAbertura = new _5gpro.Controls.DecimalBox();
             this.gbInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,6 +57,28 @@
             this.gbInfo.TabIndex = 0;
             this.gbInfo.TabStop = false;
             this.gbInfo.Text = "Informações do caixa";
+            // 
+            // dbValorAbertura
+            // 
+            this.dbValorAbertura.Enabled = false;
+            this.dbValorAbertura.Location = new System.Drawing.Point(9, 110);
+            this.dbValorAbertura.Name = "dbValorAbertura";
+            this.dbValorAbertura.Size = new System.Drawing.Size(100, 22);
+            this.dbValorAbertura.TabIndex = 4;
+            this.dbValorAbertura.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // lbValorAbertura
+            // 
+            this.lbValorAbertura.AutoSize = true;
+            this.lbValorAbertura.Location = new System.Drawing.Point(6, 94);
+            this.lbValorAbertura.Name = "lbValorAbertura";
+            this.lbValorAbertura.Size = new System.Drawing.Size(88, 13);
+            this.lbValorAbertura.TabIndex = 3;
+            this.lbValorAbertura.Text = "Valor da abertura";
             // 
             // tbStatusCaixa
             // 
@@ -138,28 +160,6 @@
             0,
             131072});
             // 
-            // lbValorAbertura
-            // 
-            this.lbValorAbertura.AutoSize = true;
-            this.lbValorAbertura.Location = new System.Drawing.Point(6, 94);
-            this.lbValorAbertura.Name = "lbValorAbertura";
-            this.lbValorAbertura.Size = new System.Drawing.Size(88, 13);
-            this.lbValorAbertura.TabIndex = 3;
-            this.lbValorAbertura.Text = "Valor da abertura";
-            // 
-            // dbValorAbertura
-            // 
-            this.dbValorAbertura.Enabled = false;
-            this.dbValorAbertura.Location = new System.Drawing.Point(9, 110);
-            this.dbValorAbertura.Name = "dbValorAbertura";
-            this.dbValorAbertura.Size = new System.Drawing.Size(100, 22);
-            this.dbValorAbertura.TabIndex = 4;
-            this.dbValorAbertura.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // fmCaiAberturaFechamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -179,6 +179,7 @@
             this.ShowInTaskbar = false;
             this.Text = "Abertura e fechamento de caixa";
             this.Load += new System.EventHandler(this.FmCaiAberturaFechamento_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCaiAberturaFechamento_KeyDown);
             this.gbInfo.ResumeLayout(false);
             this.gbInfo.PerformLayout();
             this.ResumeLayout(false);
