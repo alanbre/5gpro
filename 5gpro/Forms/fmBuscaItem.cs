@@ -3,6 +3,7 @@ using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -55,7 +56,13 @@ namespace _5gpro.Forms
             {
                 table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
             }
-            dgvItens.DataSource = table;
+
+            ListCollectionView coleção = new ListCollectionView(table.DefaultView);
+            //coleção.GroupDescriptions.Add(new PropertyGroupDescription("Unidade de Medida"));
+            coleção.GroupDescriptions.Add(new PropertyGroupDescription("Unidade de Medida"));
+            dgvItens.DataSource = table;       
+
+            //dgvItens.DataSource = table;
         }
 
         private void tbDescricao_TextChanged(object sender, EventArgs e)
