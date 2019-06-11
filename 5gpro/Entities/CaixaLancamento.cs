@@ -13,7 +13,8 @@ namespace _5gpro.Entities
         public decimal Valor { get; set; }
         public decimal ValorPago { get; set; }
         public decimal Troco { get; set; }
-        public int Tipo { get; set; }
+        public int TipoMovimento { get; set; }
+        public int TipoDocumento { get; set; }
         public int Lancamento { get; set; }
         public string Documento { get; set; }
         public Caixa Caixa { get; set; }

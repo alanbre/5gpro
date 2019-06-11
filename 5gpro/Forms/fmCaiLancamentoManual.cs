@@ -71,7 +71,8 @@ namespace _5gpro.Forms
             caixaLancamento.Valor = dbValor.Valor;
             caixaLancamento.ValorPago = dbValor.Valor;
             caixaLancamento.Troco = 0;
-            caixaLancamento.Tipo = rbCredito.Checked ? 0 : 1;
+            caixaLancamento.TipoMovimento = rbCredito.Checked ? 0 : 1;
+            caixaLancamento.TipoDocumento = 0;
             int retorno = caixaLancamentoDAO.Novo(caixaLancamento);
 
             if (retorno == 0)
