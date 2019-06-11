@@ -36,7 +36,7 @@ namespace _5gpro.Forms
 
 
             usuarios = usuarioDAO.Busca(buscaGrupoUsuario.grupoUsuario?.GrupoUsuarioID.ToString() ?? "", tbFiltroNomeUsuario.Text, tbFiltroSobrenomeUsuario.Text);
-           
+
             foreach (Usuario u in usuarios)
             {
                 table.Rows.Add(u.UsuarioID, u.Nome, u.Sobrenome, u.Email, u.Telefone);

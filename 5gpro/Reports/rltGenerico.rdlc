@@ -205,6 +205,14 @@
           <DataField>coluna46</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="totalizador0">
+          <DataField>totalizador0</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="totalizador1">
+          <DataField>totalizador1</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsGenerico</rd:DataSetName>
@@ -3816,6 +3824,9 @@
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Details" />
+                  <TablixMembers>
+                    <TablixMember />
+                  </TablixMembers>
                 </TablixMember>
               </TablixMembers>
             </TablixRowHierarchy>
@@ -3844,9 +3855,24 @@
       <Width>51.01894in</Width>
       <Page>
         <PageHeader>
-          <Height>0.31502cm</Height>
+          <Height>5.0687cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Image Name="LogoHajel">
+              <Source>Embedded</Source>
+              <Value>LogoHajel</Value>
+              <Sizing>FitProportional</Sizing>
+              <Left>0.52599cm</Left>
+              <Height>4.88667cm</Height>
+              <Width>18.75083cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+          </ReportItems>
           <Style>
             <Border>
               <Style>None</Style>
@@ -4155,7 +4181,7 @@
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>12</NumberOfRows>
+      <NumberOfRows>13</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>

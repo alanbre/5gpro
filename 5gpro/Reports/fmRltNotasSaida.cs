@@ -93,7 +93,6 @@ namespace _5gpro.Reports
         }
 
 
-
         private void SetarCampos()
         {
             SetarCamposCliente();
@@ -416,6 +415,9 @@ namespace _5gpro.Reports
                                 case "Desconto":
                                     row.Cells.Add(new DataGridViewTextBoxCell { Value = i.Desconto, ValueType = i.Desconto.GetType() });
                                     break;
+                                case "DescontoTotalItens":
+                                    row.Cells.Add(new DataGridViewTextBoxCell { Value = nf.DescontoTotalItens, ValueType = nf.DescontoTotalItens.GetType() });
+                                    break;
                             }
                         }
                         dgvDados.Rows.Add(row);
@@ -505,6 +507,9 @@ namespace _5gpro.Reports
                                 break;
                             case "ValorTotalDocumento":
                                 row.Cells.Add(new DataGridViewTextBoxCell { Value = nf.ValorTotalDocumento, ValueType = nf.ValorTotalDocumento.GetType() });
+                                break;
+                            case "DescontoTotalItens":
+                                row.Cells.Add(new DataGridViewTextBoxCell { Value = nf.DescontoTotalItens, ValueType = nf.DescontoTotalItens.GetType() });
                                 break;
                         }
                     }
