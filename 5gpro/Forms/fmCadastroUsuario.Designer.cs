@@ -280,8 +280,9 @@
             this.KeyPreview = true;
             this.Location = new System.Drawing.Point(10, 11);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(850, 493);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 492);
+            this.MinimumSize = new System.Drawing.Size(850, 493);
             this.Name = "fmCadastroUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

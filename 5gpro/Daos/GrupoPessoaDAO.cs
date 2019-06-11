@@ -146,6 +146,34 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
+        public int InserirSubGrupo(SubGrupoPessoa subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO subgrupopessoa (nome, idgrupopessoa, codigo)
+                            VALUES
+                            (@nome, @idgrupopessoa, @codigo)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, idgrupopessoa = @idgrupopessoa, codigo = @codigo";
+                sql.addParam("@idsubgrupopessoa", subGrupo.SubGrupoPessoaID);
+                sql.addParam("@nome", subGrupo.Nome);
+                sql.addParam("@idgrupopessoa", subGrupo.GrupoPessoa.GrupoPessoaID);
+                sql.addParam("@codigo", subGrupo.Codigo);
+                retorno = sql.insertQuery();
+
+                if (retorno > 0)
+                {
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupoitem;";
+                    var data = sql.selectQueryForSingleRecord();
+                    subGrupo.SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]);
+                }
+                sql.Commit();
+            }
+            return retorno;
+        }
+
         private GrupoPessoa LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)

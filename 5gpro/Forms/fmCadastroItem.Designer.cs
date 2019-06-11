@@ -93,7 +93,7 @@
             this.pnDadosGerais.Controls.Add(this.lbCodigo);
             this.pnDadosGerais.Location = new System.Drawing.Point(74, 13);
             this.pnDadosGerais.Name = "pnDadosGerais";
-            this.pnDadosGerais.Size = new System.Drawing.Size(1110, 364);
+            this.pnDadosGerais.Size = new System.Drawing.Size(565, 364);
             this.pnDadosGerais.TabIndex = 0;
             // 
             // gbDesintegracao
@@ -314,7 +314,7 @@
             this.tbAjuda.HideSelection = false;
             this.tbAjuda.Location = new System.Drawing.Point(74, 556);
             this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(1110, 20);
+            this.tbAjuda.Size = new System.Drawing.Size(561, 20);
             this.tbAjuda.TabIndex = 3;
             this.tbAjuda.TabStop = false;
             // 
@@ -325,7 +325,7 @@
             this.tcItens.Location = new System.Drawing.Point(74, 379);
             this.tcItens.Name = "tcItens";
             this.tcItens.SelectedIndex = 0;
-            this.tcItens.Size = new System.Drawing.Size(1108, 171);
+            this.tcItens.Size = new System.Drawing.Size(565, 171);
             this.tcItens.TabIndex = 1;
             // 
             // tpEstoque
@@ -340,7 +340,7 @@
             this.tpEstoque.Location = new System.Drawing.Point(4, 22);
             this.tpEstoque.Name = "tpEstoque";
             this.tpEstoque.Padding = new System.Windows.Forms.Padding(3);
-            this.tpEstoque.Size = new System.Drawing.Size(1100, 145);
+            this.tpEstoque.Size = new System.Drawing.Size(557, 145);
             this.tpEstoque.TabIndex = 0;
             this.tpEstoque.Text = "Estoque";
             // 
@@ -450,15 +450,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1194, 578);
+            this.ClientSize = new System.Drawing.Size(652, 578);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tcItens);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.pnDadosGerais);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(668, 617);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1210, 616);
+            this.MinimumSize = new System.Drawing.Size(668, 617);
             this.Name = "fmCadastroItem";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

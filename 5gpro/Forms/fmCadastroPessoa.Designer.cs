@@ -458,8 +458,9 @@
             this.Controls.Add(this.pnDadosGerais);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(850, 704);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 703);
+            this.MinimumSize = new System.Drawing.Size(850, 704);
             this.Name = "fmCadastroPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

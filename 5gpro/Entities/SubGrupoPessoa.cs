@@ -10,6 +10,7 @@ namespace _5gpro.Entities
     {
         public int SubGrupoPessoaID { get; set; }
         public string Nome { get; set; }
+        public int Codigo { get; set; }
         public GrupoPessoa GrupoPessoa { get; set; }
     }
 }

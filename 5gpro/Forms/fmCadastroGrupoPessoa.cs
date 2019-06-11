@@ -202,6 +202,8 @@ namespace _5gpro.Forms
             AbreTelaCadSubGrupoPessoa();
         }
 
+        private void BtSalvar_Click(object sender, EventArgs e) => SalvaSubGrupo();
+
 
         //EVENTOS DE TEXTCHANGED
         private void TbBuscaNomeSub_TextChanged(object sender, EventArgs e)
@@ -607,5 +609,55 @@ namespace _5gpro.Forms
             cadSubGrupoPessoa.ShowDialog();
         }
 
+
+        private void SalvaSubGrupo()
+        {
+            if (tbCodigoSubGrupo.Text.Length <= 0 || grupopessoa == null)
+            {
+                return;
+            }
+
+            SubGrupoPessoa subGrupo = null;
+            if (subgrupopessoaSelecionado == null)
+            {
+                subGrupo = new SubGrupoPessoa();
+                subGrupo.Nome = tbNomeSubGrupo.Text;
+                subGrupo.Codigo = int.Parse(tbCodigoSubGrupo.Text);
+                subGrupo.GrupoPessoa = grupopessoa;
+            }
+            else
+            {
+                subGrupo = subgrupopessoaSelecionado;
+            }
+
+
+            int resultado = grupopessoaDAO.InserirSubGrupo(subGrupo);
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            //else if (resultado == 1)
+            //{
+            //    tbAjuda.Text = "Sub-grupo salvo com sucesso";
+
+            //    grupoItem.SubGrupoItens.Add(subGrupo);
+            //    btNovoSubGrupo.Enabled = true;
+
+            //}
+            //else if (resultado == 2)
+            //{
+            //    tbAjuda.Text = "Sub-grupo atualizado com sucesso";
+            //    grupoItem.SubGrupoItens.Add(subGrupo);
+            //    btNovoSubGrupo.Enabled = true;
+            //}
+
+            //LimpaCamposSubItens();
+            //PreencheGridSubGrupoItens();
+
+        }
     }
 }

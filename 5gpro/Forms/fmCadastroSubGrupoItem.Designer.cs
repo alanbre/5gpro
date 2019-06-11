@@ -118,6 +118,7 @@
             this.Controls.Add(this.btSalvar);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(247, 197);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(247, 197);
             this.Name = "fmCadastroSubGrupoItem";
