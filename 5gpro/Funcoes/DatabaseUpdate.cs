@@ -211,6 +211,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
   `idsubgrupopessoa` INT NOT NULL,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupopessoa` INT NOT NULL,
+  `codigo` INT(11) NOT NULL,
   PRIMARY KEY (`idsubgrupopessoa`),
   INDEX `fk_subgrupopessoa_grupopessoa1_idx` (`idgrupopessoa` ASC) VISIBLE,
   CONSTRAINT `fk_subgrupopessoa_grupopessoa1`
@@ -826,6 +827,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 ";
             return create;
         }
