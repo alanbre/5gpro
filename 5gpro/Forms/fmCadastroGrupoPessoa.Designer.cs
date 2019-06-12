@@ -36,13 +36,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbCodigo = new System.Windows.Forms.Label();
             this.gbSubgrupos = new System.Windows.Forms.GroupBox();
+            this.btSalvar = new System.Windows.Forms.Button();
+            this.lbNomeSubGrupo = new System.Windows.Forms.Label();
+            this.lbCodigoSubGrupo = new System.Windows.Forms.Label();
+            this.tbCodigoSubGrupo = new System.Windows.Forms.TextBox();
+            this.tbNomeSubGrupo = new System.Windows.Forms.TextBox();
             this.btRemoverSub = new System.Windows.Forms.Button();
-            this.btAddSub = new System.Windows.Forms.Button();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.btNovoSubGrupo = new System.Windows.Forms.Button();
             this.dgvSubGruposPessoas = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigoSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNomeSub = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbBuscaNomeSub = new System.Windows.Forms.TextBox();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbNovoGrupoPessoa.SuspendLayout();
             this.gbSubgrupos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGruposPessoas)).BeginInit();
@@ -71,22 +76,22 @@
             this.gbNovoGrupoPessoa.Controls.Add(this.lbCodigo);
             this.gbNovoGrupoPessoa.Location = new System.Drawing.Point(71, 12);
             this.gbNovoGrupoPessoa.Name = "gbNovoGrupoPessoa";
-            this.gbNovoGrupoPessoa.Size = new System.Drawing.Size(255, 121);
+            this.gbNovoGrupoPessoa.Size = new System.Drawing.Size(528, 102);
             this.gbNovoGrupoPessoa.TabIndex = 1;
             this.gbNovoGrupoPessoa.TabStop = false;
             this.gbNovoGrupoPessoa.Text = "Novo Grupo de Pessoas";
             // 
             // tbNomeGrupoPessoa
             // 
-            this.tbNomeGrupoPessoa.Location = new System.Drawing.Point(9, 89);
+            this.tbNomeGrupoPessoa.Location = new System.Drawing.Point(7, 72);
             this.tbNomeGrupoPessoa.Name = "tbNomeGrupoPessoa";
-            this.tbNomeGrupoPessoa.Size = new System.Drawing.Size(184, 20);
+            this.tbNomeGrupoPessoa.Size = new System.Drawing.Size(514, 20);
             this.tbNomeGrupoPessoa.TabIndex = 3;
             this.tbNomeGrupoPessoa.TextChanged += new System.EventHandler(this.TbNomeGrupoPessoa_TextChanged);
             // 
             // tbCodigo
             // 
-            this.tbCodigo.Location = new System.Drawing.Point(9, 45);
+            this.tbCodigo.Location = new System.Drawing.Point(7, 32);
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(82, 20);
             this.tbCodigo.TabIndex = 2;
@@ -96,7 +101,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 72);
+            this.label2.Location = new System.Drawing.Point(6, 55);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 1;
@@ -105,7 +110,7 @@
             // lbCodigo
             // 
             this.lbCodigo.AutoSize = true;
-            this.lbCodigo.Location = new System.Drawing.Point(6, 28);
+            this.lbCodigo.Location = new System.Drawing.Point(4, 16);
             this.lbCodigo.Name = "lbCodigo";
             this.lbCodigo.Size = new System.Drawing.Size(40, 13);
             this.lbCodigo.TabIndex = 0;
@@ -113,47 +118,86 @@
             // 
             // gbSubgrupos
             // 
+            this.gbSubgrupos.Controls.Add(this.btSalvar);
+            this.gbSubgrupos.Controls.Add(this.lbNomeSubGrupo);
+            this.gbSubgrupos.Controls.Add(this.lbCodigoSubGrupo);
+            this.gbSubgrupos.Controls.Add(this.tbCodigoSubGrupo);
+            this.gbSubgrupos.Controls.Add(this.tbNomeSubGrupo);
             this.gbSubgrupos.Controls.Add(this.btRemoverSub);
-            this.gbSubgrupos.Controls.Add(this.btAddSub);
-            this.gbSubgrupos.Controls.Add(this.tbAjuda);
+            this.gbSubgrupos.Controls.Add(this.btNovoSubGrupo);
             this.gbSubgrupos.Controls.Add(this.dgvSubGruposPessoas);
             this.gbSubgrupos.Controls.Add(this.tbBuscaNomeSub);
-            this.gbSubgrupos.Location = new System.Drawing.Point(72, 139);
+            this.gbSubgrupos.Location = new System.Drawing.Point(71, 120);
             this.gbSubgrupos.Name = "gbSubgrupos";
-            this.gbSubgrupos.Size = new System.Drawing.Size(527, 295);
+            this.gbSubgrupos.Size = new System.Drawing.Size(527, 263);
             this.gbSubgrupos.TabIndex = 2;
             this.gbSubgrupos.TabStop = false;
             this.gbSubgrupos.Text = "Sub-Grupos";
+            // 
+            // btSalvar
+            // 
+            this.btSalvar.Location = new System.Drawing.Point(6, 234);
+            this.btSalvar.Name = "btSalvar";
+            this.btSalvar.Size = new System.Drawing.Size(75, 23);
+            this.btSalvar.TabIndex = 9;
+            this.btSalvar.Text = "Inserir";
+            this.btSalvar.UseVisualStyleBackColor = true;
+            this.btSalvar.Click += new System.EventHandler(this.BtSalvar_Click);
+            // 
+            // lbNomeSubGrupo
+            // 
+            this.lbNomeSubGrupo.AutoSize = true;
+            this.lbNomeSubGrupo.Location = new System.Drawing.Point(71, 192);
+            this.lbNomeSubGrupo.Name = "lbNomeSubGrupo";
+            this.lbNomeSubGrupo.Size = new System.Drawing.Size(35, 13);
+            this.lbNomeSubGrupo.TabIndex = 8;
+            this.lbNomeSubGrupo.Text = "Nome";
+            // 
+            // lbCodigoSubGrupo
+            // 
+            this.lbCodigoSubGrupo.AutoSize = true;
+            this.lbCodigoSubGrupo.Location = new System.Drawing.Point(6, 192);
+            this.lbCodigoSubGrupo.Name = "lbCodigoSubGrupo";
+            this.lbCodigoSubGrupo.Size = new System.Drawing.Size(40, 13);
+            this.lbCodigoSubGrupo.TabIndex = 7;
+            this.lbCodigoSubGrupo.Text = "Código";
+            // 
+            // tbCodigoSubGrupo
+            // 
+            this.tbCodigoSubGrupo.Enabled = false;
+            this.tbCodigoSubGrupo.Location = new System.Drawing.Point(7, 208);
+            this.tbCodigoSubGrupo.Name = "tbCodigoSubGrupo";
+            this.tbCodigoSubGrupo.Size = new System.Drawing.Size(58, 20);
+            this.tbCodigoSubGrupo.TabIndex = 6;
+            // 
+            // tbNomeSubGrupo
+            // 
+            this.tbNomeSubGrupo.Location = new System.Drawing.Point(71, 208);
+            this.tbNomeSubGrupo.Name = "tbNomeSubGrupo";
+            this.tbNomeSubGrupo.Size = new System.Drawing.Size(424, 20);
+            this.tbNomeSubGrupo.TabIndex = 5;
             // 
             // btRemoverSub
             // 
             this.btRemoverSub.Enabled = false;
             this.btRemoverSub.Image = global::_5gpro.Properties.Resources.icons8_Delete_Subtra_22px;
-            this.btRemoverSub.Location = new System.Drawing.Point(500, 76);
+            this.btRemoverSub.Location = new System.Drawing.Point(499, 47);
             this.btRemoverSub.Name = "btRemoverSub";
             this.btRemoverSub.Size = new System.Drawing.Size(22, 22);
             this.btRemoverSub.TabIndex = 4;
             this.btRemoverSub.UseVisualStyleBackColor = true;
             this.btRemoverSub.Click += new System.EventHandler(this.BtRemoverSub_Click);
             // 
-            // btAddSub
+            // btNovoSubGrupo
             // 
-            this.btAddSub.Enabled = false;
-            this.btAddSub.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
-            this.btAddSub.Location = new System.Drawing.Point(500, 48);
-            this.btAddSub.Name = "btAddSub";
-            this.btAddSub.Size = new System.Drawing.Size(22, 22);
-            this.btAddSub.TabIndex = 3;
-            this.btAddSub.UseVisualStyleBackColor = true;
-            this.btAddSub.Click += new System.EventHandler(this.BtAddSub_Click);
-            // 
-            // tbAjuda
-            // 
-            this.tbAjuda.Location = new System.Drawing.Point(11, 263);
-            this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.ReadOnly = true;
-            this.tbAjuda.Size = new System.Drawing.Size(483, 20);
-            this.tbAjuda.TabIndex = 2;
+            this.btNovoSubGrupo.Enabled = false;
+            this.btNovoSubGrupo.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
+            this.btNovoSubGrupo.Location = new System.Drawing.Point(499, 19);
+            this.btNovoSubGrupo.Name = "btNovoSubGrupo";
+            this.btNovoSubGrupo.Size = new System.Drawing.Size(22, 22);
+            this.btNovoSubGrupo.TabIndex = 3;
+            this.btNovoSubGrupo.UseVisualStyleBackColor = true;
+            this.btNovoSubGrupo.Click += new System.EventHandler(this.BtAddSub_Click);
             // 
             // dgvSubGruposPessoas
             // 
@@ -169,15 +213,16 @@
             this.dgvtbcCodigoSub,
             this.dgvtbcNomeSub});
             this.dgvSubGruposPessoas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvSubGruposPessoas.Location = new System.Drawing.Point(11, 48);
+            this.dgvSubGruposPessoas.Location = new System.Drawing.Point(6, 19);
             this.dgvSubGruposPessoas.MultiSelect = false;
             this.dgvSubGruposPessoas.Name = "dgvSubGruposPessoas";
             this.dgvSubGruposPessoas.ReadOnly = true;
             this.dgvSubGruposPessoas.RowHeadersVisible = false;
             this.dgvSubGruposPessoas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubGruposPessoas.Size = new System.Drawing.Size(483, 208);
+            this.dgvSubGruposPessoas.Size = new System.Drawing.Size(488, 170);
             this.dgvSubGruposPessoas.TabIndex = 1;
             this.dgvSubGruposPessoas.TabStop = false;
+            this.dgvSubGruposPessoas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposPessoas_CellClick);
             this.dgvSubGruposPessoas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposPessoas_CellDoubleClick);
             // 
             // dgvtbcCodigoSub
@@ -200,19 +245,29 @@
             this.tbBuscaNomeSub.TabIndex = 0;
             this.tbBuscaNomeSub.TextChanged += new System.EventHandler(this.TbBuscaNomeSub_TextChanged);
             // 
+            // tbAjuda
+            // 
+            this.tbAjuda.Location = new System.Drawing.Point(71, 390);
+            this.tbAjuda.Name = "tbAjuda";
+            this.tbAjuda.ReadOnly = true;
+            this.tbAjuda.Size = new System.Drawing.Size(527, 20);
+            this.tbAjuda.TabIndex = 2;
+            // 
             // fmCadastroGrupoPessoa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(610, 450);
+            this.ClientSize = new System.Drawing.Size(610, 421);
             this.Controls.Add(this.gbSubgrupos);
             this.Controls.Add(this.gbNovoGrupoPessoa);
+            this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(626, 460);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(626, 488);
+            this.MinimumSize = new System.Drawing.Size(626, 460);
             this.Name = "fmCadastroGrupoPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -227,6 +282,7 @@
             this.gbSubgrupos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGruposPessoas)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -245,6 +301,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNomeSub;
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.Button btRemoverSub;
-        private System.Windows.Forms.Button btAddSub;
+        private System.Windows.Forms.Button btNovoSubGrupo;
+        private System.Windows.Forms.TextBox tbCodigoSubGrupo;
+        private System.Windows.Forms.TextBox tbNomeSubGrupo;
+        private System.Windows.Forms.Button btSalvar;
+        private System.Windows.Forms.Label lbNomeSubGrupo;
+        private System.Windows.Forms.Label lbCodigoSubGrupo;
     }
 }

@@ -125,7 +125,7 @@
             this.dgvSubGruposItens.ReadOnly = true;
             this.dgvSubGruposItens.RowHeadersVisible = false;
             this.dgvSubGruposItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSubGruposItens.Size = new System.Drawing.Size(488, 171);
+            this.dgvSubGruposItens.Size = new System.Drawing.Size(488, 170);
             this.dgvSubGruposItens.TabIndex = 0;
             this.dgvSubGruposItens.TabStop = false;
             this.dgvSubGruposItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposItens_CellClick);
@@ -190,7 +190,7 @@
             this.gbSubGrupos.Controls.Add(this.btRemoverSub);
             this.gbSubGrupos.Location = new System.Drawing.Point(71, 120);
             this.gbSubGrupos.Name = "gbSubGrupos";
-            this.gbSubGrupos.Size = new System.Drawing.Size(527, 264);
+            this.gbSubGrupos.Size = new System.Drawing.Size(527, 263);
             this.gbSubGrupos.TabIndex = 1;
             this.gbSubGrupos.TabStop = false;
             this.gbSubGrupos.Text = "Sub-Grupos";
@@ -198,7 +198,7 @@
             // btSalvar
             // 
             this.btSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btSalvar.Location = new System.Drawing.Point(6, 235);
+            this.btSalvar.Location = new System.Drawing.Point(6, 234);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(75, 23);
             this.btSalvar.TabIndex = 5;
@@ -210,7 +210,7 @@
             // 
             this.tbNomeSubGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbNomeSubGrupo.Location = new System.Drawing.Point(71, 209);
+            this.tbNomeSubGrupo.Location = new System.Drawing.Point(71, 208);
             this.tbNomeSubGrupo.Name = "tbNomeSubGrupo";
             this.tbNomeSubGrupo.Size = new System.Drawing.Size(424, 20);
             this.tbNomeSubGrupo.TabIndex = 4;
@@ -219,7 +219,7 @@
             // 
             this.lbNomeSubGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbNomeSubGrupo.AutoSize = true;
-            this.lbNomeSubGrupo.Location = new System.Drawing.Point(71, 193);
+            this.lbNomeSubGrupo.Location = new System.Drawing.Point(71, 192);
             this.lbNomeSubGrupo.Name = "lbNomeSubGrupo";
             this.lbNomeSubGrupo.Size = new System.Drawing.Size(35, 13);
             this.lbNomeSubGrupo.TabIndex = 3;
@@ -229,7 +229,7 @@
             // 
             this.tbCodigoSubGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbCodigoSubGrupo.Enabled = false;
-            this.tbCodigoSubGrupo.Location = new System.Drawing.Point(7, 209);
+            this.tbCodigoSubGrupo.Location = new System.Drawing.Point(7, 208);
             this.tbCodigoSubGrupo.Name = "tbCodigoSubGrupo";
             this.tbCodigoSubGrupo.Size = new System.Drawing.Size(58, 20);
             this.tbCodigoSubGrupo.TabIndex = 2;
@@ -238,7 +238,7 @@
             // 
             this.lbCodigoSubGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbCodigoSubGrupo.AutoSize = true;
-            this.lbCodigoSubGrupo.Location = new System.Drawing.Point(6, 193);
+            this.lbCodigoSubGrupo.Location = new System.Drawing.Point(6, 192);
             this.lbCodigoSubGrupo.Name = "lbCodigoSubGrupo";
             this.lbCodigoSubGrupo.Size = new System.Drawing.Size(40, 13);
             this.lbCodigoSubGrupo.TabIndex = 1;
@@ -264,13 +264,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(610, 422);
+            this.ClientSize = new System.Drawing.Size(610, 421);
             this.Controls.Add(this.gbSubGrupos);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.gbGrupoItem);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(626, 460);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(626, 460);
             this.Name = "fmCadastroGrupoItem";

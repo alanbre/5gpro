@@ -401,8 +401,9 @@
             this.Controls.Add(this.gbGridDocumentos);
             this.Controls.Add(this.gbFiltrosDocumento);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1108, 501);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1108, 500);
+            this.MinimumSize = new System.Drawing.Size(1108, 501);
             this.Name = "fmSaiBuscaNotaFiscalPropria";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

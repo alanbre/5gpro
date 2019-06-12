@@ -219,7 +219,7 @@ namespace _5gpro.Forms
                     return;
                 }
             }
-        }
+        }   
         private void Recarrega()
         {
             if (tbCodigoUsuario.Text.Length <= 0)

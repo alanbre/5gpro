@@ -144,7 +144,9 @@
             this.Controls.Add(this.gbUnimedidaCad);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(658, 417);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(658, 417);
             this.Name = "fmCadastroUnimedida";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

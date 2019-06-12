@@ -13,7 +13,7 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNomeGrupoPessoa", AllowEmptyStrings = false)]
         public string Nome { get; set; }
+        public List<SubGrupoPessoa> SubGrupoPessoas { get; set; } = new List<SubGrupoPessoa>();
 
-        public List<SubGrupoPessoa> SubGrupoPessoas { get; set; }
     }
 }

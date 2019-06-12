@@ -43,6 +43,9 @@
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
+            this.cbValorConta = new System.Windows.Forms.CheckBox();
+            this.cbDataVencimentoParcela = new System.Windows.Forms.CheckBox();
+            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbAValorConta = new System.Windows.Forms.Label();
             this.dbValorFinal = new _5gpro.Controls.DecimalBox();
@@ -57,9 +60,6 @@
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
-            this.cbDataCadastro = new System.Windows.Forms.CheckBox();
-            this.cbDataVencimentoParcela = new System.Windows.Forms.CheckBox();
-            this.cbValorConta = new System.Windows.Forms.CheckBox();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
             this.gbFiltros.SuspendLayout();
@@ -202,6 +202,36 @@
             this.gbFiltros.TabStop = false;
             this.gbFiltros.Text = "Filtros";
             // 
+            // cbValorConta
+            // 
+            this.cbValorConta.AutoSize = true;
+            this.cbValorConta.Location = new System.Drawing.Point(170, 109);
+            this.cbValorConta.Name = "cbValorConta";
+            this.cbValorConta.Size = new System.Drawing.Size(15, 14);
+            this.cbValorConta.TabIndex = 16;
+            this.cbValorConta.UseVisualStyleBackColor = true;
+            this.cbValorConta.CheckedChanged += new System.EventHandler(this.CbValor_CheckedChanged);
+            // 
+            // cbDataVencimentoParcela
+            // 
+            this.cbDataVencimentoParcela.AutoSize = true;
+            this.cbDataVencimentoParcela.Location = new System.Drawing.Point(673, 74);
+            this.cbDataVencimentoParcela.Name = "cbDataVencimentoParcela";
+            this.cbDataVencimentoParcela.Size = new System.Drawing.Size(15, 14);
+            this.cbDataVencimentoParcela.TabIndex = 15;
+            this.cbDataVencimentoParcela.UseVisualStyleBackColor = true;
+            this.cbDataVencimentoParcela.CheckedChanged += new System.EventHandler(this.CbDataVencimento_CheckedChanged);
+            // 
+            // cbDataCadastro
+            // 
+            this.cbDataCadastro.AutoSize = true;
+            this.cbDataCadastro.Location = new System.Drawing.Point(672, 35);
+            this.cbDataCadastro.Name = "cbDataCadastro";
+            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
+            this.cbDataCadastro.TabIndex = 14;
+            this.cbDataCadastro.UseVisualStyleBackColor = true;
+            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
+            // 
             // btPesquisar
             // 
             this.btPesquisar.Location = new System.Drawing.Point(191, 104);
@@ -340,36 +370,6 @@
             this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
             this.buscaPessoa.TabIndex = 0;
             // 
-            // cbDataCadastro
-            // 
-            this.cbDataCadastro.AutoSize = true;
-            this.cbDataCadastro.Location = new System.Drawing.Point(672, 35);
-            this.cbDataCadastro.Name = "cbDataCadastro";
-            this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
-            this.cbDataCadastro.TabIndex = 14;
-            this.cbDataCadastro.UseVisualStyleBackColor = true;
-            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
-            // 
-            // cbDataVencimentoParcela
-            // 
-            this.cbDataVencimentoParcela.AutoSize = true;
-            this.cbDataVencimentoParcela.Location = new System.Drawing.Point(673, 74);
-            this.cbDataVencimentoParcela.Name = "cbDataVencimentoParcela";
-            this.cbDataVencimentoParcela.Size = new System.Drawing.Size(15, 14);
-            this.cbDataVencimentoParcela.TabIndex = 15;
-            this.cbDataVencimentoParcela.UseVisualStyleBackColor = true;
-            this.cbDataVencimentoParcela.CheckedChanged += new System.EventHandler(this.CbDataVencimento_CheckedChanged);
-            // 
-            // cbValorConta
-            // 
-            this.cbValorConta.AutoSize = true;
-            this.cbValorConta.Location = new System.Drawing.Point(170, 109);
-            this.cbValorConta.Name = "cbValorConta";
-            this.cbValorConta.Size = new System.Drawing.Size(15, 14);
-            this.cbValorConta.TabIndex = 16;
-            this.cbValorConta.UseVisualStyleBackColor = true;
-            this.cbValorConta.CheckedChanged += new System.EventHandler(this.CbValor_CheckedChanged);
-            // 
             // fmBuscaContaPagar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,6 +380,7 @@
             this.Controls.Add(this.gbFiltros);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1007, 613);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1007, 613);
             this.Name = "fmBuscaContaPagar";

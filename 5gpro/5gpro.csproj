@@ -543,18 +543,6 @@
     <Compile Include="Forms\fmCadastroPessoa.Designer.cs">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoItem.Designer.cs">
-      <DependentUpon>fmCadastroSubGrupoItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoPessoa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoPessoa.Designer.cs">
-      <DependentUpon>fmCadastroSubGrupoPessoa.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\fmCadastroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -801,12 +789,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroSubGrupoItem.resx">
-      <DependentUpon>fmCadastroSubGrupoItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroSubGrupoPessoa.resx">
-      <DependentUpon>fmCadastroSubGrupoPessoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUsuario.resx">
       <DependentUpon>fmCadastroUsuario.cs</DependentUpon>

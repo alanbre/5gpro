@@ -56,13 +56,13 @@ namespace _5gpro.Daos
         }
 
 
-        public GrupoPessoa BuscarByID(int Codigo)
+        public GrupoPessoa BuscaByID(int Codigo)
         {
             var grupopessoa = new GrupoPessoa();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome, s.codigo
                             FROM grupopessoa g 
                             LEFT JOIN subgrupopessoa s 
                             ON g.idgrupopessoa = s.idgrupopessoa 
@@ -80,13 +80,13 @@ namespace _5gpro.Daos
         }
 
 
-        public GrupoPessoa Proximo(string Codigo)
+        public GrupoPessoa Proximo(int Codigo)
         {
             var grupopessoa = new GrupoPessoa();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome, s.codigo
                             FROM grupopessoa g 
                             LEFT JOIN subgrupopessoa s 
                             ON g.idgrupopessoa = s.idgrupopessoa 
@@ -103,13 +103,13 @@ namespace _5gpro.Daos
             return grupopessoa;
         }
 
-        public GrupoPessoa Anterior(string Codigo)
+        public GrupoPessoa Anterior(int Codigo)
         {
             var grupopessoa = new GrupoPessoa();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa AS grupopessoaID, g.nome AS nomegrupopessoa,
-                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome
+                            s.idsubgrupopessoa AS subgrupopessoaID, s.nome AS subgrupopessoanome, s.codigo
                             FROM grupopessoa g 
                             LEFT JOIN subgrupopessoa s 
                             ON g.idgrupopessoa = s.idgrupopessoa 
@@ -146,6 +146,61 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
+        public int InserirSubGrupo(SubGrupoPessoa subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO subgrupopessoa (nome, idgrupopessoa, codigo)
+                            VALUES
+                            (@nome, @idgrupopessoa, @codigo)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, idgrupopessoa = @idgrupopessoa, codigo = @codigo";
+                sql.addParam("@idsubgrupopessoa", subGrupo.SubGrupoPessoaID);
+                sql.addParam("@nome", subGrupo.Nome);
+                sql.addParam("@idgrupopessoa", subGrupo.GrupoPessoa.GrupoPessoaID);
+                sql.addParam("@codigo", subGrupo.Codigo);
+                retorno = sql.insertQuery();
+
+                if (retorno > 0)
+                {
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupopessoa;";
+                    var data = sql.selectQueryForSingleRecord();
+                    subGrupo.SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]);
+                }
+                sql.Commit();
+            }
+            return retorno;
+        }
+
+        public bool SubGrupoUsado(SubGrupoPessoa subGrupo)
+        {
+            var usado = true;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = "SELECT * FROM pessoa WHERE idsubgrupopessoa = @idsubgrupopessoa LIMIT 1;";
+                sql.addParam("@idsubgrupopessoa", subGrupo.SubGrupoPessoaID);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    usado = false;
+                }
+            }
+            return usado;
+        }
+        public int RemoverSubGrupo(SubGrupoPessoa subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"DELETE FROM subgrupopessoa WHERE idsubgrupopessoa = @idsubgrupopessoa";
+                sql.addParam("@idsubgrupopessoa", subGrupo.SubGrupoPessoaID);
+                retorno = sql.deleteQuery();
+            }
+            return retorno;
+        }
+
         private GrupoPessoa LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)
@@ -158,21 +213,20 @@ namespace _5gpro.Daos
             grupoPessoa.Nome = (string)data[0]["nomegrupopessoa"];
             var listaSubGrupoPessoa = new List<SubGrupoPessoa>();
 
-
-            if (data[0]["subgrupopessoaID"] != null)
+            foreach (var d in data)
             {
-
-                foreach (var d in data)
+                if (d["subgrupopessoaID"] != null)
                 {
                     var subGrupoPessoa = new SubGrupoPessoa();
                     subGrupoPessoa.SubGrupoPessoaID = Convert.ToInt32(d["subgrupopessoaID"]);
+                    subGrupoPessoa.Codigo = Convert.ToInt32(d["codigo"]);
                     subGrupoPessoa.Nome = (string)d["subgrupopessoanome"];
                     subGrupoPessoa.GrupoPessoa = grupoPessoa;
 
                     listaSubGrupoPessoa.Add(subGrupoPessoa);
                 }
-                grupoPessoa.SubGrupoPessoas = listaSubGrupoPessoa;
             }
+            grupoPessoa.SubGrupoPessoas = listaSubGrupoPessoa;
 
             return grupoPessoa;
         }

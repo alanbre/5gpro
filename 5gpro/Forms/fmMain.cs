@@ -417,6 +417,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+
         private void BtiSangria_Click(object sender, EventArgs e)
         {
             var formCaiSangria = new fmCaiSangria();

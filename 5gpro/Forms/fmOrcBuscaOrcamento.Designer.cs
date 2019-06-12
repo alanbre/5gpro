@@ -412,8 +412,9 @@
             this.Controls.Add(this.gbGridOrcamentos);
             this.Controls.Add(this.gbFiltrosOrcamento);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1089, 572);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1089, 571);
+            this.MinimumSize = new System.Drawing.Size(1089, 572);
             this.Name = "fmOrcBuscaOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
