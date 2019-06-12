@@ -152,6 +152,7 @@
             this.btAddUnimedida.Size = new System.Drawing.Size(22, 22);
             this.btAddUnimedida.TabIndex = 26;
             this.btAddUnimedida.UseVisualStyleBackColor = true;
+            this.btAddUnimedida.Click += new System.EventHandler(this.BtAddUnimedida_Click);
             // 
             // dbQuantidade
             // 
@@ -405,7 +406,7 @@
             this.tpVendas.Location = new System.Drawing.Point(4, 22);
             this.tpVendas.Name = "tpVendas";
             this.tpVendas.Padding = new System.Windows.Forms.Padding(3);
-            this.tpVendas.Size = new System.Drawing.Size(1100, 145);
+            this.tpVendas.Size = new System.Drawing.Size(557, 145);
             this.tpVendas.TabIndex = 1;
             this.tpVendas.Text = "Vendas";
             // 

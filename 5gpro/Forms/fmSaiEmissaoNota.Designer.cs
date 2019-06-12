@@ -608,8 +608,9 @@
             this.Controls.Add(this.gbItens);
             this.Controls.Add(this.gbDadosDocumento);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1255, 611);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1255, 610);
+            this.MinimumSize = new System.Drawing.Size(1255, 611);
             this.Name = "fmSaiEmissaoNota";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

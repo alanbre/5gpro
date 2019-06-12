@@ -613,8 +613,9 @@
             this.Controls.Add(this.gbItens);
             this.Controls.Add(this.gbDadosDocumento);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1255, 612);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1255, 611);
+            this.MinimumSize = new System.Drawing.Size(1255, 612);
             this.Name = "fmEntEntradaNota";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

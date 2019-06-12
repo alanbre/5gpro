@@ -43,6 +43,7 @@
             this.lbDataVencimento = new System.Windows.Forms.Label();
             this.lbADataCadastro = new System.Windows.Forms.Label();
             this.dtpDataCadastroFinal = new System.Windows.Forms.DateTimePicker();
+            this.dtpDataCadastroInicial = new System.Windows.Forms.DateTimePicker();
             this.lbDataCadastro = new System.Windows.Forms.Label();
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
@@ -61,7 +62,6 @@
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dtpDataCadastroInicial = new System.Windows.Forms.DateTimePicker();
             this.gbFiltros.SuspendLayout();
             this.gbResultados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).BeginInit();
@@ -214,6 +214,15 @@
             this.dtpDataCadastroFinal.Name = "dtpDataCadastroFinal";
             this.dtpDataCadastroFinal.Size = new System.Drawing.Size(95, 20);
             this.dtpDataCadastroFinal.TabIndex = 9;
+            // 
+            // dtpDataCadastroInicial
+            // 
+            this.dtpDataCadastroInicial.Enabled = false;
+            this.dtpDataCadastroInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataCadastroInicial.Location = new System.Drawing.Point(459, 32);
+            this.dtpDataCadastroInicial.Name = "dtpDataCadastroInicial";
+            this.dtpDataCadastroInicial.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataCadastroInicial.TabIndex = 7;
             // 
             // lbDataCadastro
             // 
@@ -381,15 +390,6 @@
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
-            // dtpDataCadastroInicial
-            // 
-            this.dtpDataCadastroInicial.Enabled = false;
-            this.dtpDataCadastroInicial.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataCadastroInicial.Location = new System.Drawing.Point(459, 32);
-            this.dtpDataCadastroInicial.Name = "dtpDataCadastroInicial";
-            this.dtpDataCadastroInicial.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataCadastroInicial.TabIndex = 7;
-            // 
             // fmBuscaContaReceber
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,8 +400,9 @@
             this.Controls.Add(this.gbFiltros);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1080, 613);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1022, 612);
+            this.MinimumSize = new System.Drawing.Size(1080, 613);
             this.Name = "fmBuscaContaReceber";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

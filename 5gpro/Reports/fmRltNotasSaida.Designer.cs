@@ -636,6 +636,8 @@
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.btGerar);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1237, 661);
+            this.MinimumSize = new System.Drawing.Size(1237, 661);
             this.Name = "fmRltNotasSaida";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

@@ -511,6 +511,12 @@ namespace _5gpro.Forms
             }
         }
 
+        private void BtAddUnimedida_Click(object sender, EventArgs e)
+        {
+            var formCadUnidadeMedida = new fmCadastroUnimedida();
+            formCadUnidadeMedida.Show(this);
+        }
+
         private void DesintegracaoSimNao(Item d)
         {
             if (desintegracaoDAO.BuscaByID(d.ItemID) == null)

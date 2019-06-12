@@ -606,6 +606,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbPesquisa);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(968, 653);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(968, 652);
             this.Name = "fmCapQuitacaoConta";
