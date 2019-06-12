@@ -313,7 +313,7 @@
             // mtbTelefone
             // 
             this.mtbTelefone.Location = new System.Drawing.Point(15, 228);
-            this.mtbTelefone.Mask = "(##) ####-####";
+            this.mtbTelefone.Mask = "(##) ####-#####";
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 12;

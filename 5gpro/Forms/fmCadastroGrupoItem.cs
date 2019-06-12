@@ -25,6 +25,8 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
+        int codigo = 0;
+
         bool editando = false;
         bool ignoraCheckEvent;
 
@@ -135,6 +137,7 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
+
         private void Busca()
         {
             if (CodGrupoUsuario != "999" && Nivel <= 0)
@@ -314,23 +317,6 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
-            int codigo = 0;
-            if (!int.TryParse(tbCodigo.Text, out codigo)) { tbCodigo.Clear(); }
-            if (grupoItem?.GrupoItemID == codigo)
-            {
-                return;
-            }
-
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
             if (tbCodigo.Text.Length == 0)
             {
                 LimpaCampos(true);
@@ -338,6 +324,39 @@ namespace _5gpro.Forms
                 return;
             }
 
+            int c = 0;
+            if (!int.TryParse(tbCodigo.Text, out c))
+            {
+                tbCodigo.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
+
+            if (codigo == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+            if (grupoItem?.GrupoItemID == codigo)
+            {
+                return;
+            }
 
 
             var newGrupoItem = grupoItemDAO.BuscaByID(int.Parse(tbCodigo.Text));
@@ -369,6 +388,8 @@ namespace _5gpro.Forms
             dgvSubGruposItens.Refresh();
             btNovoSubGrupo.Enabled = false;
             LimpaCamposSubItens();
+            codigo = 0;
+            grupoItem = null;
         }
         private void LimpaCamposSubItens()
         {
@@ -479,9 +500,9 @@ namespace _5gpro.Forms
             }
 
             LimpaCamposSubItens();
-            PreencheGridSubGrupoItens();
-            
+            PreencheGridSubGrupoItens();       
         }
+
         private void PreencheGridSubGrupoItens()
         {
             dgvSubGruposItens.Rows.Clear();

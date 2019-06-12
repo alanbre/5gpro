@@ -208,7 +208,7 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`subgrupopessoa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
-  `idsubgrupopessoa` INT NOT NULL,
+  `idsubgrupopessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupopessoa` INT NOT NULL,
   `codigo` INT(11) NOT NULL,
@@ -827,6 +827,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 ";
             return create;
