@@ -17,14 +17,15 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"INSERT INTO caixa_lancamento
-                            (data, valor, valorpago, troco, tipo, lancamento, documento, idcaixa)
+                            (data, valor, valorpago, troco, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
                             VALUES
-                            (@data, @valor, @valorpago, @troco, @tipo, @lancamento, @documento, @idcaixa)";
+                            (@data, @valor, @valorpago, @troco, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
                 sql.addParam("@data", caixaLancamento.Data);
                 sql.addParam("@valor", caixaLancamento.Valor);
                 sql.addParam("@valorpago", caixaLancamento.ValorPago);
                 sql.addParam("@troco", caixaLancamento.Troco);
-                sql.addParam("@tipo", caixaLancamento.TipoMovimento);
+                sql.addParam("@tipomovimento", caixaLancamento.TipoMovimento);
+                sql.addParam("@tipodocumento", caixaLancamento.TipoDocumento);
                 sql.addParam("@lancamento", caixaLancamento.Lancamento);
                 sql.addParam("@documento", caixaLancamento.Documento);
                 sql.addParam("@idcaixa", caixaLancamento.Caixa.CaixaID);
@@ -32,7 +33,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public IEnumerable<CaixaLancamento> Busca(Caixa caixa)
         {
             var caixaLancamentos = new List<CaixaLancamento>();
@@ -55,6 +55,48 @@ namespace _5gpro.Daos
                 }
             }
             return caixaLancamentos;
+        }
+        public int Sangrar(List<CaixaLancamento> caixaLancamentos, Caixa caixaAtual, Caixa caixaDestino)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                foreach (var lanc in caixaLancamentos)
+                {
+                    sql.clearParams();
+                    sql.Query = @"INSERT INTO caixa_lancamento
+                            (data, valor, valorpago, troco, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            VALUES
+                            (@data, @valor, @valorpago, @troco, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                    sql.addParam("@data", lanc.Data);
+                    sql.addParam("@valor", lanc.Valor);
+                    sql.addParam("@valorpago", lanc.ValorPago);
+                    sql.addParam("@troco", lanc.Troco);
+                    sql.addParam("@tipomovimento", 5);
+                    sql.addParam("@tipodocumento", lanc.TipoDocumento);
+                    sql.addParam("@lancamento", lanc.Lancamento);
+                    sql.addParam("@documento", lanc.Documento);
+                    sql.addParam("@idcaixa", caixaAtual.CaixaID);
+                    sql.insertQuery();
+                    sql.clearParams();
+                    sql.Query = @"INSERT INTO caixa_lancamento
+                            (data, valor, valorpago, troco, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            VALUES
+                            (@data, @valor, @valorpago, @troco, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                    sql.addParam("@data", lanc.Data);
+                    sql.addParam("@valor", lanc.Valor);
+                    sql.addParam("@valorpago", lanc.ValorPago);
+                    sql.addParam("@troco", lanc.Troco);
+                    sql.addParam("@tipomovimento", 0);
+                    sql.addParam("@tipodocumento", lanc.TipoDocumento);
+                    sql.addParam("@lancamento", lanc.Lancamento);
+                    sql.addParam("@documento", lanc.Documento);
+                    sql.addParam("@idcaixa", caixaDestino.CaixaID);
+                    sql.insertQuery();
+                    retorno += 1;
+                }
+            }
+            return retorno;
         }
         private CaixaLancamento LeDadosReader(Dictionary<string, object> data)
         {
