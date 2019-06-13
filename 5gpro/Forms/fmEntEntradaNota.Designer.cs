@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmEntEntradaNota));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
@@ -47,6 +47,7 @@
             this.lbValorTotalDocumento = new System.Windows.Forms.Label();
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.btDesintegrar = new System.Windows.Forms.Button();
             this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
             this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
             this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
@@ -213,6 +214,7 @@
             this.gbItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbItens.Controls.Add(this.btDesintegrar);
             this.gbItens.Controls.Add(this.dbDescontoItem);
             this.gbItens.Controls.Add(this.dbDescontoItemPorc);
             this.gbItens.Controls.Add(this.dbValorTotItem);
@@ -234,6 +236,17 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
+            // 
+            // btDesintegrar
+            // 
+            this.btDesintegrar.Enabled = false;
+            this.btDesintegrar.Location = new System.Drawing.Point(209, 305);
+            this.btDesintegrar.Name = "btDesintegrar";
+            this.btDesintegrar.Size = new System.Drawing.Size(75, 23);
+            this.btDesintegrar.TabIndex = 15;
+            this.btDesintegrar.Text = "Desintegrar";
+            this.btDesintegrar.UseVisualStyleBackColor = true;
+            this.btDesintegrar.Click += new System.EventHandler(this.BtDesintegrar_Click);
             // 
             // dbDescontoItem
             // 
@@ -308,6 +321,7 @@
             this.buscaItem.Size = new System.Drawing.Size(442, 39);
             this.buscaItem.TabIndex = 1;
             this.buscaItem.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.BuscaItem_Codigo_Leave);
+            this.buscaItem.Leave += new System.EventHandler(this.BuscaItem_Leave);
             // 
             // btExcluirItem
             // 
@@ -359,8 +373,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -375,6 +389,7 @@
             this.dgvtbcDescontoPorc,
             this.dgvtbcDescontoItem});
             this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvItens.Enabled = false;
             this.dgvItens.Location = new System.Drawing.Point(6, 19);
             this.dgvItens.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.dgvItens.MultiSelect = false;
@@ -389,9 +404,9 @@
             // 
             // dgvtbcCodigo
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcCodigo.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle9.Format = "N0";
+            dataGridViewCellStyle9.NullValue = null;
+            this.dgvtbcCodigo.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvtbcCodigo.Frozen = true;
             this.dgvtbcCodigo.HeaderText = "Código";
             this.dgvtbcCodigo.MinimumWidth = 60;
@@ -410,9 +425,9 @@
             // 
             // dgvtbcQuantidade
             // 
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvtbcQuantidade.Frozen = true;
             this.dgvtbcQuantidade.HeaderText = "Quantidade";
             this.dgvtbcQuantidade.MinimumWidth = 70;
@@ -422,9 +437,9 @@
             // 
             // dgvtbcValorUnitario
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Format = "C2";
+            dataGridViewCellStyle11.NullValue = null;
+            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
             this.dgvtbcValorUnitario.MinimumWidth = 100;
             this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
@@ -432,9 +447,9 @@
             // 
             // dgvtbcValorTotalItem
             // 
-            dataGridViewCellStyle5.Format = "C2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle12.Format = "C2";
+            dataGridViewCellStyle12.NullValue = null;
+            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvtbcValorTotalItem.HeaderText = "Valor total";
             this.dgvtbcValorTotalItem.MinimumWidth = 80;
             this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
@@ -443,8 +458,8 @@
             // 
             // dgvtbcDescontoPorc
             // 
-            dataGridViewCellStyle6.NullValue = null;
-            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle13.NullValue = null;
+            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle13;
             this.dgvtbcDescontoPorc.HeaderText = "% Desc";
             this.dgvtbcDescontoPorc.MinimumWidth = 50;
             this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
@@ -453,9 +468,9 @@
             // 
             // dgvtbcDescontoItem
             // 
-            dataGridViewCellStyle7.Format = "C2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle14.Format = "C2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle14;
             this.dgvtbcDescontoItem.HeaderText = "Desconto";
             this.dgvtbcDescontoItem.MinimumWidth = 70;
             this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
@@ -679,5 +694,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoPorc;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoItem;
+        private System.Windows.Forms.Button btDesintegrar;
     }
 }

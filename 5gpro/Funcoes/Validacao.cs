@@ -209,11 +209,8 @@ namespace _5gpro.Funcoes
                     ct.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFD2CA");
 
                 }
-
             }
-
         }
-
     }
 }
 

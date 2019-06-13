@@ -2,9 +2,6 @@
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -56,6 +53,7 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
+        
         private CaixaLancamento LeDadosReader(Dictionary<string, object> data)
         {
             var caixaLancamento = new CaixaLancamento();
