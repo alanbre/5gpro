@@ -31,8 +31,8 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tbStatusCaixa = new System.Windows.Forms.TextBox();
-            this.lbStatusCaixa = new System.Windows.Forms.Label();
+            this.tbStatusCaixaOrigem = new System.Windows.Forms.TextBox();
+            this.lbStatusCaixaOrigem = new System.Windows.Forms.Label();
             this.gbSangria = new System.Windows.Forms.GroupBox();
             this.tcSangria = new System.Windows.Forms.TabControl();
             this.tpGeral = new System.Windows.Forms.TabPage();
@@ -62,6 +62,9 @@
             this.lbSangriaCartaoCredito = new System.Windows.Forms.Label();
             this.lbSangriaCheque = new System.Windows.Forms.Label();
             this.lbSangriaDinheiro = new System.Windows.Forms.Label();
+            this.tbStatusCaixaDestino = new System.Windows.Forms.TextBox();
+            this.lbStatusCaixaDestino = new System.Windows.Forms.Label();
+            this.bcDestino = new _5gpro.Controls.BuscaCaixa();
             this.dbSangriaTotal = new _5gpro.Controls.DecimalBox();
             this.dbSangriaCartaoDebitoTotal = new _5gpro.Controls.DecimalBox();
             this.dbSangriaCartaoCreditoTotal = new _5gpro.Controls.DecimalBox();
@@ -75,7 +78,7 @@
             this.dbCaixaTotal = new _5gpro.Controls.DecimalBox();
             this.dbCaixaFaturamento = new _5gpro.Controls.DecimalBox();
             this.dbCaixaAbertura = new _5gpro.Controls.DecimalBox();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
+            this.bcOrigem = new _5gpro.Controls.BuscaCaixa();
             this.gbSangria.SuspendLayout();
             this.tcSangria.SuspendLayout();
             this.tpGeral.SuspendLayout();
@@ -90,22 +93,22 @@
             this.gbTotaisSangria.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tbStatusCaixa
+            // tbStatusCaixaOrigem
             // 
-            this.tbStatusCaixa.Enabled = false;
-            this.tbStatusCaixa.Location = new System.Drawing.Point(279, 25);
-            this.tbStatusCaixa.Name = "tbStatusCaixa";
-            this.tbStatusCaixa.Size = new System.Drawing.Size(100, 20);
-            this.tbStatusCaixa.TabIndex = 2;
+            this.tbStatusCaixaOrigem.Enabled = false;
+            this.tbStatusCaixaOrigem.Location = new System.Drawing.Point(279, 25);
+            this.tbStatusCaixaOrigem.Name = "tbStatusCaixaOrigem";
+            this.tbStatusCaixaOrigem.Size = new System.Drawing.Size(100, 20);
+            this.tbStatusCaixaOrigem.TabIndex = 2;
             // 
-            // lbStatusCaixa
+            // lbStatusCaixaOrigem
             // 
-            this.lbStatusCaixa.AutoSize = true;
-            this.lbStatusCaixa.Location = new System.Drawing.Point(276, 9);
-            this.lbStatusCaixa.Name = "lbStatusCaixa";
-            this.lbStatusCaixa.Size = new System.Drawing.Size(37, 13);
-            this.lbStatusCaixa.TabIndex = 1;
-            this.lbStatusCaixa.Text = "Status";
+            this.lbStatusCaixaOrigem.AutoSize = true;
+            this.lbStatusCaixaOrigem.Location = new System.Drawing.Point(276, 9);
+            this.lbStatusCaixaOrigem.Name = "lbStatusCaixaOrigem";
+            this.lbStatusCaixaOrigem.Size = new System.Drawing.Size(37, 13);
+            this.lbStatusCaixaOrigem.TabIndex = 1;
+            this.lbStatusCaixaOrigem.Text = "Status";
             // 
             // gbSangria
             // 
@@ -363,6 +366,9 @@
             // 
             // gbTotaisSangria
             // 
+            this.gbTotaisSangria.Controls.Add(this.tbStatusCaixaDestino);
+            this.gbTotaisSangria.Controls.Add(this.bcDestino);
+            this.gbTotaisSangria.Controls.Add(this.lbStatusCaixaDestino);
             this.gbTotaisSangria.Controls.Add(this.dbSangriaTotal);
             this.gbTotaisSangria.Controls.Add(this.lbSangriaTotal);
             this.gbTotaisSangria.Controls.Add(this.btRealizarSangria);
@@ -376,7 +382,7 @@
             this.gbTotaisSangria.Controls.Add(this.lbSangriaDinheiro);
             this.gbTotaisSangria.Location = new System.Drawing.Point(12, 444);
             this.gbTotaisSangria.Name = "gbTotaisSangria";
-            this.gbTotaisSangria.Size = new System.Drawing.Size(776, 77);
+            this.gbTotaisSangria.Size = new System.Drawing.Size(776, 99);
             this.gbTotaisSangria.TabIndex = 4;
             this.gbTotaisSangria.TabStop = false;
             this.gbTotaisSangria.Text = "Totais da sangria";
@@ -384,64 +390,92 @@
             // lbSangriaTotal
             // 
             this.lbSangriaTotal.AutoSize = true;
-            this.lbSangriaTotal.Location = new System.Drawing.Point(443, 16);
+            this.lbSangriaTotal.Location = new System.Drawing.Point(441, 55);
             this.lbSangriaTotal.Name = "lbSangriaTotal";
             this.lbSangriaTotal.Size = new System.Drawing.Size(83, 13);
-            this.lbSangriaTotal.TabIndex = 8;
+            this.lbSangriaTotal.TabIndex = 11;
             this.lbSangriaTotal.Text = "Total da sangria";
             // 
             // btRealizarSangria
             // 
-            this.btRealizarSangria.Location = new System.Drawing.Point(552, 32);
+            this.btRealizarSangria.Location = new System.Drawing.Point(550, 70);
             this.btRealizarSangria.Name = "btRealizarSangria";
             this.btRealizarSangria.Size = new System.Drawing.Size(75, 23);
-            this.btRealizarSangria.TabIndex = 10;
+            this.btRealizarSangria.TabIndex = 13;
             this.btRealizarSangria.Text = "Finalizar";
             this.btRealizarSangria.UseVisualStyleBackColor = true;
+            this.btRealizarSangria.Click += new System.EventHandler(this.BtRealizarSangria_Click);
             // 
             // lbSangriaCartaoDebito
             // 
             this.lbSangriaCartaoDebito.AutoSize = true;
-            this.lbSangriaCartaoDebito.Location = new System.Drawing.Point(334, 16);
+            this.lbSangriaCartaoDebito.Location = new System.Drawing.Point(332, 55);
             this.lbSangriaCartaoDebito.Name = "lbSangriaCartaoDebito";
             this.lbSangriaCartaoDebito.Size = new System.Drawing.Size(85, 13);
-            this.lbSangriaCartaoDebito.TabIndex = 6;
+            this.lbSangriaCartaoDebito.TabIndex = 9;
             this.lbSangriaCartaoDebito.Text = "Cartão de débito";
             // 
             // lbSangriaCartaoCredito
             // 
             this.lbSangriaCartaoCredito.AutoSize = true;
-            this.lbSangriaCartaoCredito.Location = new System.Drawing.Point(228, 16);
+            this.lbSangriaCartaoCredito.Location = new System.Drawing.Point(226, 55);
             this.lbSangriaCartaoCredito.Name = "lbSangriaCartaoCredito";
             this.lbSangriaCartaoCredito.Size = new System.Drawing.Size(88, 13);
-            this.lbSangriaCartaoCredito.TabIndex = 4;
+            this.lbSangriaCartaoCredito.TabIndex = 7;
             this.lbSangriaCartaoCredito.Text = "Cartão de crédito";
             // 
             // lbSangriaCheque
             // 
             this.lbSangriaCheque.AutoSize = true;
-            this.lbSangriaCheque.Location = new System.Drawing.Point(116, 16);
+            this.lbSangriaCheque.Location = new System.Drawing.Point(114, 55);
             this.lbSangriaCheque.Name = "lbSangriaCheque";
             this.lbSangriaCheque.Size = new System.Drawing.Size(49, 13);
-            this.lbSangriaCheque.TabIndex = 2;
+            this.lbSangriaCheque.TabIndex = 5;
             this.lbSangriaCheque.Text = "Cheques";
             // 
             // lbSangriaDinheiro
             // 
             this.lbSangriaDinheiro.AutoSize = true;
-            this.lbSangriaDinheiro.Location = new System.Drawing.Point(6, 16);
+            this.lbSangriaDinheiro.Location = new System.Drawing.Point(4, 55);
             this.lbSangriaDinheiro.Name = "lbSangriaDinheiro";
             this.lbSangriaDinheiro.Size = new System.Drawing.Size(46, 13);
-            this.lbSangriaDinheiro.TabIndex = 0;
+            this.lbSangriaDinheiro.TabIndex = 3;
             this.lbSangriaDinheiro.Text = "Dinheiro";
+            // 
+            // tbStatusCaixaDestino
+            // 
+            this.tbStatusCaixaDestino.Enabled = false;
+            this.tbStatusCaixaDestino.Location = new System.Drawing.Point(444, 32);
+            this.tbStatusCaixaDestino.Name = "tbStatusCaixaDestino";
+            this.tbStatusCaixaDestino.Size = new System.Drawing.Size(100, 20);
+            this.tbStatusCaixaDestino.TabIndex = 2;
+            // 
+            // lbStatusCaixaDestino
+            // 
+            this.lbStatusCaixaDestino.AutoSize = true;
+            this.lbStatusCaixaDestino.Location = new System.Drawing.Point(441, 16);
+            this.lbStatusCaixaDestino.Name = "lbStatusCaixaDestino";
+            this.lbStatusCaixaDestino.Size = new System.Drawing.Size(37, 13);
+            this.lbStatusCaixaDestino.TabIndex = 1;
+            this.lbStatusCaixaDestino.Text = "Status";
+            // 
+            // bcDestino
+            // 
+            this.bcDestino.BackColor = System.Drawing.Color.White;
+            this.bcDestino.Location = new System.Drawing.Point(3, 16);
+            this.bcDestino.Margin = new System.Windows.Forms.Padding(0);
+            this.bcDestino.Name = "bcDestino";
+            this.bcDestino.Size = new System.Drawing.Size(434, 39);
+            this.bcDestino.TabIndex = 0;
+            this.bcDestino.Leave += new System.EventHandler(this.BcDestino_Leave);
             // 
             // dbSangriaTotal
             // 
             this.dbSangriaTotal.Enabled = false;
-            this.dbSangriaTotal.Location = new System.Drawing.Point(446, 32);
+            this.dbSangriaTotal.Location = new System.Drawing.Point(444, 71);
             this.dbSangriaTotal.Name = "dbSangriaTotal";
             this.dbSangriaTotal.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaTotal.TabIndex = 9;
+            this.dbSangriaTotal.TabIndex = 12;
             this.dbSangriaTotal.Valor = new decimal(new int[] {
             0,
             0,
@@ -451,10 +485,10 @@
             // dbSangriaCartaoDebitoTotal
             // 
             this.dbSangriaCartaoDebitoTotal.Enabled = false;
-            this.dbSangriaCartaoDebitoTotal.Location = new System.Drawing.Point(337, 32);
+            this.dbSangriaCartaoDebitoTotal.Location = new System.Drawing.Point(335, 71);
             this.dbSangriaCartaoDebitoTotal.Name = "dbSangriaCartaoDebitoTotal";
             this.dbSangriaCartaoDebitoTotal.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaCartaoDebitoTotal.TabIndex = 7;
+            this.dbSangriaCartaoDebitoTotal.TabIndex = 10;
             this.dbSangriaCartaoDebitoTotal.Valor = new decimal(new int[] {
             0,
             0,
@@ -464,10 +498,10 @@
             // dbSangriaCartaoCreditoTotal
             // 
             this.dbSangriaCartaoCreditoTotal.Enabled = false;
-            this.dbSangriaCartaoCreditoTotal.Location = new System.Drawing.Point(231, 32);
+            this.dbSangriaCartaoCreditoTotal.Location = new System.Drawing.Point(229, 71);
             this.dbSangriaCartaoCreditoTotal.Name = "dbSangriaCartaoCreditoTotal";
             this.dbSangriaCartaoCreditoTotal.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaCartaoCreditoTotal.TabIndex = 5;
+            this.dbSangriaCartaoCreditoTotal.TabIndex = 8;
             this.dbSangriaCartaoCreditoTotal.Valor = new decimal(new int[] {
             0,
             0,
@@ -477,10 +511,10 @@
             // dbSangriaChequeTotal
             // 
             this.dbSangriaChequeTotal.Enabled = false;
-            this.dbSangriaChequeTotal.Location = new System.Drawing.Point(119, 32);
+            this.dbSangriaChequeTotal.Location = new System.Drawing.Point(117, 71);
             this.dbSangriaChequeTotal.Name = "dbSangriaChequeTotal";
             this.dbSangriaChequeTotal.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaChequeTotal.TabIndex = 3;
+            this.dbSangriaChequeTotal.TabIndex = 6;
             this.dbSangriaChequeTotal.Valor = new decimal(new int[] {
             0,
             0,
@@ -489,10 +523,10 @@
             // 
             // dbSangriaDinheiroTotal
             // 
-            this.dbSangriaDinheiroTotal.Location = new System.Drawing.Point(9, 32);
+            this.dbSangriaDinheiroTotal.Location = new System.Drawing.Point(7, 71);
             this.dbSangriaDinheiroTotal.Name = "dbSangriaDinheiroTotal";
             this.dbSangriaDinheiroTotal.Size = new System.Drawing.Size(100, 22);
-            this.dbSangriaDinheiroTotal.TabIndex = 1;
+            this.dbSangriaDinheiroTotal.TabIndex = 4;
             this.dbSangriaDinheiroTotal.Valor = new decimal(new int[] {
             0,
             0,
@@ -605,27 +639,27 @@
             0,
             131072});
             // 
-            // buscaCaixa
+            // bcOrigem
             // 
-            this.buscaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaCaixa.Location = new System.Drawing.Point(9, 9);
-            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCaixa.Name = "buscaCaixa";
-            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaCaixa.TabIndex = 0;
-            this.buscaCaixa.Leave += new System.EventHandler(this.BuscaCaixa_Leave);
+            this.bcOrigem.BackColor = System.Drawing.Color.White;
+            this.bcOrigem.Location = new System.Drawing.Point(9, 9);
+            this.bcOrigem.Margin = new System.Windows.Forms.Padding(0);
+            this.bcOrigem.Name = "bcOrigem";
+            this.bcOrigem.Size = new System.Drawing.Size(264, 39);
+            this.bcOrigem.TabIndex = 0;
+            this.bcOrigem.Leave += new System.EventHandler(this.BuscaCaixa_Leave);
             // 
             // fmCaiSangria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 533);
+            this.ClientSize = new System.Drawing.Size(800, 551);
             this.Controls.Add(this.gbTotaisSangria);
             this.Controls.Add(this.gbSangria);
-            this.Controls.Add(this.tbStatusCaixa);
-            this.Controls.Add(this.lbStatusCaixa);
-            this.Controls.Add(this.buscaCaixa);
+            this.Controls.Add(this.tbStatusCaixaOrigem);
+            this.Controls.Add(this.lbStatusCaixaOrigem);
+            this.Controls.Add(this.bcOrigem);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -634,6 +668,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sangria de caixa";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCaiSangria_KeyDown);
             this.gbSangria.ResumeLayout(false);
             this.tcSangria.ResumeLayout(false);
             this.tpGeral.ResumeLayout(false);
@@ -659,9 +694,9 @@
 
         #endregion
 
-        private Controls.BuscaCaixa buscaCaixa;
-        private System.Windows.Forms.TextBox tbStatusCaixa;
-        private System.Windows.Forms.Label lbStatusCaixa;
+        private Controls.BuscaCaixa bcOrigem;
+        private System.Windows.Forms.TextBox tbStatusCaixaOrigem;
+        private System.Windows.Forms.Label lbStatusCaixaOrigem;
         private System.Windows.Forms.GroupBox gbSangria;
         private System.Windows.Forms.TabControl tcSangria;
         private System.Windows.Forms.TabPage tpGeral;
@@ -704,5 +739,8 @@
         private System.Windows.Forms.Label lbSangriaCheque;
         private Controls.DecimalBox dbSangriaDinheiroTotal;
         private System.Windows.Forms.Label lbSangriaDinheiro;
+        private System.Windows.Forms.TextBox tbStatusCaixaDestino;
+        private Controls.BuscaCaixa bcDestino;
+        private System.Windows.Forms.Label lbStatusCaixaDestino;
     }
 }

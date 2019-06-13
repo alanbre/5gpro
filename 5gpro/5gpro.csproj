@@ -324,6 +324,7 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Enum\CaixaEnum.cs" />
     <Compile Include="Forms\fmCaiAberturaFechamento.cs">
       <SubType>Form</SubType>
     </Compile>
