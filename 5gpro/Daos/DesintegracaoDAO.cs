@@ -90,6 +90,19 @@ namespace _5gpro.Daos
 
         }
 
+        public void RemoverDesintegracao(int Codigo)
+        {
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.addParam("@iddesintegracao", Codigo);
+
+                sql.Query = @"DELETE FROM resultado_desintegracao WHERE iddesintegracao = @iddesintegracao";
+                sql.deleteQuery();
+                sql.Query = @"DELETE FROM desintegracao WHERE iddesintegracao = @iddesintegracao";
+                sql.deleteQuery();
+            }
+        }
+
         //public Item Anterior(int Codigo)
         //{
         //    var item = new Item();

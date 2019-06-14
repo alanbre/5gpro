@@ -276,6 +276,7 @@
             // 
             // dbValorTotItem
             // 
+            this.dbValorTotItem.Enabled = false;
             this.dbValorTotItem.Location = new System.Drawing.Point(144, 271);
             this.dbValorTotItem.Name = "dbValorTotItem";
             this.dbValorTotItem.Size = new System.Drawing.Size(63, 20);
@@ -289,6 +290,7 @@
             // 
             // dbValorUnitItem
             // 
+            this.dbValorUnitItem.Enabled = false;
             this.dbValorUnitItem.Location = new System.Drawing.Point(75, 271);
             this.dbValorUnitItem.Name = "dbValorUnitItem";
             this.dbValorUnitItem.Size = new System.Drawing.Size(63, 20);
@@ -379,7 +381,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvItens.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigo,
             this.dgvtbcDescricao,
@@ -389,7 +390,6 @@
             this.dgvtbcDescontoPorc,
             this.dgvtbcDescontoItem});
             this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvItens.Enabled = false;
             this.dgvItens.Location = new System.Drawing.Point(6, 19);
             this.dgvItens.Margin = new System.Windows.Forms.Padding(3, 3, 1, 3);
             this.dgvItens.MultiSelect = false;

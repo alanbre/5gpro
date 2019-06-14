@@ -1,6 +1,5 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
-using _5gpro.Enum;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

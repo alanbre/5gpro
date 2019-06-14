@@ -10,6 +10,8 @@ namespace _5gpro.Forms
 {
     public partial class fmEntEntradaNota : Form
     {
+        private NotaFiscalTerceiros notaFiscalTerceirosNova;
+
         private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
@@ -19,6 +21,7 @@ namespace _5gpro.Forms
         private decimal quantidadeparte = 0;
         private decimal percentualparte = 0;
 
+        Validacao validacao = new Validacao();
 
         private NotaFiscalTerceiros notaFiscalTerceiros = new NotaFiscalTerceiros();
         private NotaFiscalTerceirosItem itemSelecionado = null;
@@ -151,60 +154,86 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
+            var controls = (ControlCollection)this.Controls;
             if (!editando)
-                return;
-
-            if (itens.Count <= 0)
             {
-                MessageBox.Show("Uma nota não pode ser salva sem itens!",
-               "Problema ao salvar",
-               MessageBoxButtons.OK,
-               MessageBoxIcon.Warning);
                 return;
             }
+            var ok = false;
 
-            var notaFiscalTerceirosNova = new NotaFiscalTerceiros
+            if (tbCodigo.Text.Length <= 0)
             {
-                NotaFiscalTerceirosID = int.Parse(tbCodigo.Text),
-                Pessoa = buscaPessoa.pessoa,
-                DataEmissao = dtpEmissao.Value,
-                DataEntradaSaida = dtpEntrada.Value,
-
-                ValorTotalItens = dbValorTotalItens.Valor,
-                DescontoTotalItens = dbDescontoTotalItens.Valor,
-                DescontoDocumento = dbDescontoDocumento.Valor,
-                ValorTotalDocumento = dbValorTotalDocumento.Valor,
-
-                NotaFiscalTerceirosItem = itens
-            };
-
-            int resultado = notaFiscalTerceirosDAO.SalvarOuAtualizar(notaFiscalTerceirosNova);
-
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                if (MessageBox.Show("Número da nota em branco, deseja gerar um numero automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigo.Text = notaFiscalTerceirosDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
             }
-            else if (resultado == 1)
+            else
             {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
-                Editando(false);
+                if (itens.Count <= 0)
+                {
+                    MessageBox.Show("Uma nota não pode ser salva sem itens!",
+                   "Problema ao salvar",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning);
+                    return;
+                }
+
+                notaFiscalTerceirosNova = new NotaFiscalTerceiros();
+                notaFiscalTerceirosNova.NotaFiscalTerceirosID = int.Parse(tbCodigo.Text);
+                notaFiscalTerceirosNova.Pessoa = buscaPessoa.pessoa;
+                notaFiscalTerceirosNova.DataEmissao = dtpEmissao.Value;
+                notaFiscalTerceirosNova.DataEntradaSaida = dtpEntrada.Value;
+
+                notaFiscalTerceirosNova.ValorTotalItens = dbValorTotalItens.Valor;
+                notaFiscalTerceirosNova.DescontoTotalItens = dbDescontoTotalItens.Valor;
+                notaFiscalTerceirosNova.DescontoDocumento = dbDescontoDocumento.Valor;
+                notaFiscalTerceirosNova.ValorTotalDocumento = dbValorTotalDocumento.Valor;
+
+                notaFiscalTerceirosNova.NotaFiscalTerceirosItem = itens;
+
+                ok = validacao.ValidarEntidade(notaFiscalTerceirosNova, controls);
             }
-            else if (resultado == 2)
+
+            if (ok)
             {
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
-                notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
-                Editando(false);
+                validacao.despintarCampos(controls);
+
+                int resultado = notaFiscalTerceirosDAO.SalvarOuAtualizar(notaFiscalTerceirosNova);
+
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
+                    notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    Editando(false);
+                }
+                notaFiscalTerceiros = notaFiscalTerceirosNova;
             }
-            notaFiscalTerceiros = notaFiscalTerceirosNova;
+
+
+
 
         }
         private void Recarrega()
@@ -237,6 +266,8 @@ namespace _5gpro.Forms
         }
         private void Proximo()
         {
+            var controls = (ControlCollection)this.Controls;
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
@@ -245,6 +276,8 @@ namespace _5gpro.Forms
                     MessageBoxIcon.Warning) == DialogResult.No)
                     return;
             }
+
+            validacao.despintarCampos(controls);
 
             if (tbCodigo.Text.Length > 0)
             {
@@ -261,8 +294,10 @@ namespace _5gpro.Forms
                 }
             }
         }
-        private void Anterior()
+        private void Anterior()             
         {
+            var controls = (ControlCollection)this.Controls;
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
@@ -271,6 +306,8 @@ namespace _5gpro.Forms
                     MessageBoxIcon.Warning) == DialogResult.No)
                     return;
             }
+
+            validacao.despintarCampos(controls);
 
             if (tbCodigo.Text.Length > 0)
             {
@@ -362,6 +399,7 @@ namespace _5gpro.Forms
             LimpaCamposItem(limpaCod);
             notaFiscalTerceiros = null;
             codigo = 0;
+            itens.Clear();
 
         }
         private void LimpaCamposItem(bool focus)
@@ -383,7 +421,6 @@ namespace _5gpro.Forms
 
             var item = new NotaFiscalTerceirosItem();
             item.Item = itemrecebido;
-            //item.ValorUnitario = dbValorUnitItem.Valor;
             item.ValorUnitario = itemrecebido.ValorEntrada;
             item.DescontoPorc = dbDescontoItemPorc.Valor;
             item.Desconto = dbDescontoItem.Valor;
@@ -394,13 +431,11 @@ namespace _5gpro.Forms
                 {
                     item.Quantidade = dbQuantidade.Valor / quantidadeparte;
                     item.ValorTotal = item.Quantidade * item.ValorUnitario;
-                    //item.ValorTotal = item.Quantidade * dbValorUnitItem.Valor;
                 }
                 else
                 {
                     item.Quantidade = (dbQuantidade.Valor * percentualparte) / 100;
                     item.ValorTotal = item.Quantidade * item.ValorUnitario;
-                    //item.ValorTotal = item.Quantidade * dbValorUnitItem.Valor;
                 }
             }
             else
@@ -431,9 +466,8 @@ namespace _5gpro.Forms
                 dgvItens.Update();
                 dgvItens.Refresh();
             }
-            //CalculaTotalDocumento();
-            //btExcluirItem.Enabled = false;
-            //LimpaCamposItem(true);
+            CalculaTotalDocumento();
+            btExcluirItem.Enabled = false;
         }
 
         private void BotaoInserirItem()
@@ -448,39 +482,7 @@ namespace _5gpro.Forms
                 return;
             }
             InserirItem(buscaItem.item, false);
-            //var item = new NotaFiscalTerceirosItem();
-            //item.Item = buscaItem.item;
-
-            //item.Quantidade = dbQuantidade.Valor;
-            //item.ValorUnitario = dbValorUnitItem.Valor;
-            //item.ValorTotal = dbValorTotItem.Valor;
-            //item.DescontoPorc = dbDescontoItemPorc.Valor;
-            //item.Desconto = dbDescontoItem.Valor;
-            //var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
-            //if (dr == null)
-            //{
-            //    itens.Add(item);
-            //    dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
-            //    btNovoItem.PerformClick();
-            //}
-            //else
-            //{
-            //    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-            //    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-            //    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-            //    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-            //    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-            //    dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-            //    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-            //    dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-            //    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-            //    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
-            //    dgvItens.Update();
-            //    dgvItens.Refresh();
-            //}
-            //CalculaTotalDocumento();
-            //btExcluirItem.Enabled = false;
-            //LimpaCamposItem(true);
+            LimpaCamposItem(true);
         }
 
         private void BuscaItem()
@@ -637,9 +639,7 @@ namespace _5gpro.Forms
 
                 InserirItem(d.Item, true);
             }
-            //CalculaTotalDocumento();
-            //btExcluirItem.Enabled = false;
-            //LimpaCamposItem(true);
+            LimpaCamposItem(true);
         }
 
         private void BuscaItem_Leave(object sender, EventArgs e)
