@@ -294,7 +294,7 @@ namespace _5gpro.Forms
                 }
             }
         }
-        private void Anterior()             
+        private void Anterior()
         {
             var controls = (ControlCollection)this.Controls;
 
@@ -365,6 +365,7 @@ namespace _5gpro.Forms
                 newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalTerceiros.Pessoa.PessoaID);
                 notaFiscalTerceiros = newNotaFiscalTerceiros;
                 PreencheCampos(notaFiscalTerceiros);
+                notaFiscalTerceiros = newNotaFiscalTerceiros;
                 Editando(false);
             }
             else
@@ -404,7 +405,7 @@ namespace _5gpro.Forms
         }
         private void LimpaCamposItem(bool focus)
         {
-            buscaItem.Limpa();
+            buscaItem1.Limpa();
             dbQuantidade.Valor = 0.00m;
             dbValorUnitItem.Valor = 0.00m;
             dbValorTotItem.Valor = 0.00m;
@@ -413,7 +414,8 @@ namespace _5gpro.Forms
             itemSelecionado = null;
             btExcluirItem.Enabled = false;
             btInserirItem.Text = "Inserir";
-            if (focus) { buscaItem.Focus(); }
+            //if (focus) { buscaItem1.Focus(); }
+            BotaoDesintegrar(buscaItem1.item);
         }
 
         private void InserirItem(Item itemrecebido, bool partedesintegrada)
@@ -453,18 +455,36 @@ namespace _5gpro.Forms
             }
             else
             {
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-                dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-                dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-                dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-                dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
-                dgvItens.Update();
-                dgvItens.Refresh();
+                if (partedesintegrada)
+                {
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                    dr.Cells[dgvtbcQuantidade.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                    dr.Cells[dgvtbcValorTotalItem.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    dgvItens.Update();
+                    dgvItens.Refresh();
+                }
+                else
+                {
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                    dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                    dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    dgvItens.Update();
+                    dgvItens.Refresh();
+                }
             }
             CalculaTotalDocumento();
             btExcluirItem.Enabled = false;
@@ -472,48 +492,60 @@ namespace _5gpro.Forms
 
         private void BotaoInserirItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
             {
                 MessageBox.Show("Item não encontrado no banco de dados",
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
                 return;
             }
-            InserirItem(buscaItem.item, false);
+            InserirItem(buscaItem1.item, false);
             LimpaCamposItem(true);
         }
 
         private void BuscaItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
                 return;
             var item = new NotaFiscalTerceirosItem();
-            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem.item.ItemID).FirstOrDefault();
+            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem1.item.ItemID).FirstOrDefault();
             if (dr == null)
             {
-                item.Item = buscaItem.item;
+                item.Item = buscaItem1.item;
                 btInserirItem.Text = "Inserir";
                 btExcluirItem.Enabled = false;
             }
             else
             {
-                item = itens.Find(i => i.Item.ItemID == buscaItem.item.ItemID);
+                item = itens.Find(i => i.Item.ItemID == buscaItem1.item.ItemID);
                 btInserirItem.Text = "Alterar";
                 btExcluirItem.Enabled = true;
             }
             PreencheCamposItem(item);
+            BotaoDesintegrar(buscaItem1.item);
+        }
 
-            if (desintegracaoDAO.BuscaByID(buscaItem.item.ItemID) != null)
-            {
-                btDesintegrar.Enabled = true;
-            }
-            else
+        private void BotaoDesintegrar(Item item)
+        {
+            if (item == null)
             {
                 btDesintegrar.Enabled = false;
             }
+            else
+            {
+                if (desintegracaoDAO.BuscaByID(item.ItemID) != null)
+                {
+                    btDesintegrar.Enabled = true;
+                }
+                else
+                {
+                    btDesintegrar.Enabled = false;
+                }
+            }
         }
+
         private void ExcluirItem()
         {
 
@@ -556,6 +588,7 @@ namespace _5gpro.Forms
             itens = notafiscal.NotaFiscalTerceirosItem.ToList();
             PreencheGridItens(itens);
             btInserirItem.Text = "Inserir";
+            notaFiscalTerceiros = notafiscal;
             ignoracheckevent = false;
         }
         private void PreencheGridItens(List<NotaFiscalTerceirosItem> itens)
@@ -570,22 +603,20 @@ namespace _5gpro.Forms
         {
             if (item == null)
             {
-                MessageBox.Show("Item não encontrado no banco de dados",
-                "Item não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
                 return;
             }
 
             ignoracheckevent = true;
-            buscaItem.PreencheCampos(item.Item);
+            buscaItem1.PreencheCampos(item.Item);
             dbQuantidade.Valor = item.Quantidade;
             dbValorUnitItem.Valor = item.ValorUnitario;
             dbValorTotItem.Valor = item.ValorTotal;
             dbDescontoItemPorc.Valor = item.DescontoPorc;
             dbDescontoItem.Valor = item.Desconto;
             ignoracheckevent = false;
+            BotaoDesintegrar(item.Item);
+
         }
         private void EnterTab(object sender, KeyEventArgs e)
         {
@@ -613,15 +644,10 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
-        {
-
-        }
 
         private void BtDesintegrar_Click(object sender, EventArgs e)
         {
-
-            desintegracao = desintegracaoDAO.BuscaByID(buscaItem.item.ItemID);
+            desintegracao = desintegracaoDAO.BuscaByID(buscaItem1.item.ItemID);
 
             foreach (var d in desintegracao.Partes)
             {
@@ -639,14 +665,24 @@ namespace _5gpro.Forms
 
                 InserirItem(d.Item, true);
             }
+            RemoverDesintegrado(desintegracao.Itemdesintegrado);
             LimpaCamposItem(true);
+        }
+
+        private void RemoverDesintegrado(Item itemdesintegrado)
+        {
+            if (itens.Any(l => l.Item.ItemID == itemdesintegrado.ItemID))
+            {
+                itens.Remove(itens.Where(i => i.Item.ItemID == itemdesintegrado.ItemID).First());
+                dgvItens.Rows.Remove(dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == itemdesintegrado.ItemID).FirstOrDefault());
+            }
         }
 
         private void BuscaItem_Leave(object sender, EventArgs e)
         {
-            if(buscaItem.item != null)
+            if (buscaItem1.item != null)
             {
-                dbValorUnitItem.Valor = buscaItem.item.ValorEntrada;
+                dbValorUnitItem.Valor = buscaItem1.item.ValorEntrada;
             }
             else
             {
