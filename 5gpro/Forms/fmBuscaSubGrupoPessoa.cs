@@ -25,12 +25,40 @@ namespace _5gpro.Forms
             FiltroGrupo(grupopessoaID);
         }
 
+        private void FmBuscaSubGrupoPessoa_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
+        private void FmBuscaSubGrupoPessoa_Load(object sender, EventArgs e)
+        {
+            BuscaSubGrupoPessoa();
+        }
+        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e)
+        {
+            BuscaSubGrupoPessoa();
+        }
+        private void BtPesquisarSubGrupoPessoa_Click(object sender, EventArgs e)
+        {
+            BuscaSubGrupoPessoa();
+        }
+        private void DgvSubGrupoPessoa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvSubGrupoPessoa.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvSubGrupoPessoa.Rows[selectedRowIndex];
+            subgrupopessoaSelecionado = listasubgrupopessoa.Find(g => g.SubGrupoPessoaID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            this.Close();
+        }
+
         private void FiltroGrupo(int grupoid)
         {
             grupopessoa = new GrupoPessoa();
             grupopessoa.GrupoPessoaID = grupoid;
         }
-
         private void BuscaSubGrupoPessoa()
         {
             DataTable table = new DataTable();
@@ -45,28 +73,13 @@ namespace _5gpro.Forms
             }
             dgvSubGrupoPessoa.DataSource = table;
         }
-
-        private void FmBuscaSubGrupoPessoa_Load(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            BuscaSubGrupoPessoa();
-        }
-
-        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e)
-        {
-            BuscaSubGrupoPessoa();
-        }
-
-        private void BtPesquisarSubGrupoPessoa_Click(object sender, EventArgs e)
-        {
-            BuscaSubGrupoPessoa();
-        }
-
-        private void DgvSubGrupoPessoa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvSubGrupoPessoa.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvSubGrupoPessoa.Rows[selectedRowIndex];
-            subgrupopessoaSelecionado = listasubgrupopessoa.Find(g => g.SubGrupoPessoaID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
-            this.Close();
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

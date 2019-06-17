@@ -324,7 +324,6 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
-    <Compile Include="Enum\CaixaEnum.cs" />
     <Compile Include="Forms\fmCaiAberturaFechamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -692,6 +691,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCaiAberturaFechamento.resx">
       <DependentUpon>fmCaiAberturaFechamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiBuscaCaixa.resx">
+      <DependentUpon>fmCaiBuscaCaixa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCaiCadastroCaixa.resx">
       <DependentUpon>fmCaiCadastroCaixa.cs</DependentUpon>

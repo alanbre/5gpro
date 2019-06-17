@@ -20,6 +20,15 @@ namespace _5gpro.Forms
             tbFiltroNomeEstado.Focus();
         }
 
+        private void FmBuscaEstado_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void BtPesquisar_Click(object sender, EventArgs e)
         {
 
@@ -51,7 +60,6 @@ namespace _5gpro.Forms
             //}
             //dgvEstados.DataSource = table;
         }
-
         private void DgvEstados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvEstados.SelectedCells[0].RowIndex;
@@ -67,11 +75,6 @@ namespace _5gpro.Forms
                 this.SelectNextControl((Control)sender, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
             }
-        }
-
-        private void FmBuscaEstado_KeyDown(object sender, KeyEventArgs e)
-        {
-            EnterTab(this.ActiveControl, e);
         }
     }
 }

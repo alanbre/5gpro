@@ -388,6 +388,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca contas a pagar";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaContaPagar_KeyDown);
             this.gbResultados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContas)).EndInit();
             this.gbFiltros.ResumeLayout(false);

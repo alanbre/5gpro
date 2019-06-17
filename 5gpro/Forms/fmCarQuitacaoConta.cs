@@ -3,12 +3,8 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -17,9 +13,10 @@ namespace _5gpro.Forms
     {
 
         private List<ParcelaContaReceber> parcelasContaReceber;
-        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
         private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO();
+        private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
         private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
+        private List<CaixaLancamento> caixaLancamentos = null;
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
@@ -56,7 +53,55 @@ namespace _5gpro.Forms
             DatasIniciais();
         }
 
+        private void FmCarQuitacaoConta_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
+        private void BtQuitar_Click(object sender, EventArgs e) => Quitar();
+        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataVencimento.Checked)
+            {
+                dtpDataVencimentoInicial.Enabled = true;
+                dtpDataVencimentoFinal.Enabled = true;
+                dataVencimentoFiltro = true;
+            }
+            else
+            {
+                dtpDataVencimentoInicial.Enabled = false;
+                dtpDataVencimentoFinal.Enabled = false;
+                dataVencimentoFiltro = false;
+            }
+        }
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpDataCadastroInicial.Enabled = true;
+                dtpDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpDataCadastroInicial.Enabled = false;
+                dtpDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+
+        }
+        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValor.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorContaFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false ;
+                dbValorFinal.Enabled = false;
+                valorContaFiltro = false;
+            }
+        }
         private void DgvParcelas_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) => SelecionaLinha();
         private void DgvParcelas_KeyDown(object sender, KeyEventArgs e)
         {
@@ -102,6 +147,62 @@ namespace _5gpro.Forms
 
             dgvParcelas.Refresh();
         }
+        private void Quitar()
+        {
+            if (parcelasContaReceberSelecionadas.Count <= 0)
+            {
+                MessageBox.Show("Nenhuma parcela seleciona!",
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            var formTroco = new fmTroco(dbValorTotal.Valor);
+            formTroco.ShowDialog();
+            if (!formTroco.pago)
+            {
+                return;
+            }
+
+            int retorno = parcelaContaReceberDAO.QuitarParcelas(parcelasContaReceberSelecionadas);
+            if (retorno == 1)
+            {
+                MessageBox.Show("Parcelas selecionadas quitadas!");
+                caixaLancamentos = new List<CaixaLancamento>();
+                foreach(var parc in parcelasContaReceberSelecionadas)
+                {
+                    var caixaLancamento = new CaixaLancamento();
+                    caixaLancamento.Caixa = buscaCaixa.caixa;
+                    caixaLancamento.Data = DateTime.Now;
+                    caixaLancamento.Documento = parc.ParcelaContaReceberID.ToString();
+                    caixaLancamento.TipoDocumento = 0;
+                    caixaLancamento.TipoMovimento = 0;
+                    caixaLancamento.Lancamento = 1;
+                    caixaLancamento.Valor = parc.ValorFinal;
+                    caixaLancamento.ParcelaContaReceber = parc;
+                    caixaLancamentos.Add(caixaLancamento);
+                }
+                caixaLancamentoDAO.NovosCar(caixaLancamentos);
+                parcelasContaReceberSelecionadas.Clear();
+                Limpar();
+                btPesquisar.PerformClick();
+            }
+            else
+            {
+                MessageBox.Show("Houve problema ao quitar as parcelas!");
+            }
+        }
+        private void Limpar()
+        {
+            tbCount.Clear();
+            dbValor.Valor = 0;
+            dbMulta.Valor = 0;
+            dbJuros.Valor = 0;
+            dbAcrescimo.Valor = 0;
+            dbDesconto.Valor = 0;
+            dbValorTotal.Valor = 0;
+            buscaCaixa.Limpa();
+        }
         private void DatasIniciais()
         {
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
@@ -126,7 +227,6 @@ namespace _5gpro.Forms
             }
             CalculaTotais();
         }
-
         private void CalculaTotais()
         {
             tbCount.Text = parcelasContaReceberSelecionadas.Count.ToString();
@@ -138,7 +238,6 @@ namespace _5gpro.Forms
             dbValorTotal.Valor = parcelasContaReceberSelecionadas.Sum(p => p.ValorFinal);
             lbTotal.Text = dbValorTotal.Valor.ToString("TOTAL: R$ ########0.00");
         }
-
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
@@ -149,73 +248,12 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
         }
-
-        private void BtQuitar_Click(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            var formTroco = new fmTroco(dbValorTotal.Valor);
-            formTroco.ShowDialog();
-            if (formTroco.pago)
+            if (e.KeyCode == Keys.Enter)
             {
-                int retorno = parcelaContaReceberDAO.QuitarParcelas(parcelasContaReceberSelecionadas);
-                if (retorno == 1)
-                {
-                    MessageBox.Show("Parcelas selecionadas quitadas!");
-                    parcelasContaReceberSelecionadas.Clear();
-                    btPesquisar.PerformClick();
-                }
-                else
-                {
-                    MessageBox.Show("Houve problema ao quitar as parcelas!");
-                }
-            }
-        }
-
-        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDataCadastro.Checked)
-            {
-                dtpDataCadastroInicial.Enabled = true;
-                dtpDataCadastroFinal.Enabled = true;
-                dataCadastroFiltro = true;
-            }
-            else
-            {
-                dtpDataCadastroInicial.Enabled = false;
-                dtpDataCadastroFinal.Enabled = false;
-                dataCadastroFiltro = false;
-            }
-
-        }
-
-        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDataVencimento.Checked)
-            {
-                dtpDataVencimentoInicial.Enabled = true;
-                dtpDataVencimentoFinal.Enabled = true;
-                dataVencimentoFiltro = true;
-            }
-            else
-            {
-                dtpDataVencimentoInicial.Enabled = false;
-                dtpDataVencimentoFinal.Enabled = false;
-                dataVencimentoFiltro = false;
-            }
-        }
-
-        private void CbValor_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbValor.Checked)
-            {
-                dbValorInicial.Enabled = true;
-                dbValorFinal.Enabled = true;
-                valorContaFiltro = true;
-            }
-            else
-            {
-                dbValorInicial.Enabled = false ;
-                dbValorFinal.Enabled = false;
-                valorContaFiltro = false;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

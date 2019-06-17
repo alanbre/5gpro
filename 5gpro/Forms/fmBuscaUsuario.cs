@@ -45,27 +45,44 @@ namespace _5gpro.Forms
 
         }
 
-        private void dgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void DgvUsuarios_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvUsuarios.SelectedCells[0].RowIndex;           
             DataGridViewRow selectedRow = dgvUsuarios.Rows[selectedRowIndex];
             usuarioSelecionado = usuarios.ToList().Find(u => u.UsuarioID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
-
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void BtPesquisar_Click(object sender, EventArgs e)
+        {
+            BuscaUsuario();
+        }
+        private void TbFiltroNomeUsuario_TextChanged(object sender, EventArgs e)
+        {
+            BuscaUsuario();
+        }
+        private void TbFiltroSobrenomeUsuario_TextChanged(object sender, EventArgs e)
         {
             BuscaUsuario();
         }
 
-        private void tbFiltroNomeUsuario_TextChanged(object sender, EventArgs e)
+
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            BuscaUsuario();
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
 
-        private void tbFiltroSobrenomeUsuario_TextChanged(object sender, EventArgs e)
+        private void FmBuscaUsuario_KeyDown(object sender, KeyEventArgs e)
         {
-            BuscaUsuario();
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
         }
     }
 }

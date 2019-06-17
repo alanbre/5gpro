@@ -18,30 +18,27 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void fmBuscaPessoa_KeyDown(object sender, KeyEventArgs e)
+        private void FmBuscaPessoa_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
             EnterTab(this.ActiveControl, e);
         }
-
-
         private void BtPesquisar_Click(object sender, EventArgs e)
         {
             BuscaPessoas();
         }
-
-
-        //EVENTOS DE TEXT CHANGED
         private void TbFiltroNome_TextChanged(object sender, EventArgs e)
         {
             if (tbFiltroNome.Text.Length > 0) { BuscaPessoas(); }
         }
-
         private void TbCpfCnpj_TextChanged(object sender, EventArgs e)
         {
             if (tbCpfCnpj.Text.Length > 0) { BuscaPessoas(); }
         }
-
-        //EVENTOS DE CELL DOUBLE CLICK
         private void DgvPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvPessoas.SelectedCells[0].RowIndex;
@@ -73,7 +70,6 @@ namespace _5gpro.Forms
             }
             dgvPessoas.DataSource = table;
         }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

@@ -94,6 +94,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Sub-Grupo Item";
             this.Load += new System.EventHandler(this.FmBuscaSubGrupoItem_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaSubGrupoItem_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGrupoItem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

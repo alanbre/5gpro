@@ -307,8 +307,7 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
-            int c = 0;
-            if (!int.TryParse(tbCodigoConta.Text, out c))
+            if (!int.TryParse(tbCodigoConta.Text, out int c))
             {
                 tbCodigoConta.Clear();
             }
@@ -471,7 +470,7 @@ namespace _5gpro.Forms
                                      );
                 dgvParcelas.Refresh();
                 btNovaParcela.Enabled = true;
-                btNovaParcela.PerformClick();
+                InserirParcela();
                 Editando(true);
             }
             else
@@ -501,10 +500,10 @@ namespace _5gpro.Forms
                 dr.Cells[dgvtbcSituacao.Index].Value = ptemp.Situacao;
                 dgvParcelas.Update();
                 dgvParcelas.Refresh();
+                LimpaCamposParcela();
                 Editando(true);
             }
-            CalculaTotalConta();
-            LimpaCamposParcela();
+            CalculaTotalConta();            
             btNovaParcela.Enabled = true;
             btExcluirParcela.Enabled = false;
         }

@@ -58,7 +58,7 @@
             this.dgvUsuarios.Size = new System.Drawing.Size(775, 330);
             this.dgvUsuarios.TabIndex = 0;
             this.dgvUsuarios.TabStop = false;
-            this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuarios_CellDoubleClick);
+            this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvUsuarios_CellDoubleClick);
             // 
             // lbNomeUsuario
             // 
@@ -75,7 +75,7 @@
             this.tbFiltroNomeUsuario.Name = "tbFiltroNomeUsuario";
             this.tbFiltroNomeUsuario.Size = new System.Drawing.Size(200, 20);
             this.tbFiltroNomeUsuario.TabIndex = 2;
-            this.tbFiltroNomeUsuario.TextChanged += new System.EventHandler(this.tbFiltroNomeUsuario_TextChanged);
+            this.tbFiltroNomeUsuario.TextChanged += new System.EventHandler(this.TbFiltroNomeUsuario_TextChanged);
             // 
             // lbSobrenomeUsuario
             // 
@@ -92,7 +92,7 @@
             this.tbFiltroSobrenomeUsuario.Name = "tbFiltroSobrenomeUsuario";
             this.tbFiltroSobrenomeUsuario.Size = new System.Drawing.Size(200, 20);
             this.tbFiltroSobrenomeUsuario.TabIndex = 8;
-            this.tbFiltroSobrenomeUsuario.TextChanged += new System.EventHandler(this.tbFiltroSobrenomeUsuario_TextChanged);
+            this.tbFiltroSobrenomeUsuario.TextChanged += new System.EventHandler(this.TbFiltroSobrenomeUsuario_TextChanged);
             // 
             // btPesquisar
             // 
@@ -102,7 +102,7 @@
             this.btPesquisar.TabIndex = 9;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
             // buscaGrupoUsuario
             // 
@@ -133,6 +133,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Usuários";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaUsuario_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

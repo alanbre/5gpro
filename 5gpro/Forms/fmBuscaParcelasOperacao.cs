@@ -21,6 +21,39 @@ namespace _5gpro.Forms
             telacadoperacao = cadoperacao;
         }
 
+        private void FmBuscaParcelasOperacao_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
+        private void BtAplicar_Click(object sender, EventArgs e)
+        {
+            EditarDias();
+        }
+        private void DgvParcelasOperacao_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if (!int.TryParse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString(), out int codigo)
+                || string.IsNullOrWhiteSpace(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString()))
+            {
+                dgvParcelasOperacao.CurrentRow.Cells[1].Value = diasalvo;
+            }
+
+            if (!dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString().Equals(diasalvo))
+            {
+                listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
+                telacadoperacao.Dias_Changed();
+            }
+        }
+        private void DgvParcelasOperacao_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            diasalvo = dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString();
+        }
+
+
         private void EditarDias()
         {
 
@@ -39,7 +72,6 @@ namespace _5gpro.Forms
                 MessageBox.Show("Apenas números", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void BuscaParcelas()
         {
 
@@ -56,29 +88,14 @@ namespace _5gpro.Forms
 
         }
 
-        private void BtAplicar_Click(object sender, EventArgs e)
-        {
-            EditarDias();
-        }
 
-        private void DgvParcelasOperacao_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            if (!int.TryParse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString(), out int codigo)
-                || string.IsNullOrWhiteSpace(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString()))
+            if (e.KeyCode == Keys.Enter)
             {
-                dgvParcelasOperacao.CurrentRow.Cells[1].Value = diasalvo;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
-
-            if (!dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString().Equals(diasalvo))
-            {
-                listaparcelasbusca.Find(p => p.Numero == int.Parse(dgvParcelasOperacao.CurrentRow.Cells[0].Value.ToString())).Dias = int.Parse(dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString());
-                telacadoperacao.Dias_Changed();
-            }
-        }
-
-        private void DgvParcelasOperacao_CellEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            diasalvo = dgvParcelasOperacao.CurrentRow.Cells[1].Value.ToString();
         }
     }
 }

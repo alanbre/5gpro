@@ -3,12 +3,8 @@ using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -18,6 +14,10 @@ namespace _5gpro.Forms
         private List<ParcelaContaPagar> parcelasContaPagar;
         private readonly ParcelaContaPagarDAO parcelaContaPagarDAO = new ParcelaContaPagarDAO();
         private List<ParcelaContaPagar> parcelasContaPagarSelecionadas = new List<ParcelaContaPagar>();
+        private List<CaixaLancamento> caixaLancamentos = null;
+        private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
+
+
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
@@ -53,10 +53,55 @@ namespace _5gpro.Forms
             DatasIniciais();
         }
 
+        private void FmCapQuitacaoConta_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
-
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpDataCadastroInicial.Enabled = true;
+                dtpDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpDataCadastroInicial.Enabled = false;
+                dtpDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+        }
+        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataVencimento.Checked)
+            {
+                dtpDataVencimentoInicial.Enabled = true;
+                dtpDataVencimentoFinal.Enabled = true;
+                dataVencimentoFiltro = true;
+            }
+            else
+            {
+                dtpDataVencimentoInicial.Enabled = false;
+                dtpDataVencimentoFinal.Enabled = false;
+                dataVencimentoFiltro = false;
+            }
+        }
+        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValor.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorContaFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false;
+                dbValorFinal.Enabled = false;
+                valorContaFiltro = false;
+            }
+        }
+        private void BtQuitar_Click(object sender, EventArgs e) => Quitar();
         private void DgvParcelas_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => SelecionaLinha();
-
         private void DgvParcelas_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Space)
@@ -100,7 +145,6 @@ namespace _5gpro.Forms
 
             dgvParcelas.Refresh();
         }
-
         private void DatasIniciais()
         {
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
@@ -125,7 +169,6 @@ namespace _5gpro.Forms
             }
             CalculaTotais();
         }
-
         private void CalculaTotais()
         {
             tbCount.Text = parcelasContaPagarSelecionadas.Count.ToString();
@@ -137,19 +180,7 @@ namespace _5gpro.Forms
             dbValorTotal.Valor = parcelasContaPagarSelecionadas.Sum(p => p.ValorFinal);
             lbTotal.Text = dbValorTotal.Valor.ToString("TOTAL: R$ ########0.00");
         }
-
-        private void SetarNivel()
-        {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("050200").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
-        }
-
-        private void BtQuitar_Click(object sender, EventArgs e)
+        private void Quitar()
         {
             var formTroco = new fmTroco(dbValorTotal.Valor);
             formTroco.ShowDialog();
@@ -159,7 +190,23 @@ namespace _5gpro.Forms
                 if (retorno == 1)
                 {
                     MessageBox.Show("Parcelas selecionadas quitadas!");
+                    caixaLancamentos = new List<CaixaLancamento>();
+                    foreach (var parc in parcelasContaPagarSelecionadas)
+                    {
+                        var caixaLancamento = new CaixaLancamento();
+                        caixaLancamento.Caixa = buscaCaixa.caixa;
+                        caixaLancamento.Data = DateTime.Now;
+                        caixaLancamento.Documento = parc.ParcelaContaPagarID.ToString();
+                        caixaLancamento.TipoDocumento = 1;
+                        caixaLancamento.TipoMovimento = 1;
+                        caixaLancamento.Lancamento = 1;
+                        caixaLancamento.Valor = parc.ValorFinal;
+                        caixaLancamento.ParcelaContaPagar = parc;
+                        caixaLancamentos.Add(caixaLancamento);
+                    }
+                    caixaLancamentoDAO.NovosCap(caixaLancamentos);
                     parcelasContaPagarSelecionadas.Clear();
+                    Limpar();
                     btPesquisar.PerformClick();
                 }
                 else
@@ -168,52 +215,33 @@ namespace _5gpro.Forms
                 }
             }
         }
-
-        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        private void Limpar()
         {
-            if (cbDataCadastro.Checked)
-            {
-                dtpDataCadastroInicial.Enabled = true;
-                dtpDataCadastroFinal.Enabled = true;
-                dataCadastroFiltro = true;
-            }
-            else
-            {
-                dtpDataCadastroInicial.Enabled = false;
-                dtpDataCadastroFinal.Enabled = false;
-                dataCadastroFiltro = false;
-            }
+            tbCount.Clear();
+            dbValor.Valor = 0;
+            dbMulta.Valor = 0;
+            dbJuros.Valor = 0;
+            dbAcrescimo.Valor = 0;
+            dbDesconto.Valor = 0;
+            dbValorTotal.Valor = 0;
+            buscaCaixa.Limpa();
+        }
+        private void SetarNivel()
+        {
+            logado = logadoDAO.BuscaByMac(adap.Mac);
+            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("050200").ToString();
+
+            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
         }
 
-        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDataVencimento.Checked)
-            {
-                dtpDataVencimentoInicial.Enabled = true;
-                dtpDataVencimentoFinal.Enabled = true;
-                dataVencimentoFiltro = true;
-            }
-            else
-            {
-                dtpDataVencimentoInicial.Enabled = false;
-                dtpDataVencimentoFinal.Enabled = false;
-                dataVencimentoFiltro = false;
-            }
-        }
 
-        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            if (cbValor.Checked)
+            if (e.KeyCode == Keys.Enter)
             {
-                dbValorInicial.Enabled = true;
-                dbValorFinal.Enabled = true;
-                valorContaFiltro = true;
-            }
-            else
-            {
-                dbValorInicial.Enabled = false;
-                dbValorFinal.Enabled = false;
-                valorContaFiltro = false;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

@@ -26,12 +26,43 @@ namespace _5gpro.Forms
             
         }
 
+
+        private void FmBuscaSubGrupoItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
+        private void FmBuscaSubGrupoItem_Load(object sender, EventArgs e)
+        {
+            BuscaSubGrupoItem();
+        }
+        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e)
+        {
+            BuscaSubGrupoItem();
+        }
+        private void BtPesquisarSubGrupoItem_Click(object sender, EventArgs e)
+        {
+            BuscaSubGrupoItem();
+        }
+        private void DgvSubGrupoItem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvSubGrupoItem.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvSubGrupoItem.Rows[selectedRowIndex];
+            subgrupoitemSelecionado = listasubgrupoitem.Find(g => g.SubGrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            this.Close();
+        }
+
+
+
         private void FiltroGrupo(int grupoid)
         {
             grupoitem = new GrupoItem();
             grupoitem.GrupoItemID = grupoid;
         }
-
         private void BuscaSubGrupoItem()
         {
             DataTable table = new DataTable();
@@ -46,28 +77,13 @@ namespace _5gpro.Forms
             }
             dgvSubGrupoItem.DataSource = table;
         }
-
-        private void FmBuscaSubGrupoItem_Load(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            BuscaSubGrupoItem();
-        }
-
-        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e)
-        {
-            BuscaSubGrupoItem();
-        }
-
-        private void BtPesquisarSubGrupoItem_Click(object sender, EventArgs e)
-        {
-            BuscaSubGrupoItem();
-        }
-
-        private void DgvSubGrupoItem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvSubGrupoItem.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvSubGrupoItem.Rows[selectedRowIndex];
-            subgrupoitemSelecionado = listasubgrupoitem.Find(g => g.SubGrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
-            this.Close();
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

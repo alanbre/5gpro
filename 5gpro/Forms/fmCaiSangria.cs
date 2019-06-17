@@ -1,14 +1,9 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
-using _5gpro.Enum;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -47,8 +42,6 @@ namespace _5gpro.Forms
             {
                 sangriaDinheiro.Data = DateTime.Now;
                 sangriaDinheiro.Valor = dbSangriaDinheiroTotal.Valor;
-                sangriaDinheiro.ValorPago = dbSangriaDinheiroTotal.Valor;
-                sangriaDinheiro.Troco = 0;
                 sangriaDinheiro.Lancamento = 0;
                 sangriaLancamentos.Add(sangriaDinheiro);
             }

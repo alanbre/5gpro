@@ -38,7 +38,15 @@ namespace _5gpro.Forms
             DatasIniciais();
         }
 
-        private void FmBuscaContaReceber_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
+        private void FmBuscaContaReceber_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {

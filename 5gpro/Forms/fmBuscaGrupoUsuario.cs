@@ -19,6 +19,15 @@ namespace _5gpro.Forms
         }
 
 
+        private void FmBuscaGrupoUsuario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void TbFiltroNomeGrupoUsuario_TextChanged(object sender, EventArgs e) => Busca();
         private void BtPesquisar_Click(object sender, EventArgs e) => Busca();        
         private void DgvGrupoUsuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -42,6 +51,14 @@ namespace _5gpro.Forms
 
             }
             dgvGrupoUsuario.Refresh();
+        }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

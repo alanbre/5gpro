@@ -56,6 +56,26 @@ namespace _5gpro.Daos
                 return LeDadosReader(data);
             }
         }
+        public List<Caixa> Busca(string nome)
+        {
+            var caixas = new List<Caixa>();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT * FROM caixa WHERE nome LIKE @nome";
+                sql.addParam("@nome", "%" + nome + "%");
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return null;
+                }
+                foreach(var d in data)
+                {
+                    caixas.Add(LeDadosReader(d));
+                }
+            }
+            return caixas;
+        }
+
         public Caixa Anterior(int Codigo)
         {
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))

@@ -773,8 +773,6 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
   `idcaixa_lancamento` INT NOT NULL AUTO_INCREMENT,
   `data` DATETIME NOT NULL,
   `valor` DECIMAL(10,2) NOT NULL,
-  `valorpago` DECIMAL(10,2) NOT NULL,
-  `troco` DECIMAL(10,2) NOT NULL,
   `tipomovimento` TINYINT(1) UNSIGNED NOT NULL,
   `tipodocumento` TINYINT(1) UNSIGNED NOT NULL,
   `lancamento` TINYINT(1) UNSIGNED NOT NULL,
@@ -823,6 +821,88 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_sangria_lancamento` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_car`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_car` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idparcela_conta_receber` INT NOT NULL,
+  INDEX `fk_caixa_lancamento_car_parcela_conta_receber1_idx` (`idparcela_conta_receber` ASC) VISIBLE,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  CONSTRAINT `fk_caixa_lancamento_car_parcela_conta_receber1`
+    FOREIGN KEY (`idparcela_conta_receber`)
+    REFERENCES `5gprodatabase`.`parcela_conta_receber` (`idparcela_conta_receber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_car_caixa_lancamento1`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_cap`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_cap` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idparcela_conta_pagar` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_lancamento_cap_parcela_conta_pagar1_idx` (`idparcela_conta_pagar` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_lancamento_cap_caixa_lancamento1`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_cap_parcela_conta_pagar1`
+    FOREIGN KEY (`idparcela_conta_pagar`)
+    REFERENCES `5gprodatabase`.`parcela_conta_pagar` (`idparcela_conta_pagar`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_sai`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_sai` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idnotafiscal` INT(11) NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_lancamento_sai_notafiscal1_idx` (`idnotafiscal` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_caixa_lancamento3`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_sai_notafiscal1`
+    FOREIGN KEY (`idnotafiscal`)
+    REFERENCES `5gprodatabase`.`notafiscal` (`idnotafiscal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_ent`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_ent` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idnota_fiscal_terceiros` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_lancamento_ent_nota_fiscal_terceiros1_idx` (`idnota_fiscal_terceiros` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_caixa_lancamento4`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_ent_nota_fiscal_terceiros1`
+    FOREIGN KEY (`idnota_fiscal_terceiros`)
+    REFERENCES `5gprodatabase`.`nota_fiscal_terceiros` (`idnota_fiscal_terceiros`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

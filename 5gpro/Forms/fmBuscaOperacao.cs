@@ -24,6 +24,32 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+        private void FmBuscaOperacao_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
+        private void DgvOperacao_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvOperacao.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvOperacao.Rows[selectedRowIndex];
+            operacaoSelecionada = operacaoDAO.BuscaByID(int.Parse(selectedRow.Cells[0].Value.ToString()));
+            this.Close();
+        }
+        private void BtPesquisar_Click(object sender, EventArgs e)
+        {
+            BuscaOperacao();
+        }
+        private void TbNomeOperacao_TextChanged(object sender, EventArgs e)
+        {
+            BuscaOperacao();
+        }
+
+
         private void BuscaOperacao()
         {
             
@@ -44,23 +70,13 @@ namespace _5gpro.Forms
             }
             dgvOperacao.DataSource = table;
         }
-
-        private void DgvOperacao_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            int selectedRowIndex = dgvOperacao.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvOperacao.Rows[selectedRowIndex];
-            operacaoSelecionada = operacaoDAO.BuscaByID(int.Parse(selectedRow.Cells[0].Value.ToString()));
-            this.Close();
-        }
-
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
-            BuscaOperacao();
-        }
-
-        private void TbNomeOperacao_TextChanged(object sender, EventArgs e)
-        {
-            BuscaOperacao();
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

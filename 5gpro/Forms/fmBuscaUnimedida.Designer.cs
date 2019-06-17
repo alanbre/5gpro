@@ -57,7 +57,7 @@
             this.dgvUnimedida.Size = new System.Drawing.Size(560, 360);
             this.dgvUnimedida.TabIndex = 3;
             this.dgvUnimedida.TabStop = false;
-            this.dgvUnimedida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUnimedida_CellDoubleClick);
+            this.dgvUnimedida.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvUnimedida_CellDoubleClick);
             // 
             // tbFiltroDescUnimedida
             // 
@@ -75,7 +75,7 @@
             this.btPesquisar.TabIndex = 5;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.btPesquisar_Click);
+            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
             // unimedidaBindingSource
             // 
@@ -100,7 +100,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Unidade de Medida";
-            this.Load += new System.EventHandler(this.fmBuscaUnimedida_Load);
+            this.Load += new System.EventHandler(this.FmBuscaUnimedida_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaUnimedida_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUnimedida)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.unimedidaBindingSource)).EndInit();
             this.ResumeLayout(false);

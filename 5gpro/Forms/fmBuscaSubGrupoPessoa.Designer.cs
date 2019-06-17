@@ -94,6 +94,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Sub-Grupo de Pessoas";
             this.Load += new System.EventHandler(this.FmBuscaSubGrupoPessoa_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaSubGrupoPessoa_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSubGrupoPessoa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGridDocumentos = new System.Windows.Forms.GroupBox();
-            this.dgvOrcamentos = new System.Windows.Forms.DataGridView();
+            this.dgvNotas = new System.Windows.Forms.DataGridView();
             this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcCodigoPessoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,8 +41,8 @@
             this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
-            this.dbValorTotalfinal = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotalinicial = new _5gpro.Controls.DecimalBox();
+            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
+            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.cbValorTotal = new System.Windows.Forms.CheckBox();
             this.cbDataEntrada = new System.Windows.Forms.CheckBox();
             this.cbDataCadastro = new System.Windows.Forms.CheckBox();
@@ -60,7 +60,7 @@
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
             this.gbGridDocumentos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNotas)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +69,7 @@
             this.gbGridDocumentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbGridDocumentos.Controls.Add(this.dgvOrcamentos);
+            this.gbGridDocumentos.Controls.Add(this.dgvNotas);
             this.gbGridDocumentos.Location = new System.Drawing.Point(12, 161);
             this.gbGridDocumentos.Name = "gbGridDocumentos";
             this.gbGridDocumentos.Size = new System.Drawing.Size(1068, 289);
@@ -77,20 +77,20 @@
             this.gbGridDocumentos.TabStop = false;
             this.gbGridDocumentos.Text = "Notas fiscais";
             // 
-            // dgvOrcamentos
+            // dgvNotas
             // 
-            this.dgvOrcamentos.AllowUserToAddRows = false;
-            this.dgvOrcamentos.AllowUserToDeleteRows = false;
-            this.dgvOrcamentos.AllowUserToOrderColumns = true;
-            this.dgvOrcamentos.AllowUserToResizeRows = false;
+            this.dgvNotas.AllowUserToAddRows = false;
+            this.dgvNotas.AllowUserToDeleteRows = false;
+            this.dgvNotas.AllowUserToOrderColumns = true;
+            this.dgvNotas.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvOrcamentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvOrcamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvNotas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvNotas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvOrcamentos.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dgvOrcamentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrcamentos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvNotas.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvNotas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcOrcamento,
             this.dgvtbcCodigoPessoa,
             this.dgvtbcNome,
@@ -100,16 +100,16 @@
             this.dgvtbcDescontoTotalItens,
             this.dgvtbcDescontoOrcamento,
             this.dgvtbcValorTotalOrçamento});
-            this.dgvOrcamentos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvOrcamentos.Location = new System.Drawing.Point(10, 19);
-            this.dgvOrcamentos.MultiSelect = false;
-            this.dgvOrcamentos.Name = "dgvOrcamentos";
-            this.dgvOrcamentos.ReadOnly = true;
-            this.dgvOrcamentos.RowHeadersVisible = false;
-            this.dgvOrcamentos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrcamentos.Size = new System.Drawing.Size(1052, 264);
-            this.dgvOrcamentos.TabIndex = 0;
-            this.dgvOrcamentos.TabStop = false;
+            this.dgvNotas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvNotas.Location = new System.Drawing.Point(10, 19);
+            this.dgvNotas.MultiSelect = false;
+            this.dgvNotas.Name = "dgvNotas";
+            this.dgvNotas.ReadOnly = true;
+            this.dgvNotas.RowHeadersVisible = false;
+            this.dgvNotas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvNotas.Size = new System.Drawing.Size(1052, 264);
+            this.dgvNotas.TabIndex = 0;
+            this.dgvNotas.TabStop = false;
             // 
             // dgvtbcOrcamento
             // 
@@ -187,8 +187,8 @@
             // 
             this.gbFiltrosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltrosDocumento.Controls.Add(this.dbValorTotalfinal);
-            this.gbFiltrosDocumento.Controls.Add(this.dbValorTotalinicial);
+            this.gbFiltrosDocumento.Controls.Add(this.dbValorFinal);
+            this.gbFiltrosDocumento.Controls.Add(this.dbValorInicial);
             this.gbFiltrosDocumento.Controls.Add(this.cbValorTotal);
             this.gbFiltrosDocumento.Controls.Add(this.cbDataEntrada);
             this.gbFiltrosDocumento.Controls.Add(this.cbDataCadastro);
@@ -212,25 +212,25 @@
             this.gbFiltrosDocumento.TabStop = false;
             this.gbFiltrosDocumento.Text = "Filtros do documento";
             // 
-            // dbValorTotalfinal
+            // dbValorFinal
             // 
-            this.dbValorTotalfinal.Location = new System.Drawing.Point(94, 115);
-            this.dbValorTotalfinal.Name = "dbValorTotalfinal";
-            this.dbValorTotalfinal.Size = new System.Drawing.Size(70, 22);
-            this.dbValorTotalfinal.TabIndex = 19;
-            this.dbValorTotalfinal.Valor = new decimal(new int[] {
+            this.dbValorFinal.Location = new System.Drawing.Point(94, 115);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(70, 22);
+            this.dbValorFinal.TabIndex = 19;
+            this.dbValorFinal.Valor = new decimal(new int[] {
             99999900,
             0,
             0,
             131072});
             // 
-            // dbValorTotalinicial
+            // dbValorInicial
             // 
-            this.dbValorTotalinicial.Location = new System.Drawing.Point(9, 115);
-            this.dbValorTotalinicial.Name = "dbValorTotalinicial";
-            this.dbValorTotalinicial.Size = new System.Drawing.Size(70, 22);
-            this.dbValorTotalinicial.TabIndex = 18;
-            this.dbValorTotalinicial.Valor = new decimal(new int[] {
+            this.dbValorInicial.Location = new System.Drawing.Point(9, 115);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(70, 22);
+            this.dbValorInicial.TabIndex = 18;
+            this.dbValorInicial.Valor = new decimal(new int[] {
             0,
             0,
             0,
@@ -264,7 +264,7 @@
             this.cbDataCadastro.Size = new System.Drawing.Size(15, 14);
             this.cbDataCadastro.TabIndex = 15;
             this.cbDataCadastro.UseVisualStyleBackColor = true;
-            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataCadastro_CheckedChanged);
+            this.cbDataCadastro.CheckedChanged += new System.EventHandler(this.CbDataEmissao_CheckedChanged);
             // 
             // buscaPessoa
             // 
@@ -357,9 +357,9 @@
             this.lbFiltroDataEmissao.AutoSize = true;
             this.lbFiltroDataEmissao.Location = new System.Drawing.Point(452, 16);
             this.lbFiltroDataEmissao.Name = "lbFiltroDataEmissao";
-            this.lbFiltroDataEmissao.Size = new System.Drawing.Size(89, 13);
+            this.lbFiltroDataEmissao.Size = new System.Drawing.Size(86, 13);
             this.lbFiltroDataEmissao.TabIndex = 6;
-            this.lbFiltroDataEmissao.Text = "Data de cadastro";
+            this.lbFiltroDataEmissao.Text = "Data de emissão";
             // 
             // lbAFiltroDataEmissao
             // 
@@ -410,7 +410,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca notas fiscais";
             this.gbGridDocumentos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvOrcamentos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvNotas)).EndInit();
             this.gbFiltrosDocumento.ResumeLayout(false);
             this.gbFiltrosDocumento.PerformLayout();
             this.ResumeLayout(false);
@@ -420,7 +420,7 @@
         #endregion
 
         private System.Windows.Forms.GroupBox gbGridDocumentos;
-        private System.Windows.Forms.DataGridView dgvOrcamentos;
+        private System.Windows.Forms.DataGridView dgvNotas;
         private System.Windows.Forms.GroupBox gbFiltrosDocumento;
         private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.Label lbAValorTotalDocumento;
@@ -447,7 +447,7 @@
         private System.Windows.Forms.CheckBox cbValorTotal;
         private System.Windows.Forms.CheckBox cbDataEntrada;
         private System.Windows.Forms.CheckBox cbDataCadastro;
-        private Controls.DecimalBox dbValorTotalfinal;
-        private Controls.DecimalBox dbValorTotalinicial;
+        private Controls.DecimalBox dbValorFinal;
+        private Controls.DecimalBox dbValorInicial;
     }
 }

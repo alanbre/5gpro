@@ -20,6 +20,15 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+        private void FmBuscaGrupoPessoa_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void FmBuscaGrupoPessoa_Load(object sender, EventArgs e) => BuscaGrupoPessoa();
         private void TbNomeGrupoPessoa_TextChanged(object sender, EventArgs e) => BuscaGrupoPessoa();
 
@@ -45,6 +54,14 @@ namespace _5gpro.Forms
                 table.Rows.Add(g.GrupoPessoaID, g.Nome);
             }
             dgvGrupoPessoa.DataSource = table;
+        }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
 
     }
