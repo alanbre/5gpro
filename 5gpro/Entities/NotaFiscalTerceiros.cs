@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
@@ -10,8 +11,12 @@ namespace _5gpro.Entities
             NotaFiscalTerceirosItem = new HashSet<NotaFiscalTerceirosItem>();
         }
 
+        [Required(ErrorMessage = "O Código é obrigatório.|tbCodigo", AllowEmptyStrings = false)]
         public int NotaFiscalTerceirosID { get; set; }
+        
+        [Required(ErrorMessage = "O Código é obrigatório.|buscaPessoa", AllowEmptyStrings = false)]
         public Pessoa Pessoa { get; set; }
+
         public DateTime DataEmissao { get; set; }
         public DateTime DataEntradaSaida { get; set; }
 

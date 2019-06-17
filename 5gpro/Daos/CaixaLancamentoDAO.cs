@@ -117,6 +117,7 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
+
         public int Sangrar(List<CaixaLancamento> caixaLancamentos, Caixa caixaAtual, Caixa caixaDestino)
         {
             int retorno = 0;
@@ -155,6 +156,7 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
         private CaixaLancamento LeDadosReader(Dictionary<string, object> data)
         {
             var caixaLancamento = new CaixaLancamento();

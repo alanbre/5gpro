@@ -10,10 +10,18 @@ namespace _5gpro.Forms
 {
     public partial class fmEntEntradaNota : Form
     {
+        private NotaFiscalTerceiros notaFiscalTerceirosNova;
+
         private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private readonly DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
+        private Desintegracao desintegracao;
 
+        private bool quantitativa;
+        private decimal quantidadeparte = 0;
+        private decimal percentualparte = 0;
 
+        Validacao validacao = new Validacao();
 
         private NotaFiscalTerceiros notaFiscalTerceiros = new NotaFiscalTerceiros();
         private NotaFiscalTerceirosItem itemSelecionado = null;
@@ -87,7 +95,13 @@ namespace _5gpro.Forms
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DbDescontoDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
         private void DbValorTotalDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
-        private void BtInserirItem_Click(object sender, EventArgs e) => InserirItem();
+        private void BtInserirItem_Click(object sender, EventArgs e)
+        {
+            BotaoInserirItem();
+            CalculaTotalDocumento();
+            btExcluirItem.Enabled = false;
+            LimpaCamposItem(true);
+        }
         private void BtExcluirItem_Click(object sender, EventArgs e) => ExcluirItem();
         private void DbQuantidade_Leave(object sender, EventArgs e)
         {
@@ -140,60 +154,85 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
+            var controls = (ControlCollection)this.Controls;
             if (!editando)
-                return;
-
-            if (itens.Count <= 0)
             {
-                MessageBox.Show("Uma nota não pode ser salva sem itens!",
-               "Problema ao salvar",
-               MessageBoxButtons.OK,
-               MessageBoxIcon.Warning);
                 return;
             }
+            var ok = false;
 
-            var notaFiscalTerceirosNova = new NotaFiscalTerceiros
+            if (tbCodigo.Text.Length <= 0)
             {
-                NotaFiscalTerceirosID = int.Parse(tbCodigo.Text),
-                Pessoa = buscaPessoa.pessoa,
-                DataEmissao = dtpEmissao.Value,
-                DataEntradaSaida = dtpEntrada.Value,
-
-                ValorTotalItens = dbValorTotalItens.Valor,
-                DescontoTotalItens = dbDescontoTotalItens.Valor,
-                DescontoDocumento = dbDescontoDocumento.Valor,
-                ValorTotalDocumento = dbValorTotalDocumento.Valor,
-
-                NotaFiscalTerceirosItem = itens
-            };
-
-            int resultado = notaFiscalTerceirosDAO.SalvarOuAtualizar(notaFiscalTerceirosNova);
-
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                if (MessageBox.Show("Número da nota em branco, deseja gerar um numero automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigo.Text = notaFiscalTerceirosDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
             }
-            else if (resultado == 1)
+            else
             {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
-                Editando(false);
+                if (itens.Count <= 0)
+                {
+                    MessageBox.Show("Uma nota não pode ser salva sem itens!",
+                   "Problema ao salvar",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning);
+                    return;
+                }
+
+                notaFiscalTerceirosNova = new NotaFiscalTerceiros();
+                notaFiscalTerceirosNova.NotaFiscalTerceirosID = int.Parse(tbCodigo.Text);
+                notaFiscalTerceirosNova.Pessoa = buscaPessoa.pessoa;
+                notaFiscalTerceirosNova.DataEmissao = dtpEmissao.Value;
+                notaFiscalTerceirosNova.DataEntradaSaida = dtpEntrada.Value;
+
+                notaFiscalTerceirosNova.ValorTotalItens = dbValorTotalItens.Valor;
+                notaFiscalTerceirosNova.DescontoTotalItens = dbDescontoTotalItens.Valor;
+                notaFiscalTerceirosNova.DescontoDocumento = dbDescontoDocumento.Valor;
+                notaFiscalTerceirosNova.ValorTotalDocumento = dbValorTotalDocumento.Valor;
+
+                notaFiscalTerceirosNova.NotaFiscalTerceirosItem = itens;
+
+                ok = validacao.ValidarEntidade(notaFiscalTerceirosNova, controls);
             }
-            else if (resultado == 2)
+
+            if (ok)
             {
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
-                notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
-                Editando(false);
+                validacao.despintarCampos(controls);
+
+                int resultado = notaFiscalTerceirosDAO.SalvarOuAtualizar(notaFiscalTerceirosNova);
+
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
+                    notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    Editando(false);
+                }
+                notaFiscalTerceiros = notaFiscalTerceirosNova;
             }
-            notaFiscalTerceiros = notaFiscalTerceirosNova;
+
+
 
 
         }
@@ -227,6 +266,8 @@ namespace _5gpro.Forms
         }
         private void Proximo()
         {
+            var controls = (ControlCollection)this.Controls;
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
@@ -235,6 +276,8 @@ namespace _5gpro.Forms
                     MessageBoxIcon.Warning) == DialogResult.No)
                     return;
             }
+
+            validacao.despintarCampos(controls);
 
             if (tbCodigo.Text.Length > 0)
             {
@@ -253,6 +296,8 @@ namespace _5gpro.Forms
         }
         private void Anterior()
         {
+            var controls = (ControlCollection)this.Controls;
+
             if (editando)
             {
                 if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
@@ -261,6 +306,8 @@ namespace _5gpro.Forms
                     MessageBoxIcon.Warning) == DialogResult.No)
                     return;
             }
+
+            validacao.despintarCampos(controls);
 
             if (tbCodigo.Text.Length > 0)
             {
@@ -276,6 +323,7 @@ namespace _5gpro.Forms
                 }
             }
         }
+
         private void CarregaDados()
         {
             int c = 0;
@@ -299,6 +347,7 @@ namespace _5gpro.Forms
                     codigo = c;
                 }
             }
+
             if (notaFiscalTerceiros?.NotaFiscalTerceirosID == codigo)
                 return;
 
@@ -316,6 +365,7 @@ namespace _5gpro.Forms
                 newNotaFiscalTerceiros.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalTerceiros.Pessoa.PessoaID);
                 notaFiscalTerceiros = newNotaFiscalTerceiros;
                 PreencheCampos(notaFiscalTerceiros);
+                notaFiscalTerceiros = newNotaFiscalTerceiros;
                 Editando(false);
             }
             else
@@ -325,6 +375,7 @@ namespace _5gpro.Forms
             }
 
         }
+
         private void Editando(bool edit)
         {
             if (!ignoracheckevent)
@@ -349,11 +400,12 @@ namespace _5gpro.Forms
             LimpaCamposItem(limpaCod);
             notaFiscalTerceiros = null;
             codigo = 0;
-            
+            itens.Clear();
+
         }
         private void LimpaCamposItem(bool focus)
         {
-            buscaItem.Limpa();
+            buscaItem1.Limpa();
             dbQuantidade.Valor = 0.00m;
             dbValorUnitItem.Valor = 0.00m;
             dbValorTotItem.Valor = 0.00m;
@@ -362,30 +414,38 @@ namespace _5gpro.Forms
             itemSelecionado = null;
             btExcluirItem.Enabled = false;
             btInserirItem.Text = "Inserir";
-            if (focus) { buscaItem.Focus(); }
+            //if (focus) { buscaItem1.Focus(); }
+            BotaoDesintegrar(buscaItem1.item);
         }
-        private void InserirItem()
+
+        private void InserirItem(Item itemrecebido, bool partedesintegrada)
         {
-            if (buscaItem.item == null)
-            {
-                MessageBox.Show("Item não encontrado no banco de dados",
-                "Item não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                buscaItem.Focus();
-                return;
-            }
 
             var item = new NotaFiscalTerceirosItem();
-            item.Item = buscaItem.item;
-
-
-
-            item.Quantidade = dbQuantidade.Valor;
-            item.ValorUnitario = dbValorUnitItem.Valor;
-            item.ValorTotal = dbValorTotItem.Valor;
+            item.Item = itemrecebido;
+            item.ValorUnitario = itemrecebido.ValorEntrada;
             item.DescontoPorc = dbDescontoItemPorc.Valor;
             item.Desconto = dbDescontoItem.Valor;
+
+            if (partedesintegrada)
+            {
+                if (quantitativa)
+                {
+                    item.Quantidade = dbQuantidade.Valor / quantidadeparte;
+                    item.ValorTotal = item.Quantidade * item.ValorUnitario;
+                }
+                else
+                {
+                    item.Quantidade = (dbQuantidade.Valor * percentualparte) / 100;
+                    item.ValorTotal = item.Quantidade * item.ValorUnitario;
+                }
+            }
+            else
+            {
+                item.Quantidade = dbQuantidade.Valor;
+                item.ValorTotal = dbValorTotItem.Valor;
+            }
+
             var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
             if (dr == null)
             {
@@ -395,45 +455,97 @@ namespace _5gpro.Forms
             }
             else
             {
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-                dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-                dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-                dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-                dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
-                dgvItens.Update();
-                dgvItens.Refresh();
+                if (partedesintegrada)
+                {
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                    dr.Cells[dgvtbcQuantidade.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                    dr.Cells[dgvtbcValorTotalItem.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    dgvItens.Update();
+                    dgvItens.Refresh();
+                }
+                else
+                {
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                    dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                    dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    dgvItens.Update();
+                    dgvItens.Refresh();
+                }
             }
             CalculaTotalDocumento();
             btExcluirItem.Enabled = false;
-            LimpaCamposItem(true);
-
-
         }
+
+        private void BotaoInserirItem()
+        {
+            if (buscaItem1.item == null)
+            {
+                MessageBox.Show("Item não encontrado no banco de dados",
+                "Item não encontrado",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                buscaItem1.Focus();
+                return;
+            }
+            InserirItem(buscaItem1.item, false);
+            LimpaCamposItem(true);
+        }
+
         private void BuscaItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
                 return;
             var item = new NotaFiscalTerceirosItem();
-            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem.item.ItemID).FirstOrDefault();
+            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem1.item.ItemID).FirstOrDefault();
             if (dr == null)
             {
-                item.Item = buscaItem.item;
+                item.Item = buscaItem1.item;
                 btInserirItem.Text = "Inserir";
                 btExcluirItem.Enabled = false;
             }
             else
             {
-                item = itens.Find(i => i.Item.ItemID == buscaItem.item.ItemID);
+                item = itens.Find(i => i.Item.ItemID == buscaItem1.item.ItemID);
                 btInserirItem.Text = "Alterar";
                 btExcluirItem.Enabled = true;
             }
             PreencheCamposItem(item);
+            BotaoDesintegrar(buscaItem1.item);
         }
+
+        private void BotaoDesintegrar(Item item)
+        {
+            if (item == null)
+            {
+                btDesintegrar.Enabled = false;
+            }
+            else
+            {
+                if (desintegracaoDAO.BuscaByID(item.ItemID) != null)
+                {
+                    btDesintegrar.Enabled = true;
+                }
+                else
+                {
+                    btDesintegrar.Enabled = false;
+                }
+            }
+        }
+
         private void ExcluirItem()
         {
 
@@ -476,6 +588,7 @@ namespace _5gpro.Forms
             itens = notafiscal.NotaFiscalTerceirosItem.ToList();
             PreencheGridItens(itens);
             btInserirItem.Text = "Inserir";
+            notaFiscalTerceiros = notafiscal;
             ignoracheckevent = false;
         }
         private void PreencheGridItens(List<NotaFiscalTerceirosItem> itens)
@@ -490,22 +603,20 @@ namespace _5gpro.Forms
         {
             if (item == null)
             {
-                MessageBox.Show("Item não encontrado no banco de dados",
-                "Item não encontrado",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
                 return;
             }
 
             ignoracheckevent = true;
-            buscaItem.PreencheCampos(item.Item);
+            buscaItem1.PreencheCampos(item.Item);
             dbQuantidade.Valor = item.Quantidade;
             dbValorUnitItem.Valor = item.ValorUnitario;
             dbValorTotItem.Valor = item.ValorTotal;
             dbDescontoItemPorc.Valor = item.DescontoPorc;
             dbDescontoItem.Valor = item.Desconto;
             ignoracheckevent = false;
+            BotaoDesintegrar(item.Item);
+
         }
         private void EnterTab(object sender, KeyEventArgs e)
         {
@@ -533,6 +644,51 @@ namespace _5gpro.Forms
             }
         }
 
+
+        private void BtDesintegrar_Click(object sender, EventArgs e)
+        {
+            desintegracao = desintegracaoDAO.BuscaByID(buscaItem1.item.ItemID);
+
+            foreach (var d in desintegracao.Partes)
+            {
+                if (desintegracao.Tipo == "Q")
+                {
+                    quantidadeparte = d.Quantidade;
+                    quantitativa = true;
+
+                }
+                else
+                {
+                    percentualparte = d.Porcentagem;
+                    quantitativa = false;
+                }
+
+                InserirItem(d.Item, true);
+            }
+            RemoverDesintegrado(desintegracao.Itemdesintegrado);
+            LimpaCamposItem(true);
+        }
+
+        private void RemoverDesintegrado(Item itemdesintegrado)
+        {
+            if (itens.Any(l => l.Item.ItemID == itemdesintegrado.ItemID))
+            {
+                itens.Remove(itens.Where(i => i.Item.ItemID == itemdesintegrado.ItemID).First());
+                dgvItens.Rows.Remove(dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == itemdesintegrado.ItemID).FirstOrDefault());
+            }
+        }
+
+        private void BuscaItem_Leave(object sender, EventArgs e)
+        {
+            if (buscaItem1.item != null)
+            {
+                dbValorUnitItem.Valor = buscaItem1.item.ValorEntrada;
+            }
+            else
+            {
+                dbValorUnitItem.Valor = 0;
+            }
+        }
 
         private void SetarNivel()
         {

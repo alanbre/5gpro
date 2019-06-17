@@ -226,6 +226,10 @@ namespace _5gpro.Forms
                 }
                 else if (resultado == 1)
                 {
+                    if (rbDesiNao.Checked)
+                    {
+                        desintegracaoDAO.RemoverDesintegracao(item.ItemID);
+                    }
                     gbDesintegracao.Enabled = true;
                     itemdesintegrar = item;
                     tbAjuda.Text = "Dados salvos com sucesso";
@@ -234,6 +238,10 @@ namespace _5gpro.Forms
                 }
                 else if (resultado == 2)
                 {
+                    if (rbDesiNao.Checked)
+                    {
+                        desintegracaoDAO.RemoverDesintegracao(item.ItemID);
+                    }
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
                     return;
@@ -487,12 +495,13 @@ namespace _5gpro.Forms
                 rbDesiSim.Checked = false;
                 btConfigDesintegracao.Enabled = false;
             }
-
+            Editando(true);
         }
 
         private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
         {
             btConfigDesintegracao.Enabled = false;
+            Editando(true);
         }
 
         private void BtConfigDesintegracao_Click(object sender, EventArgs e)

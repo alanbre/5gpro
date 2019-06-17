@@ -1062,7 +1062,9 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enum\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\addMenu_80px.png" />
     <None Include="Resources\addMenu_64px.png" />
