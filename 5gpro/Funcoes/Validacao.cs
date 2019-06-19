@@ -207,7 +207,6 @@ namespace _5gpro.Funcoes
                 foreach (Control ct in c)
                 {
                     ct.BackColor = System.Drawing.ColorTranslator.FromHtml("#FFD2CA");
-
                 }
             }
         }

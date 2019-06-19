@@ -178,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
   `idunimedida` INT(11) NOT NULL,
   `idsubgrupoitem` INT NOT NULL,
   `quantidade` DECIMAL NOT NULL,
+  `custo` DECIMAL(15,2) NULL,
   PRIMARY KEY (`iditem`),
   INDEX `fk_item_unimedida1_idx` (`idunimedida` ASC) VISIBLE,
   INDEX `fk_item_subgrupoitem1_idx` (`idsubgrupoitem` ASC) VISIBLE,
@@ -821,6 +822,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_sangria_lancamento` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_lancamento_car`
 -- -----------------------------------------------------
@@ -904,9 +906,11 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_ent` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 ";
             return create;
