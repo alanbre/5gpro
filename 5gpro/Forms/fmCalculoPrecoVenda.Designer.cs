@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProdutosSelecionados = new System.Windows.Forms.DataGridView();
             this.lbProdutosSeleciondos = new System.Windows.Forms.Label();
             this.gpMetodo1 = new System.Windows.Forms.GroupBox();
@@ -54,8 +54,8 @@
             this.dgvProdutosSelecionados.AllowUserToDeleteRows = false;
             this.dgvProdutosSelecionados.AllowUserToOrderColumns = true;
             this.dgvProdutosSelecionados.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
-            this.dgvProdutosSelecionados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvProdutosSelecionados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProdutosSelecionados.BackgroundColor = System.Drawing.Color.White;
             this.dgvProdutosSelecionados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProdutosSelecionados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -64,7 +64,7 @@
             this.dgvProdutosSelecionados.Name = "dgvProdutosSelecionados";
             this.dgvProdutosSelecionados.ReadOnly = true;
             this.dgvProdutosSelecionados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProdutosSelecionados.Size = new System.Drawing.Size(551, 61);
+            this.dgvProdutosSelecionados.Size = new System.Drawing.Size(424, 61);
             this.dgvProdutosSelecionados.TabIndex = 0;
             this.dgvProdutosSelecionados.TabStop = false;
             // 
@@ -91,7 +91,7 @@
             this.gpMetodo1.Controls.Add(this.panel1);
             this.gpMetodo1.Location = new System.Drawing.Point(6, 92);
             this.gpMetodo1.Name = "gpMetodo1";
-            this.gpMetodo1.Size = new System.Drawing.Size(551, 141);
+            this.gpMetodo1.Size = new System.Drawing.Size(424, 141);
             this.gpMetodo1.TabIndex = 2;
             this.gpMetodo1.TabStop = false;
             this.gpMetodo1.Text = "Método 1";
@@ -101,7 +101,7 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Location = new System.Drawing.Point(6, 19);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(534, 1);
+            this.panel1.Size = new System.Drawing.Size(408, 1);
             this.panel1.TabIndex = 0;
             // 
             // panel2
@@ -109,7 +109,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Location = new System.Drawing.Point(6, 49);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(534, 1);
+            this.panel2.Size = new System.Drawing.Size(408, 1);
             this.panel2.TabIndex = 1;
             // 
             // lbCalculoMetodo1
@@ -195,7 +195,7 @@
             // 
             // btCancelar
             // 
-            this.btCancelar.Location = new System.Drawing.Point(482, 239);
+            this.btCancelar.Location = new System.Drawing.Point(328, 239);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(75, 23);
             this.btCancelar.TabIndex = 3;
@@ -204,7 +204,7 @@
             // 
             // btOk
             // 
-            this.btOk.Location = new System.Drawing.Point(401, 239);
+            this.btOk.Location = new System.Drawing.Point(247, 239);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(75, 23);
             this.btOk.TabIndex = 4;
@@ -216,7 +216,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(564, 270);
+            this.ClientSize = new System.Drawing.Size(438, 270);
             this.Controls.Add(this.btOk);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.gpMetodo1);
