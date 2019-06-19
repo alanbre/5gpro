@@ -28,37 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuVertical1 = new _5gpro.Controls.MenuVertical();
+            this.gbPlanoContas = new System.Windows.Forms.GroupBox();
+            this.lbCodigo = new System.Windows.Forms.Label();
+            this.tbCodigo = new System.Windows.Forms.TextBox();
+            this.lbDescricao = new System.Windows.Forms.Label();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.tvPlanoContas = new System.Windows.Forms.TreeView();
+            this.gbPlanoContas.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuVertical1
+            // gbPlanoContas
             // 
-            this.menuVertical1.Location = new System.Drawing.Point(9, 9);
-            this.menuVertical1.Margin = new System.Windows.Forms.Padding(0);
-            this.menuVertical1.Name = "menuVertical1";
-            this.menuVertical1.Size = new System.Drawing.Size(53, 364);
-            this.menuVertical1.TabIndex = 0;
+            this.gbPlanoContas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPlanoContas.Controls.Add(this.tvPlanoContas);
+            this.gbPlanoContas.Controls.Add(this.tbDescricao);
+            this.gbPlanoContas.Controls.Add(this.lbDescricao);
+            this.gbPlanoContas.Controls.Add(this.tbCodigo);
+            this.gbPlanoContas.Controls.Add(this.lbCodigo);
+            this.gbPlanoContas.Location = new System.Drawing.Point(65, 12);
+            this.gbPlanoContas.Name = "gbPlanoContas";
+            this.gbPlanoContas.Size = new System.Drawing.Size(664, 361);
+            this.gbPlanoContas.TabIndex = 1;
+            this.gbPlanoContas.TabStop = false;
+            this.gbPlanoContas.Text = "Plano de contas";
+            // 
+            // lbCodigo
+            // 
+            this.lbCodigo.AutoSize = true;
+            this.lbCodigo.Location = new System.Drawing.Point(6, 16);
+            this.lbCodigo.Name = "lbCodigo";
+            this.lbCodigo.Size = new System.Drawing.Size(40, 13);
+            this.lbCodigo.TabIndex = 0;
+            this.lbCodigo.Text = "Código";
+            // 
+            // tbCodigo
+            // 
+            this.tbCodigo.Enabled = false;
+            this.tbCodigo.Location = new System.Drawing.Point(9, 32);
+            this.tbCodigo.Name = "tbCodigo";
+            this.tbCodigo.Size = new System.Drawing.Size(97, 20);
+            this.tbCodigo.TabIndex = 1;
+            // 
+            // lbDescricao
+            // 
+            this.lbDescricao.AutoSize = true;
+            this.lbDescricao.Location = new System.Drawing.Point(109, 16);
+            this.lbDescricao.Name = "lbDescricao";
+            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
+            this.lbDescricao.TabIndex = 2;
+            this.lbDescricao.Text = "Descrição";
+            // 
+            // tbDescricao
+            // 
+            this.tbDescricao.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbDescricao.Location = new System.Drawing.Point(112, 32);
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(546, 20);
+            this.tbDescricao.TabIndex = 3;
+            // 
+            // menuVertical
+            // 
+            this.menuVertical.Location = new System.Drawing.Point(9, 9);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(0);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 0;
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            // 
+            // tvPlanoContas
+            // 
+            this.tvPlanoContas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvPlanoContas.Location = new System.Drawing.Point(9, 58);
+            this.tvPlanoContas.Name = "tvPlanoContas";
+            this.tvPlanoContas.Size = new System.Drawing.Size(649, 297);
+            this.tvPlanoContas.TabIndex = 4;
             // 
             // fmCaiPlanoContas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(741, 556);
-            this.Controls.Add(this.menuVertical1);
+            this.ClientSize = new System.Drawing.Size(741, 381);
+            this.Controls.Add(this.gbPlanoContas);
+            this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(757, 420);
             this.Name = "fmCaiPlanoContas";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Plano de contas do caixa";
+            this.gbPlanoContas.ResumeLayout(false);
+            this.gbPlanoContas.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private Controls.MenuVertical menuVertical1;
+        private Controls.MenuVertical menuVertical;
+        private System.Windows.Forms.GroupBox gbPlanoContas;
+        private System.Windows.Forms.TextBox tbDescricao;
+        private System.Windows.Forms.Label lbDescricao;
+        private System.Windows.Forms.TextBox tbCodigo;
+        private System.Windows.Forms.Label lbCodigo;
+        private System.Windows.Forms.TreeView tvPlanoContas;
     }
 }

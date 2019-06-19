@@ -16,5 +16,12 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
         }
+
+        private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+
+        private void Salva()
+        {
+            tvPlanoContas.Nodes.Add(tbDescricao.Text);
+        }
     }
 }
