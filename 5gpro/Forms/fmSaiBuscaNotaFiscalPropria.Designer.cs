@@ -29,17 +29,16 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGridDocumentos = new System.Windows.Forms.GroupBox();
             this.dgvNotas = new System.Windows.Forms.DataGridView();
-            this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcCodigoPessoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcNotaFiscal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcCliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcNome = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataCadastro = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDataValidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescontoTotalItens = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescontoOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorTotalOrçamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataEmissao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDataSaida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
             this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
@@ -91,15 +90,12 @@
             this.dgvNotas.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvNotas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvNotas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvtbcOrcamento,
-            this.dgvtbcCodigoPessoa,
+            this.dgvtbcNotaFiscal,
+            this.dgvtbcCliente,
             this.dgvtbcNome,
-            this.dgvtbcDataCadastro,
-            this.dgvtbcDataValidade,
-            this.dgvtbcValorTotalItens,
-            this.dgvtbcDescontoTotalItens,
-            this.dgvtbcDescontoOrcamento,
-            this.dgvtbcValorTotalOrçamento});
+            this.dgvtbcDataEmissao,
+            this.dgvtbcDataSaida,
+            this.dgvtbcTotal});
             this.dgvNotas.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvNotas.Location = new System.Drawing.Point(10, 19);
             this.dgvNotas.MultiSelect = false;
@@ -110,78 +106,50 @@
             this.dgvNotas.Size = new System.Drawing.Size(1052, 264);
             this.dgvNotas.TabIndex = 0;
             this.dgvNotas.TabStop = false;
+            this.dgvNotas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvNotas_CellDoubleClick);
             // 
-            // dgvtbcOrcamento
+            // dgvtbcNotaFiscal
             // 
-            this.dgvtbcOrcamento.HeaderText = "Nota Fiscal";
-            this.dgvtbcOrcamento.MinimumWidth = 90;
-            this.dgvtbcOrcamento.Name = "dgvtbcOrcamento";
-            this.dgvtbcOrcamento.ReadOnly = true;
-            this.dgvtbcOrcamento.Width = 90;
+            this.dgvtbcNotaFiscal.HeaderText = "Nota fiscal";
+            this.dgvtbcNotaFiscal.Name = "dgvtbcNotaFiscal";
+            this.dgvtbcNotaFiscal.ReadOnly = true;
             // 
-            // dgvtbcCodigoPessoa
+            // dgvtbcCliente
             // 
-            this.dgvtbcCodigoPessoa.HeaderText = "Cliente";
-            this.dgvtbcCodigoPessoa.MinimumWidth = 50;
-            this.dgvtbcCodigoPessoa.Name = "dgvtbcCodigoPessoa";
-            this.dgvtbcCodigoPessoa.ReadOnly = true;
-            this.dgvtbcCodigoPessoa.Width = 50;
+            this.dgvtbcCliente.HeaderText = "Cliente";
+            this.dgvtbcCliente.Name = "dgvtbcCliente";
+            this.dgvtbcCliente.ReadOnly = true;
             // 
             // dgvtbcNome
             // 
             this.dgvtbcNome.HeaderText = "Nome";
-            this.dgvtbcNome.MinimumWidth = 30;
             this.dgvtbcNome.Name = "dgvtbcNome";
             this.dgvtbcNome.ReadOnly = true;
-            this.dgvtbcNome.Width = 150;
             // 
-            // dgvtbcDataCadastro
+            // dgvtbcDataEmissao
             // 
-            this.dgvtbcDataCadastro.HeaderText = "Data do cadastro";
-            this.dgvtbcDataCadastro.MinimumWidth = 120;
-            this.dgvtbcDataCadastro.Name = "dgvtbcDataCadastro";
-            this.dgvtbcDataCadastro.ReadOnly = true;
-            this.dgvtbcDataCadastro.Width = 120;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcDataEmissao.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvtbcDataEmissao.HeaderText = "Data emissão";
+            this.dgvtbcDataEmissao.Name = "dgvtbcDataEmissao";
+            this.dgvtbcDataEmissao.ReadOnly = true;
             // 
-            // dgvtbcDataValidade
+            // dgvtbcDataSaida
             // 
-            this.dgvtbcDataValidade.HeaderText = "Data de validade";
-            this.dgvtbcDataValidade.MinimumWidth = 120;
-            this.dgvtbcDataValidade.Name = "dgvtbcDataValidade";
-            this.dgvtbcDataValidade.ReadOnly = true;
-            this.dgvtbcDataValidade.Width = 120;
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcDataSaida.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvtbcDataSaida.HeaderText = "Data saída";
+            this.dgvtbcDataSaida.Name = "dgvtbcDataSaida";
+            this.dgvtbcDataSaida.ReadOnly = true;
             // 
-            // dgvtbcValorTotalItens
+            // dgvtbcTotal
             // 
-            this.dgvtbcValorTotalItens.HeaderText = "Valor dos itens";
-            this.dgvtbcValorTotalItens.MinimumWidth = 50;
-            this.dgvtbcValorTotalItens.Name = "dgvtbcValorTotalItens";
-            this.dgvtbcValorTotalItens.ReadOnly = true;
-            this.dgvtbcValorTotalItens.Width = 110;
-            // 
-            // dgvtbcDescontoTotalItens
-            // 
-            this.dgvtbcDescontoTotalItens.HeaderText = "Descontos dos itens";
-            this.dgvtbcDescontoTotalItens.MinimumWidth = 50;
-            this.dgvtbcDescontoTotalItens.Name = "dgvtbcDescontoTotalItens";
-            this.dgvtbcDescontoTotalItens.ReadOnly = true;
-            this.dgvtbcDescontoTotalItens.Width = 130;
-            // 
-            // dgvtbcDescontoOrcamento
-            // 
-            this.dgvtbcDescontoOrcamento.HeaderText = "Desconto do orçamento";
-            this.dgvtbcDescontoOrcamento.MinimumWidth = 50;
-            this.dgvtbcDescontoOrcamento.Name = "dgvtbcDescontoOrcamento";
-            this.dgvtbcDescontoOrcamento.ReadOnly = true;
-            this.dgvtbcDescontoOrcamento.Width = 150;
-            // 
-            // dgvtbcValorTotalOrçamento
-            // 
-            this.dgvtbcValorTotalOrçamento.HeaderText = "Total do orçamento";
-            this.dgvtbcValorTotalOrçamento.MinimumWidth = 50;
-            this.dgvtbcValorTotalOrçamento.Name = "dgvtbcValorTotalOrçamento";
-            this.dgvtbcValorTotalOrçamento.ReadOnly = true;
-            this.dgvtbcValorTotalOrçamento.Width = 130;
+            this.dgvtbcTotal.HeaderText = "Total documento";
+            this.dgvtbcTotal.Name = "dgvtbcTotal";
+            this.dgvtbcTotal.ReadOnly = true;
+            this.dgvtbcTotal.Width = 120;
             // 
             // gbFiltrosDocumento
             // 
@@ -433,15 +401,6 @@
         private System.Windows.Forms.Label lbAFiltroDataEmissao;
         private System.Windows.Forms.DateTimePicker dtpFiltroDataEmissaoFinal;
         private System.Windows.Forms.DateTimePicker dtpFiltroDataEmissaoInicial;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcOrcamento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoPessoa;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataCadastro;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataValidade;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItens;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoTotalItens;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoOrcamento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalOrçamento;
         private Controls.BuscaCidade buscaCidade;
         private Controls.BuscaPessoa buscaPessoa;
         private System.Windows.Forms.CheckBox cbValorTotal;
@@ -449,5 +408,11 @@
         private System.Windows.Forms.CheckBox cbDataCadastro;
         private Controls.DecimalBox dbValorFinal;
         private Controls.DecimalBox dbValorInicial;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNotaFiscal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCliente;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcNome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataEmissao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataSaida;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcTotal;
     }
 }

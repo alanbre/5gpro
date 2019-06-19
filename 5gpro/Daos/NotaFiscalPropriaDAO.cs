@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MySQLConnection;
 using _5gpro.Reports;
+using _5gpro.Forms;
 
 namespace _5gpro.Daos
 {
@@ -242,10 +243,10 @@ namespace _5gpro.Daos
                         pessoa.Complemento = (string)d["p_complemento"];
                         pessoa.Cidade = cidade;
 
-                        if(pessoa.TipoPessoa == "J")
-                        pessoa.CpfCnpj = (string)d["p_cnpj"];
+                        if (pessoa.TipoPessoa == "J")
+                            pessoa.CpfCnpj = (string)d["p_cnpj"];
                         else
-                        pessoa.CpfCnpj = (string)d["p_cpf"];
+                            pessoa.CpfCnpj = (string)d["p_cpf"];
 
                         pessoa.Telefone = (string)d["p_endereco"];
                         pessoa.Email = (string)d["p_telefone"];
@@ -270,7 +271,64 @@ namespace _5gpro.Daos
             notaFiscalProprias.RemoveAt(0);
             return notaFiscalProprias;
         }
+        public IEnumerable<NotaFiscalPropria> Busca(fmSaiBuscaNotaFiscalPropria.Filtros f)
+        {
+            var notasFiscaisProprias = new List<NotaFiscalPropria>();
+            var wherePessoa = f.Pessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            var whereCidade = f.Cidade != null ? "AND p.idcidade = @idcidade" : "";
+            string whereValorTotal = f.usarvalorTotalFiltro ? "AND nf.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final" : "";
+            string whereDataEmissao = f.usardataEmissaoFiltro ? "AND nf.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final" : "";
+            string whereDataEntrada = f.usardataSaidaFiltro ? "AND nf.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final" : "";
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = $@"SELECT nf.idnotafiscal, p.idpessoa, p.nome, nf.data_emissao, nf.data_entradasaida, nf.valor_documento
+                            FROM
+                            notafiscal nf
+                            LEFT JOIN pessoa p ON nf.idpessoa = p.idpessoa
+                            WHERE 1=1 
+                            {wherePessoa} 
+                            {whereCidade} 
+                            {whereValorTotal} 
+                            {whereDataEmissao} 
+                            {whereDataEntrada} 
+                            GROUP BY nf.idnotafiscal";
 
+                if (f.Pessoa != null) { sql.addParam("@idpessoa", f.Pessoa.PessoaID); }
+                if (f.Cidade != null) { sql.addParam("@idcidade", f.Cidade.CidadeID); }
+                if (f.usarvalorTotalFiltro)
+                {
+                    sql.addParam("@valor_documento_inicial", f.ValorInicial);
+                    sql.addParam("@valor_documento_final", f.ValorFinal);
+                }
+                if (f.usardataEmissaoFiltro)
+                {
+                    sql.addParam("@data_emissao_inicial", f.DataEmissaoInicial);
+                    sql.addParam("@data_emissao_final", f.DataEmissaoFinal);
+                }
+                if (f.usardataSaidaFiltro)
+                {
+                    sql.addParam("@data_entradasaida_inicial", f.DataEntradaInicial);
+                    sql.addParam("@data_entradasaida_final", f.DataEntradaFinal);
+                }
+                var data = sql.selectQuery();
+
+                foreach (var d in data)
+                {
+                    var pessoa = new Pessoa();
+                    pessoa.PessoaID = Convert.ToInt32(d["idpessoa"]);
+                    pessoa.Nome = (string)d["nome"];
+
+                    var notaProria = new NotaFiscalPropria();
+                    notaProria.NotaFiscalPropriaID = Convert.ToInt32(d["idnotafiscal"]);
+                    notaProria.DataEmissao = (DateTime)d["data_emissao"];
+                    notaProria.DataEntradaSaida = (DateTime)d["data_entradasaida"];
+                    notaProria.ValorTotalDocumento = (decimal)d["valor_documento"];
+                    notaProria.Pessoa = pessoa;
+                    notasFiscaisProprias.Add(notaProria);
+                }
+            }
+            return notasFiscaisProprias;
+        }
         public int SalvaOuAtualiza(NotaFiscalPropria notafiscal)
         {
             int retorno = 0;

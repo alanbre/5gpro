@@ -263,8 +263,8 @@ namespace _5gpro.Forms
                 ignoracheckevent = true;
                 Limpa(true);
                 ignoracheckevent = false;
+                Editando(false);
             }
-
         }
         private void Anterior()
         {
