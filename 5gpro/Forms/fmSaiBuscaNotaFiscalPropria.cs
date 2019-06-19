@@ -102,7 +102,7 @@ namespace _5gpro.Forms
                 usardataEmissaoFiltro = dataEmissaoFiltro
             };
 
-            notasFiscaisProprias = notaFiscalPropriasDAO.Busca(f);
+            //notasFiscaisProprias = notaFiscalPropriasDAO.Busca(f);
             dgvNotas.Rows.Clear();
 
             foreach (var nf in notasFiscaisProprias)

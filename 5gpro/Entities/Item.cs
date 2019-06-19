@@ -19,11 +19,10 @@ namespace _5gpro.Entities
         public string TipoItem { get; set; }
         public string Referencia { get; set; }
 
-        [Range(1, 99999, ErrorMessage = "Valor da Entrada deve ser maior que 0.|tbPrecoUltimaEntrada")]
         public decimal ValorEntrada { get; set; }
 
-        [Range(1, 99999, ErrorMessage = "Valor da Saída deve ser maior que 0.|tbPrecoVenda")]
         public decimal ValorSaida { get; set; }
+        public decimal Custo { get; set; }
 
         public decimal Estoquenecessario { get; set; }
 

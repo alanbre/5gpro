@@ -20,8 +20,8 @@ namespace _5gpro.Forms
         //Desintegração
         DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
         private Item itemdesintegrar = null;
-        private Desintegracao desintegracao = null;
-        private DesintegracaoResultado resultado;
+        //private Desintegracao desintegracao = null;
+        //private DesintegracaoResultado resultado;
         private List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
 
         //Controle de Permissões
@@ -203,7 +203,7 @@ namespace _5gpro.Forms
             item.Referencia = tbReferencia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
             item.Quantidade = dbQuantidade.Valor;
-            item.ValorEntrada = dbPrecoUltimaEntrada.Valor;
+            item.ValorEntrada = 0;
             item.ValorSaida = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
             item.Unimedida = buscaUnimedidaItem.unimedida;
@@ -427,7 +427,6 @@ namespace _5gpro.Forms
             tbDescricao.Clear();
             tbDescricaoDeCompra.Clear();
             tbReferencia.Clear();
-            dbPrecoUltimaEntrada.Valor = 0.00m;
             dbEstoqueNecessario.Valor = 0.00m;
             dbPrecoVenda.Valor = 0.00m;
             rbProduto.Checked = true;
@@ -463,7 +462,6 @@ namespace _5gpro.Forms
                 }
 
                 tbReferencia.Text = item.Referencia;
-                dbPrecoUltimaEntrada.Valor = item.ValorEntrada;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
                 dbPrecoVenda.Valor = item.ValorSaida;
                 dbQuantidade.Valor = item.Quantidade;
@@ -482,6 +480,13 @@ namespace _5gpro.Forms
             {
                 editando = edit;
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
+                if (editando)
+                {
+                    if (tbCodigo.Text.Length <= 0)
+                    {
+                        tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
+                    }
+                }
             }
         }
 
@@ -524,6 +529,17 @@ namespace _5gpro.Forms
         {
             var formCadUnidadeMedida = new fmCadastroUnimedida();
             formCadUnidadeMedida.Show(this);
+        }
+
+        private void TpEstoque_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtCalcular_Click(object sender, EventArgs e)
+        {
+            var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
+            formCalculoPrecoVenda.Show(this);
         }
 
         private void DesintegracaoSimNao(Item d)

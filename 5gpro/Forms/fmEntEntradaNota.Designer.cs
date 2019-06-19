@@ -657,7 +657,6 @@
         private System.Windows.Forms.Label lbValorTotalDocumento;
         private System.Windows.Forms.Label lbTotalItens;
         private System.Windows.Forms.GroupBox gbItens;
-        private Controls.BuscaItem buscaItem;
         private System.Windows.Forms.Button btExcluirItem;
         private System.Windows.Forms.Label lbDescItem;
         private System.Windows.Forms.Label lbDescontoPorc;
