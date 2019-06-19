@@ -32,7 +32,7 @@ namespace _5gpro
                     saidasOn = 2,
                     orcamentosOn = 1,
                     relatoriosOn = 1,
-                    caixaOn = 4,
+                    caixaOn = 5,
                     tamanhopanel
             ;
 
@@ -423,6 +423,14 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        private void BtiPlanoContas_Click(object sender, EventArgs e)
+        {
+            var formPlanoContas = new fmCaiPlanoContas();
+            formPlanoContas.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
 
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {

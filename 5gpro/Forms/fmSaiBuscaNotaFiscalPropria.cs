@@ -13,7 +13,7 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private IEnumerable<NotaFiscalPropria> notasFiscaisProprias;
+        private IEnumerable<NotaFiscalPropria> notasFiscaisProprias = new List<NotaFiscalPropria>();
         public NotaFiscalPropria notaFiscalPropriaSelecionada = null;
         private readonly NotaFiscalPropriaDAO notaFiscalPropriasDAO = new NotaFiscalPropriaDAO();
         private bool valorTotalFiltro = false;
@@ -32,7 +32,7 @@ namespace _5gpro.Forms
             public decimal ValorInicial;
             public decimal ValorFinal;
             public bool usarvalorTotalFiltro;
-            public bool usardataEntradaFiltro;
+            public bool usardataSaidaFiltro;
             public bool usardataEmissaoFiltro;
         }
 
@@ -82,8 +82,8 @@ namespace _5gpro.Forms
                 dataEntradaFiltro = false;
             }
         }
-
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
+        private void DgvNotas_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => Selecionar();
 
         private void Pesquisar()
         {
@@ -98,7 +98,7 @@ namespace _5gpro.Forms
                 ValorInicial = dbValorInicial.Valor,
                 ValorFinal = dbValorFinal.Valor,
                 usarvalorTotalFiltro = valorTotalFiltro,
-                usardataEntradaFiltro = dataEntradaFiltro,
+                usardataSaidaFiltro = dataEntradaFiltro,
                 usardataEmissaoFiltro = dataEmissaoFiltro
             };
 
@@ -115,6 +115,16 @@ namespace _5gpro.Forms
                                        nf.ValorTotalDocumento);
             }
             dgvNotas.Refresh();
+        }
+        private void Selecionar()
+        {
+            if (dgvNotas.SelectedRows.Count <= 0)
+                return;
+
+            var selectedRowIndex = dgvNotas.SelectedCells[0].RowIndex;
+            var selectedRow = dgvNotas.Rows[selectedRowIndex];
+            notaFiscalPropriaSelecionada = notaFiscalPropriasDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
+            this.Close();
         }
     }
 }

@@ -67,7 +67,7 @@
             this.gbDadosCaixa.Controls.Add(this.lbCodigo);
             this.gbDadosCaixa.Location = new System.Drawing.Point(65, 9);
             this.gbDadosCaixa.Name = "gbDadosCaixa";
-            this.gbDadosCaixa.Size = new System.Drawing.Size(379, 232);
+            this.gbDadosCaixa.Size = new System.Drawing.Size(379, 331);
             this.gbDadosCaixa.TabIndex = 0;
             this.gbDadosCaixa.TabStop = false;
             this.gbDadosCaixa.Text = "Dados do caixa";
