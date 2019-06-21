@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.gbPlanoContas = new System.Windows.Forms.GroupBox();
-            this.lbCodigo = new System.Windows.Forms.Label();
-            this.tbCodigo = new System.Windows.Forms.TextBox();
-            this.lbDescricao = new System.Windows.Forms.Label();
-            this.tbDescricao = new System.Windows.Forms.TextBox();
-            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.tvPlanoContas = new System.Windows.Forms.TreeView();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
+            this.lbDescricao = new System.Windows.Forms.Label();
+            this.tbCodigo = new System.Windows.Forms.TextBox();
+            this.lbCodigo = new System.Windows.Forms.Label();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbPlanoContas.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,31 +55,15 @@
             this.gbPlanoContas.TabStop = false;
             this.gbPlanoContas.Text = "Plano de contas";
             // 
-            // lbCodigo
+            // tvPlanoContas
             // 
-            this.lbCodigo.AutoSize = true;
-            this.lbCodigo.Location = new System.Drawing.Point(6, 16);
-            this.lbCodigo.Name = "lbCodigo";
-            this.lbCodigo.Size = new System.Drawing.Size(40, 13);
-            this.lbCodigo.TabIndex = 0;
-            this.lbCodigo.Text = "Código";
-            // 
-            // tbCodigo
-            // 
-            this.tbCodigo.Enabled = false;
-            this.tbCodigo.Location = new System.Drawing.Point(9, 32);
-            this.tbCodigo.Name = "tbCodigo";
-            this.tbCodigo.Size = new System.Drawing.Size(97, 20);
-            this.tbCodigo.TabIndex = 1;
-            // 
-            // lbDescricao
-            // 
-            this.lbDescricao.AutoSize = true;
-            this.lbDescricao.Location = new System.Drawing.Point(109, 16);
-            this.lbDescricao.Name = "lbDescricao";
-            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
-            this.lbDescricao.TabIndex = 2;
-            this.lbDescricao.Text = "Descrição";
+            this.tvPlanoContas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tvPlanoContas.Location = new System.Drawing.Point(9, 58);
+            this.tvPlanoContas.Name = "tvPlanoContas";
+            this.tvPlanoContas.Size = new System.Drawing.Size(649, 297);
+            this.tvPlanoContas.TabIndex = 4;
             // 
             // tbDescricao
             // 
@@ -90,6 +74,32 @@
             this.tbDescricao.Size = new System.Drawing.Size(546, 20);
             this.tbDescricao.TabIndex = 3;
             // 
+            // lbDescricao
+            // 
+            this.lbDescricao.AutoSize = true;
+            this.lbDescricao.Location = new System.Drawing.Point(109, 16);
+            this.lbDescricao.Name = "lbDescricao";
+            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
+            this.lbDescricao.TabIndex = 2;
+            this.lbDescricao.Text = "Descrição";
+            // 
+            // tbCodigo
+            // 
+            this.tbCodigo.Enabled = false;
+            this.tbCodigo.Location = new System.Drawing.Point(9, 32);
+            this.tbCodigo.Name = "tbCodigo";
+            this.tbCodigo.Size = new System.Drawing.Size(97, 20);
+            this.tbCodigo.TabIndex = 1;
+            // 
+            // lbCodigo
+            // 
+            this.lbCodigo.AutoSize = true;
+            this.lbCodigo.Location = new System.Drawing.Point(6, 16);
+            this.lbCodigo.Name = "lbCodigo";
+            this.lbCodigo.Size = new System.Drawing.Size(40, 13);
+            this.lbCodigo.TabIndex = 0;
+            this.lbCodigo.Text = "Código";
+            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(9, 9);
@@ -98,16 +108,6 @@
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
             this.menuVertical.TabIndex = 0;
             this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
-            // 
-            // tvPlanoContas
-            // 
-            this.tvPlanoContas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tvPlanoContas.Location = new System.Drawing.Point(9, 58);
-            this.tvPlanoContas.Name = "tvPlanoContas";
-            this.tvPlanoContas.Size = new System.Drawing.Size(649, 297);
-            this.tvPlanoContas.TabIndex = 4;
             // 
             // fmCaiPlanoContas
             // 
@@ -124,6 +124,7 @@
             this.Name = "fmCaiPlanoContas";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Plano de contas do caixa";
             this.gbPlanoContas.ResumeLayout(false);
             this.gbPlanoContas.PerformLayout();

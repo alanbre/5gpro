@@ -151,6 +151,7 @@
             this.Name = "fmCaiCadastroCaixa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cadastro de caixa";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCaiCadastroCaixa_FormClosing);
             this.Load += new System.EventHandler(this.FmCaiCadastroCaixa_Load);

@@ -53,14 +53,14 @@
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.tpEstoque = new System.Windows.Forms.TabPage();
-            this.decimalBox1 = new _5gpro.Controls.DecimalBox();
+            this.btCalcular = new System.Windows.Forms.Button();
+            this.dbCusto = new _5gpro.Controls.DecimalBox();
             this.lbCusto = new System.Windows.Forms.Label();
             this.dbPrecoVenda = new _5gpro.Controls.DecimalBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
             this.dbEstoqueNecessario = new _5gpro.Controls.DecimalBox();
             this.lbEstoqueNecessario = new System.Windows.Forms.Label();
             this.tcItens = new System.Windows.Forms.TabControl();
-            this.btCalcular = new System.Windows.Forms.Button();
             this.pnDadosGerais.SuspendLayout();
             this.gbDesintegracao.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
@@ -337,7 +337,7 @@
             this.tpEstoque.AutoScroll = true;
             this.tpEstoque.BackColor = System.Drawing.Color.White;
             this.tpEstoque.Controls.Add(this.btCalcular);
-            this.tpEstoque.Controls.Add(this.decimalBox1);
+            this.tpEstoque.Controls.Add(this.dbCusto);
             this.tpEstoque.Controls.Add(this.lbCusto);
             this.tpEstoque.Controls.Add(this.dbPrecoVenda);
             this.tpEstoque.Controls.Add(this.lbPrecoVenda);
@@ -351,13 +351,23 @@
             this.tpEstoque.Text = "Estoque";
             this.tpEstoque.Click += new System.EventHandler(this.TpEstoque_Click);
             // 
-            // decimalBox1
+            // btCalcular
             // 
-            this.decimalBox1.Location = new System.Drawing.Point(119, 30);
-            this.decimalBox1.Name = "decimalBox1";
-            this.decimalBox1.Size = new System.Drawing.Size(86, 22);
-            this.decimalBox1.TabIndex = 12;
-            this.decimalBox1.Valor = new decimal(new int[] {
+            this.btCalcular.Location = new System.Drawing.Point(208, 28);
+            this.btCalcular.Name = "btCalcular";
+            this.btCalcular.Size = new System.Drawing.Size(55, 23);
+            this.btCalcular.TabIndex = 13;
+            this.btCalcular.Text = "Calcular";
+            this.btCalcular.UseVisualStyleBackColor = true;
+            this.btCalcular.Click += new System.EventHandler(this.BtCalcular_Click);
+            // 
+            // dbCusto
+            // 
+            this.dbCusto.Location = new System.Drawing.Point(9, 28);
+            this.dbCusto.Name = "dbCusto";
+            this.dbCusto.Size = new System.Drawing.Size(86, 22);
+            this.dbCusto.TabIndex = 12;
+            this.dbCusto.Valor = new decimal(new int[] {
             0,
             0,
             0,
@@ -366,7 +376,7 @@
             // lbCusto
             // 
             this.lbCusto.AutoSize = true;
-            this.lbCusto.Location = new System.Drawing.Point(119, 14);
+            this.lbCusto.Location = new System.Drawing.Point(9, 12);
             this.lbCusto.Name = "lbCusto";
             this.lbCusto.Size = new System.Drawing.Size(80, 13);
             this.lbCusto.TabIndex = 11;
@@ -374,7 +384,7 @@
             // 
             // dbPrecoVenda
             // 
-            this.dbPrecoVenda.Location = new System.Drawing.Point(226, 30);
+            this.dbPrecoVenda.Location = new System.Drawing.Point(116, 28);
             this.dbPrecoVenda.Name = "dbPrecoVenda";
             this.dbPrecoVenda.Size = new System.Drawing.Size(86, 22);
             this.dbPrecoVenda.TabIndex = 6;
@@ -387,7 +397,7 @@
             // lbPrecoVenda
             // 
             this.lbPrecoVenda.AutoSize = true;
-            this.lbPrecoVenda.Location = new System.Drawing.Point(223, 14);
+            this.lbPrecoVenda.Location = new System.Drawing.Point(113, 12);
             this.lbPrecoVenda.Name = "lbPrecoVenda";
             this.lbPrecoVenda.Size = new System.Drawing.Size(83, 13);
             this.lbPrecoVenda.TabIndex = 5;
@@ -395,7 +405,7 @@
             // 
             // dbEstoqueNecessario
             // 
-            this.dbEstoqueNecessario.Location = new System.Drawing.Point(10, 30);
+            this.dbEstoqueNecessario.Location = new System.Drawing.Point(9, 69);
             this.dbEstoqueNecessario.Name = "dbEstoqueNecessario";
             this.dbEstoqueNecessario.Size = new System.Drawing.Size(86, 22);
             this.dbEstoqueNecessario.TabIndex = 4;
@@ -408,7 +418,7 @@
             // lbEstoqueNecessario
             // 
             this.lbEstoqueNecessario.AutoSize = true;
-            this.lbEstoqueNecessario.Location = new System.Drawing.Point(10, 14);
+            this.lbEstoqueNecessario.Location = new System.Drawing.Point(9, 53);
             this.lbEstoqueNecessario.Name = "lbEstoqueNecessario";
             this.lbEstoqueNecessario.Size = new System.Drawing.Size(100, 13);
             this.lbEstoqueNecessario.TabIndex = 3;
@@ -422,16 +432,6 @@
             this.tcItens.SelectedIndex = 0;
             this.tcItens.Size = new System.Drawing.Size(565, 123);
             this.tcItens.TabIndex = 1;
-            // 
-            // btCalcular
-            // 
-            this.btCalcular.Location = new System.Drawing.Point(318, 30);
-            this.btCalcular.Name = "btCalcular";
-            this.btCalcular.Size = new System.Drawing.Size(55, 23);
-            this.btCalcular.TabIndex = 13;
-            this.btCalcular.Text = "Calcular";
-            this.btCalcular.UseVisualStyleBackColor = true;
-            this.btCalcular.Click += new System.EventHandler(this.BtCalcular_Click);
             // 
             // fmCadastroItem
             // 
@@ -500,7 +500,7 @@
         private Controls.DecimalBox dbEstoqueNecessario;
         private System.Windows.Forms.Label lbEstoqueNecessario;
         private System.Windows.Forms.TabControl tcItens;
-        private Controls.DecimalBox decimalBox1;
+        private Controls.DecimalBox dbCusto;
         private System.Windows.Forms.Label lbCusto;
         private System.Windows.Forms.Button btCalcular;
     }
