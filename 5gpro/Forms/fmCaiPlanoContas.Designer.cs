@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.gbPlanoContas = new System.Windows.Forms.GroupBox();
+            this.tbCodigoFilho = new System.Windows.Forms.TextBox();
             this.tvPlanoContas = new System.Windows.Forms.TreeView();
             this.tbDescricao = new System.Windows.Forms.TextBox();
             this.lbDescricao = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@
             this.gbPlanoContas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPlanoContas.Controls.Add(this.tbCodigoFilho);
             this.gbPlanoContas.Controls.Add(this.tvPlanoContas);
             this.gbPlanoContas.Controls.Add(this.tbDescricao);
             this.gbPlanoContas.Controls.Add(this.lbDescricao);
@@ -54,6 +56,13 @@
             this.gbPlanoContas.TabIndex = 1;
             this.gbPlanoContas.TabStop = false;
             this.gbPlanoContas.Text = "Plano de contas";
+            // 
+            // tbCodigoFilho
+            // 
+            this.tbCodigoFilho.Location = new System.Drawing.Point(78, 32);
+            this.tbCodigoFilho.Name = "tbCodigoFilho";
+            this.tbCodigoFilho.Size = new System.Drawing.Size(28, 20);
+            this.tbCodigoFilho.TabIndex = 5;
             // 
             // tvPlanoContas
             // 
@@ -73,6 +82,7 @@
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(546, 20);
             this.tbDescricao.TabIndex = 3;
+            this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
             // 
             // lbDescricao
             // 
@@ -88,7 +98,7 @@
             this.tbCodigo.Enabled = false;
             this.tbCodigo.Location = new System.Drawing.Point(9, 32);
             this.tbCodigo.Name = "tbCodigo";
-            this.tbCodigo.Size = new System.Drawing.Size(97, 20);
+            this.tbCodigo.Size = new System.Drawing.Size(65, 20);
             this.tbCodigo.TabIndex = 1;
             // 
             // lbCodigo
@@ -141,5 +151,6 @@
         private System.Windows.Forms.TextBox tbCodigo;
         private System.Windows.Forms.Label lbCodigo;
         private System.Windows.Forms.TreeView tvPlanoContas;
+        private System.Windows.Forms.TextBox tbCodigoFilho;
     }
 }

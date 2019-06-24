@@ -60,6 +60,8 @@ namespace _5gpro
         //Cadastro de Caixa = 090100
         //Abertura e fechamento de caixa = 090200
         //Sangria de caixa = 090300
+        //Lançamento manual caixa = 090400
+        //Plano de contas = 090500
 
 
         public fmMain()

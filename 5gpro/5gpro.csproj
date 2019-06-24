@@ -287,6 +287,7 @@
     <Compile Include="Daos\ParcelaContaReceberDAO.cs" />
     <Compile Include="Daos\ParcelaOperacaoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
+    <Compile Include="Daos\PlanoContaDAO.cs" />
     <Compile Include="Daos\SubGrupoItemDAO.cs" />
     <Compile Include="Daos\SubGrupoPessoaDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
@@ -317,6 +318,7 @@
     <Compile Include="Entities\Desintegracao.cs" />
     <Compile Include="Entities\Permissao.cs" />
     <Compile Include="Entities\DesintegracaoResultado.cs" />
+    <Compile Include="Entities\PlanoConta.cs" />
     <Compile Include="Entities\SubGrupoItem.cs" />
     <Compile Include="Entities\SubGrupoPessoa.cs" />
     <Compile Include="Entities\Unimedida.cs" />
