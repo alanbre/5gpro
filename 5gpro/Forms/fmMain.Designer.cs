@@ -44,6 +44,7 @@
             this.btExpandeRetrai = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.paneldropCaixa = new System.Windows.Forms.Panel();
+            this.btiPlanoContas = new System.Windows.Forms.Button();
             this.btiLancamentoManual = new System.Windows.Forms.Button();
             this.btiSangria = new System.Windows.Forms.Button();
             this.btiAberturaFechamento = new System.Windows.Forms.Button();
@@ -75,7 +76,6 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
-            this.btiPlanoContas = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -113,7 +113,6 @@
             // 
             // btCaixa
             // 
-            this.btCaixa.Enabled = false;
             this.btCaixa.FlatAppearance.BorderSize = 0;
             this.btCaixa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCaixa.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
@@ -296,6 +295,21 @@
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
             this.paneldropCaixa.TabIndex = 8;
+            // 
+            // btiPlanoContas
+            // 
+            this.btiPlanoContas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiPlanoContas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiPlanoContas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiPlanoContas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiPlanoContas.ForeColor = System.Drawing.Color.White;
+            this.btiPlanoContas.Location = new System.Drawing.Point(0, 112);
+            this.btiPlanoContas.Name = "btiPlanoContas";
+            this.btiPlanoContas.Size = new System.Drawing.Size(200, 28);
+            this.btiPlanoContas.TabIndex = 3;
+            this.btiPlanoContas.Text = "Plano de contas";
+            this.btiPlanoContas.UseVisualStyleBackColor = false;
+            this.btiPlanoContas.Click += new System.EventHandler(this.BtiPlanoContas_Click);
             // 
             // btiLancamentoManual
             // 
@@ -715,21 +729,6 @@
             // timerRelogio
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
-            // 
-            // btiPlanoContas
-            // 
-            this.btiPlanoContas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiPlanoContas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiPlanoContas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiPlanoContas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiPlanoContas.ForeColor = System.Drawing.Color.White;
-            this.btiPlanoContas.Location = new System.Drawing.Point(0, 112);
-            this.btiPlanoContas.Name = "btiPlanoContas";
-            this.btiPlanoContas.Size = new System.Drawing.Size(200, 28);
-            this.btiPlanoContas.TabIndex = 3;
-            this.btiPlanoContas.Text = "Plano de contas";
-            this.btiPlanoContas.UseVisualStyleBackColor = false;
-            this.btiPlanoContas.Click += new System.EventHandler(this.BtiPlanoContas_Click);
             // 
             // fmMain
             // 
