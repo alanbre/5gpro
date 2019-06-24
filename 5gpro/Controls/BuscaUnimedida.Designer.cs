@@ -52,6 +52,7 @@
             this.tbSiglaUnimedida.ReadOnly = true;
             this.tbSiglaUnimedida.Size = new System.Drawing.Size(44, 20);
             this.tbSiglaUnimedida.TabIndex = 3;
+            this.tbSiglaUnimedida.TabStop = false;
             // 
             // lbUnimedida
             // 
@@ -81,6 +82,7 @@
             this.tbDescricaoUnimedida.ReadOnly = true;
             this.tbDescricaoUnimedida.Size = new System.Drawing.Size(171, 20);
             this.tbDescricaoUnimedida.TabIndex = 4;
+            this.tbDescricaoUnimedida.TabStop = false;
             // 
             // BuscaUnimedida
             // 

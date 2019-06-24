@@ -52,7 +52,7 @@
             this.lbCodigo = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.tpEstoque = new System.Windows.Forms.TabPage();
+            this.tpValores = new System.Windows.Forms.TabPage();
             this.btCalcular = new System.Windows.Forms.Button();
             this.dbCusto = new _5gpro.Controls.DecimalBox();
             this.lbCusto = new System.Windows.Forms.Label();
@@ -64,7 +64,7 @@
             this.pnDadosGerais.SuspendLayout();
             this.gbDesintegracao.SuspendLayout();
             this.gbTipoDeItem.SuspendLayout();
-            this.tpEstoque.SuspendLayout();
+            this.tpValores.SuspendLayout();
             this.tcItens.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,6 +149,7 @@
             this.btAddUnimedida.Name = "btAddUnimedida";
             this.btAddUnimedida.Size = new System.Drawing.Size(22, 22);
             this.btAddUnimedida.TabIndex = 26;
+            this.btAddUnimedida.TabStop = false;
             this.btAddUnimedida.UseVisualStyleBackColor = true;
             this.btAddUnimedida.Click += new System.EventHandler(this.BtAddUnimedida_Click);
             // 
@@ -332,31 +333,31 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
-            // tpEstoque
+            // tpValores
             // 
-            this.tpEstoque.AutoScroll = true;
-            this.tpEstoque.BackColor = System.Drawing.Color.White;
-            this.tpEstoque.Controls.Add(this.btCalcular);
-            this.tpEstoque.Controls.Add(this.dbCusto);
-            this.tpEstoque.Controls.Add(this.lbCusto);
-            this.tpEstoque.Controls.Add(this.dbPrecoVenda);
-            this.tpEstoque.Controls.Add(this.lbPrecoVenda);
-            this.tpEstoque.Controls.Add(this.dbEstoqueNecessario);
-            this.tpEstoque.Controls.Add(this.lbEstoqueNecessario);
-            this.tpEstoque.Location = new System.Drawing.Point(4, 22);
-            this.tpEstoque.Name = "tpEstoque";
-            this.tpEstoque.Padding = new System.Windows.Forms.Padding(3);
-            this.tpEstoque.Size = new System.Drawing.Size(557, 97);
-            this.tpEstoque.TabIndex = 0;
-            this.tpEstoque.Text = "Estoque";
-            this.tpEstoque.Click += new System.EventHandler(this.TpEstoque_Click);
+            this.tpValores.AutoScroll = true;
+            this.tpValores.BackColor = System.Drawing.Color.White;
+            this.tpValores.Controls.Add(this.btCalcular);
+            this.tpValores.Controls.Add(this.dbCusto);
+            this.tpValores.Controls.Add(this.lbCusto);
+            this.tpValores.Controls.Add(this.dbPrecoVenda);
+            this.tpValores.Controls.Add(this.lbPrecoVenda);
+            this.tpValores.Controls.Add(this.dbEstoqueNecessario);
+            this.tpValores.Controls.Add(this.lbEstoqueNecessario);
+            this.tpValores.Location = new System.Drawing.Point(4, 22);
+            this.tpValores.Name = "tpValores";
+            this.tpValores.Padding = new System.Windows.Forms.Padding(3);
+            this.tpValores.Size = new System.Drawing.Size(557, 97);
+            this.tpValores.TabIndex = 0;
+            this.tpValores.Text = "Valores";
+            this.tpValores.Click += new System.EventHandler(this.TpEstoque_Click);
             // 
             // btCalcular
             // 
             this.btCalcular.Location = new System.Drawing.Point(208, 28);
             this.btCalcular.Name = "btCalcular";
             this.btCalcular.Size = new System.Drawing.Size(55, 23);
-            this.btCalcular.TabIndex = 13;
+            this.btCalcular.TabIndex = 5;
             this.btCalcular.Text = "Calcular";
             this.btCalcular.UseVisualStyleBackColor = true;
             this.btCalcular.Click += new System.EventHandler(this.BtCalcular_Click);
@@ -366,7 +367,7 @@
             this.dbCusto.Location = new System.Drawing.Point(9, 28);
             this.dbCusto.Name = "dbCusto";
             this.dbCusto.Size = new System.Drawing.Size(86, 22);
-            this.dbCusto.TabIndex = 12;
+            this.dbCusto.TabIndex = 2;
             this.dbCusto.Valor = new decimal(new int[] {
             0,
             0,
@@ -379,7 +380,7 @@
             this.lbCusto.Location = new System.Drawing.Point(9, 12);
             this.lbCusto.Name = "lbCusto";
             this.lbCusto.Size = new System.Drawing.Size(80, 13);
-            this.lbCusto.TabIndex = 11;
+            this.lbCusto.TabIndex = 1;
             this.lbCusto.Text = "Preço de Custo";
             // 
             // dbPrecoVenda
@@ -387,7 +388,7 @@
             this.dbPrecoVenda.Location = new System.Drawing.Point(116, 28);
             this.dbPrecoVenda.Name = "dbPrecoVenda";
             this.dbPrecoVenda.Size = new System.Drawing.Size(86, 22);
-            this.dbPrecoVenda.TabIndex = 6;
+            this.dbPrecoVenda.TabIndex = 4;
             this.dbPrecoVenda.Valor = new decimal(new int[] {
             0,
             0,
@@ -400,7 +401,7 @@
             this.lbPrecoVenda.Location = new System.Drawing.Point(113, 12);
             this.lbPrecoVenda.Name = "lbPrecoVenda";
             this.lbPrecoVenda.Size = new System.Drawing.Size(83, 13);
-            this.lbPrecoVenda.TabIndex = 5;
+            this.lbPrecoVenda.TabIndex = 3;
             this.lbPrecoVenda.Text = "Preço de venda";
             // 
             // dbEstoqueNecessario
@@ -408,7 +409,7 @@
             this.dbEstoqueNecessario.Location = new System.Drawing.Point(9, 69);
             this.dbEstoqueNecessario.Name = "dbEstoqueNecessario";
             this.dbEstoqueNecessario.Size = new System.Drawing.Size(86, 22);
-            this.dbEstoqueNecessario.TabIndex = 4;
+            this.dbEstoqueNecessario.TabIndex = 6;
             this.dbEstoqueNecessario.Valor = new decimal(new int[] {
             0,
             0,
@@ -421,12 +422,12 @@
             this.lbEstoqueNecessario.Location = new System.Drawing.Point(9, 53);
             this.lbEstoqueNecessario.Name = "lbEstoqueNecessario";
             this.lbEstoqueNecessario.Size = new System.Drawing.Size(100, 13);
-            this.lbEstoqueNecessario.TabIndex = 3;
+            this.lbEstoqueNecessario.TabIndex = 6;
             this.lbEstoqueNecessario.Text = "Estoque necessário";
             // 
             // tcItens
             // 
-            this.tcItens.Controls.Add(this.tpEstoque);
+            this.tcItens.Controls.Add(this.tpValores);
             this.tcItens.Location = new System.Drawing.Point(74, 379);
             this.tcItens.Name = "tcItens";
             this.tcItens.SelectedIndex = 0;
@@ -461,8 +462,8 @@
             this.gbDesintegracao.PerformLayout();
             this.gbTipoDeItem.ResumeLayout(false);
             this.gbTipoDeItem.PerformLayout();
-            this.tpEstoque.ResumeLayout(false);
-            this.tpEstoque.PerformLayout();
+            this.tpValores.ResumeLayout(false);
+            this.tpValores.PerformLayout();
             this.tcItens.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -494,7 +495,7 @@
         private System.Windows.Forms.RadioButton rbDesiNao;
         private System.Windows.Forms.RadioButton rbDesiSim;
         private System.Windows.Forms.Button btConfigDesintegracao;
-        private System.Windows.Forms.TabPage tpEstoque;
+        private System.Windows.Forms.TabPage tpValores;
         private Controls.DecimalBox dbPrecoVenda;
         private System.Windows.Forms.Label lbPrecoVenda;
         private Controls.DecimalBox dbEstoqueNecessario;
