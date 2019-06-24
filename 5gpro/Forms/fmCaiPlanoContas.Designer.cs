@@ -134,6 +134,7 @@
             this.Name = "fmCaiPlanoContas";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Plano de contas do caixa";
             this.gbPlanoContas.ResumeLayout(false);
             this.gbPlanoContas.PerformLayout();

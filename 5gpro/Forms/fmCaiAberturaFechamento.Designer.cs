@@ -177,6 +177,7 @@
             this.Name = "fmCaiAberturaFechamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Abertura e fechamento de caixa";
             this.Load += new System.EventHandler(this.FmCaiAberturaFechamento_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCaiAberturaFechamento_KeyDown);

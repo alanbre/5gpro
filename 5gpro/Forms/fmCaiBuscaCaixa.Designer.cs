@@ -119,6 +119,7 @@
             this.Name = "fmCaiBuscaCaixa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca caixa";
             this.Load += new System.EventHandler(this.FmCaiBuscaCaixa_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCaiBuscaCaixa_KeyDown);

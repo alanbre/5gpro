@@ -480,13 +480,6 @@ namespace _5gpro.Forms
             {
                 editando = edit;
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
-                if (editando)
-                {
-                    if (tbCodigo.Text.Length <= 0)
-                    {
-                        tbCodigo.Text = itemDAO.BuscaProxCodigoDisponivel().ToString();
-                    }
-                }
             }
         }
 
@@ -538,8 +531,14 @@ namespace _5gpro.Forms
 
         private void BtCalcular_Click(object sender, EventArgs e)
         {
+
             var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
-            formCalculoPrecoVenda.Show(this);
+            formCalculoPrecoVenda.custo = dbCusto.Valor;
+            formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
+            formCalculoPrecoVenda.ShowDialog();
+            dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
+            dbCusto.Valor = formCalculoPrecoVenda.custo;
+
         }
 
         private void DesintegracaoSimNao(Item d)

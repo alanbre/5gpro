@@ -31,6 +31,7 @@
             this.gbDados = new System.Windows.Forms.GroupBox();
             this.tbDocumento = new System.Windows.Forms.TextBox();
             this.lbDocumento = new System.Windows.Forms.Label();
+            this.dbValor = new _5gpro.Controls.DecimalBox();
             this.gbTipo = new System.Windows.Forms.GroupBox();
             this.rbDebito = new System.Windows.Forms.RadioButton();
             this.rbCredito = new System.Windows.Forms.RadioButton();
@@ -39,10 +40,9 @@
             this.tbStatusCaixa = new System.Windows.Forms.TextBox();
             this.lbStatusCaixa = new System.Windows.Forms.Label();
             this.lbData = new System.Windows.Forms.Label();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btSair = new System.Windows.Forms.Button();
-            this.dbValor = new _5gpro.Controls.DecimalBox();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.gbDados.SuspendLayout();
             this.gbTipo.SuspendLayout();
             this.SuspendLayout();
@@ -85,6 +85,19 @@
             this.lbDocumento.Size = new System.Drawing.Size(62, 13);
             this.lbDocumento.TabIndex = 6;
             this.lbDocumento.Text = "Documento";
+            // 
+            // dbValor
+            // 
+            this.dbValor.Location = new System.Drawing.Point(9, 201);
+            this.dbValor.Name = "dbValor";
+            this.dbValor.Size = new System.Drawing.Size(100, 22);
+            this.dbValor.TabIndex = 9;
+            this.dbValor.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValor.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbValor_Valor_Changed);
             // 
             // gbTipo
             // 
@@ -167,6 +180,19 @@
             this.lbData.TabIndex = 3;
             this.lbData.Text = "Data";
             // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(3, 16);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(282, 39);
+            this.buscaCaixa.TabIndex = 0;
+            this.buscaCaixa.Text_Changed += new _5gpro.Controls.BuscaCaixa.text_changedEventHandler(this.BuscaCaixa_Text_Changed);
+            this.buscaCaixa.Leave += new System.EventHandler(this.BuscaCaixa_Leave);
+            // 
             // btSalvar
             // 
             this.btSalvar.Location = new System.Drawing.Point(12, 252);
@@ -187,32 +213,6 @@
             this.btSair.UseVisualStyleBackColor = true;
             this.btSair.Click += new System.EventHandler(this.BtSair_Click);
             // 
-            // dbValor
-            // 
-            this.dbValor.Location = new System.Drawing.Point(9, 201);
-            this.dbValor.Name = "dbValor";
-            this.dbValor.Size = new System.Drawing.Size(100, 22);
-            this.dbValor.TabIndex = 9;
-            this.dbValor.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbValor.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbValor_Valor_Changed);
-            // 
-            // buscaCaixa
-            // 
-            this.buscaCaixa.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buscaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaCaixa.Location = new System.Drawing.Point(3, 16);
-            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCaixa.Name = "buscaCaixa";
-            this.buscaCaixa.Size = new System.Drawing.Size(282, 39);
-            this.buscaCaixa.TabIndex = 0;
-            this.buscaCaixa.Text_Changed += new _5gpro.Controls.BuscaCaixa.text_changedEventHandler(this.BuscaCaixa_Text_Changed);
-            this.buscaCaixa.Leave += new System.EventHandler(this.BuscaCaixa_Leave);
-            // 
             // fmCaiLancamentoManual
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,6 +229,7 @@
             this.Name = "fmCaiLancamentoManual";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lançamento manual do caixa";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmCaiLancamentoManual_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCaiLancamentoManual_KeyDown);
