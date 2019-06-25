@@ -166,10 +166,12 @@
             // buscaPlanoContaCaixa1
             // 
             this.buscaPlanoContaCaixa1.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa1.Entrada = true;
             this.buscaPlanoContaCaixa1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buscaPlanoContaCaixa1.LabelText = "Compras";
             this.buscaPlanoContaCaixa1.Location = new System.Drawing.Point(42, 263);
             this.buscaPlanoContaCaixa1.Name = "buscaPlanoContaCaixa1";
+            this.buscaPlanoContaCaixa1.Saida = true;
             this.buscaPlanoContaCaixa1.Size = new System.Drawing.Size(264, 39);
             this.buscaPlanoContaCaixa1.TabIndex = 4;
             // 

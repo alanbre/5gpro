@@ -17,6 +17,8 @@ namespace _5gpro.Controls
     {
         public PlanoConta conta = null;
         private readonly PlanoContaDAO planoContaDAO = new PlanoContaDAO();
+        private bool entrada;
+        private bool saida;
 
         [Description("Texto do Label"), Category("Appearance")]
         public string LabelText
@@ -32,6 +34,32 @@ namespace _5gpro.Controls
             }
         }
 
+        [Description("Entrada"), Category("Appearance")]
+        public bool Entrada
+        {
+            get
+            {
+                return entrada;
+            }
+            set
+            {
+                entrada = value;
+            }
+        }
+
+        [Description("Saida"), Category("Appearance")]
+        public bool Saida
+        {
+            get
+            {
+                return saida;
+            }
+            set
+            {
+                saida = value;
+            }
+        }
+
         public BuscaPlanoContaCaixa()
         {
             InitializeComponent();
@@ -44,17 +72,17 @@ namespace _5gpro.Controls
 
         private void TbCodigo_Leave(object sender, EventArgs e)
         {
-            //if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
-            //if (tbCodigo.Text.Length > 0)
-            //{
-            //    conta = planoContaDAO.BuscaByID(int.Parse(tbCodigoPessoa.Text));
-            //    PreencheCamposPessoa(pessoa);
-            //}
-            //else
-            //{
-            //    pessoa = null;
-            //    tbNomePessoa.Clear();
-            //}
+            if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
+            if (tbCodigo.Text.Length > 0)
+            {
+                conta = planoContaDAO.BuscaByID(int.Parse(tbCodigo.Text));
+                PreencheCamposContaCaixa(conta);
+            }
+            else
+            {
+                conta = null;
+                tbNome.Clear();
+            }
         }
 
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
@@ -64,46 +92,46 @@ namespace _5gpro.Controls
 
         private void AbreTelaBuscaContaCaixa()
         {
-            //var buscaContaCaixa = new fmBuscaContaCaixa();
-            //buscaContaCaixa.ShowDialog();
-            //if (buscaContaCaixa.contaSelecionada != null)
-            //{
-            //    conta = buscaContaCaixa.contaSelecionada;
-            //    PreencheCamposContaCaixa(conta);
-            //}
+            var buscaContaCaixa = new fmBuscaContaCaixa();
+            buscaContaCaixa.ShowDialog();
+            if (buscaContaCaixa.planoContaSelecionada != null)
+            {
+                conta = buscaContaCaixa.planoContaSelecionada;
+                PreencheCamposContaCaixa(conta);
+            }
         }
 
-        private void PreencheCamposContaCaixa(Pessoa pessoa)
+        private void PreencheCamposContaCaixa(PlanoConta conta)
         {
-            //if (pessoa != null)
-            //{
-            //    tbCodigoPessoa.Text = pessoa.PessoaID.ToString();
-            //    tbNomePessoa.Text = pessoa.Nome;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Cliente não encontrado no banco de dados",
-            //    "Cliente não encontrado",
-            //    MessageBoxButtons.OK,
-            //    MessageBoxIcon.Warning);
-            //    tbCodigoPessoa.Clear();
-            //    tbCodigoPessoa.Focus();
-            //    tbCodigoPessoa.SelectAll();
-            //}
+            if (conta != null)
+            {
+                tbCodigo.Text = conta.PlanoContaID.ToString();
+                tbNome.Text = conta.Descricao;
+            }
+            else
+            {
+                MessageBox.Show("Conta não encontrada no banco de dados",
+                "Conta não encontrada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                tbCodigo.Clear();
+                tbCodigo.Focus();
+                tbCodigo.SelectAll();
+            }
         }
 
-        public void PreencheCampos(Pessoa pessoa)
+        public void PreencheCampos(PlanoConta conta)
         {
-            //this.pessoa = pessoa;
-            //tbCodigoPessoa.Text = this.pessoa != null ? this.pessoa.PessoaID.ToString() : "";
-            //tbNomePessoa.Text = this.pessoa != null ? this.pessoa.Nome : "";
+            this.conta = conta;
+            tbCodigo.Text = this.conta != null ? this.conta.PlanoContaID.ToString() : "";
+            tbNome.Text = this.conta != null ? this.conta.Descricao : "";
         }
 
         public void Limpa()
         {
-            //tbCodigoPessoa.Clear();
-            //tbNomePessoa.Clear();
-            //pessoa = null;
+            tbCodigo.Clear();
+            tbNome.Clear();
+            conta = null;
         }
 
 
