@@ -916,9 +916,9 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
   `level` INT NOT NULL,
   `paiid` INT NULL,
   `descricao` VARCHAR(45) NOT NULL,
+  `codigo_completo` VARCHAR(50) NULL,
   PRIMARY KEY (`idcaixa_plano_contas`))
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_plano_contas_padrao`
