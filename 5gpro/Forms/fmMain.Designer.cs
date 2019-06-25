@@ -76,6 +76,7 @@
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.btiPlanoContasPadrao = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             this.panelCentral.SuspendLayout();
@@ -284,13 +285,14 @@
             // 
             // paneldropCaixa
             // 
+            this.paneldropCaixa.Controls.Add(this.btiPlanoContasPadrao);
             this.paneldropCaixa.Controls.Add(this.btiPlanoContas);
             this.paneldropCaixa.Controls.Add(this.btiLancamentoManual);
             this.paneldropCaixa.Controls.Add(this.btiSangria);
             this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
             this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
             this.paneldropCaixa.Location = new System.Drawing.Point(3, 275);
-            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 140);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 168);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
@@ -730,6 +732,21 @@
             // 
             this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
+            // btiPlanoContasPadrao
+            // 
+            this.btiPlanoContasPadrao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiPlanoContasPadrao.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiPlanoContasPadrao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiPlanoContasPadrao.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiPlanoContasPadrao.ForeColor = System.Drawing.Color.White;
+            this.btiPlanoContasPadrao.Location = new System.Drawing.Point(0, 140);
+            this.btiPlanoContasPadrao.Name = "btiPlanoContasPadrao";
+            this.btiPlanoContasPadrao.Size = new System.Drawing.Size(200, 28);
+            this.btiPlanoContasPadrao.TabIndex = 4;
+            this.btiPlanoContasPadrao.Text = "Plano de contas padrão";
+            this.btiPlanoContasPadrao.UseVisualStyleBackColor = false;
+            this.btiPlanoContasPadrao.Click += new System.EventHandler(this.BtiPlanoContasPadrao_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -811,6 +828,7 @@
         private System.Windows.Forms.Button btiSangria;
         private System.Windows.Forms.Button btiLancamentoManual;
         private System.Windows.Forms.Button btiPlanoContas;
+        private System.Windows.Forms.Button btiPlanoContasPadrao;
     }
 }
 

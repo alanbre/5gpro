@@ -906,6 +906,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_ent` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_plano_contas`
 -- -----------------------------------------------------
@@ -917,6 +918,72 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
   `descricao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idcaixa_plano_contas`))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_plano_contas_padrao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
+  `idcaixa_plano_contas_padrao` INT NOT NULL,
+  `compras` INT NULL,
+  `contas_pagar` INT NULL,
+  `descontos_concedidos` INT NULL,
+  `juros_pagos` INT NULL,
+  `vendas` INT NULL,
+  `contas_receber` INT NULL,
+  `descontos_recebidos` INT NULL,
+  `juros_recebidos` INT NULL,
+  PRIMARY KEY (`idcaixa_plano_contas_padrao`),
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas1_idx` (`compras` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas2_idx` (`contas_pagar` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas3_idx` (`descontos_concedidos` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas4_idx` (`juros_pagos` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas5_idx` (`vendas` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas6_idx` (`contas_receber` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas7_idx` (`descontos_recebidos` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas8_idx` (`juros_recebidos` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas1`
+    FOREIGN KEY (`compras`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas2`
+    FOREIGN KEY (`contas_pagar`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas3`
+    FOREIGN KEY (`descontos_concedidos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas4`
+    FOREIGN KEY (`juros_pagos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas5`
+    FOREIGN KEY (`vendas`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas6`
+    FOREIGN KEY (`contas_receber`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas7`
+    FOREIGN KEY (`descontos_recebidos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas8`
+    FOREIGN KEY (`juros_recebidos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
