@@ -5667,6 +5667,10 @@ INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (15, 'Boleto Bancário'),
 (99, 'Outros');
 
+INSERT INTO caixa_plano_contas (idcaixa_plano_contas, codigo, descricao, paiid, level) VALUES
+(1, 1, 'Ativos', 0, 0),
+(2, 2, 'Passivos', 0, 0);
+
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE
 EVERY 5 SECOND

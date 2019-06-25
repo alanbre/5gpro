@@ -9,20 +9,41 @@ namespace _5gpro.Daos
     {
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
-        public int SalvaOuAtualiza(PlanoConta planoConta)
+        public int Salva(PlanoConta planoConta)
         {
             var retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO caixa_plano_contas
-                            (parentid, level, codigo, descricao)
+                            (paiid, level, codigo, descricao)
                             VALUES
-                            (@parentid, @level, @codigo, @descricao)
+                            (@paiid, @level, @codigo, @descricao)
                             ON DUPLICATE KEY UPDATE
                             descricao = @descricao";
-                sql.addParam("@parentid", planoConta.PaiID);
+                sql.addParam("@paiid", planoConta.PaiID);
                 sql.addParam("@level", planoConta.Level);
+                sql.addParam("@codigo", planoConta.Codigo);
+                sql.addParam("@descricao", planoConta.Descricao);
+                retorno = sql.insertQuery();
+                if (retorno > 0 && planoConta.PlanoContaID == 0)
+                {
+                    sql.Query = "SELECT LAST_INSERT_ID() AS id;";
+                    var data = sql.selectQueryForSingleRecord();
+                    planoConta.PlanoContaID = Convert.ToInt32(data["id"]);
+                }
+                sql.Commit();
+            }
+            return retorno;
+        }
+        public int Atualiza(PlanoConta planoConta)
+        {
+            var retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"UPDATE caixa_plano_contas SET descricao = @descricao WHERE codigo = @codigo AND paiid = @paiid";
+                sql.addParam("@paiid", planoConta.PaiID);
                 sql.addParam("@codigo", planoConta.Codigo);
                 sql.addParam("@descricao", planoConta.Descricao);
                 retorno = sql.insertQuery();
