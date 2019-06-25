@@ -906,6 +906,17 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_ent` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_plano_contas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
+  `idcaixa_plano_contas` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `level` INT NOT NULL,
+  `paiid` INT NULL,
+  `descricao` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idcaixa_plano_contas`))
+ENGINE = InnoDB;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

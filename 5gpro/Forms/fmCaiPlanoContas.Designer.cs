@@ -73,6 +73,7 @@
             this.tvPlanoContas.Name = "tvPlanoContas";
             this.tvPlanoContas.Size = new System.Drawing.Size(649, 297);
             this.tvPlanoContas.TabIndex = 4;
+            this.tvPlanoContas.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TvPlanoContas_AfterSelect);
             // 
             // tbDescricao
             // 
@@ -117,6 +118,7 @@
             this.menuVertical.Name = "menuVertical";
             this.menuVertical.Size = new System.Drawing.Size(53, 364);
             this.menuVertical.TabIndex = 0;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
             this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
             // 
             // fmCaiPlanoContas
