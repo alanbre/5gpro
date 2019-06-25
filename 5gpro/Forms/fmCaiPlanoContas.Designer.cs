@@ -60,6 +60,7 @@
             // 
             // tbCodigoFilho
             // 
+            this.tbCodigoFilho.Enabled = false;
             this.tbCodigoFilho.Location = new System.Drawing.Point(78, 32);
             this.tbCodigoFilho.Name = "tbCodigoFilho";
             this.tbCodigoFilho.Size = new System.Drawing.Size(28, 20);
@@ -132,6 +133,8 @@
             this.menuVertical.TabIndex = 1;
             this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
             this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 
             // fmCaiPlanoContas
             // 

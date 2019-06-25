@@ -15,16 +15,22 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.beginTransaction();
+                sql.Query = "SELECT codigo_completo FROM caixa_plano_contas WHERE idcaixa_plano_contas = @paiid";
+                sql.addParam("@paiid", planoConta.PaiID);
+                string codigo_completo = sql.selectQueryForSingleValue().ToString();
+                sql.clearParams();
+
                 sql.Query = @"INSERT INTO caixa_plano_contas
-                            (paiid, level, codigo, descricao)
+                            (paiid, level, codigo, descricao, codigo_completo)
                             VALUES
-                            (@paiid, @level, @codigo, @descricao)
+                            (@paiid, @level, @codigo, @descricao, @codigo_completo)
                             ON DUPLICATE KEY UPDATE
                             descricao = @descricao";
                 sql.addParam("@paiid", planoConta.PaiID);
                 sql.addParam("@level", planoConta.Level);
                 sql.addParam("@codigo", planoConta.Codigo);
                 sql.addParam("@descricao", planoConta.Descricao);
+                sql.addParam("@codigo_completo", planoConta.PaiID == 0 ? planoConta.Codigo.ToString() : codigo_completo + $".{planoConta.Codigo.ToString()}");
                 retorno = sql.insertQuery();
                 if (retorno > 0 && planoConta.PlanoContaID == 0)
                 {
@@ -123,6 +129,7 @@ namespace _5gpro.Daos
             planoConta.Level = Convert.ToInt32(dado["level"]);
             planoConta.PaiID = dado["paiid"] != null ? Convert.ToInt32(dado["paiid"]) : 0;
             planoConta.Descricao = (string)dado["descricao"];
+            planoConta.CodigoCompleto = (string)dado["codigo_completo"];
             return planoConta;
         }
     }

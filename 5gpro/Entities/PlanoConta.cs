@@ -12,6 +12,7 @@ namespace _5gpro.Entities
         public int PaiID { get; set; }
         public int Level { get; set; }
         public string Descricao { get; set; }
+        public string CodigoCompleto { get; set; }
         public List<PlanoConta> SubContas { get; set; } = new List<PlanoConta>();
     }
 }

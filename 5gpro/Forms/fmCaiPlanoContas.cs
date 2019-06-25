@@ -22,7 +22,6 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
-        int codigo = 0;
 
         bool editando, ignoracheckevent = false;
         public fmCaiPlanoContas()
@@ -34,6 +33,7 @@ namespace _5gpro.Forms
 
 
 
+        private void FmCaiPlanoContas_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
@@ -70,7 +70,7 @@ namespace _5gpro.Forms
             {
                 MessageBox.Show("Descrição não preenchida!",
                "Problema ao salvar",
-               MessageBoxButtons.YesNo,
+               MessageBoxButtons.OK,
                MessageBoxIcon.Warning);
                 tbDescricao.Focus();
                 return;
@@ -147,12 +147,12 @@ namespace _5gpro.Forms
             if (root == null)
             {
                 root = new TreeNode();
-                root.Text = $"- {planoConta.Descricao}";
+                root.Text = $"{planoConta.CodigoCompleto} - {planoConta.Descricao}";
                 root.Tag = planoConta.PlanoContaID;
                 foreach (var pc in planoConta.SubContas)
                 {
                     var child = new TreeNode();
-                    child.Text = $"- {pc.Descricao}";
+                    child.Text = $"{pc.CodigoCompleto} - {pc.Descricao}";
                     child.Tag = pc.PlanoContaID;
                     PreencherTreeView(ref child, pc);
                     root.Nodes.Add(child);
@@ -163,7 +163,7 @@ namespace _5gpro.Forms
                 foreach (var pc in planoConta.SubContas)
                 {
                     var child = new TreeNode();
-                    child.Text = $"- {pc.Descricao}";
+                    child.Text = $"{pc.CodigoCompleto} - {pc.Descricao}";
                     child.Tag = pc.PlanoContaID;
                     PreencherTreeView(ref child, pc);
                     root.Nodes.Add(child);
@@ -193,7 +193,42 @@ namespace _5gpro.Forms
             }
         }
 
-        private void FmCaiPlanoContas_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
+        {
+            TreeNode tn = tvPlanoContas.SelectedNode;
+            if (tn == null) return;
+            if (tn.Parent == null)
+            {
+                if (tn.Index < tvPlanoContas.Nodes.Count - 1)
+                {
+                    tvPlanoContas.SelectedNode = tvPlanoContas.Nodes[tn.Index + 1];
+                }
+            }
+            else
+            {
+                if (tn.Index < tn.Parent.Nodes.Count - 1)
+                {
+                    tvPlanoContas.SelectedNode = tn.Parent.Nodes[tn.Index + 1];
+                }
+            }
+            tvPlanoContas.Focus();
+        }
+
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
+        {
+            TreeNode tn = tvPlanoContas.SelectedNode;
+            if (tn == null) return;
+            if (tn.Parent == null)
+            {
+                tvPlanoContas.SelectedNode = tn.Index > 0 ? tvPlanoContas.Nodes[tn.Index - 1].LastNode : tvPlanoContas.SelectedNode;
+            }
+            else
+            {
+
+            }
+
+            tvPlanoContas.Focus();
+        }
 
         private void SetarNivel()
         {
