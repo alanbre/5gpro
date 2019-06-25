@@ -39,27 +39,82 @@ namespace _5gpro.Forms
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TvPlanoContas_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            ignoracheckevent = true;
+            Limpa(true);
             planoContaSelecionada = planoContas.First(pc => pc.PlanoContaID == (int)tvPlanoContas.SelectedNode.Tag);
             if (planoContaSelecionada == null) return;
             tbCodigo.Text = planoContaSelecionada.Codigo.ToString();
+            tbDescricao.Text = planoContaSelecionada.Descricao;
+            ignoracheckevent = false;
         }
 
 
 
         private void Novo()
         {
-            LimparDados(false);
-            tbCodigoFilho.Text = planoContaDAO.BuscaProxCodigoDisponivel(planoContaSelecionada.PlanoContaID).ToString();
+            if (editando || planoContaSelecionada == null)
+                return;
 
+            ignoracheckevent = true;
+            Limpa(false);
+            tbCodigoFilho.Text = planoContaDAO.BuscaProxCodigoDisponivel(planoContaSelecionada.PlanoContaID).ToString();
+            tbDescricao.Focus();
+            ignoracheckevent = false;
+            Editando(true);
         }
         private void Salva()
         {
-            if (planoContaSelecionada == null) return;
+            if (!editando || planoContaSelecionada == null) return;
 
+            if (tbDescricao.Text.Length == 0)
+            {
+                MessageBox.Show("Descrição não preenchida!",
+               "Problema ao salvar",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning);
+                tbDescricao.Focus();
+                return;
+            }
 
+            var resultado = 0;
+            if (tbCodigoFilho.Text.Length > 0)
+            {
+                var planoContaFilho = new PlanoConta();
+                planoContaFilho.Codigo = Convert.ToInt32(tbCodigoFilho.Text);
+                planoContaFilho.Descricao = tbDescricao.Text;
+                planoContaFilho.PaiID = planoContaSelecionada.PlanoContaID;
+                planoContaFilho.Level = planoContaSelecionada.Level + 1;
+                resultado = planoContaDAO.Salva(planoContaFilho);
+            }
+            else
+            {
+                planoContaSelecionada.Descricao = tbDescricao.Text;
+                resultado = planoContaDAO.Atualiza(planoContaSelecionada);
+            }
+
+            if (resultado == 0)
+            {
+                MessageBox.Show("Problema ao salvar o registro",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+            else if (resultado == 1)
+            {
+                tbAjuda.Text = "Dados salvos com sucesso";
+            }
+            else if (resultado == 2)
+            {
+                tbAjuda.Text = "Dados atualizados com sucesso";
+            }
+            Limpa(true);
+            PreencheContas();
+            Editando(false);
         }
         private void PreencheContas()
         {
+            tvPlanoContas.Nodes.Clear();
             planoContas = planoContaDAO.Busca();
             var pais = planoContas.Where(pc => pc.PaiID == 0).ToList();
 
@@ -123,12 +178,22 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-        private void LimparDados(bool limpaCodigo)
+        private void Limpa(bool limpaCodigo)
         {
             if (limpaCodigo) tbCodigo.Clear();
             tbCodigoFilho.Clear();
             tbDescricao.Clear();
         }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void FmCaiPlanoContas_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
 
         private void SetarNivel()
         {
