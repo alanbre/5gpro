@@ -213,6 +213,12 @@
     <Compile Include="Controls\BuscaPessoa.Designer.cs">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaPlanoContaCaixa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaPlanoContaCaixa.Designer.cs">
+      <DependentUpon>BuscaPlanoContaCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaSubGrupoItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -326,6 +332,12 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmBuscaContaCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaContaCaixa.Designer.cs">
+      <DependentUpon>fmBuscaContaCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCaiAberturaFechamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -682,6 +694,9 @@
     <EmbeddedResource Include="Controls\BuscaPessoa.resx">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaPlanoContaCaixa.resx">
+      <DependentUpon>BuscaPlanoContaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaSubGrupoItem.resx">
       <DependentUpon>BuscaSubGrupoItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -708,6 +723,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaContaCaixa.resx">
+      <DependentUpon>fmBuscaContaCaixa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCaiAberturaFechamento.resx">
       <DependentUpon>fmCaiAberturaFechamento.cs</DependentUpon>

@@ -29,16 +29,29 @@
         private void InitializeComponent()
         {
             this.gbLancamentosSaida = new System.Windows.Forms.GroupBox();
+            this.lbJurosPagos = new System.Windows.Forms.Label();
+            this.lbDescontosConcedidos = new System.Windows.Forms.Label();
+            this.lbContasPagar = new System.Windows.Forms.Label();
+            this.lbCompras = new System.Windows.Forms.Label();
             this.gbLancamentoEntrada = new System.Windows.Forms.GroupBox();
+            this.lbJurosRecebidos = new System.Windows.Forms.Label();
+            this.lbDescontosRecebidos = new System.Windows.Forms.Label();
+            this.lbContasReceber = new System.Windows.Forms.Label();
+            this.lbVendas = new System.Windows.Forms.Label();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btCancelar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.buscaPlanoContaCaixa1 = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbLancamentosSaida.SuspendLayout();
+            this.gbLancamentoEntrada.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbLancamentosSaida
             // 
-            this.gbLancamentosSaida.Controls.Add(this.label1);
+            this.gbLancamentosSaida.Controls.Add(this.buscaPlanoContaCaixa1);
+            this.gbLancamentosSaida.Controls.Add(this.lbJurosPagos);
+            this.gbLancamentosSaida.Controls.Add(this.lbDescontosConcedidos);
+            this.gbLancamentosSaida.Controls.Add(this.lbContasPagar);
+            this.gbLancamentosSaida.Controls.Add(this.lbCompras);
             this.gbLancamentosSaida.Location = new System.Drawing.Point(12, 12);
             this.gbLancamentosSaida.Name = "gbLancamentosSaida";
             this.gbLancamentosSaida.Size = new System.Drawing.Size(360, 396);
@@ -46,14 +59,90 @@
             this.gbLancamentosSaida.TabStop = false;
             this.gbLancamentosSaida.Text = "Lançamentos de Saída (Pagamentos)";
             // 
+            // lbJurosPagos
+            // 
+            this.lbJurosPagos.AutoSize = true;
+            this.lbJurosPagos.Location = new System.Drawing.Point(6, 188);
+            this.lbJurosPagos.Name = "lbJurosPagos";
+            this.lbJurosPagos.Size = new System.Drawing.Size(65, 13);
+            this.lbJurosPagos.TabIndex = 3;
+            this.lbJurosPagos.Text = "Juros Pagos";
+            // 
+            // lbDescontosConcedidos
+            // 
+            this.lbDescontosConcedidos.AutoSize = true;
+            this.lbDescontosConcedidos.Location = new System.Drawing.Point(6, 136);
+            this.lbDescontosConcedidos.Name = "lbDescontosConcedidos";
+            this.lbDescontosConcedidos.Size = new System.Drawing.Size(117, 13);
+            this.lbDescontosConcedidos.TabIndex = 2;
+            this.lbDescontosConcedidos.Text = "Descontos Concedidos";
+            // 
+            // lbContasPagar
+            // 
+            this.lbContasPagar.AutoSize = true;
+            this.lbContasPagar.Location = new System.Drawing.Point(6, 85);
+            this.lbContasPagar.Name = "lbContasPagar";
+            this.lbContasPagar.Size = new System.Drawing.Size(80, 13);
+            this.lbContasPagar.TabIndex = 1;
+            this.lbContasPagar.Text = "Contas a Pagar";
+            // 
+            // lbCompras
+            // 
+            this.lbCompras.AutoSize = true;
+            this.lbCompras.Location = new System.Drawing.Point(6, 16);
+            this.lbCompras.Name = "lbCompras";
+            this.lbCompras.Size = new System.Drawing.Size(48, 13);
+            this.lbCompras.TabIndex = 0;
+            this.lbCompras.Text = "Compras";
+            // 
             // gbLancamentoEntrada
             // 
+            this.gbLancamentoEntrada.Controls.Add(this.lbJurosRecebidos);
+            this.gbLancamentoEntrada.Controls.Add(this.lbDescontosRecebidos);
+            this.gbLancamentoEntrada.Controls.Add(this.lbContasReceber);
+            this.gbLancamentoEntrada.Controls.Add(this.lbVendas);
             this.gbLancamentoEntrada.Location = new System.Drawing.Point(378, 12);
             this.gbLancamentoEntrada.Name = "gbLancamentoEntrada";
             this.gbLancamentoEntrada.Size = new System.Drawing.Size(360, 396);
             this.gbLancamentoEntrada.TabIndex = 1;
             this.gbLancamentoEntrada.TabStop = false;
             this.gbLancamentoEntrada.Text = "Lançamentos de Entrada (Recebimentos)";
+            // 
+            // lbJurosRecebidos
+            // 
+            this.lbJurosRecebidos.AutoSize = true;
+            this.lbJurosRecebidos.Location = new System.Drawing.Point(36, 174);
+            this.lbJurosRecebidos.Name = "lbJurosRecebidos";
+            this.lbJurosRecebidos.Size = new System.Drawing.Size(86, 13);
+            this.lbJurosRecebidos.TabIndex = 3;
+            this.lbJurosRecebidos.Text = "Juros Recebidos";
+            // 
+            // lbDescontosRecebidos
+            // 
+            this.lbDescontosRecebidos.AutoSize = true;
+            this.lbDescontosRecebidos.Location = new System.Drawing.Point(36, 119);
+            this.lbDescontosRecebidos.Name = "lbDescontosRecebidos";
+            this.lbDescontosRecebidos.Size = new System.Drawing.Size(112, 13);
+            this.lbDescontosRecebidos.TabIndex = 2;
+            this.lbDescontosRecebidos.Text = "Descontos Recebidos";
+            // 
+            // lbContasReceber
+            // 
+            this.lbContasReceber.AutoSize = true;
+            this.lbContasReceber.Location = new System.Drawing.Point(36, 84);
+            this.lbContasReceber.Name = "lbContasReceber";
+            this.lbContasReceber.Size = new System.Drawing.Size(93, 13);
+            this.lbContasReceber.TabIndex = 1;
+            this.lbContasReceber.Text = "Contas a Receber";
+            // 
+            // lbVendas
+            // 
+            this.lbVendas.AutoSize = true;
+            this.lbVendas.Location = new System.Drawing.Point(33, 46);
+            this.lbVendas.Name = "lbVendas";
+            this.lbVendas.Size = new System.Drawing.Size(43, 13);
+            this.lbVendas.TabIndex = 0;
+            this.lbVendas.Text = "Vendas";
             // 
             // btSalvar
             // 
@@ -74,14 +163,15 @@
             this.btCancelar.UseVisualStyleBackColor = true;
             this.btCancelar.Click += new System.EventHandler(this.BtCancelar_Click);
             // 
-            // label1
+            // buscaPlanoContaCaixa1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Quitação de conta a pagar";
+            this.buscaPlanoContaCaixa1.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa1.LabelText = "Compras";
+            this.buscaPlanoContaCaixa1.Location = new System.Drawing.Point(42, 263);
+            this.buscaPlanoContaCaixa1.Name = "buscaPlanoContaCaixa1";
+            this.buscaPlanoContaCaixa1.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa1.TabIndex = 4;
             // 
             // fmCaiPlanoContasPadrao
             // 
@@ -103,6 +193,8 @@
             this.Text = "Plano de Contas Padrão";
             this.gbLancamentosSaida.ResumeLayout(false);
             this.gbLancamentosSaida.PerformLayout();
+            this.gbLancamentoEntrada.ResumeLayout(false);
+            this.gbLancamentoEntrada.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -113,6 +205,14 @@
         private System.Windows.Forms.GroupBox gbLancamentoEntrada;
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btCancelar;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbCompras;
+        private System.Windows.Forms.Label lbJurosPagos;
+        private System.Windows.Forms.Label lbDescontosConcedidos;
+        private System.Windows.Forms.Label lbContasPagar;
+        private System.Windows.Forms.Label lbJurosRecebidos;
+        private System.Windows.Forms.Label lbDescontosRecebidos;
+        private System.Windows.Forms.Label lbContasReceber;
+        private System.Windows.Forms.Label lbVendas;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa1;
     }
 }
