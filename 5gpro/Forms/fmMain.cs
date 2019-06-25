@@ -32,7 +32,7 @@ namespace _5gpro
                     saidasOn = 2,
                     orcamentosOn = 1,
                     relatoriosOn = 1,
-                    caixaOn = 5,
+                    caixaOn = 6,
                     tamanhopanel
             ;
 
@@ -247,6 +247,24 @@ namespace _5gpro
                             if (p.Nivel == 0) { btiSangria.Visible = false; caixaOn -= 1; }
                             else { btiSangria.Visible = true; }
                             break;
+
+                        case "090400":
+                            //Lançamento Manual
+                            if (p.Nivel == 0) { btiLancamentoManual.Visible = false; caixaOn -= 1; }
+                            else { btiLancamentoManual.Visible = true; }
+                            break;
+
+                        case "090500":
+                            //Plano de Contas
+                            if (p.Nivel == 0) { btiPlanoContas.Visible = false; caixaOn -= 1; }
+                            else { btiPlanoContas.Visible = true; }
+                            break;
+
+                        case "090600":
+                            //Plano de contas padrão
+                            if(p.Nivel == 0) { btiPlanoContasPadrao.Visible = false; caixaOn -= 1; }
+                            else { btiPlanoContasPadrao.Visible = true; }
+                            break;
                     }
                 }
 
@@ -429,6 +447,15 @@ namespace _5gpro
         {
             var formPlanoContas = new fmCaiPlanoContas();
             formPlanoContas.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiPlanoContasPadrao_Click(object sender, EventArgs e)
+        {
+            var formPlanoContasPadrao = new fmCaiPlanoContasPadrao();
+            formPlanoContasPadrao.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();

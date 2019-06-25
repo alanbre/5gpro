@@ -380,6 +380,12 @@
     <Compile Include="Forms\fmCalculoPrecoVenda.Designer.cs">
       <DependentUpon>fmCalculoPrecoVenda.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCaiPlanoContasPadrao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiPlanoContasPadrao.Designer.cs">
+      <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
@@ -729,6 +735,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCalculoPrecoVenda.resx">
       <DependentUpon>fmCalculoPrecoVenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
+      <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
