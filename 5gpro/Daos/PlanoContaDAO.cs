@@ -73,6 +73,29 @@ namespace _5gpro.Daos
             return planoContas;
         }
 
+        public PlanoConta BuscaByID(int Codigo)
+        {
+            var planoconta = new PlanoConta();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
+                                                   s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
+                                                   s.idgrupoitem AS idgrupoitemsub, s.codigo
+                                                   FROM grupoitem g 
+                                                   LEFT JOIN subgrupoitem s 
+                                                   ON g.idgrupoitem = s.idgrupoitem 
+                                                   WHERE g.idgrupoitem = @idgrupoitem";
+                sql.addParam("@idgrupoitem", Codigo);
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return null;
+                }
+               // planoconta = LeDadosReader(data);
+            }
+            return planoconta;
+        }
+
         public int BuscaProxCodigoDisponivel(int paiid)
         {
             int proximocodigo = 0;
