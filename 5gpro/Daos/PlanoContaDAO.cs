@@ -63,7 +63,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public List<PlanoConta> Busca()
         {
             List<PlanoConta> planoContas = new List<PlanoConta>();
@@ -78,7 +77,6 @@ namespace _5gpro.Daos
             }
             return planoContas;
         }
-
         public PlanoConta BuscaByID(int Codigo)
         {
             var planoconta = new PlanoConta();
@@ -101,7 +99,6 @@ namespace _5gpro.Daos
             }
             return planoconta;
         }
-
         public int BuscaProxCodigoDisponivel(int paiid)
         {
             int proximocodigo = 0;
@@ -119,8 +116,6 @@ namespace _5gpro.Daos
             }
             return proximocodigo;
         }
-
-
         private PlanoConta LeDadosReader(Dictionary<string, object> dado)
         {
             PlanoConta planoConta = new PlanoConta();
