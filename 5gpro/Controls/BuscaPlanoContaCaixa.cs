@@ -92,7 +92,7 @@ namespace _5gpro.Controls
 
         private void AbreTelaBuscaContaCaixa()
         {
-            var buscaContaCaixa = new fmBuscaContaCaixa();
+            var buscaContaCaixa = new fmBuscaContaCaixa(entrada, saida);
             buscaContaCaixa.ShowDialog();
             if (buscaContaCaixa.planoContaSelecionada != null)
             {

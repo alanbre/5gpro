@@ -29,124 +29,62 @@
         private void InitializeComponent()
         {
             this.gbLancamentosSaida = new System.Windows.Forms.GroupBox();
-            this.lbJurosPagos = new System.Windows.Forms.Label();
-            this.lbDescontosConcedidos = new System.Windows.Forms.Label();
-            this.lbContasPagar = new System.Windows.Forms.Label();
-            this.lbCompras = new System.Windows.Forms.Label();
+            this.buscaPlanoContaCaixa1 = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbLancamentoEntrada = new System.Windows.Forms.GroupBox();
-            this.lbJurosRecebidos = new System.Windows.Forms.Label();
-            this.lbDescontosRecebidos = new System.Windows.Forms.Label();
-            this.lbContasReceber = new System.Windows.Forms.Label();
-            this.lbVendas = new System.Windows.Forms.Label();
             this.btSalvar = new System.Windows.Forms.Button();
             this.btCancelar = new System.Windows.Forms.Button();
-            this.buscaPlanoContaCaixa1 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa2 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa3 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa4 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa5 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa6 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa7 = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaPlanoContaCaixa8 = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbLancamentosSaida.SuspendLayout();
             this.gbLancamentoEntrada.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbLancamentosSaida
             // 
+            this.gbLancamentosSaida.Controls.Add(this.buscaPlanoContaCaixa5);
+            this.gbLancamentosSaida.Controls.Add(this.buscaPlanoContaCaixa4);
+            this.gbLancamentosSaida.Controls.Add(this.buscaPlanoContaCaixa3);
             this.gbLancamentosSaida.Controls.Add(this.buscaPlanoContaCaixa1);
-            this.gbLancamentosSaida.Controls.Add(this.lbJurosPagos);
-            this.gbLancamentosSaida.Controls.Add(this.lbDescontosConcedidos);
-            this.gbLancamentosSaida.Controls.Add(this.lbContasPagar);
-            this.gbLancamentosSaida.Controls.Add(this.lbCompras);
             this.gbLancamentosSaida.Location = new System.Drawing.Point(12, 12);
             this.gbLancamentosSaida.Name = "gbLancamentosSaida";
-            this.gbLancamentosSaida.Size = new System.Drawing.Size(360, 396);
+            this.gbLancamentosSaida.Size = new System.Drawing.Size(360, 252);
             this.gbLancamentosSaida.TabIndex = 0;
             this.gbLancamentosSaida.TabStop = false;
             this.gbLancamentosSaida.Text = "Lançamentos de Saída (Pagamentos)";
             // 
-            // lbJurosPagos
+            // buscaPlanoContaCaixa1
             // 
-            this.lbJurosPagos.AutoSize = true;
-            this.lbJurosPagos.Location = new System.Drawing.Point(6, 188);
-            this.lbJurosPagos.Name = "lbJurosPagos";
-            this.lbJurosPagos.Size = new System.Drawing.Size(65, 13);
-            this.lbJurosPagos.TabIndex = 3;
-            this.lbJurosPagos.Text = "Juros Pagos";
-            // 
-            // lbDescontosConcedidos
-            // 
-            this.lbDescontosConcedidos.AutoSize = true;
-            this.lbDescontosConcedidos.Location = new System.Drawing.Point(6, 136);
-            this.lbDescontosConcedidos.Name = "lbDescontosConcedidos";
-            this.lbDescontosConcedidos.Size = new System.Drawing.Size(117, 13);
-            this.lbDescontosConcedidos.TabIndex = 2;
-            this.lbDescontosConcedidos.Text = "Descontos Concedidos";
-            // 
-            // lbContasPagar
-            // 
-            this.lbContasPagar.AutoSize = true;
-            this.lbContasPagar.Location = new System.Drawing.Point(6, 85);
-            this.lbContasPagar.Name = "lbContasPagar";
-            this.lbContasPagar.Size = new System.Drawing.Size(80, 13);
-            this.lbContasPagar.TabIndex = 1;
-            this.lbContasPagar.Text = "Contas a Pagar";
-            // 
-            // lbCompras
-            // 
-            this.lbCompras.AutoSize = true;
-            this.lbCompras.Location = new System.Drawing.Point(6, 16);
-            this.lbCompras.Name = "lbCompras";
-            this.lbCompras.Size = new System.Drawing.Size(48, 13);
-            this.lbCompras.TabIndex = 0;
-            this.lbCompras.Text = "Compras";
+            this.buscaPlanoContaCaixa1.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa1.Entrada = false;
+            this.buscaPlanoContaCaixa1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa1.LabelText = "Compras";
+            this.buscaPlanoContaCaixa1.Location = new System.Drawing.Point(6, 34);
+            this.buscaPlanoContaCaixa1.Name = "buscaPlanoContaCaixa1";
+            this.buscaPlanoContaCaixa1.Saida = true;
+            this.buscaPlanoContaCaixa1.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa1.TabIndex = 4;
             // 
             // gbLancamentoEntrada
             // 
-            this.gbLancamentoEntrada.Controls.Add(this.lbJurosRecebidos);
-            this.gbLancamentoEntrada.Controls.Add(this.lbDescontosRecebidos);
-            this.gbLancamentoEntrada.Controls.Add(this.lbContasReceber);
-            this.gbLancamentoEntrada.Controls.Add(this.lbVendas);
+            this.gbLancamentoEntrada.Controls.Add(this.buscaPlanoContaCaixa8);
+            this.gbLancamentoEntrada.Controls.Add(this.buscaPlanoContaCaixa7);
+            this.gbLancamentoEntrada.Controls.Add(this.buscaPlanoContaCaixa6);
+            this.gbLancamentoEntrada.Controls.Add(this.buscaPlanoContaCaixa2);
             this.gbLancamentoEntrada.Location = new System.Drawing.Point(378, 12);
             this.gbLancamentoEntrada.Name = "gbLancamentoEntrada";
-            this.gbLancamentoEntrada.Size = new System.Drawing.Size(360, 396);
+            this.gbLancamentoEntrada.Size = new System.Drawing.Size(360, 252);
             this.gbLancamentoEntrada.TabIndex = 1;
             this.gbLancamentoEntrada.TabStop = false;
             this.gbLancamentoEntrada.Text = "Lançamentos de Entrada (Recebimentos)";
             // 
-            // lbJurosRecebidos
-            // 
-            this.lbJurosRecebidos.AutoSize = true;
-            this.lbJurosRecebidos.Location = new System.Drawing.Point(36, 174);
-            this.lbJurosRecebidos.Name = "lbJurosRecebidos";
-            this.lbJurosRecebidos.Size = new System.Drawing.Size(86, 13);
-            this.lbJurosRecebidos.TabIndex = 3;
-            this.lbJurosRecebidos.Text = "Juros Recebidos";
-            // 
-            // lbDescontosRecebidos
-            // 
-            this.lbDescontosRecebidos.AutoSize = true;
-            this.lbDescontosRecebidos.Location = new System.Drawing.Point(36, 119);
-            this.lbDescontosRecebidos.Name = "lbDescontosRecebidos";
-            this.lbDescontosRecebidos.Size = new System.Drawing.Size(112, 13);
-            this.lbDescontosRecebidos.TabIndex = 2;
-            this.lbDescontosRecebidos.Text = "Descontos Recebidos";
-            // 
-            // lbContasReceber
-            // 
-            this.lbContasReceber.AutoSize = true;
-            this.lbContasReceber.Location = new System.Drawing.Point(36, 84);
-            this.lbContasReceber.Name = "lbContasReceber";
-            this.lbContasReceber.Size = new System.Drawing.Size(93, 13);
-            this.lbContasReceber.TabIndex = 1;
-            this.lbContasReceber.Text = "Contas a Receber";
-            // 
-            // lbVendas
-            // 
-            this.lbVendas.AutoSize = true;
-            this.lbVendas.Location = new System.Drawing.Point(33, 46);
-            this.lbVendas.Name = "lbVendas";
-            this.lbVendas.Size = new System.Drawing.Size(43, 13);
-            this.lbVendas.TabIndex = 0;
-            this.lbVendas.Text = "Vendas";
-            // 
             // btSalvar
             // 
-            this.btSalvar.Location = new System.Drawing.Point(581, 414);
+            this.btSalvar.Location = new System.Drawing.Point(582, 269);
             this.btSalvar.Name = "btSalvar";
             this.btSalvar.Size = new System.Drawing.Size(75, 23);
             this.btSalvar.TabIndex = 2;
@@ -155,7 +93,7 @@
             // 
             // btCancelar
             // 
-            this.btCancelar.Location = new System.Drawing.Point(662, 415);
+            this.btCancelar.Location = new System.Drawing.Point(663, 270);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(75, 23);
             this.btCancelar.TabIndex = 3;
@@ -163,24 +101,96 @@
             this.btCancelar.UseVisualStyleBackColor = true;
             this.btCancelar.Click += new System.EventHandler(this.BtCancelar_Click);
             // 
-            // buscaPlanoContaCaixa1
+            // buscaPlanoContaCaixa2
             // 
-            this.buscaPlanoContaCaixa1.BackColor = System.Drawing.Color.White;
-            this.buscaPlanoContaCaixa1.Entrada = true;
-            this.buscaPlanoContaCaixa1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buscaPlanoContaCaixa1.LabelText = "Compras";
-            this.buscaPlanoContaCaixa1.Location = new System.Drawing.Point(42, 263);
-            this.buscaPlanoContaCaixa1.Name = "buscaPlanoContaCaixa1";
-            this.buscaPlanoContaCaixa1.Saida = true;
-            this.buscaPlanoContaCaixa1.Size = new System.Drawing.Size(264, 39);
-            this.buscaPlanoContaCaixa1.TabIndex = 4;
+            this.buscaPlanoContaCaixa2.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa2.Entrada = true;
+            this.buscaPlanoContaCaixa2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa2.LabelText = "Vendas";
+            this.buscaPlanoContaCaixa2.Location = new System.Drawing.Point(31, 34);
+            this.buscaPlanoContaCaixa2.Name = "buscaPlanoContaCaixa2";
+            this.buscaPlanoContaCaixa2.Saida = false;
+            this.buscaPlanoContaCaixa2.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa2.TabIndex = 4;
+            // 
+            // buscaPlanoContaCaixa3
+            // 
+            this.buscaPlanoContaCaixa3.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa3.Entrada = false;
+            this.buscaPlanoContaCaixa3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa3.LabelText = "Conta a pagar";
+            this.buscaPlanoContaCaixa3.Location = new System.Drawing.Point(6, 79);
+            this.buscaPlanoContaCaixa3.Name = "buscaPlanoContaCaixa3";
+            this.buscaPlanoContaCaixa3.Saida = true;
+            this.buscaPlanoContaCaixa3.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa3.TabIndex = 5;
+            // 
+            // buscaPlanoContaCaixa4
+            // 
+            this.buscaPlanoContaCaixa4.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa4.Entrada = false;
+            this.buscaPlanoContaCaixa4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa4.LabelText = "Descontos concedidos";
+            this.buscaPlanoContaCaixa4.Location = new System.Drawing.Point(6, 124);
+            this.buscaPlanoContaCaixa4.Name = "buscaPlanoContaCaixa4";
+            this.buscaPlanoContaCaixa4.Saida = true;
+            this.buscaPlanoContaCaixa4.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa4.TabIndex = 6;
+            // 
+            // buscaPlanoContaCaixa5
+            // 
+            this.buscaPlanoContaCaixa5.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa5.Entrada = false;
+            this.buscaPlanoContaCaixa5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa5.LabelText = "Juros pagos";
+            this.buscaPlanoContaCaixa5.Location = new System.Drawing.Point(6, 169);
+            this.buscaPlanoContaCaixa5.Name = "buscaPlanoContaCaixa5";
+            this.buscaPlanoContaCaixa5.Saida = true;
+            this.buscaPlanoContaCaixa5.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa5.TabIndex = 7;
+            // 
+            // buscaPlanoContaCaixa6
+            // 
+            this.buscaPlanoContaCaixa6.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa6.Entrada = true;
+            this.buscaPlanoContaCaixa6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa6.LabelText = "Contas a receber";
+            this.buscaPlanoContaCaixa6.Location = new System.Drawing.Point(31, 79);
+            this.buscaPlanoContaCaixa6.Name = "buscaPlanoContaCaixa6";
+            this.buscaPlanoContaCaixa6.Saida = false;
+            this.buscaPlanoContaCaixa6.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa6.TabIndex = 5;
+            // 
+            // buscaPlanoContaCaixa7
+            // 
+            this.buscaPlanoContaCaixa7.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa7.Entrada = true;
+            this.buscaPlanoContaCaixa7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa7.LabelText = "Descontos recebidos";
+            this.buscaPlanoContaCaixa7.Location = new System.Drawing.Point(31, 124);
+            this.buscaPlanoContaCaixa7.Name = "buscaPlanoContaCaixa7";
+            this.buscaPlanoContaCaixa7.Saida = false;
+            this.buscaPlanoContaCaixa7.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa7.TabIndex = 6;
+            // 
+            // buscaPlanoContaCaixa8
+            // 
+            this.buscaPlanoContaCaixa8.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa8.Entrada = true;
+            this.buscaPlanoContaCaixa8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa8.LabelText = "Juros recebidos";
+            this.buscaPlanoContaCaixa8.Location = new System.Drawing.Point(31, 169);
+            this.buscaPlanoContaCaixa8.Name = "buscaPlanoContaCaixa8";
+            this.buscaPlanoContaCaixa8.Saida = false;
+            this.buscaPlanoContaCaixa8.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa8.TabIndex = 7;
             // 
             // fmCaiPlanoContasPadrao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(749, 450);
+            this.ClientSize = new System.Drawing.Size(749, 306);
             this.Controls.Add(this.btCancelar);
             this.Controls.Add(this.btSalvar);
             this.Controls.Add(this.gbLancamentoEntrada);
@@ -194,9 +204,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Plano de Contas Padrão";
             this.gbLancamentosSaida.ResumeLayout(false);
-            this.gbLancamentosSaida.PerformLayout();
             this.gbLancamentoEntrada.ResumeLayout(false);
-            this.gbLancamentoEntrada.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -207,14 +215,13 @@
         private System.Windows.Forms.GroupBox gbLancamentoEntrada;
         private System.Windows.Forms.Button btSalvar;
         private System.Windows.Forms.Button btCancelar;
-        private System.Windows.Forms.Label lbCompras;
-        private System.Windows.Forms.Label lbJurosPagos;
-        private System.Windows.Forms.Label lbDescontosConcedidos;
-        private System.Windows.Forms.Label lbContasPagar;
-        private System.Windows.Forms.Label lbJurosRecebidos;
-        private System.Windows.Forms.Label lbDescontosRecebidos;
-        private System.Windows.Forms.Label lbContasReceber;
-        private System.Windows.Forms.Label lbVendas;
         private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa1;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa3;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa2;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa5;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa4;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa8;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa7;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa6;
     }
 }

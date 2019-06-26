@@ -31,7 +31,7 @@ namespace _5gpro.Forms
         private void PreencheContas()
         {
             tvPlanoContas.Nodes.Clear();
-            planoContas = planoContaDAO.Busca();
+            planoContas = planoContaDAO.Busca(entrada, saida);
             var pais = planoContas.Where(pc => pc.PaiID == 0).ToList();
 
             foreach (var pc in pais)
@@ -49,7 +49,6 @@ namespace _5gpro.Forms
 
         private void CarregarPlanosContasFilho(PlanoConta pai, List<PlanoConta> planoContas)
         {
-            //aqui poe os filhos
             List<PlanoConta> planosFilhos = planoContas.Where(pc => pc.PaiID == pai.PlanoContaID).ToList();
             pai.SubContas = planosFilhos;
             if (pai.SubContas.Count > 0)
@@ -88,6 +87,20 @@ namespace _5gpro.Forms
                     root.Nodes.Add(child);
                 }
             }
+        }
+
+        private void BtOk_Click(object sender, EventArgs e)
+        {
+            planoContaSelecionada = planoContas.First(pc => pc.PlanoContaID == (int)tvPlanoContas.SelectedNode.Tag);
+            if (planoContaSelecionada == null) return;
+            this.Close();
+        }
+
+        private void TvPlanoContas_DoubleClick(object sender, EventArgs e)
+        {
+            planoContaSelecionada = planoContas.First(pc => pc.PlanoContaID == (int)tvPlanoContas.SelectedNode.Tag);
+            if (planoContaSelecionada == null) return;
+            this.Close();
         }
 
         private void BtCancelar_Click(object sender, EventArgs e)

@@ -51,6 +51,7 @@
             this.tvPlanoContas.Name = "tvPlanoContas";
             this.tvPlanoContas.Size = new System.Drawing.Size(367, 229);
             this.tvPlanoContas.TabIndex = 1;
+            this.tvPlanoContas.DoubleClick += new System.EventHandler(this.TvPlanoContas_DoubleClick);
             // 
             // tbBuscaContaCaixa
             // 
@@ -76,6 +77,7 @@
             this.btOk.TabIndex = 4;
             this.btOk.Text = "Ok";
             this.btOk.UseVisualStyleBackColor = true;
+            this.btOk.Click += new System.EventHandler(this.BtOk_Click);
             // 
             // fmBuscaContaCaixa
             // 

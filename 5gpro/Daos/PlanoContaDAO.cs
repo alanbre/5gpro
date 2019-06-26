@@ -64,12 +64,21 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public List<PlanoConta> Busca()
+        public List<PlanoConta> Busca(bool entrada = true, bool saida = true)
         {
+
+            string conEntrada = entrada ? "AND SUBSTRING(codigo_completo, 1, 1) = 1" : "";
+            string conSaida = saida ? "AND SUBSTRING(codigo_completo, 1, 1) = 2" : "";
+            if (entrada && saida) { conEntrada = ""; conSaida = ""; }
+
             List<PlanoConta> planoContas = new List<PlanoConta>();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * FROM caixa_plano_contas";
+                sql.Query = @"SELECT * FROM caixa_plano_contas
+                            WHERE 1=1 "
+                            +conEntrada+""
+                            +conSaida+"";
+
                 var data = sql.selectQuery();
                 foreach(var d in data)
                 {
