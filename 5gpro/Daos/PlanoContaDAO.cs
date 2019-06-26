@@ -63,12 +63,22 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-        public List<PlanoConta> Busca()
+
+        public List<PlanoConta> Busca(bool entrada = true, bool saida = true)
         {
+
+            string conEntrada = entrada ? "AND SUBSTRING(codigo_completo, 1, 1) = 1" : "";
+            string conSaida = saida ? "AND SUBSTRING(codigo_completo, 1, 1) = 2" : "";
+            if (entrada && saida) { conEntrada = ""; conSaida = ""; }
+
             List<PlanoConta> planoContas = new List<PlanoConta>();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT * FROM caixa_plano_contas";
+                sql.Query = @"SELECT * FROM caixa_plano_contas
+                            WHERE 1=1 "
+                            +conEntrada+""
+                            +conSaida+"";
+
                 var data = sql.selectQuery();
                 foreach(var d in data)
                 {
@@ -77,25 +87,28 @@ namespace _5gpro.Daos
             }
             return planoContas;
         }
-        public PlanoConta BuscaByID(int Codigo)
+
+        public PlanoConta BuscaByID(int Codigo, bool entrada = true, bool saida = true)
         {
+            string conEntrada = entrada ? "AND SUBSTRING(codigo_completo, 1, 1) = 1" : "";
+            string conSaida = saida ? "AND SUBSTRING(codigo_completo, 1, 1) = 2" : "";
+            if (entrada && saida) { conEntrada = ""; conSaida = ""; }
+
             var planoconta = new PlanoConta();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
-                                                   s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
-                                                   s.idgrupoitem AS idgrupoitemsub, s.codigo
-                                                   FROM grupoitem g 
-                                                   LEFT JOIN subgrupoitem s 
-                                                   ON g.idgrupoitem = s.idgrupoitem 
-                                                   WHERE g.idgrupoitem = @idgrupoitem";
-                sql.addParam("@idgrupoitem", Codigo);
-                var data = sql.selectQuery();
+                sql.Query = @"SELECT * FROM caixa_plano_contas
+                            WHERE idcaixa_plano_contas = @idcaixa_plano_contas "
+                            + conEntrada + ""
+                            + conSaida + "";
+
+                sql.addParam("@idcaixa_plano_contas", Codigo);
+                var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {
                     return null;
                 }
-               // planoconta = LeDadosReader(data);
+                planoconta = LeDadosReader(data);
             }
             return planoconta;
         }
