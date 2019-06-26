@@ -75,7 +75,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigo.Text, out int codigo)) { tbCodigo.Clear(); }
             if (tbCodigo.Text.Length > 0)
             {
-                conta = planoContaDAO.BuscaByID(int.Parse(tbCodigo.Text));
+                conta = planoContaDAO.BuscaByID(int.Parse(tbCodigo.Text), entrada, saida);
                 PreencheCamposContaCaixa(conta);
             }
             else

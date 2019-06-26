@@ -50,7 +50,8 @@
             this.tbNome.Name = "tbNome";
             this.tbNome.ReadOnly = true;
             this.tbNome.Size = new System.Drawing.Size(168, 20);
-            this.tbNome.TabIndex = 1;
+            this.tbNome.TabIndex = 3;
+            this.tbNome.TabStop = false;
             // 
             // btBusca
             // 
@@ -58,7 +59,7 @@
             this.btBusca.Location = new System.Drawing.Point(70, 16);
             this.btBusca.Name = "btBusca";
             this.btBusca.Size = new System.Drawing.Size(22, 22);
-            this.btBusca.TabIndex = 2;
+            this.btBusca.TabIndex = 1;
             this.btBusca.UseVisualStyleBackColor = true;
             this.btBusca.Click += new System.EventHandler(this.BtBusca_Click);
             // 
@@ -68,7 +69,7 @@
             this.lbNome.Location = new System.Drawing.Point(6, 0);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(35, 13);
-            this.lbNome.TabIndex = 3;
+            this.lbNome.TabIndex = 2;
             this.lbNome.Text = "Nome";
             // 
             // BuscaPlanoContaCaixa

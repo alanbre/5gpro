@@ -5671,6 +5671,9 @@ INSERT INTO caixa_plano_contas (idcaixa_plano_contas, codigo, descricao, paiid, 
 (1, 1, 'Entradas', 0, 0),
 (2, 2, 'Saidas', 0, 0);
 
+INSERT INTO caixa_plano_contas_padrao(idcaixa_plano_contas_padrao) VALUES
+(1);
+
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE
 EVERY 5 SECOND
