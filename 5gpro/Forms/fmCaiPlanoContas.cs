@@ -36,6 +36,8 @@ namespace _5gpro.Forms
         private void FmCaiPlanoContas_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();
+        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e) => Proximo();
+        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e) => Anterior();
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TvPlanoContas_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -111,6 +113,92 @@ namespace _5gpro.Forms
             Limpa(true);
             PreencheContas();
             Editando(false);
+        }
+        private void Anterior()
+        {
+            TreeNode tn = tvPlanoContas.SelectedNode;
+            if (tn == null) return;
+            if (tn.Parent == null)
+            {
+                if (tn.PrevNode == null)
+                {
+                    tvPlanoContas.Focus();
+                    return;
+                }
+                TreeNode last = tvPlanoContas.Nodes[tn.Index - 1] ?? tvPlanoContas.SelectedNode;
+                while (last.LastNode != null)
+                {
+                    last = last.LastNode;
+                }
+                tvPlanoContas.SelectedNode = last;
+            }
+            else
+            {
+                if (tn.PrevNode != null)
+                {
+                    tvPlanoContas.SelectedNode = tn.PrevNode.LastNode ?? tn.PrevNode;
+                }
+                else
+                {
+                    tvPlanoContas.SelectedNode = tn.Parent ?? (tn.Parent.PrevNode ?? tn.Parent);
+                }
+            }
+            tvPlanoContas.Focus();
+        }
+        private void Proximo()
+        {
+            TreeNode tn = tvPlanoContas.SelectedNode;
+            if (tn != null)
+            {
+                if (tn.Parent == null)
+                {
+                    if (tn.FirstNode != null)
+                    {
+                        tvPlanoContas.SelectedNode = tn.FirstNode;
+                    }
+                    else
+                    {
+                        if (tn.NextNode != null)
+                        {
+                            tvPlanoContas.SelectedNode = tn.NextNode;
+                        }
+                    }
+                }
+                else
+                {
+                    if (tn.FirstNode != null)
+                    {
+                        tvPlanoContas.SelectedNode = tn.FirstNode;
+                    }
+                    else
+                    {
+                        if (tn.NextNode != null)
+                        {
+                            tvPlanoContas.SelectedNode = tn.NextNode;
+                        }
+                        else
+                        {
+                            if (tn.Parent.NextNode != null)
+                            {
+                                tvPlanoContas.SelectedNode = tn.Parent.NextNode;
+                            }
+                            else
+                            {
+                                while (tn.NextNode == null)
+                                {
+                                    if (tn.Parent == null)
+                                    {
+                                        break;
+                                    }
+                                    tn = tn.Parent;
+                                }
+                                tvPlanoContas.SelectedNode = tn.NextNode;
+                            }
+                        }
+                    }
+                }
+                tvPlanoContas.Focus();
+            }
         }
         private void PreencheContas()
         {
@@ -192,44 +280,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
-        {
-            TreeNode tn = tvPlanoContas.SelectedNode;
-            if (tn == null) return;
-            if (tn.Parent == null)
-            {
-                if (tn.Index < tvPlanoContas.Nodes.Count - 1)
-                {
-                    tvPlanoContas.SelectedNode = tvPlanoContas.Nodes[tn.Index + 1];
-                }
-            }
-            else
-            {
-                if (tn.Index < tn.Parent.Nodes.Count - 1)
-                {
-                    tvPlanoContas.SelectedNode = tn.Parent.Nodes[tn.Index + 1];
-                }
-            }
-            tvPlanoContas.Focus();
-        }
-
-        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
-        {
-            TreeNode tn = tvPlanoContas.SelectedNode;
-            if (tn == null) return;
-            if (tn.Parent == null)
-            {
-                tvPlanoContas.SelectedNode = tn.Index > 0 ? tvPlanoContas.Nodes[tn.Index - 1].LastNode : tvPlanoContas.SelectedNode;
-            }
-            else
-            {
-
-            }
-
-            tvPlanoContas.Focus();
-        }
-
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
