@@ -37,6 +37,7 @@
             // tbCodigo
             // 
             this.tbCodigo.Location = new System.Drawing.Point(6, 17);
+            this.tbCodigo.Margin = new System.Windows.Forms.Padding(2);
             this.tbCodigo.Name = "tbCodigo";
             this.tbCodigo.Size = new System.Drawing.Size(65, 20);
             this.tbCodigo.TabIndex = 0;
@@ -46,7 +47,10 @@
             // 
             // tbNome
             // 
+            this.tbNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNome.Location = new System.Drawing.Point(94, 17);
+            this.tbNome.Margin = new System.Windows.Forms.Padding(2);
             this.tbNome.Name = "tbNome";
             this.tbNome.ReadOnly = true;
             this.tbNome.Size = new System.Drawing.Size(168, 20);
@@ -57,6 +61,7 @@
             // 
             this.btBusca.Image = global::_5gpro.Properties.Resources.iosSearch_17px_black;
             this.btBusca.Location = new System.Drawing.Point(70, 16);
+            this.btBusca.Margin = new System.Windows.Forms.Padding(2);
             this.btBusca.Name = "btBusca";
             this.btBusca.Size = new System.Drawing.Size(22, 22);
             this.btBusca.TabIndex = 1;
@@ -82,6 +87,7 @@
             this.Controls.Add(this.tbNome);
             this.Controls.Add(this.tbCodigo);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "BuscaPlanoContaCaixa";
             this.Size = new System.Drawing.Size(264, 39);
             this.ResumeLayout(false);
