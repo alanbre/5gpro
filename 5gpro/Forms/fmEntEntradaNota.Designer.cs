@@ -535,6 +535,8 @@
             this.buscaItem1.Name = "buscaItem1";
             this.buscaItem1.Size = new System.Drawing.Size(442, 39);
             this.buscaItem1.TabIndex = 16;
+            this.buscaItem1.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.BuscaItem1_Codigo_Leave);
+            this.buscaItem1.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.BuscaItem1_Codigo_Changed);
             // 
             // dbDescontoItem
             // 

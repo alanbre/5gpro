@@ -280,6 +280,8 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
