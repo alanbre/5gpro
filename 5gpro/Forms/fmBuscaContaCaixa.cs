@@ -21,7 +21,7 @@ namespace _5gpro.Forms
             entradasaida(entrada, saida);
             PreencheContas();
         }
-
+        
         private void entradasaida(bool entradarecebida, bool saidarecebida)
         {
             entrada = entradarecebida;
@@ -89,6 +89,12 @@ namespace _5gpro.Forms
             }
         }
 
+        private void Busca()
+        {
+
+        }
+
+
         private void BtOk_Click(object sender, EventArgs e)
         {
             planoContaSelecionada = planoContas.First(pc => pc.PlanoContaID == (int)tvPlanoContas.SelectedNode.Tag);
@@ -101,6 +107,11 @@ namespace _5gpro.Forms
             planoContaSelecionada = planoContas.First(pc => pc.PlanoContaID == (int)tvPlanoContas.SelectedNode.Tag);
             if (planoContaSelecionada == null) return;
             this.Close();
+        }
+
+        private void BtPesquisar_Click(object sender, EventArgs e)
+        {
+            Busca();
         }
 
         private void BtCancelar_Click(object sender, EventArgs e)

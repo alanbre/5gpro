@@ -130,5 +130,15 @@ namespace _5gpro.Forms
         {
 
         }
+
+        private void Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TbNomeUsuario_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

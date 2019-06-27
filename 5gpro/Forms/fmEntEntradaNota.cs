@@ -573,6 +573,7 @@ namespace _5gpro.Forms
             PreencheCamposItem(itemSelecionado);
             btExcluirItem.Enabled = true;
         }
+
         private void PreencheCampos(NotaFiscalTerceiros notafiscal)
         {
             ignoracheckevent = true;
@@ -688,6 +689,16 @@ namespace _5gpro.Forms
             {
                 dbValorUnitItem.Valor = 0;
             }
+        }
+
+        private void BuscaItem1_Codigo_Changed(object sender, EventArgs e)
+        {
+            BotaoDesintegrar(buscaItem1.item);
+        }
+
+        private void BuscaItem1_Codigo_Leave(object sender, EventArgs e)
+        {
+            BotaoDesintegrar(buscaItem1.item);
         }
 
         private void SetarNivel()

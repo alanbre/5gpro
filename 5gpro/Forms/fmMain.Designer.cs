@@ -42,53 +42,55 @@
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.lbRelogio = new System.Windows.Forms.Label();
             this.btExpandeRetrai = new System.Windows.Forms.Button();
-            this.panelCentral = new System.Windows.Forms.Panel();
-            this.paneldropCaixa = new System.Windows.Forms.Panel();
-            this.btiPlanoContas = new System.Windows.Forms.Button();
-            this.btiLancamentoManual = new System.Windows.Forms.Button();
-            this.btiSangria = new System.Windows.Forms.Button();
-            this.btiAberturaFechamento = new System.Windows.Forms.Button();
-            this.btiCadastroCaixa = new System.Windows.Forms.Button();
-            this.paneldentroRltSaida = new System.Windows.Forms.Panel();
-            this.btsRelatorionotas = new System.Windows.Forms.Button();
-            this.paneldropOrcamento = new System.Windows.Forms.Panel();
-            this.btiCadOrcamento = new System.Windows.Forms.Button();
-            this.paneldropSaida = new System.Windows.Forms.Panel();
-            this.btiRltNotaSaida = new System.Windows.Forms.Button();
-            this.btiSaida = new System.Windows.Forms.Button();
-            this.paneldropEntrada = new System.Windows.Forms.Panel();
-            this.btiEntrada = new System.Windows.Forms.Button();
-            this.paneldropApagar = new System.Windows.Forms.Panel();
-            this.btiQuitacaoAPagar = new System.Windows.Forms.Button();
-            this.btiCadContaPagar = new System.Windows.Forms.Button();
-            this.paneldropAreceber = new System.Windows.Forms.Panel();
-            this.btiQuitacaoAReceber = new System.Windows.Forms.Button();
-            this.btiCadContaReceber = new System.Windows.Forms.Button();
-            this.paneldropCadastros = new System.Windows.Forms.Panel();
-            this.btiUnimedida = new System.Windows.Forms.Button();
-            this.btiGrupopessoa = new System.Windows.Forms.Button();
-            this.btiGrupoitens = new System.Windows.Forms.Button();
-            this.btiOperacoes = new System.Windows.Forms.Button();
-            this.btiGruposusuarios = new System.Windows.Forms.Button();
-            this.btiUsuarios = new System.Windows.Forms.Button();
-            this.btiItens = new System.Windows.Forms.Button();
-            this.btiCadPessoa = new System.Windows.Forms.Button();
             this.timerDropLateral = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
+            this.paneldropCadastros = new System.Windows.Forms.Panel();
+            this.btiCadPessoa = new System.Windows.Forms.Button();
+            this.btiItens = new System.Windows.Forms.Button();
+            this.btiUsuarios = new System.Windows.Forms.Button();
+            this.btiGruposusuarios = new System.Windows.Forms.Button();
+            this.btiOperacoes = new System.Windows.Forms.Button();
+            this.btiGrupoitens = new System.Windows.Forms.Button();
+            this.btiGrupopessoa = new System.Windows.Forms.Button();
+            this.btiUnimedida = new System.Windows.Forms.Button();
+            this.paneldropAreceber = new System.Windows.Forms.Panel();
+            this.btiCadContaReceber = new System.Windows.Forms.Button();
+            this.btiQuitacaoAReceber = new System.Windows.Forms.Button();
+            this.paneldropApagar = new System.Windows.Forms.Panel();
+            this.btiCadContaPagar = new System.Windows.Forms.Button();
+            this.btiQuitacaoAPagar = new System.Windows.Forms.Button();
+            this.paneldropEntrada = new System.Windows.Forms.Panel();
+            this.btiEntrada = new System.Windows.Forms.Button();
+            this.paneldropSaida = new System.Windows.Forms.Panel();
+            this.btiSaida = new System.Windows.Forms.Button();
+            this.btiRltNotaSaida = new System.Windows.Forms.Button();
+            this.paneldropOrcamento = new System.Windows.Forms.Panel();
+            this.btiCadOrcamento = new System.Windows.Forms.Button();
+            this.paneldentroRltSaida = new System.Windows.Forms.Panel();
+            this.btsRelatorionotas = new System.Windows.Forms.Button();
+            this.paneldropCaixa = new System.Windows.Forms.Panel();
+            this.btiCadastroCaixa = new System.Windows.Forms.Button();
+            this.btiAberturaFechamento = new System.Windows.Forms.Button();
+            this.btiSangria = new System.Windows.Forms.Button();
+            this.btiLancamentoManual = new System.Windows.Forms.Button();
+            this.btiPlanoContas = new System.Windows.Forms.Button();
             this.btiPlanoContasPadrao = new System.Windows.Forms.Button();
+            this.panelCentral = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
-            this.panelCentral.SuspendLayout();
-            this.paneldropCaixa.SuspendLayout();
-            this.paneldentroRltSaida.SuspendLayout();
-            this.paneldropOrcamento.SuspendLayout();
-            this.paneldropSaida.SuspendLayout();
-            this.paneldropEntrada.SuspendLayout();
-            this.paneldropApagar.SuspendLayout();
-            this.paneldropAreceber.SuspendLayout();
-            this.paneldropCadastros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.paneldropCadastros.SuspendLayout();
+            this.paneldropAreceber.SuspendLayout();
+            this.paneldropApagar.SuspendLayout();
+            this.paneldropEntrada.SuspendLayout();
+            this.paneldropSaida.SuspendLayout();
+            this.paneldropOrcamento.SuspendLayout();
+            this.paneldentroRltSaida.SuspendLayout();
+            this.paneldropCaixa.SuspendLayout();
+            this.panelCentral.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -98,7 +100,7 @@
             // 
             // panelEsquerdo
             // 
-            this.panelEsquerdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.panelEsquerdo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.panelEsquerdo.Controls.Add(this.btCaixa);
             this.panelEsquerdo.Controls.Add(this.btOrcamentos);
             this.panelEsquerdo.Controls.Add(this.btSaidas);
@@ -130,7 +132,7 @@
             // 
             // btOrcamentos
             // 
-            this.btOrcamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btOrcamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btOrcamentos.FlatAppearance.BorderSize = 0;
             this.btOrcamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btOrcamentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -147,7 +149,7 @@
             // 
             // btSaidas
             // 
-            this.btSaidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btSaidas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btSaidas.FlatAppearance.BorderSize = 0;
             this.btSaidas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btSaidas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -164,7 +166,7 @@
             // 
             // btEntradas
             // 
-            this.btEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btEntradas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btEntradas.FlatAppearance.BorderSize = 0;
             this.btEntradas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btEntradas.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -181,7 +183,7 @@
             // 
             // btCPagar
             // 
-            this.btCPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btCPagar.FlatAppearance.BorderSize = 0;
             this.btCPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -198,7 +200,7 @@
             // 
             // btCReceber
             // 
-            this.btCReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btCReceber.FlatAppearance.BorderSize = 0;
             this.btCReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -215,7 +217,7 @@
             // 
             // btCadastrosmenu
             // 
-            this.btCadastrosmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btCadastrosmenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btCadastrosmenu.FlatAppearance.BorderSize = 0;
             this.btCadastrosmenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btCadastrosmenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -232,7 +234,7 @@
             // 
             // panelSuperior
             // 
-            this.panelSuperior.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.panelSuperior.Controls.Add(this.lbRelogio);
             this.panelSuperior.Controls.Add(this.btExpandeRetrai);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
@@ -255,10 +257,10 @@
             // 
             // btExpandeRetrai
             // 
-            this.btExpandeRetrai.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.btExpandeRetrai.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btExpandeRetrai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btExpandeRetrai.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.btExpandeRetrai.Image = global::_5gpro.Properties.Resources.menu_filled_30pxBLACK;
+            this.btExpandeRetrai.Image = global::_5gpro.Properties.Resources.menu_filled_30px_white;
             this.btExpandeRetrai.Location = new System.Drawing.Point(3, 3);
             this.btExpandeRetrai.Name = "btExpandeRetrai";
             this.btExpandeRetrai.Size = new System.Drawing.Size(42, 37);
@@ -266,313 +268,25 @@
             this.btExpandeRetrai.UseVisualStyleBackColor = false;
             this.btExpandeRetrai.Click += new System.EventHandler(this.BtExpandiretrai_Click);
             // 
-            // panelCentral
+            // timerDropLateral
             // 
-            this.panelCentral.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.panelCentral.Controls.Add(this.paneldropCaixa);
-            this.panelCentral.Controls.Add(this.paneldentroRltSaida);
-            this.panelCentral.Controls.Add(this.paneldropOrcamento);
-            this.panelCentral.Controls.Add(this.paneldropSaida);
-            this.panelCentral.Controls.Add(this.paneldropEntrada);
-            this.panelCentral.Controls.Add(this.paneldropApagar);
-            this.panelCentral.Controls.Add(this.paneldropAreceber);
-            this.panelCentral.Controls.Add(this.paneldropCadastros);
-            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCentral.Location = new System.Drawing.Point(250, 50);
-            this.panelCentral.Name = "panelCentral";
-            this.panelCentral.Size = new System.Drawing.Size(476, 535);
-            this.panelCentral.TabIndex = 3;
+            this.timerDropLateral.Interval = 1;
+            this.timerDropLateral.Tick += new System.EventHandler(this.TimerDropLateral_Tick);
             // 
-            // paneldropCaixa
+            // pictureBox1
             // 
-            this.paneldropCaixa.Controls.Add(this.btiPlanoContasPadrao);
-            this.paneldropCaixa.Controls.Add(this.btiPlanoContas);
-            this.paneldropCaixa.Controls.Add(this.btiLancamentoManual);
-            this.paneldropCaixa.Controls.Add(this.btiSangria);
-            this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
-            this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
-            this.paneldropCaixa.Location = new System.Drawing.Point(3, 275);
-            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 168);
-            this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropCaixa.Name = "paneldropCaixa";
-            this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
-            this.paneldropCaixa.TabIndex = 8;
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.Image = global::_5gpro.Properties.Resources.HAJELLL;
+            this.pictureBox1.Location = new System.Drawing.Point(29, 473);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(339, 59);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 7;
+            this.pictureBox1.TabStop = false;
             // 
-            // btiPlanoContas
+            // timerRelogio
             // 
-            this.btiPlanoContas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiPlanoContas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiPlanoContas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiPlanoContas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiPlanoContas.ForeColor = System.Drawing.Color.White;
-            this.btiPlanoContas.Location = new System.Drawing.Point(0, 112);
-            this.btiPlanoContas.Name = "btiPlanoContas";
-            this.btiPlanoContas.Size = new System.Drawing.Size(200, 28);
-            this.btiPlanoContas.TabIndex = 3;
-            this.btiPlanoContas.Text = "Plano de contas";
-            this.btiPlanoContas.UseVisualStyleBackColor = false;
-            this.btiPlanoContas.Click += new System.EventHandler(this.BtiPlanoContas_Click);
-            // 
-            // btiLancamentoManual
-            // 
-            this.btiLancamentoManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiLancamentoManual.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiLancamentoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiLancamentoManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiLancamentoManual.ForeColor = System.Drawing.Color.White;
-            this.btiLancamentoManual.Location = new System.Drawing.Point(0, 84);
-            this.btiLancamentoManual.Name = "btiLancamentoManual";
-            this.btiLancamentoManual.Size = new System.Drawing.Size(200, 28);
-            this.btiLancamentoManual.TabIndex = 2;
-            this.btiLancamentoManual.Text = "Lançamento manual";
-            this.btiLancamentoManual.UseVisualStyleBackColor = false;
-            this.btiLancamentoManual.Click += new System.EventHandler(this.BtiLancamentoManual_Click);
-            // 
-            // btiSangria
-            // 
-            this.btiSangria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiSangria.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiSangria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiSangria.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiSangria.ForeColor = System.Drawing.Color.White;
-            this.btiSangria.Location = new System.Drawing.Point(0, 56);
-            this.btiSangria.Name = "btiSangria";
-            this.btiSangria.Size = new System.Drawing.Size(200, 28);
-            this.btiSangria.TabIndex = 1;
-            this.btiSangria.Text = "Sangria";
-            this.btiSangria.UseVisualStyleBackColor = false;
-            this.btiSangria.Click += new System.EventHandler(this.BtiSangria_Click);
-            // 
-            // btiAberturaFechamento
-            // 
-            this.btiAberturaFechamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiAberturaFechamento.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiAberturaFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiAberturaFechamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiAberturaFechamento.ForeColor = System.Drawing.Color.White;
-            this.btiAberturaFechamento.Location = new System.Drawing.Point(0, 28);
-            this.btiAberturaFechamento.Name = "btiAberturaFechamento";
-            this.btiAberturaFechamento.Size = new System.Drawing.Size(200, 28);
-            this.btiAberturaFechamento.TabIndex = 0;
-            this.btiAberturaFechamento.Text = "Abertura e fechamento";
-            this.btiAberturaFechamento.UseVisualStyleBackColor = false;
-            this.btiAberturaFechamento.Click += new System.EventHandler(this.BtiAberturaFechamento_Click);
-            // 
-            // btiCadastroCaixa
-            // 
-            this.btiCadastroCaixa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiCadastroCaixa.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiCadastroCaixa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadastroCaixa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiCadastroCaixa.ForeColor = System.Drawing.Color.White;
-            this.btiCadastroCaixa.Location = new System.Drawing.Point(0, 0);
-            this.btiCadastroCaixa.Name = "btiCadastroCaixa";
-            this.btiCadastroCaixa.Size = new System.Drawing.Size(200, 28);
-            this.btiCadastroCaixa.TabIndex = 0;
-            this.btiCadastroCaixa.Text = "Cadastro caixa";
-            this.btiCadastroCaixa.UseVisualStyleBackColor = false;
-            this.btiCadastroCaixa.Click += new System.EventHandler(this.BtiCadastroCaixa_Click);
-            // 
-            // paneldentroRltSaida
-            // 
-            this.paneldentroRltSaida.Controls.Add(this.btsRelatorionotas);
-            this.paneldentroRltSaida.Location = new System.Drawing.Point(209, 211);
-            this.paneldentroRltSaida.MaximumSize = new System.Drawing.Size(200, 28);
-            this.paneldentroRltSaida.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldentroRltSaida.Name = "paneldentroRltSaida";
-            this.paneldentroRltSaida.Size = new System.Drawing.Size(200, 10);
-            this.paneldentroRltSaida.TabIndex = 6;
-            // 
-            // btsRelatorionotas
-            // 
-            this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btsRelatorionotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
-            this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
-            this.btsRelatorionotas.Name = "btsRelatorionotas";
-            this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
-            this.btsRelatorionotas.TabIndex = 0;
-            this.btsRelatorionotas.Text = "Relatório de notas";
-            this.btsRelatorionotas.UseVisualStyleBackColor = false;
-            this.btsRelatorionotas.Click += new System.EventHandler(this.BtsRelatorionotas_Click);
-            // 
-            // paneldropOrcamento
-            // 
-            this.paneldropOrcamento.Controls.Add(this.btiCadOrcamento);
-            this.paneldropOrcamento.Location = new System.Drawing.Point(3, 229);
-            this.paneldropOrcamento.MaximumSize = new System.Drawing.Size(200, 28);
-            this.paneldropOrcamento.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropOrcamento.Name = "paneldropOrcamento";
-            this.paneldropOrcamento.Size = new System.Drawing.Size(200, 10);
-            this.paneldropOrcamento.TabIndex = 5;
-            // 
-            // btiCadOrcamento
-            // 
-            this.btiCadOrcamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
-            this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
-            this.btiCadOrcamento.Name = "btiCadOrcamento";
-            this.btiCadOrcamento.Size = new System.Drawing.Size(200, 28);
-            this.btiCadOrcamento.TabIndex = 0;
-            this.btiCadOrcamento.Text = "Cadastro Orçamentos";
-            this.btiCadOrcamento.UseVisualStyleBackColor = false;
-            this.btiCadOrcamento.Click += new System.EventHandler(this.BtiCadOrcamento_Click);
-            // 
-            // paneldropSaida
-            // 
-            this.paneldropSaida.Controls.Add(this.btiRltNotaSaida);
-            this.paneldropSaida.Controls.Add(this.btiSaida);
-            this.paneldropSaida.Location = new System.Drawing.Point(3, 183);
-            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 56);
-            this.paneldropSaida.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropSaida.Name = "paneldropSaida";
-            this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
-            this.paneldropSaida.TabIndex = 4;
-            // 
-            // btiRltNotaSaida
-            // 
-            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiRltNotaSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
-            this.btiRltNotaSaida.Image = global::_5gpro.Properties.Resources.right_18px;
-            this.btiRltNotaSaida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
-            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
-            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
-            this.btiRltNotaSaida.TabIndex = 1;
-            this.btiRltNotaSaida.Text = "Relatórios";
-            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
-            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
-            // 
-            // btiSaida
-            // 
-            this.btiSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiSaida.ForeColor = System.Drawing.Color.White;
-            this.btiSaida.Location = new System.Drawing.Point(0, 0);
-            this.btiSaida.Name = "btiSaida";
-            this.btiSaida.Size = new System.Drawing.Size(200, 28);
-            this.btiSaida.TabIndex = 0;
-            this.btiSaida.Text = "Emissão de nota fiscal";
-            this.btiSaida.UseVisualStyleBackColor = false;
-            this.btiSaida.Click += new System.EventHandler(this.BtiSaida_Click);
-            // 
-            // paneldropEntrada
-            // 
-            this.paneldropEntrada.Controls.Add(this.btiEntrada);
-            this.paneldropEntrada.Location = new System.Drawing.Point(3, 139);
-            this.paneldropEntrada.MaximumSize = new System.Drawing.Size(200, 30);
-            this.paneldropEntrada.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropEntrada.Name = "paneldropEntrada";
-            this.paneldropEntrada.Size = new System.Drawing.Size(200, 10);
-            this.paneldropEntrada.TabIndex = 3;
-            // 
-            // btiEntrada
-            // 
-            this.btiEntrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiEntrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiEntrada.ForeColor = System.Drawing.Color.White;
-            this.btiEntrada.Location = new System.Drawing.Point(0, 0);
-            this.btiEntrada.Name = "btiEntrada";
-            this.btiEntrada.Size = new System.Drawing.Size(200, 28);
-            this.btiEntrada.TabIndex = 0;
-            this.btiEntrada.Text = "Entrada de notas";
-            this.btiEntrada.UseVisualStyleBackColor = false;
-            this.btiEntrada.Click += new System.EventHandler(this.BtiEntrada_Click);
-            // 
-            // paneldropApagar
-            // 
-            this.paneldropApagar.Controls.Add(this.btiQuitacaoAPagar);
-            this.paneldropApagar.Controls.Add(this.btiCadContaPagar);
-            this.paneldropApagar.Location = new System.Drawing.Point(3, 93);
-            this.paneldropApagar.MaximumSize = new System.Drawing.Size(200, 58);
-            this.paneldropApagar.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropApagar.Name = "paneldropApagar";
-            this.paneldropApagar.Size = new System.Drawing.Size(200, 10);
-            this.paneldropApagar.TabIndex = 2;
-            // 
-            // btiQuitacaoAPagar
-            // 
-            this.btiQuitacaoAPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiQuitacaoAPagar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiQuitacaoAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiQuitacaoAPagar.ForeColor = System.Drawing.Color.White;
-            this.btiQuitacaoAPagar.Location = new System.Drawing.Point(0, 28);
-            this.btiQuitacaoAPagar.Name = "btiQuitacaoAPagar";
-            this.btiQuitacaoAPagar.Size = new System.Drawing.Size(200, 28);
-            this.btiQuitacaoAPagar.TabIndex = 1;
-            this.btiQuitacaoAPagar.Text = "Quitação";
-            this.btiQuitacaoAPagar.UseVisualStyleBackColor = false;
-            this.btiQuitacaoAPagar.Click += new System.EventHandler(this.BtiQuitacaoAPagar_Click);
-            // 
-            // btiCadContaPagar
-            // 
-            this.btiCadContaPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadContaPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
-            this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
-            this.btiCadContaPagar.Name = "btiCadContaPagar";
-            this.btiCadContaPagar.Size = new System.Drawing.Size(200, 28);
-            this.btiCadContaPagar.TabIndex = 0;
-            this.btiCadContaPagar.Text = "Cadastro de Conta";
-            this.btiCadContaPagar.UseVisualStyleBackColor = false;
-            this.btiCadContaPagar.Click += new System.EventHandler(this.BtiCadContaPagar_Click);
-            // 
-            // paneldropAreceber
-            // 
-            this.paneldropAreceber.BackColor = System.Drawing.Color.White;
-            this.paneldropAreceber.Controls.Add(this.btiQuitacaoAReceber);
-            this.paneldropAreceber.Controls.Add(this.btiCadContaReceber);
-            this.paneldropAreceber.Location = new System.Drawing.Point(3, 47);
-            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 60);
-            this.paneldropAreceber.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldropAreceber.Name = "paneldropAreceber";
-            this.paneldropAreceber.Size = new System.Drawing.Size(200, 10);
-            this.paneldropAreceber.TabIndex = 1;
-            // 
-            // btiQuitacaoAReceber
-            // 
-            this.btiQuitacaoAReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiQuitacaoAReceber.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiQuitacaoAReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiQuitacaoAReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiQuitacaoAReceber.ForeColor = System.Drawing.Color.White;
-            this.btiQuitacaoAReceber.Location = new System.Drawing.Point(0, 28);
-            this.btiQuitacaoAReceber.Name = "btiQuitacaoAReceber";
-            this.btiQuitacaoAReceber.Size = new System.Drawing.Size(200, 28);
-            this.btiQuitacaoAReceber.TabIndex = 1;
-            this.btiQuitacaoAReceber.Text = "Quitação";
-            this.btiQuitacaoAReceber.UseVisualStyleBackColor = false;
-            this.btiQuitacaoAReceber.Click += new System.EventHandler(this.BtiQuitacaoConta_Click);
-            // 
-            // btiCadContaReceber
-            // 
-            this.btiCadContaReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiCadContaReceber.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiCadContaReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiCadContaReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiCadContaReceber.ForeColor = System.Drawing.Color.White;
-            this.btiCadContaReceber.Location = new System.Drawing.Point(0, 0);
-            this.btiCadContaReceber.Name = "btiCadContaReceber";
-            this.btiCadContaReceber.Size = new System.Drawing.Size(200, 28);
-            this.btiCadContaReceber.TabIndex = 0;
-            this.btiCadContaReceber.Text = "Cadastro de Conta";
-            this.btiCadContaReceber.UseVisualStyleBackColor = false;
-            this.btiCadContaReceber.Click += new System.EventHandler(this.BtiCadContaReceber_Click);
+            this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
             // 
             // paneldropCadastros
             // 
@@ -592,114 +306,9 @@
             this.paneldropCadastros.Size = new System.Drawing.Size(200, 10);
             this.paneldropCadastros.TabIndex = 0;
             // 
-            // btiUnimedida
-            // 
-            this.btiUnimedida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiUnimedida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiUnimedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiUnimedida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiUnimedida.ForeColor = System.Drawing.Color.White;
-            this.btiUnimedida.Location = new System.Drawing.Point(0, 196);
-            this.btiUnimedida.Name = "btiUnimedida";
-            this.btiUnimedida.Size = new System.Drawing.Size(200, 28);
-            this.btiUnimedida.TabIndex = 7;
-            this.btiUnimedida.Text = "Unidade de medida";
-            this.btiUnimedida.UseVisualStyleBackColor = false;
-            this.btiUnimedida.Click += new System.EventHandler(this.BtiUnimedida_Click);
-            // 
-            // btiGrupopessoa
-            // 
-            this.btiGrupopessoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiGrupopessoa.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiGrupopessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiGrupopessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiGrupopessoa.ForeColor = System.Drawing.Color.White;
-            this.btiGrupopessoa.Location = new System.Drawing.Point(0, 168);
-            this.btiGrupopessoa.Name = "btiGrupopessoa";
-            this.btiGrupopessoa.Size = new System.Drawing.Size(200, 28);
-            this.btiGrupopessoa.TabIndex = 6;
-            this.btiGrupopessoa.Text = "Grupo de Pessoas";
-            this.btiGrupopessoa.UseVisualStyleBackColor = false;
-            this.btiGrupopessoa.Click += new System.EventHandler(this.BtiGrupopessoa_Click);
-            // 
-            // btiGrupoitens
-            // 
-            this.btiGrupoitens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiGrupoitens.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiGrupoitens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiGrupoitens.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiGrupoitens.ForeColor = System.Drawing.Color.White;
-            this.btiGrupoitens.Location = new System.Drawing.Point(0, 140);
-            this.btiGrupoitens.Name = "btiGrupoitens";
-            this.btiGrupoitens.Size = new System.Drawing.Size(200, 28);
-            this.btiGrupoitens.TabIndex = 5;
-            this.btiGrupoitens.Text = "Grupo de Itens";
-            this.btiGrupoitens.UseVisualStyleBackColor = false;
-            this.btiGrupoitens.Click += new System.EventHandler(this.BtiGrupoitens_Click);
-            // 
-            // btiOperacoes
-            // 
-            this.btiOperacoes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiOperacoes.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiOperacoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiOperacoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiOperacoes.ForeColor = System.Drawing.Color.White;
-            this.btiOperacoes.Location = new System.Drawing.Point(0, 112);
-            this.btiOperacoes.Name = "btiOperacoes";
-            this.btiOperacoes.Size = new System.Drawing.Size(200, 28);
-            this.btiOperacoes.TabIndex = 4;
-            this.btiOperacoes.Text = "Operações";
-            this.btiOperacoes.UseVisualStyleBackColor = false;
-            this.btiOperacoes.Click += new System.EventHandler(this.BtiOperacoes_Click);
-            // 
-            // btiGruposusuarios
-            // 
-            this.btiGruposusuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiGruposusuarios.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiGruposusuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiGruposusuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiGruposusuarios.ForeColor = System.Drawing.Color.White;
-            this.btiGruposusuarios.Location = new System.Drawing.Point(0, 84);
-            this.btiGruposusuarios.Name = "btiGruposusuarios";
-            this.btiGruposusuarios.Size = new System.Drawing.Size(200, 28);
-            this.btiGruposusuarios.TabIndex = 3;
-            this.btiGruposusuarios.Text = "Grupos Usuários";
-            this.btiGruposusuarios.UseVisualStyleBackColor = false;
-            this.btiGruposusuarios.Click += new System.EventHandler(this.BtiGruposusuarios_Click);
-            // 
-            // btiUsuarios
-            // 
-            this.btiUsuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiUsuarios.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiUsuarios.ForeColor = System.Drawing.Color.White;
-            this.btiUsuarios.Location = new System.Drawing.Point(0, 56);
-            this.btiUsuarios.Name = "btiUsuarios";
-            this.btiUsuarios.Size = new System.Drawing.Size(200, 28);
-            this.btiUsuarios.TabIndex = 2;
-            this.btiUsuarios.Text = "Usuários";
-            this.btiUsuarios.UseVisualStyleBackColor = false;
-            this.btiUsuarios.Click += new System.EventHandler(this.BtiUsuários_Click);
-            // 
-            // btiItens
-            // 
-            this.btiItens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            this.btiItens.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiItens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiItens.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiItens.ForeColor = System.Drawing.Color.White;
-            this.btiItens.Location = new System.Drawing.Point(0, 28);
-            this.btiItens.Name = "btiItens";
-            this.btiItens.Size = new System.Drawing.Size(200, 28);
-            this.btiItens.TabIndex = 1;
-            this.btiItens.Text = "Itens";
-            this.btiItens.UseVisualStyleBackColor = false;
-            this.btiItens.Click += new System.EventHandler(this.BtiItens_Click);
-            // 
             // btiCadPessoa
             // 
-            this.btiCadPessoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiCadPessoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btiCadPessoa.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiCadPessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiCadPessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -712,29 +321,405 @@
             this.btiCadPessoa.UseVisualStyleBackColor = false;
             this.btiCadPessoa.Click += new System.EventHandler(this.BtiCadPessoa_Click);
             // 
-            // timerDropLateral
+            // btiItens
             // 
-            this.timerDropLateral.Interval = 1;
-            this.timerDropLateral.Tick += new System.EventHandler(this.TimerDropLateral_Tick);
+            this.btiItens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiItens.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiItens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiItens.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiItens.ForeColor = System.Drawing.Color.White;
+            this.btiItens.Location = new System.Drawing.Point(0, 28);
+            this.btiItens.Name = "btiItens";
+            this.btiItens.Size = new System.Drawing.Size(200, 28);
+            this.btiItens.TabIndex = 1;
+            this.btiItens.Text = "Itens";
+            this.btiItens.UseVisualStyleBackColor = false;
+            this.btiItens.Click += new System.EventHandler(this.BtiItens_Click);
             // 
-            // pictureBox1
+            // btiUsuarios
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::_5gpro.Properties.Resources.HAJELLL;
-            this.pictureBox1.Location = new System.Drawing.Point(956, 526);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(339, 59);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
+            this.btiUsuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiUsuarios.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiUsuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiUsuarios.ForeColor = System.Drawing.Color.White;
+            this.btiUsuarios.Location = new System.Drawing.Point(0, 56);
+            this.btiUsuarios.Name = "btiUsuarios";
+            this.btiUsuarios.Size = new System.Drawing.Size(200, 28);
+            this.btiUsuarios.TabIndex = 2;
+            this.btiUsuarios.Text = "Usuários";
+            this.btiUsuarios.UseVisualStyleBackColor = false;
+            this.btiUsuarios.Click += new System.EventHandler(this.BtiUsuários_Click);
             // 
-            // timerRelogio
+            // btiGruposusuarios
             // 
-            this.timerRelogio.Tick += new System.EventHandler(this.TimerRelogio_Tick);
+            this.btiGruposusuarios.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiGruposusuarios.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiGruposusuarios.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiGruposusuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGruposusuarios.ForeColor = System.Drawing.Color.White;
+            this.btiGruposusuarios.Location = new System.Drawing.Point(0, 84);
+            this.btiGruposusuarios.Name = "btiGruposusuarios";
+            this.btiGruposusuarios.Size = new System.Drawing.Size(200, 28);
+            this.btiGruposusuarios.TabIndex = 3;
+            this.btiGruposusuarios.Text = "Grupos Usuários";
+            this.btiGruposusuarios.UseVisualStyleBackColor = false;
+            this.btiGruposusuarios.Click += new System.EventHandler(this.BtiGruposusuarios_Click);
+            // 
+            // btiOperacoes
+            // 
+            this.btiOperacoes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiOperacoes.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiOperacoes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiOperacoes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiOperacoes.ForeColor = System.Drawing.Color.White;
+            this.btiOperacoes.Location = new System.Drawing.Point(0, 112);
+            this.btiOperacoes.Name = "btiOperacoes";
+            this.btiOperacoes.Size = new System.Drawing.Size(200, 28);
+            this.btiOperacoes.TabIndex = 4;
+            this.btiOperacoes.Text = "Operações";
+            this.btiOperacoes.UseVisualStyleBackColor = false;
+            this.btiOperacoes.Click += new System.EventHandler(this.BtiOperacoes_Click);
+            // 
+            // btiGrupoitens
+            // 
+            this.btiGrupoitens.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiGrupoitens.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiGrupoitens.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiGrupoitens.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGrupoitens.ForeColor = System.Drawing.Color.White;
+            this.btiGrupoitens.Location = new System.Drawing.Point(0, 140);
+            this.btiGrupoitens.Name = "btiGrupoitens";
+            this.btiGrupoitens.Size = new System.Drawing.Size(200, 28);
+            this.btiGrupoitens.TabIndex = 5;
+            this.btiGrupoitens.Text = "Grupo de Itens";
+            this.btiGrupoitens.UseVisualStyleBackColor = false;
+            this.btiGrupoitens.Click += new System.EventHandler(this.BtiGrupoitens_Click);
+            // 
+            // btiGrupopessoa
+            // 
+            this.btiGrupopessoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiGrupopessoa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiGrupopessoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiGrupopessoa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiGrupopessoa.ForeColor = System.Drawing.Color.White;
+            this.btiGrupopessoa.Location = new System.Drawing.Point(0, 168);
+            this.btiGrupopessoa.Name = "btiGrupopessoa";
+            this.btiGrupopessoa.Size = new System.Drawing.Size(200, 28);
+            this.btiGrupopessoa.TabIndex = 6;
+            this.btiGrupopessoa.Text = "Grupo de Pessoas";
+            this.btiGrupopessoa.UseVisualStyleBackColor = false;
+            this.btiGrupopessoa.Click += new System.EventHandler(this.BtiGrupopessoa_Click);
+            // 
+            // btiUnimedida
+            // 
+            this.btiUnimedida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiUnimedida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiUnimedida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiUnimedida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiUnimedida.ForeColor = System.Drawing.Color.White;
+            this.btiUnimedida.Location = new System.Drawing.Point(0, 196);
+            this.btiUnimedida.Name = "btiUnimedida";
+            this.btiUnimedida.Size = new System.Drawing.Size(200, 28);
+            this.btiUnimedida.TabIndex = 7;
+            this.btiUnimedida.Text = "Unidade de medida";
+            this.btiUnimedida.UseVisualStyleBackColor = false;
+            this.btiUnimedida.Click += new System.EventHandler(this.BtiUnimedida_Click);
+            // 
+            // paneldropAreceber
+            // 
+            this.paneldropAreceber.BackColor = System.Drawing.Color.White;
+            this.paneldropAreceber.Controls.Add(this.btiQuitacaoAReceber);
+            this.paneldropAreceber.Controls.Add(this.btiCadContaReceber);
+            this.paneldropAreceber.Location = new System.Drawing.Point(3, 47);
+            this.paneldropAreceber.MaximumSize = new System.Drawing.Size(200, 60);
+            this.paneldropAreceber.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropAreceber.Name = "paneldropAreceber";
+            this.paneldropAreceber.Size = new System.Drawing.Size(200, 10);
+            this.paneldropAreceber.TabIndex = 1;
+            // 
+            // btiCadContaReceber
+            // 
+            this.btiCadContaReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiCadContaReceber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadContaReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadContaReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaReceber.ForeColor = System.Drawing.Color.White;
+            this.btiCadContaReceber.Location = new System.Drawing.Point(0, 0);
+            this.btiCadContaReceber.Name = "btiCadContaReceber";
+            this.btiCadContaReceber.Size = new System.Drawing.Size(200, 28);
+            this.btiCadContaReceber.TabIndex = 0;
+            this.btiCadContaReceber.Text = "Cadastro de Conta";
+            this.btiCadContaReceber.UseVisualStyleBackColor = false;
+            this.btiCadContaReceber.Click += new System.EventHandler(this.BtiCadContaReceber_Click);
+            // 
+            // btiQuitacaoAReceber
+            // 
+            this.btiQuitacaoAReceber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiQuitacaoAReceber.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiQuitacaoAReceber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiQuitacaoAReceber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoAReceber.ForeColor = System.Drawing.Color.White;
+            this.btiQuitacaoAReceber.Location = new System.Drawing.Point(0, 28);
+            this.btiQuitacaoAReceber.Name = "btiQuitacaoAReceber";
+            this.btiQuitacaoAReceber.Size = new System.Drawing.Size(200, 28);
+            this.btiQuitacaoAReceber.TabIndex = 1;
+            this.btiQuitacaoAReceber.Text = "Quitação";
+            this.btiQuitacaoAReceber.UseVisualStyleBackColor = false;
+            this.btiQuitacaoAReceber.Click += new System.EventHandler(this.BtiQuitacaoConta_Click);
+            // 
+            // paneldropApagar
+            // 
+            this.paneldropApagar.Controls.Add(this.btiQuitacaoAPagar);
+            this.paneldropApagar.Controls.Add(this.btiCadContaPagar);
+            this.paneldropApagar.Location = new System.Drawing.Point(3, 93);
+            this.paneldropApagar.MaximumSize = new System.Drawing.Size(200, 58);
+            this.paneldropApagar.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropApagar.Name = "paneldropApagar";
+            this.paneldropApagar.Size = new System.Drawing.Size(200, 10);
+            this.paneldropApagar.TabIndex = 2;
+            // 
+            // btiCadContaPagar
+            // 
+            this.btiCadContaPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiCadContaPagar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadContaPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadContaPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadContaPagar.ForeColor = System.Drawing.Color.White;
+            this.btiCadContaPagar.Location = new System.Drawing.Point(0, 0);
+            this.btiCadContaPagar.Name = "btiCadContaPagar";
+            this.btiCadContaPagar.Size = new System.Drawing.Size(200, 28);
+            this.btiCadContaPagar.TabIndex = 0;
+            this.btiCadContaPagar.Text = "Cadastro de Conta";
+            this.btiCadContaPagar.UseVisualStyleBackColor = false;
+            this.btiCadContaPagar.Click += new System.EventHandler(this.BtiCadContaPagar_Click);
+            // 
+            // btiQuitacaoAPagar
+            // 
+            this.btiQuitacaoAPagar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiQuitacaoAPagar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiQuitacaoAPagar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiQuitacaoAPagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiQuitacaoAPagar.ForeColor = System.Drawing.Color.White;
+            this.btiQuitacaoAPagar.Location = new System.Drawing.Point(0, 28);
+            this.btiQuitacaoAPagar.Name = "btiQuitacaoAPagar";
+            this.btiQuitacaoAPagar.Size = new System.Drawing.Size(200, 28);
+            this.btiQuitacaoAPagar.TabIndex = 1;
+            this.btiQuitacaoAPagar.Text = "Quitação";
+            this.btiQuitacaoAPagar.UseVisualStyleBackColor = false;
+            this.btiQuitacaoAPagar.Click += new System.EventHandler(this.BtiQuitacaoAPagar_Click);
+            // 
+            // paneldropEntrada
+            // 
+            this.paneldropEntrada.Controls.Add(this.btiEntrada);
+            this.paneldropEntrada.Location = new System.Drawing.Point(3, 139);
+            this.paneldropEntrada.MaximumSize = new System.Drawing.Size(200, 30);
+            this.paneldropEntrada.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropEntrada.Name = "paneldropEntrada";
+            this.paneldropEntrada.Size = new System.Drawing.Size(200, 10);
+            this.paneldropEntrada.TabIndex = 3;
+            // 
+            // btiEntrada
+            // 
+            this.btiEntrada.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiEntrada.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiEntrada.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiEntrada.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiEntrada.ForeColor = System.Drawing.Color.White;
+            this.btiEntrada.Location = new System.Drawing.Point(0, 0);
+            this.btiEntrada.Name = "btiEntrada";
+            this.btiEntrada.Size = new System.Drawing.Size(200, 28);
+            this.btiEntrada.TabIndex = 0;
+            this.btiEntrada.Text = "Entrada de notas";
+            this.btiEntrada.UseVisualStyleBackColor = false;
+            this.btiEntrada.Click += new System.EventHandler(this.BtiEntrada_Click);
+            // 
+            // paneldropSaida
+            // 
+            this.paneldropSaida.Controls.Add(this.btiRltNotaSaida);
+            this.paneldropSaida.Controls.Add(this.btiSaida);
+            this.paneldropSaida.Location = new System.Drawing.Point(3, 183);
+            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 56);
+            this.paneldropSaida.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropSaida.Name = "paneldropSaida";
+            this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
+            this.paneldropSaida.TabIndex = 4;
+            // 
+            // btiSaida
+            // 
+            this.btiSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiSaida.ForeColor = System.Drawing.Color.White;
+            this.btiSaida.Location = new System.Drawing.Point(0, 0);
+            this.btiSaida.Name = "btiSaida";
+            this.btiSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiSaida.TabIndex = 0;
+            this.btiSaida.Text = "Emissão de nota fiscal";
+            this.btiSaida.UseVisualStyleBackColor = false;
+            this.btiSaida.Click += new System.EventHandler(this.BtiSaida_Click);
+            // 
+            // btiRltNotaSaida
+            // 
+            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiRltNotaSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
+            this.btiRltNotaSaida.Image = global::_5gpro.Properties.Resources.right_18px;
+            this.btiRltNotaSaida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
+            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
+            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
+            this.btiRltNotaSaida.TabIndex = 1;
+            this.btiRltNotaSaida.Text = "Relatórios";
+            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
+            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
+            // 
+            // paneldropOrcamento
+            // 
+            this.paneldropOrcamento.Controls.Add(this.btiCadOrcamento);
+            this.paneldropOrcamento.Location = new System.Drawing.Point(3, 229);
+            this.paneldropOrcamento.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldropOrcamento.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropOrcamento.Name = "paneldropOrcamento";
+            this.paneldropOrcamento.Size = new System.Drawing.Size(200, 10);
+            this.paneldropOrcamento.TabIndex = 5;
+            // 
+            // btiCadOrcamento
+            // 
+            this.btiCadOrcamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiCadOrcamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadOrcamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadOrcamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btiCadOrcamento.ForeColor = System.Drawing.Color.White;
+            this.btiCadOrcamento.Location = new System.Drawing.Point(0, 0);
+            this.btiCadOrcamento.Name = "btiCadOrcamento";
+            this.btiCadOrcamento.Size = new System.Drawing.Size(200, 28);
+            this.btiCadOrcamento.TabIndex = 0;
+            this.btiCadOrcamento.Text = "Cadastro Orçamentos";
+            this.btiCadOrcamento.UseVisualStyleBackColor = false;
+            this.btiCadOrcamento.Click += new System.EventHandler(this.BtiCadOrcamento_Click);
+            // 
+            // paneldentroRltSaida
+            // 
+            this.paneldentroRltSaida.Controls.Add(this.btsRelatorionotas);
+            this.paneldentroRltSaida.Location = new System.Drawing.Point(209, 211);
+            this.paneldentroRltSaida.MaximumSize = new System.Drawing.Size(200, 28);
+            this.paneldentroRltSaida.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldentroRltSaida.Name = "paneldentroRltSaida";
+            this.paneldentroRltSaida.Size = new System.Drawing.Size(200, 10);
+            this.paneldentroRltSaida.TabIndex = 6;
+            // 
+            // btsRelatorionotas
+            // 
+            this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btsRelatorionotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
+            this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
+            this.btsRelatorionotas.Name = "btsRelatorionotas";
+            this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
+            this.btsRelatorionotas.TabIndex = 0;
+            this.btsRelatorionotas.Text = "Relatório de notas";
+            this.btsRelatorionotas.UseVisualStyleBackColor = false;
+            this.btsRelatorionotas.Click += new System.EventHandler(this.BtsRelatorionotas_Click);
+            // 
+            // paneldropCaixa
+            // 
+            this.paneldropCaixa.Controls.Add(this.btiPlanoContasPadrao);
+            this.paneldropCaixa.Controls.Add(this.btiPlanoContas);
+            this.paneldropCaixa.Controls.Add(this.btiLancamentoManual);
+            this.paneldropCaixa.Controls.Add(this.btiSangria);
+            this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
+            this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
+            this.paneldropCaixa.Location = new System.Drawing.Point(3, 275);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 168);
+            this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
+            this.paneldropCaixa.Name = "paneldropCaixa";
+            this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
+            this.paneldropCaixa.TabIndex = 8;
+            // 
+            // btiCadastroCaixa
+            // 
+            this.btiCadastroCaixa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiCadastroCaixa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiCadastroCaixa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiCadastroCaixa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiCadastroCaixa.ForeColor = System.Drawing.Color.White;
+            this.btiCadastroCaixa.Location = new System.Drawing.Point(0, 0);
+            this.btiCadastroCaixa.Name = "btiCadastroCaixa";
+            this.btiCadastroCaixa.Size = new System.Drawing.Size(200, 28);
+            this.btiCadastroCaixa.TabIndex = 0;
+            this.btiCadastroCaixa.Text = "Cadastro caixa";
+            this.btiCadastroCaixa.UseVisualStyleBackColor = false;
+            this.btiCadastroCaixa.Click += new System.EventHandler(this.BtiCadastroCaixa_Click);
+            // 
+            // btiAberturaFechamento
+            // 
+            this.btiAberturaFechamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiAberturaFechamento.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiAberturaFechamento.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiAberturaFechamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiAberturaFechamento.ForeColor = System.Drawing.Color.White;
+            this.btiAberturaFechamento.Location = new System.Drawing.Point(0, 28);
+            this.btiAberturaFechamento.Name = "btiAberturaFechamento";
+            this.btiAberturaFechamento.Size = new System.Drawing.Size(200, 28);
+            this.btiAberturaFechamento.TabIndex = 0;
+            this.btiAberturaFechamento.Text = "Abertura e fechamento";
+            this.btiAberturaFechamento.UseVisualStyleBackColor = false;
+            this.btiAberturaFechamento.Click += new System.EventHandler(this.BtiAberturaFechamento_Click);
+            // 
+            // btiSangria
+            // 
+            this.btiSangria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiSangria.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiSangria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiSangria.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiSangria.ForeColor = System.Drawing.Color.White;
+            this.btiSangria.Location = new System.Drawing.Point(0, 56);
+            this.btiSangria.Name = "btiSangria";
+            this.btiSangria.Size = new System.Drawing.Size(200, 28);
+            this.btiSangria.TabIndex = 1;
+            this.btiSangria.Text = "Sangria";
+            this.btiSangria.UseVisualStyleBackColor = false;
+            this.btiSangria.Click += new System.EventHandler(this.BtiSangria_Click);
+            // 
+            // btiLancamentoManual
+            // 
+            this.btiLancamentoManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiLancamentoManual.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiLancamentoManual.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiLancamentoManual.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiLancamentoManual.ForeColor = System.Drawing.Color.White;
+            this.btiLancamentoManual.Location = new System.Drawing.Point(0, 84);
+            this.btiLancamentoManual.Name = "btiLancamentoManual";
+            this.btiLancamentoManual.Size = new System.Drawing.Size(200, 28);
+            this.btiLancamentoManual.TabIndex = 2;
+            this.btiLancamentoManual.Text = "Lançamento manual";
+            this.btiLancamentoManual.UseVisualStyleBackColor = false;
+            this.btiLancamentoManual.Click += new System.EventHandler(this.BtiLancamentoManual_Click);
+            // 
+            // btiPlanoContas
+            // 
+            this.btiPlanoContas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiPlanoContas.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiPlanoContas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiPlanoContas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiPlanoContas.ForeColor = System.Drawing.Color.White;
+            this.btiPlanoContas.Location = new System.Drawing.Point(0, 112);
+            this.btiPlanoContas.Name = "btiPlanoContas";
+            this.btiPlanoContas.Size = new System.Drawing.Size(200, 28);
+            this.btiPlanoContas.TabIndex = 3;
+            this.btiPlanoContas.Text = "Plano de contas";
+            this.btiPlanoContas.UseVisualStyleBackColor = false;
+            this.btiPlanoContas.Click += new System.EventHandler(this.BtiPlanoContas_Click);
             // 
             // btiPlanoContasPadrao
             // 
-            this.btiPlanoContasPadrao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
+            this.btiPlanoContasPadrao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btiPlanoContasPadrao.Dock = System.Windows.Forms.DockStyle.Top;
             this.btiPlanoContasPadrao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btiPlanoContasPadrao.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
@@ -747,13 +732,40 @@
             this.btiPlanoContasPadrao.UseVisualStyleBackColor = false;
             this.btiPlanoContasPadrao.Click += new System.EventHandler(this.BtiPlanoContasPadrao_Click);
             // 
+            // panelCentral
+            // 
+            this.panelCentral.BackColor = System.Drawing.Color.White;
+            this.panelCentral.Controls.Add(this.paneldropCaixa);
+            this.panelCentral.Controls.Add(this.paneldentroRltSaida);
+            this.panelCentral.Controls.Add(this.paneldropOrcamento);
+            this.panelCentral.Controls.Add(this.paneldropSaida);
+            this.panelCentral.Controls.Add(this.paneldropEntrada);
+            this.panelCentral.Controls.Add(this.paneldropApagar);
+            this.panelCentral.Controls.Add(this.paneldropAreceber);
+            this.panelCentral.Controls.Add(this.paneldropCadastros);
+            this.panelCentral.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCentral.Location = new System.Drawing.Point(250, 50);
+            this.panelCentral.Name = "panelCentral";
+            this.panelCentral.Size = new System.Drawing.Size(424, 535);
+            this.panelCentral.TabIndex = 3;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(185)))), ((int)(((byte)(9)))));
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(924, 50);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(371, 535);
+            this.panel1.TabIndex = 8;
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1295, 585);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelCentral);
             this.Controls.Add(this.panelSuperior);
             this.Controls.Add(this.panelEsquerdo);
@@ -766,18 +778,19 @@
             this.panelEsquerdo.ResumeLayout(false);
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
-            this.panelCentral.ResumeLayout(false);
-            this.paneldropCaixa.ResumeLayout(false);
-            this.paneldentroRltSaida.ResumeLayout(false);
-            this.paneldropOrcamento.ResumeLayout(false);
-            this.paneldropSaida.ResumeLayout(false);
-            this.paneldropEntrada.ResumeLayout(false);
-            this.paneldropApagar.ResumeLayout(false);
-            this.paneldropAreceber.ResumeLayout(false);
-            this.paneldropCadastros.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.paneldropCadastros.ResumeLayout(false);
+            this.paneldropAreceber.ResumeLayout(false);
+            this.paneldropApagar.ResumeLayout(false);
+            this.paneldropEntrada.ResumeLayout(false);
+            this.paneldropSaida.ResumeLayout(false);
+            this.paneldropOrcamento.ResumeLayout(false);
+            this.paneldentroRltSaida.ResumeLayout(false);
+            this.paneldropCaixa.ResumeLayout(false);
+            this.panelCentral.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -787,48 +800,49 @@
         private System.Windows.Forms.Button btExpandeRetrai;
         private System.Windows.Forms.Button btCadastrosmenu;
         private System.Windows.Forms.Panel panelSuperior;
-        private System.Windows.Forms.Panel panelCentral;
         private System.Windows.Forms.Button btOrcamentos;
         private System.Windows.Forms.Button btSaidas;
         private System.Windows.Forms.Button btEntradas;
         private System.Windows.Forms.Button btCPagar;
         private System.Windows.Forms.Button btCReceber;
-        private System.Windows.Forms.Panel paneldropAreceber;
-        private System.Windows.Forms.Button btiQuitacaoAReceber;
-        private System.Windows.Forms.Button btiCadContaReceber;
-        private System.Windows.Forms.Panel paneldropCadastros;
-        private System.Windows.Forms.Button btiGruposusuarios;
-        private System.Windows.Forms.Button btiUsuarios;
-        private System.Windows.Forms.Button btiItens;
         private System.Windows.Forms.Timer timerDropLateral;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label lbRelogio;
+        private System.Windows.Forms.Timer timerRelogio;
+        private System.Windows.Forms.Button btCaixa;
+        private System.Windows.Forms.Panel paneldropCadastros;
+        private System.Windows.Forms.Button btiUnimedida;
         private System.Windows.Forms.Button btiGrupopessoa;
         private System.Windows.Forms.Button btiGrupoitens;
         private System.Windows.Forms.Button btiOperacoes;
+        private System.Windows.Forms.Button btiGruposusuarios;
+        private System.Windows.Forms.Button btiUsuarios;
+        private System.Windows.Forms.Button btiItens;
+        private System.Windows.Forms.Button btiCadPessoa;
+        private System.Windows.Forms.Panel paneldropAreceber;
+        private System.Windows.Forms.Button btiQuitacaoAReceber;
+        private System.Windows.Forms.Button btiCadContaReceber;
         private System.Windows.Forms.Panel paneldropApagar;
         private System.Windows.Forms.Button btiQuitacaoAPagar;
         private System.Windows.Forms.Button btiCadContaPagar;
         private System.Windows.Forms.Panel paneldropEntrada;
         private System.Windows.Forms.Button btiEntrada;
         private System.Windows.Forms.Panel paneldropSaida;
+        private System.Windows.Forms.Button btiRltNotaSaida;
         private System.Windows.Forms.Button btiSaida;
         private System.Windows.Forms.Panel paneldropOrcamento;
         private System.Windows.Forms.Button btiCadOrcamento;
-        private System.Windows.Forms.Button btiRltNotaSaida;
-        private System.Windows.Forms.Button btiCadPessoa;
         private System.Windows.Forms.Panel paneldentroRltSaida;
         private System.Windows.Forms.Button btsRelatorionotas;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lbRelogio;
-        private System.Windows.Forms.Timer timerRelogio;
-        private System.Windows.Forms.Button btiUnimedida;
-        private System.Windows.Forms.Button btCaixa;
         private System.Windows.Forms.Panel paneldropCaixa;
-        private System.Windows.Forms.Button btiCadastroCaixa;
-        private System.Windows.Forms.Button btiAberturaFechamento;
-        private System.Windows.Forms.Button btiSangria;
-        private System.Windows.Forms.Button btiLancamentoManual;
-        private System.Windows.Forms.Button btiPlanoContas;
         private System.Windows.Forms.Button btiPlanoContasPadrao;
+        private System.Windows.Forms.Button btiPlanoContas;
+        private System.Windows.Forms.Button btiLancamentoManual;
+        private System.Windows.Forms.Button btiSangria;
+        private System.Windows.Forms.Button btiAberturaFechamento;
+        private System.Windows.Forms.Button btiCadastroCaixa;
+        private System.Windows.Forms.Panel panelCentral;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

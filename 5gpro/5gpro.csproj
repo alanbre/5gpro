@@ -1143,6 +1143,10 @@
     <None Include="Resources\icons8_report_card_40px_5.png" />
     <None Include="Resources\icons8_report_card_40px_6.png" />
     <None Include="Resources\report_card_40px.png" />
+    <None Include="Resources\contacts_32px.png" />
+    <None Include="Resources\unlock_32px.png" />
+    <None Include="Resources\search_filled_18px_white.png" />
+    <None Include="Resources\menu_filled_30px_white.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

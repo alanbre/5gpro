@@ -292,7 +292,7 @@ namespace _5gpro
         private void BtCadastrosesquerda_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocadastro";
         }
@@ -300,7 +300,7 @@ namespace _5gpro
         private void BtCReceber_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocontareceber";
         }
@@ -308,7 +308,7 @@ namespace _5gpro
         private void BtCPagar_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocontapagar";
         }
@@ -316,7 +316,7 @@ namespace _5gpro
         private void BtEntradas_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaoentrada";
         }
@@ -324,7 +324,7 @@ namespace _5gpro
         private void BtSaidas_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaosaida";
         }
@@ -332,7 +332,7 @@ namespace _5gpro
         private void BtOrcamentos_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaoorcamento";
         }
@@ -340,7 +340,7 @@ namespace _5gpro
         private void BtCaixa_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCaixa.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCaixa.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocaixa";
         }
@@ -562,7 +562,7 @@ namespace _5gpro
         //COM SUB MENU
         private void BtiRltNotaSaida_Click(object sender, EventArgs e)
         {
-            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "subrelatoriosaida";
         }
@@ -592,14 +592,14 @@ namespace _5gpro
         //FUNÇÕES DO MENU LATERAL
         private void DesmarcarBotoes()
         {
-            btCadastrosmenu.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btCReceber.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btCPagar.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btEntradas.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btSaidas.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btOrcamentos.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btiRltNotaSaida.BackColor = ColorTranslator.FromHtml("#007ACC");
-            btCaixa.BackColor = ColorTranslator.FromHtml("#007ACC");
+            btCadastrosmenu.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btCReceber.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btCPagar.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btEntradas.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btSaidas.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btOrcamentos.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btiRltNotaSaida.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btCaixa.BackColor = ColorTranslator.FromHtml("#1D1D1E");
         }
         private void RecolherMenus()
         {
@@ -919,7 +919,7 @@ namespace _5gpro
                             RelatorioSaidaHidden = true;
                             Image imgright = Properties.Resources.right_18px;
                             btiRltNotaSaida.Image = imgright;
-                            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+                            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#1D1D1E");
                         }
                     }
                     break;
