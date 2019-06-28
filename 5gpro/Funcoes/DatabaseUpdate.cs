@@ -768,6 +768,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_plano_contas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
+  `idcaixa_plano_contas` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `level` INT NOT NULL,
+  `paiid` INT NULL,
+  `descricao` VARCHAR(45) NOT NULL,
+  `codigo_completo` VARCHAR(50) NULL,
+  PRIMARY KEY (`idcaixa_plano_contas`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_lancamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
@@ -779,11 +793,18 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
   `lancamento` TINYINT(1) UNSIGNED NOT NULL,
   `documento` VARCHAR(15) NULL,
   `idcaixa` INT NOT NULL,
+  `idcaixa_plano_contas` INT NOT NULL,
   PRIMARY KEY (`idcaixa_lancamento`),
   INDEX `fk_caixa_entrada_caixa1_idx` (`idcaixa` ASC) VISIBLE,
+  INDEX `fk_caixa_lancamento_caixa_plano_contas1_idx` (`idcaixa_plano_contas` ASC) VISIBLE,
   CONSTRAINT `fk_caixa_entrada_caixa1`
     FOREIGN KEY (`idcaixa`)
     REFERENCES `5gprodatabase`.`caixa` (`idcaixa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_caixa_plano_contas1`
+    FOREIGN KEY (`idcaixa_plano_contas`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -908,19 +929,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `5gprodatabase`.`caixa_plano_contas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
-  `idcaixa_plano_contas` INT NOT NULL AUTO_INCREMENT,
-  `codigo` INT NOT NULL,
-  `level` INT NOT NULL,
-  `paiid` INT NULL,
-  `descricao` VARCHAR(45) NOT NULL,
-  `codigo_completo` VARCHAR(50) NULL,
-  PRIMARY KEY (`idcaixa_plano_contas`))
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_plano_contas_padrao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
@@ -988,8 +996,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
-
 ";
             return create;
         }

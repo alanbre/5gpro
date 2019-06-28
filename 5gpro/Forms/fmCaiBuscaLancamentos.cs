@@ -1,4 +1,5 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.Daos;
+using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,9 @@ namespace _5gpro.Forms
 {
     public partial class fmCaiBuscaLancamentos : Form
     {
+        private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
+        private List<CaixaLancamento> caixaLancamentos = new List<CaixaLancamento>();
+
         public fmCaiBuscaLancamentos()
         {
             InitializeComponent();
@@ -26,9 +30,35 @@ namespace _5gpro.Forms
             public PlanoConta planoConta;
         }
 
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
+        private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
 
+        private void Pesquisar()
+        {
+            Filtros f = new Filtros
+            {
+                DataInicial = dtpDataInicial.Value,
+                DataFinal = dtpDataFinal.Value,
+                caixa = buscaCaixa.caixa,
+                planoConta = buscaPlanoContaCaixa.conta
+            };
+
+            caixaLancamentos = caixaLancamentoDAO.Busca(f).ToList();
+            PreencheDados();
+
+        }
+        private void PreencheDados()
+        {
+            foreach (var cl in caixaLancamentos)
+            {
+                dgvDados.Rows.Add(
+                    cl.Data,
+                    cl.Valor,
+                    cl.Documento,
+                    cl.Caixa.Codigo.ToString() + cl.Caixa.Descricao,
+                    cl.PlanoConta.CodigoCompleto,
+                    cl.PlanoConta.Descricao
+                    );
+            }
         }
     }
 }

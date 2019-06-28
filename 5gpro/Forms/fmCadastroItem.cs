@@ -418,9 +418,6 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
             }
         }
-
-
-
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodigo.Clear(); }

@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.Forms;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -94,6 +95,39 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+        public IEnumerable<CaixaLancamento> Busca(fmCaiBuscaLancamentos.Filtros f)
+        {
+            var wherePlanoConta = f.planoConta != null ? "AND cpc.idcaixa_plano_contas = @idcaixa_plano_contas" : "";
+            var whereCaixa = f.caixa != null ? "AND c.idcaixa = @idcaixa" : "";
+            var whereData = "AND cl.data BETWEEN @datainicial AND @datafinal";
+            var caixaLancamentos = new List<CaixaLancamento>();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = $@"SELECT c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo, * 
+                            FROM caixa_lancamento cl 
+                            LEFT JOIN caixa_plano_contas cpc ON cl.idcaixa_plano_contas = cpc.idcaixa_plano_contas 
+                            LEFT JOIN caixa c ON cl.idcaixa = c.idcaixa 
+                            WHERE 1 = 1 
+                            {wherePlanoConta} 
+                            {whereCaixa} 
+                            {whereData} 
+                            ORDER BY cl.idcaixa_lancamento";
+                if (f.planoConta != null) sql.addParam("@idcaixa_plano_contas", f.planoConta);
+                if (f.caixa != null) sql.addParam("@idcaixa", f.caixa);
+                sql.addParam("@datainicial", f.DataInicial);
+                sql.addParam("@datafinal", f.DataFinal);
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return caixaLancamentos;
+                }
+                foreach(var d in data)
+                {
+                    caixaLancamentos.Add(LeDadosReaderComPlanos(d));
+                }
+            }
+            return caixaLancamentos;
+        }
         public IEnumerable<CaixaLancamento> Busca(Caixa caixa)
         {
             var caixaLancamentos = new List<CaixaLancamento>();
@@ -117,7 +151,6 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
-
         public int Sangrar(List<CaixaLancamento> caixaLancamentos, Caixa caixaAtual, Caixa caixaDestino)
         {
             int retorno = 0;
@@ -156,7 +189,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         private CaixaLancamento LeDadosReader(Dictionary<string, object> data)
         {
             var caixaLancamento = new CaixaLancamento();
@@ -167,6 +199,34 @@ namespace _5gpro.Daos
             caixaLancamento.TipoDocumento = Convert.ToInt32(data["tipodocumento"]);
             caixaLancamento.Lancamento = Convert.ToInt32(data["lancamento"]);
             caixaLancamento.Documento = (string)data["documento"];
+            return caixaLancamento;
+        }
+        private CaixaLancamento LeDadosReaderComPlanos(Dictionary<string, object> data)
+        {
+            var planoConta = new PlanoConta();
+            planoConta.PlanoContaID = Convert.ToInt32(data["idcaixa_plano_contas"]);
+            planoConta.Codigo = Convert.ToInt32(data["cpc_codigo"]);
+            planoConta.Level = Convert.ToInt32(data["level"]);
+            planoConta.PaiID = Convert.ToInt32(data["paiid"]);
+            planoConta.Descricao = (string)data["descricao"];
+            planoConta.CodigoCompleto = (string)data["codigo_completo"];
+
+            var caixa = new Caixa();
+            caixa.CaixaID = Convert.ToInt32(data["idcaixa"]);
+            caixa.Codigo = Convert.ToInt32(data["caixa_codigo"]);
+            caixa.Nome = (string)data["nome"];
+
+            var caixaLancamento = new CaixaLancamento();
+            caixaLancamento.PlanoConta = planoConta;
+            caixaLancamento.Caixa = caixa;
+            caixaLancamento.CaixaLancamentoID = Convert.ToInt32(data["idcaixa_lancamento"]);
+            caixaLancamento.Data = (DateTime)data["data"];
+            caixaLancamento.Valor = (decimal)data["valor"];
+            caixaLancamento.TipoMovimento = Convert.ToInt32(data["tipomovimento"]);
+            caixaLancamento.TipoDocumento = Convert.ToInt32(data["tipodocumento"]);
+            caixaLancamento.Lancamento = Convert.ToInt32(data["lancamento"]);
+            caixaLancamento.Documento = (string)data["documento"];
+            
             return caixaLancamento;
         }
     }

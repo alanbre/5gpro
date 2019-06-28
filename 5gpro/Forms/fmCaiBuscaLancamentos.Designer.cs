@@ -29,19 +29,27 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.btPesquisar = new System.Windows.Forms.Button();
-            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
             this.lbDataFinal = new System.Windows.Forms.Label();
             this.dtpDataInicial = new System.Windows.Forms.DateTimePicker();
             this.lbDataInicial = new System.Windows.Forms.Label();
             this.gbLançamentos = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDados = new System.Windows.Forms.DataGridView();
+            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
+            this.dgvtbcDataLancamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDocumento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcCaixa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcCodigoConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltros.SuspendLayout();
             this.gbLançamentos.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
             this.SuspendLayout();
             // 
             // gbFiltros
@@ -72,6 +80,86 @@
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
+            // dtpDataFinal
+            // 
+            this.dtpDataFinal.CustomFormat = "dd/MM/yyyy";
+            this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDataFinal.Location = new System.Drawing.Point(378, 32);
+            this.dtpDataFinal.Name = "dtpDataFinal";
+            this.dtpDataFinal.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataFinal.TabIndex = 4;
+            this.dtpDataFinal.Value = new System.DateTime(2019, 6, 28, 9, 37, 48, 0);
+            // 
+            // lbDataFinal
+            // 
+            this.lbDataFinal.AutoSize = true;
+            this.lbDataFinal.Location = new System.Drawing.Point(375, 16);
+            this.lbDataFinal.Name = "lbDataFinal";
+            this.lbDataFinal.Size = new System.Drawing.Size(52, 13);
+            this.lbDataFinal.TabIndex = 3;
+            this.lbDataFinal.Text = "Data final";
+            // 
+            // dtpDataInicial
+            // 
+            this.dtpDataInicial.CustomFormat = "dd/MM/yyyy";
+            this.dtpDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpDataInicial.Location = new System.Drawing.Point(273, 32);
+            this.dtpDataInicial.Name = "dtpDataInicial";
+            this.dtpDataInicial.Size = new System.Drawing.Size(95, 20);
+            this.dtpDataInicial.TabIndex = 2;
+            this.dtpDataInicial.Value = new System.DateTime(2019, 6, 28, 9, 37, 40, 0);
+            // 
+            // lbDataInicial
+            // 
+            this.lbDataInicial.AutoSize = true;
+            this.lbDataInicial.Location = new System.Drawing.Point(270, 16);
+            this.lbDataInicial.Name = "lbDataInicial";
+            this.lbDataInicial.Size = new System.Drawing.Size(57, 13);
+            this.lbDataInicial.TabIndex = 1;
+            this.lbDataInicial.Text = "Data incial";
+            // 
+            // gbLançamentos
+            // 
+            this.gbLançamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbLançamentos.Controls.Add(this.dgvDados);
+            this.gbLançamentos.Location = new System.Drawing.Point(12, 121);
+            this.gbLançamentos.Name = "gbLançamentos";
+            this.gbLançamentos.Size = new System.Drawing.Size(1128, 416);
+            this.gbLançamentos.TabIndex = 1;
+            this.gbLançamentos.TabStop = false;
+            this.gbLançamentos.Text = "Lançamentos";
+            // 
+            // dgvDados
+            // 
+            this.dgvDados.AllowUserToAddRows = false;
+            this.dgvDados.AllowUserToDeleteRows = false;
+            this.dgvDados.AllowUserToOrderColumns = true;
+            this.dgvDados.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDados.BackgroundColor = System.Drawing.SystemColors.Window;
+            this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvtbcDataLancamento,
+            this.dgvtbcValor,
+            this.dgvtbcDocumento,
+            this.dgvtbcCaixa,
+            this.dgvtbcCodigoConta,
+            this.dgvtbcConta});
+            this.dgvDados.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvDados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvDados.Location = new System.Drawing.Point(3, 16);
+            this.dgvDados.MultiSelect = false;
+            this.dgvDados.Name = "dgvDados";
+            this.dgvDados.ReadOnly = true;
+            this.dgvDados.RowHeadersVisible = false;
+            this.dgvDados.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDados.Size = new System.Drawing.Size(1122, 397);
+            this.dgvDados.TabIndex = 0;
+            this.dgvDados.TabStop = false;
+            // 
             // buscaPlanoContaCaixa
             // 
             this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
@@ -94,78 +182,47 @@
             this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
             this.buscaCaixa.TabIndex = 0;
             // 
-            // dtpDataFinal
+            // dgvtbcDataLancamento
             // 
-            this.dtpDataFinal.CustomFormat = "dd/MM/yyyy";
-            this.dtpDataFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDataFinal.Location = new System.Drawing.Point(378, 32);
-            this.dtpDataFinal.Name = "dtpDataFinal";
-            this.dtpDataFinal.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataFinal.TabIndex = 4;
-            this.dtpDataFinal.Value = new System.DateTime(2019, 6, 27, 0, 0, 0, 0);
+            dataGridViewCellStyle2.Format = "dd/mm/AAAA";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcDataLancamento.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvtbcDataLancamento.HeaderText = "Data";
+            this.dgvtbcDataLancamento.Name = "dgvtbcDataLancamento";
+            this.dgvtbcDataLancamento.ReadOnly = true;
             // 
-            // lbDataFinal
+            // dgvtbcValor
             // 
-            this.lbDataFinal.AutoSize = true;
-            this.lbDataFinal.Location = new System.Drawing.Point(375, 16);
-            this.lbDataFinal.Name = "lbDataFinal";
-            this.lbDataFinal.Size = new System.Drawing.Size(52, 13);
-            this.lbDataFinal.TabIndex = 3;
-            this.lbDataFinal.Text = "Data final";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcValor.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvtbcValor.HeaderText = "Valor";
+            this.dgvtbcValor.Name = "dgvtbcValor";
+            this.dgvtbcValor.ReadOnly = true;
             // 
-            // dtpDataInicial
+            // dgvtbcDocumento
             // 
-            this.dtpDataInicial.CustomFormat = "dd/MM/yyyy";
-            this.dtpDataInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpDataInicial.Location = new System.Drawing.Point(273, 32);
-            this.dtpDataInicial.Name = "dtpDataInicial";
-            this.dtpDataInicial.Size = new System.Drawing.Size(95, 20);
-            this.dtpDataInicial.TabIndex = 2;
-            this.dtpDataInicial.Value = new System.DateTime(2019, 6, 27, 0, 0, 0, 0);
+            this.dgvtbcDocumento.HeaderText = "Documento";
+            this.dgvtbcDocumento.Name = "dgvtbcDocumento";
+            this.dgvtbcDocumento.ReadOnly = true;
             // 
-            // lbDataInicial
+            // dgvtbcCaixa
             // 
-            this.lbDataInicial.AutoSize = true;
-            this.lbDataInicial.Location = new System.Drawing.Point(270, 16);
-            this.lbDataInicial.Name = "lbDataInicial";
-            this.lbDataInicial.Size = new System.Drawing.Size(57, 13);
-            this.lbDataInicial.TabIndex = 1;
-            this.lbDataInicial.Text = "Data incial";
+            this.dgvtbcCaixa.HeaderText = "Caixa";
+            this.dgvtbcCaixa.Name = "dgvtbcCaixa";
+            this.dgvtbcCaixa.ReadOnly = true;
             // 
-            // gbLançamentos
+            // dgvtbcCodigoConta
             // 
-            this.gbLançamentos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbLançamentos.Controls.Add(this.dataGridView1);
-            this.gbLançamentos.Location = new System.Drawing.Point(12, 121);
-            this.gbLançamentos.Name = "gbLançamentos";
-            this.gbLançamentos.Size = new System.Drawing.Size(1128, 416);
-            this.gbLançamentos.TabIndex = 1;
-            this.gbLançamentos.TabStop = false;
-            this.gbLançamentos.Text = "Lançamentos";
+            this.dgvtbcCodigoConta.HeaderText = "Código conta";
+            this.dgvtbcCodigoConta.Name = "dgvtbcCodigoConta";
+            this.dgvtbcCodigoConta.ReadOnly = true;
             // 
-            // dataGridView1
+            // dgvtbcConta
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Window;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 16);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1122, 397);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.TabStop = false;
+            this.dgvtbcConta.HeaderText = "Conta";
+            this.dgvtbcConta.Name = "dgvtbcConta";
+            this.dgvtbcConta.ReadOnly = true;
             // 
             // fmCaiBuscaLancamentos
             // 
@@ -184,7 +241,7 @@
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();
             this.gbLançamentos.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -199,6 +256,12 @@
         private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa;
         private Controls.BuscaCaixa buscaCaixa;
         private System.Windows.Forms.GroupBox gbLançamentos;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvDados;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataLancamento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDocumento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCaixa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoConta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcConta;
     }
 }
