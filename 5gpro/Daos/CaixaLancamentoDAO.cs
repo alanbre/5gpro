@@ -15,9 +15,9 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"INSERT INTO caixa_lancamento
-                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
                             VALUES
-                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
                 sql.addParam("@data", caixaLancamento.Data);
                 sql.addParam("@valor", caixaLancamento.Valor);
                 sql.addParam("@tipomovimento", caixaLancamento.TipoMovimento);
@@ -25,6 +25,7 @@ namespace _5gpro.Daos
                 sql.addParam("@lancamento", caixaLancamento.Lancamento);
                 sql.addParam("@documento", caixaLancamento.Documento);
                 sql.addParam("@idcaixa", caixaLancamento.Caixa.CaixaID);
+                sql.addParam("@idcaixa_plano_contas", caixaLancamento.PlanoConta.PlanoContaID);
                 retorno = sql.insertQuery();
             }
             return retorno;
@@ -103,7 +104,7 @@ namespace _5gpro.Daos
             var caixaLancamentos = new List<CaixaLancamento>();
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
-                sql.Query = $@"SELECT c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo, * 
+                sql.Query = $@"SELECT *, c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo  
                             FROM caixa_lancamento cl 
                             LEFT JOIN caixa_plano_contas cpc ON cl.idcaixa_plano_contas = cpc.idcaixa_plano_contas 
                             LEFT JOIN caixa c ON cl.idcaixa = c.idcaixa 
@@ -114,8 +115,8 @@ namespace _5gpro.Daos
                             ORDER BY cl.idcaixa_lancamento";
                 if (f.planoConta != null) sql.addParam("@idcaixa_plano_contas", f.planoConta);
                 if (f.caixa != null) sql.addParam("@idcaixa", f.caixa);
-                sql.addParam("@datainicial", f.DataInicial);
-                sql.addParam("@datafinal", f.DataFinal);
+                sql.addParam("@datainicial", f.DataInicial.Date);
+                sql.addParam("@datafinal", f.DataFinal.Date);
                 var data = sql.selectQuery();
                 if (data == null)
                 {

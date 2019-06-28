@@ -5607,7 +5607,7 @@ INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES
 INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
 
 INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
-             VALUES (9999, 'ADMIN', 'ADMIN', 'admin', '', '', 999);
+             VALUES (9999, 'ADMIN', 'ADMIN', '', '', '', 999);
 
 INSERT INTO permissao ( nome, codigo) VALUES 
 ('Módulo de Cadastros', '010000'),
