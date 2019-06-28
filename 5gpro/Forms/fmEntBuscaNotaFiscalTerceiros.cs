@@ -35,8 +35,63 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
         }
+
+        private void FmEntBuscaNotaFiscalTerceiros_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvDocumentos_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => Selecionar();
+        private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValorTotal.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorTotalFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false;
+                dbValorFinal.Enabled = false;
+                valorTotalFiltro = false;
+            }
+        }
+        private void CbDataEmissao_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataEmissao.Checked)
+            {
+                dtpFiltroDataEmissaoInicial.Enabled = true;
+                dtpFiltroDataEmissaoFinal.Enabled = true;
+                dataEmissaoFiltro = true;
+            }
+            else
+            {
+                dtpFiltroDataEmissaoInicial.Enabled = false;
+                dtpFiltroDataEmissaoFinal.Enabled = false;
+                dataEmissaoFiltro = false;
+            }
+        }
+        private void CbDataEntrada_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataEntrada.Checked)
+            {
+                dtpFiltroDataEntradaSaidaInicial.Enabled = true;
+                dtpFiltroDataEntradaSaidaFinal.Enabled = true;
+                dataEntradaFiltro = true;
+            }
+            else
+            {
+                dtpFiltroDataEntradaSaidaInicial.Enabled = false;
+                dtpFiltroDataEntradaSaidaFinal.Enabled = false;
+                dataEntradaFiltro = false;
+            }
+        }
 
         
 
@@ -82,51 +137,13 @@ namespace _5gpro.Forms
             this.Close();
         }
 
-        private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbValorTotal.Checked)
-            {
-                dbValorInicial.Enabled = true;
-                dbValorFinal.Enabled = true;
-                valorTotalFiltro = true;
-            }
-            else
-            {
-                dbValorInicial.Enabled = false;
-                dbValorFinal.Enabled = false;
-                valorTotalFiltro = false;
-            }
-        }
 
-        private void CbDataEmissao_CheckedChanged(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            if (cbDataEmissao.Checked)
+            if (e.KeyCode == Keys.Enter)
             {
-                dtpFiltroDataEmissaoInicial.Enabled = true;
-                dtpFiltroDataEmissaoFinal.Enabled = true;
-                dataEmissaoFiltro = true;
-            }
-            else
-            {
-                dtpFiltroDataEmissaoInicial.Enabled = false;
-                dtpFiltroDataEmissaoFinal.Enabled = false;
-                dataEmissaoFiltro = false;
-            }
-        }
-
-        private void CbDataEntrada_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDataEntrada.Checked)
-            {
-                dtpFiltroDataEntradaSaidaInicial.Enabled = true;
-                dtpFiltroDataEntradaSaidaFinal.Enabled = true;
-                dataEntradaFiltro = true;
-            }
-            else
-            {
-                dtpFiltroDataEntradaSaidaInicial.Enabled = false;
-                dtpFiltroDataEntradaSaidaFinal.Enabled = false;
-                dataEntradaFiltro = false;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

@@ -37,9 +37,6 @@ namespace _5gpro.Forms
             public bool usardataCadastroFiltro;
             public bool usardataValidadeFiltro;
             public bool usarvalorTotalFiltro;
-
-
-
         }
 
         public fmOrcBuscaOrcamento()
@@ -47,15 +44,14 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void FmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e) => EnterTab(this.ActiveControl, e);
-
-        private void EnterTab(object sender, KeyEventArgs e)
+        private void FmBuscaOrcamento_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            if (e.KeyCode == Keys.Escape)
             {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
+                this.Close();
+                return;
             }
+            EnterTab(this.ActiveControl, e);
         }
         private void BtPesquisar_Click(object sender, EventArgs e)
         {
@@ -97,7 +93,6 @@ namespace _5gpro.Forms
             orcamentoSelecionado = orcamentoDAO.BuscaByID(orcamentoSelecionado.OrcamentoID);
             this.Close();
         }
-
         private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
         {
             if (cbValorTotal.Checked)
@@ -113,7 +108,6 @@ namespace _5gpro.Forms
                 valorTotalFiltro = false;
             }
         }
-
         private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
         {
             if (cbDataCadastro.Checked)
@@ -129,7 +123,6 @@ namespace _5gpro.Forms
                 dataCadastroFiltro = false;
             }
         }
-
         private void CbDataValidade_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -144,6 +137,16 @@ namespace _5gpro.Forms
                 dtpFiltroDataValidadeInicial.Enabled = false;
                 dtpFiltroDataValidadeFinal.Enabled = false;
                 dataValidadeFiltro = false;
+            }
+        }
+
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
 

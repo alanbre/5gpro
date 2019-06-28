@@ -114,6 +114,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Parcelas";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaParcelasOperacao_KeyDown);
             this.gbAlterar.ResumeLayout(false);
             this.gbAlterar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelasOperacao)).EndInit();

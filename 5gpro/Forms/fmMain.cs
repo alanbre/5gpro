@@ -3,8 +3,6 @@ using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
 using _5gpro.Reports;
-using _5gpro.Relatorios;
-using _5gpro.testesrelatorios;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -24,19 +22,20 @@ namespace _5gpro
         private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
         private string botaoPressionado = "";
-        private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden, 
-            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden;
+        private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden,
+            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden, CaixaHidden;
 
-        private int cadastrosOn = 7,
+        private int cadastrosOn = 8,
                     areceberOn = 2,
                     apagarOn = 2,
                     entradasOn = 1,
                     saidasOn = 2,
                     orcamentosOn = 1,
                     relatoriosOn = 1,
+                    caixaOn = 6,
                     tamanhopanel
             ;
-       
+
         int panelWidth;
 
         Thread t;
@@ -48,14 +47,21 @@ namespace _5gpro
         //Cadastro de Grupo de Usuário = 010400
         //Cadastro de Grupo de Itens = 010500
         //Cadastro de Grupo de Pessoas = 010600
+        //Cadastro de Unidade de medida = 010700
+        //Cadastro de Orçamento = 020100
+        //Cadastro de Nota Fiscal = 030100
         //Cadastro de Operações = 040100
         //Cadastro de Contas a Receber = 050100
         //Quitação de Contas a Receber = 050200
         //Cadastro de Contas a Pagar = 060100
         //Quitação de Contas a Pagar = 060200
         //Entrada de notas = 070100
-        //Cadastro de Nota Fiscal = 030100
-        //Cadastro de Orçamento = 020100
+        //Definir Partes = 080100
+        //Cadastro de Caixa = 090100
+        //Abertura e fechamento de caixa = 090200
+        //Sangria de caixa = 090300
+        //Lançamento manual caixa = 090400
+        //Plano de contas = 090500
 
 
         public fmMain()
@@ -114,7 +120,7 @@ namespace _5gpro
 
                         case "010100":
                             //Cadastro Pessoa
-                            if(p.Nivel == 0) { btiCadPessoa.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            if (p.Nivel == 0) { btiCadPessoa.Visible = false; cadastrosOn = cadastrosOn - 1; }
                             else
                             { btiCadPessoa.Visible = true; }
                             break;
@@ -135,21 +141,21 @@ namespace _5gpro
 
                         case "010400":
                             //Cadastro Grupo de usuários
-                            if(p.Nivel == 0) { btiGruposusuarios.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            if (p.Nivel == 0) { btiGruposusuarios.Visible = false; cadastrosOn = cadastrosOn - 1; }
                             else
                             { btiGruposusuarios.Visible = true; }
                             break;
 
                         case "040100":
                             //Cadastro de Operações
-                            if(p.Nivel == 0) { btiOperacoes.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            if (p.Nivel == 0) { btiOperacoes.Visible = false; cadastrosOn = cadastrosOn - 1; }
                             else
                             { btiOperacoes.Visible = true; }
                             break;
 
                         case "010500":
                             //Cadastro de Grupo de Itens
-                            if(p.Nivel == 0) { btiGrupoitens.Visible = false; cadastrosOn = cadastrosOn - 1; }
+                            if (p.Nivel == 0) { btiGrupoitens.Visible = false; cadastrosOn = cadastrosOn - 1; }
                             else
                             { btiGrupoitens.Visible = true; }
                             break;
@@ -160,46 +166,51 @@ namespace _5gpro
                             else
                             { btiGrupopessoa.Visible = true; }
                             break;
-
+                        case "010700":
+                            //Cadastro de unidades de medida
+                            if (p.Nivel == 0) { btiUnimedida.Visible = false; cadastrosOn -= 1; }
+                            else
+                            { btiUnimedida.Visible = true; }
+                            break;
                         case "050100":
                             //Cadastro de Conta a Receber
-                            if(p.Nivel == 0) { btiCadContaReceber.Visible = false; areceberOn = areceberOn - 1; }
+                            if (p.Nivel == 0) { btiCadContaReceber.Visible = false; areceberOn = areceberOn - 1; }
                             else
                             { btiCadContaReceber.Visible = true; }
                             break;
 
                         case "050200":
                             //Quitação de Conta a Receber
-                            if(p.Nivel == 0) { btiQuitacaoAReceber.Visible = false; areceberOn = areceberOn - 1; }
+                            if (p.Nivel == 0) { btiQuitacaoAReceber.Visible = false; areceberOn = areceberOn - 1; }
                             else
                             { btiQuitacaoAReceber.Visible = true; }
                             break;
 
                         case "060100":
                             //Cadastro de Conta a Pagar
-                            if(p.Nivel == 0) { btiCadContaPagar.Visible = false; apagarOn = apagarOn - 1; }
+                            if (p.Nivel == 0) { btiCadContaPagar.Visible = false; apagarOn = apagarOn - 1; }
                             else
                             { btiCadContaPagar.Visible = true; }
                             break;
 
-                            //Quitação de Conta a Pagar
+                        //Quitação de Conta a Pagar
                         case "060200":
-                            if(p.Nivel == 0) { btiQuitacaoAPagar.Visible = false; apagarOn = apagarOn - 1; }
+                            if (p.Nivel == 0) { btiQuitacaoAPagar.Visible = false; apagarOn = apagarOn - 1; }
                             else
                             { btiQuitacaoAPagar.Visible = true; }
                             break;
 
 
-                            //Entrada
+                        //Entrada
                         case "070100":
-                            if(p.Nivel == 0) { btiEntrada.Visible = false; entradasOn = entradasOn - 1; }
+                            if (p.Nivel == 0) { btiEntrada.Visible = false; entradasOn = entradasOn - 1; }
                             else
                             { btiEntrada.Visible = true; }
                             break;
 
-                            //Saida
+                        //Saida
                         case "030100":
-                            if(p.Nivel == 0) { btiSaida.Visible = false; saidasOn = saidasOn - 1; }
+                            if (p.Nivel == 0) { btiSaida.Visible = false; saidasOn = saidasOn - 1; }
                             else
                             { btiSaida.Visible = true; }
                             break;
@@ -209,16 +220,51 @@ namespace _5gpro
                             if (p.Nivel == 0) { btiRltNotaSaida.Visible = false; relatoriosOn = relatoriosOn - 1; }
                             else
                             { btiRltNotaSaida.Visible = true; }
-                            if(relatoriosOn == 0) { saidasOn = saidasOn - 1; }
+                            if (relatoriosOn == 0) { saidasOn = saidasOn - 1; }
                             break;
 
                         case "020100":
                             //Cadastro de Orçamentos
-                            if(p.Nivel == 0) { btiCadOrcamento.Visible = false; orcamentosOn = orcamentosOn - 1; }
+                            if (p.Nivel == 0) { btiCadOrcamento.Visible = false; orcamentosOn = orcamentosOn - 1; }
                             else
                             { btiCadOrcamento.Visible = true; }
                             break;
 
+                        case "090100":
+                            //Cadastro de caixas
+                            if (p.Nivel == 0) { btiCadastroCaixa.Visible = false; caixaOn -= 1; }
+                            else { btiCadastroCaixa.Visible = true; }
+                            break;
+
+                        case "090200":
+                            //Abertura e fechamento de caixa
+                            if (p.Nivel == 0) { btiAberturaFechamento.Visible = false; caixaOn -= 1; }
+                            else { btiAberturaFechamento.Visible = true; }
+                            break;
+
+                        case "090300":
+                            //Sangria de caixa
+                            if (p.Nivel == 0) { btiSangria.Visible = false; caixaOn -= 1; }
+                            else { btiSangria.Visible = true; }
+                            break;
+
+                        case "090400":
+                            //Lançamento Manual
+                            if (p.Nivel == 0) { btiLancamentoManual.Visible = false; caixaOn -= 1; }
+                            else { btiLancamentoManual.Visible = true; }
+                            break;
+
+                        case "090500":
+                            //Plano de Contas
+                            if (p.Nivel == 0) { btiPlanoContas.Visible = false; caixaOn -= 1; }
+                            else { btiPlanoContas.Visible = true; }
+                            break;
+
+                        case "090600":
+                            //Plano de contas padrão
+                            if(p.Nivel == 0) { btiPlanoContasPadrao.Visible = false; caixaOn -= 1; }
+                            else { btiPlanoContasPadrao.Visible = true; }
+                            break;
                     }
                 }
 
@@ -229,13 +275,14 @@ namespace _5gpro
                 btSaidas.Enabled = saidasOn == 0 ? false : true;
                 btOrcamentos.Enabled = orcamentosOn == 0 ? false : true;
                 btiRltNotaSaida.Enabled = relatoriosOn == 0 ? false : true;
+                btiCadastroCaixa.Enabled = caixaOn == 0 ? false : true;
 
             }
         }
 
 
 
-       //MENU LATERAL
+        //MENU LATERAL
         private void BtExpandiretrai_Click(object sender, EventArgs e)
         {
             timerDropLateral.Start();
@@ -245,7 +292,7 @@ namespace _5gpro
         private void BtCadastrosesquerda_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocadastro";
         }
@@ -253,7 +300,7 @@ namespace _5gpro
         private void BtCReceber_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocontareceber";
         }
@@ -261,7 +308,7 @@ namespace _5gpro
         private void BtCPagar_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaocontapagar";
         }
@@ -269,7 +316,7 @@ namespace _5gpro
         private void BtEntradas_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaoentrada";
         }
@@ -277,7 +324,7 @@ namespace _5gpro
         private void BtSaidas_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaosaida";
         }
@@ -285,9 +332,17 @@ namespace _5gpro
         private void BtOrcamentos_Click(object sender, EventArgs e)
         {
             DesmarcarBotoes();
-            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "botaoorcamento";
+        }
+
+        private void BtCaixa_Click(object sender, EventArgs e)
+        {
+            DesmarcarBotoes();
+            btCaixa.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
+            timerDropLateral.Start();
+            botaoPressionado = "botaocaixa";
         }
 
 
@@ -338,10 +393,69 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+
+
         private void BtiGrupoitens_Click(object sender, EventArgs e)
         {
             var formCadGrupoItem = new fmCadastroGrupoItem();
             formCadGrupoItem.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+
+        private void BtiCadastroCaixa_Click(object sender, EventArgs e)
+        {
+            var formCadCaixa = new fmCaiCadastroCaixa();
+            formCadCaixa.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+
+        }
+
+        private void BtiLancamentoManual_Click(object sender, EventArgs e)
+        {
+            var formCaiLancamentoManual = new fmCaiLancamentoManual();
+            formCaiLancamentoManual.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+
+        private void BtiSangria_Click(object sender, EventArgs e)
+        {
+            var formCaiSangria = new fmCaiSangria();
+            formCaiSangria.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiAberturaFechamento_Click(object sender, EventArgs e)
+        {
+            var formAberturaFechamento = new fmCaiAberturaFechamento();
+            formAberturaFechamento.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiPlanoContas_Click(object sender, EventArgs e)
+        {
+            var formPlanoContas = new fmCaiPlanoContas();
+            formPlanoContas.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiPlanoContasPadrao_Click(object sender, EventArgs e)
+        {
+            var formPlanoContasPadrao = new fmCaiPlanoContasPadrao();
+            formPlanoContasPadrao.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();
@@ -352,9 +466,24 @@ namespace _5gpro
             lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
-        private void LbData_Click(object sender, EventArgs e)
-        {
 
+
+        private void BtiUnimedida_Click(object sender, EventArgs e)
+        {
+            var formCadUnidadeMedida = new fmCadastroUnimedida();
+            formCadUnidadeMedida.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiDefPartes_Click(object sender, EventArgs e)
+        {
+            var formDefPartes = new fmCadastroDesintegracao();
+            formDefPartes.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
         }
 
         private void BtiGrupopessoa_Click(object sender, EventArgs e)
@@ -387,7 +516,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        
+
         //BOTÕES DO MENU A PAGAR
         private void BtiCadContaPagar_Click(object sender, EventArgs e)
         {
@@ -407,7 +536,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        
+
         //BOTÕES DO MENU ENTRADAS
         private void BtiEntrada_Click(object sender, EventArgs e)
         {
@@ -418,7 +547,7 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        
+
         //BOTÕES DO MENU SAIDAS
         private void BtiSaida_Click(object sender, EventArgs e)
         {
@@ -429,16 +558,16 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-        
+
         //COM SUB MENU
         private void BtiRltNotaSaida_Click(object sender, EventArgs e)
         {
-            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#0092F4");
+            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
             timerDropLateral.Start();
             botaoPressionado = "subrelatoriosaida";
         }
 
-        
+
         //SUBMENU RELATORIOS SAIDA
         private void BtsRelatorionotas_Click(object sender, EventArgs e)
         {
@@ -463,15 +592,15 @@ namespace _5gpro
         //FUNÇÕES DO MENU LATERAL
         private void DesmarcarBotoes()
         {
-            btCadastrosmenu.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btCReceber.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btCPagar.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btEntradas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btSaidas.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btOrcamentos.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
-            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+            btCadastrosmenu.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btCReceber.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btCPagar.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btEntradas.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btSaidas.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btOrcamentos.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btiRltNotaSaida.BackColor = ColorTranslator.FromHtml("#1D1D1E");
+            btCaixa.BackColor = ColorTranslator.FromHtml("#1D1D1E");
         }
-
         private void RecolherMenus()
         {
             Image imgdefault = Properties.Resources.right_18px;
@@ -513,13 +642,18 @@ namespace _5gpro
                 OrcamentoHidden = true;
             }
 
-            if(botaoPressionado != "subrelatoriosaida")
+            if (botaoPressionado != "subrelatoriosaida")
             {
                 paneldentroRltSaida.Height = 0;
                 RelatorioSaidaHidden = true;
             }
-        }
 
+            if (botaoPressionado != "botaocaixa")
+            {
+                paneldropCaixa.Height = 0;
+                CaixaHidden = true;
+            }
+        }
         private void TimerDropLateral_Tick(object sender, EventArgs e)
         {
             switch (botaoPressionado)
@@ -549,6 +683,9 @@ namespace _5gpro
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
+
+                    paneldropCaixa.Height = 0;
+                    CaixaHidden = true;
 
                     Image imgdefault = Properties.Resources.right_18px;
                     btiRltNotaSaida.Image = imgdefault;
@@ -581,7 +718,7 @@ namespace _5gpro
                 case "botaocadastro":
                     if (CadastrosHidden)
                     {
-                        tamanhopanel = cadastrosOn * 28;                    
+                        tamanhopanel = cadastrosOn * 28;
                         paneldropCadastros.Height += tamanhopanel > 0 ? 28 : 0;
 
                         if (paneldropCadastros.Size.Height == tamanhopanel)
@@ -734,6 +871,32 @@ namespace _5gpro
                     RecolherMenus();
                     break;
 
+                case "botaocaixa":
+                    if (CaixaHidden)
+                    {
+                        tamanhopanel = caixaOn * 28;
+                        paneldropCaixa.Height += tamanhopanel > 0 ? 28 : 0;
+
+                        if (paneldropCaixa.Size.Height == tamanhopanel)
+                        {
+                            timerDropLateral.Stop();
+                            CaixaHidden = false;
+                            paneldropCaixa.BringToFront();
+                        }
+                    }
+                    else
+                    {
+                        paneldropCaixa.Height -= 28;
+                        if (paneldropCaixa.Size == paneldropCaixa.MinimumSize)
+                        {
+                            timerDropLateral.Stop();
+                            CaixaHidden = true;
+                            DesmarcarBotoes();
+                        }
+                    }
+                    RecolherMenus();
+                    break;
+
                 case "subrelatoriosaida":
                     if (RelatorioSaidaHidden)
                     {
@@ -756,13 +919,11 @@ namespace _5gpro
                             RelatorioSaidaHidden = true;
                             Image imgright = Properties.Resources.right_18px;
                             btiRltNotaSaida.Image = imgright;
-                            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#007ACC");
+                            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#1D1D1E");
                         }
                     }
                     break;
             }
-
         }
-
     }
 }

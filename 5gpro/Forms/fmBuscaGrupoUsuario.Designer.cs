@@ -113,6 +113,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Grupo de Usuários";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaGrupoUsuario_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoUsuario)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

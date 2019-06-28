@@ -133,6 +133,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap contacts_32px {
+            get {
+                object obj = ResourceManager.GetObject("contacts_32px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap delete_32_black {
             get {
                 object obj = ResourceManager.GetObject("delete_32_black", resourceCulture);
@@ -146,6 +156,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap delete_32_red {
             get {
                 object obj = ResourceManager.GetObject("delete_32_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap desintegracao_chart_40px {
+            get {
+                object obj = ResourceManager.GetObject("desintegracao_chart_40px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -181,7 +201,7 @@ namespace _5gpro.Properties {
         }
         
         /// <summary>
-        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap icons8_Delete_Subtra_22px {
             get {
@@ -196,6 +216,26 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap icons8_Left_22px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Left_22px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_report_card_40px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_report_card_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_report_card_40px_6 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_report_card_40px_6", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -633,6 +673,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap menu_filled_30px_white {
+            get {
+                object obj = ResourceManager.GetObject("menu_filled_30px_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap menu_filled_30pxBLACK {
             get {
                 object obj = ResourceManager.GetObject("menu_filled_30pxBLACK", resourceCulture);
@@ -793,6 +843,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap report_card_40px {
+            get {
+                object obj = ResourceManager.GetObject("report_card_40px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap right_18px {
             get {
                 object obj = ResourceManager.GetObject("right_18px", resourceCulture);
@@ -836,6 +896,26 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap search_32_blue {
             get {
                 object obj = ResourceManager.GetObject("search_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap search_filled_18px_white {
+            get {
+                object obj = ResourceManager.GetObject("search_filled_18px_white", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap unlock_32px {
+            get {
+                object obj = ResourceManager.GetObject("unlock_32px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

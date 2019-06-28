@@ -104,6 +104,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Operação";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaOperacao_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOperacao)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

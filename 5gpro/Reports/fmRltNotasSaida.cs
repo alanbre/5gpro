@@ -93,7 +93,6 @@ namespace _5gpro.Reports
         }
 
 
-
         private void SetarCampos()
         {
             SetarCamposCliente();
@@ -134,7 +133,7 @@ namespace _5gpro.Reports
         {
             camposNota = new Dictionary<string, string>()
             {
-                {"NotaFiscalPropriaID", "Número" },
+                {"NotaFiscalPropriaID", "Número Nota" },
                 {"DataEmissao", "Data emissão" },
                 {"DataEntradaSaida", "Data da saída" },
                 {"ValorTotalItens", "Valor total dos itens" },
@@ -416,6 +415,9 @@ namespace _5gpro.Reports
                                 case "Desconto":
                                     row.Cells.Add(new DataGridViewTextBoxCell { Value = i.Desconto, ValueType = i.Desconto.GetType() });
                                     break;
+                                case "DescontoTotalItens":
+                                    row.Cells.Add(new DataGridViewTextBoxCell { Value = nf.DescontoTotalItens, ValueType = nf.DescontoTotalItens.GetType() });
+                                    break;
                             }
                         }
                         dgvDados.Rows.Add(row);
@@ -506,6 +508,9 @@ namespace _5gpro.Reports
                             case "ValorTotalDocumento":
                                 row.Cells.Add(new DataGridViewTextBoxCell { Value = nf.ValorTotalDocumento, ValueType = nf.ValorTotalDocumento.GetType() });
                                 break;
+                            case "DescontoTotalItens":
+                                row.Cells.Add(new DataGridViewTextBoxCell { Value = nf.DescontoTotalItens, ValueType = nf.DescontoTotalItens.GetType() });
+                                break;
                         }
                     }
                     dgvDados.Rows.Add(row);
@@ -557,7 +562,7 @@ namespace _5gpro.Reports
             }
             if (bcInicial.cidade?.CidadeID > bcFinal.cidade?.CidadeID && cbFiltrosCidades.Checked)
             {
-                mensagem += "Cidade final maior que cidade inicial\n";
+                mensagem += "Código da Cidade inicial maior que código da cidade final\n";
                 valido = false;
             }
             if (dtpDataEmissaoInicial.Value > dtpDataEmissaoFinal.Value && cbFiltroDataEmissao.Checked)
@@ -586,7 +591,6 @@ namespace _5gpro.Reports
             tcPaginas.SelectTab(1);
             return valido;
         }
-
     }
 }
 

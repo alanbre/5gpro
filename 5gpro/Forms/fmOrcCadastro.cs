@@ -175,11 +175,6 @@ namespace _5gpro.Forms
             }
         }
 
-
-
-
-
-
         private void Novo()
         {
             if (editando)
@@ -367,7 +362,7 @@ namespace _5gpro.Forms
         private void CarregaDados()
         {
             var controls = (ControlCollection)this.Controls;
-            int c;
+            int c = 0;
             if (!int.TryParse(tbCodigo.Text, out c))
             {
                 tbCodigo.Clear();
@@ -411,11 +406,10 @@ namespace _5gpro.Forms
             }
             else
             {
-                Editando(true);
                 LimpaCampos(false);
+                Editando(true);
             }
 
-            //validacao.despintarCampos(controls);
 
         }
         private void PreencheCampos(Orcamento orcamento)
@@ -558,6 +552,8 @@ namespace _5gpro.Forms
             tbNotaDataEmissao.Clear();
             notafiscal = null;
             LimpaCamposItem(limpaCod);
+            orcamento = null;
+            codigo = 0;
         }
         private void LimpaCamposItem(bool focus)
         {
@@ -614,7 +610,8 @@ namespace _5gpro.Forms
 
             var oi = new OrcamentoItem();
             oi.Item = buscaItem.item;
-            InserirItem(itemSelecionado ?? oi);
+            InserirItem(itemSelecionado ?? oi); //verifica se itemSeleciona é nulo, se não for manda ele mesmo
+                                                //e se for nulo manda o oi
 
         }
         private void NovoItem()

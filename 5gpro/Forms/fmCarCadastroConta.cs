@@ -27,6 +27,7 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
+        int codigo = 0;
 
         public fmCarCadastroConta()
         {
@@ -133,8 +134,6 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
-
-            bool ok = false;
 
             if (!editando)
             {
@@ -306,18 +305,32 @@ namespace _5gpro.Forms
         {
             if (novo)
                 return;
-            int codigo = 0;
-            if (!int.TryParse(tbCodigoConta.Text, out codigo)) { tbCodigoConta.Clear(); }
+            int c = 0;
+            if (!int.TryParse(tbCodigoConta.Text, out c))
+            {
+                tbCodigoConta.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
+
+
             if (contaReceber?.ContaReceberID == codigo)
                 return;
 
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                    return;
-            }
 
             if (tbCodigoConta.Text.Length == 0)
             {
@@ -520,6 +533,8 @@ namespace _5gpro.Forms
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
             LimpaCamposParcela();
+            contaReceber = null;
+            codigo = 0;
         }
         private void LimpaCamposParcela()
         {

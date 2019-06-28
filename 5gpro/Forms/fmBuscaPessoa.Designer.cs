@@ -157,7 +157,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca pessoa";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fmBuscaPessoa_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaPessoa_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPessoas)).EndInit();
             this.gbFiltros.ResumeLayout(false);
             this.gbFiltros.PerformLayout();

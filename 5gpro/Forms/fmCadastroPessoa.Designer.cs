@@ -131,7 +131,7 @@
             this.buscaGrupoPessoa.Name = "buscaGrupoPessoa";
             this.buscaGrupoPessoa.Size = new System.Drawing.Size(465, 39);
             this.buscaGrupoPessoa.TabIndex = 6;
-            this.buscaGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaGrupoPessoa.text_changedEventHandler(this.BuscaGrupoPessoa_Text_Changed_1);
+            this.buscaGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaGrupoPessoa.text_changedEventHandler(this.BuscaGrupoPessoa_Text_Changed);
             this.buscaGrupoPessoa.Leave += new System.EventHandler(this.BuscaGrupoPessoa_Leave);
             // 
             // buscaSubGrupoPessoa
@@ -313,7 +313,7 @@
             // mtbTelefone
             // 
             this.mtbTelefone.Location = new System.Drawing.Point(15, 228);
-            this.mtbTelefone.Mask = "(##) ####-####";
+            this.mtbTelefone.Mask = "(##) ####-#####";
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 12;
@@ -458,8 +458,9 @@
             this.Controls.Add(this.pnDadosGerais);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(850, 704);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 703);
+            this.MinimumSize = new System.Drawing.Size(850, 704);
             this.Name = "fmCadastroPessoa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

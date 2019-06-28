@@ -88,7 +88,7 @@
             this.gbDadosOperacao.Controls.Add(this.lbCodigo);
             this.gbDadosOperacao.Location = new System.Drawing.Point(66, 13);
             this.gbDadosOperacao.Name = "gbDadosOperacao";
-            this.gbDadosOperacao.Size = new System.Drawing.Size(583, 207);
+            this.gbDadosOperacao.Size = new System.Drawing.Size(507, 207);
             this.gbDadosOperacao.TabIndex = 1;
             this.gbDadosOperacao.TabStop = false;
             this.gbDadosOperacao.Text = "Dados da operação";
@@ -187,7 +187,7 @@
             this.tcOpcoes.Location = new System.Drawing.Point(66, 282);
             this.tcOpcoes.Name = "tcOpcoes";
             this.tcOpcoes.SelectedIndex = 0;
-            this.tcOpcoes.Size = new System.Drawing.Size(583, 221);
+            this.tcOpcoes.Size = new System.Drawing.Size(511, 221);
             this.tcOpcoes.TabIndex = 3;
             // 
             // tpAvista
@@ -196,7 +196,7 @@
             this.tpAvista.Location = new System.Drawing.Point(4, 22);
             this.tpAvista.Name = "tpAvista";
             this.tpAvista.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAvista.Size = new System.Drawing.Size(575, 195);
+            this.tpAvista.Size = new System.Drawing.Size(503, 195);
             this.tpAvista.TabIndex = 0;
             this.tpAvista.Text = "Opções A Vista";
             this.tpAvista.UseVisualStyleBackColor = true;
@@ -206,7 +206,7 @@
             this.pnAvista.Controls.Add(this.gbDesconto);
             this.pnAvista.Location = new System.Drawing.Point(6, 6);
             this.pnAvista.Name = "pnAvista";
-            this.pnAvista.Size = new System.Drawing.Size(716, 206);
+            this.pnAvista.Size = new System.Drawing.Size(487, 183);
             this.pnAvista.TabIndex = 4;
             // 
             // gbDesconto
@@ -437,9 +437,9 @@
             // 
             this.tbAjuda.Enabled = false;
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(70, 529);
+            this.tbAjuda.Location = new System.Drawing.Point(70, 509);
             this.tbAjuda.Name = "tbAjuda";
-            this.tbAjuda.Size = new System.Drawing.Size(752, 20);
+            this.tbAjuda.Size = new System.Drawing.Size(507, 20);
             this.tbAjuda.TabIndex = 8;
             // 
             // menuVertical
@@ -461,7 +461,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(834, 562);
+            this.ClientSize = new System.Drawing.Size(583, 538);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.tcOpcoes);
             this.Controls.Add(this.gbCondicaoOperacao);
@@ -469,8 +469,9 @@
             this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(599, 577);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(850, 600);
+            this.MinimumSize = new System.Drawing.Size(599, 577);
             this.Name = "fmCadastroOperacao";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

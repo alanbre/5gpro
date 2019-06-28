@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dtpDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
             this.btPesquisar = new System.Windows.Forms.Button();
@@ -49,7 +49,9 @@
             this.cbFiltroValor = new System.Windows.Forms.CheckBox();
             this.gbFiltrosValor = new System.Windows.Forms.GroupBox();
             this.lbValorFinal = new System.Windows.Forms.Label();
+            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
+            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.cbFiltroDataSaida = new System.Windows.Forms.CheckBox();
             this.gbFiltrosDataSaida = new System.Windows.Forms.GroupBox();
             this.lbDataSaidaFinal = new System.Windows.Forms.Label();
@@ -58,12 +60,16 @@
             this.dtpDataSaidaFinal = new System.Windows.Forms.DateTimePicker();
             this.cbFiltrosCidades = new System.Windows.Forms.CheckBox();
             this.gbFiltrosCidades = new System.Windows.Forms.GroupBox();
+            this.bcInicial = new _5gpro.Controls.BuscaCidade();
+            this.bcFinal = new _5gpro.Controls.BuscaCidade();
             this.cbFiltroDataEmissao = new System.Windows.Forms.CheckBox();
             this.gbFiltrosDataEmissao = new System.Windows.Forms.GroupBox();
             this.lbDataEmissaoFinal = new System.Windows.Forms.Label();
             this.lbDataEmissaoInicial = new System.Windows.Forms.Label();
             this.cbFiltrosClientes = new System.Windows.Forms.CheckBox();
             this.gbFiltrosClientes = new System.Windows.Forms.GroupBox();
+            this.bpFinal = new _5gpro.Controls.BuscaPessoa();
+            this.bpInicial = new _5gpro.Controls.BuscaPessoa();
             this.tpDados = new System.Windows.Forms.TabPage();
             this.dgvDados = new System.Windows.Forms.DataGridView();
             this.gbRelatorio = new System.Windows.Forms.GroupBox();
@@ -72,12 +78,6 @@
             this.btSalvarRelatorio = new System.Windows.Forms.Button();
             this.btCarregarRelatorio = new System.Windows.Forms.Button();
             this.cbRelatorios = new System.Windows.Forms.ComboBox();
-            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
-            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
-            this.bcInicial = new _5gpro.Controls.BuscaCidade();
-            this.bcFinal = new _5gpro.Controls.BuscaCidade();
-            this.bpFinal = new _5gpro.Controls.BuscaPessoa();
-            this.bpInicial = new _5gpro.Controls.BuscaPessoa();
             this.tcPaginas.SuspendLayout();
             this.tpCampos.SuspendLayout();
             this.gbCamposCliente.SuspendLayout();
@@ -313,6 +313,18 @@
             this.lbValorFinal.TabIndex = 2;
             this.lbValorFinal.Text = "Valor final";
             // 
+            // dbValorInicial
+            // 
+            this.dbValorInicial.Location = new System.Drawing.Point(7, 29);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(64, 22);
+            this.dbValorInicial.TabIndex = 1;
+            this.dbValorInicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
             // lbValorInicial
             // 
             this.lbValorInicial.AutoSize = true;
@@ -321,6 +333,18 @@
             this.lbValorInicial.Size = new System.Drawing.Size(60, 13);
             this.lbValorInicial.TabIndex = 0;
             this.lbValorInicial.Text = "Valor inicial";
+            // 
+            // dbValorFinal
+            // 
+            this.dbValorFinal.Location = new System.Drawing.Point(77, 29);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(63, 22);
+            this.dbValorFinal.TabIndex = 3;
+            this.dbValorFinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
             // 
             // cbFiltroDataSaida
             // 
@@ -402,6 +426,24 @@
             this.gbFiltrosCidades.TabIndex = 3;
             this.gbFiltrosCidades.TabStop = false;
             // 
+            // bcInicial
+            // 
+            this.bcInicial.LabelText = "Cidade inicial";
+            this.bcInicial.Location = new System.Drawing.Point(3, 13);
+            this.bcInicial.Margin = new System.Windows.Forms.Padding(0);
+            this.bcInicial.Name = "bcInicial";
+            this.bcInicial.Size = new System.Drawing.Size(302, 39);
+            this.bcInicial.TabIndex = 0;
+            // 
+            // bcFinal
+            // 
+            this.bcFinal.LabelText = "Cidade final";
+            this.bcFinal.Location = new System.Drawing.Point(3, 53);
+            this.bcFinal.Margin = new System.Windows.Forms.Padding(0);
+            this.bcFinal.Name = "bcFinal";
+            this.bcFinal.Size = new System.Drawing.Size(302, 39);
+            this.bcFinal.TabIndex = 1;
+            // 
             // cbFiltroDataEmissao
             // 
             this.cbFiltroDataEmissao.AutoSize = true;
@@ -466,6 +508,24 @@
             this.gbFiltrosClientes.TabIndex = 1;
             this.gbFiltrosClientes.TabStop = false;
             // 
+            // bpFinal
+            // 
+            this.bpFinal.LabelText = "Cliente final";
+            this.bpFinal.Location = new System.Drawing.Point(3, 52);
+            this.bpFinal.Margin = new System.Windows.Forms.Padding(0);
+            this.bpFinal.Name = "bpFinal";
+            this.bpFinal.Size = new System.Drawing.Size(310, 39);
+            this.bpFinal.TabIndex = 1;
+            // 
+            // bpInicial
+            // 
+            this.bpInicial.LabelText = "Cliente inicial";
+            this.bpInicial.Location = new System.Drawing.Point(3, 13);
+            this.bpInicial.Margin = new System.Windows.Forms.Padding(0);
+            this.bpInicial.Name = "bpInicial";
+            this.bpInicial.Size = new System.Drawing.Size(310, 39);
+            this.bpInicial.TabIndex = 0;
+            // 
             // tpDados
             // 
             this.tpDados.Controls.Add(this.dgvDados);
@@ -483,17 +543,17 @@
             this.dgvDados.AllowUserToDeleteRows = false;
             this.dgvDados.AllowUserToOrderColumns = true;
             this.dgvDados.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
-            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvDados.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDados.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDados.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDados.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -565,66 +625,6 @@
             this.cbRelatorios.Size = new System.Drawing.Size(1023, 21);
             this.cbRelatorios.TabIndex = 0;
             // 
-            // dbValorInicial
-            // 
-            this.dbValorInicial.Location = new System.Drawing.Point(7, 29);
-            this.dbValorInicial.Name = "dbValorInicial";
-            this.dbValorInicial.Size = new System.Drawing.Size(64, 22);
-            this.dbValorInicial.TabIndex = 1;
-            this.dbValorInicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorFinal
-            // 
-            this.dbValorFinal.Location = new System.Drawing.Point(77, 29);
-            this.dbValorFinal.Name = "dbValorFinal";
-            this.dbValorFinal.Size = new System.Drawing.Size(63, 22);
-            this.dbValorFinal.TabIndex = 3;
-            this.dbValorFinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
-            // 
-            // bcInicial
-            // 
-            this.bcInicial.LabelText = "Cidade inicial";
-            this.bcInicial.Location = new System.Drawing.Point(3, 13);
-            this.bcInicial.Margin = new System.Windows.Forms.Padding(0);
-            this.bcInicial.Name = "bcInicial";
-            this.bcInicial.Size = new System.Drawing.Size(302, 39);
-            this.bcInicial.TabIndex = 0;
-            // 
-            // bcFinal
-            // 
-            this.bcFinal.LabelText = "Cidade final";
-            this.bcFinal.Location = new System.Drawing.Point(3, 53);
-            this.bcFinal.Margin = new System.Windows.Forms.Padding(0);
-            this.bcFinal.Name = "bcFinal";
-            this.bcFinal.Size = new System.Drawing.Size(302, 39);
-            this.bcFinal.TabIndex = 1;
-            // 
-            // bpFinal
-            // 
-            this.bpFinal.LabelText = "Cliente final";
-            this.bpFinal.Location = new System.Drawing.Point(3, 52);
-            this.bpFinal.Margin = new System.Windows.Forms.Padding(0);
-            this.bpFinal.Name = "bpFinal";
-            this.bpFinal.Size = new System.Drawing.Size(310, 39);
-            this.bpFinal.TabIndex = 1;
-            // 
-            // bpInicial
-            // 
-            this.bpInicial.LabelText = "Cliente inicial";
-            this.bpInicial.Location = new System.Drawing.Point(3, 13);
-            this.bpInicial.Margin = new System.Windows.Forms.Padding(0);
-            this.bpInicial.Name = "bpInicial";
-            this.bpInicial.Size = new System.Drawing.Size(310, 39);
-            this.bpInicial.TabIndex = 0;
-            // 
             // fmRltNotasSaida
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -636,6 +636,8 @@
             this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.btGerar);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1237, 661);
+            this.MinimumSize = new System.Drawing.Size(1237, 661);
             this.Name = "fmRltNotasSaida";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

@@ -38,27 +38,43 @@ namespace _5gpro.Forms
             dgvFormaPagamento.DataSource = table;
         }
 
+        private void FmBuscaFormaPagamento_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void FmBuscaFormaPagamento_Load(object sender, EventArgs e)
         {
             BuscaFormaPagamento();
         }
-
         private void BtPesquisar_Click(object sender, EventArgs e)
         {
             BuscaFormaPagamento();
         }
-
         private void TbNomeFormaPagamento_TextChanged(object sender, EventArgs e)
         {
             BuscaFormaPagamento();
         }
-
         private void DgvFormaPagamento_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvFormaPagamento.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvFormaPagamento.Rows[selectedRowIndex];
             formapagamentoSelecionada = listaformapagamento.Find(f => f.FormaPagamentoID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
+        }
+
+
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

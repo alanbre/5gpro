@@ -21,6 +21,8 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
+        int codigo = 0;
+
         bool editando = false;
         bool ignoraCheckEvent;
 
@@ -217,7 +219,7 @@ namespace _5gpro.Forms
                     return;
                 }
             }
-        }
+        }   
         private void Recarrega()
         {
             if (tbCodigoUsuario.Text.Length <= 0)
@@ -318,23 +320,6 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
-            var controls = (ControlCollection)this.Controls;
-            int codigo = 0;
-            if (!int.TryParse(tbCodigoUsuario.Text, out codigo)) { tbCodigoUsuario.Clear(); }
-            if (usuario?.UsuarioID == codigo)
-            {
-                return;
-            }
-
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    return;
-                }
-            }
 
             if (tbCodigoUsuario.Text.Length == 0)
             {
@@ -343,17 +328,53 @@ namespace _5gpro.Forms
                 return;
             }
 
-            validacao.despintarCampos(controls);
+            var controls = (ControlCollection)this.Controls;
+            int c = 0;
+            if (!int.TryParse(tbCodigoUsuario.Text, out c))
+            {
+                tbCodigoUsuario.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
+
+            if (codigo == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+            if (usuario?.UsuarioID == codigo)
+            {
+                return;
+            }
+
 
             var newUsuario = usuarioDAO.BuscaByID(int.Parse(tbCodigoUsuario.Text));
             if (newUsuario != null)
             {
+                validacao.despintarCampos(controls);
                 usuario = newUsuario;
                 PreencheCampos(usuario);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
@@ -387,6 +408,8 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             cbMostrarSenhaUsuario.Checked = false;
             MostraSenhaUsuario();
+            codigo = 0;
+            usuario = null;
         }
         private bool ConfirmaSenhas()
         {

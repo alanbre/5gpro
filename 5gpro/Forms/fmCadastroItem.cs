@@ -17,6 +17,13 @@ namespace _5gpro.Forms
         private readonly Validacao validacao = new Validacao();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
 
+        //Desintegração
+        DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
+        private Item itemdesintegrar = null;
+        //private Desintegracao desintegracao = null;
+        //private DesintegracaoResultado resultado;
+        private List<DesintegracaoResultado> listaresultados = new List<DesintegracaoResultado>();
+
         //Controle de Permissões
         private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
@@ -84,8 +91,16 @@ namespace _5gpro.Forms
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);
-        private void RbServico_CheckedChanged(object sender, EventArgs e) => Editando(true);
+        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);     
+        private void RbServico_CheckedChanged(object sender, EventArgs e)
+        {
+            Editando(true);
+            if (rbServico.Checked)
+                gbDesintegracao.Enabled = false;
+            else
+                if(item != null)
+                gbDesintegracao.Enabled = true;
+        }
         private void BuscaUnimedidaItem_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void BuscaSubGrupoItem_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
@@ -117,16 +132,6 @@ namespace _5gpro.Forms
             Editando(true);
             buscaSubGrupoItem.Limpa();
         }
-        private void RbSimquebra_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbSimquebra.Checked) { gbQuebradgv.Enabled = true; }
-        }
-        private void RbNao_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbNaoquebra.Checked) { gbQuebradgv.Enabled = false; }
-        }
-
-
 
         private void Novo()
         {
@@ -145,6 +150,7 @@ namespace _5gpro.Forms
                 tbDescricao.Focus();
                 ignoraCheckEvent = false;
                 Editando(true);
+                gbDesintegracao.Enabled = false;
             }
         }
         private void Busca()
@@ -197,7 +203,7 @@ namespace _5gpro.Forms
             item.Referencia = tbReferencia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
             item.Quantidade = dbQuantidade.Valor;
-            item.ValorEntrada = dbPrecoUltimaEntrada.Valor;
+            item.ValorEntrada = 0;
             item.ValorSaida = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
             item.Unimedida = buscaUnimedidaItem.unimedida;
@@ -220,12 +226,22 @@ namespace _5gpro.Forms
                 }
                 else if (resultado == 1)
                 {
+                    if (rbDesiNao.Checked)
+                    {
+                        desintegracaoDAO.RemoverDesintegracao(item.ItemID);
+                    }
+                    gbDesintegracao.Enabled = true;
+                    itemdesintegrar = item;
                     tbAjuda.Text = "Dados salvos com sucesso";
                     Editando(false);
                     return;
                 }
                 else if (resultado == 2)
                 {
+                    if (rbDesiNao.Checked)
+                    {
+                        desintegracaoDAO.RemoverDesintegracao(item.ItemID);
+                    }
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
                     return;
@@ -291,6 +307,7 @@ namespace _5gpro.Forms
             var newitem = itemDAO.Anterior(int.Parse(tbCodigo.Text));
             if (newitem != null)
             {
+                DesintegracaoSimNao(newitem);
                 validacao.despintarCampos(controls);
                 item = newitem;
                 codigo = item.ItemID;
@@ -323,6 +340,7 @@ namespace _5gpro.Forms
             var newitem = itemDAO.Proximo(int.Parse(tbCodigo.Text));
             if (newitem != null)
             {
+                DesintegracaoSimNao(newitem);
                 validacao.despintarCampos(controls);
                 item = newitem;
                 codigo = item.ItemID;
@@ -335,9 +353,18 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            if (tbCodigo.Text.Length == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                gbDesintegracao.Enabled = false;
+                return;
+            }
+
             var controls = (ControlCollection)this.Controls;
-            int c;
-            if (!int.TryParse(tbCodigo.Text, out c)) {
+            int c = 0;
+            if (!int.TryParse(tbCodigo.Text, out c))
+            {
                 tbCodigo.Clear();
             }
             else
@@ -357,52 +384,49 @@ namespace _5gpro.Forms
                 }
             }
 
-            if (item?.ItemID == codigo)
-            {
-                return;
-            }
-
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    return;
-                }
-            }
-
-            if (tbCodigo.Text.Length == 0)
+            if (codigo == 0)
             {
                 LimpaCampos(true);
                 Editando(false);
+                gbDesintegracao.Enabled = false;
                 return;
             }
 
-
+            if (item?.ItemID == codigo)
+            {
+                return;
+            }             
+            
 
             var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newItem != null)
             {
+                DesintegracaoSimNao(newItem);
+                gbDesintegracao.Enabled = true;
                 validacao.despintarCampos(controls);
                 item = newItem;
+                itemdesintegrar = new Item();
+                itemdesintegrar = item;
                 PreencheCampos(item);
                 Editando(false);
             }
             else
             {
+                gbDesintegracao.Enabled = false;
                 validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
         }
+
+
+
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodigo.Clear(); }
             tbDescricao.Clear();
             tbDescricaoDeCompra.Clear();
             tbReferencia.Clear();
-            dbPrecoUltimaEntrada.Valor = 0.00m;
             dbEstoqueNecessario.Valor = 0.00m;
             dbPrecoVenda.Valor = 0.00m;
             rbProduto.Checked = true;
@@ -412,6 +436,8 @@ namespace _5gpro.Forms
             buscaUnimedidaItem.Limpa();
             tbAjuda.Clear();
             dbQuantidade.Valor = 0.00m;
+            codigo = 0;
+            item = null;
         }
         private void PreencheCampos(Item item)
         {
@@ -436,7 +462,6 @@ namespace _5gpro.Forms
                 }
 
                 tbReferencia.Text = item.Referencia;
-                dbPrecoUltimaEntrada.Valor = item.ValorEntrada;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
                 dbPrecoVenda.Valor = item.ValorSaida;
                 dbQuantidade.Valor = item.Quantidade;
@@ -457,12 +482,76 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
+
+        private void RbDesiSim_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!rbServico.Checked)
+                btConfigDesintegracao.Enabled = true;
+            else
+            {
+                MessageBox.Show("Serviço não pode ser desintegrado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rbDesiSim.Checked = false;
+                btConfigDesintegracao.Enabled = false;
+            }
+            Editando(true);
+        }
+
+        private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
+        {
+            btConfigDesintegracao.Enabled = false;
+            Editando(true);
+        }
+
+        private void BtConfigDesintegracao_Click(object sender, EventArgs e)
+        {
+            var formDefPartes = new fmCadastroDesintegracao();
+            formDefPartes.itemrecebido = itemdesintegrar;
+            formDefPartes.Show(this);
+        }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 this.SelectNextControl((Control)sender, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
+            }
+        }
+
+        private void BtAddUnimedida_Click(object sender, EventArgs e)
+        {
+            var formCadUnidadeMedida = new fmCadastroUnimedida();
+            formCadUnidadeMedida.Show(this);
+        }
+
+        private void TpEstoque_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BtCalcular_Click(object sender, EventArgs e)
+        {
+
+            var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
+            formCalculoPrecoVenda.custo = dbCusto.Valor;
+            formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
+            formCalculoPrecoVenda.ShowDialog();
+            dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
+            dbCusto.Valor = formCalculoPrecoVenda.custo;
+
+        }
+
+        private void DesintegracaoSimNao(Item d)
+        {
+            if (desintegracaoDAO.BuscaByID(d.ItemID) == null)
+            {
+                rbDesiSim.Checked = false;
+                rbDesiNao.Checked = true;
+            }
+            else
+            {
+                rbDesiSim.Checked = true;
+                rbDesiNao.Checked = false;
             }
         }
     }

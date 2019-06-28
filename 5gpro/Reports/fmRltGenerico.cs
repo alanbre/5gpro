@@ -28,7 +28,7 @@ namespace _5gpro.Reports
                 _dados.Columns[c.ToString()].ColumnName = $"coluna{i}";
                 i++;
             }
-            while (i <= 45)
+            while (i <= 46)
             {
                 _dados.Columns.Add($"coluna{i}");
                 this.rpGenerico.LocalReport.SetParameters(new ReportParameter($"coluna{i}", "N", false));

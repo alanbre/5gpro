@@ -25,7 +25,27 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        public void BuscaUnimedida()
+        private void FmBuscaUnimedida_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
+        private void BtPesquisar_Click(object sender, EventArgs e) => Busca();
+        private void FmBuscaUnimedida_Load(object sender, EventArgs e) => Busca();
+        private void DgvUnimedida_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvUnimedida.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvUnimedida.Rows[selectedRowIndex];
+            unimedidaSelecionada = listaunimedida.Find(u => (u.UnimedidaID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            this.Close();
+        }
+        private void TbFiltroDescUnimedida_TextChanged(object sender, EventArgs e) => Busca();
+
+        private void Busca()
         {
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
@@ -42,29 +62,13 @@ namespace _5gpro.Forms
             }
             dgvUnimedida.DataSource = table;
         }
-
-
-        private void btPesquisar_Click(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            BuscaUnimedida();
-        }
-
-        private void fmBuscaUnimedida_Load(object sender, EventArgs e)
-        {
-            BuscaUnimedida();
-        }
-
-        private void dgvUnimedida_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvUnimedida.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvUnimedida.Rows[selectedRowIndex];
-            unimedidaSelecionada = listaunimedida.Find(u => (u.UnimedidaID).ToString() == Convert.ToString(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
-            this.Close();
-        }
-
-        private void TbFiltroDescUnimedida_TextChanged(object sender, EventArgs e)
-        {
-            BuscaUnimedida();
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

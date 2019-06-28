@@ -3,6 +3,7 @@ using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -55,64 +56,59 @@ namespace _5gpro.Forms
             {
                 table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
             }
-            dgvItens.DataSource = table;
+
+            ListCollectionView coleção = new ListCollectionView(table.DefaultView);
+            //coleção.GroupDescriptions.Add(new PropertyGroupDescription("Unidade de Medida"));
+            coleção.GroupDescriptions.Add(new PropertyGroupDescription("Unidade de Medida"));
+            dgvItens.DataSource = table;       
+
+            //dgvItens.DataSource = table;
         }
 
         private void tbDescricao_TextChanged(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void tbDenomCompra_TextChanged(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void gbTipo_TextChanged(object sender, EventArgs e)
         {
             
         }
-
         private void rbProduto_Click(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void rbServico_Click(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-
         private void cbProduto_Click(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void cbServico_Click(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void fmBuscaItem_Load(object sender, EventArgs e)
         {
 
         }
-
         private void cbServico_CheckedChanged(object sender, EventArgs e)
         {
 
         }
-
         private void btBuscarItens_Click(object sender, EventArgs e)
         {
             BuscaItens();
         }
-
         private void dgvItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
@@ -120,7 +116,6 @@ namespace _5gpro.Forms
             itemSelecionado = itens.Find(p => p.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
-
         private void BuscaGrupoItem_Leave(object sender, EventArgs e)
         {
             buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
@@ -134,10 +129,27 @@ namespace _5gpro.Forms
                 buscaSubGrupoItem.EscolhaOGrupo(true);
             }
         }
-
         private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
         {
             buscaSubGrupoItem.Limpa();
+        }
+
+        private void FmBuscaItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
         }
     }
 }

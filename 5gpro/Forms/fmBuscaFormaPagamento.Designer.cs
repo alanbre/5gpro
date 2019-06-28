@@ -94,6 +94,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Forma de Pagamento";
             this.Load += new System.EventHandler(this.FmBuscaFormaPagamento_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaFormaPagamento_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFormaPagamento)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

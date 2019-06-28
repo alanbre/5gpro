@@ -27,6 +27,7 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
+        int codigo = 0;
 
         public fmCapCadastroConta()
         {
@@ -306,18 +307,30 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
-            int codigo = 0;
-            if (!int.TryParse(tbCodigoConta.Text, out codigo)) { tbCodigoConta.Clear(); }
+            if (!int.TryParse(tbCodigoConta.Text, out int c))
+            {
+                tbCodigoConta.Clear();
+            }
+            else
+            {
+                if (c != codigo)
+                {
+                    if (editando)
+                    {
+                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning) == DialogResult.No)
+                        {
+                            return;
+                        }
+                    }
+                    codigo = c;
+                }
+            }
+
             if (contaPagar?.ContaPagarID == codigo)
                 return;
 
-            if (editando)
-            {
-                if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) == DialogResult.No)
-                    return;
-            }
 
             if (tbCodigoConta.Text.Length == 0)
             {
@@ -457,7 +470,7 @@ namespace _5gpro.Forms
                                      );
                 dgvParcelas.Refresh();
                 btNovaParcela.Enabled = true;
-                btNovaParcela.PerformClick();
+                InserirParcela();
                 Editando(true);
             }
             else
@@ -487,10 +500,10 @@ namespace _5gpro.Forms
                 dr.Cells[dgvtbcSituacao.Index].Value = ptemp.Situacao;
                 dgvParcelas.Update();
                 dgvParcelas.Refresh();
+                LimpaCamposParcela();
                 Editando(true);
             }
-            CalculaTotalConta();
-            LimpaCamposParcela();
+            CalculaTotalConta();            
             btNovaParcela.Enabled = true;
             btExcluirParcela.Enabled = false;
         }
@@ -524,6 +537,8 @@ namespace _5gpro.Forms
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
             LimpaCamposParcela();
+            contaPagar = null;
+            codigo = 0;
         }
         private void LimpaCamposParcela()
         {

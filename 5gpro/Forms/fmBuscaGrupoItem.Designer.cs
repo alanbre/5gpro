@@ -105,6 +105,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Grupo de Itens";
             this.Load += new System.EventHandler(this.FmBuscaGrupoItem_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaGrupoItem_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoItens)).EndInit();
             this.gbBusca.ResumeLayout(false);
             this.gbBusca.PerformLayout();

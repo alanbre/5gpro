@@ -38,6 +38,15 @@ namespace _5gpro.Forms
 
 
 
+        private void FmBuscaContaPagar_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -45,6 +54,51 @@ namespace _5gpro.Forms
             DataGridViewRow selectedRow = dgvContas.Rows[selectedRowIndex];
             contaPagarSelecionada = contaPagarDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
+        }
+        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbValorConta.Checked)
+            {
+                dbValorInicial.Enabled = true;
+                dbValorFinal.Enabled = true;
+                valorContaFiltro = true;
+            }
+            else
+            {
+                dbValorInicial.Enabled = false;
+                dbValorFinal.Enabled = false;
+                valorContaFiltro = false;
+            }
+        }
+        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataCadastro.Checked)
+            {
+                dtpDataCadastroInicial.Enabled = true;
+                dtpDataCadastroFinal.Enabled = true;
+                dataCadastroFiltro = true;
+            }
+            else
+            {
+                dtpDataCadastroInicial.Enabled = false;
+                dtpDataCadastroFinal.Enabled = false;
+                dataCadastroFiltro = false;
+            }
+        }
+        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbDataVencimentoParcela.Checked)
+            {
+                dtpDataVencimentoInicial.Enabled = true;
+                dtpDataVencimentoFinal.Enabled = true;
+                dataVencimentoFiltro = true;
+            }
+            else
+            {
+                dtpDataVencimentoInicial.Enabled = false;
+                dtpDataVencimentoFinal.Enabled = false;
+                dataVencimentoFiltro = false;
+            }
         }
 
 
@@ -85,52 +139,12 @@ namespace _5gpro.Forms
             dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
             dtpDataVencimentoInicial.Value = DateTime.Today.AddDays(-30);
         }
-
-        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        private void EnterTab(object sender, KeyEventArgs e)
         {
-            if (cbValorConta.Checked)
+            if (e.KeyCode == Keys.Enter)
             {
-                dbValorInicial.Enabled = true;
-                dbValorFinal.Enabled = true;
-                valorContaFiltro = true;
-            }
-            else
-            {
-                dbValorInicial.Enabled = false;
-                dbValorFinal.Enabled = false;
-                valorContaFiltro = false;
-            }
-        }
-
-        private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDataCadastro.Checked)
-            {
-                dtpDataCadastroInicial.Enabled = true;
-                dtpDataCadastroFinal.Enabled = true;
-                dataCadastroFiltro = true;
-            }
-            else
-            {
-                dtpDataCadastroInicial.Enabled = false;
-                dtpDataCadastroFinal.Enabled = false;
-                dataCadastroFiltro = false;
-            }
-        }
-
-        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbDataVencimentoParcela.Checked)
-            {
-                dtpDataVencimentoInicial.Enabled = true;
-                dtpDataVencimentoFinal.Enabled = true;
-                dataVencimentoFiltro = true;
-            }
-            else
-            {
-                dtpDataVencimentoInicial.Enabled = false;
-                dtpDataVencimentoFinal.Enabled = false;
-                dataVencimentoFiltro = false;
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

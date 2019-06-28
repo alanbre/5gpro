@@ -105,6 +105,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Grupo de Pessoa";
             this.Load += new System.EventHandler(this.FmBuscaGrupoPessoa_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaGrupoPessoa_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoPessoa)).EndInit();
             this.gbBusca.ResumeLayout(false);
             this.gbBusca.PerformLayout();

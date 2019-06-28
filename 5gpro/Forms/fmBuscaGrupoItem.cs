@@ -20,13 +20,23 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+
+        private void FmBuscaGrupoItem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
+            EnterTab(this.ActiveControl, e);
+        }
         private void FmBuscaGrupoItem_Load(object sender, EventArgs e) => BuscaGrupoItem();
         private void TbNomeGrupoIten_TextChanged(object sender, EventArgs e) => BuscaGrupoItem();
         private void DgvGrupoItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvGrupoItens.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvGrupoItens.Rows[selectedRowIndex];
-            grupoitemSelecionado = grupoitemDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));            
+            grupoitemSelecionado = grupoitemDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
         private void BuscaGrupoItem()
@@ -44,5 +54,13 @@ namespace _5gpro.Forms
             dgvGrupoItens.DataSource = table;
         }
 
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
     }
 }

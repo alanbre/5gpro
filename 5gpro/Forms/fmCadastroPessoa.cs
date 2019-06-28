@@ -43,7 +43,6 @@ namespace _5gpro.Forms
             //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
             Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
             Editando(editando);
-
         }
 
         private void FmCadastroPessoa_KeyDown(object sender, KeyEventArgs e)
@@ -100,9 +99,9 @@ namespace _5gpro.Forms
         private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void TbEmail_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void BuscaGrupoPessoa_Text_Changed_1(object sender, EventArgs e)
+        private void BuscaGrupoPessoa_Text_Changed(object sender, EventArgs e)
         {
-            if (!ignoraCheckEvent) { Editando(true); }
+            Editando(true);
             buscaSubGrupoPessoa.Limpa();
         }
         private void RbPessoaFisica_CheckedChanged(object sender, EventArgs e)
@@ -373,38 +372,9 @@ namespace _5gpro.Forms
                 }
             }
         }
+
         private void CarregaDados()
         {
-            var controls = (ControlCollection)this.Controls;
-
-            int c;
-            if (!int.TryParse(tbCodigo.Text, out c))
-            {
-                tbCodigo.Clear();
-            }
-            else
-            {
-                if (c != codigo)
-                {
-                    if (editando)
-                    {
-                        if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Warning) == DialogResult.No)
-                        {
-                            return;
-                        }
-                    }
-                    codigo = c;
-                }
-            }
-            if (pessoa?.PessoaID == codigo)
-            {
-                return;
-            }
-
-
-
             if (tbCodigo.Text.Length == 0)
             {
                 LimpaCampos(true);
@@ -412,22 +382,61 @@ namespace _5gpro.Forms
                 return;
             }
 
-
-
-            var newpessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
-            if (newpessoa != null)
+            var controls = (ControlCollection)this.Controls;
+            int c = 0;
+            if (!int.TryParse(tbCodigo.Text, out c))
             {
-                
-                pessoa = newpessoa;
+                tbCodigo.Clear();
+            }
+
+            if (codigo != c)
+            {
+                if (editando)
+                {
+                    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?", "Aviso de alteração",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.No)
+                    {
+                        return;
+                    }
+                }
+            }
+
+
+            if (pessoa?.PessoaID == c)
+            {
+                return;
+            }
+
+            if (codigo == 0)
+            {
+                LimpaCampos(true);
+                Editando(false);
+                return;
+            }
+
+            if (pessoa?.PessoaID == codigo)
+            {
+                return;
+            }
+
+
+            var newPessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
+            if (newPessoa != null)
+            {
+                pessoa = newPessoa;
+                codigo = pessoa.PessoaID;
+                validacao.despintarCampos(controls);
                 PreencheCampos(pessoa);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }
-            validacao.despintarCampos(controls);
+
         }
         private void Editando(bool edit)
         {
@@ -469,6 +478,8 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             buscaGrupoPessoa.Limpa();
             buscaSubGrupoPessoa.Limpa();
+            codigo = 0;
+            pessoa = null;
         }
         private void PreencheCampos(Pessoa pessoa)
         {

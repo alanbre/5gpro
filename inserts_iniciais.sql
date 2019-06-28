@@ -5616,6 +5616,9 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Módulo de Contas a Receber', '050000'),
 ('Módulo de Contas a Pagar', '060000'),
 ('Módulo de Entradas', '070000'),
+('Módulo de Estoque', '080000'),
+('Módulo de Caixa', '090000'),
+
 
 ('Cadastro de Pessoa', '010100'),
 ('Cadastro de Usuario', '010200'),
@@ -5623,7 +5626,7 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Cadastro de Grupo de usuários', '010400'),
 ('Cadastro de Grupo de Itens', '010500'),
 ('Cadastro de Grupo de Pessoas', '010600'),
-
+('Cadastro de Unidades de medida', '010700'),
 
 ('Cadastro de Orçamentos', '020100'),
 
@@ -5634,9 +5637,22 @@ INSERT INTO permissao ( nome, codigo) VALUES
 
 ('Cadastro de Contas a Receber', '050100'),
 ('Quitação de Contas a Receber', '050200'),
+
 ('Cadastro de Contas a Pagar', '060100'),
 ('Quitação de Contas a Pagar', '060200'),
-('Entrada de notas', '070100');
+
+('Entrada de notas', '070100'),
+
+('Definir Partes', '080100'),
+
+('Cadastro de Caixa', '090100'),
+('Abertura e fechamento de caixa', '090200'),
+('Sangria de caixa', '090300'),
+('Lançamento manual do caixa', '090400'),
+('Plano de contas', '090500'),
+('Plano de contas padrao', '090600');
+
+
 
 INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (01, 'Dinheiro'),
@@ -5650,6 +5666,13 @@ INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (13, 'Vale Combustível'),
 (15, 'Boleto Bancário'),
 (99, 'Outros');
+
+INSERT INTO caixa_plano_contas (idcaixa_plano_contas, codigo, descricao, paiid, level, codigo_completo) VALUES
+(1, 1, 'Entradas', 0, 0, 1),
+(2, 2, 'Saidas', 0, 0, 2);
+
+INSERT INTO caixa_plano_contas_padrao(idcaixa_plano_contas_padrao) VALUES
+(1);
 
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE

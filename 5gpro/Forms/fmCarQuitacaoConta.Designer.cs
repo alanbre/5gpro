@@ -63,6 +63,7 @@
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbPagamento = new System.Windows.Forms.GroupBox();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.lbDesconto = new System.Windows.Forms.Label();
             this.dbDesconto = new _5gpro.Controls.DecimalBox();
             this.btQuitar = new System.Windows.Forms.Button();
@@ -307,7 +308,7 @@
             this.gbParcelas.Controls.Add(this.dgvParcelas);
             this.gbParcelas.Location = new System.Drawing.Point(12, 125);
             this.gbParcelas.Name = "gbParcelas";
-            this.gbParcelas.Size = new System.Drawing.Size(928, 338);
+            this.gbParcelas.Size = new System.Drawing.Size(928, 337);
             this.gbParcelas.TabIndex = 1;
             this.gbParcelas.TabStop = false;
             this.gbParcelas.Text = "Parcelas";
@@ -348,7 +349,7 @@
             this.dgvParcelas.ReadOnly = true;
             this.dgvParcelas.RowHeadersVisible = false;
             this.dgvParcelas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvParcelas.Size = new System.Drawing.Size(922, 319);
+            this.dgvParcelas.Size = new System.Drawing.Size(922, 318);
             this.dgvParcelas.TabIndex = 0;
             this.dgvParcelas.TabStop = false;
             this.dgvParcelas.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelas_CellContentDoubleClick);
@@ -415,6 +416,7 @@
             // 
             this.gbPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPagamento.Controls.Add(this.buscaCaixa);
             this.gbPagamento.Controls.Add(this.lbDesconto);
             this.gbPagamento.Controls.Add(this.dbDesconto);
             this.gbPagamento.Controls.Add(this.btQuitar);
@@ -431,12 +433,21 @@
             this.gbPagamento.Controls.Add(this.lbValor);
             this.gbPagamento.Controls.Add(this.tbCount);
             this.gbPagamento.Controls.Add(this.lbCount);
-            this.gbPagamento.Location = new System.Drawing.Point(12, 469);
+            this.gbPagamento.Location = new System.Drawing.Point(12, 468);
             this.gbPagamento.Name = "gbPagamento";
             this.gbPagamento.Size = new System.Drawing.Size(928, 132);
             this.gbPagamento.TabIndex = 2;
             this.gbPagamento.TabStop = false;
             this.gbPagamento.Text = "Pagamento";
+            // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(475, 15);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(257, 39);
+            this.buscaCaixa.TabIndex = 17;
             // 
             // lbDesconto
             // 
@@ -461,7 +472,7 @@
             // 
             // btQuitar
             // 
-            this.btQuitar.Location = new System.Drawing.Point(478, 29);
+            this.btQuitar.Location = new System.Drawing.Point(735, 31);
             this.btQuitar.Name = "btQuitar";
             this.btQuitar.Size = new System.Drawing.Size(75, 23);
             this.btQuitar.TabIndex = 14;
@@ -473,7 +484,7 @@
             // 
             this.lbTotal.AutoSize = true;
             this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotal.Location = new System.Drawing.Point(6, 71);
+            this.lbTotal.Location = new System.Drawing.Point(6, 73);
             this.lbTotal.Name = "lbTotal";
             this.lbTotal.Size = new System.Drawing.Size(304, 42);
             this.lbTotal.TabIndex = 13;
@@ -606,11 +617,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(952, 613);
+            this.ClientSize = new System.Drawing.Size(952, 612);
             this.Controls.Add(this.gbPagamento);
             this.Controls.Add(this.gbParcelas);
             this.Controls.Add(this.gbPesquisa);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(968, 652);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(968, 651);
             this.Name = "fmCarQuitacaoConta";
@@ -618,6 +630,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quitação de contas a receber";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCarQuitacaoConta_KeyDown);
             this.gbPesquisa.ResumeLayout(false);
             this.gbPesquisa.PerformLayout();
             this.gbParcelas.ResumeLayout(false);
@@ -678,5 +691,6 @@
         private System.Windows.Forms.CheckBox cbValor;
         private System.Windows.Forms.CheckBox cbDataVencimento;
         private System.Windows.Forms.CheckBox cbDataCadastro;
+        private Controls.BuscaCaixa buscaCaixa;
     }
 }

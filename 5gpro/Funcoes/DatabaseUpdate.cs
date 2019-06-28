@@ -178,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
   `idunimedida` INT(11) NOT NULL,
   `idsubgrupoitem` INT NOT NULL,
   `quantidade` DECIMAL NOT NULL,
+  `custo` DECIMAL(15,2) NULL,
   PRIMARY KEY (`iditem`),
   INDEX `fk_item_unimedida1_idx` (`idunimedida` ASC) VISIBLE,
   INDEX `fk_item_subgrupoitem1_idx` (`idsubgrupoitem` ASC) VISIBLE,
@@ -208,9 +209,10 @@ ENGINE = InnoDB;
 -- Table `5gprodatabase`.`subgrupopessoa`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`subgrupopessoa` (
-  `idsubgrupopessoa` INT NOT NULL,
+  `idsubgrupopessoa` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(150) NOT NULL,
   `idgrupopessoa` INT NOT NULL,
+  `codigo` INT(11) NOT NULL,
   PRIMARY KEY (`idsubgrupopessoa`),
   INDEX `fk_subgrupopessoa_grupopessoa1_idx` (`idgrupopessoa` ASC) VISIBLE,
   CONSTRAINT `fk_subgrupopessoa_grupopessoa1`
@@ -263,8 +265,8 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
   `idnotafiscal` INT(11) NOT NULL,
-  `data_emissao` DATE NOT NULL,
-  `data_entradasaida` DATE NOT NULL,
+  `data_emissao` DATETIME NOT NULL,
+  `data_entradasaida` DATETIME NOT NULL,
   `tiponf` CHAR(1) NOT NULL,
   `valor_total_itens` DECIMAL(10,2) NULL DEFAULT NULL,
   `valor_documento` DECIMAL(10,2) NULL DEFAULT NULL,
@@ -536,7 +538,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `idparcela_conta_receber` INT NOT NULL AUTO_INCREMENT,
   `sequencia` INT NOT NULL,
-  `data_vencimento` DATETIME NOT NULL,
+  `data_vencimento` DATE NOT NULL,
   `valor` DECIMAL(10,2) NOT NULL,
   `multa` DECIMAL(10,2) NOT NULL,
   `juros` DECIMAL(10,2) NOT NULL,
@@ -594,7 +596,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
   `idparcela_conta_pagar` INT NOT NULL AUTO_INCREMENT,
   `sequencia` INT NULL,
-  `data_vencimento` DATETIME NULL,
+  `data_vencimento` DATE NULL,
   `valor` DECIMAL(10,2) NULL,
   `multa` DECIMAL(10,2) NULL,
   `juros` DECIMAL(10,2) NULL,
@@ -627,7 +629,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`registro_estoque` (
   `idregistro_estoque` INT NOT NULL AUTO_INCREMENT,
   `tipomovimentacao` CHAR(1) NOT NULL,
-  `data` DATE NOT NULL,
+  `data` DATETIME NOT NULL,
   `documento` VARCHAR(60) NOT NULL,
   `iditem` INT(11) NOT NULL,
   `quantidade` DECIMAL(10,2) NOT NULL,
@@ -698,9 +700,296 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nota_fiscal_terceiros_has_item` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`desintegracao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`desintegracao` (
+  `iddesintegracao` INT NOT NULL,
+  `iditemdesintegrado` INT(11) NOT NULL,
+  `tipo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`iddesintegracao`),
+  INDEX `fk_desintegracao_item1_idx` (`iditemdesintegrado` ASC) VISIBLE,
+  CONSTRAINT `fk_desintegracao_item1`
+    FOREIGN KEY (`iditemdesintegrado`)
+    REFERENCES `5gprodatabase`.`item` (`iditem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`resultado_desintegracao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`resultado_desintegracao` (
+  `idresultado_desintegracao` INT NOT NULL AUTO_INCREMENT,
+  `iddesintegracao` INT NOT NULL,
+  `iditemparte` INT(11) NOT NULL,
+  `porcentagem` DECIMAL(10,2) NULL,
+  `quantidade` DECIMAL NULL,
+  PRIMARY KEY (`idresultado_desintegracao`),
+  INDEX `fk_resultado_desintegracao_desintegracao1_idx` (`iddesintegracao` ASC) VISIBLE,
+  INDEX `fk_resultado_desintegracao_item1_idx` (`iditemparte` ASC) VISIBLE,
+  CONSTRAINT `fk_resultado_desintegracao_desintegracao1`
+    FOREIGN KEY (`iddesintegracao`)
+    REFERENCES `5gprodatabase`.`desintegracao` (`iddesintegracao`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_resultado_desintegracao_item1`
+    FOREIGN KEY (`iditemparte`)
+    REFERENCES `5gprodatabase`.`item` (`iditem`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa` (
+  `idcaixa` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `nome` VARCHAR(50) NOT NULL,
+  `aberto` TINYINT NOT NULL,
+  `descricao` VARCHAR(500) NULL,
+  `dataabertura` DATETIME NULL,
+  `datafechamento` DATETIME NULL,
+  `valorabertura` DECIMAL(10,2) NULL,
+  `valorfechamento` DECIMAL(10,2) NULL,
+  `idusuario` INT(11) NOT NULL,
+  PRIMARY KEY (`idcaixa`),
+  INDEX `fk_caixa_usuario1_idx` (`idusuario` ASC) VISIBLE,
+  UNIQUE INDEX `codigo_UNIQUE` (`codigo` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_usuario1`
+    FOREIGN KEY (`idusuario`)
+    REFERENCES `5gprodatabase`.`usuario` (`idusuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
+  `idcaixa_lancamento` INT NOT NULL AUTO_INCREMENT,
+  `data` DATETIME NOT NULL,
+  `valor` DECIMAL(10,2) NOT NULL,
+  `tipomovimento` TINYINT(1) UNSIGNED NOT NULL,
+  `tipodocumento` TINYINT(1) UNSIGNED NOT NULL,
+  `lancamento` TINYINT(1) UNSIGNED NOT NULL,
+  `documento` VARCHAR(15) NULL,
+  `idcaixa` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_entrada_caixa1_idx` (`idcaixa` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_entrada_caixa1`
+    FOREIGN KEY (`idcaixa`)
+    REFERENCES `5gprodatabase`.`caixa` (`idcaixa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_sangria`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_sangria` (
+  `idcaixa_sangria` INT NOT NULL AUTO_INCREMENT,
+  `data` DATETIME NOT NULL,
+  `dinheiro` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`idcaixa_sangria`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_sangria_lancamento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_sangria_lancamento` (
+  `idcaixa_sangria_lancamentos` INT NOT NULL AUTO_INCREMENT,
+  `idcaixa_lancamento` INT NOT NULL,
+  `idcaixa_sangria` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_sangria_lancamentos`),
+  INDEX `fk_caixa_sangria_lancamentos_caixa_lancamentos1_idx` (`idcaixa_lancamento` ASC) VISIBLE,
+  INDEX `fk_caixa_sangria_lancamentos_caixa_sangria1_idx` (`idcaixa_sangria` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_sangria_lancamentos_caixa_lancamentos1`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_sangria_lancamentos_caixa_sangria1`
+    FOREIGN KEY (`idcaixa_sangria`)
+    REFERENCES `5gprodatabase`.`caixa_sangria` (`idcaixa_sangria`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_car`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_car` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idparcela_conta_receber` INT NOT NULL,
+  INDEX `fk_caixa_lancamento_car_parcela_conta_receber1_idx` (`idparcela_conta_receber` ASC) VISIBLE,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  CONSTRAINT `fk_caixa_lancamento_car_parcela_conta_receber1`
+    FOREIGN KEY (`idparcela_conta_receber`)
+    REFERENCES `5gprodatabase`.`parcela_conta_receber` (`idparcela_conta_receber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_car_caixa_lancamento1`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_cap`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_cap` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idparcela_conta_pagar` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_lancamento_cap_parcela_conta_pagar1_idx` (`idparcela_conta_pagar` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_lancamento_cap_caixa_lancamento1`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_cap_parcela_conta_pagar1`
+    FOREIGN KEY (`idparcela_conta_pagar`)
+    REFERENCES `5gprodatabase`.`parcela_conta_pagar` (`idparcela_conta_pagar`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_sai`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_sai` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idnotafiscal` INT(11) NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_lancamento_sai_notafiscal1_idx` (`idnotafiscal` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_caixa_lancamento3`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_sai_notafiscal1`
+    FOREIGN KEY (`idnotafiscal`)
+    REFERENCES `5gprodatabase`.`notafiscal` (`idnotafiscal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_lancamento_ent`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento_ent` (
+  `idcaixa_lancamento` INT NOT NULL,
+  `idnota_fiscal_terceiros` INT NOT NULL,
+  PRIMARY KEY (`idcaixa_lancamento`),
+  INDEX `fk_caixa_lancamento_ent_nota_fiscal_terceiros1_idx` (`idnota_fiscal_terceiros` ASC) VISIBLE,
+  CONSTRAINT `fk_table1_caixa_lancamento4`
+    FOREIGN KEY (`idcaixa_lancamento`)
+    REFERENCES `5gprodatabase`.`caixa_lancamento` (`idcaixa_lancamento`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_ent_nota_fiscal_terceiros1`
+    FOREIGN KEY (`idnota_fiscal_terceiros`)
+    REFERENCES `5gprodatabase`.`nota_fiscal_terceiros` (`idnota_fiscal_terceiros`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_plano_contas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
+  `idcaixa_plano_contas` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `level` INT NOT NULL,
+  `paiid` INT NULL,
+  `descricao` VARCHAR(45) NOT NULL,
+  `codigo_completo` VARCHAR(50) NULL,
+  PRIMARY KEY (`idcaixa_plano_contas`))
+ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_plano_contas_padrao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
+  `idcaixa_plano_contas_padrao` INT NOT NULL,
+  `compras` INT NULL,
+  `contas_pagar` INT NULL,
+  `descontos_concedidos` INT NULL,
+  `juros_pagos` INT NULL,
+  `vendas` INT NULL,
+  `contas_receber` INT NULL,
+  `descontos_recebidos` INT NULL,
+  `juros_recebidos` INT NULL,
+  PRIMARY KEY (`idcaixa_plano_contas_padrao`),
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas1_idx` (`compras` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas2_idx` (`contas_pagar` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas3_idx` (`descontos_concedidos` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas4_idx` (`juros_pagos` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas5_idx` (`vendas` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas6_idx` (`contas_receber` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas7_idx` (`descontos_recebidos` ASC) VISIBLE,
+  INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas8_idx` (`juros_recebidos` ASC) VISIBLE,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas1`
+    FOREIGN KEY (`compras`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas2`
+    FOREIGN KEY (`contas_pagar`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas3`
+    FOREIGN KEY (`descontos_concedidos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas4`
+    FOREIGN KEY (`juros_pagos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas5`
+    FOREIGN KEY (`vendas`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas6`
+    FOREIGN KEY (`contas_receber`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas7`
+    FOREIGN KEY (`descontos_recebidos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas8`
+    FOREIGN KEY (`juros_recebidos`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
 ";
             return create;
         }

@@ -383,6 +383,7 @@
             this.ClientSize = new System.Drawing.Size(731, 458);
             this.Controls.Add(this.gbGridDocumentos);
             this.Controls.Add(this.gbFiltrosDocumento);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(747, 496);
@@ -391,6 +392,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca nota fiscal de entrada";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEntBuscaNotaFiscalTerceiros_KeyDown);
             this.gbGridDocumentos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocumentos)).EndInit();
             this.gbFiltrosDocumento.ResumeLayout(false);

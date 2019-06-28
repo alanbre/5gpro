@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MySQLConnection;
 using _5gpro.Reports;
+using _5gpro.Forms;
 
 namespace _5gpro.Daos
 {
@@ -107,7 +108,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = $@"SELECT 
                             nf.idnotafiscal AS nf_idnotafiscal, nf.data_emissao AS nf_data_emissao, nf.data_entradasaida AS nf_entradasaida, nf.tiponf AS nf_tiponf, nf.valor_total_itens AS nf_valor_total_itens, nf.valor_documento AS nf_valor_documento,  nf.desconto_total_itens AS nf_desconto_total_itens, nf.desconto_documento AS nf_desconto_documento, 
-                            p.idpessoa AS p_idpessoa, p.nome AS p_nome, p.fantasia AS p_fantasia, p.rua AS p_rua, p.numero AS p_numero, p.bairro AS p_bairro, p.complemento AS p_complemento, p.cpf AS p_cpf, p.cnpj AS p_cnpj, p.endereco AS p_endereco, p.telefone AS p_telefone, p.email AS p_email,
+                            p.idpessoa AS p_idpessoa, p.nome AS p_nome, p.fantasia AS p_fantasia, p.tipo_pessoa, p.atuacao, p.situacao, p.rua AS p_rua, p.numero AS p_numero, p.bairro AS p_bairro, p.complemento AS p_complemento, p.cpf AS p_cpf, p.cnpj AS p_cnpj, p.endereco AS p_endereco, p.telefone AS p_telefone, p.email AS p_email,
                             c.idcidade AS c_idcidade, c.nome AS c_nome,
                             sbp.idsubgrupopessoa AS sbp_idsubgrupopessoa, sbp.nome AS sbp_nome,
                             gp.idgrupopessoa AS gp_idgrupopessoa, gp.nome AS gp_nome,
@@ -233,12 +234,20 @@ namespace _5gpro.Daos
                         pessoa.PessoaID = Convert.ToInt32(d["p_idpessoa"]);
                         pessoa.Nome = (string)d["p_nome"];
                         pessoa.Fantasia = (string)d["p_fantasia"];
+                        pessoa.TipoPessoa = (string)d["tipo_pessoa"];
+                        pessoa.Atuacao = (string)d["atuacao"];
+                        pessoa.Situacao = (string)d["situacao"];
                         pessoa.Rua = (string)d["p_rua"];
                         pessoa.Numero = (string)d["p_numero"];
                         pessoa.Bairro = (string)d["p_bairro"];
                         pessoa.Complemento = (string)d["p_complemento"];
                         pessoa.Cidade = cidade;
-                        pessoa.CpfCnpj = (string)d["p_cnpj"];
+
+                        if (pessoa.TipoPessoa == "J")
+                            pessoa.CpfCnpj = (string)d["p_cnpj"];
+                        else
+                            pessoa.CpfCnpj = (string)d["p_cpf"];
+
                         pessoa.Telefone = (string)d["p_endereco"];
                         pessoa.Email = (string)d["p_telefone"];
                         pessoa.SubGrupoPessoa = subGrupoPessoa;
@@ -261,6 +270,64 @@ namespace _5gpro.Daos
             }
             notaFiscalProprias.RemoveAt(0);
             return notaFiscalProprias;
+        }
+        public IEnumerable<NotaFiscalPropria> Busca(fmSaiBuscaNotaFiscalPropria.Filtros f)
+        {
+            var notasFiscaisProprias = new List<NotaFiscalPropria>();
+            var wherePessoa = f.Pessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            var whereCidade = f.Cidade != null ? "AND p.idcidade = @idcidade" : "";
+            string whereValorTotal = f.usarvalorTotalFiltro ? "AND nf.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final" : "";
+            string whereDataEmissao = f.usardataEmissaoFiltro ? "AND nf.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final" : "";
+            string whereDataEntrada = f.usardataSaidaFiltro ? "AND nf.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final" : "";
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = $@"SELECT nf.idnotafiscal, p.idpessoa, p.nome, nf.data_emissao, nf.data_entradasaida, nf.valor_documento
+                            FROM
+                            notafiscal nf
+                            LEFT JOIN pessoa p ON nf.idpessoa = p.idpessoa
+                            WHERE 1=1 
+                            {wherePessoa} 
+                            {whereCidade} 
+                            {whereValorTotal} 
+                            {whereDataEmissao} 
+                            {whereDataEntrada} 
+                            GROUP BY nf.idnotafiscal";
+
+                if (f.Pessoa != null) { sql.addParam("@idpessoa", f.Pessoa.PessoaID); }
+                if (f.Cidade != null) { sql.addParam("@idcidade", f.Cidade.CidadeID); }
+                if (f.usarvalorTotalFiltro)
+                {
+                    sql.addParam("@valor_documento_inicial", f.ValorInicial);
+                    sql.addParam("@valor_documento_final", f.ValorFinal);
+                }
+                if (f.usardataEmissaoFiltro)
+                {
+                    sql.addParam("@data_emissao_inicial", f.DataEmissaoInicial);
+                    sql.addParam("@data_emissao_final", f.DataEmissaoFinal);
+                }
+                if (f.usardataSaidaFiltro)
+                {
+                    sql.addParam("@data_entradasaida_inicial", f.DataEntradaInicial);
+                    sql.addParam("@data_entradasaida_final", f.DataEntradaFinal);
+                }
+                var data = sql.selectQuery();
+
+                foreach (var d in data)
+                {
+                    var pessoa = new Pessoa();
+                    pessoa.PessoaID = Convert.ToInt32(d["idpessoa"]);
+                    pessoa.Nome = (string)d["nome"];
+
+                    var notaProria = new NotaFiscalPropria();
+                    notaProria.NotaFiscalPropriaID = Convert.ToInt32(d["idnotafiscal"]);
+                    notaProria.DataEmissao = (DateTime)d["data_emissao"];
+                    notaProria.DataEntradaSaida = (DateTime)d["data_entradasaida"];
+                    notaProria.ValorTotalDocumento = (decimal)d["valor_documento"];
+                    notaProria.Pessoa = pessoa;
+                    notasFiscaisProprias.Add(notaProria);
+                }
+            }
+            return notasFiscaisProprias;
         }
         public int SalvaOuAtualiza(NotaFiscalPropria notafiscal)
         {

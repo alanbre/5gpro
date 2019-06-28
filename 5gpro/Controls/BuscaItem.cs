@@ -48,15 +48,13 @@ namespace _5gpro.Controls
         }
 
 
-
-
         private void AbreTelaBuscaItem()
         {
             var buscaItem = new fmBuscaItem();
             buscaItem.ShowDialog();
             if (buscaItem.itemSelecionado != null)
             {
-                Item item = buscaItem.itemSelecionado;
+                item = buscaItem.itemSelecionado;
                 PreencheCamposItem(item);
             }
         }

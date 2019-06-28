@@ -129,6 +129,7 @@
     <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.8.0.16\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -147,8 +148,17 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BuscaCaixa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaCaixa.Designer.cs">
+      <DependentUpon>BuscaCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaCidade.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,6 +213,12 @@
     <Compile Include="Controls\BuscaPessoa.Designer.cs">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BuscaPlanoContaCaixa.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaPlanoContaCaixa.Designer.cs">
+      <DependentUpon>BuscaPlanoContaCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaSubGrupoItem.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -220,6 +236,12 @@
     </Compile>
     <Compile Include="Controls\BuscaUnimedida.Designer.cs">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BuscaUsuario.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaUsuario.Designer.cs">
+      <DependentUpon>BuscaUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\CheckedGroupBox.cs">
       <SubType>UserControl</SubType>
@@ -239,15 +261,24 @@
     <Compile Include="Controls\MenuVertical.Designer.cs">
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\MenuVerticalSemNovo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuVerticalSemNovo.Designer.cs">
+      <DependentUpon>MenuVerticalSemNovo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MiniMenuVertical.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Controls\MiniMenuVertical.Designer.cs">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Daos\CaixaDAO.cs" />
+    <Compile Include="Daos\CaixaLancamentoDAO.cs" />
     <Compile Include="Daos\CidadeDAO.cs" />
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
+    <Compile Include="Daos\DesintegracaoDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\FormaPagamentoDAO.cs" />
     <Compile Include="Daos\GrupoItemDAO.cs" />
@@ -262,17 +293,16 @@
     <Compile Include="Daos\ParcelaContaReceberDAO.cs" />
     <Compile Include="Daos\ParcelaOperacaoDAO.cs" />
     <Compile Include="Daos\PermissaoDAO.cs" />
+    <Compile Include="Daos\PlanoContaDAO.cs" />
+    <Compile Include="Daos\PlanoContaPadraoDAO.cs" />
     <Compile Include="Daos\SubGrupoItemDAO.cs" />
     <Compile Include="Daos\SubGrupoPessoaDAO.cs" />
     <Compile Include="Daos\UsuarioDAO.cs" />
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
-    <Compile Include="DataSets\dsContas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsContas.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\Caixa.cs" />
+    <Compile Include="Entities\CaixaLancamento.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
@@ -292,7 +322,11 @@
     <Compile Include="Entities\ParcelaContaPagar.cs" />
     <Compile Include="Entities\ParcelaContaReceber.cs" />
     <Compile Include="Entities\ParcelaOperacao.cs" />
+    <Compile Include="Entities\Desintegracao.cs" />
     <Compile Include="Entities\Permissao.cs" />
+    <Compile Include="Entities\DesintegracaoResultado.cs" />
+    <Compile Include="Entities\PlanoConta.cs" />
+    <Compile Include="Entities\PlanoContaPadrao.cs" />
     <Compile Include="Entities\SubGrupoItem.cs" />
     <Compile Include="Entities\SubGrupoPessoa.cs" />
     <Compile Include="Entities\Unimedida.cs" />
@@ -300,35 +334,71 @@
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Daos\ConexaoDAO.cs" />
     <Compile Include="Entities\Pessoa.cs" />
+    <Compile Include="Forms\fmBuscaContaCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaContaCaixa.Designer.cs">
+      <DependentUpon>fmBuscaContaCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCaiAberturaFechamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiAberturaFechamento.Designer.cs">
+      <DependentUpon>fmCaiAberturaFechamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCaiBuscaCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiBuscaCaixa.Designer.cs">
+      <DependentUpon>fmCaiBuscaCaixa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCaiCadastroCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiCadastroCaixa.Designer.cs">
+      <DependentUpon>fmCaiCadastroCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmCadastroUnimedida.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmCadastroUnimedida.Designer.cs">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmItemReport.cs">
+    <Compile Include="Forms\fmCadastroDesintegracao.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmItemReport.Designer.cs">
-      <DependentUpon>fmItemReport.cs</DependentUpon>
+    <Compile Include="Forms\fmCadastroDesintegracao.Designer.cs">
+      <DependentUpon>fmCadastroDesintegracao.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmQuebrarItem.cs">
+    <Compile Include="Forms\fmCaiLancamentoManual.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmQuebrarItem.Designer.cs">
-      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
+    <Compile Include="Forms\fmCaiLancamentoManual.Designer.cs">
+      <DependentUpon>fmCaiLancamentoManual.cs</DependentUpon>
     </Compile>
-    <Compile Include="Relatorios\fmRelatorioContas.cs">
+    <Compile Include="Forms\fmCaiPlanoContas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Relatorios\fmRelatorioContas.Designer.cs">
-      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
+    <Compile Include="Forms\fmCaiPlanoContas.Designer.cs">
+      <DependentUpon>fmCaiPlanoContas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Relatorios\fmReportViewer.cs">
+    <Compile Include="Forms\fmCaiSangria.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Relatorios\fmReportViewer.Designer.cs">
-      <DependentUpon>fmReportViewer.cs</DependentUpon>
+    <Compile Include="Forms\fmCaiSangria.Designer.cs">
+      <DependentUpon>fmCaiSangria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCalculoPrecoVenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCalculoPrecoVenda.Designer.cs">
+      <DependentUpon>fmCalculoPrecoVenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCaiPlanoContasPadrao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCaiPlanoContasPadrao.Designer.cs">
+      <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
@@ -338,55 +408,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Reports\AdicioneiAgora1044.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\dsItem.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dsItem.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\DSVazio.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DSVazio.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\fmRltContaReceber.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\fmRltContaReceber.Designer.cs">
-      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
-    </Compile>
     <Compile Include="Reports\fmRltGenerico.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\fmRltGenerico.Designer.cs">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\fmRltItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Reports\fmRltItem.Designer.cs">
-      <DependentUpon>fmRltItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="Reports\fmRltNotasSaida.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\fmRltNotasSaida.Designer.cs">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\gugugugu.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>gugugugu.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\exemplorelatorio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testesrelatorios\exemplorelatorio.Designer.cs">
-      <DependentUpon>exemplorelatorio.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaCidade.cs">
       <SubType>Form</SubType>
@@ -544,18 +576,6 @@
     <Compile Include="Forms\fmCadastroPessoa.Designer.cs">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoItem.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoItem.Designer.cs">
-      <DependentUpon>fmCadastroSubGrupoItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoPessoa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\fmCadastroSubGrupoPessoa.Designer.cs">
-      <DependentUpon>fmCadastroSubGrupoPessoa.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\fmCadastroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -634,25 +654,6 @@
     <Compile Include="Forms\fmSelecionarBase.Designer.cs">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="testesrelatorios\FormRelatUsu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="testesrelatorios\FormRelatUsu.Designer.cs">
-      <DependentUpon>FormRelatUsu.cs</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\SetUsuario.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SetUsuario.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\Teste.cs">
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="testesrelatorios\Teste.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Funcoes\CarregaSistema.cs" />
     <Compile Include="Funcoes\DatabaseUpdate.cs" />
     <Compile Include="Funcoes\FuncoesAuxiliares.cs" />
@@ -665,6 +666,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <EmbeddedResource Include="Controls\BuscaCaixa.resx">
+      <DependentUpon>BuscaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaCidade.resx">
       <DependentUpon>BuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -692,6 +696,9 @@
     <EmbeddedResource Include="Controls\BuscaPessoa.resx">
       <DependentUpon>BuscaPessoa.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaPlanoContaCaixa.resx">
+      <DependentUpon>BuscaPlanoContaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaSubGrupoItem.resx">
       <DependentUpon>BuscaSubGrupoItem.cs</DependentUpon>
     </EmbeddedResource>
@@ -700,6 +707,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaUnimedida.resx">
       <DependentUpon>BuscaUnimedida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\BuscaUsuario.resx">
+      <DependentUpon>BuscaUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\CheckedGroupBox.resx">
       <DependentUpon>CheckedGroupBox.cs</DependentUpon>
@@ -710,45 +720,52 @@
     <EmbeddedResource Include="Controls\MenuVertical.resx">
       <DependentUpon>MenuVertical.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MenuVerticalSemNovo.resx">
+      <DependentUpon>MenuVerticalSemNovo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaContaCaixa.resx">
+      <DependentUpon>fmBuscaContaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiAberturaFechamento.resx">
+      <DependentUpon>fmCaiAberturaFechamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiBuscaCaixa.resx">
+      <DependentUpon>fmCaiBuscaCaixa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiCadastroCaixa.resx">
+      <DependentUpon>fmCaiCadastroCaixa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUnimedida.resx">
       <DependentUpon>fmCadastroUnimedida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmItemReport.resx">
-      <DependentUpon>fmItemReport.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCadastroDesintegracao.resx">
+      <DependentUpon>fmCadastroDesintegracao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmQuebrarItem.resx">
-      <DependentUpon>fmQuebrarItem.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCaiLancamentoManual.resx">
+      <DependentUpon>fmCaiLancamentoManual.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\fmRelatorioContas.resx">
-      <DependentUpon>fmRelatorioContas.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCaiPlanoContas.resx">
+      <DependentUpon>fmCaiPlanoContas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\fmReportViewer.resx">
-      <DependentUpon>fmReportViewer.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCaiSangria.resx">
+      <DependentUpon>fmCaiSangria.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relatorios\rltContas.rdlc" />
-    <EmbeddedResource Include="Reports\fmRltContaReceber.resx">
-      <DependentUpon>fmRltContaReceber.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCalculoPrecoVenda.resx">
+      <DependentUpon>fmCalculoPrecoVenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
+      <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\fmRltItem.resx">
-      <DependentUpon>fmRltItem.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rltContas.rdlc" />
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
-    <EmbeddedResource Include="Reports\rltContaPagar.rdlc" />
-    <EmbeddedResource Include="Reports\rltItem.rdlc" />
-    <EmbeddedResource Include="Reports\rltItemSemDS.rdlc" />
-    <EmbeddedResource Include="testesrelatorios\exemplorelatorio.resx">
-      <DependentUpon>exemplorelatorio.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
@@ -824,12 +841,6 @@
     <EmbeddedResource Include="Forms\fmCadastroPessoa.resx">
       <DependentUpon>fmCadastroPessoa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroSubGrupoItem.resx">
-      <DependentUpon>fmCadastroSubGrupoItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmCadastroSubGrupoPessoa.resx">
-      <DependentUpon>fmCadastroSubGrupoPessoa.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCadastroUsuario.resx">
       <DependentUpon>fmCadastroUsuario.cs</DependentUpon>
     </EmbeddedResource>
@@ -872,10 +883,6 @@
     <EmbeddedResource Include="Forms\fmSelecionarBase.resx">
       <DependentUpon>fmSelecionarBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="testesrelatorios\FormRelatUsu.resx">
-      <DependentUpon>FormRelatUsu.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="testesrelatorios\Report2.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -886,19 +893,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="testesrelatorios\Usuarios.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
-    <None Include="DataSets\dsContas.xsc">
-      <DependentUpon>dsContas.xsd</DependentUpon>
-    </None>
-    <None Include="DataSets\dsContas.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsContas.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSets\dsContas.xss">
-      <DependentUpon>dsContas.xsd</DependentUpon>
-    </None>
     <None Include="Reports\dsGenerico.xsc">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </None>
@@ -913,72 +908,6 @@
     <None Include="Properties\DataSources\_5gpro.Entities.ContaPagar.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.ContaReceber.datasource" />
     <None Include="Properties\DataSources\_5gpro.Entities.Item.datasource" />
-    <None Include="Reports\AdicioneiAgora1044.xsc">
-      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\AdicioneiAgora1044.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>AdicioneiAgora1044.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\AdicioneiAgora1044.xss">
-      <DependentUpon>AdicioneiAgora1044.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\dsItem.xsc">
-      <DependentUpon>dsItem.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\dsItem.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dsItem.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\dsItem.xss">
-      <DependentUpon>dsItem.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\DSVazio.xsc">
-      <DependentUpon>DSVazio.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\DSVazio.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DSVazio.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\DSVazio.xss">
-      <DependentUpon>DSVazio.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\gugugugu.xsc">
-      <DependentUpon>gugugugu.xsd</DependentUpon>
-    </None>
-    <None Include="Reports\gugugugu.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>gugugugu.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Reports\gugugugu.xss">
-      <DependentUpon>gugugugu.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\SetUsuario.xsc">
-      <DependentUpon>SetUsuario.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\SetUsuario.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SetUsuario.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="testesrelatorios\SetUsuario.xss">
-      <DependentUpon>SetUsuario.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\Teste.xsc">
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </None>
-    <None Include="testesrelatorios\Teste.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>Teste.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="testesrelatorios\Teste.xss">
-      <DependentUpon>Teste.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1206,6 +1135,18 @@
     <None Include="Resources\left_18px.png" />
     <None Include="Resources\CELO-5G.ico" />
     <None Include="Resources\HAJELLL.png" />
+    <None Include="Resources\desintegracao_chart_40px.png" />
+    <None Include="Resources\icons8_report_card_40px.png" />
+    <None Include="Resources\icons8_report_card_40px_1.png" />
+    <None Include="Resources\icons8_report_card_40px_2.png" />
+    <None Include="Resources\icons8_report_card_40px_4.png" />
+    <None Include="Resources\icons8_report_card_40px_5.png" />
+    <None Include="Resources\icons8_report_card_40px_6.png" />
+    <None Include="Resources\report_card_40px.png" />
+    <None Include="Resources\contacts_32px.png" />
+    <None Include="Resources\unlock_32px.png" />
+    <None Include="Resources\search_filled_18px_white.png" />
+    <None Include="Resources\menu_filled_30px_white.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

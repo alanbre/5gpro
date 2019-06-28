@@ -23,15 +23,14 @@ namespace _5gpro.Forms
 
         private void FmBuscaCidade_KeyDown(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+                return;
+            }
             EnterTab(this.ActiveControl, e);
         }
-
-
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
-            BuscaCidades();
-        }
-
+        private void BtPesquisar_Click(object sender, EventArgs e) => BuscaCidades();
         private void DgvCidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
@@ -39,13 +38,7 @@ namespace _5gpro.Forms
             cidadeSelecionada = Cidades.Find(c => c.CidadeID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
-
-        private void TbFiltroNomeCidade_TextChanged(object sender, EventArgs e)
-        {
-            BuscaCidades();
-        }
-
-
+        private void TbFiltroNomeCidade_TextChanged(object sender, EventArgs e) => BuscaCidades();
 
         private void BuscaCidades()
         {
@@ -80,7 +73,6 @@ namespace _5gpro.Forms
             dgvCidades.Refresh();
 
         }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
