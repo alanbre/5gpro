@@ -516,6 +516,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_receber` (
   `desconto` DECIMAL(10,2) NULL,
   `situacao` VARCHAR(45) NOT NULL,
   `data_conta` DATETIME NOT NULL,
+  `descricao` VARCHAR(200) NULL,
   PRIMARY KEY (`idconta_receber`),
   INDEX `fk_conta_receber_operacao1_idx` (`idoperacao` ASC) VISIBLE,
   INDEX `fk_conta_receber_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
@@ -549,6 +550,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_receber` (
   `idformapagamento` INT NULL,
   `desconto` DECIMAL(10,2) NULL,
   `situacao` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(200) NULL,
   PRIMARY KEY (`idparcela_conta_receber`),
   INDEX `fk_parcela_conta_receber_conta_receber1_idx` (`idconta_receber` ASC) VISIBLE,
   INDEX `fk_parcela_conta_receber_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
@@ -580,6 +582,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`conta_pagar` (
   `desconto` DECIMAL(10,2) NULL,
   `situacao` VARCHAR(45) NOT NULL,
   `data_conta` DATETIME NOT NULL,
+  `descricao` VARCHAR(200) NULL,
   PRIMARY KEY (`idconta_pagar`),
   INDEX `fk_conta_pagar_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_conta_pagar_pessoa1`
@@ -607,6 +610,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`parcela_conta_pagar` (
   `acrescimo` DECIMAL(10,2) NULL,
   `desconto` DECIMAL(10,2) NULL,
   `situacao` VARCHAR(45) NOT NULL,
+  `descricao` VARCHAR(200) NULL,
   PRIMARY KEY (`idparcela_conta_pagar`),
   INDEX `fk_parcela_conta_pagar_formapagamento1_idx` (`idformapagamento` ASC) VISIBLE,
   INDEX `fk_parcela_conta_pagar_conta_pagar1_idx` (`idconta_pagar` ASC) VISIBLE,
@@ -768,6 +772,20 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixa_plano_contas`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
+  `idcaixa_plano_contas` INT NOT NULL AUTO_INCREMENT,
+  `codigo` INT NOT NULL,
+  `level` INT NOT NULL,
+  `paiid` INT NULL,
+  `descricao` VARCHAR(45) NOT NULL,
+  `codigo_completo` VARCHAR(50) NULL,
+  PRIMARY KEY (`idcaixa_plano_contas`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_lancamento`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
@@ -779,11 +797,18 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_lancamento` (
   `lancamento` TINYINT(1) UNSIGNED NOT NULL,
   `documento` VARCHAR(15) NULL,
   `idcaixa` INT NOT NULL,
+  `idcaixa_plano_contas` INT NOT NULL,
   PRIMARY KEY (`idcaixa_lancamento`),
   INDEX `fk_caixa_entrada_caixa1_idx` (`idcaixa` ASC) VISIBLE,
+  INDEX `fk_caixa_lancamento_caixa_plano_contas1_idx` (`idcaixa_plano_contas` ASC) VISIBLE,
   CONSTRAINT `fk_caixa_entrada_caixa1`
     FOREIGN KEY (`idcaixa`)
     REFERENCES `5gprodatabase`.`caixa` (`idcaixa`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_caixa_lancamento_caixa_plano_contas1`
+    FOREIGN KEY (`idcaixa_plano_contas`)
+    REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -908,19 +933,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `5gprodatabase`.`caixa_plano_contas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas` (
-  `idcaixa_plano_contas` INT NOT NULL AUTO_INCREMENT,
-  `codigo` INT NOT NULL,
-  `level` INT NOT NULL,
-  `paiid` INT NULL,
-  `descricao` VARCHAR(45) NOT NULL,
-  `codigo_completo` VARCHAR(50) NULL,
-  PRIMARY KEY (`idcaixa_plano_contas`))
-ENGINE = InnoDB;
-
--- -----------------------------------------------------
 -- Table `5gprodatabase`.`caixa_plano_contas_padrao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
@@ -988,6 +1000,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 
 ";

@@ -51,6 +51,7 @@
             this.dgvSubGrupoItem.MultiSelect = false;
             this.dgvSubGrupoItem.Name = "dgvSubGrupoItem";
             this.dgvSubGrupoItem.ReadOnly = true;
+            this.dgvSubGrupoItem.RowHeadersVisible = false;
             this.dgvSubGrupoItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSubGrupoItem.Size = new System.Drawing.Size(298, 308);
             this.dgvSubGrupoItem.TabIndex = 0;

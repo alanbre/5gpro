@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
             this.dbValorContaGerar = new _5gpro.Controls.DecimalBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
@@ -91,6 +91,8 @@
             this.lbValorOriginalConta = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
+            this.lbDescricao = new System.Windows.Forms.Label();
             this.gbDadosConta.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -101,6 +103,8 @@
             // 
             this.gbDadosConta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDadosConta.Controls.Add(this.lbDescricao);
+            this.gbDadosConta.Controls.Add(this.tbDescricao);
             this.gbDadosConta.Controls.Add(this.dbValorContaGerar);
             this.gbDadosConta.Controls.Add(this.buscaPessoa);
             this.gbDadosConta.Controls.Add(this.lbValorContaGerar);
@@ -112,14 +116,14 @@
             this.gbDadosConta.Controls.Add(this.lbCodigoConta);
             this.gbDadosConta.Location = new System.Drawing.Point(65, 12);
             this.gbDadosConta.Name = "gbDadosConta";
-            this.gbDadosConta.Size = new System.Drawing.Size(1181, 198);
+            this.gbDadosConta.Size = new System.Drawing.Size(1181, 331);
             this.gbDadosConta.TabIndex = 0;
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
             // 
             // dbValorContaGerar
             // 
-            this.dbValorContaGerar.Location = new System.Drawing.Point(447, 155);
+            this.dbValorContaGerar.Location = new System.Drawing.Point(453, 286);
             this.dbValorContaGerar.Name = "dbValorContaGerar";
             this.dbValorContaGerar.Size = new System.Drawing.Size(82, 22);
             this.dbValorContaGerar.TabIndex = 7;
@@ -132,7 +136,7 @@
             // buscaPessoa
             // 
             this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(2, 98);
+            this.buscaPessoa.Location = new System.Drawing.Point(8, 229);
             this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
             this.buscaPessoa.Name = "buscaPessoa";
             this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
@@ -141,7 +145,7 @@
             // lbValorContaGerar
             // 
             this.lbValorContaGerar.AutoSize = true;
-            this.lbValorContaGerar.Location = new System.Drawing.Point(447, 139);
+            this.lbValorContaGerar.Location = new System.Drawing.Point(453, 270);
             this.lbValorContaGerar.Name = "lbValorContaGerar";
             this.lbValorContaGerar.Size = new System.Drawing.Size(31, 13);
             this.lbValorContaGerar.TabIndex = 6;
@@ -150,7 +154,7 @@
             // btGerarParcelas
             // 
             this.btGerarParcelas.Enabled = false;
-            this.btGerarParcelas.Location = new System.Drawing.Point(535, 152);
+            this.btGerarParcelas.Location = new System.Drawing.Point(541, 283);
             this.btGerarParcelas.Name = "btGerarParcelas";
             this.btGerarParcelas.Size = new System.Drawing.Size(88, 23);
             this.btGerarParcelas.TabIndex = 8;
@@ -160,7 +164,7 @@
             // 
             // buscaOperacao
             // 
-            this.buscaOperacao.Location = new System.Drawing.Point(2, 137);
+            this.buscaOperacao.Location = new System.Drawing.Point(8, 268);
             this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
             this.buscaOperacao.Name = "buscaOperacao";
             this.buscaOperacao.Size = new System.Drawing.Size(442, 39);
@@ -170,7 +174,7 @@
             // dtpDataConta
             // 
             this.dtpDataConta.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataConta.Location = new System.Drawing.Point(6, 75);
+            this.dtpDataConta.Location = new System.Drawing.Point(11, 86);
             this.dtpDataConta.Name = "dtpDataConta";
             this.dtpDataConta.Size = new System.Drawing.Size(95, 20);
             this.dtpDataConta.TabIndex = 3;
@@ -179,7 +183,7 @@
             // lbDataConta
             // 
             this.lbDataConta.AutoSize = true;
-            this.lbDataConta.Location = new System.Drawing.Point(3, 59);
+            this.lbDataConta.Location = new System.Drawing.Point(8, 70);
             this.lbDataConta.Name = "lbDataConta";
             this.lbDataConta.Size = new System.Drawing.Size(75, 13);
             this.lbDataConta.TabIndex = 2;
@@ -231,7 +235,7 @@
             this.gbParcelas.Controls.Add(this.tbCodigoParcela);
             this.gbParcelas.Controls.Add(this.lbCodigoParcela);
             this.gbParcelas.Controls.Add(this.dgvParcelas);
-            this.gbParcelas.Location = new System.Drawing.Point(65, 216);
+            this.gbParcelas.Location = new System.Drawing.Point(67, 349);
             this.gbParcelas.Name = "gbParcelas";
             this.gbParcelas.Size = new System.Drawing.Size(999, 392);
             this.gbParcelas.TabIndex = 1;
@@ -483,8 +487,8 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvParcelas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -522,9 +526,9 @@
             // 
             // dgvtbcDataVencimento
             // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Format = "d";
+            dataGridViewCellStyle11.NullValue = null;
+            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvtbcDataVencimento.HeaderText = "Data de vencimento";
             this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
             this.dgvtbcDataVencimento.ReadOnly = true;
@@ -573,9 +577,9 @@
             // 
             // dgvtbcDataQuitacao
             // 
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Format = "d";
+            dataGridViewCellStyle12.NullValue = null;
+            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle12;
             this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
             this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
             this.dgvtbcDataQuitacao.ReadOnly = true;
@@ -602,7 +606,7 @@
             this.gbTotais.Controls.Add(this.lbJurosConta);
             this.gbTotais.Controls.Add(this.lbMultaConta);
             this.gbTotais.Controls.Add(this.lbValorOriginalConta);
-            this.gbTotais.Location = new System.Drawing.Point(1069, 216);
+            this.gbTotais.Location = new System.Drawing.Point(1072, 349);
             this.gbTotais.Name = "gbTotais";
             this.gbTotais.Size = new System.Drawing.Size(176, 392);
             this.gbTotais.TabIndex = 2;
@@ -746,7 +750,7 @@
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(65, 614);
+            this.tbAjuda.Location = new System.Drawing.Point(65, 757);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(1182, 20);
@@ -766,19 +770,35 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 
+            // tbDescricao
+            // 
+            this.tbDescricao.Location = new System.Drawing.Point(11, 137);
+            this.tbDescricao.Multiline = true;
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(442, 74);
+            this.tbDescricao.TabIndex = 9;
+            // 
+            // lbDescricao
+            // 
+            this.lbDescricao.AutoSize = true;
+            this.lbDescricao.Location = new System.Drawing.Point(8, 121);
+            this.lbDescricao.Name = "lbDescricao";
+            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
+            this.lbDescricao.TabIndex = 10;
+            this.lbDescricao.Text = "Descrição";
+            // 
             // fmCarCadastroConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1259, 646);
+            this.ClientSize = new System.Drawing.Size(1259, 789);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);
             this.Controls.Add(this.gbParcelas);
             this.Controls.Add(this.gbDadosConta);
             this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(1275, 685);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1275, 684);
             this.Name = "fmCarCadastroConta";
@@ -862,5 +882,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataQuitacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcSituacao;
+        private System.Windows.Forms.Label lbDescricao;
+        private System.Windows.Forms.TextBox tbDescricao;
     }
 }

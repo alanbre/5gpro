@@ -176,6 +176,8 @@ namespace _5gpro.Forms
                     tbCodigo.Text = grupoItemDAO.BuscaProxCodigoDisponivel().ToString();
                 }
                 ok = false;
+                return;
+                
             }
 
             grupoItem = new GrupoItem();
