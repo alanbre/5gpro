@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.Forms;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -63,7 +64,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public List<PlanoConta> Busca(bool entrada = true, bool saida = true)
         {
 
@@ -87,7 +87,6 @@ namespace _5gpro.Daos
             }
             return planoContas;
         }
-
         public PlanoConta BuscaByID(int Codigo, bool entrada = true, bool saida = true)
         {
             string conEntrada = entrada ? "AND SUBSTRING(codigo_completo, 1, 1) = 1" : "";

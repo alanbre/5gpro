@@ -1,13 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;  
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -15,9 +8,7 @@ namespace _5gpro.Forms
     public partial class fmCaiLancamentoManual : Form
     {
         private CaixaLancamento caixaLancamento = null;
-
         private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
-
         private bool editando = false;
 
         public fmCaiLancamentoManual()
@@ -71,6 +62,7 @@ namespace _5gpro.Forms
             caixaLancamento.Valor = dbValor.Valor;
             caixaLancamento.TipoMovimento = rbCredito.Checked ? 0 : 1;
             caixaLancamento.TipoDocumento = 0;
+            caixaLancamento.PlanoConta = buscaPlanoContaCaixa.conta;
             int retorno = caixaLancamentoDAO.Novo(caixaLancamento);
 
             if (retorno == 0)
@@ -114,7 +106,6 @@ namespace _5gpro.Forms
         {
             editando = edit;
         }
-
         private void BtSair_Click(object sender, EventArgs e)
         {
             this.Close();

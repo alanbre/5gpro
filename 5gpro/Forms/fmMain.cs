@@ -32,7 +32,7 @@ namespace _5gpro
                     saidasOn = 2,
                     orcamentosOn = 1,
                     relatoriosOn = 1,
-                    caixaOn = 6,
+                    caixaOn = 7,
                     tamanhopanel
             ;
 
@@ -456,6 +456,15 @@ namespace _5gpro
         {
             var formPlanoContasPadrao = new fmCaiPlanoContasPadrao();
             formPlanoContasPadrao.Show(this);
+            botaoPressionado = "";
+            RecolherMenus();
+            DesmarcarBotoes();
+        }
+
+        private void BtiLancamentos_Click(object sender, EventArgs e)
+        {
+            var formLancamentosCaixa = new fmCaiBuscaLancamentos();
+            formLancamentosCaixa.Show(this);
             botaoPressionado = "";
             RecolherMenus();
             DesmarcarBotoes();

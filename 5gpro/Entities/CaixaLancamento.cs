@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
@@ -20,5 +16,6 @@ namespace _5gpro.Entities
         public ParcelaContaPagar ParcelaContaPagar { get; set; }
         public NotaFiscalPropria NotaFiscalPropria { get; set; }
         public NotaFiscalTerceiros NotaFiscalTerceiros { get; set; }
+        public PlanoConta PlanoConta { get; set; }
     }
 }

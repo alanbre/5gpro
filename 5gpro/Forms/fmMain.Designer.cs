@@ -78,6 +78,7 @@
             this.btiCadastroCaixa = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btiLancamentos = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -628,6 +629,7 @@
             // 
             // paneldropCaixa
             // 
+            this.paneldropCaixa.Controls.Add(this.btiLancamentos);
             this.paneldropCaixa.Controls.Add(this.btiPlanoContasPadrao);
             this.paneldropCaixa.Controls.Add(this.btiPlanoContas);
             this.paneldropCaixa.Controls.Add(this.btiLancamentoManual);
@@ -635,7 +637,7 @@
             this.paneldropCaixa.Controls.Add(this.btiAberturaFechamento);
             this.paneldropCaixa.Controls.Add(this.btiCadastroCaixa);
             this.paneldropCaixa.Location = new System.Drawing.Point(3, 275);
-            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 168);
+            this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 196);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
@@ -757,6 +759,21 @@
             this.panel1.Size = new System.Drawing.Size(88, 535);
             this.panel1.TabIndex = 8;
             // 
+            // btiLancamentos
+            // 
+            this.btiLancamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiLancamentos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiLancamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiLancamentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiLancamentos.ForeColor = System.Drawing.Color.White;
+            this.btiLancamentos.Location = new System.Drawing.Point(0, 168);
+            this.btiLancamentos.Name = "btiLancamentos";
+            this.btiLancamentos.Size = new System.Drawing.Size(200, 28);
+            this.btiLancamentos.TabIndex = 5;
+            this.btiLancamentos.Text = "Lançamentos caixa";
+            this.btiLancamentos.UseVisualStyleBackColor = false;
+            this.btiLancamentos.Click += new System.EventHandler(this.BtiLancamentos_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -841,6 +858,7 @@
         private System.Windows.Forms.Button btiCadastroCaixa;
         private System.Windows.Forms.Panel panelCentral;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btiLancamentos;
     }
 }
 
