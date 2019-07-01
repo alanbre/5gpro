@@ -2,9 +2,6 @@
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
@@ -30,14 +27,14 @@ namespace _5gpro.Daos
                               (1, @compras, @contas_pagar, @descontos_concedidos, @juros_pagos, @vendas, @contas_receber,
                                @descontos_recebidos, @juros_recebidos)";
 
-                sql.addParam("@compras", planoContaPadrao.Compras != null ? planoContaPadrao.Compras.PlanoContaID.ToString() : null);
-                sql.addParam("@contas_pagar", planoContaPadrao.ContasPagar != null ? planoContaPadrao.ContasPagar.PlanoContaID.ToString() : null);
-                sql.addParam("@descontos_concedidos", planoContaPadrao.DescontosConcedidos != null ? planoContaPadrao.DescontosConcedidos.PlanoContaID.ToString() : null);
-                sql.addParam("@juros_pagos", planoContaPadrao.JurosPagos != null ? planoContaPadrao.JurosPagos.PlanoContaID.ToString() : null);
-                sql.addParam("@vendas", planoContaPadrao.Vendas != null ? planoContaPadrao.Vendas.PlanoContaID.ToString() : null);
-                sql.addParam("@contas_receber", planoContaPadrao.ContasReceber != null ? planoContaPadrao.ContasReceber.PlanoContaID.ToString() : null);
-                sql.addParam("@descontos_recebidos", planoContaPadrao.DescontosRecebidos != null ? planoContaPadrao.DescontosRecebidos.PlanoContaID.ToString() : null);
-                sql.addParam("@juros_recebidos", planoContaPadrao.JurosRecebidos != null ? planoContaPadrao.JurosRecebidos.PlanoContaID.ToString() : null);
+                sql.addParam("@compras", planoContaPadrao.Compras?.PlanoContaID);
+                sql.addParam("@contas_pagar", planoContaPadrao.ContasPagar?.PlanoContaID);
+                sql.addParam("@descontos_concedidos", planoContaPadrao.DescontosConcedidos?.PlanoContaID);
+                sql.addParam("@juros_pagos", planoContaPadrao.JurosPagos?.PlanoContaID);
+                sql.addParam("@vendas", planoContaPadrao.Vendas?.PlanoContaID);
+                sql.addParam("@contas_receber", planoContaPadrao.ContasReceber?.PlanoContaID);
+                sql.addParam("@descontos_recebidos", planoContaPadrao.DescontosRecebidos?.PlanoContaID);
+                sql.addParam("@juros_recebidos", planoContaPadrao.JurosRecebidos?.PlanoContaID);
 
                 retorno = sql.insertQuery();
                 sql.Commit();

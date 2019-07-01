@@ -14,6 +14,7 @@ namespace _5gpro.Forms
 
         private List<ParcelaContaReceber> parcelasContaReceber;
         private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO();
+        private readonly PlanoContaPadraoDAO planoContaPadraoDAO = new PlanoContaPadraoDAO();
         private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
         private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
         private List<CaixaLancamento> caixaLancamentos = null;

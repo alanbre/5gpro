@@ -36,8 +36,8 @@ namespace _5gpro.Forms
         {
             Filtros f = new Filtros
             {
-                DataInicial = dtpDataInicial.Value,
-                DataFinal = dtpDataFinal.Value,
+                DataInicial = dtpDataInicial.Value.Date,
+                DataFinal = dtpDataFinal.Value.Date.AddDays(1).AddTicks(-1),
                 caixa = buscaCaixa.caixa,
                 planoConta = buscaPlanoContaCaixa.conta
             };
