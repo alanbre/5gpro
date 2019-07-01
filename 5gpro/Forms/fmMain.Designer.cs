@@ -259,7 +259,7 @@
             // 
             this.btExpandeRetrai.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btExpandeRetrai.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btExpandeRetrai.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.btExpandeRetrai.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btExpandeRetrai.Image = global::_5gpro.Properties.Resources.menu_filled_30px_white;
             this.btExpandeRetrai.Location = new System.Drawing.Point(3, 3);
             this.btExpandeRetrai.Name = "btExpandeRetrai";

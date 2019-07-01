@@ -88,6 +88,9 @@ namespace _5gpro.Forms
             }
 
         }
+        private void DbCusto_Valor_Changed(object sender, EventArgs e) => Editando(true);
+        private void DbPrecoVenda_Valor_Changed(object sender, EventArgs e) => Editando(true);
+        private void DbEstoqueNecessario_Valor_Changed(object sender, EventArgs e) => Editando(true);
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
@@ -205,6 +208,7 @@ namespace _5gpro.Forms
             item.Referencia = tbReferencia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
             item.Quantidade = dbQuantidade.Valor;
+            item.Custo = dbCusto.Valor;
             item.ValorEntrada = 0;
             item.ValorSaida = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
@@ -428,6 +432,7 @@ namespace _5gpro.Forms
             tbReferencia.Clear();
             dbEstoqueNecessario.Valor = 0.00m;
             dbPrecoVenda.Valor = 0.00m;
+            dbCusto.Valor = 0.00m;
             rbProduto.Checked = true;
             rbServico.Checked = false;
             buscaGrupoItem.Limpa();
@@ -461,6 +466,7 @@ namespace _5gpro.Forms
                 }
 
                 tbReferencia.Text = item.Referencia;
+                dbCusto.Valor = item.Custo;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
                 dbPrecoVenda.Valor = item.ValorSaida;
                 dbQuantidade.Valor = item.Quantidade;
@@ -539,6 +545,7 @@ namespace _5gpro.Forms
             dbCusto.Valor = formCalculoPrecoVenda.custo;
 
         }
+
 
         private void DesintegracaoSimNao(Item d)
         {

@@ -373,6 +373,7 @@
             0,
             0,
             131072});
+            this.dbCusto.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbCusto_Valor_Changed);
             // 
             // lbCusto
             // 
@@ -394,6 +395,7 @@
             0,
             0,
             131072});
+            this.dbPrecoVenda.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbPrecoVenda_Valor_Changed);
             // 
             // lbPrecoVenda
             // 
@@ -415,6 +417,7 @@
             0,
             0,
             131072});
+            this.dbEstoqueNecessario.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbEstoqueNecessario_Valor_Changed);
             // 
             // lbEstoqueNecessario
             // 

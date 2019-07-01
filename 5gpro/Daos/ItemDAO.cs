@@ -16,12 +16,12 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"INSERT INTO item 
-                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade) 
+                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade, custo) 
                             VALUES
-                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade)
+                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade, @custo)
                             ON DUPLICATE KEY UPDATE
                             descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
-                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade";
+                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade, custo = @custo";
 
                 sql.addParam("@iditem", item.ItemID);
                 sql.addParam("@descitem", item.Descricao);
@@ -34,6 +34,7 @@ namespace _5gpro.Daos
                 sql.addParam("@idunimedida", item.Unimedida.UnimedidaID);
                 sql.addParam("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
                 sql.addParam("@quantidade", item.Quantidade);
+                sql.addParam("custo", item.Custo);
                 retorno = sql.insertQuery();
             }
 
@@ -180,6 +181,7 @@ namespace _5gpro.Daos
             item.ValorSaida = (decimal)data["valorsaida"];
             item.Estoquenecessario = (decimal)data["estoquenecessario"];
             item.Quantidade = (decimal)data["quantidade"];
+            item.Custo = (decimal)data["custo"];
             item.Unimedida = unidadeMedida;
             item.SubGrupoItem = subGrupoItem;
 
