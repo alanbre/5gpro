@@ -33,5 +33,6 @@ namespace _5gpro.Entities
         public int ContaPagarID { get; set; }
 
         public string Situacao { get; set; }
+        public string Descricao { get; set; }
     }
 }

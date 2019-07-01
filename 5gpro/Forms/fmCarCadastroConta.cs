@@ -166,6 +166,7 @@ namespace _5gpro.Forms
                 DataCadastro = DateTime.Today,
                 DataConta = dtpDataConta.Value,
                 Operacao = buscaOperacao.operacao,
+                Descricao = tbDescricao.Text,
 
                 ValorOriginal = dbValorOriginalConta.Valor,
                 Multa = dbMultaConta.Valor,
@@ -365,6 +366,7 @@ namespace _5gpro.Forms
             LimpaCampos(false);
             tbCodigoConta.Text = contaReceber.ContaReceberID.ToString();
             dtpDataConta.Value = contaReceber.DataCadastro;
+            tbDescricao.Text = contaReceber.Descricao;
             buscaOperacao.operacao = contaReceber.Operacao;
             dbValorOriginalConta.Valor = contaReceber.ValorOriginal;
             dbValorFinalConta.Valor = contaReceber.ValorFinal;
@@ -533,6 +535,7 @@ namespace _5gpro.Forms
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
             LimpaCamposParcela();
+            tbDescricao.Clear();
             contaReceber = null;
             codigo = 0;
         }
@@ -557,6 +560,10 @@ namespace _5gpro.Forms
             }
         }
 
+        private void GbDadosConta_Enter(object sender, EventArgs e)
+        {
+
+        }
 
         private void Editando(bool edit)
         {
