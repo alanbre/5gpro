@@ -372,7 +372,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void CarregaDados()
         {
             if (tbCodigo.Text.Length == 0)

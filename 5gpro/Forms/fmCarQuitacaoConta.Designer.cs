@@ -235,6 +235,7 @@
             this.tbCodigoConta.Name = "tbCodigoConta";
             this.tbCodigoConta.Size = new System.Drawing.Size(66, 20);
             this.tbCodigoConta.TabIndex = 3;
+            this.tbCodigoConta.Leave += new System.EventHandler(this.TbCodigoConta_Leave);
             // 
             // dtpDataVencimentoInicial
             // 
