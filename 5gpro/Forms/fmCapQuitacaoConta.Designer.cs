@@ -38,8 +38,6 @@
             this.cbDataCadastro = new System.Windows.Forms.CheckBox();
             this.cbValor = new System.Windows.Forms.CheckBox();
             this.cbDataVencimento = new System.Windows.Forms.CheckBox();
-            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
-            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.lbAValorConta = new System.Windows.Forms.Label();
             this.lbADataVencimentoParcela = new System.Windows.Forms.Label();
             this.lbADataCadastro = new System.Windows.Forms.Label();
@@ -50,22 +48,14 @@
             this.btPesquisar = new System.Windows.Forms.Button();
             this.lbCodigoConta = new System.Windows.Forms.Label();
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.lbDesconto = new System.Windows.Forms.Label();
-            this.dbDesconto = new _5gpro.Controls.DecimalBox();
             this.btQuitar = new System.Windows.Forms.Button();
             this.lbTotal = new System.Windows.Forms.Label();
-            this.dbValorTotal = new _5gpro.Controls.DecimalBox();
             this.lbValorTotal = new System.Windows.Forms.Label();
-            this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
             this.lbAcrescimo = new System.Windows.Forms.Label();
-            this.dbJuros = new _5gpro.Controls.DecimalBox();
             this.lbJuros = new System.Windows.Forms.Label();
-            this.dbMulta = new _5gpro.Controls.DecimalBox();
             this.lbMulta = new System.Windows.Forms.Label();
-            this.dbValor = new _5gpro.Controls.DecimalBox();
             this.lbValor = new System.Windows.Forms.Label();
             this.tbCount = new System.Windows.Forms.TextBox();
             this.lbCount = new System.Windows.Forms.Label();
@@ -80,6 +70,16 @@
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
+            this.dbDesconto = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotal = new _5gpro.Controls.DecimalBox();
+            this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
+            this.dbJuros = new _5gpro.Controls.DecimalBox();
+            this.dbMulta = new _5gpro.Controls.DecimalBox();
+            this.dbValor = new _5gpro.Controls.DecimalBox();
+            this.dbValorInicial = new _5gpro.Controls.DecimalBox();
+            this.dbValorFinal = new _5gpro.Controls.DecimalBox();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.gbPesquisa.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbParcelas.SuspendLayout();
@@ -171,32 +171,6 @@
             this.cbDataVencimento.UseVisualStyleBackColor = true;
             this.cbDataVencimento.CheckedChanged += new System.EventHandler(this.CbDataVencimento_CheckedChanged);
             // 
-            // dbValorInicial
-            // 
-            this.dbValorInicial.Enabled = false;
-            this.dbValorInicial.Location = new System.Drawing.Point(634, 67);
-            this.dbValorInicial.Name = "dbValorInicial";
-            this.dbValorInicial.Size = new System.Drawing.Size(95, 22);
-            this.dbValorInicial.TabIndex = 14;
-            this.dbValorInicial.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorFinal
-            // 
-            this.dbValorFinal.Enabled = false;
-            this.dbValorFinal.Location = new System.Drawing.Point(745, 67);
-            this.dbValorFinal.Name = "dbValorFinal";
-            this.dbValorFinal.Size = new System.Drawing.Size(95, 22);
-            this.dbValorFinal.TabIndex = 16;
-            this.dbValorFinal.Valor = new decimal(new int[] {
-            99999900,
-            0,
-            0,
-            131072});
-            // 
             // lbAValorConta
             // 
             this.lbAValorConta.AutoSize = true;
@@ -285,15 +259,7 @@
             this.tbCodigoConta.Name = "tbCodigoConta";
             this.tbCodigoConta.Size = new System.Drawing.Size(66, 20);
             this.tbCodigoConta.TabIndex = 1;
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Fornecedor";
-            this.buscaPessoa.Location = new System.Drawing.Point(79, 21);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 2;
+            this.tbCodigoConta.Leave += new System.EventHandler(this.TbCodigoConta_Leave);
             // 
             // groupBox1
             // 
@@ -323,15 +289,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pagamento";
             // 
-            // buscaCaixa
-            // 
-            this.buscaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaCaixa.Location = new System.Drawing.Point(475, 15);
-            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCaixa.Name = "buscaCaixa";
-            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaCaixa.TabIndex = 14;
-            // 
             // lbDesconto
             // 
             this.lbDesconto.AutoSize = true;
@@ -340,18 +297,6 @@
             this.lbDesconto.Size = new System.Drawing.Size(53, 13);
             this.lbDesconto.TabIndex = 10;
             this.lbDesconto.Text = "Desconto";
-            // 
-            // dbDesconto
-            // 
-            this.dbDesconto.Location = new System.Drawing.Point(334, 32);
-            this.dbDesconto.Name = "dbDesconto";
-            this.dbDesconto.Size = new System.Drawing.Size(66, 22);
-            this.dbDesconto.TabIndex = 11;
-            this.dbDesconto.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
             // 
             // btQuitar
             // 
@@ -373,18 +318,6 @@
             this.lbTotal.TabIndex = 15;
             this.lbTotal.Text = "TOTAL: R$ 0,00";
             // 
-            // dbValorTotal
-            // 
-            this.dbValorTotal.Location = new System.Drawing.Point(406, 32);
-            this.dbValorTotal.Name = "dbValorTotal";
-            this.dbValorTotal.Size = new System.Drawing.Size(66, 22);
-            this.dbValorTotal.TabIndex = 13;
-            this.dbValorTotal.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // lbValorTotal
             // 
             this.lbValorTotal.AutoSize = true;
@@ -393,18 +326,6 @@
             this.lbValorTotal.Size = new System.Drawing.Size(58, 13);
             this.lbValorTotal.TabIndex = 12;
             this.lbValorTotal.Text = "Valor Total";
-            // 
-            // dbAcrescimo
-            // 
-            this.dbAcrescimo.Location = new System.Drawing.Point(262, 32);
-            this.dbAcrescimo.Name = "dbAcrescimo";
-            this.dbAcrescimo.Size = new System.Drawing.Size(66, 22);
-            this.dbAcrescimo.TabIndex = 9;
-            this.dbAcrescimo.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
             // 
             // lbAcrescimo
             // 
@@ -415,18 +336,6 @@
             this.lbAcrescimo.TabIndex = 8;
             this.lbAcrescimo.Text = "Acréscimo";
             // 
-            // dbJuros
-            // 
-            this.dbJuros.Location = new System.Drawing.Point(190, 32);
-            this.dbJuros.Name = "dbJuros";
-            this.dbJuros.Size = new System.Drawing.Size(66, 22);
-            this.dbJuros.TabIndex = 7;
-            this.dbJuros.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // lbJuros
             // 
             this.lbJuros.AutoSize = true;
@@ -436,18 +345,6 @@
             this.lbJuros.TabIndex = 6;
             this.lbJuros.Text = "Juros";
             // 
-            // dbMulta
-            // 
-            this.dbMulta.Location = new System.Drawing.Point(118, 32);
-            this.dbMulta.Name = "dbMulta";
-            this.dbMulta.Size = new System.Drawing.Size(66, 22);
-            this.dbMulta.TabIndex = 5;
-            this.dbMulta.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
             // lbMulta
             // 
             this.lbMulta.AutoSize = true;
@@ -456,18 +353,6 @@
             this.lbMulta.Size = new System.Drawing.Size(33, 13);
             this.lbMulta.TabIndex = 4;
             this.lbMulta.Text = "Multa";
-            // 
-            // dbValor
-            // 
-            this.dbValor.Location = new System.Drawing.Point(47, 32);
-            this.dbValor.Name = "dbValor";
-            this.dbValor.Size = new System.Drawing.Size(66, 22);
-            this.dbValor.TabIndex = 3;
-            this.dbValor.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
             // 
             // lbValor
             // 
@@ -606,6 +491,122 @@
             this.dgvtbcValorFinal.HeaderText = "Valor final";
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
+            // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(475, 15);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaCaixa.TabIndex = 14;
+            // 
+            // dbDesconto
+            // 
+            this.dbDesconto.Location = new System.Drawing.Point(334, 32);
+            this.dbDesconto.Name = "dbDesconto";
+            this.dbDesconto.Size = new System.Drawing.Size(66, 22);
+            this.dbDesconto.TabIndex = 11;
+            this.dbDesconto.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorTotal
+            // 
+            this.dbValorTotal.Location = new System.Drawing.Point(406, 32);
+            this.dbValorTotal.Name = "dbValorTotal";
+            this.dbValorTotal.Size = new System.Drawing.Size(66, 22);
+            this.dbValorTotal.TabIndex = 13;
+            this.dbValorTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbAcrescimo
+            // 
+            this.dbAcrescimo.Location = new System.Drawing.Point(262, 32);
+            this.dbAcrescimo.Name = "dbAcrescimo";
+            this.dbAcrescimo.Size = new System.Drawing.Size(66, 22);
+            this.dbAcrescimo.TabIndex = 9;
+            this.dbAcrescimo.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbJuros
+            // 
+            this.dbJuros.Location = new System.Drawing.Point(190, 32);
+            this.dbJuros.Name = "dbJuros";
+            this.dbJuros.Size = new System.Drawing.Size(66, 22);
+            this.dbJuros.TabIndex = 7;
+            this.dbJuros.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbMulta
+            // 
+            this.dbMulta.Location = new System.Drawing.Point(118, 32);
+            this.dbMulta.Name = "dbMulta";
+            this.dbMulta.Size = new System.Drawing.Size(66, 22);
+            this.dbMulta.TabIndex = 5;
+            this.dbMulta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValor
+            // 
+            this.dbValor.Location = new System.Drawing.Point(47, 32);
+            this.dbValor.Name = "dbValor";
+            this.dbValor.Size = new System.Drawing.Size(66, 22);
+            this.dbValor.TabIndex = 3;
+            this.dbValor.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorInicial
+            // 
+            this.dbValorInicial.Enabled = false;
+            this.dbValorInicial.Location = new System.Drawing.Point(634, 67);
+            this.dbValorInicial.Name = "dbValorInicial";
+            this.dbValorInicial.Size = new System.Drawing.Size(95, 22);
+            this.dbValorInicial.TabIndex = 14;
+            this.dbValorInicial.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorFinal
+            // 
+            this.dbValorFinal.Enabled = false;
+            this.dbValorFinal.Location = new System.Drawing.Point(745, 67);
+            this.dbValorFinal.Name = "dbValorFinal";
+            this.dbValorFinal.Size = new System.Drawing.Size(95, 22);
+            this.dbValorFinal.TabIndex = 16;
+            this.dbValorFinal.Valor = new decimal(new int[] {
+            99999900,
+            0,
+            0,
+            131072});
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Fornecedor";
+            this.buscaPessoa.Location = new System.Drawing.Point(79, 21);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.TabIndex = 2;
             // 
             // fmCapQuitacaoConta
             // 

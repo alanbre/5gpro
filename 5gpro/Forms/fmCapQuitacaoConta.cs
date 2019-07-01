@@ -244,5 +244,15 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
+        private void TbCodigoConta_Leave(object sender, EventArgs e)
+        {
+            int c = 0;
+            if (!int.TryParse(tbCodigoConta.Text, out c))
+            {
+                tbCodigoConta.Clear();
+            }
+            codigo = c;
+        }
     }
 }
