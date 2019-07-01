@@ -20,12 +20,12 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO conta_receber
-                         (idconta_receber, data_cadastro, data_conta, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
+                         (idconta_receber, data_cadastro, data_conta, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao, descricao)
                           VALUES
-                         (@idconta_receber, @data_cadastro, @data_conta, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
+                         (@idconta_receber, @data_cadastro, @data_conta, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao, @descricao)
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, data_conta = @data_conta, idoperacao = @idoperacao, valor_original = @valor_original,
-                          multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
+                          multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao, descricao = @descricao
                           ";
                 sql.addParam("@idconta_receber", contaReceber.ContaReceberID);
                 sql.addParam("@data_cadastro", contaReceber.DataCadastro);
@@ -39,6 +39,7 @@ namespace _5gpro.Daos
                 sql.addParam("@idpessoa", contaReceber.Pessoa.PessoaID);
                 sql.addParam("@situacao", contaReceber.Situacao);
                 sql.addParam("@data_conta", contaReceber.DataConta);
+                sql.addParam("descricao", contaReceber.Descricao);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
@@ -46,9 +47,9 @@ namespace _5gpro.Daos
                     sql.deleteQuery();
 
                     sql.Query = @"INSERT INTO parcela_conta_receber
-                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_receber, idformapagamento, situacao)
+                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_receber, idformapagamento, situacao, descricao)
                                 VALUES
-                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento, @situacao)";
+                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento, @situacao, @descricao)";
                     foreach (var parcela in contaReceber.Parcelas)
                     {
                         sql.clearParams();
@@ -64,6 +65,7 @@ namespace _5gpro.Daos
                         sql.addParam("@idconta_receber", contaReceber.ContaReceberID);
                         sql.addParam("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
                         sql.addParam("@situacao", contaReceber.Situacao);
+                        sql.addParam("descricao", contaReceber.Descricao);
                         sql.insertQuery();
                     }
                 }
@@ -78,7 +80,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final, c.descricao AS crdescricao  
                             FROM conta_receber AS c
                             LEFT JOIN parcela_conta_receber AS p 
                             ON  c.idconta_receber = p.idconta_receber
@@ -109,7 +111,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT cr.idconta_receber, p.idpessoa, p.nome, cr.data_cadastro, cr.data_conta,
                                                     op.idoperacao, op.nome as nomeoperacao, cr.valor_original, cr.multa, cr.juros,
-                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento, cr.situacao
+                                                    cr.valor_final, cr.acrescimo, cr.desconto, pa.data_vencimento, cr.situacao, cr.descricao AS crdescricao
                                                     FROM conta_receber cr 
                                                     LEFT JOIN operacao op ON cr.idoperacao = op.idoperacao
                                                     LEFT JOIN pessoa p ON cr.idpessoa = p.idpessoa
@@ -161,6 +163,7 @@ namespace _5gpro.Daos
                         ContaReceberID = Convert.ToInt32(d["idconta_receber"]),
                         DataCadastro = (DateTime)d["data_cadastro"],
                         DataConta = (DateTime)d["data_conta"],
+                        Descricao = (string)d["crdescricao"],
                         ValorOriginal = (decimal)d["valor_original"],
                         Multa = (decimal)d["multa"],
                         Juros = (decimal)d["juros"],
@@ -275,7 +278,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final, c.descricao AS crdescricao  
                             FROM conta_receber AS c
                             LEFT JOIN parcela_conta_receber AS p 
                             ON  c.idconta_receber = p.idconta_receber
@@ -283,8 +286,7 @@ namespace _5gpro.Daos
                             ON f.idformapagamento = p.idformapagamento
                             WHERE c.idconta_receber = (SELECT min(idconta_receber) 
                             FROM conta_receber 
-                            WHERE idconta_receber > @idconta_receber)
-                            LIMIT 1";
+                            WHERE idconta_receber > @idconta_receber)";
 
                 sql.addParam("@idconta_receber", codigo);
                 var data = sql.selectQuery();
@@ -303,7 +305,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final, c.descricao AS crdescricao  
                             FROM conta_receber AS c
                             LEFT JOIN parcela_conta_receber AS p 
                             ON  c.idconta_receber = p.idconta_receber
@@ -311,8 +313,7 @@ namespace _5gpro.Daos
                             ON f.idformapagamento = p.idformapagamento
                             WHERE c.idconta_receber = (SELECT max(idconta_receber) 
                             FROM conta_receber 
-                            WHERE idconta_receber < @idconta_receber)
-                            LIMIT 1";
+                            WHERE idconta_receber < @idconta_receber)";
 
                 sql.addParam("@idconta_receber", codigo);
                 var data = sql.selectQuery();
@@ -378,6 +379,7 @@ namespace _5gpro.Daos
 
             contaReceber.ContaReceberID = Convert.ToInt32(data[0]["idconta_receber"]);
             contaReceber.DataCadastro = (DateTime)data[0]["data_cadastro"];
+            contaReceber.Descricao = (string)data[0]["crdescricao"];
             contaReceber.DataConta = (DateTime)data[0]["data_conta"];
             contaReceber.ValorOriginal = (decimal)data[0]["valor_original"];
             contaReceber.Multa = (decimal)data[0]["multa"];
@@ -410,6 +412,7 @@ namespace _5gpro.Daos
                 parcela.ParcelaContaReceberID = Convert.ToInt32(d["idparcela_conta_receber"]);
                 parcela.DataQuitacao = (DateTime?)d["data_quitacao"];
                 parcela.DataVencimento = (DateTime)d["data_vencimento"];
+                parcela.Descricao = (string)d["crdescricao"];
                 parcela.Juros = (decimal)d["pjuros"];
                 parcela.Acrescimo = (decimal)d["pacrescimo"];
                 parcela.Desconto = (decimal)d["pdesconto"];
