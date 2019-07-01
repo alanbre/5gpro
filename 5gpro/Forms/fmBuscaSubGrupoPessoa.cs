@@ -50,7 +50,7 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvSubGrupoPessoa.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvSubGrupoPessoa.Rows[selectedRowIndex];
-            subgrupopessoaSelecionado = listasubgrupopessoa.Find(g => g.SubGrupoPessoaID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            subgrupopessoaSelecionado = listasubgrupopessoa.Find(g => g.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
 
@@ -69,7 +69,7 @@ namespace _5gpro.Forms
 
             foreach (SubGrupoPessoa g in listasubgrupopessoa)
             {
-                table.Rows.Add(g.SubGrupoPessoaID, g.Nome);
+                table.Rows.Add(g.Codigo, g.Nome);
             }
             dgvSubGrupoPessoa.DataSource = table;
         }

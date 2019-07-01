@@ -70,6 +70,7 @@
             this.paneldentroRltSaida = new System.Windows.Forms.Panel();
             this.btsRelatorionotas = new System.Windows.Forms.Button();
             this.paneldropCaixa = new System.Windows.Forms.Panel();
+            this.btiLancamentos = new System.Windows.Forms.Button();
             this.btiPlanoContasPadrao = new System.Windows.Forms.Button();
             this.btiPlanoContas = new System.Windows.Forms.Button();
             this.btiLancamentoManual = new System.Windows.Forms.Button();
@@ -78,7 +79,6 @@
             this.btiCadastroCaixa = new System.Windows.Forms.Button();
             this.panelCentral = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btiLancamentos = new System.Windows.Forms.Button();
             this.panelEsquerdo.SuspendLayout();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -91,7 +91,6 @@
             this.paneldentroRltSaida.SuspendLayout();
             this.paneldropCaixa.SuspendLayout();
             this.panelCentral.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -278,7 +277,7 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::_5gpro.Properties.Resources.HAJELLL;
-            this.pictureBox1.Location = new System.Drawing.Point(29, 473);
+            this.pictureBox1.Location = new System.Drawing.Point(897, 514);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(339, 59);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -644,6 +643,21 @@
             this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
             this.paneldropCaixa.TabIndex = 8;
             // 
+            // btiLancamentos
+            // 
+            this.btiLancamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
+            this.btiLancamentos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btiLancamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btiLancamentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
+            this.btiLancamentos.ForeColor = System.Drawing.Color.White;
+            this.btiLancamentos.Location = new System.Drawing.Point(0, 168);
+            this.btiLancamentos.Name = "btiLancamentos";
+            this.btiLancamentos.Size = new System.Drawing.Size(200, 28);
+            this.btiLancamentos.TabIndex = 5;
+            this.btiLancamentos.Text = "Lançamentos caixa";
+            this.btiLancamentos.UseVisualStyleBackColor = false;
+            this.btiLancamentos.Click += new System.EventHandler(this.BtiLancamentos_Click);
+            // 
             // btiPlanoContasPadrao
             // 
             this.btiPlanoContasPadrao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
@@ -754,27 +768,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(185)))), ((int)(((byte)(9)))));
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(924, 50);
+            this.panel1.Location = new System.Drawing.Point(1242, 50);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(371, 535);
+            this.panel1.Size = new System.Drawing.Size(53, 535);
             this.panel1.TabIndex = 8;
-            // 
-            // btiLancamentos
-            // 
-            this.btiLancamentos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
-            this.btiLancamentos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiLancamentos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiLancamentos.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F);
-            this.btiLancamentos.ForeColor = System.Drawing.Color.White;
-            this.btiLancamentos.Location = new System.Drawing.Point(0, 168);
-            this.btiLancamentos.Name = "btiLancamentos";
-            this.btiLancamentos.Size = new System.Drawing.Size(200, 28);
-            this.btiLancamentos.TabIndex = 5;
-            this.btiLancamentos.Text = "Lançamentos caixa";
-            this.btiLancamentos.UseVisualStyleBackColor = false;
-            this.btiLancamentos.Click += new System.EventHandler(this.BtiLancamentos_Click);
             // 
             // fmMain
             // 
@@ -782,6 +780,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1295, 585);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelCentral);
             this.Controls.Add(this.panelSuperior);
@@ -805,9 +804,8 @@
             this.paneldentroRltSaida.ResumeLayout(false);
             this.paneldropCaixa.ResumeLayout(false);
             this.panelCentral.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

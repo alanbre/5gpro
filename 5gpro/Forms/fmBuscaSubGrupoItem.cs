@@ -2,12 +2,8 @@
 using _5gpro.Entities;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -26,7 +22,6 @@ namespace _5gpro.Forms
             
         }
 
-
         private void FmBuscaSubGrupoItem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -36,6 +31,7 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
+
         private void FmBuscaSubGrupoItem_Load(object sender, EventArgs e)
         {
             BuscaSubGrupoItem();
@@ -52,17 +48,16 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvSubGrupoItem.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvSubGrupoItem.Rows[selectedRowIndex];
-            subgrupoitemSelecionado = listasubgrupoitem.Find(g => g.SubGrupoItemID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
+            subgrupoitemSelecionado = listasubgrupoitem.Find(g => g.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
-
-
 
         private void FiltroGrupo(int grupoid)
         {
             grupoitem = new GrupoItem();
             grupoitem.GrupoItemID = grupoid;
         }
+
         private void BuscaSubGrupoItem()
         {
             DataTable table = new DataTable();
@@ -73,10 +68,11 @@ namespace _5gpro.Forms
 
             foreach (SubGrupoItem g in listasubgrupoitem)
             {
-                table.Rows.Add(g.SubGrupoItemID, g.Nome);
+                table.Rows.Add(g.Codigo, g.Nome);
             }
             dgvSubGrupoItem.DataSource = table;
         }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

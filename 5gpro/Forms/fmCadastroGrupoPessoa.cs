@@ -347,6 +347,7 @@ namespace _5gpro.Forms
                     tbCodigo.Text = grupopessoaDAO.BuscaProxCodigoDisponivel().ToString();
                 }
                 ok = false;
+                return;
             }
 
             grupoPessoa = new GrupoPessoa();
@@ -491,8 +492,11 @@ namespace _5gpro.Forms
 
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
+            
             if (tbCodigo.Text.Length == 0)
             {
+                validacao.despintarCampos(controls);
                 LimpaCampos(true);
                 Editando(false);
                 return;
@@ -536,12 +540,14 @@ namespace _5gpro.Forms
             var newGrupoPessoa = grupopessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newGrupoPessoa != null)
             {
+                validacao.despintarCampos(controls);
                 grupoPessoa = newGrupoPessoa;
                 PreencheCampos(grupoPessoa);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }

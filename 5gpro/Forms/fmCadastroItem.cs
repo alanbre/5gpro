@@ -114,6 +114,7 @@ namespace _5gpro.Forms
         {
 
         }
+
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
         {
             buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
@@ -127,6 +128,7 @@ namespace _5gpro.Forms
                 buscaSubGrupoItem.EscolhaOGrupo(true);
             }
         }
+
         private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
         {
             Editando(true);

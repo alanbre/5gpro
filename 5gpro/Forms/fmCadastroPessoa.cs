@@ -90,6 +90,7 @@ namespace _5gpro.Forms
         {
 
         }
+        private void BuscaSubGrupoPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void TbNome_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbFantasia_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbRua_TextChanged(object sender, EventArgs e) => Editando(true);
@@ -143,7 +144,6 @@ namespace _5gpro.Forms
                 buscaSubGrupoPessoa.EscolhaOGrupo(true);
             }
         }
-
 
         private void Novo()
         {
@@ -541,5 +541,6 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = false;
             }
         }
+
     }
 }

@@ -176,6 +176,7 @@ namespace _5gpro.Forms
                     tbCodigo.Text = grupoItemDAO.BuscaProxCodigoDisponivel().ToString();
                 }
                 ok = false;
+                return;
             }
 
             grupoItem = new GrupoItem();
@@ -317,8 +318,11 @@ namespace _5gpro.Forms
         }
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
+
             if (tbCodigo.Text.Length == 0)
             {
+                validacao.despintarCampos(controls);
                 LimpaCampos(true);
                 Editando(false);
                 return;
@@ -362,12 +366,14 @@ namespace _5gpro.Forms
             var newGrupoItem = grupoItemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newGrupoItem != null)
             {
+                validacao.despintarCampos(controls);
                 grupoItem = newGrupoItem;
                 PreencheCampos(grupoItem);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }

@@ -45,7 +45,7 @@ namespace _5gpro.Daos
                             WHERE 1=1 "
                             + conGrupoPessoa + " "
                             + conNome + " "
-                            +@"ORDER BY nome";
+                            +@"ORDER BY codigo";
                 sql.addParam("@idgrupopessoa", grupopessoaID);
                 if (nome.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
                 var data = sql.selectQuery();
@@ -63,9 +63,9 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *
                             FROM subgrupopessoa 
-                            WHERE idsubgrupopessoa = @idsubgrupopessoa
+                            WHERE codigo = @codigo
                             AND idgrupopessoa = @idgrupopessoa";
-                sql.addParam("@idsubgrupopessoa", Codigo);
+                sql.addParam("@codigo", Codigo);
                 sql.addParam("@idgrupopessoa", grupopessoaID);
 
                 var data = sql.selectQueryForSingleRecord();
@@ -116,6 +116,7 @@ namespace _5gpro.Daos
             subGrupoPessoa.SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]);
             subGrupoPessoa.Nome = (string)data["nome"];
             subGrupoPessoa.GrupoPessoa = grupoPessoa;
+            subGrupoPessoa.Codigo = Convert.ToInt32(data["codigo"]);
             return subGrupoPessoa;
         }
     }

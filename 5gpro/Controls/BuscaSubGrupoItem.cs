@@ -85,7 +85,7 @@ namespace _5gpro.Controls
         {
             if (subgrupoItem != null)
             {
-                tbCodigoSubGrupoItem.Text = subgrupoItem.SubGrupoItemID.ToString();
+                tbCodigoSubGrupoItem.Text = subgrupoItem.Codigo.ToString();
                 tbNomeSubGrupoItem.Text = subgrupoItem.Nome;
             }
             else
@@ -94,7 +94,7 @@ namespace _5gpro.Controls
                 "Sub-Grupo de itens não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                Limpa();
+                Limpa(false);
             }
         }
 
@@ -103,7 +103,7 @@ namespace _5gpro.Controls
             if (subgrupoItem != null)
             {
                 this.subgrupoItem = subgrupoItem;
-                tbCodigoSubGrupoItem.Text = subgrupoItem.SubGrupoItemID.ToString();
+                tbCodigoSubGrupoItem.Text = subgrupoItem.Codigo.ToString();
                 tbNomeSubGrupoItem.Text = subgrupoItem.Nome;
             }
             else
@@ -127,10 +127,13 @@ namespace _5gpro.Controls
             }
         }
 
-        public void Limpa()
+        public void Limpa(bool limpagrupo = true)
         {
             this.subgrupoItem = null;
+
+            if(limpagrupo)
             this.gruporecebido = null;
+
             tbCodigoSubGrupoItem.Clear();
             tbNomeSubGrupoItem.Clear();
         }
