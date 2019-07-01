@@ -68,7 +68,9 @@ namespace _5gpro.Forms
         {
             if (!editando || planoContaSelecionada == null) return;
 
-            if (tbDescricao.Text.Length == 0)
+
+
+            if (string.IsNullOrWhiteSpace(tbDescricao.Text))
             {
                 MessageBox.Show("Descrição não preenchida!",
                "Problema ao salvar",
