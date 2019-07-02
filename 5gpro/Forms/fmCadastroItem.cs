@@ -210,7 +210,7 @@ namespace _5gpro.Forms
             item.Quantidade = dbQuantidade.Valor;
             item.Custo = dbCusto.Valor;
             item.ValorEntrada = 0;
-            item.ValorSaida = dbPrecoVenda.Valor;
+            item.ValorUnitario = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
             item.Unimedida = buscaUnimedidaItem.unimedida;
             item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
@@ -468,7 +468,7 @@ namespace _5gpro.Forms
                 tbReferencia.Text = item.Referencia;
                 dbCusto.Valor = item.Custo;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
-                dbPrecoVenda.Valor = item.ValorSaida;
+                dbPrecoVenda.Valor = item.ValorUnitario;
                 dbQuantidade.Valor = item.Quantidade;
 
                 buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);

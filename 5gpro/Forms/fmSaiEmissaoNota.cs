@@ -458,6 +458,7 @@ namespace _5gpro.Forms
             btExcluirItem.Enabled = false;
             LimpaCamposItem(true);
         }
+
         private void BuscaItem()
         {
             if (buscaItem.item == null)
@@ -524,11 +525,8 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 buscaItem.PreencheCampos(item.Item);
-                dbQuantidade.Valor = item.Quantidade;
-                dbValorUnitItem.Valor = item.ValorUnitario;
-                dbValorTotItem.Valor = item.ValorTotal;
-                dbDescontoItemPorc.Valor = item.DescontoPorc;
-                dbDescontoItem.Valor = item.Desconto;
+                dbQuantidade.Valor = item.Item.Quantidade;
+                dbValorUnitItem.Valor = item.Item.ValorUnitario;
                 ignoracheckevent = false;
             }
             else
@@ -565,6 +563,15 @@ namespace _5gpro.Forms
                 dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
             }
         }
+
+        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
+        {
+            if (buscaItem.item == null)
+                return;
+
+            dbValorUnitItem.Valor = buscaItem.item.ValorUnitario;
+        }
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC

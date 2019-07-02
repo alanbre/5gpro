@@ -54,7 +54,7 @@ namespace _5gpro.Forms
 
             foreach (Item i in itens)
             {
-                table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorSaida);
+                table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorUnitario);
             }
 
             ListCollectionView coleção = new ListCollectionView(table.DefaultView);

@@ -29,7 +29,7 @@ namespace _5gpro.Daos
                 sql.addParam("@tipo", item.TipoItem);
                 sql.addParam("@referencia", item.Referencia);
                 sql.addParam("@valorentrada", item.ValorEntrada);
-                sql.addParam("@valorsaida", item.ValorSaida);
+                sql.addParam("@valorsaida", item.ValorUnitario);
                 sql.addParam("@estoquenecessario", item.Estoquenecessario);
                 sql.addParam("@idunimedida", item.Unimedida.UnimedidaID);
                 sql.addParam("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
@@ -178,7 +178,7 @@ namespace _5gpro.Daos
             item.TipoItem = (string)data["tipo"];
             item.Referencia = (string)data["referencia"];
             item.ValorEntrada = (decimal)data["valorentrada"];
-            item.ValorSaida = (decimal)data["valorsaida"];
+            item.ValorUnitario = (decimal)data["valorsaida"];
             item.Estoquenecessario = (decimal)data["estoquenecessario"];
             item.Quantidade = (decimal)data["quantidade"];
             item.Custo = (decimal)data["custo"];

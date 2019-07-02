@@ -431,7 +431,7 @@ namespace _5gpro.Forms
             {
                 if (quantitativa)
                 {
-                    item.Quantidade = dbQuantidade.Valor / quantidadeparte;
+                    item.Quantidade = dbQuantidade.Valor * quantidadeparte;
                     item.ValorTotal = item.Quantidade * item.ValorUnitario;
                 }
                 else
@@ -450,7 +450,7 @@ namespace _5gpro.Forms
             if (dr == null)
             {
                 itens.Add(item);
-                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Item.Quantidade, item.Item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                 btNovoItem.PerformClick();
             }
             else
@@ -610,8 +610,8 @@ namespace _5gpro.Forms
 
             ignoracheckevent = true;
             buscaItem1.PreencheCampos(item.Item);
-            dbQuantidade.Valor = item.Quantidade;
-            dbValorUnitItem.Valor = item.ValorUnitario;
+            dbQuantidade.Valor = item.Item.Quantidade;
+            dbValorUnitItem.Valor = item.Item.ValorUnitario;//mudei aqi
             dbValorTotItem.Valor = item.ValorTotal;
             dbDescontoItemPorc.Valor = item.DescontoPorc;
             dbDescontoItem.Valor = item.Desconto;

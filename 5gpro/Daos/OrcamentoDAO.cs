@@ -317,7 +317,7 @@ namespace _5gpro.Daos
                 i.TipoItem = (string)d["tipo"];
                 i.Referencia = (string)d["referencia"];
                 i.ValorEntrada = (decimal)d["valorentrada"];
-                i.ValorSaida = (decimal)d["valorsaida"];
+                i.ValorUnitario = (decimal)d["valorsaida"];
                 i.Estoquenecessario = (decimal)d["estoquenecessario"];
                 i.Unimedida = u;
 

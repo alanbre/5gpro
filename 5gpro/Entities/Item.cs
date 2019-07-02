@@ -21,7 +21,7 @@ namespace _5gpro.Entities
 
         public decimal ValorEntrada { get; set; }
 
-        public decimal ValorSaida { get; set; }
+        public decimal ValorUnitario { get; set; }
         public decimal Custo { get; set; }
 
         public decimal Estoquenecessario { get; set; }
@@ -33,7 +33,6 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoItem", AllowEmptyStrings = false)]
         public SubGrupoItem SubGrupoItem { get; set; }
-
         public decimal Quantidade { get; set; }
 
 

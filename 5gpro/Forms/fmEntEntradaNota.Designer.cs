@@ -580,7 +580,6 @@
             // 
             // dbValorUnitItem
             // 
-            this.dbValorUnitItem.Enabled = false;
             this.dbValorUnitItem.Location = new System.Drawing.Point(75, 271);
             this.dbValorUnitItem.Name = "dbValorUnitItem";
             this.dbValorUnitItem.Size = new System.Drawing.Size(63, 20);

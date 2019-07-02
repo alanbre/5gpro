@@ -265,7 +265,7 @@ namespace _5gpro.Forms
                     {
                         resultadodesi.Quantidade = dbValorTipo.Valor;
                         listaresultadosquantitativo.Where(i => i.Item.ItemID == resultadodesi.Item.ItemID).First().Quantidade = resultadodesi.Quantidade;
-                        dr.Cells[dgvtbcPorcentagem.Index].Value = resultadodesi.Porcentagem;
+                        dr.Cells[dgvtbcPorcentagem.Index].Value = resultadodesi.Quantidade;
                         dgvPartes.Update();
                         dgvPartes.Refresh();
                     }

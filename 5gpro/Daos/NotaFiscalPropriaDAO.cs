@@ -196,7 +196,7 @@ namespace _5gpro.Daos
                     item.TipoItem = (string)d["i_tipo"];
                     item.Referencia = (string)d["i_referencia"];
                     item.ValorEntrada = (decimal)d["i_valorentrada"];
-                    item.ValorSaida = (decimal)d["i_valorsaida"];
+                    item.ValorUnitario = (decimal)d["i_valorsaida"];
                     item.Estoquenecessario = (decimal)d["i_estoquenecessario"];
                     item.Unimedida = uniMedida;
                     item.SubGrupoItem = subGrupoItem;
@@ -456,7 +456,7 @@ namespace _5gpro.Daos
                 i.TipoItem = (string)d["tipo"];
                 i.Referencia = (string)d["referencia"];
                 i.ValorEntrada = (decimal)d["valorentrada"];
-                i.ValorSaida = (decimal)d["valorsaida"];
+                i.ValorUnitario = (decimal)d["valorsaida"];
                 i.Estoquenecessario = (decimal)d["estoquenecessario"];
 
                 var nfi = new NotaFiscalPropriaItem();

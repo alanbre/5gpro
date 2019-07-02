@@ -160,7 +160,7 @@ namespace _5gpro.Daos
 
             item.ItemID = Convert.ToInt32(data[0]["iditemdesintegrado"]);
             item.ValorEntrada = Convert.ToInt32(data[0]["valorentrada"]);
-            item.ValorSaida = Convert.ToInt32(data[0]["valorsaida"]);
+            item.ValorUnitario = Convert.ToInt32(data[0]["valorsaida"]);
 
 
             desintegracao.DesintegracaoID = Convert.ToInt32(data[0]["iddesintegracao"]);
@@ -174,7 +174,7 @@ namespace _5gpro.Daos
                 item.ItemID = Convert.ToInt32(p["iditemparte"]);
                 item.Descricao = (string)p["descitem"];
                 item.ValorEntrada = (decimal)p["valorentrada"];
-                item.ValorSaida = (decimal)p["valorsaida"];
+                item.ValorUnitario = (decimal)p["valorsaida"];
                 parte.Desintegracao = desintegracao;
                 parte.Item = item;
 
