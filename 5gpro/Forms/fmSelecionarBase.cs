@@ -37,6 +37,16 @@ namespace _5gpro.Forms
             Uid = "5gprouser",
             Pwd = "5gproedualan"
         };
+
+        private readonly Bases hajeldatabase = new Bases()
+        {
+            Database = "5gprodatabasehajel",
+            Server = "192.168.2.114",
+            Uid = "5gprouser",
+            Pwd = "5gproedualan"
+        };
+
+
         private readonly Bases itamar = new Bases()
         {
             Database = "5gprodatabase",
@@ -59,6 +69,7 @@ namespace _5gpro.Forms
             bases.Add(localhost);
             bases.Add(dalva);
             bases.Add(eduardoNote);
+            bases.Add(hajeldatabase);
             bases.Add(itamar);
             PreencheGridBases();
         }
