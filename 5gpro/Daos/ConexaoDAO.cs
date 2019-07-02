@@ -15,7 +15,7 @@ namespace _5gpro.Daos
             get
             {
                 return "DATABASE=" + database + ";SERVER=" + server + ";UID=" + uid + ";PWD=" + pwd;
-            }
+            } 
         }
         public string ConectaSemBase
         {
