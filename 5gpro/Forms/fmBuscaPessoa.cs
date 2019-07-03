@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaPessoa : Form
     {
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
         public Pessoa pessoaSelecionada = null;
         private List<Pessoa> Pessoas;
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
@@ -17,7 +19,16 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
         }
+        //LOAD
+        private void FmBuscaPessoa_Load(object sender, EventArgs e) => BuscaPessoas();
 
+        //LEAVE
+        private void BuscaCidade_Leave(object sender, EventArgs e) => BuscaPessoas();
+
+        //KEYUP, KEYDOWN
+        private void BuscaCidade_KeyUp(object sender, KeyEventArgs e) => BackDelete(e);
+        private void TbFiltroNome_KeyUp(object sender, KeyEventArgs e) => BackDelete(e);
+        private void TbCpfCnpj_KeyUp(object sender, KeyEventArgs e) => BackDelete(e);
         private void FmBuscaPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -27,18 +38,9 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
-            BuscaPessoas();
-        }
-        private void TbFiltroNome_TextChanged(object sender, EventArgs e)
-        {
-            if (tbFiltroNome.Text.Length > 0) { BuscaPessoas(); }
-        }
-        private void TbCpfCnpj_TextChanged(object sender, EventArgs e)
-        {
-            if (tbCpfCnpj.Text.Length > 0) { BuscaPessoas(); }
-        }
+
+        //CLICK
+        private void BtPesquisar_Click(object sender, EventArgs e) => BuscaPessoas();
         private void DgvPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvPessoas.SelectedCells[0].RowIndex;
@@ -47,9 +49,16 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        //TEXTCHANGED
+        private void TbFiltroNome_TextChanged(object sender, EventArgs e) => BuscaPessoas();
+        private void TbCpfCnpj_TextChanged(object sender, EventArgs e) => BuscaPessoas();
+        private void BuscaCidade_Text_Changed(object sender, EventArgs e) => BuscaPessoas();
 
+        //FUNÇÕES
         private void BuscaPessoas()
         {
+            dgvPessoas.DataSource = "";
+
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome / Razão social", typeof(string));
@@ -61,6 +70,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Telefone", typeof(string));
             table.Columns.Add("E-Mail", typeof(string));
 
+
             int idcidade = buscaCidade.cidade?.CidadeID ?? 0;
             Pessoas = pessoaDAO.Busca(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
 
@@ -69,7 +79,10 @@ namespace _5gpro.Forms
                 table.Rows.Add(p.PessoaID, p.Nome, p.Fantasia, p.TipoPessoa, p.Endereco, p.Cidade.Nome, p.CpfCnpj, p.Telefone, p.Email);
             }
             dgvPessoas.DataSource = table;
+
+            funaux.TratarTamanhoColunas(dgvPessoas);
         }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -78,5 +91,18 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
+        private void BackDelete(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                BuscaPessoas();
+            }
+            if (e.KeyCode == Keys.Delete)
+            {
+                BuscaPessoas();
+            }
+        }
+
     }
 }
