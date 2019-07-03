@@ -764,6 +764,7 @@
             this.panelCentral.Name = "panelCentral";
             this.panelCentral.Size = new System.Drawing.Size(424, 535);
             this.panelCentral.TabIndex = 3;
+            this.panelCentral.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelCentral_Paint);
             // 
             // panel1
             // 

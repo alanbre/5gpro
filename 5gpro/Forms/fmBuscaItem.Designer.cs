@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvItens = new System.Windows.Forms.DataGridView();
             this.tbDenomCompra = new System.Windows.Forms.TextBox();
             this.tbDescricao = new System.Windows.Forms.TextBox();
@@ -50,8 +50,11 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -120,7 +123,6 @@
             this.cbServico.TabIndex = 1;
             this.cbServico.Text = "Serviço";
             this.cbServico.UseVisualStyleBackColor = true;
-            this.cbServico.CheckedChanged += new System.EventHandler(this.cbServico_CheckedChanged);
             this.cbServico.Click += new System.EventHandler(this.cbServico_Click);
             // 
             // cbProduto
@@ -132,7 +134,6 @@
             this.cbProduto.TabIndex = 0;
             this.cbProduto.Text = "Produto";
             this.cbProduto.UseVisualStyleBackColor = true;
-            this.cbProduto.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             this.cbProduto.Click += new System.EventHandler(this.cbProduto_Click);
             // 
             // btBuscarItens
@@ -160,6 +161,7 @@
             this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
             this.buscaSubGrupoItem.Size = new System.Drawing.Size(442, 39);
             this.buscaSubGrupoItem.TabIndex = 11;
+            this.buscaSubGrupoItem.Leave += new System.EventHandler(this.BuscaSubGrupoItem_Leave);
             // 
             // fmBuscaItem
             // 

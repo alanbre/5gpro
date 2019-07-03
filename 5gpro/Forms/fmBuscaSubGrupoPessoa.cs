@@ -1,19 +1,17 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
     public partial class fmBuscaSubGrupoPessoa : Form
     {
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
         GrupoPessoa grupopessoa = null;
         List<SubGrupoPessoa> listasubgrupopessoa;
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
@@ -25,6 +23,10 @@ namespace _5gpro.Forms
             FiltroGrupo(grupopessoaID);
         }
 
+        //LOAD
+        private void FmBuscaSubGrupoPessoa_Load(object sender, EventArgs e) => BuscaSubGrupoPessoa();
+
+        //KEYUP, KEYDOWN
         private void FmBuscaSubGrupoPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -34,18 +36,7 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-        private void FmBuscaSubGrupoPessoa_Load(object sender, EventArgs e)
-        {
-            BuscaSubGrupoPessoa();
-        }
-        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e)
-        {
-            BuscaSubGrupoPessoa();
-        }
-        private void BtPesquisarSubGrupoPessoa_Click(object sender, EventArgs e)
-        {
-            BuscaSubGrupoPessoa();
-        }
+        //CLICK
         private void DgvSubGrupoPessoa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvSubGrupoPessoa.SelectedCells[0].RowIndex;
@@ -54,6 +45,10 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        //TEXTCHANGED
+        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e) => BuscaSubGrupoPessoa();
+
+        //FUNÇÕES
         private void FiltroGrupo(int grupoid)
         {
             grupopessoa = new GrupoPessoa();
@@ -61,6 +56,8 @@ namespace _5gpro.Forms
         }
         private void BuscaSubGrupoPessoa()
         {
+            dgvSubGrupoPessoa.Columns.Clear();
+
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
@@ -72,6 +69,8 @@ namespace _5gpro.Forms
                 table.Rows.Add(g.Codigo, g.Nome);
             }
             dgvSubGrupoPessoa.DataSource = table;
+
+            funaux.TratarTamanhoColunas(dgvSubGrupoPessoa);
         }
         private void EnterTab(object sender, KeyEventArgs e)
         {

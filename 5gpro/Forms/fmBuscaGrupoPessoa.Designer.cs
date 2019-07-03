@@ -31,10 +31,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoPessoa = new System.Windows.Forms.DataGridView();
             this.tbNomeGrupoPessoa = new System.Windows.Forms.TextBox();
-            this.gbBusca = new System.Windows.Forms.GroupBox();
+            this.gbBuscaGrupo = new System.Windows.Forms.GroupBox();
             this.lbNome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoPessoa)).BeginInit();
-            this.gbBusca.SuspendLayout();
+            this.gbBuscaGrupo.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvGrupoPessoa
@@ -45,6 +45,9 @@
             this.dgvGrupoPessoa.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dgvGrupoPessoa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvGrupoPessoa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGrupoPessoa.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvGrupoPessoa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrupoPessoa.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -61,23 +64,29 @@
             // 
             // tbNomeGrupoPessoa
             // 
+            this.tbNomeGrupoPessoa.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeGrupoPessoa.Location = new System.Drawing.Point(6, 44);
             this.tbNomeGrupoPessoa.Name = "tbNomeGrupoPessoa";
             this.tbNomeGrupoPessoa.Size = new System.Drawing.Size(286, 20);
             this.tbNomeGrupoPessoa.TabIndex = 1;
             this.tbNomeGrupoPessoa.TextChanged += new System.EventHandler(this.TbNomeGrupoPessoa_TextChanged);
             // 
-            // gbBusca
+            // gbBuscaGrupo
             // 
-            this.gbBusca.Controls.Add(this.lbNome);
-            this.gbBusca.Controls.Add(this.tbNomeGrupoPessoa);
-            this.gbBusca.Controls.Add(this.dgvGrupoPessoa);
-            this.gbBusca.Location = new System.Drawing.Point(12, 12);
-            this.gbBusca.Name = "gbBusca";
-            this.gbBusca.Size = new System.Drawing.Size(298, 232);
-            this.gbBusca.TabIndex = 3;
-            this.gbBusca.TabStop = false;
-            this.gbBusca.Text = "Busca";
+            this.gbBuscaGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBuscaGrupo.Controls.Add(this.lbNome);
+            this.gbBuscaGrupo.Controls.Add(this.tbNomeGrupoPessoa);
+            this.gbBuscaGrupo.Controls.Add(this.dgvGrupoPessoa);
+            this.gbBuscaGrupo.Location = new System.Drawing.Point(12, 12);
+            this.gbBuscaGrupo.Name = "gbBuscaGrupo";
+            this.gbBuscaGrupo.Size = new System.Drawing.Size(298, 232);
+            this.gbBuscaGrupo.TabIndex = 3;
+            this.gbBuscaGrupo.TabStop = false;
+            this.gbBuscaGrupo.Text = "Busca Grupo Pessoa";
             // 
             // lbNome
             // 
@@ -94,7 +103,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(322, 253);
-            this.Controls.Add(this.gbBusca);
+            this.Controls.Add(this.gbBuscaGrupo);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -107,8 +116,8 @@
             this.Load += new System.EventHandler(this.FmBuscaGrupoPessoa_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaGrupoPessoa_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoPessoa)).EndInit();
-            this.gbBusca.ResumeLayout(false);
-            this.gbBusca.PerformLayout();
+            this.gbBuscaGrupo.ResumeLayout(false);
+            this.gbBuscaGrupo.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -117,7 +126,7 @@
 
         private System.Windows.Forms.DataGridView dgvGrupoPessoa;
         private System.Windows.Forms.TextBox tbNomeGrupoPessoa;
-        private System.Windows.Forms.GroupBox gbBusca;
+        private System.Windows.Forms.GroupBox gbBuscaGrupo;
         private System.Windows.Forms.Label lbNome;
     }
 }

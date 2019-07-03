@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,8 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaSubGrupoItem : Form
     {
+
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
         GrupoItem grupoitem = null;
         List<SubGrupoItem> listasubgrupoitem;
         public SubGrupoItem subgrupoitemSelecionado = null;
@@ -22,6 +25,10 @@ namespace _5gpro.Forms
             
         }
 
+        //LOAD
+        private void FmBuscaSubGrupoItem_Load(object sender, EventArgs e) => BuscaSubGrupoItem();
+
+        //KEYUP, KEYDOWN
         private void FmBuscaSubGrupoItem_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -32,18 +39,7 @@ namespace _5gpro.Forms
             EnterTab(this.ActiveControl, e);
         }
 
-        private void FmBuscaSubGrupoItem_Load(object sender, EventArgs e)
-        {
-            BuscaSubGrupoItem();
-        }
-        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e)
-        {
-            BuscaSubGrupoItem();
-        }
-        private void BtPesquisarSubGrupoItem_Click(object sender, EventArgs e)
-        {
-            BuscaSubGrupoItem();
-        }
+        //CLICK
         private void DgvSubGrupoItem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvSubGrupoItem.SelectedCells[0].RowIndex;
@@ -52,6 +48,11 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        //TEXTCHANGED
+        private void TbNomeSubGrupo_TextChanged(object sender, EventArgs e) => BuscaSubGrupoItem();
+
+
+        //FUNÇÕES
         private void FiltroGrupo(int grupoid)
         {
             grupoitem = new GrupoItem();
@@ -60,6 +61,8 @@ namespace _5gpro.Forms
 
         private void BuscaSubGrupoItem()
         {
+            dgvSubGrupoItem.Columns.Clear();
+
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Nome", typeof(string));
@@ -71,6 +74,8 @@ namespace _5gpro.Forms
                 table.Rows.Add(g.Codigo, g.Nome);
             }
             dgvSubGrupoItem.DataSource = table;
+
+            funaux.TratarTamanhoColunas(dgvSubGrupoItem);
         }
 
         private void EnterTab(object sender, KeyEventArgs e)

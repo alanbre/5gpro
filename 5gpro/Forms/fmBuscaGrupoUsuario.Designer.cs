@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvGrupoUsuario = new System.Windows.Forms.DataGridView();
             this.DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataGridViewTextBoxNomeGrupoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbFiltroNomeGrupoUsuario = new System.Windows.Forms.TextBox();
-            this.btPesquisar = new System.Windows.Forms.Button();
+            this.gbBusca = new System.Windows.Forms.GroupBox();
+            this.lbNome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoUsuario)).BeginInit();
+            this.gbBusca.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvGrupoUsuario
@@ -43,20 +45,23 @@
             this.dgvGrupoUsuario.AllowUserToDeleteRows = false;
             this.dgvGrupoUsuario.AllowUserToOrderColumns = true;
             this.dgvGrupoUsuario.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvGrupoUsuario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dgvGrupoUsuario.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvGrupoUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvGrupoUsuario.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvGrupoUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrupoUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DataGridViewTextBoxColumn,
             this.DataGridViewTextBoxNomeGrupoUsuario});
-            this.dgvGrupoUsuario.Location = new System.Drawing.Point(12, 43);
+            this.dgvGrupoUsuario.Location = new System.Drawing.Point(6, 69);
             this.dgvGrupoUsuario.MultiSelect = false;
             this.dgvGrupoUsuario.Name = "dgvGrupoUsuario";
             this.dgvGrupoUsuario.ReadOnly = true;
             this.dgvGrupoUsuario.RowHeadersVisible = false;
             this.dgvGrupoUsuario.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGrupoUsuario.Size = new System.Drawing.Size(560, 406);
+            this.dgvGrupoUsuario.Size = new System.Drawing.Size(335, 204);
             this.dgvGrupoUsuario.TabIndex = 0;
             this.dgvGrupoUsuario.TabStop = false;
             this.dgvGrupoUsuario.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvGrupoUsuario_CellDoubleClick);
@@ -79,44 +84,61 @@
             // 
             // tbFiltroNomeGrupoUsuario
             // 
-            this.tbFiltroNomeGrupoUsuario.Location = new System.Drawing.Point(13, 17);
+            this.tbFiltroNomeGrupoUsuario.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbFiltroNomeGrupoUsuario.Location = new System.Drawing.Point(7, 43);
             this.tbFiltroNomeGrupoUsuario.Name = "tbFiltroNomeGrupoUsuario";
-            this.tbFiltroNomeGrupoUsuario.Size = new System.Drawing.Size(478, 20);
+            this.tbFiltroNomeGrupoUsuario.Size = new System.Drawing.Size(334, 20);
             this.tbFiltroNomeGrupoUsuario.TabIndex = 1;
             this.tbFiltroNomeGrupoUsuario.TextChanged += new System.EventHandler(this.TbFiltroNomeGrupoUsuario_TextChanged);
             // 
-            // btPesquisar
+            // gbBusca
             // 
-            this.btPesquisar.Location = new System.Drawing.Point(497, 14);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btPesquisar.TabIndex = 2;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
+            this.gbBusca.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBusca.Controls.Add(this.lbNome);
+            this.gbBusca.Controls.Add(this.dgvGrupoUsuario);
+            this.gbBusca.Controls.Add(this.tbFiltroNomeGrupoUsuario);
+            this.gbBusca.Location = new System.Drawing.Point(12, 12);
+            this.gbBusca.Name = "gbBusca";
+            this.gbBusca.Size = new System.Drawing.Size(348, 287);
+            this.gbBusca.TabIndex = 2;
+            this.gbBusca.TabStop = false;
+            this.gbBusca.Text = "Busca";
+            // 
+            // lbNome
+            // 
+            this.lbNome.AutoSize = true;
+            this.lbNome.Location = new System.Drawing.Point(6, 27);
+            this.lbNome.Name = "lbNome";
+            this.lbNome.Size = new System.Drawing.Size(35, 13);
+            this.lbNome.TabIndex = 2;
+            this.lbNome.Text = "Nome";
             // 
             // fmBuscaGrupoUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(584, 462);
-            this.Controls.Add(this.btPesquisar);
-            this.Controls.Add(this.tbFiltroNomeGrupoUsuario);
-            this.Controls.Add(this.dgvGrupoUsuario);
+            this.ClientSize = new System.Drawing.Size(366, 311);
+            this.Controls.Add(this.gbBusca);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(600, 500);
+            this.MinimumSize = new System.Drawing.Size(382, 350);
             this.Name = "fmBuscaGrupoUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca Grupo de Usuários";
+            this.Load += new System.EventHandler(this.FmBuscaGrupoUsuario_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaGrupoUsuario_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrupoUsuario)).EndInit();
+            this.gbBusca.ResumeLayout(false);
+            this.gbBusca.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -124,8 +146,9 @@
 
         private System.Windows.Forms.DataGridView dgvGrupoUsuario;
         private System.Windows.Forms.TextBox tbFiltroNomeGrupoUsuario;
-        private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataGridViewTextBoxNomeGrupoUsuario;
+        private System.Windows.Forms.GroupBox gbBusca;
+        private System.Windows.Forms.Label lbNome;
     }
 }

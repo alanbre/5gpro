@@ -116,12 +116,12 @@ namespace _5gpro.Daos
                             INNER JOIN unimedida u ON i.idunimedida = u.idunimedida
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
-                            WHERE 1=1 "
-                            + conDescItem
-                            + conDenomItem
-                            + conTipoItem
-                            + conSubgrupoItem
-                            + @" ORDER BY i.iditem";
+                            WHERE 1=1 
+                            " + conDescItem + @"
+                            " + conDenomItem + @"
+                            " + conTipoItem + @"
+                            " + conSubgrupoItem + @"
+                             ORDER BY i.iditem";
                 if (denomItem.Length > 0) { sql.addParam("@denominacaocompra", "%" + denomItem + "%"); }
                 if (descItem.Length > 0) { sql.addParam("@descitem", "%" + descItem + "%"); }
                 if (tipoItem.Length > 0) { sql.addParam("@tipo", "%" + tipoItem + "%"); }

@@ -34,7 +34,6 @@
             this.tbFiltroNomeUsuario = new System.Windows.Forms.TextBox();
             this.lbSobrenomeUsuario = new System.Windows.Forms.Label();
             this.tbFiltroSobrenomeUsuario = new System.Windows.Forms.TextBox();
-            this.btPesquisar = new System.Windows.Forms.Button();
             this.buscaGrupoUsuario = new _5gpro.Controls.BuscaGrupoUsuario();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).BeginInit();
             this.SuspendLayout();
@@ -47,6 +46,9 @@
             this.dgvUsuarios.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dgvUsuarios.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvUsuarios.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvUsuarios.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuarios.Location = new System.Drawing.Point(13, 108);
@@ -55,8 +57,8 @@
             this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.RowHeadersVisible = false;
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsuarios.Size = new System.Drawing.Size(775, 330);
-            this.dgvUsuarios.TabIndex = 0;
+            this.dgvUsuarios.Size = new System.Drawing.Size(435, 230);
+            this.dgvUsuarios.TabIndex = 5;
             this.dgvUsuarios.TabStop = false;
             this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvUsuarios_CellDoubleClick);
             // 
@@ -66,59 +68,50 @@
             this.lbNomeUsuario.Location = new System.Drawing.Point(7, 48);
             this.lbNomeUsuario.Name = "lbNomeUsuario";
             this.lbNomeUsuario.Size = new System.Drawing.Size(35, 13);
-            this.lbNomeUsuario.TabIndex = 1;
+            this.lbNomeUsuario.TabIndex = 0;
             this.lbNomeUsuario.Text = "Nome";
             // 
             // tbFiltroNomeUsuario
             // 
             this.tbFiltroNomeUsuario.Location = new System.Drawing.Point(10, 64);
             this.tbFiltroNomeUsuario.Name = "tbFiltroNomeUsuario";
-            this.tbFiltroNomeUsuario.Size = new System.Drawing.Size(200, 20);
-            this.tbFiltroNomeUsuario.TabIndex = 2;
+            this.tbFiltroNomeUsuario.Size = new System.Drawing.Size(215, 20);
+            this.tbFiltroNomeUsuario.TabIndex = 1;
             this.tbFiltroNomeUsuario.TextChanged += new System.EventHandler(this.TbFiltroNomeUsuario_TextChanged);
             // 
             // lbSobrenomeUsuario
             // 
             this.lbSobrenomeUsuario.AutoSize = true;
-            this.lbSobrenomeUsuario.Location = new System.Drawing.Point(247, 48);
+            this.lbSobrenomeUsuario.Location = new System.Drawing.Point(231, 48);
             this.lbSobrenomeUsuario.Name = "lbSobrenomeUsuario";
             this.lbSobrenomeUsuario.Size = new System.Drawing.Size(61, 13);
-            this.lbSobrenomeUsuario.TabIndex = 7;
+            this.lbSobrenomeUsuario.TabIndex = 2;
             this.lbSobrenomeUsuario.Text = "Sobrenome";
             // 
             // tbFiltroSobrenomeUsuario
             // 
-            this.tbFiltroSobrenomeUsuario.Location = new System.Drawing.Point(250, 64);
+            this.tbFiltroSobrenomeUsuario.Location = new System.Drawing.Point(231, 64);
             this.tbFiltroSobrenomeUsuario.Name = "tbFiltroSobrenomeUsuario";
-            this.tbFiltroSobrenomeUsuario.Size = new System.Drawing.Size(200, 20);
-            this.tbFiltroSobrenomeUsuario.TabIndex = 8;
+            this.tbFiltroSobrenomeUsuario.Size = new System.Drawing.Size(219, 20);
+            this.tbFiltroSobrenomeUsuario.TabIndex = 3;
             this.tbFiltroSobrenomeUsuario.TextChanged += new System.EventHandler(this.TbFiltroSobrenomeUsuario_TextChanged);
-            // 
-            // btPesquisar
-            // 
-            this.btPesquisar.Location = new System.Drawing.Point(467, 61);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(75, 23);
-            this.btPesquisar.TabIndex = 9;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
             // 
             // buscaGrupoUsuario
             // 
             this.buscaGrupoUsuario.Location = new System.Drawing.Point(6, 6);
             this.buscaGrupoUsuario.Name = "buscaGrupoUsuario";
             this.buscaGrupoUsuario.Size = new System.Drawing.Size(442, 39);
-            this.buscaGrupoUsuario.TabIndex = 0;
+            this.buscaGrupoUsuario.TabIndex = 4;
+            this.buscaGrupoUsuario.Text_Changed += new _5gpro.Controls.BuscaGrupoUsuario.text_changedEventHandler(this.BuscaGrupoUsuario_Text_Changed);
+            this.buscaGrupoUsuario.Leave += new System.EventHandler(this.BuscaGrupoUsuario_Leave);
             // 
             // fmBuscaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 451);
+            this.ClientSize = new System.Drawing.Size(466, 364);
             this.Controls.Add(this.buscaGrupoUsuario);
-            this.Controls.Add(this.btPesquisar);
             this.Controls.Add(this.tbFiltroSobrenomeUsuario);
             this.Controls.Add(this.lbSobrenomeUsuario);
             this.Controls.Add(this.tbFiltroNomeUsuario);
@@ -127,12 +120,12 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "fmBuscaUsuario";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Usuários";
+            this.Load += new System.EventHandler(this.FmBuscaUsuario_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaUsuario_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuarios)).EndInit();
             this.ResumeLayout(false);
@@ -147,7 +140,6 @@
         private System.Windows.Forms.TextBox tbFiltroNomeUsuario;
         private System.Windows.Forms.Label lbSobrenomeUsuario;
         private System.Windows.Forms.TextBox tbFiltroSobrenomeUsuario;
-        private System.Windows.Forms.Button btPesquisar;
         private Controls.BuscaGrupoUsuario buscaGrupoUsuario;
     }
 }

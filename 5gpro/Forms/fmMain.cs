@@ -470,6 +470,11 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
+        private void PanelCentral_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
             lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");

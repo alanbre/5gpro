@@ -209,10 +209,10 @@ namespace _5gpro.Daos
             }
             return usuario;
         }
-        public IEnumerable<Usuario> Busca(string codGrupoUsuario, string nomeUsuario, string sobrenomeUsuario)
+        public IEnumerable<Usuario> Busca(GrupoUsuario grupousuariorecebido, string nomeUsuario, string sobrenomeUsuario)
         {
             List<Usuario> usuarios = new List<Usuario>();
-            string conCodGrupoUsuario = codGrupoUsuario.Length > 0 ? "AND g.idgrupousuario = @idgrupousuario" : "";
+            string conCodGrupoUsuario = grupousuariorecebido != null ? "AND g.idgrupousuario = @idgrupousuario" : "";
             string conNomeUsuario = nomeUsuario.Length > 0 ? "AND u.nome LIKE @nomeusuario" : "";
             string conSobrenomeUsuario = sobrenomeUsuario.Length > 0 ? "AND u.sobrenome LIKE @sobrenomeusuario" : "";
 
@@ -227,7 +227,7 @@ namespace _5gpro.Daos
                             " + conNomeUsuario + @"
                             " + conSobrenomeUsuario + @"
                             ORDER BY u.idusuario";
-                if (codGrupoUsuario.Length > 0) { sql.addParam("@idgrupousuario", codGrupoUsuario); }
+                if (grupousuariorecebido != null) { sql.addParam("@idgrupousuario", grupousuariorecebido.GrupoUsuarioID); }
                 if (nomeUsuario.Length > 0) { sql.addParam("@nomeusuario", "%" + nomeUsuario + "%"); }
                 if (sobrenomeUsuario.Length > 0) { sql.addParam("@sobrenomeUsuario", "%" + sobrenomeUsuario + "%"); }
 

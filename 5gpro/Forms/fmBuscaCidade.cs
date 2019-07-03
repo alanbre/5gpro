@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,13 +15,18 @@ namespace _5gpro.Forms
         private readonly CidadeDAO cidadeDAO = new CidadeDAO();
 
 
-
-
         public fmBuscaCidade()
         {
             InitializeComponent();
         }
 
+        //LOAD
+        private void FmBuscaCidade_Load(object sender, EventArgs e) => BuscaCidades();
+
+        //LEAVE
+        private void BuscaEstado_Leave(object sender, EventArgs e) => BuscaCidades();
+
+        //KEYUP, KEYDOWN
         private void FmBuscaCidade_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -30,7 +36,8 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-        private void BtPesquisar_Click(object sender, EventArgs e) => BuscaCidades();
+
+        //CLICK
         private void DgvCidades_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvCidades.SelectedCells[0].RowIndex;
@@ -38,8 +45,12 @@ namespace _5gpro.Forms
             cidadeSelecionada = Cidades.Find(c => c.CidadeID == Convert.ToInt32(selectedRow.Cells[0].Value)); // FAZ UMA BUSCA NA LISTA ONDE A CONDIÇÃO É ACEITA
             this.Close();
         }
-        private void TbFiltroNomeCidade_TextChanged(object sender, EventArgs e) => BuscaCidades();
 
+        //TEXTCHANGED
+        private void TbFiltroNomeCidade_TextChanged(object sender, EventArgs e) => BuscaCidades();
+        private void BuscaEstado_Text_Changed(object sender, EventArgs e) => BuscaCidades();
+
+        //FUNÇÕES
         private void BuscaCidades()
         {
             dgvCidades.Rows.Clear();
@@ -59,20 +70,11 @@ namespace _5gpro.Forms
                 );
                 rows.Add(linha);
 
-                //MÉTODO QUE PRIMEIRO ADICIONA A LINHA A LISTA DEPOIS CRIA AS CÉLULAS
-                //rows.Add(new DataGridViewRow());
-                //rows[rows.Count - 1].CreateCells(dgvCidades,
-                //c.CidadeID,
-                //c.Nome,
-                //c.Estado.EstadoID,
-                //c.Estado.Nome,
-                //c.Estado.Uf
-                //);
             }
             dgvCidades.Rows.AddRange(rows.ToArray());
             dgvCidades.Refresh();
-
         }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -81,7 +83,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
     }
 }
 

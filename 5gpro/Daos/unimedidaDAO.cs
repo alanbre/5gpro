@@ -114,7 +114,7 @@ namespace _5gpro.Daos
                             WHERE 1=1 "
                             + conDescUnimedida +
                             @" ORDER BY idunimedida";
-                if (conDescUnimedida.Length > 0) { sql.addParam("@nome", "%" + descricao + "%"); }
+                if (conDescUnimedida.Length > 0) { sql.addParam("@descricao", "%" + descricao + "%"); }
                 var data = sql.selectQuery();
                 foreach (var d in data)
                 {

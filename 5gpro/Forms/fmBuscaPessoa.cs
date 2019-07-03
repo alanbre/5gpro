@@ -19,6 +19,7 @@ namespace _5gpro.Forms
         {
             InitializeComponent();
         }
+
         //LOAD
         private void FmBuscaPessoa_Load(object sender, EventArgs e) => BuscaPessoas();
 
@@ -26,9 +27,6 @@ namespace _5gpro.Forms
         private void BuscaCidade_Leave(object sender, EventArgs e) => BuscaPessoas();
 
         //KEYUP, KEYDOWN
-        private void BuscaCidade_KeyUp(object sender, KeyEventArgs e) => BackDelete(e);
-        private void TbFiltroNome_KeyUp(object sender, KeyEventArgs e) => BackDelete(e);
-        private void TbCpfCnpj_KeyUp(object sender, KeyEventArgs e) => BackDelete(e);
         private void FmBuscaPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -40,7 +38,6 @@ namespace _5gpro.Forms
         }
 
         //CLICK
-        private void BtPesquisar_Click(object sender, EventArgs e) => BuscaPessoas();
         private void DgvPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvPessoas.SelectedCells[0].RowIndex;
@@ -57,7 +54,7 @@ namespace _5gpro.Forms
         //FUNÇÕES
         private void BuscaPessoas()
         {
-            dgvPessoas.DataSource = "";
+            dgvPessoas.Columns.Clear();
 
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(string));
@@ -91,18 +88,5 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
-        private void BackDelete(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Back)
-            {
-                BuscaPessoas();
-            }
-            if (e.KeyCode == Keys.Delete)
-            {
-                BuscaPessoas();
-            }
-        }
-
     }
 }

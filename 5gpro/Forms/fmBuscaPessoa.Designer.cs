@@ -33,7 +33,6 @@
             this.tbFiltroNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvPessoas = new System.Windows.Forms.DataGridView();
-            this.btPesquisar = new System.Windows.Forms.Button();
             this.tbCpfCnpj = new System.Windows.Forms.TextBox();
             this.gbFiltros = new System.Windows.Forms.GroupBox();
             this.buscaCidade = new _5gpro.Controls.BuscaCidade();
@@ -57,7 +56,6 @@
             this.tbFiltroNome.Size = new System.Drawing.Size(309, 20);
             this.tbFiltroNome.TabIndex = 1;
             this.tbFiltroNome.TextChanged += new System.EventHandler(this.TbFiltroNome_TextChanged);
-            this.tbFiltroNome.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbFiltroNome_KeyUp);
             // 
             // label1
             // 
@@ -92,16 +90,6 @@
             this.dgvPessoas.TabStop = false;
             this.dgvPessoas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvPessoas_CellDoubleClick);
             // 
-            // btPesquisar
-            // 
-            this.btPesquisar.Location = new System.Drawing.Point(324, 110);
-            this.btPesquisar.Name = "btPesquisar";
-            this.btPesquisar.Size = new System.Drawing.Size(62, 23);
-            this.btPesquisar.TabIndex = 2;
-            this.btPesquisar.Text = "Pesquisar";
-            this.btPesquisar.UseVisualStyleBackColor = true;
-            this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
-            // 
             // tbCpfCnpj
             // 
             this.tbCpfCnpj.Location = new System.Drawing.Point(9, 71);
@@ -110,7 +98,6 @@
             this.tbCpfCnpj.Size = new System.Drawing.Size(141, 20);
             this.tbCpfCnpj.TabIndex = 5;
             this.tbCpfCnpj.TextChanged += new System.EventHandler(this.TbCpfCnpj_TextChanged);
-            this.tbCpfCnpj.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCpfCnpj_KeyUp);
             // 
             // gbFiltros
             // 
@@ -120,7 +107,6 @@
             this.gbFiltros.Controls.Add(this.lbFiltroNome);
             this.gbFiltros.Controls.Add(this.tbCpfCnpj);
             this.gbFiltros.Controls.Add(this.tbFiltroNome);
-            this.gbFiltros.Controls.Add(this.btPesquisar);
             this.gbFiltros.Controls.Add(this.label1);
             this.gbFiltros.Location = new System.Drawing.Point(12, 12);
             this.gbFiltros.Name = "gbFiltros";
@@ -138,7 +124,6 @@
             this.buscaCidade.Size = new System.Drawing.Size(315, 39);
             this.buscaCidade.TabIndex = 3;
             this.buscaCidade.Text_Changed += new _5gpro.Controls.BuscaCidade.text_changedEventHandler(this.BuscaCidade_Text_Changed);
-            this.buscaCidade.KeyUp += new System.Windows.Forms.KeyEventHandler(this.BuscaCidade_KeyUp);
             this.buscaCidade.Leave += new System.EventHandler(this.BuscaCidade_Leave);
             // 
             // fmBuscaPessoa
@@ -172,7 +157,6 @@
         private System.Windows.Forms.TextBox tbFiltroNome;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvPessoas;
-        private System.Windows.Forms.Button btPesquisar;
         private System.Windows.Forms.TextBox tbCpfCnpj;
         private System.Windows.Forms.GroupBox gbFiltros;
         private Controls.BuscaCidade buscaCidade;

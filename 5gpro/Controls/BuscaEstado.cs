@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using _5gpro.Daos;
 using _5gpro.Entities;
@@ -77,6 +78,20 @@ namespace _5gpro.Controls
                 tbCodigoEstado.Focus();
                 tbCodigoEstado.SelectAll();
             }
+        }
+
+        //--------------------------------------------------
+        //CRIA O EVENTO Text_Changed DO USERCONTROL
+        //--------------------------------------------------
+        public delegate void text_changedEventHandler(object sender, EventArgs e);
+
+        [Category("Action")]
+        [Description("É acionado quando o conteúdo é alterado")]
+        public event text_changedEventHandler Text_Changed;
+
+        private void TbCodigoEstado_TextChanged(object sender, EventArgs e)
+        {
+            this.Text_Changed?.Invoke(this, e);
         }
     }
 }

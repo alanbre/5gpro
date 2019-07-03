@@ -50,7 +50,7 @@ namespace _5gpro.Controls
         {
             var buscaUnimedida = new fmBuscaUnimedida();
             buscaUnimedida.ShowDialog();
-            if (buscaUnimedida != null)
+            if (buscaUnimedida.unimedidaSelecionada != null)
             {
                 unimedida = buscaUnimedida.unimedidaSelecionada;
                 PreencheCamposUnimedida(unimedida);
