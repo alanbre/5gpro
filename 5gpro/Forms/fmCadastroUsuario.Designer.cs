@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
-            this.buscaGrupoUsuario = new _5gpro.Controls.BuscaGrupoUsuario();
             this.lbConfirmaSenha = new System.Windows.Forms.Label();
             this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
             this.tbConfirmaSenhaUsuario = new System.Windows.Forms.TextBox();
@@ -49,6 +48,7 @@
             this.lbEmailUsuario = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.buscaGrupoUsuario = new _5gpro.Controls.BuscaGrupoUsuario();
             this.pnDadosGerais.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -69,13 +69,6 @@
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(750, 184);
             this.pnDadosGerais.TabIndex = 0;
-            // 
-            // buscaGrupoUsuario
-            // 
-            this.buscaGrupoUsuario.Location = new System.Drawing.Point(3, 131);
-            this.buscaGrupoUsuario.Name = "buscaGrupoUsuario";
-            this.buscaGrupoUsuario.Size = new System.Drawing.Size(442, 39);
-            this.buscaGrupoUsuario.TabIndex = 8;
             // 
             // lbConfirmaSenha
             // 
@@ -158,6 +151,7 @@
             // tbNomeUsuario
             // 
             this.tbNomeUsuario.Location = new System.Drawing.Point(9, 29);
+            this.tbNomeUsuario.MaxLength = 40;
             this.tbNomeUsuario.Name = "tbNomeUsuario";
             this.tbNomeUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbNomeUsuario.TabIndex = 1;
@@ -184,6 +178,7 @@
             // tbSobrenomeUsuario
             // 
             this.tbSobrenomeUsuario.Location = new System.Drawing.Point(9, 68);
+            this.tbSobrenomeUsuario.MaxLength = 50;
             this.tbSobrenomeUsuario.Name = "tbSobrenomeUsuario";
             this.tbSobrenomeUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbSobrenomeUsuario.TabIndex = 3;
@@ -226,6 +221,7 @@
             // tbEmailUsuario
             // 
             this.tbEmailUsuario.Location = new System.Drawing.Point(9, 107);
+            this.tbEmailUsuario.MaxLength = 60;
             this.tbEmailUsuario.Name = "tbEmailUsuario";
             this.tbEmailUsuario.Size = new System.Drawing.Size(527, 20);
             this.tbEmailUsuario.TabIndex = 5;
@@ -266,6 +262,13 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
+            // 
+            // buscaGrupoUsuario
+            // 
+            this.buscaGrupoUsuario.Location = new System.Drawing.Point(3, 131);
+            this.buscaGrupoUsuario.Name = "buscaGrupoUsuario";
+            this.buscaGrupoUsuario.Size = new System.Drawing.Size(442, 39);
+            this.buscaGrupoUsuario.TabIndex = 8;
             // 
             // fmCadastroUsuario
             // 

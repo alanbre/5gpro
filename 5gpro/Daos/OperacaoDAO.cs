@@ -79,18 +79,21 @@ namespace _5gpro.Daos
             }
             return operacao;
         }
-        public IEnumerable<Operacao> Busca(string nomeOperacao)
+        public IEnumerable<Operacao> Busca(string nomeOperacao, string condicao)
         {
             List<Operacao> operacoes = new List<Operacao>();
+            string conCondicao = condicao.Length > 0 ? "AND o.condicao = @condicao" : "";
             string conNomeOperacao = nomeOperacao.Length > 0 ? "AND o.nome LIKE @nomeoperacao" : "";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM operacao o 
                             WHERE 1=1 "
+                            + conCondicao + " "
                             + conNomeOperacao + " "
                             + @"ORDER BY o.nome";
                 if (nomeOperacao.Length > 0) { sql.addParam("@nomeoperacao", "%" + nomeOperacao + "%"); }
+                if (condicao.Length > 0) { sql.addParam("@condicao",  condicao); }
                 var data = sql.selectQuery();
 
                 foreach (var d in data)
