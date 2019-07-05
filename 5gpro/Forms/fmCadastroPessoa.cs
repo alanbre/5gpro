@@ -455,7 +455,7 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-        private void LimpaCampos(bool limpaCodigo)
+        private void LimpaCampos(bool limpaCodigo, bool limpapessoa = true)
         {
             if (limpaCodigo) { tbCodigo.Clear(); codigo = 0; }
             tbNome.Clear();
@@ -479,15 +479,15 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             buscaGrupoPessoa.Limpa();
             buscaSubGrupoPessoa.Limpa();
-            
-            pessoa = null;
+
+            if (limpapessoa) { pessoa = null; }
         }
         private void PreencheCampos(Pessoa pessoa)
         {
             if (pessoa != null)
             {
                 ignoraCheckEvent = true;
-                LimpaCampos(false);
+                LimpaCampos(false, false);
                 tbCodigo.Text = pessoa.PessoaID.ToString();
                 tbNome.Text = pessoa.Nome;
                 tbFantasia.Text = pessoa.Fantasia;

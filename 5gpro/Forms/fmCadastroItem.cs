@@ -410,10 +410,10 @@ namespace _5gpro.Forms
                 DesintegracaoSimNao(newItem);
                 gbDesintegracao.Enabled = true;
                 validacao.despintarCampos(controls);
-                item = newItem;
                 itemdesintegrar = new Item();
                 itemdesintegrar = item;
-                PreencheCampos(item);
+                PreencheCampos(newItem);
+                item = newItem;
                 Editando(false);
             }
             else
@@ -424,7 +424,7 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
             }
         }
-        private void LimpaCampos(bool cod)
+        private void LimpaCampos(bool cod, bool limpaitem = true)
         {
             if (cod) { tbCodigo.Clear(); }
             tbDescricao.Clear();
@@ -441,14 +441,15 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             dbQuantidade.Valor = 0.00m;
             codigo = 0;
-            item = null;
+            if (limpaitem) { item = null; }
+            
         }
         private void PreencheCampos(Item item)
         {
             if (item != null)
             {
                 ignoraCheckEvent = true;
-                LimpaCampos(false);
+                LimpaCampos(false, false);
                 tbCodigo.Text = item.ItemID.ToString();
                 tbDescricao.Text = item.Descricao;
                 tbDescricaoDeCompra.Text = item.DescCompra;
