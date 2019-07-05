@@ -147,6 +147,7 @@ namespace _5gpro.Forms
         }
         private void BtNotaGerar_Click(object sender, EventArgs e)
         {
+
             if (orcamento.NotaFiscal == null)
             {
                 notafiscal = nfa.GerarNotaFiscal(orcamento);
@@ -210,9 +211,9 @@ namespace _5gpro.Forms
             buscaOrcamento.ShowDialog();
             if (buscaOrcamento.orcamentoSelecionado != null)
             {
-                orcamento = buscaOrcamento.orcamentoSelecionado;
                 codigo = orcamento.OrcamentoID;
-                PreencheCampos(orcamento);
+                PreencheCampos(buscaOrcamento.orcamentoSelecionado);
+                orcamento = buscaOrcamento.orcamentoSelecionado;
             }
         }
         private void Salva()
@@ -259,6 +260,7 @@ namespace _5gpro.Forms
             {
                 tbAjuda.Text = "Dados salvos com sucesso";
                 Editando(false);
+                btNotaGerar.Enabled = true;
             }
             else if (resultado == 2)
             {
@@ -322,10 +324,10 @@ namespace _5gpro.Forms
             var neworcamento = orcamentoDAO.Anterior(int.Parse(tbCodigo.Text));
             if (neworcamento != null)
             {
+                codigo = neworcamento.OrcamentoID;
+                PreencheCampos(neworcamento);
                 orcamento = neworcamento;
-                codigo = orcamento.OrcamentoID;
                 itens = orcamento.OrcamentoItem.ToList();
-                PreencheCampos(orcamento);
                 Editando(false);
             }
         }
@@ -352,10 +354,10 @@ namespace _5gpro.Forms
             var neworcamento = orcamentoDAO.Proximo(int.Parse(tbCodigo.Text));
             if (neworcamento != null)
             {
+                codigo = neworcamento.OrcamentoID;
+                PreencheCampos(neworcamento);
                 orcamento = neworcamento;
-                codigo = orcamento.OrcamentoID;
                 itens = orcamento.OrcamentoItem.ToList();
-                PreencheCampos(orcamento);
                 Editando(false);
             }
         }
@@ -400,8 +402,8 @@ namespace _5gpro.Forms
             var neworcamento = orcamentoDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (neworcamento != null)
             {
+                PreencheCampos(neworcamento);
                 orcamento = neworcamento;
-                PreencheCampos(orcamento);
                 Editando(false);
             }
             else
@@ -475,7 +477,6 @@ namespace _5gpro.Forms
         {
             if (!ignoracheckevent && notafiscal == null)
             {
-                btNotaGerar.Enabled = !edit;
                 editando = edit;
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }

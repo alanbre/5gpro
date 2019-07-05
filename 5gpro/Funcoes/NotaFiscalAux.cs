@@ -38,6 +38,12 @@ namespace _5gpro.Funcoes
             }
 
             int resultado = notaFiscalDAO.SalvaOuAtualiza(notafiscal);
+            if(resultado == 1) { notaFiscalDAO.MovimentaEstoque(notafiscal); }
+            if(resultado == 2)
+            {
+                notaFiscalDAO.LimpaRegistrosEstoque(notafiscal);
+                notaFiscalDAO.MovimentaEstoque(notafiscal);
+            }
             if (resultado > 0) { resultado = orcamentoDAO.VincularNotaAoOrcamento(orcamento, notafiscal); }
             return resultado > 0 ? notafiscal : null;
         }

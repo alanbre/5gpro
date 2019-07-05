@@ -82,6 +82,7 @@ namespace _5gpro.Forms
             table.Columns.Add("Tipo", typeof(string));
             table.Columns.Add("Referência", typeof(string));
             table.Columns.Add("Estoque Necessário", typeof(string));
+            table.Columns.Add("Quantidade em Estoque", typeof(string));
             table.Columns.Add("Unidade de Medida", typeof(string));
             table.Columns.Add("Valor de Entrada", typeof(string));
             table.Columns.Add("Valor de Saída", typeof(string));
@@ -104,7 +105,7 @@ namespace _5gpro.Forms
 
             foreach (Item i in itens)
             {
-                table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Unimedida.Sigla, i.ValorEntrada, i.ValorUnitario);
+                table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Quantidade, i.Unimedida.Sigla, i.ValorEntrada, i.ValorUnitario);
             }
 
             ListCollectionView coleção = new ListCollectionView(table.DefaultView);
