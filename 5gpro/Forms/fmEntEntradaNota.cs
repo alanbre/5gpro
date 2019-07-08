@@ -437,7 +437,7 @@ namespace _5gpro.Forms
                 else
                 {
                     item.Quantidade = (dbQuantidade.Valor * percentualparte) / 100;
-                    item.ValorTotal = item.Quantidade * item.ValorUnitario;
+                    item.ValorTotal = item.Quantidade * item.Item.ValorUnitario;
                 }
             }
             else
@@ -450,38 +450,38 @@ namespace _5gpro.Forms
             if (dr == null)
             {
                 itens.Add(item);
-                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Item.Quantidade, item.Item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.Item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                 btNovoItem.PerformClick();
             }
             else
             {
                 if (partedesintegrada)
                 {
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = dbQuantidade.Valor + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = dbValorUnitItem.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = dbValorTotItem.Valor + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = dbDescontoItemPorc.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = dbDescontoItem.Valor;
                     dr.Cells[dgvtbcQuantidade.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
-                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = dbValorUnitItem.Valor;
                     dr.Cells[dgvtbcValorTotalItem.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
-                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = dbDescontoItemPorc.Valor;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = dbDescontoItem.Valor;
                     dgvItens.Update();
                     dgvItens.Refresh();
                 }
                 else
                 {
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-                    dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-                    dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = dbQuantidade.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = dbValorUnitItem.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = dbValorTotItem.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = dbDescontoItemPorc.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = dbDescontoItem.Valor;
+                    dr.Cells[dgvtbcQuantidade.Index].Value = dbQuantidade.Valor;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = dbValorUnitItem.Valor;
+                    dr.Cells[dgvtbcValorTotalItem.Index].Value = dbValorTotItem.Valor;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = dbDescontoItemPorc.Valor;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = dbDescontoItem.Valor;
                     dgvItens.Update();
                     dgvItens.Refresh();
                 }
@@ -610,7 +610,7 @@ namespace _5gpro.Forms
 
             ignoracheckevent = true;
             buscaItem1.PreencheCampos(item.Item);
-            dbQuantidade.Valor = item.Item.Quantidade;
+            dbQuantidade.Valor = item.Quantidade;
             dbValorUnitItem.Valor = item.Item.ValorUnitario;//mudei aqi
             dbValorTotItem.Valor = item.ValorTotal;
             dbDescontoItemPorc.Valor = item.DescontoPorc;
