@@ -54,8 +54,8 @@
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.tpValores = new System.Windows.Forms.TabPage();
             this.btCalcular = new System.Windows.Forms.Button();
-            this.dbCusto = new _5gpro.Controls.DecimalBox();
-            this.lbCusto = new System.Windows.Forms.Label();
+            this.dbValorEntrada = new _5gpro.Controls.DecimalBox();
+            this.lbValorEntrada = new System.Windows.Forms.Label();
             this.dbPrecoVenda = new _5gpro.Controls.DecimalBox();
             this.lbPrecoVenda = new System.Windows.Forms.Label();
             this.dbEstoqueNecessario = new _5gpro.Controls.DecimalBox();
@@ -338,8 +338,8 @@
             this.tpValores.AutoScroll = true;
             this.tpValores.BackColor = System.Drawing.Color.White;
             this.tpValores.Controls.Add(this.btCalcular);
-            this.tpValores.Controls.Add(this.dbCusto);
-            this.tpValores.Controls.Add(this.lbCusto);
+            this.tpValores.Controls.Add(this.dbValorEntrada);
+            this.tpValores.Controls.Add(this.lbValorEntrada);
             this.tpValores.Controls.Add(this.dbPrecoVenda);
             this.tpValores.Controls.Add(this.lbPrecoVenda);
             this.tpValores.Controls.Add(this.dbEstoqueNecessario);
@@ -362,27 +362,27 @@
             this.btCalcular.UseVisualStyleBackColor = true;
             this.btCalcular.Click += new System.EventHandler(this.BtCalcular_Click);
             // 
-            // dbCusto
+            // dbValorEntrada
             // 
-            this.dbCusto.Location = new System.Drawing.Point(9, 28);
-            this.dbCusto.Name = "dbCusto";
-            this.dbCusto.Size = new System.Drawing.Size(86, 22);
-            this.dbCusto.TabIndex = 2;
-            this.dbCusto.Valor = new decimal(new int[] {
+            this.dbValorEntrada.Location = new System.Drawing.Point(9, 28);
+            this.dbValorEntrada.Name = "dbValorEntrada";
+            this.dbValorEntrada.Size = new System.Drawing.Size(86, 22);
+            this.dbValorEntrada.TabIndex = 2;
+            this.dbValorEntrada.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
-            this.dbCusto.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbCusto_Valor_Changed);
+            this.dbValorEntrada.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbCusto_Valor_Changed);
             // 
-            // lbCusto
+            // lbValorEntrada
             // 
-            this.lbCusto.AutoSize = true;
-            this.lbCusto.Location = new System.Drawing.Point(9, 12);
-            this.lbCusto.Name = "lbCusto";
-            this.lbCusto.Size = new System.Drawing.Size(80, 13);
-            this.lbCusto.TabIndex = 1;
-            this.lbCusto.Text = "Preço de Custo";
+            this.lbValorEntrada.AutoSize = true;
+            this.lbValorEntrada.Location = new System.Drawing.Point(9, 12);
+            this.lbValorEntrada.Name = "lbValorEntrada";
+            this.lbValorEntrada.Size = new System.Drawing.Size(85, 13);
+            this.lbValorEntrada.TabIndex = 1;
+            this.lbValorEntrada.Text = "Valor de entrada";
             // 
             // dbPrecoVenda
             // 
@@ -504,8 +504,8 @@
         private Controls.DecimalBox dbEstoqueNecessario;
         private System.Windows.Forms.Label lbEstoqueNecessario;
         private System.Windows.Forms.TabControl tcItens;
-        private Controls.DecimalBox dbCusto;
-        private System.Windows.Forms.Label lbCusto;
+        private Controls.DecimalBox dbValorEntrada;
+        private System.Windows.Forms.Label lbValorEntrada;
         private System.Windows.Forms.Button btCalcular;
     }
 }

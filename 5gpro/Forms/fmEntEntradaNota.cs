@@ -423,12 +423,13 @@ namespace _5gpro.Forms
 
             var item = new NotaFiscalTerceirosItem();
             item.Item = itemrecebido;
-            item.ValorUnitario = itemrecebido.ValorEntrada;
+            item.ValorUnitario = dbValorUnitItem.Valor;
             item.DescontoPorc = dbDescontoItemPorc.Valor;
             item.Desconto = dbDescontoItem.Valor;
 
             if (partedesintegrada)
             {
+                item.ValorUnitario = itemrecebido.ValorEntrada;
                 if (quantitativa)
                 {
                     item.Quantidade = dbQuantidade.Valor * quantidadeparte;
@@ -437,8 +438,9 @@ namespace _5gpro.Forms
                 else
                 {
                     item.Quantidade = (dbQuantidade.Valor * percentualparte) / 100;
-                    item.ValorTotal = item.Quantidade * item.Item.ValorUnitario;
+                    item.ValorTotal = item.Quantidade * item.ValorUnitario;
                 }
+                
             }
             else
             {
@@ -450,7 +452,7 @@ namespace _5gpro.Forms
             if (dr == null)
             {
                 itens.Add(item);
-                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.Item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                 btNovoItem.PerformClick();
             }
             else
@@ -611,7 +613,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             buscaItem1.PreencheCampos(item.Item);
             dbQuantidade.Valor = item.Quantidade;
-            dbValorUnitItem.Valor = item.Item.ValorUnitario;//mudei aqi
+            dbValorUnitItem.Valor = item.ValorUnitario;
             dbValorTotItem.Valor = item.ValorTotal;
             dbDescontoItemPorc.Valor = item.DescontoPorc;
             dbDescontoItem.Valor = item.Desconto;

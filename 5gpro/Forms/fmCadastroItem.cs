@@ -208,8 +208,8 @@ namespace _5gpro.Forms
             item.Referencia = tbReferencia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
             item.Quantidade = dbQuantidade.Valor;
-            item.Custo = dbCusto.Valor;
-            item.ValorEntrada = 0;
+            item.Custo = 0;
+            item.ValorEntrada = dbValorEntrada.Valor;
             item.ValorUnitario = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
             item.Unimedida = buscaUnimedidaItem.unimedida;
@@ -432,7 +432,7 @@ namespace _5gpro.Forms
             tbReferencia.Clear();
             dbEstoqueNecessario.Valor = 0.00m;
             dbPrecoVenda.Valor = 0.00m;
-            dbCusto.Valor = 0.00m;
+            dbValorEntrada.Valor = 0.00m;
             rbProduto.Checked = true;
             rbServico.Checked = false;
             buscaGrupoItem.Limpa();
@@ -467,7 +467,7 @@ namespace _5gpro.Forms
                 }
 
                 tbReferencia.Text = item.Referencia;
-                dbCusto.Valor = item.Custo;
+                dbValorEntrada.Valor = item.ValorEntrada;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
                 dbPrecoVenda.Valor = item.ValorUnitario;
                 dbQuantidade.Valor = item.Quantidade;
@@ -539,11 +539,11 @@ namespace _5gpro.Forms
         {
 
             var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
-            formCalculoPrecoVenda.custo = dbCusto.Valor;
+            formCalculoPrecoVenda.valorentrada = dbValorEntrada.Valor;
             formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
             formCalculoPrecoVenda.ShowDialog();
             dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
-            dbCusto.Valor = formCalculoPrecoVenda.custo;
+            dbValorEntrada.Valor = formCalculoPrecoVenda.valorentrada;
 
         }
 
