@@ -169,16 +169,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
   `iditem` INT(11) NOT NULL,
-  `descitem` VARCHAR(45) NULL DEFAULT NULL,
-  `denominacaocompra` VARCHAR(45) NULL DEFAULT NULL,
+  `descitem` VARCHAR(100) NULL DEFAULT NULL,
+  `denominacaocompra` VARCHAR(100) NULL DEFAULT NULL,
   `tipo` VARCHAR(45) NULL DEFAULT NULL,
-  `referencia` VARCHAR(45) NULL DEFAULT NULL,
+  `referencia` VARCHAR(100) NULL DEFAULT NULL,
   `valorentrada` DECIMAL(15,2) NULL DEFAULT NULL,
   `valorsaida` DECIMAL(15,2) NULL DEFAULT NULL,
-  `estoquenecessario` DECIMAL(10,0) NULL DEFAULT NULL,
+  `estoquenecessario` DECIMAL(10,2) NULL DEFAULT NULL,
   `idunimedida` INT(11) NOT NULL,
   `idsubgrupoitem` INT NOT NULL,
-  `quantidade` DECIMAL NOT NULL,
+  `quantidade` DECIMAL(10,2) NOT NULL,
   `custo` DECIMAL(15,2) NULL,
   PRIMARY KEY (`iditem`),
   INDEX `fk_item_unimedida1_idx` (`idunimedida` ASC) VISIBLE,
@@ -274,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
   `desconto_total_itens` DECIMAL(10,2) NULL DEFAULT NULL,
   `desconto_documento` DECIMAL(10,2) NULL DEFAULT NULL,
   `idpessoa` INT(11) NULL DEFAULT NULL,
+  `descricao` VARCHAR(150) NULL,
   PRIMARY KEY (`idnotafiscal`),
   INDEX `fk_notafiscal_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_notafiscal_pessoa1`
@@ -668,6 +669,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nota_fiscal_terceiros` (
   `desconto_total_itens` DECIMAL(10,2) NOT NULL,
   `desconto_documento` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NULL,
+  `descricao` VARCHAR(150) NULL,
   PRIMARY KEY (`idnota_fiscal_terceiros`),
   INDEX `fk_nota_fiscal_terceiros_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_nota_fiscal_terceiros_pessoa1`
@@ -993,6 +995,108 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
   CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas8`
     FOREIGN KEY (`juros_recebidos`)
     REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`caixaprovisorio`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixaprovisorio` (
+  `idcaixaprovisorio` INT NOT NULL,
+  `valoratual` DECIMAL(10,2) NULL,
+  PRIMARY KEY (`idcaixaprovisorio`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`lancamento_saida`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lancamento_saida` (
+  `idlancamento_saida` INT NOT NULL,
+  `idcaixaprovisorio` INT NOT NULL,
+  `idnota_fiscal_terceiros` INT NOT NULL,
+  PRIMARY KEY (`idlancamento_saida`),
+  INDEX `fk_entradaprovi_caixaprovisorio1_idx` (`idcaixaprovisorio` ASC) VISIBLE,
+  INDEX `fk_lancamento_saida_nota_fiscal_terceiros1_idx` (`idnota_fiscal_terceiros` ASC) VISIBLE,
+  CONSTRAINT `fk_entradaprovi_caixaprovisorio1`
+    FOREIGN KEY (`idcaixaprovisorio`)
+    REFERENCES `5gprodatabase`.`caixaprovisorio` (`idcaixaprovisorio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lancamento_saida_nota_fiscal_terceiros1`
+    FOREIGN KEY (`idnota_fiscal_terceiros`)
+    REFERENCES `5gprodatabase`.`nota_fiscal_terceiros` (`idnota_fiscal_terceiros`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`lancamento_entrada`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lancamento_entrada` (
+  `idlancamento_entrada` INT NOT NULL,
+  `idcaixaprovisorio` INT NOT NULL,
+  `idnotafiscal` INT(11) NOT NULL,
+  PRIMARY KEY (`idlancamento_entrada`),
+  INDEX `fk_saidaprovi_caixaprovisorio1_idx` (`idcaixaprovisorio` ASC) VISIBLE,
+  INDEX `fk_lancamento_entrada_notafiscal1_idx` (`idnotafiscal` ASC) VISIBLE,
+  CONSTRAINT `fk_saidaprovi_caixaprovisorio1`
+    FOREIGN KEY (`idcaixaprovisorio`)
+    REFERENCES `5gprodatabase`.`caixaprovisorio` (`idcaixaprovisorio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lancamento_entrada_notafiscal1`
+    FOREIGN KEY (`idnotafiscal`)
+    REFERENCES `5gprodatabase`.`notafiscal` (`idnotafiscal`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`lancamento_car`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lancamento_car` (
+  `idlancamento_car` INT NOT NULL,
+  `idcaixaprovisorio` INT NOT NULL,
+  `idconta_receber` INT NOT NULL,
+  PRIMARY KEY (`idlancamento_car`),
+  INDEX `fk_lancamento_car_caixaprovisorio1_idx` (`idcaixaprovisorio` ASC) VISIBLE,
+  INDEX `fk_lancamento_car_conta_receber1_idx` (`idconta_receber` ASC) VISIBLE,
+  CONSTRAINT `fk_lancamento_car_caixaprovisorio1`
+    FOREIGN KEY (`idcaixaprovisorio`)
+    REFERENCES `5gprodatabase`.`caixaprovisorio` (`idcaixaprovisorio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lancamento_car_conta_receber1`
+    FOREIGN KEY (`idconta_receber`)
+    REFERENCES `5gprodatabase`.`conta_receber` (`idconta_receber`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`lancamento_cap`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`lancamento_cap` (
+  `idlancamento_cap` INT NOT NULL,
+  `idcaixaprovisorio` INT NOT NULL,
+  `idconta_pagar` INT NOT NULL,
+  PRIMARY KEY (`idlancamento_cap`),
+  INDEX `fk_lancamento_cap_caixaprovisorio1_idx` (`idcaixaprovisorio` ASC) VISIBLE,
+  INDEX `fk_lancamento_cap_conta_pagar1_idx` (`idconta_pagar` ASC) VISIBLE,
+  CONSTRAINT `fk_lancamento_cap_caixaprovisorio1`
+    FOREIGN KEY (`idcaixaprovisorio`)
+    REFERENCES `5gprodatabase`.`caixaprovisorio` (`idcaixaprovisorio`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lancamento_cap_conta_pagar1`
+    FOREIGN KEY (`idconta_pagar`)
+    REFERENCES `5gprodatabase`.`conta_pagar` (`idconta_pagar`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

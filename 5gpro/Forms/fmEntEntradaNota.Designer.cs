@@ -67,6 +67,8 @@
             this.lbEmissao = new System.Windows.Forms.Label();
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNumeroDocumento = new System.Windows.Forms.Label();
+            this.lbDescnotaentrada = new System.Windows.Forms.Label();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
             this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
@@ -391,6 +393,8 @@
             // 
             this.gbDadosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDadosDocumento.Controls.Add(this.tbDescricao);
+            this.gbDadosDocumento.Controls.Add(this.lbDescnotaentrada);
             this.gbDadosDocumento.Controls.Add(this.buscaPessoa);
             this.gbDadosDocumento.Controls.Add(this.dtpEntrada);
             this.gbDadosDocumento.Controls.Add(this.dtpEmissao);
@@ -408,10 +412,10 @@
             // dtpEntrada
             // 
             this.dtpEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEntrada.Location = new System.Drawing.Point(11, 152);
+            this.dtpEntrada.Location = new System.Drawing.Point(577, 155);
             this.dtpEntrada.Name = "dtpEntrada";
             this.dtpEntrada.Size = new System.Drawing.Size(99, 20);
-            this.dtpEntrada.TabIndex = 6;
+            this.dtpEntrada.TabIndex = 8;
             this.dtpEntrada.ValueChanged += new System.EventHandler(this.DtpEntrada_ValueChanged);
             // 
             // dtpEmissao
@@ -419,28 +423,28 @@
             this.dtpEmissao.Checked = false;
             this.dtpEmissao.CustomFormat = "";
             this.dtpEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEmissao.Location = new System.Drawing.Point(10, 113);
+            this.dtpEmissao.Location = new System.Drawing.Point(462, 155);
             this.dtpEmissao.Name = "dtpEmissao";
             this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
-            this.dtpEmissao.TabIndex = 4;
+            this.dtpEmissao.TabIndex = 6;
             this.dtpEmissao.ValueChanged += new System.EventHandler(this.DtpEmissao_ValueChanged);
             // 
             // lbEntrada
             // 
             this.lbEntrada.AutoSize = true;
-            this.lbEntrada.Location = new System.Drawing.Point(7, 136);
+            this.lbEntrada.Location = new System.Drawing.Point(573, 139);
             this.lbEntrada.Name = "lbEntrada";
             this.lbEntrada.Size = new System.Drawing.Size(84, 13);
-            this.lbEntrada.TabIndex = 5;
+            this.lbEntrada.TabIndex = 7;
             this.lbEntrada.Text = "Data de entrada";
             // 
             // lbEmissao
             // 
             this.lbEmissao.AutoSize = true;
-            this.lbEmissao.Location = new System.Drawing.Point(7, 94);
+            this.lbEmissao.Location = new System.Drawing.Point(459, 136);
             this.lbEmissao.Name = "lbEmissao";
             this.lbEmissao.Size = new System.Drawing.Size(86, 13);
-            this.lbEmissao.TabIndex = 3;
+            this.lbEmissao.TabIndex = 5;
             this.lbEmissao.Text = "Data da emissão";
             // 
             // tbCodigo
@@ -459,6 +463,24 @@
             this.lbNumeroDocumento.Size = new System.Drawing.Size(77, 13);
             this.lbNumeroDocumento.TabIndex = 0;
             this.lbNumeroDocumento.Text = "N° Documento";
+            // 
+            // lbDescnotaentrada
+            // 
+            this.lbDescnotaentrada.AutoSize = true;
+            this.lbDescnotaentrada.Location = new System.Drawing.Point(6, 59);
+            this.lbDescnotaentrada.Name = "lbDescnotaentrada";
+            this.lbDescnotaentrada.Size = new System.Drawing.Size(55, 13);
+            this.lbDescnotaentrada.TabIndex = 2;
+            this.lbDescnotaentrada.Text = "Descrição";
+            // 
+            // tbDescricao
+            // 
+            this.tbDescricao.Location = new System.Drawing.Point(9, 75);
+            this.tbDescricao.Multiline = true;
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(434, 49);
+            this.tbDescricao.TabIndex = 3;
+            this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
             // 
             // menuVertical
             // 
@@ -606,11 +628,11 @@
             // buscaPessoa
             // 
             this.buscaPessoa.LabelText = "Fornecedor";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 55);
+            this.buscaPessoa.Location = new System.Drawing.Point(6, 136);
             this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
             this.buscaPessoa.Name = "buscaPessoa";
             this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 2;
+            this.buscaPessoa.TabIndex = 4;
             this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
             // fmEntEntradaNota
@@ -692,5 +714,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoPorc;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoItem;
+        private System.Windows.Forms.TextBox tbDescricao;
+        private System.Windows.Forms.Label lbDescnotaentrada;
     }
 }
