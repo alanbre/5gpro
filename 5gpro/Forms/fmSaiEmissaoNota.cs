@@ -113,6 +113,7 @@ namespace _5gpro.Forms
             }
         }
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEmissao_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DgvItens_CurrentCellChanged(object sender, EventArgs e)
@@ -197,6 +198,7 @@ namespace _5gpro.Forms
             var notaFiscalPropriaNova = new NotaFiscalPropria
             {
                 NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
+                Descricao = tbDescricao.Text,
                 Pessoa = buscaPessoa.pessoa,
                 DataEmissao = dtpEmissao.Value,
                 DataEntradaSaida = dtpSaida.Value,
@@ -383,6 +385,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpSaida.Value = DateTime.Now;
             dbValorTotalItens.Valor = 0.00m;
@@ -499,6 +502,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             Limpa(false);
             tbCodigo.Text = notafiscal.NotaFiscalPropriaID.ToString();
+            tbDescricao.Text = notafiscal.Descricao;
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpSaida.Value = notafiscal.DataEntradaSaida;
@@ -571,6 +575,7 @@ namespace _5gpro.Forms
 
             dbValorUnitItem.Valor = buscaItem.item.ValorUnitario;
         }
+
 
         private void SetarNivel()
         {

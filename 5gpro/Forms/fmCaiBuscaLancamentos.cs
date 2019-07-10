@@ -48,6 +48,7 @@ namespace _5gpro.Forms
         }
         private void PreencheDados()
         {
+            dgvDados.Rows.Clear();
             foreach (var cl in caixaLancamentos)
             {
                 dgvDados.Rows.Add(

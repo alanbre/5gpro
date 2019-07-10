@@ -29,13 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSaiEmissaoNota));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
+            this.lbDescnotasaida = new System.Windows.Forms.Label();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.dtpSaida = new System.Windows.Forms.DateTimePicker();
             this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
@@ -64,12 +66,6 @@
             this.lbDescontoPorc = new System.Windows.Forms.Label();
             this.btNovoItem = new System.Windows.Forms.Button();
             this.dgvItens = new System.Windows.Forms.DataGridView();
-            this.btInserirItem = new System.Windows.Forms.Button();
-            this.lbValorUnit = new System.Windows.Forms.Label();
-            this.lbQuantidade = new System.Windows.Forms.Label();
-            this.lbValorTot = new System.Windows.Forms.Label();
-            this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,6 +73,12 @@
             this.dgvtbcValorTotalItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescontoPorc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDescontoItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btInserirItem = new System.Windows.Forms.Button();
+            this.lbValorUnit = new System.Windows.Forms.Label();
+            this.lbQuantidade = new System.Windows.Forms.Label();
+            this.lbValorTot = new System.Windows.Forms.Label();
+            this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
@@ -85,6 +87,8 @@
             // 
             // gbDadosDocumento
             // 
+            this.gbDadosDocumento.Controls.Add(this.lbDescnotasaida);
+            this.gbDadosDocumento.Controls.Add(this.tbDescricao);
             this.gbDadosDocumento.Controls.Add(this.buscaPessoa);
             this.gbDadosDocumento.Controls.Add(this.dtpSaida);
             this.gbDadosDocumento.Controls.Add(this.dtpEmissao);
@@ -99,23 +103,41 @@
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
             // 
+            // lbDescnotasaida
+            // 
+            this.lbDescnotasaida.AutoSize = true;
+            this.lbDescnotasaida.Location = new System.Drawing.Point(6, 61);
+            this.lbDescnotasaida.Name = "lbDescnotasaida";
+            this.lbDescnotasaida.Size = new System.Drawing.Size(55, 13);
+            this.lbDescnotasaida.TabIndex = 2;
+            this.lbDescnotasaida.Text = "Descrição";
+            // 
+            // tbDescricao
+            // 
+            this.tbDescricao.Location = new System.Drawing.Point(9, 77);
+            this.tbDescricao.Multiline = true;
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(434, 49);
+            this.tbDescricao.TabIndex = 3;
+            this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
+            // 
             // buscaPessoa
             // 
             this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 55);
+            this.buscaPessoa.Location = new System.Drawing.Point(9, 129);
             this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
             this.buscaPessoa.Name = "buscaPessoa";
             this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
-            this.buscaPessoa.TabIndex = 2;
+            this.buscaPessoa.TabIndex = 4;
             this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
             // dtpSaida
             // 
             this.dtpSaida.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpSaida.Location = new System.Drawing.Point(11, 152);
+            this.dtpSaida.Location = new System.Drawing.Point(591, 145);
             this.dtpSaida.Name = "dtpSaida";
             this.dtpSaida.Size = new System.Drawing.Size(99, 20);
-            this.dtpSaida.TabIndex = 6;
+            this.dtpSaida.TabIndex = 8;
             this.dtpSaida.ValueChanged += new System.EventHandler(this.DtpEntrada_ValueChanged);
             // 
             // dtpEmissao
@@ -123,28 +145,28 @@
             this.dtpEmissao.Checked = false;
             this.dtpEmissao.CustomFormat = "";
             this.dtpEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEmissao.Location = new System.Drawing.Point(10, 113);
+            this.dtpEmissao.Location = new System.Drawing.Point(475, 145);
             this.dtpEmissao.Name = "dtpEmissao";
             this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
-            this.dtpEmissao.TabIndex = 4;
+            this.dtpEmissao.TabIndex = 6;
             this.dtpEmissao.ValueChanged += new System.EventHandler(this.DtpEmissao_ValueChanged);
             // 
             // lbSaida
             // 
             this.lbSaida.AutoSize = true;
-            this.lbSaida.Location = new System.Drawing.Point(7, 136);
+            this.lbSaida.Location = new System.Drawing.Point(587, 129);
             this.lbSaida.Name = "lbSaida";
             this.lbSaida.Size = new System.Drawing.Size(75, 13);
-            this.lbSaida.TabIndex = 5;
+            this.lbSaida.TabIndex = 7;
             this.lbSaida.Text = "Data de saída";
             // 
             // lbEmissao
             // 
             this.lbEmissao.AutoSize = true;
-            this.lbEmissao.Location = new System.Drawing.Point(7, 94);
+            this.lbEmissao.Location = new System.Drawing.Point(472, 126);
             this.lbEmissao.Name = "lbEmissao";
             this.lbEmissao.Size = new System.Drawing.Size(86, 13);
-            this.lbEmissao.TabIndex = 3;
+            this.lbEmissao.TabIndex = 5;
             this.lbEmissao.Text = "Data da emissão";
             // 
             // tbCodigo
@@ -431,8 +453,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -458,6 +480,78 @@
             this.dgvItens.TabStop = false;
             this.dgvItens.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItens_CellContentClick);
             this.dgvItens.CurrentCellChanged += new System.EventHandler(this.DgvItens_CurrentCellChanged);
+            // 
+            // dgvtbcCodigo
+            // 
+            this.dgvtbcCodigo.Frozen = true;
+            this.dgvtbcCodigo.HeaderText = "Código";
+            this.dgvtbcCodigo.MinimumWidth = 60;
+            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
+            this.dgvtbcCodigo.ReadOnly = true;
+            this.dgvtbcCodigo.Width = 60;
+            // 
+            // dgvtbcDescricao
+            // 
+            this.dgvtbcDescricao.Frozen = true;
+            this.dgvtbcDescricao.HeaderText = "Descrição";
+            this.dgvtbcDescricao.MinimumWidth = 70;
+            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
+            this.dgvtbcDescricao.ReadOnly = true;
+            this.dgvtbcDescricao.Width = 150;
+            // 
+            // dgvtbcQuantidade
+            // 
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle14;
+            this.dgvtbcQuantidade.Frozen = true;
+            this.dgvtbcQuantidade.HeaderText = "Quantidade";
+            this.dgvtbcQuantidade.MinimumWidth = 70;
+            this.dgvtbcQuantidade.Name = "dgvtbcQuantidade";
+            this.dgvtbcQuantidade.ReadOnly = true;
+            // 
+            // dgvtbcValorUnitario
+            // 
+            dataGridViewCellStyle15.Format = "C2";
+            dataGridViewCellStyle15.NullValue = null;
+            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle15;
+            this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
+            this.dgvtbcValorUnitario.MinimumWidth = 100;
+            this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
+            this.dgvtbcValorUnitario.ReadOnly = true;
+            this.dgvtbcValorUnitario.Width = 120;
+            // 
+            // dgvtbcValorTotalItem
+            // 
+            dataGridViewCellStyle16.Format = "C2";
+            dataGridViewCellStyle16.NullValue = null;
+            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle16;
+            this.dgvtbcValorTotalItem.HeaderText = "Valor total";
+            this.dgvtbcValorTotalItem.MinimumWidth = 80;
+            this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
+            this.dgvtbcValorTotalItem.ReadOnly = true;
+            this.dgvtbcValorTotalItem.Width = 120;
+            // 
+            // dgvtbcDescontoPorc
+            // 
+            dataGridViewCellStyle17.NullValue = null;
+            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle17;
+            this.dgvtbcDescontoPorc.HeaderText = "% Desc";
+            this.dgvtbcDescontoPorc.MinimumWidth = 50;
+            this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
+            this.dgvtbcDescontoPorc.ReadOnly = true;
+            this.dgvtbcDescontoPorc.Width = 50;
+            // 
+            // dgvtbcDescontoItem
+            // 
+            dataGridViewCellStyle18.Format = "C2";
+            dataGridViewCellStyle18.NullValue = null;
+            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle18;
+            this.dgvtbcDescontoItem.HeaderText = "Desconto";
+            this.dgvtbcDescontoItem.MinimumWidth = 70;
+            this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
+            this.dgvtbcDescontoItem.ReadOnly = true;
+            this.dgvtbcDescontoItem.Width = 120;
             // 
             // btInserirItem
             // 
@@ -525,78 +619,6 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
-            // dgvtbcCodigo
-            // 
-            this.dgvtbcCodigo.Frozen = true;
-            this.dgvtbcCodigo.HeaderText = "Código";
-            this.dgvtbcCodigo.MinimumWidth = 60;
-            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
-            this.dgvtbcCodigo.ReadOnly = true;
-            this.dgvtbcCodigo.Width = 60;
-            // 
-            // dgvtbcDescricao
-            // 
-            this.dgvtbcDescricao.Frozen = true;
-            this.dgvtbcDescricao.HeaderText = "Descrição";
-            this.dgvtbcDescricao.MinimumWidth = 70;
-            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
-            this.dgvtbcDescricao.ReadOnly = true;
-            this.dgvtbcDescricao.Width = 150;
-            // 
-            // dgvtbcQuantidade
-            // 
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvtbcQuantidade.Frozen = true;
-            this.dgvtbcQuantidade.HeaderText = "Quantidade";
-            this.dgvtbcQuantidade.MinimumWidth = 70;
-            this.dgvtbcQuantidade.Name = "dgvtbcQuantidade";
-            this.dgvtbcQuantidade.ReadOnly = true;
-            // 
-            // dgvtbcValorUnitario
-            // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
-            this.dgvtbcValorUnitario.MinimumWidth = 100;
-            this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
-            this.dgvtbcValorUnitario.ReadOnly = true;
-            this.dgvtbcValorUnitario.Width = 120;
-            // 
-            // dgvtbcValorTotalItem
-            // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgvtbcValorTotalItem.HeaderText = "Valor total";
-            this.dgvtbcValorTotalItem.MinimumWidth = 80;
-            this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
-            this.dgvtbcValorTotalItem.ReadOnly = true;
-            this.dgvtbcValorTotalItem.Width = 120;
-            // 
-            // dgvtbcDescontoPorc
-            // 
-            dataGridViewCellStyle5.NullValue = null;
-            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgvtbcDescontoPorc.HeaderText = "% Desc";
-            this.dgvtbcDescontoPorc.MinimumWidth = 50;
-            this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
-            this.dgvtbcDescontoPorc.ReadOnly = true;
-            this.dgvtbcDescontoPorc.Width = 50;
-            // 
-            // dgvtbcDescontoItem
-            // 
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dgvtbcDescontoItem.HeaderText = "Desconto";
-            this.dgvtbcDescontoItem.MinimumWidth = 70;
-            this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
-            this.dgvtbcDescontoItem.ReadOnly = true;
-            this.dgvtbcDescontoItem.Width = 120;
             // 
             // fmSaiEmissaoNota
             // 
@@ -675,5 +697,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorTotalItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoPorc;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoItem;
+        private System.Windows.Forms.Label lbDescnotasaida;
+        private System.Windows.Forms.TextBox tbDescricao;
     }
 }

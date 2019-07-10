@@ -154,13 +154,13 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO nota_fiscal_terceiros
-                         (idnota_fiscal_terceiros, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa)
+                         (idnota_fiscal_terceiros, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa, descricao)
                           VALUES
-                         (@idnota_fiscal_terceiros, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa)
+                         (@idnota_fiscal_terceiros, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa, @descricao)
                           ON DUPLICATE KEY UPDATE
                           data_emissao = @data_emissao, data_entradasaida = @data_entradasaida, valor_total_itens = @valor_total_itens,
                           valor_documento = @valor_documento, desconto_total_itens = @desconto_total_itens, desconto_documento = @desconto_documento,
-                          idpessoa = @idpessoa";
+                          idpessoa = @idpessoa, descricao = @descricao";
                 sql.addParam("@idnota_fiscal_terceiros", notafiscal.NotaFiscalTerceirosID);
                 sql.addParam("@data_emissao", notafiscal.DataEmissao);
                 sql.addParam("@data_entradasaida", notafiscal.DataEntradaSaida);
@@ -169,6 +169,7 @@ namespace _5gpro.Daos
                 sql.addParam("@valor_documento", notafiscal.ValorTotalDocumento);
                 sql.addParam("@desconto_total_itens", notafiscal.DescontoTotalItens);
                 sql.addParam("@desconto_documento", notafiscal.DescontoDocumento);
+                sql.addParam("@descricao", notafiscal.Descricao);
                 if (notafiscal.Pessoa != null) { sql.addParam("@idpessoa", notafiscal.Pessoa.PessoaID); }
                 retorno = sql.insertQuery();
                 if (retorno > 0)
@@ -244,6 +245,14 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
+        public int MovimentaCaixa()
+        {
+            int retorno = 0;
+
+            return retorno;
+        }
+
         private NotaFiscalTerceiros LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)
@@ -254,6 +263,7 @@ namespace _5gpro.Daos
 
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             notaFiscalTerceiros.NotaFiscalTerceirosID = Convert.ToInt32(data[0]["idnota_fiscal_terceiros"]);
+            notaFiscalTerceiros.Descricao = (string)data[0]["descricao"];
             notaFiscalTerceiros.DataEmissao = (DateTime)data[0]["data_emissao"];
             notaFiscalTerceiros.DataEntradaSaida = (DateTime)data[0]["data_entradasaida"];
             notaFiscalTerceiros.ValorTotalItens = (decimal)data[0]["valor_total_itens"];

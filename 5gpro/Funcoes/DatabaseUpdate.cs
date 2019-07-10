@@ -169,16 +169,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `5gprodatabase`.`item` (
   `iditem` INT(11) NOT NULL,
-  `descitem` VARCHAR(45) NULL DEFAULT NULL,
-  `denominacaocompra` VARCHAR(45) NULL DEFAULT NULL,
+  `descitem` VARCHAR(100) NULL DEFAULT NULL,
+  `denominacaocompra` VARCHAR(100) NULL DEFAULT NULL,
   `tipo` VARCHAR(45) NULL DEFAULT NULL,
-  `referencia` VARCHAR(45) NULL DEFAULT NULL,
+  `referencia` VARCHAR(100) NULL DEFAULT NULL,
   `valorentrada` DECIMAL(15,2) NULL DEFAULT NULL,
   `valorsaida` DECIMAL(15,2) NULL DEFAULT NULL,
-  `estoquenecessario` DECIMAL(10,0) NULL DEFAULT NULL,
+  `estoquenecessario` DECIMAL(10,2) NULL DEFAULT NULL,
   `idunimedida` INT(11) NOT NULL,
   `idsubgrupoitem` INT NOT NULL,
-  `quantidade` DECIMAL NOT NULL,
+  `quantidade` DECIMAL(10,2) NOT NULL,
   `custo` DECIMAL(15,2) NULL,
   PRIMARY KEY (`iditem`),
   INDEX `fk_item_unimedida1_idx` (`idunimedida` ASC) VISIBLE,
@@ -274,6 +274,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`notafiscal` (
   `desconto_total_itens` DECIMAL(10,2) NULL DEFAULT NULL,
   `desconto_documento` DECIMAL(10,2) NULL DEFAULT NULL,
   `idpessoa` INT(11) NULL DEFAULT NULL,
+  `descricao` VARCHAR(150) NULL,
   PRIMARY KEY (`idnotafiscal`),
   INDEX `fk_notafiscal_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_notafiscal_pessoa1`
@@ -668,6 +669,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`nota_fiscal_terceiros` (
   `desconto_total_itens` DECIMAL(10,2) NOT NULL,
   `desconto_documento` DECIMAL(10,2) NOT NULL,
   `idpessoa` INT(11) NULL,
+  `descricao` VARCHAR(150) NULL,
   PRIMARY KEY (`idnota_fiscal_terceiros`),
   INDEX `fk_nota_fiscal_terceiros_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
   CONSTRAINT `fk_nota_fiscal_terceiros_pessoa1`

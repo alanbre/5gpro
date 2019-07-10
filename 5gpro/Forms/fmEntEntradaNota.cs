@@ -91,6 +91,7 @@ namespace _5gpro.Forms
         }
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEmissao_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DbDescontoDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
@@ -185,6 +186,7 @@ namespace _5gpro.Forms
 
                 notaFiscalTerceirosNova = new NotaFiscalTerceiros();
                 notaFiscalTerceirosNova.NotaFiscalTerceirosID = int.Parse(tbCodigo.Text);
+                notaFiscalTerceirosNova.Descricao = tbDescricao.Text;
                 notaFiscalTerceirosNova.Pessoa = buscaPessoa.pessoa;
                 notaFiscalTerceirosNova.DataEmissao = dtpEmissao.Value;
                 notaFiscalTerceirosNova.DataEntradaSaida = dtpEntrada.Value;
@@ -195,6 +197,7 @@ namespace _5gpro.Forms
                 notaFiscalTerceirosNova.ValorTotalDocumento = dbValorTotalDocumento.Valor;
 
                 notaFiscalTerceirosNova.NotaFiscalTerceirosItem = itens;
+                
 
                 ok = validacao.ValidarEntidade(notaFiscalTerceirosNova, controls);
             }
@@ -388,6 +391,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpEntrada.Value = DateTime.Now;
             dbValorTotalItens.Valor = 0.00m;
@@ -423,12 +427,13 @@ namespace _5gpro.Forms
 
             var item = new NotaFiscalTerceirosItem();
             item.Item = itemrecebido;
-            item.ValorUnitario = itemrecebido.ValorEntrada;
+            item.ValorUnitario = dbValorUnitItem.Valor;
             item.DescontoPorc = dbDescontoItemPorc.Valor;
             item.Desconto = dbDescontoItem.Valor;
 
             if (partedesintegrada)
             {
+                item.ValorUnitario = itemrecebido.ValorEntrada;
                 if (quantitativa)
                 {
                     item.Quantidade = dbQuantidade.Valor * quantidadeparte;
@@ -437,8 +442,9 @@ namespace _5gpro.Forms
                 else
                 {
                     item.Quantidade = (dbQuantidade.Valor * percentualparte) / 100;
-                    item.ValorTotal = item.Quantidade * item.Item.ValorUnitario;
+                    item.ValorTotal = item.Quantidade * item.ValorUnitario;
                 }
+                
             }
             else
             {
@@ -450,7 +456,7 @@ namespace _5gpro.Forms
             if (dr == null)
             {
                 itens.Add(item);
-                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.Item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
+                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                 btNovoItem.PerformClick();
             }
             else
@@ -579,6 +585,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             Limpa(false);
             tbCodigo.Text = notafiscal.NotaFiscalTerceirosID.ToString();
+            tbDescricao.Text = notafiscal.Descricao;
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpEntrada.Value = notafiscal.DataEntradaSaida;
@@ -611,7 +618,7 @@ namespace _5gpro.Forms
             ignoracheckevent = true;
             buscaItem1.PreencheCampos(item.Item);
             dbQuantidade.Valor = item.Quantidade;
-            dbValorUnitItem.Valor = item.Item.ValorUnitario;//mudei aqi
+            dbValorUnitItem.Valor = item.ValorUnitario;
             dbValorTotItem.Valor = item.ValorTotal;
             dbDescontoItemPorc.Valor = item.DescontoPorc;
             dbDescontoItem.Valor = item.Desconto;

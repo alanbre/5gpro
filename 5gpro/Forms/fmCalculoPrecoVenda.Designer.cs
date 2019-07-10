@@ -30,9 +30,12 @@
         {
             this.gpMetodo1 = new System.Windows.Forms.GroupBox();
             this.btAceitar = new System.Windows.Forms.Button();
+            this.dbValorSugerido = new _5gpro.Controls.DecimalBox();
+            this.dbPorcentagem = new _5gpro.Controls.DecimalBox();
+            this.dbValorEntrada = new _5gpro.Controls.DecimalBox();
             this.lbValorSugerido = new System.Windows.Forms.Label();
             this.lbPorcentagem = new System.Windows.Forms.Label();
-            this.lbCusto = new System.Windows.Forms.Label();
+            this.lbValorEntrada = new System.Windows.Forms.Label();
             this.lbCalculoMetodo1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -40,9 +43,6 @@
             this.btOk = new System.Windows.Forms.Button();
             this.lbValor = new System.Windows.Forms.Label();
             this.dbValor = new _5gpro.Controls.DecimalBox();
-            this.dbValorSugerido = new _5gpro.Controls.DecimalBox();
-            this.dbPorcentagem = new _5gpro.Controls.DecimalBox();
-            this.dbCusto = new _5gpro.Controls.DecimalBox();
             this.gpMetodo1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,10 +51,10 @@
             this.gpMetodo1.Controls.Add(this.btAceitar);
             this.gpMetodo1.Controls.Add(this.dbValorSugerido);
             this.gpMetodo1.Controls.Add(this.dbPorcentagem);
-            this.gpMetodo1.Controls.Add(this.dbCusto);
+            this.gpMetodo1.Controls.Add(this.dbValorEntrada);
             this.gpMetodo1.Controls.Add(this.lbValorSugerido);
             this.gpMetodo1.Controls.Add(this.lbPorcentagem);
-            this.gpMetodo1.Controls.Add(this.lbCusto);
+            this.gpMetodo1.Controls.Add(this.lbValorEntrada);
             this.gpMetodo1.Controls.Add(this.lbCalculoMetodo1);
             this.gpMetodo1.Controls.Add(this.panel2);
             this.gpMetodo1.Controls.Add(this.panel1);
@@ -75,6 +75,45 @@
             this.btAceitar.UseVisualStyleBackColor = true;
             this.btAceitar.Click += new System.EventHandler(this.BtAceitar_Click);
             // 
+            // dbValorSugerido
+            // 
+            this.dbValorSugerido.Location = new System.Drawing.Point(205, 89);
+            this.dbValorSugerido.Name = "dbValorSugerido";
+            this.dbValorSugerido.Size = new System.Drawing.Size(81, 22);
+            this.dbValorSugerido.TabIndex = 8;
+            this.dbValorSugerido.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorSugerido.Leave += new System.EventHandler(this.DbValorSugerido_Leave);
+            // 
+            // dbPorcentagem
+            // 
+            this.dbPorcentagem.Location = new System.Drawing.Point(108, 89);
+            this.dbPorcentagem.Name = "dbPorcentagem";
+            this.dbPorcentagem.Size = new System.Drawing.Size(81, 22);
+            this.dbPorcentagem.TabIndex = 7;
+            this.dbPorcentagem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbPorcentagem.Leave += new System.EventHandler(this.DbPorcentagem_Leave);
+            // 
+            // dbValorEntrada
+            // 
+            this.dbValorEntrada.Location = new System.Drawing.Point(7, 89);
+            this.dbValorEntrada.Name = "dbValorEntrada";
+            this.dbValorEntrada.Size = new System.Drawing.Size(81, 22);
+            this.dbValorEntrada.TabIndex = 6;
+            this.dbValorEntrada.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorEntrada.Leave += new System.EventHandler(this.DbCusto_Leave);
+            // 
             // lbValorSugerido
             // 
             this.lbValorSugerido.AutoSize = true;
@@ -93,23 +132,23 @@
             this.lbPorcentagem.TabIndex = 4;
             this.lbPorcentagem.Text = "Porcentagem";
             // 
-            // lbCusto
+            // lbValorEntrada
             // 
-            this.lbCusto.AutoSize = true;
-            this.lbCusto.Location = new System.Drawing.Point(6, 72);
-            this.lbCusto.Name = "lbCusto";
-            this.lbCusto.Size = new System.Drawing.Size(34, 13);
-            this.lbCusto.TabIndex = 3;
-            this.lbCusto.Text = "Custo";
+            this.lbValorEntrada.AutoSize = true;
+            this.lbValorEntrada.Location = new System.Drawing.Point(6, 72);
+            this.lbValorEntrada.Name = "lbValorEntrada";
+            this.lbValorEntrada.Size = new System.Drawing.Size(85, 13);
+            this.lbValorEntrada.TabIndex = 3;
+            this.lbValorEntrada.Text = "Valor de entrada";
             // 
             // lbCalculoMetodo1
             // 
             this.lbCalculoMetodo1.AutoSize = true;
             this.lbCalculoMetodo1.Location = new System.Drawing.Point(16, 27);
             this.lbCalculoMetodo1.Name = "lbCalculoMetodo1";
-            this.lbCalculoMetodo1.Size = new System.Drawing.Size(316, 13);
+            this.lbCalculoMetodo1.Size = new System.Drawing.Size(327, 13);
             this.lbCalculoMetodo1.TabIndex = 2;
-            this.lbCalculoMetodo1.Text = "Cálculo: Preço de custo + (Preço de Custo * Porcentagem / 100) ";
+            this.lbCalculoMetodo1.Text = "Cálculo: Valor de entrada + (Valor de entrada * Porcentagem / 100) ";
             // 
             // panel2
             // 
@@ -168,45 +207,6 @@
             0,
             131072});
             // 
-            // dbValorSugerido
-            // 
-            this.dbValorSugerido.Location = new System.Drawing.Point(205, 89);
-            this.dbValorSugerido.Name = "dbValorSugerido";
-            this.dbValorSugerido.Size = new System.Drawing.Size(81, 22);
-            this.dbValorSugerido.TabIndex = 8;
-            this.dbValorSugerido.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbValorSugerido.Leave += new System.EventHandler(this.DbValorSugerido_Leave);
-            // 
-            // dbPorcentagem
-            // 
-            this.dbPorcentagem.Location = new System.Drawing.Point(108, 89);
-            this.dbPorcentagem.Name = "dbPorcentagem";
-            this.dbPorcentagem.Size = new System.Drawing.Size(81, 22);
-            this.dbPorcentagem.TabIndex = 7;
-            this.dbPorcentagem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbPorcentagem.Leave += new System.EventHandler(this.DbPorcentagem_Leave);
-            // 
-            // dbCusto
-            // 
-            this.dbCusto.Location = new System.Drawing.Point(7, 89);
-            this.dbCusto.Name = "dbCusto";
-            this.dbCusto.Size = new System.Drawing.Size(81, 22);
-            this.dbCusto.TabIndex = 6;
-            this.dbCusto.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbCusto.Leave += new System.EventHandler(this.DbCusto_Leave);
-            // 
             // fmCalculoPrecoVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,10 +239,10 @@
         private System.Windows.Forms.Button btAceitar;
         private Controls.DecimalBox dbValorSugerido;
         private Controls.DecimalBox dbPorcentagem;
-        private Controls.DecimalBox dbCusto;
+        private Controls.DecimalBox dbValorEntrada;
         private System.Windows.Forms.Label lbValorSugerido;
         private System.Windows.Forms.Label lbPorcentagem;
-        private System.Windows.Forms.Label lbCusto;
+        private System.Windows.Forms.Label lbValorEntrada;
         private System.Windows.Forms.Label lbCalculoMetodo1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel1;

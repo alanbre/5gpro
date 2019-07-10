@@ -13,7 +13,7 @@ namespace _5gpro.Forms
     public partial class fmCalculoPrecoVenda : Form
     {
 
-        public decimal custo = 0;
+        public decimal valorentrada = 0;
         public decimal valorsugerido = 0;
         public decimal valor = 0;
 
@@ -24,7 +24,7 @@ namespace _5gpro.Forms
 
         private void FmCalculoPrecoVenda_Load(object sender, EventArgs e)
         {
-            dbCusto.Valor = custo;
+            dbValorEntrada.Valor = valorentrada;
         }
 
 
@@ -59,7 +59,7 @@ namespace _5gpro.Forms
         private void BtOk_Click(object sender, EventArgs e)
         {
             valor = dbValor.Valor;
-            custo = dbCusto.Valor;
+            valorentrada = dbValorEntrada.Valor;
             this.Close();
         }
 
@@ -67,14 +67,14 @@ namespace _5gpro.Forms
         //FUNÇÕES DE CÁLCULO
         private void Metodo1()
         {
-            valorsugerido = dbCusto.Valor + (dbCusto.Valor * dbPorcentagem.Valor / 100);
+            valorsugerido = dbValorEntrada.Valor + (dbValorEntrada.Valor * dbPorcentagem.Valor / 100);
             dbValorSugerido.Valor = valorsugerido;
         }
 
         private void PorcentagemCalculo()
         {
-            if(dbCusto.Valor > 0)
-            dbPorcentagem.Valor = ((dbValorSugerido.Valor * 100) / dbCusto.Valor) - 100;
+            if(dbValorEntrada.Valor > 0)
+            dbPorcentagem.Valor = ((dbValorSugerido.Valor * 100) / dbValorEntrada.Valor) - 100;
         }
     }
 }

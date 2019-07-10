@@ -336,13 +336,13 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO notafiscal
-                         (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa)
+                         (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa, descricao)
                           VALUES
-                         (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa)
+                         (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa, @descricao)
                           ON DUPLICATE KEY UPDATE
                           data_emissao = @data_emissao, data_entradasaida = @data_entradasaida, valor_total_itens = @valor_total_itens,
                           valor_documento = @valor_documento, desconto_total_itens = @desconto_total_itens, desconto_documento = @desconto_documento,
-                          idpessoa = @idpessoa";
+                          idpessoa = @idpessoa, descricao = @descricao";
 
                 sql.addParam("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
                 sql.addParam("@data_emissao", notafiscal.DataEmissao);
@@ -353,6 +353,7 @@ namespace _5gpro.Daos
                 sql.addParam("@desconto_total_itens", notafiscal.DescontoTotalItens);
                 sql.addParam("@desconto_documento", notafiscal.DescontoDocumento);
                 sql.addParam("@idpessoa", notafiscal.Pessoa?.PessoaID ?? null);
+                sql.addParam("@descricao", notafiscal.Descricao);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
@@ -437,6 +438,7 @@ namespace _5gpro.Daos
 
             var notaFiscalPropria = new NotaFiscalPropria();
             notaFiscalPropria.NotaFiscalPropriaID = Convert.ToInt32(data[0]["idnotafiscal"]);
+            notaFiscalPropria.Descricao = (string)data[0]["descricao"];
             notaFiscalPropria.DataEmissao = (DateTime)data[0]["data_emissao"];
             notaFiscalPropria.DataEntradaSaida = (DateTime)data[0]["data_entradasaida"];
             notaFiscalPropria.ValorTotalItens = (decimal)data[0]["valor_total_itens"];

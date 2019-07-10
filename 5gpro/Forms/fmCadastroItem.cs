@@ -163,22 +163,6 @@ namespace _5gpro.Forms
             var formCadUnidadeMedida = new fmCadastroUnimedida();
             formCadUnidadeMedida.Show(this);
         }
-        private void TpEstoque_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void BtCalcular_Click(object sender, EventArgs e)
-        {
-
-            var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
-            formCalculoPrecoVenda.custo = dbCusto.Valor;
-            formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
-            formCalculoPrecoVenda.ShowDialog();
-            dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
-            dbCusto.Valor = formCalculoPrecoVenda.custo;
-
-        }
-
 
 
         private void Novo()
@@ -251,8 +235,8 @@ namespace _5gpro.Forms
             item.Referencia = tbReferencia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
             item.Quantidade = dbQuantidade.Valor;
-            item.Custo = dbCusto.Valor;
-            item.ValorEntrada = 0;
+            item.Custo = 0;
+            item.ValorEntrada = dbValorEntrada.Valor;
             item.ValorUnitario = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
             item.Unimedida = buscaUnimedidaItem.unimedida;
@@ -475,7 +459,7 @@ namespace _5gpro.Forms
             tbReferencia.Clear();
             dbEstoqueNecessario.Valor = 0.00m;
             dbPrecoVenda.Valor = 0.00m;
-            dbCusto.Valor = 0.00m;
+            dbValorEntrada.Valor = 0.00m;
             rbProduto.Checked = true;
             rbServico.Checked = false;
             buscaGrupoItem.Limpa();
@@ -510,7 +494,7 @@ namespace _5gpro.Forms
                 }
 
                 tbReferencia.Text = item.Referencia;
-                dbCusto.Valor = item.Custo;
+                dbValorEntrada.Valor = item.ValorEntrada;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
                 dbPrecoVenda.Valor = item.ValorUnitario;
                 dbQuantidade.Valor = item.Quantidade;
@@ -539,6 +523,20 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
+        private void BtCalcular_Click(object sender, EventArgs e)
+        {
+
+            var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
+            formCalculoPrecoVenda.valorentrada = dbValorEntrada.Valor;
+            formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
+            formCalculoPrecoVenda.ShowDialog();
+            dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
+            dbValorEntrada.Valor = formCalculoPrecoVenda.valorentrada;
+
+        }
+
+
         private void DesintegracaoSimNao(Item d)
         {
             if (desintegracaoDAO.BuscaByID(d.ItemID) == null)
