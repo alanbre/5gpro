@@ -48,7 +48,5 @@ namespace _5gpro.Entities
                 this.Bairro = dados[2];
             }
         }
-
-
     }
 }

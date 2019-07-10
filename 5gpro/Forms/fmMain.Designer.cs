@@ -640,7 +640,7 @@
             this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 196);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
-            this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
+            this.paneldropCaixa.Size = new System.Drawing.Size(200, 196);
             this.paneldropCaixa.TabIndex = 8;
             // 
             // btiLancamentos
