@@ -117,7 +117,6 @@ namespace _5gpro.Forms
         {
 
         }
-
         private void BuscaGrupoItemTelaCadItem_Leave(object sender, EventArgs e)
         {
             buscaSubGrupoItem.EnviarGrupo(buscaGrupoItem.grupoItem);
@@ -131,12 +130,56 @@ namespace _5gpro.Forms
                 buscaSubGrupoItem.EscolhaOGrupo(true);
             }
         }
-
         private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e)
         {
             Editando(true);
             buscaSubGrupoItem.Limpa();
         }
+        private void RbDesiSim_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!rbServico.Checked)
+                btConfigDesintegracao.Enabled = true;
+            else
+            {
+                MessageBox.Show("Serviço não pode ser desintegrado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rbDesiSim.Checked = false;
+                btConfigDesintegracao.Enabled = false;
+            }
+            Editando(true);
+        }
+        private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
+        {
+            btConfigDesintegracao.Enabled = false;
+            Editando(true);
+        }
+        private void BtConfigDesintegracao_Click(object sender, EventArgs e)
+        {
+            var formDefPartes = new fmCadastroDesintegracao();
+            formDefPartes.itemrecebido = itemdesintegrar;
+            formDefPartes.Show(this);
+        }
+        private void BtAddUnimedida_Click(object sender, EventArgs e)
+        {
+            var formCadUnidadeMedida = new fmCadastroUnimedida();
+            formCadUnidadeMedida.Show(this);
+        }
+        private void TpEstoque_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void BtCalcular_Click(object sender, EventArgs e)
+        {
+
+            var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
+            formCalculoPrecoVenda.custo = dbCusto.Valor;
+            formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
+            formCalculoPrecoVenda.ShowDialog();
+            dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
+            dbCusto.Valor = formCalculoPrecoVenda.custo;
+
+        }
+
+
 
         private void Novo()
         {
@@ -488,33 +531,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
-        private void RbDesiSim_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!rbServico.Checked)
-                btConfigDesintegracao.Enabled = true;
-            else
-            {
-                MessageBox.Show("Serviço não pode ser desintegrado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                rbDesiSim.Checked = false;
-                btConfigDesintegracao.Enabled = false;
-            }
-            Editando(true);
-        }
-
-        private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
-        {
-            btConfigDesintegracao.Enabled = false;
-            Editando(true);
-        }
-
-        private void BtConfigDesintegracao_Click(object sender, EventArgs e)
-        {
-            var formDefPartes = new fmCadastroDesintegracao();
-            formDefPartes.itemrecebido = itemdesintegrar;
-            formDefPartes.Show(this);
-        }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -523,31 +539,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
-        private void BtAddUnimedida_Click(object sender, EventArgs e)
-        {
-            var formCadUnidadeMedida = new fmCadastroUnimedida();
-            formCadUnidadeMedida.Show(this);
-        }
-
-        private void TpEstoque_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtCalcular_Click(object sender, EventArgs e)
-        {
-
-            var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
-            formCalculoPrecoVenda.custo = dbCusto.Valor;
-            formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
-            formCalculoPrecoVenda.ShowDialog();
-            dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
-            dbCusto.Valor = formCalculoPrecoVenda.custo;
-
-        }
-
-
         private void DesintegracaoSimNao(Item d)
         {
             if (desintegracaoDAO.BuscaByID(d.ItemID) == null)

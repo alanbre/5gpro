@@ -414,11 +414,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\dsItens.cs">
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsItens.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\fmRltGenerico.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\fmRltGenerico.Designer.cs">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltItens.Designer.cs">
+      <DependentUpon>fmRltItens.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\fmRltNotasSaida.cs">
       <SubType>Form</SubType>
@@ -771,6 +785,9 @@
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltItens.resx">
+      <DependentUpon>fmRltItens.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
     </EmbeddedResource>
@@ -902,6 +919,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\rltItens.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
     <None Include="Reports\dsGenerico.xsc">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
@@ -932,6 +950,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reports\dsItens.xsc">
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsItens.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsItens.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsItens.xss">
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </None>
     <None Include="Resources\plus_32_blue.png" />
   </ItemGroup>
   <ItemGroup>

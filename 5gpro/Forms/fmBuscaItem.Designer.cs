@@ -40,6 +40,7 @@
             this.btBuscarItens = new System.Windows.Forms.Button();
             this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
             this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
+            this.btImprimir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.gbTipoItem.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +68,7 @@
             this.dgvItens.Size = new System.Drawing.Size(892, 383);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
-            this.dgvItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItens_CellDoubleClick);
+            this.dgvItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItens_CellDoubleClick);
             // 
             // tbDenomCompra
             // 
@@ -123,7 +124,7 @@
             this.cbServico.TabIndex = 1;
             this.cbServico.Text = "Serviço";
             this.cbServico.UseVisualStyleBackColor = true;
-            this.cbServico.Click += new System.EventHandler(this.cbServico_Click);
+            this.cbServico.Click += new System.EventHandler(this.CbServico_Click);
             // 
             // cbProduto
             // 
@@ -134,7 +135,7 @@
             this.cbProduto.TabIndex = 0;
             this.cbProduto.Text = "Produto";
             this.cbProduto.UseVisualStyleBackColor = true;
-            this.cbProduto.Click += new System.EventHandler(this.cbProduto_Click);
+            this.cbProduto.Click += new System.EventHandler(this.CbProduto_Click);
             // 
             // btBuscarItens
             // 
@@ -144,7 +145,7 @@
             this.btBuscarItens.TabIndex = 9;
             this.btBuscarItens.Text = "Pesquisar";
             this.btBuscarItens.UseVisualStyleBackColor = true;
-            this.btBuscarItens.Click += new System.EventHandler(this.btBuscarItens_Click);
+            this.btBuscarItens.Click += new System.EventHandler(this.BtBuscarItens_Click);
             // 
             // buscaGrupoItem
             // 
@@ -163,12 +164,23 @@
             this.buscaSubGrupoItem.TabIndex = 11;
             this.buscaSubGrupoItem.Leave += new System.EventHandler(this.BuscaSubGrupoItem_Leave);
             // 
+            // btImprimir
+            // 
+            this.btImprimir.Location = new System.Drawing.Point(376, 83);
+            this.btImprimir.Name = "btImprimir";
+            this.btImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btImprimir.TabIndex = 12;
+            this.btImprimir.Text = "Imprimir";
+            this.btImprimir.UseVisualStyleBackColor = true;
+            this.btImprimir.Click += new System.EventHandler(this.BtImprimir_Click);
+            // 
             // fmBuscaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(916, 507);
+            this.Controls.Add(this.btImprimir);
             this.Controls.Add(this.buscaSubGrupoItem);
             this.Controls.Add(this.buscaGrupoItem);
             this.Controls.Add(this.btBuscarItens);
@@ -187,7 +199,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca de Itens";
-            this.Load += new System.EventHandler(this.fmBuscaItem_Load);
+            this.Load += new System.EventHandler(this.FmBuscaItem_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmBuscaItem_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();
             this.gbTipoItem.ResumeLayout(false);
@@ -210,5 +222,6 @@
         private System.Windows.Forms.Button btBuscarItens;
         private Controls.BuscaGrupoItem buscaGrupoItem;
         private Controls.BuscaSubGrupoItem buscaSubGrupoItem;
+        private System.Windows.Forms.Button btImprimir;
     }
 }

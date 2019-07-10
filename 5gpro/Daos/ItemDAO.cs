@@ -169,6 +169,7 @@ namespace _5gpro.Daos
             var subGrupoItem = new SubGrupoItem();
             subGrupoItem.SubGrupoItemID = Convert.ToInt32(data["idsubgrupoitem"]);
             subGrupoItem.Nome = (string)data["nome"];
+            subGrupoItem.Codigo = Convert.ToInt32(data["codigo"]);
             subGrupoItem.GrupoItem = grupoItem;
 
             var item = new Item();
