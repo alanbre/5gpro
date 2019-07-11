@@ -152,6 +152,28 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
+
+        public CaixaLancamento BuscaByDocumento(string documento)
+        {
+            var caixaLancamentos = new CaixaLancamento();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *, c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo  
+                            FROM caixa_lancamento cl 
+                            LEFT JOIN caixa_plano_contas cpc ON cl.idcaixa_plano_contas = cpc.idcaixa_plano_contas 
+                            LEFT JOIN caixa c ON cl.idcaixa = c.idcaixa
+                            WHERE documento = @documento";
+                sql.addParam("@documento", documento);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                caixaLancamentos = LeDadosReaderComPlanos(data);
+            }
+            return caixaLancamentos;
+        }
+
         public int Sangrar(List<CaixaLancamento> caixaLancamentos, Caixa caixaAtual, Caixa caixaDestino)
         {
             int retorno = 0;

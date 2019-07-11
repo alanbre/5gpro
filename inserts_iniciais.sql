@@ -5667,12 +5667,22 @@ INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (15, 'Boleto Bancário'),
 (99, 'Outros');
 
-INSERT INTO caixa_plano_contas (idcaixa_plano_contas, codigo, descricao, paiid, level, codigo_completo) VALUES
-(1, 1, 'Entradas', 0, 0, 1),
-(2, 2, 'Saidas', 0, 0, 2);
+INSERT  INTO `caixa_plano_contas`(`idcaixa_plano_contas`,`codigo`,`level`,`paiid`,`descricao`,`codigo_completo`) values 
+(1,1,0,0,'Entradas','1'),
+(2,2,0,0,'Saidas','2'),
+(3,1,1,2,'Salários','2.1'),
+(4,2,1,2,'Prolabore','2.2'),
+(5,3,1,2,'Aluguel','2.3'),
+(6,4,1,2,'Material de escritório','2.4'),
+(7,1,1,1,'Consultoria','1.1'),
+(8,2,1,1,'Projetos de engenharia','1.2'),
+(9,3,1,1,'Venda de jóias','1.3'),
+(10,5,1,2,'Compra de estoque','2.5'),
+(11,4,1,1,'Venda de imóveis','1.4');
 
 INSERT INTO caixa_plano_contas_padrao(idcaixa_plano_contas_padrao) VALUES
 (1);
+
 
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE

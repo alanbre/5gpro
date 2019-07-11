@@ -101,7 +101,6 @@ namespace _5gpro.Funcoes
                 //GROUPBOX
                 if (ctrl is GroupBox)
                 {
-                    //ctrl.BackColor = Color.FromKnownColor(KnownColor.Control);
                     ctrl.BackColor = System.Drawing.Color.White;
 
                     foreach (Control ctrlgb in ctrl.Controls)
@@ -111,14 +110,12 @@ namespace _5gpro.Funcoes
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
 
-                        if (ctrlgb is Controls.BuscaSubGrupoItem || ctrlgb is Controls.BuscaUnimedida || ctrlgb is Controls.BuscaGrupoUsuario)
+                        if (ctrlgb is Controls.BuscaSubGrupoItem || ctrlgb is Controls.BuscaUnimedida || ctrlgb is Controls.BuscaGrupoUsuario || ctrlgb is Controls.BuscaCaixa)
                         {
-                            //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
-                        if (ctrlgb is Controls.BuscaCidade || ctrlgb is Controls.BuscaSubGrupoPessoa || ctrlgb is Controls.BuscaPessoa)
+                        if (ctrlgb is Controls.BuscaCidade || ctrlgb is Controls.BuscaSubGrupoPessoa || ctrlgb is Controls.BuscaPessoa || ctrlgb is Controls.BuscaPlanoContaCaixa)
                         {
-                            //ctrlgb.BackColor = Color.FromKnownColor(KnownColor.Control);
                             ctrlgb.BackColor = System.Drawing.Color.White;
                         }
                         if (ctrlgb is CheckedListBox)

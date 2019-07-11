@@ -86,7 +86,7 @@ namespace _5gpro.Daos
                 sql.addParam("@data_entradasaida_inicial", f.DataEntradaInicial);
                 sql.addParam("@data_entradasaida_final", f.DataEntradaFinal);
                 var data = sql.selectQuery();
-                foreach(var d in data)
+                foreach (var d in data)
                 {
                     var pessoa = new Pessoa();
                     pessoa.PessoaID = Convert.ToInt32(d["idpessoa"]);
@@ -94,9 +94,9 @@ namespace _5gpro.Daos
 
                     var notaTerceiros = new NotaFiscalTerceiros();
                     notaTerceiros.NotaFiscalTerceirosID = Convert.ToInt32(d["idnota_fiscal_terceiros"]);
-                    notaTerceiros.DataEmissao = (DateTime) d["data_emissao"];
-                    notaTerceiros.DataEntradaSaida = (DateTime) d["data_entradasaida"];
-                    notaTerceiros.ValorTotalDocumento = (decimal) d["valor_documento"];
+                    notaTerceiros.DataEmissao = (DateTime)d["data_emissao"];
+                    notaTerceiros.DataEntradaSaida = (DateTime)d["data_entradasaida"];
+                    notaTerceiros.ValorTotalDocumento = (decimal)d["valor_documento"];
                     notaTerceiros.Pessoa = pessoa;
                     notasFiscais.Add(notaTerceiros);
                 }
@@ -209,6 +209,8 @@ namespace _5gpro.Daos
                 sql.deleteQuery();
             }
         }
+
+
         public int MovimentaEstoque(NotaFiscalTerceiros nota)
         {
             int retorno = 0;
@@ -246,11 +248,78 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public int MovimentaCaixa()
+        public int MovimentaCaixa(NotaFiscalTerceiros nota)
         {
             int retorno = 0;
 
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+
+                sql.beginTransaction();
+                sql.Query = @"INSERT INTO caixa_lancamento
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
+                            VALUES
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
+                sql.addParam("@data", nota.DataEntradaSaida);
+                sql.addParam("@valor", nota.ValorTotalDocumento);
+                sql.addParam("@tipomovimento", 1);
+                sql.addParam("@tipodocumento", 3);
+                sql.addParam("@lancamento", 1);
+                sql.addParam("@documento", nota.NotaFiscalTerceirosID);
+                sql.addParam("@idcaixa", nota.Caixa.CaixaID);
+                sql.addParam("@idcaixa_plano_contas", nota.PlanoDeConta.PlanoContaID);
+                retorno = sql.insertQuery();
+
+
+                if (retorno > 0)
+                {
+                    sql.Query = "SELECT LAST_INSERT_ID() AS idcaixalancamento;";
+                    var data = sql.selectQueryForSingleRecord();
+                    int idcaixalancamento = Convert.ToInt32(data["idcaixalancamento"]);
+
+                    sql.Query = @"DELETE FROM caixa_lancamento_ent 
+                                  WHERE idnota_fiscal_terceiros = @idnota_fiscal_terceiros
+                                  AND idcaixa_lancamento = @idcaixa_lancamento";
+
+                    sql.clearParams();
+                    sql.addParam("@idcaixa_lancamento", idcaixalancamento);
+                    sql.addParam("@idnota_fiscal_terceiros", nota.NotaFiscalTerceirosID);
+
+                    sql.deleteQuery();
+
+                    sql.Query = @"INSERT INTO caixa_lancamento_ent (idcaixa_lancamento, idnota_fiscal_terceiros)
+                                VALUES
+                                (@idcaixa_lancamento, @idnota_fiscal_terceiros)";
+
+                    sql.clearParams();
+                    sql.addParam("@idcaixa_lancamento", idcaixalancamento);
+                    sql.addParam("@idnota_fiscal_terceiros", nota.NotaFiscalTerceirosID);
+                    sql.insertQuery();
+
+                }
+
+                sql.Commit();
+            }
+
             return retorno;
+        }
+
+
+
+        public void LimpaRegistrosCaixa(NotaFiscalTerceiros nota)
+        {
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.addParam("@documento", nota.NotaFiscalTerceirosID.ToString());
+
+                sql.Query = @"DELETE FROM caixa_lancamento_ent 
+                              WHERE idnota_fiscal_terceiros = @documento";
+                sql.deleteQuery();
+
+                sql.Query = @"DELETE FROM caixa_lancamento 
+                            WHERE documento = @documento";
+                sql.deleteQuery();
+            }
         }
 
         private NotaFiscalTerceiros LeDadosReader(List<Dictionary<string, object>> data)
