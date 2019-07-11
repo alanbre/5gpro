@@ -3,6 +3,7 @@ using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -16,6 +17,11 @@ namespace _5gpro
         [STAThread]
         static void Main()
         {
+
+            var culture = CultureInfo.GetCultureInfo("pt-BR");
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

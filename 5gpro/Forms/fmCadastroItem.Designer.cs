@@ -350,7 +350,6 @@
             this.tpValores.Size = new System.Drawing.Size(557, 97);
             this.tpValores.TabIndex = 0;
             this.tpValores.Text = "Valores";
-            this.tpValores.Click += new System.EventHandler(this.TpEstoque_Click);
             // 
             // btCalcular
             // 
