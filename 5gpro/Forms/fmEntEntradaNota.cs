@@ -12,6 +12,8 @@ namespace _5gpro.Forms
     {
         private NotaFiscalTerceiros notaFiscalTerceirosNova;
 
+        private CaixaLancamento caixalancamento = new CaixaLancamento();
+        private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
         private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
@@ -196,6 +198,9 @@ namespace _5gpro.Forms
                 notaFiscalTerceirosNova.DescontoDocumento = dbDescontoDocumento.Valor;
                 notaFiscalTerceirosNova.ValorTotalDocumento = dbValorTotalDocumento.Valor;
 
+                notaFiscalTerceirosNova.Caixa = buscaCaixa.caixa;
+                notaFiscalTerceirosNova.PlanoDeConta = buscaPlanoDeConta.conta;
+
                 notaFiscalTerceirosNova.NotaFiscalTerceirosItem = itens;
                 
 
@@ -223,6 +228,8 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    notaFiscalTerceirosDAO.MovimentaCaixa(notaFiscalTerceirosNova);
+
                     Editando(false);
                 }
                 else if (resultado == 2)
@@ -230,14 +237,12 @@ namespace _5gpro.Forms
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
                     notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    notaFiscalTerceirosDAO.LimpaRegistrosCaixa(notaFiscalTerceirosNova);
+                    notaFiscalTerceirosDAO.MovimentaCaixa(notaFiscalTerceirosNova);
                     Editando(false);
                 }
                 notaFiscalTerceiros = notaFiscalTerceirosNova;
             }
-
-
-
-
         }
         private void Recarrega()
         {
@@ -391,6 +396,8 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            buscaCaixa.Limpa();
+            buscaPlanoDeConta.Limpa();
             tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpEntrada.Value = DateTime.Now;
@@ -580,6 +587,13 @@ namespace _5gpro.Forms
             btExcluirItem.Enabled = true;
         }
 
+        private void PreencheCaixaEPlano(NotaFiscalTerceiros notafiscal)
+        {
+            caixalancamento = caixalancamentoDAO.BuscaByDocumento(notafiscal.NotaFiscalTerceirosID.ToString());
+            buscaCaixa.PreencheCampos(caixalancamento.Caixa);
+            buscaPlanoDeConta.PreencheCampos(caixalancamento.PlanoConta);
+        }
+
         private void PreencheCampos(NotaFiscalTerceiros notafiscal)
         {
             ignoracheckevent = true;
@@ -595,6 +609,7 @@ namespace _5gpro.Forms
             dbValorTotalDocumento.Valor = notafiscal.ValorTotalDocumento;
             itens = notafiscal.NotaFiscalTerceirosItem.ToList();
             PreencheGridItens(itens);
+            PreencheCaixaEPlano(notafiscal);
             btInserirItem.Text = "Inserir";
             notaFiscalTerceiros = notafiscal;
             ignoracheckevent = false;
