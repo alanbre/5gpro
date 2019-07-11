@@ -243,12 +243,6 @@
     <Compile Include="Controls\BuscaUsuario.Designer.cs">
       <DependentUpon>BuscaUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CheckedGroupBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CheckedGroupBox.Designer.cs">
-      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DecimalBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -730,9 +724,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaUsuario.resx">
       <DependentUpon>BuscaUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CheckedGroupBox.resx">
-      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DecimalBox.resx">
       <DependentUpon>DecimalBox.cs</DependentUpon>

@@ -429,7 +429,7 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        public void LimpaRegistrosCaixa(NotaFiscalPropria nota)
+        public void LimpaRegistrosCaixaSaida(NotaFiscalPropria nota)
         {
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
@@ -445,7 +445,7 @@ namespace _5gpro.Daos
             }
         }
 
-        public int MovimentaCaixa(NotaFiscalPropria nota)
+        public int MovimentaCaixaEntradaDeDinheiro(NotaFiscalPropria nota)
         {
             int retorno = 0;
 

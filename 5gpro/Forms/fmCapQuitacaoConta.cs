@@ -195,6 +195,7 @@ namespace _5gpro.Forms
                     {
                         var caixaLancamento = new CaixaLancamento();
                         caixaLancamento.Caixa = buscaCaixa.caixa;
+                        caixaLancamento.PlanoConta = buscaPlanoContaCaixa.conta;
                         caixaLancamento.Data = DateTime.Now;
                         caixaLancamento.Documento = parc.ParcelaContaPagarID.ToString();
                         caixaLancamento.TipoDocumento = 1;

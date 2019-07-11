@@ -257,15 +257,15 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                    notaFiscalPropriaDAO.MovimentaCaixa(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.MovimentaCaixaEntradaDeDinheiro(notaFiscalPropriaNova);
                     Editando(false);
                 }
                 else if (resultado == 2)
                 {
                     notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropriaNova);
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                    notaFiscalPropriaDAO.LimpaRegistrosCaixa(notaFiscalPropriaNova);
-                    notaFiscalPropriaDAO.MovimentaCaixa(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.LimpaRegistrosCaixaSaida(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.MovimentaCaixaEntradaDeDinheiro(notaFiscalPropriaNova);
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
                 }
