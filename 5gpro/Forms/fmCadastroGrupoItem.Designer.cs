@@ -128,7 +128,6 @@
             this.dgvSubGruposItens.Size = new System.Drawing.Size(488, 170);
             this.dgvSubGruposItens.TabIndex = 0;
             this.dgvSubGruposItens.TabStop = false;
-            this.dgvSubGruposItens.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposItens_CellClick);
             this.dgvSubGruposItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposItens_CellDoubleClick);
             // 
             // dgvtbcCodigoSub
