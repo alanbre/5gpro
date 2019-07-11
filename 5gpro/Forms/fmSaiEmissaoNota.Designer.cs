@@ -79,6 +79,8 @@
             this.lbValorTot = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
+            this.buscaPlanoDeConta = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
@@ -87,6 +89,8 @@
             // 
             // gbDadosDocumento
             // 
+            this.gbDadosDocumento.Controls.Add(this.buscaPlanoDeConta);
+            this.gbDadosDocumento.Controls.Add(this.buscaCaixa);
             this.gbDadosDocumento.Controls.Add(this.lbDescnotasaida);
             this.gbDadosDocumento.Controls.Add(this.tbDescricao);
             this.gbDadosDocumento.Controls.Add(this.buscaPessoa);
@@ -127,14 +131,14 @@
             this.buscaPessoa.Location = new System.Drawing.Point(9, 129);
             this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
             this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(449, 39);
+            this.buscaPessoa.Size = new System.Drawing.Size(310, 39);
             this.buscaPessoa.TabIndex = 4;
             this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
             // dtpSaida
             // 
             this.dtpSaida.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpSaida.Location = new System.Drawing.Point(591, 145);
+            this.dtpSaida.Location = new System.Drawing.Point(234, 32);
             this.dtpSaida.Name = "dtpSaida";
             this.dtpSaida.Size = new System.Drawing.Size(99, 20);
             this.dtpSaida.TabIndex = 8;
@@ -145,7 +149,7 @@
             this.dtpEmissao.Checked = false;
             this.dtpEmissao.CustomFormat = "";
             this.dtpEmissao.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpEmissao.Location = new System.Drawing.Point(475, 145);
+            this.dtpEmissao.Location = new System.Drawing.Point(118, 32);
             this.dtpEmissao.Name = "dtpEmissao";
             this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
             this.dtpEmissao.TabIndex = 6;
@@ -154,7 +158,7 @@
             // lbSaida
             // 
             this.lbSaida.AutoSize = true;
-            this.lbSaida.Location = new System.Drawing.Point(587, 129);
+            this.lbSaida.Location = new System.Drawing.Point(230, 16);
             this.lbSaida.Name = "lbSaida";
             this.lbSaida.Size = new System.Drawing.Size(75, 13);
             this.lbSaida.TabIndex = 7;
@@ -163,7 +167,7 @@
             // lbEmissao
             // 
             this.lbEmissao.AutoSize = true;
-            this.lbEmissao.Location = new System.Drawing.Point(472, 126);
+            this.lbEmissao.Location = new System.Drawing.Point(115, 13);
             this.lbEmissao.Name = "lbEmissao";
             this.lbEmissao.Size = new System.Drawing.Size(86, 13);
             this.lbEmissao.TabIndex = 5;
@@ -622,6 +626,28 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(319, 129);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaCaixa.TabIndex = 9;
+            // 
+            // buscaPlanoDeConta
+            // 
+            this.buscaPlanoDeConta.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoDeConta.Entrada = false;
+            this.buscaPlanoDeConta.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoDeConta.LabelText = "Conta Caixa";
+            this.buscaPlanoDeConta.Location = new System.Drawing.Point(593, 129);
+            this.buscaPlanoDeConta.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPlanoDeConta.Name = "buscaPlanoDeConta";
+            this.buscaPlanoDeConta.Saida = false;
+            this.buscaPlanoDeConta.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoDeConta.TabIndex = 10;
+            // 
             // fmSaiEmissaoNota
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -701,5 +727,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescontoItem;
         private System.Windows.Forms.Label lbDescnotasaida;
         private System.Windows.Forms.TextBox tbDescricao;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoDeConta;
+        private Controls.BuscaCaixa buscaCaixa;
     }
 }
