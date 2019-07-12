@@ -2,7 +2,6 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -98,13 +97,6 @@ namespace _5gpro.Forms
         private void BtRemoverSub_Click(object sender, EventArgs e) => RemoverSubGrupoItem();
         private void DgvSubGruposItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = dgvSubGruposItens.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvSubGruposItens.Rows[selectedRowIndex];
-            subgrupoitemSelecionado = grupoItem.SubGrupoItens.Find(g => (g.SubGrupoItemID).ToString() == Convert.ToString(selectedRow.Cells[0].Value));
-            InserirSubGrupoItem();
-        }
-        private void DgvSubGruposItens_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
             if (dgvSubGruposItens.SelectedRows.Count > 0)
             {
                 int selectedRowIndex = dgvSubGruposItens.SelectedCells[0].RowIndex;
@@ -112,10 +104,10 @@ namespace _5gpro.Forms
                 subgrupoitemSelecionado = grupoItem.SubGrupoItens.Find(p => p.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value));
                 PreencheCamposSubGrupo(subgrupoitemSelecionado);
                 btSalvar.Enabled = true;
-                btNovoSubGrupo.Enabled = false;
                 btRemoverSub.Enabled = true;
             }
         }
+
         private void BtSalvar_Click(object sender, EventArgs e) => SalvaSubGrupo();
 
 
@@ -277,7 +269,7 @@ namespace _5gpro.Forms
             {
                 grupoItem = newgrupoitem;
                 PreencheCampos(grupoItem);
-                if(editando)
+                if (editando)
                 {
                     Editando(false);
                 }
@@ -449,7 +441,7 @@ namespace _5gpro.Forms
             }
 
             int retorno = grupoItemDAO.RemoverSubGrupo(subgrupoitemSelecionado);
-            if(retorno > 0)
+            if (retorno > 0)
             {
                 grupoItem.SubGrupoItens.Remove(subgrupoitemSelecionado);
                 dgvSubGruposItens.Rows.Clear();
@@ -468,57 +460,73 @@ namespace _5gpro.Forms
             }
 
             SubGrupoItem subGrupo = null;
-            if(subgrupoitemSelecionado == null)
+            if (subgrupoitemSelecionado != null)
+            {
+                subGrupo = subgrupoitemSelecionado;
+                grupoItem.SubGrupoItens.Remove(subGrupo);
+                subGrupo.Nome = tbNomeSubGrupo.Text;
+
+                int resultado = grupoItemDAO.AtualizarSubGrupo(subGrupo);
+                if(resultado > 0)
+                {
+                    tbAjuda.Text = "Sub-grupo atualizado com sucesso";
+                    grupoItem.SubGrupoItens.Add(subGrupo);
+                    btNovoSubGrupo.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Problema ao atualizar o registro",
+                    "Problema ao atualizar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                
+            }
+            else
             {
                 subGrupo = new SubGrupoItem();
                 subGrupo.Nome = tbNomeSubGrupo.Text;
                 subGrupo.Codigo = int.Parse(tbCodigoSubGrupo.Text);
                 subGrupo.GrupoItem = grupoItem;
-            }
-            else
-            {
-                subGrupo = subgrupoitemSelecionado;
-            }
-            
 
-            int resultado = grupoItemDAO.InserirSubGrupo(subGrupo);
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
-            }
-            else if (resultado == 1)
-            {
-                tbAjuda.Text = "Sub-grupo salvo com sucesso";
+                int resultado = grupoItemDAO.InserirSubGrupo(subGrupo);
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Sub-grupo salvo com sucesso";
 
-                grupoItem.SubGrupoItens.Add(subGrupo);
-                btNovoSubGrupo.Enabled = true;
-                
-            }
-            else if (resultado == 2)
-            {
-                tbAjuda.Text = "Sub-grupo atualizado com sucesso";         
-                grupoItem.SubGrupoItens.Add(subGrupo);
-                btNovoSubGrupo.Enabled = true;
-            }
+                    grupoItem.SubGrupoItens.Add(subGrupo);
+                    btNovoSubGrupo.Enabled = true;
 
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Sub-grupo atualizado com sucesso";
+                    grupoItem.SubGrupoItens.Add(subGrupo);
+                    btNovoSubGrupo.Enabled = true;
+                }
+            }
             LimpaCamposSubItens();
-            PreencheGridSubGrupoItens();       
+            PreencheGridSubGrupoItens();
         }
 
         private void PreencheGridSubGrupoItens()
         {
             dgvSubGruposItens.Rows.Clear();
-            foreach(var sub in grupoItem.SubGrupoItens)
+            foreach (var sub in grupoItem.SubGrupoItens)
             {
                 dgvSubGruposItens.Rows.Add(sub.Codigo,
                                            sub.Nome);
             }
             dgvSubGruposItens.Refresh();
         }
-
     }
 }

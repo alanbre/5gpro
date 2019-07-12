@@ -63,12 +63,9 @@
             this.paneldropEntrada = new System.Windows.Forms.Panel();
             this.btiEntrada = new System.Windows.Forms.Button();
             this.paneldropSaida = new System.Windows.Forms.Panel();
-            this.btiRltNotaSaida = new System.Windows.Forms.Button();
             this.btiSaida = new System.Windows.Forms.Button();
             this.paneldropOrcamento = new System.Windows.Forms.Panel();
             this.btiCadOrcamento = new System.Windows.Forms.Button();
-            this.paneldentroRltSaida = new System.Windows.Forms.Panel();
-            this.btsRelatorionotas = new System.Windows.Forms.Button();
             this.paneldropCaixa = new System.Windows.Forms.Panel();
             this.btiLancamentos = new System.Windows.Forms.Button();
             this.btiPlanoContasPadrao = new System.Windows.Forms.Button();
@@ -88,7 +85,6 @@
             this.paneldropEntrada.SuspendLayout();
             this.paneldropSaida.SuspendLayout();
             this.paneldropOrcamento.SuspendLayout();
-            this.paneldentroRltSaida.SuspendLayout();
             this.paneldropCaixa.SuspendLayout();
             this.panelCentral.SuspendLayout();
             this.SuspendLayout();
@@ -536,31 +532,13 @@
             // 
             // paneldropSaida
             // 
-            this.paneldropSaida.Controls.Add(this.btiRltNotaSaida);
             this.paneldropSaida.Controls.Add(this.btiSaida);
             this.paneldropSaida.Location = new System.Drawing.Point(3, 183);
-            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 56);
+            this.paneldropSaida.MaximumSize = new System.Drawing.Size(200, 28);
             this.paneldropSaida.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropSaida.Name = "paneldropSaida";
             this.paneldropSaida.Size = new System.Drawing.Size(200, 10);
             this.paneldropSaida.TabIndex = 4;
-            // 
-            // btiRltNotaSaida
-            // 
-            this.btiRltNotaSaida.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
-            this.btiRltNotaSaida.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btiRltNotaSaida.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btiRltNotaSaida.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btiRltNotaSaida.ForeColor = System.Drawing.Color.White;
-            this.btiRltNotaSaida.Image = global::_5gpro.Properties.Resources.right_18px;
-            this.btiRltNotaSaida.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btiRltNotaSaida.Location = new System.Drawing.Point(0, 28);
-            this.btiRltNotaSaida.Name = "btiRltNotaSaida";
-            this.btiRltNotaSaida.Size = new System.Drawing.Size(200, 28);
-            this.btiRltNotaSaida.TabIndex = 1;
-            this.btiRltNotaSaida.Text = "Relatórios";
-            this.btiRltNotaSaida.UseVisualStyleBackColor = false;
-            this.btiRltNotaSaida.Click += new System.EventHandler(this.BtiRltNotaSaida_Click);
             // 
             // btiSaida
             // 
@@ -602,31 +580,6 @@
             this.btiCadOrcamento.UseVisualStyleBackColor = false;
             this.btiCadOrcamento.Click += new System.EventHandler(this.BtiCadOrcamento_Click);
             // 
-            // paneldentroRltSaida
-            // 
-            this.paneldentroRltSaida.Controls.Add(this.btsRelatorionotas);
-            this.paneldentroRltSaida.Location = new System.Drawing.Point(209, 211);
-            this.paneldentroRltSaida.MaximumSize = new System.Drawing.Size(200, 28);
-            this.paneldentroRltSaida.MinimumSize = new System.Drawing.Size(200, 0);
-            this.paneldentroRltSaida.Name = "paneldentroRltSaida";
-            this.paneldentroRltSaida.Size = new System.Drawing.Size(200, 10);
-            this.paneldentroRltSaida.TabIndex = 6;
-            // 
-            // btsRelatorionotas
-            // 
-            this.btsRelatorionotas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
-            this.btsRelatorionotas.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btsRelatorionotas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btsRelatorionotas.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btsRelatorionotas.ForeColor = System.Drawing.Color.White;
-            this.btsRelatorionotas.Location = new System.Drawing.Point(0, 0);
-            this.btsRelatorionotas.Name = "btsRelatorionotas";
-            this.btsRelatorionotas.Size = new System.Drawing.Size(200, 28);
-            this.btsRelatorionotas.TabIndex = 0;
-            this.btsRelatorionotas.Text = "Relatório de notas";
-            this.btsRelatorionotas.UseVisualStyleBackColor = false;
-            this.btsRelatorionotas.Click += new System.EventHandler(this.BtsRelatorionotas_Click);
-            // 
             // paneldropCaixa
             // 
             this.paneldropCaixa.Controls.Add(this.btiLancamentos);
@@ -640,7 +593,7 @@
             this.paneldropCaixa.MaximumSize = new System.Drawing.Size(200, 196);
             this.paneldropCaixa.MinimumSize = new System.Drawing.Size(200, 0);
             this.paneldropCaixa.Name = "paneldropCaixa";
-            this.paneldropCaixa.Size = new System.Drawing.Size(200, 196);
+            this.paneldropCaixa.Size = new System.Drawing.Size(200, 10);
             this.paneldropCaixa.TabIndex = 8;
             // 
             // btiLancamentos
@@ -752,7 +705,6 @@
             // 
             this.panelCentral.BackColor = System.Drawing.Color.White;
             this.panelCentral.Controls.Add(this.paneldropCaixa);
-            this.panelCentral.Controls.Add(this.paneldentroRltSaida);
             this.panelCentral.Controls.Add(this.paneldropOrcamento);
             this.panelCentral.Controls.Add(this.paneldropSaida);
             this.panelCentral.Controls.Add(this.paneldropEntrada);
@@ -802,7 +754,6 @@
             this.paneldropEntrada.ResumeLayout(false);
             this.paneldropSaida.ResumeLayout(false);
             this.paneldropOrcamento.ResumeLayout(false);
-            this.paneldentroRltSaida.ResumeLayout(false);
             this.paneldropCaixa.ResumeLayout(false);
             this.panelCentral.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -844,12 +795,9 @@
         private System.Windows.Forms.Panel paneldropEntrada;
         private System.Windows.Forms.Button btiEntrada;
         private System.Windows.Forms.Panel paneldropSaida;
-        private System.Windows.Forms.Button btiRltNotaSaida;
         private System.Windows.Forms.Button btiSaida;
         private System.Windows.Forms.Panel paneldropOrcamento;
         private System.Windows.Forms.Button btiCadOrcamento;
-        private System.Windows.Forms.Panel paneldentroRltSaida;
-        private System.Windows.Forms.Button btsRelatorionotas;
         private System.Windows.Forms.Panel paneldropCaixa;
         private System.Windows.Forms.Button btiPlanoContasPadrao;
         private System.Windows.Forms.Button btiPlanoContas;

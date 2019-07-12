@@ -248,6 +248,22 @@ namespace _5gpro.Daos
             return retorno;
         }
 
+        public void LimpaRegistrosCaixa(NotaFiscalTerceiros nota)
+        {
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.addParam("@documento", nota.NotaFiscalTerceirosID.ToString());
+
+                sql.Query = @"DELETE FROM caixa_lancamento_ent 
+                              WHERE idnota_fiscal_terceiros = @documento";
+                sql.deleteQuery();
+
+                sql.Query = @"DELETE FROM caixa_lancamento 
+                            WHERE documento = @documento";
+                sql.deleteQuery();
+            }
+        }
+
         public int MovimentaCaixa(NotaFiscalTerceiros nota)
         {
             int retorno = 0;
@@ -304,23 +320,6 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-
-
-        public void LimpaRegistrosCaixa(NotaFiscalTerceiros nota)
-        {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
-            {
-                sql.addParam("@documento", nota.NotaFiscalTerceirosID.ToString());
-
-                sql.Query = @"DELETE FROM caixa_lancamento_ent 
-                              WHERE idnota_fiscal_terceiros = @documento";
-                sql.deleteQuery();
-
-                sql.Query = @"DELETE FROM caixa_lancamento 
-                            WHERE documento = @documento";
-                sql.deleteQuery();
-            }
-        }
 
         private NotaFiscalTerceiros LeDadosReader(List<Dictionary<string, object>> data)
         {

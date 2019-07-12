@@ -174,6 +174,7 @@ namespace _5gpro.Forms
                 {
                     var caixaLancamento = new CaixaLancamento();
                     caixaLancamento.Caixa = buscaCaixa.caixa;
+                    caixaLancamento.PlanoConta = buscaPlanoContaCaixa.conta;
                     caixaLancamento.Data = DateTime.Now;
                     caixaLancamento.Documento = parc.ParcelaContaReceberID.ToString();
                     caixaLancamento.TipoDocumento = 0;
@@ -266,6 +267,11 @@ namespace _5gpro.Forms
                 tbCodigoConta.Clear();
             }
             codigo = c;
+        }
+
+        private void GbPagamento_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

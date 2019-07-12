@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
@@ -20,6 +21,12 @@ namespace _5gpro.Entities
         public decimal DescontoTotalItens { get; set; }
         public decimal DescontoDocumento { get; set; }
         public string Descricao { get; set; }
+
+        [Required(ErrorMessage = "O Código é obrigatório.|buscaCaixa", AllowEmptyStrings = false)]
+        public Caixa Caixa { get; set; }
+
+        [Required(ErrorMessage = "O Código é obrigatório.|buscaPlanoDeConta", AllowEmptyStrings = false)]
+        public PlanoConta PlanoDeConta { get; set; }
 
         public virtual ICollection<NotaFiscalPropriaItem> NotaFiscalPropriaItem { get; set; }
     }

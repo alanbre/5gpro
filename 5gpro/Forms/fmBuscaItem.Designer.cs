@@ -38,9 +38,11 @@
             this.cbServico = new System.Windows.Forms.CheckBox();
             this.cbProduto = new System.Windows.Forms.CheckBox();
             this.btBuscarItens = new System.Windows.Forms.Button();
-            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
-            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
             this.btImprimir = new System.Windows.Forms.Button();
+            this.lbReferencia = new System.Windows.Forms.Label();
+            this.tbReferencia = new System.Windows.Forms.TextBox();
+            this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
+            this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.gbTipoItem.SuspendLayout();
             this.SuspendLayout();
@@ -59,13 +61,13 @@
             this.dgvItens.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItens.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvItens.Location = new System.Drawing.Point(15, 112);
+            this.dgvItens.Location = new System.Drawing.Point(15, 157);
             this.dgvItens.MultiSelect = false;
             this.dgvItens.Name = "dgvItens";
             this.dgvItens.ReadOnly = true;
             this.dgvItens.RowHeadersVisible = false;
             this.dgvItens.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItens.Size = new System.Drawing.Size(892, 383);
+            this.dgvItens.Size = new System.Drawing.Size(892, 367);
             this.dgvItens.TabIndex = 0;
             this.dgvItens.TabStop = false;
             this.dgvItens.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItens_CellDoubleClick);
@@ -108,7 +110,7 @@
             // 
             this.gbTipoItem.Controls.Add(this.cbServico);
             this.gbTipoItem.Controls.Add(this.cbProduto);
-            this.gbTipoItem.Location = new System.Drawing.Point(295, 17);
+            this.gbTipoItem.Location = new System.Drawing.Point(295, 40);
             this.gbTipoItem.Name = "gbTipoItem";
             this.gbTipoItem.Size = new System.Drawing.Size(149, 43);
             this.gbTipoItem.TabIndex = 8;
@@ -139,13 +141,48 @@
             // 
             // btBuscarItens
             // 
-            this.btBuscarItens.Location = new System.Drawing.Point(295, 83);
+            this.btBuscarItens.Location = new System.Drawing.Point(300, 127);
             this.btBuscarItens.Name = "btBuscarItens";
             this.btBuscarItens.Size = new System.Drawing.Size(75, 23);
             this.btBuscarItens.TabIndex = 9;
             this.btBuscarItens.Text = "Pesquisar";
             this.btBuscarItens.UseVisualStyleBackColor = true;
             this.btBuscarItens.Click += new System.EventHandler(this.BtBuscarItens_Click);
+            // 
+            // btImprimir
+            // 
+            this.btImprimir.Location = new System.Drawing.Point(381, 127);
+            this.btImprimir.Name = "btImprimir";
+            this.btImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btImprimir.TabIndex = 12;
+            this.btImprimir.Text = "Imprimir";
+            this.btImprimir.UseVisualStyleBackColor = true;
+            this.btImprimir.Click += new System.EventHandler(this.BtImprimir_Click);
+            // 
+            // lbReferencia
+            // 
+            this.lbReferencia.AutoSize = true;
+            this.lbReferencia.Location = new System.Drawing.Point(15, 113);
+            this.lbReferencia.Name = "lbReferencia";
+            this.lbReferencia.Size = new System.Drawing.Size(59, 13);
+            this.lbReferencia.TabIndex = 13;
+            this.lbReferencia.Text = "Referência";
+            // 
+            // tbReferencia
+            // 
+            this.tbReferencia.Location = new System.Drawing.Point(15, 129);
+            this.tbReferencia.Name = "tbReferencia";
+            this.tbReferencia.Size = new System.Drawing.Size(274, 20);
+            this.tbReferencia.TabIndex = 14;
+            this.tbReferencia.TextChanged += new System.EventHandler(this.TbReferencia_TextChanged);
+            // 
+            // buscaSubGrupoItem
+            // 
+            this.buscaSubGrupoItem.Location = new System.Drawing.Point(450, 62);
+            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
+            this.buscaSubGrupoItem.Size = new System.Drawing.Size(442, 39);
+            this.buscaSubGrupoItem.TabIndex = 11;
+            this.buscaSubGrupoItem.Leave += new System.EventHandler(this.BuscaSubGrupoItem_Leave);
             // 
             // buscaGrupoItem
             // 
@@ -156,30 +193,14 @@
             this.buscaGrupoItem.Text_Changed += new _5gpro.Controls.BuscaGrupoItem.text_changedEventHandler(this.BuscaGrupoItem_Text_Changed);
             this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItem_Leave);
             // 
-            // buscaSubGrupoItem
-            // 
-            this.buscaSubGrupoItem.Location = new System.Drawing.Point(450, 62);
-            this.buscaSubGrupoItem.Name = "buscaSubGrupoItem";
-            this.buscaSubGrupoItem.Size = new System.Drawing.Size(442, 39);
-            this.buscaSubGrupoItem.TabIndex = 11;
-            this.buscaSubGrupoItem.Leave += new System.EventHandler(this.BuscaSubGrupoItem_Leave);
-            // 
-            // btImprimir
-            // 
-            this.btImprimir.Location = new System.Drawing.Point(376, 83);
-            this.btImprimir.Name = "btImprimir";
-            this.btImprimir.Size = new System.Drawing.Size(75, 23);
-            this.btImprimir.TabIndex = 12;
-            this.btImprimir.Text = "Imprimir";
-            this.btImprimir.UseVisualStyleBackColor = true;
-            this.btImprimir.Click += new System.EventHandler(this.BtImprimir_Click);
-            // 
             // fmBuscaItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(916, 507);
+            this.ClientSize = new System.Drawing.Size(916, 536);
+            this.Controls.Add(this.tbReferencia);
+            this.Controls.Add(this.lbReferencia);
             this.Controls.Add(this.btImprimir);
             this.Controls.Add(this.buscaSubGrupoItem);
             this.Controls.Add(this.buscaGrupoItem);
@@ -223,5 +244,7 @@
         private Controls.BuscaGrupoItem buscaGrupoItem;
         private Controls.BuscaSubGrupoItem buscaSubGrupoItem;
         private System.Windows.Forms.Button btImprimir;
+        private System.Windows.Forms.Label lbReferencia;
+        private System.Windows.Forms.TextBox tbReferencia;
     }
 }

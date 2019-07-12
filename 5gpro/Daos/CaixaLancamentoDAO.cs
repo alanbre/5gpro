@@ -39,9 +39,9 @@ namespace _5gpro.Daos
                 foreach (var lanc in caixaLancamentos)
                 {
                     sql.Query = @"INSERT INTO caixa_lancamento
-                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
                             VALUES
-                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
                     sql.clearParams();
                     sql.addParam("@data", lanc.Data);
                     sql.addParam("@valor", lanc.Valor);
@@ -50,6 +50,7 @@ namespace _5gpro.Daos
                     sql.addParam("@lancamento", lanc.Lancamento);
                     sql.addParam("@documento", lanc.Documento);
                     sql.addParam("@idcaixa", lanc.Caixa.CaixaID);
+                    sql.addParam("@idcaixa_plano_contas", lanc.PlanoConta.PlanoContaID);
                     retorno += sql.insertQuery();
                     sql.clearParams();
                     sql.Query = @"INSERT INTO caixa_lancamento_car
@@ -72,9 +73,9 @@ namespace _5gpro.Daos
                 foreach (var lanc in caixaLancamentos)
                 {
                     sql.Query = @"INSERT INTO caixa_lancamento
-                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
                             VALUES
-                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
                     sql.clearParams();
                     sql.addParam("@data", lanc.Data);
                     sql.addParam("@valor", lanc.Valor);
@@ -83,6 +84,7 @@ namespace _5gpro.Daos
                     sql.addParam("@lancamento", lanc.Lancamento);
                     sql.addParam("@documento", lanc.Documento);
                     sql.addParam("@idcaixa", lanc.Caixa.CaixaID);
+                    sql.addParam("@idcaixa_plano_contas", lanc.PlanoConta.PlanoContaID);
                     retorno += sql.insertQuery();
                     sql.clearParams();
                     sql.Query = @"INSERT INTO caixa_lancamento_cap

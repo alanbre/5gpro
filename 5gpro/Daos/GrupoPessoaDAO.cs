@@ -146,15 +146,33 @@ namespace _5gpro.Daos
             return proximoid;
         }
 
+        public int AtualizarSubGrupo(SubGrupoPessoa subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"UPDATE subgrupopessoa SET nome = @nome
+                              WHERE idgrupopessoa = @idgrupopessoa
+                              AND codigo = @codigo                  
+                                ";
+                sql.addParam("@nome", subGrupo.Nome);
+                sql.addParam("@idgrupopessoa", subGrupo.GrupoPessoa.GrupoPessoaID);
+                sql.addParam("@codigo", subGrupo.Codigo);
+                retorno = sql.updateQuery();
+            }
+
+            return retorno;
+        }
+
         public int InserirSubGrupo(SubGrupoPessoa subGrupo)
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.beginTransaction();
-                sql.Query = @"INSERT INTO subgrupopessoa (nome, idgrupopessoa, codigo)
+                sql.Query = @"INSERT INTO subgrupopessoa (idsubgrupopessoa, nome, idgrupopessoa, codigo)
                             VALUES
-                            (@nome, @idgrupopessoa, @codigo)
+                            (@idsubgrupopessoa, @nome, @idgrupopessoa, @codigo)
                             ON DUPLICATE KEY UPDATE
                             nome = @nome, idgrupopessoa = @idgrupopessoa, codigo = @codigo";
                 sql.addParam("@idsubgrupopessoa", subGrupo.SubGrupoPessoaID);

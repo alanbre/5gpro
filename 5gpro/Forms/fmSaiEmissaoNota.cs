@@ -11,12 +11,19 @@ namespace _5gpro.Forms
 {
     public partial class fmSaiEmissaoNota : Form
     {
+        private NotaFiscalPropria notaFiscalPropriaNova;
+
         private readonly NotaFiscalPropriaDAO notaFiscalPropriaDAO = new NotaFiscalPropriaDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+
+        private CaixaLancamento caixalancamento = new CaixaLancamento();
+        private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
 
         private NotaFiscalPropria notaFiscalPropria = new NotaFiscalPropria();
         private NotaFiscalPropriaItem itemSelecionado;
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
+
+        Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
@@ -181,64 +188,91 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
+            var controls = (ControlCollection)this.Controls;
             if (!editando)
             {
                 return;
             }
+            var ok = false;
 
-            if (itens.Count <= 0)
+            if (tbCodigo.Text.Length <= 0)
             {
-                MessageBox.Show("Uma nota não pode ser salva sem itens!",
-               "Problema ao salvar",
-               MessageBoxButtons.OK,
-               MessageBoxIcon.Warning);
-                return;
+                if (MessageBox.Show("Número da nota em branco, deseja gerar um numero automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
+            }
+            else
+            {
+                if (itens.Count <= 0)
+                {
+                    MessageBox.Show("Uma nota não pode ser salva sem itens!",
+                   "Problema ao salvar",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning);
+                    return;
+                }
+
+                notaFiscalPropriaNova = new NotaFiscalPropria
+                {
+                    NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
+                    Descricao = tbDescricao.Text,
+                    Pessoa = buscaPessoa.pessoa,
+                    DataEmissao = dtpEmissao.Value,
+                    DataEntradaSaida = dtpSaida.Value,
+                    Caixa = buscaCaixa.caixa,
+                    PlanoDeConta = buscaPlanoDeConta.conta,
+                    ValorTotalItens = dbValorTotalItens.Valor,
+                    DescontoTotalItens = dbDescontoTotalItens.Valor,
+                    DescontoDocumento = dbDescontoDocumento.Valor,
+                    ValorTotalDocumento = dbValorTotalDocumento.Valor,
+
+                    NotaFiscalPropriaItem = itens
+                };
+
+                ok = validacao.ValidarEntidade(notaFiscalPropriaNova, controls);
             }
 
-            var notaFiscalPropriaNova = new NotaFiscalPropria
+
+            if (ok)
             {
-                NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
-                Descricao = tbDescricao.Text,
-                Pessoa = buscaPessoa.pessoa,
-                DataEmissao = dtpEmissao.Value,
-                DataEntradaSaida = dtpSaida.Value,
+                int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
 
-                ValorTotalItens = dbValorTotalItens.Valor,
-                DescontoTotalItens = dbDescontoTotalItens.Valor,
-                DescontoDocumento = dbDescontoDocumento.Valor,
-                ValorTotalDocumento = dbValorTotalDocumento.Valor,
-
-                NotaFiscalPropriaItem = itens
-            };
-
-            int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
-
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.MovimentaCaixaEntradaDeDinheiro(notaFiscalPropriaNova);
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.LimpaRegistrosCaixaSaida(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.MovimentaCaixaEntradaDeDinheiro(notaFiscalPropriaNova);
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                }
+                notaFiscalPropria = notaFiscalPropriaNova;
             }
-            else if (resultado == 1)
-            {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                Editando(false);
-            }
-            else if (resultado == 2)
-            {
-                notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropria);
-                notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                Editando(false);
-            }
-            notaFiscalPropria = notaFiscalPropriaNova;
         }
+
         private void Recarrega()
         {
             if (editando)
@@ -294,7 +328,7 @@ namespace _5gpro.Forms
                         Editando(false);
                     }
                 }
-            }            
+            }
         }
         private void Proximo()
         {
@@ -385,6 +419,8 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            buscaCaixa.Limpa();
+            buscaPlanoDeConta.Limpa();
             tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpSaida.Value = DateTime.Now;
@@ -497,6 +533,14 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
+
+        private void PreencheCaixaEPlano(NotaFiscalPropria notafiscal)
+        {
+            caixalancamento = caixalancamentoDAO.BuscaByDocumento(notafiscal.NotaFiscalPropriaID.ToString());
+            buscaCaixa.PreencheCampos(caixalancamento.Caixa);
+            buscaPlanoDeConta.PreencheCampos(caixalancamento.PlanoConta);
+        }
+
         private void PreencheCampos(NotaFiscalPropria notafiscal)
         {
             ignoracheckevent = true;
@@ -512,6 +556,7 @@ namespace _5gpro.Forms
             dbValorTotalDocumento.Valor = notafiscal.ValorTotalDocumento;
             itens = notafiscal.NotaFiscalPropriaItem.ToList();
             PreencheGridItens(itens);
+            PreencheCaixaEPlano(notafiscal);
             btInserirItem.Text = "Inserir";
             ignoracheckevent = false;
         }
@@ -529,7 +574,6 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 buscaItem.PreencheCampos(item.Item);
-                dbQuantidade.Valor = item.Item.Quantidade;
                 dbValorUnitItem.Valor = item.Item.ValorUnitario;
                 ignoracheckevent = false;
             }

@@ -120,15 +120,34 @@ namespace _5gpro.Daos
             return grupoitem;
         }
 
+        public int AtualizarSubGrupo(SubGrupoItem subGrupo)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"UPDATE subgrupoitem SET nome = @nome
+                              WHERE idgrupoitem = @idgrupoitem
+                              AND codigo = @codigo                  
+                                ";
+                sql.addParam("@nome", subGrupo.Nome);
+                sql.addParam("@idgrupoitem", subGrupo.GrupoItem.GrupoItemID);
+                sql.addParam("@codigo", subGrupo.Codigo);
+                retorno = sql.updateQuery();
+            }
+
+            return retorno;
+        }
+
         public int InserirSubGrupo(SubGrupoItem subGrupo)
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.beginTransaction();
-                sql.Query = @"INSERT INTO subgrupoitem (nome, idgrupoitem, codigo)
+
+                sql.Query = @"INSERT INTO subgrupoitem (idsubgrupoitem, nome, idgrupoitem, codigo)
                             VALUES
-                            (@nome, @idgrupoitem, @codigo)
+                            (@idsubgrupoitem, @nome, @idgrupoitem, @codigo)
                             ON DUPLICATE KEY UPDATE
                             nome = @nome, idgrupoitem = @idgrupoitem, codigo = @codigo";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
@@ -137,7 +156,7 @@ namespace _5gpro.Daos
                 sql.addParam("@codigo", subGrupo.Codigo);
                 retorno = sql.insertQuery();
 
-                if( retorno > 0)
+                if (retorno > 0)
                 {
                     sql.Query = "SELECT LAST_INSERT_ID() AS idsubgrupoitem;";
                     var data = sql.selectQueryForSingleRecord();
@@ -147,6 +166,7 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
         public bool SubGrupoUsado(SubGrupoItem subGrupo)
         {
             var usado = true;

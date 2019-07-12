@@ -106,7 +106,7 @@ namespace _5gpro.Forms
                 tipodoitem = "";
             }
 
-            itens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tipodoitem, buscaSubGrupoItem.subgrupoItem);
+            itens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tbReferencia.Text, tipodoitem, buscaSubGrupoItem.subgrupoItem);
 
             foreach (Item i in itens)
             {
@@ -133,5 +133,7 @@ namespace _5gpro.Forms
             var formRelatorioItens = new fmRltItens(rel);
             formRelatorioItens.Show(this);
         }
+
+        private void TbReferencia_TextChanged(object sender, EventArgs e) => BuscaItens();
     }
 }
