@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbGridDocumentos = new System.Windows.Forms.GroupBox();
             this.dgvDocumentos = new System.Windows.Forms.DataGridView();
             this.dgvtbcOrcamento = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +59,7 @@
             this.lbAFiltroDataEmissao = new System.Windows.Forms.Label();
             this.dtpFiltroDataEmissaoFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpFiltroDataEmissaoInicial = new System.Windows.Forms.DateTimePicker();
+            this.btImprimir = new System.Windows.Forms.Button();
             this.gbGridDocumentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocumentos)).BeginInit();
             this.gbFiltrosDocumento.SuspendLayout();
@@ -83,8 +84,8 @@
             this.dgvDocumentos.AllowUserToDeleteRows = false;
             this.dgvDocumentos.AllowUserToOrderColumns = true;
             this.dgvDocumentos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvDocumentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightGray;
+            this.dgvDocumentos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvDocumentos.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvDocumentos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDocumentos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -133,9 +134,9 @@
             // 
             // dgvtbcDataEmissao
             // 
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcDataEmissao.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dgvtbcDataEmissao.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDataEmissao.HeaderText = "Data da emissão";
             this.dgvtbcDataEmissao.MinimumWidth = 120;
             this.dgvtbcDataEmissao.Name = "dgvtbcDataEmissao";
@@ -144,9 +145,9 @@
             // 
             // dgvtbcDataEntrada
             // 
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcDataEntrada.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "d";
+            dataGridViewCellStyle7.NullValue = null;
+            this.dgvtbcDataEntrada.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvtbcDataEntrada.HeaderText = "Data da entrada";
             this.dgvtbcDataEntrada.MinimumWidth = 120;
             this.dgvtbcDataEntrada.Name = "dgvtbcDataEntrada";
@@ -155,9 +156,9 @@
             // 
             // dgvtbcValorTotalDocumento
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dgvtbcValorTotalDocumento.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.Format = "C2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.dgvtbcValorTotalDocumento.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvtbcValorTotalDocumento.HeaderText = "Total do documento";
             this.dgvtbcValorTotalDocumento.MinimumWidth = 50;
             this.dgvtbcValorTotalDocumento.Name = "dgvtbcValorTotalDocumento";
@@ -168,6 +169,7 @@
             // 
             this.gbFiltrosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltrosDocumento.Controls.Add(this.btImprimir);
             this.gbFiltrosDocumento.Controls.Add(this.cbValorTotal);
             this.gbFiltrosDocumento.Controls.Add(this.cbDataEntrada);
             this.gbFiltrosDocumento.Controls.Add(this.cbDataEmissao);
@@ -375,6 +377,16 @@
             this.dtpFiltroDataEmissaoInicial.TabIndex = 7;
             this.dtpFiltroDataEmissaoInicial.Value = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             // 
+            // btImprimir
+            // 
+            this.btImprimir.Location = new System.Drawing.Point(262, 114);
+            this.btImprimir.Name = "btImprimir";
+            this.btImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btImprimir.TabIndex = 21;
+            this.btImprimir.Text = "Imprimir";
+            this.btImprimir.UseVisualStyleBackColor = true;
+            this.btImprimir.Click += new System.EventHandler(this.BtImprimir_Click);
+            // 
             // fmEntBuscaNotaFiscalTerceiros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -392,6 +404,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca nota fiscal de entrada";
+            this.Load += new System.EventHandler(this.FmEntBuscaNotaFiscalTerceiros_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEntBuscaNotaFiscalTerceiros_KeyDown);
             this.gbGridDocumentos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDocumentos)).EndInit();
@@ -430,5 +443,6 @@
         private System.Windows.Forms.CheckBox cbValorTotal;
         private System.Windows.Forms.CheckBox cbDataEntrada;
         private System.Windows.Forms.CheckBox cbDataEmissao;
+        private System.Windows.Forms.Button btImprimir;
     }
 }

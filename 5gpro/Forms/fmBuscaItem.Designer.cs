@@ -78,7 +78,7 @@
             this.tbDenomCompra.Name = "tbDenomCompra";
             this.tbDenomCompra.Size = new System.Drawing.Size(274, 20);
             this.tbDenomCompra.TabIndex = 1;
-            this.tbDenomCompra.TextChanged += new System.EventHandler(this.tbDenomCompra_TextChanged);
+            this.tbDenomCompra.TextChanged += new System.EventHandler(this.TbDenomCompra_TextChanged);
             // 
             // tbDescricao
             // 
@@ -86,7 +86,7 @@
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(274, 20);
             this.tbDescricao.TabIndex = 4;
-            this.tbDescricao.TextChanged += new System.EventHandler(this.tbDescricao_TextChanged);
+            this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
             // 
             // lbDescricao
             // 

@@ -25,7 +25,28 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
-        private void FmBuscaItem_Load(object sender, EventArgs e) => BuscaItens();
+        private void FmBuscaItem_Load(object sender, EventArgs e)
+        {
+            rel.Columns.Add("codigo", typeof(int));
+            rel.Columns.Add("referencia", typeof(string));
+            rel.Columns.Add("desc_item", typeof(string));
+            rel.Columns.Add("desc_comp", typeof(string));
+            rel.Columns.Add("quantidade", typeof(decimal));
+            rel.Columns.Add("valor", typeof(decimal));
+
+
+            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Descrição", typeof(string));
+            table.Columns.Add("Denominação da Compra", typeof(string));
+            table.Columns.Add("Tipo", typeof(string));
+            table.Columns.Add("Referência", typeof(string));
+            table.Columns.Add("Estoque Necessário", typeof(string));
+            table.Columns.Add("Quantidade em Estoque", typeof(string));
+            table.Columns.Add("Unidade de Medida", typeof(string));
+            table.Columns.Add("Valor de Entrada", typeof(string));
+            table.Columns.Add("Valor de Saída", typeof(string));
+            BuscaItens();
+        }
         private void BuscaSubGrupoItem_Leave(object sender, EventArgs e) => BuscaItens();
         private void BuscaGrupoItem_Leave(object sender, EventArgs e)
         {
@@ -60,37 +81,16 @@ namespace _5gpro.Forms
             this.Close();
         }
         private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e) => buscaSubGrupoItem.Limpa();
-        private void tbDescricao_TextChanged(object sender, EventArgs e) => BuscaItens();
-        private void tbDenomCompra_TextChanged(object sender, EventArgs e) => BuscaItens();
+        private void TbDescricao_TextChanged(object sender, EventArgs e) => BuscaItens();
+        private void TbDenomCompra_TextChanged(object sender, EventArgs e) => BuscaItens();
 
 
 
         private void BuscaItens()
         {
-
-            dgvItens.Columns.Clear();
-            rel.Clear();
-            rel.Columns.Clear();
             rel.Rows.Clear();
-            rel.Columns.Add("codigo", typeof(int));
-            rel.Columns.Add("referencia", typeof(string));
-            rel.Columns.Add("desc_item", typeof(string));
-            rel.Columns.Add("desc_comp", typeof(string));
-            rel.Columns.Add("quantidade", typeof(decimal));
-            rel.Columns.Add("valor", typeof(decimal));
-
-            table.Columns.Clear();
             table.Rows.Clear();
-            table.Columns.Add("Código", typeof(string));
-            table.Columns.Add("Descrição", typeof(string));
-            table.Columns.Add("Denominação da Compra", typeof(string));
-            table.Columns.Add("Tipo", typeof(string));
-            table.Columns.Add("Referência", typeof(string));
-            table.Columns.Add("Estoque Necessário", typeof(string));
-            table.Columns.Add("Quantidade em Estoque", typeof(string));
-            table.Columns.Add("Unidade de Medida", typeof(string));
-            table.Columns.Add("Valor de Entrada", typeof(string));
-            table.Columns.Add("Valor de Saída", typeof(string));
+            
 
             string tipodoitem = "";
             if (cbProduto.Checked)
@@ -114,8 +114,6 @@ namespace _5gpro.Forms
                 rel.Rows.Add(i.ItemID, i.Referencia, i.Descricao, i.DescCompra, i.Quantidade, i.ValorUnitario);
             }
 
-            ListCollectionView colecao = new ListCollectionView(table.DefaultView);
-            colecao.GroupDescriptions.Add(new PropertyGroupDescription("Unidade de Medida"));
             dgvItens.DataSource = table;
 
             funaux.TratarTamanhoColunas(dgvItens);
