@@ -243,12 +243,6 @@
     <Compile Include="Controls\BuscaUsuario.Designer.cs">
       <DependentUpon>BuscaUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CheckedGroupBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CheckedGroupBox.Designer.cs">
-      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DecimalBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -422,6 +416,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsItens.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\dsNotasEntradas.cs">
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasEntradas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasSaidas.cs">
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasSaidas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\fmRltGenerico.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -433,6 +443,12 @@
     </Compile>
     <Compile Include="Reports\fmRltItens.Designer.cs">
       <DependentUpon>fmRltItens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasSaidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasSaidas.Designer.cs">
+      <DependentUpon>fmRltNotasSaidas.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\fmRltNotasSaida.cs">
       <SubType>Form</SubType>
@@ -685,6 +701,12 @@
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\fmRltNotasEntradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasEntradas.Designer.cs">
+      <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Controls\BuscaCaixa.resx">
       <DependentUpon>BuscaCaixa.cs</DependentUpon>
@@ -730,9 +752,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaUsuario.resx">
       <DependentUpon>BuscaUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CheckedGroupBox.resx">
-      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DecimalBox.resx">
       <DependentUpon>DecimalBox.cs</DependentUpon>
@@ -788,8 +807,14 @@
     <EmbeddedResource Include="Reports\fmRltItens.resx">
       <DependentUpon>fmRltItens.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltNotasSaidas.resx">
+      <DependentUpon>fmRltNotasSaidas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltNotasEntradas.resx">
+      <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
@@ -920,6 +945,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Reports\rltItens.rdlc" />
+    <EmbeddedResource Include="Reports\rltNotasSaidas.rdlc" />
+    <EmbeddedResource Include="Reports\rltNotasEntradas.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
     <None Include="Reports\dsGenerico.xsc">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
@@ -960,6 +987,28 @@
     </None>
     <None Include="Reports\dsItens.xss">
       <DependentUpon>dsItens.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasEntradas.xsc">
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasEntradas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsNotasEntradas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsNotasEntradas.xss">
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasSaidas.xsc">
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasSaidas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsNotasSaidas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsNotasSaidas.xss">
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
     </None>
     <None Include="Resources\plus_32_blue.png" />
   </ItemGroup>
