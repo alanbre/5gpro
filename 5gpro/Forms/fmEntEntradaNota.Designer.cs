@@ -71,6 +71,8 @@
             this.lbQuantidade = new System.Windows.Forms.Label();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
+            this.buscaPlanoDeConta = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.tbDescricao = new System.Windows.Forms.TextBox();
             this.lbDescnotaentrada = new System.Windows.Forms.Label();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
@@ -81,8 +83,6 @@
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNumeroDocumento = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
-            this.buscaPlanoDeConta = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
@@ -543,13 +543,35 @@
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
             // 
+            // buscaPlanoDeConta
+            // 
+            this.buscaPlanoDeConta.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoDeConta.Entrada = false;
+            this.buscaPlanoDeConta.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoDeConta.LabelText = "Conta Caixa";
+            this.buscaPlanoDeConta.Location = new System.Drawing.Point(580, 136);
+            this.buscaPlanoDeConta.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPlanoDeConta.Name = "buscaPlanoDeConta";
+            this.buscaPlanoDeConta.Saida = true;
+            this.buscaPlanoDeConta.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoDeConta.TabIndex = 10;
+            // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(316, 136);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaCaixa.TabIndex = 9;
+            // 
             // tbDescricao
             // 
             this.tbDescricao.Location = new System.Drawing.Point(9, 75);
             this.tbDescricao.Multiline = true;
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(434, 49);
-            this.tbDescricao.TabIndex = 3;
+            this.tbDescricao.TabIndex = 7;
             this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
             // 
             // lbDescnotaentrada
@@ -558,7 +580,7 @@
             this.lbDescnotaentrada.Location = new System.Drawing.Point(6, 59);
             this.lbDescnotaentrada.Name = "lbDescnotaentrada";
             this.lbDescnotaentrada.Size = new System.Drawing.Size(55, 13);
-            this.lbDescnotaentrada.TabIndex = 2;
+            this.lbDescnotaentrada.TabIndex = 6;
             this.lbDescnotaentrada.Text = "Descrição";
             // 
             // buscaPessoa
@@ -568,7 +590,7 @@
             this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
             this.buscaPessoa.Name = "buscaPessoa";
             this.buscaPessoa.Size = new System.Drawing.Size(310, 39);
-            this.buscaPessoa.TabIndex = 4;
+            this.buscaPessoa.TabIndex = 8;
             this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
             // dtpEntrada
@@ -577,7 +599,7 @@
             this.dtpEntrada.Location = new System.Drawing.Point(232, 32);
             this.dtpEntrada.Name = "dtpEntrada";
             this.dtpEntrada.Size = new System.Drawing.Size(99, 20);
-            this.dtpEntrada.TabIndex = 8;
+            this.dtpEntrada.TabIndex = 5;
             this.dtpEntrada.ValueChanged += new System.EventHandler(this.DtpEntrada_ValueChanged);
             // 
             // dtpEmissao
@@ -588,7 +610,7 @@
             this.dtpEmissao.Location = new System.Drawing.Point(117, 32);
             this.dtpEmissao.Name = "dtpEmissao";
             this.dtpEmissao.Size = new System.Drawing.Size(100, 20);
-            this.dtpEmissao.TabIndex = 6;
+            this.dtpEmissao.TabIndex = 3;
             this.dtpEmissao.ValueChanged += new System.EventHandler(this.DtpEmissao_ValueChanged);
             // 
             // lbEntrada
@@ -597,7 +619,7 @@
             this.lbEntrada.Location = new System.Drawing.Point(228, 16);
             this.lbEntrada.Name = "lbEntrada";
             this.lbEntrada.Size = new System.Drawing.Size(84, 13);
-            this.lbEntrada.TabIndex = 7;
+            this.lbEntrada.TabIndex = 4;
             this.lbEntrada.Text = "Data de entrada";
             // 
             // lbEmissao
@@ -606,7 +628,7 @@
             this.lbEmissao.Location = new System.Drawing.Point(114, 13);
             this.lbEmissao.Name = "lbEmissao";
             this.lbEmissao.Size = new System.Drawing.Size(86, 13);
-            this.lbEmissao.TabIndex = 5;
+            this.lbEmissao.TabIndex = 2;
             this.lbEmissao.Text = "Data da emissão";
             // 
             // tbCodigo
@@ -640,28 +662,6 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
-            // buscaCaixa
-            // 
-            this.buscaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaCaixa.Location = new System.Drawing.Point(316, 136);
-            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCaixa.Name = "buscaCaixa";
-            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaCaixa.TabIndex = 9;
-            // 
-            // buscaPlanoDeConta
-            // 
-            this.buscaPlanoDeConta.BackColor = System.Drawing.Color.White;
-            this.buscaPlanoDeConta.Entrada = false;
-            this.buscaPlanoDeConta.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buscaPlanoDeConta.LabelText = "Conta Caixa";
-            this.buscaPlanoDeConta.Location = new System.Drawing.Point(580, 136);
-            this.buscaPlanoDeConta.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPlanoDeConta.Name = "buscaPlanoDeConta";
-            this.buscaPlanoDeConta.Saida = false;
-            this.buscaPlanoDeConta.Size = new System.Drawing.Size(264, 39);
-            this.buscaPlanoDeConta.TabIndex = 10;
             // 
             // fmEntEntradaNota
             // 

@@ -65,6 +65,7 @@
             this.btBusca.Name = "btBusca";
             this.btBusca.Size = new System.Drawing.Size(22, 22);
             this.btBusca.TabIndex = 1;
+            this.btBusca.TabStop = false;
             this.btBusca.UseVisualStyleBackColor = true;
             this.btBusca.Click += new System.EventHandler(this.BtBusca_Click);
             // 

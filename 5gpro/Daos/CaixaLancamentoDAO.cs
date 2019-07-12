@@ -241,6 +241,11 @@ namespace _5gpro.Daos
             caixa.Codigo = Convert.ToInt32(data["caixa_codigo"]);
             caixa.Nome = (string)data["nome"];
 
+            var parcelaCAR = new ParcelaContaReceber();
+            var parcelaCAP = new ParcelaContaPagar();
+            var notafiscalpropria = new NotaFiscalPropria();
+            var notafiscalterceiros = new NotaFiscalTerceiros();
+
             var caixaLancamento = new CaixaLancamento();
             caixaLancamento.PlanoConta = planoConta;
             caixaLancamento.Caixa = caixa;
@@ -251,6 +256,7 @@ namespace _5gpro.Daos
             caixaLancamento.TipoDocumento = Convert.ToInt32(data["tipodocumento"]);
             caixaLancamento.Lancamento = Convert.ToInt32(data["lancamento"]);
             caixaLancamento.Documento = (string)data["documento"];
+            
             
             return caixaLancamento;
         }
