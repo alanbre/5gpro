@@ -103,11 +103,12 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public List<Item> Busca(string descItem, string denomItem, string tipoItem, SubGrupoItem subgrupoitem)
+        public List<Item> Busca(string descItem, string denomItem, string refeItem, string tipoItem, SubGrupoItem subgrupoitem)
         {
             List<Item> itens = new List<Item>();
             string conDescItem = descItem.Length > 0 ? "AND i.descitem LIKE @descitem" : "";
             string conDenomItem = denomItem.Length > 0 ? "AND i.denominacaocompra LIKE @denominacaocompra" : "";
+            string conRefeItem = refeItem.Length > 0 ? "AND i.referencia LIKE @referencia" : "";
             string conTipoItem = tipoItem.Length > 0 ? "AND i.tipo LIKE @tipo" : "";
             string conSubgrupoItem = subgrupoitem != null ? "AND i.idsubgrupoitem = @idsubgrupoitem" : "";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -119,11 +120,13 @@ namespace _5gpro.Daos
                             WHERE 1=1 
                             " + conDescItem + @"
                             " + conDenomItem + @"
+                            " + conRefeItem + @"
                             " + conTipoItem + @"
                             " + conSubgrupoItem + @"
                              ORDER BY i.iditem";
                 if (denomItem.Length > 0) { sql.addParam("@denominacaocompra", "%" + denomItem + "%"); }
                 if (descItem.Length > 0) { sql.addParam("@descitem", "%" + descItem + "%"); }
+                if (refeItem.Length > 0) { sql.addParam("@referencia", "%" + refeItem + "%"); }
                 if (tipoItem.Length > 0) { sql.addParam("@tipo", "%" + tipoItem + "%"); }
                 if (subgrupoitem != null) { sql.addParam("@idsubgrupoitem", subgrupoitem.SubGrupoItemID); }
 

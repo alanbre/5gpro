@@ -556,6 +556,7 @@ namespace _5gpro.Forms
                 {
                     btDesintegrar.Enabled = false;
                 }
+                dbValorUnitItem.Valor = item.ValorUnitario;
             }
         }
 

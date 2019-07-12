@@ -23,7 +23,7 @@ namespace _5gpro
 
         private string botaoPressionado = "";
         private bool CadastrosHidden, ContareceberHidden, MenuHidden, ContapagarHidden,
-            EntradaHidden, SaidaHidden, OrcamentoHidden, RelatorioSaidaHidden, CaixaHidden;
+            EntradaHidden, SaidaHidden, OrcamentoHidden, CaixaHidden;
 
         private int cadastrosOn = 8,
                     areceberOn = 2,
@@ -31,7 +31,6 @@ namespace _5gpro
                     entradasOn = 1,
                     saidasOn = 2,
                     orcamentosOn = 1,
-                    relatoriosOn = 1,
                     caixaOn = 7,
                     tamanhopanel
             ;
@@ -215,14 +214,6 @@ namespace _5gpro
                             { btiSaida.Visible = true; }
                             break;
 
-                        case "030200":
-                            //Relatório de Notas
-                            if (p.Nivel == 0) { btiRltNotaSaida.Visible = false; relatoriosOn = relatoriosOn - 1; }
-                            else
-                            { btiRltNotaSaida.Visible = true; }
-                            if (relatoriosOn == 0) { saidasOn = saidasOn - 1; }
-                            break;
-
                         case "020100":
                             //Cadastro de Orçamentos
                             if (p.Nivel == 0) { btiCadOrcamento.Visible = false; orcamentosOn = orcamentosOn - 1; }
@@ -274,7 +265,6 @@ namespace _5gpro
                 btEntradas.Enabled = entradasOn == 0 ? false : true;
                 btSaidas.Enabled = saidasOn == 0 ? false : true;
                 btOrcamentos.Enabled = orcamentosOn == 0 ? false : true;
-                btiRltNotaSaida.Enabled = relatoriosOn == 0 ? false : true;
                 btiCadastroCaixa.Enabled = caixaOn == 0 ? false : true;
 
             }
@@ -572,26 +562,6 @@ namespace _5gpro
             DesmarcarBotoes();
         }
 
-
-        //COM SUB MENU
-        private void BtiRltNotaSaida_Click(object sender, EventArgs e)
-        {
-            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#7E7E82");
-            timerDropLateral.Start();
-            botaoPressionado = "subrelatoriosaida";
-        }
-
-
-        //SUBMENU RELATORIOS SAIDA
-        private void BtsRelatorionotas_Click(object sender, EventArgs e)
-        {
-            var formRelTeste = new fmRltNotasSaida();
-            formRelTeste.Show(this);
-            botaoPressionado = "";
-            RecolherMenus();
-            DesmarcarBotoes();
-        }
-
         //BOTÕES DO MENU ORCAMENTOS
         private void BtiCadOrcamento_Click(object sender, EventArgs e)
         {
@@ -612,13 +582,10 @@ namespace _5gpro
             btEntradas.BackColor = ColorTranslator.FromHtml("#1D1D1E");
             btSaidas.BackColor = ColorTranslator.FromHtml("#1D1D1E");
             btOrcamentos.BackColor = ColorTranslator.FromHtml("#1D1D1E");
-            btiRltNotaSaida.BackColor = ColorTranslator.FromHtml("#1D1D1E");
             btCaixa.BackColor = ColorTranslator.FromHtml("#1D1D1E");
         }
         private void RecolherMenus()
         {
-            Image imgdefault = Properties.Resources.right_18px;
-            btiRltNotaSaida.Image = imgdefault;
 
             if (botaoPressionado != "botaocadastro")
             {
@@ -656,12 +623,6 @@ namespace _5gpro
                 OrcamentoHidden = true;
             }
 
-            if (botaoPressionado != "subrelatoriosaida")
-            {
-                paneldentroRltSaida.Height = 0;
-                RelatorioSaidaHidden = true;
-            }
-
             if (botaoPressionado != "botaocaixa")
             {
                 paneldropCaixa.Height = 0;
@@ -692,17 +653,12 @@ namespace _5gpro
                     paneldropOrcamento.Height = 0;
                     OrcamentoHidden = true;
 
-                    paneldentroRltSaida.Height = 0;
-                    RelatorioSaidaHidden = true;
 
                     panelEsquerdo.Width = 60;
                     MenuHidden = true;
 
                     paneldropCaixa.Height = 0;
                     CaixaHidden = true;
-
-                    Image imgdefault = Properties.Resources.right_18px;
-                    btiRltNotaSaida.Image = imgdefault;
 
                     break;
 
@@ -911,32 +867,6 @@ namespace _5gpro
                     RecolherMenus();
                     break;
 
-                case "subrelatoriosaida":
-                    if (RelatorioSaidaHidden)
-                    {
-                        paneldentroRltSaida.Height += 100;
-                        if (paneldentroRltSaida.Size == paneldentroRltSaida.MaximumSize)
-                        {
-                            timerDropLateral.Stop();
-                            RelatorioSaidaHidden = false;
-                            Image imgleft = Properties.Resources.left_18px;
-                            btiRltNotaSaida.Image = imgleft;
-                            paneldentroRltSaida.BringToFront();
-                        }
-                    }
-                    else
-                    {
-                        paneldentroRltSaida.Height -= 100;
-                        if (paneldentroRltSaida.Size == paneldentroRltSaida.MinimumSize)
-                        {
-                            timerDropLateral.Stop();
-                            RelatorioSaidaHidden = true;
-                            Image imgright = Properties.Resources.right_18px;
-                            btiRltNotaSaida.Image = imgright;
-                            btiRltNotaSaida.BackColor = System.Drawing.ColorTranslator.FromHtml("#1D1D1E");
-                        }
-                    }
-                    break;
             }
         }
     }

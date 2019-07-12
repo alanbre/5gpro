@@ -574,7 +574,6 @@ namespace _5gpro.Forms
             {
                 ignoracheckevent = true;
                 buscaItem.PreencheCampos(item.Item);
-                dbQuantidade.Valor = item.Item.Quantidade;
                 dbValorUnitItem.Valor = item.Item.ValorUnitario;
                 ignoracheckevent = false;
             }
