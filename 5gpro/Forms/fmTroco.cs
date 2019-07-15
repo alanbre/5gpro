@@ -10,8 +10,9 @@ namespace _5gpro.Forms
     public partial class fmTroco : Form
     {
         private readonly FormaPagamentoDAO formaPagamentoDAO = new FormaPagamentoDAO();
-        public List<Tuple<FormaPagamento, decimal>> formasPagamento = new List<Tuple<FormaPagamento, decimal>>();
+        public List<Tuple<FormaPagamento, decimal>> TupleFormasPagamento = new List<Tuple<FormaPagamento, decimal>>();
         public bool pago = false;
+        public FormaPagamento formaPagamento = new FormaPagamento();
 
         private decimal totalPago = 0.00m;
         private decimal totalAPagar = 0.00m;
@@ -61,7 +62,7 @@ namespace _5gpro.Forms
             {
                 var vp = formaPagamentoDAO.BuscarByID(int.Parse(tbCodigoFormaPagamento1.Text));
                 var forma = new Tuple<FormaPagamento, decimal>(vp, dbPagamento1.Valor);
-                formasPagamento.Add(forma);
+                TupleFormasPagamento.Add(forma);
             }
             //if (tbCodigoFormaPagamento2.Text.Length > 0 && dbPagamento2.Valor > 0)
             //{
@@ -102,7 +103,7 @@ namespace _5gpro.Forms
             this.Close();
         }
 
-
+        
 
         private void AtalhoAbreBuscaFormaPagamento(TextBox codigo, TextBox nome, KeyEventArgs e)
         {
@@ -142,7 +143,7 @@ namespace _5gpro.Forms
                 return;
 
 
-            var formaPagamento = formaPagamentoDAO.BuscarByID(id);
+            formaPagamento = formaPagamentoDAO.BuscarByID(id);
             if (formaPagamento != null)
             {
                 PreencheCamposFormaPagamento(formaPagamento, codigo, nome);

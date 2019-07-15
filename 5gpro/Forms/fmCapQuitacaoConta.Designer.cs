@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbPesquisa = new System.Windows.Forms.GroupBox();
             this.lbValorInicial = new System.Windows.Forms.Label();
             this.lbDataVencimento = new System.Windows.Forms.Label();
@@ -52,6 +52,7 @@
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.lbDesconto = new System.Windows.Forms.Label();
             this.dbDesconto = new _5gpro.Controls.DecimalBox();
@@ -72,6 +73,7 @@
             this.gbParcelas = new System.Windows.Forms.GroupBox();
             this.dgvParcelas = new System.Windows.Forms.DataGridView();
             this.dgvtbcCodigoConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcCodigoParcela = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDataVencimento = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValor = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,7 +82,6 @@
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbPesquisa.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbParcelas.SuspendLayout();
@@ -110,7 +111,7 @@
             this.gbPesquisa.Controls.Add(this.buscaPessoa);
             this.gbPesquisa.Location = new System.Drawing.Point(12, 12);
             this.gbPesquisa.Name = "gbPesquisa";
-            this.gbPesquisa.Size = new System.Drawing.Size(927, 107);
+            this.gbPesquisa.Size = new System.Drawing.Size(1032, 107);
             this.gbPesquisa.TabIndex = 0;
             this.gbPesquisa.TabStop = false;
             this.gbPesquisa.Text = "Pesquisa";
@@ -321,10 +322,23 @@
             this.groupBox1.Controls.Add(this.lbCount);
             this.groupBox1.Location = new System.Drawing.Point(12, 469);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(928, 132);
+            this.groupBox1.Size = new System.Drawing.Size(1033, 132);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Pagamento";
+            // 
+            // buscaPlanoContaCaixa
+            // 
+            this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa.Entrada = false;
+            this.buscaPlanoContaCaixa.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa.LabelText = "Conta Caixa";
+            this.buscaPlanoContaCaixa.Location = new System.Drawing.Point(475, 54);
+            this.buscaPlanoContaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPlanoContaCaixa.Name = "buscaPlanoContaCaixa";
+            this.buscaPlanoContaCaixa.Saida = true;
+            this.buscaPlanoContaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa.TabIndex = 17;
             // 
             // buscaCaixa
             // 
@@ -506,7 +520,7 @@
             this.gbParcelas.Controls.Add(this.dgvParcelas);
             this.gbParcelas.Location = new System.Drawing.Point(12, 125);
             this.gbParcelas.Name = "gbParcelas";
-            this.gbParcelas.Size = new System.Drawing.Size(928, 338);
+            this.gbParcelas.Size = new System.Drawing.Size(1033, 338);
             this.gbParcelas.TabIndex = 1;
             this.gbParcelas.TabStop = false;
             this.gbParcelas.Text = "Parcelas";
@@ -517,20 +531,21 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvParcelas.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvParcelas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvParcelas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvParcelas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvParcelas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigoConta,
+            this.dgvtbcDescricao,
             this.dgvtbcCodigoParcela,
             this.dgvtbcDataVencimento,
             this.dgvtbcValor,
@@ -547,7 +562,7 @@
             this.dgvParcelas.ReadOnly = true;
             this.dgvParcelas.RowHeadersVisible = false;
             this.dgvParcelas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvParcelas.Size = new System.Drawing.Size(922, 319);
+            this.dgvParcelas.Size = new System.Drawing.Size(1027, 319);
             this.dgvParcelas.TabIndex = 0;
             this.dgvParcelas.TabStop = false;
             this.dgvParcelas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvParcelas_CellDoubleClick);
@@ -559,6 +574,12 @@
             this.dgvtbcCodigoConta.Name = "dgvtbcCodigoConta";
             this.dgvtbcCodigoConta.ReadOnly = true;
             // 
+            // dgvtbcDescricao
+            // 
+            this.dgvtbcDescricao.HeaderText = "Descrição";
+            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
+            this.dgvtbcDescricao.ReadOnly = true;
+            // 
             // dgvtbcCodigoParcela
             // 
             this.dgvtbcCodigoParcela.HeaderText = "Parcela";
@@ -567,9 +588,9 @@
             // 
             // dgvtbcDataVencimento
             // 
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "d";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDataVencimento.HeaderText = "Vencimento";
             this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
             this.dgvtbcDataVencimento.ReadOnly = true;
@@ -610,32 +631,19 @@
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
-            // buscaPlanoContaCaixa
-            // 
-            this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaPlanoContaCaixa.Entrada = false;
-            this.buscaPlanoContaCaixa.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buscaPlanoContaCaixa.LabelText = "Conta Caixa";
-            this.buscaPlanoContaCaixa.Location = new System.Drawing.Point(475, 54);
-            this.buscaPlanoContaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPlanoContaCaixa.Name = "buscaPlanoContaCaixa";
-            this.buscaPlanoContaCaixa.Saida = false;
-            this.buscaPlanoContaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaPlanoContaCaixa.TabIndex = 17;
-            // 
             // fmCapQuitacaoConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(952, 614);
+            this.ClientSize = new System.Drawing.Size(1057, 614);
             this.Controls.Add(this.gbParcelas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gbPesquisa);
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(968, 653);
+            this.MaximumSize = new System.Drawing.Size(1073, 653);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(968, 652);
+            this.MinimumSize = new System.Drawing.Size(1073, 653);
             this.Name = "fmCapQuitacaoConta";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -693,7 +701,10 @@
         private System.Windows.Forms.Label lbCount;
         private System.Windows.Forms.GroupBox gbParcelas;
         private System.Windows.Forms.DataGridView dgvParcelas;
+        private Controls.BuscaCaixa buscaCaixa;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoConta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescricao;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoParcela;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataVencimento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValor;
@@ -702,7 +713,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcAcrescimo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
-        private Controls.BuscaCaixa buscaCaixa;
-        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa;
     }
 }

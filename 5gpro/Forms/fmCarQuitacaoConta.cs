@@ -21,6 +21,7 @@ namespace _5gpro.Forms
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
+        private FuncoesAuxiliares funaux = new FuncoesAuxiliares();
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
@@ -135,6 +136,7 @@ namespace _5gpro.Forms
             foreach (var par in parcelasContaReceber)
             {
                 dgvParcelas.Rows.Add(par.ContaReceberID,
+                                     par.Descricao,
                                      par.Sequencia,
                                      par.DataVencimento,
                                      par.Valor,
@@ -145,7 +147,7 @@ namespace _5gpro.Forms
                                      par.ValorFinal
                                      );
             }
-
+            funaux.TratarTamanhoColunas(dgvParcelas);
             dgvParcelas.Refresh();
         }
         private void Quitar()
@@ -165,7 +167,7 @@ namespace _5gpro.Forms
                 return;
             }
 
-            int retorno = parcelaContaReceberDAO.QuitarParcelas(parcelasContaReceberSelecionadas);
+            int retorno = parcelaContaReceberDAO.QuitarParcelas(parcelasContaReceberSelecionadas, formTroco.formaPagamento);
             if (retorno == 1)
             {
                 MessageBox.Show("Parcelas selecionadas quitadas!");
@@ -212,7 +214,7 @@ namespace _5gpro.Forms
         }
         private void SelecionaLinha()
         {
-            var parcelaSelecionada = parcelasContaReceber.Single(p => p.ContaReceberID == (int) dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[1].Value);
+            var parcelaSelecionada = parcelasContaReceber.Single(p => p.ContaReceberID == (int) dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[2].Value);
             if(parcelasContaReceberSelecionadas.Contains(parcelaSelecionada))
             {
                 parcelasContaReceberSelecionadas.Remove(parcelaSelecionada);
