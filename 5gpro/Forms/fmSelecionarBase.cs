@@ -50,7 +50,7 @@ namespace _5gpro.Forms
         private readonly Bases itamar = new Bases()
         {
             Database = "5gprodatabase",
-            Server = "192.168.2.114",
+            Server = "192.168.2.105",
             Uid = "5gprouser",
             Pwd = "5gproedualan"
         };
