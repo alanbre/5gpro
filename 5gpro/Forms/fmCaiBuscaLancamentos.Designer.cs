@@ -35,6 +35,8 @@
             this.dtpDataFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpDataInicial = new System.Windows.Forms.DateTimePicker();
             this.btPesquisar = new System.Windows.Forms.Button();
+            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
+            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
             this.lbDataFinal = new System.Windows.Forms.Label();
             this.lbDataInicial = new System.Windows.Forms.Label();
             this.gbLançamentos = new System.Windows.Forms.GroupBox();
@@ -47,10 +49,6 @@
             this.dgvtbcCodigoConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcConta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcTipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
-            this.buscaCaixa = new _5gpro.Controls.BuscaCaixa();
-            this.lbDescricao = new System.Windows.Forms.Label();
-            this.tbDescricao = new System.Windows.Forms.TextBox();
             this.gbFiltros.SuspendLayout();
             this.gbLançamentos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDados)).BeginInit();
@@ -60,8 +58,6 @@
             // 
             this.gbFiltros.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbFiltros.Controls.Add(this.tbDescricao);
-            this.gbFiltros.Controls.Add(this.lbDescricao);
             this.gbFiltros.Controls.Add(this.dtpDataFinal);
             this.gbFiltros.Controls.Add(this.dtpDataInicial);
             this.gbFiltros.Controls.Add(this.btPesquisar);
@@ -96,13 +92,35 @@
             // 
             // btPesquisar
             // 
-            this.btPesquisar.Location = new System.Drawing.Point(273, 68);
+            this.btPesquisar.Location = new System.Drawing.Point(270, 68);
             this.btPesquisar.Name = "btPesquisar";
             this.btPesquisar.Size = new System.Drawing.Size(75, 23);
             this.btPesquisar.TabIndex = 6;
             this.btPesquisar.Text = "Pesquisar";
             this.btPesquisar.UseVisualStyleBackColor = true;
             this.btPesquisar.Click += new System.EventHandler(this.BtPesquisar_Click);
+            // 
+            // buscaPlanoContaCaixa
+            // 
+            this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa.Entrada = true;
+            this.buscaPlanoContaCaixa.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa.LabelText = "Conta caixa";
+            this.buscaPlanoContaCaixa.Location = new System.Drawing.Point(3, 52);
+            this.buscaPlanoContaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPlanoContaCaixa.Name = "buscaPlanoContaCaixa";
+            this.buscaPlanoContaCaixa.Saida = true;
+            this.buscaPlanoContaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa.TabIndex = 5;
+            // 
+            // buscaCaixa
+            // 
+            this.buscaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaCaixa.Location = new System.Drawing.Point(3, 13);
+            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaCaixa.Name = "buscaCaixa";
+            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaCaixa.TabIndex = 0;
             // 
             // lbDataFinal
             // 
@@ -220,44 +238,6 @@
             this.dgvtbcTipo.Name = "dgvtbcTipo";
             this.dgvtbcTipo.ReadOnly = true;
             // 
-            // buscaPlanoContaCaixa
-            // 
-            this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaPlanoContaCaixa.Entrada = true;
-            this.buscaPlanoContaCaixa.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buscaPlanoContaCaixa.LabelText = "Conta caixa";
-            this.buscaPlanoContaCaixa.Location = new System.Drawing.Point(469, 13);
-            this.buscaPlanoContaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPlanoContaCaixa.Name = "buscaPlanoContaCaixa";
-            this.buscaPlanoContaCaixa.Saida = true;
-            this.buscaPlanoContaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaPlanoContaCaixa.TabIndex = 5;
-            // 
-            // buscaCaixa
-            // 
-            this.buscaCaixa.BackColor = System.Drawing.Color.White;
-            this.buscaCaixa.Location = new System.Drawing.Point(3, 13);
-            this.buscaCaixa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaCaixa.Name = "buscaCaixa";
-            this.buscaCaixa.Size = new System.Drawing.Size(264, 39);
-            this.buscaCaixa.TabIndex = 0;
-            // 
-            // lbDescricao
-            // 
-            this.lbDescricao.AutoSize = true;
-            this.lbDescricao.Location = new System.Drawing.Point(6, 55);
-            this.lbDescricao.Name = "lbDescricao";
-            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
-            this.lbDescricao.TabIndex = 9;
-            this.lbDescricao.Text = "Descrição";
-            // 
-            // tbDescricao
-            // 
-            this.tbDescricao.Location = new System.Drawing.Point(9, 71);
-            this.tbDescricao.Name = "tbDescricao";
-            this.tbDescricao.Size = new System.Drawing.Size(258, 20);
-            this.tbDescricao.TabIndex = 10;
-            // 
             // fmCaiBuscaLancamentos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -299,7 +279,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigoConta;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcConta;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcTipo;
-        private System.Windows.Forms.TextBox tbDescricao;
-        private System.Windows.Forms.Label lbDescricao;
     }
 }
