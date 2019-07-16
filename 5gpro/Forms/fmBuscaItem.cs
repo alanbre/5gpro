@@ -5,7 +5,6 @@ using _5gpro.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms

@@ -5598,11 +5598,13 @@ INSERT INTO `cidade` (`idcidade`, `nome`, `idestado`) VALUES
 (5564, 'Xambioá', 27);
 
 INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES 
-(1, 'm', 'Metro'),
-(2, 'h', 'Hora'),
-(3, 'min', 'Minuto'),
-(4, 'L', 'Litro'),
-(5, 'm²', 'Metro');
+(1, 'M', 'METRO'),
+(2, 'H', 'HORA'),
+(3, 'MIN', 'MINUTO'),
+(4, 'L', 'LITRO'),
+(5, 'KM', 'QUILÔMETRO'),
+(6, 'M²', 'METROS QUADRADOS'),
+(7, 'UN', 'UNIDADE');
 
 INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
 

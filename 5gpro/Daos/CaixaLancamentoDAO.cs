@@ -115,8 +115,8 @@ namespace _5gpro.Daos
                             {whereCaixa} 
                             {whereData} 
                             ORDER BY cl.idcaixa_lancamento";
-                if (f.planoConta != null) sql.addParam("@idcaixa_plano_contas", f.planoConta.PlanoContaID);
-                if (f.caixa != null) sql.addParam("@idcaixa", f.caixa.CaixaID);
+                if (f.planoConta != null) sql.addParam("@idcaixa_plano_contas", f.planoConta);
+                if (f.caixa != null) sql.addParam("@idcaixa", f.caixa);
                 sql.addParam("@datainicial", f.DataInicial);
                 sql.addParam("@datafinal", f.DataFinal);
                 var data = sql.selectQuery();

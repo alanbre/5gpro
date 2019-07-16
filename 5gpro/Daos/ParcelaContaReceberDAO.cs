@@ -75,14 +75,14 @@ namespace _5gpro.Daos
             return parcelaContaReceber;
         }
 
-        public int QuitarParcelas(List<ParcelaContaReceber> parcelas, FormaPagamento formapagamento)
+        public int QuitarParcelas(List<ParcelaContaReceber> parcelas)
         {
             int retorno = 0;
             string pago = "Pago";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"UPDATE parcela_conta_receber 
-                            SET data_quitacao = @data_quitacao, situacao = @situacao, idformapagamento = @idformapagamento
+                            SET data_quitacao = @data_quitacao, situacao = @situacao
                             WHERE idparcela_conta_receber = @idparcela_conta_receber
                             AND idconta_receber = @idconta_receber";
                 foreach (var p in parcelas)
@@ -92,7 +92,6 @@ namespace _5gpro.Daos
                     sql.addParam("@idparcela_conta_receber", p.ParcelaContaReceberID);
                     sql.addParam("@idconta_receber", p.ContaReceberID);
                     sql.addParam("@situacao", pago);
-                    sql.addParam("@idformapagamento", formapagamento.FormaPagamentoID);
                     sql.updateQuery();
                 }
                 retorno = 1;
@@ -111,7 +110,6 @@ namespace _5gpro.Daos
             {
                 var parcela = new ParcelaContaReceber();
                 parcela.ParcelaContaReceberID = Convert.ToInt32(d["idparcela_conta_receber"]);
-                parcela.Descricao = (string)d["descricao"];
                 parcela.Sequencia = Convert.ToInt32(d["sequencia"]);
                 parcela.DataVencimento = (DateTime)d["data_vencimento"];
                 parcela.Valor = (decimal)d["valor"];

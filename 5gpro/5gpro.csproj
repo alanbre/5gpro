@@ -405,6 +405,11 @@
     </Compile>
     <Compile Include="Forms\fmCfgDadosEstabelecimento.Designer.cs">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    <Compile Include="Forms\fmSelecaoOrcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSelecaoOrcamento.Designer.cs">
+      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmSaiNotaFiscal.cs">
       <SubType>Form</SubType>
@@ -826,6 +831,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
+      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSaiNotaFiscal.resx">
       <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
@@ -1242,7 +1249,6 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\addMenu_80px.png" />
     <None Include="Resources\addMenu_64px.png" />
