@@ -28,6 +28,7 @@ namespace _5gpro.Reports
             this.rvItens.LocalReport.DisplayName = "Listagem de itens";
             this.rvItens.LocalReport.DataSources.Clear();
             this.rvItens.LocalReport.DataSources.Add(new ReportDataSource("dsItens", _dados));
+            this.rvItens.SetDisplayMode(DisplayMode.PrintLayout);
             this.rvItens.RefreshReport();
         }
     }

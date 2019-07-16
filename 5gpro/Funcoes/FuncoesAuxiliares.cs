@@ -14,8 +14,6 @@ namespace _5gpro.Funcoes
                 e.Handled = true;
             }
         }
-
-
         public T DeepCopy<T>(T item)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -26,8 +24,6 @@ namespace _5gpro.Funcoes
             stream.Close();
             return result;
         }
-
-
         public void TratarTamanhoColunas(DataGridView dgv)
         {
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
@@ -37,6 +33,50 @@ namespace _5gpro.Funcoes
                 dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 dgv.Columns[i].Width = colw;
             }
+        }
+
+        /// <summary>
+        /// Formatar uma string CNPJ
+        /// </summary>
+        /// <param name="CNPJ">string CNPJ sem formatacao</param>
+        /// <returns>string CNPJ formatada</returns>
+        /// <example>Recebe '99999999999999' Devolve '99.999.999/9999-99'</example>
+        public string FormataCNPJ(string CNPJ)
+        {
+            return Convert.ToUInt64(CNPJ).ToString(@"00\.000\.000\/0000\-00");
+        }
+
+        /// <summary>
+        /// Formatar uma string CPF
+        /// </summary>
+        /// <param name="CPF">string CPF sem formatacao</param>
+        /// <returns>string CPF formatada</returns>
+        /// <example>Recebe '99999999999' Devolve '999.999.999-99'</example>
+        public string FormataCPF(string CPF)
+        {
+            return Convert.ToUInt64(CPF).ToString(@"000\.000\.000\-00");
+        }
+
+        /// <summary>
+        /// Retira a Formatacao de uma string CNPJ/CPF
+        /// </summary>
+        /// <param name="Documento">string Codigo Formatada</param>
+        /// <returns>string sem formatacao</returns>
+        /// <example>Recebe '99.999.999/9999-99' Devolve '99999999999999'</example>
+        public string SemFormatacao(string Documento)
+        {
+            return Documento.Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty);
+        }
+
+        /// <summary>
+        /// Formatar uma string Telefone
+        /// </summary>
+        /// <param name="Tel">string Telefone sem formatacao</param>
+        /// <returns>string Telefone formatada</returns>
+        /// <example>Recebe '99999999999' Devolve '(99) 99999-9999'</example>
+        public string FormataTel(string Tel)
+        {
+            return Convert.ToUInt64(Tel).ToString("(00) 00000-0000");
         }
     }
 }

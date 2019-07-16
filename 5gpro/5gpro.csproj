@@ -400,6 +400,12 @@
     <Compile Include="Forms\fmCaiPlanoContasPadrao.Designer.cs">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmSaiNotaFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSaiNotaFiscal.designer.cs">
+      <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
@@ -431,6 +437,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsOrcamento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOrcamento.xsd</DependentUpon>
     </Compile>
     <Compile Include="Reports\fmRltGenerico.cs">
       <SubType>Form</SubType>
@@ -707,6 +718,12 @@
     <Compile Include="Reports\fmRltNotasEntradas.Designer.cs">
       <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reports\impOrcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\impOrcamento.Designer.cs">
+      <DependentUpon>impOrcamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Controls\BuscaCaixa.resx">
       <DependentUpon>BuscaCaixa.cs</DependentUpon>
@@ -801,6 +818,9 @@
     <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSaiNotaFiscal.resx">
+      <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
     </EmbeddedResource>
@@ -815,6 +835,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltNotasEntradas.resx">
       <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\impOrcamento.rdlc" />
+    <EmbeddedResource Include="Reports\impOrcamento.resx">
+      <DependentUpon>impOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
@@ -1009,6 +1033,17 @@
     </None>
     <None Include="Reports\dsNotasSaidas.xss">
       <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsOrcamento.xsc">
+      <DependentUpon>dsOrcamento.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsOrcamento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOrcamento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsOrcamento.xss">
+      <DependentUpon>dsOrcamento.xsd</DependentUpon>
     </None>
     <None Include="Resources\plus_32_blue.png" />
   </ItemGroup>
@@ -1234,6 +1269,7 @@
     <None Include="Resources\unlock_32px.png" />
     <None Include="Resources\search_filled_18px_white.png" />
     <None Include="Resources\menu_filled_30px_white.png" />
+    <None Include="Resources\print_48px.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

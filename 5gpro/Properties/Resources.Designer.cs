@@ -793,6 +793,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap print_48px {
+            get {
+                object obj = ResourceManager.GetObject("print_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap receive_change_40px {
             get {
                 object obj = ResourceManager.GetObject("receive_change_40px", resourceCulture);
