@@ -16,6 +16,7 @@ namespace _5gpro.Forms
         private List<ParcelaContaPagar> parcelasContaPagarSelecionadas = new List<ParcelaContaPagar>();
         private List<CaixaLancamento> caixaLancamentos = null;
         private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
+        private FuncoesAuxiliares funaux = new FuncoesAuxiliares();
 
 
         private bool valorContaFiltro = false;
@@ -132,6 +133,7 @@ namespace _5gpro.Forms
             foreach (var par in parcelasContaPagar)
             {
                 dgvParcelas.Rows.Add(par.ContaPagarID,
+                                     par.Descricao,
                                      par.Sequencia,
                                      par.DataVencimento,
                                      par.Valor,
@@ -142,7 +144,7 @@ namespace _5gpro.Forms
                                      par.ValorFinal
                                      );
             }
-
+            funaux.TratarTamanhoColunas(dgvParcelas);
             dgvParcelas.Refresh();
         }
         private void DatasIniciais()
@@ -152,7 +154,7 @@ namespace _5gpro.Forms
         }
         private void SelecionaLinha()
         {
-            var parcelaSelecionada = parcelasContaPagar.Single(p => p.ContaPagarID == (int)dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[1].Value);
+            var parcelaSelecionada = parcelasContaPagar.Single(p => p.ContaPagarID == (int)dgvParcelas.CurrentRow.Cells[0].Value && p.Sequencia == (int)dgvParcelas.CurrentRow.Cells[2].Value);
             if (parcelasContaPagarSelecionadas.Contains(parcelaSelecionada))
             {
                 parcelasContaPagarSelecionadas.Remove(parcelaSelecionada);
@@ -186,7 +188,8 @@ namespace _5gpro.Forms
             formTroco.ShowDialog();
             if (formTroco.pago)
             {
-                int retorno = parcelaContaPagarDAO.QuitarParcelas(parcelasContaPagarSelecionadas);
+                
+                int retorno = parcelaContaPagarDAO.QuitarParcelas(parcelasContaPagarSelecionadas, formTroco.formaPagamento);
                 if (retorno == 1)
                 {
                     MessageBox.Show("Parcelas selecionadas quitadas!");
