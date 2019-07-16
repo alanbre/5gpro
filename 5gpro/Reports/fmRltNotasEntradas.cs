@@ -28,6 +28,7 @@ namespace _5gpro.Reports
             this.rvNotasEntradas.LocalReport.DisplayName = "Relatório de notas de saída";
             this.rvNotasEntradas.LocalReport.DataSources.Clear();
             this.rvNotasEntradas.LocalReport.DataSources.Add(new ReportDataSource("dsNotasEntradas", _dados));
+            this.rvNotasEntradas.SetDisplayMode(DisplayMode.PrintLayout);
             this.rvNotasEntradas.RefreshReport();
         }
     }

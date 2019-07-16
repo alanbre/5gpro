@@ -17,15 +17,18 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                            p.complemento, p.idcidade, p.telefone, p.email,
+                            p.complemento, p.telefone, p.email, p.cpf, p.cnpj,
                             n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
                             i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario,
-                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
+                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto,
+                            c.idcidade, c.nome AS cidade_nome, e.idestado, e.nome AS estado_nome, e.uf
                             FROM orcamento o 
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            LEFT JOIN cidade c ON c.idcidade = p.idcidade
+                            LEFT JOIN estado e ON c.idestado = e.idestado
                             LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
                             LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
                             LEFT JOIN item i ON oi.iditem = i.iditem
@@ -48,15 +51,18 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                            p.complemento, p.idcidade, p.telefone, p.email,
+                            p.complemento, p.idcidade, p.telefone, p.email, p.cpf, p.cnpj,
                             n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
                             i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario,
-                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
+                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto,
+                            c.idcidade, c.nome AS cidade_nome, e.idestado, e.nome AS estado_nome, e.uf
                             FROM orcamento o 
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            LEFT JOIN cidade c ON c.idcidade = p.idcidade
+                            LEFT JOIN estado e ON c.idestado = e.idestado
                             LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
                             LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
                             LEFT JOIN item i ON oi.iditem = i.iditem
@@ -78,15 +84,18 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                            p.complemento, p.idcidade, p.telefone, p.email,
+                            p.complemento, p.idcidade, p.telefone, p.email, p.cpf, p.cnpj,
                             n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento,
                             i.iditem, i.descitem, i.denominacaocompra, i.tipo, i.referencia, i.valorentrada, i.valorsaida, i.estoquenecessario,
-                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto
+                            i.idunimedida, oi.quantidade, oi.valor_unitario, oi.valor_total, oi.desconto_porc, oi.desconto,
+                            c.idcidade, c.nome AS cidade_nome, e.idestado, e.nome AS estado_nome, e.uf
                             FROM orcamento o 
                             INNER JOIN pessoa p ON p.idpessoa = o.idpessoa
+                            LEFT JOIN cidade c ON c.idcidade = p.idcidade
+                            LEFT JOIN estado e ON c.idestado = e.idestado
                             LEFT JOIN notafiscal n ON o.idnotafiscal = n.idnotafiscal
                             LEFT JOIN orcamento_has_item oi ON oi.idorcamento = o.idorcamento
                             LEFT JOIN item i ON oi.iditem = i.iditem
@@ -262,8 +271,15 @@ namespace _5gpro.Daos
             Pessoa pessoa = null;
             if (data[0]["idpessoa"] != null)
             {
+                var estado = new Estado();
+                estado.EstadoID = Convert.ToInt32(data[0]["idestado"]);
+                estado.Nome = (string)data[0]["estado_nome"];
+                estado.Uf = (string)data[0]["uf"];
+
                 var cidade = new Cidade();
                 cidade.CidadeID = Convert.ToInt32(data[0]["idcidade"]);
+                cidade.Nome = (string)data[0]["cidade_nome"];
+                cidade.Estado = estado;
 
                 pessoa = new Pessoa();
                 pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
@@ -277,6 +293,7 @@ namespace _5gpro.Daos
                 pessoa.Cidade = cidade;
                 pessoa.Telefone = (string)data[0]["telefone"];
                 pessoa.Email = (string)data[0]["email"];
+                pessoa.CpfCnpj = (string)data[0]["cpf"] ?? (string)data[0]["cnpj"];
             }
 
 
