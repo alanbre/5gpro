@@ -43,7 +43,14 @@ namespace _5gpro.Funcoes
         /// <example>Recebe '99999999999999' Devolve '99.999.999/9999-99'</example>
         public string FormataCNPJ(string CNPJ)
         {
-            return Convert.ToUInt64(CNPJ).ToString(@"00\.000\.000\/0000\-00");
+            if (CNPJ.Length == 14)
+            {
+                return Convert.ToUInt64(CNPJ).ToString(@"00\.000\.000\/0000\-00");
+            }
+            else
+            {
+                return CNPJ;
+            }
         }
 
         /// <summary>
@@ -54,7 +61,14 @@ namespace _5gpro.Funcoes
         /// <example>Recebe '99999999999' Devolve '999.999.999-99'</example>
         public string FormataCPF(string CPF)
         {
-            return Convert.ToUInt64(CPF).ToString(@"000\.000\.000\-00");
+            if (CPF.Length == 11)
+            {
+                return Convert.ToUInt64(CPF).ToString(@"000\.000\.000\-00");
+            }
+            else
+            {
+                return CPF;
+            }
         }
 
         /// <summary>
@@ -76,7 +90,14 @@ namespace _5gpro.Funcoes
         /// <example>Recebe '99999999999' Devolve '(99) 99999-9999'</example>
         public string FormataTel(string Tel)
         {
-            return Convert.ToUInt64(Tel).ToString("(00) 00000-0000");
+            if (Tel.Length == 11)
+            {
+                return Convert.ToUInt64(Tel).ToString("(00) 00000-0000");
+            }
+            else
+            {
+                return Tel;
+            }
         }
     }
 }
