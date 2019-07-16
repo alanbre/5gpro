@@ -57,6 +57,7 @@
             this.lbValorTot = new System.Windows.Forms.Label();
             this.btInserirItem = new System.Windows.Forms.Button();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.btSelecionar = new System.Windows.Forms.Button();
             this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
             this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
             this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
@@ -366,6 +367,7 @@
             this.gbItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbItens.Controls.Add(this.btSelecionar);
             this.gbItens.Controls.Add(this.dbDescontoItem);
             this.gbItens.Controls.Add(this.dbDescontoItemPorc);
             this.gbItens.Controls.Add(this.dbValorTotItem);
@@ -387,6 +389,16 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
+            // 
+            // btSelecionar
+            // 
+            this.btSelecionar.Location = new System.Drawing.Point(212, 308);
+            this.btSelecionar.Name = "btSelecionar";
+            this.btSelecionar.Size = new System.Drawing.Size(75, 23);
+            this.btSelecionar.TabIndex = 15;
+            this.btSelecionar.Text = "Selecionar";
+            this.btSelecionar.UseVisualStyleBackColor = true;
+            this.btSelecionar.Click += new System.EventHandler(this.BtConjunto_Click);
             // 
             // dbDescontoItem
             // 
@@ -729,5 +741,6 @@
         private Controls.DecimalBox dbValorTotalOrcamento;
         private Controls.DecimalBox dbDescontoOrcamento;
         private Controls.DecimalBox dbDescontoTotalItens;
+        private System.Windows.Forms.Button btSelecionar;
     }
 }

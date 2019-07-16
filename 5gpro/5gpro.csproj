@@ -400,6 +400,12 @@
     <Compile Include="Forms\fmCaiPlanoContasPadrao.Designer.cs">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmSelecaoOrcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSelecaoOrcamento.Designer.cs">
+      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
@@ -800,6 +806,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
+      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
