@@ -405,6 +405,7 @@
     </Compile>
     <Compile Include="Forms\fmSelecaoOrcamento.Designer.cs">
       <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmSaiNotaFiscal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -825,6 +826,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
       <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSaiNotaFiscal.resx">
       <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
     </EmbeddedResource>
@@ -1240,7 +1242,6 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\addMenu_80px.png" />
     <None Include="Resources\addMenu_64px.png" />

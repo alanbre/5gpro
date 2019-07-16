@@ -19,13 +19,8 @@ namespace _5gpro.Forms
         private readonly NotaFiscalAux nfa = new NotaFiscalAux();
         private Validacao validacao = new Validacao();
 
-<<<<<<< HEAD
-        private Orcamento orcamento = new Orcamento();
-        private List<OrcamentoItem> listaorcamentoitens = new List<OrcamentoItem>();
-=======
         private Orcamento orcamento = null;
-        private List<OrcamentoItem> itens = new List<OrcamentoItem>();
->>>>>>> 7f8bc00e964034664f2fa62a74617d474d3f96fc
+        private List<OrcamentoItem> listaorcamentoitens = new List<OrcamentoItem>();
         private OrcamentoItem itemSelecionado;
         private DataTable rel = new DataTable();
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
@@ -310,7 +305,7 @@ namespace _5gpro.Forms
                 }
             }
 
-            PreencheGridItens(itens);
+            PreencheGridItens(listaorcamentoitens);
 
         }
         private void Recarrega()
@@ -539,7 +534,16 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-        private void InserirItem(OrcamentoItem orcamentoitem)
+
+        public void InserirItensSelecionados(List<OrcamentoItem> listaorcitem)
+        {
+            foreach (var l in listaorcitem)
+            {
+                InserirItem(l, true);
+            }
+        }
+
+        private void InserirItem(OrcamentoItem orcamentoitem, bool selecao = false)
         {
             var item = itemSelecionado ?? orcamentoitem;
             if (item == null)
@@ -551,11 +555,16 @@ namespace _5gpro.Forms
                 buscaItem.Focus();
                 return;
             }
-            item.Quantidade = dbQuantidade.Valor;
-            item.ValorUnitario = dbValorUnitItem.Valor;
-            item.ValorTotal = dbValorTotItem.Valor;
-            item.DescontoPorc = dbDescontoItemPorc.Valor;
-            item.Desconto = dbDescontoItem.Valor;
+            if (!selecao)
+            {
+                item.Quantidade = dbQuantidade.Valor;
+                item.ValorUnitario = dbValorUnitItem.Valor;
+                item.ValorTotal = dbValorTotItem.Valor;
+                item.DescontoPorc = dbDescontoItemPorc.Valor;
+                item.Desconto = dbDescontoItem.Valor;
+            }
+            item.ValorUnitario = item.Item.ValorUnitario;
+
             DataGridViewRow dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
             if (dr == null)
             {
@@ -622,12 +631,8 @@ namespace _5gpro.Forms
             tbNotaNumero.Clear();
             tbNotaDataEmissao.Clear();
             LimpaCamposItem(limpaCod);
-<<<<<<< HEAD
             orcamento = null;
             listaorcamentoitens.Clear();
-=======
-            
->>>>>>> 7f8bc00e964034664f2fa62a74617d474d3f96fc
             codigo = 0;
         }
         private void LimpaCamposItem(bool focus)
@@ -696,14 +701,11 @@ namespace _5gpro.Forms
             btInserirItem.Text = "Inserir";
         }
 
-<<<<<<< HEAD
         private void BtConjunto_Click(object sender, EventArgs e)
         {
-            var fmselecao = new fmSelecaoOrcamento();
+            var fmselecao = new fmSelecaoOrcamento(this);
             fmselecao.Show(this);
         }
-=======
->>>>>>> 7f8bc00e964034664f2fa62a74617d474d3f96fc
 
         private void PreencheGridItens(List<OrcamentoItem> itens)
         {
