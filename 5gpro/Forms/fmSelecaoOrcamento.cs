@@ -61,6 +61,7 @@ namespace _5gpro.Forms
                 {
                     dgvItensorcamento.Rows.Add(i.ItemID,
                            i.Descricao,
+                           i.Referencia,
                            i.Quantidade,
                            i.Unimedida.Sigla,
                            i.ValorUnitario,
@@ -71,6 +72,7 @@ namespace _5gpro.Forms
                 {
                     dgvItensorcamento.Rows.Add(i.ItemID,
                            i.Descricao,
+                           i.Referencia,
                            i.Quantidade,
                            i.Unimedida.Sigla,
                            i.ValorUnitario);
@@ -129,39 +131,41 @@ namespace _5gpro.Forms
             {
                 decimal c;
 
-                if (decimal.TryParse(dgvItensorcamento.SelectedRows[0].Cells[5].Value.ToString(), out c))
+                if (decimal.TryParse(dgvItensorcamento.SelectedRows[0].Cells[6].Value.ToString(), out c))
                 {
                     itemOrcamento = new OrcamentoItem();
                     itemOrcamento.Item = itemDAO.BuscaByID((int)dgvItensorcamento.CurrentRow.Cells[0].Value);
                     
                     quantidade = c;
-                    valorunitario = decimal.Parse(dgvItensorcamento.SelectedRows[0].Cells[4].Value.ToString());
+                    valorunitario = decimal.Parse(dgvItensorcamento.SelectedRows[0].Cells[5].Value.ToString());
                     totalitem = quantidade * valorunitario;
-                    dgvItensorcamento.SelectedRows[0].Cells[6].Value = totalitem;
+                    dgvItensorcamento.SelectedRows[0].Cells[7].Value = totalitem;
 
                     itemOrcamento.Quantidade = quantidade;
                     itemOrcamento.ValorTotal = totalitem;
 
                     itemRemover = listaitensorcamento.Find(i => i.Item.ItemID == itemOrcamento.Item.ItemID);
+
                     listaitensorcamento.Remove(itemRemover);
                     if(itemRemover != null)
                     total -= itemRemover.ValorTotal;
 
-                    listaitensorcamento.Add(itemOrcamento);
-                    if(itemOrcamento != null)
-                    total += itemOrcamento.ValorTotal;
+                    if (c > 0)
+                    {
+                        listaitensorcamento.Add(itemOrcamento);
+                        if (itemOrcamento != null)
+                        total += itemOrcamento.ValorTotal;
+                    }
 
                 }
                 else
                 {
                     quantidade = 0;
-                    dgvItensorcamento.SelectedRows[0].Cells[5].Value = 0.00;
                     dgvItensorcamento.SelectedRows[0].Cells[6].Value = 0.00;
-
+                    dgvItensorcamento.SelectedRows[0].Cells[7].Value = 0.00;
                 }
                 dbTotal.Valor = total;
             }
         }
-
     }
 }
