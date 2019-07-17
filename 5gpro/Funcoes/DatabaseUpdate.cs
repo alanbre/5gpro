@@ -1000,6 +1000,30 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
 ENGINE = InnoDB;
 
 
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`estabelecimento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`estabelecimento` (
+  `idestabelecimento` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  `fantasia` VARCHAR(255) NULL,
+  `rua` VARCHAR(150) NULL,
+  `numero` VARCHAR(10) NULL,
+  `bairro` VARCHAR(50) NULL,
+  `complemento` VARCHAR(50) NULL,
+  `cnpj` VARCHAR(14) NULL,
+  `telefone` VARCHAR(45) NULL,
+  `email` VARCHAR(150) NULL,
+  `idcidade` INT(11) NOT NULL,
+  PRIMARY KEY (`idestabelecimento`),
+  INDEX `fk_estabelecimento_cidade1_idx` (`idcidade` ASC) VISIBLE,
+  CONSTRAINT `fk_estabelecimento_cidade1`
+    FOREIGN KEY (`idcidade`)
+    REFERENCES `5gprodatabase`.`cidade` (`idcidade`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

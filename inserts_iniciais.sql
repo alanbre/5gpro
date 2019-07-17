@@ -5615,11 +5615,13 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Módulo de Cadastros', '010000'),
 ('Módulo de Orçamentos', '020000'),
 ('Módulo de Saidas', '030000'),
+('Módulo Financeiro', '040000'),
 ('Módulo de Contas a Receber', '050000'),
 ('Módulo de Contas a Pagar', '060000'),
 ('Módulo de Entradas', '070000'),
 ('Módulo de Estoque', '080000'),
 ('Módulo de Caixa', '090000'),
+('Módulo de Configuração', '100000')
 
 
 ('Cadastro de Pessoa', '010100'),
@@ -5634,7 +5636,6 @@ INSERT INTO permissao ( nome, codigo) VALUES
 
 ('Cadastro de Nota Fiscal', '030100'),
 
-('Módulo Financeiro', '040000'),
 ('Cadastro de Operacao', '040100'),
 
 ('Cadastro de Contas a Receber', '050100'),
@@ -5652,7 +5653,9 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Sangria de caixa', '090300'),
 ('Lançamento manual do caixa', '090400'),
 ('Plano de contas', '090500'),
-('Plano de contas padrao', '090600');
+('Plano de contas padrao', '090600'),
+
+('Dados do Estabelecimento', '100100');
 
 
 
