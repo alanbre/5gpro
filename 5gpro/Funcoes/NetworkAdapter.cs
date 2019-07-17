@@ -3,7 +3,7 @@ using System.Management;
 
 namespace _5gpro.Funcoes
 {
-    class NetworkAdapter
+    public class NetworkAdapter
     {
         private string _MAC = "";
         private string _IP = "";

@@ -28,13 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuVertical1 = new _5gpro.Controls.MenuVertical();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbDados = new System.Windows.Forms.GroupBox();
-            this.tbFantasia = new System.Windows.Forms.TextBox();
-            this.lbFantasia = new System.Windows.Forms.Label();
-            this.tbNome = new System.Windows.Forms.TextBox();
-            this.lbNome = new System.Windows.Forms.Label();
             this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
@@ -50,16 +46,21 @@
             this.lbNumero = new System.Windows.Forms.Label();
             this.tbRua = new System.Windows.Forms.TextBox();
             this.lbRua = new System.Windows.Forms.Label();
+            this.tbFantasia = new System.Windows.Forms.TextBox();
+            this.lbFantasia = new System.Windows.Forms.Label();
+            this.tbNome = new System.Windows.Forms.TextBox();
+            this.lbNome = new System.Windows.Forms.Label();
             this.gbDados.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuVertical1
+            // menuVertical
             // 
-            this.menuVertical1.Location = new System.Drawing.Point(9, 9);
-            this.menuVertical1.Margin = new System.Windows.Forms.Padding(0);
-            this.menuVertical1.Name = "menuVertical1";
-            this.menuVertical1.Size = new System.Drawing.Size(53, 364);
-            this.menuVertical1.TabIndex = 0;
+            this.menuVertical.Location = new System.Drawing.Point(9, 9);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(0);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 0;
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
             // 
             // tbAjuda
             // 
@@ -103,40 +104,6 @@
             this.gbDados.TabStop = false;
             this.gbDados.Text = "Dados";
             // 
-            // tbFantasia
-            // 
-            this.tbFantasia.Location = new System.Drawing.Point(8, 75);
-            this.tbFantasia.MaxLength = 255;
-            this.tbFantasia.Name = "tbFantasia";
-            this.tbFantasia.Size = new System.Drawing.Size(528, 20);
-            this.tbFantasia.TabIndex = 9;
-            // 
-            // lbFantasia
-            // 
-            this.lbFantasia.AutoSize = true;
-            this.lbFantasia.Location = new System.Drawing.Point(6, 55);
-            this.lbFantasia.Name = "lbFantasia";
-            this.lbFantasia.Size = new System.Drawing.Size(121, 13);
-            this.lbFantasia.TabIndex = 8;
-            this.lbFantasia.Text = "Apelido / Nome fantasia";
-            // 
-            // tbNome
-            // 
-            this.tbNome.Location = new System.Drawing.Point(9, 32);
-            this.tbNome.MaxLength = 255;
-            this.tbNome.Name = "tbNome";
-            this.tbNome.Size = new System.Drawing.Size(527, 20);
-            this.tbNome.TabIndex = 7;
-            // 
-            // lbNome
-            // 
-            this.lbNome.AutoSize = true;
-            this.lbNome.Location = new System.Drawing.Point(6, 16);
-            this.lbNome.Name = "lbNome";
-            this.lbNome.Size = new System.Drawing.Size(107, 13);
-            this.lbNome.TabIndex = 6;
-            this.lbNome.Text = "Nome / Razão social";
-            // 
             // buscaCidade
             // 
             this.buscaCidade.LabelText = "Cidade";
@@ -145,14 +112,16 @@
             this.buscaCidade.Name = "buscaCidade";
             this.buscaCidade.Size = new System.Drawing.Size(442, 39);
             this.buscaCidade.TabIndex = 23;
+            this.buscaCidade.Text_Changed += new _5gpro.Controls.BuscaCidade.text_changedEventHandler(this.BuscaCidade_Text_Changed);
             // 
             // tbEmail
             // 
             this.tbEmail.Location = new System.Drawing.Point(9, 355);
-            this.tbEmail.MaxLength = 45;
+            this.tbEmail.MaxLength = 150;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
             this.tbEmail.TabIndex = 29;
+            this.tbEmail.TextChanged += new System.EventHandler(this.TbEmail_TextChanged);
             // 
             // lbEmail
             // 
@@ -170,6 +139,7 @@
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefone.TabIndex = 27;
+            this.mtbTelefone.TextChanged += new System.EventHandler(this.MtbTelefone_TextChanged);
             // 
             // lbTelefone
             // 
@@ -188,6 +158,7 @@
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
             this.mtbCpfCnpj.TabIndex = 25;
+            this.mtbCpfCnpj.TextChanged += new System.EventHandler(this.MtbCpfCnpj_TextChanged);
             // 
             // lbCpf
             // 
@@ -201,10 +172,11 @@
             // tbComplemento
             // 
             this.tbComplemento.Location = new System.Drawing.Point(10, 192);
-            this.tbComplemento.MaxLength = 45;
+            this.tbComplemento.MaxLength = 50;
             this.tbComplemento.Name = "tbComplemento";
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
             this.tbComplemento.TabIndex = 22;
+            this.tbComplemento.TextChanged += new System.EventHandler(this.TbComplemento_TextChanged);
             // 
             // lbComplemento
             // 
@@ -218,10 +190,11 @@
             // tbBairro
             // 
             this.tbBairro.Location = new System.Drawing.Point(9, 153);
-            this.tbBairro.MaxLength = 45;
+            this.tbBairro.MaxLength = 50;
             this.tbBairro.Name = "tbBairro";
             this.tbBairro.Size = new System.Drawing.Size(528, 20);
             this.tbBairro.TabIndex = 20;
+            this.tbBairro.TextChanged += new System.EventHandler(this.TbBairro_TextChanged);
             // 
             // lbBairro
             // 
@@ -239,6 +212,7 @@
             this.tbNumero.Name = "tbNumero";
             this.tbNumero.Size = new System.Drawing.Size(64, 20);
             this.tbNumero.TabIndex = 18;
+            this.tbNumero.TextChanged += new System.EventHandler(this.TbNumero_TextChanged);
             // 
             // lbNumero
             // 
@@ -256,6 +230,7 @@
             this.tbRua.Name = "tbRua";
             this.tbRua.Size = new System.Drawing.Size(528, 20);
             this.tbRua.TabIndex = 16;
+            this.tbRua.TextChanged += new System.EventHandler(this.TbRua_TextChanged);
             // 
             // lbRua
             // 
@@ -266,7 +241,43 @@
             this.lbRua.TabIndex = 15;
             this.lbRua.Text = "Rua";
             // 
-            // fmCfgEmpresa
+            // tbFantasia
+            // 
+            this.tbFantasia.Location = new System.Drawing.Point(10, 75);
+            this.tbFantasia.MaxLength = 255;
+            this.tbFantasia.Name = "tbFantasia";
+            this.tbFantasia.Size = new System.Drawing.Size(528, 20);
+            this.tbFantasia.TabIndex = 9;
+            this.tbFantasia.TextChanged += new System.EventHandler(this.TbFantasia_TextChanged);
+            // 
+            // lbFantasia
+            // 
+            this.lbFantasia.AutoSize = true;
+            this.lbFantasia.Location = new System.Drawing.Point(6, 55);
+            this.lbFantasia.Name = "lbFantasia";
+            this.lbFantasia.Size = new System.Drawing.Size(121, 13);
+            this.lbFantasia.TabIndex = 8;
+            this.lbFantasia.Text = "Apelido / Nome fantasia";
+            // 
+            // tbNome
+            // 
+            this.tbNome.Location = new System.Drawing.Point(9, 32);
+            this.tbNome.MaxLength = 255;
+            this.tbNome.Name = "tbNome";
+            this.tbNome.Size = new System.Drawing.Size(527, 20);
+            this.tbNome.TabIndex = 7;
+            this.tbNome.TextChanged += new System.EventHandler(this.TbNome_TextChanged);
+            // 
+            // lbNome
+            // 
+            this.lbNome.AutoSize = true;
+            this.lbNome.Location = new System.Drawing.Point(6, 16);
+            this.lbNome.Name = "lbNome";
+            this.lbNome.Size = new System.Drawing.Size(107, 13);
+            this.lbNome.TabIndex = 6;
+            this.lbNome.Text = "Nome / Razão social";
+            // 
+            // fmCfgDadosEstabelecimento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -274,14 +285,16 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.gbDados);
             this.Controls.Add(this.tbAjuda);
-            this.Controls.Add(this.menuVertical1);
+            this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "fmCfgEmpresa";
+            this.Name = "fmCfgDadosEstabelecimento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Dados da empresa";
+            this.Load += new System.EventHandler(this.FmCfgDadosEstabelecimento_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmCfgDadosEstabelecimento_KeyDown);
             this.gbDados.ResumeLayout(false);
             this.gbDados.PerformLayout();
             this.ResumeLayout(false);
@@ -291,7 +304,7 @@
 
         #endregion
 
-        private Controls.MenuVertical menuVertical1;
+        private Controls.MenuVertical menuVertical;
         private System.Windows.Forms.TextBox tbAjuda;
         private System.Windows.Forms.GroupBox gbDados;
         private System.Windows.Forms.TextBox tbFantasia;

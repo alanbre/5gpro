@@ -1024,6 +1024,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`estabelecimento` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+<<<<<<< HEAD
 
 -- -----------------------------------------------------
 -- Table `5gprodatabase`.`migrations`
@@ -1036,6 +1037,8 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`migrations` (
 ENGINE = InnoDB;
 
 
+=======
+>>>>>>> f807bc2fc50f12daeab2cee2149782a42184ee6d
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
