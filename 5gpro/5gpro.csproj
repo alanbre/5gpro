@@ -405,6 +405,7 @@
     </Compile>
     <Compile Include="Forms\fmCfgDadosEstabelecimento.Designer.cs">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmSelecaoOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -831,6 +832,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
       <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
     </EmbeddedResource>
