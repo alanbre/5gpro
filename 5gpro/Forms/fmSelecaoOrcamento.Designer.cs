@@ -28,20 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbListadeitens = new System.Windows.Forms.GroupBox();
             this.dgvItensorcamento = new System.Windows.Forms.DataGridView();
-            this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcQuantidadeEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcUnidadeMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcValorSaida = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvtbcTotalporitem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btConfirmar = new System.Windows.Forms.Button();
             this.btCancelar = new System.Windows.Forms.Button();
             this.tbReferencia = new System.Windows.Forms.TextBox();
@@ -58,6 +51,14 @@
             this.dbTotal = new _5gpro.Controls.DecimalBox();
             this.buscaSubGrupoItem = new _5gpro.Controls.BuscaSubGrupoItem();
             this.buscaGrupoItem = new _5gpro.Controls.BuscaGrupoItem();
+            this.dgvtbcCodigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcDescricao = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcReferencia = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcQuantidadeEstoque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcUnidadeMedida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcValorSaida = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcQuantidade = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvtbcTotalporitem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbListadeitens.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItensorcamento)).BeginInit();
             this.gbTipoItem.SuspendLayout();
@@ -65,10 +66,13 @@
             // 
             // gbListadeitens
             // 
+            this.gbListadeitens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbListadeitens.Controls.Add(this.dgvItensorcamento);
             this.gbListadeitens.Location = new System.Drawing.Point(12, 160);
             this.gbListadeitens.Name = "gbListadeitens";
-            this.gbListadeitens.Size = new System.Drawing.Size(762, 323);
+            this.gbListadeitens.Size = new System.Drawing.Size(990, 323);
             this.gbListadeitens.TabIndex = 10;
             this.gbListadeitens.TabStop = false;
             this.gbListadeitens.Text = "Lista de Itens";
@@ -79,13 +83,14 @@
             this.dgvItensorcamento.AllowUserToDeleteRows = false;
             this.dgvItensorcamento.AllowUserToOrderColumns = true;
             this.dgvItensorcamento.AllowUserToResizeRows = false;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItensorcamento.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItensorcamento.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItensorcamento.BackgroundColor = System.Drawing.Color.White;
             this.dgvItensorcamento.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItensorcamento.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigo,
             this.dgvtbcDescricao,
+            this.dgvtbcReferencia,
             this.dgvtbcQuantidadeEstoque,
             this.dgvtbcUnidadeMedida,
             this.dgvtbcValorSaida,
@@ -96,72 +101,16 @@
             this.dgvItensorcamento.Name = "dgvItensorcamento";
             this.dgvItensorcamento.RowHeadersVisible = false;
             this.dgvItensorcamento.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvItensorcamento.Size = new System.Drawing.Size(756, 304);
+            this.dgvItensorcamento.Size = new System.Drawing.Size(984, 304);
             this.dgvItensorcamento.TabIndex = 0;
             this.dgvItensorcamento.TabStop = false;
             this.dgvItensorcamento.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvItensorcamento_CellValueChanged);
             this.dgvItensorcamento.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DgvItensorcamento_KeyDown);
             // 
-            // dgvtbcCodigo
-            // 
-            this.dgvtbcCodigo.HeaderText = "Código";
-            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
-            this.dgvtbcCodigo.ReadOnly = true;
-            this.dgvtbcCodigo.Width = 50;
-            // 
-            // dgvtbcDescricao
-            // 
-            this.dgvtbcDescricao.HeaderText = "Descrição";
-            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
-            this.dgvtbcDescricao.ReadOnly = true;
-            this.dgvtbcDescricao.Width = 150;
-            // 
-            // dgvtbcQuantidadeEstoque
-            // 
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.dgvtbcQuantidadeEstoque.DefaultCellStyle = dataGridViewCellStyle12;
-            this.dgvtbcQuantidadeEstoque.HeaderText = "Quantidade em Estoque";
-            this.dgvtbcQuantidadeEstoque.Name = "dgvtbcQuantidadeEstoque";
-            this.dgvtbcQuantidadeEstoque.ReadOnly = true;
-            // 
-            // dgvtbcUnidadeMedida
-            // 
-            this.dgvtbcUnidadeMedida.HeaderText = "Unidade de Medida";
-            this.dgvtbcUnidadeMedida.Name = "dgvtbcUnidadeMedida";
-            this.dgvtbcUnidadeMedida.ReadOnly = true;
-            this.dgvtbcUnidadeMedida.Width = 50;
-            // 
-            // dgvtbcValorSaida
-            // 
-            dataGridViewCellStyle13.Format = "C2";
-            dataGridViewCellStyle13.NullValue = null;
-            this.dgvtbcValorSaida.DefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvtbcValorSaida.HeaderText = "Valor de Saída";
-            this.dgvtbcValorSaida.Name = "dgvtbcValorSaida";
-            this.dgvtbcValorSaida.ReadOnly = true;
-            // 
-            // dgvtbcQuantidade
-            // 
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle14;
-            this.dgvtbcQuantidade.HeaderText = "Quantidade";
-            this.dgvtbcQuantidade.Name = "dgvtbcQuantidade";
-            // 
-            // dgvtbcTotalporitem
-            // 
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.dgvtbcTotalporitem.DefaultCellStyle = dataGridViewCellStyle15;
-            this.dgvtbcTotalporitem.HeaderText = "Total por Item";
-            this.dgvtbcTotalporitem.Name = "dgvtbcTotalporitem";
-            this.dgvtbcTotalporitem.ReadOnly = true;
-            this.dgvtbcTotalporitem.Width = 150;
-            // 
             // btConfirmar
             // 
-            this.btConfirmar.Location = new System.Drawing.Point(310, 521);
+            this.btConfirmar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btConfirmar.Location = new System.Drawing.Point(366, 521);
             this.btConfirmar.Name = "btConfirmar";
             this.btConfirmar.Size = new System.Drawing.Size(75, 23);
             this.btConfirmar.TabIndex = 12;
@@ -171,7 +120,8 @@
             // 
             // btCancelar
             // 
-            this.btCancelar.Location = new System.Drawing.Point(391, 521);
+            this.btCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btCancelar.Location = new System.Drawing.Point(447, 521);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(75, 23);
             this.btCancelar.TabIndex = 13;
@@ -275,8 +225,9 @@
             // 
             // lbTotalorcamento
             // 
+            this.lbTotalorcamento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbTotalorcamento.AutoSize = true;
-            this.lbTotalorcamento.Location = new System.Drawing.Point(620, 490);
+            this.lbTotalorcamento.Location = new System.Drawing.Point(851, 490);
             this.lbTotalorcamento.Name = "lbTotalorcamento";
             this.lbTotalorcamento.Size = new System.Drawing.Size(42, 13);
             this.lbTotalorcamento.TabIndex = 14;
@@ -284,7 +235,8 @@
             // 
             // dbTotal
             // 
-            this.dbTotal.Location = new System.Drawing.Point(668, 486);
+            this.dbTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dbTotal.Location = new System.Drawing.Point(899, 486);
             this.dbTotal.Name = "dbTotal";
             this.dbTotal.Size = new System.Drawing.Size(100, 22);
             this.dbTotal.TabIndex = 15;
@@ -310,12 +262,75 @@
             this.buscaGrupoItem.TabIndex = 6;
             this.buscaGrupoItem.Leave += new System.EventHandler(this.BuscaGrupoItem_Leave);
             // 
+            // dgvtbcCodigo
+            // 
+            this.dgvtbcCodigo.HeaderText = "Código";
+            this.dgvtbcCodigo.Name = "dgvtbcCodigo";
+            this.dgvtbcCodigo.ReadOnly = true;
+            this.dgvtbcCodigo.Width = 50;
+            // 
+            // dgvtbcDescricao
+            // 
+            this.dgvtbcDescricao.HeaderText = "Descrição";
+            this.dgvtbcDescricao.Name = "dgvtbcDescricao";
+            this.dgvtbcDescricao.ReadOnly = true;
+            this.dgvtbcDescricao.Width = 180;
+            // 
+            // dgvtbcReferencia
+            // 
+            this.dgvtbcReferencia.HeaderText = "Referência";
+            this.dgvtbcReferencia.Name = "dgvtbcReferencia";
+            this.dgvtbcReferencia.Width = 180;
+            // 
+            // dgvtbcQuantidadeEstoque
+            // 
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcQuantidadeEstoque.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvtbcQuantidadeEstoque.HeaderText = "Quantidade em Estoque";
+            this.dgvtbcQuantidadeEstoque.Name = "dgvtbcQuantidadeEstoque";
+            this.dgvtbcQuantidadeEstoque.ReadOnly = true;
+            // 
+            // dgvtbcUnidadeMedida
+            // 
+            this.dgvtbcUnidadeMedida.HeaderText = "Unidade de Medida";
+            this.dgvtbcUnidadeMedida.Name = "dgvtbcUnidadeMedida";
+            this.dgvtbcUnidadeMedida.ReadOnly = true;
+            this.dgvtbcUnidadeMedida.Width = 50;
+            // 
+            // dgvtbcValorSaida
+            // 
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcValorSaida.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvtbcValorSaida.HeaderText = "Valor de Saída";
+            this.dgvtbcValorSaida.Name = "dgvtbcValorSaida";
+            this.dgvtbcValorSaida.ReadOnly = true;
+            // 
+            // dgvtbcQuantidade
+            // 
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvtbcQuantidade.HeaderText = "Quantidade";
+            this.dgvtbcQuantidade.Name = "dgvtbcQuantidade";
+            // 
+            // dgvtbcTotalporitem
+            // 
+            dataGridViewCellStyle5.Format = "C2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.dgvtbcTotalporitem.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvtbcTotalporitem.HeaderText = "Total por Item";
+            this.dgvtbcTotalporitem.Name = "dgvtbcTotalporitem";
+            this.dgvtbcTotalporitem.ReadOnly = true;
+            this.dgvtbcTotalporitem.Width = 150;
+            // 
             // fmSelecaoOrcamento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(796, 556);
+            this.ClientSize = new System.Drawing.Size(1014, 556);
             this.Controls.Add(this.dbTotal);
             this.Controls.Add(this.lbTotalorcamento);
             this.Controls.Add(this.lbReferencia);
@@ -332,8 +347,7 @@
             this.Controls.Add(this.btConfirmar);
             this.Controls.Add(this.gbListadeitens);
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1030, 595);
             this.Name = "fmSelecaoOrcamento";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -367,14 +381,15 @@
         private System.Windows.Forms.TextBox tbDenomCompra;
         private System.Windows.Forms.Label lbDescricao;
         private System.Windows.Forms.Label lbReferencia;
+        private System.Windows.Forms.Label lbTotalorcamento;
+        private Controls.DecimalBox dbTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcCodigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDescricao;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcReferencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcQuantidadeEstoque;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcUnidadeMedida;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorSaida;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcQuantidade;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcTotalporitem;
-        private System.Windows.Forms.Label lbTotalorcamento;
-        private Controls.DecimalBox dbTotal;
     }
 }

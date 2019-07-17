@@ -61,6 +61,7 @@ namespace _5gpro.Forms
                 {
                     dgvItensorcamento.Rows.Add(i.ItemID,
                            i.Descricao,
+                           i.Referencia,
                            i.Quantidade,
                            i.Unimedida.Sigla,
                            i.ValorUnitario,
@@ -71,6 +72,7 @@ namespace _5gpro.Forms
                 {
                     dgvItensorcamento.Rows.Add(i.ItemID,
                            i.Descricao,
+                           i.Referencia,
                            i.Quantidade,
                            i.Unimedida.Sigla,
                            i.ValorUnitario);
