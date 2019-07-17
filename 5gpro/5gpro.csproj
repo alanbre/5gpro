@@ -400,6 +400,11 @@
     <Compile Include="Forms\fmCaiPlanoContasPadrao.Designer.cs">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCfgDadosEstabelecimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCfgDadosEstabelecimento.Designer.cs">
+      <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
     <Compile Include="Forms\fmSelecaoOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -824,6 +829,8 @@
     <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
+      <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
     <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
       <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
     </EmbeddedResource>
@@ -1278,6 +1285,7 @@
     <None Include="Resources\search_filled_18px_white.png" />
     <None Include="Resources\menu_filled_30px_white.png" />
     <None Include="Resources\print_48px.png" />
+    <None Include="Resources\icons8-settings-40.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
