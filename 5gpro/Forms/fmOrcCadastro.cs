@@ -6,6 +6,7 @@ using _5gpro.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -21,7 +22,9 @@ namespace _5gpro.Forms
 
         private Orcamento orcamento = null;
         private List<OrcamentoItem> listaorcamentoitens = new List<OrcamentoItem>();
+        private List<OrcamentoItem> listaorcamentoitensSelecionados = new List<OrcamentoItem>();
         private OrcamentoItem itemSelecionado;
+        private OrcamentoItem itemMultiselect = new OrcamentoItem();
         private DataTable rel = new DataTable();
         private readonly FuncoesAuxiliares f = new FuncoesAuxiliares();
 
@@ -160,7 +163,6 @@ namespace _5gpro.Forms
         }
         private void BtNotaGerar_Click(object sender, EventArgs e)
         {
-
             if (orcamento.NotaFiscal == null)
             {
                 notafiscal = nfa.GerarNotaFiscal(orcamento);
@@ -189,6 +191,13 @@ namespace _5gpro.Forms
             }
         }
         private void BtImprimir_Click(object sender, EventArgs e) => Imprimir();
+        private void DgvItens_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e) => SelecionaLinha();
+        private void DgvItens_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Space)
+                return;
+            SelecionaLinha();
+        }
 
         private void Novo()
         {
@@ -534,7 +543,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
         public void InserirItensSelecionados(List<OrcamentoItem> listaorcitem)
         {
             foreach (var l in listaorcitem)
@@ -542,7 +550,6 @@ namespace _5gpro.Forms
                 InserirItem(l, true);
             }
         }
-
         private void InserirItem(OrcamentoItem orcamentoitem, bool selecao = false)
         {
             var item = itemSelecionado ?? orcamentoitem;
@@ -610,7 +617,8 @@ namespace _5gpro.Forms
         }
         private void LimpaCampos(bool limpaCod)
         {
-            if (limpaCod) {
+            if (limpaCod)
+            {
                 tbCodigo.Clear();
                 orcamento = null;
                 notafiscal = null;
@@ -665,15 +673,28 @@ namespace _5gpro.Forms
         }
         private void ExcluirItem()
         {
-            if (itemSelecionado != null)
+            if(listaorcamentoitensSelecionados.Count > 0)
             {
-                listaorcamentoitens.RemoveAll(i => i.Item.ItemID == itemSelecionado.Item.ItemID);
+                foreach (var orcamentoitem in listaorcamentoitensSelecionados)
+                {
+                    listaorcamentoitens.RemoveAll(i => i.Item.ItemID == orcamentoitem.Item.ItemID);
+                }
                 dgvItens.Rows.Clear();
                 dgvItens.Refresh();
                 LimpaCamposItem(false);
                 PreencheGridItens(listaorcamentoitens);
                 CalculaTotalOrcamento();
             }
+
+            //if (itemSelecionado != null)
+            //{
+            //    listaorcamentoitens.RemoveAll(i => i.Item.ItemID == itemSelecionado.Item.ItemID);
+            //    dgvItens.Rows.Clear();
+            //    dgvItens.Refresh();
+            //    LimpaCamposItem(false);
+            //    PreencheGridItens(listaorcamentoitens);
+            //    CalculaTotalOrcamento();
+            //}
         }
         private void InserirItem()
         {
@@ -700,13 +721,30 @@ namespace _5gpro.Forms
             buscaItem.Focus();
             btInserirItem.Text = "Inserir";
         }
-
         private void BtConjunto_Click(object sender, EventArgs e)
         {
             var fmselecao = new fmSelecaoOrcamento(this);
             fmselecao.Show(this);
         }
+        private void SelecionaLinha()
+        {
+            var itemMultiSelecionado = listaorcamentoitens.Single(p => p.Item.ItemID == (int)dgvItens.CurrentRow.Cells[0].Value);
+            if (listaorcamentoitensSelecionados.Contains(itemMultiSelecionado))
+            {
+                listaorcamentoitensSelecionados.Remove(itemMultiSelecionado);
+                dgvItens.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.DodgerBlue;
+                dgvItens.CurrentRow.DefaultCellStyle.BackColor = Color.White;
+                dgvItens.CurrentRow.DefaultCellStyle.ForeColor = Color.Black;
+            }
+            else
+            {
+                listaorcamentoitensSelecionados.Add(itemMultiSelecionado);
+                dgvItens.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Blue;
+                dgvItens.CurrentRow.DefaultCellStyle.BackColor = Color.DarkBlue;
+                dgvItens.CurrentRow.DefaultCellStyle.ForeColor = Color.White;
+            }
 
+        }
         private void PreencheGridItens(List<OrcamentoItem> itens)
         {
             dgvItens.Rows.Clear();

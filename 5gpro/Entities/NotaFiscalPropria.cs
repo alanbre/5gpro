@@ -22,12 +22,6 @@ namespace _5gpro.Entities
         public decimal DescontoDocumento { get; set; }
         public string Descricao { get; set; }
 
-        [Required(ErrorMessage = "O Código é obrigatório.|buscaCaixa", AllowEmptyStrings = false)]
-        public Caixa Caixa { get; set; }
-
-        [Required(ErrorMessage = "O Código é obrigatório.|buscaPlanoDeConta", AllowEmptyStrings = false)]
-        public PlanoConta PlanoDeConta { get; set; }
-
         public virtual ICollection<NotaFiscalPropriaItem> NotaFiscalPropriaItem { get; set; }
     }
 }
