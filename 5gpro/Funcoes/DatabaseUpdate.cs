@@ -29,8 +29,7 @@ namespace _5gpro.Funcoes
         }
         private string CreateTableSQL()
         {
-            string create = @"
--- MySQL Workbench Forward Engineering
+            string create = @"-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -323,6 +322,7 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`orcamento` (
   `desconto_orcamento` DECIMAL(10,2) NULL DEFAULT NULL,
   `idnotafiscal` INT(11) NULL,
   `idpessoa` INT(11) NULL,
+  `descricao` VARCHAR(150) NULL,
   PRIMARY KEY (`idorcamento`),
   INDEX `fk_orcamento_notafiscal1_idx` (`idnotafiscal` ASC) VISIBLE,
   INDEX `fk_orcamento_pessoa1_idx` (`idpessoa` ASC) VISIBLE,
@@ -997,6 +997,42 @@ CREATE TABLE IF NOT EXISTS `5gprodatabase`.`caixa_plano_contas_padrao` (
     REFERENCES `5gprodatabase`.`caixa_plano_contas` (`idcaixa_plano_contas`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`estabelecimento`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`estabelecimento` (
+  `idestabelecimento` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(255) NOT NULL,
+  `fantasia` VARCHAR(255) NULL,
+  `rua` VARCHAR(150) NULL,
+  `numero` VARCHAR(10) NULL,
+  `bairro` VARCHAR(50) NULL,
+  `complemento` VARCHAR(50) NULL,
+  `cnpj` VARCHAR(14) NULL,
+  `telefone` VARCHAR(45) NULL,
+  `email` VARCHAR(150) NULL,
+  `idcidade` INT(11) NOT NULL,
+  PRIMARY KEY (`idestabelecimento`),
+  INDEX `fk_estabelecimento_cidade1_idx` (`idcidade` ASC) VISIBLE,
+  CONSTRAINT `fk_estabelecimento_cidade1`
+    FOREIGN KEY (`idcidade`)
+    REFERENCES `5gprodatabase`.`cidade` (`idcidade`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `5gprodatabase`.`migrations`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `5gprodatabase`.`migrations` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `aplicado` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
