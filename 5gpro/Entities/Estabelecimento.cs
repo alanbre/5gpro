@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace _5gpro.Entities
 {
-    class Estabelecimento
+    public static class Estabelecimento
     {
-        public int EstabelecimentoID { get; set; }
-        public int Codigo { get; set; }
+        public static int EstabelecimentoID { get; set; }
+        public static int Codigo { get; set; }
         [Required(ErrorMessage = "O Nome é obrigatório.|tbNome", AllowEmptyStrings = false)]
-        public string Nome { get; set; }
-        public string Fantasia { get; set; }
-        public string Rua { get; set; }
-        public string Numero { get; set; }
-        public string Bairro { get; set; }
-        public string Complemento { get; set; }
+        public static string Nome { get; set; }
+        public static string Fantasia { get; set; }
+        public static string Rua { get; set; }
+        public static string Numero { get; set; }
+        public static string Bairro { get; set; }
+        public static string Complemento { get; set; }
         [Required(ErrorMessage = "A Cidade é obrigatória.|buscaCidade", AllowEmptyStrings = false)]
-        public Cidade Cidade { get; set; }
-        public string CpfCnpj { get; set; }
-        public string Telefone { get; set; }
-        public string Email { get; set; }
+        public static Cidade Cidade { get; set; }
+        public static string CpfCnpj { get; set; }
+        public static string Telefone { get; set; }
+        public static string Email { get; set; }
     }
 }

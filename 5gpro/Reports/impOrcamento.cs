@@ -31,6 +31,13 @@ namespace _5gpro.Reports
         {
             _dados.TableName = "Orçamento";
             this.rvOrcamento.LocalReport.DisplayName = "Orçamento";
+
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"razaosocial", Estabelecimento.Nome, true));
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"endereco", $"{Estabelecimento.Rua}, {Estabelecimento.Numero} {Estabelecimento.Complemento} - {Estabelecimento.Bairro}", true));
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"telefone", fa.FormataTel(Estabelecimento.Telefone), true));
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"email", fa.FormataTel(Estabelecimento.Email), true));
+
+
             this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"numero", orcamento.OrcamentoID.ToString(), true));
             this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"cliente_cod", orcamento.Pessoa.PessoaID.ToString(), true));
             this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"cliente_nome", orcamento.Pessoa.Nome.ToString(), true));

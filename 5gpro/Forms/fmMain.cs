@@ -11,6 +11,7 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
+        private readonly EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
         private Permissao permissao = new Permissao();
         private PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado = new Logado();
@@ -48,6 +49,7 @@ namespace _5gpro
         public fmMain()
         {
             InitializeComponent();
+            estabelecimentoDAO.Busca();
         }
 
 

@@ -90,13 +90,13 @@ namespace _5gpro.Funcoes
         /// <example>Recebe '99999999999' Devolve '(99) 99999-9999'</example>
         public string FormataTel(string Tel)
         {
-            if (Tel.Length == 11)
+            if (Tel == null || Tel.Length != 11)
             {
-                return Convert.ToUInt64(Tel).ToString("(00) 00000-0000");
+                return Tel;
             }
             else
             {
-                return Tel;
+                return Convert.ToUInt64(Tel).ToString("(00) 00000-0000");
             }
         }
     }
