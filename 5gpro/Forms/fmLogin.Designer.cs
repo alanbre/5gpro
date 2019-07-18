@@ -98,7 +98,6 @@
             // btProcuraUsuario
             // 
             this.btProcuraUsuario.FlatAppearance.BorderSize = 0;
-            this.btProcuraUsuario.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btProcuraUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btProcuraUsuario.ForeColor = System.Drawing.Color.Black;
             this.btProcuraUsuario.Image = global::_5gpro.Properties.Resources.search_filled_18px_white;

@@ -35,7 +35,7 @@ namespace _5gpro.Daos
                 sql.addParam("@idpessoa", contaPagar.Pessoa.PessoaID);
                 sql.addParam("@situacao", contaPagar.Situacao);
                 sql.addParam("data_conta", contaPagar.DataConta);
-                sql.addParam("descricao", contaPagar.Descricao);
+                sql.addParam("@descricao", contaPagar.Descricao);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
@@ -60,7 +60,7 @@ namespace _5gpro.Daos
                         sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
                         sql.addParam("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
                         sql.addParam("@situacao", parcela.Situacao);
-                        sql.addParam("descricao", parcela.Descricao);
+                        sql.addParam("@descricao", parcela.Descricao);
                         sql.insertQuery();
                     }
                 }
@@ -75,7 +75,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final, c.descricao AS cpdescricao  
                             FROM conta_pagar AS c
                             LEFT JOIN parcela_conta_pagar AS p 
                             ON  c.idconta_pagar = p.idconta_pagar
@@ -104,7 +104,7 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
-                                                    cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
+                                                    cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao, cp.descricao AS cpdescricao
                                                     FROM 
                                                     conta_pagar cp 
                                                     LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
@@ -138,6 +138,7 @@ namespace _5gpro.Daos
                     contaPagar.ContaPagarID = Convert.ToInt32(d["idconta_pagar"]);
                     contaPagar.DataCadastro = (DateTime)d["data_cadastro"];
                     contaPagar.DataConta = (DateTime)d["data_conta"];
+                    contaPagar.Descricao = (string)d["cpdescricao"];
                     contaPagar.ValorOriginal = (decimal)d["valor_original"];
                     contaPagar.Multa = (decimal)d["multa"];
                     contaPagar.Juros = (decimal)d["juros"];
@@ -178,7 +179,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final, c.descricao AS cpdescricao  
                             FROM conta_pagar AS c
                             LEFT JOIN parcela_conta_pagar AS p 
                             ON  c.idconta_pagar = p.idconta_pagar
@@ -186,8 +187,7 @@ namespace _5gpro.Daos
                             ON f.idformapagamento = p.idformapagamento
                             WHERE c.idconta_pagar = (SELECT min(idconta_pagar) 
                             FROM conta_pagar 
-                            WHERE idconta_pagar > @idconta_pagar)
-                            LIMIT 1";
+                            WHERE idconta_pagar > @idconta_pagar)";
 
                 sql.addParam("@idconta_pagar", codigo);
                 var data = sql.selectQuery();
@@ -206,7 +206,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
-                            p.desconto AS pdesconto, p.valor_final AS pvalor_final  
+                            p.desconto AS pdesconto, p.valor_final AS pvalor_final, c.descricao AS cpdescricao  
                             FROM conta_pagar AS c
                             LEFT JOIN parcela_conta_pagar AS p 
                             ON  c.idconta_pagar = p.idconta_pagar
@@ -238,6 +238,7 @@ namespace _5gpro.Daos
             contaPagar.ContaPagarID = Convert.ToInt32(data[0]["idconta_pagar"]);
             contaPagar.DataCadastro = (DateTime)data[0]["data_cadastro"];
             contaPagar.DataConta = (DateTime)data[0]["data_conta"];
+            contaPagar.Descricao = (string)data[0]["cpdescricao"];
             contaPagar.ValorOriginal = (decimal)data[0]["valor_original"];
             contaPagar.Multa = (decimal)data[0]["multa"];
             contaPagar.Juros = (decimal)data[0]["juros"];
@@ -268,6 +269,7 @@ namespace _5gpro.Daos
                 parcela.ParcelaContaPagarID = Convert.ToInt32(d["idparcela_conta_pagar"]);
                 parcela.DataQuitacao = (DateTime?)d["data_quitacao"];
                 parcela.DataVencimento = (DateTime)d["data_vencimento"];
+                parcela.Descricao = (string)d["cpdescricao"];
                 parcela.Juros = (decimal)d["pjuros"];
                 parcela.Acrescimo = (decimal)d["pacrescimo"];
                 parcela.Desconto = (decimal)d["pdesconto"];
@@ -283,84 +285,6 @@ namespace _5gpro.Daos
 
             return contaPagar;
         }
-
-        //public IEnumerable<ContaPagar> BuscaParaRelatorio(fmRelatorioContas.Filtros f)
-        //{
-        //    var contaPagars = new List<ContaPagar>();
-        //    //string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";
-        //    string whereValorFinal = f.usarvalorContaFiltro ? "AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
-        //    string whereDatCadastro = f.usardataCadastroFiltro ? "AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
-        //    string whereDataConta = f.usardataContaFiltro ? "AND cp.data_conta BETWEEN @data_conta_inicial AND @data_conta_final" : "";
-        //    string whereAberto;
-        //    string wherePago;
-        //    if (f.usarPago && f.usarAberto)
-        //    {
-        //        whereAberto = "";
-        //        wherePago = "";
-        //    }
-        //    else
-        //    {
-        //        whereAberto = f.usarAberto ? "AND cp.situacao = @aberto" : "";
-        //        wherePago = f.usarPago ? "AND cp.situacao = @pago" : "";
-        //    }
-
-
-        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
-        //    {
-        //        sql.Query = @"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
-        //                                            cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao
-        //                                            FROM 
-        //                                            conta_pagar cp 
-        //                                            LEFT JOIN pessoa p ON cp.idpessoa = p.idpessoa
-        //                                            LEFT JOIN parcela_conta_pagar pa ON pa.idconta_pagar = cp.idconta_pagar
-        //                                            WHERE 1 = 1 "
-        //                                     //+ wherePessoa + " "
-        //                                     + whereAberto + " "
-        //                                     + wherePago + " "
-        //                                     + whereValorFinal + " "
-        //                                     + whereDatCadastro + " "
-        //                                     + whereDataConta + " "
-        //                                     + "GROUP BY cp.idconta_pagar";
-
-        //        //if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
-        //        sql.addParam("@valor_conta_inicial", f.filtroValorInicial);
-        //        sql.addParam("@valor_conta_final", f.filtroValorFinal);
-        //        sql.addParam("@data_cadastro_inicial", f.filtroDataCadastroInicial);
-        //        sql.addParam("@data_cadastro_final", f.filtroDataCadastroFinal);
-        //        sql.addParam("@data_conta_inicial", f.filtroDataContaInicial);
-        //        sql.addParam("@data_conta_final", f.filtroDataContaFinal);
-        //        sql.addParam("@aberto", "Aberto");
-        //        sql.addParam("@pago", "Pago");
-
-
-        //        var data = sql.selectQuery();
-
-        //        foreach (var d in data)
-        //        {
-        //            var pessoa = new Pessoa();
-        //            pessoa.PessoaID = Convert.ToInt32(d["idpessoa"]);
-        //            pessoa.Nome = (string)d["nome"];
-
-        //            var contaPagar = new ContaPagar();
-
-        //            contaPagar.ContaPagarID = Convert.ToInt32(d["idconta_pagar"]);
-        //            contaPagar.DataCadastro = (DateTime)d["data_cadastro"];
-        //            contaPagar.DataConta = (DateTime)d["data_conta"];
-        //            contaPagar.ValorOriginal = (decimal)d["valor_original"];
-        //            contaPagar.Multa = (decimal)d["multa"];
-        //            contaPagar.Juros = (decimal)d["juros"];
-        //            contaPagar.Acrescimo = (decimal)d["acrescimo"];
-        //            contaPagar.Desconto = (decimal)d["desconto"];
-        //            contaPagar.ValorFinal = (decimal)d["valor_final"];
-        //            contaPagar.Situacao = (string)d["situacao"];
-
-        //            contaPagar.Pessoa = pessoa;
-        //            contaPagars.Add(contaPagar);
-        //        }
-        //    }
-        //    return contaPagars;
-        //}
-
     }
 }
 

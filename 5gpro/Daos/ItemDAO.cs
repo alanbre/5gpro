@@ -16,12 +16,12 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"INSERT INTO item 
-                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade) 
+                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade, custo) 
                             VALUES
-                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade)
+                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade, @custo)
                             ON DUPLICATE KEY UPDATE
                             descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
-                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade";
+                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade, custo = @custo";
 
                 sql.addParam("@iditem", item.ItemID);
                 sql.addParam("@descitem", item.Descricao);
@@ -29,11 +29,12 @@ namespace _5gpro.Daos
                 sql.addParam("@tipo", item.TipoItem);
                 sql.addParam("@referencia", item.Referencia);
                 sql.addParam("@valorentrada", item.ValorEntrada);
-                sql.addParam("@valorsaida", item.ValorSaida);
+                sql.addParam("@valorsaida", item.ValorUnitario);
                 sql.addParam("@estoquenecessario", item.Estoquenecessario);
                 sql.addParam("@idunimedida", item.Unimedida.UnimedidaID);
                 sql.addParam("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
                 sql.addParam("@quantidade", item.Quantidade);
+                sql.addParam("custo", item.Custo);
                 retorno = sql.insertQuery();
             }
 
@@ -102,11 +103,12 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public List<Item> Busca(string descItem, string denomItem, string tipoItem, SubGrupoItem subgrupoitem)
+        public List<Item> Busca(string descItem, string denomItem, string refeItem, string tipoItem, SubGrupoItem subgrupoitem)
         {
             List<Item> itens = new List<Item>();
             string conDescItem = descItem.Length > 0 ? "AND i.descitem LIKE @descitem" : "";
             string conDenomItem = denomItem.Length > 0 ? "AND i.denominacaocompra LIKE @denominacaocompra" : "";
+            string conRefeItem = refeItem.Length > 0 ? "AND i.referencia LIKE @referencia" : "";
             string conTipoItem = tipoItem.Length > 0 ? "AND i.tipo LIKE @tipo" : "";
             string conSubgrupoItem = subgrupoitem != null ? "AND i.idsubgrupoitem = @idsubgrupoitem" : "";
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -115,14 +117,16 @@ namespace _5gpro.Daos
                             INNER JOIN unimedida u ON i.idunimedida = u.idunimedida
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
-                            WHERE 1=1 "
-                            + conDescItem
-                            + conDenomItem
-                            + conTipoItem
-                            + conSubgrupoItem
-                            + @" ORDER BY i.iditem";
+                            WHERE 1=1 
+                            " + conDescItem + @"
+                            " + conDenomItem + @"
+                            " + conRefeItem + @"
+                            " + conTipoItem + @"
+                            " + conSubgrupoItem + @"
+                             ORDER BY i.iditem";
                 if (denomItem.Length > 0) { sql.addParam("@denominacaocompra", "%" + denomItem + "%"); }
                 if (descItem.Length > 0) { sql.addParam("@descitem", "%" + descItem + "%"); }
+                if (refeItem.Length > 0) { sql.addParam("@referencia", "%" + refeItem + "%"); }
                 if (tipoItem.Length > 0) { sql.addParam("@tipo", "%" + tipoItem + "%"); }
                 if (subgrupoitem != null) { sql.addParam("@idsubgrupoitem", subgrupoitem.SubGrupoItemID); }
 
@@ -168,6 +172,7 @@ namespace _5gpro.Daos
             var subGrupoItem = new SubGrupoItem();
             subGrupoItem.SubGrupoItemID = Convert.ToInt32(data["idsubgrupoitem"]);
             subGrupoItem.Nome = (string)data["nome"];
+            subGrupoItem.Codigo = Convert.ToInt32(data["codigo"]);
             subGrupoItem.GrupoItem = grupoItem;
 
             var item = new Item();
@@ -177,9 +182,10 @@ namespace _5gpro.Daos
             item.TipoItem = (string)data["tipo"];
             item.Referencia = (string)data["referencia"];
             item.ValorEntrada = (decimal)data["valorentrada"];
-            item.ValorSaida = (decimal)data["valorsaida"];
+            item.ValorUnitario = (decimal)data["valorsaida"];
             item.Estoquenecessario = (decimal)data["estoquenecessario"];
             item.Quantidade = (decimal)data["quantidade"];
+            item.Custo = (decimal)data["custo"];
             item.Unimedida = unidadeMedida;
             item.SubGrupoItem = subGrupoItem;
 

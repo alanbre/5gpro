@@ -263,6 +263,16 @@ namespace _5gpro.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_settings_40 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_settings_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap iosDelete_22px_Red {
             get {
                 object obj = ResourceManager.GetObject("iosDelete_22px_Red", resourceCulture);
@@ -786,6 +796,16 @@ namespace _5gpro.Properties {
         internal static System.Drawing.Bitmap plus_32_blue {
             get {
                 object obj = ResourceManager.GetObject("plus_32_blue", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap print_48px {
+            get {
+                object obj = ResourceManager.GetObject("print_48px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

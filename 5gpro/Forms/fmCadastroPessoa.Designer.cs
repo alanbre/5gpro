@@ -140,6 +140,7 @@
             this.buscaSubGrupoPessoa.Name = "buscaSubGrupoPessoa";
             this.buscaSubGrupoPessoa.Size = new System.Drawing.Size(442, 39);
             this.buscaSubGrupoPessoa.TabIndex = 7;
+            this.buscaSubGrupoPessoa.Text_Changed += new _5gpro.Controls.BuscaSubGrupoPessoa.text_changedEventHandler(this.BuscaSubGrupoPessoa_Text_Changed);
             // 
             // gbAtuacao
             // 

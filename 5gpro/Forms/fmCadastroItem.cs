@@ -88,6 +88,9 @@ namespace _5gpro.Forms
             }
 
         }
+        private void DbCusto_Valor_Changed(object sender, EventArgs e) => Editando(true);
+        private void DbPrecoVenda_Valor_Changed(object sender, EventArgs e) => Editando(true);
+        private void DbEstoqueNecessario_Valor_Changed(object sender, EventArgs e) => Editando(true);
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
@@ -132,6 +135,35 @@ namespace _5gpro.Forms
             Editando(true);
             buscaSubGrupoItem.Limpa();
         }
+        private void RbDesiSim_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!rbServico.Checked)
+                btConfigDesintegracao.Enabled = true;
+            else
+            {
+                MessageBox.Show("Serviço não pode ser desintegrado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rbDesiSim.Checked = false;
+                btConfigDesintegracao.Enabled = false;
+            }
+            Editando(true);
+        }
+        private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
+        {
+            btConfigDesintegracao.Enabled = false;
+            Editando(true);
+        }
+        private void BtConfigDesintegracao_Click(object sender, EventArgs e)
+        {
+            var formDefPartes = new fmCadastroDesintegracao();
+            formDefPartes.itemrecebido = itemdesintegrar;
+            formDefPartes.Show(this);
+        }
+        private void BtAddUnimedida_Click(object sender, EventArgs e)
+        {
+            var formCadUnidadeMedida = new fmCadastroUnimedida();
+            formCadUnidadeMedida.Show(this);
+        }
+
 
         private void Novo()
         {
@@ -203,8 +235,9 @@ namespace _5gpro.Forms
             item.Referencia = tbReferencia.Text;
             item.TipoItem = rbProduto.Checked ? "P" : "S";
             item.Quantidade = dbQuantidade.Valor;
-            item.ValorEntrada = 0;
-            item.ValorSaida = dbPrecoVenda.Valor;
+            item.Custo = 0;
+            item.ValorEntrada = dbValorEntrada.Valor;
+            item.ValorUnitario = dbPrecoVenda.Valor;
             item.Estoquenecessario = dbEstoqueNecessario.Valor;
             item.Unimedida = buscaUnimedidaItem.unimedida;
             item.SubGrupoItem = buscaSubGrupoItem.subgrupoItem;
@@ -404,10 +437,10 @@ namespace _5gpro.Forms
                 DesintegracaoSimNao(newItem);
                 gbDesintegracao.Enabled = true;
                 validacao.despintarCampos(controls);
-                item = newItem;
                 itemdesintegrar = new Item();
                 itemdesintegrar = item;
-                PreencheCampos(item);
+                PreencheCampos(newItem);
+                item = newItem;
                 Editando(false);
             }
             else
@@ -418,7 +451,7 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
             }
         }
-        private void LimpaCampos(bool cod)
+        private void LimpaCampos(bool cod, bool limpaitem = true)
         {
             if (cod) { tbCodigo.Clear(); }
             tbDescricao.Clear();
@@ -426,6 +459,7 @@ namespace _5gpro.Forms
             tbReferencia.Clear();
             dbEstoqueNecessario.Valor = 0.00m;
             dbPrecoVenda.Valor = 0.00m;
+            dbValorEntrada.Valor = 0.00m;
             rbProduto.Checked = true;
             rbServico.Checked = false;
             buscaGrupoItem.Limpa();
@@ -434,14 +468,15 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             dbQuantidade.Valor = 0.00m;
             codigo = 0;
-            item = null;
+            if (limpaitem) { item = null; }
+            
         }
         private void PreencheCampos(Item item)
         {
             if (item != null)
             {
                 ignoraCheckEvent = true;
-                LimpaCampos(false);
+                LimpaCampos(false, false);
                 tbCodigo.Text = item.ItemID.ToString();
                 tbDescricao.Text = item.Descricao;
                 tbDescricaoDeCompra.Text = item.DescCompra;
@@ -459,8 +494,9 @@ namespace _5gpro.Forms
                 }
 
                 tbReferencia.Text = item.Referencia;
+                dbValorEntrada.Valor = item.ValorEntrada;
                 dbEstoqueNecessario.Valor = item.Estoquenecessario;
-                dbPrecoVenda.Valor = item.ValorSaida;
+                dbPrecoVenda.Valor = item.ValorUnitario;
                 dbQuantidade.Valor = item.Quantidade;
 
                 buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
@@ -479,33 +515,6 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-
-        private void RbDesiSim_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!rbServico.Checked)
-                btConfigDesintegracao.Enabled = true;
-            else
-            {
-                MessageBox.Show("Serviço não pode ser desintegrado", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                rbDesiSim.Checked = false;
-                btConfigDesintegracao.Enabled = false;
-            }
-            Editando(true);
-        }
-
-        private void RbDesiNao_CheckedChanged(object sender, EventArgs e)
-        {
-            btConfigDesintegracao.Enabled = false;
-            Editando(true);
-        }
-
-        private void BtConfigDesintegracao_Click(object sender, EventArgs e)
-        {
-            var formDefPartes = new fmCadastroDesintegracao();
-            formDefPartes.itemrecebido = itemdesintegrar;
-            formDefPartes.Show(this);
-        }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -515,28 +524,18 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BtAddUnimedida_Click(object sender, EventArgs e)
-        {
-            var formCadUnidadeMedida = new fmCadastroUnimedida();
-            formCadUnidadeMedida.Show(this);
-        }
-
-        private void TpEstoque_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void BtCalcular_Click(object sender, EventArgs e)
         {
 
             var formCalculoPrecoVenda = new fmCalculoPrecoVenda();
-            formCalculoPrecoVenda.custo = dbCusto.Valor;
+            formCalculoPrecoVenda.valorentrada = dbValorEntrada.Valor;
             formCalculoPrecoVenda.valor = dbPrecoVenda.Valor;
             formCalculoPrecoVenda.ShowDialog();
             dbPrecoVenda.Valor = formCalculoPrecoVenda.valor;
-            dbCusto.Valor = formCalculoPrecoVenda.custo;
+            dbValorEntrada.Valor = formCalculoPrecoVenda.valorentrada;
 
         }
+
 
         private void DesintegracaoSimNao(Item d)
         {

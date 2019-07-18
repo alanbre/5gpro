@@ -5598,11 +5598,13 @@ INSERT INTO `cidade` (`idcidade`, `nome`, `idestado`) VALUES
 (5564, 'Xambioá', 27);
 
 INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES 
-(1, 'm', 'Metro'),
-(2, 'h', 'Hora'),
-(3, 'min', 'Minuto'),
-(4, 'L', 'Litro'),
-(5, 'm²', 'Metro');
+(1, 'M', 'METRO'),
+(2, 'H', 'HORA'),
+(3, 'MIN', 'MINUTO'),
+(4, 'L', 'LITRO'),
+(5, 'KM', 'QUILÔMETRO'),
+(6, 'M²', 'METROS QUADRADOS'),
+(7, 'UN', 'UNIDADE');
 
 INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');
 
@@ -5613,11 +5615,13 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Módulo de Cadastros', '010000'),
 ('Módulo de Orçamentos', '020000'),
 ('Módulo de Saidas', '030000'),
+('Módulo Financeiro', '040000'),
 ('Módulo de Contas a Receber', '050000'),
 ('Módulo de Contas a Pagar', '060000'),
 ('Módulo de Entradas', '070000'),
 ('Módulo de Estoque', '080000'),
 ('Módulo de Caixa', '090000'),
+('Módulo de Configuração', '100000')
 
 
 ('Cadastro de Pessoa', '010100'),
@@ -5632,7 +5636,6 @@ INSERT INTO permissao ( nome, codigo) VALUES
 
 ('Cadastro de Nota Fiscal', '030100'),
 
-('Módulo Financeiro', '040000'),
 ('Cadastro de Operacao', '040100'),
 
 ('Cadastro de Contas a Receber', '050100'),
@@ -5650,7 +5653,9 @@ INSERT INTO permissao ( nome, codigo) VALUES
 ('Sangria de caixa', '090300'),
 ('Lançamento manual do caixa', '090400'),
 ('Plano de contas', '090500'),
-('Plano de contas padrao', '090600');
+('Plano de contas padrao', '090600'),
+
+('Dados do Estabelecimento', '100100');
 
 
 
@@ -5667,12 +5672,22 @@ INSERT INTO formapagamento (idformapagamento, nome) VALUES
 (15, 'Boleto Bancário'),
 (99, 'Outros');
 
-INSERT INTO caixa_plano_contas (idcaixa_plano_contas, codigo, descricao, paiid, level, codigo_completo) VALUES
-(1, 1, 'Entradas', 0, 0, 1),
-(2, 2, 'Saidas', 0, 0, 2);
+INSERT  INTO `caixa_plano_contas`(`idcaixa_plano_contas`,`codigo`,`level`,`paiid`,`descricao`,`codigo_completo`) values 
+(1,1,0,0,'Entradas','1'),
+(2,2,0,0,'Saidas','2'),
+(3,1,1,2,'Salários','2.1'),
+(4,2,1,2,'Prolabore','2.2'),
+(5,3,1,2,'Aluguel','2.3'),
+(6,4,1,2,'Material de escritório','2.4'),
+(7,1,1,1,'Consultoria','1.1'),
+(8,2,1,1,'Projetos de engenharia','1.2'),
+(9,3,1,1,'Venda de jóias','1.3'),
+(10,5,1,2,'Compra de estoque','2.5'),
+(11,4,1,1,'Venda de imóveis','1.4');
 
 INSERT INTO caixa_plano_contas_padrao(idcaixa_plano_contas_padrao) VALUES
 (1);
+
 
 CREATE EVENT DELETA_LOGADOS_5SEC
 ON SCHEDULE

@@ -163,7 +163,7 @@ namespace _5gpro.Forms
                 ContaPagarID = int.Parse(tbCodigoConta.Text),
                 DataCadastro = DateTime.Today,
                 DataConta = dtpDataConta.Value,
-                Descricao = tbDescricao.Text,
+                Descricao = tbDescricaoCAP.Text,
 
                 ValorOriginal = dbValorOriginalConta.Valor,
                 Multa = dbMultaConta.Valor,
@@ -367,6 +367,7 @@ namespace _5gpro.Forms
             dbJurosConta.Valor = contaPagar.Juros;
             dbAcrescimoConta.Valor = contaPagar.Acrescimo;
             dbDescontoConta.Valor = contaPagar.Desconto;
+            tbDescricaoCAP.Text = contaPagar.Descricao;
             parcelas = contaPagar.Parcelas.ToList();
             buscaPessoa.PreencheCampos(contaPagar.Pessoa);
             PreencheGridParcelas(parcelas);
@@ -533,6 +534,7 @@ namespace _5gpro.Forms
             dbJurosConta.Valor = 0.00m;
             dbAcrescimoConta.Valor = 0.00m;
             dbDescontoConta.Valor = 0.00m;
+            tbDescricaoCAP.Clear();
             tbAjuda.Clear();
             parcelas.Clear();
             dgvParcelas.Rows.Clear();

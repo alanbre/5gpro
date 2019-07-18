@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,10 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+        //LOAD
+        private void FmBuscaGrupoUsuario_Load(object sender, EventArgs e) => Busca();
 
+        //KEYUP, KEYDOWN
         private void FmBuscaGrupoUsuario_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -28,8 +32,8 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-        private void TbFiltroNomeGrupoUsuario_TextChanged(object sender, EventArgs e) => Busca();
-        private void BtPesquisar_Click(object sender, EventArgs e) => Busca();        
+
+        //CLICK
         private void DgvGrupoUsuario_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvGrupoUsuario.SelectedCells[0].RowIndex;
@@ -39,7 +43,10 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        //TEXTCHANGED
+        private void TbFiltroNomeGrupoUsuario_TextChanged(object sender, EventArgs e) => Busca();
 
+        //FUNÇÕES         
         public void Busca()
         {
             Listagrupousuario = grupousuarioDAO.Busca(tbFiltroNomeGrupoUsuario.Text).ToList();
@@ -59,6 +66,6 @@ namespace _5gpro.Forms
                 this.SelectNextControl((Control)sender, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
             }
-        }
+        }      
     }
 }

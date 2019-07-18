@@ -39,9 +39,9 @@ namespace _5gpro.Daos
                 foreach (var lanc in caixaLancamentos)
                 {
                     sql.Query = @"INSERT INTO caixa_lancamento
-                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
                             VALUES
-                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
                     sql.clearParams();
                     sql.addParam("@data", lanc.Data);
                     sql.addParam("@valor", lanc.Valor);
@@ -50,6 +50,7 @@ namespace _5gpro.Daos
                     sql.addParam("@lancamento", lanc.Lancamento);
                     sql.addParam("@documento", lanc.Documento);
                     sql.addParam("@idcaixa", lanc.Caixa.CaixaID);
+                    sql.addParam("@idcaixa_plano_contas", lanc.PlanoConta.PlanoContaID);
                     retorno += sql.insertQuery();
                     sql.clearParams();
                     sql.Query = @"INSERT INTO caixa_lancamento_car
@@ -72,9 +73,9 @@ namespace _5gpro.Daos
                 foreach (var lanc in caixaLancamentos)
                 {
                     sql.Query = @"INSERT INTO caixa_lancamento
-                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa)
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
                             VALUES
-                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa)";
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
                     sql.clearParams();
                     sql.addParam("@data", lanc.Data);
                     sql.addParam("@valor", lanc.Valor);
@@ -83,6 +84,7 @@ namespace _5gpro.Daos
                     sql.addParam("@lancamento", lanc.Lancamento);
                     sql.addParam("@documento", lanc.Documento);
                     sql.addParam("@idcaixa", lanc.Caixa.CaixaID);
+                    sql.addParam("@idcaixa_plano_contas", lanc.PlanoConta.PlanoContaID);
                     retorno += sql.insertQuery();
                     sql.clearParams();
                     sql.Query = @"INSERT INTO caixa_lancamento_cap
@@ -115,8 +117,8 @@ namespace _5gpro.Daos
                             ORDER BY cl.idcaixa_lancamento";
                 if (f.planoConta != null) sql.addParam("@idcaixa_plano_contas", f.planoConta);
                 if (f.caixa != null) sql.addParam("@idcaixa", f.caixa);
-                sql.addParam("@datainicial", f.DataInicial.Date);
-                sql.addParam("@datafinal", f.DataFinal.Date);
+                sql.addParam("@datainicial", f.DataInicial);
+                sql.addParam("@datafinal", f.DataFinal);
                 var data = sql.selectQuery();
                 if (data == null)
                 {
@@ -152,6 +154,28 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
+
+        public CaixaLancamento BuscaByDocumento(string documento)
+        {
+            var caixaLancamentos = new CaixaLancamento();
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT *, c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo  
+                            FROM caixa_lancamento cl 
+                            LEFT JOIN caixa_plano_contas cpc ON cl.idcaixa_plano_contas = cpc.idcaixa_plano_contas 
+                            LEFT JOIN caixa c ON cl.idcaixa = c.idcaixa
+                            WHERE documento = @documento";
+                sql.addParam("@documento", documento);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                caixaLancamentos = LeDadosReaderComPlanos(data);
+            }
+            return caixaLancamentos;
+        }
+
         public int Sangrar(List<CaixaLancamento> caixaLancamentos, Caixa caixaAtual, Caixa caixaDestino)
         {
             int retorno = 0;
@@ -217,6 +241,11 @@ namespace _5gpro.Daos
             caixa.Codigo = Convert.ToInt32(data["caixa_codigo"]);
             caixa.Nome = (string)data["nome"];
 
+            var parcelaCAR = new ParcelaContaReceber();
+            var parcelaCAP = new ParcelaContaPagar();
+            var notafiscalpropria = new NotaFiscalPropria();
+            var notafiscalterceiros = new NotaFiscalTerceiros();
+
             var caixaLancamento = new CaixaLancamento();
             caixaLancamento.PlanoConta = planoConta;
             caixaLancamento.Caixa = caixa;
@@ -227,6 +256,7 @@ namespace _5gpro.Daos
             caixaLancamento.TipoDocumento = Convert.ToInt32(data["tipodocumento"]);
             caixaLancamento.Lancamento = Convert.ToInt32(data["lancamento"]);
             caixaLancamento.Documento = (string)data["documento"];
+            
             
             return caixaLancamento;
         }

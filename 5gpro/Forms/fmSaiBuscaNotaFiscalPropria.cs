@@ -1,7 +1,9 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Reports;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -20,6 +22,7 @@ namespace _5gpro.Forms
         private bool dataEntradaFiltro = false;
         private bool dataEmissaoFiltro = false;
 
+        private DataTable rel = new DataTable();
 
         public struct Filtros
         {
@@ -37,6 +40,14 @@ namespace _5gpro.Forms
         }
 
 
+        private void FmSaiBuscaNotaFiscalPropria_Load(object sender, EventArgs e)
+        {
+            rel.Columns.Add("numero", typeof(int));
+            rel.Columns.Add("data_emissao", typeof(DateTime));
+            rel.Columns.Add("data_saida", typeof(DateTime));
+            rel.Columns.Add("cliente", typeof(string));
+            rel.Columns.Add("valor", typeof(decimal));
+        }
         private void CbValorTotal_CheckedChanged(object sender, EventArgs e)
         {
             if (cbValorTotal.Checked)
@@ -84,6 +95,11 @@ namespace _5gpro.Forms
         }
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvNotas_CellDoubleClick(object sender, DataGridViewCellEventArgs e) => Selecionar();
+        private void BtImprimir_Click(object sender, EventArgs e)
+        {
+            var formRelatorioNotasProprias = new fmRltNotasSaidas(rel);
+            formRelatorioNotasProprias.Show(this);
+        }
 
         private void Pesquisar()
         {
@@ -102,8 +118,10 @@ namespace _5gpro.Forms
                 usardataEmissaoFiltro = dataEmissaoFiltro
             };
 
-            //notasFiscaisProprias = notaFiscalPropriasDAO.Busca(f);
+            notasFiscaisProprias = notaFiscalPropriasDAO.Busca(f);
             dgvNotas.Rows.Clear();
+            rel.Rows.Clear();
+
 
             foreach (var nf in notasFiscaisProprias)
             {
@@ -113,6 +131,11 @@ namespace _5gpro.Forms
                                        nf.DataEmissao,
                                        nf.DataEntradaSaida.Date,
                                        nf.ValorTotalDocumento);
+                rel.Rows.Add(nf.NotaFiscalPropriaID,
+                                      nf.DataEmissao,
+                                      nf.DataEntradaSaida,
+                                      $"{nf.Pessoa.PessoaID} - {nf.Pessoa.Nome}",
+                                      nf.ValorTotalDocumento);
             }
             dgvNotas.Refresh();
         }
@@ -126,5 +149,6 @@ namespace _5gpro.Forms
             notaFiscalPropriaSelecionada = notaFiscalPropriasDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
+
     }
 }

@@ -66,6 +66,7 @@
             this.tbCodigoEstado.Name = "tbCodigoEstado";
             this.tbCodigoEstado.Size = new System.Drawing.Size(65, 20);
             this.tbCodigoEstado.TabIndex = 1;
+            this.tbCodigoEstado.TextChanged += new System.EventHandler(this.TbCodigoEstado_TextChanged);
             this.tbCodigoEstado.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TbCodigoEstado_KeyUp);
             this.tbCodigoEstado.Leave += new System.EventHandler(this.TbCodigoEstado_Leave);
             // 

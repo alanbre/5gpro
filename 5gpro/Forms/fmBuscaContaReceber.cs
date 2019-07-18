@@ -1,7 +1,9 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -14,6 +16,7 @@ namespace _5gpro.Forms
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
 
 
         public struct Filtros
@@ -38,6 +41,14 @@ namespace _5gpro.Forms
             DatasIniciais();
         }
 
+        //LOAD
+        private void FmBuscaContaReceber_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //LEAVE
+        //KEYUP, KEYDOWN
         private void FmBuscaContaReceber_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -47,6 +58,8 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
+
+        //CLICK
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -56,58 +69,7 @@ namespace _5gpro.Forms
             this.Close();
         }
 
-
-
-        private void Pesquisar()
-        {
-            Filtros f = new Filtros
-            {
-                filtroOperacao = buscaOperacao.operacao,
-                filtroPessoa = buscaPessoa.pessoa,
-                filtroValorInicial = dbValorInicial.Valor,
-                filtroValorFinal = dbValorFinal.Valor,
-                filtroDataCadastroInicial = dtpDataCadastroInicial.Value,
-                filtroDataCadastroFinal = dtpDataCadastroFinal.Value,
-                filtroDataVencimentoInicial = dtpDataVencimentoInicial.Value,
-                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value,
-                usardataCadastroFiltro = dataCadastroFiltro,
-                usardataVencimentoFiltro = dataVencimentoFiltro,
-                usarvalorContaFiltro = valorContaFiltro
-            };
-
-
-            contasReceber = contaReceberDAO.Busca(f);
-            dgvContas.Rows.Clear();
-
-            foreach (var cr in contasReceber)
-                dgvContas.Rows.Add(cr.ContaReceberID,
-                                   cr.Pessoa.PessoaID,
-                                   cr.Pessoa.Nome,
-                                   cr.DataCadastro,
-                                   cr.Operacao.Nome,
-                                   cr.ValorOriginal,
-                                   cr.Multa,
-                                   cr.Juros,
-                                   cr.Acrescimo,
-                                   cr.Desconto,
-                                   cr.ValorFinal);
-
-            dgvContas.Refresh();
-        }
-        private void DatasIniciais()
-        {
-            dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
-            dtpDataVencimentoInicial.Value = DateTime.Today.AddDays(-30);
-        }
-        private void EnterTab(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                this.SelectNextControl((Control)sender, true, true, true, true);
-                e.Handled = e.SuppressKeyPress = true;
-            }
-        }
-
+        //TEXTCHANGED
         private void CbValorConta_CheckedChanged(object sender, EventArgs e)
         {
             if (cbValorConta.Checked)
@@ -153,6 +115,58 @@ namespace _5gpro.Forms
                 dtpDataVencimentoInicial.Enabled = false;
                 dtpDataVencimentoFinal.Enabled = false;
                 dataVencimentoFiltro = false;
+            }
+        }
+
+        //FUNÇÕES
+        private void Pesquisar()
+        {
+            Filtros f = new Filtros
+            {
+                filtroOperacao = buscaOperacao.operacao,
+                filtroPessoa = buscaPessoa.pessoa,
+                filtroValorInicial = dbValorInicial.Valor,
+                filtroValorFinal = dbValorFinal.Valor,
+                filtroDataCadastroInicial = dtpDataCadastroInicial.Value,
+                filtroDataCadastroFinal = dtpDataCadastroFinal.Value,
+                filtroDataVencimentoInicial = dtpDataVencimentoInicial.Value,
+                filtroDataVencimentoFinal = dtpDataVencimentoFinal.Value,
+                usardataCadastroFiltro = dataCadastroFiltro,
+                usardataVencimentoFiltro = dataVencimentoFiltro,
+                usarvalorContaFiltro = valorContaFiltro
+            };
+
+
+            contasReceber = contaReceberDAO.Busca(f);
+
+            dgvContas.Rows.Clear();
+
+            foreach (var cr in contasReceber)
+                dgvContas.Rows.Add(cr.ContaReceberID,
+                                   cr.Descricao,
+                                   cr.Pessoa.Nome,
+                                   cr.DataCadastro.ToShortDateString(),
+                                   cr.Operacao.Nome,
+                                   cr.ValorOriginal,
+                                   cr.Multa,
+                                   cr.Juros,
+                                   cr.Acrescimo,
+                                   cr.Desconto,
+                                   cr.ValorFinal);
+
+            dgvContas.Refresh();
+        }
+        private void DatasIniciais()
+        {
+            dtpDataCadastroInicial.Value = DateTime.Today.AddDays(-30);
+            dtpDataVencimentoInicial.Value = DateTime.Today.AddDays(-30);
+        }
+        private void EnterTab(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
             }
         }
     }

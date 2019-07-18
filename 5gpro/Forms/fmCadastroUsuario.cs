@@ -395,7 +395,7 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-        private void LimpaCampos(bool limpaCodigo)
+        private void LimpaCampos(bool limpaCodigo, bool limpausuario = true)
         {
             if (limpaCodigo) { tbCodigoUsuario.Clear(); }
             tbSenhaUsuario.Clear();
@@ -409,7 +409,8 @@ namespace _5gpro.Forms
             cbMostrarSenhaUsuario.Checked = false;
             MostraSenhaUsuario();
             codigo = 0;
-            usuario = null;
+            if(limpausuario)
+                usuario = null;
         }
         private bool ConfirmaSenhas()
         {
@@ -419,7 +420,7 @@ namespace _5gpro.Forms
         private void PreencheCampos(Usuario usuario)
         {
             ignoraCheckEvent = true;
-            LimpaCampos(false);
+            LimpaCampos(false, false);
 
             tbCodigoUsuario.Text = usuario.UsuarioID.ToString();
             tbSenhaUsuario.Text = usuario.Senha;

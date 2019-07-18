@@ -12,6 +12,8 @@ namespace _5gpro.Forms
     {
         private NotaFiscalTerceiros notaFiscalTerceirosNova;
 
+        private CaixaLancamento caixalancamento = new CaixaLancamento();
+        private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
         private readonly NotaFiscalTerceirosDAO notaFiscalTerceirosDAO = new NotaFiscalTerceirosDAO();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly DesintegracaoDAO desintegracaoDAO = new DesintegracaoDAO();
@@ -91,6 +93,7 @@ namespace _5gpro.Forms
         }
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEmissao_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DbDescontoDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
@@ -185,6 +188,7 @@ namespace _5gpro.Forms
 
                 notaFiscalTerceirosNova = new NotaFiscalTerceiros();
                 notaFiscalTerceirosNova.NotaFiscalTerceirosID = int.Parse(tbCodigo.Text);
+                notaFiscalTerceirosNova.Descricao = tbDescricao.Text;
                 notaFiscalTerceirosNova.Pessoa = buscaPessoa.pessoa;
                 notaFiscalTerceirosNova.DataEmissao = dtpEmissao.Value;
                 notaFiscalTerceirosNova.DataEntradaSaida = dtpEntrada.Value;
@@ -194,7 +198,11 @@ namespace _5gpro.Forms
                 notaFiscalTerceirosNova.DescontoDocumento = dbDescontoDocumento.Valor;
                 notaFiscalTerceirosNova.ValorTotalDocumento = dbValorTotalDocumento.Valor;
 
+                notaFiscalTerceirosNova.Caixa = buscaCaixa.caixa;
+                notaFiscalTerceirosNova.PlanoDeConta = buscaPlanoDeConta.conta;
+
                 notaFiscalTerceirosNova.NotaFiscalTerceirosItem = itens;
+                
 
                 ok = validacao.ValidarEntidade(notaFiscalTerceirosNova, controls);
             }
@@ -220,6 +228,8 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    notaFiscalTerceirosDAO.MovimentaCaixa(notaFiscalTerceirosNova);
+
                     Editando(false);
                 }
                 else if (resultado == 2)
@@ -227,14 +237,12 @@ namespace _5gpro.Forms
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     notaFiscalTerceirosDAO.LimpaRegistrosEstoque(notaFiscalTerceiros);
                     notaFiscalTerceirosDAO.MovimentaEstoque(notaFiscalTerceirosNova);
+                    notaFiscalTerceirosDAO.LimpaRegistrosCaixa(notaFiscalTerceirosNova);
+                    notaFiscalTerceirosDAO.MovimentaCaixa(notaFiscalTerceirosNova);
                     Editando(false);
                 }
                 notaFiscalTerceiros = notaFiscalTerceirosNova;
             }
-
-
-
-
         }
         private void Recarrega()
         {
@@ -388,6 +396,9 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            buscaCaixa.Limpa();
+            buscaPlanoDeConta.Limpa();
+            tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpEntrada.Value = DateTime.Now;
             dbValorTotalItens.Valor = 0.00m;
@@ -423,15 +434,16 @@ namespace _5gpro.Forms
 
             var item = new NotaFiscalTerceirosItem();
             item.Item = itemrecebido;
-            item.ValorUnitario = itemrecebido.ValorEntrada;
+            item.ValorUnitario = dbValorUnitItem.Valor;
             item.DescontoPorc = dbDescontoItemPorc.Valor;
             item.Desconto = dbDescontoItem.Valor;
 
             if (partedesintegrada)
             {
+                item.ValorUnitario = itemrecebido.ValorEntrada;
                 if (quantitativa)
                 {
-                    item.Quantidade = dbQuantidade.Valor / quantidadeparte;
+                    item.Quantidade = dbQuantidade.Valor * quantidadeparte;
                     item.ValorTotal = item.Quantidade * item.ValorUnitario;
                 }
                 else
@@ -439,6 +451,7 @@ namespace _5gpro.Forms
                     item.Quantidade = (dbQuantidade.Valor * percentualparte) / 100;
                     item.ValorTotal = item.Quantidade * item.ValorUnitario;
                 }
+                
             }
             else
             {
@@ -457,31 +470,31 @@ namespace _5gpro.Forms
             {
                 if (partedesintegrada)
                 {
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = dbQuantidade.Valor + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = dbValorUnitItem.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = dbValorTotItem.Valor + itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = dbDescontoItemPorc.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = dbDescontoItem.Valor;
                     dr.Cells[dgvtbcQuantidade.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade;
-                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = dbValorUnitItem.Valor;
                     dr.Cells[dgvtbcValorTotalItem.Index].Value = itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal;
-                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = dbDescontoItemPorc.Valor;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = dbDescontoItem.Valor;
                     dgvItens.Update();
                     dgvItens.Refresh();
                 }
                 else
                 {
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-                    dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-                    dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-                    dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-                    dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                    dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = dbQuantidade.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = dbValorUnitItem.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = dbValorTotItem.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = dbDescontoItemPorc.Valor;
+                    itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = dbDescontoItem.Valor;
+                    dr.Cells[dgvtbcQuantidade.Index].Value = dbQuantidade.Valor;
+                    dr.Cells[dgvtbcValorUnitario.Index].Value = dbValorUnitItem.Valor;
+                    dr.Cells[dgvtbcValorTotalItem.Index].Value = dbValorTotItem.Valor;
+                    dr.Cells[dgvtbcDescontoPorc.Index].Value = dbDescontoItemPorc.Valor;
+                    dr.Cells[dgvtbcDescontoItem.Index].Value = dbDescontoItem.Valor;
                     dgvItens.Update();
                     dgvItens.Refresh();
                 }
@@ -543,6 +556,7 @@ namespace _5gpro.Forms
                 {
                     btDesintegrar.Enabled = false;
                 }
+                dbValorUnitItem.Valor = item.ValorUnitario;
             }
         }
 
@@ -574,11 +588,19 @@ namespace _5gpro.Forms
             btExcluirItem.Enabled = true;
         }
 
+        private void PreencheCaixaEPlano(NotaFiscalTerceiros notafiscal)
+        {
+            caixalancamento = caixalancamentoDAO.BuscaByDocumento(notafiscal.NotaFiscalTerceirosID.ToString());
+            buscaCaixa.PreencheCampos(caixalancamento.Caixa);
+            buscaPlanoDeConta.PreencheCampos(caixalancamento.PlanoConta);
+        }
+
         private void PreencheCampos(NotaFiscalTerceiros notafiscal)
         {
             ignoracheckevent = true;
             Limpa(false);
             tbCodigo.Text = notafiscal.NotaFiscalTerceirosID.ToString();
+            tbDescricao.Text = notafiscal.Descricao;
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpEntrada.Value = notafiscal.DataEntradaSaida;
@@ -588,6 +610,7 @@ namespace _5gpro.Forms
             dbValorTotalDocumento.Valor = notafiscal.ValorTotalDocumento;
             itens = notafiscal.NotaFiscalTerceirosItem.ToList();
             PreencheGridItens(itens);
+            PreencheCaixaEPlano(notafiscal);
             btInserirItem.Text = "Inserir";
             notaFiscalTerceiros = notafiscal;
             ignoracheckevent = false;

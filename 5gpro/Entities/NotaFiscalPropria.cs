@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
@@ -19,6 +20,7 @@ namespace _5gpro.Entities
         public decimal ValorTotalDocumento { get; set; }
         public decimal DescontoTotalItens { get; set; }
         public decimal DescontoDocumento { get; set; }
+        public string Descricao { get; set; }
 
         public virtual ICollection<NotaFiscalPropriaItem> NotaFiscalPropriaItem { get; set; }
     }

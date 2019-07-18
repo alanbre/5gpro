@@ -11,12 +11,21 @@ namespace _5gpro.Forms
 {
     public partial class fmSaiEmissaoNota : Form
     {
+        private NotaFiscalPropria notaFiscalPropriaNova;
         private readonly NotaFiscalPropriaDAO notaFiscalPropriaDAO = new NotaFiscalPropriaDAO();
-        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
-
         private NotaFiscalPropria notaFiscalPropria = new NotaFiscalPropria();
         private NotaFiscalPropriaItem itemSelecionado;
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
+        private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+
+        //private CaixaLancamento caixalancamento = new CaixaLancamento();
+        //private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
+        private ContaReceber contaReceber;
+        private ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
+
+        private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
+
+        Validacao validacao = new Validacao();
 
         //Controle de Permissões
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
@@ -25,6 +34,7 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
+        private decimal totaldocumento = 0;
 
         int codigo = 0;
 
@@ -74,7 +84,7 @@ namespace _5gpro.Forms
         private void BtNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCamposItem(true);
-            buscaItem.Focus();
+            buscaItem1.Focus();
             itemSelecionado = null;
             btInserirItem.Text = "Inserir";
         }
@@ -103,7 +113,7 @@ namespace _5gpro.Forms
             }
         }
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
-        private void BuscaItem_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
+        private void buscaItem1_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
@@ -113,6 +123,7 @@ namespace _5gpro.Forms
             }
         }
         private void BuscaPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEmissao_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DtpEntrada_ValueChanged(object sender, EventArgs e) => Editando(true);
         private void DgvItens_CurrentCellChanged(object sender, EventArgs e)
@@ -145,13 +156,11 @@ namespace _5gpro.Forms
             CalculaDescontoItem();
         }
         private void DbValorTotItem_Leave(object sender, EventArgs e) => CalculaDescontoItem();
-        private void DbDescontoItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
-
-
-
-
-
-
+        private void DbDescontoItem_Leave(object sender, EventArgs e)
+        {
+            CalculaPorcDescontoItem();
+            CalculaTotalItem();
+        }
         private void Novo()
         {
             if (editando)
@@ -180,63 +189,114 @@ namespace _5gpro.Forms
         }
         private void Salva()
         {
+            var controls = (ControlCollection)this.Controls;
             if (!editando)
             {
                 return;
             }
+            var ok = false;
 
-            if (itens.Count <= 0)
+            if (tbCodigo.Text.Length <= 0)
             {
-                MessageBox.Show("Uma nota não pode ser salva sem itens!",
-               "Problema ao salvar",
-               MessageBoxButtons.OK,
-               MessageBoxIcon.Warning);
-                return;
+                if (MessageBox.Show("Número da nota em branco, deseja gerar um numero automaticamente?",
+                "Aviso",
+                 MessageBoxButtons.YesNo,
+                 MessageBoxIcon.Information) == DialogResult.Yes)
+                {
+                    tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
+                }
+                ok = false;
+            }
+            else
+            {
+                if (itens.Count <= 0)
+                {
+                    MessageBox.Show("Uma nota não pode ser salva sem itens!",
+                   "Problema ao salvar",
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Warning);
+                    return;
+                }
+
+                notaFiscalPropriaNova = new NotaFiscalPropria
+                {
+                    NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
+                    Descricao = tbDescricao.Text,
+                    Pessoa = buscaPessoa.pessoa,
+                    DataEmissao = dtpEmissao.Value,
+                    DataEntradaSaida = dtpSaida.Value,
+                    ValorTotalItens = dbValorTotalItens.Valor,
+                    DescontoTotalItens = dbDescontoTotalItens.Valor,
+                    DescontoDocumento = dbDescontoDocumento.Valor,
+                    ValorTotalDocumento = dbValorTotalDocumento.Valor,
+
+                    NotaFiscalPropriaItem = itens
+                };
+
+                ok = validacao.ValidarEntidade(notaFiscalPropriaNova, controls);
             }
 
-            var notaFiscalPropriaNova = new NotaFiscalPropria
+
+            if (ok)
             {
-                NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
-                Pessoa = buscaPessoa.pessoa,
-                DataEmissao = dtpEmissao.Value,
-                DataEntradaSaida = dtpSaida.Value,
+                int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
 
-                ValorTotalItens = dbValorTotalItens.Valor,
-                DescontoTotalItens = dbDescontoTotalItens.Valor,
-                DescontoDocumento = dbDescontoDocumento.Valor,
-                ValorTotalDocumento = dbValorTotalDocumento.Valor,
+                // resultado 0 = nada foi inserido (houve algum erro)
+                // resultado 1 = foi inserido com sucesso
+                // resultado 2 = foi atualizado com sucesso
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Dados salvos com sucesso";
+                    notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                    Editando(false);
+                }
+                else if (resultado == 2)
+                {
+                    notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                    GerarContaReceber();
 
-                NotaFiscalPropriaItem = itens
-            };
-
-            int resultado = notaFiscalPropriaDAO.SalvaOuAtualiza(notaFiscalPropriaNova);
-
-            // resultado 0 = nada foi inserido (houve algum erro)
-            // resultado 1 = foi inserido com sucesso
-            // resultado 2 = foi atualizado com sucesso
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                    tbAjuda.Text = "Dados atualizados com sucesso";
+                    Editando(false);
+                }
+                notaFiscalPropria = notaFiscalPropriaNova;
             }
-            else if (resultado == 1)
-            {
-                tbAjuda.Text = "Dados salvos com sucesso";
-                notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                Editando(false);
-            }
-            else if (resultado == 2)
-            {
-                notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropria);
-                notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                tbAjuda.Text = "Dados atualizados com sucesso";
-                Editando(false);
-            }
-            notaFiscalPropria = notaFiscalPropriaNova;
         }
+
+        private void GerarContaReceber()
+        {
+            contaReceber = new ContaReceber
+            {
+                ContaReceberID = contaReceberDAO.BuscaProxCodigoDisponivel(),
+                DataCadastro = DateTime.Today,
+                DataConta = dtpSaida.Value,
+                Operacao = buscaOperacao.operacao,
+                Descricao = tbDescricao.Text,
+
+                ValorOriginal = dbValorTotalItens.Valor,
+
+                //Multa = buscaOperacao.operacao.Multa,
+                //Juros = buscaOperacao.operacao.Juros,
+                //Acrescimo = dbAcrescimoConta.Valor,
+                //Desconto = dbDescontoConta.Valor,
+
+                ValorFinal = dbValorTotalDocumento.Valor,
+                Situacao = "Aberto",
+
+                Parcelas = parcelas,
+
+                Pessoa = buscaPessoa.pessoa
+            };
+        }
+
         private void Recarrega()
         {
             if (editando)
@@ -292,7 +352,7 @@ namespace _5gpro.Forms
                         Editando(false);
                     }
                 }
-            }            
+            }
         }
         private void Proximo()
         {
@@ -383,6 +443,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpSaida.Value = DateTime.Now;
             dbValorTotalItens.Valor = 0.00m;
@@ -399,7 +460,7 @@ namespace _5gpro.Forms
         }
         private void LimpaCamposItem(bool focus)
         {
-            buscaItem.Limpa();
+            buscaItem1.Limpa();
             dbQuantidade.Valor = 0.00m;
             dbValorUnitItem.Valor = 0.00m;
             dbValorTotItem.Valor = 0.00m;
@@ -408,22 +469,22 @@ namespace _5gpro.Forms
             itemSelecionado = null;
             btExcluirItem.Enabled = false;
             btInserirItem.Text = "Inserir";
-            if (focus) { buscaItem.Focus(); }
+            if (focus) { buscaItem1.Focus(); }
         }
         private void InserirItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
             {
                 MessageBox.Show("Item não encontrado no banco de dados",
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
                 return;
             }
 
             var item = new NotaFiscalPropriaItem();
-            item.Item = buscaItem.item;
+            item.Item = buscaItem1.item;
 
 
 
@@ -458,21 +519,22 @@ namespace _5gpro.Forms
             btExcluirItem.Enabled = false;
             LimpaCamposItem(true);
         }
+
         private void BuscaItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
                 return;
             var item = new NotaFiscalPropriaItem();
-            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem.item.ItemID).FirstOrDefault();
+            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem1.item.ItemID).FirstOrDefault();
             if (dr == null)
             {
-                item.Item = buscaItem.item;
+                item.Item = buscaItem1.item;
                 btInserirItem.Text = "Inserir";
                 btExcluirItem.Enabled = false;
             }
             else
             {
-                item = itens.Find(i => i.Item.ItemID == buscaItem.item.ItemID);
+                item = itens.Find(i => i.Item.ItemID == buscaItem1.item.ItemID);
                 btInserirItem.Text = "Alterar";
                 btExcluirItem.Enabled = true;
             }
@@ -493,11 +555,14 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
+
+
         private void PreencheCampos(NotaFiscalPropria notafiscal)
         {
             ignoracheckevent = true;
             Limpa(false);
             tbCodigo.Text = notafiscal.NotaFiscalPropriaID.ToString();
+            tbDescricao.Text = notafiscal.Descricao;
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpSaida.Value = notafiscal.DataEntradaSaida;
@@ -523,12 +588,13 @@ namespace _5gpro.Forms
             if (item != null)
             {
                 ignoracheckevent = true;
-                buscaItem.PreencheCampos(item.Item);
+                buscaItem1.PreencheCampos(item.Item);
+                dbValorUnitItem.Valor = item.Item.ValorUnitario;
                 dbQuantidade.Valor = item.Quantidade;
-                dbValorUnitItem.Valor = item.ValorUnitario;
                 dbValorTotItem.Valor = item.ValorTotal;
                 dbDescontoItemPorc.Valor = item.DescontoPorc;
                 dbDescontoItem.Valor = item.Desconto;
+
                 ignoracheckevent = false;
             }
             else
@@ -537,7 +603,7 @@ namespace _5gpro.Forms
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
             }
         }
         private void EnterTab(object sender, KeyEventArgs e)
@@ -556,15 +622,89 @@ namespace _5gpro.Forms
         {
             dbDescontoItem.Valor = dbValorTotItem.Valor * dbDescontoItemPorc.Valor / 100;
         }
+        private void CalculaPorcDescontoItem()
+        {
+            if (dbValorTotItem.Valor > 0)
+                dbDescontoItemPorc.Valor = (dbDescontoItem.Valor * 100) / dbValorTotItem.Valor;
+        }
         private void CalculaTotalDocumento()
         {
             if (itens.Count > 0)
             {
                 dbValorTotalItens.Valor = itens.Sum(i => i.ValorTotal);
                 dbDescontoTotalItens.Valor = itens.Sum(i => i.Desconto);
-                dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
+                totaldocumento = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
+
+                if (buscaOperacao.operacao != null)
+                {
+                    dbJurosTotal.Valor = (totaldocumento * buscaOperacao.operacao.Juros) / 100;
+                    dbDescontoDocumento.Valor = (totaldocumento * buscaOperacao.operacao.Desconto) / 100;
+                    dbValorTotalDocumento.Valor = totaldocumento + dbJurosTotal.Valor - dbDescontoDocumento.Valor;
+                }
+            }
+            else
+            {
+                dbValorTotalItens.Valor = 0m;
+                dbDescontoTotalItens.Valor = 0m;
+                dbValorTotalDocumento.Valor = 0m;
+                dbJurosTotal.Valor = 0m;
+                dbDescontoDocumento.Valor = 0m;
             }
         }
+
+        private void buscaItem1_Codigo_Changed(object sender, EventArgs e)
+        {
+            if (buscaItem1.item == null)
+                return;
+
+            dbValorUnitItem.Valor = buscaItem1.item.ValorUnitario;
+        }
+
+
+        private void GerarParcelas()
+        {
+            if (buscaOperacao.operacao == null)
+            {
+                MessageBox.Show("Você deve selecionar um operação para gerar as parcelas!",
+                 "Operação não selecionada",
+                 MessageBoxButtons.OK,
+                 MessageBoxIcon.Warning);
+                return;
+            }
+            parcelas.Clear();
+            var parcelasOperacao = buscaOperacao.operacao.Parcelas;
+
+            int sequencia = 1;
+            foreach (var parcela in parcelasOperacao)
+            {
+                var par = new ParcelaContaReceber
+                {
+                    Sequencia = sequencia,
+                    DataVencimento = dtpSaida.Value.AddDays(parcela.Dias),
+                    Multa = 0.00m,
+                    Juros = 0.00m,
+                    Valor = dbValorTotalDocumento.Valor / parcelasOperacao.Count,
+                    Acrescimo = dbValorTotalDocumento.Valor * buscaOperacao.operacao.Acrescimo / 100 / parcelasOperacao.Count,
+                    Situacao = "Aberto"
+                };
+                sequencia++;
+                this.parcelas.Add(par);
+            }
+            dbNumeroParcelas.Valor = parcelas.Count;
+            dbValorParcela.Valor = parcelas[0].Valor;
+        }
+
+        private void BtVisualizarparcelas_Click(object sender, EventArgs e)
+        {
+            var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
+            fmvisualizaparcelas.Show(this);
+        }
+
+        private void BuscaOperacao_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC

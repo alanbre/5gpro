@@ -40,6 +40,7 @@
             this.dgvtbcDataSaida = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbFiltrosDocumento = new System.Windows.Forms.GroupBox();
+            this.btImprimir = new System.Windows.Forms.Button();
             this.dbValorFinal = new _5gpro.Controls.DecimalBox();
             this.dbValorInicial = new _5gpro.Controls.DecimalBox();
             this.cbValorTotal = new System.Windows.Forms.CheckBox();
@@ -119,12 +120,14 @@
             this.dgvtbcCliente.HeaderText = "Cliente";
             this.dgvtbcCliente.Name = "dgvtbcCliente";
             this.dgvtbcCliente.ReadOnly = true;
+            this.dgvtbcCliente.Width = 120;
             // 
             // dgvtbcNome
             // 
             this.dgvtbcNome.HeaderText = "Nome";
             this.dgvtbcNome.Name = "dgvtbcNome";
             this.dgvtbcNome.ReadOnly = true;
+            this.dgvtbcNome.Width = 120;
             // 
             // dgvtbcDataEmissao
             // 
@@ -155,6 +158,7 @@
             // 
             this.gbFiltrosDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbFiltrosDocumento.Controls.Add(this.btImprimir);
             this.gbFiltrosDocumento.Controls.Add(this.dbValorFinal);
             this.gbFiltrosDocumento.Controls.Add(this.dbValorInicial);
             this.gbFiltrosDocumento.Controls.Add(this.cbValorTotal);
@@ -179,6 +183,16 @@
             this.gbFiltrosDocumento.TabIndex = 0;
             this.gbFiltrosDocumento.TabStop = false;
             this.gbFiltrosDocumento.Text = "Filtros do documento";
+            // 
+            // btImprimir
+            // 
+            this.btImprimir.Location = new System.Drawing.Point(273, 113);
+            this.btImprimir.Name = "btImprimir";
+            this.btImprimir.Size = new System.Drawing.Size(75, 23);
+            this.btImprimir.TabIndex = 20;
+            this.btImprimir.Text = "Imprimir";
+            this.btImprimir.UseVisualStyleBackColor = true;
+            this.btImprimir.Click += new System.EventHandler(this.BtImprimir_Click);
             // 
             // dbValorFinal
             // 
@@ -369,6 +383,7 @@
             this.Controls.Add(this.gbGridDocumentos);
             this.Controls.Add(this.gbFiltrosDocumento);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1108, 501);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1108, 501);
@@ -377,6 +392,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Busca notas fiscais";
+            this.Load += new System.EventHandler(this.FmSaiBuscaNotaFiscalPropria_Load);
             this.gbGridDocumentos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvNotas)).EndInit();
             this.gbFiltrosDocumento.ResumeLayout(false);
@@ -414,5 +430,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataEmissao;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataSaida;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcTotal;
+        private System.Windows.Forms.Button btImprimir;
     }
 }

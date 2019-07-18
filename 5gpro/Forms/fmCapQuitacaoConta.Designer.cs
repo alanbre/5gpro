@@ -80,6 +80,7 @@
             this.dgvtbcAcrescimo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcDesconto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcValorFinal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbPesquisa.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbParcelas.SuspendLayout();
@@ -285,6 +286,7 @@
             this.tbCodigoConta.Name = "tbCodigoConta";
             this.tbCodigoConta.Size = new System.Drawing.Size(66, 20);
             this.tbCodigoConta.TabIndex = 1;
+            this.tbCodigoConta.Leave += new System.EventHandler(this.TbCodigoConta_Leave);
             // 
             // buscaPessoa
             // 
@@ -299,6 +301,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.buscaPlanoContaCaixa);
             this.groupBox1.Controls.Add(this.buscaCaixa);
             this.groupBox1.Controls.Add(this.lbDesconto);
             this.groupBox1.Controls.Add(this.dbDesconto);
@@ -355,7 +358,7 @@
             // 
             // btQuitar
             // 
-            this.btQuitar.Location = new System.Drawing.Point(742, 31);
+            this.btQuitar.Location = new System.Drawing.Point(745, 70);
             this.btQuitar.Name = "btQuitar";
             this.btQuitar.Size = new System.Drawing.Size(75, 23);
             this.btQuitar.TabIndex = 16;
@@ -607,6 +610,19 @@
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
             // 
+            // buscaPlanoContaCaixa
+            // 
+            this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa.Entrada = false;
+            this.buscaPlanoContaCaixa.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa.LabelText = "Conta Caixa";
+            this.buscaPlanoContaCaixa.Location = new System.Drawing.Point(475, 54);
+            this.buscaPlanoContaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPlanoContaCaixa.Name = "buscaPlanoContaCaixa";
+            this.buscaPlanoContaCaixa.Saida = false;
+            this.buscaPlanoContaCaixa.Size = new System.Drawing.Size(264, 39);
+            this.buscaPlanoContaCaixa.TabIndex = 17;
+            // 
             // fmCapQuitacaoConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -687,5 +703,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDesconto;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
         private Controls.BuscaCaixa buscaCaixa;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace _5gpro.Entities
 {
@@ -11,6 +12,8 @@ namespace _5gpro.Entities
         }
 
         public int OrcamentoID { get; set; }
+
+        [Required(ErrorMessage = "O Cliente é obrigatório.|buscaPessoa", AllowEmptyStrings = false)]
         public Pessoa Pessoa { get; set; }
 
         public NotaFiscalPropria NotaFiscal { get; set; } = null;
@@ -21,6 +24,7 @@ namespace _5gpro.Entities
         public decimal ValorTotalOrcamento { get; set; }
         public decimal DescontoTotalItens { get; set; }
         public decimal DescontoOrcamento { get; set; }
+        public string Descricao { get; set; }
 
         public virtual ICollection<OrcamentoItem> OrcamentoItem { get; set; }
     }

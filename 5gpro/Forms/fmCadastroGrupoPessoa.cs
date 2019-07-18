@@ -128,10 +128,15 @@ namespace _5gpro.Forms
 
         private void DgvSubGruposPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = dgvSubGruposPessoas.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvSubGruposPessoas.Rows[selectedRowIndex];
-            subgrupopessoaSelecionado = grupoPessoa.SubGrupoPessoas.Find(g => (g.SubGrupoPessoaID).ToString() == Convert.ToString(selectedRow.Cells[0].Value));
-            InserirSubGrupoPessoa();
+            if (dgvSubGruposPessoas.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = dgvSubGruposPessoas.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dgvSubGruposPessoas.Rows[selectedRowIndex];
+                subgrupopessoaSelecionado = grupoPessoa.SubGrupoPessoas.Find(p => p.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value));
+                PreencheCamposSubGrupo(subgrupopessoaSelecionado);
+                btSalvar.Enabled = true;
+                btRemoverSub.Enabled = true;
+            }
         }
 
         private void BtSalvar_Click(object sender, EventArgs e) => SalvaSubGrupo();
@@ -347,6 +352,7 @@ namespace _5gpro.Forms
                     tbCodigo.Text = grupopessoaDAO.BuscaProxCodigoDisponivel().ToString();
                 }
                 ok = false;
+                return;
             }
 
             grupoPessoa = new GrupoPessoa();
@@ -395,43 +401,60 @@ namespace _5gpro.Forms
             }
 
             SubGrupoPessoa subGrupo = null;
-            if (subgrupopessoaSelecionado == null)
+            if (subgrupopessoaSelecionado != null)
+            {
+                subGrupo = subgrupopessoaSelecionado;
+                grupoPessoa.SubGrupoPessoas.Remove(subGrupo);
+                subGrupo.Nome = tbNomeSubGrupo.Text;
+
+                int resultado = grupopessoaDAO.AtualizarSubGrupo(subGrupo);
+                if (resultado > 0)
+                {
+                    tbAjuda.Text = "Sub-grupo atualizado com sucesso";
+                    grupoPessoa.SubGrupoPessoas.Add(subGrupo);
+                    btNovoSubGrupo.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("Problema ao atualizar o registro",
+                    "Problema ao atualizar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+
+            }
+            else
             {
                 subGrupo = new SubGrupoPessoa();
                 subGrupo.Nome = tbNomeSubGrupo.Text;
                 subGrupo.Codigo = int.Parse(tbCodigoSubGrupo.Text);
                 subGrupo.GrupoPessoa = grupoPessoa;
-            }
-            else
-            {
-                subGrupo = subgrupopessoaSelecionado;
-            }
 
+                int resultado = grupopessoaDAO.InserirSubGrupo(subGrupo);
+                if (resultado == 0)
+                {
+                    MessageBox.Show("Problema ao salvar o registro",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+                else if (resultado == 1)
+                {
+                    tbAjuda.Text = "Sub-grupo salvo com sucesso";
 
-            int resultado = grupopessoaDAO.InserirSubGrupo(subGrupo);
-            if (resultado == 0)
-            {
-                MessageBox.Show("Problema ao salvar o registro",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                    grupoPessoa.SubGrupoPessoas.Add(subGrupo);
+                    btNovoSubGrupo.Enabled = true;
+
+                }
+                else if (resultado == 2)
+                {
+                    tbAjuda.Text = "Sub-grupo atualizado com sucesso";
+                    grupoPessoa.SubGrupoPessoas.Add(subGrupo);
+                    btNovoSubGrupo.Enabled = true;
+                }
             }
-            else if (resultado == 1)
-            {
-                tbAjuda.Text = "Sub-grupo salvo com sucesso";
-
-                grupoPessoa.SubGrupoPessoas.Add(subGrupo);
-                btNovoSubGrupo.Enabled = true;
-
-            }
-            else if (resultado == 2)
-            {
-                tbAjuda.Text = "Sub-grupo atualizado com sucesso";
-                grupoPessoa.SubGrupoPessoas.Add(subGrupo);
-                btNovoSubGrupo.Enabled = true;
-            }
-
             LimpaCamposSubPessoas();
             PreencheGridSubGrupoPessoas();
 
@@ -450,16 +473,7 @@ namespace _5gpro.Forms
 
         private void DgvSubGruposPessoas_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvSubGruposPessoas.SelectedRows.Count > 0)
-            {
-                int selectedRowIndex = dgvSubGruposPessoas.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = dgvSubGruposPessoas.Rows[selectedRowIndex];
-                subgrupopessoaSelecionado = grupoPessoa.SubGrupoPessoas.Find(p => p.Codigo == Convert.ToInt32(selectedRow.Cells[0].Value));
-                PreencheCamposSubGrupo(subgrupopessoaSelecionado);
-                btSalvar.Enabled = true;
-                btNovoSubGrupo.Enabled = false;
-                btRemoverSub.Enabled = true;
-            }
+
         }
 
         private void RemoverSubGrupoPessoa()
@@ -491,8 +505,11 @@ namespace _5gpro.Forms
 
         private void CarregaDados()
         {
+            var controls = (ControlCollection)this.Controls;
+            
             if (tbCodigo.Text.Length == 0)
             {
+                validacao.despintarCampos(controls);
                 LimpaCampos(true);
                 Editando(false);
                 return;
@@ -536,12 +553,14 @@ namespace _5gpro.Forms
             var newGrupoPessoa = grupopessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newGrupoPessoa != null)
             {
+                validacao.despintarCampos(controls);
                 grupoPessoa = newGrupoPessoa;
                 PreencheCampos(grupoPessoa);
                 Editando(false);
             }
             else
             {
+                validacao.despintarCampos(controls);
                 Editando(true);
                 LimpaCampos(false);
             }

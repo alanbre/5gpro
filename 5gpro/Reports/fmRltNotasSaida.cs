@@ -371,7 +371,7 @@ namespace _5gpro.Reports
                                     row.Cells.Add(new DataGridViewTextBoxCell { Value = i.Item?.ValorEntrada, ValueType = i.Item?.ValorEntrada.GetType() });
                                     break;
                                 case "ValorSaida":
-                                    row.Cells.Add(new DataGridViewTextBoxCell { Value = i.Item?.ValorSaida, ValueType = i.Item?.ValorSaida.GetType() });
+                                    row.Cells.Add(new DataGridViewTextBoxCell { Value = i.Item?.ValorUnitario, ValueType = i.Item?.ValorUnitario.GetType() });
                                     break;
                                 case "Estoquenecessario":
                                     row.Cells.Add(new DataGridViewTextBoxCell { Value = i.Item?.Estoquenecessario, ValueType = i.Item?.Estoquenecessario.GetType() });

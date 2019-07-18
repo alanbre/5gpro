@@ -14,6 +14,7 @@ namespace _5gpro.Forms
 
         private List<ParcelaContaReceber> parcelasContaReceber;
         private readonly ParcelaContaReceberDAO parcelaContaReceberDAO = new ParcelaContaReceberDAO();
+        private readonly PlanoContaPadraoDAO planoContaPadraoDAO = new PlanoContaPadraoDAO();
         private readonly CaixaLancamentoDAO caixaLancamentoDAO = new CaixaLancamentoDAO();
         private List<ParcelaContaReceber> parcelasContaReceberSelecionadas = new List<ParcelaContaReceber>();
         private List<CaixaLancamento> caixaLancamentos = null;
@@ -173,6 +174,7 @@ namespace _5gpro.Forms
                 {
                     var caixaLancamento = new CaixaLancamento();
                     caixaLancamento.Caixa = buscaCaixa.caixa;
+                    caixaLancamento.PlanoConta = buscaPlanoContaCaixa.conta;
                     caixaLancamento.Data = DateTime.Now;
                     caixaLancamento.Documento = parc.ParcelaContaReceberID.ToString();
                     caixaLancamento.TipoDocumento = 0;
@@ -255,6 +257,21 @@ namespace _5gpro.Forms
                 this.SelectNextControl((Control)sender, true, true, true, true);
                 e.Handled = e.SuppressKeyPress = true;
             }
+        }
+
+        private void TbCodigoConta_Leave(object sender, EventArgs e)
+        {
+            int c = 0;
+            if (!int.TryParse(tbCodigoConta.Text, out c))
+            {
+                tbCodigoConta.Clear();
+            }
+            codigo = c;
+        }
+
+        private void GbPagamento_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

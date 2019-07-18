@@ -85,7 +85,7 @@ namespace _5gpro.Controls
         {
             if (subgrupoPessoa != null)
             {
-                tbCodigoSubGrupoPessoa.Text = subgrupoPessoa.SubGrupoPessoaID.ToString();
+                tbCodigoSubGrupoPessoa.Text = subgrupoPessoa.Codigo.ToString();
                 tbNomeSubGrupoPessoa.Text = subgrupoPessoa.Nome;
             }
             else
@@ -94,7 +94,7 @@ namespace _5gpro.Controls
                 "Sub-Grupo de pessoas não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                Limpa();
+                Limpa(false);
             }
         }
 
@@ -127,10 +127,13 @@ namespace _5gpro.Controls
             }
         }
 
-        public void Limpa()
+        public void Limpa(bool limpagrupo = true)
         {
             this.subgrupoPessoa = null;
+
+            if(limpagrupo)
             this.gruporecebido = null;
+
             tbCodigoSubGrupoPessoa.Clear();
             tbNomeSubGrupoPessoa.Clear();
         }

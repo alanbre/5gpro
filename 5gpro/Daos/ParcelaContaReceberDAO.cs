@@ -53,6 +53,28 @@ namespace _5gpro.Daos
             }
             return parcelas;
         }
+
+        public ParcelaContaReceber BuscaByID(string codigo)
+        {
+            ParcelaContaReceber parcelaContaReceber = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT * FROM parcela_conta_receber pcr
+                              LEFT JOIN conta_receber cr
+                              ON pcr.idconta_receber = cr.idconta_receber
+                              WHERE idparcela_conta_receber = @idparcela_conta_receber";
+
+                sql.addParam("@idparcela_conta_receber", codigo);
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return null;
+                }
+                parcelaContaReceber = LeDadosReader(data)[0];
+            }
+            return parcelaContaReceber;
+        }
+
         public int QuitarParcelas(List<ParcelaContaReceber> parcelas)
         {
             int retorno = 0;

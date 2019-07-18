@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,7 +11,7 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaGrupoPessoa : Form
     {
-
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
         List<GrupoPessoa> listagrupopessoa;
         public GrupoPessoa grupoPessoaSelecionado = null;
         GrupoPessoaDAO grupoPessoaDAO = new GrupoPessoaDAO();
@@ -20,6 +21,10 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+        //LOAD
+        private void FmBuscaGrupoPessoa_Load(object sender, EventArgs e) => BuscaGrupoPessoa();
+
+        //KEYUP, KEYDOWN
         private void FmBuscaGrupoPessoa_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -29,9 +34,8 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-        private void FmBuscaGrupoPessoa_Load(object sender, EventArgs e) => BuscaGrupoPessoa();
-        private void TbNomeGrupoPessoa_TextChanged(object sender, EventArgs e) => BuscaGrupoPessoa();
 
+        //CLICK
         private void DgvGrupoPessoa_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgvGrupoPessoa.SelectedCells[0].RowIndex;
@@ -40,9 +44,14 @@ namespace _5gpro.Forms
             this.Close();
         }
 
+        //TEXTCHANGED
+        private void TbNomeGrupoPessoa_TextChanged(object sender, EventArgs e) => BuscaGrupoPessoa();
 
+        //FUNÇÕES
         private void BuscaGrupoPessoa()
         {
+            dgvGrupoPessoa.Columns.Clear();
+
             DataTable table = new DataTable();
             table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Nome", typeof(string));
@@ -54,7 +63,10 @@ namespace _5gpro.Forms
                 table.Rows.Add(g.GrupoPessoaID, g.Nome);
             }
             dgvGrupoPessoa.DataSource = table;
+
+            funaux.TratarTamanhoColunas(dgvGrupoPessoa);
         }
+
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -63,6 +75,5 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
     }
 }

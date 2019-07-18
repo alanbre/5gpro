@@ -14,7 +14,7 @@ namespace _5gpro.Daos
     class ParcelaContaPagarDAO
     {
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
+        
 
         public IEnumerable<ParcelaContaPagar> Busca(fmCapQuitacaoConta.Filtros f)
         {
@@ -58,6 +58,28 @@ namespace _5gpro.Daos
             }
             return parcelas;
         }
+
+        public ParcelaContaPagar BuscaByID(string codigo)
+        {
+            ParcelaContaPagar parcelaContaPagar = null;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.Query = @"SELECT * FROM parcela_conta_pagar pcp
+                              LEFT JOIN conta_pagar cp
+                              ON pcp.idconta_pagar = cp.idconta_pagar
+                              WHERE idparcela_conta_pagar = @idparcela_conta_pagar";
+
+                sql.addParam("@idparcela_conta_pagar", codigo);
+                var data = sql.selectQuery();
+                if (data == null)
+                {
+                    return null;
+                }
+                parcelaContaPagar = LeDadosReader(data)[0];
+            }
+            return parcelaContaPagar;
+        }
+
         public int QuitarParcelas(List<ParcelaContaPagar> parcelas)
         {
             int retorno = 0;
@@ -93,6 +115,7 @@ namespace _5gpro.Daos
             {
                 var parcela = new ParcelaContaPagar();
                 parcela.ParcelaContaPagarID = Convert.ToInt32(d["idparcela_conta_pagar"]);
+                
                 parcela.Sequencia = Convert.ToInt32(d["sequencia"]);
                 parcela.DataVencimento = (DateTime)d["data_vencimento"];
                 parcela.Valor = (decimal)d["valor"];

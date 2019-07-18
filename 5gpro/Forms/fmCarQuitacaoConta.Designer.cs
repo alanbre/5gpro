@@ -80,6 +80,7 @@
             this.lbValor = new System.Windows.Forms.Label();
             this.tbCount = new System.Windows.Forms.TextBox();
             this.lbCount = new System.Windows.Forms.Label();
+            this.buscaPlanoContaCaixa = new _5gpro.Controls.BuscaPlanoContaCaixa();
             this.gbPesquisa.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -235,6 +236,7 @@
             this.tbCodigoConta.Name = "tbCodigoConta";
             this.tbCodigoConta.Size = new System.Drawing.Size(66, 20);
             this.tbCodigoConta.TabIndex = 3;
+            this.tbCodigoConta.Leave += new System.EventHandler(this.TbCodigoConta_Leave);
             // 
             // dtpDataVencimentoInicial
             // 
@@ -416,6 +418,7 @@
             // 
             this.gbPagamento.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbPagamento.Controls.Add(this.buscaPlanoContaCaixa);
             this.gbPagamento.Controls.Add(this.buscaCaixa);
             this.gbPagamento.Controls.Add(this.lbDesconto);
             this.gbPagamento.Controls.Add(this.dbDesconto);
@@ -439,6 +442,7 @@
             this.gbPagamento.TabIndex = 2;
             this.gbPagamento.TabStop = false;
             this.gbPagamento.Text = "Pagamento";
+            this.gbPagamento.Enter += new System.EventHandler(this.GbPagamento_Enter);
             // 
             // buscaCaixa
             // 
@@ -472,7 +476,7 @@
             // 
             // btQuitar
             // 
-            this.btQuitar.Location = new System.Drawing.Point(735, 31);
+            this.btQuitar.Location = new System.Drawing.Point(745, 73);
             this.btQuitar.Name = "btQuitar";
             this.btQuitar.Size = new System.Drawing.Size(75, 23);
             this.btQuitar.TabIndex = 14;
@@ -612,6 +616,19 @@
             this.lbCount.TabIndex = 0;
             this.lbCount.Text = "Qtd";
             // 
+            // buscaPlanoContaCaixa
+            // 
+            this.buscaPlanoContaCaixa.BackColor = System.Drawing.Color.White;
+            this.buscaPlanoContaCaixa.Entrada = false;
+            this.buscaPlanoContaCaixa.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buscaPlanoContaCaixa.LabelText = "Conta Caixa";
+            this.buscaPlanoContaCaixa.Location = new System.Drawing.Point(475, 57);
+            this.buscaPlanoContaCaixa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPlanoContaCaixa.Name = "buscaPlanoContaCaixa";
+            this.buscaPlanoContaCaixa.Saida = false;
+            this.buscaPlanoContaCaixa.Size = new System.Drawing.Size(257, 39);
+            this.buscaPlanoContaCaixa.TabIndex = 18;
+            // 
             // fmCarQuitacaoConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -692,5 +709,6 @@
         private System.Windows.Forms.CheckBox cbDataVencimento;
         private System.Windows.Forms.CheckBox cbDataCadastro;
         private Controls.BuscaCaixa buscaCaixa;
+        private Controls.BuscaPlanoContaCaixa buscaPlanoContaCaixa;
     }
 }

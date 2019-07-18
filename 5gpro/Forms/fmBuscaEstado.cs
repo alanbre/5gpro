@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,7 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaEstado : Form
     {
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
         public List<Estado> Estados;
         public Estado EstadoSelecionado;
         private readonly EstadoDAO estadoDAO = new EstadoDAO();
@@ -20,6 +22,10 @@ namespace _5gpro.Forms
             tbFiltroNomeEstado.Focus();
         }
 
+        //LOAD
+        private void FmBuscaEstado_Load(object sender, EventArgs e) => BuscaEstados();
+
+        //KEYUP, KEYDOWN
         private void FmBuscaEstado_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -29,9 +35,22 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
-        private void BtPesquisar_Click(object sender, EventArgs e)
-        {
 
+        //CLICK
+        private void DgvEstados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int selectedRowIndex = dgvEstados.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = dgvEstados.Rows[selectedRowIndex];
+            EstadoSelecionado = Estados.Find(est => est.EstadoID == Convert.ToInt32(selectedRow.Cells[0].Value));
+            this.Close();
+        }
+
+        //TEXTCHANGED
+        private void TbFiltroNomeEstado_TextChanged(object sender, EventArgs e) => BuscaEstados();
+
+        //FUNÇÕES
+        private void BuscaEstados()
+        {
             dgvEstados.Rows.Clear();
             Estados = estadoDAO.BuscaEstadoByNome(tbFiltroNomeEstado.Text);
             List<DataGridViewRow> rows = new List<DataGridViewRow>();
@@ -47,25 +66,8 @@ namespace _5gpro.Forms
 
             }
             dgvEstados.Rows.AddRange(rows.ToArray());
+            funaux.TratarTamanhoColunas(dgvEstados);
             dgvEstados.Refresh();
-
-
-            //MÉTODO ANTIGO COMENTADO POR SEGURANÇA
-            //DataTable table = new DataTable();
-            //table.Columns.Add("Código", typeof(string));
-            //table.Columns.Add("Nome", typeof(string));
-            //foreach (Estado estado in Estados)
-            //{
-            //    table.Rows.Add(estado.EstadoID, estado.Nome);
-            //}
-            //dgvEstados.DataSource = table;
-        }
-        private void DgvEstados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int selectedRowIndex = dgvEstados.SelectedCells[0].RowIndex;
-            DataGridViewRow selectedRow = dgvEstados.Rows[selectedRowIndex];
-            EstadoSelecionado = Estados.Find(est => est.EstadoID == Convert.ToInt32(selectedRow.Cells[0].Value));
-            this.Close();
         }
 
         private void EnterTab(object sender, KeyEventArgs e)

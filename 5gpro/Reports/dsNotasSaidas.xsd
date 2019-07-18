@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsNotasSaidas" targetNamespace="http://tempuri.org/dsNotasSaidas.xsd" xmlns:mstns="http://tempuri.org/dsNotasSaidas.xsd" xmlns="http://tempuri.org/dsNotasSaidas.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsNotasSaidas" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsNotasSaidas" msprop:Generator_UserDSName="dsNotasSaidas">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="notas_saida" msprop:Generator_TableClassName="notas_saidaDataTable" msprop:Generator_TableVarName="tablenotas_saida" msprop:Generator_RowChangedName="notas_saidaRowChanged" msprop:Generator_TablePropName="notas_saida" msprop:Generator_RowDeletingName="notas_saidaRowDeleting" msprop:Generator_RowChangingName="notas_saidaRowChanging" msprop:Generator_RowEvHandlerName="notas_saidaRowChangeEventHandler" msprop:Generator_RowDeletedName="notas_saidaRowDeleted" msprop:Generator_RowClassName="notas_saidaRow" msprop:Generator_UserTableName="notas_saida" msprop:Generator_RowEvArgName="notas_saidaRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="numero" msprop:Generator_ColumnVarNameInTable="columnnumero" msprop:Generator_ColumnPropNameInRow="numero" msprop:Generator_ColumnPropNameInTable="numeroColumn" msprop:Generator_UserColumnName="numero" type="xs:string" minOccurs="0" />
+              <xs:element name="data_emissao" msprop:Generator_ColumnVarNameInTable="columndata_emissao" msprop:Generator_ColumnPropNameInRow="data_emissao" msprop:Generator_ColumnPropNameInTable="data_emissaoColumn" msprop:Generator_UserColumnName="data_emissao" type="xs:string" minOccurs="0" />
+              <xs:element name="data_saida" msprop:Generator_ColumnVarNameInTable="columndata_saida" msprop:Generator_ColumnPropNameInRow="data_saida" msprop:Generator_ColumnPropNameInTable="data_saidaColumn" msprop:Generator_UserColumnName="data_saida" type="xs:string" minOccurs="0" />
+              <xs:element name="cliente" msprop:Generator_ColumnVarNameInTable="columncliente" msprop:Generator_ColumnPropNameInRow="cliente" msprop:Generator_ColumnPropNameInTable="clienteColumn" msprop:Generator_UserColumnName="cliente" type="xs:string" minOccurs="0" />
+              <xs:element name="valor" msprop:Generator_ColumnVarNameInTable="columnvalor" msprop:Generator_ColumnPropNameInRow="valor" msprop:Generator_ColumnPropNameInTable="valorColumn" msprop:Generator_UserColumnName="valor" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -196,7 +196,7 @@ namespace _5gpro.Daos
                     item.TipoItem = (string)d["i_tipo"];
                     item.Referencia = (string)d["i_referencia"];
                     item.ValorEntrada = (decimal)d["i_valorentrada"];
-                    item.ValorSaida = (decimal)d["i_valorsaida"];
+                    item.ValorUnitario = (decimal)d["i_valorsaida"];
                     item.Estoquenecessario = (decimal)d["i_estoquenecessario"];
                     item.Unimedida = uniMedida;
                     item.SubGrupoItem = subGrupoItem;
@@ -336,13 +336,13 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO notafiscal
-                         (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa)
+                         (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa, descricao)
                           VALUES
-                         (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa)
+                         (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa, @descricao)
                           ON DUPLICATE KEY UPDATE
                           data_emissao = @data_emissao, data_entradasaida = @data_entradasaida, valor_total_itens = @valor_total_itens,
                           valor_documento = @valor_documento, desconto_total_itens = @desconto_total_itens, desconto_documento = @desconto_documento,
-                          idpessoa = @idpessoa";
+                          idpessoa = @idpessoa, descricao = @descricao";
 
                 sql.addParam("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
                 sql.addParam("@data_emissao", notafiscal.DataEmissao);
@@ -353,6 +353,7 @@ namespace _5gpro.Daos
                 sql.addParam("@desconto_total_itens", notafiscal.DescontoTotalItens);
                 sql.addParam("@desconto_documento", notafiscal.DescontoDocumento);
                 sql.addParam("@idpessoa", notafiscal.Pessoa?.PessoaID ?? null);
+                sql.addParam("@descricao", notafiscal.Descricao);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
@@ -427,6 +428,79 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
+        //public void LimpaRegistrosCaixaSaida(NotaFiscalPropria nota)
+        //{
+        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+        //    {
+        //        sql.addParam("@documento", nota.NotaFiscalPropriaID.ToString());
+
+        //        sql.Query = @"DELETE FROM caixa_lancamento_sai 
+        //                      WHERE idnotafiscal = @documento";
+        //        sql.deleteQuery();
+
+        //        sql.Query = @"DELETE FROM caixa_lancamento 
+        //                    WHERE documento = @documento";
+        //        sql.deleteQuery();
+        //    }
+        //}
+
+        //public int MovimentaCaixaEntradaDeDinheiro(NotaFiscalPropria nota)
+        //{
+        //    int retorno = 0;
+
+        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+        //    {
+
+        //        sql.beginTransaction();
+        //        sql.Query = @"INSERT INTO caixa_lancamento
+        //                    (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
+        //                    VALUES
+        //                    (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
+        //        sql.addParam("@data", nota.DataEntradaSaida);
+        //        sql.addParam("@valor", nota.ValorTotalDocumento);
+        //        sql.addParam("@tipomovimento", 0);
+        //        sql.addParam("@tipodocumento", 2);
+        //        sql.addParam("@lancamento", 1);
+        //        sql.addParam("@documento", nota.NotaFiscalPropriaID);
+        //        //sql.addParam("@idcaixa", nota.Caixa.CaixaID);
+        //        //sql.addParam("@idcaixa_plano_contas", nota.PlanoDeConta.PlanoContaID);
+        //        retorno = sql.insertQuery();
+
+
+        //        if (retorno > 0)
+        //        {
+        //            sql.Query = "SELECT LAST_INSERT_ID() AS idcaixalancamento;";
+        //            var data = sql.selectQueryForSingleRecord();
+        //            int idcaixalancamento = Convert.ToInt32(data["idcaixalancamento"]);
+
+        //            sql.Query = @"DELETE FROM caixa_lancamento_sai 
+        //                          WHERE idnotafiscal = @idnotafiscal
+        //                          AND idcaixa_lancamento = @idcaixa_lancamento";
+
+        //            sql.clearParams();
+        //            sql.addParam("@idcaixa_lancamento", idcaixalancamento);
+        //            sql.addParam("@idnotafiscal", nota.NotaFiscalPropriaID);
+
+        //            sql.deleteQuery();
+
+        //            sql.Query = @"INSERT INTO caixa_lancamento_sai (idcaixa_lancamento, idnotafiscal)
+        //                        VALUES
+        //                        (@idcaixa_lancamento, @idnotafiscal)";
+
+        //            sql.clearParams();
+        //            sql.addParam("@idcaixa_lancamento", idcaixalancamento);
+        //            sql.addParam("@idnotafiscal", nota.NotaFiscalPropriaID);
+        //            sql.insertQuery();
+
+        //        }
+
+        //        sql.Commit();
+        //    }
+
+        //    return retorno;
+        //}
+
         private NotaFiscalPropria LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)
@@ -437,6 +511,7 @@ namespace _5gpro.Daos
 
             var notaFiscalPropria = new NotaFiscalPropria();
             notaFiscalPropria.NotaFiscalPropriaID = Convert.ToInt32(data[0]["idnotafiscal"]);
+            notaFiscalPropria.Descricao = (string)data[0]["descricao"];
             notaFiscalPropria.DataEmissao = (DateTime)data[0]["data_emissao"];
             notaFiscalPropria.DataEntradaSaida = (DateTime)data[0]["data_entradasaida"];
             notaFiscalPropria.ValorTotalItens = (decimal)data[0]["valor_total_itens"];
@@ -456,7 +531,7 @@ namespace _5gpro.Daos
                 i.TipoItem = (string)d["tipo"];
                 i.Referencia = (string)d["referencia"];
                 i.ValorEntrada = (decimal)d["valorentrada"];
-                i.ValorSaida = (decimal)d["valorsaida"];
+                i.ValorUnitario = (decimal)d["valorsaida"];
                 i.Estoquenecessario = (decimal)d["estoquenecessario"];
 
                 var nfi = new NotaFiscalPropriaItem();

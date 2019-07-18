@@ -243,12 +243,6 @@
     <Compile Include="Controls\BuscaUsuario.Designer.cs">
       <DependentUpon>BuscaUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CheckedGroupBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Controls\CheckedGroupBox.Designer.cs">
-      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DecimalBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -279,6 +273,7 @@
     <Compile Include="Daos\ContaPagarDAO.cs" />
     <Compile Include="Daos\ContaReceberDAO.cs" />
     <Compile Include="Daos\DesintegracaoDAO.cs" />
+    <Compile Include="Daos\EstabelecimentoDAO.cs" />
     <Compile Include="Daos\EstadoDAO.cs" />
     <Compile Include="Daos\FormaPagamentoDAO.cs" />
     <Compile Include="Daos\GrupoItemDAO.cs" />
@@ -306,6 +301,7 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
+    <Compile Include="Entities\Estabelecimento.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\FormaPagamento.cs" />
     <Compile Include="Entities\GrupoItem.cs" />
@@ -406,6 +402,30 @@
     <Compile Include="Forms\fmCaiPlanoContasPadrao.Designer.cs">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCfgDadosEstabelecimento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCfgDadosEstabelecimento.Designer.cs">
+      <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmSelecaoOrcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSelecaoOrcamento.Designer.cs">
+      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmSaiNotaFiscal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmSaiNotaFiscal.designer.cs">
+      <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmVisualizaParcelas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmVisualizaParcelas.Designer.cs">
+      <DependentUpon>fmVisualizaParcelas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
@@ -414,11 +434,52 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\dsItens.cs">
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsItens.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasEntradas.cs">
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasEntradas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasSaidas.cs">
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsNotasSaidas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsOrcamento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsOrcamento.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\fmRltGenerico.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\fmRltGenerico.Designer.cs">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltItens.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltItens.Designer.cs">
+      <DependentUpon>fmRltItens.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasSaidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasSaidas.Designer.cs">
+      <DependentUpon>fmRltNotasSaidas.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\fmRltNotasSaida.cs">
       <SubType>Form</SubType>
@@ -671,6 +732,18 @@
     <Compile Include="Methods.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\fmRltNotasEntradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\fmRltNotasEntradas.Designer.cs">
+      <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\impOrcamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\impOrcamento.Designer.cs">
+      <DependentUpon>impOrcamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Controls\BuscaCaixa.resx">
       <DependentUpon>BuscaCaixa.cs</DependentUpon>
@@ -716,9 +789,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaUsuario.resx">
       <DependentUpon>BuscaUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Controls\CheckedGroupBox.resx">
-      <DependentUpon>CheckedGroupBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\DecimalBox.resx">
       <DependentUpon>DecimalBox.cs</DependentUpon>
@@ -768,11 +838,36 @@
     <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
+      <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
+      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmSaiNotaFiscal.resx">
+      <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmVisualizaParcelas.resx">
+      <DependentUpon>fmVisualizaParcelas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltItens.resx">
+      <DependentUpon>fmRltItens.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltNotasSaidas.resx">
+      <DependentUpon>fmRltNotasSaidas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltNotasSaida.resx">
       <DependentUpon>fmRltNotasSaida.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\fmRltNotasEntradas.resx">
+      <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\impOrcamento.rdlc" />
+    <EmbeddedResource Include="Reports\impOrcamento.resx">
+      <DependentUpon>impOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rltGenerico.rdlc" />
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
@@ -902,6 +997,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports\rltItens.rdlc" />
+    <EmbeddedResource Include="Reports\rltNotasSaidas.rdlc" />
+    <EmbeddedResource Include="Reports\rltNotasEntradas.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
     <None Include="Reports\dsGenerico.xsc">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
@@ -932,6 +1030,50 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reports\dsItens.xsc">
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsItens.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsItens.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsItens.xss">
+      <DependentUpon>dsItens.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasEntradas.xsc">
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasEntradas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsNotasEntradas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsNotasEntradas.xss">
+      <DependentUpon>dsNotasEntradas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasSaidas.xsc">
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsNotasSaidas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsNotasSaidas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsNotasSaidas.xss">
+      <DependentUpon>dsNotasSaidas.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsOrcamento.xsc">
+      <DependentUpon>dsOrcamento.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsOrcamento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsOrcamento.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsOrcamento.xss">
+      <DependentUpon>dsOrcamento.xsd</DependentUpon>
+    </None>
     <None Include="Resources\plus_32_blue.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1120,7 +1262,6 @@
   <ItemGroup>
     <None Include="Resources\icons8_Delete_Subtra_22px.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\addMenu_80px.png" />
     <None Include="Resources\addMenu_64px.png" />
@@ -1156,6 +1297,8 @@
     <None Include="Resources\unlock_32px.png" />
     <None Include="Resources\search_filled_18px_white.png" />
     <None Include="Resources\menu_filled_30px_white.png" />
+    <None Include="Resources\print_48px.png" />
+    <None Include="Resources\icons8-settings-40.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

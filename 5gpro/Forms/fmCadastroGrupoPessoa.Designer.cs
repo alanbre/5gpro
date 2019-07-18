@@ -222,7 +222,6 @@
             this.dgvSubGruposPessoas.Size = new System.Drawing.Size(488, 170);
             this.dgvSubGruposPessoas.TabIndex = 1;
             this.dgvSubGruposPessoas.TabStop = false;
-            this.dgvSubGruposPessoas.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposPessoas_CellClick);
             this.dgvSubGruposPessoas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvSubGruposPessoas_CellDoubleClick);
             // 
             // dgvtbcCodigoSub

@@ -36,8 +36,7 @@ namespace _5gpro.Forms
             DatasIniciais();
         }
 
-
-
+        //KEYUP, KEYDOWN
         private void FmBuscaContaPagar_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -47,6 +46,8 @@ namespace _5gpro.Forms
             }
             EnterTab(this.ActiveControl, e);
         }
+
+        //CLICK
         private void BtPesquisar_Click(object sender, EventArgs e) => Pesquisar();
         private void DgvContas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -55,6 +56,8 @@ namespace _5gpro.Forms
             contaPagarSelecionada = contaPagarDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
+
+        //TEXTCHANGED
         private void CbValor_CheckedChanged(object sender, EventArgs e)
         {
             if (cbValorConta.Checked)
@@ -101,7 +104,7 @@ namespace _5gpro.Forms
             }
         }
 
-
+        //FUNÇÕES
         private void Pesquisar()
         {
             Filtros f = new Filtros
@@ -123,7 +126,8 @@ namespace _5gpro.Forms
 
             foreach (var cp in contasPagar)
                 dgvContas.Rows.Add(cp.ContaPagarID,
-                                   cp.Pessoa.PessoaID, cp.Pessoa.Nome,
+                                   cp.Descricao,
+                                   cp.Pessoa.Nome,
                                    cp.DataCadastro.ToShortDateString(),
                                    cp.ValorOriginal,
                                    cp.Multa,

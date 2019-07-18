@@ -1,7 +1,9 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Reports;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
@@ -15,6 +17,7 @@ namespace _5gpro.Forms
         private bool dataEntradaFiltro = false;
         private bool dataEmissaoFiltro = false;
 
+        private DataTable rel = new DataTable();
 
         public struct Filtros
         {
@@ -36,6 +39,14 @@ namespace _5gpro.Forms
             InitializeComponent();
         }
 
+        private void FmEntBuscaNotaFiscalTerceiros_Load(object sender, EventArgs e)
+        {
+            rel.Columns.Add("numero", typeof(int));
+            rel.Columns.Add("data_emissao", typeof(DateTime));
+            rel.Columns.Add("data_entrada", typeof(DateTime));
+            rel.Columns.Add("fornecedor", typeof(string));
+            rel.Columns.Add("valor", typeof(decimal));
+        }
         private void FmEntBuscaNotaFiscalTerceiros_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -92,8 +103,13 @@ namespace _5gpro.Forms
                 dataEntradaFiltro = false;
             }
         }
+        private void BtImprimir_Click(object sender, EventArgs e)
+        {
+            var formRelatorioNotasTerceiros = new fmRltNotasEntradas(rel);
+            formRelatorioNotasTerceiros.Show(this);
+        }
 
-        
+
 
         private void Pesquisar()
         {
@@ -114,8 +130,9 @@ namespace _5gpro.Forms
 
             notasFiscaisTerceiros = notaFiscalTerceirosDAO.Busca(f);
             dgvDocumentos.Rows.Clear();
+            rel.Rows.Clear();
 
-            foreach(var nf in notasFiscaisTerceiros)
+            foreach (var nf in notasFiscaisTerceiros)
             {
                 dgvDocumentos.Rows.Add(nf.NotaFiscalTerceirosID,
                                        nf.Pessoa.PessoaID,
@@ -123,6 +140,11 @@ namespace _5gpro.Forms
                                        nf.DataEmissao,
                                        nf.DataEntradaSaida.Date,
                                        nf.ValorTotalDocumento);
+                rel.Rows.Add(nf.NotaFiscalTerceirosID,
+                                      nf.DataEmissao,
+                                      nf.DataEntradaSaida,
+                                      $"{nf.Pessoa.PessoaID} - {nf.Pessoa.Nome}",
+                                      nf.ValorTotalDocumento);
             }
             dgvDocumentos.Refresh();
         }
@@ -136,8 +158,6 @@ namespace _5gpro.Forms
             notaFiscalTerceirosSelecionada = notaFiscalTerceirosDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
-
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -146,5 +166,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
+
     }
 }

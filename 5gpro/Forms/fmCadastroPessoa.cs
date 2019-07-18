@@ -90,6 +90,7 @@ namespace _5gpro.Forms
         {
 
         }
+        private void BuscaSubGrupoPessoa_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void TbNome_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbFantasia_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbRua_TextChanged(object sender, EventArgs e) => Editando(true);
@@ -143,7 +144,6 @@ namespace _5gpro.Forms
                 buscaSubGrupoPessoa.EscolhaOGrupo(true);
             }
         }
-
 
         private void Novo()
         {
@@ -372,7 +372,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void CarregaDados()
         {
             if (tbCodigo.Text.Length == 0)
@@ -408,7 +407,7 @@ namespace _5gpro.Forms
                 return;
             }
 
-            if (codigo == 0)
+            if (c == 0)
             {
                 LimpaCampos(true);
                 Editando(false);
@@ -420,21 +419,23 @@ namespace _5gpro.Forms
                 return;
             }
 
-
-            var newPessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
-            if (newPessoa != null)
+            if (codigo != c)
             {
-                pessoa = newPessoa;
-                codigo = pessoa.PessoaID;
-                validacao.despintarCampos(controls);
-                PreencheCampos(pessoa);
-                Editando(false);
-            }
-            else
-            {
-                validacao.despintarCampos(controls);
-                Editando(true);
-                LimpaCampos(false);
+                var newPessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigo.Text));
+                if (newPessoa != null)
+                {
+                    pessoa = newPessoa;
+                    codigo = pessoa.PessoaID;
+                    validacao.despintarCampos(controls);
+                    PreencheCampos(pessoa);
+                    Editando(false);
+                }
+                else
+                {
+                    validacao.despintarCampos(controls);
+                    Editando(true);
+                    LimpaCampos(false);
+                }
             }
 
         }
@@ -454,9 +455,9 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-        private void LimpaCampos(bool limpaCodigo)
+        private void LimpaCampos(bool limpaCodigo, bool limpapessoa = true)
         {
-            if (limpaCodigo) { tbCodigo.Clear(); }
+            if (limpaCodigo) { tbCodigo.Clear(); codigo = 0; }
             tbNome.Clear();
             tbFantasia.Clear();
             tbRua.Clear();
@@ -478,15 +479,15 @@ namespace _5gpro.Forms
             tbAjuda.Clear();
             buscaGrupoPessoa.Limpa();
             buscaSubGrupoPessoa.Limpa();
-            codigo = 0;
-            pessoa = null;
+
+            if (limpapessoa) { pessoa = null; }
         }
         private void PreencheCampos(Pessoa pessoa)
         {
             if (pessoa != null)
             {
                 ignoraCheckEvent = true;
-                LimpaCampos(false);
+                LimpaCampos(false, false);
                 tbCodigo.Text = pessoa.PessoaID.ToString();
                 tbNome.Text = pessoa.Nome;
                 tbFantasia.Text = pessoa.Fantasia;
@@ -541,5 +542,6 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = false;
             }
         }
+
     }
 }
