@@ -34,7 +34,7 @@ namespace _5gpro.Funcoes
                               id INT NOT NULL AUTO_INCREMENT,
                               nome VARCHAR(45) NOT NULL,
                               aplicado DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                              PRIMARY KEY (`id`))
+                              PRIMARY KEY (id))
                             ENGINE = InnoDB";
                     var retorno = sql.insertQuery();
                     sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
