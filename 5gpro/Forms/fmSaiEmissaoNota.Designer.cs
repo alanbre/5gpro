@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSaiEmissaoNota));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
-            this.btGerarParcelas = new System.Windows.Forms.Button();
             this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.lbDescnotasaida = new System.Windows.Forms.Label();
             this.tbDescricao = new System.Windows.Forms.TextBox();
@@ -48,6 +47,8 @@
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNotaFiscal = new System.Windows.Forms.Label();
             this.gbTotais = new System.Windows.Forms.GroupBox();
+            this.dbJurosTotal = new _5gpro.Controls.DecimalBox();
+            this.lbJurosDoc = new System.Windows.Forms.Label();
             this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
             this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
             this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
@@ -57,12 +58,12 @@
             this.lbValorTotalDocumento = new System.Windows.Forms.Label();
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.buscaItem1 = new _5gpro.Controls.BuscaItem();
             this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
             this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
             this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
             this.dbValorUnitItem = new _5gpro.Controls.DecimalBox();
             this.dbQuantidade = new _5gpro.Controls.DecimalBox();
-            this.buscaItem = new _5gpro.Controls.BuscaItem();
             this.btExcluirItem = new System.Windows.Forms.Button();
             this.lbDescItem = new System.Windows.Forms.Label();
             this.lbDescontoPorc = new System.Windows.Forms.Label();
@@ -80,13 +81,13 @@
             this.lbQuantidade = new System.Windows.Forms.Label();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.lbNumeroparcelas = new System.Windows.Forms.Label();
             this.lbValorparcela = new System.Windows.Forms.Label();
-            this.dbNumeroParcelas = new _5gpro.Controls.DecimalBox();
-            this.dbValorParcela = new _5gpro.Controls.DecimalBox();
             this.gbParcelas = new System.Windows.Forms.GroupBox();
             this.btVisualizarparcelas = new System.Windows.Forms.Button();
+            this.dbValorParcela = new _5gpro.Controls.DecimalBox();
+            this.dbNumeroParcelas = new _5gpro.Controls.DecimalBox();
+            this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
@@ -96,7 +97,6 @@
             // 
             // gbDadosDocumento
             // 
-            this.gbDadosDocumento.Controls.Add(this.btGerarParcelas);
             this.gbDadosDocumento.Controls.Add(this.buscaOperacao);
             this.gbDadosDocumento.Controls.Add(this.lbDescnotasaida);
             this.gbDadosDocumento.Controls.Add(this.tbDescricao);
@@ -114,16 +114,6 @@
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
             // 
-            // btGerarParcelas
-            // 
-            this.btGerarParcelas.Location = new System.Drawing.Point(660, 145);
-            this.btGerarParcelas.Name = "btGerarParcelas";
-            this.btGerarParcelas.Size = new System.Drawing.Size(93, 23);
-            this.btGerarParcelas.TabIndex = 10;
-            this.btGerarParcelas.Text = "Gerar Parcelas";
-            this.btGerarParcelas.UseVisualStyleBackColor = true;
-            this.btGerarParcelas.Click += new System.EventHandler(this.BtGerarParcelas_Click);
-            // 
             // buscaOperacao
             // 
             this.buscaOperacao.Location = new System.Drawing.Point(313, 129);
@@ -131,6 +121,7 @@
             this.buscaOperacao.Name = "buscaOperacao";
             this.buscaOperacao.Size = new System.Drawing.Size(344, 39);
             this.buscaOperacao.TabIndex = 9;
+            this.buscaOperacao.Leave += new System.EventHandler(this.BuscaOperacao_Leave);
             // 
             // lbDescnotasaida
             // 
@@ -220,6 +211,8 @@
             // 
             this.gbTotais.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbTotais.Controls.Add(this.dbJurosTotal);
+            this.gbTotais.Controls.Add(this.lbJurosDoc);
             this.gbTotais.Controls.Add(this.dbValorTotalDocumento);
             this.gbTotais.Controls.Add(this.dbDescontoDocumento);
             this.gbTotais.Controls.Add(this.dbDescontoTotalItens);
@@ -235,10 +228,32 @@
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
             // 
+            // dbJurosTotal
+            // 
+            this.dbJurosTotal.Enabled = false;
+            this.dbJurosTotal.Location = new System.Drawing.Point(9, 148);
+            this.dbJurosTotal.Name = "dbJurosTotal";
+            this.dbJurosTotal.Size = new System.Drawing.Size(85, 22);
+            this.dbJurosTotal.TabIndex = 21;
+            this.dbJurosTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // lbJurosDoc
+            // 
+            this.lbJurosDoc.AutoSize = true;
+            this.lbJurosDoc.Location = new System.Drawing.Point(6, 134);
+            this.lbJurosDoc.Name = "lbJurosDoc";
+            this.lbJurosDoc.Size = new System.Drawing.Size(32, 13);
+            this.lbJurosDoc.TabIndex = 20;
+            this.lbJurosDoc.Text = "Juros";
+            // 
             // dbValorTotalDocumento
             // 
             this.dbValorTotalDocumento.Enabled = false;
-            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 152);
+            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 184);
             this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
             this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 22);
             this.dbValorTotalDocumento.TabIndex = 19;
@@ -313,7 +328,7 @@
             // 
             this.lbValorTotalDocumento.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbValorTotalDocumento.AutoSize = true;
-            this.lbValorTotalDocumento.Location = new System.Drawing.Point(5, 136);
+            this.lbValorTotalDocumento.Location = new System.Drawing.Point(6, 169);
             this.lbValorTotalDocumento.Name = "lbValorTotalDocumento";
             this.lbValorTotalDocumento.Size = new System.Drawing.Size(125, 13);
             this.lbValorTotalDocumento.TabIndex = 6;
@@ -334,12 +349,12 @@
             this.gbItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbItens.Controls.Add(this.buscaItem1);
             this.gbItens.Controls.Add(this.dbDescontoItem);
             this.gbItens.Controls.Add(this.dbDescontoItemPorc);
             this.gbItens.Controls.Add(this.dbValorTotItem);
             this.gbItens.Controls.Add(this.dbValorUnitItem);
             this.gbItens.Controls.Add(this.dbQuantidade);
-            this.gbItens.Controls.Add(this.buscaItem);
             this.gbItens.Controls.Add(this.btExcluirItem);
             this.gbItens.Controls.Add(this.lbDescItem);
             this.gbItens.Controls.Add(this.lbDescontoPorc);
@@ -355,6 +370,15 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
+            // 
+            // buscaItem1
+            // 
+            this.buscaItem1.Location = new System.Drawing.Point(3, 213);
+            this.buscaItem1.Name = "buscaItem1";
+            this.buscaItem1.Size = new System.Drawing.Size(442, 39);
+            this.buscaItem1.TabIndex = 1;
+            this.buscaItem1.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.buscaItem1_Codigo_Leave);
+            this.buscaItem1.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.buscaItem1_Codigo_Changed);
             // 
             // dbDescontoItem
             // 
@@ -422,16 +446,6 @@
             131072});
             this.dbQuantidade.Leave += new System.EventHandler(this.DbQuantidade_Leave);
             // 
-            // buscaItem
-            // 
-            this.buscaItem.Location = new System.Drawing.Point(1, 208);
-            this.buscaItem.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaItem.Name = "buscaItem";
-            this.buscaItem.Size = new System.Drawing.Size(442, 39);
-            this.buscaItem.TabIndex = 1;
-            this.buscaItem.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.BuscaItem_Codigo_Leave);
-            this.buscaItem.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.BuscaItem_Codigo_Changed);
-            // 
             // btExcluirItem
             // 
             this.btExcluirItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -483,8 +497,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle19;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -531,9 +545,9 @@
             // 
             // dgvtbcQuantidade
             // 
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Format = "N2";
+            dataGridViewCellStyle20.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle20;
             this.dgvtbcQuantidade.Frozen = true;
             this.dgvtbcQuantidade.HeaderText = "Quantidade";
             this.dgvtbcQuantidade.MinimumWidth = 70;
@@ -542,9 +556,9 @@
             // 
             // dgvtbcValorUnitario
             // 
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Format = "C2";
+            dataGridViewCellStyle21.NullValue = null;
+            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle21;
             this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
             this.dgvtbcValorUnitario.MinimumWidth = 100;
             this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
@@ -553,9 +567,9 @@
             // 
             // dgvtbcValorTotalItem
             // 
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Format = "C2";
+            dataGridViewCellStyle22.NullValue = null;
+            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle22;
             this.dgvtbcValorTotalItem.HeaderText = "Valor total";
             this.dgvtbcValorTotalItem.MinimumWidth = 80;
             this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
@@ -564,8 +578,8 @@
             // 
             // dgvtbcDescontoPorc
             // 
-            dataGridViewCellStyle5.NullValue = null;
-            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.NullValue = null;
+            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle23;
             this.dgvtbcDescontoPorc.HeaderText = "% Desc";
             this.dgvtbcDescontoPorc.MinimumWidth = 50;
             this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
@@ -574,9 +588,9 @@
             // 
             // dgvtbcDescontoItem
             // 
-            dataGridViewCellStyle6.Format = "C2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Format = "C2";
+            dataGridViewCellStyle24.NullValue = null;
+            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle24;
             this.dgvtbcDescontoItem.HeaderText = "Desconto";
             this.dgvtbcDescontoItem.MinimumWidth = 70;
             this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
@@ -635,21 +649,6 @@
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 4;
             // 
-            // menuVertical
-            // 
-            this.menuVertical.Location = new System.Drawing.Point(7, 11);
-            this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
-            this.menuVertical.Name = "menuVertical";
-            this.menuVertical.Size = new System.Drawing.Size(53, 364);
-            this.menuVertical.TabIndex = 3;
-            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
-            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
-            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
-            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
-            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
-            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
-            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
             // lbNumeroparcelas
             // 
             this.lbNumeroparcelas.AutoSize = true;
@@ -667,32 +666,6 @@
             this.lbValorparcela.Size = new System.Drawing.Size(85, 13);
             this.lbValorparcela.TabIndex = 21;
             this.lbValorparcela.Text = "Valor da Parcela";
-            // 
-            // dbNumeroParcelas
-            // 
-            this.dbNumeroParcelas.Enabled = false;
-            this.dbNumeroParcelas.Location = new System.Drawing.Point(6, 30);
-            this.dbNumeroParcelas.Name = "dbNumeroParcelas";
-            this.dbNumeroParcelas.Size = new System.Drawing.Size(100, 22);
-            this.dbNumeroParcelas.TabIndex = 22;
-            this.dbNumeroParcelas.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorParcela
-            // 
-            this.dbValorParcela.Enabled = false;
-            this.dbValorParcela.Location = new System.Drawing.Point(6, 68);
-            this.dbValorParcela.Name = "dbValorParcela";
-            this.dbValorParcela.Size = new System.Drawing.Size(100, 22);
-            this.dbValorParcela.TabIndex = 23;
-            this.dbValorParcela.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
             // 
             // gbParcelas
             // 
@@ -717,6 +690,47 @@
             this.btVisualizarparcelas.Text = "Visualizar";
             this.btVisualizarparcelas.UseVisualStyleBackColor = true;
             this.btVisualizarparcelas.Click += new System.EventHandler(this.BtVisualizarparcelas_Click);
+            // 
+            // dbValorParcela
+            // 
+            this.dbValorParcela.Enabled = false;
+            this.dbValorParcela.Location = new System.Drawing.Point(6, 68);
+            this.dbValorParcela.Name = "dbValorParcela";
+            this.dbValorParcela.Size = new System.Drawing.Size(100, 22);
+            this.dbValorParcela.TabIndex = 23;
+            this.dbValorParcela.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbNumeroParcelas
+            // 
+            this.dbNumeroParcelas.Enabled = false;
+            this.dbNumeroParcelas.Location = new System.Drawing.Point(6, 30);
+            this.dbNumeroParcelas.Name = "dbNumeroParcelas";
+            this.dbNumeroParcelas.Size = new System.Drawing.Size(100, 22);
+            this.dbNumeroParcelas.TabIndex = 22;
+            this.dbNumeroParcelas.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // menuVertical
+            // 
+            this.menuVertical.Location = new System.Drawing.Point(7, 11);
+            this.menuVertical.Margin = new System.Windows.Forms.Padding(2);
+            this.menuVertical.Name = "menuVertical";
+            this.menuVertical.Size = new System.Drawing.Size(53, 364);
+            this.menuVertical.TabIndex = 3;
+            this.menuVertical.Novo_Clicked += new _5gpro.Controls.MenuVertical.novoEventHandler(this.MenuVertical_Novo_Clicked);
+            this.menuVertical.Buscar_Clicked += new _5gpro.Controls.MenuVertical.buscarEventHandler(this.MenuVertical_Buscar_Clicked);
+            this.menuVertical.Salvar_Clicked += new _5gpro.Controls.MenuVertical.salvarEventHandler(this.MenuVertical_Salvar_Clicked);
+            this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
+            this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
+            this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
+            this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
             // fmSaiEmissaoNota
             // 
@@ -781,7 +795,6 @@
         private System.Windows.Forms.Button btExcluirItem;
         private Controls.MenuVertical menuVertical;
         private Controls.BuscaPessoa buscaPessoa;
-        private Controls.BuscaItem buscaItem;
         private Controls.DecimalBox dbQuantidade;
         private Controls.DecimalBox dbValorTotalDocumento;
         private Controls.DecimalBox dbDescontoDocumento;
@@ -807,6 +820,8 @@
         private Controls.DecimalBox dbValorParcela;
         private System.Windows.Forms.GroupBox gbParcelas;
         private System.Windows.Forms.Button btVisualizarparcelas;
-        private System.Windows.Forms.Button btGerarParcelas;
+        private Controls.DecimalBox dbJurosTotal;
+        private System.Windows.Forms.Label lbJurosDoc;
+        private Controls.BuscaItem buscaItem1;
     }
 }

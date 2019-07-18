@@ -23,6 +23,7 @@ namespace _5gpro.Entities
         public decimal Desconto { get; set; }
         public string Situacao { get; set; }
         public string Descricao { get; set; }
+        public decimal Entrada { get; set; }
         public virtual ICollection<ParcelaContaReceber> Parcelas { get; set; }
     }
 }

@@ -306,8 +306,8 @@ namespace _5gpro.Forms
                             operacao.Entrada = dbEntrada.Valor;
 
                         operacao.Acrescimo = dbAcrescimo.Valor;
-
-
+                        operacao.Multa = dbMulta.Valor;
+                        operacao.Juros = dbJuros.Valor;
                         operacao.Desconto = 0;
 
                     }
@@ -412,8 +412,10 @@ namespace _5gpro.Forms
             tbNomeOperacao.Clear();
             tbAjuda.Clear();
             tbDescOperacao.Clear();
-            dbEntrada.Valor = 0;
-            dbDesconto.Valor = 0;
+            dbEntrada.Valor = 0m;
+            dbDesconto.Valor = 0m;
+            dbMulta.Valor = 0m;
+            dbJuros.Valor = 0m;
             tbNparcelas.Clear();
             dbAcrescimo.Valor = 0;
             rbNao.Checked = true;
@@ -482,6 +484,8 @@ namespace _5gpro.Forms
                         dbEntrada.Valor = 0;
                     }
                     dbDesconto.Valor = 0;
+                    dbMulta.Valor = operacao.Multa;
+                    dbJuros.Valor = operacao.Juros;
 
                     listaparcelasprincipal = operacao.Parcelas;
                     tbNparcelas.Clear();

@@ -46,6 +46,15 @@
             this.lbPorcentoDesconto = new System.Windows.Forms.Label();
             this.tpAprazo = new System.Windows.Forms.TabPage();
             this.pnAprazo = new System.Windows.Forms.Panel();
+            this.gbJurosAP = new System.Windows.Forms.GroupBox();
+            this.lbPorcentoJurosAP = new System.Windows.Forms.Label();
+            this.dbJuros = new _5gpro.Controls.DecimalBox();
+            this.gbMultaAP = new System.Windows.Forms.GroupBox();
+            this.lbPorcentoMultaAP = new System.Windows.Forms.Label();
+            this.dbMulta = new _5gpro.Controls.DecimalBox();
+            this.gbParcelas = new System.Windows.Forms.GroupBox();
+            this.tbNparcelas = new System.Windows.Forms.TextBox();
+            this.btGerar = new System.Windows.Forms.Button();
             this.gbVisualizar = new System.Windows.Forms.GroupBox();
             this.tbVisualizar = new System.Windows.Forms.TextBox();
             this.btEditar = new System.Windows.Forms.Button();
@@ -55,14 +64,11 @@
             this.rbNao = new System.Windows.Forms.RadioButton();
             this.lbPorcentoEntrada = new System.Windows.Forms.Label();
             this.rbSim = new System.Windows.Forms.RadioButton();
-            this.gbAcrescimo = new System.Windows.Forms.GroupBox();
-            this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
-            this.lbPorcentoAcrescimo = new System.Windows.Forms.Label();
-            this.gbParcelas = new System.Windows.Forms.GroupBox();
-            this.tbNparcelas = new System.Windows.Forms.TextBox();
-            this.btGerar = new System.Windows.Forms.Button();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.lbPorcentoAcrescimo = new System.Windows.Forms.Label();
+            this.dbAcrescimo = new _5gpro.Controls.DecimalBox();
+            this.gbAcrescimo = new System.Windows.Forms.GroupBox();
             this.gbDadosOperacao.SuspendLayout();
             this.gbCondicaoOperacao.SuspendLayout();
             this.tcOpcoes.SuspendLayout();
@@ -71,10 +77,12 @@
             this.gbDesconto.SuspendLayout();
             this.tpAprazo.SuspendLayout();
             this.pnAprazo.SuspendLayout();
+            this.gbJurosAP.SuspendLayout();
+            this.gbMultaAP.SuspendLayout();
+            this.gbParcelas.SuspendLayout();
             this.gbVisualizar.SuspendLayout();
             this.gbEntrada.SuspendLayout();
             this.gbAcrescimo.SuspendLayout();
-            this.gbParcelas.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDadosOperacao
@@ -249,28 +257,125 @@
             this.tpAprazo.Location = new System.Drawing.Point(4, 22);
             this.tpAprazo.Name = "tpAprazo";
             this.tpAprazo.Padding = new System.Windows.Forms.Padding(3);
-            this.tpAprazo.Size = new System.Drawing.Size(575, 195);
+            this.tpAprazo.Size = new System.Drawing.Size(503, 195);
             this.tpAprazo.TabIndex = 1;
             this.tpAprazo.Text = "Opções A Prazo";
             this.tpAprazo.UseVisualStyleBackColor = true;
             // 
             // pnAprazo
             // 
+            this.pnAprazo.Controls.Add(this.gbJurosAP);
+            this.pnAprazo.Controls.Add(this.gbMultaAP);
+            this.pnAprazo.Controls.Add(this.gbParcelas);
             this.pnAprazo.Controls.Add(this.gbVisualizar);
             this.pnAprazo.Controls.Add(this.gbEntrada);
             this.pnAprazo.Controls.Add(this.gbAcrescimo);
-            this.pnAprazo.Controls.Add(this.gbParcelas);
             this.pnAprazo.Location = new System.Drawing.Point(6, 6);
             this.pnAprazo.Name = "pnAprazo";
-            this.pnAprazo.Size = new System.Drawing.Size(563, 185);
+            this.pnAprazo.Size = new System.Drawing.Size(491, 185);
             this.pnAprazo.TabIndex = 18;
+            // 
+            // gbJurosAP
+            // 
+            this.gbJurosAP.Controls.Add(this.lbPorcentoJurosAP);
+            this.gbJurosAP.Controls.Add(this.dbJuros);
+            this.gbJurosAP.Location = new System.Drawing.Point(10, 65);
+            this.gbJurosAP.Name = "gbJurosAP";
+            this.gbJurosAP.Size = new System.Drawing.Size(118, 48);
+            this.gbJurosAP.TabIndex = 19;
+            this.gbJurosAP.TabStop = false;
+            this.gbJurosAP.Text = "Juros";
+            // 
+            // lbPorcentoJurosAP
+            // 
+            this.lbPorcentoJurosAP.AutoSize = true;
+            this.lbPorcentoJurosAP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.lbPorcentoJurosAP.Location = new System.Drawing.Point(89, 19);
+            this.lbPorcentoJurosAP.Name = "lbPorcentoJurosAP";
+            this.lbPorcentoJurosAP.Size = new System.Drawing.Size(20, 16);
+            this.lbPorcentoJurosAP.TabIndex = 1;
+            this.lbPorcentoJurosAP.Text = "%";
+            // 
+            // dbJuros
+            // 
+            this.dbJuros.Location = new System.Drawing.Point(6, 15);
+            this.dbJuros.Name = "dbJuros";
+            this.dbJuros.Size = new System.Drawing.Size(76, 20);
+            this.dbJuros.TabIndex = 0;
+            this.dbJuros.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // gbMultaAP
+            // 
+            this.gbMultaAP.Controls.Add(this.lbPorcentoMultaAP);
+            this.gbMultaAP.Controls.Add(this.dbMulta);
+            this.gbMultaAP.Location = new System.Drawing.Point(10, 11);
+            this.gbMultaAP.Name = "gbMultaAP";
+            this.gbMultaAP.Size = new System.Drawing.Size(118, 48);
+            this.gbMultaAP.TabIndex = 18;
+            this.gbMultaAP.TabStop = false;
+            this.gbMultaAP.Text = "Multa";
+            // 
+            // lbPorcentoMultaAP
+            // 
+            this.lbPorcentoMultaAP.AutoSize = true;
+            this.lbPorcentoMultaAP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.lbPorcentoMultaAP.Location = new System.Drawing.Point(89, 19);
+            this.lbPorcentoMultaAP.Name = "lbPorcentoMultaAP";
+            this.lbPorcentoMultaAP.Size = new System.Drawing.Size(20, 16);
+            this.lbPorcentoMultaAP.TabIndex = 1;
+            this.lbPorcentoMultaAP.Text = "%";
+            // 
+            // dbMulta
+            // 
+            this.dbMulta.Location = new System.Drawing.Point(6, 15);
+            this.dbMulta.Name = "dbMulta";
+            this.dbMulta.Size = new System.Drawing.Size(76, 20);
+            this.dbMulta.TabIndex = 0;
+            this.dbMulta.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // gbParcelas
+            // 
+            this.gbParcelas.Controls.Add(this.tbNparcelas);
+            this.gbParcelas.Controls.Add(this.btGerar);
+            this.gbParcelas.Location = new System.Drawing.Point(134, 11);
+            this.gbParcelas.Name = "gbParcelas";
+            this.gbParcelas.Size = new System.Drawing.Size(139, 80);
+            this.gbParcelas.TabIndex = 15;
+            this.gbParcelas.TabStop = false;
+            this.gbParcelas.Text = "Parcelas";
+            // 
+            // tbNparcelas
+            // 
+            this.tbNparcelas.Location = new System.Drawing.Point(6, 21);
+            this.tbNparcelas.Name = "tbNparcelas";
+            this.tbNparcelas.Size = new System.Drawing.Size(114, 20);
+            this.tbNparcelas.TabIndex = 1;
+            this.tbNparcelas.TextChanged += new System.EventHandler(this.TbNparcelas_TextChanged);
+            // 
+            // btGerar
+            // 
+            this.btGerar.Location = new System.Drawing.Point(76, 48);
+            this.btGerar.Name = "btGerar";
+            this.btGerar.Size = new System.Drawing.Size(44, 23);
+            this.btGerar.TabIndex = 10;
+            this.btGerar.Text = "Gerar";
+            this.btGerar.UseVisualStyleBackColor = true;
+            this.btGerar.Click += new System.EventHandler(this.BtGerar_Click);
             // 
             // gbVisualizar
             // 
             this.gbVisualizar.Controls.Add(this.tbVisualizar);
             this.gbVisualizar.Controls.Add(this.btEditar);
             this.gbVisualizar.Controls.Add(this.btRemover);
-            this.gbVisualizar.Location = new System.Drawing.Point(279, 18);
+            this.gbVisualizar.Location = new System.Drawing.Point(132, 94);
             this.gbVisualizar.Name = "gbVisualizar";
             this.gbVisualizar.Size = new System.Drawing.Size(141, 82);
             this.gbVisualizar.TabIndex = 16;
@@ -315,7 +420,7 @@
             this.gbEntrada.Controls.Add(this.rbNao);
             this.gbEntrada.Controls.Add(this.lbPorcentoEntrada);
             this.gbEntrada.Controls.Add(this.rbSim);
-            this.gbEntrada.Location = new System.Drawing.Point(9, 18);
+            this.gbEntrada.Location = new System.Drawing.Point(279, 11);
             this.gbEntrada.Name = "gbEntrada";
             this.gbEntrada.Size = new System.Drawing.Size(119, 80);
             this.gbEntrada.TabIndex = 6;
@@ -370,69 +475,6 @@
             this.rbSim.UseVisualStyleBackColor = true;
             this.rbSim.CheckedChanged += new System.EventHandler(this.RbSim_CheckedChanged);
             // 
-            // gbAcrescimo
-            // 
-            this.gbAcrescimo.Controls.Add(this.dbAcrescimo);
-            this.gbAcrescimo.Controls.Add(this.lbPorcentoAcrescimo);
-            this.gbAcrescimo.Location = new System.Drawing.Point(10, 104);
-            this.gbAcrescimo.Name = "gbAcrescimo";
-            this.gbAcrescimo.Size = new System.Drawing.Size(118, 48);
-            this.gbAcrescimo.TabIndex = 17;
-            this.gbAcrescimo.TabStop = false;
-            this.gbAcrescimo.Text = "Acréscimo";
-            // 
-            // dbAcrescimo
-            // 
-            this.dbAcrescimo.Location = new System.Drawing.Point(10, 15);
-            this.dbAcrescimo.Name = "dbAcrescimo";
-            this.dbAcrescimo.Size = new System.Drawing.Size(76, 20);
-            this.dbAcrescimo.TabIndex = 18;
-            this.dbAcrescimo.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbAcrescimo.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbAcrescimo_Valor_Changed);
-            // 
-            // lbPorcentoAcrescimo
-            // 
-            this.lbPorcentoAcrescimo.AutoSize = true;
-            this.lbPorcentoAcrescimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPorcentoAcrescimo.Location = new System.Drawing.Point(88, 19);
-            this.lbPorcentoAcrescimo.Name = "lbPorcentoAcrescimo";
-            this.lbPorcentoAcrescimo.Size = new System.Drawing.Size(20, 16);
-            this.lbPorcentoAcrescimo.TabIndex = 14;
-            this.lbPorcentoAcrescimo.Text = "%";
-            // 
-            // gbParcelas
-            // 
-            this.gbParcelas.Controls.Add(this.tbNparcelas);
-            this.gbParcelas.Controls.Add(this.btGerar);
-            this.gbParcelas.Location = new System.Drawing.Point(134, 18);
-            this.gbParcelas.Name = "gbParcelas";
-            this.gbParcelas.Size = new System.Drawing.Size(139, 80);
-            this.gbParcelas.TabIndex = 15;
-            this.gbParcelas.TabStop = false;
-            this.gbParcelas.Text = "Parcelas";
-            // 
-            // tbNparcelas
-            // 
-            this.tbNparcelas.Location = new System.Drawing.Point(6, 21);
-            this.tbNparcelas.Name = "tbNparcelas";
-            this.tbNparcelas.Size = new System.Drawing.Size(114, 20);
-            this.tbNparcelas.TabIndex = 1;
-            this.tbNparcelas.TextChanged += new System.EventHandler(this.TbNparcelas_TextChanged);
-            // 
-            // btGerar
-            // 
-            this.btGerar.Location = new System.Drawing.Point(76, 48);
-            this.btGerar.Name = "btGerar";
-            this.btGerar.Size = new System.Drawing.Size(44, 23);
-            this.btGerar.TabIndex = 10;
-            this.btGerar.Text = "Gerar";
-            this.btGerar.UseVisualStyleBackColor = true;
-            this.btGerar.Click += new System.EventHandler(this.BtGerar_Click);
-            // 
             // tbAjuda
             // 
             this.tbAjuda.Enabled = false;
@@ -455,6 +497,40 @@
             this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical1_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical1_Proximo_Clicked);
+            // 
+            // lbPorcentoAcrescimo
+            // 
+            this.lbPorcentoAcrescimo.AutoSize = true;
+            this.lbPorcentoAcrescimo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPorcentoAcrescimo.Location = new System.Drawing.Point(88, 19);
+            this.lbPorcentoAcrescimo.Name = "lbPorcentoAcrescimo";
+            this.lbPorcentoAcrescimo.Size = new System.Drawing.Size(20, 16);
+            this.lbPorcentoAcrescimo.TabIndex = 14;
+            this.lbPorcentoAcrescimo.Text = "%";
+            // 
+            // dbAcrescimo
+            // 
+            this.dbAcrescimo.Location = new System.Drawing.Point(6, 15);
+            this.dbAcrescimo.Name = "dbAcrescimo";
+            this.dbAcrescimo.Size = new System.Drawing.Size(76, 20);
+            this.dbAcrescimo.TabIndex = 18;
+            this.dbAcrescimo.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbAcrescimo.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbAcrescimo_Valor_Changed);
+            // 
+            // gbAcrescimo
+            // 
+            this.gbAcrescimo.Controls.Add(this.dbAcrescimo);
+            this.gbAcrescimo.Controls.Add(this.lbPorcentoAcrescimo);
+            this.gbAcrescimo.Location = new System.Drawing.Point(10, 119);
+            this.gbAcrescimo.Name = "gbAcrescimo";
+            this.gbAcrescimo.Size = new System.Drawing.Size(118, 48);
+            this.gbAcrescimo.TabIndex = 17;
+            this.gbAcrescimo.TabStop = false;
+            this.gbAcrescimo.Text = "Acréscimo";
             // 
             // fmCadastroOperacao
             // 
@@ -490,14 +566,18 @@
             this.gbDesconto.PerformLayout();
             this.tpAprazo.ResumeLayout(false);
             this.pnAprazo.ResumeLayout(false);
+            this.gbJurosAP.ResumeLayout(false);
+            this.gbJurosAP.PerformLayout();
+            this.gbMultaAP.ResumeLayout(false);
+            this.gbMultaAP.PerformLayout();
+            this.gbParcelas.ResumeLayout(false);
+            this.gbParcelas.PerformLayout();
             this.gbVisualizar.ResumeLayout(false);
             this.gbVisualizar.PerformLayout();
             this.gbEntrada.ResumeLayout(false);
             this.gbEntrada.PerformLayout();
             this.gbAcrescimo.ResumeLayout(false);
             this.gbAcrescimo.PerformLayout();
-            this.gbParcelas.ResumeLayout(false);
-            this.gbParcelas.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -530,15 +610,21 @@
         private System.Windows.Forms.Button btRemover;
         private System.Windows.Forms.Label lbPorcentoEntrada;
         private System.Windows.Forms.Label lbPorcentoDesconto;
-        private System.Windows.Forms.Label lbPorcentoAcrescimo;
         private System.Windows.Forms.GroupBox gbDesconto;
-        private System.Windows.Forms.GroupBox gbAcrescimo;
         private System.Windows.Forms.GroupBox gbVisualizar;
         private System.Windows.Forms.GroupBox gbParcelas;
         private System.Windows.Forms.Panel pnAprazo;
         private System.Windows.Forms.Panel pnAvista;
         private Controls.DecimalBox dbEntrada;
-        private Controls.DecimalBox dbAcrescimo;
         private Controls.DecimalBox dbDesconto;
+        private System.Windows.Forms.GroupBox gbJurosAP;
+        private System.Windows.Forms.Label lbPorcentoJurosAP;
+        private Controls.DecimalBox dbJuros;
+        private System.Windows.Forms.GroupBox gbMultaAP;
+        private System.Windows.Forms.Label lbPorcentoMultaAP;
+        private Controls.DecimalBox dbMulta;
+        private System.Windows.Forms.GroupBox gbAcrescimo;
+        private Controls.DecimalBox dbAcrescimo;
+        private System.Windows.Forms.Label lbPorcentoAcrescimo;
     }
 }

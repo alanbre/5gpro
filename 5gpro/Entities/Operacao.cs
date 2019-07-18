@@ -20,6 +20,8 @@ namespace _5gpro.Entities
         public decimal Desconto { get; set; }
         public decimal Entrada { get; set; }
         public decimal Acrescimo { get; set; }
+        public decimal Multa { get; set; }
+        public decimal Juros { get; set; }
         public List<ParcelaOperacao> Parcelas { get; set; }
     }
 }
