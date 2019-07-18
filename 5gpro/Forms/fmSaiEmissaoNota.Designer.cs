@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSaiEmissaoNota));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
+            this.btGerarParcelas = new System.Windows.Forms.Button();
             this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.lbDescnotasaida = new System.Windows.Forms.Label();
             this.tbDescricao = new System.Windows.Forms.TextBox();
@@ -82,11 +83,10 @@
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.lbNumeroparcelas = new System.Windows.Forms.Label();
             this.lbValorparcela = new System.Windows.Forms.Label();
-            this.decimalBox1 = new _5gpro.Controls.DecimalBox();
-            this.decimalBox2 = new _5gpro.Controls.DecimalBox();
+            this.dbNumeroParcelas = new _5gpro.Controls.DecimalBox();
+            this.dbValorParcela = new _5gpro.Controls.DecimalBox();
             this.gbParcelas = new System.Windows.Forms.GroupBox();
             this.btVisualizarparcelas = new System.Windows.Forms.Button();
-            this.btGerarParcelas = new System.Windows.Forms.Button();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
@@ -113,6 +113,16 @@
             this.gbDadosDocumento.TabIndex = 0;
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
+            // 
+            // btGerarParcelas
+            // 
+            this.btGerarParcelas.Location = new System.Drawing.Point(660, 145);
+            this.btGerarParcelas.Name = "btGerarParcelas";
+            this.btGerarParcelas.Size = new System.Drawing.Size(93, 23);
+            this.btGerarParcelas.TabIndex = 10;
+            this.btGerarParcelas.Text = "Gerar Parcelas";
+            this.btGerarParcelas.UseVisualStyleBackColor = true;
+            this.btGerarParcelas.Click += new System.EventHandler(this.BtGerarParcelas_Click);
             // 
             // buscaOperacao
             // 
@@ -473,8 +483,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -521,9 +531,9 @@
             // 
             // dgvtbcQuantidade
             // 
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvtbcQuantidade.Frozen = true;
             this.dgvtbcQuantidade.HeaderText = "Quantidade";
             this.dgvtbcQuantidade.MinimumWidth = 70;
@@ -532,9 +542,9 @@
             // 
             // dgvtbcValorUnitario
             // 
-            dataGridViewCellStyle15.Format = "C2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
             this.dgvtbcValorUnitario.MinimumWidth = 100;
             this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
@@ -543,9 +553,9 @@
             // 
             // dgvtbcValorTotalItem
             // 
-            dataGridViewCellStyle16.Format = "C2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvtbcValorTotalItem.HeaderText = "Valor total";
             this.dgvtbcValorTotalItem.MinimumWidth = 80;
             this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
@@ -554,8 +564,8 @@
             // 
             // dgvtbcDescontoPorc
             // 
-            dataGridViewCellStyle17.NullValue = null;
-            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle5.NullValue = null;
+            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvtbcDescontoPorc.HeaderText = "% Desc";
             this.dgvtbcDescontoPorc.MinimumWidth = 50;
             this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
@@ -564,9 +574,9 @@
             // 
             // dgvtbcDescontoItem
             // 
-            dataGridViewCellStyle18.Format = "C2";
-            dataGridViewCellStyle18.NullValue = null;
-            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDescontoItem.HeaderText = "Desconto";
             this.dgvtbcDescontoItem.MinimumWidth = 70;
             this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
@@ -658,25 +668,27 @@
             this.lbValorparcela.TabIndex = 21;
             this.lbValorparcela.Text = "Valor da Parcela";
             // 
-            // decimalBox1
+            // dbNumeroParcelas
             // 
-            this.decimalBox1.Location = new System.Drawing.Point(6, 30);
-            this.decimalBox1.Name = "decimalBox1";
-            this.decimalBox1.Size = new System.Drawing.Size(100, 22);
-            this.decimalBox1.TabIndex = 22;
-            this.decimalBox1.Valor = new decimal(new int[] {
+            this.dbNumeroParcelas.Enabled = false;
+            this.dbNumeroParcelas.Location = new System.Drawing.Point(6, 30);
+            this.dbNumeroParcelas.Name = "dbNumeroParcelas";
+            this.dbNumeroParcelas.Size = new System.Drawing.Size(100, 22);
+            this.dbNumeroParcelas.TabIndex = 22;
+            this.dbNumeroParcelas.Valor = new decimal(new int[] {
             0,
             0,
             0,
             131072});
             // 
-            // decimalBox2
+            // dbValorParcela
             // 
-            this.decimalBox2.Location = new System.Drawing.Point(6, 68);
-            this.decimalBox2.Name = "decimalBox2";
-            this.decimalBox2.Size = new System.Drawing.Size(100, 22);
-            this.decimalBox2.TabIndex = 23;
-            this.decimalBox2.Valor = new decimal(new int[] {
+            this.dbValorParcela.Enabled = false;
+            this.dbValorParcela.Location = new System.Drawing.Point(6, 68);
+            this.dbValorParcela.Name = "dbValorParcela";
+            this.dbValorParcela.Size = new System.Drawing.Size(100, 22);
+            this.dbValorParcela.TabIndex = 23;
+            this.dbValorParcela.Valor = new decimal(new int[] {
             0,
             0,
             0,
@@ -685,9 +697,9 @@
             // gbParcelas
             // 
             this.gbParcelas.Controls.Add(this.btVisualizarparcelas);
-            this.gbParcelas.Controls.Add(this.decimalBox2);
+            this.gbParcelas.Controls.Add(this.dbValorParcela);
             this.gbParcelas.Controls.Add(this.lbValorparcela);
-            this.gbParcelas.Controls.Add(this.decimalBox1);
+            this.gbParcelas.Controls.Add(this.dbNumeroParcelas);
             this.gbParcelas.Controls.Add(this.lbNumeroparcelas);
             this.gbParcelas.Location = new System.Drawing.Point(1064, 6);
             this.gbParcelas.Name = "gbParcelas";
@@ -704,16 +716,7 @@
             this.btVisualizarparcelas.TabIndex = 24;
             this.btVisualizarparcelas.Text = "Visualizar";
             this.btVisualizarparcelas.UseVisualStyleBackColor = true;
-            // 
-            // btGerarParcelas
-            // 
-            this.btGerarParcelas.Location = new System.Drawing.Point(660, 145);
-            this.btGerarParcelas.Name = "btGerarParcelas";
-            this.btGerarParcelas.Size = new System.Drawing.Size(93, 23);
-            this.btGerarParcelas.TabIndex = 10;
-            this.btGerarParcelas.Text = "Gerar Parcelas";
-            this.btGerarParcelas.UseVisualStyleBackColor = true;
-            this.btGerarParcelas.Click += new System.EventHandler(this.BtGerarParcelas_Click);
+            this.btVisualizarparcelas.Click += new System.EventHandler(this.BtVisualizarparcelas_Click);
             // 
             // fmSaiEmissaoNota
             // 
@@ -800,8 +803,8 @@
         private Controls.BuscaOperacao buscaOperacao;
         private System.Windows.Forms.Label lbNumeroparcelas;
         private System.Windows.Forms.Label lbValorparcela;
-        private Controls.DecimalBox decimalBox1;
-        private Controls.DecimalBox decimalBox2;
+        private Controls.DecimalBox dbNumeroParcelas;
+        private Controls.DecimalBox dbValorParcela;
         private System.Windows.Forms.GroupBox gbParcelas;
         private System.Windows.Forms.Button btVisualizarparcelas;
         private System.Windows.Forms.Button btGerarParcelas;

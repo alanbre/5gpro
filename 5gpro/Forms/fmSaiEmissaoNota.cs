@@ -599,6 +599,12 @@ namespace _5gpro.Forms
                 dbDescontoTotalItens.Valor = itens.Sum(i => i.Desconto);
                 dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
             }
+            else
+            {
+                dbValorTotalItens.Valor = 0;
+                dbDescontoTotalItens.Valor = 0;
+                dbValorTotalDocumento.Valor = 0;
+            }
         }
 
         private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
@@ -643,6 +649,14 @@ namespace _5gpro.Forms
                 sequencia++;
                 this.parcelas.Add(par);
             }
+            dbNumeroParcelas.Valor = parcelas.Count;
+            dbValorParcela.Valor = parcelas[0].Valor;
+        }
+
+        private void BtVisualizarparcelas_Click(object sender, EventArgs e)
+        {
+            var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
+            fmvisualizaparcelas.Show(this);
         }
 
         private void SetarNivel()
