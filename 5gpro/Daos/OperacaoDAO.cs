@@ -20,11 +20,11 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO operacao 
-                            (idoperacao, nome, descricao, condicao, desconto, entrada, acrescimo) 
+                            (idoperacao, nome, descricao, condicao, desconto, entrada, acrescimo, multa, juros) 
                             VALUES
-                            (@idoperacao, @nome, @descricao, @condicao, @desconto, @entrada, @acrescimo)
+                            (@idoperacao, @nome, @descricao, @condicao, @desconto, @entrada, @acrescimo, @multa, @juros)
                             ON DUPLICATE KEY UPDATE
-                            nome = @nome, descricao = @descricao, condicao = @condicao, desconto = @desconto, entrada = @entrada, acrescimo = @acrescimo";
+                            nome = @nome, descricao = @descricao, condicao = @condicao, desconto = @desconto, entrada = @entrada, acrescimo = @acrescimo, multa = @multa, juros = @juros";
                 sql.addParam("@idoperacao", operacao.OperacaoID);
                 sql.addParam("@nome", operacao.Nome);
                 sql.addParam("@descricao", operacao.Descricao);
@@ -32,6 +32,8 @@ namespace _5gpro.Daos
                 sql.addParam("@desconto", operacao.Desconto);
                 sql.addParam("@entrada", operacao.Entrada);
                 sql.addParam("@acrescimo", operacao.Acrescimo);
+                sql.addParam("@multa", operacao.Multa);
+                sql.addParam("@juros", operacao.Juros);
                 retorno = sql.insertQuery();
 
                 sql.Query = @"DELETE FROM parcelaoperacao WHERE idoperacao = @idoperacao";
@@ -106,6 +108,8 @@ namespace _5gpro.Daos
                     operacao.Desconto = (decimal)d["desconto"];
                     operacao.Entrada = (decimal)d["entrada"];
                     operacao.Acrescimo = (decimal)d["acrescimo"];
+                    operacao.Multa = (decimal)d["multa"];
+                    operacao.Juros = (decimal)d["juros"];
                     operacoes.Add(operacao);
                 }
             }
@@ -185,6 +189,8 @@ namespace _5gpro.Daos
             operacao.Desconto = (decimal)data[0]["desconto"];
             operacao.Entrada = (decimal)data[0]["entrada"];
             operacao.Acrescimo = (decimal)data[0]["acrescimo"];
+            operacao.Multa = (decimal)data[0]["multa"];
+            operacao.Juros = (decimal)data[0]["juros"];
 
             foreach (var d in data)
             {

@@ -97,6 +97,7 @@ namespace _5gpro.Funcoes
             if (versao_base == "0038_caixalancamentoent") versao_base = Migrate_0039(versao_base);
             if (versao_base == "0039_caixaplanocontapadrao") versao_base = Migrate_0040(versao_base);
             if (versao_base == "0040_estabelecimento") versao_base = Migrate_0041(versao_base);
+            if (versao_base == "0041_eventodeletalogado") versao_base = Migrate_0042(versao_base);
 
             return true;
         }
@@ -7137,6 +7138,30 @@ namespace _5gpro.Funcoes
                 sql.insertQuery();
                 sql.Commit();
                 versao_base = "0041_eventodeletalogado";
+            }
+            return versao_base;
+        }
+
+        private string Migrate_0042(string v)
+        {
+            string versao_base = v;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"ALTER TABLE operacao ADD multa DECIMAL(10,2) DEFAULT 0;";
+                sql.updateQuery();
+                sql.Query = @"ALTER TABLE operacao ADD juros DECIMAL(10,2) DEFAULT 0;";
+                sql.updateQuery();
+                sql.Query = @"ALTER TABLE conta_pagar ADD entrada DECIMAL(10,2) DEFAULT 0;";
+                sql.updateQuery();
+                sql.Query = @"ALTER TABLE conta_receber ADD entrada DECIMAL(10,2) DEFAULT 0;";
+                sql.updateQuery();
+
+                sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
+                sql.addParam("@versao", "0042_operacaomultajuroscarcapentrada");
+                sql.insertQuery();
+                sql.Commit();
+                versao_base = "0042_operacaomultajuroscarcapentrada";
             }
             return versao_base;
         }

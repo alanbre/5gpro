@@ -420,6 +420,12 @@
     <Compile Include="Forms\fmSaiNotaFiscal.designer.cs">
       <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmVisualizaParcelas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmVisualizaParcelas.Designer.cs">
+      <DependentUpon>fmVisualizaParcelas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\dsGenerico.cs">
       <DependentUpon>dsGenerico.xsd</DependentUpon>
     </Compile>
@@ -840,6 +846,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSaiNotaFiscal.resx">
       <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmVisualizaParcelas.resx">
+      <DependentUpon>fmVisualizaParcelas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\fmRltGenerico.resx">
       <DependentUpon>fmRltGenerico.cs</DependentUpon>

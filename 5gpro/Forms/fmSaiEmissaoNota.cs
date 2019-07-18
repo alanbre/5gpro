@@ -18,8 +18,10 @@ namespace _5gpro.Forms
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
-        private CaixaLancamento caixalancamento = new CaixaLancamento();
-        private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
+        //private CaixaLancamento caixalancamento = new CaixaLancamento();
+        //private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
+        private ContaReceber contaReceber;
+        private ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
 
         private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
 
@@ -32,6 +34,7 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
+        private decimal totaldocumento = 0;
 
         int codigo = 0;
 
@@ -81,7 +84,7 @@ namespace _5gpro.Forms
         private void BtNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCamposItem(true);
-            buscaItem.Focus();
+            buscaItem1.Focus();
             itemSelecionado = null;
             btInserirItem.Text = "Inserir";
         }
@@ -110,7 +113,7 @@ namespace _5gpro.Forms
             }
         }
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
-        private void BuscaItem_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
+        private void buscaItem1_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
@@ -153,13 +156,11 @@ namespace _5gpro.Forms
             CalculaDescontoItem();
         }
         private void DbValorTotItem_Leave(object sender, EventArgs e) => CalculaDescontoItem();
-        private void DbDescontoItem_Leave(object sender, EventArgs e) => CalculaTotalItem();
-
-
-
-
-
-
+        private void DbDescontoItem_Leave(object sender, EventArgs e)
+        {
+            CalculaPorcDescontoItem();
+            CalculaTotalItem();
+        }
         private void Novo()
         {
             if (editando)
@@ -255,20 +256,45 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                    //notaFiscalPropriaDAO.MovimentaCaixaEntradaDeDinheiro(notaFiscalPropriaNova);
                     Editando(false);
                 }
                 else if (resultado == 2)
                 {
                     notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropriaNova);
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
-                    //notaFiscalPropriaDAO.LimpaRegistrosCaixaSaida(notaFiscalPropriaNova);
-                    //notaFiscalPropriaDAO.MovimentaCaixaEntradaDeDinheiro(notaFiscalPropriaNova);
+                    GerarContaReceber();
+
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
                 }
                 notaFiscalPropria = notaFiscalPropriaNova;
             }
+        }
+
+        private void GerarContaReceber()
+        {
+            contaReceber = new ContaReceber
+            {
+                ContaReceberID = contaReceberDAO.BuscaProxCodigoDisponivel(),
+                DataCadastro = DateTime.Today,
+                DataConta = dtpSaida.Value,
+                Operacao = buscaOperacao.operacao,
+                Descricao = tbDescricao.Text,
+
+                ValorOriginal = dbValorTotalItens.Valor,
+
+                //Multa = buscaOperacao.operacao.Multa,
+                //Juros = buscaOperacao.operacao.Juros,
+                //Acrescimo = dbAcrescimoConta.Valor,
+                //Desconto = dbDescontoConta.Valor,
+
+                ValorFinal = dbValorTotalDocumento.Valor,
+                Situacao = "Aberto",
+
+                Parcelas = parcelas,
+
+                Pessoa = buscaPessoa.pessoa
+            };
         }
 
         private void Recarrega()
@@ -434,7 +460,7 @@ namespace _5gpro.Forms
         }
         private void LimpaCamposItem(bool focus)
         {
-            buscaItem.Limpa();
+            buscaItem1.Limpa();
             dbQuantidade.Valor = 0.00m;
             dbValorUnitItem.Valor = 0.00m;
             dbValorTotItem.Valor = 0.00m;
@@ -443,22 +469,22 @@ namespace _5gpro.Forms
             itemSelecionado = null;
             btExcluirItem.Enabled = false;
             btInserirItem.Text = "Inserir";
-            if (focus) { buscaItem.Focus(); }
+            if (focus) { buscaItem1.Focus(); }
         }
         private void InserirItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
             {
                 MessageBox.Show("Item não encontrado no banco de dados",
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
                 return;
             }
 
             var item = new NotaFiscalPropriaItem();
-            item.Item = buscaItem.item;
+            item.Item = buscaItem1.item;
 
 
 
@@ -496,19 +522,19 @@ namespace _5gpro.Forms
 
         private void BuscaItem()
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
                 return;
             var item = new NotaFiscalPropriaItem();
-            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem.item.ItemID).FirstOrDefault();
+            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem1.item.ItemID).FirstOrDefault();
             if (dr == null)
             {
-                item.Item = buscaItem.item;
+                item.Item = buscaItem1.item;
                 btInserirItem.Text = "Inserir";
                 btExcluirItem.Enabled = false;
             }
             else
             {
-                item = itens.Find(i => i.Item.ItemID == buscaItem.item.ItemID);
+                item = itens.Find(i => i.Item.ItemID == buscaItem1.item.ItemID);
                 btInserirItem.Text = "Alterar";
                 btExcluirItem.Enabled = true;
             }
@@ -562,8 +588,13 @@ namespace _5gpro.Forms
             if (item != null)
             {
                 ignoracheckevent = true;
-                buscaItem.PreencheCampos(item.Item);
+                buscaItem1.PreencheCampos(item.Item);
                 dbValorUnitItem.Valor = item.Item.ValorUnitario;
+                dbQuantidade.Valor = item.Quantidade;
+                dbValorTotItem.Valor = item.ValorTotal;
+                dbDescontoItemPorc.Valor = item.DescontoPorc;
+                dbDescontoItem.Valor = item.Desconto;
+
                 ignoracheckevent = false;
             }
             else
@@ -572,7 +603,7 @@ namespace _5gpro.Forms
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem.Focus();
+                buscaItem1.Focus();
             }
         }
         private void EnterTab(object sender, KeyEventArgs e)
@@ -591,28 +622,44 @@ namespace _5gpro.Forms
         {
             dbDescontoItem.Valor = dbValorTotItem.Valor * dbDescontoItemPorc.Valor / 100;
         }
+        private void CalculaPorcDescontoItem()
+        {
+            if (dbValorTotItem.Valor > 0)
+                dbDescontoItemPorc.Valor = (dbDescontoItem.Valor * 100) / dbValorTotItem.Valor;
+        }
         private void CalculaTotalDocumento()
         {
             if (itens.Count > 0)
             {
                 dbValorTotalItens.Valor = itens.Sum(i => i.ValorTotal);
                 dbDescontoTotalItens.Valor = itens.Sum(i => i.Desconto);
-                dbValorTotalDocumento.Valor = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
+                totaldocumento = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
+
+                if (buscaOperacao.operacao != null)
+                {
+                    dbJurosTotal.Valor = (totaldocumento * buscaOperacao.operacao.Juros) / 100;
+                    dbDescontoDocumento.Valor = (totaldocumento * buscaOperacao.operacao.Desconto) / 100;
+                    dbValorTotalDocumento.Valor = totaldocumento + dbJurosTotal.Valor - dbDescontoDocumento.Valor;
+                }
+            }
+            else
+            {
+                dbValorTotalItens.Valor = 0m;
+                dbDescontoTotalItens.Valor = 0m;
+                dbValorTotalDocumento.Valor = 0m;
+                dbJurosTotal.Valor = 0m;
+                dbDescontoDocumento.Valor = 0m;
             }
         }
 
-        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
+        private void buscaItem1_Codigo_Changed(object sender, EventArgs e)
         {
-            if (buscaItem.item == null)
+            if (buscaItem1.item == null)
                 return;
 
-            dbValorUnitItem.Valor = buscaItem.item.ValorUnitario;
+            dbValorUnitItem.Valor = buscaItem1.item.ValorUnitario;
         }
 
-        private void BtGerarParcelas_Click(object sender, EventArgs e)
-        {
-            GerarParcelas();
-        }
 
         private void GerarParcelas()
         {
@@ -643,6 +690,19 @@ namespace _5gpro.Forms
                 sequencia++;
                 this.parcelas.Add(par);
             }
+            dbNumeroParcelas.Valor = parcelas.Count;
+            dbValorParcela.Valor = parcelas[0].Valor;
+        }
+
+        private void BtVisualizarparcelas_Click(object sender, EventArgs e)
+        {
+            var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
+            fmvisualizaparcelas.Show(this);
+        }
+
+        private void BuscaOperacao_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
         }
 
         private void SetarNivel()
