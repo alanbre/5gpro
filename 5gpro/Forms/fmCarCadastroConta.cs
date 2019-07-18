@@ -166,6 +166,7 @@ namespace _5gpro.Forms
                 DataCadastro = DateTime.Today,
                 DataConta = dtpDataConta.Value,
                 Operacao = buscaOperacao.operacao,
+                Descricao = tbDescricao.Text,
 
                 ValorOriginal = dbValorOriginalConta.Valor,
                 Multa = dbMultaConta.Valor,

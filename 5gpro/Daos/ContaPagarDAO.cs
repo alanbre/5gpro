@@ -17,12 +17,12 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO conta_pagar
-                         (idconta_pagar, data_cadastro, data_conta, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
+                         (idconta_pagar, data_cadastro, data_conta, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao, descricao)
                           VALUES
-                         (@idconta_pagar, @data_cadastro, @data_conta, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
+                         (@idconta_pagar, @data_cadastro, @data_conta, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao, @descricao)
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, data_conta = @data_conta, valor_original = @valor_original, multa = @multa,
-                          juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
+                          juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao, descricao = @descricao
                           ";
                 sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
                 sql.addParam("@data_cadastro", contaPagar.DataCadastro);
@@ -35,15 +35,16 @@ namespace _5gpro.Daos
                 sql.addParam("@idpessoa", contaPagar.Pessoa.PessoaID);
                 sql.addParam("@situacao", contaPagar.Situacao);
                 sql.addParam("data_conta", contaPagar.DataConta);
+                sql.addParam("descricao", contaPagar.Descricao);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
                     sql.Query = @"DELETE FROM parcela_conta_pagar WHERE idconta_pagar = @idconta_pagar";
                     sql.deleteQuery();
                     sql.Query = @"INSERT INTO parcela_conta_pagar
-                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_pagar, idformapagamento, situacao)
+                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_pagar, idformapagamento, situacao, descricao)
                                 VALUES
-                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento, @situacao)";
+                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento, @situacao, @descricao)";
                     foreach (var parcela in contaPagar.Parcelas)
                     {
                         sql.clearParams();
@@ -59,6 +60,7 @@ namespace _5gpro.Daos
                         sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
                         sql.addParam("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
                         sql.addParam("@situacao", parcela.Situacao);
+                        sql.addParam("descricao", parcela.Descricao);
                         sql.insertQuery();
                     }
                 }

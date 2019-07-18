@@ -163,6 +163,7 @@ namespace _5gpro.Forms
                 ContaPagarID = int.Parse(tbCodigoConta.Text),
                 DataCadastro = DateTime.Today,
                 DataConta = dtpDataConta.Value,
+                Descricao = tbDescricao.Text,
 
                 ValorOriginal = dbValorOriginalConta.Valor,
                 Multa = dbMultaConta.Valor,

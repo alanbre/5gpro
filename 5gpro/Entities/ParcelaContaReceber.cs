@@ -20,5 +20,7 @@ namespace _5gpro.Entities
         public FormaPagamento FormaPagamento { get; set; }
         public int ContaReceberID { get; set; }
         public string Situacao { get; set; }
+
+        public string Descricao { get; set; }
     }
 }

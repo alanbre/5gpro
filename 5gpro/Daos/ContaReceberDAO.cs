@@ -20,12 +20,12 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO conta_receber
-                         (idconta_receber, data_cadastro, data_conta, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao)
+                         (idconta_receber, data_cadastro, data_conta, idoperacao, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao, descricao)
                           VALUES
-                         (@idconta_receber, @data_cadastro, @data_conta, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao)
+                         (@idconta_receber, @data_cadastro, @data_conta, @idoperacao, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao, @descricao)
                           ON DUPLICATE KEY UPDATE
                           data_cadastro = @data_cadastro, data_conta = @data_conta, idoperacao = @idoperacao, valor_original = @valor_original,
-                          multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao
+                          multa = @multa, juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao, descricao = @descricao
                           ";
                 sql.addParam("@idconta_receber", contaReceber.ContaReceberID);
                 sql.addParam("@data_cadastro", contaReceber.DataCadastro);
@@ -39,6 +39,7 @@ namespace _5gpro.Daos
                 sql.addParam("@idpessoa", contaReceber.Pessoa.PessoaID);
                 sql.addParam("@situacao", contaReceber.Situacao);
                 sql.addParam("@data_conta", contaReceber.DataConta);
+                sql.addParam("descricao", contaReceber.Descricao);
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
@@ -46,9 +47,9 @@ namespace _5gpro.Daos
                     sql.deleteQuery();
 
                     sql.Query = @"INSERT INTO parcela_conta_receber
-                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_receber, idformapagamento, situacao)
+                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_receber, idformapagamento, situacao, descricao)
                                 VALUES
-                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento, @situacao)";
+                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_receber, @idformapagamento, @situacao, @descricao)";
                     foreach (var parcela in contaReceber.Parcelas)
                     {
                         sql.clearParams();
@@ -64,6 +65,7 @@ namespace _5gpro.Daos
                         sql.addParam("@idconta_receber", contaReceber.ContaReceberID);
                         sql.addParam("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
                         sql.addParam("@situacao", contaReceber.Situacao);
+                        sql.addParam("descricao", contaReceber.Descricao);
                         sql.insertQuery();
                     }
                 }

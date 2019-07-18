@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
+            this.lbDescricao = new System.Windows.Forms.Label();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
             this.dbValorContaGerar = new _5gpro.Controls.DecimalBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.lbValorContaGerar = new System.Windows.Forms.Label();
@@ -91,8 +93,6 @@
             this.lbValorOriginalConta = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.tbDescricao = new System.Windows.Forms.TextBox();
-            this.lbDescricao = new System.Windows.Forms.Label();
             this.gbDadosConta.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -120,6 +120,23 @@
             this.gbDadosConta.TabIndex = 0;
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
+            // 
+            // lbDescricao
+            // 
+            this.lbDescricao.AutoSize = true;
+            this.lbDescricao.Location = new System.Drawing.Point(8, 121);
+            this.lbDescricao.Name = "lbDescricao";
+            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
+            this.lbDescricao.TabIndex = 10;
+            this.lbDescricao.Text = "Descrição";
+            // 
+            // tbDescricao
+            // 
+            this.tbDescricao.Location = new System.Drawing.Point(11, 137);
+            this.tbDescricao.Multiline = true;
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(442, 74);
+            this.tbDescricao.TabIndex = 9;
             // 
             // dbValorContaGerar
             // 
@@ -487,8 +504,8 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvParcelas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -526,9 +543,9 @@
             // 
             // dgvtbcDataVencimento
             // 
-            dataGridViewCellStyle11.Format = "d";
-            dataGridViewCellStyle11.NullValue = null;
-            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvtbcDataVencimento.HeaderText = "Data de vencimento";
             this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
             this.dgvtbcDataVencimento.ReadOnly = true;
@@ -577,9 +594,9 @@
             // 
             // dgvtbcDataQuitacao
             // 
-            dataGridViewCellStyle12.Format = "d";
-            dataGridViewCellStyle12.NullValue = null;
-            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Format = "d";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
             this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
             this.dgvtbcDataQuitacao.ReadOnly = true;
@@ -769,23 +786,6 @@
             this.menuVertical.Recarregar_Clicked += new _5gpro.Controls.MenuVertical.recarregarEventHandler(this.MenuVertical_Recarregar_Clicked);
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
-            // 
-            // tbDescricao
-            // 
-            this.tbDescricao.Location = new System.Drawing.Point(11, 137);
-            this.tbDescricao.Multiline = true;
-            this.tbDescricao.Name = "tbDescricao";
-            this.tbDescricao.Size = new System.Drawing.Size(442, 74);
-            this.tbDescricao.TabIndex = 9;
-            // 
-            // lbDescricao
-            // 
-            this.lbDescricao.AutoSize = true;
-            this.lbDescricao.Location = new System.Drawing.Point(8, 121);
-            this.lbDescricao.Name = "lbDescricao";
-            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
-            this.lbDescricao.TabIndex = 10;
-            this.lbDescricao.Text = "Descrição";
             // 
             // fmCarCadastroConta
             // 

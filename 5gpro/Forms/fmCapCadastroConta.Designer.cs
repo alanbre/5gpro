@@ -88,6 +88,8 @@
             this.tbCodigoConta = new System.Windows.Forms.TextBox();
             this.lbCodigoConta = new System.Windows.Forms.Label();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
+            this.lbDescricao = new System.Windows.Forms.Label();
+            this.tbDescricao = new System.Windows.Forms.TextBox();
             this.gbTotais.SuspendLayout();
             this.gbParcelas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParcelas)).BeginInit();
@@ -99,7 +101,7 @@
             this.tbAjuda.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbAjuda.HideSelection = false;
-            this.tbAjuda.Location = new System.Drawing.Point(67, 572);
+            this.tbAjuda.Location = new System.Drawing.Point(67, 758);
             this.tbAjuda.Name = "tbAjuda";
             this.tbAjuda.ReadOnly = true;
             this.tbAjuda.Size = new System.Drawing.Size(1182, 20);
@@ -121,9 +123,9 @@
             this.gbTotais.Controls.Add(this.lbJurosConta);
             this.gbTotais.Controls.Add(this.lbMultaConta);
             this.gbTotais.Controls.Add(this.lbValorOriginalConta);
-            this.gbTotais.Location = new System.Drawing.Point(1071, 165);
+            this.gbTotais.Location = new System.Drawing.Point(1072, 349);
             this.gbTotais.Name = "gbTotais";
-            this.gbTotais.Size = new System.Drawing.Size(176, 398);
+            this.gbTotais.Size = new System.Drawing.Size(176, 392);
             this.gbTotais.TabIndex = 2;
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
@@ -291,7 +293,7 @@
             this.gbParcelas.Controls.Add(this.tbCodigoParcela);
             this.gbParcelas.Controls.Add(this.lbCodigoParcela);
             this.gbParcelas.Controls.Add(this.dgvParcelas);
-            this.gbParcelas.Location = new System.Drawing.Point(68, 165);
+            this.gbParcelas.Location = new System.Drawing.Point(67, 349);
             this.gbParcelas.Name = "gbParcelas";
             this.gbParcelas.Size = new System.Drawing.Size(999, 398);
             this.gbParcelas.TabIndex = 1;
@@ -672,6 +674,8 @@
             // 
             this.gbDadosConta.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbDadosConta.Controls.Add(this.lbDescricao);
+            this.gbDadosConta.Controls.Add(this.tbDescricao);
             this.gbDadosConta.Controls.Add(this.buscaPessoa);
             this.gbDadosConta.Controls.Add(this.dtpDataConta);
             this.gbDadosConta.Controls.Add(this.lbDataConta);
@@ -679,7 +683,7 @@
             this.gbDadosConta.Controls.Add(this.lbCodigoConta);
             this.gbDadosConta.Location = new System.Drawing.Point(67, 14);
             this.gbDadosConta.Name = "gbDadosConta";
-            this.gbDadosConta.Size = new System.Drawing.Size(1181, 145);
+            this.gbDadosConta.Size = new System.Drawing.Size(1181, 277);
             this.gbDadosConta.TabIndex = 0;
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
@@ -743,20 +747,38 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             // 
+            // lbDescricao
+            // 
+            this.lbDescricao.AutoSize = true;
+            this.lbDescricao.Location = new System.Drawing.Point(6, 148);
+            this.lbDescricao.Name = "lbDescricao";
+            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
+            this.lbDescricao.TabIndex = 12;
+            this.lbDescricao.Text = "Descrição";
+            // 
+            // tbDescricao
+            // 
+            this.tbDescricao.Location = new System.Drawing.Point(9, 164);
+            this.tbDescricao.Multiline = true;
+            this.tbDescricao.Name = "tbDescricao";
+            this.tbDescricao.Size = new System.Drawing.Size(442, 74);
+            this.tbDescricao.TabIndex = 11;
+            // 
             // fmCapCadastroConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1259, 603);
+            this.ClientSize = new System.Drawing.Size(1259, 789);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);
             this.Controls.Add(this.gbParcelas);
             this.Controls.Add(this.gbDadosConta);
             this.Controls.Add(this.menuVertical);
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1275, 828);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(1275, 642);
+            this.MinimumSize = new System.Drawing.Size(1275, 828);
             this.Name = "fmCapCadastroConta";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -836,5 +858,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataQuitacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcSituacao;
+        private System.Windows.Forms.Label lbDescricao;
+        private System.Windows.Forms.TextBox tbDescricao;
     }
 }
