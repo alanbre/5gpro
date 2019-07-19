@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using _5gpro.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _5gpro.Entities
+namespace _5gpro.StaticFiles
 {
     public static class Estabelecimento
     {
