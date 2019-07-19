@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmBuscaContaReceber
+    partial class fmCarBuscaContaReceber
     {
         /// <summary>
         /// Required designer variable.

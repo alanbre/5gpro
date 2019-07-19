@@ -89,6 +89,7 @@
             this.dgvtbcDataQuitacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcSituacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
+            this.btReplicar = new System.Windows.Forms.Button();
             this.lbDescricaoCAP = new System.Windows.Forms.Label();
             this.tbDescricaoCAP = new System.Windows.Forms.TextBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
@@ -713,6 +714,7 @@
             // gbDadosConta
             // 
             this.gbDadosConta.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.gbDadosConta.Controls.Add(this.btReplicar);
             this.gbDadosConta.Controls.Add(this.lbDescricaoCAP);
             this.gbDadosConta.Controls.Add(this.tbDescricaoCAP);
             this.gbDadosConta.Controls.Add(this.buscaPessoa);
@@ -726,6 +728,16 @@
             this.gbDadosConta.TabIndex = 0;
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
+            // 
+            // btReplicar
+            // 
+            this.btReplicar.Location = new System.Drawing.Point(455, 199);
+            this.btReplicar.Name = "btReplicar";
+            this.btReplicar.Size = new System.Drawing.Size(101, 23);
+            this.btReplicar.TabIndex = 7;
+            this.btReplicar.Text = "Replicar conta";
+            this.btReplicar.UseVisualStyleBackColor = true;
+            this.btReplicar.Click += new System.EventHandler(this.BtReplicar_Click);
             // 
             // lbDescricaoCAP
             // 
@@ -908,5 +920,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorFinal;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataQuitacao;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcSituacao;
+        private System.Windows.Forms.Button btReplicar;
     }
 }

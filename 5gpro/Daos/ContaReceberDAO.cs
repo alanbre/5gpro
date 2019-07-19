@@ -101,7 +101,7 @@ namespace _5gpro.Daos
 
 
 
-        public IEnumerable<ContaReceber> Busca(fmBuscaContaReceber.Filtros f)
+        public IEnumerable<ContaReceber> Busca(fmCarBuscaContaReceber.Filtros f)
         {
             var ListaContasReceber = new List<ContaReceber>();
             var parcelaContaReceber = new ParcelaContaReceber();

@@ -1,6 +1,6 @@
 ﻿namespace _5gpro.Forms
 {
-    partial class fmBuscaContaPagar
+    partial class fmCapBuscaContaPagar
     {
         /// <summary>
         /// Required designer variable.

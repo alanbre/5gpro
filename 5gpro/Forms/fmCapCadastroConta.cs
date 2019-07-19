@@ -85,6 +85,20 @@ namespace _5gpro.Forms
         private void DbJurosParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
         private void DbAcrescimoParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
         private void DbDescontoParcela_Leave(object sender, EventArgs e) => CalculaTotalParcela();
+        private void BtReplicar_Click(object sender, EventArgs e)
+        {
+            if (contaPagar == null)
+            {
+                 MessageBox.Show("Deve ser selecionada uma conta para replicar!",
+                 "Erro ao replicar",
+                 MessageBoxButtons.OK,
+                 MessageBoxIcon.Warning);
+                return;
+            }
+
+            var fmReplicarContaPagar = new fmCapReplicarConta(contaPagar);
+            fmReplicarContaPagar.ShowDialog(this);
+        }
 
         private void DgvParcelas_CurrentCellChanged(object sender, EventArgs e)
         {
@@ -122,7 +136,7 @@ namespace _5gpro.Forms
         {
             if (editando)
                 return;
-            var buscaContaPagar = new fmBuscaContaPagar();
+            var buscaContaPagar = new fmCapBuscaContaPagar();
             buscaContaPagar.ShowDialog();
             if (buscaContaPagar.contaPagarSelecionada != null)
             {
@@ -505,7 +519,7 @@ namespace _5gpro.Forms
                 LimpaCamposParcela();
                 Editando(true);
             }
-            CalculaTotalConta();            
+            CalculaTotalConta();
             btNovaParcela.Enabled = true;
             btExcluirParcela.Enabled = false;
         }
@@ -523,7 +537,10 @@ namespace _5gpro.Forms
         }
         private void LimpaCampos(bool limpaCod)
         {
-            if (limpaCod) { tbCodigoConta.Clear(); }
+            if (limpaCod) {
+                tbCodigoConta.Clear();
+                contaPagar = null;
+            }
             buscaPessoa.Limpa();
             dtpDataConta.Value = DateTime.Now;
             tbCodigoParcela.Clear();
@@ -540,7 +557,6 @@ namespace _5gpro.Forms
             dgvParcelas.Rows.Clear();
             dgvParcelas.Refresh();
             LimpaCamposParcela();
-            contaPagar = null;
             codigo = 0;
         }
         private void LimpaCamposParcela()

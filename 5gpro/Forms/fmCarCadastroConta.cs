@@ -124,7 +124,7 @@ namespace _5gpro.Forms
         {
             if (editando)
                 return;
-            var buscaContaReceber = new fmBuscaContaReceber();
+            var buscaContaReceber = new fmCarBuscaContaReceber();
             buscaContaReceber.ShowDialog();
             if (buscaContaReceber.contaReceberSelecionada != null)
             {
