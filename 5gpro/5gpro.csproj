@@ -301,7 +301,7 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
-    <Compile Include="Entities\Estabelecimento.cs" />
+    <Compile Include="static\Estabelecimento.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\FormaPagamento.cs" />
     <Compile Include="Entities\GrupoItem.cs" />
