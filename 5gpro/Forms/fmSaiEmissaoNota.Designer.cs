@@ -69,6 +69,7 @@
             this.lbQuantidade = new System.Windows.Forms.Label();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
+            this.btCancelarNota = new System.Windows.Forms.Button();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.dbJurosTotal = new _5gpro.Controls.DecimalBox();
             this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
@@ -83,7 +84,6 @@
             this.dbQuantidade = new _5gpro.Controls.DecimalBox();
             this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
-            this.btCancelarNota = new System.Windows.Forms.Button();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
@@ -494,6 +494,16 @@
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 4;
             // 
+            // btCancelarNota
+            // 
+            this.btCancelarNota.Location = new System.Drawing.Point(1064, 151);
+            this.btCancelarNota.Name = "btCancelarNota";
+            this.btCancelarNota.Size = new System.Drawing.Size(90, 23);
+            this.btCancelarNota.TabIndex = 5;
+            this.btCancelarNota.Text = "Cancelar Nota";
+            this.btCancelarNota.UseVisualStyleBackColor = true;
+            this.btCancelarNota.Click += new System.EventHandler(this.BtCancelarNota_Click);
+            // 
             // menuVertical
             // 
             this.menuVertical.Location = new System.Drawing.Point(7, 11);
@@ -677,16 +687,6 @@
             this.buscaPessoa.Size = new System.Drawing.Size(310, 39);
             this.buscaPessoa.TabIndex = 8;
             this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
-            // 
-            // btCancelarNota
-            // 
-            this.btCancelarNota.Enabled = false;
-            this.btCancelarNota.Location = new System.Drawing.Point(1064, 151);
-            this.btCancelarNota.Name = "btCancelarNota";
-            this.btCancelarNota.Size = new System.Drawing.Size(90, 23);
-            this.btCancelarNota.TabIndex = 5;
-            this.btCancelarNota.Text = "Cancelar Nota";
-            this.btCancelarNota.UseVisualStyleBackColor = true;
             // 
             // fmSaiEmissaoNota
             // 

@@ -304,6 +304,12 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
+    <Compile Include="Forms\fmDecimal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmDecimal.Designer.cs">
+      <DependentUpon>fmDecimal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Funcoes\DadosEstaticos.cs" />
     <Compile Include="Staticfiles\Configuracao.cs" />
     <Compile Include="Staticfiles\Estabelecimento.cs" />
@@ -845,6 +851,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmDecimal.resx">
+      <DependentUpon>fmDecimal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
       <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>

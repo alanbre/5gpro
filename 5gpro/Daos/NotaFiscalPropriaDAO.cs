@@ -429,21 +429,54 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-       public int VinculaContaReceber(NotaFiscalPropria notafiscal, ContaReceber contareceber)
+        public int VinculaContaReceber(NotaFiscalPropria notafiscal, ContaReceber contareceber)
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.beginTransaction();
 
-                    sql.Query = @"UPDATE notafiscal SET idconta_receber = @idconta_receber
+                sql.Query = @"UPDATE notafiscal SET idconta_receber = @idconta_receber
                                   WHERE idnotafiscal = @idnota_fiscal";
 
+                sql.clearParams();
+                sql.addParam("@idnota_fiscal", notafiscal.NotaFiscalPropriaID);
+                sql.addParam("@idconta_receber", contareceber.ContaReceberID);
+                retorno = sql.updateQuery();
+
+                sql.Commit();
+            }
+            return retorno;
+        }
+
+        public int CancelarNota(NotaFiscalPropria notafiscal)
+        {
+
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+
+
+                sql.clearParams();
+                sql.addParam("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
+                sql.addParam("@idconta_receber", notafiscal.ContaReceber.ContaReceberID);
+
+                sql.Query = @"UPDATE notafiscal SET situacao = 'Cancelado' WHERE idnotafiscal = @idnotafiscal";
+                sql.updateQuery();
+
+                sql.Query = @"UPDATE conta_receber SET situacao = 'Cancelado' WHERE idconta_receber = @idconta_receber";
+                sql.updateQuery();
+            
+                foreach (var p in notafiscal.ContaReceber.Parcelas)
+                {
                     sql.clearParams();
-                    sql.addParam("@idnota_fiscal", notafiscal.NotaFiscalPropriaID);
-                    sql.addParam("@idconta_receber", contareceber.ContaReceberID);
+                    sql.addParam("@idparcela_conta_receber", p.ParcelaContaReceberID);
+                    sql.Query = @"UPDATE parcela_conta_receber SET situacao = 'Cancelado' WHERE idparcela_conta_receber = @idparcela_conta_receber";
                     retorno = sql.updateQuery();
-                
+
+                }
+
                 sql.Commit();
             }
             return retorno;

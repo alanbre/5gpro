@@ -21,6 +21,9 @@ namespace _5gpro.Forms
         private ContaReceber contaReceber;
         private ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
 
+        private CaixaLancamento caixalancemnto;
+        private CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
+
         private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
 
         Validacao validacao = new Validacao();
@@ -34,6 +37,7 @@ namespace _5gpro.Forms
         private string CodGrupoUsuario;
         private decimal totaldocumento = 0, jurosparcela, descontoparcela;
 
+        public decimal multacancelamento = 0;
         int codigo = 0;
 
         bool editando, ignoracheckevent = false;
@@ -165,7 +169,7 @@ namespace _5gpro.Forms
                 return;
 
             ignoracheckevent = true;
-            Limpa(false);
+            Limpa(false, true);
             tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
             notaFiscalPropria = null;
             tbDescricao.Focus();
@@ -356,7 +360,7 @@ namespace _5gpro.Forms
             else
             {
                 ignoracheckevent = true;
-                Limpa(true);
+                Limpa(true, true);
                 ignoracheckevent = false;
                 Editando(false);
             }
@@ -446,7 +450,7 @@ namespace _5gpro.Forms
 
             if (tbCodigo.Text.Length == 0)
             {
-                Limpa(true);
+                Limpa(true, true);
                 Editando(false);
                 return;
             }
@@ -458,11 +462,13 @@ namespace _5gpro.Forms
                 notaFiscalPropria = newNotaFiscalPropria;
                 PreencheCampos(notaFiscalPropria);
                 Editando(false);
+                btCancelarNota.Enabled = true;
             }
             else
             {
+                btCancelarNota.Enabled = false;
                 Editando(true);
-                Limpa(false);
+                Limpa(false, true);
             }
 
         }
@@ -474,7 +480,7 @@ namespace _5gpro.Forms
                 menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
             }
         }
-        private void Limpa(bool limpaCod)
+        private void Limpa(bool limpaCod, bool limpaNotaFiscalPropria = false)
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
@@ -491,7 +497,10 @@ namespace _5gpro.Forms
             dgvItens.Rows.Clear();
             dgvItens.Refresh();
             LimpaCamposItem(limpaCod);
-            notaFiscalPropria = null;
+
+            if (limpaNotaFiscalPropria)
+                notaFiscalPropria = null;
+
             codigo = 0;
         }
         private void LimpaCamposItem(bool focus)
@@ -603,8 +612,8 @@ namespace _5gpro.Forms
 
             notafiscal.ContaReceber = contaReceberDAO.BuscaById(notafiscal.ContaReceber.ContaReceberID);
 
-            if(notafiscal.ContaReceber != null)
-            buscaOperacao.BuscaPreenche(notafiscal.ContaReceber.Operacao.OperacaoID);
+            if (notafiscal.ContaReceber != null)
+                buscaOperacao.BuscaPreenche(notafiscal.ContaReceber.Operacao.OperacaoID);
 
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpSaida.Value = notafiscal.DataEntradaSaida;
@@ -764,6 +773,203 @@ namespace _5gpro.Forms
         private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
         {
             CalculaTotalDocumento();
+        }
+
+        private void BtCancelarNota_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente cancelar esta nota?",
+                "Cancelamento",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                return;
+            }
+            if (MessageBox.Show("Deseja adicionar multa ao cancelamento?",
+                "Multa por cancelamento",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                fmDecimal fmdecimal = new fmDecimal("Porcentagem da Multa", this);
+                fmdecimal.ShowDialog();
+                if (fmdecimal.fmdecimalvalor > 0)
+                {
+                    multacancelamento = fmdecimal.fmdecimalvalor;
+                }
+                if (MessageBox.Show("Concluir cancelamento com " + multacancelamento + "% de multa ?",
+                    "Cancelamento",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation) == DialogResult.No)
+                {
+                    return;
+                }
+                CancelarNota();
+                return;
+            }
+            multacancelamento = 0m;
+            if (MessageBox.Show("Concluir cancelamento sem multa ?",
+                    "Cancelamento",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                return;
+            }
+            CancelarNota();
+        }
+
+        private void CancelarNota()
+        {
+            decimal Pago = 0, Aberto = 0, Devolucao = 0;
+
+            multacancelamento = (notaFiscalPropria.ValorTotalDocumento * multacancelamento) / 100;
+
+            foreach (var p in notaFiscalPropria.ContaReceber.Parcelas)
+            {
+                switch (p.Situacao)
+                {
+                    case "Pago":
+                        Pago += p.ValorFinal;
+                        break;
+                    case "Aberto":
+                        Aberto += p.ValorFinal;
+                        break;
+                }
+            }
+
+            Devolucao = Pago - multacancelamento;
+
+
+            if (Devolucao > 0)
+            {
+                MessageBox.Show("Escolha o caixa em que o lançamento será realizado", "Aviso",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Caixa caixa = new Caixa();
+                var buscaCaixa = new fmCaiBuscaCaixa();
+                buscaCaixa.ShowDialog();
+                if (buscaCaixa.caixaSelecionada == null)
+                {
+                    MessageBox.Show("Caixa não selecionado, operação interrompida!", "Erro",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                caixa = buscaCaixa.caixaSelecionada;
+
+                PlanoContaDAO planocontaDAO = new PlanoContaDAO();
+                PlanoConta planoconta = new PlanoConta();
+                planoconta = planocontaDAO.BuscaByID(2);
+
+                caixalancemnto = new CaixaLancamento
+                {
+                    Data = DateTime.Today,
+                    Valor = Devolucao,
+                    TipoMovimento = 1,
+                    TipoDocumento = 6,
+                    Lancamento = 1,
+                    Caixa = caixa,
+                    PlanoConta = planoconta
+
+                };
+
+                var resultado = caixalancamentoDAO.DevolucaoCancelamento(caixalancemnto);
+
+                if (resultado > 0)
+                {
+
+                    MessageBox.Show("Lançamento realizado com sucesso!",
+                    "Conta gerada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show("Problema ao realizar lançamento",
+                    "Problema ao gerar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+
+            }
+            if (Devolucao < 0)
+            {
+                //Gerar conta a receber com valor MULTA POR CANCELAMENTO DE NOTA
+
+                Devolucao = Devolucao * -1;
+
+                var par = new ParcelaContaReceber
+                {
+                    Sequencia = 1,
+                    DataVencimento = DateTime.Today.AddDays(30),
+                    Multa = 0.00m,
+                    Juros = 0,
+                    Valor = Devolucao,
+                    Acrescimo = 0,
+                    Desconto = 0,
+                    Descricao = "Multa por cancelamento de nota",
+                    Situacao = "Aberto"
+                };
+
+                List<ParcelaContaReceber> parcelasmulta = new List<ParcelaContaReceber>();
+                parcelasmulta.Add(par);
+
+                var contaReceberMulta = new ContaReceber
+                {
+                    ContaReceberID = contaReceberDAO.BuscaProxCodigoDisponivel(),
+                    DataCadastro = DateTime.Today,
+                    DataConta = dtpSaida.Value,
+                    Pessoa = buscaPessoa.pessoa,
+                    Operacao = buscaOperacao.operacao,
+                    ValorOriginal = Devolucao,
+                    Multa = 0m,
+                    Juros = 0m,
+                    ValorFinal = Devolucao,
+                    Acrescimo = 0m,
+                    Desconto = 0m,
+                    Situacao = "Aberto",
+                    Descricao = "Multa por cancelamento de nota",
+                    Entrada = 0m,
+                    Parcelas = parcelas
+                };
+
+                int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceberMulta);
+
+                if (resultado > 0)
+                {
+
+                    MessageBox.Show("Conta a Receber gerada com sucesso!",
+                    "Conta gerada",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                }
+                else
+                {
+                    MessageBox.Show("Problema ao gerar conta a receber",
+                    "Problema ao gerar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                }
+            }
+
+            var retorno = notaFiscalPropriaDAO.CancelarNota(notaFiscalPropria);
+            if (retorno > 0)
+            {
+
+                MessageBox.Show("Nota cancelada com sucesso!",
+                "Conta gerada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            }
+            else
+            {
+                MessageBox.Show("Problema ao cancelar nota",
+                "Problema ao gerar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+
         }
 
         private void BtSimular_Click(object sender, EventArgs e)
