@@ -12,7 +12,12 @@ namespace _5gpro.Funcoes
         {
             var parser = new FileIniDataParser();
             var path = AppDomain.CurrentDomain.BaseDirectory + "5gpro.ini";
-            if (!File.Exists(path)) File.CreateText(path);
+            if (!File.Exists(path))
+            {
+                using (FileStream fs = File.Create(path))
+                {
+                }
+            }
             IniData data = parser.ReadFile(AppDomain.CurrentDomain.BaseDirectory + "5gpro.ini");
             return data;
         }
