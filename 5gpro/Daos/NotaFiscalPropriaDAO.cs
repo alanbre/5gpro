@@ -429,77 +429,25 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-        //public void LimpaRegistrosCaixaSaida(NotaFiscalPropria nota)
-        //{
-        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
-        //    {
-        //        sql.addParam("@documento", nota.NotaFiscalPropriaID.ToString());
+       public int VinculaContaReceber(NotaFiscalPropria notafiscal, ContaReceber contareceber)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
 
-        //        sql.Query = @"DELETE FROM caixa_lancamento_sai 
-        //                      WHERE idnotafiscal = @documento";
-        //        sql.deleteQuery();
+                    sql.Query = @"UPDATE notafiscal SET idconta_receber = @idconta_receber
+                                  WHERE idnotafiscal = @idnota_fiscal";
 
-        //        sql.Query = @"DELETE FROM caixa_lancamento 
-        //                    WHERE documento = @documento";
-        //        sql.deleteQuery();
-        //    }
-        //}
-
-        //public int MovimentaCaixaEntradaDeDinheiro(NotaFiscalPropria nota)
-        //{
-        //    int retorno = 0;
-
-        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
-        //    {
-
-        //        sql.beginTransaction();
-        //        sql.Query = @"INSERT INTO caixa_lancamento
-        //                    (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
-        //                    VALUES
-        //                    (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
-        //        sql.addParam("@data", nota.DataEntradaSaida);
-        //        sql.addParam("@valor", nota.ValorTotalDocumento);
-        //        sql.addParam("@tipomovimento", 0);
-        //        sql.addParam("@tipodocumento", 2);
-        //        sql.addParam("@lancamento", 1);
-        //        sql.addParam("@documento", nota.NotaFiscalPropriaID);
-        //        //sql.addParam("@idcaixa", nota.Caixa.CaixaID);
-        //        //sql.addParam("@idcaixa_plano_contas", nota.PlanoDeConta.PlanoContaID);
-        //        retorno = sql.insertQuery();
-
-
-        //        if (retorno > 0)
-        //        {
-        //            sql.Query = "SELECT LAST_INSERT_ID() AS idcaixalancamento;";
-        //            var data = sql.selectQueryForSingleRecord();
-        //            int idcaixalancamento = Convert.ToInt32(data["idcaixalancamento"]);
-
-        //            sql.Query = @"DELETE FROM caixa_lancamento_sai 
-        //                          WHERE idnotafiscal = @idnotafiscal
-        //                          AND idcaixa_lancamento = @idcaixa_lancamento";
-
-        //            sql.clearParams();
-        //            sql.addParam("@idcaixa_lancamento", idcaixalancamento);
-        //            sql.addParam("@idnotafiscal", nota.NotaFiscalPropriaID);
-
-        //            sql.deleteQuery();
-
-        //            sql.Query = @"INSERT INTO caixa_lancamento_sai (idcaixa_lancamento, idnotafiscal)
-        //                        VALUES
-        //                        (@idcaixa_lancamento, @idnotafiscal)";
-
-        //            sql.clearParams();
-        //            sql.addParam("@idcaixa_lancamento", idcaixalancamento);
-        //            sql.addParam("@idnotafiscal", nota.NotaFiscalPropriaID);
-        //            sql.insertQuery();
-
-        //        }
-
-        //        sql.Commit();
-        //    }
-
-        //    return retorno;
-        //}
+                    sql.clearParams();
+                    sql.addParam("@idnota_fiscal", notafiscal.NotaFiscalPropriaID);
+                    sql.addParam("@idconta_receber", contareceber.ContaReceberID);
+                    retorno = sql.updateQuery();
+                
+                sql.Commit();
+            }
+            return retorno;
+        }
 
         private NotaFiscalPropria LeDadosReader(List<Dictionary<string, object>> data)
         {
@@ -518,6 +466,9 @@ namespace _5gpro.Daos
             notaFiscalPropria.ValorTotalDocumento = (decimal)data[0]["valor_documento"];
             notaFiscalPropria.DescontoTotalItens = (decimal)data[0]["desconto_total_itens"];
             notaFiscalPropria.DescontoDocumento = (decimal)data[0]["desconto_documento"];
+            var contareceber = new ContaReceber();
+            contareceber.ContaReceberID = Convert.ToInt32(data[0]["idconta_receber"]);
+            notaFiscalPropria.ContaReceber = contareceber;
             var pessoa = new Pessoa();
             pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
             notaFiscalPropria.Pessoa = pessoa;

@@ -7165,6 +7165,35 @@ namespace _5gpro.Funcoes
             }
             return versao_base;
         }
+
+        private string Migrate_0043(string v)
+        {
+            string versao_base = v;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"ALTER TABLE notafiscal ADD idconta_receber INT(11);";
+                sql.updateQuery();
+                sql.Query = @"ALTER TABLE notafiscal ADD CONSTRAINT fk_conta_receber 
+                            FOREIGN KEY ( idconta_receber ) 
+                            REFERENCES conta_receber ( idconta_receber );";
+                sql.updateQuery();
+
+                sql.Query = @"ALTER TABLE nota_fiscal_terceiros ADD idconta_pagar INT(11);";
+                sql.updateQuery();
+                sql.Query = @"ALTER TABLE nota_fiscal_terceiros ADD CONSTRAINT fk_conta_pagar 
+                            FOREIGN KEY ( idconta_pagar ) 
+                            REFERENCES conta_pagar ( idconta_pagar );";
+                sql.updateQuery();
+
+                sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
+                sql.addParam("@versao", "0043_ligacaocontasenotas");
+                sql.insertQuery();
+                sql.Commit();
+                versao_base = "0043_ligacaocontasenotas";
+            }
+            return versao_base;
+        }
     }
 }
 

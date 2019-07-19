@@ -168,7 +168,7 @@ namespace _5gpro.Forms
             Limpa(false);
             tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
             notaFiscalPropria = null;
-            buscaPessoa.Focus();
+            tbDescricao.Focus();
             ignoracheckevent = false;
             Editando(true);
         }
@@ -216,7 +216,7 @@ namespace _5gpro.Forms
                     return;
                 }
 
-                if(buscaOperacao.operacao == null)
+                if (buscaOperacao.operacao == null)
                 {
                     MessageBox.Show("Escolha uma operação!",
                     "Problema ao salvar",
@@ -290,26 +290,37 @@ namespace _5gpro.Forms
                 DataConta = dtpSaida.Value,
                 Pessoa = buscaPessoa.pessoa,
                 Operacao = buscaOperacao.operacao,
-                ValorOriginal = dbValorTotalItens.Valor,                          
+                ValorOriginal = dbValorTotalItens.Valor,
                 Multa = 0m,
                 Juros = dbJurosTotal.Valor,
                 ValorFinal = dbValorTotalDocumento.Valor,
                 Acrescimo = 0m,
-                Desconto = dbDescontoDocumento.Valor,           
+                Desconto = dbDescontoDocumento.Valor,
                 Situacao = "Aberto",
                 Descricao = tbDescricao.Text,
                 Entrada = 0m,
-                Parcelas = parcelas            
+                Parcelas = parcelas
             };
 
             int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
 
-            if(resultado > 0)
+            if (resultado > 0)
             {
+                resultado = notaFiscalPropriaDAO.VinculaContaReceber(notaFiscalPropriaNova, contaReceber);
+
+                if (resultado <= 0)
+                {
+                    MessageBox.Show("Problema ao vincular nota e conta a receber!",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation);
+                }
+
                 MessageBox.Show("Conta a Receber gerada com sucesso!",
                 "Conta gerada",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
+
             }
             else
             {
@@ -589,6 +600,12 @@ namespace _5gpro.Forms
             tbCodigo.Text = notafiscal.NotaFiscalPropriaID.ToString();
             tbDescricao.Text = notafiscal.Descricao;
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
+
+            notafiscal.ContaReceber = contaReceberDAO.BuscaById(notafiscal.ContaReceber.ContaReceberID);
+
+            if(notafiscal.ContaReceber != null)
+            buscaOperacao.BuscaPreenche(notafiscal.ContaReceber.Operacao.OperacaoID);
+
             dtpEmissao.Value = notafiscal.DataEmissao;
             dtpSaida.Value = notafiscal.DataEntradaSaida;
             dbValorTotalItens.Valor = notafiscal.ValorTotalItens;
@@ -713,7 +730,7 @@ namespace _5gpro.Forms
             {
                 var par = new ParcelaContaReceber
                 {
-                    Sequencia = sequencia,        
+                    Sequencia = sequencia,
                     DataVencimento = dtpSaida.Value.AddDays(parcela.Dias),
                     Multa = 0.00m,
                     Juros = jurosparcela,
@@ -744,11 +761,20 @@ namespace _5gpro.Forms
             CalculaTotalDocumento();
         }
 
+        private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+
         private void BtSimular_Click(object sender, EventArgs e)
         {
             GerarParcelas();
-            var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
-            fmvisualizaparcelas.Show(this);
+            if (buscaOperacao.operacao != null)
+            {
+                var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
+                fmvisualizaparcelas.Show(this);
+            }
+
         }
 
         private void BuscaOperacao_Leave_1(object sender, EventArgs e)
