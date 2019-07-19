@@ -304,11 +304,19 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
+<<<<<<< HEAD
     <Compile Include="Forms\fmDecimal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmDecimal.Designer.cs">
       <DependentUpon>fmDecimal.cs</DependentUpon>
+=======
+    <Compile Include="Forms\fmCapReplicarConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCapReplicarConta.Designer.cs">
+      <DependentUpon>fmCapReplicarConta.cs</DependentUpon>
+>>>>>>> 89729d2ac839fc36fe1ae2280713c63f7205e033
     </Compile>
     <Compile Include="Funcoes\DadosEstaticos.cs" />
     <Compile Include="Staticfiles\Configuracao.cs" />
@@ -504,17 +512,17 @@
     <Compile Include="Forms\fmBuscaCidade.Designer.cs">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaContaPagar.cs">
+    <Compile Include="Forms\fmCapBuscaContaPagar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaContaPagar.Designer.cs">
-      <DependentUpon>fmBuscaContaPagar.cs</DependentUpon>
+    <Compile Include="Forms\fmCapBuscaContaPagar.Designer.cs">
+      <DependentUpon>fmCapBuscaContaPagar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmBuscaContaReceber.cs">
+    <Compile Include="Forms\fmCarBuscaContaReceber.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmBuscaContaReceber.Designer.cs">
-      <DependentUpon>fmBuscaContaReceber.cs</DependentUpon>
+    <Compile Include="Forms\fmCarBuscaContaReceber.Designer.cs">
+      <DependentUpon>fmCarBuscaContaReceber.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmBuscaFormaPagamento.cs">
       <SubType>Form</SubType>
@@ -849,6 +857,9 @@
     <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCapReplicarConta.resx">
+      <DependentUpon>fmCapReplicarConta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
     </EmbeddedResource>
@@ -887,11 +898,11 @@
     <EmbeddedResource Include="Forms\fmBuscaCidade.resx">
       <DependentUpon>fmBuscaCidade.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaContaPagar.resx">
-      <DependentUpon>fmBuscaContaPagar.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCapBuscaContaPagar.resx">
+      <DependentUpon>fmCapBuscaContaPagar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmBuscaContaReceber.resx">
-      <DependentUpon>fmBuscaContaReceber.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmCarBuscaContaReceber.resx">
+      <DependentUpon>fmCarBuscaContaReceber.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaEstado.resx">
       <DependentUpon>fmBuscaEstado.cs</DependentUpon>

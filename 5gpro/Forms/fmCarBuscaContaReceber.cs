@@ -1,24 +1,28 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.Funcoes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace _5gpro.Forms
 {
-    public partial class fmBuscaContaPagar : Form
+    public partial class fmCarBuscaContaReceber : Form
     {
-
-        public ContaPagar contaPagarSelecionada = null;
-        private IEnumerable<ContaPagar> contasPagar;
-        private readonly ContaPagarDAO contaPagarDAO = new ContaPagarDAO();
+        public ContaReceber contaReceberSelecionada = null;
+        private IEnumerable<ContaReceber> contasReceber;
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
         private bool valorContaFiltro = false;
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
+        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
+
 
         public struct Filtros
         {
             public Pessoa filtroPessoa;
+            public Operacao filtroOperacao;
             public decimal filtroValorInicial;
             public decimal filtroValorFinal;
             public DateTime filtroDataCadastroInicial;
@@ -30,14 +34,22 @@ namespace _5gpro.Forms
             public bool usardataVencimentoFiltro;
         }
 
-        public fmBuscaContaPagar()
+
+        public fmCarBuscaContaReceber()
         {
             InitializeComponent();
             DatasIniciais();
         }
 
+        //LOAD
+        private void FmBuscaContaReceber_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        //LEAVE
         //KEYUP, KEYDOWN
-        private void FmBuscaContaPagar_KeyDown(object sender, KeyEventArgs e)
+        private void FmBuscaContaReceber_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
@@ -53,12 +65,12 @@ namespace _5gpro.Forms
         {
             int selectedRowIndex = dgvContas.SelectedCells[0].RowIndex;
             DataGridViewRow selectedRow = dgvContas.Rows[selectedRowIndex];
-            contaPagarSelecionada = contaPagarDAO.BuscaByID(Convert.ToInt32(selectedRow.Cells[0].Value));
+            contaReceberSelecionada = contaReceberDAO.BuscaById(Convert.ToInt32(selectedRow.Cells[0].Value));
             this.Close();
         }
 
         //TEXTCHANGED
-        private void CbValor_CheckedChanged(object sender, EventArgs e)
+        private void CbValorConta_CheckedChanged(object sender, EventArgs e)
         {
             if (cbValorConta.Checked)
             {
@@ -73,6 +85,7 @@ namespace _5gpro.Forms
                 valorContaFiltro = false;
             }
         }
+
         private void CbDataCadastro_CheckedChanged(object sender, EventArgs e)
         {
             if (cbDataCadastro.Checked)
@@ -88,7 +101,8 @@ namespace _5gpro.Forms
                 dataCadastroFiltro = false;
             }
         }
-        private void CbDataVencimento_CheckedChanged(object sender, EventArgs e)
+
+        private void CbDataVencimentoParcela_CheckedChanged(object sender, EventArgs e)
         {
             if (cbDataVencimentoParcela.Checked)
             {
@@ -109,6 +123,7 @@ namespace _5gpro.Forms
         {
             Filtros f = new Filtros
             {
+                filtroOperacao = buscaOperacao.operacao,
                 filtroPessoa = buscaPessoa.pessoa,
                 filtroValorInicial = dbValorInicial.Valor,
                 filtroValorFinal = dbValorFinal.Valor,
@@ -121,20 +136,23 @@ namespace _5gpro.Forms
                 usarvalorContaFiltro = valorContaFiltro
             };
 
-            contasPagar = contaPagarDAO.Busca(f);
+
+            contasReceber = contaReceberDAO.Busca(f);
+
             dgvContas.Rows.Clear();
 
-            foreach (var cp in contasPagar)
-                dgvContas.Rows.Add(cp.ContaPagarID,
-                                   cp.Descricao,
-                                   cp.Pessoa.Nome,
-                                   cp.DataCadastro.ToShortDateString(),
-                                   cp.ValorOriginal,
-                                   cp.Multa,
-                                   cp.Juros,
-                                   cp.Acrescimo,
-                                   cp.Desconto,
-                                   cp.ValorFinal);
+            foreach (var cr in contasReceber)
+                dgvContas.Rows.Add(cr.ContaReceberID,
+                                   cr.Descricao,
+                                   cr.Pessoa.Nome,
+                                   cr.DataCadastro.ToShortDateString(),
+                                   cr.Operacao.Nome,
+                                   cr.ValorOriginal,
+                                   cr.Multa,
+                                   cr.Juros,
+                                   cr.Acrescimo,
+                                   cr.Desconto,
+                                   cr.ValorFinal);
 
             dgvContas.Refresh();
         }

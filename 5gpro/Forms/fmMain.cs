@@ -72,7 +72,6 @@ namespace _5gpro
         private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             t.Abort();
-            logadoDAO.RemoveTodosLocks(logado);
             logadoDAO.RemoverLogado(adap.Mac);
         }
 

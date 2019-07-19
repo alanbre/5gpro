@@ -68,6 +68,69 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+        public int SalvaOuAtualiza(List<ContaPagar> contasPagar)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            {
+                foreach (var contaPagar in contasPagar)
+                {
+                    sql.beginTransaction();
+                    contaPagar.ContaPagarID = BuscaProxCodigoDisponivel();
+                    sql.clearParams();
+                    sql.Query = @"INSERT INTO conta_pagar
+                         (idconta_pagar, data_cadastro, data_conta, valor_original, multa, juros, acrescimo, desconto, valor_final, idpessoa, situacao, descricao)
+                          VALUES
+                         (@idconta_pagar, @data_cadastro, @data_conta, @valor_original, @multa, @juros, @acrescimo, @desconto, @valor_final, @idpessoa, @situacao, @descricao)
+                          ON DUPLICATE KEY UPDATE
+                          data_cadastro = @data_cadastro, data_conta = @data_conta, valor_original = @valor_original, multa = @multa,
+                          juros = @juros, acrescimo = @acrescimo, desconto = @desconto, valor_final = @valor_final, idpessoa = @idpessoa, situacao = @situacao, descricao = @descricao
+                          ";
+                    sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
+                    sql.addParam("@data_cadastro", contaPagar.DataCadastro);
+                    sql.addParam("@valor_original", contaPagar.ValorOriginal);
+                    sql.addParam("@multa", contaPagar.Multa);
+                    sql.addParam("@juros", contaPagar.Juros);
+                    sql.addParam("@acrescimo", contaPagar.Acrescimo);
+                    sql.addParam("@desconto", contaPagar.Desconto);
+                    sql.addParam("@valor_final", contaPagar.ValorFinal);
+                    sql.addParam("@idpessoa", contaPagar.Pessoa.PessoaID);
+                    sql.addParam("@situacao", contaPagar.Situacao);
+                    sql.addParam("data_conta", contaPagar.DataConta);
+                    sql.addParam("@descricao", contaPagar.Descricao);
+                    retorno += sql.insertQuery();
+                    if (retorno > 0)
+                    {
+                        sql.Query = @"DELETE FROM parcela_conta_pagar WHERE idconta_pagar = @idconta_pagar";
+                        sql.deleteQuery();
+                        sql.Query = @"INSERT INTO parcela_conta_pagar
+                                (sequencia, data_vencimento, valor, multa, juros, acrescimo, desconto, valor_final, data_quitacao, idconta_pagar, idformapagamento, situacao, descricao)
+                                VALUES
+                                (@sequencia, @data_vencimento, @valor, @multa, @juros, @acrescimo, @desconto, @valor_final, @data_quitacao, @idconta_pagar, @idformapagamento, @situacao, @descricao)";
+                        foreach (var parcela in contaPagar.Parcelas)
+                        {
+                            sql.clearParams();
+                            sql.addParam("@sequencia", parcela.Sequencia);
+                            sql.addParam("@data_vencimento", parcela.DataVencimento);
+                            sql.addParam("@valor", parcela.Valor);
+                            sql.addParam("@multa", parcela.Multa);
+                            sql.addParam("@juros", parcela.Juros);
+                            sql.addParam("@acrescimo", parcela.Acrescimo);
+                            sql.addParam("@desconto", parcela.Desconto);
+                            sql.addParam("@valor_final", parcela.ValorFinal);
+                            sql.addParam("@data_quitacao", parcela.DataQuitacao);
+                            sql.addParam("@idconta_pagar", contaPagar.ContaPagarID);
+                            sql.addParam("@idformapagamento", parcela.FormaPagamento?.FormaPagamentoID ?? null);
+                            sql.addParam("@situacao", parcela.Situacao);
+                            sql.addParam("@descricao", parcela.Descricao);
+                            sql.insertQuery();
+                        }
+                    }
+                    sql.Commit();
+                }
+            }
+            return retorno;
+        }
         public ContaPagar BuscaByID(int codigo)
         {
             var contaPagar = new ContaPagar();
@@ -92,7 +155,7 @@ namespace _5gpro.Daos
             }
             return contaPagar;
         }
-        public IEnumerable<ContaPagar> Busca(fmBuscaContaPagar.Filtros f)
+        public IEnumerable<ContaPagar> Busca(fmCapBuscaContaPagar.Filtros f)
         {
             var contaPagars = new List<ContaPagar>();
             string wherePessoa = f.filtroPessoa != null ? "AND p.idpessoa = @idpessoa" : "";

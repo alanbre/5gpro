@@ -6,11 +6,6 @@ namespace _5gpro.Entities
 {
     public class ContaPagar
     {
-        public ContaPagar()
-        {
-            Parcelas = new HashSet<ParcelaContaPagar>();
-        }
-
         public int ContaPagarID { get; set; }
         public DateTime DataCadastro { get; set; }
         public DateTime DataConta { get; set; }
@@ -27,6 +22,6 @@ namespace _5gpro.Entities
         public string Situacao { get; set; }
         public string Descricao { get; set; }
         public decimal Entrada { get; set; }
-        public virtual ICollection<ParcelaContaPagar> Parcelas { get; set; }
+        public virtual List<ParcelaContaPagar> Parcelas { get; set; }
     }
 }
