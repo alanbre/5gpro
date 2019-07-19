@@ -18,8 +18,6 @@ namespace _5gpro.Forms
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
-        //private CaixaLancamento caixalancamento = new CaixaLancamento();
-        //private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
         private ContaReceber contaReceber;
         private ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
 
@@ -34,7 +32,7 @@ namespace _5gpro.Forms
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
-        private decimal totaldocumento = 0;
+        private decimal totaldocumento = 0, jurosparcela, descontoparcela;
 
         int codigo = 0;
 
@@ -218,6 +216,15 @@ namespace _5gpro.Forms
                     return;
                 }
 
+                if(buscaOperacao.operacao == null)
+                {
+                    MessageBox.Show("Escolha uma operação!",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
+
                 notaFiscalPropriaNova = new NotaFiscalPropria
                 {
                     NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
@@ -256,6 +263,7 @@ namespace _5gpro.Forms
                 {
                     tbAjuda.Text = "Dados salvos com sucesso";
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
+                    GerarContaReceber();
                     Editando(false);
                 }
                 else if (resultado == 2)
@@ -273,28 +281,44 @@ namespace _5gpro.Forms
 
         private void GerarContaReceber()
         {
+            GerarParcelas();
+
             contaReceber = new ContaReceber
             {
                 ContaReceberID = contaReceberDAO.BuscaProxCodigoDisponivel(),
                 DataCadastro = DateTime.Today,
                 DataConta = dtpSaida.Value,
+                Pessoa = buscaPessoa.pessoa,
                 Operacao = buscaOperacao.operacao,
-                Descricao = tbDescricao.Text,
-
-                ValorOriginal = dbValorTotalItens.Valor,
-
-                //Multa = buscaOperacao.operacao.Multa,
-                //Juros = buscaOperacao.operacao.Juros,
-                //Acrescimo = dbAcrescimoConta.Valor,
-                //Desconto = dbDescontoConta.Valor,
-
+                ValorOriginal = dbValorTotalItens.Valor,                          
+                Multa = 0m,
+                Juros = dbJurosTotal.Valor,
                 ValorFinal = dbValorTotalDocumento.Valor,
+                Acrescimo = 0m,
+                Desconto = dbDescontoDocumento.Valor,           
                 Situacao = "Aberto",
-
-                Parcelas = parcelas,
-
-                Pessoa = buscaPessoa.pessoa
+                Descricao = tbDescricao.Text,
+                Entrada = 0m,
+                Parcelas = parcelas            
             };
+
+            int resultado = contaReceberDAO.SalvaOuAtualiza(contaReceber);
+
+            if(resultado > 0)
+            {
+                MessageBox.Show("Conta a Receber gerada com sucesso!",
+                "Conta gerada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Problema ao gerar conta a receber",
+                "Problema ao gerar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            }
+
         }
 
         private void Recarrega()
@@ -443,6 +467,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            buscaOperacao.Limpa();
             tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
             dtpSaida.Value = DateTime.Now;
@@ -633,13 +658,20 @@ namespace _5gpro.Forms
             {
                 dbValorTotalItens.Valor = itens.Sum(i => i.ValorTotal);
                 dbDescontoTotalItens.Valor = itens.Sum(i => i.Desconto);
-                totaldocumento = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto) - dbDescontoDocumento.Valor);
+                totaldocumento = (itens.Sum(i => i.ValorTotal) - itens.Sum(i => i.Desconto));
+                dbValorTotalDocumento.Valor = totaldocumento;
 
                 if (buscaOperacao.operacao != null)
                 {
                     dbJurosTotal.Valor = (totaldocumento * buscaOperacao.operacao.Juros) / 100;
                     dbDescontoDocumento.Valor = (totaldocumento * buscaOperacao.operacao.Desconto) / 100;
-                    dbValorTotalDocumento.Valor = totaldocumento + dbJurosTotal.Valor - dbDescontoDocumento.Valor;
+                    totaldocumento = totaldocumento + dbJurosTotal.Valor - dbDescontoDocumento.Valor;
+                    dbValorTotalDocumento.Valor = totaldocumento;
+                }
+                else
+                {
+                    dbJurosTotal.Valor = 0m;
+                    dbDescontoDocumento.Valor = 0m;
                 }
             }
             else
@@ -673,25 +705,27 @@ namespace _5gpro.Forms
             }
             parcelas.Clear();
             var parcelasOperacao = buscaOperacao.operacao.Parcelas;
+            jurosparcela = dbJurosTotal.Valor / parcelasOperacao.Count;
+            descontoparcela = dbDescontoDocumento.Valor / parcelasOperacao.Count;
 
             int sequencia = 1;
             foreach (var parcela in parcelasOperacao)
             {
                 var par = new ParcelaContaReceber
                 {
-                    Sequencia = sequencia,
+                    Sequencia = sequencia,        
                     DataVencimento = dtpSaida.Value.AddDays(parcela.Dias),
                     Multa = 0.00m,
-                    Juros = 0.00m,
-                    Valor = dbValorTotalDocumento.Valor / parcelasOperacao.Count,
+                    Juros = jurosparcela,
+                    Valor = dbValorTotalItens.Valor / parcelasOperacao.Count,
                     Acrescimo = dbValorTotalDocumento.Valor * buscaOperacao.operacao.Acrescimo / 100 / parcelasOperacao.Count,
+                    Desconto = descontoparcela,
+                    Descricao = tbDescricao.Text,
                     Situacao = "Aberto"
                 };
                 sequencia++;
                 this.parcelas.Add(par);
             }
-            dbNumeroParcelas.Valor = parcelas.Count;
-            dbValorParcela.Valor = parcelas[0].Valor;
         }
 
         private void BtVisualizarparcelas_Click(object sender, EventArgs e)
@@ -701,6 +735,23 @@ namespace _5gpro.Forms
         }
 
         private void BuscaOperacao_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+
+        private void BuscaOperacao_Codigo_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+
+        private void BtSimular_Click(object sender, EventArgs e)
+        {
+            GerarParcelas();
+            var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
+            fmvisualizaparcelas.Show(this);
+        }
+
+        private void BuscaOperacao_Leave_1(object sender, EventArgs e)
         {
             CalculaTotalDocumento();
         }

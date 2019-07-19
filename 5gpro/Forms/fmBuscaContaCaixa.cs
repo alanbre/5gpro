@@ -97,6 +97,7 @@ namespace _5gpro.Forms
 
         private void BtOk_Click(object sender, EventArgs e)
         {
+            if(tvPlanoContas.SelectedNode == null) { return; }
             planoContaSelecionada = planoContas.First(pc => pc.PlanoContaID == (int)tvPlanoContas.SelectedNode.Tag);
             if (planoContaSelecionada == null) return;
             this.Close();

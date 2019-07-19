@@ -28,15 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.gbTotais = new System.Windows.Forms.GroupBox();
             this.lbDescontoConta = new System.Windows.Forms.Label();
@@ -89,8 +89,8 @@
             this.dgvtbcDataQuitacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvtbcSituacao = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbDadosConta = new System.Windows.Forms.GroupBox();
-            this.lbDescricao = new System.Windows.Forms.Label();
-            this.tbDescricao = new System.Windows.Forms.TextBox();
+            this.lbDescricaoCAP = new System.Windows.Forms.Label();
+            this.tbDescricaoCAP = new System.Windows.Forms.TextBox();
             this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.dtpDataConta = new System.Windows.Forms.DateTimePicker();
             this.lbDataConta = new System.Windows.Forms.Label();
@@ -597,8 +597,8 @@
             this.dgvParcelas.AllowUserToDeleteRows = false;
             this.dgvParcelas.AllowUserToOrderColumns = true;
             this.dgvParcelas.AllowUserToResizeRows = false;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.LightGray;
-            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvParcelas.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvParcelas.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dgvParcelas.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvParcelas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -634,17 +634,17 @@
             // 
             // dgvtbcDataVencimento
             // 
-            dataGridViewCellStyle11.Format = "d";
-            dataGridViewCellStyle11.NullValue = null;
-            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcDataVencimento.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvtbcDataVencimento.HeaderText = "Data de vencimento";
             this.dgvtbcDataVencimento.Name = "dgvtbcDataVencimento";
             this.dgvtbcDataVencimento.ReadOnly = true;
             // 
             // dgvtbcValorOriginal
             // 
-            dataGridViewCellStyle12.Format = "C2";
-            this.dgvtbcValorOriginal.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle3.Format = "C2";
+            this.dgvtbcValorOriginal.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvtbcValorOriginal.HeaderText = "Valor original";
             this.dgvtbcValorOriginal.Name = "dgvtbcValorOriginal";
             this.dgvtbcValorOriginal.ReadOnly = true;
@@ -652,8 +652,8 @@
             // 
             // dgvtbcMulta
             // 
-            dataGridViewCellStyle13.Format = "C2";
-            this.dgvtbcMulta.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle4.Format = "C2";
+            this.dgvtbcMulta.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvtbcMulta.HeaderText = "Multa";
             this.dgvtbcMulta.Name = "dgvtbcMulta";
             this.dgvtbcMulta.ReadOnly = true;
@@ -661,8 +661,8 @@
             // 
             // dgvtbcJuros
             // 
-            dataGridViewCellStyle14.Format = "C2";
-            this.dgvtbcJuros.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle5.Format = "C2";
+            this.dgvtbcJuros.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvtbcJuros.HeaderText = "Juros";
             this.dgvtbcJuros.Name = "dgvtbcJuros";
             this.dgvtbcJuros.ReadOnly = true;
@@ -670,8 +670,8 @@
             // 
             // dgvtbcAcrescimo
             // 
-            dataGridViewCellStyle15.Format = "C2";
-            this.dgvtbcAcrescimo.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle6.Format = "C2";
+            this.dgvtbcAcrescimo.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcAcrescimo.HeaderText = "Acréscimo";
             this.dgvtbcAcrescimo.Name = "dgvtbcAcrescimo";
             this.dgvtbcAcrescimo.ReadOnly = true;
@@ -679,8 +679,8 @@
             // 
             // dgvtbcDesconto
             // 
-            dataGridViewCellStyle16.Format = "C2";
-            this.dgvtbcDesconto.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle7.Format = "C2";
+            this.dgvtbcDesconto.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgvtbcDesconto.HeaderText = "Desconto";
             this.dgvtbcDesconto.Name = "dgvtbcDesconto";
             this.dgvtbcDesconto.ReadOnly = true;
@@ -688,8 +688,8 @@
             // 
             // dgvtbcValorFinal
             // 
-            dataGridViewCellStyle17.Format = "C2";
-            this.dgvtbcValorFinal.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle8.Format = "C2";
+            this.dgvtbcValorFinal.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgvtbcValorFinal.HeaderText = "Valor final";
             this.dgvtbcValorFinal.Name = "dgvtbcValorFinal";
             this.dgvtbcValorFinal.ReadOnly = true;
@@ -697,9 +697,9 @@
             // 
             // dgvtbcDataQuitacao
             // 
-            dataGridViewCellStyle18.Format = "d";
-            dataGridViewCellStyle18.NullValue = null;
-            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle9.Format = "d";
+            dataGridViewCellStyle9.NullValue = null;
+            this.dgvtbcDataQuitacao.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgvtbcDataQuitacao.HeaderText = "Data quitação";
             this.dgvtbcDataQuitacao.Name = "dgvtbcDataQuitacao";
             this.dgvtbcDataQuitacao.ReadOnly = true;
@@ -713,8 +713,8 @@
             // gbDadosConta
             // 
             this.gbDadosConta.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.gbDadosConta.Controls.Add(this.lbDescricao);
-            this.gbDadosConta.Controls.Add(this.tbDescricao);
+            this.gbDadosConta.Controls.Add(this.lbDescricaoCAP);
+            this.gbDadosConta.Controls.Add(this.tbDescricaoCAP);
             this.gbDadosConta.Controls.Add(this.buscaPessoa);
             this.gbDadosConta.Controls.Add(this.dtpDataConta);
             this.gbDadosConta.Controls.Add(this.lbDataConta);
@@ -727,24 +727,24 @@
             this.gbDadosConta.TabStop = false;
             this.gbDadosConta.Text = "Dados da conta";
             // 
-            // lbDescricao
+            // lbDescricaoCAP
             // 
-            this.lbDescricao.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.lbDescricao.AutoSize = true;
-            this.lbDescricao.Location = new System.Drawing.Point(8, 103);
-            this.lbDescricao.Name = "lbDescricao";
-            this.lbDescricao.Size = new System.Drawing.Size(55, 13);
-            this.lbDescricao.TabIndex = 4;
-            this.lbDescricao.Text = "Descrição";
+            this.lbDescricaoCAP.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lbDescricaoCAP.AutoSize = true;
+            this.lbDescricaoCAP.Location = new System.Drawing.Point(8, 103);
+            this.lbDescricaoCAP.Name = "lbDescricaoCAP";
+            this.lbDescricaoCAP.Size = new System.Drawing.Size(55, 13);
+            this.lbDescricaoCAP.TabIndex = 4;
+            this.lbDescricaoCAP.Text = "Descrição";
             // 
-            // tbDescricao
+            // tbDescricaoCAP
             // 
-            this.tbDescricao.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tbDescricao.Location = new System.Drawing.Point(8, 119);
-            this.tbDescricao.Multiline = true;
-            this.tbDescricao.Name = "tbDescricao";
-            this.tbDescricao.Size = new System.Drawing.Size(431, 61);
-            this.tbDescricao.TabIndex = 5;
+            this.tbDescricaoCAP.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tbDescricaoCAP.Location = new System.Drawing.Point(8, 119);
+            this.tbDescricaoCAP.Multiline = true;
+            this.tbDescricaoCAP.Name = "tbDescricaoCAP";
+            this.tbDescricaoCAP.Size = new System.Drawing.Size(431, 61);
+            this.tbDescricaoCAP.TabIndex = 5;
             // 
             // buscaPessoa
             // 
@@ -896,8 +896,8 @@
         private System.Windows.Forms.TextBox tbSituacaoParcela;
         private System.Windows.Forms.Label lbFormaPagamentoParcela;
         private System.Windows.Forms.TextBox tbFormaPagamentoParcela;
-        private System.Windows.Forms.Label lbDescricao;
-        private System.Windows.Forms.TextBox tbDescricao;
+        private System.Windows.Forms.Label lbDescricaoCAP;
+        private System.Windows.Forms.TextBox tbDescricaoCAP;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcSequencia;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcDataVencimento;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvtbcValorOriginal;

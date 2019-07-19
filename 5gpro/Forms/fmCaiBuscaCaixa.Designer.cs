@@ -73,9 +73,10 @@
             this.dgvCaixa.AllowUserToDeleteRows = false;
             this.dgvCaixa.AllowUserToOrderColumns = true;
             this.dgvCaixa.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Empty;
             this.dgvCaixa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvCaixa.BackgroundColor = System.Drawing.Color.White;
+            this.dgvCaixa.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvCaixa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCaixa.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvtbcCodigo,

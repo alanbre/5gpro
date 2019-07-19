@@ -145,7 +145,7 @@
             this.tbDescricao.Name = "tbDescricao";
             this.tbDescricao.Size = new System.Drawing.Size(431, 61);
             this.tbDescricao.TabIndex = 5;
-            // 
+            //// 
             // dbValorContaGerar
             // 
             this.dbValorContaGerar.Anchor = System.Windows.Forms.AnchorStyles.None;
