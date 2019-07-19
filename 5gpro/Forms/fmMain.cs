@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,6 +12,7 @@ namespace _5gpro
 {
     public partial class fmMain : Form
     {
+        private readonly EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
         private Permissao permissao = new Permissao();
         private PermissaoDAO permissaoDAO = new PermissaoDAO();
         private Logado logado = new Logado();
@@ -48,6 +50,7 @@ namespace _5gpro
         public fmMain()
         {
             InitializeComponent();
+            estabelecimentoDAO.Busca();
         }
 
 
@@ -60,6 +63,7 @@ namespace _5gpro
         }
         private void FmMain_Load(object sender, EventArgs e)
         {
+            DadosEstaticos d = new DadosEstaticos();
             FiltroDePermissoes();
             timerRelogio.Start();
             t = new Thread(new ThreadStart(AtualizaLogado));

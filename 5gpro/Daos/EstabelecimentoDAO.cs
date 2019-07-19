@@ -1,17 +1,14 @@
-﻿using _5gpro.Entities;
+﻿using _5gpro.StaticFiles;
+using _5gpro.Entities;
 using MySQLConnection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {
-    class EstabelecimentoDAO
+    public class EstabelecimentoDAO
     {
         private static readonly ConexaoDAO Connect = new ConexaoDAO();
-        public int SalvaOuAtualiza(Estabelecimento estabelecimento)
+        public int SalvaOuAtualiza()
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
@@ -24,25 +21,24 @@ namespace _5gpro.Daos
                           nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, complemento = @complemento,
                           cnpj = @cnpj, telefone = @telefone, email = @email, idcidade = @idcidade";
                 sql.addParam("@idestabelecimento", 1);
-                sql.addParam("@nome", estabelecimento.Nome);
-                sql.addParam("@fantasia", estabelecimento.Fantasia);
-                sql.addParam("@rua", estabelecimento.Rua);
-                sql.addParam("@numero", estabelecimento.Numero);
-                sql.addParam("@bairro", estabelecimento.Bairro);
-                sql.addParam("@complemento", estabelecimento.Complemento);
-                sql.addParam("@cnpj", estabelecimento.CpfCnpj);
-                sql.addParam("@telefone", estabelecimento.Telefone);
-                sql.addParam("@email", estabelecimento.Email);
-                sql.addParam("@idcidade", estabelecimento.Cidade.CidadeID);
+                sql.addParam("@nome", Estabelecimento.Nome);
+                sql.addParam("@fantasia", Estabelecimento.Fantasia);
+                sql.addParam("@rua", Estabelecimento.Rua);
+                sql.addParam("@numero", Estabelecimento.Numero);
+                sql.addParam("@bairro", Estabelecimento.Bairro);
+                sql.addParam("@complemento", Estabelecimento.Complemento);
+                sql.addParam("@cnpj", Estabelecimento.CpfCnpj);
+                sql.addParam("@telefone", Estabelecimento.Telefone);
+                sql.addParam("@email", Estabelecimento.Email);
+                sql.addParam("@idcidade", Estabelecimento.Cidade.CidadeID);
 
                 retorno = sql.insertQuery();
             }
             return retorno;
         }
 
-        public Estabelecimento Busca()
+        public void Busca()
         {
-            Estabelecimento estabelecimento = null;
             using (MySQLConn sql = new MySQLConn(Connect.Conecta))
             {
                 sql.Query = @"SELECT e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
@@ -53,10 +49,7 @@ namespace _5gpro.Daos
                             INNER JOIN estado e ON e.idestado = c.idestado
                             LIMIT 1";
                 var data = sql.selectQueryForSingleRecord();
-                if (data == null)
-                {
-                    return estabelecimento;
-                }
+                if (data == null) return;
 
                 var estado = new Estado
                 {
@@ -72,20 +65,18 @@ namespace _5gpro.Daos
                     Estado = estado
                 };
 
-                estabelecimento = new Estabelecimento();
-                estabelecimento.EstabelecimentoID = Convert.ToInt32(data["idestabelecimento"]);
-                estabelecimento.Nome = (string)data["nomeestabelecimento"];
-                estabelecimento.Fantasia = (string)data["fantasia"];
-                estabelecimento.Rua = (string)data["rua"];
-                estabelecimento.Numero = (string)data["numero"];
-                estabelecimento.Bairro = (string)data["bairro"];
-                estabelecimento.Complemento = (string)data["complemento"];
-                estabelecimento.Cidade = cidade;
-                estabelecimento.Telefone = (string)data["telefone"];
-                estabelecimento.Email = (string)data["email"];
-                estabelecimento.CpfCnpj = (string)data["cnpj"];
+                Estabelecimento.EstabelecimentoID = Convert.ToInt32(data["idestabelecimento"]);
+                Estabelecimento.Nome = (string)data["nomeestabelecimento"];
+                Estabelecimento.Fantasia = (string)data["fantasia"];
+                Estabelecimento.Rua = (string)data["rua"];
+                Estabelecimento.Numero = (string)data["numero"];
+                Estabelecimento.Bairro = (string)data["bairro"];
+                Estabelecimento.Complemento = (string)data["complemento"];
+                Estabelecimento.Cidade = cidade;
+                Estabelecimento.Telefone = (string)data["telefone"];
+                Estabelecimento.Email = (string)data["email"];
+                Estabelecimento.CpfCnpj = (string)data["cnpj"];
             }
-            return estabelecimento;
         }
     }
 }

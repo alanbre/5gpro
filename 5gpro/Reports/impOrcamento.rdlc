@@ -722,14 +722,88 @@
               </Border>
             </Style>
           </Tablix>
+          <Line Name="Line1">
+            <Top>1.02554in</Top>
+            <Left>1.86458in</Left>
+            <Height>0in</Height>
+            <Width>2.45833in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Assinatura</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>1.05332in</Top>
+            <Left>2.5325in</Left>
+            <Height>0.25in</Height>
+            <Width>1in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox2">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Data: __/__/____</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.84723in</Top>
+            <Left>0.18625in</Left>
+            <Height>0.25in</Height>
+            <Width>1.63667in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>22.19374mm</Height>
+        <Height>37.01041mm</Height>
         <Style />
       </Body>
-      <Width>188.91275mm</Width>
+      <Width>188.91301mm</Width>
       <Page>
         <PageHeader>
-          <Height>2.94667in</Height>
+          <Height>3.49875in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -742,7 +816,7 @@
                     <TextRun>
                       <Value>ORÇAMENTO</Value>
                       <Style>
-                        <FontSize>20pt</FontSize>
+                        <FontSize>18pt</FontSize>
                         <FontWeight>Bold</FontWeight>
                         <TextDecoration>None</TextDecoration>
                       </Style>
@@ -754,7 +828,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox21</rd:DefaultName>
-              <Top>0.18625in</Top>
+              <Top>0.84597in</Top>
+              <Left>0.00001in</Left>
               <Height>0.36458in</Height>
               <Width>7.43751in</Width>
               <Style>
@@ -792,8 +867,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox38</rd:DefaultName>
-              <Top>0.90847in</Top>
-              <Left>5.73959in</Left>
+              <Top>1.54042in</Top>
+              <Left>5.7396in</Left>
               <Height>0.25in</Height>
               <Width>1.69792in</Width>
               <ZIndex>1</ZIndex>
@@ -832,8 +907,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>data_vencimento</rd:DefaultName>
-              <Top>1.47792in</Top>
-              <Left>5.09376in</Left>
+              <Top>2.10987in</Top>
+              <Left>5.09377in</Left>
               <Height>0.25in</Height>
               <Width>2.34375in</Width>
               <ZIndex>2</ZIndex>
@@ -885,7 +960,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox45</rd:DefaultName>
-              <Top>1.47792in</Top>
+              <Top>2.10987in</Top>
+              <Left>0.00001in</Left>
               <Height>0.25in</Height>
               <Width>4.84375in</Width>
               <ZIndex>3</ZIndex>
@@ -922,7 +998,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox46</rd:DefaultName>
-              <Top>1.74181in</Top>
+              <Top>2.37376in</Top>
+              <Left>0.00001in</Left>
               <Height>0.25in</Height>
               <Width>4.84375in</Width>
               <ZIndex>4</ZIndex>
@@ -959,8 +1036,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox47</rd:DefaultName>
-              <Top>2.01958in</Top>
-              <Left>1.86458in</Left>
+              <Top>2.65153in</Top>
+              <Left>1.86459in</Left>
               <Height>0.25in</Height>
               <Width>1.86458in</Width>
               <ZIndex>5</ZIndex>
@@ -997,7 +1074,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox49</rd:DefaultName>
-              <Top>2.01958in</Top>
+              <Top>2.65153in</Top>
+              <Left>0.00001in</Left>
               <Height>0.25in</Height>
               <Width>1.82292in</Width>
               <ZIndex>6</ZIndex>
@@ -1034,8 +1112,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox50</rd:DefaultName>
-              <Top>2.01958in</Top>
-              <Left>3.77083in</Left>
+              <Top>2.65153in</Top>
+              <Left>3.77084in</Left>
               <Height>0.25in</Height>
               <Width>1.80431in</Width>
               <ZIndex>7</ZIndex>
@@ -1072,7 +1150,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox51</rd:DefaultName>
-              <Top>2.29736in</Top>
+              <Top>2.92931in</Top>
+              <Left>0.00001in</Left>
               <Height>0.25in</Height>
               <Width>3.72917in</Width>
               <ZIndex>8</ZIndex>
@@ -1109,8 +1188,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox52</rd:DefaultName>
-              <Top>2.29736in</Top>
-              <Left>3.77083in</Left>
+              <Top>2.92931in</Top>
+              <Left>3.77084in</Left>
               <Height>0.25in</Height>
               <Width>2.375in</Width>
               <ZIndex>9</ZIndex>
@@ -1147,7 +1226,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox53</rd:DefaultName>
-              <Top>2.58903in</Top>
+              <Top>3.22098in</Top>
+              <Left>0.00001in</Left>
               <Height>0.25in</Height>
               <Width>3.72917in</Width>
               <ZIndex>10</ZIndex>
@@ -1180,8 +1260,8 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox8</rd:DefaultName>
-              <Top>0.62027in</Top>
-              <Left>5.66667in</Left>
+              <Top>1.25222in</Top>
+              <Left>5.66668in</Left>
               <Height>0.25in</Height>
               <Width>1.77083in</Width>
               <ZIndex>11</ZIndex>
@@ -1220,11 +1300,133 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>data_vencimento</rd:DefaultName>
-              <Top>1.18625in</Top>
-              <Left>5.09376in</Left>
+              <Top>1.8182in</Top>
+              <Left>5.09377in</Left>
               <Height>0.25in</Height>
               <Width>2.34375in</Width>
               <ZIndex>12</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!razaosocial.Value</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Left>1.86459in</Left>
+              <Height>0.25in</Height>
+              <Width>3.71056in</Width>
+              <ZIndex>13</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox4">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!endereco.Value</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox4</rd:DefaultName>
+              <Top>0.25in</Top>
+              <Left>1.86458in</Left>
+              <Height>0.25in</Height>
+              <Width>3.71057in</Width>
+              <ZIndex>14</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox5">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!telefone.Value</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox5</rd:DefaultName>
+              <Top>0.51389in</Top>
+              <Left>1.86459in</Left>
+              <Height>0.25in</Height>
+              <Width>1.22917in</Width>
+              <ZIndex>15</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!email.Value</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Top>0.5in</Top>
+              <Left>3.16321in</Left>
+              <Height>0.25in</Height>
+              <Width>2.41194in</Width>
+              <ZIndex>16</ZIndex>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1242,90 +1444,6 @@
             </Border>
           </Style>
         </PageHeader>
-        <PageFooter>
-          <Height>0.51042in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Line Name="Line1">
-              <Top>0.17831in</Top>
-              <Left>1.86458in</Left>
-              <Height>0in</Height>
-              <Width>2.45833in</Width>
-              <Style>
-                <Border>
-                  <Style>Solid</Style>
-                </Border>
-              </Style>
-            </Line>
-            <Textbox Name="Textbox1">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Assinatura</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Center</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.20609in</Top>
-              <Left>2.5325in</Left>
-              <Height>0.25in</Height>
-              <Width>1in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox2">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Data: __/__/____</Value>
-                      <Style />
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Left>0.18625in</Left>
-              <Height>0.25in</Height>
-              <Width>1.63667in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-          </Style>
-        </PageFooter>
         <PageHeight>297mm</PageHeight>
         <PageWidth>210mm</PageWidth>
         <InteractiveHeight>277mm</InteractiveHeight>
@@ -1401,11 +1519,35 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="razaosocial">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="endereco">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="telefone">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="email">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -1466,6 +1608,26 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>cliente_telefone</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>razaosocial</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>endereco</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>2</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>telefone</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>email</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

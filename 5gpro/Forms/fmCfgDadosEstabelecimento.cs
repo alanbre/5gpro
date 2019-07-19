@@ -1,5 +1,6 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using _5gpro.Funcoes;
 using System;
 using System.Windows.Forms;
@@ -10,7 +11,6 @@ namespace _5gpro.Forms
     {
         private readonly EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
         private readonly Validacao validacao = new Validacao();
-        private Estabelecimento estabelecimento = null;
 
         //Controle de Permissões
         private Logado logado;
@@ -42,7 +42,7 @@ namespace _5gpro.Forms
 
         private void FmCfgDadosEstabelecimento_Load(object sender, EventArgs e)
         {
-            this.estabelecimento = estabelecimentoDAO.Busca();
+            estabelecimentoDAO.Busca();
             PreencheDados();
             SetarNivel();
         }
@@ -65,26 +65,19 @@ namespace _5gpro.Forms
         {
             if (!editando) return;
             
-            var ok = false;
 
-            if (estabelecimento == null) estabelecimento = new Estabelecimento();
-            estabelecimento.Nome = tbNome.Text;
-            estabelecimento.Fantasia = tbFantasia.Text;
-            estabelecimento.Rua = tbRua.Text;
-            estabelecimento.Numero = tbNumero.Text;
-            estabelecimento.Bairro = tbBairro.Text;
-            estabelecimento.Complemento = tbComplemento.Text;
-            estabelecimento.Cidade = buscaCidade.cidade;
-            estabelecimento.CpfCnpj = mtbCpfCnpj.TextNoMask();
-            estabelecimento.Telefone = mtbTelefone.TextNoMask();
-            estabelecimento.Email = tbEmail.Text;
-            var controls = (ControlCollection)this.Controls;
+            Estabelecimento.Nome = tbNome.Text;
+            Estabelecimento.Fantasia = tbFantasia.Text;
+            Estabelecimento.Rua = tbRua.Text;
+            Estabelecimento.Numero = tbNumero.Text;
+            Estabelecimento.Bairro = tbBairro.Text;
+            Estabelecimento.Complemento = tbComplemento.Text;
+            Estabelecimento.Cidade = buscaCidade.cidade;
+            Estabelecimento.CpfCnpj = mtbCpfCnpj.TextNoMask();
+            Estabelecimento.Telefone = mtbTelefone.TextNoMask();
+            Estabelecimento.Email = tbEmail.Text;
 
-            ok = validacao.ValidarEntidade(estabelecimento, controls);
-            if (!ok) return;
-
-            validacao.despintarCampos(controls);
-            int resultado = estabelecimentoDAO.SalvaOuAtualiza(estabelecimento);
+            int resultado = estabelecimentoDAO.SalvaOuAtualiza();
             if (resultado == 0)
             {
                 MessageBox.Show("Problema ao salvar o registro",
@@ -108,18 +101,17 @@ namespace _5gpro.Forms
         }
         private void PreencheDados()
         {
-            if (estabelecimento == null) return;
             ignoraCheckEvent = true;
-            tbNome.Text = estabelecimento.Nome;
-            tbFantasia.Text = estabelecimento.Fantasia;
-            tbRua.Text = estabelecimento.Rua;
-            tbNumero.Text = estabelecimento.Numero;
-            tbBairro.Text = estabelecimento.Bairro;
-            tbComplemento.Text = estabelecimento.Complemento;
-            mtbCpfCnpj.Text = estabelecimento.CpfCnpj;
-            mtbTelefone.Text = estabelecimento.Telefone;
-            tbEmail.Text = estabelecimento.Email;
-            buscaCidade.PreencheCampos(estabelecimento.Cidade);
+            tbNome.Text = Estabelecimento.Nome;
+            tbFantasia.Text = Estabelecimento.Fantasia;
+            tbRua.Text = Estabelecimento.Rua;
+            tbNumero.Text = Estabelecimento.Numero;
+            tbBairro.Text = Estabelecimento.Bairro;
+            tbComplemento.Text = Estabelecimento.Complemento;
+            mtbCpfCnpj.Text = Estabelecimento.CpfCnpj;
+            mtbTelefone.Text = Estabelecimento.Telefone;
+            tbEmail.Text = Estabelecimento.Email;
+            buscaCidade.PreencheCampos(Estabelecimento.Cidade);
             ignoraCheckEvent = false;
         }
         private void EnterTab(object sender, KeyEventArgs e)

@@ -1,14 +1,9 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using _5gpro.Funcoes;
 using Microsoft.Reporting.WinForms;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace _5gpro.Reports
@@ -31,6 +26,13 @@ namespace _5gpro.Reports
         {
             _dados.TableName = "Orçamento";
             this.rvOrcamento.LocalReport.DisplayName = "Orçamento";
+
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"razaosocial", Estabelecimento.Nome, true));
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"endereco", $"{Estabelecimento.Rua}, {Estabelecimento.Numero} {Estabelecimento.Complemento} - {Estabelecimento.Bairro}", true));
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"telefone", fa.FormataTel(Estabelecimento.Telefone), true));
+            this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"email", fa.FormataTel(Estabelecimento.Email), true));
+
+
             this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"numero", orcamento.OrcamentoID.ToString(), true));
             this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"cliente_cod", orcamento.Pessoa.PessoaID.ToString(), true));
             this.rvOrcamento.LocalReport.SetParameters(new ReportParameter($"cliente_nome", orcamento.Pessoa.Nome.ToString(), true));

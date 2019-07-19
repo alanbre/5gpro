@@ -37,6 +37,8 @@ namespace _5gpro.Forms
             table.Columns.Add("Código", typeof(string));
             table.Columns.Add("Descrição", typeof(string));
             table.Columns.Add("Denominação da Compra", typeof(string));
+            table.Columns.Add("Grupo", typeof(string));
+            table.Columns.Add("SubGrupo", typeof(string));
             table.Columns.Add("Tipo", typeof(string));
             table.Columns.Add("Referência", typeof(string));
             table.Columns.Add("Estoque Necessário", typeof(string));
@@ -109,7 +111,21 @@ namespace _5gpro.Forms
 
             foreach (Item i in itens)
             {
-                table.Rows.Add(i.ItemID, i.Descricao, i.DescCompra, i.TipoItem, i.Referencia, i.Estoquenecessario, i.Quantidade, i.Unimedida.Sigla, i.ValorEntrada, i.ValorUnitario);
+                string grupo = $"{i.SubGrupoItem.GrupoItem.GrupoItemID.ToString()} - {i.SubGrupoItem.GrupoItem.Nome}";
+                string subgrupo = $"{i.SubGrupoItem.Codigo.ToString()} - {i.SubGrupoItem.Nome}";
+                table.Rows.Add(
+                    i.ItemID,
+                    i.Descricao,
+                    i.DescCompra,
+                    grupo,
+                    subgrupo,
+                    i.TipoItem,
+                    i.Referencia,
+                    i.Estoquenecessario,
+                    i.Quantidade,
+                    i.Unimedida.Sigla,
+                    i.ValorEntrada,
+                    i.ValorUnitario);
                 rel.Rows.Add(i.ItemID, i.Referencia, i.Descricao, i.DescCompra, i.Quantidade, i.ValorUnitario);
             }
 

@@ -54,38 +54,36 @@
             // 
             this.tbSenha.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.tbSenha.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSenha.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbSenha.ForeColor = System.Drawing.Color.White;
             this.tbSenha.Location = new System.Drawing.Point(84, 125);
             this.tbSenha.Name = "tbSenha";
             this.tbSenha.PasswordChar = '*';
-            this.tbSenha.Size = new System.Drawing.Size(140, 20);
+            this.tbSenha.Size = new System.Drawing.Size(140, 19);
             this.tbSenha.TabIndex = 3;
-            this.tbSenha.TextChanged += new System.EventHandler(this.TbSenha_TextChanged);
-            this.tbSenha.Enter += new System.EventHandler(this.tbSenha_Enter);
-            this.tbSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSenha_KeyDown);
+            this.tbSenha.Enter += new System.EventHandler(this.TbSenha_Enter);
+            this.tbSenha.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbSenha_KeyDown);
             // 
             // tbNomeUsuario
             // 
             this.tbNomeUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(185)))), ((int)(((byte)(9)))));
             this.tbNomeUsuario.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbNomeUsuario.Enabled = false;
-            this.tbNomeUsuario.Font = new System.Drawing.Font("Century Gothic", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbNomeUsuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbNomeUsuario.ForeColor = System.Drawing.Color.Black;
             this.tbNomeUsuario.Location = new System.Drawing.Point(12, 16);
             this.tbNomeUsuario.Name = "tbNomeUsuario";
             this.tbNomeUsuario.ReadOnly = true;
-            this.tbNomeUsuario.Size = new System.Drawing.Size(207, 20);
+            this.tbNomeUsuario.Size = new System.Drawing.Size(207, 19);
             this.tbNomeUsuario.TabIndex = 7;
             this.tbNomeUsuario.TabStop = false;
-            this.tbNomeUsuario.TextChanged += new System.EventHandler(this.TbNomeUsuario_TextChanged);
             // 
             // btEntrar
             // 
             this.btEntrar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btEntrar.FlatAppearance.BorderSize = 0;
             this.btEntrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btEntrar.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btEntrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btEntrar.ForeColor = System.Drawing.Color.White;
             this.btEntrar.Location = new System.Drawing.Point(88, 151);
             this.btEntrar.Name = "btEntrar";
@@ -93,7 +91,7 @@
             this.btEntrar.TabIndex = 4;
             this.btEntrar.Text = "Entrar";
             this.btEntrar.UseVisualStyleBackColor = false;
-            this.btEntrar.Click += new System.EventHandler(this.btEntrar_Click);
+            this.btEntrar.Click += new System.EventHandler(this.BtEntrar_Click);
             // 
             // btProcuraUsuario
             // 
@@ -107,14 +105,14 @@
             this.btProcuraUsuario.TabIndex = 6;
             this.btProcuraUsuario.TabStop = false;
             this.btProcuraUsuario.UseVisualStyleBackColor = false;
-            this.btProcuraUsuario.Click += new System.EventHandler(this.btProcuraUsuario_Click);
+            this.btProcuraUsuario.Click += new System.EventHandler(this.BtProcuraUsuario_Click);
             // 
             // btSair
             // 
             this.btSair.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.btSair.FlatAppearance.BorderSize = 0;
             this.btSair.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btSair.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSair.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btSair.ForeColor = System.Drawing.Color.White;
             this.btSair.Location = new System.Drawing.Point(163, 151);
             this.btSair.Name = "btSair";
@@ -122,21 +120,21 @@
             this.btSair.TabIndex = 5;
             this.btSair.Text = "Sair";
             this.btSair.UseVisualStyleBackColor = false;
-            this.btSair.Click += new System.EventHandler(this.btSair_Click);
+            this.btSair.Click += new System.EventHandler(this.BtSair_Click);
             // 
             // tbCodigo
             // 
             this.tbCodigo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(30)))));
             this.tbCodigo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbCodigo.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCodigo.ForeColor = System.Drawing.Color.White;
             this.tbCodigo.Location = new System.Drawing.Point(85, 73);
             this.tbCodigo.Name = "tbCodigo";
-            this.tbCodigo.Size = new System.Drawing.Size(140, 20);
+            this.tbCodigo.Size = new System.Drawing.Size(140, 19);
             this.tbCodigo.TabIndex = 1;
-            this.tbCodigo.Enter += new System.EventHandler(this.tbLogin_Enter);
-            this.tbCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbLogin_KeyDown);
-            this.tbCodigo.Leave += new System.EventHandler(this.tbCodigo_Leave);
+            this.tbCodigo.Enter += new System.EventHandler(this.TbLogin_Enter);
+            this.tbCodigo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TbLogin_KeyDown);
+            this.tbCodigo.Leave += new System.EventHandler(this.TbCodigo_Leave);
             // 
             // panel2
             // 
@@ -155,7 +153,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(326, 211);
             this.panel2.TabIndex = 9;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel2_Paint);
             // 
             // panel1
             // 
@@ -236,6 +233,7 @@
             this.Name = "fmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.FmLogin_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);

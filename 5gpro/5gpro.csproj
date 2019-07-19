@@ -93,6 +93,9 @@
     <OutputPath>bin\x86\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
+      <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -301,7 +304,9 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
-    <Compile Include="Entities\Estabelecimento.cs" />
+    <Compile Include="Funcoes\DadosEstaticos.cs" />
+    <Compile Include="Staticfiles\Configuracao.cs" />
+    <Compile Include="Staticfiles\Estabelecimento.cs" />
     <Compile Include="Entities\Estado.cs" />
     <Compile Include="Entities\FormaPagamento.cs" />
     <Compile Include="Entities\GrupoItem.cs" />
