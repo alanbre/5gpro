@@ -39,6 +39,7 @@ namespace _5gpro.Controls
                 operacao = null;
                 tbNomeOperacao.Clear();
             }
+            this.Codigo_Leave?.Invoke(this, e);
         }
 
         private void BtBuscaOperacao_Click(object sender, EventArgs e)
@@ -94,16 +95,15 @@ namespace _5gpro.Controls
 
 
 
-
-
-
-
-
-
         //--------------------------------------------------
         //CRIA O EVENTO Text_Changed DO USERCONTROL
         //--------------------------------------------------
         public delegate void text_changedEventHandler(object sender, EventArgs e);
+        public delegate void codigo_leaveEventHandler(object sender, EventArgs e);
+
+        [Category("Action")]
+        [Description("É acionado quando o foco sai do campo Código da operacao")]
+        public event codigo_leaveEventHandler Codigo_Leave;
 
         [Category("Action")]
         [Description("É acionado quando o conteúdo do código da pessoa é alterado")]
