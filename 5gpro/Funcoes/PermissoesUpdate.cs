@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
@@ -10,7 +11,6 @@ namespace _5gpro.Funcoes
 {
     class PermissoesUpdate
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private readonly GrupoUsuarioDAO grupousuarioDAO = new GrupoUsuarioDAO();
         private List<GrupoUsuario> listagrupos = new List<GrupoUsuario>();
@@ -54,7 +54,7 @@ namespace _5gpro.Funcoes
         public int InserirRelacoesPermissao(int inseriridpermissao)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO permissao_has_grupo_usuario 
@@ -76,7 +76,7 @@ namespace _5gpro.Funcoes
         public int InserirRelacoesGrupoUsuarios(int inseriridgrupousuario)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO permissao_has_grupo_usuario (idgrupousuario, idpermissao, nivel)

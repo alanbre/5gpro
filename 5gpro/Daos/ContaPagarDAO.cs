@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,10 @@ namespace _5gpro.Daos
 {
     class ContaPagarDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public int SalvaOuAtualiza(ContaPagar contaPagar)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO conta_pagar
@@ -71,7 +70,7 @@ namespace _5gpro.Daos
         public int SalvaOuAtualiza(List<ContaPagar> contasPagar)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 foreach (var contaPagar in contasPagar)
                 {
@@ -134,7 +133,7 @@ namespace _5gpro.Daos
         public ContaPagar BuscaByID(int codigo)
         {
             var contaPagar = new ContaPagar();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
@@ -164,7 +163,7 @@ namespace _5gpro.Daos
             string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pa.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
 
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT cp.idconta_pagar, p.idpessoa, p.nome, cp.data_cadastro, cp.data_conta,
                                                     cp.valor_original, cp.multa, cp.juros, cp.acrescimo, cp.desconto, cp.valor_final, cp.situacao, cp.descricao AS cpdescricao
@@ -219,7 +218,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT cp1.idconta_pagar + 1 AS proximoid
                             FROM conta_pagar AS cp1
@@ -238,7 +237,7 @@ namespace _5gpro.Daos
         public ContaPagar Proximo(int codigo)
         {
             ContaPagar contaPagar = null;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,
@@ -265,7 +264,7 @@ namespace _5gpro.Daos
         public ContaPagar Anterior(int codigo)
         {
             ContaPagar contaPagar = null;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, p.situacao AS psituacao, p.idformapagamento AS pformapagamento,
                             p.multa AS pmulta, p.juros AS pjuros, p.acrescimo AS pacrescimo,

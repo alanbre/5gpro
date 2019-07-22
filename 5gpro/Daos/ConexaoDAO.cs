@@ -24,49 +24,5 @@ namespace _5gpro.Daos
                 return "SERVER=" +server + ";UID=" + uid + ";PWD=" + pwd;
             }
         }
-
-        public MySqlConnection Conexao;
-        public MySqlTransaction tr = null;
-        public MySqlCommand Comando = null;
-
-        
-        public void AbrirConexao()
-        {
-            try
-            {
-                Conexao = new MySqlConnection(Conecta);
-                Conexao.Open();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-        }
-        public void AbrirConexaoSemBase()
-        {
-            try
-            {
-                Conexao = new MySqlConnection(ConectaSemBase);
-                Conexao.Open();
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-        }
-        public void FecharConexao()
-        {
-            try
-            {
-                if (Conexao != null)
-                {
-                    Conexao.Close();
-                }
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error: {0}", ex.ToString());
-            }
-        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,10 @@ namespace _5gpro.Daos
 
     class GrupoUsuarioDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public GrupoUsuario BuscaByID(int Codigo)
         {
             var grupoUsuario = new GrupoUsuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM grupo_usuario WHERE idgrupousuario = @idgrupousuario LIMIT 1";
                 sql.addParam("@idgrupousuario", Codigo);
@@ -32,7 +31,7 @@ namespace _5gpro.Daos
         {
             var grupoUsuarios = new List<GrupoUsuario>();
             string conNome = nome.Length > 0 ? "AND nome LIKE @nome" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = $@"SELECT *
                             FROM grupo_usuario
@@ -52,7 +51,7 @@ namespace _5gpro.Daos
         public List<GrupoUsuario> BuscaTodos()
         {
             var grupoUsuarios = new List<GrupoUsuario>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM grupo_usuario";
                 var data = sql.selectQuery();
@@ -68,7 +67,7 @@ namespace _5gpro.Daos
         {
             var permissaoDAO = new PermissaoDAO();
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 
@@ -117,7 +116,7 @@ namespace _5gpro.Daos
         public GrupoUsuario Proximo(string Codigo)
         {
             var grupoUsuario = new GrupoUsuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT min(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario > @idgrupousuario) LIMIT 1";
                 sql.addParam("@idgrupousuario", Codigo);
@@ -134,7 +133,7 @@ namespace _5gpro.Daos
         public GrupoUsuario Anterior(string Codigo)
         {
             var grupoUsuario = new GrupoUsuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM grupo_usuario WHERE idgrupousuario = (SELECT max(idgrupousuario) FROM grupo_usuario WHERE idgrupousuario < @idgrupousuario) LIMIT 1";
                 sql.addParam("@idgrupousuario", Codigo);
@@ -150,7 +149,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g1.idgrupousuario + 1 AS proximoid
                             FROM grupo_usuario AS g1
@@ -169,7 +168,7 @@ namespace _5gpro.Daos
         public List<int> BuscarIDNpraN()
         {
             var idgrupousuariosNpraN = new List<int>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT DISTINCT p.idgrupousuario 
                             FROM permissao_has_grupo_usuario as p";

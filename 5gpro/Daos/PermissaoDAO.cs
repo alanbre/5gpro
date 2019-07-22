@@ -8,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using _5gpro.Forms;
 using MySQLConnection;
+using _5gpro.StaticFiles;
 
 namespace _5gpro.Daos
 {
     public class PermissaoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public fmCadastroGrupoUsuario.PermissoesStruct BuscaPermissoesByIdGrupo(string cod)
         {
 
@@ -26,7 +24,7 @@ namespace _5gpro.Daos
             permissoes.Telas = new List<Permissao>();
             permissoes.Funcoes = new List<Permissao>();
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpermissao AS pid, p.nome AS pnome, p.codigo AS pcodigo, pg.nivel AS pgnivel
                             FROM permissao_has_grupo_usuario pg INNER JOIN permissao p 
@@ -83,7 +81,7 @@ namespace _5gpro.Daos
             permissoes.Telas = new List<Permissao>();
             permissoes.Funcoes = new List<Permissao>();
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM permissao ORDER BY codigo";
 
@@ -128,7 +126,7 @@ namespace _5gpro.Daos
         {
             Permissao permissao = null;
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM permissao as p WHERE p.idpermissao = @idpermissao";
 
@@ -154,7 +152,7 @@ namespace _5gpro.Daos
         {
             int permissaoid = 0;
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpermissao FROM permissao as p WHERE p.codigo = @codigo";
 
@@ -177,7 +175,7 @@ namespace _5gpro.Daos
         {
             int nivel = 0;
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT pg.nivel FROM permissao_has_grupo_usuario as pg 
                                              WHERE idgrupousuario = @idgrupousuario 
@@ -200,7 +198,7 @@ namespace _5gpro.Daos
         {
             List<int> idpermissoesNpraN = new List<int>();
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT DISTINCT p.idpermissao 
                                              FROM permissao_has_grupo_usuario as p";
@@ -221,7 +219,7 @@ namespace _5gpro.Daos
         {
             List<fmMain.PermissaoNivelStruct> listacomniveis = new List<fmMain.PermissaoNivelStruct>();
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * 
                 FROM permissao_has_grupo_usuario as p

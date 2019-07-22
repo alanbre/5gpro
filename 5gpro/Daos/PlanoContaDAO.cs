@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,10 @@ namespace _5gpro.Daos
 {
     public class PlanoContaDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public int Salva(PlanoConta planoConta)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = "SELECT codigo_completo FROM caixa_plano_contas WHERE idcaixa_plano_contas = @paiid";
@@ -46,7 +45,7 @@ namespace _5gpro.Daos
         public int Atualiza(PlanoConta planoConta)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"UPDATE caixa_plano_contas SET descricao = @descricao WHERE codigo = @codigo AND paiid = @paiid";
@@ -72,7 +71,7 @@ namespace _5gpro.Daos
             if (entrada && saida) { conEntrada = ""; conSaida = ""; }
 
             List<PlanoConta> planoContas = new List<PlanoConta>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM caixa_plano_contas
                             WHERE 1=1 "
@@ -94,7 +93,7 @@ namespace _5gpro.Daos
             if (entrada && saida) { conEntrada = ""; conSaida = ""; }
 
             var planoconta = new PlanoConta();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM caixa_plano_contas
                             WHERE idcaixa_plano_contas = @idcaixa_plano_contas "
@@ -114,7 +113,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel(int paiid)
         {
             int proximocodigo = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT COALESCE(MAX(pc.codigo) + 1, 1) AS proximocodigo
                             FROM caixa_plano_contas AS pc

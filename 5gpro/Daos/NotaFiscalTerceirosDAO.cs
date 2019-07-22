@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,10 @@ namespace _5gpro.Daos
 {
     class NotaFiscalTerceirosDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT nf1.idnota_fiscal_terceiros + 1 AS proximoid 
                             FROM nota_fiscal_terceiros AS nf1 
@@ -33,7 +31,7 @@ namespace _5gpro.Daos
         public NotaFiscalTerceiros BuscaByID(int Codigo)
         {
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
                             FROM nota_fiscal_terceiros nft
@@ -62,7 +60,7 @@ namespace _5gpro.Daos
             string whereDataEntrada = f.usardataEntradaFiltro ? "AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final" : "";
 
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT nft.idnota_fiscal_terceiros, p.idpessoa, p.nome, nft.data_emissao, nft.data_entradasaida, nft.valor_documento
                             FROM
@@ -106,7 +104,7 @@ namespace _5gpro.Daos
         public NotaFiscalTerceiros Proximo(int Codigo)
         {
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
                             FROM nota_fiscal_terceiros nft
@@ -128,7 +126,7 @@ namespace _5gpro.Daos
         public NotaFiscalTerceiros Anterior(int Codigo)
         {
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
                             FROM nota_fiscal_terceiros nft
@@ -150,7 +148,7 @@ namespace _5gpro.Daos
         public int SalvarOuAtualizar(NotaFiscalTerceiros notafiscal)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO nota_fiscal_terceiros
@@ -198,7 +196,7 @@ namespace _5gpro.Daos
         }
         public void LimpaRegistrosEstoque(NotaFiscalTerceiros nota)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"DELETE FROM registro_estoque 
                             WHERE documento = @documento
@@ -214,7 +212,7 @@ namespace _5gpro.Daos
         public int MovimentaEstoque(NotaFiscalTerceiros nota)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 foreach (var i in nota.NotaFiscalTerceirosItem)
@@ -250,7 +248,7 @@ namespace _5gpro.Daos
 
         public void LimpaRegistrosCaixa(NotaFiscalTerceiros nota)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.addParam("@documento", nota.NotaFiscalTerceirosID.ToString());
 
@@ -268,7 +266,7 @@ namespace _5gpro.Daos
         {
             int retorno = 0;
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
 
                 sql.beginTransaction();

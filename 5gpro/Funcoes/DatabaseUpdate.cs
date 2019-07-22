@@ -1,4 +1,5 @@
 ﻿using _5gpro.Daos;
+using _5gpro.StaticFiles;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
@@ -8,11 +9,9 @@ namespace _5gpro.Funcoes
 {
     class DatabaseUpdate
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         private void CriarBase()
         {
-            using (MySQLConn sql = new MySQLConn(Connect.ConectaSemBase))
+            using (MySQLConn sql = new MySQLConn(Configuracao.ConectaSemBase))
             {
                 sql.Query = @"CREATE SCHEMA IF NOT EXISTS 5gprodatabase DEFAULT CHARACTER SET utf8";
                 sql.insertQuery();
@@ -21,7 +20,7 @@ namespace _5gpro.Funcoes
         private string PegarVerasoBase()
         {
             string versao_base = "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"SHOW TABLES LIKE @migrations";
@@ -104,7 +103,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0001(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS pais (
@@ -129,7 +128,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0002(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS estado (
@@ -186,7 +185,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0003(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS cidade (
@@ -5779,7 +5778,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0004(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS grupopessoa (
@@ -5813,7 +5812,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0005(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS grupo_usuario (
@@ -5837,7 +5836,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0006(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS grupoitem (
@@ -5871,7 +5870,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0007(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS unimedida (
@@ -5903,7 +5902,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0008(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS item (
@@ -5945,7 +5944,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0009(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS pessoa (
@@ -5992,7 +5991,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0010(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS notafiscal (
@@ -6026,7 +6025,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0011(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS notafiscal_has_item (
@@ -6061,7 +6060,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0012(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS orcamento (
@@ -6103,7 +6102,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0013(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS orcamento_has_item (
@@ -6138,7 +6137,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0014(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS permissao (
@@ -6207,7 +6206,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0015(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS permissao_has_grupo_usuario (
@@ -6238,7 +6237,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0016(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS usuario (
@@ -6272,7 +6271,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0017(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS logado (
@@ -6301,7 +6300,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0018(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS operacao (
@@ -6326,7 +6325,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0019(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS parcelaoperacao (
@@ -6354,7 +6353,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0020(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS formapagamento (
@@ -6387,7 +6386,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0021(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS conta_receber (
@@ -6430,7 +6429,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0022(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS parcela_conta_receber (
@@ -6474,7 +6473,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0023(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS conta_pagar (
@@ -6510,7 +6509,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0024(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS parcela_conta_pagar (
@@ -6554,7 +6553,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0025(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS registro_estoque (
@@ -6591,7 +6590,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0026(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS nota_fiscal_terceiros (
@@ -6625,7 +6624,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0027(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS nota_fiscal_terceiros_has_item (
@@ -6662,7 +6661,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0028(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS desintegracao (
@@ -6689,7 +6688,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0029(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS resultado_desintegracao (
@@ -6724,7 +6723,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0030(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa (
@@ -6759,7 +6758,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0031(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_plano_contas (
@@ -6796,7 +6795,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0032(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_lancamento (
@@ -6835,7 +6834,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0033(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_sangria (
@@ -6856,7 +6855,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0034(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_sangria_lancamento (
@@ -6889,7 +6888,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0035(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_lancamento_car (
@@ -6920,7 +6919,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0036(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_lancamento_cap (
@@ -6951,7 +6950,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0037(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_lancamento_sai (
@@ -6982,7 +6981,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0038(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_lancamento_ent (
@@ -7013,7 +7012,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0039(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_plano_contas_padrao (
@@ -7090,7 +7089,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0040(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE TABLE IF NOT EXISTS estabelecimento (
@@ -7125,7 +7124,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0041(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"CREATE EVENT DELETA_LOGADOS_5SEC
@@ -7141,11 +7140,10 @@ namespace _5gpro.Funcoes
             }
             return versao_base;
         }
-
         private string Migrate_0042(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"ALTER TABLE operacao ADD multa DECIMAL(10,2) DEFAULT 0;";

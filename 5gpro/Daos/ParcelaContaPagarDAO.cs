@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
@@ -13,9 +14,6 @@ namespace _5gpro.Daos
 {
     class ParcelaContaPagarDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-        
-
         public IEnumerable<ParcelaContaPagar> Busca(fmCapQuitacaoConta.Filtros f)
         {
             var parcelas = new List<ParcelaContaPagar>();
@@ -24,7 +22,7 @@ namespace _5gpro.Daos
             string whereValorFinal = f.usarvalorContaFiltro ? "AND cp.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
             string whereDatCadastro = f.usardataCadastroFiltro ? "AND cp.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
             string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pcp.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM parcela_conta_pagar pcp
                                                      LEFT JOIN conta_pagar cp
@@ -58,11 +56,32 @@ namespace _5gpro.Daos
             }
             return parcelas;
         }
-
+        public IEnumerable<ParcelaContaPagar> Busca(fmCapPrevisao.Filtros f)
+        {
+            var parcelas = new List<ParcelaContaPagar>();
+            string wherePessoa = f.filtroPessoa != null ? "AND cp.idpessoa = @idpessoa" : "";
+            string whereDataVencimento = "AND pcp.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final";
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.Query = $@"SELECT * FROM parcela_conta_pagar pcp
+                                                     LEFT JOIN conta_pagar cp
+                                                     ON pcp.idconta_pagar = cp.idconta_pagar
+                                                     WHERE 1 = 1 
+                                                    { wherePessoa } 
+                                                    { whereDataVencimento } 
+                                                    ORDER BY pcp.data_vencimento";
+                if (f.filtroPessoa != null) { sql.addParam("@idpessoa", f.filtroPessoa.PessoaID); }
+                sql.addParam("@data_vencimento_inicial", f.filtroDataVencimentoInicial);
+                sql.addParam("@data_vencimento_final", f.filtroDataVencimentoFinal);
+                var data = sql.selectQuery();
+                parcelas = LeDadosReader(data);
+            }
+            return parcelas;
+        }
         public ParcelaContaPagar BuscaByID(string codigo)
         {
             ParcelaContaPagar parcelaContaPagar = null;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM parcela_conta_pagar pcp
                               LEFT JOIN conta_pagar cp
@@ -79,12 +98,11 @@ namespace _5gpro.Daos
             }
             return parcelaContaPagar;
         }
-
         public int QuitarParcelas(List<ParcelaContaPagar> parcelas)
         {
             int retorno = 0;
             string pago = "Pago";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"UPDATE parcela_conta_pagar 
                             SET data_quitacao = @data_quitacao, situacao = @situacao

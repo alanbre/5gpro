@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,10 @@ namespace _5gpro.Daos
 {
     class EstadoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public Estado BuscaByID(int cod)
         {
             Estado estado = new Estado();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM estado WHERE idestado = @idestado LIMIT 1";
                 sql.addParam("@idestado", cod);
@@ -30,7 +29,7 @@ namespace _5gpro.Daos
         public List<Estado> BuscaEstadoByNome(string nome)
         {
             List<Estado> estados = new List<Estado>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM estado WHERE nome LIKE @nome";
                 sql.addParam("@nome", "%" + nome + "%");

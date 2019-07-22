@@ -11,7 +11,6 @@ namespace _5gpro.Forms
     {
         public Usuario usuariologado;
         private Logado logado;
-        private readonly DadosEstaticos dadosEstaticos = new DadosEstaticos();
 
         private readonly UsuarioDAO usuarioDAO = new UsuarioDAO();
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
@@ -25,8 +24,6 @@ namespace _5gpro.Forms
         }
         private void FmLogin_Load(object sender, EventArgs e)
         {
-            dadosEstaticos.LeDadosEstaticos();
-
             if (Configuracao.CodUsuario != null)
             {
                 tbCodigo.Text = Configuracao.CodUsuario;
@@ -77,7 +74,7 @@ namespace _5gpro.Forms
                 logadoDAO.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
                 if (tbCodigo.Text != Configuracao.CodUsuario)
                 {
-                    dadosEstaticos.SalvaDadoEstatico("Login", "codusuario", tbCodigo.Text);
+                    DadosEstaticos.SalvaDadoEstatico("Login", "codusuario", tbCodigo.Text);
                 }
                 this.Close();
             }

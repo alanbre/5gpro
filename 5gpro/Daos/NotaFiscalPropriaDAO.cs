@@ -5,18 +5,16 @@ using System.Linq;
 using MySQLConnection;
 using _5gpro.Reports;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 
 namespace _5gpro.Daos
 {
     class NotaFiscalPropriaDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT nf1.idnotafiscal + 1 AS proximoid 
                             FROM notafiscal AS nf1 
@@ -35,7 +33,7 @@ namespace _5gpro.Daos
         public NotaFiscalPropria BuscaByID(int Codigo)
         {
             var notaFiscalPropria = new NotaFiscalPropria();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, nfhi.quantidade AS quantidadenfhi
                             FROM notafiscal nf
@@ -56,7 +54,7 @@ namespace _5gpro.Daos
         public NotaFiscalPropria Proximo(int Codigo)
         {
             var notaFiscalPropria = new NotaFiscalPropria();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, nfhi.quantidade AS quantidadenfhi
                             FROM notafiscal nf
@@ -77,7 +75,7 @@ namespace _5gpro.Daos
         public NotaFiscalPropria Anterior(int Codigo)
         {
             var notaFiscalPropria = new NotaFiscalPropria();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, nfhi.quantidade AS quantidadenfhi
                             FROM notafiscal nf
@@ -104,7 +102,7 @@ namespace _5gpro.Daos
             var whereDataSaida = f.usaFiltroDataSaida ? " AND nf.data_entradasaida BETWEEN @data_saida_inicial AND @data_saida_final" : "";
             var whereValor = f.usaFiltroValor ? " AND nf.valor_documento BETWEEN @valor_inicial AND @valor_final" : "";
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = $@"SELECT 
                             nf.idnotafiscal AS nf_idnotafiscal, nf.data_emissao AS nf_data_emissao, nf.data_entradasaida AS nf_entradasaida, nf.tiponf AS nf_tiponf, nf.valor_total_itens AS nf_valor_total_itens, nf.valor_documento AS nf_valor_documento,  nf.desconto_total_itens AS nf_desconto_total_itens, nf.desconto_documento AS nf_desconto_documento, 
@@ -279,7 +277,7 @@ namespace _5gpro.Daos
             string whereValorTotal = f.usarvalorTotalFiltro ? "AND nf.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final" : "";
             string whereDataEmissao = f.usardataEmissaoFiltro ? "AND nf.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final" : "";
             string whereDataEntrada = f.usardataSaidaFiltro ? "AND nf.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = $@"SELECT nf.idnotafiscal, p.idpessoa, p.nome, nf.data_emissao, nf.data_entradasaida, nf.valor_documento
                             FROM
@@ -332,7 +330,7 @@ namespace _5gpro.Daos
         public int SalvaOuAtualiza(NotaFiscalPropria notafiscal)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO notafiscal
@@ -381,7 +379,7 @@ namespace _5gpro.Daos
         }
         public void LimpaRegistrosEstoque(NotaFiscalPropria nota)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"DELETE FROM registro_estoque 
                             WHERE documento = @documento
@@ -395,7 +393,7 @@ namespace _5gpro.Daos
         public int MovimentaEstoque(NotaFiscalPropria nota)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 foreach (var i in nota.NotaFiscalPropriaItem)
@@ -431,7 +429,7 @@ namespace _5gpro.Daos
 
         //public void LimpaRegistrosCaixaSaida(NotaFiscalPropria nota)
         //{
-        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+        //    using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
         //    {
         //        sql.addParam("@documento", nota.NotaFiscalPropriaID.ToString());
 
@@ -449,7 +447,7 @@ namespace _5gpro.Daos
         //{
         //    int retorno = 0;
 
-        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+        //    using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
         //    {
 
         //        sql.beginTransaction();

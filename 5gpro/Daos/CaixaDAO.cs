@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,10 @@ namespace _5gpro.Daos
 {
     class CaixaDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public int SalvaOuAtualiza(Caixa caixa)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO caixa 
@@ -44,7 +43,7 @@ namespace _5gpro.Daos
         }
         public Caixa Busca(int Codigo)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM caixa WHERE codigo = @codigo";
                 sql.addParam("@codigo", Codigo);
@@ -59,7 +58,7 @@ namespace _5gpro.Daos
         public List<Caixa> Busca(string nome)
         {
             var caixas = new List<Caixa>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM caixa WHERE nome LIKE @nome";
                 sql.addParam("@nome", "%" + nome + "%");
@@ -75,10 +74,9 @@ namespace _5gpro.Daos
             }
             return caixas;
         }
-
         public Caixa Anterior(int Codigo)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * 
                             FROM caixa 
@@ -94,7 +92,7 @@ namespace _5gpro.Daos
         }
         public Caixa Proximo(int Codigo)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * 
                             FROM caixa 
@@ -111,7 +109,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT c1.codigo + 1 AS proximoid
                             FROM caixa AS c1
@@ -129,7 +127,7 @@ namespace _5gpro.Daos
         public bool AbreOuFecha(Caixa caixa)
         {
             var retorno = false;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"UPDATE caixa
                             SET 

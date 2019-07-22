@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,12 @@ namespace _5gpro.Daos
 {
     class FormaPagamentoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
 
         public IEnumerable<FormaPagamento> Busca(string nome)
         {
             List<FormaPagamento> formapagamentos = new List<FormaPagamento>();
             string conNome = nome.Length > 0 ? "AND f.nome LIKE @nome" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM formapagamento f 
@@ -38,7 +37,7 @@ namespace _5gpro.Daos
         {
 
             var formapagamento = new FormaPagamento();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM formapagamento f 

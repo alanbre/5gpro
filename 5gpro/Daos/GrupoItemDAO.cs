@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,10 @@ namespace _5gpro.Daos
 {
     class GrupoItemDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public int SalvarOuAtualizar(GrupoItem grupoitem)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO grupoitem 
                           (idgrupoitem, nome) 
@@ -31,7 +29,7 @@ namespace _5gpro.Daos
         {
             List<GrupoItem> listagrupoitem = new List<GrupoItem>();
             string conNome = nome.Length > 0 ? " AND nome LIKE @nome" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM grupoitem 
@@ -54,7 +52,7 @@ namespace _5gpro.Daos
         public GrupoItem BuscaByID(int Codigo)
         {
             var grupoitem = new GrupoItem();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                                                    s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
@@ -76,7 +74,7 @@ namespace _5gpro.Daos
         public GrupoItem Proximo(int Codigo)
         {
             var grupoitem = new GrupoItem();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                             s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
@@ -99,7 +97,7 @@ namespace _5gpro.Daos
         public GrupoItem Anterior(int Codigo)
         {
             var grupoitem = new GrupoItem();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupoitem AS grupoitemID, g.nome AS nomegrupoitem,
                             s.idsubgrupoitem AS subgrupoitemID, s.nome AS subgrupoitemnome,
@@ -123,7 +121,7 @@ namespace _5gpro.Daos
         public int AtualizarSubGrupo(SubGrupoItem subGrupo)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"UPDATE subgrupoitem SET nome = @nome
                               WHERE idgrupoitem = @idgrupoitem
@@ -141,7 +139,7 @@ namespace _5gpro.Daos
         public int InserirSubGrupo(SubGrupoItem subGrupo)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 
@@ -170,7 +168,7 @@ namespace _5gpro.Daos
         public bool SubGrupoUsado(SubGrupoItem subGrupo)
         {
             var usado = true;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM item WHERE idsubgrupoitem = @idsubgrupoitem LIMIT 1;";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
@@ -185,7 +183,7 @@ namespace _5gpro.Daos
         public int RemoverSubGrupo(SubGrupoItem subGrupo)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"DELETE FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem";
                 sql.addParam("@idsubgrupoitem", subGrupo.SubGrupoItemID);
@@ -196,7 +194,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT i1.idgrupoitem + 1 AS proximoid
                             FROM grupoitem AS i1

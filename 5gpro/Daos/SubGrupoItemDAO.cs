@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,10 @@ namespace _5gpro.Daos
 {
     class SubGrupoItemDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public int SalvaOuAtualiza(SubGrupoItem subgrupoitem)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO subgrupoitem 
                             (idsubgrupoitem, nome, idgrupoitem) 
@@ -34,7 +32,7 @@ namespace _5gpro.Daos
             var conNome = nome.Length > 0 ? "AND nome LIKE @nome" : "";
             var conGrupoItem = "AND idgrupoitem = @idgrupoitem";
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM subgrupoitem  
@@ -55,7 +53,7 @@ namespace _5gpro.Daos
         public SubGrupoItem BuscaByID(int Codigo, int grupoitemID)
         {
             var subgrupoitem = new SubGrupoItem();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM subgrupoitem 
@@ -76,7 +74,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT i1.idsubgrupoitem + 1 AS proximoid
                             FROM subgrupoitem AS i1
@@ -95,7 +93,7 @@ namespace _5gpro.Daos
         public int Remover(string idsub)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"DELETE FROM subgrupoitem WHERE idsubgrupoitem = @idsubgrupoitem";
                 sql.addParam("@idsubgrupoitem", idsub);

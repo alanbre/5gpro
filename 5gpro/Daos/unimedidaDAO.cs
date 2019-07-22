@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
@@ -9,13 +10,10 @@ namespace _5gpro.Daos
 {
     class UnimedidaDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public int SalvaOuAtualiza(Unimedida unimedida)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO unimedida
                             (idunimedida, sigla, descricao)
@@ -33,7 +31,7 @@ namespace _5gpro.Daos
         public Unimedida BuscaByID(int Codigo)
         {
             var unimedida = new Unimedida();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM unimedida WHERE idunimedida = @idunimedida";
                 sql.addParam("@idunimedida", Codigo);
@@ -49,7 +47,7 @@ namespace _5gpro.Daos
         public Unimedida Anterior(int Codigo)
         {
             var unidadeMedida = new Unimedida();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM unimedida
@@ -68,7 +66,7 @@ namespace _5gpro.Daos
         public Unimedida Proximo(int Codigo)
         {
             var unidadeMedida = new Unimedida();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM unimedida
@@ -87,7 +85,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT u1.idunimedida + 1 AS proximoid
                             FROM unimedida AS u1
@@ -107,7 +105,7 @@ namespace _5gpro.Daos
         {
             var listaUnimedida = new List<Unimedida>();
             string conDescUnimedida = descricao.Length > 0 ? "AND descricao LIKE @descricao" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM unimedida 
@@ -129,7 +127,7 @@ namespace _5gpro.Daos
         {
 
             var listaUnimedida = new List<Unimedida>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM unimedida";
                 var data = sql.selectQuery();

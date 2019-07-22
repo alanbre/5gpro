@@ -2,18 +2,16 @@
 using System;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
+using _5gpro.StaticFiles;
 
 namespace _5gpro.Daos
 {
     public class LogadoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public Logado BuscaByUsuario(Usuario usuario)
         {
             Logado usuarioLogado = null;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM logado WHERE idusuario = @idusuario";
                 sql.addParam("@idusuario", usuario.UsuarioID);
@@ -44,7 +42,7 @@ namespace _5gpro.Daos
             Logado usuarioLogado = null;
             GrupoUsuario grupousuario = null;
             Usuario usuario = null;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM logado l INNER JOIN usuario u
                             ON l.idusuario = u.idusuario
@@ -83,7 +81,7 @@ namespace _5gpro.Daos
         public int GravarLogado(Usuario usuario, string mac, string nomepc, string ipdopc)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO logado
                          (idusuario, mac, nomepc, ipdopc, data_update)
@@ -103,7 +101,7 @@ namespace _5gpro.Daos
         public int RemoverLogado(string mac)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "DELETE FROM logado WHERE mac = @mac";
                 sql.addParam("@mac", mac);
@@ -114,7 +112,7 @@ namespace _5gpro.Daos
 
         public void AtualizarLogado(string mac)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"UPDATE logado SET data_update = NOW() WHERE mac = @mac";
                 sql.addParam("@mac", mac);
@@ -124,7 +122,7 @@ namespace _5gpro.Daos
 
         public void RemoveTodosLocks(Logado logado)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "DELETE FROM 5gprodatabase.lock WHERE idusuario = @idusuario";
                 sql.addParam("@idusuario", logado.Usuario.UsuarioID);

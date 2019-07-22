@@ -73,6 +73,7 @@
             this.tsmiCaiCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCfg = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCfgDadosEstabelecimento = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCapPrevisao = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -326,7 +327,8 @@
             // 
             this.tsmiCap.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCapCadastro,
-            this.tsmiCapQuitacao});
+            this.tsmiCapQuitacao,
+            this.tsmiCapPrevisao});
             this.tsmiCap.Name = "tsmiCap";
             this.tsmiCap.Size = new System.Drawing.Size(98, 20);
             this.tsmiCap.Text = "Contas a pagar";
@@ -334,14 +336,14 @@
             // tsmiCapCadastro
             // 
             this.tsmiCapCadastro.Name = "tsmiCapCadastro";
-            this.tsmiCapCadastro.Size = new System.Drawing.Size(170, 22);
+            this.tsmiCapCadastro.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapCadastro.Text = "Cadastro de conta";
             this.tsmiCapCadastro.Click += new System.EventHandler(this.TsmiCapCadastro_Click);
             // 
             // tsmiCapQuitacao
             // 
             this.tsmiCapQuitacao.Name = "tsmiCapQuitacao";
-            this.tsmiCapQuitacao.Size = new System.Drawing.Size(170, 22);
+            this.tsmiCapQuitacao.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapQuitacao.Text = "Quitação";
             this.tsmiCapQuitacao.Click += new System.EventHandler(this.TsmiCapQuitacao_Click);
             // 
@@ -423,6 +425,13 @@
             this.tsmiCfgDadosEstabelecimento.Text = "Dados do estabelecimento";
             this.tsmiCfgDadosEstabelecimento.Click += new System.EventHandler(this.TsmiCfgDadosEstabelecimento_Click);
             // 
+            // tsmiCapPrevisao
+            // 
+            this.tsmiCapPrevisao.Name = "tsmiCapPrevisao";
+            this.tsmiCapPrevisao.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapPrevisao.Text = "Previsão de contas";
+            this.tsmiCapPrevisao.Click += new System.EventHandler(this.tsmiCapPrevisao_Click);
+            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,6 +505,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCfgDadosEstabelecimento;
         private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastro;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapQuitacao;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCapPrevisao;
     }
 }
 
