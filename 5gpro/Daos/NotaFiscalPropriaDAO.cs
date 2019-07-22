@@ -427,11 +427,10 @@ namespace _5gpro.Daos
             return retorno;
         }
 
-<<<<<<< HEAD
         public int VinculaContaReceber(NotaFiscalPropria notafiscal, ContaReceber contareceber)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 
@@ -452,7 +451,7 @@ namespace _5gpro.Daos
         {
 
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 
@@ -480,7 +479,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-=======
         //public void LimpaRegistrosCaixaSaida(NotaFiscalPropria nota)
         //{
         //    using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
@@ -552,7 +550,6 @@ namespace _5gpro.Daos
 
         //    return retorno;
         //}
->>>>>>> 8e3b5b0764a98ae75d01582c7ec0874d4ec92ab7
 
         private NotaFiscalPropria LeDadosReader(List<Dictionary<string, object>> data)
         {

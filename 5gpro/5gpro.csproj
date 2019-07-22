@@ -305,19 +305,17 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
-<<<<<<< HEAD
     <Compile Include="Forms\fmDecimal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmDecimal.Designer.cs">
       <DependentUpon>fmDecimal.cs</DependentUpon>
-=======
+    </Compile>
     <Compile Include="Forms\fmCapPrevisao.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmCapPrevisao.Designer.cs">
       <DependentUpon>fmCapPrevisao.cs</DependentUpon>
->>>>>>> 8e3b5b0764a98ae75d01582c7ec0874d4ec92ab7
     </Compile>
     <Compile Include="Forms\fmCapReplicarConta.cs">
       <SubType>Form</SubType>

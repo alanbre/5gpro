@@ -7168,7 +7168,7 @@ namespace _5gpro.Funcoes
         private string Migrate_0043(string v)
         {
             string versao_base = v;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 

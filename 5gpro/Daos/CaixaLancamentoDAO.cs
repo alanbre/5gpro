@@ -102,7 +102,7 @@ namespace _5gpro.Daos
         public int DevolucaoCancelamento(CaixaLancamento caixaLancamento)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 
