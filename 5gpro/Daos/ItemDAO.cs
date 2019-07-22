@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,10 @@ namespace _5gpro.Daos
 {
     class ItemDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public int SalvaOuAtualiza(Item item)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO item 
                             (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade, custo) 
@@ -43,7 +42,7 @@ namespace _5gpro.Daos
         public Item BuscaByID(int Codigo)
         {
             var item = new Item();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
@@ -64,7 +63,7 @@ namespace _5gpro.Daos
         public Item Anterior(int Codigo)
         {
             var item = new Item();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i 
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
@@ -85,7 +84,7 @@ namespace _5gpro.Daos
         public Item Proximo(int Codigo)
         {
             var item = new Item();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
@@ -111,7 +110,7 @@ namespace _5gpro.Daos
             string conRefeItem = refeItem.Length > 0 ? "AND i.referencia LIKE @referencia" : "";
             string conTipoItem = tipoItem.Length > 0 ? "AND i.tipo LIKE @tipo" : "";
             string conSubgrupoItem = subgrupoitem != null ? "AND i.idsubgrupoitem = @idsubgrupoitem" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN unimedida u ON i.idunimedida = u.idunimedida
@@ -142,7 +141,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT i1.iditem + 1 AS proximoid
                             FROM item AS i1

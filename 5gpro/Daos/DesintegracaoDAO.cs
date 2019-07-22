@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,10 @@ namespace _5gpro.Daos
 {
     class DesintegracaoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public int SalvaOuAtualiza(Desintegracao desintegracao)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO desintegracao
@@ -68,7 +67,7 @@ namespace _5gpro.Daos
         public Desintegracao BuscaByID(int Codigo)
         {
             var desintegracao = new Desintegracao();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM desintegracao d
                               INNER JOIN resultado_desintegracao r 
@@ -92,7 +91,7 @@ namespace _5gpro.Daos
 
         public void RemoverDesintegracao(int Codigo)
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.addParam("@iddesintegracao", Codigo);
 
@@ -106,7 +105,7 @@ namespace _5gpro.Daos
         //public Item Anterior(int Codigo)
         //{
         //    var item = new Item();
-        //    using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+        //    using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
         //    {
         //        sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i 
         //                    INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
@@ -127,7 +126,7 @@ namespace _5gpro.Daos
         //public Item Proximo(int Codigo)
         //{
             //var item = new Item();
-            //using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            //using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             //{
             //    sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
             //                INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem

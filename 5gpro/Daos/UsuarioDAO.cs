@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using MySQLConnection;
 using System;
+using _5gpro.StaticFiles;
 
 namespace _5gpro.Daos
 {
     public class UsuarioDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
         public Usuario Logar(string idusuario, string senha)
         {
             Usuario usuario = new Usuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM usuario WHERE idusuario = @idusuario AND BINARY senha = @senha LIMIT 1";
                 sql.addParam("@idusuario", idusuario);
@@ -33,7 +32,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT u1.idusuario + 1 AS proximoid
                                              FROM usuario AS u1
@@ -53,7 +52,7 @@ namespace _5gpro.Daos
         public int Salvar(Usuario usuario)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO usuario 
                           (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) 
@@ -83,7 +82,7 @@ namespace _5gpro.Daos
         public Usuario BuscaByIDLogin(int cod)
         {
             Usuario usuario = new Usuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT u.idusuario, u.nome FROM usuario AS u WHERE idusuario = @idusuario LIMIT 1";
                 sql.addParam("@idusuario", cod);
@@ -104,7 +103,7 @@ namespace _5gpro.Daos
         {
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS nomegrupo
                               FROM usuario
@@ -138,7 +137,7 @@ namespace _5gpro.Daos
         {
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *,  g.nome AS nomegrupo
                               FROM usuario 
@@ -176,7 +175,7 @@ namespace _5gpro.Daos
             Usuario usuario = new Usuario();
             GrupoUsuario grupousuario = new GrupoUsuario();
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS nomegrupo 
                               FROM usuario u
@@ -216,7 +215,7 @@ namespace _5gpro.Daos
             string conNomeUsuario = nomeUsuario.Length > 0 ? "AND u.nome LIKE @nomeusuario" : "";
             string conSobrenomeUsuario = sobrenomeUsuario.Length > 0 ? "AND u.sobrenome LIKE @sobrenomeusuario" : "";
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, g.nome AS nomegrupo
                             FROM usuario u

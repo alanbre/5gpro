@@ -20,7 +20,7 @@ namespace _5gpro.Forms
         bool editando = false;
         bool ignoraCheckEvent;
 
-        PlanoContaDAO planocontaDAO = new PlanoContaDAO();
+        private readonly PlanoContaDAO planocontaDAO = new PlanoContaDAO();
         private PlanoContaPadraoDAO planocontapadraoDAO = new PlanoContaPadraoDAO();
         private PlanoContaPadrao planocontapadrao;
 

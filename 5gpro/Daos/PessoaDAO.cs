@@ -3,18 +3,18 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using MySQLConnection;
+using _5gpro.StaticFiles;
 
 namespace _5gpro.Daos
 {
     class PessoaDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
 
         public int SalvaOuAtualiza(Pessoa pessoa)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO pessoa
                          (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao)
@@ -59,7 +59,7 @@ namespace _5gpro.Daos
         public Pessoa BuscaByID(int cod)
         {
             Pessoa pessoa = new Pessoa();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
@@ -127,7 +127,7 @@ namespace _5gpro.Daos
         public Pessoa Proximo(int cod)
         {
             Pessoa pessoa = new Pessoa();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
@@ -194,7 +194,7 @@ namespace _5gpro.Daos
         public Pessoa Anterior(int cod)
         {
             Pessoa pessoa = new Pessoa();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
@@ -265,7 +265,7 @@ namespace _5gpro.Daos
             string conCpfCnpj = cpfCnpj.Length > 0 ? "AND (cpf LIKE @cpfcnpj OR cnpj LIKE @cpfcnpj)" : "";
             string conCidade = idcidade > 0 ? "AND c.idcidade = @idcidade" : "";
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                                              e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
@@ -338,7 +338,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p1.idpessoa + 1 AS proximoid
                             FROM pessoa AS p1

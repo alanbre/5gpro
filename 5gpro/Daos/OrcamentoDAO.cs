@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,13 +9,10 @@ namespace _5gpro.Daos
 {
     class OrcamentoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public Orcamento BuscaByID(int Codigo)
         {
             var orcamento = new Orcamento();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
                             p.complemento, p.telefone, p.email, p.cpf, p.cnpj,
@@ -48,7 +46,7 @@ namespace _5gpro.Daos
         public Orcamento Proximo(int Codigo)
         {
             var orcamento = new Orcamento();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
                             p.complemento, p.idcidade, p.telefone, p.email, p.cpf, p.cnpj,
@@ -81,7 +79,7 @@ namespace _5gpro.Daos
         public Orcamento Anterior(int Codigo)
         {
             var orcamento = new Orcamento();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
                             p.complemento, p.idcidade, p.telefone, p.email, p.cpf, p.cnpj,
@@ -120,7 +118,7 @@ namespace _5gpro.Daos
             string whereDataValidade = f.usardataValidadeFiltro ? "AND o.data_validade BETWEEN @data_validade_inicial AND @data_validade_final" : "";
             string whereValorTotal = f.usarvalorTotalFiltro ? "AND o.valor_orcamento BETWEEN @valor_total_inicial AND @valor_total_final" : "";
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
                             p.complemento, p.idcidade, p.telefone, p.email,
@@ -184,7 +182,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT o1.idorcamento + 1 AS proximoid
                             FROM orcamento AS o1
@@ -203,7 +201,7 @@ namespace _5gpro.Daos
         public int SalvaOuAtualiza(Orcamento orcamento)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO orcamento
@@ -250,7 +248,7 @@ namespace _5gpro.Daos
         public int VincularNotaAoOrcamento(Orcamento orcamento, NotaFiscalPropria notafiscal)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"UPDATE orcamento SET idnotafiscal = @idnotafiscal WHERE idorcamento = @idorcamento";
                 sql.addParam("@idorcamento", orcamento.OrcamentoID);

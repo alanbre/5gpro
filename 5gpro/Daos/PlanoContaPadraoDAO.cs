@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,12 @@ namespace _5gpro.Daos
 {
     class PlanoContaPadraoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
 
         public int Salva(PlanoContaPadrao planoContaPadrao)
         {
 
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
 
@@ -45,7 +45,7 @@ namespace _5gpro.Daos
         public PlanoContaPadrao Busca()
         {
             PlanoContaPadrao planocontapadrao = new PlanoContaPadrao();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM caixa_plano_contas_padrao";
 

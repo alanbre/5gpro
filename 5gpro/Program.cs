@@ -1,10 +1,8 @@
 ﻿using _5gpro.Forms;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace _5gpro
@@ -25,20 +23,24 @@ namespace _5gpro
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var carregaSistema = new CarregaSistema();
 
 
+            DadosEstaticos.LeDadosEstaticos();
 
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Configuracao.BancoIP == null || Configuracao.BancoUsuario == null || Configuracao.BancoSenha == null)
             {
-                var formSelecionaBase = new fmSelecionarBase();
-                formSelecionaBase.ShowDialog();
+                var fmCfgBase = new fmCfgBase();
+                fmCfgBase.ShowDialog();
+                DadosEstaticos.LeDadosEstaticos();
             }
+
+            
+
+
+            var carregaSistema = new CarregaSistema();
 
             if (!carregaSistema.Carrega())
                 Application.Exit();
-
-
 
             var formLogin = new fmLogin();
             formLogin.ShowDialog();

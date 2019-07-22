@@ -142,6 +142,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -304,17 +305,31 @@
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
+<<<<<<< HEAD
     <Compile Include="Forms\fmDecimal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmDecimal.Designer.cs">
       <DependentUpon>fmDecimal.cs</DependentUpon>
+=======
+    <Compile Include="Forms\fmCapPrevisao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCapPrevisao.Designer.cs">
+      <DependentUpon>fmCapPrevisao.cs</DependentUpon>
+>>>>>>> 8e3b5b0764a98ae75d01582c7ec0874d4ec92ab7
     </Compile>
     <Compile Include="Forms\fmCapReplicarConta.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\fmCapReplicarConta.Designer.cs">
       <DependentUpon>fmCapReplicarConta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\fmCfgBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCfgBase.Designer.cs">
+      <DependentUpon>fmCfgBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\DadosEstaticos.cs" />
     <Compile Include="Staticfiles\Configuracao.cs" />
@@ -855,8 +870,14 @@
     <EmbeddedResource Include="Forms\fmCaiPlanoContasPadrao.resx">
       <DependentUpon>fmCaiPlanoContasPadrao.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCapPrevisao.resx">
+      <DependentUpon>fmCapPrevisao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCapReplicarConta.resx">
       <DependentUpon>fmCapReplicarConta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCfgBase.resx">
+      <DependentUpon>fmCfgBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCfgDadosEstabelecimento.resx">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>

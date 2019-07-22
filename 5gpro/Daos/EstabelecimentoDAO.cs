@@ -7,11 +7,10 @@ namespace _5gpro.Daos
 {
     public class EstabelecimentoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
         public int SalvaOuAtualiza()
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO estabelecimento
                          (idestabelecimento, nome, fantasia, rua, numero, bairro, complemento, cnpj, telefone, email, idcidade)
@@ -39,7 +38,7 @@ namespace _5gpro.Daos
 
         public void Busca()
         {
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             est.idestabelecimento, est.nome AS nomeestabelecimento, fantasia, rua, numero, bairro, complemento, 

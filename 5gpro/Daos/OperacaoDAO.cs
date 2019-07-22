@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
@@ -10,13 +11,10 @@ namespace _5gpro.Daos
 {
     class OperacaoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public int SalvaOuAtualiza(Operacao operacao)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO operacao 
@@ -64,7 +62,7 @@ namespace _5gpro.Daos
         public Operacao BuscaByID(int Codigo)
         {
             var operacao = new Operacao();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM operacao o 
@@ -86,7 +84,7 @@ namespace _5gpro.Daos
             List<Operacao> operacoes = new List<Operacao>();
             string conCondicao = condicao.Length > 0 ? "AND o.condicao = @condicao" : "";
             string conNomeOperacao = nomeOperacao.Length > 0 ? "AND o.nome LIKE @nomeoperacao" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM operacao o 
@@ -118,7 +116,7 @@ namespace _5gpro.Daos
         public int BuscaProxCodigoDisponivel()
         {
             int proximoid = 1;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT o1.idoperacao + 1 AS proximoid
                             FROM operacao AS o1
@@ -137,7 +135,7 @@ namespace _5gpro.Daos
         public Operacao Proxima(string Codigo)
         {
             var operacao = new Operacao();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM operacao o 
@@ -157,7 +155,7 @@ namespace _5gpro.Daos
         public Operacao Anterior(string Codigo)
         {
             var operacao = new Operacao();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM operacao o 

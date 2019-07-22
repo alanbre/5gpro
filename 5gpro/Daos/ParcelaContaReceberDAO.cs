@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,6 @@ namespace _5gpro.Daos
 {
     public class ParcelaContaReceberDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public IEnumerable<ParcelaContaReceber> Busca(fmCarQuitacaoConta.Filtros f)
         {
             var parcelas = new List<ParcelaContaReceber>();
@@ -19,7 +17,7 @@ namespace _5gpro.Daos
             string whereValorFinal = f.usarvalorContaFiltro ? "AND cr.valor_final BETWEEN @valor_conta_inicial AND @valor_conta_final" : "";
             string whereDatCadastro = f.usardataCadastroFiltro ? "AND cr.data_cadastro BETWEEN @data_cadastro_inicial AND @data_cadastro_final" : "";
             string whereDataVencimento = f.usardataVencimentoFiltro ? "AND pcr.data_vencimento BETWEEN @data_vencimento_inicial AND @data_vencimento_final" : "";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM parcela_conta_receber pcr
                                                      LEFT JOIN conta_receber cr
@@ -57,7 +55,7 @@ namespace _5gpro.Daos
         public ParcelaContaReceber BuscaByID(string codigo)
         {
             ParcelaContaReceber parcelaContaReceber = null;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT * FROM parcela_conta_receber pcr
                               LEFT JOIN conta_receber cr
@@ -79,7 +77,7 @@ namespace _5gpro.Daos
         {
             int retorno = 0;
             string pago = "Pago";
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"UPDATE parcela_conta_receber 
                             SET data_quitacao = @data_quitacao, situacao = @situacao

@@ -1,4 +1,5 @@
 ﻿using _5gpro.Entities;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -7,13 +8,10 @@ namespace _5gpro.Daos
 {
     class CidadeDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
-
-
         public Cidade BuscaByID(int cod)
         {
             var cidade = new Cidade();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = "SELECT * FROM cidade WHERE idcidade = @idcidade LIMIT 1";
                 sql.addParam("@idcidade", cod);
@@ -27,14 +25,13 @@ namespace _5gpro.Daos
             }
             return cidade;
         }
-
         public List<Cidade> Busca(int codEstado, string nomeCidade)
         {
             List<Cidade> cidades = new List<Cidade>();
             string conCodEstado = codEstado > 0 ? "AND e.idestado = @idestado" : "";
             string conNomeCidade = nomeCidade.Length > 0 ? "AND c.nome LIKE @nomecidade" : "";
 
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT c.idcidade, c.nome AS nomecidade, e.idestado, e.nome AS nomeestado, e.uf
                                              FROM cidade c INNER JOIN estado e 

@@ -1,5 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
+using _5gpro.StaticFiles;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,10 @@ namespace _5gpro.Daos
 {
     class CaixaLancamentoDAO
     {
-        private static readonly ConexaoDAO Connect = new ConexaoDAO();
         public int Novo(CaixaLancamento caixaLancamento)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO caixa_lancamento
                             (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
@@ -33,7 +33,7 @@ namespace _5gpro.Daos
         public int NovosCar(List<CaixaLancamento> caixaLancamentos)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 foreach (var lanc in caixaLancamentos)
@@ -67,7 +67,7 @@ namespace _5gpro.Daos
         public int NovosCap(List<CaixaLancamento> caixaLancamentos)
         {
             var retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.beginTransaction();
                 foreach (var lanc in caixaLancamentos)
@@ -132,7 +132,7 @@ namespace _5gpro.Daos
             var whereCaixa = f.caixa != null ? "AND c.idcaixa = @idcaixa" : "";
             var whereData = "AND cl.data BETWEEN @datainicial AND @datafinal";
             var caixaLancamentos = new List<CaixaLancamento>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = $@"SELECT *, c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo  
                             FROM caixa_lancamento cl 
@@ -162,7 +162,7 @@ namespace _5gpro.Daos
         public IEnumerable<CaixaLancamento> Busca(Caixa caixa)
         {
             var caixaLancamentos = new List<CaixaLancamento>();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *
                             FROM caixa_lancamento
@@ -182,11 +182,10 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
-
         public CaixaLancamento BuscaByDocumento(string documento)
         {
             var caixaLancamentos = new CaixaLancamento();
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT *, c.codigo AS caixa_codigo, cpc.codigo AS cpc_codigo  
                             FROM caixa_lancamento cl 
@@ -203,11 +202,10 @@ namespace _5gpro.Daos
             }
             return caixaLancamentos;
         }
-
         public int Sangrar(List<CaixaLancamento> caixaLancamentos, Caixa caixaAtual, Caixa caixaDestino)
         {
             int retorno = 0;
-            using (MySQLConn sql = new MySQLConn(Connect.Conecta))
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 foreach (var lanc in caixaLancamentos)
                 {

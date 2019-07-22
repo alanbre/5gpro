@@ -59,11 +59,9 @@ namespace _5gpro
         {
             public Permissao permissao;
             public int Nivel;
-
         }
         private void FmMain_Load(object sender, EventArgs e)
         {
-            DadosEstaticos d = new DadosEstaticos();
             FiltroDePermissoes();
             timerRelogio.Start();
             t = new Thread(new ThreadStart(AtualizaLogado));
@@ -291,5 +289,10 @@ namespace _5gpro
             fmCfgDadosEstabelecimento.Show(this);
         }
 
+        private void tsmiCapPrevisao_Click(object sender, EventArgs e)
+        {
+            var fmCapPrevisao = new fmCapPrevisao();
+            fmCapPrevisao.Show(this);
+        }
     }
 }
