@@ -1297,7 +1297,6 @@
     <None Include="Resources\card_in_use_40px.png" />
     <None Include="Resources\multiple_inputs_40px.png" />
     <None Include="Resources\Output_40px.png" />
-    <None Include="Resources\orcamento_40px.png" />
     <None Include="Resources\orcamento_livro_40px.png" />
     <None Include="Resources\relatorio_40px.png" />
     <None Include="Resources\cadastros_rule_40px.png" />
