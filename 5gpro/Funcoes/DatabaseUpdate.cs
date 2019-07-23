@@ -1,9 +1,6 @@
-﻿using _5gpro.Daos;
-using _5gpro.StaticFiles;
-using MySql.Data.MySqlClient;
+﻿using _5gpro.StaticFiles;
 using MySQLConnection;
-using System;
-using System.IO;
+
 
 namespace _5gpro.Funcoes
 {

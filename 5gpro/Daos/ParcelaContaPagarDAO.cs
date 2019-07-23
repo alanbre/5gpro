@@ -1,14 +1,9 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.StaticFiles;
-using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace _5gpro.Daos
 {

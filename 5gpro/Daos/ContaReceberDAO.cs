@@ -1,7 +1,6 @@
 ﻿using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.StaticFiles;
-using MySql.Data.MySqlClient;
 using MySQLConnection;
 using System;
 using System.Collections;
