@@ -8,7 +8,9 @@ namespace _5gpro.Entities
         public DateTime Data { get; set; }
         public decimal Valor { get; set; }
         public int TipoMovimento { get; set; } // 0 = crédito 1 = débito 5 = Sangria
-        public int TipoDocumento { get; set; } // 0 = CAR 1 = CAP 2 = NF saida 3 = NF entrada 5 = Sangria
+        public int TipoDocumento { get; set; } // 0 = CAR 1 = CAP
+                                              //  2 = NFsaida 3 = NFentrada
+                                              //  5 = Sangria 6 = DevolucaoCancelamento
         public int Lancamento { get; set; } // 0 = manual 1 = automático
         public string Documento { get; set; }
         public Caixa Caixa { get; set; }

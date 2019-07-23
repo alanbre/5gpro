@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmSaiEmissaoNota));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
+            this.btSimular = new System.Windows.Forms.Button();
             this.lbDescnotasaida = new System.Windows.Forms.Label();
             this.tbDescricao = new System.Windows.Forms.TextBox();
             this.dtpSaida = new System.Windows.Forms.DateTimePicker();
@@ -68,7 +69,7 @@
             this.lbQuantidade = new System.Windows.Forms.Label();
             this.lbValorTot = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
-            this.btSimular = new System.Windows.Forms.Button();
+            this.btCancelarNota = new System.Windows.Forms.Button();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
             this.dbJurosTotal = new _5gpro.Controls.DecimalBox();
             this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
@@ -108,6 +109,16 @@
             this.gbDadosDocumento.TabIndex = 0;
             this.gbDadosDocumento.TabStop = false;
             this.gbDadosDocumento.Text = "Dados do documento";
+            // 
+            // btSimular
+            // 
+            this.btSimular.Location = new System.Drawing.Point(660, 145);
+            this.btSimular.Name = "btSimular";
+            this.btSimular.Size = new System.Drawing.Size(75, 23);
+            this.btSimular.TabIndex = 15;
+            this.btSimular.Text = "Simular";
+            this.btSimular.UseVisualStyleBackColor = true;
+            this.btSimular.Click += new System.EventHandler(this.BtSimular_Click);
             // 
             // lbDescnotasaida
             // 
@@ -331,8 +342,8 @@
             this.dgvItens.AllowUserToDeleteRows = false;
             this.dgvItens.AllowUserToOrderColumns = true;
             this.dgvItens.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
-            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            this.dgvItens.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvItens.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -379,9 +390,9 @@
             // 
             // dgvtbcQuantidade
             // 
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.dgvtbcQuantidade.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgvtbcQuantidade.Frozen = true;
             this.dgvtbcQuantidade.HeaderText = "Quantidade";
             this.dgvtbcQuantidade.MinimumWidth = 70;
@@ -390,9 +401,9 @@
             // 
             // dgvtbcValorUnitario
             // 
-            dataGridViewCellStyle9.Format = "C2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.dgvtbcValorUnitario.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvtbcValorUnitario.HeaderText = "Valor unitário";
             this.dgvtbcValorUnitario.MinimumWidth = 100;
             this.dgvtbcValorUnitario.Name = "dgvtbcValorUnitario";
@@ -401,9 +412,9 @@
             // 
             // dgvtbcValorTotalItem
             // 
-            dataGridViewCellStyle10.Format = "C2";
-            dataGridViewCellStyle10.NullValue = null;
-            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.dgvtbcValorTotalItem.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgvtbcValorTotalItem.HeaderText = "Valor total";
             this.dgvtbcValorTotalItem.MinimumWidth = 80;
             this.dgvtbcValorTotalItem.Name = "dgvtbcValorTotalItem";
@@ -412,8 +423,8 @@
             // 
             // dgvtbcDescontoPorc
             // 
-            dataGridViewCellStyle11.NullValue = null;
-            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle5.NullValue = null;
+            this.dgvtbcDescontoPorc.DefaultCellStyle = dataGridViewCellStyle5;
             this.dgvtbcDescontoPorc.HeaderText = "% Desc";
             this.dgvtbcDescontoPorc.MinimumWidth = 50;
             this.dgvtbcDescontoPorc.Name = "dgvtbcDescontoPorc";
@@ -422,9 +433,9 @@
             // 
             // dgvtbcDescontoItem
             // 
-            dataGridViewCellStyle12.Format = "C2";
-            dataGridViewCellStyle12.NullValue = null;
-            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.dgvtbcDescontoItem.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvtbcDescontoItem.HeaderText = "Desconto";
             this.dgvtbcDescontoItem.MinimumWidth = 70;
             this.dgvtbcDescontoItem.Name = "dgvtbcDescontoItem";
@@ -483,15 +494,15 @@
             this.tbAjuda.Size = new System.Drawing.Size(993, 20);
             this.tbAjuda.TabIndex = 4;
             // 
-            // btSimular
+            // btCancelarNota
             // 
-            this.btSimular.Location = new System.Drawing.Point(660, 145);
-            this.btSimular.Name = "btSimular";
-            this.btSimular.Size = new System.Drawing.Size(75, 23);
-            this.btSimular.TabIndex = 15;
-            this.btSimular.Text = "Simular";
-            this.btSimular.UseVisualStyleBackColor = true;
-            this.btSimular.Click += new System.EventHandler(this.BtSimular_Click);
+            this.btCancelarNota.Location = new System.Drawing.Point(1064, 151);
+            this.btCancelarNota.Name = "btCancelarNota";
+            this.btCancelarNota.Size = new System.Drawing.Size(90, 23);
+            this.btCancelarNota.TabIndex = 5;
+            this.btCancelarNota.Text = "Cancelar Nota";
+            this.btCancelarNota.UseVisualStyleBackColor = true;
+            this.btCancelarNota.Click += new System.EventHandler(this.BtCancelarNota_Click);
             // 
             // menuVertical
             // 
@@ -577,6 +588,7 @@
             // 
             // buscaItem1
             // 
+            this.buscaItem1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buscaItem1.Location = new System.Drawing.Point(3, 213);
             this.buscaItem1.Name = "buscaItem1";
             this.buscaItem1.Size = new System.Drawing.Size(442, 39);
@@ -586,6 +598,7 @@
             // 
             // dbDescontoItem
             // 
+            this.dbDescontoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dbDescontoItem.Location = new System.Drawing.Point(75, 308);
             this.dbDescontoItem.Name = "dbDescontoItem";
             this.dbDescontoItem.Size = new System.Drawing.Size(62, 22);
@@ -599,6 +612,7 @@
             // 
             // dbDescontoItemPorc
             // 
+            this.dbDescontoItemPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dbDescontoItemPorc.Location = new System.Drawing.Point(6, 308);
             this.dbDescontoItemPorc.Name = "dbDescontoItemPorc";
             this.dbDescontoItemPorc.Size = new System.Drawing.Size(62, 22);
@@ -612,6 +626,7 @@
             // 
             // dbValorTotItem
             // 
+            this.dbValorTotItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dbValorTotItem.Enabled = false;
             this.dbValorTotItem.Location = new System.Drawing.Point(143, 269);
             this.dbValorTotItem.Name = "dbValorTotItem";
@@ -626,6 +641,7 @@
             // 
             // dbValorUnitItem
             // 
+            this.dbValorUnitItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dbValorUnitItem.Location = new System.Drawing.Point(75, 269);
             this.dbValorUnitItem.Name = "dbValorUnitItem";
             this.dbValorUnitItem.Size = new System.Drawing.Size(62, 22);
@@ -639,6 +655,7 @@
             // 
             // dbQuantidade
             // 
+            this.dbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dbQuantidade.Location = new System.Drawing.Point(6, 271);
             this.dbQuantidade.Name = "dbQuantidade";
             this.dbQuantidade.Size = new System.Drawing.Size(62, 22);
@@ -658,6 +675,7 @@
             this.buscaOperacao.Size = new System.Drawing.Size(344, 39);
             this.buscaOperacao.TabIndex = 9;
             this.buscaOperacao.Codigo_Leave += new _5gpro.Controls.BuscaOperacao.codigo_leaveEventHandler(this.BuscaOperacao_Codigo_Leave);
+            this.buscaOperacao.Text_Changed += new _5gpro.Controls.BuscaOperacao.text_changedEventHandler(this.BuscaOperacao_Text_Changed);
             this.buscaOperacao.Leave += new System.EventHandler(this.BuscaOperacao_Leave_1);
             // 
             // buscaPessoa
@@ -676,14 +694,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1239, 572);
+            this.Controls.Add(this.btCancelarNota);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
             this.Controls.Add(this.gbTotais);
             this.Controls.Add(this.gbItens);
             this.Controls.Add(this.gbDadosDocumento);
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(1255, 611);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1255, 611);
             this.Name = "fmSaiEmissaoNota";
             this.ShowIcon = false;
@@ -753,5 +770,6 @@
         private System.Windows.Forms.Label lbJurosDoc;
         private Controls.BuscaItem buscaItem1;
         private System.Windows.Forms.Button btSimular;
+        private System.Windows.Forms.Button btCancelarNota;
     }
 }

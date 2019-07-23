@@ -86,6 +86,12 @@ namespace _5gpro.Controls
             tbNomeOperacao.Text = this.operacao != null ? this.operacao.Nome : "";
         }
 
+        public void BuscaPreenche(int codigo)
+        {
+            operacao = operacaoDAO.BuscaByID(codigo);
+            PreencheCamposOperacao(operacao);
+        }
+
         public void Limpa()
         {
             tbCodigoOperacao.Clear();

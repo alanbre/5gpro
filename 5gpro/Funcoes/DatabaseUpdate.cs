@@ -97,6 +97,7 @@ namespace _5gpro.Funcoes
             if (versao_base == "0039_caixaplanocontapadrao") versao_base = Migrate_0040(versao_base);
             if (versao_base == "0040_estabelecimento") versao_base = Migrate_0041(versao_base);
             if (versao_base == "0041_eventodeletalogado") versao_base = Migrate_0042(versao_base);
+            if (versao_base == "0042_operacaomultajuroscarcapentrada") versao_base = Migrate_0043(versao_base);
 
             return true;
         }
@@ -7161,6 +7162,44 @@ namespace _5gpro.Funcoes
                 sql.insertQuery();
                 sql.Commit();
                 versao_base = "0042_operacaomultajuroscarcapentrada";
+            }
+            return versao_base;
+        }
+
+        private string Migrate_0043(string v)
+        {
+            string versao_base = v;
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.beginTransaction();
+
+                sql.Query = @"ALTER TABLE notafiscal ADD idconta_receber INT(11);";
+                sql.updateQuery();
+
+                sql.Query = @"ALTER TABLE notafiscal ADD CONSTRAINT fk_conta_receber 
+                            FOREIGN KEY ( idconta_receber ) 
+                            REFERENCES conta_receber ( idconta_receber );";
+                sql.updateQuery();
+
+                sql.Query = @"ALTER TABLE nota_fiscal_terceiros ADD idconta_pagar INT(11);";
+                sql.updateQuery();
+
+                sql.Query = @"ALTER TABLE nota_fiscal_terceiros ADD CONSTRAINT fk_conta_pagar 
+                            FOREIGN KEY ( idconta_pagar ) 
+                            REFERENCES conta_pagar ( idconta_pagar );";
+                sql.updateQuery();
+
+                sql.Query = @"ALTER TABLE notafiscal ADD COLUMN situacao VARCHAR(45) DEFAULT 'Ativa';";
+                sql.updateQuery();
+
+                sql.Query = @"ALTER TABLE nota_fiscal_terceiros ADD COLUMN situacao VARCHAR(45) DEFAULT 'Ativa';";
+                sql.updateQuery();
+
+                sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
+                sql.addParam("@versao", "0043_ligacaocontasenotas");
+                sql.insertQuery();
+                sql.Commit();
+                versao_base = "0043_ligacaocontasenotas";
             }
             return versao_base;
         }

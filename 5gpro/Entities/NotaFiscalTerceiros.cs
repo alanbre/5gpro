@@ -31,6 +31,7 @@ namespace _5gpro.Entities
 
         [Required(ErrorMessage = "O Código é obrigatório.|buscaPlanoDeConta", AllowEmptyStrings = false)]
         public PlanoConta PlanoDeConta { get; set; }
+        public ContaPagar ContaPagar { get; set; }
 
         public virtual ICollection<NotaFiscalTerceirosItem> NotaFiscalTerceirosItem { get; set; }
     }

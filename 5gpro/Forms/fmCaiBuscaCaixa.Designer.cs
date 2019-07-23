@@ -74,7 +74,6 @@
             this.dgvCaixa.AllowUserToOrderColumns = true;
             this.dgvCaixa.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Empty;
             this.dgvCaixa.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCaixa.BackgroundColor = System.Drawing.SystemColors.Window;
             this.dgvCaixa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -88,7 +87,7 @@
             this.dgvCaixa.ReadOnly = true;
             this.dgvCaixa.RowHeadersVisible = false;
             this.dgvCaixa.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCaixa.Size = new System.Drawing.Size(491, 422);
+            this.dgvCaixa.Size = new System.Drawing.Size(491, 242);
             this.dgvCaixa.TabIndex = 1;
             this.dgvCaixa.TabStop = false;
             this.dgvCaixa.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCaixa_CellDoubleClick);
@@ -111,12 +110,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(515, 520);
+            this.ClientSize = new System.Drawing.Size(515, 341);
             this.Controls.Add(this.dgvCaixa);
             this.Controls.Add(this.gbFiltros);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(531, 380);
             this.Name = "fmCaiBuscaCaixa";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;

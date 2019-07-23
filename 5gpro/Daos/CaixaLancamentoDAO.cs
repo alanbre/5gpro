@@ -98,6 +98,34 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
+
+        public int DevolucaoCancelamento(CaixaLancamento caixaLancamento)
+        {
+            var retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.beginTransaction();
+
+                    sql.Query = @"INSERT INTO caixa_lancamento
+                            (data, valor, tipomovimento, tipodocumento, lancamento, documento, idcaixa, idcaixa_plano_contas)
+                            VALUES
+                            (@data, @valor, @tipomovimento, @tipodocumento, @lancamento, @documento, @idcaixa, @idcaixa_plano_contas)";
+                    sql.clearParams();
+                    sql.addParam("@data", caixaLancamento.Data);
+                    sql.addParam("@valor", caixaLancamento.Valor);
+                    sql.addParam("@tipomovimento", caixaLancamento.TipoMovimento);
+                    sql.addParam("@tipodocumento", caixaLancamento.TipoDocumento);
+                    sql.addParam("@lancamento", caixaLancamento.Lancamento);
+                    sql.addParam("@documento", caixaLancamento.Documento);
+                    sql.addParam("@idcaixa", caixaLancamento.Caixa.CaixaID);
+                    sql.addParam("@idcaixa_plano_contas", caixaLancamento.PlanoConta.PlanoContaID);
+                    retorno += sql.insertQuery();
+                    sql.clearParams();            
+                sql.Commit();
+            }
+            return retorno;
+        }
+
         public IEnumerable<CaixaLancamento> Busca(fmCaiBuscaLancamentos.Filtros f)
         {
             var wherePlanoConta = f.planoConta != null ? "AND cpc.idcaixa_plano_contas = @idcaixa_plano_contas" : "";

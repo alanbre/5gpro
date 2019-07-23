@@ -21,7 +21,7 @@ namespace _5gpro.Entities
         public decimal DescontoTotalItens { get; set; }
         public decimal DescontoDocumento { get; set; }
         public string Descricao { get; set; }
-
+        public ContaReceber ContaReceber { get; set; }
         public virtual ICollection<NotaFiscalPropriaItem> NotaFiscalPropriaItem { get; set; }
     }
 }
