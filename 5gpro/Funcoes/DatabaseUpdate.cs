@@ -112,8 +112,8 @@ namespace _5gpro.Funcoes
                               sigla VARCHAR(45) NULL DEFAULT NULL,
                               PRIMARY KEY (idpais))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO pais (idpais, nome, sigla) VALUES (1, 'Brasil', 'BR')";
                 sql.insertQuery();
@@ -137,13 +137,13 @@ namespace _5gpro.Funcoes
                               uf CHAR(2) NULL DEFAULT NULL,
                               idpais INT(11) NOT NULL,
                               PRIMARY KEY (idestado),
-                              INDEX `fk_estado_pais1_idx` (idpais ASC) VISIBLE,
-                              CONSTRAINT `fk_estado_pais1`
+                              INDEX fk_estado_pais1_idx (idpais ASC),
+                              CONSTRAINT fk_estado_pais1
                                 FOREIGN KEY (idpais)
                                 REFERENCES pais (idpais))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO estado (idestado, nome, uf, idpais) VALUES
                             (1, 'Acre', 'AC', 1),
@@ -193,13 +193,13 @@ namespace _5gpro.Funcoes
                               nome VARCHAR(45) NULL DEFAULT NULL,
                               idestado INT(11) NOT NULL,
                               PRIMARY KEY (idcidade),
-                              INDEX `fk_cidade_estado1_idx` (idestado ASC) VISIBLE,
-                              CONSTRAINT `fk_cidade_estado1`
+                              INDEX fk_cidade_estado1_idx (idestado ASC),
+                              CONSTRAINT fk_cidade_estado1
                                 FOREIGN KEY (idestado)
                                 REFERENCES estado (idestado))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO cidade (idcidade, nome, idestado) VALUES
                             (1, 'Afonso Cláudio', 8),
@@ -362,9 +362,9 @@ namespace _5gpro.Funcoes
                             (158, 'Monteirópolis', 2),
                             (159, 'Murici', 2),
                             (160, 'Novo Lino', 2),
-                            (161, 'Olho d`Água das Flores', 2),
-                            (162, 'Olho d`Água do Casado', 2),
-                            (163, 'Olho d`Água Grande', 2),
+                            (161, 'Olho dÁgua das Flores', 2),
+                            (162, 'Olho dÁgua do Casado', 2),
+                            (163, 'Olho dÁgua Grande', 2),
                             (164, 'Olivença', 2),
                             (165, 'Ouro Branco', 2),
                             (166, 'Palestina', 2),
@@ -398,7 +398,7 @@ namespace _5gpro.Funcoes
                             (194, 'São Sebastião', 2),
                             (195, 'Satuba', 2),
                             (196, 'Senador Rui Palmeira', 2),
-                            (197, 'Tanque d`Arca', 2),
+                            (197, 'Tanque dArca', 2),
                             (198, 'Taquarana', 2),
                             (199, 'Teotônio Vilela', 2),
                             (200, 'Traipu', 2),
@@ -600,7 +600,7 @@ namespace _5gpro.Funcoes
                             (396, 'Cruz das Almas', 5),
                             (397, 'Curaçá', 5),
                             (398, 'Dário Meira', 5),
-                            (399, 'Dias d`Ávila', 5),
+                            (399, 'Dias dÁvila', 5),
                             (400, 'Dom Basílio', 5),
                             (401, 'Dom Macedo Costa', 5),
                             (402, 'Elísio Medrado', 5),
@@ -1299,7 +1299,7 @@ namespace _5gpro.Funcoes
                             (1095, 'Santo Antônio do Descoberto', 9),
                             (1096, 'São Domingos', 9),
                             (1097, 'São Francisco de Goiás', 9),
-                            (1098, 'São João d`Aliança', 9),
+                            (1098, 'São João dAliança', 9),
                             (1099, 'São João da Paraúna', 9),
                             (1100, 'São Luís de Montes Belos', 9),
                             (1101, 'São Luíz do Norte', 9),
@@ -1311,7 +1311,7 @@ namespace _5gpro.Funcoes
                             (1107, 'Serranópolis', 9),
                             (1108, 'Silvânia', 9),
                             (1109, 'Simolândia', 9),
-                            (1110, 'Sítio d`Abadia', 9),
+                            (1110, 'Sítio dAbadia', 9),
                             (1111, 'Taquaral de Goiás', 9),
                             (1112, 'Teresina de Goiás', 9),
                             (1113, 'Terezópolis de Goiás', 9),
@@ -1457,7 +1457,7 @@ namespace _5gpro.Funcoes
                             (1253, 'Nova Colinas', 10),
                             (1254, 'Nova Iorque', 10),
                             (1255, 'Nova Olinda do Maranhão', 10),
-                            (1256, 'Olho d`Água das Cunhãs', 10),
+                            (1256, 'Olho dÁgua das Cunhãs', 10),
                             (1257, 'Olinda Nova do Maranhão', 10),
                             (1258, 'Paço do Lumiar', 10),
                             (1259, 'Palmeirândia', 10),
@@ -1582,7 +1582,7 @@ namespace _5gpro.Funcoes
                             (1378, 'Colniza', 13),
                             (1379, 'Comodoro', 13),
                             (1380, 'Confresa', 13),
-                            (1381, 'Conquista d`Oeste', 13),
+                            (1381, 'Conquista dOeste', 13),
                             (1382, 'Cotriguaçu', 13),
                             (1383, 'Cuiabá', 13),
                             (1384, 'Curvelândia', 13),
@@ -1591,10 +1591,10 @@ namespace _5gpro.Funcoes
                             (1387, 'Diamantino', 13),
                             (1388, 'Dom Aquino', 13),
                             (1389, 'Feliz Natal', 13),
-                            (1390, 'Figueirópolis d`Oeste', 13),
+                            (1390, 'Figueirópolis dOeste', 13),
                             (1391, 'Gaúcha do Norte', 13),
                             (1392, 'General Carneiro', 13),
-                            (1393, 'Glória d`Oeste', 13),
+                            (1393, 'Glória dOeste', 13),
                             (1394, 'Guarantã do Norte', 13),
                             (1395, 'Guiratinga', 13),
                             (1396, 'Indiavaí', 13),
@@ -1609,12 +1609,12 @@ namespace _5gpro.Funcoes
                             (1405, 'Juína', 13),
                             (1406, 'Juruena', 13),
                             (1407, 'Juscimeira', 13),
-                            (1408, 'Lambari d`Oeste', 13),
+                            (1408, 'Lambari dOeste', 13),
                             (1409, 'Lucas do Rio Verde', 13),
                             (1410, 'Luciára', 13),
                             (1411, 'Marcelândia', 13),
                             (1412, 'Matupá', 13),
-                            (1413, 'Mirassol d`Oeste', 13),
+                            (1413, 'Mirassol dOeste', 13),
                             (1414, 'Nobres', 13),
                             (1415, 'Nortelândia', 13),
                             (1416, 'Nossa Senhora do Livramento', 13),
@@ -2296,7 +2296,7 @@ namespace _5gpro.Funcoes
                             (2092, 'Novo Oriente de Minas', 11),
                             (2093, 'Novorizonte', 11),
                             (2094, 'Olaria', 11),
-                            (2095, 'Olhos-d`Água', 11),
+                            (2095, 'Olhos-dÁgua', 11),
                             (2096, 'Olímpio Noronha', 11),
                             (2097, 'Oliveira', 11),
                             (2098, 'Oliveira Fortes', 11),
@@ -2357,7 +2357,7 @@ namespace _5gpro.Funcoes
                             (2153, 'Piedade do Rio Grande', 11),
                             (2154, 'Piedade dos Gerais', 11),
                             (2155, 'Pimenta', 11),
-                            (2156, 'Pingo-d`Água', 11),
+                            (2156, 'Pingo-dÁgua', 11),
                             (2157, 'Pintópolis', 11),
                             (2158, 'Piracema', 11),
                             (2159, 'Pirajuba', 11),
@@ -2708,7 +2708,7 @@ namespace _5gpro.Funcoes
                             (2504, 'Palestina do Pará', 14),
                             (2505, 'Paragominas', 14),
                             (2506, 'Parauapebas', 14),
-                            (2507, 'Pau d`Arco', 14),
+                            (2507, 'Pau dArco', 14),
                             (2508, 'Peixe-Boi', 14),
                             (2509, 'Piçarra', 14),
                             (2510, 'Placas', 14),
@@ -2869,7 +2869,7 @@ namespace _5gpro.Funcoes
                             (2665, 'Livramento', 15),
                             (2666, 'Logradouro', 15),
                             (2667, 'Lucena', 15),
-                            (2668, 'Mãe d`Água', 15),
+                            (2668, 'Mãe dÁgua', 15),
                             (2669, 'Malta', 15),
                             (2670, 'Mamanguape', 15),
                             (2671, 'Manaíra', 15),
@@ -2891,7 +2891,7 @@ namespace _5gpro.Funcoes
                             (2687, 'Nova Floresta', 15),
                             (2688, 'Nova Olinda', 15),
                             (2689, 'Nova Palmeira', 15),
-                            (2690, 'Olho d`Água', 15),
+                            (2690, 'Olho dÁgua', 15),
                             (2691, 'Olivedos', 15),
                             (2692, 'Ouro Velho', 15),
                             (2693, 'Parari', 15),
@@ -3081,7 +3081,7 @@ namespace _5gpro.Funcoes
                             (2877, 'Cruzmaltina', 18),
                             (2878, 'Curitiba', 18),
                             (2879, 'Curiúva', 18),
-                            (2880, 'Diamante d`Oeste', 18),
+                            (2880, 'Diamante dOeste', 18),
                             (2881, 'Diamante do Norte', 18),
                             (2882, 'Diamante do Sul', 18),
                             (2883, 'Dois Vizinhos', 18),
@@ -3145,7 +3145,7 @@ namespace _5gpro.Funcoes
                             (2941, 'Itaipulândia', 18),
                             (2942, 'Itambaracá', 18),
                             (2943, 'Itambé', 18),
-                            (2944, 'Itapejara d`Oeste', 18),
+                            (2944, 'Itapejara dOeste', 18),
                             (2945, 'Itaperuçu', 18),
                             (2946, 'Itaúna do Sul', 18),
                             (2947, 'Ivaí', 18),
@@ -3249,7 +3249,7 @@ namespace _5gpro.Funcoes
                             (3045, 'Peabiru', 18),
                             (3046, 'Perobal', 18),
                             (3047, 'Pérola', 18),
-                            (3048, 'Pérola d`Oeste', 18),
+                            (3048, 'Pérola dOeste', 18),
                             (3049, 'Piên', 18),
                             (3050, 'Pinhais', 18),
                             (3051, 'Pinhal de São Bento', 18),
@@ -3283,7 +3283,7 @@ namespace _5gpro.Funcoes
                             (3079, 'Quitandinha', 18),
                             (3080, 'Ramilândia', 18),
                             (3081, 'Rancho Alegre', 18),
-                            (3082, 'Rancho Alegre d`Oeste', 18),
+                            (3082, 'Rancho Alegre dOeste', 18),
                             (3083, 'Realeza', 18),
                             (3084, 'Rebouças', 18),
                             (3085, 'Renascença', 18),
@@ -3331,7 +3331,7 @@ namespace _5gpro.Funcoes
                             (3127, 'São João do Caiuá', 18),
                             (3128, 'São João do Ivaí', 18),
                             (3129, 'São João do Triunfo', 18),
-                            (3130, 'São Jorge d`Oeste', 18),
+                            (3130, 'São Jorge dOeste', 18),
                             (3131, 'São Jorge do Ivaí', 18),
                             (3132, 'São Jorge do Patrocínio', 18),
                             (3133, 'São José da Boa Vista', 18),
@@ -3587,7 +3587,7 @@ namespace _5gpro.Funcoes
                             (3383, 'Assunção do Piauí', 17),
                             (3384, 'Avelino Lopes', 17),
                             (3385, 'Baixa Grande do Ribeiro', 17),
-                            (3386, 'Barra d`Alcântara', 17),
+                            (3386, 'Barra dAlcântara', 17),
                             (3387, 'Barras', 17),
                             (3388, 'Barreiras do Piauí', 17),
                             (3389, 'Barro Duro', 17),
@@ -3711,7 +3711,7 @@ namespace _5gpro.Funcoes
                             (3507, 'Novo Oriente do Piauí', 17),
                             (3508, 'Novo Santo Antônio', 17),
                             (3509, 'Oeiras', 17),
-                            (3510, 'Olho d`Água do Piauí', 17),
+                            (3510, 'Olho dÁgua do Piauí', 17),
                             (3511, 'Padre Marcos', 17),
                             (3512, 'Paes Landim', 17),
                             (3513, 'Pajeú do Piauí', 17),
@@ -3722,7 +3722,7 @@ namespace _5gpro.Funcoes
                             (3518, 'Parnaíba', 17),
                             (3519, 'Passagem Franca do Piauí', 17),
                             (3520, 'Patos do Piauí', 17),
-                            (3521, 'Pau d`Arco do Piauí', 17),
+                            (3521, 'Pau dArco do Piauí', 17),
                             (3522, 'Paulistana', 17),
                             (3523, 'Pavussu', 17),
                             (3524, 'Pedro II', 17),
@@ -3951,7 +3951,7 @@ namespace _5gpro.Funcoes
                             (3747, 'José da Penha', 20),
                             (3748, 'Jucurutu', 20),
                             (3749, 'Jundiá', 20),
-                            (3750, 'Lagoa d`Anta', 20),
+                            (3750, 'Lagoa dAnta', 20),
                             (3751, 'Lagoa de Pedras', 20),
                             (3752, 'Lagoa de Velhos', 20),
                             (3753, 'Lagoa Nova', 20),
@@ -3974,7 +3974,7 @@ namespace _5gpro.Funcoes
                             (3770, 'Natal', 20),
                             (3771, 'Nísia Floresta', 20),
                             (3772, 'Nova Cruz', 20),
-                            (3773, 'Olho-d`Água do Borges', 20),
+                            (3773, 'Olho-dÁgua do Borges', 20),
                             (3774, 'Ouro Branco', 20),
                             (3775, 'Paraná', 20),
                             (3776, 'Paraú', 20),
@@ -4547,10 +4547,10 @@ namespace _5gpro.Funcoes
                             (4343, 'Vitória das Missões', 23),
                             (4344, 'Westfália', 23),
                             (4345, 'Xangri-lá', 23),
-                            (4346, 'Alta Floresta d`Oeste', 21),
+                            (4346, 'Alta Floresta dOeste', 21),
                             (4347, 'Alto Alegre dos Parecis', 21),
                             (4348, 'Alto Paraíso', 21),
-                            (4349, 'Alvorada d`Oeste', 21),
+                            (4349, 'Alvorada dOeste', 21),
                             (4350, 'Ariquemes', 21),
                             (4351, 'Buritis', 21),
                             (4352, 'Cabixi', 21),
@@ -4565,17 +4565,17 @@ namespace _5gpro.Funcoes
                             (4361, 'Corumbiara', 21),
                             (4362, 'Costa Marques', 21),
                             (4363, 'Cujubim', 21),
-                            (4364, 'Espigão d`Oeste', 21),
+                            (4364, 'Espigão dOeste', 21),
                             (4365, 'Governador Jorge Teixeira', 21),
                             (4366, 'Guajará-Mirim', 21),
                             (4367, 'Itapuã do Oeste', 21),
                             (4368, 'Jaru', 21),
                             (4369, 'Ji-Paraná', 21),
-                            (4370, 'Machadinho d`Oeste', 21),
+                            (4370, 'Machadinho dOeste', 21),
                             (4371, 'Ministro Andreazza', 21),
                             (4372, 'Mirante da Serra', 21),
                             (4373, 'Monte Negro', 21),
-                            (4374, 'Nova Brasilândia d`Oeste', 21),
+                            (4374, 'Nova Brasilândia dOeste', 21),
                             (4375, 'Nova Mamoré', 21),
                             (4376, 'Nova União', 21),
                             (4377, 'Novo Horizonte do Oeste', 21),
@@ -4588,8 +4588,8 @@ namespace _5gpro.Funcoes
                             (4384, 'Primavera de Rondônia', 21),
                             (4385, 'Rio Crespo', 21),
                             (4386, 'Rolim de Moura', 21),
-                            (4387, 'Santa Luzia d`Oeste', 21),
-                            (4388, 'São Felipe d`Oeste', 21),
+                            (4387, 'Santa Luzia dOeste', 21),
+                            (4388, 'São Felipe dOeste', 21),
                             (4389, 'São Francisco do Guaporé', 21),
                             (4390, 'São Miguel do Guaporé', 21),
                             (4391, 'Seringueiras', 21),
@@ -4718,7 +4718,7 @@ namespace _5gpro.Funcoes
                             (4514, 'Guaramirim', 24),
                             (4515, 'Guarujá do Sul', 24),
                             (4516, 'Guatambú', 24),
-                            (4517, 'Herval d`Oeste', 24),
+                            (4517, 'Herval dOeste', 24),
                             (4518, 'Ibiam', 24),
                             (4519, 'Ibicaré', 24),
                             (4520, 'Ibirama', 24),
@@ -4935,7 +4935,7 @@ namespace _5gpro.Funcoes
                             (4731, 'Anhembi', 26),
                             (4732, 'Anhumas', 26),
                             (4733, 'Aparecida', 26),
-                            (4734, 'Aparecida d`Oeste', 26),
+                            (4734, 'Aparecida dOeste', 26),
                             (4735, 'Apiaí', 26),
                             (4736, 'Araçariguama', 26),
                             (4737, 'Araçatuba', 26),
@@ -5082,7 +5082,7 @@ namespace _5gpro.Funcoes
                             (4878, 'Espírito Santo do Pinhal', 26),
                             (4879, 'Espírito Santo do Turvo', 26),
                             (4880, 'Estiva Gerbi', 26),
-                            (4881, 'Estrela d`Oeste', 26),
+                            (4881, 'Estrela dOeste', 26),
                             (4882, 'Estrela do Norte', 26),
                             (4883, 'Euclides da Cunha Paulista', 26),
                             (4884, 'Fartura', 26),
@@ -5113,7 +5113,7 @@ namespace _5gpro.Funcoes
                             (4909, 'Guará', 26),
                             (4910, 'Guaraçaí', 26),
                             (4911, 'Guaraci', 26),
-                            (4912, 'Guarani d`Oeste', 26),
+                            (4912, 'Guarani dOeste', 26),
                             (4913, 'Guarantã', 26),
                             (4914, 'Guararapes', 26),
                             (4915, 'Guararema', 26),
@@ -5305,7 +5305,7 @@ namespace _5gpro.Funcoes
                             (5101, 'Pacaembu', 26),
                             (5102, 'Palestina', 26),
                             (5103, 'Palmares Paulista', 26),
-                            (5104, 'Palmeira d`Oeste', 26),
+                            (5104, 'Palmeira dOeste', 26),
                             (5105, 'Palmital', 26),
                             (5106, 'Panorama', 26),
                             (5107, 'Paraguaçu Paulista', 26),
@@ -5422,9 +5422,9 @@ namespace _5gpro.Funcoes
                             (5218, 'Sandovalina', 26),
                             (5219, 'Santa Adélia', 26),
                             (5220, 'Santa Albertina', 26),
-                            (5221, 'Santa Bárbara d`Oeste', 26),
+                            (5221, 'Santa Bárbara dOeste', 26),
                             (5222, 'Santa Branca', 26),
-                            (5223, 'Santa Clara d`Oeste', 26),
+                            (5223, 'Santa Clara dOeste', 26),
                             (5224, 'Santa Cruz da Conceição', 26),
                             (5225, 'Santa Cruz da Esperança', 26),
                             (5226, 'Santa Cruz das Palmeiras', 26),
@@ -5436,7 +5436,7 @@ namespace _5gpro.Funcoes
                             (5232, 'Santa Lúcia', 26),
                             (5233, 'Santa Maria da Serra', 26),
                             (5234, 'Santa Mercedes', 26),
-                            (5235, 'Santa Rita d`Oeste', 26),
+                            (5235, 'Santa Rita dOeste', 26),
                             (5236, 'Santa Rita do Passa Quatro', 26),
                             (5237, 'Santa Rosa de Viterbo', 26),
                             (5238, 'Santa Salete', 26),
@@ -5460,7 +5460,7 @@ namespace _5gpro.Funcoes
                             (5256, 'São João da Boa Vista', 26),
                             (5257, 'São João das Duas Pontes', 26),
                             (5258, 'São João de Iracema', 26),
-                            (5259, 'São João do Pau d`Alho', 26),
+                            (5259, 'São João do Pau dAlho', 26),
                             (5260, 'São Joaquim da Barra', 26),
                             (5261, 'São José da Bela Vista', 26),
                             (5262, 'São José do Barreiro', 26),
@@ -5581,7 +5581,7 @@ namespace _5gpro.Funcoes
                             (5377, 'Itabaiana', 25),
                             (5378, 'Itabaianinha', 25),
                             (5379, 'Itabi', 25),
-                            (5380, 'Itaporanga d`Ajuda', 25),
+                            (5380, 'Itaporanga dAjuda', 25),
                             (5381, 'Japaratuba', 25),
                             (5382, 'Japoatã', 25),
                             (5383, 'Lagarto', 25),
@@ -5721,7 +5721,7 @@ namespace _5gpro.Funcoes
                             (5517, 'Palmeirópolis', 27),
                             (5518, 'Paraíso do Tocantins', 27),
                             (5519, 'Paranã', 27),
-                            (5520, 'Pau d`Arco', 27),
+                            (5520, 'Pau dArco', 27),
                             (5521, 'Pedro Afonso', 27),
                             (5522, 'Peixe', 27),
                             (5523, 'Pequizeiro', 27),
@@ -5793,8 +5793,8 @@ namespace _5gpro.Funcoes
                               idgrupopessoa INT NOT NULL,
                               codigo INT(11) NOT NULL,
                               PRIMARY KEY (idsubgrupopessoa),
-                              INDEX `fk_subgrupopessoa_grupopessoa1_idx` (idgrupopessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_subgrupopessoa_grupopessoa1`
+                              INDEX fk_subgrupopessoa_grupopessoa1_idx (idgrupopessoa ASC),
+                              CONSTRAINT fk_subgrupopessoa_grupopessoa1
                                 FOREIGN KEY (idgrupopessoa)
                                 REFERENCES grupopessoa (idgrupopessoa)
                                 ON DELETE NO ACTION
@@ -5820,8 +5820,8 @@ namespace _5gpro.Funcoes
                               nome VARCHAR(60) NULL DEFAULT NULL,
                               PRIMARY KEY (idgrupousuario))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO grupo_usuario (idgrupousuario, nome) VALUES (999, 'Super Usuários');";
                 sql.insertQuery();
@@ -5851,8 +5851,8 @@ namespace _5gpro.Funcoes
                               idgrupoitem INT NOT NULL,
                               codigo INT(11) NOT NULL,
                               PRIMARY KEY (idsubgrupoitem),
-                              INDEX `fk_subgrupoitem_GrupoItem1_idx` (idgrupoitem ASC) VISIBLE,
-                              CONSTRAINT `fk_subgrupoitem_GrupoItem1`
+                              INDEX fk_subgrupoitem_GrupoItem1_idx (idgrupoitem ASC),
+                              CONSTRAINT fk_subgrupoitem_GrupoItem1
                                 FOREIGN KEY (idgrupoitem)
                                 REFERENCES grupoitem (idgrupoitem)
                                 ON DELETE NO ACTION
@@ -5879,8 +5879,8 @@ namespace _5gpro.Funcoes
                               descricao VARCHAR(45) NULL DEFAULT NULL,
                               PRIMARY KEY (idunimedida))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO unimedida (idunimedida, sigla, descricao) VALUES 
                             (1, 'M', 'METRO'),
@@ -5919,19 +5919,19 @@ namespace _5gpro.Funcoes
                               quantidade DECIMAL(10,2) NOT NULL,
                               custo DECIMAL(15,2) NULL,
                               PRIMARY KEY (iditem),
-                              INDEX `fk_item_unimedida1_idx` (idunimedida ASC) VISIBLE,
-                              INDEX `fk_item_subgrupoitem1_idx` (idsubgrupoitem ASC) VISIBLE,
-                              CONSTRAINT `fk_item_unimedida1`
+                              INDEX fk_item_unimedida1_idx (idunimedida ASC),
+                              INDEX fk_item_subgrupoitem1_idx (idsubgrupoitem ASC),
+                              CONSTRAINT fk_item_unimedida1
                                 FOREIGN KEY (idunimedida)
                                 REFERENCES unimedida (idunimedida),
-                              CONSTRAINT `fk_item_subgrupoitem1`
+                              CONSTRAINT fk_item_subgrupoitem1
                                 FOREIGN KEY (idsubgrupoitem)
                                 REFERENCES subgrupoitem (idsubgrupoitem)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION)
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0008_item");
@@ -5966,19 +5966,19 @@ namespace _5gpro.Funcoes
                               atuacao VARCHAR(45) NOT NULL,
                               situacao VARCHAR(45) NOT NULL,
                               PRIMARY KEY (idpessoa),
-                              INDEX `fk_pessoa_cidade1_idx` (idcidade ASC) VISIBLE,
-                              INDEX `fk_pessoa_subgrupopessoa1_idx` (idsubgrupopessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_pessoa_cidade1`
+                              INDEX fk_pessoa_cidade1_idx (idcidade ASC),
+                              INDEX fk_pessoa_subgrupopessoa1_idx (idsubgrupopessoa ASC),
+                              CONSTRAINT fk_pessoa_cidade1
                                 FOREIGN KEY (idcidade)
                                 REFERENCES cidade (idcidade),
-                              CONSTRAINT `fk_pessoa_subgrupopessoa1`
+                              CONSTRAINT fk_pessoa_subgrupopessoa1
                                 FOREIGN KEY (idsubgrupopessoa)
                                 REFERENCES subgrupopessoa (idsubgrupopessoa)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION)
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0009_pessoa");
@@ -6006,13 +6006,13 @@ namespace _5gpro.Funcoes
                               idpessoa INT(11) NULL DEFAULT NULL,
                               descricao VARCHAR(150) NULL,
                               PRIMARY KEY (idnotafiscal),
-                              INDEX `fk_notafiscal_pessoa1_idx` (idpessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_notafiscal_pessoa1`
+                              INDEX fk_notafiscal_pessoa1_idx (idpessoa ASC),
+                              CONSTRAINT fk_notafiscal_pessoa1
                                 FOREIGN KEY (idpessoa)
                                 REFERENCES pessoa (idpessoa))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0010_notafiscal");
@@ -6037,17 +6037,17 @@ namespace _5gpro.Funcoes
                               desconto_porc DECIMAL(10,2) NULL DEFAULT NULL,
                               desconto DECIMAL(10,2) NULL DEFAULT NULL,
                               PRIMARY KEY (idnotafiscal, iditem),
-                              INDEX `fk_notafiscal_has_item_item1_idx` (iditem ASC) VISIBLE,
-                              INDEX `fk_notafiscal_has_item_notafiscal1_idx` (idnotafiscal ASC) VISIBLE,
-                              CONSTRAINT `fk_notafiscal_has_item_item1`
+                              INDEX fk_notafiscal_has_item_item1_idx (iditem ASC),
+                              INDEX fk_notafiscal_has_item_notafiscal1_idx (idnotafiscal ASC),
+                              CONSTRAINT fk_notafiscal_has_item_item1
                                 FOREIGN KEY (iditem)
                                 REFERENCES item (iditem),
-                              CONSTRAINT `fk_notafiscal_has_item_notafiscal1`
+                              CONSTRAINT fk_notafiscal_has_item_notafiscal1
                                 FOREIGN KEY (idnotafiscal)
                                 REFERENCES notafiscal (idnotafiscal))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0011_notafiscalhasitem");
@@ -6075,21 +6075,21 @@ namespace _5gpro.Funcoes
                               idpessoa INT(11) NULL,
                               descricao VARCHAR(150) NULL,
                               PRIMARY KEY (idorcamento),
-                              INDEX `fk_orcamento_notafiscal1_idx` (idnotafiscal ASC) VISIBLE,
-                              INDEX `fk_orcamento_pessoa1_idx` (idpessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_orcamento_notafiscal1`
+                              INDEX fk_orcamento_notafiscal1_idx (idnotafiscal ASC),
+                              INDEX fk_orcamento_pessoa1_idx (idpessoa ASC),
+                              CONSTRAINT fk_orcamento_notafiscal1
                                 FOREIGN KEY (idnotafiscal)
                                 REFERENCES notafiscal (idnotafiscal)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_orcamento_pessoa1`
+                              CONSTRAINT fk_orcamento_pessoa1
                                 FOREIGN KEY (idpessoa)
                                 REFERENCES pessoa (idpessoa)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION)
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0012_orcamento");
@@ -6114,17 +6114,17 @@ namespace _5gpro.Funcoes
                               desconto_porc DECIMAL(10,2) NULL DEFAULT NULL,
                               desconto DECIMAL(10,2) NULL DEFAULT NULL,
                               PRIMARY KEY (idorcamento, iditem),
-                              INDEX `fk_orcamento_has_item_item1_idx` (iditem ASC) VISIBLE,
-                              INDEX `fk_orcamento_has_item_orcamento1_idx` (idorcamento ASC) VISIBLE,
-                              CONSTRAINT `fk_orcamento_has_item_item1`
+                              INDEX fk_orcamento_has_item_item1_idx (iditem ASC),
+                              INDEX fk_orcamento_has_item_orcamento1_idx (idorcamento ASC),
+                              CONSTRAINT fk_orcamento_has_item_item1
                                 FOREIGN KEY (iditem)
                                 REFERENCES item (iditem),
-                              CONSTRAINT `fk_orcamento_has_item_orcamento1`
+                              CONSTRAINT fk_orcamento_has_item_orcamento1
                                 FOREIGN KEY (idorcamento)
                                 REFERENCES orcamento (idorcamento))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0013_orcamentohasitem");
@@ -6145,12 +6145,13 @@ namespace _5gpro.Funcoes
                               nome VARCHAR(45) NULL DEFAULT NULL,
                               codigo VARCHAR(60) NOT NULL,
                               PRIMARY KEY (idpermissao),
-                              UNIQUE INDEX `codigo_UNIQUE` (codigo ASC) VISIBLE)
+                              UNIQUE INDEX codigo_UNIQUE (codigo ASC) )
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
-                sql.Query = @"('Módulo de Cadastros', '010000'),
+                sql.Query = @"INSERT INTO permissao (nome, codigo) VALUES
+                            ('Módulo de Cadastros', '010000'),
                             ('Módulo de Orçamentos', '020000'),
                             ('Módulo de Saidas', '030000'),
                             ('Módulo Financeiro', '040000'),
@@ -6159,7 +6160,7 @@ namespace _5gpro.Funcoes
                             ('Módulo de Entradas', '070000'),
                             ('Módulo de Estoque', '080000'),
                             ('Módulo de Caixa', '090000'),
-                            ('Módulo de Configuração', '100000')
+                            ('Módulo de Configuração', '100000'),
 
 
                             ('Cadastro de Pessoa', '010100'),
@@ -6214,17 +6215,17 @@ namespace _5gpro.Funcoes
                               idgrupousuario INT(11) NOT NULL,
                               nivel INT(11) NOT NULL DEFAULT '0',
                               PRIMARY KEY (idpermissao, idgrupousuario),
-                              INDEX `fk_permissao_has_grupo_usuario_grupo_usuario1_idx` (idgrupousuario ASC) VISIBLE,
-                              INDEX `fk_permissao_has_grupo_usuario_permissao1_idx` (idpermissao ASC) VISIBLE,
-                              CONSTRAINT `fk_permissao_has_grupo_usuario_grupo_usuario1`
+                              INDEX fk_permissao_has_grupo_usuario_grupo_usuario1_idx (idgrupousuario ASC),
+                              INDEX fk_permissao_has_grupo_usuario_permissao1_idx (idpermissao ASC),
+                              CONSTRAINT fk_permissao_has_grupo_usuario_grupo_usuario1
                                 FOREIGN KEY (idgrupousuario)
                                 REFERENCES grupo_usuario (idgrupousuario),
-                              CONSTRAINT `fk_permissao_has_grupo_usuario_permissao1`
+                              CONSTRAINT fk_permissao_has_grupo_usuario_permissao1
                                 FOREIGN KEY (idpermissao)
                                 REFERENCES permissao (idpermissao))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
                 sql.addParam("@versao", "0015_permissaohasgrupousuario");
@@ -6246,16 +6247,16 @@ namespace _5gpro.Funcoes
                               sobrenome VARCHAR(50) NULL DEFAULT NULL,
                               senha VARCHAR(255) NOT NULL,
                               email VARCHAR(60) NULL DEFAULT NULL,
-                              telefone VARCHAR(45) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_0900_ai_ci' NULL DEFAULT NULL,
+                              telefone VARCHAR(45) CHARACTER SET 'utf8' COLLATE 'utf8_general_ci' NULL DEFAULT NULL,
                               idgrupousuario INT(11) NOT NULL,
                               PRIMARY KEY (idusuario),
-                              INDEX `fk_usuario_grupo_usuario1_idx` (idgrupousuario ASC) VISIBLE,
-                              CONSTRAINT `fk_usuario_grupo_usuario1`
+                              INDEX fk_usuario_grupo_usuario1_idx (idgrupousuario ASC),
+                              CONSTRAINT fk_usuario_grupo_usuario1
                                 FOREIGN KEY (idgrupousuario)
                                 REFERENCES grupo_usuario (idgrupousuario))
                             ENGINE = InnoDB
-                            DEFAULT CHARACTER SET = utf8mb4
-                            COLLATE = utf8mb4_0900_ai_ci;";
+                            DEFAULT CHARACTER SET = utf8
+                            COLLATE = utf8_general_ci;";
                 sql.insertQuery();
                 sql.Query = @"INSERT INTO usuario (idusuario, nome, sobrenome, senha, email, telefone, idgrupousuario) VALUES 
                             (9999, 'ADMIN', 'ADMIN', '', '', '', 999);";
@@ -6281,8 +6282,8 @@ namespace _5gpro.Funcoes
                               ipdopc VARCHAR(45) NULL,
                               data_update DATETIME NULL,
                               PRIMARY KEY (idusuario),
-                              INDEX `fk_logado_usuario1_idx` (idusuario ASC) VISIBLE,
-                              CONSTRAINT `fk_logado_usuario1`
+                              INDEX fk_logado_usuario1_idx (idusuario ASC),
+                              CONSTRAINT fk_logado_usuario1
                                 FOREIGN KEY (idusuario)
                                 REFERENCES usuario (idusuario)
                                 ON DELETE NO ACTION
@@ -6334,8 +6335,8 @@ namespace _5gpro.Funcoes
                               dias INT NULL,
                               idoperacao INT NOT NULL,
                               PRIMARY KEY (idparcelaoperacao),
-                              INDEX `fk_parcelaoperacao_operacao1_idx` (idoperacao ASC) VISIBLE,
-                              CONSTRAINT `fk_parcelaoperacao_operacao1`
+                              INDEX fk_parcelaoperacao_operacao1_idx (idoperacao ASC),
+                              CONSTRAINT fk_parcelaoperacao_operacao1
                                 FOREIGN KEY (idoperacao)
                                 REFERENCES operacao (idoperacao)
                                 ON DELETE NO ACTION
@@ -6404,14 +6405,14 @@ namespace _5gpro.Funcoes
                               data_conta DATETIME NOT NULL,
                               descricao VARCHAR(200) NULL,
                               PRIMARY KEY (idconta_receber),
-                              INDEX `fk_conta_receber_operacao1_idx` (idoperacao ASC) VISIBLE,
-                              INDEX `fk_conta_receber_pessoa1_idx` (idpessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_conta_receber_operacao1`
+                              INDEX fk_conta_receber_operacao1_idx (idoperacao ASC),
+                              INDEX fk_conta_receber_pessoa1_idx (idpessoa ASC),
+                              CONSTRAINT fk_conta_receber_operacao1
                                 FOREIGN KEY (idoperacao)
                                 REFERENCES operacao (idoperacao)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_conta_receber_pessoa1`
+                              CONSTRAINT fk_conta_receber_pessoa1
                                 FOREIGN KEY (idpessoa)
                                 REFERENCES pessoa (idpessoa)
                                 ON DELETE NO ACTION
@@ -6448,14 +6449,14 @@ namespace _5gpro.Funcoes
                               situacao VARCHAR(45) NOT NULL,
                               descricao VARCHAR(200) NULL,
                               PRIMARY KEY (idparcela_conta_receber),
-                              INDEX `fk_parcela_conta_receber_conta_receber1_idx` (idconta_receber ASC) VISIBLE,
-                              INDEX `fk_parcela_conta_receber_formapagamento1_idx` (idformapagamento ASC) VISIBLE,
-                              CONSTRAINT `fk_parcela_conta_receber_conta_receber1`
+                              INDEX fk_parcela_conta_receber_conta_receber1_idx (idconta_receber ASC),
+                              INDEX fk_parcela_conta_receber_formapagamento1_idx (idformapagamento ASC),
+                              CONSTRAINT fk_parcela_conta_receber_conta_receber1
                                 FOREIGN KEY (idconta_receber)
                                 REFERENCES conta_receber (idconta_receber)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_parcela_conta_receber_formapagamento1`
+                              CONSTRAINT fk_parcela_conta_receber_formapagamento1
                                 FOREIGN KEY (idformapagamento)
                                 REFERENCES formapagamento (idformapagamento)
                                 ON DELETE NO ACTION
@@ -6490,8 +6491,8 @@ namespace _5gpro.Funcoes
                               data_conta DATETIME NOT NULL,
                               descricao VARCHAR(200) NULL,
                               PRIMARY KEY (idconta_pagar),
-                              INDEX `fk_conta_pagar_pessoa1_idx` (idpessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_conta_pagar_pessoa1`
+                              INDEX fk_conta_pagar_pessoa1_idx (idpessoa ASC),
+                              CONSTRAINT fk_conta_pagar_pessoa1
                                 FOREIGN KEY (idpessoa)
                                 REFERENCES pessoa (idpessoa)
                                 ON DELETE NO ACTION
@@ -6528,14 +6529,14 @@ namespace _5gpro.Funcoes
                             situacao VARCHAR(45) NOT NULL,
                             descricao VARCHAR(200) NULL,
                             PRIMARY KEY (idparcela_conta_pagar),
-                            INDEX `fk_parcela_conta_pagar_formapagamento1_idx` (idformapagamento ASC) VISIBLE,
-                            INDEX `fk_parcela_conta_pagar_conta_pagar1_idx` (idconta_pagar ASC) VISIBLE,
-                            CONSTRAINT `fk_parcela_conta_pagar_formapagamento1`
+                            INDEX fk_parcela_conta_pagar_formapagamento1_idx (idformapagamento ASC),
+                            INDEX fk_parcela_conta_pagar_conta_pagar1_idx (idconta_pagar ASC),
+                            CONSTRAINT fk_parcela_conta_pagar_formapagamento1
                             FOREIGN KEY (idformapagamento)
                             REFERENCES formapagamento (idformapagamento)
                             ON DELETE NO ACTION
                             ON UPDATE NO ACTION,
-                            CONSTRAINT `fk_parcela_conta_pagar_conta_pagar1`
+                            CONSTRAINT fk_parcela_conta_pagar_conta_pagar1
                             FOREIGN KEY (idconta_pagar)
                             REFERENCES conta_pagar (idconta_pagar)
                             ON DELETE NO ACTION
@@ -6565,14 +6566,14 @@ namespace _5gpro.Funcoes
                               quantidade DECIMAL(10,2) NOT NULL,
                               idpessoa INT(11) NULL,
                               PRIMARY KEY (idregistro_estoque),
-                              INDEX `fk_registromovimentacao_item1_idx` (iditem ASC) VISIBLE,
-                              INDEX `fk_registro_estoque_pessoa1_idx` (idpessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_registromovimentacao_item1`
+                              INDEX fk_registromovimentacao_item1_idx (iditem ASC),
+                              INDEX fk_registro_estoque_pessoa1_idx (idpessoa ASC),
+                              CONSTRAINT fk_registromovimentacao_item1
                                 FOREIGN KEY (iditem)
                                 REFERENCES item (iditem)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_registro_estoque_pessoa1`
+                              CONSTRAINT fk_registro_estoque_pessoa1
                                 FOREIGN KEY (idpessoa)
                                 REFERENCES pessoa (idpessoa)
                                 ON DELETE NO ACTION
@@ -6605,8 +6606,8 @@ namespace _5gpro.Funcoes
                               idpessoa INT(11) NULL,
                               descricao VARCHAR(150) NULL,
                               PRIMARY KEY (idnota_fiscal_terceiros),
-                              INDEX `fk_nota_fiscal_terceiros_pessoa1_idx` (idpessoa ASC) VISIBLE,
-                              CONSTRAINT `fk_nota_fiscal_terceiros_pessoa1`
+                              INDEX fk_nota_fiscal_terceiros_pessoa1_idx (idpessoa ASC),
+                              CONSTRAINT fk_nota_fiscal_terceiros_pessoa1
                                 FOREIGN KEY (idpessoa)
                                 REFERENCES pessoa (idpessoa)
                                 ON DELETE NO ACTION
@@ -6636,14 +6637,14 @@ namespace _5gpro.Funcoes
                               desconto_porc DECIMAL(10,2) NOT NULL,
                               desconto DECIMAL(10,2) NOT NULL,
                               PRIMARY KEY (idnota_fiscal_terceiros, iditem),
-                              INDEX `fk_nota_fiscal_terceiros_has_item_item1_idx` (iditem ASC) VISIBLE,
-                              INDEX `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1_idx` (idnota_fiscal_terceiros ASC) VISIBLE,
-                              CONSTRAINT `fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1`
+                              INDEX fk_nota_fiscal_terceiros_has_item_item1_idx (iditem ASC),
+                              INDEX fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1_idx (idnota_fiscal_terceiros ASC),
+                              CONSTRAINT fk_nota_fiscal_terceiros_has_item_nota_fiscal_terceiros1
                                 FOREIGN KEY (idnota_fiscal_terceiros)
                                 REFERENCES nota_fiscal_terceiros (idnota_fiscal_terceiros)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_nota_fiscal_terceiros_has_item_item1`
+                              CONSTRAINT fk_nota_fiscal_terceiros_has_item_item1
                                 FOREIGN KEY (iditem)
                                 REFERENCES item (iditem)
                                 ON DELETE NO ACTION
@@ -6669,8 +6670,8 @@ namespace _5gpro.Funcoes
                               iditemdesintegrado INT(11) NOT NULL,
                               tipo VARCHAR(45) NOT NULL,
                               PRIMARY KEY (iddesintegracao),
-                              INDEX `fk_desintegracao_item1_idx` (iditemdesintegrado ASC) VISIBLE,
-                              CONSTRAINT `fk_desintegracao_item1`
+                              INDEX fk_desintegracao_item1_idx (iditemdesintegrado ASC),
+                              CONSTRAINT fk_desintegracao_item1
                                 FOREIGN KEY (iditemdesintegrado)
                                 REFERENCES item (iditem)
                                 ON DELETE NO ACTION
@@ -6698,14 +6699,14 @@ namespace _5gpro.Funcoes
                               porcentagem DECIMAL(10,2) NULL,
                               quantidade DECIMAL NULL,
                               PRIMARY KEY (idresultado_desintegracao),
-                              INDEX `fk_resultado_desintegracao_desintegracao1_idx` (iddesintegracao ASC) VISIBLE,
-                              INDEX `fk_resultado_desintegracao_item1_idx` (iditemparte ASC) VISIBLE,
-                              CONSTRAINT `fk_resultado_desintegracao_desintegracao1`
+                              INDEX fk_resultado_desintegracao_desintegracao1_idx (iddesintegracao ASC),
+                              INDEX fk_resultado_desintegracao_item1_idx (iditemparte ASC),
+                              CONSTRAINT fk_resultado_desintegracao_desintegracao1
                                 FOREIGN KEY (iddesintegracao)
                                 REFERENCES desintegracao (iddesintegracao)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_resultado_desintegracao_item1`
+                              CONSTRAINT fk_resultado_desintegracao_item1
                                 FOREIGN KEY (iditemparte)
                                 REFERENCES item (iditem)
                                 ON DELETE NO ACTION
@@ -6738,9 +6739,9 @@ namespace _5gpro.Funcoes
                               valorfechamento DECIMAL(10,2) NULL,
                               idusuario INT(11) NOT NULL,
                               PRIMARY KEY (idcaixa),
-                              INDEX `fk_caixa_usuario1_idx` (idusuario ASC) VISIBLE,
-                              UNIQUE INDEX `codigo_UNIQUE` (codigo ASC) VISIBLE,
-                              CONSTRAINT `fk_caixa_usuario1`
+                              INDEX fk_caixa_usuario1_idx (idusuario ASC),
+                              UNIQUE INDEX codigo_UNIQUE (codigo ASC),
+                              CONSTRAINT fk_caixa_usuario1
                                 FOREIGN KEY (idusuario)
                                 REFERENCES usuario (idusuario)
                                 ON DELETE NO ACTION
@@ -6809,14 +6810,14 @@ namespace _5gpro.Funcoes
                               idcaixa INT NOT NULL,
                               idcaixa_plano_contas INT NOT NULL,
                               PRIMARY KEY (idcaixa_lancamento),
-                              INDEX `fk_caixa_entrada_caixa1_idx` (idcaixa ASC) VISIBLE,
-                              INDEX `fk_caixa_lancamento_caixa_plano_contas1_idx` (idcaixa_plano_contas ASC) VISIBLE,
-                              CONSTRAINT `fk_caixa_entrada_caixa1`
+                              INDEX fk_caixa_entrada_caixa1_idx (idcaixa ASC),
+                              INDEX fk_caixa_lancamento_caixa_plano_contas1_idx (idcaixa_plano_contas ASC),
+                              CONSTRAINT fk_caixa_entrada_caixa1
                                 FOREIGN KEY (idcaixa)
                                 REFERENCES caixa (idcaixa)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_lancamento_caixa_plano_contas1`
+                              CONSTRAINT fk_caixa_lancamento_caixa_plano_contas1
                                 FOREIGN KEY (idcaixa_plano_contas)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
@@ -6863,14 +6864,14 @@ namespace _5gpro.Funcoes
                               idcaixa_lancamento INT NOT NULL,
                               idcaixa_sangria INT NOT NULL,
                               PRIMARY KEY (idcaixa_sangria_lancamentos),
-                              INDEX `fk_caixa_sangria_lancamentos_caixa_lancamentos1_idx` (idcaixa_lancamento ASC) VISIBLE,
-                              INDEX `fk_caixa_sangria_lancamentos_caixa_sangria1_idx` (idcaixa_sangria ASC) VISIBLE,
-                              CONSTRAINT `fk_caixa_sangria_lancamentos_caixa_lancamentos1`
+                              INDEX fk_caixa_sangria_lancamentos_caixa_lancamentos1_idx (idcaixa_lancamento ASC),
+                              INDEX fk_caixa_sangria_lancamentos_caixa_sangria1_idx (idcaixa_sangria ASC),
+                              CONSTRAINT fk_caixa_sangria_lancamentos_caixa_lancamentos1
                                 FOREIGN KEY (idcaixa_lancamento)
                                 REFERENCES caixa_lancamento (idcaixa_lancamento)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_sangria_lancamentos_caixa_sangria1`
+                              CONSTRAINT fk_caixa_sangria_lancamentos_caixa_sangria1
                                 FOREIGN KEY (idcaixa_sangria)
                                 REFERENCES caixa_sangria (idcaixa_sangria)
                                 ON DELETE NO ACTION
@@ -6894,14 +6895,14 @@ namespace _5gpro.Funcoes
                 sql.Query = @"CREATE TABLE IF NOT EXISTS caixa_lancamento_car (
                               idcaixa_lancamento INT NOT NULL,
                               idparcela_conta_receber INT NOT NULL,
-                              INDEX `fk_caixa_lancamento_car_parcela_conta_receber1_idx` (idparcela_conta_receber ASC) VISIBLE,
+                              INDEX fk_caixa_lancamento_car_parcela_conta_receber1_idx (idparcela_conta_receber ASC),
                               PRIMARY KEY (idcaixa_lancamento),
-                              CONSTRAINT `fk_caixa_lancamento_car_parcela_conta_receber1`
+                              CONSTRAINT fk_caixa_lancamento_car_parcela_conta_receber1
                                 FOREIGN KEY (idparcela_conta_receber)
                                 REFERENCES parcela_conta_receber (idparcela_conta_receber)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_lancamento_car_caixa_lancamento1`
+                              CONSTRAINT fk_caixa_lancamento_car_caixa_lancamento1
                                 FOREIGN KEY (idcaixa_lancamento)
                                 REFERENCES caixa_lancamento (idcaixa_lancamento)
                                 ON DELETE NO ACTION
@@ -6926,13 +6927,13 @@ namespace _5gpro.Funcoes
                               idcaixa_lancamento INT NOT NULL,
                               idparcela_conta_pagar INT NOT NULL,
                               PRIMARY KEY (idcaixa_lancamento),
-                              INDEX `fk_caixa_lancamento_cap_parcela_conta_pagar1_idx` (idparcela_conta_pagar ASC) VISIBLE,
-                              CONSTRAINT `fk_caixa_lancamento_cap_caixa_lancamento1`
+                              INDEX fk_caixa_lancamento_cap_parcela_conta_pagar1_idx (idparcela_conta_pagar ASC),
+                              CONSTRAINT fk_caixa_lancamento_cap_caixa_lancamento1
                                 FOREIGN KEY (idcaixa_lancamento)
                                 REFERENCES caixa_lancamento (idcaixa_lancamento)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_lancamento_cap_parcela_conta_pagar1`
+                              CONSTRAINT fk_caixa_lancamento_cap_parcela_conta_pagar1
                                 FOREIGN KEY (idparcela_conta_pagar)
                                 REFERENCES parcela_conta_pagar (idparcela_conta_pagar)
                                 ON DELETE NO ACTION
@@ -6957,13 +6958,13 @@ namespace _5gpro.Funcoes
                               idcaixa_lancamento INT NOT NULL,
                               idnotafiscal INT(11) NOT NULL,
                               PRIMARY KEY (idcaixa_lancamento),
-                              INDEX `fk_caixa_lancamento_sai_notafiscal1_idx` (idnotafiscal ASC) VISIBLE,
-                              CONSTRAINT `fk_table1_caixa_lancamento3`
+                              INDEX fk_caixa_lancamento_sai_notafiscal1_idx (idnotafiscal ASC),
+                              CONSTRAINT fk_table1_caixa_lancamento3
                                 FOREIGN KEY (idcaixa_lancamento)
                                 REFERENCES caixa_lancamento (idcaixa_lancamento)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_lancamento_sai_notafiscal1`
+                              CONSTRAINT fk_caixa_lancamento_sai_notafiscal1
                                 FOREIGN KEY (idnotafiscal)
                                 REFERENCES notafiscal (idnotafiscal)
                                 ON DELETE NO ACTION
@@ -6988,13 +6989,13 @@ namespace _5gpro.Funcoes
                               idcaixa_lancamento INT NOT NULL,
                               idnota_fiscal_terceiros INT NOT NULL,
                               PRIMARY KEY (idcaixa_lancamento),
-                              INDEX `fk_caixa_lancamento_ent_nota_fiscal_terceiros1_idx` (idnota_fiscal_terceiros ASC) VISIBLE,
-                              CONSTRAINT `fk_table1_caixa_lancamento4`
+                              INDEX fk_caixa_lancamento_ent_nota_fiscal_terceiros1_idx (idnota_fiscal_terceiros ASC),
+                              CONSTRAINT fk_table1_caixa_lancamento4
                                 FOREIGN KEY (idcaixa_lancamento)
                                 REFERENCES caixa_lancamento (idcaixa_lancamento)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_lancamento_ent_nota_fiscal_terceiros1`
+                              CONSTRAINT fk_caixa_lancamento_ent_nota_fiscal_terceiros1
                                 FOREIGN KEY (idnota_fiscal_terceiros)
                                 REFERENCES nota_fiscal_terceiros (idnota_fiscal_terceiros)
                                 ON DELETE NO ACTION
@@ -7026,50 +7027,50 @@ namespace _5gpro.Funcoes
                               descontos_recebidos INT NULL,
                               juros_recebidos INT NULL,
                               PRIMARY KEY (idcaixa_plano_contas_padrao),
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas1_idx` (compras ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas2_idx` (contas_pagar ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas3_idx` (descontos_concedidos ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas4_idx` (juros_pagos ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas5_idx` (vendas ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas6_idx` (contas_receber ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas7_idx` (descontos_recebidos ASC) VISIBLE,
-                              INDEX `fk_caixa_plano_contas_padrao_caixa_plano_contas8_idx` (juros_recebidos ASC) VISIBLE,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas1`
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas1_idx (compras ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas2_idx (contas_pagar ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas3_idx (descontos_concedidos ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas4_idx (juros_pagos ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas5_idx (vendas ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas6_idx (contas_receber ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas7_idx (descontos_recebidos ASC),
+                              INDEX fk_caixa_plano_contas_padrao_caixa_plano_contas8_idx (juros_recebidos ASC),
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas1
                                 FOREIGN KEY (compras)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas2`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas2
                                 FOREIGN KEY (contas_pagar)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas3`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas3
                                 FOREIGN KEY (descontos_concedidos)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas4`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas4
                                 FOREIGN KEY (juros_pagos)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas5`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas5
                                 FOREIGN KEY (vendas)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas6`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas6
                                 FOREIGN KEY (contas_receber)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas7`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas7
                                 FOREIGN KEY (descontos_recebidos)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
                                 ON UPDATE NO ACTION,
-                              CONSTRAINT `fk_caixa_plano_contas_padrao_caixa_plano_contas8`
+                              CONSTRAINT fk_caixa_plano_contas_padrao_caixa_plano_contas8
                                 FOREIGN KEY (juros_recebidos)
                                 REFERENCES caixa_plano_contas (idcaixa_plano_contas)
                                 ON DELETE NO ACTION
@@ -7105,8 +7106,8 @@ namespace _5gpro.Funcoes
                               email VARCHAR(150) NULL,
                               idcidade INT(11) NOT NULL,
                               PRIMARY KEY (idestabelecimento),
-                              INDEX `fk_estabelecimento_cidade1_idx` (idcidade ASC) VISIBLE,
-                              CONSTRAINT `fk_estabelecimento_cidade1`
+                              INDEX fk_estabelecimento_cidade1_idx (idcidade ASC),
+                              CONSTRAINT fk_estabelecimento_cidade1
                                 FOREIGN KEY (idcidade)
                                 REFERENCES cidade (idcidade)
                                 ON DELETE NO ACTION
