@@ -21,3 +21,4 @@ artifacts/
 5gpro/Daos/ConexaoDAO.cs
 5gpro/Funcoes/DatabaseUpdate.cs
 5gpro/Funcoes/DatabaseUpdate.cs
+inserts_iniciais.sql
