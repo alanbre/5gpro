@@ -94,6 +94,7 @@ namespace _5gpro.Forms
         private void TbDescricao_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbCodigoInterno_TextChanged(object sender, EventArgs e) => Editando(true);
         private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);     
         private void RbServico_CheckedChanged(object sender, EventArgs e)
         {
@@ -179,7 +180,7 @@ namespace _5gpro.Forms
                 codigo = itemDAO.BuscaProxCodigoDisponivel();
                 tbCodigo.Text = codigo.ToString();
                 item = null;
-                tbDescricao.Focus();
+                tbCodigoInterno.Focus();
                 ignoraCheckEvent = false;
                 Editando(true);
                 gbDesintegracao.Enabled = false;
@@ -227,9 +228,9 @@ namespace _5gpro.Forms
                 ok = false;
             }
 
-
-            item = new Item();
+            if(item == null) { item = new Item(); }            
             item.ItemID = int.Parse(tbCodigo.Text);
+            item.CodigoInterno = tbCodigoInterno.Text;
             item.Descricao = tbDescricao.Text;
             item.DescCompra = tbDescricaoDeCompra.Text;
             item.Referencia = tbReferencia.Text;
@@ -244,7 +245,19 @@ namespace _5gpro.Forms
 
             var controls = (ControlCollection)this.Controls;
 
+            
+            var itemIgual = itemDAO.ChecaSeExistemItemIgual(item.CodigoInterno, item.Referencia);
+            if (itemIgual != null)
+            {
+                MessageBox.Show($"Já existe item com código interno e referência iguais! \n Item: {itemIgual}",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+
             ok = validacao.ValidarEntidade(item, controls);
+
             if (ok)
             {
                 validacao.despintarCampos(controls);
@@ -454,6 +467,7 @@ namespace _5gpro.Forms
         private void LimpaCampos(bool cod, bool limpaitem = true)
         {
             if (cod) { tbCodigo.Clear(); }
+            tbCodigoInterno.Clear();
             tbDescricao.Clear();
             tbDescricaoDeCompra.Clear();
             tbReferencia.Clear();
@@ -478,6 +492,7 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = true;
                 LimpaCampos(false, false);
                 tbCodigo.Text = item.ItemID.ToString();
+                tbCodigoInterno.Text = item.CodigoInterno;
                 tbDescricao.Text = item.Descricao;
                 tbDescricaoDeCompra.Text = item.DescCompra;
 
@@ -523,7 +538,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
         private void BtCalcular_Click(object sender, EventArgs e)
         {
 
@@ -535,8 +549,6 @@ namespace _5gpro.Forms
             dbValorEntrada.Valor = formCalculoPrecoVenda.valorentrada;
 
         }
-
-
         private void DesintegracaoSimNao(Item d)
         {
             if (desintegracaoDAO.BuscaByID(d.ItemID) == null)

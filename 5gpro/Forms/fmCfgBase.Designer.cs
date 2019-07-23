@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.gbDados = new System.Windows.Forms.GroupBox();
-            this.btSair = new System.Windows.Forms.Button();
-            this.btConfirmar = new System.Windows.Forms.Button();
+            this.tbIp = new System.Windows.Forms.TextBox();
             this.tbSenha = new System.Windows.Forms.TextBox();
             this.lbSenha = new System.Windows.Forms.Label();
             this.tbUsuario = new System.Windows.Forms.TextBox();
             this.lbUsuario = new System.Windows.Forms.Label();
             this.lbIp = new System.Windows.Forms.Label();
-            this.tbIp = new System.Windows.Forms.TextBox();
+            this.btSair = new System.Windows.Forms.Button();
+            this.btConfirmar = new System.Windows.Forms.Button();
             this.gbDados.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,25 +55,12 @@
             this.gbDados.TabStop = false;
             this.gbDados.Text = "Base de dados";
             // 
-            // btSair
+            // tbIp
             // 
-            this.btSair.Location = new System.Drawing.Point(93, 160);
-            this.btSair.Name = "btSair";
-            this.btSair.Size = new System.Drawing.Size(75, 23);
-            this.btSair.TabIndex = 2;
-            this.btSair.Text = "Sair";
-            this.btSair.UseVisualStyleBackColor = true;
-            this.btSair.Click += new System.EventHandler(this.BtSair_Click);
-            // 
-            // btConfirmar
-            // 
-            this.btConfirmar.Location = new System.Drawing.Point(12, 160);
-            this.btConfirmar.Name = "btConfirmar";
-            this.btConfirmar.Size = new System.Drawing.Size(75, 23);
-            this.btConfirmar.TabIndex = 1;
-            this.btConfirmar.Text = "Confirmar";
-            this.btConfirmar.UseVisualStyleBackColor = true;
-            this.btConfirmar.Click += new System.EventHandler(this.BtConfirmar_Click);
+            this.tbIp.Location = new System.Drawing.Point(6, 32);
+            this.tbIp.Name = "tbIp";
+            this.tbIp.Size = new System.Drawing.Size(254, 20);
+            this.tbIp.TabIndex = 1;
             // 
             // tbSenha
             // 
@@ -117,12 +104,25 @@
             this.lbIp.TabIndex = 0;
             this.lbIp.Text = "IP do servidor";
             // 
-            // tbIp
+            // btSair
             // 
-            this.tbIp.Location = new System.Drawing.Point(6, 32);
-            this.tbIp.Name = "tbIp";
-            this.tbIp.Size = new System.Drawing.Size(254, 20);
-            this.tbIp.TabIndex = 1;
+            this.btSair.Location = new System.Drawing.Point(93, 160);
+            this.btSair.Name = "btSair";
+            this.btSair.Size = new System.Drawing.Size(75, 23);
+            this.btSair.TabIndex = 2;
+            this.btSair.Text = "Sair";
+            this.btSair.UseVisualStyleBackColor = true;
+            this.btSair.Click += new System.EventHandler(this.BtSair_Click);
+            // 
+            // btConfirmar
+            // 
+            this.btConfirmar.Location = new System.Drawing.Point(12, 160);
+            this.btConfirmar.Name = "btConfirmar";
+            this.btConfirmar.Size = new System.Drawing.Size(75, 23);
+            this.btConfirmar.TabIndex = 1;
+            this.btConfirmar.Text = "Confirmar";
+            this.btConfirmar.UseVisualStyleBackColor = true;
+            this.btConfirmar.Click += new System.EventHandler(this.BtConfirmar_Click);
             // 
             // fmCfgBase
             // 
@@ -140,6 +140,7 @@
             this.MinimumSize = new System.Drawing.Size(305, 230);
             this.Name = "fmCfgBase";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Configuração da base de dados";
             this.gbDados.ResumeLayout(false);
             this.gbDados.PerformLayout();

@@ -58,6 +58,8 @@
             // 
             // tbNomeGrupoItem
             // 
+            this.tbNomeGrupoItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeGrupoItem.Location = new System.Drawing.Point(94, 17);
             this.tbNomeGrupoItem.Name = "tbNomeGrupoItem";
             this.tbNomeGrupoItem.ReadOnly = true;
@@ -76,6 +78,7 @@
             // 
             // btAdd
             // 
+            this.btAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btAdd.Image = global::_5gpro.Properties.Resources.iosPlus_22px_blue;
             this.btAdd.Location = new System.Drawing.Point(442, 16);
             this.btAdd.Name = "btAdd";

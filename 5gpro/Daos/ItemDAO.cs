@@ -15,14 +15,15 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO item 
-                            (iditem, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade, custo) 
+                            (iditem, codigointerno, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade, custo) 
                             VALUES
-                            (@iditem, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade, @custo)
+                            (@iditem, @codigointerno, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade, @custo)
                             ON DUPLICATE KEY UPDATE
                             descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
                             valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade, custo = @custo";
 
                 sql.addParam("@iditem", item.ItemID);
+                sql.addParam("@codigointerno", item.CodigoInterno);
                 sql.addParam("@descitem", item.Descricao);
                 sql.addParam("@denominacaocompra", item.DescCompra);
                 sql.addParam("@tipo", item.TipoItem);
@@ -38,6 +39,17 @@ namespace _5gpro.Daos
             }
 
             return retorno;
+        }
+        public string ChecaSeExistemItemIgual(string codigoInterno, string referencia)
+        {
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.Query = @"SELECT * FROM item WHERE referencia = @referencia AND codigointerno = @codigointerno";
+                sql.addParam("@referencia", referencia);
+                sql.addParam("@codigoInterno", codigoInterno);
+                var data = sql.selectQueryForSingleValue();
+                return (string)data?.ToString() ?? null;
+            }
         }
         public Item BuscaByID(int Codigo)
         {
@@ -130,7 +142,7 @@ namespace _5gpro.Daos
                 if (subgrupoitem != null) { sql.addParam("@idsubgrupoitem", subgrupoitem.SubGrupoItemID); }
 
                 var data = sql.selectQuery();
-                foreach(var d in data)
+                foreach (var d in data)
                 {
                     var item = LeDadosReader(d);
                     itens.Add(item);
@@ -176,6 +188,7 @@ namespace _5gpro.Daos
 
             var item = new Item();
             item.ItemID = Convert.ToInt32(data["iditem"]);
+            item.CodigoInterno = (string)data["codigointerno"];
             item.Descricao = (string)data["descitem"];
             item.DescCompra = (string)data["denominacaocompra"];
             item.TipoItem = (string)data["tipo"];

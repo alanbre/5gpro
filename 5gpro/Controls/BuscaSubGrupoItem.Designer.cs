@@ -57,6 +57,8 @@
             // 
             // tbNomeSubGrupoItem
             // 
+            this.tbNomeSubGrupoItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbNomeSubGrupoItem.Location = new System.Drawing.Point(94, 17);
             this.tbNomeSubGrupoItem.Name = "tbNomeSubGrupoItem";
             this.tbNomeSubGrupoItem.ReadOnly = true;
