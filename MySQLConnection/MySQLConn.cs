@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace MySQLConnection
 {
@@ -351,7 +352,16 @@ namespace MySQLConnection
                 {
                     affectedRecords = command.ExecuteNonQuery();
                 }
-                catch (MySqlException ex)
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show("Sem conexão com o banco de dados",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    
+                    Console.WriteLine(ex.ToString());
+                }
+                catch(MySqlException ex)
                 {
                     Console.WriteLine(ex.ToString());
                 }

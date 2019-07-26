@@ -16,8 +16,9 @@ namespace _5gpro.Forms
         public Item itemSelecionado;
         private readonly ItemDAO itemDAO = new ItemDAO();
 
-        DataTable table = new DataTable();
-        DataTable rel = new DataTable();
+        private DataTable table = new DataTable();
+        private DataTable rel = new DataTable();
+        private decimal total = 0;
 
         public fmBuscaItem()
         {
@@ -26,12 +27,13 @@ namespace _5gpro.Forms
 
         private void FmBuscaItem_Load(object sender, EventArgs e)
         {
-            rel.Columns.Add("codigo", typeof(int));
+            rel.Columns.Add("codigo", typeof(string));
             rel.Columns.Add("referencia", typeof(string));
             rel.Columns.Add("desc_item", typeof(string));
             rel.Columns.Add("desc_comp", typeof(string));
             rel.Columns.Add("quantidade", typeof(decimal));
             rel.Columns.Add("valor", typeof(decimal));
+            rel.Columns.Add("total", typeof(decimal));
 
 
             table.Columns.Add("Código", typeof(string));
@@ -91,7 +93,7 @@ namespace _5gpro.Forms
         {
             rel.Rows.Clear();
             table.Rows.Clear();
-            
+            total = 0;
 
             string tipodoitem = "";
             if (cbProduto.Checked)
@@ -126,7 +128,8 @@ namespace _5gpro.Forms
                     i.Unimedida.Sigla,
                     i.ValorEntrada,
                     i.ValorUnitario);
-                rel.Rows.Add(i.ItemID, i.Referencia, i.Descricao, i.DescCompra, i.Quantidade, i.ValorUnitario);
+                rel.Rows.Add(i.CodigoInterno, i.Referencia, i.Descricao, i.DescCompra, i.Quantidade, i.ValorUnitario, i.Quantidade * i.ValorUnitario);
+                total += i.Quantidade * i.ValorUnitario;
             }
 
             dgvItens.DataSource = table;
@@ -145,7 +148,7 @@ namespace _5gpro.Forms
 
         private void BtImprimir_Click(object sender, EventArgs e)
         {
-            var formRelatorioItens = new fmRltItens(rel);
+            var formRelatorioItens = new fmRltItens(rel, total);
             formRelatorioItens.Show(this);
         }
 

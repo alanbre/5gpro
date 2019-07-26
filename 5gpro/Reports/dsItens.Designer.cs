@@ -291,6 +291,8 @@ namespace _5gpro.Reports {
             
             private global::System.Data.DataColumn columndesc_comp;
             
+            private global::System.Data.DataColumn columntotal;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public itensDataTable() {
@@ -374,6 +376,14 @@ namespace _5gpro.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn totalColumn {
+                get {
+                    return this.columntotal;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -409,7 +419,7 @@ namespace _5gpro.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public itensRow AdditensRow(string codigo, string referencia, string desc_item, string quantidade, string valor, string desc_comp) {
+            public itensRow AdditensRow(string codigo, string referencia, string desc_item, string quantidade, string valor, string desc_comp, string total) {
                 itensRow rowitensRow = ((itensRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         codigo,
@@ -417,7 +427,8 @@ namespace _5gpro.Reports {
                         desc_item,
                         quantidade,
                         valor,
-                        desc_comp};
+                        desc_comp,
+                        total};
                 rowitensRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowitensRow);
                 return rowitensRow;
@@ -446,6 +457,7 @@ namespace _5gpro.Reports {
                 this.columnquantidade = base.Columns["quantidade"];
                 this.columnvalor = base.Columns["valor"];
                 this.columndesc_comp = base.Columns["desc_comp"];
+                this.columntotal = base.Columns["total"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -463,6 +475,8 @@ namespace _5gpro.Reports {
                 base.Columns.Add(this.columnvalor);
                 this.columndesc_comp = new global::System.Data.DataColumn("desc_comp", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columndesc_comp);
+                this.columntotal = new global::System.Data.DataColumn("total", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntotal);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -701,6 +715,22 @@ namespace _5gpro.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string total {
+                get {
+                    try {
+                        return ((string)(this[this.tableitens.totalColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'total\' in table \'itens\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableitens.totalColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IscodigoNull() {
                 return this.IsNull(this.tableitens.codigoColumn);
             }
@@ -769,6 +799,18 @@ namespace _5gpro.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void Setdesc_compNull() {
                 this[this.tableitens.desc_compColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IstotalNull() {
+                return this.IsNull(this.tableitens.totalColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SettotalNull() {
+                this[this.tableitens.totalColumn] = global::System.Convert.DBNull;
             }
         }
         

@@ -11,14 +11,18 @@ namespace _5gpro.Funcoes
         private static IniData PegarArquivo()
         {
             var parser = new FileIniDataParser();
-            var path = AppDomain.CurrentDomain.BaseDirectory + "5gpro.ini";
+            string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "5gpro\\");
+            var path = folder + "5gpro.ini";
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
             if (!File.Exists(path))
             {
-                using (FileStream fs = File.Create(path))
-                {
-                }
+                File.Create(path).Dispose();                
             }
-            IniData data = parser.ReadFile(AppDomain.CurrentDomain.BaseDirectory + "5gpro.ini");
+            IniData data = parser.ReadFile(path);
             return data;
         }
         public static void LeDadosEstaticos()
@@ -29,13 +33,13 @@ namespace _5gpro.Funcoes
             Configuracao.BancoUsuario = data["Base de dados"]["usuario"];
             Configuracao.BancoSenha = data["Base de dados"]["senha"];
         }
-
         public static void SalvaDadoEstatico(string grupo, string item, string valor)
         {
             IniData data = PegarArquivo();
             data[grupo][item] = valor;
             var parser = new FileIniDataParser();
-            var path = AppDomain.CurrentDomain.BaseDirectory + "5gpro.ini";
+            string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "5gpro\\");
+            var path = folder + "5gpro.ini";
             parser.WriteFile(path, data);
         }
     }
