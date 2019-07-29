@@ -1034,7 +1034,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Reports\rltItens.rdlc" />
+    <EmbeddedResource Include="Reports\Relatorio de itens.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rltNotasSaidas.rdlc" />
     <EmbeddedResource Include="Reports\rltNotasEntradas.rdlc" />
     <None Include="5gpro_TemporaryKey.pfx" />
