@@ -52,7 +52,7 @@ namespace _5gpro.Forms
                 tipodoitem = "";
             }
 
-            listadeitens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tbReferencia.Text, tipodoitem, buscaSubGrupoItem.subgrupoItem);
+            listadeitens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tbReferencia.Text, tipodoitem, buscaGrupoItem.grupoItem, buscaSubGrupoItem.subgrupoItem, "");
             foreach (Item i in listadeitens)
             {
                 itemOrcamento = listaitensorcamento.Find(p => p.Item.ItemID == i.ItemID);

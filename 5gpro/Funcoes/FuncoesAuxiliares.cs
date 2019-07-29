@@ -24,7 +24,7 @@ namespace _5gpro.Funcoes
             stream.Close();
             return result;
         }
-        public void TratarTamanhoColunas(DataGridView dgv)
+        public DataGridView TratarTamanhoColunas(DataGridView dgv)
         {
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             for (var i = 0; i <= dgv.Columns.Count - 1; i++)
@@ -33,6 +33,7 @@ namespace _5gpro.Funcoes
                 dgv.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
                 dgv.Columns[i].Width = colw;
             }
+            return dgv;
         }
 
         /// <summary>

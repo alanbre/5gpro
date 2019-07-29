@@ -29,6 +29,11 @@ namespace _5gpro.Controls
                 e.Handled = true;
                 AbreTelaBuscaItem();
             }
+            if (e.KeyCode == Keys.F6)
+            {
+                e.Handled = true;
+                AbreTelaBuscaItemSeleciona();
+            }
         }
 
         private void TbCodigoItem_Leave(object sender, System.EventArgs e)
@@ -58,7 +63,16 @@ namespace _5gpro.Controls
                 PreencheCamposItem(item);
             }
         }
-
+        private void AbreTelaBuscaItemSeleciona()
+        {
+            var buscaItemSeleciona = new fmBuscaItemSeleciona();
+            buscaItemSeleciona.ShowDialog();
+            if (buscaItemSeleciona.itemSelecionado != null)
+            {
+                item = buscaItemSeleciona.itemSelecionado;
+                PreencheCamposItem(item);
+            }
+        }
         private void PreencheCamposItem(Item item)
         {
             if (item != null)
@@ -76,14 +90,12 @@ namespace _5gpro.Controls
                 tbCodigoItem.SelectAll();
             }
         }
-
         public void PreencheCampos(Item item)
         {
             this.item = item;
             tbCodigoItem.Text = item.ItemID.ToString();
             tbDescricaoItem.Text = item.Descricao;
         }
-
         public void Limpa()
         {
             this.item = null;

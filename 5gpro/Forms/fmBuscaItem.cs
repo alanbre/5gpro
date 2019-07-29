@@ -37,6 +37,7 @@ namespace _5gpro.Forms
 
 
             table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Código Int.", typeof(string));
             table.Columns.Add("Descrição", typeof(string));
             table.Columns.Add("Denominação da Compra", typeof(string));
             table.Columns.Add("Grupo", typeof(string));
@@ -86,6 +87,12 @@ namespace _5gpro.Forms
         private void BuscaGrupoItem_Text_Changed(object sender, EventArgs e) => buscaSubGrupoItem.Limpa();
         private void TbDescricao_TextChanged(object sender, EventArgs e) => BuscaItens();
         private void TbDenomCompra_TextChanged(object sender, EventArgs e) => BuscaItens();
+        private void TbReferencia_TextChanged(object sender, EventArgs e) => BuscaItens();
+        private void BtImprimir_Click(object sender, EventArgs e)
+        {
+            var formRelatorioItens = new fmRltItens(rel, total);
+            formRelatorioItens.Show(this);
+        }
 
 
 
@@ -104,12 +111,12 @@ namespace _5gpro.Forms
             {
                 tipodoitem = "S";
             }
-            if(cbProduto.Checked && cbServico.Checked)
+            if (cbProduto.Checked && cbServico.Checked)
             {
                 tipodoitem = "";
             }
 
-            itens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tbReferencia.Text, tipodoitem, buscaSubGrupoItem.subgrupoItem);
+            itens = itemDAO.Busca(tbDescricao.Text, tbDenomCompra.Text, tbReferencia.Text, tipodoitem, buscaGrupoItem.grupoItem, buscaSubGrupoItem.subgrupoItem, tbCodigoInterno.Text);
 
             foreach (Item i in itens)
             {
@@ -117,6 +124,7 @@ namespace _5gpro.Forms
                 string subgrupo = $"{i.SubGrupoItem.Codigo.ToString()} - {i.SubGrupoItem.Nome}";
                 table.Rows.Add(
                     i.ItemID,
+                    i.CodigoInterno,
                     i.Descricao,
                     i.DescCompra,
                     grupo,
@@ -136,7 +144,6 @@ namespace _5gpro.Forms
 
             funaux.TratarTamanhoColunas(dgvItens);
         }
-       
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -146,12 +153,5 @@ namespace _5gpro.Forms
             }
         }
 
-        private void BtImprimir_Click(object sender, EventArgs e)
-        {
-            var formRelatorioItens = new fmRltItens(rel, total);
-            formRelatorioItens.Show(this);
-        }
-
-        private void TbReferencia_TextChanged(object sender, EventArgs e) => BuscaItens();
     }
 }

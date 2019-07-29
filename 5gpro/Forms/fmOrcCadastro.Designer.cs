@@ -395,7 +395,7 @@
             this.btSelecionar.TabIndex = 15;
             this.btSelecionar.Text = "Selecionar";
             this.btSelecionar.UseVisualStyleBackColor = true;
-            this.btSelecionar.Click += new System.EventHandler(this.BtConjunto_Click);
+            this.btSelecionar.Click += new System.EventHandler(this.BtSelecionar_Click);
             // 
             // btExcluirItem
             // 

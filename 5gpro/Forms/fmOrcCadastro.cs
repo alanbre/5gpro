@@ -721,7 +721,7 @@ namespace _5gpro.Forms
             buscaItem.Focus();
             btInserirItem.Text = "Inserir";
         }
-        private void BtConjunto_Click(object sender, EventArgs e)
+        private void BtSelecionar_Click(object sender, EventArgs e)
         {
             var fmselecao = new fmSelecaoOrcamento(this);
             fmselecao.Show(this);

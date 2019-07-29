@@ -19,7 +19,7 @@ namespace _5gpro.Daos
                             VALUES
                             (@iditem, @codigointerno, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade, @custo)
                             ON DUPLICATE KEY UPDATE
-                            descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
+                            codigointerno = @codigointerno, descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
                             valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade, custo = @custo";
 
                 sql.addParam("@iditem", item.ItemID);
@@ -114,31 +114,39 @@ namespace _5gpro.Daos
             }
             return item;
         }
-        public List<Item> Busca(string descItem, string denomItem, string refeItem, string tipoItem, SubGrupoItem subgrupoitem)
+        public List<Item> Busca(string descItem, string denomItem, string refeItem,
+                                string tipoItem, GrupoItem grupoitem,
+                                SubGrupoItem subgrupoitem, string codigoInterno)
         {
             List<Item> itens = new List<Item>();
             string conDescItem = descItem.Length > 0 ? "AND i.descitem LIKE @descitem" : "";
             string conDenomItem = denomItem.Length > 0 ? "AND i.denominacaocompra LIKE @denominacaocompra" : "";
             string conRefeItem = refeItem.Length > 0 ? "AND i.referencia LIKE @referencia" : "";
             string conTipoItem = tipoItem.Length > 0 ? "AND i.tipo LIKE @tipo" : "";
+            string conGrupoItem = grupoitem != null ? "AND g.idgrupoitem = @idgrupoitem" : "";
             string conSubgrupoItem = subgrupoitem != null ? "AND i.idsubgrupoitem = @idsubgrupoitem" : "";
+            string conCodigoInterno = codigoInterno.Length > 0 ? "AND i.codigointerno LIKE @codigointerno" : "";
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
+                sql.Query = $@"SELECT *, g.nome AS grupoitemnome FROM item i
                             INNER JOIN unimedida u ON i.idunimedida = u.idunimedida
                             INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
                             INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
                             WHERE 1=1 
-                            " + conDescItem + @"
-                            " + conDenomItem + @"
-                            " + conRefeItem + @"
-                            " + conTipoItem + @"
-                            " + conSubgrupoItem + @"
-                             ORDER BY i.iditem";
+                            { conDescItem} 
+                            { conDenomItem } 
+                            { conRefeItem } 
+                            { conTipoItem } 
+                            { conSubgrupoItem } 
+                            { conCodigoInterno }
+                            { conGrupoItem }
+                             ORDER BY i.codigointerno, i.referencia";
                 if (denomItem.Length > 0) { sql.addParam("@denominacaocompra", "%" + denomItem + "%"); }
                 if (descItem.Length > 0) { sql.addParam("@descitem", "%" + descItem + "%"); }
                 if (refeItem.Length > 0) { sql.addParam("@referencia", "%" + refeItem + "%"); }
                 if (tipoItem.Length > 0) { sql.addParam("@tipo", "%" + tipoItem + "%"); }
+                if (conCodigoInterno.Length > 0) { sql.addParam("@codigointerno", "%" + codigoInterno + "%"); }
+                if (grupoitem != null) { sql.addParam("@idgrupoitem", grupoitem.GrupoItemID); }
                 if (subgrupoitem != null) { sql.addParam("@idsubgrupoitem", subgrupoitem.SubGrupoItemID); }
 
                 var data = sql.selectQuery();
@@ -149,6 +157,26 @@ namespace _5gpro.Daos
                 }
             }
             return itens;
+        }
+        public List<Item> Busca(string codigoInterno)
+        {
+            var itens = new List<Item>();
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.Query = @"SELECT *, g.nome AS grupoitemnome FROM item i
+                            INNER JOIN subgrupoitem s ON i.idsubgrupoitem = s.idsubgrupoitem
+                            INNER JOIN grupoitem g ON s.idgrupoitem = g.idgrupoitem
+                            INNER JOIN unimedida u ON u.idunimedida = i.idunimedida
+                            WHERE i.codigointerno = @codigointerno";
+                sql.addParam("@codigoInterno", codigoInterno);
+                var data = sql.selectQuery();
+                foreach (var d in data)
+                {
+                    var item = LeDadosReader(d);
+                    itens.Add(item);
+                }
+                return itens;
+            }
         }
         public int BuscaProxCodigoDisponivel()
         {

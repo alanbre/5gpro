@@ -12,7 +12,7 @@ namespace _5gpro.Forms
     {
         public Unimedida unimedidadostestes = null;
 
-        private Item item = null;
+        public Item item = null;
         private readonly ItemDAO itemDAO = new ItemDAO();
         private readonly Validacao validacao = new Validacao();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
@@ -31,7 +31,8 @@ namespace _5gpro.Forms
         private int Nivel;
         private string CodGrupoUsuario;
 
-        bool editando, ignoraCheckEvent = false;
+        public bool editando = false;
+        private bool ignoraCheckEvent = false;
         int codigo = 0;
 
         public fmCadastroItem()
@@ -72,6 +73,13 @@ namespace _5gpro.Forms
                 return;
             }
 
+            if (e.KeyCode == Keys.F6)
+            {
+                if (editando) return;
+                var fmBuscaItemSeleciona = new fmBuscaItemSeleciona(this);
+                fmBuscaItemSeleciona.Show(this);
+            }
+
             EnterTab(this.ActiveControl, e);
         }
         private void FmCadastroItem_FormClosing(object sender, FormClosingEventArgs e)
@@ -95,14 +103,14 @@ namespace _5gpro.Forms
         private void TbDescricaoDeCompra_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbReferencia_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbCodigoInterno_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);     
+        private void RbProduto_CheckedChanged(object sender, EventArgs e) => Editando(true);
         private void RbServico_CheckedChanged(object sender, EventArgs e)
         {
             Editando(true);
             if (rbServico.Checked)
                 gbDesintegracao.Enabled = false;
             else
-                if(item != null)
+                if (item != null)
                 gbDesintegracao.Enabled = true;
         }
         private void BuscaUnimedidaItem_Text_Changed(object sender, EventArgs e) => Editando(true);
@@ -228,7 +236,7 @@ namespace _5gpro.Forms
                 ok = false;
             }
 
-            if(item == null) { item = new Item(); }            
+            if (item == null) { item = new Item(); }
             item.ItemID = int.Parse(tbCodigo.Text);
             item.CodigoInterno = tbCodigoInterno.Text;
             item.Descricao = tbDescricao.Text;
@@ -245,15 +253,17 @@ namespace _5gpro.Forms
 
             var controls = (ControlCollection)this.Controls;
 
-            
-            var itemIgual = itemDAO.ChecaSeExistemItemIgual(item.CodigoInterno, item.Referencia);
-            if (itemIgual != null)
+            if (item.CodigoInterno.Length > 0 && item.Referencia.Length > 0)
             {
-                MessageBox.Show($"Já existe item com código interno e referência iguais! \n Item: {itemIgual}",
-                "Problema ao salvar",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Warning);
-                return;
+                var itemIgual = itemDAO.ChecaSeExistemItemIgual(item.CodigoInterno, item.Referencia);
+                if (itemIgual != null && itemIgual != item.ItemID.ToString())
+                {
+                    MessageBox.Show($"Já existe item com código interno e referência iguais! \n Item: {itemIgual}",
+                    "Problema ao salvar",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
             ok = validacao.ValidarEntidade(item, controls);
@@ -441,8 +451,8 @@ namespace _5gpro.Forms
             if (item?.ItemID == codigo)
             {
                 return;
-            }             
-            
+            }
+
 
             var newItem = itemDAO.BuscaByID(int.Parse(tbCodigo.Text));
             if (newItem != null)
@@ -483,44 +493,43 @@ namespace _5gpro.Forms
             dbQuantidade.Valor = 0.00m;
             codigo = 0;
             if (limpaitem) { item = null; }
-            
+
         }
-        private void PreencheCampos(Item item)
+        public void PreencheCampos(Item item)
         {
-            if (item != null)
+            if (item == null) return;
+            ignoraCheckEvent = true;
+            LimpaCampos(false, false);
+            tbCodigo.Text = item.ItemID.ToString();
+            tbCodigoInterno.Text = item.CodigoInterno;
+            tbDescricao.Text = item.Descricao;
+            tbDescricaoDeCompra.Text = item.DescCompra;
+
+
+            if (item.TipoItem == "P")
             {
-                ignoraCheckEvent = true;
-                LimpaCampos(false, false);
-                tbCodigo.Text = item.ItemID.ToString();
-                tbCodigoInterno.Text = item.CodigoInterno;
-                tbDescricao.Text = item.Descricao;
-                tbDescricaoDeCompra.Text = item.DescCompra;
-
-
-                if (item.TipoItem == "P")
-                {
-                    rbProduto.Checked = true;
-                    rbServico.Checked = false;
-                }
-                else
-                {
-                    rbProduto.Checked = false;
-                    rbServico.Checked = true;
-                }
-
-                tbReferencia.Text = item.Referencia;
-                dbValorEntrada.Valor = item.ValorEntrada;
-                dbEstoqueNecessario.Valor = item.Estoquenecessario;
-                dbPrecoVenda.Valor = item.ValorUnitario;
-                dbQuantidade.Valor = item.Quantidade;
-
-                buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
-                buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
-                buscaUnimedidaItem.PreencheCampos(item.Unimedida);
-
-
-                ignoraCheckEvent = false;
+                rbProduto.Checked = true;
+                rbServico.Checked = false;
             }
+            else
+            {
+                rbProduto.Checked = false;
+                rbServico.Checked = true;
+            }
+
+            tbReferencia.Text = item.Referencia;
+            dbValorEntrada.Valor = item.ValorEntrada;
+            dbEstoqueNecessario.Valor = item.Estoquenecessario;
+            dbPrecoVenda.Valor = item.ValorUnitario;
+            dbQuantidade.Valor = item.Quantidade;
+
+            buscaGrupoItem.PreencheCampos(item.SubGrupoItem.GrupoItem);
+            buscaSubGrupoItem.PreencheCampos(item.SubGrupoItem);
+            buscaUnimedidaItem.PreencheCampos(item.Unimedida);
+
+
+            ignoraCheckEvent = false;
+
         }
         private void Editando(bool edit)
         {
