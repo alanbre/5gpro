@@ -40,13 +40,13 @@
         "Entry"
         {
         "MsmKey" = "8:_1ABEB6641816852A821C2BD3AF248A91"
-        "OwnerKey" = "8:_EADE68FA8F544D0998CDD807253B38EE"
+        "OwnerKey" = "8:_3D6C71435C12AD0947823E8868D72ED3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_1ABEB6641816852A821C2BD3AF248A91"
-        "OwnerKey" = "8:_52C1B5566D074762ADB8C64FBA0B7E22"
+        "OwnerKey" = "8:_EADE68FA8F544D0998CDD807253B38EE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -71,6 +71,18 @@
         {
         "MsmKey" = "8:_3A52F521F106C1E1EBB0BC7B3A35FDDB"
         "OwnerKey" = "8:_C723EE82E82F7823C703EEE2571F8E2B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D6C71435C12AD0947823E8868D72ED3"
+        "OwnerKey" = "8:_EADE68FA8F544D0998CDD807253B38EE"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3D6C71435C12AD0947823E8868D72ED3"
+        "OwnerKey" = "8:_F0947F0803F834383259CA611A9461A8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -101,18 +113,6 @@
         {
         "MsmKey" = "8:_465F6B2AD6E37B1C8AD6106246C273B9"
         "OwnerKey" = "8:_6EC7B4796CF11C9AC6729606E0F36FB3"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_52C1B5566D074762ADB8C64FBA0B7E22"
-        "OwnerKey" = "8:_EADE68FA8F544D0998CDD807253B38EE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_52C1B5566D074762ADB8C64FBA0B7E22"
-        "OwnerKey" = "8:_F0947F0803F834383259CA611A9461A8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -213,12 +213,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_D5C2C22066EA480A96008F9F2BE1D8DA"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_E2BD92017615A7EFCCD1E6191289AEA0"
         "OwnerKey" = "8:_3A52F521F106C1E1EBB0BC7B3A35FDDB"
         "MsmSig" = "8:_UNDEFINED"
@@ -310,12 +304,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F0947F0803F834383259CA611A9461A8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_C723EE82E82F7823C703EEE2571F8E2B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -364,7 +352,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_52C1B5566D074762ADB8C64FBA0B7E22"
+        "OwnerKey" = "8:_F0947F0803F834383259CA611A9461A8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_3D6C71435C12AD0947823E8868D72ED3"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -683,6 +677,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_3D6C71435C12AD0947823E8868D72ED3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_3D6C71435C12AD0947823E8868D72ED3"
+                    {
+                    "Name" = "8:MySql.Data.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MySql.Data.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_05C2366F00A644E995D0820B50642EF0"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_42CAF03B93B140EA27B4684C4DB2DD7C"
             {
             "AssemblyRegister" = "3:1"
@@ -728,37 +753,6 @@
                     }
                 }
             "SourcePath" = "8:Microsoft.VisualStudio.TextManager.Interop.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_05C2366F00A644E995D0820B50642EF0"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_52C1B5566D074762ADB8C64FBA0B7E22"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MySql.Data, Version=8.0.15.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_52C1B5566D074762ADB8C64FBA0B7E22"
-                    {
-                    "Name" = "8:MySql.Data.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:MySql.Data.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_05C2366F00A644E995D0820B50642EF0"
@@ -1075,26 +1069,6 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D5C2C22066EA480A96008F9F2BE1D8DA"
-            {
-            "SourcePath" = "8:..\\5gpro\\Reports\\Relatorio de itens.rdlc"
-            "TargetName" = "8:Relatorio de itens.rdlc"
-            "Tag" = "8:"
-            "Folder" = "8:_0A36B34C288740D29F1F1342F3253A72"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E2BD92017615A7EFCCD1E6191289AEA0"
             {
             "AssemblyRegister" = "3:1"
@@ -1255,17 +1229,6 @@
             "Property" = "8:TARGETDIR"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_0A36B34C288740D29F1F1342F3253A72"
-                    {
-                    "Name" = "8:Reports"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_A490A7FB8D3B40A1A8694668097FEFCD"
-                        "Folders"
-                        {
-                        }
-                    }
                 }
             }
             "{1525181F-901A-416C-8A58-119130FE478E}:_611C6A71802B41E991D0CBC3435A8CC4"
@@ -1317,15 +1280,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:5GPro"
-        "ProductCode" = "8:{CCCC3752-CF65-4911-AD8F-574450A42955}"
-        "PackageCode" = "8:{E9F1105D-456C-4197-AEA2-3F9986A715A8}"
+        "ProductCode" = "8:{D182133D-B271-429D-A846-51CCD53465C8}"
+        "PackageCode" = "8:{EB33BAB9-AAED-4AE2-83F7-F33528D8C4E6}"
         "UpgradeCode" = "8:{DB37C6DA-39F5-4C32-9972-F241579CD3CA}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.4"
+        "ProductVersion" = "8:1.0.6"
         "Manufacturer" = "8:Hajel"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

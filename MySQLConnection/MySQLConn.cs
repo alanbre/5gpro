@@ -56,6 +56,15 @@ namespace MySQLConnection
                 this._connection = new MySqlConnection(connectionString);
                 this._connection.Open();
             }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Sem conexão com o banco de dados",
+                "Erro",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+
+                Console.WriteLine(ex.ToString());
+            }
             catch (MySqlException ex)
             {
                 Console.WriteLine(ex.ToString());
@@ -143,6 +152,15 @@ namespace MySQLConnection
                 try
                 {
                     dbValue = command.ExecuteScalar();
+                }
+                catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show("Sem conexão com o banco de dados",
+                    "Erro",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                    Console.WriteLine(ex.ToString());
                 }
                 catch (MySqlException ex)
                 {

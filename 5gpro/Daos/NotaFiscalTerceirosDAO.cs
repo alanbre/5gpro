@@ -33,7 +33,7 @@ namespace _5gpro.Daos
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
+                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti, i.quantidade AS estoque
                             FROM nota_fiscal_terceiros nft
                             LEFT JOIN nota_fiscal_terceiros_has_item nftitem
                             ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
@@ -101,12 +101,67 @@ namespace _5gpro.Daos
             }
             return notasFiscais;
         }
+        public List<fmEntBuscaNotaFiscalTerceiros.row> BuscaParaRelatorio(fmEntBuscaNotaFiscalTerceiros.Filtros f)
+        {
+            var result = new List<fmEntBuscaNotaFiscalTerceiros.row>();
+            var wherePessoa = f.Pessoa != null ? "AND p.idpessoa = @idpessoa" : "";
+            var whereCidade = f.Cidade != null ? "AND p.idcidade = @idcidade" : "";
+            string whereValorTotal = f.usarvalorTotalFiltro ? "AND nft.valor_documento BETWEEN @valor_documento_inicial AND @valor_documento_final" : "";
+            string whereDataEmissao = f.usardataEmissaoFiltro ? "AND nft.data_emissao BETWEEN @data_emissao_inicial AND @data_emissao_final" : "";
+            string whereDataEntrada = f.usardataEntradaFiltro ? "AND nft.data_entradasaida BETWEEN @data_entradasaida_inicial AND @data_entradasaida_final" : "";
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.Query = $@"SELECT DATE(nft.data_entradasaida) AS data,
+                            i.codigointerno, i.descitem, i.referencia,
+                            SUM(nftitem.quantidade) as qtd, i.valorsaida, SUM(nftitem.valor_total) AS total
+                            FROM nota_fiscal_terceiros nft
+                            LEFT JOIN nota_fiscal_terceiros_has_item nftitem
+                            ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
+                            LEFT JOIN item i ON i.iditem = nftitem.iditem
+                            WHERE 1 = 1
+                            { wherePessoa } 
+                            { whereCidade } 
+                            { whereValorTotal } 
+                            { whereDataEmissao } 
+                            { whereDataEntrada } 
+                            GROUP BY DATE(nft.data_entradasaida), i.codigointerno, i.descitem, i.referencia, i.valorsaida
+                            ORDER BY 1";
+
+                if (f.Pessoa != null) { sql.addParam("@idpessoa", f.Pessoa.PessoaID); }
+                if (f.Cidade != null) { sql.addParam("@idcidade", f.Cidade.CidadeID); }
+
+                sql.addParam("@valor_documento_inicial", f.ValorInicial);
+                sql.addParam("@valor_documento_final", f.ValorFinal);
+                sql.addParam("@data_emissao_inicial", f.DataEmissaoInicial);
+                sql.addParam("@data_emissao_final", f.DataEmissaoFinal);
+                sql.addParam("@data_entradasaida_inicial", f.DataEntradaInicial);
+                sql.addParam("@data_entradasaida_final", f.DataEntradaFinal);
+                var data = sql.selectQuery();
+                if (data != null)
+                {
+                    foreach(var r in data)
+                    {
+                        var row = new fmEntBuscaNotaFiscalTerceiros.row();
+                        row.data = (DateTime)r["data"];
+                        row.codigo = (string)r["codigointerno"];
+                        row.item = (string)r["descitem"];
+                        row.tamanho = (string)r["referencia"];
+                        row.quantidade = (decimal)r["qtd"];
+                        row.valorunit = (decimal)r["valorsaida"];
+                        row.estoque = (decimal)r["total"];
+                        result.Add(row);
+                    }
+                }
+
+            }
+            return result;
+        }
         public NotaFiscalTerceiros Proximo(int Codigo)
         {
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
+                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti, i.quantidade AS estoque
                             FROM nota_fiscal_terceiros nft
                             LEFT JOIN nota_fiscal_terceiros_has_item nftitem
                             ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
@@ -128,7 +183,7 @@ namespace _5gpro.Daos
             var notaFiscalTerceiros = new NotaFiscalTerceiros();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti 
+                sql.Query = @"SELECT *, nftitem.quantidade AS quantidadenfti, i.quantidade AS estoque 
                             FROM nota_fiscal_terceiros nft
                             LEFT JOIN nota_fiscal_terceiros_has_item nftitem
                             ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
@@ -207,8 +262,6 @@ namespace _5gpro.Daos
                 sql.deleteQuery();
             }
         }
-
-
         public int MovimentaEstoque(NotaFiscalTerceiros nota)
         {
             int retorno = 0;
@@ -245,7 +298,6 @@ namespace _5gpro.Daos
             }
             return retorno;
         }
-
         public void LimpaRegistrosCaixa(NotaFiscalTerceiros nota)
         {
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
@@ -261,7 +313,6 @@ namespace _5gpro.Daos
                 sql.deleteQuery();
             }
         }
-
         public int MovimentaCaixa(NotaFiscalTerceiros nota)
         {
             int retorno = 0;
@@ -317,8 +368,6 @@ namespace _5gpro.Daos
 
             return retorno;
         }
-
-
         private NotaFiscalTerceiros LeDadosReader(List<Dictionary<string, object>> data)
         {
             if (data.Count == 0)
@@ -351,6 +400,8 @@ namespace _5gpro.Daos
                 i.ValorEntrada = (decimal)d["valorentrada"];
                 i.ValorUnitario = (decimal)d["valorsaida"];
                 i.Estoquenecessario = (decimal)d["estoquenecessario"];
+                i.CodigoInterno = (string)d["codigointerno"];
+                i.Quantidade = (decimal)d["estoque"];
 
                 var nfi = new NotaFiscalTerceirosItem();
                 nfi.Quantidade = (decimal)d["quantidadenfti"];

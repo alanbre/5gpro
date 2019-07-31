@@ -34,6 +34,17 @@ namespace _5gpro.Forms
             public bool usardataEmissaoFiltro;
         }
 
+        public struct row
+        {
+            public DateTime data;
+            public string codigo;
+            public string item;
+            public string tamanho;
+            public decimal quantidade;
+            public decimal valorunit;
+            public decimal estoque;
+        }
+
         public fmEntBuscaNotaFiscalTerceiros()
         {
             InitializeComponent();
@@ -41,11 +52,13 @@ namespace _5gpro.Forms
 
         private void FmEntBuscaNotaFiscalTerceiros_Load(object sender, EventArgs e)
         {
-            rel.Columns.Add("numero", typeof(int));
-            rel.Columns.Add("data_emissao", typeof(DateTime));
-            rel.Columns.Add("data_entrada", typeof(DateTime));
-            rel.Columns.Add("fornecedor", typeof(string));
-            rel.Columns.Add("valor", typeof(decimal));
+            rel.Columns.Add("data", typeof(DateTime));
+            rel.Columns.Add("codigo", typeof(string));
+            rel.Columns.Add("item", typeof(string));
+            rel.Columns.Add("tamanho", typeof(string));
+            rel.Columns.Add("quantidade", typeof(decimal));
+            rel.Columns.Add("valorunit", typeof(decimal));
+            rel.Columns.Add("estoque", typeof(decimal));
         }
         private void FmEntBuscaNotaFiscalTerceiros_KeyDown(object sender, KeyEventArgs e)
         {
@@ -105,7 +118,41 @@ namespace _5gpro.Forms
         }
         private void BtImprimir_Click(object sender, EventArgs e)
         {
-            var formRelatorioNotasTerceiros = new fmRltNotasEntradas(rel);
+            rel.Rows.Clear();
+            var f = new Filtros
+            {
+                Cidade = buscaCidade.cidade,
+                Pessoa = buscaPessoa.pessoa,
+                DataEmissaoInicial = dtpFiltroDataEmissaoInicial.Value,
+                DataEmissaoFinal = dtpFiltroDataEmissaoFinal.Value,
+                DataEntradaInicial = dtpFiltroDataEntradaSaidaInicial.Value,
+                DataEntradaFinal = dtpFiltroDataEntradaSaidaFinal.Value,
+                ValorInicial = dbValorInicial.Valor,
+                ValorFinal = dbValorFinal.Valor,
+                usarvalorTotalFiltro = valorTotalFiltro,
+                usardataEntradaFiltro = dataEntradaFiltro,
+                usardataEmissaoFiltro = dataEmissaoFiltro
+            };
+
+
+            foreach (var row in notaFiscalTerceirosDAO.BuscaParaRelatorio(f))
+            {
+                rel.Rows.Add(
+                    row.data,
+                    row.codigo,
+                    row.item,
+                    row.tamanho,
+                    row.quantidade,
+                    row.valorunit,
+                    row.estoque
+                    );
+
+            }
+            var formRelatorioNotasTerceiros = new fmRltNotasEntradas(
+                rel,
+                dtpFiltroDataEntradaSaidaInicial.Value,
+                dtpFiltroDataEntradaSaidaFinal.Value,
+                cbDataEntrada.Checked);
             formRelatorioNotasTerceiros.Show(this);
         }
 
@@ -130,7 +177,7 @@ namespace _5gpro.Forms
 
             notasFiscaisTerceiros = notaFiscalTerceirosDAO.Busca(f);
             dgvDocumentos.Rows.Clear();
-            rel.Rows.Clear();
+
 
             foreach (var nf in notasFiscaisTerceiros)
             {
@@ -140,11 +187,7 @@ namespace _5gpro.Forms
                                        nf.DataEmissao,
                                        nf.DataEntradaSaida.Date,
                                        nf.ValorTotalDocumento);
-                rel.Rows.Add(nf.NotaFiscalTerceirosID,
-                                      nf.DataEmissao,
-                                      nf.DataEntradaSaida,
-                                      $"{nf.Pessoa.PessoaID} - {nf.Pessoa.Nome}",
-                                      nf.ValorTotalDocumento);
+
             }
             dgvDocumentos.Refresh();
         }
