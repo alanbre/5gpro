@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using _5gpro.Forms;
 using _5gpro.Funcoes;
+using _5gpro.Reports;
 using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
@@ -293,6 +294,12 @@ namespace _5gpro
         {
             var fmCapPrevisao = new fmCapPrevisao();
             fmCapPrevisao.Show(this);
+        }
+
+        private void TestesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var fmteste = new impNotaSaida();
+            fmteste.Show(this);
         }
     }
 }

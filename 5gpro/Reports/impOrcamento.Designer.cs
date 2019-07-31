@@ -32,7 +32,7 @@
             this.SuspendLayout();
             // 
             // rvOrcamento
-            // 
+            //
             this.rvOrcamento.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rvOrcamento.LocalReport.ReportEmbeddedResource = "_5gpro.Reports.impOrcamento.rdlc";
             this.rvOrcamento.Location = new System.Drawing.Point(0, 0);

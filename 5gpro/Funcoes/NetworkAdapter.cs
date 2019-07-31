@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Management;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
 
 namespace _5gpro.Funcoes
 {
@@ -24,18 +27,46 @@ namespace _5gpro.Funcoes
             get { return NomePC; }
         }
 
+        public static string GetLocalIpAddress()
+        {
+            foreach (var netI in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if(!(
+                    netI.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
+                    netI.NetworkInterfaceType == NetworkInterfaceType.Ethernet) && netI.OperationalStatus != OperationalStatus.Up
+                    )continue;
+                foreach (var uniIpAddrInfo in netI.GetIPProperties().UnicastAddresses.Where(x => netI.GetIPProperties().GatewayAddresses.Count > 0))
+                {
+
+                    if (uniIpAddrInfo.Address.AddressFamily == AddressFamily.InterNetwork)
+                        return uniIpAddrInfo.Address.ToString();
+                }
+            }
+            return null;
+        }
+
+        public static string GetMacAddress()
+        {
+            foreach (var netI in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (!(
+                    netI.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 ||
+                    netI.NetworkInterfaceType == NetworkInterfaceType.Ethernet) && netI.OperationalStatus != OperationalStatus.Up
+                    ) continue;
+                foreach (var uniIpAddrInfo in netI.GetIPProperties().UnicastAddresses.Where(x => netI.GetIPProperties().GatewayAddresses.Count > 0))
+                {
+
+                    if (uniIpAddrInfo.Address.AddressFamily == AddressFamily.InterNetwork)
+                        return netI.GetPhysicalAddress().ToString();
+                }
+            }
+            return null;
+        }
+
         public NetworkAdapter()
         {
-            ManagementObjectSearcher ObjMOS = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapterConfiguration WHERE IPEnabled = 'TRUE'");
-            ManagementObjectCollection ObjMOC = ObjMOS.Get();
-
-
-            foreach (ManagementObject mo in ObjMOC)
-            {
-                string[] addresses = (string[])mo["IPAddress"];
-                this._IP = addresses[0];
-                this._MAC = addresses[1];
-            }
+            this._IP = GetLocalIpAddress();
+            this._MAC = GetMacAddress();
             this.NomePC = Environment.MachineName;
         }
     }

@@ -63,6 +63,7 @@
             this.tsmiCap = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapCadastro = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCapQuitacao = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCapPrevisao = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCai = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCaiCadCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCaiAberturaFechamento = new System.Windows.Forms.ToolStripMenuItem();
@@ -73,7 +74,7 @@
             this.tsmiCaiCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCfg = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCfgDadosEstabelecimento = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiCapPrevisao = new System.Windows.Forms.ToolStripMenuItem();
+            this.testesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -153,7 +154,8 @@
             this.tsmiCar,
             this.tsmiCap,
             this.tsmiCai,
-            this.tsmiCfg});
+            this.tsmiCfg,
+            this.testesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1295, 24);
@@ -336,16 +338,23 @@
             // tsmiCapCadastro
             // 
             this.tsmiCapCadastro.Name = "tsmiCapCadastro";
-            this.tsmiCapCadastro.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapCadastro.Size = new System.Drawing.Size(172, 22);
             this.tsmiCapCadastro.Text = "Cadastro de conta";
             this.tsmiCapCadastro.Click += new System.EventHandler(this.TsmiCapCadastro_Click);
             // 
             // tsmiCapQuitacao
             // 
             this.tsmiCapQuitacao.Name = "tsmiCapQuitacao";
-            this.tsmiCapQuitacao.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapQuitacao.Size = new System.Drawing.Size(172, 22);
             this.tsmiCapQuitacao.Text = "Quitação";
             this.tsmiCapQuitacao.Click += new System.EventHandler(this.TsmiCapQuitacao_Click);
+            // 
+            // tsmiCapPrevisao
+            // 
+            this.tsmiCapPrevisao.Name = "tsmiCapPrevisao";
+            this.tsmiCapPrevisao.Size = new System.Drawing.Size(172, 22);
+            this.tsmiCapPrevisao.Text = "Previsão de contas";
+            this.tsmiCapPrevisao.Click += new System.EventHandler(this.tsmiCapPrevisao_Click);
             // 
             // tsmiCai
             // 
@@ -425,12 +434,12 @@
             this.tsmiCfgDadosEstabelecimento.Text = "Dados do estabelecimento";
             this.tsmiCfgDadosEstabelecimento.Click += new System.EventHandler(this.TsmiCfgDadosEstabelecimento_Click);
             // 
-            // tsmiCapPrevisao
+            // testesToolStripMenuItem
             // 
-            this.tsmiCapPrevisao.Name = "tsmiCapPrevisao";
-            this.tsmiCapPrevisao.Size = new System.Drawing.Size(180, 22);
-            this.tsmiCapPrevisao.Text = "Previsão de contas";
-            this.tsmiCapPrevisao.Click += new System.EventHandler(this.tsmiCapPrevisao_Click);
+            this.testesToolStripMenuItem.Name = "testesToolStripMenuItem";
+            this.testesToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.testesToolStripMenuItem.Text = "testes";
+            this.testesToolStripMenuItem.Click += new System.EventHandler(this.TestesToolStripMenuItem_Click);
             // 
             // fmMain
             // 
@@ -506,6 +515,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastro;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapQuitacao;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapPrevisao;
+        private System.Windows.Forms.ToolStripMenuItem testesToolStripMenuItem;
     }
 }
 
