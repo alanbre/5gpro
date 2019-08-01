@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,11 +30,6 @@ namespace _5gpro.Forms
         private NotaFiscalTerceirosItem itemSelecionado = null;
         private List<NotaFiscalTerceirosItem> itens = new List<NotaFiscalTerceirosItem>();
 
-        //Controle de Permissões
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
         int codigo = 0;
@@ -726,13 +722,8 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("070100").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "090100").Nivel;
             Editando(editando);
         }
     }

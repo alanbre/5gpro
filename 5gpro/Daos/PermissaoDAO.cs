@@ -46,7 +46,7 @@ namespace _5gpro.Daos
                         PermissaoId = Convert.ToInt32(d["pid"]),
                         Nome = (string)d["pnome"],
                         Codigo = (string)d["pcodigo"],
-                        Nivel = Convert.ToString(d["pgnivel"])
+                        Nivel = Convert.ToInt32(d["pgnivel"])
 
                     };
                     permissoes.Todas.Add(p);
@@ -95,7 +95,7 @@ namespace _5gpro.Daos
                         PermissaoId = Convert.ToInt32(d["idpermissao"]),
                         Nome = (string)d["nome"],
                         Codigo = (string)d["codigo"],
-                        Nivel = "0"
+                        Nivel = 0
                     };
                     permissoes.Todas.Add(p);
 
@@ -139,7 +139,7 @@ namespace _5gpro.Daos
                     permissao.PermissaoId = Convert.ToInt32(d["idpermissao"]);
                     permissao.Nome = (string)d["nome"];
                     permissao.Codigo = (string)d["codigo"];
-                    permissao.Nivel = "0";
+                    permissao.Nivel = 0;
 
                 }
             }
@@ -214,31 +214,31 @@ namespace _5gpro.Daos
             return idpermissoesNpraN;
         }
 
-        public List<fmMain.PermissaoNivelStruct> PermissoesNiveisStructByCodGrupoUsuario(string codgrupousuario)
-        {
-            List<fmMain.PermissaoNivelStruct> listacomniveis = new List<fmMain.PermissaoNivelStruct>();
+        //public List<fmMain.PermissaoNivelStruct> PermissoesNiveisStructByCodGrupoUsuario(string codgrupousuario)
+        //{
+        //    List<fmMain.PermissaoNivelStruct> listacomniveis = new List<fmMain.PermissaoNivelStruct>();
 
-            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
-            {
-                sql.Query = @"SELECT * 
-                FROM permissao_has_grupo_usuario as p
-                WHERE p.idgrupousuario = @idgrupousuario
-                ";
+        //    using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+        //    {
+        //        sql.Query = @"SELECT * 
+        //        FROM permissao_has_grupo_usuario as p
+        //        WHERE p.idgrupousuario = @idgrupousuario
+        //        ";
 
-                sql.addParam("@idgrupousuario", codgrupousuario);
+        //        sql.addParam("@idgrupousuario", codgrupousuario);
 
-                var data = sql.selectQuery();
+        //        var data = sql.selectQuery();
 
-                foreach (var d in data)
-                {
-                    fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
-                    permissaonivel.permissao = BuscarPermissaoByID((d["idpermissao"]).ToString());
-                    permissaonivel.Nivel = Convert.ToInt32(d["nivel"]);
+        //        foreach (var d in data)
+        //        {
+        //            fmMain.PermissaoNivelStruct permissaonivel = new fmMain.PermissaoNivelStruct();
+        //            permissaonivel.permissao = BuscarPermissaoByID((d["idpermissao"]).ToString());
+        //            permissaonivel.Nivel = Convert.ToInt32(d["nivel"]);
 
-                    listacomniveis.Add(permissaonivel);
-                }
-            }
-            return listacomniveis;
-        }
+        //            listacomniveis.Add(permissaonivel);
+        //        }
+        //    }
+        //    return listacomniveis;
+        //}
     }
 }

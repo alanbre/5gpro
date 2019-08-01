@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Windows.Forms;
 
@@ -14,11 +15,6 @@ namespace _5gpro.Forms
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
         private readonly Validacao validacao = new Validacao();
 
-        //Controle de Permissões
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
 
@@ -35,13 +31,8 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010100").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "010100").Nivel;
             Editando(editando);
         }
 
@@ -79,7 +70,6 @@ namespace _5gpro.Forms
                 e.Cancel = true;
             }
         }
-
         private void MenuVertical_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical_Buscar_Clicked(object sender, EventArgs e) => Busca();
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salva();

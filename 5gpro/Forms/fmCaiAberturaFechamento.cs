@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Windows.Forms;
 
@@ -10,14 +11,8 @@ namespace _5gpro.Forms
     {
         private readonly CaixaDAO caixaDAO = new CaixaDAO();
 
-        //Controle de Permissões
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
-
 
         public fmCaiAberturaFechamento()
         {
@@ -76,7 +71,7 @@ namespace _5gpro.Forms
                 buscaCaixa.caixa.ValorAbertura = dbValorAberturaFechamento.Valor;
                 buscaCaixa.caixa.ValorFechamento = 0.00m;
                 buscaCaixa.caixa.Aberto = true;
-                buscaCaixa.caixa.Usuario = logado.Usuario;
+                //buscaCaixa.caixa.Usuario = logado.Usuario;
                 if (caixaDAO.AbreOuFecha(buscaCaixa.caixa))
                 {
                     MessageBox.Show($"Caixa aberto com o valor R${dbValorAberturaFechamento.Valor}!",
@@ -108,7 +103,7 @@ namespace _5gpro.Forms
                 buscaCaixa.caixa.DataFechamento = DateTime.Now;
                 buscaCaixa.caixa.ValorFechamento = dbValorAberturaFechamento.Valor;
                 buscaCaixa.caixa.Aberto = false;
-                buscaCaixa.caixa.Usuario = logado.Usuario;
+                //buscaCaixa.caixa.Usuario = logado.Usuario;
                 if (caixaDAO.AbreOuFecha(buscaCaixa.caixa))
                 {
                     MessageBox.Show($"Caixa fechado com o valor R${dbValorAberturaFechamento.Valor}!",
@@ -139,10 +134,8 @@ namespace _5gpro.Forms
         }
         private void SetarNivel()
         {
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            var Codpermissao = permissaoDAO.BuscarIDbyCodigo("090200").ToString();
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "090200").Nivel;
         }
 
     }

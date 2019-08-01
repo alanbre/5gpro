@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +15,10 @@ namespace _5gpro.Forms
         private readonly GrupoPessoaDAO grupopessoaDAO = new GrupoPessoaDAO();
         private readonly SubGrupoPessoaDAO subgrupopessoaDAO = new SubGrupoPessoaDAO();
         private readonly Validacao validacao = new Validacao();
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         public SubGrupoPessoa subgrupopessoaSelecionado = null;
         private List<SubGrupoPessoa> listadesubgrupopessoa = new List<SubGrupoPessoa>();
 
         int codigo = 0;
-
-        //Controle de Permissões
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
 
@@ -38,13 +33,8 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010600").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "010600").Nivel;
             Editando(editando);
         }
 
@@ -76,7 +66,6 @@ namespace _5gpro.Forms
             }
         }
 
-        //MENU
         private void MenuVertical1_Novo_Clicked(object sender, EventArgs e) => Novo();
         private void MenuVertical1_Buscar_Clicked(object sender, EventArgs e) => Busca();
         private void MenuVertical1_Salvar_Clicked(object sender, EventArgs e) => Salva();
@@ -87,7 +76,6 @@ namespace _5gpro.Forms
         {
 
         }
-
         private void TbCodigo_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -95,37 +83,17 @@ namespace _5gpro.Forms
                 e.Handled = true;
             }
         }
-
         private void FmCadastroGrupoPessoa_Load(object sender, EventArgs e)
         {
             tbCodigo.Focus();
         }
-
-
-        //EVENTOS DE TEXTCHANGED
         private void TbNomeGrupoPessoa_TextChanged(object sender, EventArgs e)
         {
             if (!ignoraCheckEvent) { Editando(true); }
         }
-
-
-        //EVENTOS DE LEAVE
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
-
-
-        //EVENTOS DE CLICK
         private void BtRemoverSub_Click(object sender, EventArgs e) => RemoverSubGrupoPessoa();
-
         private void BtAddSub_Click(object sender, EventArgs e) => InserirSubGrupoPessoa();
-
-        private void InserirSubGrupoPessoa()
-        {
-            LimpaCamposSubPessoas();
-            tbCodigoSubGrupo.Text = grupoPessoa.SubGrupoPessoas?.Count > 0 ? (grupoPessoa.SubGrupoPessoas?.Max(sg => sg.Codigo) + 1).ToString() : "1";
-            tbNomeSubGrupo.Focus();
-            btNovoSubGrupo.Enabled = false;
-        }
-
         private void DgvSubGruposPessoas_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dgvSubGruposPessoas.SelectedRows.Count > 0)
@@ -138,11 +106,6 @@ namespace _5gpro.Forms
                 btRemoverSub.Enabled = true;
             }
         }
-
-        private void BtSalvar_Click(object sender, EventArgs e) => SalvaSubGrupo();
-
-
-        //EVENTOS DE TEXTCHANGED
         private void TbBuscaNomeSub_TextChanged(object sender, EventArgs e)
         {
             if (grupoPessoa != null)
@@ -156,9 +119,20 @@ namespace _5gpro.Forms
                 dgvSubGruposPessoas.Refresh();
             }
         }
+        private void BtSalvar_Click(object sender, EventArgs e) => SalvaSubGrupo();
+        private void DgvSubGruposPessoas_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
 
 
-        //PADRÕES CRIADAS
+        private void InserirSubGrupoPessoa()
+        {
+            LimpaCamposSubPessoas();
+            tbCodigoSubGrupo.Text = grupoPessoa.SubGrupoPessoas?.Count > 0 ? (grupoPessoa.SubGrupoPessoas?.Max(sg => sg.Codigo) + 1).ToString() : "1";
+            tbNomeSubGrupo.Focus();
+            btNovoSubGrupo.Enabled = false;
+        }
         private void Recarrega()
         {
             if (tbCodigo.Text.Length <= 0)
@@ -193,7 +167,6 @@ namespace _5gpro.Forms
                 ignoraCheckEvent = false;
             }
         }
-
         private void Proximo()
         {
             if (tbCodigo.Text.Length <= 0)
@@ -227,7 +200,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void Anterior()
         {
 
@@ -262,7 +234,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
         private void EnterTab(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -271,7 +242,6 @@ namespace _5gpro.Forms
                 e.Handled = e.SuppressKeyPress = true;
             }
         }
-
         private void LimpaCampos(bool cod)
         {
             if (cod) { tbCodigo.Clear(); }
@@ -283,14 +253,12 @@ namespace _5gpro.Forms
             codigo = 0;
             grupoPessoa = null;
         }
-
         private void LimpaCamposSubPessoas()
         {
             tbCodigoSubGrupo.Clear();
             tbNomeSubGrupo.Clear();
             subgrupopessoaSelecionado = null;
         }
-
         private void Novo()
         {
             if (editando)
@@ -309,7 +277,6 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-
         private void PreencheCampos(GrupoPessoa grupopessoa)
         {
             ignoraCheckEvent = true;
@@ -321,19 +288,16 @@ namespace _5gpro.Forms
             PreencheGridSubGrupoPessoas();
             ignoraCheckEvent = false;
         }
-
         private void PreencheCamposSubGrupo(SubGrupoPessoa subGrupoPessoa)
         {
             tbCodigoSubGrupo.Text = subGrupoPessoa.Codigo.ToString();
             tbNomeSubGrupo.Text = subGrupoPessoa.Nome;
         }
-
         private void Editando(bool edit)
         {
             editando = edit;
             menuVertical.Editando(edit, Nivel, CodGrupoUsuario);
         }
-
         private void Salva()
         {
             if (!editando)
@@ -391,8 +355,6 @@ namespace _5gpro.Forms
                 }
             }
         }
-
-
         private void SalvaSubGrupo()
         {
             if (tbCodigoSubGrupo.Text.Length <= 0 || grupoPessoa == null)
@@ -459,7 +421,6 @@ namespace _5gpro.Forms
             PreencheGridSubGrupoPessoas();
 
         }
-
         private void PreencheGridSubGrupoPessoas()
         {
             dgvSubGruposPessoas.Rows.Clear();
@@ -470,12 +431,6 @@ namespace _5gpro.Forms
             }
             dgvSubGruposPessoas.Refresh();
         }
-
-        private void DgvSubGruposPessoas_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void RemoverSubGrupoPessoa()
         {
             if (grupopessoaDAO.SubGrupoUsado(subgrupopessoaSelecionado))
@@ -502,7 +457,6 @@ namespace _5gpro.Forms
                 tbAjuda.Text = "Sub-grupo removido com sucesso";
             }
         }
-
         private void CarregaDados()
         {
             var controls = (ControlCollection)this.Controls;
@@ -565,7 +519,6 @@ namespace _5gpro.Forms
                 LimpaCampos(false);
             }
         }
-
         private void Busca()
         {
             if (CodGrupoUsuario != "999" && Nivel <= 0)

@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace _5gpro.Forms
         int NivelTodas = 0;
 
         //Controle de permissões
-        private Logado logado;
+        //private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
@@ -47,15 +48,9 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("010400").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
-            Editando(editando);
-
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "010400").Nivel;
+            Editando(editando); 
         }
 
         private void FmCadastroGrupoUsuario_KeyDown(object sender, KeyEventArgs e)
@@ -137,7 +132,7 @@ namespace _5gpro.Forms
                 {
                     if (p.Codigo.Substring(0, 2) == dgvModulos.CurrentRow.Cells[0].Value.ToString().Substring(0, 2))
                     {
-                        p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
+                        p.Nivel = Convert.ToInt32(dgvModulos.CurrentRow.Cells[2].Value);
                     }
                 }
             }
@@ -162,7 +157,7 @@ namespace _5gpro.Forms
 
                 foreach (Permissao p in listapermissoes)
                 {
-                    p.Nivel = dgvModulos.CurrentRow.Cells[2].Value.ToString();
+                    p.Nivel = Convert.ToInt32(dgvModulos.CurrentRow.Cells[2].Value);
                 }
                 NivelTodas = int.Parse(dgvModulos.CurrentRow.Cells[2].Value.ToString());
 
@@ -189,7 +184,7 @@ namespace _5gpro.Forms
                 dgvPermissoes.CurrentRow.Cells[2].Value = 0;
             }
 
-            listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = dgvPermissoes.CurrentRow.Cells[2].Value.ToString();
+            listapermissoes.Find(l => l.Codigo == dgvPermissoes.CurrentRow.Cells[0].Value.ToString()).Nivel = Convert.ToInt32(dgvPermissoes.CurrentRow.Cells[2].Value);
             Editando(true);
         }
         private void DgvModulos_CurrentCellChanged(object sender, EventArgs e)

@@ -12,11 +12,6 @@ namespace _5gpro.Forms
         private readonly EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
         private readonly Validacao validacao = new Validacao();
 
-        //Controle de Permissões
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
 
@@ -30,13 +25,8 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("100100").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "100100").Nivel;
             Editando(editando);
         }
 

@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Windows.Forms;
 
@@ -10,7 +11,7 @@ namespace _5gpro.Forms
     {
 
         //Controle de Permissões
-        private Logado logado;
+        //private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
@@ -161,14 +162,11 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            var Codpermissao = permissaoDAO.BuscarIDbyCodigo("090600").ToString();
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "090600").Nivel;
             Editando(editando);
         }
 
-        //EVENTOS DE TEXTCHANGED
         private void BuscaCompras_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void BuscaContasPagar_Text_Changed(object sender, EventArgs e) => Editando(true);
         private void BuscaDescontosConcedidos_Text_Changed(object sender, EventArgs e) => Editando(true);

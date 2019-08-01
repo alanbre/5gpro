@@ -9,13 +9,10 @@ namespace _5gpro.Forms
 {
     public partial class fmLogin : Form
     {
-        public Usuario usuariologado;
-        private Logado logado;
-
         private readonly UsuarioDAO usuarioDAO = new UsuarioDAO();
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
 
-        private readonly NetworkAdapter adap = new NetworkAdapter();
+        private readonly NetworkAdapter adaptador = new NetworkAdapter();
 
 
         public fmLogin()
@@ -51,7 +48,7 @@ namespace _5gpro.Forms
 
         private void Entrar()
         {
-            usuariologado = usuarioDAO.Logar(tbCodigo.Text, tbSenha.Text);
+            var usuariologado = usuarioDAO.Logar(tbCodigo.Text, tbSenha.Text);
 
 
             if (usuariologado == null)
@@ -64,14 +61,17 @@ namespace _5gpro.Forms
                 return;
             }
 
-            logado = logadoDAO.BuscaByUsuario(usuariologado);
-            if (logado != null)
+            Logado.Mac = adaptador.Mac;
+            Logado.IPdoPC = adaptador.IP;
+            Logado.NomePC = adaptador.Nome;
+            Logado.Usuario = usuariologado;
+            if (logadoDAO.ChecaLogado(Logado.Mac, Logado.NomePC, Logado.IPdoPC))
             {
-                MessageBox.Show("Usuário " + usuariologado.Nome + " logado no computador " + logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Usuário " + Logado.Usuario.Nome + " logado no computador " + Logado.NomePC, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             else
             {
-                logadoDAO.GravarLogado(usuariologado, adap.Mac, adap.Nome, adap.IP);
+                logadoDAO.GravarLogado();
                 if (tbCodigo.Text != Configuracao.CodUsuario)
                 {
                     DadosEstaticos.SalvaDadoEstatico("Login", "codusuario", tbCodigo.Text);

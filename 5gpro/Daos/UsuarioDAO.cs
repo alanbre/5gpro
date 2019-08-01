@@ -13,19 +13,44 @@ namespace _5gpro.Daos
             Usuario usuario = new Usuario();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = "SELECT * FROM usuario WHERE idusuario = @idusuario AND BINARY senha = @senha LIMIT 1";
+                sql.Query = @"SELECT *, u.nome AS u_nome, gu.nome AS gu_nome, p.nome AS p_nome FROM
+                            usuario u
+                            LEFT JOIN grupo_usuario gu
+                            ON u.idgrupousuario = gu.idgrupousuario
+                            LEFT JOIN permissao_has_grupo_usuario pgu
+                            ON pgu.idgrupousuario = gu.idgrupousuario
+                            LEFT JOIN permissao p
+                            ON pgu.idpermissao = p.idpermissao
+                            WHERE u.idusuario = @idusuario AND BINARY u.senha = @senha";
                 sql.addParam("@idusuario", idusuario);
                 sql.addParam("@senha", senha);
-                var data = sql.selectQueryForSingleRecord();
-                if (data == null)
+                var data = sql.selectQuery();
+                if (data.Count == 0)
                 {
                     return null;
                 }
+                List<Permissao> permissoes = new List<Permissao>();
+                foreach(var d in data)
+                {
+                    Permissao permissao = new Permissao();
+                    permissao.PermissaoId = Convert.ToInt32(d["idpermissao"]);
+                    permissao.Nome = (string)d["nome"];
+                    permissao.Codigo = (string)d["codigo"];
+                    permissao.Nivel = Convert.ToInt32(d["nivel"]);
+                    permissoes.Add(permissao);
+                }
+
+                var grupoUsuario = new GrupoUsuario();
+                grupoUsuario.GrupoUsuarioID = Convert.ToInt32(data[0]["idgrupousuario"]);
+                grupoUsuario.Nome = (string)data[0]["gu_nome"];
+                grupoUsuario.Permissoes = permissoes;
+
                 usuario = new Usuario();
-                usuario.UsuarioID = Convert.ToInt32(data["idusuario"]);
-                usuario.Nome = (string)data["nome"];
-                usuario.Sobrenome = (string)data["sobrenome"];
-                usuario.Senha = (string)data["senha"];
+                usuario.UsuarioID = Convert.ToInt32(data[0]["idusuario"]);
+                usuario.Nome = (string)data[0]["u_nome"];
+                usuario.Sobrenome = (string)data[0]["sobrenome"];
+                usuario.Senha = (string)data[0]["senha"];
+                usuario.Grupousuario = grupoUsuario;
             }
             return usuario;
         }

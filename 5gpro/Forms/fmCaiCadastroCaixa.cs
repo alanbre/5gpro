@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Windows.Forms;
 
@@ -13,7 +14,7 @@ namespace _5gpro.Forms
         private readonly Validacao validacao = new Validacao();
 
         //Controle de Permissões
-        private Logado logado;
+        //private Logado logado;
         private readonly LogadoDAO logadoDAO = new LogadoDAO();
         private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
         private readonly NetworkAdapter adap = new NetworkAdapter();
@@ -142,7 +143,7 @@ namespace _5gpro.Forms
             }
             caixa.Nome = tbNome.Text;
             caixa.Descricao = tbDescricao.Text;
-            caixa.Usuario = logado.Usuario;
+            //caixa.Usuario = logado.Usuario;
 
             var controls = (ControlCollection)this.Controls;
 
@@ -372,10 +373,8 @@ namespace _5gpro.Forms
         }
         private void SetarNivel()
         {
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            var Codpermissao = permissaoDAO.BuscarIDbyCodigo("090100").ToString();
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "090100").Nivel;
             Editando(editando);
         }
     }

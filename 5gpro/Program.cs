@@ -43,7 +43,7 @@ namespace _5gpro
 
             var formLogin = new fmLogin();
             formLogin.ShowDialog();
-            if (formLogin.usuariologado != null)
+            if (Logado.Usuario != null)
             {
                 Application.Run(new fmMain());
             }
@@ -51,8 +51,6 @@ namespace _5gpro
             {
                 Application.Exit();
             }
-
-
         }
     }
 }

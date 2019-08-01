@@ -2,6 +2,7 @@
 using _5gpro.Entities;
 using _5gpro.Funcoes;
 using _5gpro.Reports;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,13 +29,8 @@ namespace _5gpro.Forms
 
         private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
 
-        Validacao validacao = new Validacao();
+        private readonly Validacao validacao = new Validacao();
 
-        //Controle de Permissões
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
         private decimal totaldocumento = 0, jurosparcela, descontoparcela;
@@ -997,13 +993,8 @@ namespace _5gpro.Forms
         }
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("030100").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "030100").Nivel;
             Editando(editando);
         }
     }

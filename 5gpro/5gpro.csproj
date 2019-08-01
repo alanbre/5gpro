@@ -344,7 +344,6 @@
     <Compile Include="Entities\GrupoItem.cs" />
     <Compile Include="Entities\GrupoPessoa.cs" />
     <Compile Include="Entities\GrupoUsuario.cs" />
-    <Compile Include="Entities\Logado.cs" />
     <Compile Include="Entities\NotaFiscalPropria.cs" />
     <Compile Include="Entities\NotaFiscalPropriaItem.cs" />
     <Compile Include="Entities\NotaFiscalTerceiros.cs" />
@@ -781,6 +780,7 @@
       <DependentUpon>impOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Staticfiles\Logado.cs" />
     <EmbeddedResource Include="Controls\BuscaCaixa.resx">
       <DependentUpon>BuscaCaixa.cs</DependentUpon>
     </EmbeddedResource>

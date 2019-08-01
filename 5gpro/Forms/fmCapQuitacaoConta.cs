@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,11 +23,6 @@ namespace _5gpro.Forms
         private bool dataCadastroFiltro = false;
         private bool dataVencimentoFiltro = false;
 
-        //Controle de Permissões
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private string CodGrupoUsuario;
 
         private int Nivel;
@@ -229,11 +225,8 @@ namespace _5gpro.Forms
         }
         private void SetarNivel()
         {
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("050200").ToString();
-
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "050200").Nivel;
         }
 
 

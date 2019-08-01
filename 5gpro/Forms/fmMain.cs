@@ -14,13 +14,7 @@ namespace _5gpro
     public partial class fmMain : Form
     {
         private readonly EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
-        private Permissao permissao = new Permissao();
-        private PermissaoDAO permissaoDAO = new PermissaoDAO();
-        private Logado logado = new Logado();
         private LogadoDAO logadoDAO = new LogadoDAO();
-        private NetworkAdapter adap = new NetworkAdapter();
-        private string Codgrupousuario;
-        private List<PermissaoNivelStruct> listapermissaonivel = new List<PermissaoNivelStruct>();
 
         Thread t;
 
@@ -47,19 +41,10 @@ namespace _5gpro
         //Lançamento manual caixa = 090400
         //Plano de contas = 090500
 
-
         public fmMain()
         {
             InitializeComponent();
             estabelecimentoDAO.Busca();
-        }
-
-
-
-        public struct PermissaoNivelStruct
-        {
-            public Permissao permissao;
-            public int Nivel;
         }
         private void FmMain_Load(object sender, EventArgs e)
         {
@@ -68,11 +53,6 @@ namespace _5gpro
             t = new Thread(new ThreadStart(AtualizaLogado));
             t.Start();
         }
-        private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            t.Abort();
-            logadoDAO.RemoverLogado(adap.Mac);
-        }
 
 
         private void AtualizaLogado()
@@ -80,26 +60,20 @@ namespace _5gpro
             while (true)
             {
                 Thread.Sleep(1000);
-                logadoDAO.AtualizarLogado(logado.Mac);
+                logadoDAO.AtualizarLogado();
             }
         }
         private void FiltroDePermissoes()
         {
 
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
+            var codgrupousuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
 
-            Codgrupousuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-
-            if (Codgrupousuario != "999")
+            if (codgrupousuario != "999")
             {
-                listapermissaonivel = permissaoDAO.PermissoesNiveisStructByCodGrupoUsuario(Codgrupousuario);
-
-                foreach (PermissaoNivelStruct p in listapermissaonivel)
+                foreach (var p in Logado.Usuario.Grupousuario.Permissoes)
                 {
-                    switch (p.permissao.Codigo)
+                    switch (p.Codigo)
                     {
-
                         case "010100":
                             tsmiCadCliForPessoa.Visible = p.Nivel != 0; //Cadastro de pessoa
                             break;
@@ -167,13 +141,18 @@ namespace _5gpro
                 }
             }
         }
+
+
+
+        private void FmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            t.Abort();
+            logadoDAO.RemoverLogado();
+        }
         private void TimerRelogio_Tick(object sender, EventArgs e)
         {
             lbRelogio.Text = DateTime.Now.ToString("HH:mm:ss");
         }
-
-
-
         private void TsmiCadCliForPessoa_Click(object sender, EventArgs e)
         {
             var fmCadastroPessoa = new fmCadastroPessoa();

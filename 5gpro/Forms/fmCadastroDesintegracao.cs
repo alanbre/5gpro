@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.StaticFiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,16 +17,9 @@ namespace _5gpro.Forms
         private DesintegracaoResultado resultadodesi;
         public List<DesintegracaoResultado> listaresultadospercentual = new List<DesintegracaoResultado>();
         public List<DesintegracaoResultado> listaresultadosquantitativo = new List<DesintegracaoResultado>();
-
-        public Item itemrecebido = null;
-
-        //Controle de permissões
-        private Logado logado;
-        private readonly LogadoDAO logadoDAO = new LogadoDAO();
-        private readonly NetworkAdapter adap = new NetworkAdapter();
         private int Nivel;
         private string CodGrupoUsuario;
-        private readonly PermissaoDAO permissaoDAO = new PermissaoDAO();
+        public Item itemrecebido = null;
 
         bool editando, ignoraCheckEvent = false;
 
@@ -36,7 +30,6 @@ namespace _5gpro.Forms
         }
 
 
-        //EVENTOS DE CLICK
 
         private void BtInserir_Click(object sender, EventArgs e) => InserirLinha();
 
@@ -97,41 +90,10 @@ namespace _5gpro.Forms
         }
 
 
-        //MENU PRINCIPAL
-        private void MenuVertical_Novo_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuVertical_Buscar_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
         private void MenuVertical_Salvar_Clicked(object sender, EventArgs e) => Salvar();
 
-        private void MenuVertical_Recarregar_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuVertical_Anterior_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuVertical_Proximo_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MenuVertical_Excluir_Clicked(object sender, EventArgs e)
-        {
-
-        }
 
 
-        //EVENTOS DE LEAVE E LOAD
         private void BuscaItemInteiro_Leave(object sender, EventArgs e) => CarregaDados();
 
         private void FmDefinirPartesItem_Load(object sender, EventArgs e)
@@ -140,7 +102,7 @@ namespace _5gpro.Forms
         }
 
 
-        //FUNÇÕES
+
         private void Salvar()
         {
             if (!editando)
@@ -332,13 +294,8 @@ namespace _5gpro.Forms
 
         private void SetarNivel()
         {
-            //Busca o usuário logado no pc, através do MAC
-            logado = logadoDAO.BuscaByMac(adap.Mac);
-            CodGrupoUsuario = logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
-            string Codpermissao = permissaoDAO.BuscarIDbyCodigo("080100").ToString();
-
-            //Busca o nivel de permissão através do código do Grupo Usuario e do código da Tela
-            Nivel = permissaoDAO.BuscarNivelPermissao(CodGrupoUsuario, Codpermissao);
+            CodGrupoUsuario = Logado.Usuario.Grupousuario.GrupoUsuarioID.ToString();
+            Nivel = Logado.Usuario.Grupousuario.Permissoes.Find(p => p.Codigo == "080100").Nivel;
             Editando(editando);
         }
 
@@ -374,73 +331,6 @@ namespace _5gpro.Forms
             dgvPartes.Refresh();
 
             ignoraCheckEvent = false;
-        }
-
-        private void Anterior()
-        {
-            if (buscaItemInteiro.item == null)
-            {
-                return;
-            }
-
-            //var controls = (ControlCollection)this.Controls;
-
-            //if (editando)
-            //{
-            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-            //        "Aviso de alteração",
-            //        MessageBoxButtons.YesNo,
-            //        MessageBoxIcon.Warning) == DialogResult.No)
-            //        return;
-            //}
-
-
-            //var newitem = itemDAO.Anterior(int.Parse(tbCodigo.Text));
-            //if (newitem != null)
-            //{
-            //    DesintegracaoSimNao(newitem);
-            //    validacao.despintarCampos(controls);
-            //    item = newitem;
-            //    codigo = item.ItemID;
-            //    PreencheCampos(item);
-            //    if (editando)
-            //    {
-            //        Editando(false);
-            //    }
-            //}
-        }
-        private void Proximo()
-        {
-            //if (tbCodigo.Text.Length <= 0)
-            //{
-            //    return;
-            //}
-
-            //var controls = (ControlCollection)this.Controls;
-
-            //if (editando)
-            //{
-            //    if (MessageBox.Show("Tem certeza que deseja perder os dados alterados?",
-            //        "Aviso de alteração",
-            //        MessageBoxButtons.YesNo,
-            //        MessageBoxIcon.Warning) == DialogResult.No)
-            //        return;
-            //}
-
-
-            //var newitem = itemDAO.Proximo(int.Parse(tbCodigo.Text));
-            //if (newitem != null)
-            //{
-            //    DesintegracaoSimNao(newitem);
-            //    validacao.despintarCampos(controls);
-            //    item = newitem;
-            //    codigo = item.ItemID;
-            //    PreencheCampos(item);
-            //    if (editando)
-            //    {
-            //        Editando(false);
-            //    }
-            //}
         }
 
     }

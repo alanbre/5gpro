@@ -11,7 +11,7 @@ namespace _5gpro.Entities
         public int PermissaoId { get; set; }
         public string Nome { get; set; }
         public string Codigo { get; set; }
-        public string Nivel { get; set; }
+        public int Nivel { get; set; }
 
     }
 }
