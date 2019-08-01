@@ -19,6 +19,7 @@ namespace _5gpro.Entities
         public string Rua { get; set; }
         public string Numero { get; set; }
         public string Bairro { get; set; }
+        public string Cep { get; set; }
         public string Complemento { get; set; }
 
         [Required(ErrorMessage = "A Cidade é obrigatória.|buscaCidade", AllowEmptyStrings = false)]

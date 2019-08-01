@@ -106,7 +106,7 @@ namespace _5gpro.Daos
             {
                 sql.Query = $@"SELECT 
                             nf.idnotafiscal AS nf_idnotafiscal, nf.data_emissao AS nf_data_emissao, nf.data_entradasaida AS nf_entradasaida, nf.tiponf AS nf_tiponf, nf.valor_total_itens AS nf_valor_total_itens, nf.valor_documento AS nf_valor_documento,  nf.desconto_total_itens AS nf_desconto_total_itens, nf.desconto_documento AS nf_desconto_documento, 
-                            p.idpessoa AS p_idpessoa, p.nome AS p_nome, p.fantasia AS p_fantasia, p.tipo_pessoa, p.atuacao, p.situacao, p.rua AS p_rua, p.numero AS p_numero, p.bairro AS p_bairro, p.complemento AS p_complemento, p.cpf AS p_cpf, p.cnpj AS p_cnpj, p.endereco AS p_endereco, p.telefone AS p_telefone, p.email AS p_email,
+                            p.idpessoa AS p_idpessoa, p.nome AS p_nome, p.fantasia AS p_fantasia, p.tipo_pessoa, p.atuacao, p.situacao, p.rua AS p_rua, p.numero AS p_numero, p.bairro AS p_bairro, p.complemento AS p_complemento, p.cpf AS p_cpf, p.cnpj AS p_cnpj, p.endereco AS p_endereco, p.telefone AS p_telefone, p.email AS p_email, p.cep AS p_cep
                             c.idcidade AS c_idcidade, c.nome AS c_nome,
                             sbp.idsubgrupopessoa AS sbp_idsubgrupopessoa, sbp.nome AS sbp_nome,
                             gp.idgrupopessoa AS gp_idgrupopessoa, gp.nome AS gp_nome,
@@ -238,6 +238,7 @@ namespace _5gpro.Daos
                         pessoa.Rua = (string)d["p_rua"];
                         pessoa.Numero = (string)d["p_numero"];
                         pessoa.Bairro = (string)d["p_bairro"];
+                        pessoa.Cep = (string)d["p_cep"];
                         pessoa.Complemento = (string)d["p_complemento"];
                         pessoa.Cidade = cidade;
 
@@ -577,15 +578,19 @@ namespace _5gpro.Daos
 
             foreach (var d in data)
             {
-                var i = new Item();
-                i.ItemID = Convert.ToInt32(d["iditem"]);
-                i.Descricao = (string)d["descitem"];
-                i.DescCompra = (string)d["denominacaocompra"];
-                i.TipoItem = (string)d["tipo"];
-                i.Referencia = (string)d["referencia"];
-                i.ValorEntrada = (decimal)d["valorentrada"];
-                i.ValorUnitario = (decimal)d["valorsaida"];
-                i.Estoquenecessario = (decimal)d["estoquenecessario"];
+                var item = new Item();
+                item.ItemID = Convert.ToInt32(d["iditem"]);
+                item.CodigoInterno = (string)d["codigointerno"];
+                item.Descricao = (string)d["descitem"];
+                item.DescCompra = (string)d["denominacaocompra"];
+                item.TipoItem = (string)d["tipo"];
+                item.Referencia = (string)d["referencia"];
+                item.ValorEntrada = (decimal)d["valorentrada"];
+                item.ValorUnitario = (decimal)d["valorsaida"];
+                item.Estoquenecessario = (decimal)d["estoquenecessario"];
+                item.Quantidade = (decimal)d["quantidade"];
+                item.Custo = (decimal)d["custo"];
+
 
                 var nfi = new NotaFiscalPropriaItem();
                 nfi.Quantidade = (decimal)d["quantidadenfhi"];
@@ -593,7 +598,7 @@ namespace _5gpro.Daos
                 nfi.ValorTotal = (decimal)d["valor_total"];
                 nfi.DescontoPorc = (decimal)d["desconto_porc"];
                 nfi.Desconto = (decimal)d["desconto"];
-                nfi.Item = i;
+                nfi.Item = item;
                 notaFiscalItens.Add(nfi);
             }
             notaFiscalPropria.NotaFiscalPropriaItem = notaFiscalItens;

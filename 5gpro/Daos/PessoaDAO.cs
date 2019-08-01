@@ -16,11 +16,11 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO pessoa
-                         (idpessoa, nome, fantasia, rua, numero, bairro, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao)
+                         (idpessoa, nome, fantasia, rua, numero, bairro, cep, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao)
                           VALUES
-                         (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao)
+                         (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @cep, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao)
                           ON DUPLICATE KEY UPDATE
-                          nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, complemento = @complemento,
+                          nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, cep = @cep, complemento = @complemento,
                           cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa, idsubgrupopessoa = @idsubgrupopessoa,
                           atuacao = @atuacao, situacao = @situacao
                           ";
@@ -30,6 +30,7 @@ namespace _5gpro.Daos
                 sql.addParam("@rua", pessoa.Rua);
                 sql.addParam("@numero", pessoa.Numero);
                 sql.addParam("@bairro", pessoa.Bairro);
+                sql.addParam("@cep", pessoa.Cep);
                 sql.addParam("@complemento", pessoa.Complemento);
                 sql.addParam("@atuacao", pessoa.Atuacao);
                 sql.addParam("@situacao", pessoa.Situacao);
@@ -63,7 +64,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
@@ -111,6 +112,7 @@ namespace _5gpro.Daos
                     Rua = (string)data["rua"],
                     Numero = (string)data["numero"],
                     Bairro = (string)data["bairro"],
+                    Cep = (string)data["cep"],
                     Complemento = (string)data["complemento"],
                     Cidade = cidade,
                     Telefone = (string)data["telefone"],
@@ -131,7 +133,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
@@ -178,6 +180,7 @@ namespace _5gpro.Daos
                     Rua = (string)data["rua"],
                     Numero = (string)data["numero"],
                     Bairro = (string)data["bairro"],
+                    Cep = (string)data["cep"],
                     Complemento = (string)data["complemento"],
                     Cidade = cidade,
                     Telefone = (string)data["telefone"],
@@ -198,7 +201,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
@@ -245,6 +248,7 @@ namespace _5gpro.Daos
                     Rua = (string)data["rua"],
                     Numero = (string)data["numero"],
                     Bairro = (string)data["bairro"],
+                    Cep = (string)data["cep"],
                     Complemento = (string)data["complemento"],
                     Cidade = cidade,
                     Telefone = (string)data["telefone"],
@@ -269,7 +273,7 @@ namespace _5gpro.Daos
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                                              e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                                              p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                                             telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao
+                                             telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
                                              FROM pessoa p
                                              INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                                              INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
@@ -320,6 +324,7 @@ namespace _5gpro.Daos
                         Rua = (string)d["rua"],
                         Numero = (string)d["numero"],
                         Bairro = (string)d["bairro"],
+                        Cep = (string)d["cep"],
                         Complemento = (string)d["complemento"],
                         Cidade = cidade,
                         Telefone = (string)d["telefone"],

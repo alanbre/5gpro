@@ -46,6 +46,8 @@
             this.rbPessoaJuridica = new System.Windows.Forms.RadioButton();
             this.rbPessoaFisica = new System.Windows.Forms.RadioButton();
             this.pnDados = new System.Windows.Forms.Panel();
+            this.tbCep = new System.Windows.Forms.TextBox();
+            this.lbCep = new System.Windows.Forms.Label();
             this.buscaCidade = new _5gpro.Controls.BuscaCidade();
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.lbEmail = new System.Windows.Forms.Label();
@@ -264,6 +266,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnDados.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnDados.Controls.Add(this.tbCep);
+            this.pnDados.Controls.Add(this.lbCep);
             this.pnDados.Controls.Add(this.buscaCidade);
             this.pnDados.Controls.Add(this.tbEmail);
             this.pnDados.Controls.Add(this.lbEmail);
@@ -284,6 +288,24 @@
             this.pnDados.Size = new System.Drawing.Size(750, 309);
             this.pnDados.TabIndex = 2;
             // 
+            // tbCep
+            // 
+            this.tbCep.Location = new System.Drawing.Point(552, 65);
+            this.tbCep.MaxLength = 9;
+            this.tbCep.Name = "tbCep";
+            this.tbCep.Size = new System.Drawing.Size(64, 20);
+            this.tbCep.TabIndex = 7;
+            this.tbCep.TextChanged += new System.EventHandler(this.TbCep_TextChanged);
+            // 
+            // lbCep
+            // 
+            this.lbCep.AutoSize = true;
+            this.lbCep.Location = new System.Drawing.Point(549, 49);
+            this.lbCep.Name = "lbCep";
+            this.lbCep.Size = new System.Drawing.Size(28, 13);
+            this.lbCep.TabIndex = 6;
+            this.lbCep.Text = "CEP";
+            // 
             // buscaCidade
             // 
             this.buscaCidade.LabelText = "Cidade";
@@ -291,7 +313,7 @@
             this.buscaCidade.Margin = new System.Windows.Forms.Padding(0);
             this.buscaCidade.Name = "buscaCidade";
             this.buscaCidade.Size = new System.Drawing.Size(442, 39);
-            this.buscaCidade.TabIndex = 8;
+            this.buscaCidade.TabIndex = 10;
             // 
             // tbEmail
             // 
@@ -299,7 +321,7 @@
             this.tbEmail.MaxLength = 45;
             this.tbEmail.Name = "tbEmail";
             this.tbEmail.Size = new System.Drawing.Size(528, 20);
-            this.tbEmail.TabIndex = 14;
+            this.tbEmail.TabIndex = 16;
             this.tbEmail.TextChanged += new System.EventHandler(this.TbEmail_TextChanged);
             // 
             // lbEmail
@@ -308,7 +330,7 @@
             this.lbEmail.Location = new System.Drawing.Point(13, 251);
             this.lbEmail.Name = "lbEmail";
             this.lbEmail.Size = new System.Drawing.Size(35, 13);
-            this.lbEmail.TabIndex = 13;
+            this.lbEmail.TabIndex = 15;
             this.lbEmail.Text = "E-mail";
             // 
             // mtbTelefone
@@ -317,7 +339,7 @@
             this.mtbTelefone.Mask = "(##) ####-#####";
             this.mtbTelefone.Name = "mtbTelefone";
             this.mtbTelefone.Size = new System.Drawing.Size(153, 20);
-            this.mtbTelefone.TabIndex = 12;
+            this.mtbTelefone.TabIndex = 14;
             this.mtbTelefone.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MtbTelefone_MaskInputRejected);
             // 
             // lbTelefone
@@ -326,7 +348,7 @@
             this.lbTelefone.Location = new System.Drawing.Point(13, 212);
             this.lbTelefone.Name = "lbTelefone";
             this.lbTelefone.Size = new System.Drawing.Size(49, 13);
-            this.lbTelefone.TabIndex = 11;
+            this.lbTelefone.TabIndex = 13;
             this.lbTelefone.Text = "Telefone";
             // 
             // mtbCpfCnpj
@@ -336,7 +358,7 @@
             this.mtbCpfCnpj.Mask = "###.###.###-##";
             this.mtbCpfCnpj.Name = "mtbCpfCnpj";
             this.mtbCpfCnpj.Size = new System.Drawing.Size(153, 20);
-            this.mtbCpfCnpj.TabIndex = 10;
+            this.mtbCpfCnpj.TabIndex = 12;
             this.mtbCpfCnpj.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MtbCpfCnpj_MaskInputRejected);
             // 
             // lbCpf
@@ -345,7 +367,7 @@
             this.lbCpf.Location = new System.Drawing.Point(13, 173);
             this.lbCpf.Name = "lbCpf";
             this.lbCpf.Size = new System.Drawing.Size(59, 13);
-            this.lbCpf.TabIndex = 9;
+            this.lbCpf.TabIndex = 11;
             this.lbCpf.Text = "CPF/CNPJ";
             // 
             // tbComplemento
@@ -354,7 +376,7 @@
             this.tbComplemento.MaxLength = 45;
             this.tbComplemento.Name = "tbComplemento";
             this.tbComplemento.Size = new System.Drawing.Size(527, 20);
-            this.tbComplemento.TabIndex = 7;
+            this.tbComplemento.TabIndex = 9;
             this.tbComplemento.TextChanged += new System.EventHandler(this.TbComplemento_TextChanged);
             // 
             // lbComplemento
@@ -363,7 +385,7 @@
             this.lbComplemento.Location = new System.Drawing.Point(12, 88);
             this.lbComplemento.Name = "lbComplemento";
             this.lbComplemento.Size = new System.Drawing.Size(71, 13);
-            this.lbComplemento.TabIndex = 6;
+            this.lbComplemento.TabIndex = 8;
             this.lbComplemento.Text = "Complemento";
             // 
             // tbBairro
@@ -520,5 +542,7 @@
         private System.Windows.Forms.GroupBox gbSituacao;
         private System.Windows.Forms.RadioButton rbInativo;
         private System.Windows.Forms.RadioButton rbAtivo;
+        private System.Windows.Forms.TextBox tbCep;
+        private System.Windows.Forms.Label lbCep;
     }
 }

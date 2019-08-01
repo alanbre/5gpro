@@ -591,8 +591,8 @@ namespace _5gpro.Forms
         private void PreencheCaixaEPlano(NotaFiscalTerceiros notafiscal)
         {
             caixalancamento = caixalancamentoDAO.BuscaByDocumento(notafiscal.NotaFiscalTerceirosID.ToString());
-            buscaCaixa.PreencheCampos(caixalancamento.Caixa);
-            buscaPlanoDeConta.PreencheCampos(caixalancamento.PlanoConta);
+            buscaCaixa.PreencheCampos(caixalancamento?.Caixa);
+            buscaPlanoDeConta.PreencheCampos(caixalancamento?.PlanoConta);
         }
 
         private void PreencheCampos(NotaFiscalTerceiros notafiscal)

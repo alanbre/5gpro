@@ -37,11 +37,15 @@
             this.lbIp = new System.Windows.Forms.Label();
             this.btSair = new System.Windows.Forms.Button();
             this.btConfirmar = new System.Windows.Forms.Button();
+            this.tbPorta = new System.Windows.Forms.TextBox();
+            this.lbPorta = new System.Windows.Forms.Label();
             this.gbDados.SuspendLayout();
             this.SuspendLayout();
             // 
             // gbDados
             // 
+            this.gbDados.Controls.Add(this.tbPorta);
+            this.gbDados.Controls.Add(this.lbPorta);
             this.gbDados.Controls.Add(this.tbIp);
             this.gbDados.Controls.Add(this.tbSenha);
             this.gbDados.Controls.Add(this.lbSenha);
@@ -50,7 +54,7 @@
             this.gbDados.Controls.Add(this.lbIp);
             this.gbDados.Location = new System.Drawing.Point(12, 12);
             this.gbDados.Name = "gbDados";
-            this.gbDados.Size = new System.Drawing.Size(266, 142);
+            this.gbDados.Size = new System.Drawing.Size(266, 177);
             this.gbDados.TabIndex = 0;
             this.gbDados.TabStop = false;
             this.gbDados.Text = "Base de dados";
@@ -64,7 +68,7 @@
             // 
             // tbSenha
             // 
-            this.tbSenha.Location = new System.Drawing.Point(6, 110);
+            this.tbSenha.Location = new System.Drawing.Point(6, 152);
             this.tbSenha.Name = "tbSenha";
             this.tbSenha.Size = new System.Drawing.Size(254, 20);
             this.tbSenha.TabIndex = 5;
@@ -73,7 +77,7 @@
             // lbSenha
             // 
             this.lbSenha.AutoSize = true;
-            this.lbSenha.Location = new System.Drawing.Point(3, 94);
+            this.lbSenha.Location = new System.Drawing.Point(3, 136);
             this.lbSenha.Name = "lbSenha";
             this.lbSenha.Size = new System.Drawing.Size(38, 13);
             this.lbSenha.TabIndex = 4;
@@ -81,7 +85,7 @@
             // 
             // tbUsuario
             // 
-            this.tbUsuario.Location = new System.Drawing.Point(6, 71);
+            this.tbUsuario.Location = new System.Drawing.Point(6, 113);
             this.tbUsuario.Name = "tbUsuario";
             this.tbUsuario.Size = new System.Drawing.Size(254, 20);
             this.tbUsuario.TabIndex = 3;
@@ -89,7 +93,7 @@
             // lbUsuario
             // 
             this.lbUsuario.AutoSize = true;
-            this.lbUsuario.Location = new System.Drawing.Point(3, 55);
+            this.lbUsuario.Location = new System.Drawing.Point(3, 97);
             this.lbUsuario.Name = "lbUsuario";
             this.lbUsuario.Size = new System.Drawing.Size(43, 13);
             this.lbUsuario.TabIndex = 2;
@@ -106,7 +110,7 @@
             // 
             // btSair
             // 
-            this.btSair.Location = new System.Drawing.Point(93, 160);
+            this.btSair.Location = new System.Drawing.Point(93, 195);
             this.btSair.Name = "btSair";
             this.btSair.Size = new System.Drawing.Size(75, 23);
             this.btSair.TabIndex = 2;
@@ -116,7 +120,7 @@
             // 
             // btConfirmar
             // 
-            this.btConfirmar.Location = new System.Drawing.Point(12, 160);
+            this.btConfirmar.Location = new System.Drawing.Point(12, 195);
             this.btConfirmar.Name = "btConfirmar";
             this.btConfirmar.Size = new System.Drawing.Size(75, 23);
             this.btConfirmar.TabIndex = 1;
@@ -124,20 +128,37 @@
             this.btConfirmar.UseVisualStyleBackColor = true;
             this.btConfirmar.Click += new System.EventHandler(this.BtConfirmar_Click);
             // 
+            // tbPorta
+            // 
+            this.tbPorta.Location = new System.Drawing.Point(6, 71);
+            this.tbPorta.Name = "tbPorta";
+            this.tbPorta.Size = new System.Drawing.Size(254, 20);
+            this.tbPorta.TabIndex = 7;
+            this.tbPorta.Text = "3306";
+            // 
+            // lbPorta
+            // 
+            this.lbPorta.AutoSize = true;
+            this.lbPorta.Location = new System.Drawing.Point(3, 55);
+            this.lbPorta.Name = "lbPorta";
+            this.lbPorta.Size = new System.Drawing.Size(32, 13);
+            this.lbPorta.TabIndex = 6;
+            this.lbPorta.Text = "Porta";
+            // 
             // fmCfgBase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(289, 191);
+            this.ClientSize = new System.Drawing.Size(294, 224);
             this.Controls.Add(this.btSair);
             this.Controls.Add(this.gbDados);
             this.Controls.Add(this.btConfirmar);
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(305, 230);
+            this.MaximumSize = new System.Drawing.Size(310, 263);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(305, 230);
+            this.MinimumSize = new System.Drawing.Size(310, 263);
             this.Name = "fmCfgBase";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -159,5 +180,7 @@
         private System.Windows.Forms.TextBox tbUsuario;
         private System.Windows.Forms.Label lbUsuario;
         private System.Windows.Forms.TextBox tbIp;
+        private System.Windows.Forms.TextBox tbPorta;
+        private System.Windows.Forms.Label lbPorta;
     }
 }

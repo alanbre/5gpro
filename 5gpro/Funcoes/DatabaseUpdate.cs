@@ -96,6 +96,7 @@ namespace _5gpro.Funcoes
             if (versao_base == "0041_eventodeletalogado") versao_base = Migrate_0042(versao_base);
             if (versao_base == "0042_operacaomultajuroscarcapentrada") versao_base = Migrate_0043(versao_base);
             if (versao_base == "0043_ligacaocontasenotas") versao_base = Migrate_0044(versao_base);
+            if (versao_base == "0044_codigointerno") versao_base = Migrate_0045(versao_base);
 
             return true;
         }
@@ -7215,6 +7216,24 @@ namespace _5gpro.Funcoes
                 sql.insertQuery();
                 sql.Commit();
                 versao_base = "0044_codigointerno";
+            }
+            return versao_base;
+        }
+        private string Migrate_0045(string v)
+        {
+            string versao_base = v;
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.beginTransaction();
+
+                sql.Query = @"ALTER TABLE pessoa ADD COLUMN cep VARCHAR(9) DEFAULT '';";
+                sql.insertQuery();
+
+                sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
+                sql.addParam("@versao", "0045_pessoacep");
+                sql.insertQuery();
+                sql.Commit();
+                versao_base = "0045_pessoacep";
             }
             return versao_base;
         }

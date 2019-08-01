@@ -93,7 +93,7 @@ namespace _5gpro.Forms
         private void TbNomeUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbSobrenomeUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbEmailUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
-        private void MtbTelefoneUsuario_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
+        private void MtbTelefoneUsuario_TextChanged(object sender, EventArgs e) => Editando(true);
         private void TbCodigoUsuario_Leave(object sender, EventArgs e) => CarregaDados();
         private void TbSenhaUsuario_Leave(object sender, EventArgs e) => ConfirmaSenhas();
         private void TbConfirmaSenhaUsuario_Leave(object sender, EventArgs e) => ConfirmaSenhas();
@@ -446,5 +446,6 @@ namespace _5gpro.Forms
                 tbConfirmaSenhaUsuario.PasswordChar = '*';
             }
         }
+
     }
 }

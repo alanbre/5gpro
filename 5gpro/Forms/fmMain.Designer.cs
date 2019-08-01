@@ -74,7 +74,6 @@
             this.tsmiCaiCaixa = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCfg = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCfgDadosEstabelecimento = new System.Windows.Forms.ToolStripMenuItem();
-            this.testesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -154,8 +153,7 @@
             this.tsmiCar,
             this.tsmiCap,
             this.tsmiCai,
-            this.tsmiCfg,
-            this.testesToolStripMenuItem});
+            this.tsmiCfg});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1295, 24);
@@ -179,7 +177,7 @@
             this.tsmiCadCliForPessoa,
             this.tsmiCadCliForGrupoPessoa});
             this.tsmiCadCliFor.Name = "tsmiCadCliFor";
-            this.tsmiCadCliFor.Size = new System.Drawing.Size(176, 22);
+            this.tsmiCadCliFor.Size = new System.Drawing.Size(180, 22);
             this.tsmiCadCliFor.Text = "Cliente/Fornecedor";
             // 
             // tsmiCadCliForPessoa
@@ -203,7 +201,7 @@
             this.tsmiCadItensGrupo,
             this.tsmiCadItensUniMedida});
             this.tsmiCadItens.Name = "tsmiCadItens";
-            this.tsmiCadItens.Size = new System.Drawing.Size(176, 22);
+            this.tsmiCadItens.Size = new System.Drawing.Size(180, 22);
             this.tsmiCadItens.Text = "Itens";
             // 
             // tsmiCadItensItem
@@ -233,7 +231,7 @@
             this.tsmiUsuCadUsu,
             this.tsmiUsuGrupo});
             this.tsmiUsu.Name = "tsmiUsu";
-            this.tsmiUsu.Size = new System.Drawing.Size(176, 22);
+            this.tsmiUsu.Size = new System.Drawing.Size(180, 22);
             this.tsmiUsu.Text = "Usuários";
             // 
             // tsmiUsuCadUsu
@@ -253,7 +251,7 @@
             // tsmiOpe
             // 
             this.tsmiOpe.Name = "tsmiOpe";
-            this.tsmiOpe.Size = new System.Drawing.Size(176, 22);
+            this.tsmiOpe.Size = new System.Drawing.Size(180, 22);
             this.tsmiOpe.Text = "Operações";
             this.tsmiOpe.Click += new System.EventHandler(this.TsmiOpe_Click);
             // 
@@ -354,7 +352,7 @@
             this.tsmiCapPrevisao.Name = "tsmiCapPrevisao";
             this.tsmiCapPrevisao.Size = new System.Drawing.Size(172, 22);
             this.tsmiCapPrevisao.Text = "Previsão de contas";
-            this.tsmiCapPrevisao.Click += new System.EventHandler(this.tsmiCapPrevisao_Click);
+            this.tsmiCapPrevisao.Click += new System.EventHandler(this.TsmiCapPrevisao_Click);
             // 
             // tsmiCai
             // 
@@ -434,13 +432,6 @@
             this.tsmiCfgDadosEstabelecimento.Text = "Dados do estabelecimento";
             this.tsmiCfgDadosEstabelecimento.Click += new System.EventHandler(this.TsmiCfgDadosEstabelecimento_Click);
             // 
-            // testesToolStripMenuItem
-            // 
-            this.testesToolStripMenuItem.Name = "testesToolStripMenuItem";
-            this.testesToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.testesToolStripMenuItem.Text = "testes";
-            this.testesToolStripMenuItem.Click += new System.EventHandler(this.TestesToolStripMenuItem_Click);
-            // 
             // fmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -515,7 +506,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastro;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapQuitacao;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapPrevisao;
-        private System.Windows.Forms.ToolStripMenuItem testesToolStripMenuItem;
     }
 }
 

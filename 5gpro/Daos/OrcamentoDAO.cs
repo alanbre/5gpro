@@ -15,7 +15,7 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
-                            p.complemento, p.telefone, p.email, p.cpf, p.cnpj,
+                            p.complemento, p.telefone, p.email, p.cpf, p.cnpj, p.cep,
                             n.idnotafiscal, n.data_emissao, n.data_entradasaida, n.valor_total_itens AS valortotalitensnota,
                             n.valor_documento, n.desconto_total_itens AS descontototalitensnota, n.desconto_documento,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
@@ -120,7 +120,7 @@ namespace _5gpro.Daos
 
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro,
+                sql.Query = @"SELECT p.idpessoa, p.nome, p.fantasia, p.tipo_pessoa, p.rua, p.numero, p.bairro, p.cep,
                             p.complemento, p.idcidade, p.telefone, p.email,
                             o.idorcamento, o.data_cadastro, o.data_validade, o.valor_total_itens AS valortotalitensorcamento,
                             o.valor_orcamento, o.desconto_total_itens AS descontototalitensorcamento, o.desconto_orcamento
@@ -159,6 +159,7 @@ namespace _5gpro.Daos
                         pessoa.Rua = (string)d["rua"];
                         pessoa.Numero = (string)d["numero"];
                         pessoa.Bairro = (string)d["bairro"];
+                        pessoa.Cep = (string)d["cep"];
                         pessoa.Complemento = (string)d["complemento"];
                         pessoa.Cidade = cidade;
                         pessoa.Telefone = (string)d["telefone"];
@@ -287,6 +288,7 @@ namespace _5gpro.Daos
                 pessoa.Rua = (string)data[0]["rua"];
                 pessoa.Numero = (string)data[0]["numero"];
                 pessoa.Bairro = (string)data[0]["bairro"];
+                pessoa.Cep = (string)data[0]["cep"];
                 pessoa.Complemento = (string)data[0]["complemento"];
                 pessoa.Cidade = cidade;
                 pessoa.Telefone = (string)data[0]["telefone"];

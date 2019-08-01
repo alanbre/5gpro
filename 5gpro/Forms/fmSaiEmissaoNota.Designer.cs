@@ -37,8 +37,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gbDadosDocumento = new System.Windows.Forms.GroupBox();
             this.btSimular = new System.Windows.Forms.Button();
+            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
             this.lbDescnotasaida = new System.Windows.Forms.Label();
             this.tbDescricao = new System.Windows.Forms.TextBox();
+            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
             this.dtpSaida = new System.Windows.Forms.DateTimePicker();
             this.dtpEmissao = new System.Windows.Forms.DateTimePicker();
             this.lbSaida = new System.Windows.Forms.Label();
@@ -46,12 +48,23 @@
             this.tbCodigo = new System.Windows.Forms.TextBox();
             this.lbNotaFiscal = new System.Windows.Forms.Label();
             this.gbTotais = new System.Windows.Forms.GroupBox();
+            this.dbJurosTotal = new _5gpro.Controls.DecimalBox();
             this.lbJurosDoc = new System.Windows.Forms.Label();
+            this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotalItens = new _5gpro.Controls.DecimalBox();
             this.lbDescontoDocumento = new System.Windows.Forms.Label();
             this.lbDescontoTotalItens = new System.Windows.Forms.Label();
             this.lbValorTotalDocumento = new System.Windows.Forms.Label();
             this.lbTotalItens = new System.Windows.Forms.Label();
             this.gbItens = new System.Windows.Forms.GroupBox();
+            this.buscaItem1 = new _5gpro.Controls.BuscaItem();
+            this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
+            this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
+            this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
+            this.dbValorUnitItem = new _5gpro.Controls.DecimalBox();
+            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
             this.btExcluirItem = new System.Windows.Forms.Button();
             this.lbDescItem = new System.Windows.Forms.Label();
             this.lbDescontoPorc = new System.Windows.Forms.Label();
@@ -71,19 +84,7 @@
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.btCancelarNota = new System.Windows.Forms.Button();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.dbJurosTotal = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotalDocumento = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoDocumento = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoTotalItens = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotalItens = new _5gpro.Controls.DecimalBox();
-            this.buscaItem1 = new _5gpro.Controls.BuscaItem();
-            this.dbDescontoItem = new _5gpro.Controls.DecimalBox();
-            this.dbDescontoItemPorc = new _5gpro.Controls.DecimalBox();
-            this.dbValorTotItem = new _5gpro.Controls.DecimalBox();
-            this.dbValorUnitItem = new _5gpro.Controls.DecimalBox();
-            this.dbQuantidade = new _5gpro.Controls.DecimalBox();
-            this.buscaOperacao = new _5gpro.Controls.BuscaOperacao();
-            this.buscaPessoa = new _5gpro.Controls.BuscaPessoa();
+            this.btImprimir = new System.Windows.Forms.Button();
             this.gbDadosDocumento.SuspendLayout();
             this.gbTotais.SuspendLayout();
             this.gbItens.SuspendLayout();
@@ -120,6 +121,17 @@
             this.btSimular.UseVisualStyleBackColor = true;
             this.btSimular.Click += new System.EventHandler(this.BtSimular_Click);
             // 
+            // buscaOperacao
+            // 
+            this.buscaOperacao.Location = new System.Drawing.Point(313, 129);
+            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaOperacao.Name = "buscaOperacao";
+            this.buscaOperacao.Size = new System.Drawing.Size(344, 39);
+            this.buscaOperacao.TabIndex = 9;
+            this.buscaOperacao.Codigo_Leave += new _5gpro.Controls.BuscaOperacao.codigo_leaveEventHandler(this.BuscaOperacao_Codigo_Leave);
+            this.buscaOperacao.Text_Changed += new _5gpro.Controls.BuscaOperacao.text_changedEventHandler(this.BuscaOperacao_Text_Changed);
+            this.buscaOperacao.Leave += new System.EventHandler(this.BuscaOperacao_Leave);
+            // 
             // lbDescnotasaida
             // 
             this.lbDescnotasaida.AutoSize = true;
@@ -137,6 +149,16 @@
             this.tbDescricao.Size = new System.Drawing.Size(434, 49);
             this.tbDescricao.TabIndex = 7;
             this.tbDescricao.TextChanged += new System.EventHandler(this.TbDescricao_TextChanged);
+            // 
+            // buscaPessoa
+            // 
+            this.buscaPessoa.LabelText = "Cliente";
+            this.buscaPessoa.Location = new System.Drawing.Point(3, 129);
+            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
+            this.buscaPessoa.Name = "buscaPessoa";
+            this.buscaPessoa.Size = new System.Drawing.Size(310, 39);
+            this.buscaPessoa.TabIndex = 8;
+            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
             // 
             // dtpSaida
             // 
@@ -215,6 +237,19 @@
             this.gbTotais.TabStop = false;
             this.gbTotais.Text = "Totais";
             // 
+            // dbJurosTotal
+            // 
+            this.dbJurosTotal.Enabled = false;
+            this.dbJurosTotal.Location = new System.Drawing.Point(9, 148);
+            this.dbJurosTotal.Name = "dbJurosTotal";
+            this.dbJurosTotal.Size = new System.Drawing.Size(85, 22);
+            this.dbJurosTotal.TabIndex = 21;
+            this.dbJurosTotal.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
             // lbJurosDoc
             // 
             this.lbJurosDoc.AutoSize = true;
@@ -223,6 +258,60 @@
             this.lbJurosDoc.Size = new System.Drawing.Size(32, 13);
             this.lbJurosDoc.TabIndex = 20;
             this.lbJurosDoc.Text = "Juros";
+            // 
+            // dbValorTotalDocumento
+            // 
+            this.dbValorTotalDocumento.Enabled = false;
+            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 184);
+            this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
+            this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 22);
+            this.dbValorTotalDocumento.TabIndex = 19;
+            this.dbValorTotalDocumento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorTotalDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbValorTotalDocumento_Valor_Changed);
+            // 
+            // dbDescontoDocumento
+            // 
+            this.dbDescontoDocumento.Enabled = false;
+            this.dbDescontoDocumento.Location = new System.Drawing.Point(9, 111);
+            this.dbDescontoDocumento.Name = "dbDescontoDocumento";
+            this.dbDescontoDocumento.Size = new System.Drawing.Size(85, 22);
+            this.dbDescontoDocumento.TabIndex = 18;
+            this.dbDescontoDocumento.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbDescontoDocumento_Valor_Changed);
+            // 
+            // dbDescontoTotalItens
+            // 
+            this.dbDescontoTotalItens.Enabled = false;
+            this.dbDescontoTotalItens.Location = new System.Drawing.Point(9, 74);
+            this.dbDescontoTotalItens.Name = "dbDescontoTotalItens";
+            this.dbDescontoTotalItens.Size = new System.Drawing.Size(85, 22);
+            this.dbDescontoTotalItens.TabIndex = 17;
+            this.dbDescontoTotalItens.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            // 
+            // dbValorTotalItens
+            // 
+            this.dbValorTotalItens.Enabled = false;
+            this.dbValorTotalItens.Location = new System.Drawing.Point(9, 35);
+            this.dbValorTotalItens.Name = "dbValorTotalItens";
+            this.dbValorTotalItens.Size = new System.Drawing.Size(85, 22);
+            this.dbValorTotalItens.TabIndex = 16;
+            this.dbValorTotalItens.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
             // 
             // lbDescontoDocumento
             // 
@@ -290,6 +379,87 @@
             this.gbItens.TabIndex = 1;
             this.gbItens.TabStop = false;
             this.gbItens.Text = "Itens";
+            // 
+            // buscaItem1
+            // 
+            this.buscaItem1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buscaItem1.Location = new System.Drawing.Point(3, 213);
+            this.buscaItem1.Name = "buscaItem1";
+            this.buscaItem1.Size = new System.Drawing.Size(442, 39);
+            this.buscaItem1.TabIndex = 1;
+            this.buscaItem1.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.buscaItem1_Codigo_Leave);
+            this.buscaItem1.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.BuscaItem_Codigo_Changed);
+            // 
+            // dbDescontoItem
+            // 
+            this.dbDescontoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dbDescontoItem.Location = new System.Drawing.Point(75, 308);
+            this.dbDescontoItem.Name = "dbDescontoItem";
+            this.dbDescontoItem.Size = new System.Drawing.Size(62, 22);
+            this.dbDescontoItem.TabIndex = 11;
+            this.dbDescontoItem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoItem.Leave += new System.EventHandler(this.DbDescontoItem_Leave);
+            // 
+            // dbDescontoItemPorc
+            // 
+            this.dbDescontoItemPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dbDescontoItemPorc.Location = new System.Drawing.Point(6, 308);
+            this.dbDescontoItemPorc.Name = "dbDescontoItemPorc";
+            this.dbDescontoItemPorc.Size = new System.Drawing.Size(62, 22);
+            this.dbDescontoItemPorc.TabIndex = 9;
+            this.dbDescontoItemPorc.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbDescontoItemPorc.Leave += new System.EventHandler(this.DbDescontoItemPorc_Leave);
+            // 
+            // dbValorTotItem
+            // 
+            this.dbValorTotItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dbValorTotItem.Enabled = false;
+            this.dbValorTotItem.Location = new System.Drawing.Point(143, 269);
+            this.dbValorTotItem.Name = "dbValorTotItem";
+            this.dbValorTotItem.Size = new System.Drawing.Size(62, 22);
+            this.dbValorTotItem.TabIndex = 7;
+            this.dbValorTotItem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorTotItem.Leave += new System.EventHandler(this.DbValorTotItem_Leave);
+            // 
+            // dbValorUnitItem
+            // 
+            this.dbValorUnitItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dbValorUnitItem.Location = new System.Drawing.Point(75, 269);
+            this.dbValorUnitItem.Name = "dbValorUnitItem";
+            this.dbValorUnitItem.Size = new System.Drawing.Size(62, 22);
+            this.dbValorUnitItem.TabIndex = 5;
+            this.dbValorUnitItem.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbValorUnitItem.Leave += new System.EventHandler(this.DbValorUnitItem_Leave);
+            // 
+            // dbQuantidade
+            // 
+            this.dbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dbQuantidade.Location = new System.Drawing.Point(6, 271);
+            this.dbQuantidade.Name = "dbQuantidade";
+            this.dbQuantidade.Size = new System.Drawing.Size(62, 22);
+            this.dbQuantidade.TabIndex = 3;
+            this.dbQuantidade.Valor = new decimal(new int[] {
+            0,
+            0,
+            0,
+            131072});
+            this.dbQuantidade.Leave += new System.EventHandler(this.DbQuantidade_Leave);
             // 
             // btExcluirItem
             // 
@@ -519,174 +689,17 @@
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
             // 
-            // dbJurosTotal
+            // btImprimir
             // 
-            this.dbJurosTotal.Enabled = false;
-            this.dbJurosTotal.Location = new System.Drawing.Point(9, 148);
-            this.dbJurosTotal.Name = "dbJurosTotal";
-            this.dbJurosTotal.Size = new System.Drawing.Size(85, 22);
-            this.dbJurosTotal.TabIndex = 21;
-            this.dbJurosTotal.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorTotalDocumento
-            // 
-            this.dbValorTotalDocumento.Enabled = false;
-            this.dbValorTotalDocumento.Location = new System.Drawing.Point(9, 184);
-            this.dbValorTotalDocumento.Name = "dbValorTotalDocumento";
-            this.dbValorTotalDocumento.Size = new System.Drawing.Size(85, 22);
-            this.dbValorTotalDocumento.TabIndex = 19;
-            this.dbValorTotalDocumento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbValorTotalDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbValorTotalDocumento_Valor_Changed);
-            // 
-            // dbDescontoDocumento
-            // 
-            this.dbDescontoDocumento.Enabled = false;
-            this.dbDescontoDocumento.Location = new System.Drawing.Point(9, 111);
-            this.dbDescontoDocumento.Name = "dbDescontoDocumento";
-            this.dbDescontoDocumento.Size = new System.Drawing.Size(85, 22);
-            this.dbDescontoDocumento.TabIndex = 18;
-            this.dbDescontoDocumento.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbDescontoDocumento.Valor_Changed += new _5gpro.Controls.DecimalBox.valor_changedEventHandler(this.DbDescontoDocumento_Valor_Changed);
-            // 
-            // dbDescontoTotalItens
-            // 
-            this.dbDescontoTotalItens.Enabled = false;
-            this.dbDescontoTotalItens.Location = new System.Drawing.Point(9, 74);
-            this.dbDescontoTotalItens.Name = "dbDescontoTotalItens";
-            this.dbDescontoTotalItens.Size = new System.Drawing.Size(85, 22);
-            this.dbDescontoTotalItens.TabIndex = 17;
-            this.dbDescontoTotalItens.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // dbValorTotalItens
-            // 
-            this.dbValorTotalItens.Enabled = false;
-            this.dbValorTotalItens.Location = new System.Drawing.Point(9, 35);
-            this.dbValorTotalItens.Name = "dbValorTotalItens";
-            this.dbValorTotalItens.Size = new System.Drawing.Size(85, 22);
-            this.dbValorTotalItens.TabIndex = 16;
-            this.dbValorTotalItens.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            // 
-            // buscaItem1
-            // 
-            this.buscaItem1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buscaItem1.Location = new System.Drawing.Point(3, 213);
-            this.buscaItem1.Name = "buscaItem1";
-            this.buscaItem1.Size = new System.Drawing.Size(442, 39);
-            this.buscaItem1.TabIndex = 1;
-            this.buscaItem1.Codigo_Leave += new _5gpro.Controls.BuscaItem.codigo_leaveEventHandler(this.buscaItem1_Codigo_Leave);
-            this.buscaItem1.Codigo_Changed += new _5gpro.Controls.BuscaItem.codigo_changedEventHandler(this.buscaItem1_Codigo_Changed);
-            // 
-            // dbDescontoItem
-            // 
-            this.dbDescontoItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dbDescontoItem.Location = new System.Drawing.Point(75, 308);
-            this.dbDescontoItem.Name = "dbDescontoItem";
-            this.dbDescontoItem.Size = new System.Drawing.Size(62, 22);
-            this.dbDescontoItem.TabIndex = 11;
-            this.dbDescontoItem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbDescontoItem.Leave += new System.EventHandler(this.DbDescontoItem_Leave);
-            // 
-            // dbDescontoItemPorc
-            // 
-            this.dbDescontoItemPorc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dbDescontoItemPorc.Location = new System.Drawing.Point(6, 308);
-            this.dbDescontoItemPorc.Name = "dbDescontoItemPorc";
-            this.dbDescontoItemPorc.Size = new System.Drawing.Size(62, 22);
-            this.dbDescontoItemPorc.TabIndex = 9;
-            this.dbDescontoItemPorc.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbDescontoItemPorc.Leave += new System.EventHandler(this.DbDescontoItemPorc_Leave);
-            // 
-            // dbValorTotItem
-            // 
-            this.dbValorTotItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dbValorTotItem.Enabled = false;
-            this.dbValorTotItem.Location = new System.Drawing.Point(143, 269);
-            this.dbValorTotItem.Name = "dbValorTotItem";
-            this.dbValorTotItem.Size = new System.Drawing.Size(62, 22);
-            this.dbValorTotItem.TabIndex = 7;
-            this.dbValorTotItem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbValorTotItem.Leave += new System.EventHandler(this.DbValorTotItem_Leave);
-            // 
-            // dbValorUnitItem
-            // 
-            this.dbValorUnitItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dbValorUnitItem.Location = new System.Drawing.Point(75, 269);
-            this.dbValorUnitItem.Name = "dbValorUnitItem";
-            this.dbValorUnitItem.Size = new System.Drawing.Size(62, 22);
-            this.dbValorUnitItem.TabIndex = 5;
-            this.dbValorUnitItem.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbValorUnitItem.Leave += new System.EventHandler(this.DbValorUnitItem_Leave);
-            // 
-            // dbQuantidade
-            // 
-            this.dbQuantidade.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dbQuantidade.Location = new System.Drawing.Point(6, 271);
-            this.dbQuantidade.Name = "dbQuantidade";
-            this.dbQuantidade.Size = new System.Drawing.Size(62, 22);
-            this.dbQuantidade.TabIndex = 3;
-            this.dbQuantidade.Valor = new decimal(new int[] {
-            0,
-            0,
-            0,
-            131072});
-            this.dbQuantidade.Leave += new System.EventHandler(this.DbQuantidade_Leave);
-            // 
-            // buscaOperacao
-            // 
-            this.buscaOperacao.Location = new System.Drawing.Point(313, 129);
-            this.buscaOperacao.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaOperacao.Name = "buscaOperacao";
-            this.buscaOperacao.Size = new System.Drawing.Size(344, 39);
-            this.buscaOperacao.TabIndex = 9;
-            this.buscaOperacao.Codigo_Leave += new _5gpro.Controls.BuscaOperacao.codigo_leaveEventHandler(this.BuscaOperacao_Codigo_Leave);
-            this.buscaOperacao.Text_Changed += new _5gpro.Controls.BuscaOperacao.text_changedEventHandler(this.BuscaOperacao_Text_Changed);
-            this.buscaOperacao.Leave += new System.EventHandler(this.BuscaOperacao_Leave_1);
-            // 
-            // buscaPessoa
-            // 
-            this.buscaPessoa.LabelText = "Cliente";
-            this.buscaPessoa.Location = new System.Drawing.Point(3, 129);
-            this.buscaPessoa.Margin = new System.Windows.Forms.Padding(0);
-            this.buscaPessoa.Name = "buscaPessoa";
-            this.buscaPessoa.Size = new System.Drawing.Size(310, 39);
-            this.buscaPessoa.TabIndex = 8;
-            this.buscaPessoa.Text_Changed += new _5gpro.Controls.BuscaPessoa.text_changedEventHandler(this.BuscaPessoa_Text_Changed);
+            this.btImprimir.Image = global::_5gpro.Properties.Resources.print_48px;
+            this.btImprimir.Location = new System.Drawing.Point(9, 379);
+            this.btImprimir.Margin = new System.Windows.Forms.Padding(2);
+            this.btImprimir.MinimumSize = new System.Drawing.Size(48, 48);
+            this.btImprimir.Name = "btImprimir";
+            this.btImprimir.Size = new System.Drawing.Size(48, 48);
+            this.btImprimir.TabIndex = 8;
+            this.btImprimir.UseVisualStyleBackColor = true;
+            this.btImprimir.Click += new System.EventHandler(this.BtImprimir_Click);
             // 
             // fmSaiEmissaoNota
             // 
@@ -694,6 +707,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1239, 572);
+            this.Controls.Add(this.btImprimir);
             this.Controls.Add(this.btCancelarNota);
             this.Controls.Add(this.menuVertical);
             this.Controls.Add(this.tbAjuda);
@@ -708,6 +722,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Emissão de notas";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FmSaiEmissaoNota_FormClosing);
+            this.Load += new System.EventHandler(this.FmSaiEmissaoNota_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FmEstoqueEntradaDocumentos_KeyDown);
             this.gbDadosDocumento.ResumeLayout(false);
             this.gbDadosDocumento.PerformLayout();
@@ -771,5 +786,6 @@
         private Controls.BuscaItem buscaItem1;
         private System.Windows.Forms.Button btSimular;
         private System.Windows.Forms.Button btCancelarNota;
+        private System.Windows.Forms.Button btImprimir;
     }
 }

@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.7.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.11.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -323,6 +323,14 @@
       <DependentUpon>fmCfgBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Funcoes\DadosEstaticos.cs" />
+    <Compile Include="Reports\dsImpNotaSaida.cs">
+      <DependentUpon>dsImpNotaSaida.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\dsImpNotaSaida.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsImpNotaSaida.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\impNotaSaida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -908,7 +916,7 @@
     <EmbeddedResource Include="Reports\fmRltNotasEntradas.resx">
       <DependentUpon>fmRltNotasEntradas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\imNotaSaida.rdlc" />
+    <EmbeddedResource Include="Reports\impNotaSaida.rdlc" />
     <EmbeddedResource Include="Reports\impNotaSaida.resx">
       <DependentUpon>impNotaSaida.cs</DependentUpon>
     </EmbeddedResource>
@@ -1077,6 +1085,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Reports\dsImpNotaSaida.xsc">
+      <DependentUpon>dsImpNotaSaida.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\dsImpNotaSaida.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsImpNotaSaida.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\dsImpNotaSaida.xss">
+      <DependentUpon>dsImpNotaSaida.xsd</DependentUpon>
+    </None>
     <None Include="Reports\dsItens.xsc">
       <DependentUpon>dsItens.xsd</DependentUpon>
     </None>

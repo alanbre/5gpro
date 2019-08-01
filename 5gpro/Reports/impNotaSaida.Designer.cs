@@ -34,7 +34,7 @@
             // rvNotaSaida
             // 
             this.rvNotaSaida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rvNotaSaida.LocalReport.ReportEmbeddedResource = "_5gpro.Reports.impOrcamento.rdlc";
+            this.rvNotaSaida.LocalReport.ReportEmbeddedResource = "_5gpro.Reports.impNotaSaida.rdlc";
             this.rvNotaSaida.Location = new System.Drawing.Point(0, 0);
             this.rvNotaSaida.Name = "rvNotaSaida";
             this.rvNotaSaida.ServerReport.BearerToken = null;
@@ -54,6 +54,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Impressão de nota de saída";
+            this.Load += new System.EventHandler(this.ImpNotaSaida_Load);
             this.ResumeLayout(false);
 
         }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.pnDadosGerais = new System.Windows.Forms.Panel();
+            this.buscaGrupoUsuario = new _5gpro.Controls.BuscaGrupoUsuario();
             this.lbConfirmaSenha = new System.Windows.Forms.Label();
             this.cbMostrarSenhaUsuario = new System.Windows.Forms.CheckBox();
             this.tbConfirmaSenhaUsuario = new System.Windows.Forms.TextBox();
@@ -48,7 +49,6 @@
             this.lbEmailUsuario = new System.Windows.Forms.Label();
             this.tbAjuda = new System.Windows.Forms.TextBox();
             this.menuVertical = new _5gpro.Controls.MenuVertical();
-            this.buscaGrupoUsuario = new _5gpro.Controls.BuscaGrupoUsuario();
             this.pnDadosGerais.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +69,13 @@
             this.pnDadosGerais.Name = "pnDadosGerais";
             this.pnDadosGerais.Size = new System.Drawing.Size(750, 184);
             this.pnDadosGerais.TabIndex = 0;
+            // 
+            // buscaGrupoUsuario
+            // 
+            this.buscaGrupoUsuario.Location = new System.Drawing.Point(3, 131);
+            this.buscaGrupoUsuario.Name = "buscaGrupoUsuario";
+            this.buscaGrupoUsuario.Size = new System.Drawing.Size(442, 39);
+            this.buscaGrupoUsuario.TabIndex = 8;
             // 
             // lbConfirmaSenha
             // 
@@ -207,7 +214,7 @@
             this.mtbTelefoneUsuario.Name = "mtbTelefoneUsuario";
             this.mtbTelefoneUsuario.Size = new System.Drawing.Size(153, 20);
             this.mtbTelefoneUsuario.TabIndex = 7;
-            this.mtbTelefoneUsuario.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.MtbTelefoneUsuario_MaskInputRejected);
+            this.mtbTelefoneUsuario.TextChanged += new System.EventHandler(this.MtbTelefoneUsuario_TextChanged);
             // 
             // lbTelefoneUsuario
             // 
@@ -262,13 +269,6 @@
             this.menuVertical.Anterior_Clicked += new _5gpro.Controls.MenuVertical.anteriorEventHandler(this.MenuVertical_Anterior_Clicked);
             this.menuVertical.Proximo_Clicked += new _5gpro.Controls.MenuVertical.proximoEventHandler(this.MenuVertical_Proximo_Clicked);
             this.menuVertical.Excluir_Clicked += new _5gpro.Controls.MenuVertical.excluirEventHandler(this.MenuVertical_Excluir_Clicked);
-            // 
-            // buscaGrupoUsuario
-            // 
-            this.buscaGrupoUsuario.Location = new System.Drawing.Point(3, 131);
-            this.buscaGrupoUsuario.Name = "buscaGrupoUsuario";
-            this.buscaGrupoUsuario.Size = new System.Drawing.Size(442, 39);
-            this.buscaGrupoUsuario.TabIndex = 8;
             // 
             // fmCadastroUsuario
             // 

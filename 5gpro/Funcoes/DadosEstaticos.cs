@@ -32,6 +32,7 @@ namespace _5gpro.Funcoes
             Configuracao.BancoIP = data["Base de dados"]["ip"];
             Configuracao.BancoUsuario = data["Base de dados"]["usuario"];
             Configuracao.BancoSenha = data["Base de dados"]["senha"];
+            Configuracao.BancoPorta = data["Base de dados"]["porta"];
         }
         public static void SalvaDadoEstatico(string grupo, string item, string valor)
         {

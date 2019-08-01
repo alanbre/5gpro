@@ -289,17 +289,10 @@ namespace _5gpro
             var fmCfgDadosEstabelecimento = new fmCfgDadosEstabelecimento();
             fmCfgDadosEstabelecimento.Show(this);
         }
-
-        private void tsmiCapPrevisao_Click(object sender, EventArgs e)
+        private void TsmiCapPrevisao_Click(object sender, EventArgs e)
         {
             var fmCapPrevisao = new fmCapPrevisao();
             fmCapPrevisao.Show(this);
-        }
-
-        private void TestesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var fmteste = new impNotaSaida();
-            fmteste.Show(this);
         }
     }
 }

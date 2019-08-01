@@ -100,6 +100,7 @@ namespace _5gpro.Forms
         private void MtbCpfCnpj_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void MtbTelefone_MaskInputRejected(object sender, MaskInputRejectedEventArgs e) => Editando(true);
         private void TbEmail_TextChanged(object sender, EventArgs e) => Editando(true);
+        private void TbCep_TextChanged(object sender, EventArgs e) => Editando(true);
         private void BuscaGrupoPessoa_Text_Changed(object sender, EventArgs e)
         {
             Editando(true);
@@ -215,6 +216,7 @@ namespace _5gpro.Forms
             pessoa.Rua = tbRua.Text;
             pessoa.Numero = tbNumero.Text;
             pessoa.Bairro = tbBairro.Text;
+            pessoa.Cep = tbCep.Text;
             pessoa.Complemento = tbComplemento.Text;
             pessoa.Cidade = buscaCidade.cidade;
             pessoa.CpfCnpj = mtbCpfCnpj.TextNoMask();
@@ -504,6 +506,7 @@ namespace _5gpro.Forms
                 tbRua.Text = pessoa.Rua;
                 tbNumero.Text = pessoa.Numero;
                 tbBairro.Text = pessoa.Bairro;
+                tbCep.Text = pessoa.Cep;
                 tbComplemento.Text = pessoa.Complemento;
                 mtbCpfCnpj.Text = pessoa.CpfCnpj;
                 mtbTelefone.Text = pessoa.Telefone;

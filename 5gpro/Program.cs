@@ -15,7 +15,6 @@ namespace _5gpro
         [STAThread]
         static void Main()
         {
-
             var culture = CultureInfo.GetCultureInfo("pt-BR");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
@@ -27,7 +26,7 @@ namespace _5gpro
 
             DadosEstaticos.LeDadosEstaticos();
 
-            if (Configuracao.BancoIP == null || Configuracao.BancoUsuario == null || Configuracao.BancoSenha == null)
+            if (Configuracao.BancoIP == null || Configuracao.BancoUsuario == null || Configuracao.BancoSenha == null || Configuracao.BancoPorta == null)
             {
                 var fmCfgBase = new fmCfgBase();
                 fmCfgBase.ShowDialog();

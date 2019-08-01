@@ -115,6 +115,8 @@ namespace _5gpro.Daos
                             i.codigointerno, i.descitem, i.referencia,
                             SUM(nftitem.quantidade) as qtd, i.valorsaida, SUM(nftitem.valor_total) AS total
                             FROM nota_fiscal_terceiros nft
+                            LEFT JOIN pessoa p
+                            ON p.idpessoa = nft.idpessoa
                             LEFT JOIN nota_fiscal_terceiros_has_item nftitem
                             ON nft.idnota_fiscal_terceiros = nftitem.idnota_fiscal_terceiros
                             LEFT JOIN item i ON i.iditem = nftitem.iditem

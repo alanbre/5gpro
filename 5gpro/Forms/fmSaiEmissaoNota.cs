@@ -1,6 +1,7 @@
 ﻿using _5gpro.Daos;
 using _5gpro.Entities;
 using _5gpro.Funcoes;
+using _5gpro.Reports;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,6 +19,7 @@ namespace _5gpro.Forms
         private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
 
+        private DataTable rel = new DataTable();
         private ContaReceber contaReceber;
         private ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
 
@@ -49,6 +51,14 @@ namespace _5gpro.Forms
         }
 
 
+        private void FmSaiEmissaoNota_Load(object sender, EventArgs e)
+        {
+            rel.Columns.Add("produto", typeof(string));
+            rel.Columns.Add("codigo", typeof(string));
+            rel.Columns.Add("quantidade", typeof(decimal));
+            rel.Columns.Add("valorunit", typeof(decimal));
+            rel.Columns.Add("valortotal", typeof(decimal));
+        }
         private void FmEstoqueEntradaDocumentos_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
@@ -163,6 +173,78 @@ namespace _5gpro.Forms
             CalculaPorcDescontoItem();
             CalculaTotalItem();
         }
+        private void BuscaOperacao_Codigo_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+        private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+        private void BtCancelarNota_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Deseja realmente cancelar esta nota?",
+                "Cancelamento",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                return;
+            }
+            if (MessageBox.Show("Deseja adicionar multa ao cancelamento?",
+                "Multa por cancelamento",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                fmDecimal fmdecimal = new fmDecimal("Porcentagem da Multa", this);
+                fmdecimal.ShowDialog();
+                if (fmdecimal.fmdecimalvalor > 0)
+                {
+                    multacancelamento = fmdecimal.fmdecimalvalor;
+                }
+                if (MessageBox.Show("Concluir cancelamento com " + multacancelamento + "% de multa ?",
+                    "Cancelamento",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation) == DialogResult.No)
+                {
+                    return;
+                }
+                CancelarNota();
+                return;
+            }
+            multacancelamento = 0m;
+            if (MessageBox.Show("Concluir cancelamento sem multa ?",
+                    "Cancelamento",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation) == DialogResult.No)
+            {
+                return;
+            }
+            CancelarNota();
+        }
+        private void BtImprimir_Click(object sender, EventArgs e)
+        {
+            if (notaFiscalPropria == null) return;
+            var impNotaSaida = new impNotaSaida(rel, notaFiscalPropria);
+            impNotaSaida.ShowDialog(this);
+        }
+        private void BtSimular_Click(object sender, EventArgs e)
+        {
+            GerarParcelas();
+            if (buscaOperacao.operacao != null)
+            {
+                var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
+                fmvisualizaparcelas.Show(this);
+            }
+
+        }
+        private void BuscaOperacao_Leave(object sender, EventArgs e)
+        {
+            CalculaTotalDocumento();
+        }
+
+
+
+
         private void Novo()
         {
             if (editando)
@@ -269,6 +351,7 @@ namespace _5gpro.Forms
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
                     GerarContaReceber();
                     Editando(false);
+                    Recarrega();
                 }
                 else if (resultado == 2)
                 {
@@ -278,11 +361,12 @@ namespace _5gpro.Forms
 
                     tbAjuda.Text = "Dados atualizados com sucesso";
                     Editando(false);
+                    Recarrega();
                 }
                 notaFiscalPropria = notaFiscalPropriaNova;
             }
+            
         }
-
         private void GerarContaReceber()
         {
             GerarParcelas();
@@ -335,7 +419,6 @@ namespace _5gpro.Forms
             }
 
         }
-
         private void Recarrega()
         {
             if (editando)
@@ -564,7 +647,6 @@ namespace _5gpro.Forms
             btExcluirItem.Enabled = false;
             LimpaCamposItem(true);
         }
-
         private void BuscaItem()
         {
             if (buscaItem1.item == null)
@@ -600,8 +682,6 @@ namespace _5gpro.Forms
                 Editando(true);
             }
         }
-
-
         private void PreencheCampos(NotaFiscalPropria notafiscal)
         {
             ignoracheckevent = true;
@@ -628,9 +708,17 @@ namespace _5gpro.Forms
         }
         private void PreencheGridItens(List<NotaFiscalPropriaItem> itens)
         {
+            rel.Rows.Clear();
             foreach (var i in itens)
             {
                 dgvItens.Rows.Add(i.Item.ItemID, i.Item.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
+                rel.Rows.Add(
+                    i.Item.Descricao,
+                    i.Item.CodigoInterno,
+                    i.Quantidade,
+                    i.ValorUnitario,
+                    i.ValorTotal - i.Desconto
+                    );
             }
             dgvItens.Refresh();
         }
@@ -709,8 +797,7 @@ namespace _5gpro.Forms
                 dbDescontoDocumento.Valor = 0m;
             }
         }
-
-        private void buscaItem1_Codigo_Changed(object sender, EventArgs e)
+        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
         {
             if (buscaItem1.item == null)
                 return;
@@ -753,69 +840,6 @@ namespace _5gpro.Forms
                 this.parcelas.Add(par);
             }
         }
-
-        private void BtVisualizarparcelas_Click(object sender, EventArgs e)
-        {
-            var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
-            fmvisualizaparcelas.Show(this);
-        }
-
-        private void BuscaOperacao_Leave(object sender, EventArgs e)
-        {
-            CalculaTotalDocumento();
-        }
-
-        private void BuscaOperacao_Codigo_Leave(object sender, EventArgs e)
-        {
-            CalculaTotalDocumento();
-        }
-
-        private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
-        {
-            CalculaTotalDocumento();
-        }
-
-        private void BtCancelarNota_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Deseja realmente cancelar esta nota?",
-                "Cancelamento",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Exclamation) == DialogResult.No)
-            {
-                return;
-            }
-            if (MessageBox.Show("Deseja adicionar multa ao cancelamento?",
-                "Multa por cancelamento",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                fmDecimal fmdecimal = new fmDecimal("Porcentagem da Multa", this);
-                fmdecimal.ShowDialog();
-                if (fmdecimal.fmdecimalvalor > 0)
-                {
-                    multacancelamento = fmdecimal.fmdecimalvalor;
-                }
-                if (MessageBox.Show("Concluir cancelamento com " + multacancelamento + "% de multa ?",
-                    "Cancelamento",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Exclamation) == DialogResult.No)
-                {
-                    return;
-                }
-                CancelarNota();
-                return;
-            }
-            multacancelamento = 0m;
-            if (MessageBox.Show("Concluir cancelamento sem multa ?",
-                    "Cancelamento",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Exclamation) == DialogResult.No)
-            {
-                return;
-            }
-            CancelarNota();
-        }
-
         private void CancelarNota()
         {
             decimal Pago = 0, Aberto = 0, Devolucao = 0;
@@ -971,23 +995,6 @@ namespace _5gpro.Forms
             }
 
         }
-
-        private void BtSimular_Click(object sender, EventArgs e)
-        {
-            GerarParcelas();
-            if (buscaOperacao.operacao != null)
-            {
-                var fmvisualizaparcelas = new fmVisualizaParcelas(parcelas);
-                fmvisualizaparcelas.Show(this);
-            }
-
-        }
-
-        private void BuscaOperacao_Leave_1(object sender, EventArgs e)
-        {
-            CalculaTotalDocumento();
-        }
-
         private void SetarNivel()
         {
             //Busca o usuário logado no pc, através do MAC
