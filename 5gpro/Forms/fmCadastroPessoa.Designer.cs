@@ -162,7 +162,8 @@
             this.cblAtuacao.FormattingEnabled = true;
             this.cblAtuacao.Items.AddRange(new object[] {
             "Cliente",
-            "Fornecedor"});
+            "Fornecedor",
+            "Vendedor(a)"});
             this.cblAtuacao.Location = new System.Drawing.Point(6, 19);
             this.cblAtuacao.Name = "cblAtuacao";
             this.cblAtuacao.Size = new System.Drawing.Size(120, 90);

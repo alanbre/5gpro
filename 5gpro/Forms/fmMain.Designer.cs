@@ -38,7 +38,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerRelogio = new System.Windows.Forms.Timer(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.msMenu = new System.Windows.Forms.MenuStrip();
             this.tsmiCadastros = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadCliFor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadCliForPessoa = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +47,7 @@
             this.tsmiCadItensItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadItensGrupo = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiCadItensUniMedida = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCadItemAjustePrecos = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsuCadUsu = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiUsuGrupo = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +77,7 @@
             this.tsmiCfgDadosEstabelecimento = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.msMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // tsmiCadastroContaReceber
@@ -143,9 +144,9 @@
             this.panel1.Size = new System.Drawing.Size(53, 511);
             this.panel1.TabIndex = 8;
             // 
-            // menuStrip1
+            // msMenu
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCadastros,
             this.tsmiOrcamentos,
             this.tsmiEntradas,
@@ -154,11 +155,11 @@
             this.tsmiCap,
             this.tsmiCai,
             this.tsmiCfg});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1295, 24);
-            this.menuStrip1.TabIndex = 9;
-            this.menuStrip1.Text = "menuStrip1";
+            this.msMenu.Location = new System.Drawing.Point(0, 0);
+            this.msMenu.Name = "msMenu";
+            this.msMenu.Size = new System.Drawing.Size(1295, 24);
+            this.msMenu.TabIndex = 9;
+            this.msMenu.Text = "Menu";
             // 
             // tsmiCadastros
             // 
@@ -199,7 +200,8 @@
             this.tsmiCadItens.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiCadItensItem,
             this.tsmiCadItensGrupo,
-            this.tsmiCadItensUniMedida});
+            this.tsmiCadItensUniMedida,
+            this.tsmiCadItemAjustePrecos});
             this.tsmiCadItens.Name = "tsmiCadItens";
             this.tsmiCadItens.Size = new System.Drawing.Size(180, 22);
             this.tsmiCadItens.Text = "Itens";
@@ -207,23 +209,30 @@
             // tsmiCadItensItem
             // 
             this.tsmiCadItensItem.Name = "tsmiCadItensItem";
-            this.tsmiCadItensItem.Size = new System.Drawing.Size(177, 22);
+            this.tsmiCadItensItem.Size = new System.Drawing.Size(209, 22);
             this.tsmiCadItensItem.Text = "Item";
             this.tsmiCadItensItem.Click += new System.EventHandler(this.TsmiCadItensItem_Click);
             // 
             // tsmiCadItensGrupo
             // 
             this.tsmiCadItensGrupo.Name = "tsmiCadItensGrupo";
-            this.tsmiCadItensGrupo.Size = new System.Drawing.Size(177, 22);
+            this.tsmiCadItensGrupo.Size = new System.Drawing.Size(209, 22);
             this.tsmiCadItensGrupo.Text = "Grupo de itens";
             this.tsmiCadItensGrupo.Click += new System.EventHandler(this.TsmiCadItensGrupo_Click);
             // 
             // tsmiCadItensUniMedida
             // 
             this.tsmiCadItensUniMedida.Name = "tsmiCadItensUniMedida";
-            this.tsmiCadItensUniMedida.Size = new System.Drawing.Size(177, 22);
+            this.tsmiCadItensUniMedida.Size = new System.Drawing.Size(209, 22);
             this.tsmiCadItensUniMedida.Text = "Unidade de medida";
             this.tsmiCadItensUniMedida.Click += new System.EventHandler(this.TsmiCadItensUniMedida_Click);
+            // 
+            // tsmiCadItemAjustePrecos
+            // 
+            this.tsmiCadItemAjustePrecos.Name = "tsmiCadItemAjustePrecos";
+            this.tsmiCadItemAjustePrecos.Size = new System.Drawing.Size(209, 22);
+            this.tsmiCadItemAjustePrecos.Text = "Ajustes de preços em lote";
+            this.tsmiCadItemAjustePrecos.Visible = false;
             // 
             // tsmiUsu
             // 
@@ -281,7 +290,7 @@
             // tsmiEntNota
             // 
             this.tsmiEntNota.Name = "tsmiEntNota";
-            this.tsmiEntNota.Size = new System.Drawing.Size(159, 22);
+            this.tsmiEntNota.Size = new System.Drawing.Size(180, 22);
             this.tsmiEntNota.Text = "Nota de entrada";
             this.tsmiEntNota.Click += new System.EventHandler(this.TsmiEntNota_Click);
             // 
@@ -312,14 +321,14 @@
             // tsmiCarCadastro
             // 
             this.tsmiCarCadastro.Name = "tsmiCarCadastro";
-            this.tsmiCarCadastro.Size = new System.Drawing.Size(171, 22);
+            this.tsmiCarCadastro.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarCadastro.Text = "Cadastro de conta";
             this.tsmiCarCadastro.Click += new System.EventHandler(this.TsmiCarCadastro_Click);
             // 
             // tsmiCarQuitacao
             // 
             this.tsmiCarQuitacao.Name = "tsmiCarQuitacao";
-            this.tsmiCarQuitacao.Size = new System.Drawing.Size(171, 22);
+            this.tsmiCarQuitacao.Size = new System.Drawing.Size(180, 22);
             this.tsmiCarQuitacao.Text = "Quitação de conta";
             this.tsmiCarQuitacao.Click += new System.EventHandler(this.TsmiCarQuitacao_Click);
             // 
@@ -336,21 +345,21 @@
             // tsmiCapCadastro
             // 
             this.tsmiCapCadastro.Name = "tsmiCapCadastro";
-            this.tsmiCapCadastro.Size = new System.Drawing.Size(172, 22);
+            this.tsmiCapCadastro.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapCadastro.Text = "Cadastro de conta";
             this.tsmiCapCadastro.Click += new System.EventHandler(this.TsmiCapCadastro_Click);
             // 
             // tsmiCapQuitacao
             // 
             this.tsmiCapQuitacao.Name = "tsmiCapQuitacao";
-            this.tsmiCapQuitacao.Size = new System.Drawing.Size(172, 22);
+            this.tsmiCapQuitacao.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapQuitacao.Text = "Quitação";
             this.tsmiCapQuitacao.Click += new System.EventHandler(this.TsmiCapQuitacao_Click);
             // 
             // tsmiCapPrevisao
             // 
             this.tsmiCapPrevisao.Name = "tsmiCapPrevisao";
-            this.tsmiCapPrevisao.Size = new System.Drawing.Size(172, 22);
+            this.tsmiCapPrevisao.Size = new System.Drawing.Size(180, 22);
             this.tsmiCapPrevisao.Text = "Previsão de contas";
             this.tsmiCapPrevisao.Click += new System.EventHandler(this.TsmiCapPrevisao_Click);
             // 
@@ -442,9 +451,9 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelSuperior);
             this.Controls.Add(this.panelEsquerdo);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.msMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.msMenu;
             this.Name = "fmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "5GPro";
@@ -454,8 +463,8 @@
             this.panelSuperior.ResumeLayout(false);
             this.panelSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.msMenu.ResumeLayout(false);
+            this.msMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -470,7 +479,7 @@
         private System.Windows.Forms.Label lbRelogio;
         private System.Windows.Forms.Timer timerRelogio;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip msMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadastros;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadCliFor;
         private System.Windows.Forms.ToolStripMenuItem tsmiCadCliForPessoa;
@@ -506,6 +515,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiCarCadastro;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapQuitacao;
         private System.Windows.Forms.ToolStripMenuItem tsmiCapPrevisao;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCadItemAjustePrecos;
     }
 }
 

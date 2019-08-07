@@ -97,6 +97,7 @@ namespace _5gpro.Funcoes
             if (versao_base == "0042_operacaomultajuroscarcapentrada") versao_base = Migrate_0043(versao_base);
             if (versao_base == "0043_ligacaocontasenotas") versao_base = Migrate_0044(versao_base);
             if (versao_base == "0044_codigointerno") versao_base = Migrate_0045(versao_base);
+            if (versao_base == "0045_pessoacep") versao_base = Migrate_0046(versao_base);
 
             return true;
         }
@@ -7234,6 +7235,65 @@ namespace _5gpro.Funcoes
                 sql.insertQuery();
                 sql.Commit();
                 versao_base = "0045_pessoacep";
+            }
+            return versao_base;
+        }
+        private string Migrate_0046(string v)
+        {
+            string versao_base = v;
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.beginTransaction();
+
+                sql.Query = @"ALTER TABLE notafiscal   
+	                        ADD COLUMN idpessoa_vendedor INT(11) NULL AFTER situacao, 
+                            ADD  KEY fk_notafiscal_pessoa2_idx (idpessoa_vendedor), 
+                            ADD CONSTRAINT fk_notafiscal_pessoa2 FOREIGN KEY (idpessoa_vendedor)
+                                REFERENCES pessoa(idpessoa);";
+                sql.insertQuery();
+
+                sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
+                sql.addParam("@versao", "0046_vendedoranf");
+                sql.insertQuery();
+                sql.Commit();
+                versao_base = "0046_vendedoranf";
+            }
+            return versao_base;
+        }
+        private string Migrate_0047(string v)
+        {
+            string versao_base = v;
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"ALTER TABLE item  
+	                        ADD COLUMN idusuario INT(11) DEFAULT NULL NULL, 
+                            ADD KEY fk_item_usuario_idx (idusuario), 
+                            ADD CONSTRAINT fk_item_usuario FOREIGN KEY (idusuario)
+                                REFERENCES usuario(idusuario)";
+                sql.insertQuery();
+
+                sql.Query = @"ALTER TABLE pessoa  
+	                        ADD COLUMN idusuario INT(11) DEFAULT NULL NULL, 
+                            ADD KEY fk_pessoa_usuario_idx (idusuario), 
+                            ADD CONSTRAINT fk_pessoa_usuario FOREIGN KEY (idusuario)
+                                REFERENCES usuario(idusuario)";
+                sql.insertQuery();
+
+
+                sql.Query = @"INSERT INTO permissao (nome, codigo) VALUES (@nome, @codigo)";
+                sql.addParam("@nome", "Alteração de preços de itens em lote");
+                sql.addParam("@codigo", "010301");
+
+                //sql.Query = @"INSERT INTO permissao (nome, codigo) VALUES (080200)";
+                //sql.insertQuery();
+
+
+                sql.Query = @"INSERT INTO migrations (nome) VALUES (@versao)";
+                sql.addParam("@versao", "0046_vendedoranf");
+                sql.insertQuery();
+                sql.Commit();
+                versao_base = "0046_vendedoranf";
             }
             return versao_base;
         }

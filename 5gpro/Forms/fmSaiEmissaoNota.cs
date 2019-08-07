@@ -13,23 +13,26 @@ namespace _5gpro.Forms
 {
     public partial class fmSaiEmissaoNota : Form
     {
-        private NotaFiscalPropria notaFiscalPropriaNova;
         private readonly NotaFiscalPropriaDAO notaFiscalPropriaDAO = new NotaFiscalPropriaDAO();
-        private NotaFiscalPropria notaFiscalPropria = new NotaFiscalPropria();
-        private NotaFiscalPropriaItem itemSelecionado;
-        private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
-
-        private DataTable rel = new DataTable();
-        private ContaReceber contaReceber;
-        private ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
-
-        private CaixaLancamento caixalancemnto;
-        private CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
-
-        private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
+        private readonly ContaReceberDAO contaReceberDAO = new ContaReceberDAO();
+        private readonly CaixaLancamentoDAO caixalancamentoDAO = new CaixaLancamentoDAO();
 
         private readonly Validacao validacao = new Validacao();
+
+        private NotaFiscalPropria notaFiscalPropriaNova = null;
+        private NotaFiscalPropria notaFiscalPropria = null;
+        private List<NotaFiscalPropriaItem> itens = new List<NotaFiscalPropriaItem>();
+        private List<NotaFiscalPropriaItem> itensNovos = new List<NotaFiscalPropriaItem>();
+        private NotaFiscalPropriaItem itemSelecionado;
+
+        private DataTable rel = new DataTable();
+
+        private ContaReceber contaReceber;
+        private CaixaLancamento caixalancemnto;
+        private List<ParcelaContaReceber> parcelas = new List<ParcelaContaReceber>();
+
+
 
         private int Nivel;
         private string CodGrupoUsuario;
@@ -92,7 +95,7 @@ namespace _5gpro.Forms
         private void BtNovoItem_Click(object sender, EventArgs e)
         {
             LimpaCamposItem(true);
-            buscaItem1.Focus();
+            buscaItem.Focus();
             itemSelecionado = null;
             btInserirItem.Text = "Inserir";
         }
@@ -120,8 +123,20 @@ namespace _5gpro.Forms
                 btExcluirItem.Enabled = true;
             }
         }
+        private void DgvItens_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvItens.SelectedRows.Count > 0)
+            {
+                int selectedRowIndex = dgvItens.SelectedCells[0].RowIndex;
+                DataGridViewRow selectedRow = dgvItens.Rows[selectedRowIndex];
+                itemSelecionado = itens.Find(i => i.Item.ItemID == Convert.ToInt32(selectedRow.Cells[0].Value));
+                btInserirItem.Text = "Alterar";
+                PreencheCamposItem(itemSelecionado);
+                btExcluirItem.Enabled = true;
+            }
+        }
         private void TbCodigo_Leave(object sender, EventArgs e) => CarregaDados();
-        private void buscaItem1_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
+        private void BuscaItem_Codigo_Leave(object sender, EventArgs e) => BuscaItem();
         private void TbCodigo_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F3 && !editando)
@@ -148,6 +163,14 @@ namespace _5gpro.Forms
         }
         private void DbDescontoDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
         private void DbValorTotalDocumento_Valor_Changed(object sender, EventArgs e) => Editando(true);
+        private void BpVendedor_Text_Changed(object sender, EventArgs e) => Editando(true);
+        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
+        {
+            if (buscaItem.item == null)
+                return;
+
+            dbValorUnitItem.Valor = buscaItem.item.ValorUnitario;
+        }
         private void DbQuantidade_Leave(object sender, EventArgs e)
         {
             CalculaTotalItem();
@@ -176,6 +199,7 @@ namespace _5gpro.Forms
         private void BuscaOperacao_Text_Changed(object sender, EventArgs e)
         {
             CalculaTotalDocumento();
+            Editando(true);
         }
         private void BtCancelarNota_Click(object sender, EventArgs e)
         {
@@ -264,6 +288,7 @@ namespace _5gpro.Forms
             {
                 notaFiscalPropria = buscaNotaFiscalPropria.notaFiscalPropriaSelecionada;
                 notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
+                if (notaFiscalPropria.Vendedor?.PessoaID > 0) { notaFiscalPropria.Vendedor = pessoaDAO.BuscaByID(notaFiscalPropria.Vendedor.PessoaID); }
                 PreencheCampos(notaFiscalPropria);
             }
         }
@@ -276,54 +301,55 @@ namespace _5gpro.Forms
             }
             var ok = false;
 
+            if (itens.Count <= 0)
+            {
+                MessageBox.Show("Uma nota não pode ser salva sem itens!",
+               "Problema ao salvar",
+               MessageBoxButtons.OK,
+               MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (buscaOperacao.operacao == null)
+            {
+                MessageBox.Show("Escolha uma operação!",
+                "Problema ao salvar",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+                return;
+            }
+
             if (tbCodigo.Text.Length <= 0)
             {
                 if (MessageBox.Show("Número da nota em branco, deseja gerar um numero automaticamente?",
                 "Aviso",
                  MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Information) == DialogResult.Yes)
+                 MessageBoxIcon.Information) == DialogResult.No)
                 {
-                    tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
+                    return;
                 }
+                tbCodigo.Text = notaFiscalPropriaDAO.BuscaProxCodigoDisponivel().ToString();
                 ok = false;
             }
-            else
-            {
-                if (itens.Count <= 0)
-                {
-                    MessageBox.Show("Uma nota não pode ser salva sem itens!",
-                   "Problema ao salvar",
-                   MessageBoxButtons.OK,
-                   MessageBoxIcon.Warning);
-                    return;
-                }
 
-                if (buscaOperacao.operacao == null)
-                {
-                    MessageBox.Show("Escolha uma operação!",
-                    "Problema ao salvar",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                    return;
-                }
+            notaFiscalPropriaNova = new NotaFiscalPropria();
 
-                notaFiscalPropriaNova = new NotaFiscalPropria
-                {
-                    NotaFiscalPropriaID = int.Parse(tbCodigo.Text),
-                    Descricao = tbDescricao.Text,
-                    Pessoa = buscaPessoa.pessoa,
-                    DataEmissao = dtpEmissao.Value,
-                    DataEntradaSaida = dtpSaida.Value,
-                    ValorTotalItens = dbValorTotalItens.Valor,
-                    DescontoTotalItens = dbDescontoTotalItens.Valor,
-                    DescontoDocumento = dbDescontoDocumento.Valor,
-                    ValorTotalDocumento = dbValorTotalDocumento.Valor,
+            notaFiscalPropriaNova.NotaFiscalPropriaID = int.Parse(tbCodigo.Text);
+            notaFiscalPropriaNova.Descricao = tbDescricao.Text;
+            notaFiscalPropriaNova.Pessoa = buscaPessoa.pessoa;
+            notaFiscalPropriaNova.DataEmissao = dtpEmissao.Value;
+            notaFiscalPropriaNova.DataEntradaSaida = dtpSaida.Value;
+            notaFiscalPropriaNova.ValorTotalItens = dbValorTotalItens.Valor;
+            notaFiscalPropriaNova.DescontoTotalItens = dbDescontoTotalItens.Valor;
+            notaFiscalPropriaNova.DescontoDocumento = dbDescontoDocumento.Valor;
+            notaFiscalPropriaNova.ValorTotalDocumento = dbValorTotalDocumento.Valor;
+            notaFiscalPropriaNova.Vendedor = bpVendedor.pessoa;
+            notaFiscalPropriaNova.NotaFiscalPropriaItem = itens;
 
-                    NotaFiscalPropriaItem = itens
-                };
 
-                ok = validacao.ValidarEntidade(notaFiscalPropriaNova, controls);
-            }
+
+            ok = validacao.ValidarEntidade(notaFiscalPropriaNova, controls);
+
 
 
             if (ok)
@@ -351,7 +377,7 @@ namespace _5gpro.Forms
                 }
                 else if (resultado == 2)
                 {
-                    notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropriaNova);
+                    notaFiscalPropriaDAO.LimpaRegistrosEstoque(notaFiscalPropria);
                     notaFiscalPropriaDAO.MovimentaEstoque(notaFiscalPropriaNova);
                     GerarContaReceber();
 
@@ -361,7 +387,7 @@ namespace _5gpro.Forms
                 }
                 notaFiscalPropria = notaFiscalPropriaNova;
             }
-            
+
         }
         private void GerarContaReceber()
         {
@@ -432,6 +458,7 @@ namespace _5gpro.Forms
             {
                 notaFiscalPropria = notaFiscalPropriaDAO.BuscaByID(notaFiscalPropria.NotaFiscalPropriaID);
                 notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
+                if (notaFiscalPropria.Vendedor?.PessoaID > 0) { notaFiscalPropria.Vendedor = pessoaDAO.BuscaByID(notaFiscalPropria.Vendedor.PessoaID); }
                 PreencheCampos(notaFiscalPropria);
                 if (editando)
                     Editando(false);
@@ -463,6 +490,7 @@ namespace _5gpro.Forms
                 {
                     notaFiscalPropria = newnotafiscal;
                     notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
+                    if (notaFiscalPropria.Vendedor?.PessoaID > 0) { notaFiscalPropria.Vendedor = pessoaDAO.BuscaByID(notaFiscalPropria.Vendedor.PessoaID); }
                     itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
                     PreencheCampos(notaFiscalPropria);
                     if (editando)
@@ -491,6 +519,8 @@ namespace _5gpro.Forms
                 {
                     notaFiscalPropria = newnotafiscal;
                     notaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(notaFiscalPropria.Pessoa.PessoaID);
+                    if (notaFiscalPropria.Vendedor?.PessoaID > 0) { notaFiscalPropria.Vendedor = pessoaDAO.BuscaByID(notaFiscalPropria.Vendedor.PessoaID); }
+
                     itens = notaFiscalPropria.NotaFiscalPropriaItem.ToList();
                     PreencheCampos(notaFiscalPropria);
                     if (editando)
@@ -538,6 +568,7 @@ namespace _5gpro.Forms
             if (newNotaFiscalPropria != null)
             {
                 newNotaFiscalPropria.Pessoa = pessoaDAO.BuscaByID(newNotaFiscalPropria.Pessoa.PessoaID);
+                if (newNotaFiscalPropria.Vendedor?.PessoaID > 0) { newNotaFiscalPropria.Vendedor = pessoaDAO.BuscaByID(newNotaFiscalPropria.Vendedor.PessoaID); }
                 notaFiscalPropria = newNotaFiscalPropria;
                 PreencheCampos(notaFiscalPropria);
                 Editando(false);
@@ -563,6 +594,7 @@ namespace _5gpro.Forms
         {
             if (limpaCod) { tbCodigo.Clear(); }
             buscaPessoa.Limpa();
+            bpVendedor.Limpa();
             buscaOperacao.Limpa();
             tbDescricao.Clear();
             dtpEmissao.Value = DateTime.Now;
@@ -584,7 +616,7 @@ namespace _5gpro.Forms
         }
         private void LimpaCamposItem(bool focus)
         {
-            buscaItem1.Limpa();
+            buscaItem.Limpa();
             dbQuantidade.Valor = 0.00m;
             dbValorUnitItem.Valor = 0.00m;
             dbValorTotItem.Valor = 0.00m;
@@ -593,71 +625,63 @@ namespace _5gpro.Forms
             itemSelecionado = null;
             btExcluirItem.Enabled = false;
             btInserirItem.Text = "Inserir";
-            if (focus) { buscaItem1.Focus(); }
+            if (focus) { buscaItem.Focus(); }
         }
         private void InserirItem()
         {
-            if (buscaItem1.item == null)
+            if (buscaItem.item == null)
             {
                 MessageBox.Show("Item não encontrado no banco de dados",
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem1.Focus();
+                buscaItem.Focus();
                 return;
             }
 
-            var item = new NotaFiscalPropriaItem();
-            item.Item = buscaItem1.item;
-
-
-
-            item.Quantidade = dbQuantidade.Valor;
-            item.ValorUnitario = dbValorUnitItem.Valor;
-            item.ValorTotal = dbValorTotItem.Valor;
-            item.DescontoPorc = dbDescontoItemPorc.Valor;
-            item.Desconto = dbDescontoItem.Valor;
-            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => int.Parse(r.Cells[0].Value.ToString()) == item.Item.ItemID).FirstOrDefault();
-            if (dr == null)
+            NotaFiscalPropriaItem item = null;
+            if(itemSelecionado == null)
             {
+                item = new NotaFiscalPropriaItem();
+                item.Item = buscaItem.item;
+                item.Quantidade = dbQuantidade.Valor;
+                item.ValorUnitario = dbValorUnitItem.Valor;
+                item.ValorTotal = dbValorTotItem.Valor;
+                item.DescontoPorc = dbDescontoItemPorc.Valor;
+                item.Desconto = dbDescontoItem.Valor;
                 itens.Add(item);
-                dgvItens.Rows.Add(item.Item.ItemID, item.Item.Descricao, item.Quantidade, item.ValorUnitario, item.ValorTotal, item.DescontoPorc, item.Desconto);
                 btNovoItem.PerformClick();
             }
             else
             {
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Quantidade = item.Quantidade;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorUnitario = item.ValorUnitario;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().ValorTotal = item.ValorTotal;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().DescontoPorc = item.DescontoPorc;
-                itens.Where(i => i.Item.ItemID == item.Item.ItemID).First().Desconto = item.Desconto;
-                dr.Cells[dgvtbcQuantidade.Index].Value = item.Quantidade;
-                dr.Cells[dgvtbcValorUnitario.Index].Value = item.ValorUnitario;
-                dr.Cells[dgvtbcValorTotalItem.Index].Value = item.ValorTotal;
-                dr.Cells[dgvtbcDescontoPorc.Index].Value = item.DescontoPorc;
-                dr.Cells[dgvtbcDescontoItem.Index].Value = item.Desconto;
-                dgvItens.Update();
-                dgvItens.Refresh();
+                item = itemSelecionado;
+                item.Quantidade = dbQuantidade.Valor;
+                item.ValorUnitario = dbValorUnitItem.Valor;
+                item.ValorTotal = dbValorTotItem.Valor;
+                item.DescontoPorc = dbDescontoItemPorc.Valor;
+                item.Desconto = dbDescontoItem.Valor;
+                itens[itens.FindIndex(i => i.Item.ItemID == item.Item.ItemID)] = item;
             }
             CalculaTotalDocumento();
             btExcluirItem.Enabled = false;
             LimpaCamposItem(true);
+            PreencheGridItens();
         }
         private void BuscaItem()
         {
-            if (buscaItem1.item == null)
+            if (buscaItem.item == null)
                 return;
             var item = new NotaFiscalPropriaItem();
-            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem1.item.ItemID).FirstOrDefault();
+            var dr = dgvItens.Rows.Cast<DataGridViewRow>().Where(r => (int)r.Cells[0].Value == buscaItem.item.ItemID).FirstOrDefault();
             if (dr == null)
             {
-                item.Item = buscaItem1.item;
+                item.Item = buscaItem.item;
                 btInserirItem.Text = "Inserir";
                 btExcluirItem.Enabled = false;
             }
             else
             {
-                item = itens.Find(i => i.Item.ItemID == buscaItem1.item.ItemID);
+                item = itens.Find(i => i.Item.ItemID == buscaItem.item.ItemID);
                 btInserirItem.Text = "Alterar";
                 btExcluirItem.Enabled = true;
             }
@@ -671,7 +695,7 @@ namespace _5gpro.Forms
                 dgvItens.Rows.Clear();
                 dgvItens.Refresh();
                 LimpaCamposItem(false);
-                PreencheGridItens(itens);
+                PreencheGridItens();
                 CalculaTotalDocumento();
                 itemSelecionado = null;
                 btExcluirItem.Enabled = false;
@@ -685,6 +709,7 @@ namespace _5gpro.Forms
             tbCodigo.Text = notafiscal.NotaFiscalPropriaID.ToString();
             tbDescricao.Text = notafiscal.Descricao;
             buscaPessoa.PreencheCampos(notafiscal.Pessoa);
+            if (notafiscal.Vendedor.PessoaID > 0) bpVendedor.PreencheCampos(notafiscal.Vendedor);
 
             notafiscal.ContaReceber = contaReceberDAO.BuscaById(notafiscal.ContaReceber.ContaReceberID);
 
@@ -698,13 +723,14 @@ namespace _5gpro.Forms
             dbDescontoDocumento.Valor = notafiscal.DescontoDocumento;
             dbValorTotalDocumento.Valor = notafiscal.ValorTotalDocumento;
             itens = notafiscal.NotaFiscalPropriaItem.ToList();
-            PreencheGridItens(itens);
+            PreencheGridItens();
             btInserirItem.Text = "Inserir";
             ignoracheckevent = false;
         }
-        private void PreencheGridItens(List<NotaFiscalPropriaItem> itens)
+        private void PreencheGridItens()
         {
             rel.Rows.Clear();
+            dgvItens.Rows.Clear();
             foreach (var i in itens)
             {
                 dgvItens.Rows.Add(i.Item.ItemID, i.Item.Descricao, i.Quantidade, i.ValorUnitario, i.ValorTotal, i.DescontoPorc, i.Desconto);
@@ -723,7 +749,7 @@ namespace _5gpro.Forms
             if (item != null)
             {
                 ignoracheckevent = true;
-                buscaItem1.PreencheCampos(item.Item);
+                buscaItem.PreencheCampos(item.Item);
                 dbValorUnitItem.Valor = item.Item.ValorUnitario;
                 dbQuantidade.Valor = item.Quantidade;
                 dbValorTotItem.Valor = item.ValorTotal;
@@ -738,7 +764,7 @@ namespace _5gpro.Forms
                 "Item não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
-                buscaItem1.Focus();
+                buscaItem.Focus();
             }
         }
         private void EnterTab(object sender, KeyEventArgs e)
@@ -793,14 +819,6 @@ namespace _5gpro.Forms
                 dbDescontoDocumento.Valor = 0m;
             }
         }
-        private void BuscaItem_Codigo_Changed(object sender, EventArgs e)
-        {
-            if (buscaItem1.item == null)
-                return;
-
-            dbValorUnitItem.Valor = buscaItem1.item.ValorUnitario;
-        }
-
 
         private void GerarParcelas()
         {

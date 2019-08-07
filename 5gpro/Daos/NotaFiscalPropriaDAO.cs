@@ -335,13 +335,13 @@ namespace _5gpro.Daos
             {
                 sql.beginTransaction();
                 sql.Query = @"INSERT INTO notafiscal
-                         (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa, descricao)
+                         (idnotafiscal, data_emissao, data_entradasaida, tiponf, valor_total_itens, valor_documento, desconto_total_itens, desconto_documento, idpessoa, descricao, idpessoa_vendedor)
                           VALUES
-                         (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa, @descricao)
+                         (@idnotafiscal, @data_emissao, @data_entradasaida, @tiponf, @valor_total_itens, @valor_documento, @desconto_total_itens, @desconto_documento, @idpessoa, @descricao, @idpessoa_vendedor)
                           ON DUPLICATE KEY UPDATE
                           data_emissao = @data_emissao, data_entradasaida = @data_entradasaida, valor_total_itens = @valor_total_itens,
                           valor_documento = @valor_documento, desconto_total_itens = @desconto_total_itens, desconto_documento = @desconto_documento,
-                          idpessoa = @idpessoa, descricao = @descricao";
+                          idpessoa = @idpessoa, descricao = @descricao, idpessoa_vendedor = @idpessoa_vendedor";
 
                 sql.addParam("@idnotafiscal", notafiscal.NotaFiscalPropriaID);
                 sql.addParam("@data_emissao", notafiscal.DataEmissao);
@@ -353,6 +353,14 @@ namespace _5gpro.Daos
                 sql.addParam("@desconto_documento", notafiscal.DescontoDocumento);
                 sql.addParam("@idpessoa", notafiscal.Pessoa?.PessoaID ?? null);
                 sql.addParam("@descricao", notafiscal.Descricao);
+                if(notafiscal.Vendedor?.PessoaID > 0)
+                {
+                    sql.addParam("@idpessoa_vendedor", notafiscal.Vendedor.PessoaID);
+                }
+                else
+                {
+                    sql.addParam("@idpessoa_vendedor", null);
+                }
                 retorno = sql.insertQuery();
                 if (retorno > 0)
                 {
@@ -574,7 +582,11 @@ namespace _5gpro.Daos
             notaFiscalPropria.ContaReceber = contareceber;
             var pessoa = new Pessoa();
             pessoa.PessoaID = Convert.ToInt32(data[0]["idpessoa"]);
+            var vendedor = new Pessoa();
+            vendedor.PessoaID = Convert.ToInt32(data[0]["idpessoa_vendedor"]);
             notaFiscalPropria.Pessoa = pessoa;
+            notaFiscalPropria.Vendedor = vendedor;
+            
 
             foreach (var d in data)
             {

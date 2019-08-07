@@ -14,10 +14,17 @@ namespace _5gpro.Forms
         public Pessoa pessoaSelecionada = null;
         private List<Pessoa> Pessoas;
         private readonly PessoaDAO pessoaDAO = new PessoaDAO();
+        private int atuacao;
 
         public fmBuscaPessoa()
         {
             InitializeComponent();
+        }
+
+        public fmBuscaPessoa(int atuacao)
+        {
+            InitializeComponent();
+            this.atuacao = atuacao;
         }
 
         //LOAD
@@ -69,7 +76,7 @@ namespace _5gpro.Forms
 
 
             int idcidade = buscaCidade.cidade?.CidadeID ?? 0;
-            Pessoas = pessoaDAO.Busca(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade);
+            Pessoas = pessoaDAO.Busca(tbFiltroNome.Text, tbCpfCnpj.Text, idcidade, atuacao);
 
             foreach (Pessoa p in Pessoas)
             {

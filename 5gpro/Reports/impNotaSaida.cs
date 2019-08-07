@@ -30,6 +30,15 @@ namespace _5gpro.Reports
             this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"email", fa.FormataTel(Estabelecimento.Email), true));
 
             this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"numero", _notaFiscalPropria.NotaFiscalPropriaID.ToString(), true));
+            if (_notaFiscalPropria.Vendedor?.PessoaID > 0)
+            {
+                this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"vendedor_nome", _notaFiscalPropria.Vendedor.Nome.ToString(), true));
+            }
+            else
+            {
+                this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"vendedor_nome", "", true));
+            }
+
             this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"cliente_cod", _notaFiscalPropria.Pessoa.PessoaID.ToString(), true));
             this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"cliente_nome", _notaFiscalPropria.Pessoa.Nome.ToString(), true));
             this.rvNotaSaida.LocalReport.SetParameters(new ReportParameter($"cliente_endereco", _notaFiscalPropria.Pessoa.Rua + _notaFiscalPropria.Pessoa.Numero, true));

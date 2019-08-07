@@ -223,6 +223,9 @@ namespace _5gpro.Forms
                     case "Fornecedor":
                         atuacaostring += "F";
                         break;
+                    case "Vendedor(a)":
+                        atuacaostring += "V";
+                        break;
                 }
             }
             pessoa.Atuacao = atuacaostring;
@@ -504,19 +507,17 @@ namespace _5gpro.Forms
 
                 buscaCidade.PreencheCampos(pessoa.Cidade);
 
-
-                switch (pessoa.Atuacao)
+                if (pessoa.Atuacao.Contains("C"))
                 {
-                    case "CF":
-                        cblAtuacao.SetItemChecked(0, true);
-                        cblAtuacao.SetItemChecked(1, true);
-                        break;
-                    case "C":
-                        cblAtuacao.SetItemChecked(0, true);
-                        break;
-                    case "F":
-                        cblAtuacao.SetItemChecked(1, true);
-                        break;
+                    cblAtuacao.SetItemChecked(0, true);
+                }
+                if (pessoa.Atuacao.Contains("F"))
+                {
+                    cblAtuacao.SetItemChecked(1, true);
+                }
+                if (pessoa.Atuacao.Contains("V"))
+                {
+                    cblAtuacao.SetItemChecked(2, true);
                 }
                 switch (pessoa.Situacao)
                 {

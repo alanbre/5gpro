@@ -13,6 +13,7 @@ namespace _5gpro.Entities
 
         public int NotaFiscalPropriaID { get; set; }
         public Pessoa Pessoa { get; set; }
+        public Pessoa Vendedor { get; set; }
         public DateTime DataEmissao { get; set; }
         public DateTime DataEntradaSaida { get; set; }
         public string TipoNf { get; set; }

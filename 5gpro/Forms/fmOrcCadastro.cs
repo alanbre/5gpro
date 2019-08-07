@@ -230,9 +230,9 @@ namespace _5gpro.Forms
             buscaOrcamento.ShowDialog();
             if (buscaOrcamento.orcamentoSelecionado != null)
             {
+                orcamento = buscaOrcamento.orcamentoSelecionado;
                 codigo = orcamento.OrcamentoID;
                 PreencheCampos(buscaOrcamento.orcamentoSelecionado);
-                orcamento = buscaOrcamento.orcamentoSelecionado;
             }
         }
         private void Salva()
@@ -719,7 +719,7 @@ namespace _5gpro.Forms
         }
         private void BtSelecionar_Click(object sender, EventArgs e)
         {
-            var fmselecao = new fmSelecaoOrcamento(this);
+            var fmselecao = new fmOrcSelecaoItensOrcamento(this);
             fmselecao.Show(this);
         }
         private void SelecionaLinha()

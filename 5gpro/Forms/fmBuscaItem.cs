@@ -36,7 +36,7 @@ namespace _5gpro.Forms
             rel.Columns.Add("total", typeof(decimal));
 
 
-            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Código", typeof(int));
             table.Columns.Add("Código Int.", typeof(string));
             table.Columns.Add("Descrição", typeof(string));
             table.Columns.Add("Denominação da Compra", typeof(string));

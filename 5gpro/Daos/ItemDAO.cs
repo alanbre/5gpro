@@ -15,12 +15,18 @@ namespace _5gpro.Daos
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO item 
-                            (iditem, codigointerno, descitem, denominacaocompra, tipo, referencia, valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem, quantidade, custo) 
+                            (iditem, codigointerno, descitem, denominacaocompra, tipo, referencia,
+                            valorentrada, valorsaida, estoquenecessario, idunimedida, idsubgrupoitem,
+                            quantidade, custo, idusuario) 
                             VALUES
-                            (@iditem, @codigointerno, @descitem, @denominacaocompra, @tipo, @referencia, @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem, @quantidade, @custo)
+                            (@iditem, @codigointerno, @descitem, @denominacaocompra, @tipo, @referencia,
+                            @valorentrada, @valorsaida, @estoquenecessario, @idunimedida, @idsubgrupoitem,
+                            @quantidade, @custo, @idusuario)
                             ON DUPLICATE KEY UPDATE
-                            codigointerno = @codigointerno, descitem = @descitem, denominacaocompra = @denominacaocompra, tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada,
-                            valorsaida = @valorsaida, estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem, quantidade = @quantidade, custo = @custo";
+                            codigointerno = @codigointerno, descitem = @descitem, denominacaocompra = @denominacaocompra,
+                            tipo = @tipo, referencia = @referencia, valorentrada = @valorentrada, valorsaida = @valorsaida,
+                            estoquenecessario = @estoquenecessario, idunimedida = @idunimedida, idsubgrupoitem = @idsubgrupoitem,
+                            quantidade = @quantidade, custo = @custo, idusuario = @idusuario";
 
                 sql.addParam("@iditem", item.ItemID);
                 sql.addParam("@codigointerno", item.CodigoInterno);
@@ -34,7 +40,8 @@ namespace _5gpro.Daos
                 sql.addParam("@idunimedida", item.Unimedida.UnimedidaID);
                 sql.addParam("@idsubgrupoitem", item.SubGrupoItem.SubGrupoItemID);
                 sql.addParam("@quantidade", item.Quantidade);
-                sql.addParam("custo", item.Custo);
+                sql.addParam("@custo", item.Custo);
+                sql.addParam("@idusuario", Logado.Usuario.UsuarioID);
                 retorno = sql.insertQuery();
             }
 

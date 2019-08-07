@@ -25,13 +25,17 @@ namespace _5gpro.Controls
             set
             {
                 lbPessoa.Text = value;
-                if(value == "Cliente")
+                if (value == "Cliente")
                 {
                     atuacao = 1;
                 }
                 else if (value == "Fornecedor")
                 {
                     atuacao = 2;
+                }
+                else if (value == "Vendedor(a)")
+                {
+                    atuacao = 3;
                 }
             }
         }
@@ -53,7 +57,7 @@ namespace _5gpro.Controls
             if (!int.TryParse(tbCodigoPessoa.Text, out int codigo)) { tbCodigoPessoa.Clear(); }
             if (tbCodigoPessoa.Text.Length > 0)
             {
-                pessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigoPessoa.Text));
+                pessoa = pessoaDAO.BuscaByID(int.Parse(tbCodigoPessoa.Text), atuacao);
                 PreencheCamposPessoa(pessoa);
             }
             else
@@ -76,7 +80,7 @@ namespace _5gpro.Controls
 
         private void AbreTelaBuscaPessoa()
         {
-            var buscaPessoa = new fmBuscaPessoa();
+            var buscaPessoa = new fmBuscaPessoa(atuacao);
             buscaPessoa.ShowDialog();
             if (buscaPessoa.pessoaSelecionada != null)
             {
@@ -94,8 +98,21 @@ namespace _5gpro.Controls
             }
             else
             {
-                MessageBox.Show("Cliente não encontrado no banco de dados",
-                "Cliente não encontrado",
+                string pessoa_tipo = "";
+                switch (atuacao)
+                {
+                    case 1:
+                        pessoa_tipo = "Cliente";
+                        break;
+                    case 2:
+                        pessoa_tipo = "Fornecedor";
+                        break;
+                    case 3:
+                        pessoa_tipo = "Vendedor(a)";
+                        break;
+                }
+                MessageBox.Show($"{pessoa_tipo} não encontrado no banco de dados",
+                $"{pessoa_tipo} não encontrado",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
                 tbCodigoPessoa.Clear();

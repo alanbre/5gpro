@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.11.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.15.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -298,6 +298,12 @@
     <Compile Include="Forms\fmBuscaItemSeleciona.Designer.cs">
       <DependentUpon>fmBuscaItemSeleciona.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\fmCadItemAlteracaoPrecosLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmCadItemAlteracaoPrecosLote.Designer.cs">
+      <DependentUpon>fmCadItemAlteracaoPrecosLote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmDecimal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -443,11 +449,11 @@
     <Compile Include="Forms\fmCfgDadosEstabelecimento.Designer.cs">
       <DependentUpon>fmCfgDadosEstabelecimento.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\fmSelecaoOrcamento.cs">
+    <Compile Include="Forms\fmOrcSelecaoItensOrcamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\fmSelecaoOrcamento.Designer.cs">
-      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    <Compile Include="Forms\fmOrcSelecaoItensOrcamento.Designer.cs">
+      <DependentUpon>fmOrcSelecaoItensOrcamento.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\fmSaiNotaFiscal.cs">
       <SubType>Form</SubType>
@@ -844,6 +850,9 @@
     <EmbeddedResource Include="Forms\fmBuscaItemSeleciona.resx">
       <DependentUpon>fmBuscaItemSeleciona.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmCadItemAlteracaoPrecosLote.resx">
+      <DependentUpon>fmCadItemAlteracaoPrecosLote.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmCaiAberturaFechamento.resx">
       <DependentUpon>fmCaiAberturaFechamento.cs</DependentUpon>
     </EmbeddedResource>
@@ -892,8 +901,8 @@
     <EmbeddedResource Include="Forms\fmDecimal.resx">
       <DependentUpon>fmDecimal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\fmSelecaoOrcamento.resx">
-      <DependentUpon>fmSelecaoOrcamento.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\fmOrcSelecaoItensOrcamento.resx">
+      <DependentUpon>fmOrcSelecaoItensOrcamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmSaiNotaFiscal.resx">
       <DependentUpon>fmSaiNotaFiscal.cs</DependentUpon>

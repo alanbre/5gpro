@@ -8,22 +8,22 @@ namespace _5gpro.Daos
 {
     class PessoaDAO
     {
-
-
         public int SalvaOuAtualiza(Pessoa pessoa)
         {
             int retorno = 0;
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"INSERT INTO pessoa
-                         (idpessoa, nome, fantasia, rua, numero, bairro, cep, complemento, cpf, cnpj, endereco, telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao)
-                          VALUES
-                         (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @cep, @complemento, @cpf, @cnpj, @endereco, @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao)
-                          ON DUPLICATE KEY UPDATE
-                          nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, cep = @cep, complemento = @complemento,
-                          cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone, email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa, idsubgrupopessoa = @idsubgrupopessoa,
-                          atuacao = @atuacao, situacao = @situacao
-                          ";
+                            (idpessoa, nome, fantasia, rua, numero, bairro, cep, complemento, cpf, cnpj, endereco,
+                            telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao, idusuario)
+                            VALUES
+                            (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @cep, @complemento, @cpf, @cnpj, @endereco,
+                            @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao, @idusuario)
+                            ON DUPLICATE KEY UPDATE
+                            nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, cep = @cep,
+                            complemento = @complemento, cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone,
+                            email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa, idsubgrupopessoa = @idsubgrupopessoa,
+                            atuacao = @atuacao, situacao = @situacao, idusuario = @idusuario";
                 sql.addParam("@idpessoa", pessoa.PessoaID);
                 sql.addParam("@nome", pessoa.Nome);
                 sql.addParam("@fantasia", pessoa.Fantasia);
@@ -34,6 +34,7 @@ namespace _5gpro.Daos
                 sql.addParam("@complemento", pessoa.Complemento);
                 sql.addParam("@atuacao", pessoa.Atuacao);
                 sql.addParam("@situacao", pessoa.Situacao);
+                sql.addParam("@idusuario", Logado.Usuario.UsuarioID);
 
                 if (pessoa.TipoPessoa == "F")
                 {
@@ -73,6 +74,87 @@ namespace _5gpro.Daos
                             WHERE p.idpessoa = @idpessoa
                             LIMIT 1";
                 sql.addParam("@idpessoa", cod);
+                var data = sql.selectQueryForSingleRecord();
+                if (data == null)
+                {
+                    return null;
+                }
+                var grupopessoa = new GrupoPessoa
+                {
+                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
+                    Nome = (string)data["nomegrupopessoa"]
+                };
+                var subgrupopessoa = new SubGrupoPessoa
+                {
+                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
+                    Nome = (string)data["nomesubgrupopessoa"],
+                    GrupoPessoa = grupopessoa
+                };
+                var estado = new Estado
+                {
+                    EstadoID = Convert.ToInt32(data["idestado"]),
+                    Nome = (string)data["nomeestado"],
+                    Uf = (string)data["uf"]
+                };
+
+                var cidade = new Cidade
+                {
+                    CidadeID = Convert.ToInt32(data["idcidade"]),
+                    Nome = (string)data["nomecidade"],
+                    Estado = estado
+                };
+
+                pessoa = new Pessoa
+                {
+                    PessoaID = Convert.ToInt32(data["idpessoa"]),
+                    Nome = (string)data["nomepessoa"],
+                    Fantasia = (string)data["fantasia"],
+                    TipoPessoa = (string)data["tipo_pessoa"],
+                    Rua = (string)data["rua"],
+                    Numero = (string)data["numero"],
+                    Bairro = (string)data["bairro"],
+                    Cep = (string)data["cep"],
+                    Complemento = (string)data["complemento"],
+                    Cidade = cidade,
+                    Telefone = (string)data["telefone"],
+                    Email = (string)data["email"],
+                    SubGrupoPessoa = subgrupopessoa,
+                    Atuacao = (string)data["atuacao"],
+                    Situacao = (string)data["situacao"]
+                };
+                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
+            }
+            return pessoa;
+        }
+        public Pessoa BuscaByID(int cod, int atuacao)
+        {
+            Pessoa pessoa = new Pessoa();
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                            e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
+                            p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
+                            FROM pessoa p
+                            INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
+                            INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
+                            INNER JOIN cidade c ON p.idcidade = c.idcidade
+                            INNER JOIN estado e ON e.idestado = c.idestado
+                            WHERE p.idpessoa = @idpessoa AND p.atuacao LIKE @atuacao
+                            LIMIT 1";
+                sql.addParam("@idpessoa", cod);
+                switch (atuacao)
+                {
+                    case 1:
+                        sql.addParam("@atuacao", "%C%");
+                        break;
+                    case 2:
+                        sql.addParam("@atuacao", "%F%");
+                        break;
+                    case 3:
+                        sql.addParam("@atuacao", "%V%");
+                        break;
+                }
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {
@@ -261,16 +343,18 @@ namespace _5gpro.Daos
             }
             return pessoa;
         }
-        public List<Pessoa> Busca(string nome, string cpfCnpj, int idcidade)
+        public List<Pessoa> Busca(string nome, string cpfCnpj, int idcidade, int atuacao)
         {
             List<Pessoa> pessoas = new List<Pessoa>();
             string conCodPessoa = nome.Length > 0 ? "AND p.nome LIKE @nome" : "";
             string conCpfCnpj = cpfCnpj.Length > 0 ? "AND (cpf LIKE @cpfcnpj OR cnpj LIKE @cpfcnpj)" : "";
             string conCidade = idcidade > 0 ? "AND c.idcidade = @idcidade" : "";
+            string conAtuacao = atuacao > 0 ? "AND p.atuacao LIKE @atuacao" : "";
+            
 
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
-                sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
+                sql.Query = $@"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                                              e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                                              p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
                                              telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
@@ -279,14 +363,27 @@ namespace _5gpro.Daos
                                              INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
                                              INNER JOIN cidade c ON p.idcidade = c.idcidade
                                              INNER JOIN estado e ON e.idestado = c.idestado
-                                             WHERE 1=1
-                                             " + conCodPessoa + @"
-                                             " + conCpfCnpj + @"
-                                             " + conCidade + @"
+                                             WHERE 1=1 
+                                             { conCodPessoa } 
+                                             { conCpfCnpj } 
+                                             { conCidade } 
+                                             { conAtuacao } 
                                              ORDER BY p.idpessoa";
                 if (conCodPessoa.Length > 0) { sql.addParam("@nome", "%" + nome + "%"); }
                 if (conCpfCnpj.Length > 0) { sql.addParam("@cpfcnpj", "%" + cpfCnpj + "%"); }
                 if (conCidade.Length > 0) { sql.addParam("@idcidade", idcidade); }
+                switch (atuacao)
+                {
+                    case 1:
+                        sql.addParam("@atuacao", "%C%");
+                        break;
+                    case 2:
+                        sql.addParam("@atuacao", "%F%");
+                        break;
+                    case 3:
+                        sql.addParam("@atuacao", "%V%");
+                        break;
+                }
                 var data = sql.selectQuery();
                 foreach (var d in data)
                 {
