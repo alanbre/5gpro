@@ -273,5 +273,11 @@ namespace _5gpro
             var fmCapPrevisao = new fmCapPrevisao();
             fmCapPrevisao.Show(this);
         }
+
+        private void TsmiCadItemAjustePrecos_Click(object sender, EventArgs e)
+        {
+            var fmCadItemAjustePrecos = new fmCadItemAlteracaoPrecosLote();
+            fmCadItemAjustePrecos.Show(this);
+        }
     }
 }

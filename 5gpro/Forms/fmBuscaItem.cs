@@ -11,7 +11,7 @@ namespace _5gpro.Forms
 {
     public partial class fmBuscaItem : Form
     {
-        FuncoesAuxiliares funaux = new FuncoesAuxiliares();
+        private FuncoesAuxiliares funaux = new FuncoesAuxiliares();
         public List<Item> itens;
         public Item itemSelecionado;
         private readonly ItemDAO itemDAO = new ItemDAO();

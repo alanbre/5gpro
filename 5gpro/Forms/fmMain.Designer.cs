@@ -232,7 +232,7 @@
             this.tsmiCadItemAjustePrecos.Name = "tsmiCadItemAjustePrecos";
             this.tsmiCadItemAjustePrecos.Size = new System.Drawing.Size(209, 22);
             this.tsmiCadItemAjustePrecos.Text = "Ajustes de preços em lote";
-            this.tsmiCadItemAjustePrecos.Visible = false;
+            this.tsmiCadItemAjustePrecos.Click += new System.EventHandler(this.TsmiCadItemAjustePrecos_Click);
             // 
             // tsmiUsu
             // 
@@ -290,7 +290,7 @@
             // tsmiEntNota
             // 
             this.tsmiEntNota.Name = "tsmiEntNota";
-            this.tsmiEntNota.Size = new System.Drawing.Size(180, 22);
+            this.tsmiEntNota.Size = new System.Drawing.Size(159, 22);
             this.tsmiEntNota.Text = "Nota de entrada";
             this.tsmiEntNota.Click += new System.EventHandler(this.TsmiEntNota_Click);
             // 
@@ -321,14 +321,14 @@
             // tsmiCarCadastro
             // 
             this.tsmiCarCadastro.Name = "tsmiCarCadastro";
-            this.tsmiCarCadastro.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarCadastro.Size = new System.Drawing.Size(171, 22);
             this.tsmiCarCadastro.Text = "Cadastro de conta";
             this.tsmiCarCadastro.Click += new System.EventHandler(this.TsmiCarCadastro_Click);
             // 
             // tsmiCarQuitacao
             // 
             this.tsmiCarQuitacao.Name = "tsmiCarQuitacao";
-            this.tsmiCarQuitacao.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCarQuitacao.Size = new System.Drawing.Size(171, 22);
             this.tsmiCarQuitacao.Text = "Quitação de conta";
             this.tsmiCarQuitacao.Click += new System.EventHandler(this.TsmiCarQuitacao_Click);
             // 
@@ -345,21 +345,21 @@
             // tsmiCapCadastro
             // 
             this.tsmiCapCadastro.Name = "tsmiCapCadastro";
-            this.tsmiCapCadastro.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapCadastro.Size = new System.Drawing.Size(172, 22);
             this.tsmiCapCadastro.Text = "Cadastro de conta";
             this.tsmiCapCadastro.Click += new System.EventHandler(this.TsmiCapCadastro_Click);
             // 
             // tsmiCapQuitacao
             // 
             this.tsmiCapQuitacao.Name = "tsmiCapQuitacao";
-            this.tsmiCapQuitacao.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapQuitacao.Size = new System.Drawing.Size(172, 22);
             this.tsmiCapQuitacao.Text = "Quitação";
             this.tsmiCapQuitacao.Click += new System.EventHandler(this.TsmiCapQuitacao_Click);
             // 
             // tsmiCapPrevisao
             // 
             this.tsmiCapPrevisao.Name = "tsmiCapPrevisao";
-            this.tsmiCapPrevisao.Size = new System.Drawing.Size(180, 22);
+            this.tsmiCapPrevisao.Size = new System.Drawing.Size(172, 22);
             this.tsmiCapPrevisao.Text = "Previsão de contas";
             this.tsmiCapPrevisao.Click += new System.EventHandler(this.TsmiCapPrevisao_Click);
             // 

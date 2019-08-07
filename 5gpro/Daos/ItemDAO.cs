@@ -47,6 +47,24 @@ namespace _5gpro.Daos
 
             return retorno;
         }
+        public int AlteracaoValores(List<Item> itens)
+        {
+            int retorno = 0;
+            using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
+            {
+                sql.beginTransaction();
+                sql.Query = @"UPDATE item SET valorsaida = @valorsaida WHERE iditem = @iditem";
+                foreach(var i in itens)
+                {
+                    sql.clearParams();
+                    sql.addParam("@valorsaida", i.ValorUnitario);
+                    sql.addParam("@iditem", i.ItemID);
+                    retorno += sql.updateQuery();
+                }
+                sql.Commit();
+            }
+            return retorno;
+        }
         public string ChecaSeExistemItemIgual(string codigoInterno, string referencia)
         {
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
