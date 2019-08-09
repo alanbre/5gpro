@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.15.%2a</ApplicationVersion>
+    <ApplicationVersion>1.0.17.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -145,6 +145,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\BuscaBanco.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\BuscaBanco.Designer.cs">
+      <DependentUpon>BuscaBanco.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BuscaCaixa.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -259,6 +265,7 @@
     <Compile Include="Controls\MiniMenuVertical.Designer.cs">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
     </Compile>
+    <Compile Include="Daos\BancoDAO.cs" />
     <Compile Include="Daos\CaixaDAO.cs" />
     <Compile Include="Daos\CaixaLancamentoDAO.cs" />
     <Compile Include="Daos\CidadeDAO.cs" />
@@ -287,11 +294,18 @@
     <Compile Include="Daos\ItemDAO.cs" />
     <Compile Include="Daos\PessoaDAO.cs" />
     <Compile Include="Daos\UnimedidaDAO.cs" />
+    <Compile Include="Entities\Banco.cs" />
     <Compile Include="Entities\Caixa.cs" />
     <Compile Include="Entities\CaixaLancamento.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\ContaPagar.cs" />
     <Compile Include="Entities\ContaReceber.cs" />
+    <Compile Include="Forms\fmBuscaBanco.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\fmBuscaBanco.Designer.cs">
+      <DependentUpon>fmBuscaBanco.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\fmBuscaItemSeleciona.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -787,6 +801,9 @@
     </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Staticfiles\Logado.cs" />
+    <EmbeddedResource Include="Controls\BuscaBanco.resx">
+      <DependentUpon>BuscaBanco.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\BuscaCaixa.resx">
       <DependentUpon>BuscaCaixa.cs</DependentUpon>
     </EmbeddedResource>
@@ -843,6 +860,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\MiniMenuVertical.resx">
       <DependentUpon>MiniMenuVertical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\fmBuscaBanco.resx">
+      <DependentUpon>fmBuscaBanco.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\fmBuscaContaCaixa.resx">
       <DependentUpon>fmBuscaContaCaixa.cs</DependentUpon>

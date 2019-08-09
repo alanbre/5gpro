@@ -15,15 +15,18 @@ namespace _5gpro.Daos
             {
                 sql.Query = @"INSERT INTO pessoa
                             (idpessoa, nome, fantasia, rua, numero, bairro, cep, complemento, cpf, cnpj, endereco,
-                            telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao, idusuario)
+                            telefone, email, idcidade, tipo_pessoa, idsubgrupopessoa, atuacao, situacao, idusuario,
+                            idbanco, agencia, conta, tipoconta)
                             VALUES
                             (@idpessoa, @nome, @fantasia, @rua, @numero, @bairro, @cep, @complemento, @cpf, @cnpj, @endereco,
-                            @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao, @idusuario)
+                            @telefone, @email, @idcidade, @tipoPessoa, @idsubgrupopessoa, @atuacao, @situacao, @idusuario,
+                            @idbanco, @agencia, @conta, @tipoconta)
                             ON DUPLICATE KEY UPDATE
                             nome = @nome, fantasia = @fantasia, rua = @rua, numero = @numero, bairro = @bairro, cep = @cep,
                             complemento = @complemento, cpf = @cpf, cnpj = @cnpj, endereco = @endereco, telefone = @telefone,
                             email = @email, idcidade = @idcidade, tipo_pessoa = @tipoPessoa, idsubgrupopessoa = @idsubgrupopessoa,
-                            atuacao = @atuacao, situacao = @situacao, idusuario = @idusuario";
+                            atuacao = @atuacao, situacao = @situacao, idusuario = @idusuario, idbanco = @idbanco, agencia = @agencia,
+                            conta = @conta, tipoconta = @tipoconta";
                 sql.addParam("@idpessoa", pessoa.PessoaID);
                 sql.addParam("@nome", pessoa.Nome);
                 sql.addParam("@fantasia", pessoa.Fantasia);
@@ -52,6 +55,10 @@ namespace _5gpro.Daos
                 sql.addParam("@idcidade", pessoa.Cidade.CidadeID);
                 sql.addParam("@tipoPessoa", pessoa.TipoPessoa);
                 sql.addParam("@idsubgrupopessoa", pessoa.SubGrupoPessoa.SubGrupoPessoaID);
+                sql.addParam("@idbanco", pessoa.Banco?.BancoID);
+                sql.addParam("@agencia", pessoa.Agencia);
+                sql.addParam("@conta", pessoa.ContaBancaria);
+                sql.addParam("@tipoconta", pessoa.TipoContaBancaria);
 
                 retorno = sql.insertQuery();
             }
@@ -59,18 +66,21 @@ namespace _5gpro.Daos
         }
         public Pessoa BuscaByID(int cod)
         {
-            Pessoa pessoa = new Pessoa();
+            var pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep, p.agencia, p.conta,
+                            p.tipoconta,
+                            b.idbanco, b.codigo AS b_codigo, b.nome AS b_nome
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
                             INNER JOIN cidade c ON p.idcidade = c.idcidade
                             INNER JOIN estado e ON e.idestado = c.idestado
+                            LEFT JOIN banco b ON p.idbanco = b.idbanco
                             WHERE p.idpessoa = @idpessoa
                             LIMIT 1";
                 sql.addParam("@idpessoa", cod);
@@ -79,67 +89,27 @@ namespace _5gpro.Daos
                 {
                     return null;
                 }
-                var grupopessoa = new GrupoPessoa
-                {
-                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
-                    Nome = (string)data["nomegrupopessoa"]
-                };
-                var subgrupopessoa = new SubGrupoPessoa
-                {
-                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"],
-                    GrupoPessoa = grupopessoa
-                };
-                var estado = new Estado
-                {
-                    EstadoID = Convert.ToInt32(data["idestado"]),
-                    Nome = (string)data["nomeestado"],
-                    Uf = (string)data["uf"]
-                };
-
-                var cidade = new Cidade
-                {
-                    CidadeID = Convert.ToInt32(data["idcidade"]),
-                    Nome = (string)data["nomecidade"],
-                    Estado = estado
-                };
-
-                pessoa = new Pessoa
-                {
-                    PessoaID = Convert.ToInt32(data["idpessoa"]),
-                    Nome = (string)data["nomepessoa"],
-                    Fantasia = (string)data["fantasia"],
-                    TipoPessoa = (string)data["tipo_pessoa"],
-                    Rua = (string)data["rua"],
-                    Numero = (string)data["numero"],
-                    Bairro = (string)data["bairro"],
-                    Cep = (string)data["cep"],
-                    Complemento = (string)data["complemento"],
-                    Cidade = cidade,
-                    Telefone = (string)data["telefone"],
-                    Email = (string)data["email"],
-                    SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = (string)data["atuacao"],
-                    Situacao = (string)data["situacao"]
-                };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
+                pessoa = LeDadosReader(data);
             }
             return pessoa;
         }
         public Pessoa BuscaByID(int cod, int atuacao)
         {
-            Pessoa pessoa = new Pessoa();
+            var pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep, p.agencia, p.conta,
+                            p.tipoconta,
+                            b.idbanco, b.codigo AS b_codigo, b.nome AS b_nome
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
                             INNER JOIN cidade c ON p.idcidade = c.idcidade
                             INNER JOIN estado e ON e.idestado = c.idestado
+                            LEFT JOIN banco b ON p.idbanco = b.idbanco
                             WHERE p.idpessoa = @idpessoa AND p.atuacao LIKE @atuacao
                             LIMIT 1";
                 sql.addParam("@idpessoa", cod);
@@ -160,186 +130,65 @@ namespace _5gpro.Daos
                 {
                     return null;
                 }
-                var grupopessoa = new GrupoPessoa
-                {
-                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
-                    Nome = (string)data["nomegrupopessoa"]
-                };
-                var subgrupopessoa = new SubGrupoPessoa
-                {
-                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"],
-                    GrupoPessoa = grupopessoa
-                };
-                var estado = new Estado
-                {
-                    EstadoID = Convert.ToInt32(data["idestado"]),
-                    Nome = (string)data["nomeestado"],
-                    Uf = (string)data["uf"]
-                };
-
-                var cidade = new Cidade
-                {
-                    CidadeID = Convert.ToInt32(data["idcidade"]),
-                    Nome = (string)data["nomecidade"],
-                    Estado = estado
-                };
-
-                pessoa = new Pessoa
-                {
-                    PessoaID = Convert.ToInt32(data["idpessoa"]),
-                    Nome = (string)data["nomepessoa"],
-                    Fantasia = (string)data["fantasia"],
-                    TipoPessoa = (string)data["tipo_pessoa"],
-                    Rua = (string)data["rua"],
-                    Numero = (string)data["numero"],
-                    Bairro = (string)data["bairro"],
-                    Cep = (string)data["cep"],
-                    Complemento = (string)data["complemento"],
-                    Cidade = cidade,
-                    Telefone = (string)data["telefone"],
-                    Email = (string)data["email"],
-                    SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = (string)data["atuacao"],
-                    Situacao = (string)data["situacao"]
-                };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
+                pessoa = LeDadosReader(data);
             }
             return pessoa;
         }
         public Pessoa Proximo(int cod)
         {
-            Pessoa pessoa = new Pessoa();
+            var pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep, p.agencia, p.conta,
+                            p.tipoconta,
+                            b.idbanco, b.codigo AS b_codigo, b.nome AS b_nome
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
                             INNER JOIN cidade c ON p.idcidade = c.idcidade
                             INNER JOIN estado e ON e.idestado = c.idestado
-                            WHERE p.idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)";
+                            LEFT JOIN banco b ON p.idbanco = b.idbanco
+                            WHERE p.idpessoa = (SELECT min(idpessoa) FROM pessoa WHERE idpessoa > @idpessoa)
+                            LIMIT 1";
                 sql.addParam("@idpessoa", cod);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {
                     return null;
                 }
-                var grupopessoa = new GrupoPessoa
-                {
-                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
-                    Nome = (string)data["nomegrupopessoa"]
-                };
-                var subgrupopessoa = new SubGrupoPessoa
-                {
-                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"],
-                    GrupoPessoa = grupopessoa
-                };
-                var estado = new Estado
-                {
-                    EstadoID = Convert.ToInt32(data["idestado"]),
-                    Nome = (string)data["nomeestado"],
-                    Uf = (string)data["uf"]
-                };
-
-                var cidade = new Cidade
-                {
-                    CidadeID = Convert.ToInt32(data["idcidade"]),
-                    Nome = (string)data["nomecidade"],
-                    Estado = estado
-                };
-
-                pessoa = new Pessoa
-                {
-                    PessoaID = Convert.ToInt32(data["idpessoa"]),
-                    Nome = (string)data["nomepessoa"],
-                    Fantasia = (string)data["fantasia"],
-                    TipoPessoa = (string)data["tipo_pessoa"],
-                    Rua = (string)data["rua"],
-                    Numero = (string)data["numero"],
-                    Bairro = (string)data["bairro"],
-                    Cep = (string)data["cep"],
-                    Complemento = (string)data["complemento"],
-                    Cidade = cidade,
-                    Telefone = (string)data["telefone"],
-                    Email = (string)data["email"],
-                    SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = (string)data["atuacao"],
-                    Situacao = (string)data["situacao"]
-                };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
+                pessoa = LeDadosReader(data);
             }
             return pessoa;
         }
         public Pessoa Anterior(int cod)
         {
-            Pessoa pessoa = new Pessoa();
+            var pessoa = new Pessoa();
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
                 sql.Query = @"SELECT g.idgrupopessoa, g.nome AS nomegrupopessoa, s.idsubgrupopessoa, s.nome AS nomesubgrupopessoa,
                             e.idestado, e.nome AS nomeestado, uf, c.idcidade, c.nome AS nomecidade,
                             p.idpessoa, p.nome AS nomepessoa, fantasia, tipo_pessoa, rua, numero, bairro, complemento, 
-                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep
+                            telefone, email, p.cpf, p.cnpj, p.atuacao, p.situacao, p.cep, p.agencia, p.conta,
+                            p.tipoconta,
+                            b.idbanco, b.codigo AS b_codigo, b.nome AS b_nome
                             FROM pessoa p
                             INNER JOIN subgrupopessoa s ON s.idsubgrupopessoa = p.idsubgrupopessoa
                             INNER JOIN grupopessoa g ON g.idgrupopessoa = s.idgrupopessoa
                             INNER JOIN cidade c ON p.idcidade = c.idcidade
                             INNER JOIN estado e ON e.idestado = c.idestado
-                            WHERE p.idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)";
+                            LEFT JOIN banco b ON p.idbanco = b.idbanco
+                            WHERE p.idpessoa = (SELECT max(idpessoa) FROM pessoa WHERE idpessoa < @idpessoa)
+                            LIMIT 1";
                 sql.addParam("@idpessoa", cod);
                 var data = sql.selectQueryForSingleRecord();
                 if (data == null)
                 {
                     return null;
                 }
-                var grupopessoa = new GrupoPessoa
-                {
-                    GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]),
-                    Nome = (string)data["nomegrupopessoa"]
-                };
-                var subgrupopessoa = new SubGrupoPessoa
-                {
-                    SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]),
-                    Nome = (string)data["nomesubgrupopessoa"],
-                    GrupoPessoa = grupopessoa
-                };
-                var estado = new Estado
-                {
-                    EstadoID = Convert.ToInt32(data["idestado"]),
-                    Nome = (string)data["nomeestado"],
-                    Uf = (string)data["uf"]
-                };
-
-                var cidade = new Cidade
-                {
-                    CidadeID = Convert.ToInt32(data["idcidade"]),
-                    Nome = (string)data["nomecidade"],
-                    Estado = estado
-                };
-
-                pessoa = new Pessoa
-                {
-                    PessoaID = Convert.ToInt32(data["idpessoa"]),
-                    Nome = (string)data["nomepessoa"],
-                    Fantasia = (string)data["fantasia"],
-                    TipoPessoa = (string)data["tipo_pessoa"],
-                    Rua = (string)data["rua"],
-                    Numero = (string)data["numero"],
-                    Bairro = (string)data["bairro"],
-                    Cep = (string)data["cep"],
-                    Complemento = (string)data["complemento"],
-                    Cidade = cidade,
-                    Telefone = (string)data["telefone"],
-                    Email = (string)data["email"],
-                    SubGrupoPessoa = subgrupopessoa,
-                    Atuacao = (string)data["atuacao"],
-                    Situacao = (string)data["situacao"]
-                };
-                pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
+                pessoa = LeDadosReader(data);
             }
             return pessoa;
         }
@@ -350,7 +199,7 @@ namespace _5gpro.Daos
             string conCpfCnpj = cpfCnpj.Length > 0 ? "AND (cpf LIKE @cpfcnpj OR cnpj LIKE @cpfcnpj)" : "";
             string conCidade = idcidade > 0 ? "AND c.idcidade = @idcidade" : "";
             string conAtuacao = atuacao > 0 ? "AND p.atuacao LIKE @atuacao" : "";
-            
+
 
             using (MySQLConn sql = new MySQLConn(Configuracao.Conecta))
             {
@@ -454,6 +303,58 @@ namespace _5gpro.Daos
                 }
             }
             return proximoid;
+        }
+        private Pessoa LeDadosReader(Dictionary<string, object> data)
+        {
+            var grupopessoa = new GrupoPessoa();
+            grupopessoa.GrupoPessoaID = Convert.ToInt32(data["idgrupopessoa"]);
+            grupopessoa.Nome = (string)data["nomegrupopessoa"];
+
+            var subgrupopessoa = new SubGrupoPessoa();
+            subgrupopessoa.SubGrupoPessoaID = Convert.ToInt32(data["idsubgrupopessoa"]);
+            subgrupopessoa.Nome = (string)data["nomesubgrupopessoa"];
+            subgrupopessoa.GrupoPessoa = grupopessoa;
+
+
+            var estado = new Estado();
+            estado.EstadoID = Convert.ToInt32(data["idestado"]);
+            estado.Nome = (string)data["nomeestado"];
+            estado.Uf = (string)data["uf"];
+
+
+            var cidade = new Cidade();
+            cidade.CidadeID = Convert.ToInt32(data["idcidade"]);
+            cidade.Nome = (string)data["nomecidade"];
+            cidade.Estado = estado;
+
+            var banco = new Banco();
+            banco.BancoID = Convert.ToInt32(data["idbanco"]);
+            banco.Codigo = (string)data["b_codigo"];
+            banco.Nome = (string)data["b_nome"];
+
+            var pessoa = new Pessoa();
+            pessoa.PessoaID = Convert.ToInt32(data["idpessoa"]);
+            pessoa.Nome = (string)data["nomepessoa"];
+            pessoa.Fantasia = (string)data["fantasia"];
+            pessoa.TipoPessoa = (string)data["tipo_pessoa"];
+            pessoa.Rua = (string)data["rua"];
+            pessoa.Numero = (string)data["numero"];
+            pessoa.Bairro = (string)data["bairro"];
+            pessoa.Cep = (string)data["cep"];
+            pessoa.Complemento = (string)data["complemento"];
+            pessoa.Cidade = cidade;
+            pessoa.Telefone = (string)data["telefone"];
+            pessoa.Email = (string)data["email"];
+            pessoa.SubGrupoPessoa = subgrupopessoa;
+            pessoa.Atuacao = (string)data["atuacao"];
+            pessoa.Situacao = (string)data["situacao"];
+            pessoa.Banco = banco;
+            pessoa.Agencia = (string)data["agencia"];
+            pessoa.ContaBancaria = (string)data["conta"];
+            pessoa.TipoContaBancaria = (string)data["tipoconta"];
+            pessoa.CpfCnpj = pessoa.TipoPessoa == "F" ? (string)data["cpf"] : (string)data["cnpj"];
+
+            return pessoa;
         }
     }
 }

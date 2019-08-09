@@ -28,6 +28,10 @@ namespace _5gpro.Entities
         public string CpfCnpj { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
+        public Banco Banco { get; set; }
+        public string Agencia { get; set; }
+        public string ContaBancaria { get; set; }
+        public string TipoContaBancaria { get; set; }
 
         [Required(ErrorMessage = "SubGrupo necessário.|buscaSubGrupoPessoa", AllowEmptyStrings = false)]
         public SubGrupoPessoa SubGrupoPessoa { get; set; }

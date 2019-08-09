@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.gbDados = new System.Windows.Forms.GroupBox();
+            this.tbPorta = new System.Windows.Forms.TextBox();
+            this.lbPorta = new System.Windows.Forms.Label();
             this.tbIp = new System.Windows.Forms.TextBox();
             this.tbSenha = new System.Windows.Forms.TextBox();
             this.lbSenha = new System.Windows.Forms.Label();
@@ -37,8 +39,6 @@
             this.lbIp = new System.Windows.Forms.Label();
             this.btSair = new System.Windows.Forms.Button();
             this.btConfirmar = new System.Windows.Forms.Button();
-            this.tbPorta = new System.Windows.Forms.TextBox();
-            this.lbPorta = new System.Windows.Forms.Label();
             this.gbDados.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,6 +59,23 @@
             this.gbDados.TabStop = false;
             this.gbDados.Text = "Base de dados";
             // 
+            // tbPorta
+            // 
+            this.tbPorta.Location = new System.Drawing.Point(6, 71);
+            this.tbPorta.Name = "tbPorta";
+            this.tbPorta.Size = new System.Drawing.Size(254, 20);
+            this.tbPorta.TabIndex = 3;
+            this.tbPorta.Text = "3306";
+            // 
+            // lbPorta
+            // 
+            this.lbPorta.AutoSize = true;
+            this.lbPorta.Location = new System.Drawing.Point(3, 55);
+            this.lbPorta.Name = "lbPorta";
+            this.lbPorta.Size = new System.Drawing.Size(32, 13);
+            this.lbPorta.TabIndex = 2;
+            this.lbPorta.Text = "Porta";
+            // 
             // tbIp
             // 
             this.tbIp.Location = new System.Drawing.Point(6, 32);
@@ -71,7 +88,7 @@
             this.tbSenha.Location = new System.Drawing.Point(6, 152);
             this.tbSenha.Name = "tbSenha";
             this.tbSenha.Size = new System.Drawing.Size(254, 20);
-            this.tbSenha.TabIndex = 5;
+            this.tbSenha.TabIndex = 7;
             this.tbSenha.UseSystemPasswordChar = true;
             // 
             // lbSenha
@@ -80,7 +97,7 @@
             this.lbSenha.Location = new System.Drawing.Point(3, 136);
             this.lbSenha.Name = "lbSenha";
             this.lbSenha.Size = new System.Drawing.Size(38, 13);
-            this.lbSenha.TabIndex = 4;
+            this.lbSenha.TabIndex = 6;
             this.lbSenha.Text = "Senha";
             // 
             // tbUsuario
@@ -88,7 +105,7 @@
             this.tbUsuario.Location = new System.Drawing.Point(6, 113);
             this.tbUsuario.Name = "tbUsuario";
             this.tbUsuario.Size = new System.Drawing.Size(254, 20);
-            this.tbUsuario.TabIndex = 3;
+            this.tbUsuario.TabIndex = 5;
             // 
             // lbUsuario
             // 
@@ -96,7 +113,7 @@
             this.lbUsuario.Location = new System.Drawing.Point(3, 97);
             this.lbUsuario.Name = "lbUsuario";
             this.lbUsuario.Size = new System.Drawing.Size(43, 13);
-            this.lbUsuario.TabIndex = 2;
+            this.lbUsuario.TabIndex = 4;
             this.lbUsuario.Text = "Usuário";
             // 
             // lbIp
@@ -127,23 +144,6 @@
             this.btConfirmar.Text = "Confirmar";
             this.btConfirmar.UseVisualStyleBackColor = true;
             this.btConfirmar.Click += new System.EventHandler(this.BtConfirmar_Click);
-            // 
-            // tbPorta
-            // 
-            this.tbPorta.Location = new System.Drawing.Point(6, 71);
-            this.tbPorta.Name = "tbPorta";
-            this.tbPorta.Size = new System.Drawing.Size(254, 20);
-            this.tbPorta.TabIndex = 7;
-            this.tbPorta.Text = "3306";
-            // 
-            // lbPorta
-            // 
-            this.lbPorta.AutoSize = true;
-            this.lbPorta.Location = new System.Drawing.Point(3, 55);
-            this.lbPorta.Name = "lbPorta";
-            this.lbPorta.Size = new System.Drawing.Size(32, 13);
-            this.lbPorta.TabIndex = 6;
-            this.lbPorta.Text = "Porta";
             // 
             // fmCfgBase
             // 
